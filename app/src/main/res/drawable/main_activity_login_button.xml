@@ -3,7 +3,7 @@
     <item android:state_pressed="true" >
         <shape>
 
-            <solid android:color="#205890"/>
+            <solid android:color="@color/login_button_click"/>
             <corners
                 android:bottomLeftRadius="8dp"
                 android:bottomRightRadius="8dp"
@@ -15,7 +15,7 @@
         <shape>
 
 
-            <solid android:color="#D36134"/>
+            <solid android:color="@color/login_button"/>
             <corners
                 android:bottomLeftRadius="8dp"
                 android:bottomRightRadius="8dp"
