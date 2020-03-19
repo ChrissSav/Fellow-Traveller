@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#fff"
     tools:context=".LoginActivity">
 
@@ -13,10 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="22dp"
-        android:textStyle="bold"
-        android:textSize="30sp"
         android:text="Είσοδος"
         android:textColor="#000"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,15 +39,15 @@
         android:layout_marginTop="0dp"
         android:layout_marginEnd="24dp"
         android:textColorHint="#000"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header"
-        app:hintEnabled="false"
         app:layout_constraintTop_toBottomOf="@+id/LoginActivity_textView2">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_marginStart="-3dp"
             android:layout_height="45dp"
+            android:layout_marginStart="-3dp"
             android:backgroundTint="#817F7F"
             android:inputType="textEmailAddress"
             android:paddingEnd="15dp"
@@ -64,9 +64,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="38dp"
         android:text="Κωδικός"
-        android:textStyle="bold"
-        android:textSize="20sp"
         android:textColor="#000"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header"
         app:layout_constraintTop_toBottomOf="@+id/LoginActivity_editText_email" />
 
@@ -75,8 +75,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColorHint="#000"
-        app:layout_constraintEnd_toEndOf="@+id/LoginActivity_editText_email"
         app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="@+id/LoginActivity_editText_email"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header"
         app:layout_constraintTop_toBottomOf="@+id/LoginActivity_textView3"
@@ -85,13 +85,13 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="45dp"
+            android:layout_marginStart="-3dp"
             android:backgroundTint="#817F7F"
             android:inputType="textPassword"
             android:paddingEnd="15dp"
-            android:layout_marginStart="-3dp"
             android:textColor="#817F7F"
             android:textColorHint="#000"
-            android:textSize="20sp"  />
+            android:textSize="20sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -101,8 +101,8 @@
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="78dp"
-        android:background="@drawable/main_activity_login_button"
         android:text="Είσοδος"
+        android:background="@drawable/main_activity_login_button"
         android:textAllCaps="false"
         android:textColor="#fff"
         android:textSize="18sp"
@@ -147,8 +147,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/LoginActivity_textView8"
         app:layout_constraintStart_toEndOf="@+id/LoginActivity_textView8"
         app:layout_constraintTop_toTopOf="@+id/LoginActivity_textView8" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
