@@ -5,4 +5,12 @@
     <color name="colorAccent">#D81B60</color>
     <color name="login_button">#D36134</color>
     <color name="login_button_click">#205890</color>
+    <color name="hoverOrange">#E9B381</color>
+    <color name="blue">#8297FF</color>
+    <color name="lightBlue">#F3F5FF</color>
+    <color name="orange">#FFAA5E</color>
+    <color name="lightOrange">#FFF2E6</color>
+    <color name="grey">#C9C9C9</color>
+    <color name="lightGrey">#EEEEEE</color>
+    <color name="black">#171717</color>
 </resources>
