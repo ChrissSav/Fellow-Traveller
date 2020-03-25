@@ -7,10 +7,12 @@
     tools:context=".Register_Feature.RegisterStage1Fragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -41,19 +43,23 @@
             app:layout_constraintTop_toBottomOf="@+id/RegisterStage1Fragment_textView4" />
 
 
-        <EditText
-            android:id="@+id/RegisterStage1Fragment_editText_email"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/RegisterStage1Fragment_textInputLayout_email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/edit_text_color"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:text="spurakos98@gmail.com"
-            android:textColor="@color/edit_text_color"
-            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/RegisterStage1Fragment_textView5" />
+            app:layout_constraintTop_toBottomOf="@+id/RegisterStage1Fragment_textView5">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/RegisterStage1Fragment_editText_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:text="spurakos98@gmail.com"
+                android:textColor="@color/edit_text_color"
+                android:textSize="20sp" />
+        </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

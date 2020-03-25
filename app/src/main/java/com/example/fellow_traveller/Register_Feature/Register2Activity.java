@@ -48,7 +48,7 @@ public class Register2Activity extends AppCompatActivity {
         fragmentManager.beginTransaction().replace(R.id.RegisterActivity_frame_container, fra).commit();
         button_next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (fra.toString().equals("RegisterStage1Fragment")) {
+                if (fra.toString().equals("RegisterStage1Fragment") && registerStage1Fragment.isOk()) {
                     fra = registerStage2Fragment;
                     progressBar.setProgress(num_num * registerStage2Fragment.getRank());
                     //button_next.setText("Αποστολή");
