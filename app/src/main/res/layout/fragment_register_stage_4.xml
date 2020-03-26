@@ -53,6 +53,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="date"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:longClickable="false"
                 android:textColor="@color/edit_text_color"
                 android:textSize="20sp" />
         </com.google.android.material.textfield.TextInputLayout>

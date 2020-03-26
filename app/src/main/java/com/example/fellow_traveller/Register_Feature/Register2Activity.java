@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.fellow_traveller.R;
 
@@ -58,11 +59,15 @@ public class Register2Activity extends AppCompatActivity {
                     fra = registerStage3Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.RegisterActivity_frame_container, fra).commit();
 
-                } else if (fra.toString().equals("RegisterStage3Fragment")) {
+                } else if (fra.toString().equals("RegisterStage3Fragment") && registerStage3Fragment.isOk()) {
                     progressBar.setProgress(num_num * registerStage4Fragment.getRank());
                     fra = registerStage4Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.RegisterActivity_frame_container, fra).commit();
                     button_next.setText("Complete");
+                } else if (fra.toString().equals("RegisterStage4Fragment") && registerStage4Fragment.isOk()) {
+                    Toast.makeText(Register2Activity.this,"Success", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(Register2Activity.this,"Not Success", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -93,6 +98,8 @@ public class Register2Activity extends AppCompatActivity {
             fra = registerStage1Fragment;
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.RegisterActivity_frame_container, fra).commit();
 
+        } else {
+            super.onBackPressed();
         }
 
     }

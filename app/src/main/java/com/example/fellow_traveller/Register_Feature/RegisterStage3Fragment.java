@@ -20,8 +20,8 @@ public class RegisterStage3Fragment extends Fragment {
 
     private View view;
     private TextInputLayout textInputLayout_name, textInputLayout_surname;
-    private String name = "";
-    private String surname = "";
+    private String name = "Sypros";
+    private String surname = "Rantoglou";
 
     public RegisterStage3Fragment() {
         // Required empty public constructor
@@ -65,5 +65,23 @@ public class RegisterStage3Fragment extends Fragment {
         return 3;
     }
 
+    public Boolean isOk() {
+        String name_1 = textInputLayout_name.getEditText().getText().toString();
+        String surname_1 = textInputLayout_surname.getEditText().getText().toString();
+
+        if (name_1.length() < 3) {
+            textInputLayout_name.setError("Not Valid");
+            return false;
+        } else if (surname_1.length() < 3) {
+            textInputLayout_surname.setError("Not Valid");
+            return false;
+        } else {
+            textInputLayout_name.setError(null);
+            textInputLayout_surname.setError(null);
+            return true;
+        }
+
+
+    }
 
 }
