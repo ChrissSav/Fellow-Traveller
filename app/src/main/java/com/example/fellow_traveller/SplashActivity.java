@@ -9,7 +9,7 @@ import android.os.Handler;
 import com.example.fellow_traveller.Register_Feature.Register2Activity;
 
 public class SplashActivity extends AppCompatActivity {
-    private int SPLASH_TIME = 2000;
+    private int SPLASH_TIME = 0000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

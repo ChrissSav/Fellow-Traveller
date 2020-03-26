@@ -53,7 +53,7 @@ public class Register2Activity extends AppCompatActivity {
                     progressBar.setProgress(num_num * registerStage2Fragment.getRank());
                     //button_next.setText("Αποστολή");
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.RegisterActivity_frame_container, fra).commit();
-                } else if (fra.toString().equals("RegisterStage2Fragment")) {
+                } else if (fra.toString().equals("RegisterStage2Fragment") && registerStage2Fragment.isOk()) {
                     progressBar.setProgress(num_num * registerStage3Fragment.getRank());
                     fra = registerStage3Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.RegisterActivity_frame_container, fra).commit();

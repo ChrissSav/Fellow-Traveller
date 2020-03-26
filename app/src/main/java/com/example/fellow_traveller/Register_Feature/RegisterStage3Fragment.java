@@ -5,20 +5,28 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fellow_traveller.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class RegisterStage3Fragment extends Fragment {
 
+    private View view;
+    private TextInputLayout textInputLayout_name, textInputLayout_surname;
+    private String name = "";
+    private String surname = "";
 
     public RegisterStage3Fragment() {
         // Required empty public constructor
+        //Log.i("Lifecycle_Stage3", "contractor ");
+
     }
 
 
@@ -26,15 +34,34 @@ public class RegisterStage3Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register_stage_3, container, false);
+        //Log.i("dd", "RegisterStage1Fragment");
+       // Log.i("Lifecycle_Stage3", "onCreateView ");
+        view = inflater.inflate(R.layout.fragment_register_stage_3, container, false);
+
+        textInputLayout_name = view.findViewById(R.id.RegisterStage3Fragment_textInputLayout_name);
+        textInputLayout_surname = view.findViewById(R.id.RegisterStage3Fragment_textInputLayout_surname);
+        textInputLayout_name.getEditText().setText(name);
+        textInputLayout_surname.getEditText().setText(surname);
+
+
+        return view;
     }
 
+    @Override
+    public void onDestroy() {
+        //Log.i("Lifecycle_Stage3", "onDestroy ");
 
-    public String toString(){
+        // Log.i("Lifecycle", "onDestroy");
+        name = textInputLayout_name.getEditText().getText().toString();
+        surname = textInputLayout_surname.getEditText().getText().toString();
+        super.onDestroy();
+    }
+
+    public String toString() {
         return "RegisterStage3Fragment";
     }
 
-    public int getRank(){
+    public int getRank() {
         return 3;
     }
 
