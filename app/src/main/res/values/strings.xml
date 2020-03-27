@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Fellow_Traveller</string>
+    <string name="app_name">Fellow Traveller</string>
     <string-array name="spinner_phone_codes">
         <item>+30</item>
         <item>+1</item>
