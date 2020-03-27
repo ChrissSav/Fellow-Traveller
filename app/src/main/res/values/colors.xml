@@ -15,4 +15,5 @@
     <color name="black">#171717</color>
     <color name="profile">#262322</color>
     <color name="home_blue">#3ca9cb</color>
+    <color name="white">#fff</color>
 </resources>
