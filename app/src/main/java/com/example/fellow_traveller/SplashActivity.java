@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.example.fellow_traveller.Register_Feature.Register2Activity;
+import com.example.fellow_traveller.Register.RegisterContainerActivity;
 
 public class SplashActivity extends AppCompatActivity {
     private int SPLASH_TIME = 0000;
@@ -21,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 //Do any action here. Now we are moving to next page
                 //This 'finish()' is for exiting the app when back button pressed from Home page which is ActivityHome
-                Intent mainIntent = new Intent(SplashActivity.this, Register2Activity.class);
+                Intent mainIntent = new Intent(SplashActivity.this, RegisterActivity.class);
                 startActivity(mainIntent);
                 finish();
             }

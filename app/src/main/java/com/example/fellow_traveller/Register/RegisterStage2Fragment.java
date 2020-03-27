@@ -1,24 +1,18 @@
-package com.example.fellow_traveller.Register_Feature;
+package com.example.fellow_traveller.Register;
 
 
-import android.content.Context;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.text.InputType;
-import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.example.fellow_traveller.R;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**

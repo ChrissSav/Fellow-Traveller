@@ -1,4 +1,4 @@
-package com.example.fellow_traveller.Register_Feature;
+package com.example.fellow_traveller.Register;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.fellow_traveller.R;
 
-public class Register2Activity extends AppCompatActivity {
+public class RegisterContainerActivity extends AppCompatActivity {
 
     private final int stages = 4;
     private Button button_next;
@@ -26,12 +26,15 @@ public class Register2Activity extends AppCompatActivity {
     private RegisterStage4Fragment registerStage4Fragment;
     private ProgressBar progressBar;
     private int num_num;
+    private String user_phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register2);
+        setContentView(R.layout.activity_register_container);
         num_num = 100 / stages;
+
+        user_phone = getIntent().getStringExtra("USER_PHONE");
 
         registerStage1Fragment = new RegisterStage1Fragment();
         registerStage2Fragment = new RegisterStage2Fragment();
@@ -65,9 +68,9 @@ public class Register2Activity extends AppCompatActivity {
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.RegisterActivity_frame_container, fra).commit();
                     button_next.setText("Complete");
                 } else if (fra.toString().equals("RegisterStage4Fragment") && registerStage4Fragment.isOk()) {
-                    Toast.makeText(Register2Activity.this,"Success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterContainerActivity.this,"Success", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(Register2Activity.this,"Not Success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterContainerActivity.this,"Not Success", Toast.LENGTH_SHORT).show();
                 }
             }
         });

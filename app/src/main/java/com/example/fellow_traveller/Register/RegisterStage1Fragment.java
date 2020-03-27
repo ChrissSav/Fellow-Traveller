@@ -1,4 +1,4 @@
-package com.example.fellow_traveller.Register_Feature;
+package com.example.fellow_traveller.Register;
 
 
 import android.os.Bundle;
@@ -87,11 +87,4 @@ public class RegisterStage1Fragment extends Fragment {
     }
 
 
-    public String getTextInputLayoutEmail() {
-        return textInputLayout.getEditText().getText().toString();
-    }
-
-    public void setTextInputLayoutEmail(String mail) {
-        textInputLayout.getEditText().setText(mail);
-    }
 }

@@ -1,8 +1,7 @@
-package com.example.fellow_traveller.Register_Feature;
+package com.example.fellow_traveller.Register;
 
 
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
