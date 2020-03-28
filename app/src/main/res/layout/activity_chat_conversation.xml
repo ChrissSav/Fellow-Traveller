@@ -86,6 +86,7 @@
 
         >
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/border_of_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -108,7 +109,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
-                android:id="@+id/ask_textView"
+                android:id="@+id/write_et_chat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="50dp"
