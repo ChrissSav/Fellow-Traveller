@@ -23,8 +23,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:background="@drawable/ic_settings"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
             />
         <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_picture"
@@ -255,7 +255,6 @@
             android:textColor="@color/lightGrey"
             android:fontFamily="@font/firasans_light"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="10dp"
             android:textSize="18sp"
             />
         <Button
