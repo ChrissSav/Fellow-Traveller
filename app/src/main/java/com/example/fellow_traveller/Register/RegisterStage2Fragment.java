@@ -15,9 +15,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.regex.Pattern;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class RegisterStage2Fragment extends Fragment {
 
     private TextInputLayout textInputLayout_pass_1, textInputLayout_pass_2;
@@ -114,4 +112,8 @@ public class RegisterStage2Fragment extends Fragment {
         return textPattern.matcher(textToCheck).matches();
     }
 
+
+    public String GetPassword(){
+        return textInputLayout_pass_1.getEditText().getText().toString();
+    }
 }

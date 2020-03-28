@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.fellow_traveller.Register.RegisterContainerActivity;
 
@@ -37,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }else{
+                    Toast.makeText(RegisterActivity.this,"Invalid length number", Toast.LENGTH_SHORT).show();
 
                 }
             }
