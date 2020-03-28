@@ -43,4 +43,8 @@ dependencies {
     implementation 'id.zelory:compressor:2.1.0'
     //Paypal SDK
     implementation 'com.paypal.sdk:paypal-android-sdk:2.15.3'
+    //Retrofit
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+
 }
