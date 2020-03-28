@@ -136,7 +136,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
         User user = new User(name, surname, email, password, user_phone);
         Log.i("Register_Container", "user_phone :" + user_phone+"\n "+user.toString());
 
-        retrofit = new Retrofit.Builder().baseUrl(getString(R.string.API_URL)).addConverterFactory(GsonConverterFactory.create()).build();
+        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitService = retrofit.create(RetrofitService.class);
 
 
