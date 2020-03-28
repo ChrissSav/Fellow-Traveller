@@ -21,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 //Do any action here. Now we are moving to next page
                 //This 'finish()' is for exiting the app when back button pressed from Home page which is ActivityHome
-                Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
+                Intent mainIntent = new Intent(SplashActivity.this, HomeActivity.class);
                 startActivity(mainIntent);
                 finish();
             }
