@@ -2,6 +2,7 @@ package com.example.fellow_traveller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,7 +22,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 //Do any action here. Now we are moving to next page
                 //This 'finish()' is for exiting the app when back button pressed from Home page which is ActivityHome
-                Intent mainIntent = new Intent(SplashActivity.this, HomeActivity.class);
+                Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(mainIntent);
                 finish();
             }
