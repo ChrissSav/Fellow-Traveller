@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,11 +13,11 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.fellow_traveller.HomeActivity;
 import com.example.fellow_traveller.Models.User;
 import com.example.fellow_traveller.R;
-import com.example.fellow_traveller.RegisterActivity;
-import com.example.fellow_traveller.RetrofitService;
-import com.example.fellow_traveller.Status_Handling;
+import com.example.fellow_traveller.API.RetrofitService;
+import com.example.fellow_traveller.API.Status_Handling;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -85,11 +86,12 @@ public class RegisterContainerActivity extends AppCompatActivity {
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.RegisterActivity_frame_container, fra).commit();
                     button_next.setText("Complete");
                 }*/ else if (fra.toString().equals("RegisterStage3Fragment") && registerStage3Fragment.isOk()) {
-                    Toast.makeText(RegisterContainerActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                    ////   Toast.makeText(RegisterContainerActivity.this, "Success", Toast.LENGTH_SHORT).show();
                     RegisterUser();
-                } else {
-                    Toast.makeText(RegisterContainerActivity.this, "Not Success", Toast.LENGTH_SHORT).show();
                 }
+//                 else {
+//                    Toast.makeText(RegisterContainerActivity.this, "Not Success", Toast.LENGTH_SHORT).show();
+//                }
             }
         });
 
@@ -134,9 +136,9 @@ public class RegisterContainerActivity extends AppCompatActivity {
         String surname = registerStage3Fragment.GetSurName();
 
         User user = new User(name, surname, email, password, user_phone);
-        Log.i("Register_Container", "user_phone :" + user_phone+"\n "+user.toString());
+        //Log.i("Register_Container", "user_phone :" + user_phone+"\n "+user.toString());
 
-        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.api_url)).addConverterFactory(GsonConverterFactory.create()).build();
+        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.private_info)).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitService = retrofit.create(RetrofitService.class);
 
 
@@ -152,6 +154,13 @@ public class RegisterContainerActivity extends AppCompatActivity {
                 String res = st.getStatus()+" " + st.getMsg();
                 Log.i("Register_Container", res);
 
+                if(st.getStatus().equals("success")){
+                    Intent intent = new Intent(RegisterContainerActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Toast.makeText(RegisterContainerActivity.this, "Not Success", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

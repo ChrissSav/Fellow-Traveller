@@ -1,4 +1,4 @@
-package com.example.fellow_traveller;
+package com.example.fellow_traveller.API;
 
 import com.example.fellow_traveller.Models.User;
 
