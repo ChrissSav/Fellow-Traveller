@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SettingsActivity"></activity>
-        <activity android:name=".Register.RegisterContainerActivity"></activity>
+        <activity android:name=".ChatConversationActivity"></activity>
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".Register.RegisterContainerActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
