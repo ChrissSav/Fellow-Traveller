@@ -13,7 +13,6 @@ import android.widget.Button;
 
 import com.example.fellow_traveller.ChatConversationActivity;
 import com.example.fellow_traveller.R;
-import com.example.fellow_traveller.SettingsActivity;
 
 /**
  * A simple {@link Fragment} subclass.
