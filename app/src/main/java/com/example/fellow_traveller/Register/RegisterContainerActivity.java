@@ -13,11 +13,18 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.fellow_traveller.HomeActivity;
+import com.example.fellow_traveller.HomeFragments.HomeActivity;
+import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.Models.User;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.API.RetrofitService;
 import com.example.fellow_traveller.API.Status_Handling;
+import com.example.fellow_traveller.SplashActivity;
+import com.google.gson.JsonObject;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,6 +45,8 @@ public class RegisterContainerActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private int num_num;
     private String user_phone;
+    private GlobalClass globalClass;
+
     //Retrofit
 
     private RetrofitService retrofitService;
@@ -48,11 +57,14 @@ public class RegisterContainerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_container);
+        globalClass = (GlobalClass) getApplicationContext();
 
         num_num = 100 / stages;
         user_phone = getIntent().getStringExtra("USER_PHONE");
         Log.i("Register_Container", "user_phone :" + user_phone);
 
+        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL)).addConverterFactory(GsonConverterFactory.create()).build();
+        retrofitService = retrofit.create(RetrofitService.class);
 
         progressBar = findViewById(R.id.RegisterActivity_progressBar);
         button_next = findViewById(R.id.RegisterActivity_button_next);
@@ -67,6 +79,8 @@ public class RegisterContainerActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         fra = registerStage1Fragment;
         fragmentManager.beginTransaction().replace(R.id.RegisterActivity_frame_container, fra).commit();
+
+
         button_next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (fra.toString().equals("RegisterStage1Fragment") && registerStage1Fragment.isOk()) {
@@ -80,18 +94,10 @@ public class RegisterContainerActivity extends AppCompatActivity {
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.RegisterActivity_frame_container, fra).commit();
                     button_next.setText("Complete");
 
-                } /*else if (fra.toString().equals("RegisterStage3Fragment") && registerStage3Fragment.isOk()) {
-                    progressBar.setProgress(num_num * registerStage4Fragment.getRank());
-                    fra = registerStage4Fragment;
-                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.RegisterActivity_frame_container, fra).commit();
-                    button_next.setText("Complete");
-                }*/ else if (fra.toString().equals("RegisterStage3Fragment") && registerStage3Fragment.isOk()) {
+                } else if (fra.toString().equals("RegisterStage3Fragment") && registerStage3Fragment.isOk()) {
                     ////   Toast.makeText(RegisterContainerActivity.this, "Success", Toast.LENGTH_SHORT).show();
                     RegisterUser();
                 }
-//                 else {
-//                    Toast.makeText(RegisterContainerActivity.this, "Not Success", Toast.LENGTH_SHORT).show();
-//                }
             }
         });
 
@@ -105,13 +111,6 @@ public class RegisterContainerActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        /*if (fra.toString().equals("RegisterStage4Fragment")) {
-            button_next.setText("Next");
-            progressBar.setProgress(num_num * registerStage3Fragment.getRank());
-            fra = registerStage3Fragment;
-            fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.RegisterActivity_frame_container, fra).commit();
-
-        }*/
         if (fra.toString().equals("RegisterStage3Fragment")) {
             progressBar.setProgress(num_num * registerStage2Fragment.getRank());
             button_next.setText("Next");
@@ -130,16 +129,13 @@ public class RegisterContainerActivity extends AppCompatActivity {
     }
 
     public void RegisterUser() {
-        String email = registerStage1Fragment.GetEmail();
-        String password = registerStage2Fragment.GetPassword();
+        final String email = registerStage1Fragment.GetEmail();
+        final String password = registerStage2Fragment.GetPassword();
         String name = registerStage3Fragment.GetName();
         String surname = registerStage3Fragment.GetSurName();
 
         User user = new User(name, surname, email, password, user_phone);
         //Log.i("Register_Container", "user_phone :" + user_phone+"\n "+user.toString());
-
-        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL)).addConverterFactory(GsonConverterFactory.create()).build();
-        retrofitService = retrofit.create(RetrofitService.class);
 
 
         Call<Status_Handling> call = retrofitService.registerUser(user);
@@ -147,25 +143,90 @@ public class RegisterContainerActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Status_Handling> call, Response<Status_Handling> response) {
                 if (!response.isSuccessful()) {
-                    Toast.makeText(RegisterContainerActivity.this,"response "+response.errorBody(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterContainerActivity.this, "response " + response.errorBody(), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Status_Handling st = response.body();
-                String res = st.getStatus()+" " + st.getMsg();
+                String res = st.getStatus() + " " + st.getMsg();
                 Log.i("Register_Container", res);
 
-                if(st.getStatus().equals("success")){
-                    Intent intent = new Intent(RegisterContainerActivity.this, HomeActivity.class);
+                if (st.getStatus().equals("success")) {
+                    /*Intent intent = new Intent(RegisterContainerActivity.this, HomeActivity.class);
                     startActivity(intent);
-                    finish();
-                }else{
-                    Toast.makeText(RegisterContainerActivity.this, "Not Success", Toast.LENGTH_SHORT).show();
+                    finish();*/
+
+                } else {
+                    //  Toast.makeText(RegisterContainerActivity.this, "Not Success", Toast.LENGTH_SHORT).show();
                 }
+                LoginUser(email, password);
             }
 
             @Override
             public void onFailure(Call<Status_Handling> call, Throwable t) {
-               Log.i("Register_Container","onFailure: "+t.getMessage());
+                Log.i("Register_Container", "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+    public void SaveUserInfo(String id, String name, String surname) {
+        String final_str = id + "\n" + name + "\n" + surname;
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(getString(R.string.USER_INFO_FILE), MODE_PRIVATE);
+            fos.write(final_str.getBytes());
+            Intent intent = new Intent(RegisterContainerActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void LoginUser(String email, String password) {
+        Log.i("LoginUser", "user_phone :" + email + " " + password);
+
+        JsonObject user_obj = new JsonObject();
+        user_obj.addProperty("email", email);
+        user_obj.addProperty("password", password);
+
+        Call<User> call = retrofitService.loginUser(user_obj);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(RegisterContainerActivity.this, "response " + response.errorBody(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //Toast.makeText(RegisterContainerActivity.this, "body " + response.body(), Toast.LENGTH_SHORT).show();
+                User user = response.body();
+                if (user.getName() != null && user.getSurname() != null && user.getId() != 0) {
+                    Log.i("onResponse", user.getId() + "\n" + user.getName() + "\n" + user.getSurname());
+                    globalClass.setCurrent_user(user);
+                    SaveUserInfo(user.getId()+"", user.getName(), user.getSurname());
+
+
+                } else {
+                    //error login SaveUserInfo(String id, String name, String surname)
+
+
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.i("Register_Container", "onFailure: " + t.getMessage());
             }
         });
     }
