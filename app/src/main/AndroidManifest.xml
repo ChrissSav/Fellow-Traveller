@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PersonalSettingsActivity"></activity>
+        <activity android:name=".FiltersActivity"></activity>
+        <activity android:name=".PersonalSettingsActivity" />
         <activity android:name=".ChatConversationActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".Register.RegisterContainerActivity" />
