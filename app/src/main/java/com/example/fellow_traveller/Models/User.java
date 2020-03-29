@@ -2,7 +2,7 @@ package com.example.fellow_traveller.Models;
 
 public class User {
 
-    private int id ;
+    private int id;
     private String name;
     private String surname;
     private String email;
@@ -16,6 +16,17 @@ public class User {
         this.email = email;
         this.password = password;
         this.phone = phone;
+    }
+
+    public User(int id, String name, String surname, String phone) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.phone = phone;
+    }
+
+    public User() {
+
     }
 
     public int getId() {
@@ -64,5 +75,10 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+
+    public Boolean User_Info_OK(){
+        return name != null && surname!= null && id != 0;
     }
 }
