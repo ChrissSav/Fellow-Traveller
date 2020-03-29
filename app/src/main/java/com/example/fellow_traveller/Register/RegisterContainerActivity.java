@@ -154,11 +154,12 @@ public class RegisterContainerActivity extends AppCompatActivity {
                     /*Intent intent = new Intent(RegisterContainerActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();*/
+                    LoginUser(email, password);
 
                 } else {
-                    //  Toast.makeText(RegisterContainerActivity.this, "Not Success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterContainerActivity.this, "Not Success", Toast.LENGTH_SHORT).show();
                 }
-                LoginUser(email, password);
+
             }
 
             @Override
