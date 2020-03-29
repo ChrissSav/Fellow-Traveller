@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:text="Φίλτρα"
-        android:textSize="28dp"
+        android:textSize="25dp"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         />
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/firasans_medium"
         android:textColor="@color/profile"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/filters_tv"
         app:layout_constraintStart_toStartOf="@id/filters_tv"
         android:layout_marginTop="40dp"
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/firasans_medium"
         android:textColor="@color/profile"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/sort_by_tv"
         app:layout_constraintStart_toStartOf="@id/filters_tv"
         android:layout_marginTop="25dp"
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/firasans_medium"
         android:textColor="@color/profile"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/date_tv"
         app:layout_constraintStart_toStartOf="@id/filters_tv"
         android:layout_marginTop="25dp"
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/firasans_medium"
         android:textColor="@color/profile"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/time_tv"
         app:layout_constraintStart_toStartOf="@id/filters_tv"
         android:layout_marginTop="25dp"
@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/firasans_medium"
         android:textColor="@color/profile"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/price_tv"
         app:layout_constraintStart_toStartOf="@id/filters_tv"
         android:layout_marginTop="25dp"
@@ -94,8 +94,7 @@
         android:max="200"
         style="@style/MySeekBar"
         android:thumbTint="@color/login_button"
-        android:progress="20"
-
+        android:progress="0"
         />
 
     <TextView
@@ -104,10 +103,10 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/firasans_medium"
         android:textColor="@color/profile"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/slider_filters"
         app:layout_constraintStart_toStartOf="@id/filters_tv"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="38dp"
         android:text="Θέσεις που απομένουν"
         />
 
@@ -117,13 +116,14 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/firasans_medium"
         android:textColor="@color/profile"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/seats_tv"
         app:layout_constraintStart_toStartOf="@id/filters_tv"
         android:layout_marginTop="25dp"
         android:text="Αξιολόγηση"
         />
     <ImageButton
+        android:id="@+id/close_button_filters"
         android:layout_width="30dp"
         android:layout_height="30dp"
         app:layout_constraintTop_toTopOf="@id/filters_tv"
@@ -210,7 +210,7 @@
         app:layout_constraintBottom_toBottomOf="@id/range_tv"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="20dp"
-        android:text="10 χλμ"
+        android:text="Επιλέξτε εύρος"
         android:fontFamily="@font/firasans_light"
         android:textSize="16sp"
         android:textColor="@color/profile"
@@ -269,6 +269,7 @@
         android:fontFamily="@font/firasans_medium"
         android:textSize="18sp"
         android:textColor="@color/profile"
+        app:layout_constraintTop_toTopOf="parent"
         />
     <Button
         android:id="@+id/apply_button"
