@@ -10,6 +10,7 @@ import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.Models.User;
 import com.example.fellow_traveller.Register.RegisterContainerActivity;
+import com.example.fellow_traveller.Trips.TripPageActivity;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -18,7 +19,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class SplashActivity extends AppCompatActivity {
-    private int SPLASH_TIME = 2000;
+    private int SPLASH_TIME = 1500;
     private GlobalClass globalClass;
     private int acti = 0;
     private Boolean flag = false;
@@ -33,7 +34,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                Intent mainIntent = new Intent(SplashActivity.this, RegisterContainerActivity.class);
+                Intent mainIntent = new Intent(SplashActivity.this, HomeActivity.class);
                 startActivity(mainIntent);
                 finish();
 
