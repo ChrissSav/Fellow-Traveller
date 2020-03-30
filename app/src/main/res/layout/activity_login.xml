@@ -51,7 +51,7 @@
             android:backgroundTint="#817F7F"
             android:inputType="textEmailAddress"
             android:paddingEnd="15dp"
-            android:text="example@email.com"
+            android:text="spurakos98@gmail.com"
             android:textColor="#817F7F"
             android:textSize="20sp" />
 
@@ -89,6 +89,7 @@
             android:backgroundTint="#817F7F"
             android:inputType="textPassword"
             android:paddingEnd="15dp"
+            android:text="aD@ffff1"
             android:textColor="#817F7F"
             android:textColorHint="#000"
             android:textSize="20sp" />

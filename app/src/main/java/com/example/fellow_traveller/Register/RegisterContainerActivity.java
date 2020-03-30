@@ -157,7 +157,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
                     LoginUser(email, password);
 
                 } else {
-                    Toast.makeText(RegisterContainerActivity.this, "Not Success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterContainerActivity.this, st.getMsg(), Toast.LENGTH_SHORT).show();
                 }
 
             }
