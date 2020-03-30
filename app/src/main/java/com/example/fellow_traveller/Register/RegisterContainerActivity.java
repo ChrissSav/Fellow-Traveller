@@ -176,6 +176,8 @@ public class RegisterContainerActivity extends AppCompatActivity {
             fos = openFileOutput(getString(R.string.USER_INFO_FILE), MODE_PRIVATE);
             fos.write(final_str.getBytes());
             Intent intent = new Intent(RegisterContainerActivity.this, HomeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
         } catch (FileNotFoundException e) {

@@ -43,7 +43,7 @@
                 android:fontFamily="@font/firasans_medium"
                 android:text="Trip"
                 android:textColor="@color/profile"
-                android:textSize="24sp"
+                android:textSize="29sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

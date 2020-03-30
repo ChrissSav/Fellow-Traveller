@@ -34,9 +34,9 @@ public class HomeActivity extends AppCompatActivity {
 
 
         bottomNav = findViewById(R.id.HomeActivity_bottomNavigationView);
-        Toast.makeText(HomeActivity.this, "id " + globalClass.getCurrent_user().getId()+"\n"+
+/*        Toast.makeText(HomeActivity.this, "id " + globalClass.getCurrent_user().getId()+"\n"+
                 "name " + globalClass.getCurrent_user().getName()+"\n"+
-                "surname " + globalClass.getCurrent_user().getSurname(), Toast.LENGTH_SHORT).show();
+                "surname " + globalClass.getCurrent_user().getSurname(), Toast.LENGTH_SHORT).show();*/
 
 
         if (savedInstanceState == null) {
