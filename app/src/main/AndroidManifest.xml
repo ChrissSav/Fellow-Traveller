@@ -18,10 +18,6 @@
         <activity android:name=".Chat.ChatConversationActivity" />
         <activity android:name=".Settings.SettingsActivity" />
         <activity android:name=".Trips.TripPageActivity"></activity>
-        <activity android:name=".FiltersActivity" />
-        <activity android:name=".PersonalSettingsActivity" />
-        <activity android:name=".ChatConversationActivity" />
-        <activity android:name=".SettingsActivity" />
         <activity android:name=".Register.RegisterContainerActivity" />
         <activity android:name=".HomeFragments.HomeActivity" />
         <activity android:name=".RegisterActivity" />
