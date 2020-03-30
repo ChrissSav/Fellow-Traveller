@@ -14,9 +14,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".FiltersActivity"></activity>
-        <activity android:name=".PersonalSettingsActivity" />
-        <activity android:name=".ChatConversationActivity" />
-        <activity android:name=".SettingsActivity" />
+        <activity android:name=".Settings.PersonalSettingsActivity" />
+        <activity android:name=".Chat.ChatConversationActivity" />
+        <activity android:name=".Settings.SettingsActivity" />
         <activity android:name=".Register.RegisterContainerActivity" />
         <activity android:name=".HomeFragments.HomeActivity" />
         <activity android:name=".RegisterActivity" />
