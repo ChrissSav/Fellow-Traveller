@@ -29,6 +29,11 @@ public class User {
 
     }
 
+    public User(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+
     public int getId() {
         return id;
     }
@@ -77,8 +82,11 @@ public class User {
         this.phone = phone;
     }
 
+    public String getFullName() {
+        return name + " " + surname;
+    }
 
-    public Boolean User_Info_OK(){
-        return name != null && surname!= null && id != 0;
+    public Boolean User_Info_OK() {
+        return name != null && surname != null && id != 0;
     }
 }
