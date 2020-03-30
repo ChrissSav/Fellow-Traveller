@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".FiltersActivity"></activity>
+        <activity android:name=".Trips.TripPageActivity"></activity>
+        <activity android:name=".FiltersActivity" />
         <activity android:name=".PersonalSettingsActivity" />
         <activity android:name=".ChatConversationActivity" />
         <activity android:name=".SettingsActivity" />
