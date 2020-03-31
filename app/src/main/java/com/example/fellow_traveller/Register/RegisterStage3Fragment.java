@@ -83,12 +83,4 @@ public class RegisterStage3Fragment extends Fragment {
 
     }
 
-    public String GetName(){
-        return textInputLayout_name.getEditText().getText().toString();
-    }
-
-    public String GetSurName(){
-        return textInputLayout_surname.getEditText().getText().toString();
-    }
-
 }

@@ -13,11 +13,14 @@ import android.view.ViewGroup;
 import com.example.fellow_traveller.R;
 import com.google.android.material.textfield.TextInputLayout;
 
+/**
+ * A simple {@link Fragment} subclass.
+ */
 public class RegisterStage1Fragment extends Fragment {
 
     private TextInputLayout textInputLayout;
     //private TextInputEditText editText;
-    private String mail = "";
+    private String mail="";
 
     private View view;
 
@@ -26,12 +29,13 @@ public class RegisterStage1Fragment extends Fragment {
         //Log.i("Fragment","contractor RegisterStage1Fragment");
 
 
-    }
 
+    }
     public RegisterStage1Fragment(String m) {
         mail = m;
         // Required empty public constructor
         //Log.i("Fragment","contractor RegisterStage1Fragment");
+
 
 
     }
@@ -44,7 +48,7 @@ public class RegisterStage1Fragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_register_stage_1, container, false);
         // editText = view.findViewById(R.id.RegisterStage1Fragment_editText_email);
         textInputLayout = view.findViewById(R.id.RegisterStage1Fragment_textInputLayout_email);
-        Log.i("Fragment", "RegisterStage1Fragment");
+        Log.i("Fragment","RegisterStage1Fragment");
 
         return view;
     }
@@ -82,9 +86,5 @@ public class RegisterStage1Fragment extends Fragment {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
-
-    public String GetEmail(){
-        return textInputLayout.getEditText().getText().toString();
-    }
 
 }
