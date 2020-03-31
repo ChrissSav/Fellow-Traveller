@@ -102,18 +102,17 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         int currNext = -1;
         int currPrev = -1;
 
-        //Initialize and check if we run out of list
+        //Initialize and check if we run out of the list
         if (position + 1 < messagesList.size()) {
             currNext = messagesList.get(position + 1).getId();
         }
         if (position - 1 > -1) {
             currPrev = messagesList.get(position - 1).getId();
         }
-
         //Finished initialization
 
 
-        if (curr.getId() == 1) {
+        if (current == 1) {
 
             if ((currNext == current) && (current == currPrev)) {
                 return SEND_MIDDLE;
@@ -123,7 +122,8 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
                 return SEND_TOP;
             } else { return SEND_SINGLE;
                 }
-        } else {
+        }else {
+
             if ((currNext == current) && (current == currPrev)) {
                 return RECEIVE_MIDDLE;
             } else if ((current != currNext) && (current == currPrev)) {
@@ -132,11 +132,8 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
                 return RECEIVE_TOP;
             } else {
                 return RECEIVE_SINGLE;
-        }
             }
-
-
-
+        }
 
 
     }

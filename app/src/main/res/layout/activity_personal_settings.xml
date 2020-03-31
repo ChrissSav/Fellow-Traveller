@@ -26,6 +26,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="15dp"
+            android:padding="20dp"
             android:backgroundTint="@color/profile"
             android:background="@drawable/ic_close"
 
@@ -50,6 +51,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/close_button_personal_settings"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginRight="15dp"
+                android:padding="20dp"
                 android:background="@drawable/ic_check"
                 android:backgroundTint="@color/home_blue"
                 />
