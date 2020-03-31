@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Fellow Traveller</string>
+    <string name="app_name">Fellow_Traveller</string>
     <string-array name="spinner_phone_codes">
         <item>+30</item>
         <item>+1</item>
@@ -237,8 +237,13 @@
         <item>+1876</item>
         <item>+7840</item>
     </string-array>
+<<<<<<< HEAD
     <string name="API_URL">http://snf-874026.vm.okeanos.grnet.gr:5023/</string>
     <string name="USER_INFO_FILE">user_info.txt</string>
+=======
+
+    <!-- TODO: Remove or change this placeholder text -->
+>>>>>>> fellow_traveller/Home_Fagment
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="euro_symbol">€</string>
 

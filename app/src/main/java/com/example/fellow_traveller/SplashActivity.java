@@ -2,6 +2,7 @@ package com.example.fellow_traveller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,7 +20,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class SplashActivity extends AppCompatActivity {
-    private int SPLASH_TIME = 1500;
+    private final int SPLASH_TIME = 1500;
     private GlobalClass globalClass;
     private int acti = 0;
     private Boolean flag = false;
