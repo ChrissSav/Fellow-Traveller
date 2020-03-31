@@ -1,5 +1,7 @@
 package com.example.fellow_traveller.Notification;
 
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +10,9 @@ import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.fellow_traveller.R;
+
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -32,8 +36,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public static class ExampleViewHolder extends RecyclerView.ViewHolder {
         private ConstraintLayout constraintLayout;
         private CircleImageView circleImageView;
-        private TextView textView;
-
+        private TextView tv_des, tv_read;
 
 
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
@@ -41,8 +44,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
             constraintLayout = itemView.findViewById(R.id.NotificationItem_ConstraintLayout);
             circleImageView = itemView.findViewById(R.id.NotificationItem_profile_picture);
-            textView = itemView.findViewById(R.id.NotificationItem_textView_des);
-
+            tv_des = itemView.findViewById(R.id.NotificationItem_textView_des);
+            tv_read = itemView.findViewById(R.id.NotificationItem_textView_read);
             constraintLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -65,14 +68,18 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @Override
     public ExampleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_item, parent, false);
-        ExampleViewHolder evh = new ExampleViewHolder(v,mListener);
+        ExampleViewHolder evh = new ExampleViewHolder(v, mListener);
         return evh;
     }
 
     @Override
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
         NotificationItem currentItem = mExampleList.get(position);
-        holder.textView.setText(currentItem.getUser().getFullName());
+        holder.tv_des.setText(currentItem.getUser().getFullName());
+        Log.i("onBindViewHolder", currentItem.getStatus());
+        if (currentItem.getStatus().equals("read")) {
+            holder.tv_read.setVisibility(View.GONE);
+        }
     }
 
     @Override
