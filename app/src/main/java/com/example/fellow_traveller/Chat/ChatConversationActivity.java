@@ -1,4 +1,4 @@
-package com.example.fellow_traveller;
+package com.example.fellow_traveller.Chat;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+
+import com.example.fellow_traveller.R;
 
 public class ChatConversationActivity extends AppCompatActivity {
     private EditText writeEdtText;

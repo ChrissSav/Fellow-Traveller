@@ -1,8 +1,10 @@
-package com.example.fellow_traveller;
+package com.example.fellow_traveller.Settings;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.fellow_traveller.R;
 
 public class PersonalSettingsActivity extends AppCompatActivity {
 

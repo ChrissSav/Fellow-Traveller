@@ -18,7 +18,8 @@ import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.Register.RegisterContainerActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class HomeActivity extends AppCompatActivity {
+public class
+HomeActivity extends AppCompatActivity {
 
     private GlobalClass globalClass;
     private BottomNavigationView bottomNav;

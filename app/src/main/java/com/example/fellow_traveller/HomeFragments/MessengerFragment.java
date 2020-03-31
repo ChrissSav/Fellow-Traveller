@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.fellow_traveller.ChatConversationActivity;
+import com.example.fellow_traveller.Chat.ChatConversationActivity;
 import com.example.fellow_traveller.R;
 
 /**

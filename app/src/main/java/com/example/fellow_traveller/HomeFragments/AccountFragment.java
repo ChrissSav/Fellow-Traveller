@@ -9,13 +9,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 
-import com.example.fellow_traveller.LoginActivity;
-import com.example.fellow_traveller.MainActivity;
 import com.example.fellow_traveller.R;
-import com.example.fellow_traveller.SettingsActivity;
+import com.example.fellow_traveller.Settings.SettingsActivity;
 
 /**
  * A simple {@link Fragment} subclass.
