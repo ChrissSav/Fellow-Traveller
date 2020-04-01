@@ -9,6 +9,8 @@ import android.os.Handler;
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.Models.User;
+import com.example.fellow_traveller.NewOffer.NewOfferActivity;
+import com.example.fellow_traveller.NewOffer.NewOfferStage1Fragment;
 import com.example.fellow_traveller.Register.RegisterContainerActivity;
 import com.example.fellow_traveller.Trips.TripPageActivity;
 
@@ -19,7 +21,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class SplashActivity extends AppCompatActivity {
-    private int SPLASH_TIME = 1500;
+    private int SPLASH_TIME = 0000;
     private GlobalClass globalClass;
     private int acti = 0;
     private Boolean flag = false;
@@ -30,18 +32,18 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         globalClass = (GlobalClass) getApplicationContext();
 
-        /*new Handler().postDelayed(new Runnable() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
-                Intent mainIntent = new Intent(SplashActivity.this, HomeActivity.class);
+                Intent mainIntent = new Intent(SplashActivity.this, NewOfferActivity.class);
                 startActivity(mainIntent);
                 finish();
 
             }
-        }, SPLASH_TIME);*/
+        }, SPLASH_TIME);
 
-        Thread splashTread = new Thread() {
+        /*Thread splashTread = new Thread() {
             @Override
             public void run() {
 
@@ -64,7 +66,7 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
         };
-        splashTread.start();
+        splashTread.start();*/
     }
 
     public void Load() {
