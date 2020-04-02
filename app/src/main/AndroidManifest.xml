@@ -16,6 +16,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".NewOffer.NewOfferActivity"></activity>
         <activity android:name=".FiltersActivity" />
         <activity android:name=".Settings.PersonalSettingsActivity" />
         <activity android:name=".Chat.ChatConversationActivity" />
