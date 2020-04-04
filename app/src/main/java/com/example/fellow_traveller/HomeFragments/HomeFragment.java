@@ -1,4 +1,5 @@
 package com.example.fellow_traveller.HomeFragments;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.fellow_traveller.R;
+import com.example.fellow_traveller.SearchActivity;
+import com.example.fellow_traveller.SplashActivity;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -33,15 +37,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                int visibility=constraintLayout.getVisibility();
-                if(visibility==View.VISIBLE) {
-                    constraintLayout.setVisibility(View.GONE);
-                    constraintLayout2.setVisibility(View.GONE);
-                }
-                else {
-                    constraintLayout.setVisibility(View.VISIBLE);
-                    constraintLayout2.setVisibility(View.VISIBLE);
-                }
+                Intent mainIntent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(mainIntent);
             }
         });
         return view;
