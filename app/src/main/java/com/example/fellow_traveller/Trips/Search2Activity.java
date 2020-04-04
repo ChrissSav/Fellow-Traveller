@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.fellow_traveller.R;
+
 public class Search2Activity extends AppCompatActivity {
 
     @Override
