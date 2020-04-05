@@ -46,7 +46,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="50dp"
             android:layout_marginStart="60dp"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent"
+            android:inputType="text"
+            android:imeOptions="actionSearch"/>
 
         <ImageButton
             android:id="@+id/erase_search"
@@ -58,6 +60,19 @@
             app:layout_constraintBottom_toBottomOf="@id/autocomplete_search_destination"
             app:layout_constraintRight_toRightOf="parent"
             android:padding="10dp"/>
+        <ImageView
+            android:id="@+id/search_icon"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/ic_search"
+            android:backgroundTint="@color/profile"
+            app:layout_constraintTop_toTopOf="@id/autocomplete_search_destination"
+            app:layout_constraintBottom_toBottomOf="@id/autocomplete_search_destination"
+            app:layout_constraintRight_toRightOf="parent"
+            android:padding="10dp"
+            android:rotation="90"
+            android:visibility="invisible"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
