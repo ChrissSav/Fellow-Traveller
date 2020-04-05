@@ -66,4 +66,10 @@ public class ChatConversationActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        writeEdtText.clearFocus();
+    }
 }

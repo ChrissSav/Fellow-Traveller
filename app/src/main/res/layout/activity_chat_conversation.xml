@@ -130,14 +130,14 @@
 
             <ImageButton
                 android:id="@+id/plus_button_chat"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_alignParentStart="true"
                 android:background="@drawable/ic_plus"
                 android:backgroundTint="@color/lightGrey"
                 android:layout_marginStart="15dp"
-                android:layout_marginBottom="9dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/write_et_chat"
+                app:layout_constraintBottom_toBottomOf="@id/write_et_chat"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
