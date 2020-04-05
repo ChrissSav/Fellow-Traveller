@@ -32,17 +32,19 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         globalClass = (GlobalClass) getApplicationContext();
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                Intent mainIntent = new Intent(SplashActivity.this, NewOfferActivity.class);
-                startActivity(mainIntent);
-                finish();
-
-            }
-        }, SPLASH_TIME);
-
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                Intent mainIntent = new Intent(SplashActivity.this, NewOfferActivity.class);
+//                startActivity(mainIntent);
+//                finish();
+//
+//            }
+//        }, SPLASH_TIME);
+        Intent mainIntent = new Intent(SplashActivity.this, NewOfferActivity.class);
+        startActivity(mainIntent);
+        finish();
         /*Thread splashTread = new Thread() {
             @Override
             public void run() {

@@ -62,10 +62,8 @@
         android:id="@+id/NewOfferStage3Fragment_switch_pets"
         android:layout_width="156dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:fontFamily="@font/firasans_medium"
-        android:text="Switch"
+        android:text="Not Allow"
         android:textColor="@color/profile"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_textView4"
@@ -75,8 +73,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="166dp"
+        android:layout_height="35dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_textViewf"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,26 +84,25 @@
             android:id="@+id/NewOfferStage3Fragment_button_minus_seats"
             android:layout_width="38dp"
             android:layout_height="36dp"
-            android:layout_marginEnd="32dp"
             android:background="?android:selectableItemBackgroundBorderless"
             android:padding="5dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_line"
             app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_button_plus_seats"
-            app:layout_constraintEnd_toStartOf="@+id/NewOfferStage3Fragment_TextView_seats"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/NewOfferStage3Fragment_button_plus_seats" />
 
         <TextView
             android:id="@+id/NewOfferStage3Fragment_TextView_seats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/firasans_light"
             android:text="1"
             android:textColor="@color/profile"
-            android:fontFamily="@font/firasans_light"
             android:textSize="26sp"
             app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_button_plus_seats"
-            app:layout_constraintEnd_toStartOf="@+id/NewOfferStage3Fragment_button_plus_seats"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_button_minus_seats"
             app:layout_constraintTop_toTopOf="@+id/NewOfferStage3Fragment_button_plus_seats" />
 
         <ImageButton
@@ -123,36 +120,36 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout3"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_textView3"
         app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
         app:layout_constraintTop_toTopOf="@+id/NewOfferStage3Fragment_textView3">
 
         <ImageButton
             android:id="@+id/NewOfferStage3Fragment_button_minus_bags"
             android:layout_width="38dp"
             android:layout_height="36dp"
-            android:layout_marginEnd="32dp"
             android:background="?android:selectableItemBackgroundBorderless"
             android:padding="5dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_line"
             app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_button_plus_bags"
-            app:layout_constraintEnd_toStartOf="@+id/NewOfferStage3Fragment_TextView_bags"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/NewOfferStage3Fragment_button_plus_bags" />
 
         <TextView
             android:id="@+id/NewOfferStage3Fragment_TextView_bags"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/firasans_light"
             android:text="1"
             android:textColor="@color/profile"
-            android:fontFamily="@font/firasans_light"
             android:textSize="26sp"
             app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_button_plus_bags"
-            app:layout_constraintEnd_toStartOf="@+id/NewOfferStage3Fragment_button_plus_bags"
+            app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_button_plus_bags"
+            app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_button_minus_bags"
             app:layout_constraintTop_toTopOf="@+id/NewOfferStage3Fragment_button_plus_bags" />
 
         <ImageButton

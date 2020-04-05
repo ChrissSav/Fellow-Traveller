@@ -48,6 +48,10 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/firasans_light"
             android:hint="Choose date"
+            android:focusable="false"
+            android:longClickable="false"
+            android:singleLine="true"
+            android:inputType="text"
             android:textColor="@color/profile"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -79,6 +83,10 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/firasans_light"
             android:hint="Choose time"
+            android:singleLine="true"
+            android:focusable="false"
+            android:longClickable="false"
+            android:inputType="text"
             android:textColor="@color/profile"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
