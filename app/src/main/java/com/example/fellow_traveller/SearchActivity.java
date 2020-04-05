@@ -35,8 +35,13 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if(i== EditorInfo.IME_ACTION_SEARCH){
+                    if(!destinationAutoComplete.getText().toString().trim().isEmpty()){
                     Intent mainIntent = new Intent(SearchActivity.this, Search2Activity.class);
+                    mainIntent.putExtra("FromPlace",destinationAutoComplete.getText().toString());
                     startActivity(mainIntent);
+                    }else{
+                        destinationAutoComplete.setError("Δεν έχετε επιλέξει την αφετηρία σας");
+                    }
                     return true;
                 }
 

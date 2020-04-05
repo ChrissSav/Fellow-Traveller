@@ -15,7 +15,7 @@
         <shape>
 
 
-            <solid android:color="@color/blue"/>
+            <solid android:color="@color/home_blue"/>
             <corners
                 android:bottomLeftRadius="8dp"
                 android:bottomRightRadius="8dp"
