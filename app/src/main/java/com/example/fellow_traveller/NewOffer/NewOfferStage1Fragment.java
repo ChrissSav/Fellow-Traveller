@@ -54,4 +54,20 @@ public class NewOfferStage1Fragment extends Fragment {
         to = textInputLayout_to.getEditText().getText().toString();
         super.onDestroy();
     }
+
+    public  Boolean isOk(){
+        if(textInputLayout_from.getEditText().getText().length() < 1){
+            textInputLayout_from.setError("Υποχρεωτικό πεδίο!");
+            return false;
+        }else {
+            textInputLayout_from.setError(null);
+        }
+        if(textInputLayout_to.getEditText().getText().length() < 1){
+            textInputLayout_to.setError("Υποχρεωτικό πεδίο!");
+            return false;
+        }else {
+            textInputLayout_to.setError(null);
+        }
+        return true;
+    }
 }

@@ -35,4 +35,7 @@ public class NewOfferStage4Fragment extends Fragment {
     public int getRank() {
         return 4;
     }
+    public boolean isOk(){
+        return true;
+    }
 }

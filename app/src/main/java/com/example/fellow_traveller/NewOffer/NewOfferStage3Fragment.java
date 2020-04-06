@@ -13,6 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fellow_traveller.R;
 
@@ -137,5 +138,12 @@ public class NewOfferStage3Fragment extends Fragment {
         else
             pets = false;
         super.onDestroy();
+    }
+    public boolean isOk(){
+        if(Integer.parseInt(seats_tv.getText().toString())<1){
+            Toast.makeText(getActivity(), "Ο αριθμός των θέσων πρέπει να ειναι τουλάστον 1!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 }
