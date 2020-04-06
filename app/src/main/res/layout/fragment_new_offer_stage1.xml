@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Why are you soo good"
         android:fontFamily="@font/firasans_light"
+        android:text="Why are you soo good"
         android:textColor="@color/profile"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -49,6 +49,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/firasans_light"
             android:hint="Choose starting point"
+            android:inputType="text"
+            android:singleLine="true"
             android:textColor="@color/profile"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -80,6 +82,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/firasans_light"
             android:hint="Choose destination"
+            android:inputType="text"
+            android:singleLine="true"
             android:textColor="@color/profile"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>

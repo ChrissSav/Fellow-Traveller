@@ -31,7 +31,6 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         globalClass = (GlobalClass) getApplicationContext();
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -42,7 +41,6 @@ public class SplashActivity extends AppCompatActivity {
 
             }
         }, SPLASH_TIME);
-
         /*Thread splashTread = new Thread() {
             @Override
             public void run() {
