@@ -109,7 +109,7 @@
         android:gravity="left|center_vertical"
         android:background="@drawable/search_button_items"
 
-    />
+        />
 
     <Button
         android:id="@+id/athens_search"
@@ -159,28 +159,28 @@
         android:background="@drawable/search_button_items"
         />
     <Button
-    android:id="@+id/ioannina_search"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    style="?android:attr/borderlessButtonStyle"
-    app:layout_constraintTop_toBottomOf="@id/thessaloniki_search"
-    android:layout_marginTop="20dp"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"
-    android:text="Ιωάννινα"
-    android:textAllCaps="false"
-    android:textColor="@color/profile"
-    android:textSize="15sp"
-    android:fontFamily="@font/firasans_medium"
-    android:paddingTop="15dp"
-    android:paddingBottom="15dp"
-    android:paddingLeft="15dp"
-    android:drawableLeft="@drawable/ic_location"
-    android:drawablePadding="15dp"
-    android:drawableTint="@color/login_button"
-    android:gravity="left|center_vertical"
-    android:background="@drawable/search_button_items"
-    />
+        android:id="@+id/ioannina_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="?android:attr/borderlessButtonStyle"
+        app:layout_constraintTop_toBottomOf="@id/thessaloniki_search"
+        android:layout_marginTop="20dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="Ιωάννινα"
+        android:textAllCaps="false"
+        android:textColor="@color/profile"
+        android:textSize="15sp"
+        android:fontFamily="@font/firasans_medium"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="15dp"
+        android:drawableLeft="@drawable/ic_location"
+        android:drawablePadding="15dp"
+        android:drawableTint="@color/login_button"
+        android:gravity="left|center_vertical"
+        android:background="@drawable/search_button_items"
+        />
     <Button
         android:id="@+id/patra_search"
         android:layout_width="match_parent"

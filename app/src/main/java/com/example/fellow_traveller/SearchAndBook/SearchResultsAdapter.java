@@ -14,12 +14,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdapter.SearchResultsViewHolder>{
     private ArrayList<SearchResultItem> searchResultList;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
+
+    }
     public static class SearchResultsViewHolder extends RecyclerView.ViewHolder{
         public TextView userName, rate, review, from, to, date, time;
 
 
 
-        public SearchResultsViewHolder(@NonNull View itemView) {
+
+        public SearchResultsViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
 
             userName = itemView.findViewById(R.id.name_search_item);
@@ -29,6 +40,18 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
             to = itemView.findViewById(R.id.to_search_item);
             date = itemView.findViewById(R.id.date_search_item);
             time = itemView.findViewById(R.id.time_search_item);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
 
         }
     }
@@ -41,7 +64,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     @Override
     public SearchResultsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_resulti_item, parent, false);
-        SearchResultsViewHolder evh = new SearchResultsViewHolder (v);
+        SearchResultsViewHolder evh = new SearchResultsViewHolder (v, mListener);
         return evh;
     }
 
