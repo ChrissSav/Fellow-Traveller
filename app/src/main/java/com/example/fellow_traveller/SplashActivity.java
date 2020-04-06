@@ -12,6 +12,7 @@ import com.example.fellow_traveller.Models.User;
 import com.example.fellow_traveller.NewOffer.NewOfferActivity;
 import com.example.fellow_traveller.NewOffer.NewOfferStage1Fragment;
 import com.example.fellow_traveller.Register.RegisterContainerActivity;
+import com.example.fellow_traveller.SearchAndBook.BookActivity;
 import com.example.fellow_traveller.SearchAndBook.SearchDetailsActivity;
 import com.example.fellow_traveller.Trips.TripPageActivity;
 
@@ -37,7 +38,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                Intent mainIntent = new Intent(SplashActivity.this, SearchDetailsActivity.class);
+                Intent mainIntent = new Intent(SplashActivity.this, BookActivity.class);
                 startActivity(mainIntent);
                 finish();
 

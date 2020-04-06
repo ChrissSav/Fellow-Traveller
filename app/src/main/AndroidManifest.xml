@@ -17,7 +17,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SearchAndBook.SearchDetailsActivity"></activity>
+        <activity android:name=".SearchAndBook.BookActivity"></activity>
+        <activity android:name=".SearchAndBook.SearchDetailsActivity" />
         <activity android:name=".SearchAndBook.SearchResultsActivity" />
         <activity android:name=".SearchAndBook.Search2Activity" />
         <activity
