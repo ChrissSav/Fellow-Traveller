@@ -1,13 +1,11 @@
-package com.example.fellow_traveller;
+package com.example.fellow_traveller.SearchAndBook;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.fellow_traveller.Notification.NotificationAdapter;
 import com.example.fellow_traveller.R;
-import com.example.fellow_traveller.SearchResultItem;
 
 import java.util.ArrayList;
 

@@ -6,12 +6,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.fellow_traveller.R;
-import com.example.fellow_traveller.SearchActivity;
-import com.example.fellow_traveller.SplashActivity;
+import com.example.fellow_traveller.SearchAndBook.SearchActivity;
 
 /**
  * A simple {@link Fragment} subclass.

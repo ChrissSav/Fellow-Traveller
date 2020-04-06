@@ -1,4 +1,4 @@
-package com.example.fellow_traveller;
+package com.example.fellow_traveller.SearchAndBook;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.PlacesAPI.PlaceAutocompleteAdapter;
+import com.example.fellow_traveller.R;
 
 public class SearchActivity extends AppCompatActivity {
     private AutoCompleteTextView destinationAutoComplete;

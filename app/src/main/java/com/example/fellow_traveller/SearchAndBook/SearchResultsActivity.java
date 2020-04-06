@@ -1,4 +1,4 @@
-package com.example.fellow_traveller;
+package com.example.fellow_traveller.SearchAndBook;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,8 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.fellow_traveller.Chat.ConversationAdapter;
-import com.example.fellow_traveller.Chat.ConversationItem;
+import com.example.fellow_traveller.R;
 
 import java.util.ArrayList;
 

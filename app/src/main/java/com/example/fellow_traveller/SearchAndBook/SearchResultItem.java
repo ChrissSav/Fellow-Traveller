@@ -1,4 +1,4 @@
-package com.example.fellow_traveller;
+package com.example.fellow_traveller.SearchAndBook;
 
 public class SearchResultItem {
     private String userName;
