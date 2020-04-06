@@ -31,7 +31,8 @@
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="24dp"
                     android:background="@color/background"
-                    android:text="Hi Fotios,"
+                    android:text="Γεια σου Fotios,"
+                    android:fontFamily="@font/firasans_bold"
                     android:textColor="@color/pitch_black"
                     android:textSize="30sp"
                     android:textStyle="bold"
@@ -43,8 +44,9 @@
                     android:layout_width="340dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="56dp"
-                    android:text="Planning on atrip but don't have company?"
+                    android:text="Βρες την ιδανική παρέα για το επόμενο ταξίδι σου"
                     android:textColor="#000"
+                    android:fontFamily="@font/firasans_bold"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/FragmentHome_textView_header"
@@ -54,8 +56,10 @@
                     android:id="@+id/FragmentHome_textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Find the right trip for you"
+                    android:fontFamily="@font/firasans_medium"
+                    android:text="Βρες το κατάλληλο ταξίδι για σένα"
                     android:textSize="16sp"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="@+id/FragmentHome_textView1"
                     app:layout_constraintTop_toBottomOf="@+id/FragmentHome_textView1" />
 
@@ -66,13 +70,16 @@
             <TextView
                 android:id="@+id/FragmentHome_textView_Search"
                 android:layout_width="340dp"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
                 android:layout_marginLeft="28dp"
                 android:layout_marginTop="20dp"
+                android:fontFamily="@font/firasans_medium"
                 android:background="@drawable/home_fragment_search"
-
+                android:paddingRight="20dp"
+                android:paddingLeft="20dp"
                 android:drawableRight="@android:drawable/ic_menu_search"
-                android:text="Search for a trip"
+                android:text="Βρες ένα ταξίδι"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/Layout1"
                 app:layout_constraintTop_toBottomOf="@id/Layout1" />
@@ -84,14 +91,14 @@
                 android:layout_marginTop="48dp"
                 app:layout_constraintStart_toStartOf="@id/Layout1"
                 app:layout_constraintTop_toBottomOf="@id/FragmentHome_textView_Search">
-
-
+                android:fontFamily="@font/firasans_bold"
                 <TextView
                     android:id="@+id/FragmentHome_textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="28dp"
-                    android:text="Your next trip is to:"
+                    android:text="Το επόμενο ταξίδι σου είναι προς:"
+                    android:fontFamily="@font/firasans_bold"
                     android:textColor="@color/pitch_black"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -103,20 +110,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Diaolos"
+                    android:fontFamily="@font/firasans_bold"
                     android:textColor="@color/pitch_black"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/FragmentHome_textView4"
                     app:layout_constraintTop_toBottomOf="@+id/FragmentHome_textView4" />
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="73dp"
-                    android:layout_height="78dp"
-                    android:layout_marginTop="16dp"
-                    android:src="@drawable/ic_launcher_foreground"
-                    app:layout_constraintStart_toStartOf="@+id/textView5"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image_icon_home"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/null_icon"
+                    app:layout_constraintLeft_toLeftOf="@id/textView5"
+                    app:layout_constraintTop_toBottomOf="@id/textView5" />
 
                 <TextView
                     android:id="@+id/FragmentHome_textView_DriversName"
@@ -124,18 +132,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="12dp"
-                    android:text="Name"
+                    android:text="Όνομα"
+                    android:fontFamily="@font/firasans_bold"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/imageView2"
-                    app:layout_constraintTop_toTopOf="@+id/imageView2" />
+                    app:layout_constraintStart_toEndOf="@+id/image_icon_home"
+                    app:layout_constraintTop_toTopOf="@+id/image_icon_home" />
 
                 <TextView
                     android:id="@+id/FragmentHome_textView_DriversRating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="rating"
+                    android:text="Αξιολόγηση"
+                    android:fontFamily="@font/firasans_medium"
                     app:layout_constraintStart_toStartOf="@+id/FragmentHome_textView_DriversName"
                     app:layout_constraintTop_toBottomOf="@+id/FragmentHome_textView_DriversName" />
 
@@ -144,7 +154,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="reviews"
+                    android:text="Κριτικές"
+                    android:fontFamily="@font/firasans_medium"
                     app:layout_constraintStart_toEndOf="@+id/textView9"
                     app:layout_constraintTop_toTopOf="@+id/FragmentHome_textView_DriversRating" />
 
@@ -163,12 +174,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="196dp"
                     android:text="10 $"
+                    android:fontFamily="@font/firasans_bold"
                     android:textColor="@color/orange"
                     android:textSize="30sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-                    app:layout_constraintStart_toEndOf="@+id/imageView2"
-                    app:layout_constraintTop_toTopOf="@+id/imageView2"
+                    app:layout_constraintBottom_toBottomOf="@+id/image_icon_home"
+                    app:layout_constraintStart_toEndOf="@+id/image_icon_home"
+                    app:layout_constraintTop_toTopOf="@+id/image_icon_home"
                     app:layout_constraintVertical_bias="0.593" />
 
                 <TextView
@@ -176,17 +188,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
-                    android:text="From"
+                    android:text="Από"
+                    android:fontFamily="@font/firasans_medium"
                     android:textSize="17sp"
-                    app:layout_constraintLeft_toLeftOf="@id/imageView2"
-                    app:layout_constraintStart_toStartOf="@+id/imageView2"
-                    app:layout_constraintTop_toBottomOf="@id/imageView2" />
+                    app:layout_constraintLeft_toLeftOf="@id/image_icon_home"
+                    app:layout_constraintStart_toStartOf="@+id/image_icon_home"
+                    app:layout_constraintTop_toBottomOf="@id/image_icon_home" />
 
                 <TextView
                     android:id="@+id/FragmentHome_textView_StartingPoint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Athens"
+                    android:fontFamily="@font/firasans_bold"
                     android:textColor="@color/pitch_black"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -206,7 +220,8 @@
                     android:id="@+id/FragmentHome_textView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="To"
+                    android:text="Προς"
+                    android:fontFamily="@font/firasans_medium"
                     android:textSize="17sp"
                     app:layout_constraintLeft_toRightOf="@id/FragmentHome_textView11"
                     app:layout_constraintTop_toTopOf="@id/FragmentHome_TextView10" />
@@ -216,6 +231,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Thessalonikh"
+                    android:fontFamily="@font/firasans_bold"
                     android:textColor="@color/pitch_black"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -228,7 +244,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
-                    android:text="Date"
+                    android:text="Ημερομηνιία"
+                    android:fontFamily="@font/firasans_medium"
                     android:textSize="17sp"
                     app:layout_constraintLeft_toLeftOf="@id/FragmentHome_textView_StartingPoint"
                     app:layout_constraintStart_toStartOf="@+id/FragmentHome_textView_StartingPoint"
@@ -239,6 +256,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="22 Dec 2020"
+                    android:fontFamily="@font/firasans_bold"
                     android:textColor="@color/pitch_black"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -258,7 +276,8 @@
                     android:id="@+id/FragmentHome_textView15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="To"
+                    android:text="Ώρα"
+                    android:fontFamily="@font/firasans_medium"
                     android:textSize="17sp"
                     app:layout_constraintLeft_toRightOf="@id/FragmentHome_textView14"
                     app:layout_constraintTop_toTopOf="@id/FragmentHome_textView14" />
@@ -268,6 +287,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="20:10 AM"
+                    android:fontFamily="@font/firasans_bold"
                     android:textColor="@color/pitch_black"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -295,7 +315,8 @@
                     android:id="@+id/FragmentHome_textView16"
                     android:layout_width="340dp"
                     android:layout_height="wrap_content"
-                    android:text="Planning on atrip but don't have company?"
+                    android:text="Βρες την ιδανική παρέα για το επόμενο ταξίδι σου"
+                    android:fontFamily="@font/firasans_bold"
                     android:textColor="#000"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -306,8 +327,10 @@
                     android:id="@+id/FragmentHome_textView17"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Call now Kostas Razgkelis. You won't regret it"
+                    android:fontFamily="@font/firasans_medium"
+                    android:text="Κάλεσε τον Κώστας Ράζγκελης, δεν θα το μετανιώσεις"
                     android:textSize="16sp"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/FragmentHome_textView16" />
 
@@ -321,7 +344,8 @@
                 android:layout_marginTop="48dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/home_fragment_button"
-                android:text="Crate a trip"
+                android:text="Δημιουργία ταξιδιού"
+                android:fontFamily="@font/firasans_bold"
                 android:textColor="@color/white_opaque"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@id/Layout3"
