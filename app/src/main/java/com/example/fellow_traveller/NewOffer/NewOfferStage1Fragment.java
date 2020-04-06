@@ -70,4 +70,13 @@ public class NewOfferStage1Fragment extends Fragment {
         }
         return true;
     }
+
+
+    public String getDest_from() {
+        return textInputLayout_from.getEditText().getText().toString();
+    }
+
+    public String getDest_to() {
+        return textInputLayout_to.getEditText().getText().toString();
+    }
 }

@@ -153,4 +153,12 @@ public class NewOfferStage2Fragment extends Fragment {
         }
         return true;
     }
+
+    public String getDate() {
+        return textInputLayout_date.getEditText().getText().toString();
+    }
+
+    public String getTime() {
+        return textInputLayout_time.getEditText().getText().toString();
+    }
 }

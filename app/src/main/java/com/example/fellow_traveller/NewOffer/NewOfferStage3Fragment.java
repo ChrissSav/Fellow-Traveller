@@ -146,4 +146,14 @@ public class NewOfferStage3Fragment extends Fragment {
         }
         return true;
     }
+
+    public String getNum_of_seats() {
+        return seats_tv.getText().toString();
+    }
+    public String getNum_of_bags() {
+        return bags_tv.getText().toString();
+    }
+    public String getPet() {
+        return pet_switch.isChecked()+"";
+    }
 }
