@@ -34,7 +34,11 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
 
+<<<<<<< Updated upstream
                 Intent mainIntent = new Intent(SplashActivity.this, HomeActivity.class);
+=======
+                Intent mainIntent = new Intent(SplashActivity.this, RegisterActivity.class);
+>>>>>>> Stashed changes
                 startActivity(mainIntent);
                 finish();
 
