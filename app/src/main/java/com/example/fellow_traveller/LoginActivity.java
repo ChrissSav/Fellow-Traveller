@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(isValidEmail(email)){
                     textInputLayout_email.setError(null);
                     textInputLayout_password.setError(null);
-                    LoginUser(email,password);
+                    //LoginUser(email,password);
                 }else {
                     textInputLayout_email.setError("The email is not valid !");
                 }
@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
-    public void LoginUser(String email, String password) {
+    /*public void LoginUser(String email, String password) {
         retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL)).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitService = retrofit.create(RetrofitService.class);
 
@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                 Log.i("Register_Container", "onFailure: " + t.getMessage());
             }
         });
-    }
+    }*/
 
     public void SaveUserInfo(String id, String name, String surname) {
         String final_str = id + "\n" + name + "\n" + surname;

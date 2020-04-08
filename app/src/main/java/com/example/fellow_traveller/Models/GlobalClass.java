@@ -4,13 +4,13 @@ import android.app.Application;
 
 public class GlobalClass extends Application {
 
-    private User current_user;
+    private UserAuth current_user;
 
-    public User getCurrent_user() {
+    public UserAuth getCurrent_user() {
         return current_user;
     }
 
-    public void setCurrent_user(User current_user) {
+    public void setCurrent_user(UserAuth current_user) {
         this.current_user = current_user;
     }
 }

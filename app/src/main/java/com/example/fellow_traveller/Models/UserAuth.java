@@ -1,6 +1,6 @@
 package com.example.fellow_traveller.Models;
 
-public class User {
+public class UserAuth{
 
     private int id;
     private String name;
@@ -12,48 +12,6 @@ public class User {
     private String about_me;
     private String access_token;
     private String refresh_token;
-
-
-    public User(String name, String surname, String email, String password, String phone) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
-    }
-
-    public User(int id, String name, String surname, String phone) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.phone = phone;
-    }
-
-    public User() {
-
-    }
-
-    public User(String name, String surname) {
-        this.name = name;
-        this.surname = surname;
-    }
-
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
-
-    public String getAbout_me() {
-        return about_me;
-    }
-
-    public void setAbout_me(String about_me) {
-        this.about_me = about_me;
-    }
 
     public int getId() {
         return id;
@@ -87,6 +45,14 @@ public class User {
         this.email = email;
     }
 
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -103,11 +69,30 @@ public class User {
         this.phone = phone;
     }
 
-    public String getFullName() {
-        return name + " " + surname;
+    public String getAbout_me() {
+        return about_me;
     }
 
-    public Boolean User_Info_OK() {
-        return name != null && surname != null && id != 0;
+    public void setAbout_me(String about_me) {
+        this.about_me = about_me;
+    }
+
+    public String getAccess_token() {
+        return access_token;
+    }
+
+    public void setAccess_token(String access_token) {
+        this.access_token = access_token;
+    }
+
+    public String getRefresh_token() {
+        return refresh_token;
+    }
+
+    public void setRefresh_token(String refresh_token) {
+        this.refresh_token = refresh_token;
+    }
+    public String toString(){
+        return id+" "+name+" "+email+" "+" "+phone+" "+about_me+" "+access_token+" "+refresh_token;
     }
 }

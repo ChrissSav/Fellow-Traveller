@@ -239,7 +239,9 @@
     </string-array>
     <string name="API_URL">http://snf-874026.vm.okeanos.grnet.gr:5025/</string>
     <string name="USER_INFO_FILE">user_info.txt</string>
+    <string name="USER_INFO">userAuth</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="euro_symbol">€</string>
+
 
 </resources>
