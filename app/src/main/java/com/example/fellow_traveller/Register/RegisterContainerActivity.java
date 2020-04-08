@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,19 +17,24 @@ import android.widget.Toast;
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.Models.User;
+import com.example.fellow_traveller.Models.UserAuth;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.API.RetrofitService;
 import com.example.fellow_traveller.API.Status_Handling;
 import com.example.fellow_traveller.SplashActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.lang.reflect.Type;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -62,6 +68,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_container);
         globalClass = (GlobalClass) getApplicationContext();
+
 
         num_num = 100 / stages;
         user_phone = getIntent().getStringExtra("USER_PHONE");
@@ -138,117 +145,77 @@ public class RegisterContainerActivity extends AppCompatActivity {
         String name = registerStage3Fragment.GetName();
         String surname = registerStage3Fragment.GetSurName();
 
-        User user = new User(name, surname, email, password, user_phone);
-        //Log.i("Register_Container", "user_phone :" + user_phone+"\n "+user.toString());
-
-
-        Call<Status_Handling> call = retrofitService.registerUser(user);
-        call.enqueue(new Callback<Status_Handling>() {
-            @Override
-            public void onResponse(Call<Status_Handling> call, Response<Status_Handling> response) {
-                if (!response.isSuccessful()) {
-                    Toast.makeText(RegisterContainerActivity.this, "response " + response.errorBody(), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                Status_Handling st = response.body();
-                String res = st.getStatus() + " " + st.getMsg();
-                Log.i("Register_Container", res);
-
-                if (st.getStatus().equals("success")) {
-                    /*Intent intent = new Intent(RegisterContainerActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                    finish();*/
-
-                    LoginUser(email, password);
-
-                } else {
-                    Toast.makeText(RegisterContainerActivity.this, st.getMsg(), Toast.LENGTH_SHORT).show();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<Status_Handling> call, Throwable t) {
-                Log.i("Register_Container", "onFailure: " + t.getMessage());
-            }
-        });
-    }
-
-    public void SaveUserInfo(String id, String name, String surname) {
-        String final_str = id + "\n" + name + "\n" + surname;
-        FileOutputStream fos = null;
-        try {
-            fos = openFileOutput(getString(R.string.USER_INFO_FILE), MODE_PRIVATE);
-            fos.write(final_str.getBytes());
-            Intent intent = new Intent(RegisterContainerActivity.this, HomeActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public void LoginUser(String email, String password) {
-        Log.i("LoginUser", "user_phone :" + email + " " + password);
-
         JsonObject user_obj = new JsonObject();
+        user_obj.addProperty("name", name);
+        user_obj.addProperty("surname", surname);
         user_obj.addProperty("email", email);
         user_obj.addProperty("password", password);
+        user_obj.addProperty("phone", "999999999");
 
-        Call<User> call = retrofitService.loginUser(user_obj);
-        call.enqueue(new Callback<User>() {
+        Call<UserAuth> call = retrofitService.registerUser(user_obj);
+        call.enqueue(new Callback<UserAuth>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<UserAuth> call, Response<UserAuth> response) {
+                Log.i("SaveClass", "-2");
                 if (!response.isSuccessful()) {
-                    Toast.makeText(RegisterContainerActivity.this, "response " + response.errorBody(), Toast.LENGTH_SHORT).show();
+                    try {
+                        Toast.makeText(RegisterContainerActivity.this, response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     return;
                 }
-                //Toast.makeText(RegisterContainerActivity.this, "body " + response.body(), Toast.LENGTH_SHORT).show();
-                User user = response.body();
-                if (user.getName() != null && user.getSurname() != null && user.getId() != 0) {
-                    Log.i("onResponse", user.getId() + "\n" + user.getName() + "\n" + user.getSurname());
-                    globalClass.setCurrent_user(user);
-                    SaveUserInfo(user.getId()+"", user.getName(), user.getSurname());
-                    firebaseRegister(user.getId()+"", user.getName(), user.getSurname());
+                Log.i("SaveClass", "-1");
+                UserAuth userAuth = response.body();
+                //Toast.makeText(RegisterContainerActivity.this, userAuth.getName(), Toast.LENGTH_SHORT).show();
+                Log.i("SaveClass", "0");
 
-
-
-                } else {
-                    //error login SaveUserInfo(String id, String name, String surname)
-
-
-                }
+                SaveClass(userAuth);
+                firebaseRegister(userAuth.getId()+"", userAuth.getName(), userAuth.getSurname());
+                Log.i("SaveClass", "4");
 
 
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<UserAuth> call, Throwable t) {
                 Log.i("Register_Container", "onFailure: " + t.getMessage());
             }
         });
     }
+
 
     private void firebaseRegister(String id, String name, String surname) {
         userDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
         HashMap<String, String> userMap = new HashMap<>();
-        userMap.put("name",name);
+        userMap.put("name", name);
         userMap.put("surname", surname);
-        userMap.put("image","default");
+        userMap.put("image", "default");
 
         userDatabase.setValue(userMap);
 
     }
+
+    public void SaveClass(UserAuth userAuth) {
+
+        Log.i("SaveClass", "1");
+        SharedPreferences mPrefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(userAuth);
+        editor.putString(getResources().getString(R.string.USER_INFO), json);
+        Log.i("SaveClass", "2");
+
+        editor.apply();
+        globalClass.setCurrent_user(userAuth);
+        Log.i("SaveClass", "3");
+
+        Intent intent = new Intent(RegisterContainerActivity.this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+
 }
