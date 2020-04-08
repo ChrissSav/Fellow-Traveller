@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".NewOffer.NewOfferStage3Fragment">
+
+    <TextView
+        android:id="@+id/NewOfferStage3Fragment_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="How much free space do you have?"
+        android:fontFamily="@font/firasans_light"
+        android:textColor="@color/profile"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/NewOfferStage3Fragment_textViewf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="Seats"
+        android:textColor="@color/profile"
+        android:fontFamily="@font/firasans_medium"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textView"
+        app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_textView" />
+
+    <TextView
+        android:id="@+id/NewOfferStage3Fragment_textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Bags"
+        android:textColor="@color/profile"
+        android:fontFamily="@font/firasans_medium"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textViewf"
+        app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_textViewf" />
+
+    <TextView
+        android:id="@+id/NewOfferStage3Fragment_textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:textColor="@color/profile"
+        android:text="Pets"
+        android:fontFamily="@font/firasans_medium"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textView3"
+        app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_textView3" />
+
+    <Switch
+        android:id="@+id/NewOfferStage3Fragment_switch_pets"
+        android:layout_width="156dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/firasans_medium"
+        android:text="Not Allow"
+        android:textColor="@color/profile"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_textView4"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout3"
+        app:layout_constraintTop_toTopOf="@+id/NewOfferStage3Fragment_textView4" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="166dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_textViewf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/NewOfferStage3Fragment_textViewf">
+
+        <ImageButton
+            android:id="@+id/NewOfferStage3Fragment_button_minus_seats"
+            android:layout_width="38dp"
+            android:layout_height="36dp"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_line"
+            app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_button_plus_seats"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/NewOfferStage3Fragment_button_plus_seats" />
+
+        <TextView
+            android:id="@+id/NewOfferStage3Fragment_TextView_seats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/firasans_light"
+            android:text="1"
+            android:textColor="@color/profile"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_button_plus_seats"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_button_minus_seats"
+            app:layout_constraintTop_toTopOf="@+id/NewOfferStage3Fragment_button_plus_seats" />
+
+        <ImageButton
+            android:id="@+id/NewOfferStage3Fragment_button_plus_seats"
+            android:layout_width="45dp"
+            android:layout_height="34dp"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_plus"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_textView3"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
+        app:layout_constraintTop_toTopOf="@+id/NewOfferStage3Fragment_textView3">
+
+        <ImageButton
+            android:id="@+id/NewOfferStage3Fragment_button_minus_bags"
+            android:layout_width="38dp"
+            android:layout_height="36dp"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_line"
+            app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_button_plus_bags"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/NewOfferStage3Fragment_button_plus_bags" />
+
+        <TextView
+            android:id="@+id/NewOfferStage3Fragment_TextView_bags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/firasans_light"
+            android:text="1"
+            android:textColor="@color/profile"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_button_plus_bags"
+            app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_button_plus_bags"
+            app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_button_minus_bags"
+            app:layout_constraintTop_toTopOf="@+id/NewOfferStage3Fragment_button_plus_bags" />
+
+        <ImageButton
+            android:id="@+id/NewOfferStage3Fragment_button_plus_bags"
+            android:layout_width="45dp"
+            android:layout_height="34dp"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_plus"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

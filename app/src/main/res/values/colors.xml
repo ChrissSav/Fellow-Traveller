@@ -19,6 +19,6 @@
     <color name="background">#FFF </color>
     <color name="edit_text_color">#3C3939</color>
     <color name="receiverFill">#F8F8F8</color>
-
+    <color name="shadowForButtons">#EEEEEE</color>
 
 </resources>

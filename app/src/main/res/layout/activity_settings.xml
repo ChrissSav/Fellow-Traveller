@@ -90,10 +90,11 @@
         android:textColor="@color/profile"
         android:textSize="18sp"
         android:fontFamily="@font/firasans_light"
-        android:padding="0dp"
+        android:padding="10dp"
         android:drawableRight="@drawable/ic_person"
         android:gravity="left|center_vertical"
         android:layout_marginRight="20dp"
+        android:background="@drawable/settings_button_item"
 
 
         />
@@ -111,10 +112,11 @@
         android:textColor="@color/profile"
         android:textSize="18sp"
         android:fontFamily="@font/firasans_light"
-        android:padding="0dp"
+        android:padding="10dp"
         android:drawableRight="@drawable/ic_person"
         android:gravity="left|center_vertical"
         android:layout_marginRight="20dp"
+        android:background="@drawable/settings_button_item"
         />
     <Button
         android:id="@+id/payments"
@@ -130,10 +132,11 @@
         android:textColor="@color/profile"
         android:textSize="18sp"
         android:fontFamily="@font/firasans_light"
-        android:padding="0dp"
+        android:padding="10dp"
         android:drawableRight="@drawable/ic_person"
         android:gravity="left|center_vertical"
         android:layout_marginRight="20dp"
+        android:background="@drawable/settings_button_item"
         />
     <Button
         android:id="@+id/notifications"
@@ -149,10 +152,11 @@
         android:textColor="@color/profile"
         android:textSize="18sp"
         android:fontFamily="@font/firasans_light"
-        android:padding="0dp"
+        android:padding="10dp"
         android:drawableRight="@drawable/ic_notifications"
         android:gravity="left|center_vertical"
         android:layout_marginRight="20dp"
+        android:background="@drawable/settings_button_item"
         />
     <TextView
         android:id="@+id/fellow_drivers"
@@ -167,6 +171,7 @@
         android:textStyle="bold"
         android:textColor="@color/profile"
         android:fontFamily="@font/firasans_medium"
+        android:background="@drawable/settings_button_item"
         />
     <Button
         android:id="@+id/become_driver"
@@ -182,10 +187,11 @@
         android:textColor="@color/home_blue"
         android:textSize="18sp"
         android:fontFamily="@font/firasans_light"
-        android:padding="0dp"
+        android:padding="10dp"
         android:drawableRight="@drawable/ic_person"
         android:gravity="left|center_vertical"
         android:layout_marginRight="20dp"
+        android:background="@drawable/settings_button_item"
         />
     <Button
         android:id="@+id/manage_cars"
@@ -201,10 +207,11 @@
         android:textColor="@color/profile"
         android:textSize="18sp"
         android:fontFamily="@font/firasans_light"
-        android:padding="0dp"
+        android:padding="10dp"
         android:drawableRight="@drawable/ic_car"
         android:gravity="left|center_vertical"
         android:layout_marginRight="20dp"
+        android:background="@drawable/settings_button_item"
         />
     <Button
         android:id="@+id/feedback"
@@ -220,10 +227,11 @@
         android:textColor="@color/profile"
         android:textSize="18sp"
         android:fontFamily="@font/firasans_light"
-        android:padding="0dp"
+        android:padding="10dp"
         android:drawableRight="@drawable/ic_person"
         android:gravity="left|center_vertical"
         android:layout_marginRight="20dp"
+        android:background="@drawable/settings_button_item"
         />
 
         <Button
@@ -240,10 +248,11 @@
         android:textColor="@color/profile"
         android:textSize="18sp"
         android:fontFamily="@font/firasans_light"
-        android:padding="0dp"
+        android:padding="10dp"
         android:drawableRight="@drawable/ic_person"
         android:gravity="left|center_vertical"
         android:layout_marginRight="20dp"
+        android:background="@drawable/settings_button_item"
         />
     <Button
         android:id="@+id/terms"
@@ -259,10 +268,11 @@
         android:textColor="@color/profile"
         android:textSize="18sp"
         android:fontFamily="@font/firasans_light"
-        android:padding="0dp"
+        android:padding="10dp"
         android:drawableRight="@drawable/ic_person"
         android:gravity="left|center_vertical"
         android:layout_marginRight="20dp"
+        android:background="@drawable/settings_button_item"
         />
     <Button
         android:id="@+id/logout"
@@ -278,10 +288,11 @@
         android:textColor="@color/login_button"
         android:textSize="18sp"
         android:fontFamily="@font/firasans_light"
-        android:padding="0dp"
+        android:padding="10dp"
         android:drawableRight="@drawable/ic_person"
         android:gravity="left|center_vertical"
         android:layout_marginRight="20dp"
+        android:background="@drawable/settings_button_item"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

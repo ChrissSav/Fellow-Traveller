@@ -74,8 +74,10 @@ public class NotificationFragment extends Fragment {
         notificationList = new ArrayList<>();
         NotificationItem notificationItem = new NotificationItem();
         notificationItem.setUser(new User("Φωτης", "Πεχλιβανης"));
+        notificationItem.setStatus("read");
         notificationList.add(notificationItem);
         notificationItem = new NotificationItem();
+        notificationItem.setStatus("notread");
         notificationItem.setUser(new User("Σπυρος", "Ραντογλου"));
         notificationList.add(notificationItem);
         buildRecyclerView();
