@@ -86,7 +86,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         MessageItem currentItem = messagesList.get(position);
 
         holder.text.setText(currentItem.getText());
-        holder.name.setText(currentItem.getName());
+
 
     }
 
