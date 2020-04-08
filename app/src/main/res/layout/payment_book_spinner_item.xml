@@ -29,6 +29,7 @@
         android:textColor="@color/profile"
         android:fontFamily="@font/firasans_light"
         android:textSize="18sp"
+        android:minWidth="50dp"
         />
 
 

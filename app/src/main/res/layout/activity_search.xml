@@ -34,7 +34,7 @@
 
 
 
-
+        
         <AutoCompleteTextView
             android:id="@+id/autocomplete_search_destination"
             android:layout_width="match_parent"
@@ -46,9 +46,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="50dp"
             android:layout_marginStart="60dp"
-            android:background="@android:color/transparent"
+            android:dropDownVerticalOffset="20dp"
             android:inputType="text"
-            android:imeOptions="actionSearch"/>
+            android:imeOptions="actionSearch"
+            android:longClickable="false"
+            android:dropDownWidth="match_parent"
+            android:background="@android:color/transparent"
+            />
 
         <ImageButton
             android:id="@+id/erase_search"
