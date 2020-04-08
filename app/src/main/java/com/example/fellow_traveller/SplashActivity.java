@@ -12,6 +12,10 @@ import com.example.fellow_traveller.Models.User;
 import com.example.fellow_traveller.NewOffer.NewOfferActivity;
 import com.example.fellow_traveller.NewOffer.NewOfferStage1Fragment;
 import com.example.fellow_traveller.Register.RegisterContainerActivity;
+import com.example.fellow_traveller.SearchAndBook.BookActivity;
+import com.example.fellow_traveller.SearchAndBook.SearchActivity;
+import com.example.fellow_traveller.SearchAndBook.SearchDetailsActivity;
+import com.example.fellow_traveller.SearchAndBook.SearchResultsActivity;
 import com.example.fellow_traveller.Trips.TripPageActivity;
 
 import java.io.BufferedReader;
@@ -35,11 +39,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-<<<<<<< Updated upstream
                 Intent mainIntent = new Intent(SplashActivity.this, HomeActivity.class);
-=======
-                Intent mainIntent = new Intent(SplashActivity.this, RegisterActivity.class);
->>>>>>> Stashed changes
+
                 startActivity(mainIntent);
                 finish();
 
