@@ -20,11 +20,14 @@ import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.API.RetrofitService;
 import com.example.fellow_traveller.API.Status_Handling;
 import com.example.fellow_traveller.SplashActivity;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.JsonObject;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,6 +49,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
     private int num_num;
     private String user_phone;
     private GlobalClass globalClass;
+    private DatabaseReference userDatabase;
 
     //Retrofit
 
@@ -154,6 +158,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
                     /*Intent intent = new Intent(RegisterContainerActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();*/
+
                     LoginUser(email, password);
 
                 } else {
@@ -216,6 +221,8 @@ public class RegisterContainerActivity extends AppCompatActivity {
                     Log.i("onResponse", user.getId() + "\n" + user.getName() + "\n" + user.getSurname());
                     globalClass.setCurrent_user(user);
                     SaveUserInfo(user.getId()+"", user.getName(), user.getSurname());
+                    firebaseRegister(user.getId()+"", user.getName(), user.getSurname());
+
 
 
                 } else {
@@ -232,5 +239,16 @@ public class RegisterContainerActivity extends AppCompatActivity {
                 Log.i("Register_Container", "onFailure: " + t.getMessage());
             }
         });
+    }
+
+    private void firebaseRegister(String id, String name, String surname) {
+        userDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
+        HashMap<String, String> userMap = new HashMap<>();
+        userMap.put("name",name);
+        userMap.put("surname", surname);
+        userMap.put("image","default");
+
+        userDatabase.setValue(userMap);
+
     }
 }
