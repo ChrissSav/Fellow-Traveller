@@ -171,7 +171,6 @@ public class RegisterContainerActivity extends AppCompatActivity {
                 Log.i("SaveClass", "0");
 
                 SaveClass(userAuth);
-                firebaseRegister(userAuth.getId()+"", userAuth.getName(), userAuth.getSurname());
                 Log.i("SaveClass", "4");
 
 
@@ -197,7 +196,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
     }
 
     public void SaveClass(UserAuth userAuth) {
-
+        firebaseRegister(userAuth.getId()+"", userAuth.getName(), userAuth.getSurname());
         Log.i("SaveClass", "1");
         SharedPreferences mPrefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = mPrefs.edit();
