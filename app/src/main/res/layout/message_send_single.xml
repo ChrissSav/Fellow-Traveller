@@ -26,7 +26,7 @@
             android:text="22:52"
             app:layout_constraintEnd_toEndOf="@id/message"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="20dp"
+
             android:textSize="10sp"
             android:fontFamily="@font/firasans_light"
             android:textColor="@color/profile"
@@ -43,11 +43,12 @@
             android:paddingBottom="10dp"
             android:textColor="@color/white"
             android:fontFamily="@font/firasans_medium"
-            android:text="Καλημέραααααααααααααααααα!"
+            android:text="K"
             app:layout_constraintTop_toBottomOf="@id/message_time"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             />
         <TextView
             android:id="@+id/sender_message"

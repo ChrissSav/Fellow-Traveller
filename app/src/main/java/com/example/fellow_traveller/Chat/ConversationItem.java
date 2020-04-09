@@ -1,25 +1,26 @@
 package com.example.fellow_traveller.Chat;
 
 public class ConversationItem {
-    private String userName;
+    private String tripName ;
     private String description;
-    private String date;
+    private long date;
     private boolean seen;
 
-    public ConversationItem(String aUserName, String aDescription, String aDate, boolean aSeen){
+    public ConversationItem(String aUserName, String aDescription, long aDate, boolean aSeen){
 
-        userName = aUserName;
+        tripName = aUserName;
         description = aDescription;
         date = aDate;
         seen = aSeen;
     }
+    public ConversationItem(){}
 
-    public String getUserName() {
-        return userName;
+    public String getTripName() {
+        return tripName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setTripName(String tripName) {
+        this.tripName = tripName;
     }
 
     public String getDescription() {
@@ -30,11 +31,11 @@ public class ConversationItem {
         this.description = description;
     }
 
-    public String getDate() {
+    public long getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(long date) {
         this.date = date;
     }
 
