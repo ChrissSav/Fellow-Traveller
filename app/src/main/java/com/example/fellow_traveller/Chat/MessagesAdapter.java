@@ -1,15 +1,18 @@
 package com.example.fellow_traveller.Chat;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fellow_traveller.R;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import androidx.annotation.NonNull;
@@ -100,20 +103,21 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     }
 
     private DateFormat convertDateFormat(long myTimestamp) {
-        final int SECOND_MILLIS = 1000;
-        final int MINUTE_MILLIS = 60 * SECOND_MILLIS;
-        final int HOUR_MILLIS = 60 * MINUTE_MILLIS;
-        final int DAY_MILLIS = 24 * HOUR_MILLIS;
-        final int YEAR_MILLIS = 365 * HOUR_MILLIS;
 
-        long now = System.currentTimeMillis();
-        final long diff = now - myTimestamp;
+        //Get The year and date of our timestamp and from current year
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(myTimestamp);
+        int compareYear = cal.get(Calendar.YEAR);
+        int compareDay = cal.get(Calendar.DATE);
+        int thisYear = Calendar.getInstance().get(Calendar.YEAR);
+        int thisDate = Calendar.getInstance().get(Calendar.DATE);
 
         DateFormat dateFormat;
-        if(diff<DAY_MILLIS){
+
+        if(thisDate==compareDay){
             dateFormat = new SimpleDateFormat("h:mm a");
             return dateFormat;
-        }else if(diff<YEAR_MILLIS){
+        }else if(thisYear==compareYear){
             dateFormat = new SimpleDateFormat("EEE, d MMM - h:mm a");
             return dateFormat;
         }else{

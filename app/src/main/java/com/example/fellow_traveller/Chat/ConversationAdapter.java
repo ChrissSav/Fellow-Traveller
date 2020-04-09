@@ -12,6 +12,7 @@ import java.security.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import androidx.annotation.NonNull;
@@ -80,22 +81,21 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     }
 
     private DateFormat convertDateFormat(long myTimestamp) {
-        final int SECOND_MILLIS = 1000;
-        final int MINUTE_MILLIS = 60 * SECOND_MILLIS;
-        final int HOUR_MILLIS = 60 * MINUTE_MILLIS;
-        final int DAY_MILLIS = 24 * HOUR_MILLIS;
-        final long YEAR_MILLIS = 365 * DAY_MILLIS;
 
-        long now = System.currentTimeMillis();
+        //Get The year and date of our timestamp and from current year
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(myTimestamp);
+        int compareYear = cal.get(Calendar.YEAR);
+        int compareDay = cal.get(Calendar.DATE);
+        int thisYear = Calendar.getInstance().get(Calendar.YEAR);
+        int thisDate = Calendar.getInstance().get(Calendar.DATE);
 
-        final long diff = now - myTimestamp;
-
-
+        
         DateFormat dateFormat;
-        if(diff<DAY_MILLIS){
+        if(thisDate==compareDay){
             dateFormat = new SimpleDateFormat("h:mm a");
             return dateFormat;
-        }else if(diff<YEAR_MILLIS){
+        }else if(compareYear==thisYear){
             dateFormat = new SimpleDateFormat(" EEE, d MMM");
             return dateFormat;
         }else{
