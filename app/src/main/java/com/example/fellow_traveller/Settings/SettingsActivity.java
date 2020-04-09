@@ -31,11 +31,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SettingsActivity extends AppCompatActivity {
-    private Button personalButton,btn_logout;
+    private Button personalButton, btn_logout;
     private RetrofitService retrofitService;
     private Retrofit retrofit;
     private GlobalClass globalClass;
-
 
 
     @Override
@@ -45,7 +44,7 @@ public class SettingsActivity extends AppCompatActivity {
         globalClass = (GlobalClass) getApplicationContext();
 
         personalButton = findViewById(R.id.personal_info);
-        btn_logout  = findViewById(R.id.logout);
+        btn_logout = findViewById(R.id.logout);
         personalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,12 +65,12 @@ public class SettingsActivity extends AppCompatActivity {
     public void LogOut() {
         Log.i("getAccess_token", globalClass.getCurrent_user().getAccess_token());
 
-        retrofit = new Retrofit.Builder().baseUrl(getResources()
-                .getString(R.string.API_URL))
-                .client(globalClass.getOkHttpClient().build())
-                .addConverterFactory(GsonConverterFactory.create()).build();
+        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL)).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitService = retrofit.create(RetrofitService.class);
-        Call<Status_Handling> call = retrofitService.LogoutUser();
+
+        JsonObject user_object = new JsonObject();
+        user_object.addProperty("refresh_token", globalClass.getCurrent_user().getRefresh_token());
+        Call<Status_Handling> call = retrofitService.LogoutUser(globalClass.getCurrent_user().getRefresh_token());
         call.enqueue(new Callback<Status_Handling>() {
             @Override
             public void onResponse(Call<Status_Handling> call, Response<Status_Handling> response) {

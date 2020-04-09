@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface RetrofitService {
 
@@ -23,7 +24,9 @@ public interface RetrofitService {
     );
 
     @POST("logout")
-    Call<Status_Handling> LogoutUser();
+    Call<Status_Handling> LogoutUser(
+            @Query("refresh_token") String token
+    );
 
 
 }
