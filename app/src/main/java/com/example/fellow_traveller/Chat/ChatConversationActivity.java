@@ -82,6 +82,7 @@ public class ChatConversationActivity extends AppCompatActivity {
                borderOfEdtText.setBackgroundResource( R.drawable.write_message_et_black_chat);
                 plusButton.setBackgroundTintList(getResources().getColorStateList(R.color.profile));
                 sendButton.setBackgroundTintList(getResources().getColorStateList(R.color.profile));
+
             }
         });
         sendButton.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +91,7 @@ public class ChatConversationActivity extends AppCompatActivity {
                 String message = writeEdtText.getText().toString();
 
                 if(!message.trim().isEmpty()) {
-                    sendMessage(1,7, message);
+                    sendMessage(2,7, message);
                     writeEdtText.setText("");
                 }
             }

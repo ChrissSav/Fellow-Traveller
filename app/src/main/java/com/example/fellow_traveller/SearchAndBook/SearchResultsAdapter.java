@@ -22,7 +22,6 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
 
     public void setOnItemClickListener(OnItemClickListener listener){
         mListener = listener;
-
     }
     public static class SearchResultsViewHolder extends RecyclerView.ViewHolder{
         public TextView userName, rate, review, from, to, date, time;

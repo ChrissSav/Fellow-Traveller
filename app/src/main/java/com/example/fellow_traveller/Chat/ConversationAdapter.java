@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.fellow_traveller.R;
+import com.example.fellow_traveller.SearchAndBook.SearchResultsAdapter;
 
 import java.security.Timestamp;
 import java.text.DateFormat;
@@ -18,18 +19,39 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapter.ConversationViewHolder>{
     private ArrayList<ConversationItem> conversationList;
+    private ConversationAdapter.OnItemClickListener mListener;
+
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(ConversationAdapter.OnItemClickListener listener){
+        mListener = listener;
+    }
     public static class ConversationViewHolder extends RecyclerView.ViewHolder{
         public TextView userName;
         public TextView description;
         public TextView date;
 
 
-        public ConversationViewHolder(@NonNull View itemView) {
+        public ConversationViewHolder(@NonNull View itemView, final ConversationAdapter.OnItemClickListener listener) {
             super(itemView);
 
             userName = itemView.findViewById(R.id.name_chat);
             description = itemView.findViewById(R.id.description_chat);
             date = itemView.findViewById(R.id.message_date_chat);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
     public ConversationAdapter(ArrayList<ConversationItem> convList){
@@ -41,7 +63,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     @Override
     public ConversationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.messenger_item, parent, false);
-        ConversationViewHolder evh = new ConversationViewHolder(v);
+        ConversationViewHolder evh = new ConversationViewHolder(v,mListener);
         return evh;
     }
 

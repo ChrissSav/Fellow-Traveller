@@ -18,6 +18,8 @@ import com.example.fellow_traveller.Chat.ChatConversationActivity;
 import com.example.fellow_traveller.Chat.ConversationAdapter;
 import com.example.fellow_traveller.Chat.ConversationItem;
 import com.example.fellow_traveller.R;
+import com.example.fellow_traveller.SearchAndBook.SearchDetailsActivity;
+import com.example.fellow_traveller.SearchAndBook.SearchResultsActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,7 +37,7 @@ import static java.lang.String.valueOf;
 public class MessengerFragment extends Fragment {
     private Button btn;
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private ConversationAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private DatabaseReference convsRef;
     private int myId;
@@ -52,6 +54,7 @@ public class MessengerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_messenger, container, false);
+
         btn = view.findViewById(R.id.button);
 
         myId = 1;
@@ -96,8 +99,18 @@ public class MessengerFragment extends Fragment {
             }
         });
 
+    mAdapter.setOnItemClickListener(new ConversationAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClick(int position) {
+            Intent mainIntent = new Intent(getActivity(), ChatConversationActivity.class);
+            startActivity(mainIntent);
+        }
+    });
+
         return view;
     }
+
+
     public void loadConversation(){
 
         {
