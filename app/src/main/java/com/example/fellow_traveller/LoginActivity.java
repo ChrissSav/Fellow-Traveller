@@ -103,6 +103,8 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+
+
     public void SaveClass(UserAuth userAuth) {
         Log.i("SaveClass", "1");
         SharedPreferences mPrefs = getSharedPreferences("shared preferences", MODE_PRIVATE);

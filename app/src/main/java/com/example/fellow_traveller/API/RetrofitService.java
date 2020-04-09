@@ -21,4 +21,9 @@ public interface RetrofitService {
     Call<UserAuth> loginUser(
             @Body JsonObject user_obj
     );
+
+    @POST("logout")
+    Call<Status_Handling> LogoutUser();
+
+
 }
