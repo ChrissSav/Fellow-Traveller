@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.fellow_traveller.Notification.NotificationAdapter;
 import com.example.fellow_traveller.R;
 
 import java.util.ArrayList;
@@ -45,9 +44,9 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     @Override
     public void onBindViewHolder(@NonNull ConversationViewHolder holder, int position) {
         ConversationItem currentItem = conversationList.get(position);
-        holder.userName.setText(currentItem.getUserName());
+        holder.userName.setText(currentItem.getTripName());
         holder.description.setText(currentItem.getDescription());
-        holder.date.setText(currentItem.getDate());
+        holder.date.setText(Long.toString(currentItem.getDate()));
     }
 
     @Override

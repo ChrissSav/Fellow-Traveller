@@ -33,7 +33,7 @@ public class ChatConversationActivity extends AppCompatActivity {
     private ImageButton plusButton, sendButton;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private LinearLayoutManager mLayoutManager;
     private ArrayList<MessageItem> messagesList = new ArrayList<>();
     private static final int TOTAL_ITEMS_TO_LOAD = 20;
     private int mCurrentPage = 1;
@@ -90,7 +90,7 @@ public class ChatConversationActivity extends AppCompatActivity {
                 String message = writeEdtText.getText().toString();
 
                 if(!message.trim().isEmpty()) {
-                    sendMessage(9,7, message);
+                    sendMessage(7,7, message);
                     writeEdtText.setText("");
                 }
             }
@@ -187,7 +187,8 @@ public class ChatConversationActivity extends AppCompatActivity {
                 }
 
                 mAdapter.notifyDataSetChanged();
-                mRecyclerView.scrollBy(20,0);
+                mLayoutManager.scrollToPositionWithOffset(18,0);
+
                 mRefreshLayout.setRefreshing(false);
 
 
