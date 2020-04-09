@@ -150,7 +150,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
         user_obj.addProperty("surname", surname);
         user_obj.addProperty("email", email);
         user_obj.addProperty("password", password);
-        user_obj.addProperty("phone", "999999999");
+        user_obj.addProperty("phone", getIntent().getStringExtra("USER_PHONE"));
 
         Call<UserAuth> call = retrofitService.registerUser(user_obj);
         call.enqueue(new Callback<UserAuth>() {
