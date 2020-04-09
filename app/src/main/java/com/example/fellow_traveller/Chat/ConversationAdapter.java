@@ -75,29 +75,31 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
 
 
         Date currentDate = new Date(currentItem.getDate()*1000);
-        DateFormat dateFormat =  convertDateFormat(currentItem.getDate()*1000);
-        holder.date.setText(dateFormat.format(currentDate));
-//        Long.toString(currentItem.getDate())
+        DateFormat dateFormatFinal =  convertDateFormat(currentItem.getDate()*1000);
+        holder.date.setText(dateFormatFinal.format(currentDate));
     }
+
     private DateFormat convertDateFormat(long myTimestamp) {
         final int SECOND_MILLIS = 1000;
         final int MINUTE_MILLIS = 60 * SECOND_MILLIS;
         final int HOUR_MILLIS = 60 * MINUTE_MILLIS;
         final int DAY_MILLIS = 24 * HOUR_MILLIS;
-        final int YEAR_MILLIS = 365 * HOUR_MILLIS;
+        final long YEAR_MILLIS = 365 * DAY_MILLIS;
 
         long now = System.currentTimeMillis();
+
         final long diff = now - myTimestamp;
 
+
         DateFormat dateFormat;
-        if(diff<24*HOUR_MILLIS){
+        if(diff<DAY_MILLIS){
             dateFormat = new SimpleDateFormat("h:mm a");
             return dateFormat;
         }else if(diff<YEAR_MILLIS){
-            dateFormat = new SimpleDateFormat("EEE, d/M");
+            dateFormat = new SimpleDateFormat(" EEE, d MMM");
             return dateFormat;
         }else{
-            dateFormat = new SimpleDateFormat(" d/M/yyyy");
+            dateFormat = new SimpleDateFormat("d MMM yyyy");
             return dateFormat;
         }
     }

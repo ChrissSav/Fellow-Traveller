@@ -110,14 +110,14 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         final long diff = now - myTimestamp;
 
         DateFormat dateFormat;
-        if(diff<24*HOUR_MILLIS){
+        if(diff<DAY_MILLIS){
             dateFormat = new SimpleDateFormat("h:mm a");
             return dateFormat;
         }else if(diff<YEAR_MILLIS){
-            dateFormat = new SimpleDateFormat("EEE, d/M - h:mm a");
+            dateFormat = new SimpleDateFormat("EEE, d MMM - h:mm a");
             return dateFormat;
         }else{
-            dateFormat = new SimpleDateFormat("EEE, d/M/yyyy - h:mm a");
+            dateFormat = new SimpleDateFormat("d MMM yyyy - h:mm a");
             return dateFormat;
         }
     }

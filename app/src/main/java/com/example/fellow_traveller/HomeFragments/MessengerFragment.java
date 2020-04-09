@@ -35,7 +35,6 @@ import static java.lang.String.valueOf;
  * A simple {@link Fragment} subclass.
  */
 public class MessengerFragment extends Fragment {
-    private Button btn;
     private RecyclerView mRecyclerView;
     private ConversationAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -54,8 +53,6 @@ public class MessengerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_messenger, container, false);
-
-        btn = view.findViewById(R.id.button);
 
         myId = 1;
 
@@ -89,15 +86,7 @@ public class MessengerFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
 
         loadConversation();
-
-    btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(getActivity(), ChatConversationActivity.class);
-                startActivity(intent);
-            }
-        });
+        
 
     mAdapter.setOnItemClickListener(new ConversationAdapter.OnItemClickListener() {
         @Override
