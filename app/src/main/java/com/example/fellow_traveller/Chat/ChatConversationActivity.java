@@ -90,7 +90,7 @@ public class ChatConversationActivity extends AppCompatActivity {
                 String message = writeEdtText.getText().toString();
 
                 if(!message.trim().isEmpty()) {
-                    sendMessage(7,7, message);
+                    sendMessage(1,7, message);
                     writeEdtText.setText("");
                 }
             }

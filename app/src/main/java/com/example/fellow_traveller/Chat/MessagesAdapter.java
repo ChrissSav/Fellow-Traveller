@@ -7,7 +7,10 @@ import android.widget.TextView;
 
 import com.example.fellow_traveller.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +30,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     public static class MessagesViewHolder extends RecyclerView.ViewHolder {
         public TextView text;
         public TextView name;
+        public TextView date;
 
 
         public MessagesViewHolder(@NonNull View itemView) {
@@ -34,7 +38,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
 
             text = itemView.findViewById(R.id.message);
             name = itemView.findViewById(R.id.sender_message);
-
+            date = itemView.findViewById(R.id.message_time);
         }
     }
 
@@ -87,7 +91,35 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
 
         holder.text.setText(currentItem.getText());
 
+        Date currentDate = new Date(currentItem.getTimestamp()*1000);
+        DateFormat dateFormat = convertDateFormat(currentItem.getTimestamp()*1000);
+        holder.date.setText(dateFormat.format(currentDate));
 
+
+
+    }
+
+    private DateFormat convertDateFormat(long myTimestamp) {
+        final int SECOND_MILLIS = 1000;
+        final int MINUTE_MILLIS = 60 * SECOND_MILLIS;
+        final int HOUR_MILLIS = 60 * MINUTE_MILLIS;
+        final int DAY_MILLIS = 24 * HOUR_MILLIS;
+        final int YEAR_MILLIS = 365 * HOUR_MILLIS;
+
+        long now = System.currentTimeMillis();
+        final long diff = now - myTimestamp;
+
+        DateFormat dateFormat;
+        if(diff<24*HOUR_MILLIS){
+            dateFormat = new SimpleDateFormat("h:mm a");
+            return dateFormat;
+        }else if(diff<YEAR_MILLIS){
+            dateFormat = new SimpleDateFormat("EEE, d/M - h:mm a");
+            return dateFormat;
+        }else{
+            dateFormat = new SimpleDateFormat("EEE, d/M/yyyy - h:mm a");
+            return dateFormat;
+        }
     }
 
     @Override

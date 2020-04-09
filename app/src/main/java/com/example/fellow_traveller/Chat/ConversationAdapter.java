@@ -7,7 +7,11 @@ import android.widget.TextView;
 
 import com.example.fellow_traveller.R;
 
+import java.security.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,7 +50,34 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         ConversationItem currentItem = conversationList.get(position);
         holder.userName.setText(currentItem.getTripName());
         holder.description.setText(currentItem.getDescription());
-        holder.date.setText(Long.toString(currentItem.getDate()));
+
+
+        Date currentDate = new Date(currentItem.getDate()*1000);
+        DateFormat dateFormat =  convertDateFormat(currentItem.getDate()*1000);
+        holder.date.setText(dateFormat.format(currentDate));
+//        Long.toString(currentItem.getDate())
+    }
+    private DateFormat convertDateFormat(long myTimestamp) {
+        final int SECOND_MILLIS = 1000;
+        final int MINUTE_MILLIS = 60 * SECOND_MILLIS;
+        final int HOUR_MILLIS = 60 * MINUTE_MILLIS;
+        final int DAY_MILLIS = 24 * HOUR_MILLIS;
+        final int YEAR_MILLIS = 365 * HOUR_MILLIS;
+
+        long now = System.currentTimeMillis();
+        final long diff = now - myTimestamp;
+
+        DateFormat dateFormat;
+        if(diff<24*HOUR_MILLIS){
+            dateFormat = new SimpleDateFormat("h:mm a");
+            return dateFormat;
+        }else if(diff<YEAR_MILLIS){
+            dateFormat = new SimpleDateFormat("EEE, d/M");
+            return dateFormat;
+        }else{
+            dateFormat = new SimpleDateFormat(" d/M/yyyy");
+            return dateFormat;
+        }
     }
 
     @Override
