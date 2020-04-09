@@ -17,15 +17,18 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Search2Activity"></activity>
+        <activity android:name=".SearchAndBook.BookActivity"></activity>
+        <activity android:name=".SearchAndBook.SearchDetailsActivity" />
+        <activity android:name=".SearchAndBook.SearchResultsActivity" />
+        <activity android:name=".SearchAndBook.Search2Activity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Base.Theme.AppCompat" />
-        <activity android:name=".SearchActivity$Search2Activity" />
-        <activity android:name=".SearchActivity" />
+        <activity android:name=".SearchAndBook.SearchActivity$Search2Activity" />
+        <activity android:name=".SearchAndBook.SearchActivity" />
         <activity android:name=".NewOffer.NewOfferActivity" />
-        <activity android:name=".FiltersActivity" />
+        <activity android:name=".SearchAndBook.FiltersActivity" />
         <activity android:name=".Settings.PersonalSettingsActivity" />
         <activity android:name=".Chat.ChatConversationActivity" />
         <activity android:name=".Settings.SettingsActivity" />

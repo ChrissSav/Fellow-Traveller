@@ -14,6 +14,10 @@ import com.example.fellow_traveller.Models.UserAuth;
 import com.example.fellow_traveller.NewOffer.NewOfferActivity;
 import com.example.fellow_traveller.NewOffer.NewOfferStage1Fragment;
 import com.example.fellow_traveller.Register.RegisterContainerActivity;
+import com.example.fellow_traveller.SearchAndBook.BookActivity;
+import com.example.fellow_traveller.SearchAndBook.SearchActivity;
+import com.example.fellow_traveller.SearchAndBook.SearchDetailsActivity;
+import com.example.fellow_traveller.SearchAndBook.SearchResultsActivity;
 import com.example.fellow_traveller.Trips.TripPageActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -50,8 +54,6 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(mainIntent);
                     finish();
                 }
-
-
             }
         }, SPLASH_TIME);
         /*Thread splashTread = new Thread() {

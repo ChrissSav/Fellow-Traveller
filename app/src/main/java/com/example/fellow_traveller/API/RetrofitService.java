@@ -17,8 +17,8 @@ public interface RetrofitService {
     );
 
 
-    @POST("user/login")
-    Call<User> loginUser(
+    @POST("login")
+    Call<UserAuth> loginUser(
             @Body JsonObject user_obj
     );
 }

@@ -22,6 +22,8 @@ import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.API.RetrofitService;
 import com.example.fellow_traveller.API.Status_Handling;
 import com.example.fellow_traveller.SplashActivity;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -29,6 +31,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.lang.reflect.Type;
 
 import okhttp3.ResponseBody;
@@ -52,6 +55,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
     private int num_num;
     private String user_phone;
     private GlobalClass globalClass;
+    private DatabaseReference userDatabase;
 
     //Retrofit
 
@@ -152,7 +156,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
         call.enqueue(new Callback<UserAuth>() {
             @Override
             public void onResponse(Call<UserAuth> call, Response<UserAuth> response) {
-                Log.i("SaveClass","-2");
+                Log.i("SaveClass", "-2");
                 if (!response.isSuccessful()) {
                     try {
                         Toast.makeText(RegisterContainerActivity.this, response.errorBody().string(), Toast.LENGTH_SHORT).show();
@@ -161,14 +165,13 @@ public class RegisterContainerActivity extends AppCompatActivity {
                     }
                     return;
                 }
-                Log.i("SaveClass","-1");
+                Log.i("SaveClass", "-1");
                 UserAuth userAuth = response.body();
                 //Toast.makeText(RegisterContainerActivity.this, userAuth.getName(), Toast.LENGTH_SHORT).show();
-                Log.i("SaveClass","0");
+                Log.i("SaveClass", "0");
 
                 SaveClass(userAuth);
-                Log.i("SaveClass","4");
-
+                Log.i("SaveClass", "4");
 
 
             }
@@ -181,21 +184,35 @@ public class RegisterContainerActivity extends AppCompatActivity {
     }
 
 
+    private void firebaseRegister(String id, String name, String surname) {
+        userDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
+        HashMap<String, String> userMap = new HashMap<>();
+        userMap.put("name", name);
+        userMap.put("surname", surname);
+        userMap.put("image", "default");
+
+        userDatabase.setValue(userMap);
+
+    }
+
     public void SaveClass(UserAuth userAuth) {
-        Log.i("SaveClass","1");
+        //firebaseRegister(userAuth.getId()+"", userAuth.getName(), userAuth.getSurname());
+        Log.i("SaveClass", "1");
         SharedPreferences mPrefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = mPrefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(userAuth);
         editor.putString(getResources().getString(R.string.USER_INFO), json);
-        Log.i("SaveClass","2");
+        Log.i("SaveClass", "2");
 
         editor.apply();
         globalClass.setCurrent_user(userAuth);
-        Intent mainIntent = new Intent(RegisterContainerActivity.this, HomeActivity.class);
-        Log.i("SaveClass","3");
+        Log.i("SaveClass", "3");
 
-        startActivity(mainIntent);
+        Intent intent = new Intent(RegisterContainerActivity.this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
         finish();
     }
 
