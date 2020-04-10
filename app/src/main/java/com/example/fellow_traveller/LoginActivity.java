@@ -70,18 +70,21 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void LoginUser(String email,String password) {
-        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL)).addConverterFactory(GsonConverterFactory.create()).build();
+        Log.i("LoginUser",email+" "+ password);
+        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL))
+                .addConverterFactory(GsonConverterFactory.create()).build();
         retrofitService = retrofit.create(RetrofitService.class);
         Log.i("LoginUser",email+" "+ password);
         JsonObject user_object = new JsonObject();
         user_object.addProperty("email", email);
         user_object.addProperty("password", password);
+        Log.i("LoginUser","τελοσ ξσον");
 
         Call<UserAuth> call = retrofitService.loginUser(user_object);
         call.enqueue(new Callback<UserAuth>() {
             @Override
             public void onResponse(Call<UserAuth> call, Response<UserAuth> response) {
-                Log.i("SaveClass", "-2");
+                Log.i("LoginUser", "μπηκα");
                 if (!response.isSuccessful()) {
                     try {
                         Toast.makeText(LoginActivity.this, response.errorBody().string(), Toast.LENGTH_SHORT).show();
@@ -90,6 +93,8 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     return;
                 }
+                Log.i("LoginUser", "ολα καλα");
+
                 UserAuth userAuth = response.body();
                 SaveClass(userAuth);
 
@@ -98,6 +103,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<UserAuth> call, Throwable t) {
+                Log.i("LoginUser", "φαιλ");
+
                 Log.i("Register_Container", "onFailure: " + t.getMessage());
             }
         });
@@ -106,17 +113,17 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void SaveClass(UserAuth userAuth) {
-        Log.i("SaveClass", "1");
+        Log.i("LoginUser", "σαβε");
         SharedPreferences mPrefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = mPrefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(userAuth);
         editor.putString(getResources().getString(R.string.USER_INFO), json);
-        Log.i("SaveClass", "2");
+        Log.i("LoginUser", "2");
 
         editor.apply();
         globalClass.setCurrent_user(userAuth);
-        Log.i("SaveClass", "3");
+        Log.i("LoginUser", "3");
 
         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK

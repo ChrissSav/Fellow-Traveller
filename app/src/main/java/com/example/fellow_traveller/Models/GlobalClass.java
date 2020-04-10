@@ -4,6 +4,8 @@ import android.app.Application;
 import android.util.Log;
 
 import java.io.IOException;
+import java.net.Proxy;
+
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -23,7 +25,7 @@ public class GlobalClass extends Application {
     }
 
     public OkHttpClient.Builder getOkHttpClient() {
-        okHttpClient = new OkHttpClient.Builder();
+        okHttpClient = new OkHttpClient.Builder().proxy(Proxy.NO_PROXY);
         okHttpClient.addInterceptor((new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {

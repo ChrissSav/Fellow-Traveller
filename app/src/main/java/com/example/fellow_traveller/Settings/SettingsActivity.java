@@ -65,7 +65,7 @@ public class SettingsActivity extends AppCompatActivity {
     public void LogOut() {
         Log.i("getAccess_token", globalClass.getCurrent_user().getAccess_token());
 
-        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL)).addConverterFactory(GsonConverterFactory.create()).build();
+        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL)).client(globalClass.getOkHttpClient().build()).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitService = retrofit.create(RetrofitService.class);
 
         JsonObject user_object = new JsonObject();
