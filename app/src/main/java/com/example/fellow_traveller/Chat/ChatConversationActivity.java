@@ -7,6 +7,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -15,6 +18,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.fellow_traveller.MessagesNotification.APIService;
+import com.example.fellow_traveller.MessagesNotification.Client;
+import com.example.fellow_traveller.MessagesNotification.Data;
+import com.example.fellow_traveller.MessagesNotification.MyResponse;
+import com.example.fellow_traveller.MessagesNotification.Sender;
+import com.example.fellow_traveller.MessagesNotification.Token;
 import com.example.fellow_traveller.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,6 +51,9 @@ public class ChatConversationActivity extends AppCompatActivity {
     private String lastKey = "";
     private String prevKey = "";
     private SwipeRefreshLayout mRefreshLayout;
+    private String myId = "1";
+    APIService apiService;
+    boolean notify = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +81,8 @@ public class ChatConversationActivity extends AppCompatActivity {
 //        messagesList.add(new MessageItem(1,"Εππsdsadafsadadsasdπ","George"));
 
 
+        apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
+
         mRecyclerView = findViewById(R.id.messages_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
@@ -88,10 +103,11 @@ public class ChatConversationActivity extends AppCompatActivity {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                notify = true;
                 String message = writeEdtText.getText().toString();
 
                 if(!message.trim().isEmpty()) {
-                    sendMessage(2,7, message);
+                    sendMessage(1,7, message);
                     writeEdtText.setText("");
                 }
             }
@@ -105,9 +121,11 @@ public class ChatConversationActivity extends AppCompatActivity {
                 readMoreMessages();
             }
         });
+
+        updateToken(FirebaseInstanceId.getInstance().getToken());
     }
 
-    private void sendMessage(int myId, int groupId, String msg) {
+    private void sendMessage(int myId, int groupId, String message) {
         //We send message to the id which we putted extra from conversation list
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Messages").child("7");
@@ -115,10 +133,61 @@ public class ChatConversationActivity extends AppCompatActivity {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("id", myId);
         hashMap.put("groupId", groupId);
-        hashMap.put("text", msg);
+        hashMap.put("text", message);
         hashMap.put("timestamp", System.currentTimeMillis()/1000);
 
         reference.push().setValue(hashMap);
+
+        final String msg = message;
+        if (notify) {
+            sendNotification("1", "Tyler", msg);
+        }
+        notify = false;
+    }
+
+
+
+
+    private void sendNotification(String receiver, final String username, final String message ){
+
+        //WARNING HAVE TO CHANGE THE SENTET FROM 1 TO ANOTHER ID
+
+        DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Tokens");
+        Query query = tokens.orderByKey().equalTo(receiver);
+
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    Token token = snapshot.getValue(Token.class);
+                    Data data = new Data(myId, R.drawable.ic_logo, username + ": " + message, "Νέο μήνυμα","1");
+
+                    Sender sender = new Sender(data, token.getToken());
+                    apiService.sendNotification(sender)
+                            .enqueue(new Callback<MyResponse>() {
+                                @Override
+                                public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                                    if(response.code() == 200){
+                                        if(response.body().success != 1){
+                                            Toast.makeText(ChatConversationActivity.this, "Απέτυχε", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<MyResponse> call, Throwable t) {
+
+                                }
+                            });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     public void readMessages(){
@@ -215,8 +284,13 @@ public class ChatConversationActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    private void updateToken(String token){
 
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Tokens");
+        Token token1 = new Token(token);
+        reference.child(myId).setValue(token1);
 
     }
 
