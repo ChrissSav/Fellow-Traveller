@@ -82,17 +82,22 @@
         app:layout_constraintBottom_toTopOf="@id/underline"
         android:background="@color/white"
         >
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_chat_conversation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/messages_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="4dp"
+
             android:scrollbars="vertical"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

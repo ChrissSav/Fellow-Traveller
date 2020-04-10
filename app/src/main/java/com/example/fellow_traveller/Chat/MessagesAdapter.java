@@ -1,13 +1,19 @@
 package com.example.fellow_traveller.Chat;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fellow_traveller.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +33,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     public static class MessagesViewHolder extends RecyclerView.ViewHolder {
         public TextView text;
         public TextView name;
+        public TextView date;
 
 
         public MessagesViewHolder(@NonNull View itemView) {
@@ -34,7 +41,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
 
             text = itemView.findViewById(R.id.message);
             name = itemView.findViewById(R.id.sender_message);
-
+            date = itemView.findViewById(R.id.message_time);
         }
     }
 
@@ -86,8 +93,37 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         MessageItem currentItem = messagesList.get(position);
 
         holder.text.setText(currentItem.getText());
-        holder.name.setText(currentItem.getName());
 
+        Date currentDate = new Date(currentItem.getTimestamp()*1000);
+        DateFormat dateFormat = convertDateFormat(currentItem.getTimestamp()*1000);
+        holder.date.setText(dateFormat.format(currentDate));
+
+
+
+    }
+
+    private DateFormat convertDateFormat(long myTimestamp) {
+
+        //Get The year and date of our timestamp and from current year
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(myTimestamp);
+        int compareYear = cal.get(Calendar.YEAR);
+        int compareDay = cal.get(Calendar.DATE);
+        int thisYear = Calendar.getInstance().get(Calendar.YEAR);
+        int thisDate = Calendar.getInstance().get(Calendar.DATE);
+
+        DateFormat dateFormat;
+
+        if(thisDate==compareDay){
+            dateFormat = new SimpleDateFormat("h:mm a");
+            return dateFormat;
+        }else if(thisYear==compareYear){
+            dateFormat = new SimpleDateFormat("EEE, d MMM - h:mm a");
+            return dateFormat;
+        }else{
+            dateFormat = new SimpleDateFormat("d MMM yyyy - h:mm a");
+            return dateFormat;
+        }
     }
 
     @Override
