@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.API.RetrofitService;
 import com.example.fellow_traveller.API.Status_Handling;
+import com.example.fellow_traveller.Settings.ChangePassword;
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.LoginActivity;
 import com.example.fellow_traveller.MainActivity;
@@ -19,6 +21,7 @@ import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.Models.UserAuth;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.Register.RegisterContainerActivity;
+import com.example.fellow_traveller.SplashActivity;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -35,6 +38,7 @@ public class SettingsActivity extends AppCompatActivity {
     private RetrofitService retrofitService;
     private Retrofit retrofit;
     private GlobalClass globalClass;
+    private Button changePasswordButton;
 
 
     @Override
@@ -53,6 +57,17 @@ public class SettingsActivity extends AppCompatActivity {
                 //finish();
             }
         });
+
+
+        changePasswordButton=findViewById(R.id.change_password);
+        changePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent changePassword = new Intent(SettingsActivity.this, ChangePassword.class);
+                startActivity(changePassword);
+            }
+        });
+
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +75,7 @@ public class SettingsActivity extends AppCompatActivity {
                 LogOut();
             }
         });
+
     }
 
     public void LogOut() {
