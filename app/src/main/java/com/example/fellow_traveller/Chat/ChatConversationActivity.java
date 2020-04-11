@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -41,6 +42,8 @@ public class ChatConversationActivity extends AppCompatActivity {
     private String lastKey = "";
     private String prevKey = "";
     private SwipeRefreshLayout mRefreshLayout;
+    private GlobalClass globalClass;
+    private int myId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +70,14 @@ public class ChatConversationActivity extends AppCompatActivity {
 //        messagesList.add(new MessageItem(1,"Εππsadadsasdπ","George"));
 //        messagesList.add(new MessageItem(1,"Εππsdsadafsadadsasdπ","George"));
 
+        //Retrieve current user's id
+        globalClass = (GlobalClass) getApplicationContext();
+        myId = globalClass.getCurrent_user().getId();
 
         mRecyclerView = findViewById(R.id.messages_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new MessagesAdapter(messagesList);
+        mAdapter = new MessagesAdapter(messagesList, this.getApplicationContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         readMessages();
@@ -91,7 +97,7 @@ public class ChatConversationActivity extends AppCompatActivity {
                 String message = writeEdtText.getText().toString();
 
                 if(!message.trim().isEmpty()) {
-                    sendMessage(2,7, message);
+                    sendMessage(myId,7, message);
                     writeEdtText.setText("");
                 }
             }
