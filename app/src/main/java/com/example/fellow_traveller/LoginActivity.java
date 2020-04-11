@@ -3,22 +3,20 @@ package com.example.fellow_traveller;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.example.fellow_traveller.API.RetrofitService;
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
-import com.example.fellow_traveller.Models.User;
-import com.example.fellow_traveller.Register.RegisterContainerActivity;
+import com.example.fellow_traveller.Models.UserAuth;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import retrofit2.Call;
@@ -71,70 +69,68 @@ public class LoginActivity extends AppCompatActivity {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
-    public void LoginUser(String email, String password) {
-        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL)).addConverterFactory(GsonConverterFactory.create()).build();
+    public void LoginUser(String email,String password) {
+        Log.i("LoginUser",email+" "+ password);
+        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL))
+                .addConverterFactory(GsonConverterFactory.create()).build();
         retrofitService = retrofit.create(RetrofitService.class);
+        Log.i("LoginUser",email+" "+ password);
+        JsonObject user_object = new JsonObject();
+        user_object.addProperty("email", email);
+        user_object.addProperty("password", password);
+        Log.i("LoginUser","τελοσ ξσον");
 
-
-        Log.i("LoginUser", "user_phone :" + email + " " + password);
-
-        JsonObject user_obj = new JsonObject();
-        user_obj.addProperty("email", email);
-        user_obj.addProperty("password", password);
-
-        Call<User> call = retrofitService.loginUser(user_obj);
-        call.enqueue(new Callback<User>() {
+        Call<UserAuth> call = retrofitService.loginUser(user_object);
+        call.enqueue(new Callback<UserAuth>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<UserAuth> call, Response<UserAuth> response) {
+                Log.i("LoginUser", "μπηκα");
                 if (!response.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, "response " + response.errorBody(), Toast.LENGTH_SHORT).show();
+                    try {
+                        Toast.makeText(LoginActivity.this, response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     return;
                 }
-                //Toast.makeText(RegisterContainerActivity.this, "body " + response.body(), Toast.LENGTH_SHORT).show();
-                User user = response.body();
-                if (user.getName() != null && user.getSurname() != null && user.getId() != 0) {
-                    Log.i("onResponse", user.getId() + "\n" + user.getName() + "\n" + user.getSurname());
-                    globalClass.setCurrent_user(user);
-                    SaveUserInfo(user.getId() + "", user.getName(), user.getSurname());
+                Log.i("LoginUser", "ολα καλα");
 
-                } else {
-                    textInputLayout_email.setError("Incorrect fields!");
-                    textInputLayout_password.setError("Incorrect fields!");
-                }
+                UserAuth userAuth = response.body();
+                SaveClass(userAuth);
+
 
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<UserAuth> call, Throwable t) {
+                Log.i("LoginUser", "φαιλ");
+
                 Log.i("Register_Container", "onFailure: " + t.getMessage());
             }
         });
     }
 
-    public void SaveUserInfo(String id, String name, String surname) {
-        String final_str = id + "\n" + name + "\n" + surname;
-        FileOutputStream fos = null;
-        try {
-            fos = openFileOutput(getString(R.string.USER_INFO_FILE), MODE_PRIVATE);
-            fos.write(final_str.getBytes());
-            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                    | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+
+    public void SaveClass(UserAuth userAuth) {
+        Log.i("LoginUser", "σαβε");
+        SharedPreferences mPrefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(userAuth);
+        editor.putString(getResources().getString(R.string.USER_INFO), json);
+        Log.i("LoginUser", "2");
+
+        editor.apply();
+        globalClass.setCurrent_user(userAuth);
+        Log.i("LoginUser", "3");
+
+        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
+
+
 }

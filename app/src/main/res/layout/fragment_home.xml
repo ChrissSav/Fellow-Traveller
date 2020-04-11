@@ -25,7 +25,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/FragmentHome_textView_header"
+                    android:id="@+id/FragmentHome_textView_welcome_user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="28dp"
@@ -49,8 +49,8 @@
                     android:fontFamily="@font/firasans_bold"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/FragmentHome_textView_header"
-                    app:layout_constraintTop_toBottomOf="@+id/FragmentHome_textView_header" />
+                    app:layout_constraintStart_toStartOf="@+id/FragmentHome_textView_welcome_user"
+                    app:layout_constraintTop_toBottomOf="@+id/FragmentHome_textView_welcome_user" />
 
                 <TextView
                     android:id="@+id/FragmentHome_textView3"
@@ -109,7 +109,7 @@
                     android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Diaolos"
+                    android:text="Θεσσαλονίκη"
                     android:fontFamily="@font/firasans_bold"
                     android:textColor="@color/pitch_black"
                     android:textSize="20sp"
