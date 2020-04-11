@@ -24,6 +24,7 @@ import com.example.fellow_traveller.MessagesNotification.Data;
 import com.example.fellow_traveller.MessagesNotification.MyResponse;
 import com.example.fellow_traveller.MessagesNotification.Sender;
 import com.example.fellow_traveller.MessagesNotification.Token;
+import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -54,6 +55,8 @@ public class ChatConversationActivity extends AppCompatActivity {
     private String myId = "1";
     APIService apiService;
     boolean notify = false;
+    private GlobalClass globalClass;
+    private int myId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,13 +83,16 @@ public class ChatConversationActivity extends AppCompatActivity {
 //        messagesList.add(new MessageItem(1,"Εππsadadsasdπ","George"));
 //        messagesList.add(new MessageItem(1,"Εππsdsadafsadadsasdπ","George"));
 
+        //Retrieve current user's id
+        globalClass = (GlobalClass) getApplicationContext();
+        myId = globalClass.getCurrent_user().getId();
 
         apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
 
         mRecyclerView = findViewById(R.id.messages_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new MessagesAdapter(messagesList);
+        mAdapter = new MessagesAdapter(messagesList, this.getApplicationContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         readMessages();
@@ -107,7 +113,7 @@ public class ChatConversationActivity extends AppCompatActivity {
                 String message = writeEdtText.getText().toString();
 
                 if(!message.trim().isEmpty()) {
-                    sendMessage(1,7, message);
+                    sendMessage(myId,7, message);
                     writeEdtText.setText("");
                 }
             }

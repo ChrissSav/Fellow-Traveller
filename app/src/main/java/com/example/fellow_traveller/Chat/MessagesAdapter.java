@@ -1,5 +1,6 @@
 package com.example.fellow_traveller.Chat;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fellow_traveller.MainActivity;
+import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 
 import java.text.DateFormat;
@@ -20,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MessagesViewHolder> {
     private ArrayList<MessageItem> messagesList;
+    private Context myContext;
     public static final int SEND_SINGLE = 0;
     public static final int SEND_TOP = 1;
     public static final int SEND_MIDDLE = 2;
@@ -28,6 +32,8 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     public static final int RECEIVE_TOP = 5;
     public static final int RECEIVE_MIDDLE = 6;
     public static final int RECEIVE_BOTTOM = 7;
+    private GlobalClass globalClass;
+    private int myId;
 
 
     public static class MessagesViewHolder extends RecyclerView.ViewHolder {
@@ -45,8 +51,9 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         }
     }
 
-    public MessagesAdapter(ArrayList<MessageItem> messList) {
+    public MessagesAdapter(ArrayList<MessageItem> messList, Context context) {
         messagesList = messList;
+        myContext = context;
 
     }
 
@@ -100,6 +107,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
 
 
 
+
     }
 
     private DateFormat convertDateFormat(long myTimestamp) {
@@ -138,6 +146,9 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         int currNext = -1;
         int currPrev = -1;
 
+        //Get myId from Global Class
+        globalClass = (GlobalClass) myContext.getApplicationContext();
+        myId = globalClass.getCurrent_user().getId();
         //Initialize and check if we run out of the list
         if (position + 1 < messagesList.size()) {
             currNext = messagesList.get(position + 1).getId();
@@ -148,7 +159,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         //Finished initialization
 
 
-        if (current == 1) {
+        if (current == myId) {
 
             if ((currNext == current) && (current == currPrev)) {
                 return SEND_MIDDLE;
