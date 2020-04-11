@@ -138,6 +138,7 @@ public class ChatConversationActivity extends AppCompatActivity {
 
         reference.push().setValue(hashMap);
 
+        //To who we sent notification
         final String msg = message;
         if (notify) {
             sendNotification("1", "Tyler", msg);
