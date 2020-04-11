@@ -11,6 +11,11 @@ import android.widget.Toast;
 import com.example.fellow_traveller.MainActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -96,7 +101,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MessagesViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MessagesViewHolder  holder, int position) {
         MessageItem currentItem = messagesList.get(position);
 
         holder.text.setText(currentItem.getText());
@@ -104,6 +109,23 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         Date currentDate = new Date(currentItem.getTimestamp()*1000);
         DateFormat dateFormat = convertDateFormat(currentItem.getTimestamp()*1000);
         holder.date.setText(dateFormat.format(currentDate));
+
+
+        //Retrieve the id of sender of the message, to get the sender's username
+        DatabaseReference userName = FirebaseDatabase.getInstance().getReference("Users").child(Integer.toString(currentItem.getId()));
+
+        userName.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String nameFirebase = (String) dataSnapshot.child("name").getValue(String.class);
+                holder.name.setText(nameFirebase);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
 

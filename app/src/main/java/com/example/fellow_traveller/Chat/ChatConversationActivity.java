@@ -11,6 +11,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
@@ -52,11 +53,11 @@ public class ChatConversationActivity extends AppCompatActivity {
     private String lastKey = "";
     private String prevKey = "";
     private SwipeRefreshLayout mRefreshLayout;
-    private String myId = "1";
     APIService apiService;
     boolean notify = false;
     private GlobalClass globalClass;
     private int myId;
+    private int groupId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,9 +84,15 @@ public class ChatConversationActivity extends AppCompatActivity {
 //        messagesList.add(new MessageItem(1,"Εππsadadsasdπ","George"));
 //        messagesList.add(new MessageItem(1,"Εππsdsadafsadadsasdπ","George"));
 
+
+
         //Retrieve current user's id
         globalClass = (GlobalClass) getApplicationContext();
         myId = globalClass.getCurrent_user().getId();
+
+        //Retrieve groupChat id
+        Intent intent = getIntent();
+        groupId = intent.getIntExtra("groupId", 0);
 
         apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
 
@@ -113,7 +120,7 @@ public class ChatConversationActivity extends AppCompatActivity {
                 String message = writeEdtText.getText().toString();
 
                 if(!message.trim().isEmpty()) {
-                    sendMessage(myId,7, message);
+                    sendMessage(myId, groupId, message);
                     writeEdtText.setText("");
                 }
             }
@@ -134,7 +141,7 @@ public class ChatConversationActivity extends AppCompatActivity {
     private void sendMessage(int myId, int groupId, String message) {
         //We send message to the id which we putted extra from conversation list
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Messages").child("7");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Messages").child(Integer.toString(groupId));
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("id", myId);
@@ -147,7 +154,7 @@ public class ChatConversationActivity extends AppCompatActivity {
         //To who we sent notification
         final String msg = message;
         if (notify) {
-            sendNotification("1", "Tyler", msg);
+            sendNotification("6", "Tyler", msg);
         }
         notify = false;
     }
@@ -167,7 +174,7 @@ public class ChatConversationActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     Token token = snapshot.getValue(Token.class);
-                    Data data = new Data(myId, R.drawable.ic_logo, username + ": " + message, "Νέο μήνυμα","1");
+                    Data data = new Data(Integer.toString(myId), R.drawable.ic_logo, username + ": " + message, "Νέο μήνυμα","1");
 
                     Sender sender = new Sender(data, token.getToken());
                     apiService.sendNotification(sender)
@@ -199,7 +206,7 @@ public class ChatConversationActivity extends AppCompatActivity {
 
     public void readMessages(){
         //Bring the messages only for trip with id 7.. When we click the conversations list puts extra the trip id
-        DatabaseReference  messageRef = FirebaseDatabase.getInstance().getReference("Messages").child("7");
+        DatabaseReference  messageRef = FirebaseDatabase.getInstance().getReference("Messages").child(Integer.toString(groupId));
         Query messageQuery = messageRef.limitToLast(mCurrentPage*TOTAL_ITEMS_TO_LOAD);
 
         messageQuery.addChildEventListener(new ChildEventListener() {
@@ -243,7 +250,7 @@ public class ChatConversationActivity extends AppCompatActivity {
 
     public void readMoreMessages(){
 
-        DatabaseReference  messageRef = FirebaseDatabase.getInstance().getReference("Messages").child("7");
+        DatabaseReference  messageRef = FirebaseDatabase.getInstance().getReference("Messages").child(Integer.toString(groupId));
         Query messageQuery = messageRef.orderByKey().endAt(lastKey).limitToLast(20);
 
         messageQuery.addChildEventListener(new ChildEventListener() {
@@ -297,7 +304,7 @@ public class ChatConversationActivity extends AppCompatActivity {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Tokens");
         Token token1 = new Token(token);
-        reference.child(myId).setValue(token1);
+        reference.child(Integer.toString(myId)).setValue(token1);
 
     }
 

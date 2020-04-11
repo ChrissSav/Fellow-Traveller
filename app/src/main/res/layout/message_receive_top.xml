@@ -44,6 +44,17 @@
             android:textColor="@color/profile"
             android:layout_marginTop="20dp"
             />
+        <ImageView
+            android:id="@+id/divider"
+            android:layout_width="3dp"
+            android:layout_height="3dp"
+            android:backgroundTint="@color/profile"
+            android:background="@drawable/null_icon"
+            app:layout_constraintTop_toTopOf="@id/sender_message"
+            app:layout_constraintBottom_toBottomOf="@id/sender_message"
+            app:layout_constraintStart_toEndOf="@+id/sender_message"
+            android:layout_marginStart="5dp"/>
+
         <TextView
             android:id="@+id/message_time"
             android:layout_width="wrap_content"
@@ -51,8 +62,8 @@
             android:text="22:52"
             app:layout_constraintTop_toTopOf="@id/sender_message"
             app:layout_constraintBottom_toBottomOf="@id/sender_message"
-            app:layout_constraintStart_toEndOf="@+id/sender_message"
-            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@+id/divider"
+            android:layout_marginStart="5dp"
             android:textSize="10sp"
             android:fontFamily="@font/firasans_light"
             android:textColor="@color/profile"/>

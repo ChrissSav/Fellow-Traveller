@@ -13,10 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.fellow_traveller.Chat.ChatConversationActivity;
 import com.example.fellow_traveller.Chat.ConversationAdapter;
 import com.example.fellow_traveller.Chat.ConversationItem;
+import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.SearchAndBook.SearchDetailsActivity;
 import com.example.fellow_traveller.SearchAndBook.SearchResultsActivity;
@@ -39,6 +41,7 @@ public class MessengerFragment extends Fragment {
     private ConversationAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private DatabaseReference convsRef;
+    private GlobalClass globalClass;
     private int myId;
     private ArrayList<ConversationItem> conversationsList = new ArrayList<>();
 
@@ -54,7 +57,9 @@ public class MessengerFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_messenger, container, false);
 
-        myId = 1;
+        //Retrieve current user's id
+        globalClass = (GlobalClass) getActivity().getApplicationContext();
+        myId = globalClass.getCurrent_user().getId();
 
 //        conversationsList.add(new ConversationItem("Martin Garrix", "Yes i finished the last one", "20:27", true));
 //        conversationsList.add(new ConversationItem("Martin Garrix", "Yes i finished the last one", "20:27", true));
@@ -91,7 +96,11 @@ public class MessengerFragment extends Fragment {
     mAdapter.setOnItemClickListener(new ConversationAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(int position) {
+
+            ConversationItem item = conversationsList.get(position);
+            Toast.makeText(globalClass, "Χτυπήθηκε το item " + item.getTripId(), Toast.LENGTH_SHORT).show();
             Intent mainIntent = new Intent(getActivity(), ChatConversationActivity.class);
+            mainIntent.putExtra("groupId", item.getTripId());
             startActivity(mainIntent);
         }
     });

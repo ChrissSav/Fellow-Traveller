@@ -1,19 +1,29 @@
 package com.example.fellow_traveller.Chat;
 
 public class ConversationItem {
+    private int tripId;
     private String tripName ;
     private String description;
     private long date;
     private boolean seen;
 
-    public ConversationItem(String aUserName, String aDescription, long aDate, boolean aSeen){
+    public ConversationItem(int aId, String aUserName, String aDescription, long aDate, boolean aSeen){
 
+        tripId = aId;
         tripName = aUserName;
         description = aDescription;
         date = aDate;
         seen = aSeen;
     }
     public ConversationItem(){}
+
+    public int getTripId() {
+        return tripId;
+    }
+
+    public void setTripId(int tripId) {
+        this.tripId = tripId;
+    }
 
     public String getTripName() {
         return tripName;
