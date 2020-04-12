@@ -61,12 +61,12 @@ public class NewOfferActivity extends AppCompatActivity {
                     fra = newOfferStage3Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
-                }else if (fra.toString().equals("NewOfferStage3Fragment") && newOfferStage3Fragment.isOk() ) {
+                }else if (fra.toString().equals("NewOfferStage3Fragment")){// && newOfferStage3Fragment.isOk() ) {
                     progressBar.setProgress(num_num * newOfferStage4Fragment.getRank());
                     fra = newOfferStage4Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
-                }else if (fra.toString().equals("NewOfferStage4Fragment")  && newOfferStage4Fragment.isOk()) {
+                }else if (fra.toString().equals("NewOfferStage4Fragment")) {// && newOfferStage4Fragment.isOk()) {
                     progressBar.setProgress(num_num * newOfferStage5Fragment.getRank());
                     fra = newOfferStage5Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();

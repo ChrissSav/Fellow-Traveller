@@ -14,7 +14,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:text="Write a message to your passengers"
+        android:text="Καθόρισε την τιμή για τους επιβάτες"
         android:fontFamily="@font/firasans_light"
         android:textColor="@color/profile"
         android:textSize="30sp"
@@ -24,35 +24,84 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/NewOfferStage4Fragment_textView2"
-        android:layout_width="wrap_content"
+        android:id="@+id/NewOfferStage4Fragment_textView"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:text="Message (Optional)"
-        android:fontFamily="@font/firasans_medium"
-        android:textColor="@color/profile"
-        android:textSize="20sp"
+        android:layout_marginTop="24dp"
+        android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod"
+        app:layout_constraintEnd_toEndOf="@+id/NewOfferStage4Fragment_textView1"
         app:layout_constraintStart_toStartOf="@+id/NewOfferStage4Fragment_textView1"
         app:layout_constraintTop_toBottomOf="@+id/NewOfferStage4Fragment_textView1" />
 
-    <EditText
-        android:id="@+id/NewOfferStage4Fragment_editText"
-        android:layout_width="0dp"
-        android:layout_height="210dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:inputType="textCapSentences|textMultiLine"
-        android:background="@drawable/descr_background"
-        android:padding="10dp"
-        android:singleLine="false"
-        android:fontFamily="@font/firasans_light"
+    <TextView
+        android:id="@+id/NewOfferStage4Fragment_textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:fontFamily="@font/firasans_medium"
+        android:text="Τιμή ανα άτομο"
         android:textColor="@color/profile"
-        android:textSize="20sp"
-        android:gravity="top|left"
-        android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum"
-        app:layout_constraintEnd_toEndOf="@+id/NewOfferStage4Fragment_textView1"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/NewOfferStage4Fragment_textView"
+        app:layout_constraintTop_toBottomOf="@+id/NewOfferStage4Fragment_textView" />
+
+    <EditText
+        android:id="@+id/NewOfferStage4Fragment_editText_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:background="@android:color/transparent"
+        android:ems="10"
+        android:fontFamily="@font/firasans_medium"
+        android:hint="0.00 €"
+        android:inputType="numberDecimal"
+        android:textAlignment="center"
+        android:textColor="@color/profile"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="@+id/NewOfferStage4Fragment_textView"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/NewOfferStage4Fragment_textView1"
-        app:layout_constraintTop_toBottomOf="@+id/NewOfferStage4Fragment_textView2" />
+        app:layout_constraintStart_toStartOf="@+id/NewOfferStage4Fragment_textView"
+        app:layout_constraintTop_toBottomOf="@+id/NewOfferStage4Fragment_textView6" />
+
+    <TextView
+        android:id="@+id/NewOfferStage4Fragment_textView7"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="64dp"
+        android:background="@color/lightGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NewOfferStage4Fragment_editText_price" />
+
+    <TextView
+        android:id="@+id/NewOfferStage4Fragment_textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/firasans_medium"
+        android:text="Συνολικό"
+        android:textColor="@color/profile"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/NewOfferStage4Fragment_editText_price"
+        app:layout_constraintTop_toBottomOf="@+id/NewOfferStage4Fragment_textView7" />
+
+    <TextView
+        android:id="@+id/NewOfferStage4Fragment_textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="Με ΦΠΑ"
+        app:layout_constraintStart_toStartOf="@+id/NewOfferStage4Fragment_textView8"
+        app:layout_constraintTop_toBottomOf="@+id/NewOfferStage4Fragment_textView8" />
+
+    <TextView
+        android:id="@+id/NewOfferStage4Fragment_textView_total_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="40 €"
+        app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage4Fragment_textView8"
+        app:layout_constraintEnd_toEndOf="@+id/NewOfferStage4Fragment_editText_price"
+        app:layout_constraintTop_toTopOf="@+id/NewOfferStage4Fragment_textView8" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

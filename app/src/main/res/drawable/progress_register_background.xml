@@ -16,10 +16,10 @@
         <clip>
             <shape>
                 <gradient
-                    android:startColor="@color/login_button"
-                    android:centerColor="@color/login_button"
+                    android:startColor="#3CA9CB"
+                    android:centerColor="#3CA9CB"
                     android:centerY="0.75"
-                    android:endColor="@color/login_button"
+                    android:endColor="#3CA9CB"
                     android:angle="270"
                     />
             </shape>
