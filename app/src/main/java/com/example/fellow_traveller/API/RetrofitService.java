@@ -19,12 +19,12 @@ public interface RetrofitService {
     );
 
 
-    @POST("login")
+    @POST("auth/login")
     Call<UserAuth> loginUser(
             @Body JsonObject user_obj
     );
 
-    @POST("logout")
+    @POST("auth/logout")
     Call<Status_Handling> LogoutUser(
             @Query("refresh_token") String token
     );
