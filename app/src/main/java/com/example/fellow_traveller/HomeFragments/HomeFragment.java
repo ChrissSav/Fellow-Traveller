@@ -10,12 +10,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.API.RetrofitService;
 import com.example.fellow_traveller.API.Status_Handling;
 import com.example.fellow_traveller.Models.GlobalClass;
+import com.example.fellow_traveller.NewOffer.NewOfferActivity;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.SearchAndBook.SearchActivity;
 import com.example.fellow_traveller.Settings.SettingsActivity;
@@ -44,7 +46,7 @@ public class HomeFragment extends Fragment {
     private View view;
     private GlobalClass globalClass;
     private CircleImageView circleImageView;
-
+    private Button btn_new_offer;
     private RetrofitService retrofitService;
     private Retrofit retrofit;
 
@@ -67,6 +69,7 @@ public class HomeFragment extends Fragment {
         constraintLayout = view.findViewById(R.id.Layout2);
         constraintLayout2 = view.findViewById(R.id.Layout3);
         welcome_user = view.findViewById(R.id.FragmentHome_textView_welcome_user);
+        btn_new_offer = view.findViewById(R.id.FragmentHome_button_CreateTrip);
 
         welcome_user.setText("Γεια σου " + globalClass.getCurrent_user().getName() + ",");
         searchForTrip.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +86,13 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getActivity(), "Το πατησες", Toast.LENGTH_SHORT).show();
 
                 CheckConnection();
+            }
+        });
+        btn_new_offer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainIntent = new Intent(getActivity(), NewOfferActivity.class);
+                startActivity(mainIntent);
             }
         });
         return view;
