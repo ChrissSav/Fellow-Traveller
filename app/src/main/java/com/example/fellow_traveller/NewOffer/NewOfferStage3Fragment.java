@@ -23,15 +23,12 @@ import com.example.fellow_traveller.R;
  */
 public class NewOfferStage3Fragment extends Fragment {
 
-
+    private final String TITLE_PET = "Επέλεξε ...";
     private View view;
-    private ImageButton seats_increase, seats_decrease, bags_increase, bags_decrease;
-    private TextView seats_tv, bags_tv;
-    private String num_of_seats = "0";
-    private String num_of_bags = "0";
-    private Switch pet_switch;
-    private Boolean pets = false;
-    private Button select_seats;
+    private Button button_seats, button_pet;
+    private String pet_title = TITLE_PET;
+    private String seat_title = "Θέσεις ...";
+
 
     public NewOfferStage3Fragment() {
         // Required empty public constructor
@@ -43,13 +40,33 @@ public class NewOfferStage3Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_new_offer_stage3, container, false);
-        select_seats = view.findViewById(R.id.NewOfferStage3Fragment_button_seat);
+        button_seats = view.findViewById(R.id.NewOfferStage3Fragment_button_seat);
+        button_pet = view.findViewById(R.id.NewOfferStage3Fragment_button_pet);
 
-        select_seats.setOnClickListener(new View.OnClickListener() {
+        button_pet.setText(pet_title);
+        button_seats.setText(seat_title);
+
+        button_seats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 openDialog();
+            }
+        });
+
+        button_pet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (button_pet.getText().equals(TITLE_PET) || button_pet.getText().equals("Δεν επιτρέπω")) {
+                    button_pet.setText("Επιτρέπω");
+                    return;
+                }
+                if (button_pet.getText().equals("Επιτρέπω")) {
+                    button_pet.setText("Δεν επιτρέπω");
+                    return;
+                }
+
+
             }
         });
         return view;
@@ -63,8 +80,8 @@ public class NewOfferStage3Fragment extends Fragment {
         ImageButton dicrease = mView.findViewById(R.id.choose_num_imageButton_minus);
         final TextView textView_number = mView.findViewById(R.id.choose_num_textView_number);
         TextView textView_title = mView.findViewById(R.id.choose_num_textView_title);
-        if(!select_seats.getText().equals("Θέσεις ...")){
-            textView_number.setText(select_seats.getText().toString());
+        if (!button_seats.getText().equals("Θέσεις ...")) {
+            textView_number.setText(button_seats.getText().toString());
         }
 
         textView_title.setText("Καθόρισε τον αριθμό των θέσεων");
@@ -78,7 +95,7 @@ public class NewOfferStage3Fragment extends Fragment {
             public void onClick(View view) {
 
                 dialog.dismiss();
-                select_seats.setText(textView_number.getText().toString());
+                button_seats.setText(textView_number.getText().toString());
 
             }
         });
@@ -122,33 +139,28 @@ public class NewOfferStage3Fragment extends Fragment {
 
     @Override
     public void onDestroy() {
-        // Log.i("textInputLayout_pass_1", "onDestroy");
-        //       num_of_seats = seats_tv.getText().toString();
-//        num_of_bags = bags_tv.getText().toString();
-//        if(pet_switch.isChecked())
-//            pets =true;
-//        else
-//            pets = false;
+        pet_title = button_pet.getText().toString();
+        seat_title = button_seats.getText().toString();
         super.onDestroy();
     }
 
     public boolean isOk() {
-        if (Integer.parseInt(seats_tv.getText().toString()) < 1) {
-            Toast.makeText(getActivity(), "Ο αριθμός των θέσων πρέπει να ειναι τουλάστον 1!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
+        // if (Integer.parseInt(seats_tv.getText().toString()) < 1) {
+        //     Toast.makeText(getActivity(), "Ο αριθμός των θέσων πρέπει να ειναι τουλάστον 1!", Toast.LENGTH_SHORT).show();
+        //    return false;
+        //  }
         return true;
     }
 
-    public String getNum_of_seats() {
-        return seats_tv.getText().toString();
-    }
-
-    public String getNum_of_bags() {
-        return bags_tv.getText().toString();
-    }
-
-    public String getPet() {
-        return pet_switch.isChecked() + "";
-    }
+//    public String getNum_of_seats() {
+//        return seats_tv.getText().toString();
+//    }
+//
+//    public String getNum_of_bags() {
+//        return bags_tv.getText().toString();
+//    }
+//
+//    public String getPet() {
+//        return pet_switch.isChecked() + "";
+//    }
 }

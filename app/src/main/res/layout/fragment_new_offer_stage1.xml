@@ -37,6 +37,7 @@
         android:id="@+id/NewOfferStage1Fragment_TextInputLayout_from"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         app:endIconMode="clear_text"
         app:hintEnabled="false"
@@ -47,9 +48,11 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_background_select"
             android:fontFamily="@font/firasans_light"
             android:hint="Επέλεξε τοποθεσία"
             android:inputType="text"
+            android:padding="15dp"
             android:singleLine="true"
             android:textColor="@color/profile"
             android:textSize="18sp" />
@@ -71,6 +74,7 @@
         android:id="@+id/NewOfferStage1Fragment_TextInputLayout_to"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         app:endIconMode="clear_text"
         app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="@+id/NewOfferStage1Fragment_TextInputLayout_from"
@@ -83,6 +87,8 @@
             android:fontFamily="@font/firasans_light"
             android:hint="Επέλεξε τοποθεσία"
             android:inputType="text"
+            android:background="@drawable/button_background_select"
+            android:padding="15dp"
             android:singleLine="true"
             android:textColor="@color/profile"
             android:textSize="18sp" />
