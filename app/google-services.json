@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "453200374533",
+    "firebase_url": "https://fellow-traveller-firebase.firebaseio.com",
+    "project_id": "fellow-traveller-firebase",
+    "storage_bucket": "fellow-traveller-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453200374533:android:2c048df6b034c8b920656c",
+        "android_client_info": {
+          "package_name": "com.example.fellow_traveller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "453200374533-1h50gms14hfqpm2urbcm87uo1jstgkft.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fellow_traveller",
+            "certificate_hash": "d60815ed3d34dbd938c6d460ba124399e935ef61"
+          }
+        },
+        {
+          "client_id": "453200374533-u5uru8k8gvedpv6e115bb3lqcku90rob.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAognIafhYXfGOBY7WMCkDPWifr04csf9w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "453200374533-u5uru8k8gvedpv6e115bb3lqcku90rob.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
