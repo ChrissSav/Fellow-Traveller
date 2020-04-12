@@ -17,7 +17,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Settings.CarsSettingsActivity"></activity>
+        <activity android:name=".Settings.AddCarSettingsActivity"></activity>
+        <activity android:name=".Settings.CarsSettingsActivity" />
         <activity android:name=".SearchAndBook.BookActivity" />
         <activity android:name=".SearchAndBook.SearchDetailsActivity" />
         <activity android:name=".SearchAndBook.SearchResultsActivity" />
