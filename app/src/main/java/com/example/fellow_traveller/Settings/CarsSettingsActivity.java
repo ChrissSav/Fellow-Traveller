@@ -10,15 +10,19 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.fellow_traveller.Chat.ChatConversationActivity;
+import com.example.fellow_traveller.Chat.ConversationAdapter;
 import com.example.fellow_traveller.Chat.MessageItem;
 import com.example.fellow_traveller.Chat.MessagesAdapter;
 import com.example.fellow_traveller.R;
+import com.example.fellow_traveller.SearchAndBook.SearchDetailsActivity;
+import com.example.fellow_traveller.SearchAndBook.SearchResultsActivity;
+import com.example.fellow_traveller.SearchAndBook.SearchResultsAdapter;
 
 import java.util.ArrayList;
 
 public class CarsSettingsActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private MyCarAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
     private ArrayList<MyCarItem> carsList = new ArrayList<>();
     private Button addCarButton;
@@ -52,5 +56,16 @@ public class CarsSettingsActivity extends AppCompatActivity {
 
             }
         });
+
+
+        mAdapter.setOnItemClickListener(new MyCarAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent mainIntent = new Intent(CarsSettingsActivity.this, EditCarSettingsActivity.class);
+                startActivity(mainIntent);
+            }
+        });
+
+
     }
 }

@@ -23,13 +23,15 @@ public class MyCarAdapter extends RecyclerView.Adapter<MyCarAdapter.MyCarViewHol
     private ArrayList<MyCarItem> carsList;
     private MyCarAdapter.OnItemClickListener mListener;
 
+
+
     public interface OnItemClickListener{
         void onItemClick(int position);
     }
-
-    public void setOnItemClickListener(MyCarAdapter.OnItemClickListener listener){
-        mListener = listener;
+    public void setOnItemClickListener(MyCarAdapter.OnItemClickListener onItemClickListener) {
+        mListener = onItemClickListener;
     }
+
     public static class MyCarViewHolder extends RecyclerView.ViewHolder{
         public TextView carSpecs;
 
