@@ -40,71 +40,71 @@ public class NewOfferStage3Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_new_offer_stage3, container, false);
-        seats_increase = view.findViewById(R.id.NewOfferStage3Fragment_button_plus_seats);
-        seats_decrease = view.findViewById(R.id.NewOfferStage3Fragment_button_minus_seats);
-
-        bags_increase = view.findViewById(R.id.NewOfferStage3Fragment_button_plus_bags);
-        bags_decrease = view.findViewById(R.id.NewOfferStage3Fragment_button_minus_bags);
-
-        seats_tv = view.findViewById(R.id.NewOfferStage3Fragment_TextView_seats);
-        bags_tv = view.findViewById(R.id.NewOfferStage3Fragment_TextView_bags);
-
-        pet_switch = view.findViewById(R.id.NewOfferStage3Fragment_switch_pets);
-        seats_tv.setText(num_of_seats);
-        bags_tv.setText(num_of_bags);
-
-        if(pets){
-            pet_switch.setChecked(true);
-            pet_switch.setText("Allow");
-        }
-
-        seats_increase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Increase(seats_tv);
-            }
-        });
-
-        seats_decrease.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Decrease(seats_tv);
-            }
-        });
-
-        bags_increase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Increase(bags_tv);
-            }
-        });
-
-        bags_increase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Increase(bags_tv);
-            }
-        });
-
-        bags_decrease.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Decrease(bags_tv);
-            }
-        });
-
-
-
-        pet_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    pet_switch.setText("Allow");
-                }else{
-                    pet_switch.setText("Not Allow");
-                }
-            }
-        });
+//        seats_increase = view.findViewById(R.id.NewOfferStage3Fragment_button_plus_seats);
+//        seats_decrease = view.findViewById(R.id.NewOfferStage3Fragment_button_minus_seats);
+//
+//        bags_increase = view.findViewById(R.id.NewOfferStage3Fragment_button_plus_bags);
+//        bags_decrease = view.findViewById(R.id.NewOfferStage3Fragment_button_minus_bags);
+//
+//        seats_tv = view.findViewById(R.id.NewOfferStage3Fragment_TextView_seats);
+//        bags_tv = view.findViewById(R.id.NewOfferStage3Fragment_TextView_bags);
+//
+//        pet_switch = view.findViewById(R.id.NewOfferStage3Fragment_switch_pets);
+//        seats_tv.setText(num_of_seats);
+//        bags_tv.setText(num_of_bags);
+//
+//        if(pets){
+//            pet_switch.setChecked(true);
+//            pet_switch.setText("Allow");
+//        }
+//
+//        seats_increase.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Increase(seats_tv);
+//            }
+//        });
+//
+//        seats_decrease.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Decrease(seats_tv);
+//            }
+//        });
+//
+//        bags_increase.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Increase(bags_tv);
+//            }
+//        });
+//
+//        bags_increase.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Increase(bags_tv);
+//            }
+//        });
+//
+//        bags_decrease.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Decrease(bags_tv);
+//            }
+//        });
+//
+//
+//
+//        pet_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if(isChecked){
+//                    pet_switch.setText("Allow");
+//                }else{
+//                    pet_switch.setText("Not Allow");
+//                }
+//            }
+//        });
 
         return view;
     }
@@ -131,12 +131,12 @@ public class NewOfferStage3Fragment extends Fragment {
     @Override
     public void onDestroy() {
         // Log.i("textInputLayout_pass_1", "onDestroy");
-        num_of_seats = seats_tv.getText().toString();
-        num_of_bags = bags_tv.getText().toString();
-        if(pet_switch.isChecked())
-            pets =true;
-        else
-            pets = false;
+ //       num_of_seats = seats_tv.getText().toString();
+//        num_of_bags = bags_tv.getText().toString();
+//        if(pet_switch.isChecked())
+//            pets =true;
+//        else
+//            pets = false;
         super.onDestroy();
     }
     public boolean isOk(){

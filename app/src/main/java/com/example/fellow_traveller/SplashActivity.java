@@ -40,22 +40,9 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         globalClass = (GlobalClass) getApplicationContext();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                LoadClass();
-
-                if(globalClass.getCurrent_user() == null){
-                    Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
-                    startActivity(mainIntent);
-                    finish();
-                }else{
-                    Intent mainIntent = new Intent(SplashActivity.this, HomeActivity.class);
-                    startActivity(mainIntent);
-                    finish();
-                }
-            }
-        }, SPLASH_TIME);
+        Intent mainIntent = new Intent(SplashActivity.this, NewOfferActivity.class);
+        startActivity(mainIntent);
+        finish();
         /*Thread splashTread = new Thread() {
             @Override
             public void run() {
