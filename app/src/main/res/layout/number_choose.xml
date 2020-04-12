@@ -1,76 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/choose_num_textView"
+        android:id="@+id/choose_num_textView_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="41dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/firasans_medium"
         android:text="Choose number of bags"
+        android:textColor="@color/profile"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/choose_num_textView"
-        app:layout_constraintTop_toBottomOf="@+id/choose_num_textView">
+        app:layout_constraintStart_toStartOf="@+id/choose_num_textView_title"
+        app:layout_constraintTop_toBottomOf="@+id/choose_num_textView_title">
 
         <TextView
-            android:id="@+id/choose_num_textView2"
-            android:layout_width="wrap_content"
+            android:id="@+id/choose_num_textView_number"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/firasans_medium"
             android:text="0"
+            android:gravity="center"
+            android:textColor="@color/profile"
+            android:textSize="40sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/choose_num_imageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/choose_num_imageButton_minus"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginEnd="64dp"
             android:background="?android:selectableItemBackgroundBorderless"
             android:padding="5dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_line"
-            app:layout_constraintBottom_toBottomOf="@+id/choose_num_textView2"
-            app:layout_constraintEnd_toStartOf="@+id/choose_num_textView2"
-            app:layout_constraintTop_toTopOf="@+id/choose_num_textView2" />
+            app:layout_constraintBottom_toBottomOf="@+id/choose_num_imageButton_plus"
+            app:layout_constraintEnd_toStartOf="@+id/choose_num_textView_number"
+            app:layout_constraintTop_toTopOf="@+id/choose_num_imageButton_plus" />
 
         <ImageButton
-            android:id="@+id/choose_num_imageButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/choose_num_imageButton_plus"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="64dp"
+            android:layout_marginTop="4dp"
             android:background="?android:selectableItemBackgroundBorderless"
             android:padding="5dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_plus"
-            app:layout_constraintBottom_toBottomOf="@+id/choose_num_textView2"
-            app:layout_constraintStart_toEndOf="@+id/choose_num_textView2"
-            app:layout_constraintTop_toTopOf="@+id/choose_num_textView2" />
+            app:layout_constraintBottom_toBottomOf="@+id/choose_num_textView_number"
+            app:layout_constraintStart_toEndOf="@+id/choose_num_textView_number"
+            app:layout_constraintTop_toTopOf="@+id/choose_num_textView_number" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/choose_num_button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="42dp"
-        android:text="Επλιογή"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/buttons_background_blue"
+        android:text="Επλογή"
         android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="@+id/constraintLayout4"
-        app:layout_constraintStart_toStartOf="@+id/constraintLayout4"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 </androidx.constraintlayout.widget.ConstraintLayout>

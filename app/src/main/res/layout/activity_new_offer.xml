@@ -51,7 +51,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
-        android:background="@drawable/main_activity_login_button"
+        android:background="@drawable/buttons_background_blue"
         android:text="Next"
         android:textAllCaps="false"
         android:textColor="#fff"
