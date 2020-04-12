@@ -40,18 +40,9 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         globalClass = (GlobalClass) getApplicationContext();
-        Thread splashTread = new Thread() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
-//                while (flag == false) {
-//                    try {
-//                        sleep(SPLASH_TIME);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                    Load();
-//                }
                 LoadClass();
                 if (globalClass.getCurrent_user() != null) {
                     Intent mainIntent = new Intent(SplashActivity.this, HomeActivity.class);
@@ -63,58 +54,16 @@ public class SplashActivity extends AppCompatActivity {
                     finish();
                 }
             }
-        };
-        splashTread.start();
+        }, SPLASH_TIME);
     }
 
-   /* public void Load() {
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput(getString(R.string.USER_INFO_FILE));
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String text;
-            int i = 0;
-            User user = new User();
-
-            while ((text = br.readLine()) != null) {
-                // Log.i("Load_Info1", "text:" + text + " i = " + i);
-                sb.append(text).append("\n");
-                if (i == 0) {
-                    user.setId(Integer.parseInt(text));
-                } else if (i == 1) {
-                    user.setName(text);
-                } else if (i == 2) {
-                    user.setSurname(text);
-                }
-                i++;
-            }
-            globalClass.setCurrent_user(user);
-            //Log.i("Load_Info", "\ntext:" + sb.toString() + "\n" + sb);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        flag = true;
-    }*/
-
-    public void LoadClass(){
-        SharedPreferences mPrefs = getSharedPreferences("shared preferences",MODE_PRIVATE);
+    public void LoadClass() {
+        SharedPreferences mPrefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = mPrefs.getString(getResources().getString(R.string.USER_INFO),null);
-        Type type = new TypeToken<UserAuth>(){}.getType();
-        UserAuth userAuth = gson.fromJson(json,type);
+        String json = mPrefs.getString(getResources().getString(R.string.USER_INFO), null);
+        Type type = new TypeToken<UserAuth>() {
+        }.getType();
+        UserAuth userAuth = gson.fromJson(json, type);
         globalClass.setCurrent_user(userAuth);
     }
 }
