@@ -34,11 +34,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SettingsActivity extends AppCompatActivity {
-    private Button personalButton, btn_logout;
+    private Button personalButton, btn_logout, changePasswordButton, manageCarsButton;
     private RetrofitService retrofitService;
     private Retrofit retrofit;
     private GlobalClass globalClass;
-    private Button changePasswordButton;
 
 
     @Override
@@ -49,6 +48,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         personalButton = findViewById(R.id.personal_info);
         btn_logout = findViewById(R.id.logout);
+        manageCarsButton = findViewById(R.id.manage_cars);
+        changePasswordButton=findViewById(R.id.change_password);
+
         personalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,12 +61,20 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
 
-        changePasswordButton=findViewById(R.id.change_password);
+
         changePasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent changePassword = new Intent(SettingsActivity.this, ChangePassword.class);
                 startActivity(changePassword);
+            }
+        });
+
+        manageCarsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SettingsActivity.this, CarsSettingsActivity.class);
+                startActivity(intent);
             }
         });
 

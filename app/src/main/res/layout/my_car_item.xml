@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:paddingLeft="20dp">
+
+    <ImageView
+        android:id="@+id/car_image_view_adapter_settings"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_car"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="@color/profile"/>
+
+    <TextView
+        android:id="@+id/car_speces_settings_adapter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/car_image_view_adapter_settings"
+        app:layout_constraintBottom_toBottomOf="@id/car_image_view_adapter_settings"
+        app:layout_constraintStart_toEndOf="@id/car_image_view_adapter_settings"
+        android:layout_marginStart="15dp"
+        android:text="Lamborghini, Huraccan 720LP - ΤΣΖ 3954"
+        android:fontFamily="@font/firasans_light"
+        android:textAllCaps="true"
+        android:textColor="@color/profile"
+        android:textSize="15sp"/>
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
