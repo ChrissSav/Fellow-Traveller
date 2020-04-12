@@ -46,30 +46,6 @@ public class RegisterStage2Fragment extends Fragment {
     }
 
     @Override
-    public void onPause() {
-        //textInputLayout_pass_1.getEditText().setText("pojog0jrgre");
-
-        // Log.i("Lifecycle", "onPause");
-        super.onPause();
-    }
-
-    @Override
-    public void onStart() {
-        //textInputLayout_pass_1.getEditText().setText("pojog0jrgre");
-
-        //Log.i("Lifecycle", "onStart");
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        //textInputLayout_pass_1.getEditText().setText("pojog0jrgre");
-
-        //Log.i("Lifecycle", "onStop");
-        super.onStop();
-    }
-
-    @Override
     public void onDestroy() {
         Log.i("textInputLayout_pass_1", "onDestroy");
         pass_1 = textInputLayout_pass_1.getEditText().getText().toString();

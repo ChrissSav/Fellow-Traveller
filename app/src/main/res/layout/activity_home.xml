@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
+    tools:context=".HomeFragments.HomeActivity">
 
 
 
@@ -23,7 +23,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/HomeActivity_bottomNavigationView"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:background="@drawable/top_line_bottom_nav"
         android:outlineProvider="none"
         app:itemIconSize="35dp"

@@ -28,14 +28,6 @@ public class RegisterStage1Fragment extends Fragment {
 
     }
 
-    public RegisterStage1Fragment(String m) {
-        mail = m;
-        // Required empty public constructor
-        //Log.i("Fragment","contractor RegisterStage1Fragment");
-
-
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

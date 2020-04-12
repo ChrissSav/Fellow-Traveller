@@ -1,0 +1,166 @@
+package com.example.fellow_traveller.NewOffer;
+
+
+import android.app.AlertDialog;
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.fellow_traveller.R;
+
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class NewOfferStage3Fragment extends Fragment {
+
+    private final String TITLE_PET = "Επέλεξε ...";
+    private View view;
+    private Button button_seats, button_pet;
+    private String pet_title = TITLE_PET;
+    private String seat_title = "Θέσεις ...";
+
+
+    public NewOfferStage3Fragment() {
+        // Required empty public constructor
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_new_offer_stage3, container, false);
+        button_seats = view.findViewById(R.id.NewOfferStage3Fragment_button_seat);
+        button_pet = view.findViewById(R.id.NewOfferStage3Fragment_button_pet);
+
+        button_pet.setText(pet_title);
+        button_seats.setText(seat_title);
+
+        button_seats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                openDialog();
+            }
+        });
+
+        button_pet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (button_pet.getText().equals(TITLE_PET) || button_pet.getText().equals("Δεν επιτρέπω")) {
+                    button_pet.setText("Επιτρέπω");
+                    return;
+                }
+                if (button_pet.getText().equals("Επιτρέπω")) {
+                    button_pet.setText("Δεν επιτρέπω");
+                    return;
+                }
+
+
+            }
+        });
+        return view;
+    }
+
+    public void openDialog() {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+        View mView = getLayoutInflater().inflate(R.layout.number_choose, null);
+        Button button = mView.findViewById(R.id.choose_num_button);
+        ImageButton increase = mView.findViewById(R.id.choose_num_imageButton_plus);
+        ImageButton dicrease = mView.findViewById(R.id.choose_num_imageButton_minus);
+        final TextView textView_number = mView.findViewById(R.id.choose_num_textView_number);
+        TextView textView_title = mView.findViewById(R.id.choose_num_textView_title);
+        if (!button_seats.getText().equals("Θέσεις ...")) {
+            textView_number.setText(button_seats.getText().toString());
+        }
+
+        textView_title.setText("Καθόρισε τον αριθμό των θέσεων");
+        mBuilder.setView(mView);
+
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dialog.dismiss();
+                button_seats.setText(textView_number.getText().toString());
+
+            }
+        });
+
+        increase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Increase(textView_number);
+            }
+        });
+
+        dicrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Decrease(textView_number);
+            }
+        });
+
+    }
+
+
+    public String toString() {
+        return "NewOfferStage3Fragment";
+    }
+
+    public int getRank() {
+        return 3;
+    }
+
+    public void Increase(TextView textView) {
+        int current_num = Integer.parseInt(textView.getText().toString());
+        textView.setText((current_num + 1) + "");
+
+    }
+
+    public void Decrease(TextView textView) {
+        int current_num = Integer.parseInt(textView.getText().toString());
+        if (current_num > 0)
+            textView.setText((current_num - 1) + "");
+    }
+
+    @Override
+    public void onDestroy() {
+        pet_title = button_pet.getText().toString();
+        seat_title = button_seats.getText().toString();
+        super.onDestroy();
+    }
+
+    public boolean isOk() {
+        // if (Integer.parseInt(seats_tv.getText().toString()) < 1) {
+        //     Toast.makeText(getActivity(), "Ο αριθμός των θέσων πρέπει να ειναι τουλάστον 1!", Toast.LENGTH_SHORT).show();
+        //    return false;
+        //  }
+        return true;
+    }
+
+//    public String getNum_of_seats() {
+//        return seats_tv.getText().toString();
+//    }
+//
+//    public String getNum_of_bags() {
+//        return bags_tv.getText().toString();
+//    }
+//
+//    public String getPet() {
+//        return pet_switch.isChecked() + "";
+//    }
+}

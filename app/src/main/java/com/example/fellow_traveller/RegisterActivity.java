@@ -36,7 +36,6 @@ public class RegisterActivity extends AppCompatActivity {
                     Intent intent = new Intent(RegisterActivity.this, RegisterContainerActivity.class);
                     intent.putExtra("USER_PHONE", editText.getText().toString());
                     startActivity(intent);
-                    finish();
                 }else{
                     Toast.makeText(RegisterActivity.this,"Invalid length number", Toast.LENGTH_SHORT).show();
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatConversationActivity">
+    tools:context=".Chat.ChatConversationActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/status_chat"
@@ -82,9 +82,24 @@
         app:layout_constraintBottom_toTopOf="@id/underline"
         android:background="@color/white"
         >
-        <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_chat_conversation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/messages_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:scrollbars="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
@@ -120,14 +135,14 @@
 
             <ImageButton
                 android:id="@+id/plus_button_chat"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_alignParentStart="true"
                 android:background="@drawable/ic_plus"
                 android:backgroundTint="@color/lightGrey"
                 android:layout_marginStart="15dp"
-                android:layout_marginBottom="9dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/write_et_chat"
+                app:layout_constraintBottom_toBottomOf="@id/write_et_chat"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
@@ -159,6 +174,7 @@
                 android:background="@drawable/ic_send"
                 android:backgroundTint="@color/lightGrey"
                 android:layout_marginEnd="15dp"
+                android:padding="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
