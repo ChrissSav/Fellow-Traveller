@@ -29,6 +29,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 
 import static java.lang.String.valueOf;
@@ -90,6 +92,7 @@ public class MessengerFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
+
         loadConversation();
         
 
@@ -111,18 +114,17 @@ public class MessengerFragment extends Fragment {
 
     public void loadConversation(){
 
-        {
-
             convsRef = FirebaseDatabase.getInstance().getReference();
             convsRef.child("Trips").child(String.valueOf(myId)).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                    conversationsList.clear();
                     if(dataSnapshot.getChildrenCount()>0){
                         for (DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
                             ConversationItem item = datasnapshot.getValue(ConversationItem.class);
                             conversationsList.add(item);
                         }
+                        Collections.sort(conversationsList);
                         mAdapter.notifyDataSetChanged();
                     }
                 }
@@ -132,7 +134,7 @@ public class MessengerFragment extends Fragment {
 
                 }
             });
-        }
+
     }
 
 }

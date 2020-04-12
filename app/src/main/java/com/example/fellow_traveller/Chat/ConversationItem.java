@@ -1,6 +1,6 @@
 package com.example.fellow_traveller.Chat;
 
-public class ConversationItem {
+public class ConversationItem implements Comparable{
     private int tripId;
     private String tripName ;
     private String description;
@@ -15,6 +15,8 @@ public class ConversationItem {
         date = aDate;
         seen = aSeen;
     }
+
+
     public ConversationItem(){}
 
     public int getTripId() {
@@ -56,4 +58,15 @@ public class ConversationItem {
     public void setSeen(boolean seen) {
         this.seen = seen;
     }
+
+    @Override
+    public int compareTo(Object o) {
+            if(this.getDate()>((ConversationItem) o).getDate()) {
+                return -1;
+            }else{
+                return 1;
+            }
+    }
+
+
 }
