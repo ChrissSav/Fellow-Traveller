@@ -34,13 +34,15 @@ public class NewOfferStage3Fragment extends Fragment {
     private final String TITLE_PET = "Επέλεξε ...";
     private final String TITLE_SEAT = "Θέσεις ...";
     private final String TITLE_CAR = "Διάλεξε αυτοκίνητο ...";
+    private final String TITLE_BAGS = "Αποσκεύες ...";
 
     private View view;
-    private Button button_seats, button_pet, button_car;
+    private Button button_seats, button_pet, button_car, button_bags;
     //Backup
     private String pet_title = TITLE_PET;
     private String seat_title = TITLE_SEAT;
     private String car_title = TITLE_CAR;
+    private String bags_title = TITLE_BAGS;
 
     //Recycle
     private RecyclerView mRecyclerView;
@@ -61,9 +63,14 @@ public class NewOfferStage3Fragment extends Fragment {
         button_seats = view.findViewById(R.id.NewOfferStage3Fragment_button_seat);
         button_pet = view.findViewById(R.id.NewOfferStage3Fragment_button_pet);
         button_car = view.findViewById(R.id.NewOfferStage3Fragment_button_car);
+        button_bags = view.findViewById(R.id.NewOfferStage3Fragment_button_bags);
+
+
         button_pet.setText(pet_title);
         button_seats.setText(seat_title);
         button_car.setText(car_title);
+        button_bags.setText(bags_title);
+
 
         button_seats.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +79,17 @@ public class NewOfferStage3Fragment extends Fragment {
                 openDialogForSeats();
             }
         });
+
+        button_bags.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                openDialogForBags();
+            }
+        });
+
+
+
         button_car.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,14 +126,14 @@ public class NewOfferStage3Fragment extends Fragment {
 
         final AlertDialog dialog = mBuilder.create();
 
-        FillList(mView,dialog);
+        FillList(mView, dialog);
         dialog.show();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 dialog.dismiss();
-                Intent intent = new Intent(getActivity(),AddCarSettingsActivity.class);
+                Intent intent = new Intent(getActivity(), AddCarSettingsActivity.class);
                 startActivity(intent);
 
             }
@@ -135,7 +153,7 @@ public class NewOfferStage3Fragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 button_car.setText(mExampleList.get(position).getDescription());
-               dialog.dismiss();
+                dialog.dismiss();
 
 
             }
@@ -147,10 +165,10 @@ public class NewOfferStage3Fragment extends Fragment {
         View mView = getLayoutInflater().inflate(R.layout.number_choose, null);
         Button button = mView.findViewById(R.id.choose_num_button);
         ImageButton increase = mView.findViewById(R.id.choose_num_imageButton_plus);
-        ImageButton dicrease = mView.findViewById(R.id.choose_num_imageButton_minus);
+        ImageButton decrease = mView.findViewById(R.id.choose_num_imageButton_minus);
         final TextView textView_number = mView.findViewById(R.id.choose_num_textView_number);
         TextView textView_title = mView.findViewById(R.id.choose_num_textView_title);
-        if (!button_seats.getText().equals("Θέσεις ...")) {
+        if (!button_seats.getText().equals(TITLE_SEAT)) {
             textView_number.setText(button_seats.getText().toString());
         }
 
@@ -177,7 +195,51 @@ public class NewOfferStage3Fragment extends Fragment {
             }
         });
 
-        dicrease.setOnClickListener(new View.OnClickListener() {
+        decrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Decrease(textView_number);
+            }
+        });
+
+    }
+
+    public void openDialogForBags() {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+        View mView = getLayoutInflater().inflate(R.layout.number_choose, null);
+        Button button = mView.findViewById(R.id.choose_num_button);
+        ImageButton increase = mView.findViewById(R.id.choose_num_imageButton_plus);
+        ImageButton decrease = mView.findViewById(R.id.choose_num_imageButton_minus);
+        final TextView textView_number = mView.findViewById(R.id.choose_num_textView_number);
+        TextView textView_title = mView.findViewById(R.id.choose_num_textView_title);
+        if (!button_bags.getText().equals(TITLE_BAGS)) {
+            textView_number.setText(button_seats.getText().toString());
+        }
+
+        textView_title.setText("Καθόρισε τον αριθμό των αποσκεύων");
+        mBuilder.setView(mView);
+
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dialog.dismiss();
+                button_bags.setText(textView_number.getText().toString());
+
+            }
+        });
+
+        increase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Increase(textView_number);
+            }
+        });
+
+        decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Decrease(textView_number);
@@ -212,6 +274,7 @@ public class NewOfferStage3Fragment extends Fragment {
         pet_title = button_pet.getText().toString();
         seat_title = button_seats.getText().toString();
         car_title = button_car.getText().toString();
+        bags_title = button_bags.getText().toString();
         super.onDestroy();
     }
 
@@ -224,13 +287,13 @@ public class NewOfferStage3Fragment extends Fragment {
     }
 
 
-    public void FillList(View view,AlertDialog dialog) {
-        mExampleList= new ArrayList<>();
-        Car car = new Car( "Nissan", "Navara", "ZXB1025");
+    public void FillList(View view, AlertDialog dialog) {
+        mExampleList = new ArrayList<>();
+        Car car = new Car("Nissan", "Navara", "ZXB1025");
         mExampleList.add(car);
-        car = new Car( "Toyota", "Hilux", "ZXB1415");
+        car = new Car("Toyota", "Hilux", "ZXB1415");
         mExampleList.add(car);
-        buildRecyclerView(view,dialog);
+        buildRecyclerView(view, dialog);
 
     }
 }

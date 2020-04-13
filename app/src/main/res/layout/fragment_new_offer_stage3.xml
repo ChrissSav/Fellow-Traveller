@@ -26,6 +26,7 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +34,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,8 +48,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
-                android:text="Αμάξι"
                 android:fontFamily="@font/firasans_medium"
+                android:text="Αμάξι"
                 android:textColor="@color/profile"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -127,8 +128,8 @@
                 android:text="Κατοικίδιο"
                 android:textColor="@color/profile"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textView8"
-                app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_textView8" />
+                app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textView6v"
+                app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_textView6v" />
 
             <Button
                 android:id="@+id/NewOfferStage3Fragment_button_pet"
@@ -151,10 +152,50 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
                 android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_button_pet"
                 app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textView10"
                 app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_button_pet" />
+
+            <TextView
+                android:id="@+id/NewOfferStage3Fragment_textView_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="53dp"
+                android:fontFamily="@font/firasans_medium"
+                android:text="Αποσκεύες"
+                android:textColor="@color/profile"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textView8"
+                app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_textView8" />
+
+            <Button
+                android:id="@+id/NewOfferStage3Fragment_button_bags"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background_select"
+                android:drawableEnd="@drawable/ic_luggage"
+                android:paddingStart="15dp"
+                android:paddingEnd="20dp"
+                android:text="Αποσκεύες ..."
+                android:textAlignment="textStart"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_textView_2"
+                app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_button_seat"
+                app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_button_seat"
+                app:layout_constraintTop_toTopOf="@+id/NewOfferStage3Fragment_textView_2" />
+
+            <TextView
+                android:id="@+id/NewOfferStage3Fragment_textView6v"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod"
+                app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_button_bags"
+                app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textView_2"
+                app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_button_bags" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
