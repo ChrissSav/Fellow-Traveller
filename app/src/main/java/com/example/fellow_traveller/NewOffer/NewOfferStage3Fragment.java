@@ -4,29 +4,21 @@ package com.example.fellow_traveller.NewOffer;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import com.example.fellow_traveller.Adapters.CarAdapter;
 import com.example.fellow_traveller.Models.Car;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.Settings.AddCarSettingsActivity;
 
 import java.util.ArrayList;
-
-import static android.view.WindowManager.*;
-import static androidx.constraintlayout.widget.ConstraintLayout.*;
 
 
 public class NewOfferStage3Fragment extends Fragment {
