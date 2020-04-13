@@ -88,7 +88,7 @@ public class MessengerFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.conversations_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-        mAdapter = new ConversationAdapter(conversationsList);
+        mAdapter = new ConversationAdapter(conversationsList, getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -119,6 +119,7 @@ public class MessengerFragment extends Fragment {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     conversationsList.clear();
+
                     if(dataSnapshot.getChildrenCount()>0){
                         for (DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
                             ConversationItem item = datasnapshot.getValue(ConversationItem.class);
