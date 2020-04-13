@@ -58,6 +58,8 @@ public class ChatConversationActivity extends AppCompatActivity {
     private GlobalClass globalClass;
     private int myId;
     private int groupId;
+    ValueEventListener seenListener;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +105,7 @@ public class ChatConversationActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         readMessages();
+        updateSeenStatus(Integer.toString(myId),Integer.toString(groupId));
 
 
         sendButton.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +150,7 @@ public class ChatConversationActivity extends AppCompatActivity {
         //To who we sent notification
         final String msg = message;
         if (notify) {
-            sendNotification("6", "Tyler", msg);
+            sendNotification("10", "Tyler", msg);
         }
         notify = false;
     }
@@ -167,7 +170,7 @@ public class ChatConversationActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     Token token = snapshot.getValue(Token.class);
-                    Data data = new Data(Integer.toString(myId), R.drawable.ic_logo, username + ": " + message, "Νέο μήνυμα","1");
+                    Data data = new Data(Integer.toString(myId), R.drawable.ic_logo, username + ": " + message, "Νέο μήνυμα", "10");
 
                     Sender sender = new Sender(data, token.getToken());
                     apiService.sendNotification(sender)
@@ -300,10 +303,29 @@ public class ChatConversationActivity extends AppCompatActivity {
         reference.child(Integer.toString(myId)).setValue(token1);
 
     }
+    private void updateSeenStatus(String myId, String groupId){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Trips").child(myId).child(groupId);
+        seenListener = reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put("seen", true);
+                dataSnapshot.getRef().updateChildren(hashMap);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         writeEdtText.clearFocus();
     }
+
+
 }

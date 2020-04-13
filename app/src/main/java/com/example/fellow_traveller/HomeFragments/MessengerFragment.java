@@ -46,6 +46,8 @@ public class MessengerFragment extends Fragment {
     private GlobalClass globalClass;
     private int myId;
     private ArrayList<ConversationItem> conversationsList = new ArrayList<>();
+    private boolean notifyFlag = false;
+
 
 
     public MessengerFragment() {
@@ -92,8 +94,14 @@ public class MessengerFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
+        if(notifyFlag){
+            mAdapter.notify();
+            notifyFlag = false;
+
+        }
 
         loadConversation();
+
         
 
     mAdapter.setOnItemClickListener(new ConversationAdapter.OnItemClickListener() {
@@ -102,8 +110,10 @@ public class MessengerFragment extends Fragment {
 
             ConversationItem item = conversationsList.get(position);
             Toast.makeText(globalClass, "Χτυπήθηκε το item " + item.getTripId(), Toast.LENGTH_SHORT).show();
+            notifyFlag = true;
             Intent mainIntent = new Intent(getActivity(), ChatConversationActivity.class);
             mainIntent.putExtra("groupId", item.getTripId());
+
             startActivity(mainIntent);
         }
     });
@@ -135,7 +145,8 @@ public class MessengerFragment extends Fragment {
 
                 }
             });
-
     }
+
+
 
 }

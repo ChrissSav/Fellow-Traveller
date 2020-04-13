@@ -10,7 +10,7 @@ public class MyFirebaseIdService extends FirebaseMessagingService {
     @Override
     public void onNewToken(String s) {
         super.onNewToken(s);
-        String myId = "1";
+        String myId = "10";
         String refreshToken = FirebaseInstanceId.getInstance().getToken();
         if(myId!=null){
             updateToken(refreshToken);
@@ -18,7 +18,7 @@ public class MyFirebaseIdService extends FirebaseMessagingService {
     }
 
     private void updateToken(String refreshToken){
-        String myId = "1";
+        String myId = "10";
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Tokens");
         Token token = new Token(refreshToken);

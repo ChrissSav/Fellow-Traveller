@@ -11,21 +11,28 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.example.fellow_traveller.Chat.ChatConversationActivity;
+import com.example.fellow_traveller.Models.GlobalClass;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import androidx.core.app.NotificationCompat;
 
 public class MyFirebaseMessaging extends FirebaseMessagingService {
+    private GlobalClass globalClass;
+    private int myId;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        String myId = "1";
+
+        //Retrieve current user's id
+        globalClass = (GlobalClass) getApplicationContext();
+        myId = globalClass.getCurrent_user().getId();
+
 
         String sented = remoteMessage.getData().get("sented");
-        if(myId != null && sented.equals(myId)){
+        if("10" != null && sented.equals("10")){
 
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
                 sendOreoNotification(remoteMessage);
