@@ -6,6 +6,12 @@ public class Car {
     private String model;
     private String plate;
 
+    public Car(String brand, String model, String plate) {
+        this.brand = brand;
+        this.model = model;
+        this.plate = plate;
+    }
+
     public int getId() {
         return id;
     }
@@ -36,5 +42,10 @@ public class Car {
 
     public void setPlate(String plate) {
         this.plate = plate;
+    }
+
+
+    public String getDescription() {
+       return brand + "  " + model + " | " + plate;
     }
 }

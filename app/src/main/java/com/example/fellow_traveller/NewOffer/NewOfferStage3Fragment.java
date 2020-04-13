@@ -2,33 +2,51 @@ package com.example.fellow_traveller.NewOffer;
 
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.fellow_traveller.Adapters.CarAdapter;
+import com.example.fellow_traveller.Models.Car;
 import com.example.fellow_traveller.R;
+import com.example.fellow_traveller.Settings.AddCarSettingsActivity;
+
+import java.util.ArrayList;
+
+import static android.view.WindowManager.*;
+import static androidx.constraintlayout.widget.ConstraintLayout.*;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class NewOfferStage3Fragment extends Fragment {
 
     private final String TITLE_PET = "Επέλεξε ...";
-    private View view;
-    private Button button_seats, button_pet;
-    private String pet_title = TITLE_PET;
-    private String seat_title = "Θέσεις ...";
+    private final String TITLE_SEAT = "Θέσεις ...";
+    private final String TITLE_CAR = "Διάλεξε αυτοκίνητο ...";
 
+    private View view;
+    private Button button_seats, button_pet, button_car;
+    //Backup
+    private String pet_title = TITLE_PET;
+    private String seat_title = TITLE_SEAT;
+    private String car_title = TITLE_CAR;
+
+    //Recycle
+    private RecyclerView mRecyclerView;
+    private CarAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private ArrayList<Car> mExampleList;
 
     public NewOfferStage3Fragment() {
         // Required empty public constructor
@@ -42,15 +60,23 @@ public class NewOfferStage3Fragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_new_offer_stage3, container, false);
         button_seats = view.findViewById(R.id.NewOfferStage3Fragment_button_seat);
         button_pet = view.findViewById(R.id.NewOfferStage3Fragment_button_pet);
-
+        button_car = view.findViewById(R.id.NewOfferStage3Fragment_button_car);
         button_pet.setText(pet_title);
         button_seats.setText(seat_title);
+        button_car.setText(car_title);
 
         button_seats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                openDialog();
+                openDialogForSeats();
+            }
+        });
+        button_car.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                openDialogForCar();
             }
         });
 
@@ -72,7 +98,51 @@ public class NewOfferStage3Fragment extends Fragment {
         return view;
     }
 
-    public void openDialog() {
+
+    public void openDialogForCar() {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+        View mView = getLayoutInflater().inflate(R.layout.choose_car, null);
+        Button button = mView.findViewById(R.id.choose_car_button_add_car);
+
+        mBuilder.setView(mView);
+
+        final AlertDialog dialog = mBuilder.create();
+
+        FillList(mView,dialog);
+        dialog.show();
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dialog.dismiss();
+                Intent intent = new Intent(getActivity(),AddCarSettingsActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
+    }
+
+    public void buildRecyclerView(View view, final AlertDialog dialog) {
+        mRecyclerView = view.findViewById(R.id.choose_car_recyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mAdapter = new CarAdapter(mExampleList);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new CarAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                button_car.setText(mExampleList.get(position).getDescription());
+               dialog.dismiss();
+
+
+            }
+        });
+    }
+
+    public void openDialogForSeats() {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
         View mView = getLayoutInflater().inflate(R.layout.number_choose, null);
         Button button = mView.findViewById(R.id.choose_num_button);
@@ -141,6 +211,7 @@ public class NewOfferStage3Fragment extends Fragment {
     public void onDestroy() {
         pet_title = button_pet.getText().toString();
         seat_title = button_seats.getText().toString();
+        car_title = button_car.getText().toString();
         super.onDestroy();
     }
 
@@ -152,15 +223,14 @@ public class NewOfferStage3Fragment extends Fragment {
         return true;
     }
 
-//    public String getNum_of_seats() {
-//        return seats_tv.getText().toString();
-//    }
-//
-//    public String getNum_of_bags() {
-//        return bags_tv.getText().toString();
-//    }
-//
-//    public String getPet() {
-//        return pet_switch.isChecked() + "";
-//    }
+
+    public void FillList(View view,AlertDialog dialog) {
+        mExampleList= new ArrayList<>();
+        Car car = new Car( "Nissan", "Navara", "ZXB1025");
+        mExampleList.add(car);
+        car = new Car( "Toyota", "Hilux", "ZXB1415");
+        mExampleList.add(car);
+        buildRecyclerView(view,dialog);
+
+    }
 }

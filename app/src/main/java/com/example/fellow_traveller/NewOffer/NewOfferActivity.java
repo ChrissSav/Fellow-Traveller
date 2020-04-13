@@ -45,7 +45,7 @@ public class NewOfferActivity extends AppCompatActivity {
 
 
         fragmentManager = getSupportFragmentManager();
-        fra = newOfferStage1Fragment;
+        fra = newOfferStage3Fragment;
         fragmentManager.beginTransaction().replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
         button_next.setOnClickListener(new View.OnClickListener() {
