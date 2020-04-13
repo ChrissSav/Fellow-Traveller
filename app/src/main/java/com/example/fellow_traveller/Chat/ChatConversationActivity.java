@@ -144,7 +144,7 @@ public class ChatConversationActivity extends AppCompatActivity {
         //To who we sent notification
         final String msg = message;
         if (notify) {
-            sendNotification(Integer.toString(groupId), globalClass.getCurrent_user().getName(), msg);
+            sendNotification(Integer.toString(groupId), globalClass.getCurrent_user().getName(), msg, groupId);
         }
         notify = false;
         updateParticipantsInfo(Integer.toString(groupId));
@@ -153,7 +153,7 @@ public class ChatConversationActivity extends AppCompatActivity {
 
 
 
-    private void sendNotification(final String  receiver, final String username, final String message ){
+    private void sendNotification(final String  receiver, final String username, final String message, final Integer groupId ){
 
         //WARNING HAVE TO CHANGE THE SENTET FROM 1 TO ANOTHER ID
 
@@ -165,7 +165,7 @@ public class ChatConversationActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     Token token = snapshot.getValue(Token.class);
-                    Data data = new Data(Integer.toString(myId), R.drawable.ic_logo, username + ": " + message, "Νέο μήνυμα", receiver);
+                    Data data = new Data(Integer.toString(myId), R.drawable.ic_logo, username + ": " + message, "Νέο μήνυμα", receiver, Integer.toString(groupId));
 
                     Sender sender = new Sender(data, token.getToken());
                     apiService.sendNotification(sender)
