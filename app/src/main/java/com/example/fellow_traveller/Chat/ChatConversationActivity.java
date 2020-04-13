@@ -104,15 +104,7 @@ public class ChatConversationActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
         readMessages();
 
-        writeEdtText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-               borderOfEdtText.setBackgroundResource( R.drawable.write_message_et_black_chat);
-                plusButton.setBackgroundTintList(getResources().getColorStateList(R.color.profile));
-                sendButton.setBackgroundTintList(getResources().getColorStateList(R.color.profile));
 
-            }
-        });
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
