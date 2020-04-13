@@ -60,8 +60,8 @@ public class ChatConversationActivity extends AppCompatActivity {
     private int myId;
     private int groupId;
     private boolean updateStatus = false;
-    ValueEventListener seenListener, updateListener;
-    DatabaseReference reference, referenceStatus ;
+    ValueEventListener seenListener;
+    DatabaseReference reference;
 
 
     @Override
@@ -144,16 +144,16 @@ public class ChatConversationActivity extends AppCompatActivity {
         //To who we sent notification
         final String msg = message;
         if (notify) {
-            sendNotification(Integer.toString(groupId), globalClass.getCurrent_user().getName(), msg);
+            sendNotification("10", "Tyler", msg);
         }
         notify = false;
-        updateParticipantsInfo(Integer.toString(groupId));
+        updateParticipantConvInfo(Integer.toString(groupId));
     }
 
 
 
 
-    private void sendNotification(final String  receiver, final String username, final String message ){
+    private void sendNotification(String receiver, final String username, final String message ){
 
         //WARNING HAVE TO CHANGE THE SENTET FROM 1 TO ANOTHER ID
 
@@ -165,7 +165,7 @@ public class ChatConversationActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     Token token = snapshot.getValue(Token.class);
-                    Data data = new Data(Integer.toString(myId), R.drawable.ic_logo, username + ": " + message, "Νέο μήνυμα", receiver);
+                    Data data = new Data(Integer.toString(myId), R.drawable.ic_logo, username + ": " + message, "Νέο μήνυμα", "10");
 
                     Sender sender = new Sender(data, token.getToken());
                     apiService.sendNotification(sender)
@@ -337,49 +337,12 @@ public class ChatConversationActivity extends AppCompatActivity {
         });
 
     }
-//    private void updateParticipantConvInfo(String groupId){
-//        for(int  i=0; i < convParticipantsId.size(); i++) {
-//            referenceStatus = FirebaseDatabase.getInstance().getReference("Trips").child(Integer.toString(convParticipantsId.get(i))).child(groupId);
-//            if(convParticipantsId.get(i) != myId) {
-//
-//              referenceStatus.addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                        HashMap<String, Object> hashMap = new HashMap<>();
-//                        hashMap.put("seen", false);
-//                        dataSnapshot.getRef().updateChildren(hashMap);
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                    }
-//                });
-//            }
-//
-//
-//            referenceStatus.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                    HashMap<String, Object> hashMap = new HashMap<>();
-//                    hashMap.put("date", System.currentTimeMillis() / 1000);
-//                    dataSnapshot.getRef().updateChildren(hashMap);
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                }
-//            });
-//        }
-//
-//    }
-    private void updateParticipantsInfo(String groupId){
+    private void updateParticipantConvInfo(String groupId){
         for(int  i=0; i < convParticipantsId.size(); i++) {
-            referenceStatus = FirebaseDatabase.getInstance().getReference("Trips").child(Integer.toString(convParticipantsId.get(i))).child(groupId);
-            if(convParticipantsId.get(i) != myId) {
 
-                referenceStatus.addListenerForSingleValueEvent(new ValueEventListener() {
+            if(convParticipantsId.get(i) != myId) {
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Trips").child(Integer.toString(convParticipantsId.get(i))).child(groupId);
+                reference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         HashMap<String, Object> hashMap = new HashMap<>();
@@ -392,10 +355,10 @@ public class ChatConversationActivity extends AppCompatActivity {
 
                     }
                 });
-
             }
 
-            referenceStatus.addListenerForSingleValueEvent(new ValueEventListener() {
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Trips").child(Integer.toString(convParticipantsId.get(i))).child(groupId);
+            reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     HashMap<String, Object> hashMap = new HashMap<>();
@@ -408,11 +371,9 @@ public class ChatConversationActivity extends AppCompatActivity {
 
                 }
             });
-
         }
 
     }
-
 
     @Override
     public void onBackPressed() {
@@ -424,6 +385,5 @@ public class ChatConversationActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         reference.removeEventListener(seenListener);
-
     }
 }

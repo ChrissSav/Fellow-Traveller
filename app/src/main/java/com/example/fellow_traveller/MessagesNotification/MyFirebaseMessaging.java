@@ -32,7 +32,7 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
 
 
         String sented = remoteMessage.getData().get("sented");
-        if(Integer.toString(myId) != null && sented.equals(Integer.toString(myId))){
+        if("10" != null && sented.equals("10")){
 
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
                 sendOreoNotification(remoteMessage);
