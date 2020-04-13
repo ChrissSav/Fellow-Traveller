@@ -47,6 +47,7 @@ public class ChatConversationActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private LinearLayoutManager mLayoutManager;
     private ArrayList<MessageItem> messagesList = new ArrayList<>();
+    private ArrayList<Integer> convParticipantsId  = new ArrayList<>();
     private static final int TOTAL_ITEMS_TO_LOAD = 20;
     private int mCurrentPage = 1;
     private int itemPos = 0;
@@ -58,8 +59,10 @@ public class ChatConversationActivity extends AppCompatActivity {
     private GlobalClass globalClass;
     private int myId;
     private int groupId;
+    private boolean updateStatus = false;
     ValueEventListener seenListener;
     DatabaseReference reference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,22 +73,6 @@ public class ChatConversationActivity extends AppCompatActivity {
         plusButton = findViewById(R.id.plus_button_chat);
         sendButton = findViewById(R.id.send_chat);
         mRefreshLayout = findViewById(R.id.swipe_refresh_chat_conversation);
-        //ArrayList<MessageItem> messagesList = new ArrayList<>();
-//        messagesList.add(new MessageItem(1,"Επππsdadadsadad","George"));
-//        messagesList.add(new MessageItem(1,"Εππsdsdassπ","George"));
-//        messagesList.add(new MessageItem(1,"Επdadsdasdasππ","George"));
-//        messagesList.add(new MessageItem(1,"Εππsadadsasdπ","George"));
-//        messagesList.add(new MessageItem(1,"Εππsdadsdπ","George"));
-//        messagesList.add(new MessageItem(2,"Τdadsadι λέεfι das","Manthos"));
-//        messagesList.add(new MessageItem(2,"Τι λέει τasdadadfsafσακάλια","Manthos"));
-//        messagesList.add(new MessageItem(3,"Που στε σκύλοιιι;;;","Neoklis"));
-//        messagesList.add(new MessageItem(1,"Εππsdaasdasdsdπ","George"));
-//        messagesList.add(new MessageItem(4,"Πάμεε Σdasdadsdaαλόνικαα;","Φάνος"));
-//        messagesList.add(new MessageItem(4,"Πάμεε Σαλdasdadaόνικαα;","Φάνος"));
-//        messagesList.add(new MessageItem(4,"Πάμεε dadsadads;","Φάνος"));
-//        messagesList.add(new MessageItem(1,"Εππsadadsasdπ","George"));
-//        messagesList.add(new MessageItem(1,"Εππsdsadafsadadsasdπ","George"));
-
 
 
         //Retrieve current user's id
@@ -104,8 +91,15 @@ public class ChatConversationActivity extends AppCompatActivity {
         mAdapter = new MessagesAdapter(messagesList, this.getApplicationContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
         readMessages();
-        updateSeenStatus(Integer.toString(myId),Integer.toString(groupId));
+        if(!updateStatus){
+            updateSeenStatus(Integer.toString(myId),Integer.toString(groupId));
+            updateStatus = false;
+
+        }
+
+        getAllParticipantsId(Integer.toString(groupId));
 
 
         sendButton.setOnClickListener(new View.OnClickListener() {
@@ -136,7 +130,7 @@ public class ChatConversationActivity extends AppCompatActivity {
     private void sendMessage(int myId, int groupId, String message) {
         //We send message to the id which we putted extra from conversation list
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Messages").child(Integer.toString(groupId));
+        DatabaseReference referenceMessage = FirebaseDatabase.getInstance().getReference().child("Messages").child(Integer.toString(groupId));
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("id", myId);
@@ -145,7 +139,7 @@ public class ChatConversationActivity extends AppCompatActivity {
         hashMap.put("timestamp", System.currentTimeMillis()/1000);
         hashMap.put("senderName", globalClass.getCurrent_user().getName());
 
-        reference.push().setValue(hashMap);
+        referenceMessage.push().setValue(hashMap);
 
         //To who we sent notification
         final String msg = message;
@@ -153,6 +147,7 @@ public class ChatConversationActivity extends AppCompatActivity {
             sendNotification("10", "Tyler", msg);
         }
         notify = false;
+        updateParticipantConvInfo(Integer.toString(groupId));
     }
 
 
@@ -298,13 +293,13 @@ public class ChatConversationActivity extends AppCompatActivity {
 
     private void updateToken(String token){
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Tokens");
+        DatabaseReference referenceTokens = FirebaseDatabase.getInstance().getReference("Tokens");
         Token token1 = new Token(token);
-        reference.child(Integer.toString(myId)).setValue(token1);
+        referenceTokens.child(Integer.toString(myId)).setValue(token1);
 
     }
     private void updateSeenStatus(String myId, String groupId){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Trips").child(myId).child(groupId);
+        reference = FirebaseDatabase.getInstance().getReference("Trips").child(myId).child(groupId);
         seenListener = reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -319,6 +314,65 @@ public class ChatConversationActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+    private void getAllParticipantsId(String grouId){
+
+        convParticipantsId.clear();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("TripsAndParticipants").child(grouId);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                    int aId = snapshot.child("userId").getValue(Integer.class);
+                    convParticipantsId.add(aId);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+    private void updateParticipantConvInfo(String groupId){
+        for(int  i=0; i < convParticipantsId.size(); i++) {
+
+            if(convParticipantsId.get(i) != myId) {
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Trips").child(Integer.toString(convParticipantsId.get(i))).child(groupId);
+                reference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        HashMap<String, Object> hashMap = new HashMap<>();
+                        hashMap.put("seen", false);
+                        dataSnapshot.getRef().updateChildren(hashMap);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Trips").child(Integer.toString(convParticipantsId.get(i))).child(groupId);
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("date", System.currentTimeMillis() / 1000);
+                    dataSnapshot.getRef().updateChildren(hashMap);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
     }
 
     @Override
@@ -327,5 +381,9 @@ public class ChatConversationActivity extends AppCompatActivity {
         writeEdtText.clearFocus();
     }
 
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        reference.removeEventListener(seenListener);
+    }
 }

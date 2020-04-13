@@ -103,7 +103,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             holder.seenIcon.setVisibility(View.VISIBLE);
         }else{
             holder.description.setTypeface(Typeface.DEFAULT);
-            holder.seenIcon.setVisibility(View.INVISIBLE);            
+            holder.seenIcon.setVisibility(View.INVISIBLE);
         }
 
 

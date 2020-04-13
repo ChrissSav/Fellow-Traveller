@@ -46,7 +46,7 @@ public class MessengerFragment extends Fragment {
     private GlobalClass globalClass;
     private int myId;
     private ArrayList<ConversationItem> conversationsList = new ArrayList<>();
-    private boolean notifyFlag = false;
+    private boolean notifyFlag = true;
 
 
 
@@ -95,7 +95,7 @@ public class MessengerFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
 
         if(notifyFlag){
-            mAdapter.notify();
+            mAdapter.notifyDataSetChanged();
             notifyFlag = false;
 
         }
