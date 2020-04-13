@@ -7,12 +7,14 @@ public class Data {
     private String title;
     private String sented;
 
+
     public Data(String user, int icon, String body, String title, String sented) {
         this.user = user;
         this.icon = icon;
         this.body = body;
         this.title = title;
         this.sented = sented;
+
     }
 
     public Data(){}
@@ -20,6 +22,7 @@ public class Data {
     public String getUser() {
         return user;
     }
+
 
     public void setUser(String user) {
         this.user = user;
