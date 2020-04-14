@@ -3,16 +3,20 @@ package com.example.fellow_traveller.NewOffer;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
 import com.example.fellow_traveller.Adapters.CarAdapter;
 import com.example.fellow_traveller.Models.Car;
 import com.example.fellow_traveller.R;
@@ -22,7 +26,7 @@ import java.util.ArrayList;
 
 
 public class NewOfferStage3Fragment extends Fragment {
-
+    private final String CLICK_COLOR = "#1C1C1C";
     private final String TITLE_PET = "Επέλεξε ...";
     private final String TITLE_SEAT = "Θέσεις ...";
     private final String TITLE_CAR = "Διάλεξε αυτοκίνητο ...";
@@ -62,6 +66,19 @@ public class NewOfferStage3Fragment extends Fragment {
         button_seats.setText(seat_title);
         button_car.setText(car_title);
         button_bags.setText(bags_title);
+        //Text Color
+        if (button_pet.getText() != TITLE_PET) {
+            button_pet.setTextColor(Color.parseColor(CLICK_COLOR));
+        }
+        if (button_bags.getText() != TITLE_BAGS) {
+            button_bags.setTextColor(Color.parseColor(CLICK_COLOR));
+        }
+        if (button_car.getText() != TITLE_CAR) {
+            button_car.setTextColor(Color.parseColor(CLICK_COLOR));
+        }
+        if (button_seats.getText() != TITLE_SEAT) {
+            button_seats.setTextColor(Color.parseColor(CLICK_COLOR));
+        }
 
 
         button_seats.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +98,6 @@ public class NewOfferStage3Fragment extends Fragment {
         });
 
 
-
         button_car.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +109,7 @@ public class NewOfferStage3Fragment extends Fragment {
         button_pet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                button_pet.setTextColor(Color.parseColor(CLICK_COLOR));
                 if (button_pet.getText().equals(TITLE_PET) || button_pet.getText().equals("Δεν επιτρέπω")) {
                     button_pet.setText("Επιτρέπω");
                     return;
@@ -144,6 +161,7 @@ public class NewOfferStage3Fragment extends Fragment {
         mAdapter.setOnItemClickListener(new CarAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                button_car.setTextColor(Color.parseColor(CLICK_COLOR));
                 button_car.setText(mExampleList.get(position).getDescription());
                 dialog.dismiss();
 
@@ -175,6 +193,7 @@ public class NewOfferStage3Fragment extends Fragment {
             public void onClick(View view) {
 
                 dialog.dismiss();
+                button_seats.setTextColor(Color.parseColor(CLICK_COLOR));
                 button_seats.setText(textView_number.getText().toString());
 
             }
@@ -219,6 +238,7 @@ public class NewOfferStage3Fragment extends Fragment {
             public void onClick(View view) {
 
                 dialog.dismiss();
+                button_bags.setTextColor(Color.parseColor(CLICK_COLOR));
                 button_bags.setText(textView_number.getText().toString());
 
             }
