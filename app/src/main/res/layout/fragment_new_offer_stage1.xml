@@ -9,15 +9,17 @@
 
     <TextView
         android:id="@+id/NewOfferStage1Fragment_textView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/firasans_light"
-        android:text="Που σκοπεύεις να πας ;"
+        android:text="Εισάγεται την αφετηρία και τον προορισμό"
         android:textColor="@color/profile"
         android:textSize="30sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,7 +52,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_background_select"
             android:fontFamily="@font/firasans_light"
-            android:hint="Επέλεξε τοποθεσία"
+            android:hint="Διάλεξε την αφετηρία ..."
             android:inputType="text"
             android:padding="15dp"
             android:singleLine="true"
@@ -85,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/firasans_light"
-            android:hint="Επέλεξε τοποθεσία"
+            android:hint="Διάλεξε τον προορισμό ..."
             android:inputType="text"
             android:background="@drawable/button_background_select"
             android:padding="15dp"
