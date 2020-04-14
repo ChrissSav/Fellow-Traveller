@@ -12,9 +12,7 @@ import android.view.ViewGroup;
 import com.example.fellow_traveller.R;
 import com.google.android.material.textfield.TextInputLayout;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class NewOfferStage1Fragment extends Fragment {
     private View view;
     private TextInputLayout textInputLayout_from, textInputLayout_to;

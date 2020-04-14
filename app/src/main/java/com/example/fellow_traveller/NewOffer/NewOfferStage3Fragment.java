@@ -14,8 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fellow_traveller.Adapters.CarAdapter;
 import com.example.fellow_traveller.Models.Car;
@@ -291,13 +293,56 @@ public class NewOfferStage3Fragment extends Fragment {
     }
 
     public boolean isOk() {
-        // if (Integer.parseInt(seats_tv.getText().toString()) < 1) {
-        //     Toast.makeText(getActivity(), "Ο αριθμός των θέσων πρέπει να ειναι τουλάστον 1!", Toast.LENGTH_SHORT).show();
-        //    return false;
-        //  }
-        return true;
+        if(CheckCar() && CheckSeats() && CheckBags()&& CheckPet()){
+            return true;
+        }
+        return false;
     }
 
+
+    public Boolean CheckCar() {
+        if (button_car.getText().equals(TITLE_CAR)) {
+            Toast.makeText(getActivity(), "Παρακαλω καταχωρήστε το όχημα σας", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public Boolean CheckPet() {
+        if (button_pet.getText().equals(TITLE_PET)) {
+            Toast.makeText(getActivity(), "Παρακαλω καταχωρήστε αν δεχεστε ζωα", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public Boolean CheckSeats() {
+        try {
+            int res = Integer.parseInt(button_seats.getText().toString());
+            if (res < 1) {
+                Toast.makeText(getActivity(), "Οι θεσεις πρεπει να ειναι τουλαχιστον μια", Toast.LENGTH_SHORT).show();
+                return false;
+            } else {
+                return true;
+            }
+        } catch (NumberFormatException e) {
+            Toast.makeText(getActivity(), "Υπαρχει λαθος στην καταχωρηση των θεσεων", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
+
+    public Boolean CheckBags() {
+        try {
+            int res = Integer.parseInt(button_bags.getText().toString());
+            return true;
+
+        } catch (NumberFormatException e) {
+            Toast.makeText(getActivity(), "Υπαρχει λαθος στην καταχωρηση των αποσκευων", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
 
     public void FillList(View view, AlertDialog dialog) {
         mExampleList = new ArrayList<>();
