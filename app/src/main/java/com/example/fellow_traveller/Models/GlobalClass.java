@@ -1,6 +1,10 @@
 package com.example.fellow_traveller.Models;
 
 import android.app.Application;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.util.Log;
 
 import java.io.IOException;
@@ -12,6 +16,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class GlobalClass extends Application {
+    public static final String CHANNEL_1_ID = "channel1";
 
     private UserAuth current_user;
     private OkHttpClient.Builder okHttpClient;
@@ -32,11 +37,35 @@ public class GlobalClass extends Application {
                 Request request = chain.request();
                 Log.i("getAccess_token", current_user.getAccess_token());
 
-                Request.Builder newRequest = request.newBuilder().header("authorization",current_user.getAccess_token());
+                Request.Builder newRequest = request.newBuilder().header("authorization", current_user.getAccess_token());
                 return chain.proceed(newRequest.build());
             }
         }));
         return okHttpClient;
+    }
+
+    @Override
+    public void onCreate() {
+        createNotificationChannels();
+
+        super.onCreate();
+    }
+
+    private void createNotificationChannels() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel1 = new NotificationChannel(
+                    CHANNEL_1_ID,
+                    "Channel 1",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            channel1.setDescription("This is Channel 1");
+
+            channel1.enableLights(true);
+            channel1.enableVibration(true);
+            channel1.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel1);
+        }
     }
 }
 
