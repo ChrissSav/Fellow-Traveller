@@ -32,10 +32,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.app.Notification.DEFAULT_SOUND;
+import static android.app.Notification.DEFAULT_VIBRATE;
 import static com.example.fellow_traveller.Models.GlobalClass.CHANNEL_1_ID;
 
 public class ExampleJobService extends JobService {
-
+    public static final String CHANNEL_1_ID = "channel1";
     private RetrofitService retrofitService;
     private Retrofit retrofit;
     private static final String TAG = "ExampleJobService";
@@ -55,18 +57,19 @@ public class ExampleJobService extends JobService {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int i = 0; i < 1; i++) {
-                    Log.d(TAG, "run: " + i);
+                for (int i = 0; i < 2; i++) {
+
                     if (jobCancelled) {
                         return;
                     }
 
                     //CheckConnection();
                     try {
-                        Thread.sleep(2000);
+                        Thread.sleep(5000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    Log.d(TAG, "run: " + i);
                     ViewNotif("run: " + i,i);
                 }
 
@@ -141,11 +144,10 @@ public class ExampleJobService extends JobService {
                 .setContentTitle("Ειδποποιήση ταξιδιού")
                 .setContentText(text)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                .setColor(Color.BLUE)
                 .setContentIntent(contentIntent)
                 .setAutoCancel(true)
                 .setOnlyAlertOnce(true)
+                .setDefaults(DEFAULT_SOUND | DEFAULT_VIBRATE)
                 .build();
 
         notificationManager.notify(i, notification);
