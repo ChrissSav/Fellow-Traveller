@@ -1,9 +1,12 @@
 package com.example.fellow_traveller.API;
 
 
-import com.example.fellow_traveller.Models.User;
+import com.example.fellow_traveller.Models.NotificationModel;
 import com.example.fellow_traveller.Models.UserAuth;
 import com.google.gson.JsonObject;
+
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -32,6 +35,9 @@ public interface RetrofitService {
 
     @GET(".")
     Call<Status_Handling> Test();
+
+    @GET("/notifications")
+    Call<List<NotificationModel>> getNotifications();
 
 
 }

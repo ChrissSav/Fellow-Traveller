@@ -1,6 +1,7 @@
 package com.example.fellow_traveller.Models;
 
-public class Notification {
+public class NotificationModel {
+
     private int id;
     private UserBase user;
     private Trip trip;

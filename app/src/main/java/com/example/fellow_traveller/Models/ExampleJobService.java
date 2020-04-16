@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -25,6 +26,8 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,8 +39,9 @@ import static android.app.Notification.DEFAULT_SOUND;
 import static android.app.Notification.DEFAULT_VIBRATE;
 import static com.example.fellow_traveller.Models.GlobalClass.CHANNEL_1_ID;
 
+
 public class ExampleJobService extends JobService {
-    public static final String CHANNEL_1_ID = "channel1";
+    public static final String TITLE = "Ειδποποιήση ταξιδιού";
     private RetrofitService retrofitService;
     private Retrofit retrofit;
     private static final String TAG = "ExampleJobService";
@@ -70,7 +74,7 @@ public class ExampleJobService extends JobService {
                         e.printStackTrace();
                     }
                     Log.d(TAG, "run: " + i);
-                    ViewNotif("run: " + i,i);
+                    CheckConnection();
                 }
 
                 Log.d(TAG, "ExampleJobService finished");
@@ -87,33 +91,35 @@ public class ExampleJobService extends JobService {
     }
 
     public void CheckConnection() {
-
-        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL)).addConverterFactory(GsonConverterFactory.create()).build();
+        GlobalClass globalClass = (GlobalClass) getApplicationContext();
+        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL)).client(globalClass.getOkHttpClient().build()).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitService = retrofit.create(RetrofitService.class);
 
-        JsonObject user_object = new JsonObject();
-        user_object.addProperty("refresh_token", "hkyukuykyukuyk");
-        Call<Status_Handling> call = retrofitService.Test();
-        call.enqueue(new Callback<Status_Handling>() {
+        Call<List<NotificationModel>> call = retrofitService.getNotifications();
+        call.enqueue(new Callback<List<NotificationModel>>() {
             @Override
-            public void onResponse(Call<Status_Handling> call, Response<Status_Handling> response) {
-
-                Log.i(TAG, "-2");
+            public void onResponse(Call<List<NotificationModel>> call, Response<List<NotificationModel>> response) {
                 if (!response.isSuccessful()) {
-                    // Toast.makeText(getActivity(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
-                    Log.i(TAG, "-1");
+                    Log.i(TAG, "!response.isSuccessful()");
+
 
                     return;
                 }
-                //Log.i(TAG, "-1");
+                List<NotificationModel> list = response.body();
 
-                ///Toast.makeText(getActivity(), response.body().toString(), Toast.LENGTH_SHORT).show();
+                for (NotificationModel notificationModel: list){
+                    String text = "Ο χρήστης "+notificationModel.getUser().getName()+ " "+notificationModel.getUser().getSurname()
+                            + " μόλις προστεθηκε στο ταξίδι σου";
+                    ViewNotification( text, notificationModel.getId());
+                }
+
+
 
 
             }
 
             @Override
-            public void onFailure(Call<Status_Handling> call, Throwable t) {
+            public void onFailure(Call<List<NotificationModel>> call, Throwable t) {
                 Log.i(TAG, "onFailure: " + t.getMessage());
 
             }
@@ -121,15 +127,11 @@ public class ExampleJobService extends JobService {
         });
     }
 
-    public void ViewNotif(String text,int i ){
-        Uri defaultSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+    public void ViewNotification(String text, int i) {
 
-        String user ="user";
-        String icon = "user";
-        String title ="user";
-        String body = "user";
-        Log.i(TAG, "ViewNotif");
+        Log.i(TAG, "ViewNotification");
         Context mContext = this;
+
         notificationManager = NotificationManagerCompat.from(mContext);
 
 
@@ -138,19 +140,21 @@ public class ExampleJobService extends JobService {
                 0, activityIntent, 0);
 
 
-
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
                 .setSmallIcon(R.drawable.ic_logo)
-                .setContentTitle("Ειδποποιήση ταξιδιού")
+                .setContentTitle(TITLE)
                 .setContentText(text)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(contentIntent)
                 .setAutoCancel(true)
+                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                 .setOnlyAlertOnce(true)
-                .setDefaults(DEFAULT_SOUND | DEFAULT_VIBRATE)
+                .setVibrate(new long[] { 1000, 1000})
                 .build();
 
         notificationManager.notify(i, notification);
 
     }
+
+
 }

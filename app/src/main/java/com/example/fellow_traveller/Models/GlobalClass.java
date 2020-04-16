@@ -18,8 +18,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class GlobalClass extends Application {
-    public static final String CHANNEL_1_ID = "channel";
-    private static final String CHANNEL_NAME_1 = "This is Channel 1";
+    public static final String CHANNEL_1_ID = "passenger_notification";
+    private static final String CHANNEL_NAME_1 = "This is Channel passenger_notification";
 
 
     private UserAuth current_user;
@@ -57,23 +57,24 @@ public class GlobalClass extends Application {
 
     private void createNotificationChannels() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            @SuppressLint("WrongConstant") NotificationChannel channel1 = new NotificationChannel(
+            NotificationChannel channel1 = new NotificationChannel(
                     CHANNEL_1_ID,
                     "Channel 1",
-                    NotificationManager.IMPORTANCE_MAX
+                    NotificationManager.IMPORTANCE_HIGH
             );
             channel1.setDescription(CHANNEL_NAME_1);
-
-            channel1.enableLights(true);
+            channel1.setVibrationPattern(new long[]{0, 1000, 500, 1000});
             channel1.enableVibration(true);
-            channel1.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+            channel1.setShowBadge(false);
 
-            NotificationManager  manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+            if(manager == null){
+                manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            }
             manager.createNotificationChannel(channel1);
-
-
-
         }
     }
+
 }
 
