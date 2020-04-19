@@ -1,13 +1,15 @@
 package com.example.fellow_traveller.Models;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class Trip {
     private int id;
     private String dest_from;
     private String dest_to;
-    private String date;
-    private String time;
+    private Long timestamp;
     private String pet;
     private int max_seats;
     private int current_seats;
@@ -42,21 +44,7 @@ public class Trip {
         this.dest_to = dest_to;
     }
 
-    public String getDate() {
-        return date;
-    }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
 
     public String getPet() {
         return pet;
@@ -122,6 +110,13 @@ public class Trip {
         this.passengers = passengers;
     }
 
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
+    }
 
     public String getSeatsStatus() {
         return current_seats+"/"+max_seats;
@@ -129,5 +124,16 @@ public class Trip {
 
     public String getBagsStatus() {
         return current_bags+"/"+max_bags;
+    }
+
+
+    public String GetDate(){
+        Timestamp stamp = new Timestamp(timestamp);
+        return new SimpleDateFormat("dd/MM/yyyy").format(stamp);
+    }
+
+    public String GetTime(){
+        Timestamp stamp = new Timestamp(timestamp);
+        return new SimpleDateFormat("HH:mm").format(stamp);
     }
 }
