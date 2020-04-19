@@ -8,13 +8,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.example.fellow_traveller.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class NewOfferStage6Fragment extends Fragment {
+    private View view;
 
 
     public NewOfferStage6Fragment() {
@@ -26,7 +26,8 @@ public class NewOfferStage6Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new_offer_stage6, container, false);
+        view =  inflater.inflate(R.layout.fragment_new_offer_stage6, container, false);
+        return view;
     }
     public String toString() {
         return "NewOfferStage6Fragment";

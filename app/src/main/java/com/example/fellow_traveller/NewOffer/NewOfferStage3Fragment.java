@@ -58,6 +58,7 @@ public class NewOfferStage3Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_new_offer_stage3, container, false);
+
         button_seats = view.findViewById(R.id.NewOfferStage3Fragment_button_seat);
         button_pet = view.findViewById(R.id.NewOfferStage3Fragment_button_pet);
         button_car = view.findViewById(R.id.NewOfferStage3Fragment_button_car);
@@ -68,6 +69,8 @@ public class NewOfferStage3Fragment extends Fragment {
         button_seats.setText(seat_title);
         button_car.setText(car_title);
         button_bags.setText(bags_title);
+
+
         //Text Color
         if (button_pet.getText() != TITLE_PET) {
             button_pet.setTextColor(Color.parseColor(CLICK_COLOR));

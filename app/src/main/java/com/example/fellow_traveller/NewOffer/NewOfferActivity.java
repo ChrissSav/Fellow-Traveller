@@ -47,7 +47,7 @@ public class NewOfferActivity extends AppCompatActivity {
 
 
         fragmentManager = getSupportFragmentManager();
-        fra = newOfferStage6Fragment;
+        fra = newOfferStage1Fragment;
         fragmentManager.beginTransaction().replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
         button_next.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +78,7 @@ public class NewOfferActivity extends AppCompatActivity {
                     progressBar.setProgress(num_num * newOfferStage6Fragment.getRank());
                     fra = newOfferStage6Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
-                    button_next.setText("Complete");
+                    button_next.setText("Καταχώρηση");
 
                 }
 
@@ -95,9 +95,15 @@ public class NewOfferActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (fra.toString().equals("NewOfferStage5Fragment")) {
+        if (fra.toString().equals("NewOfferStage6Fragment")) {
+            progressBar.setProgress(num_num * newOfferStage5Fragment.getRank());
+            button_next.setText("Επόμενο");
+            fra = newOfferStage5Fragment;
+            fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.NewOfferActivity_frame_container, fra).commit();
+
+        }
+        else if (fra.toString().equals("NewOfferStage5Fragment")) {
             progressBar.setProgress(num_num * newOfferStage4Fragment.getRank());
-            button_next.setText("Next");
             fra = newOfferStage4Fragment;
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
