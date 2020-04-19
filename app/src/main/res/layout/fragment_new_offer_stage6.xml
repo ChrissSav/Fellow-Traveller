@@ -138,7 +138,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/NewOfferStage6Fragment_textView_date_number"
+                        android:id="@+id/NewOfferStage6Fragment_textView_date"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
