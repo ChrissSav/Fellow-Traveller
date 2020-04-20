@@ -3,7 +3,12 @@ package com.example.fellow_traveller.API;
 
 import com.example.fellow_traveller.Models.User;
 import com.example.fellow_traveller.Models.UserAuth;
+import com.example.fellow_traveller.PlaceAutocomplete.PlaceAPi;
+import com.example.fellow_traveller.PlaceAutocomplete.Predictions;
 import com.google.gson.JsonObject;
+
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -34,4 +39,9 @@ public interface RetrofitService {
     Call<Status_Handling> Test();
 
 
+    //PlaceAPi
+    @GET("json")
+    Call<PlaceAPi> getPlaces(
+            @Query("input") String input,
+            @Query("key") String key);
 }
