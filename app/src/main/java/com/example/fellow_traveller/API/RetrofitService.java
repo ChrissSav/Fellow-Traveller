@@ -43,5 +43,6 @@ public interface RetrofitService {
     @GET("json")
     Call<PlaceAPi> getPlaces(
             @Query("input") String input,
-            @Query("key") String key);
+            @Query("key") String key,
+            @Query("language") String language);
 }

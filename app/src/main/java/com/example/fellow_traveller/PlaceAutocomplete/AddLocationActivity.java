@@ -123,8 +123,9 @@ public class AddLocationActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create()).build();
         retrofitService = retrofit.create(RetrofitService.class);
         String key = getResources().getString(R.string.PLACE_KEY);
+        String language = getResources().getString(R.string.PLACE_LANGUAGE);
 
-        Call<PlaceAPi> call = retrofitService.getPlaces(input, key);
+        Call<PlaceAPi> call = retrofitService.getPlaces(input, key,language);
         call.enqueue(new Callback<PlaceAPi>() {
             @Override
             public void onResponse(Call<PlaceAPi> call, Response<PlaceAPi> response) {
