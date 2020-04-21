@@ -36,6 +36,9 @@ public class NewOfferStage5Fragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_new_offer_stage5, container, false);
 
 
+        editText = view.findViewById(R.id.NewOfferStage5Fragment_editText);
+
+
 
 
         return  view;
@@ -46,5 +49,10 @@ public class NewOfferStage5Fragment extends Fragment {
 
     public int getRank() {
         return 5;
+    }
+
+
+    public String getMsg() {
+        return editText.getText().toString();
     }
 }

@@ -26,6 +26,9 @@ import com.example.fellow_traveller.Settings.AddCarSettingsActivity;
 
 import java.util.ArrayList;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
+
 
 public class NewOfferStage3Fragment extends Fragment {
     private final String CLICK_COLOR = "#1C1C1C";
@@ -48,6 +51,8 @@ public class NewOfferStage3Fragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Car> mExampleList;
 
+    private Car current_car;
+
     public NewOfferStage3Fragment() {
         // Required empty public constructor
     }
@@ -58,6 +63,7 @@ public class NewOfferStage3Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_new_offer_stage3, container, false);
+
         button_seats = view.findViewById(R.id.NewOfferStage3Fragment_button_seat);
         button_pet = view.findViewById(R.id.NewOfferStage3Fragment_button_pet);
         button_car = view.findViewById(R.id.NewOfferStage3Fragment_button_car);
@@ -68,6 +74,8 @@ public class NewOfferStage3Fragment extends Fragment {
         button_seats.setText(seat_title);
         button_car.setText(car_title);
         button_bags.setText(bags_title);
+
+
         //Text Color
         if (button_pet.getText() != TITLE_PET) {
             button_pet.setTextColor(Color.parseColor(CLICK_COLOR));
@@ -145,7 +153,8 @@ public class NewOfferStage3Fragment extends Fragment {
 
                 dialog.dismiss();
                 Intent intent = new Intent(getActivity(), AddCarSettingsActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
+
 
             }
         });
@@ -153,7 +162,7 @@ public class NewOfferStage3Fragment extends Fragment {
 
     }
 
-    public void buildRecyclerView(View view, final AlertDialog dialog) {
+    public void buildRecyclerViewForCar(View view, final AlertDialog dialog) {
         mRecyclerView = view.findViewById(R.id.choose_car_recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -165,6 +174,7 @@ public class NewOfferStage3Fragment extends Fragment {
             public void onItemClick(int position) {
                 button_car.setTextColor(Color.parseColor(CLICK_COLOR));
                 button_car.setText(mExampleList.get(position).getDescription());
+                current_car = mExampleList.get(position);
                 dialog.dismiss();
 
 
@@ -193,11 +203,9 @@ public class NewOfferStage3Fragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 dialog.dismiss();
                 button_seats.setTextColor(Color.parseColor(CLICK_COLOR));
                 button_seats.setText(textView_number.getText().toString());
-
             }
         });
 
@@ -226,7 +234,7 @@ public class NewOfferStage3Fragment extends Fragment {
         final TextView textView_number = mView.findViewById(R.id.choose_num_textView_number);
         TextView textView_title = mView.findViewById(R.id.choose_num_textView_title);
         if (!button_bags.getText().equals(TITLE_BAGS)) {
-            textView_number.setText(button_seats.getText().toString());
+            textView_number.setText(button_bags.getText().toString());
         }
 
         textView_title.setText("Καθόρισε τον αριθμό των αποσκεύων");
@@ -311,7 +319,7 @@ public class NewOfferStage3Fragment extends Fragment {
 
     public Boolean CheckPet() {
         if (button_pet.getText().equals(TITLE_PET)) {
-            Toast.makeText(getActivity(), "Παρακαλω καταχωρήστε αν δεχεστε ζωα", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Παρακαλω καταχωρήστε αν δεχεστε κατοικίδια", Toast.LENGTH_SHORT).show();
             return false;
         } else {
             return true;
@@ -346,11 +354,48 @@ public class NewOfferStage3Fragment extends Fragment {
 
     public void FillList(View view, AlertDialog dialog) {
         mExampleList = new ArrayList<>();
-        Car car = new Car("Nissan", "Navara", "ZXB1025");
+        Car car = new Car(1,"Nissan", "Navara", "ZXB1025","Green");
         mExampleList.add(car);
-        car = new Car("Toyota", "Hilux", "ZXB1415");
+        car = new Car(2,"Toyota", "Hilux", "ZXB1415","Red");
         mExampleList.add(car);
-        buildRecyclerView(view, dialog);
+        buildRecyclerViewForCar(view, dialog);
 
+    }
+
+    public String getSeats() {
+        return button_seats.getText().toString();
+    }
+
+    public String getPets() {
+        return button_pet.getText().toString();
+    }
+
+    public String getCar() {
+        return button_car.getText().toString();
+    }
+
+    public String getBags() {
+        return button_bags.getText().toString();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                Car car = data.getParcelableExtra("car");
+                current_car = car;
+                button_car.setText(car.getDescription());
+
+            }
+            if (resultCode == RESULT_CANCELED) {
+                // mTextViewResult.setText("Nothing selected");
+            }
+        }
+    }
+
+    public Car getCarObject() {
+        return current_car;
     }
 }

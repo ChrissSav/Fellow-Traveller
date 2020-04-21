@@ -3,8 +3,8 @@ package com.example.fellow_traveller.API;
 
 import com.example.fellow_traveller.Models.NotificationModel;
 import com.example.fellow_traveller.Models.UserAuth;
+import com.example.fellow_traveller.PlaceAutocomplete.PlaceAPi;
 import com.google.gson.JsonObject;
-
 import java.util.List;
 
 import retrofit2.Call;
@@ -14,12 +14,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface RetrofitService {
-
-
-    @POST("user")
-    Call<UserAuth> registerUser(
-            @Body JsonObject user
-    );
 
 
     @POST("auth/login")
@@ -32,6 +26,23 @@ public interface RetrofitService {
             @Query("refresh_token") String token
     );
 
+    //User
+    @POST("user")
+    Call<UserAuth> registerUser(
+            @Body JsonObject user
+    );
+
+
+
+
+
+    //Trip
+    @POST("/trips")
+    Call<Status_Handling> registerTrip(
+            @Body JsonObject trip
+    );
+
+
 
     @GET(".")
     Call<Status_Handling> Test();
@@ -40,4 +51,12 @@ public interface RetrofitService {
     Call<List<NotificationModel>> getNotifications();
 
 
+    //PlaceAPi
+
+    @GET("json")
+    Call<PlaceAPi> getPlaces(
+            @Query("input") String input,
+            @Query("key") String key,
+            @Query("language") String language,
+            @Query("components") String components);
 }

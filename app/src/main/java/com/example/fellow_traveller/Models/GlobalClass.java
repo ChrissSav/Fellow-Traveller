@@ -1,15 +1,19 @@
 package com.example.fellow_traveller.Models;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Build;
+import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.fellow_traveller.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.Proxy;
 
 import okhttp3.Interceptor;
@@ -33,6 +37,8 @@ public class GlobalClass extends Application {
         this.current_user = current_user;
     }
 
+
+
     public OkHttpClient.Builder getOkHttpClient() {
         okHttpClient = new OkHttpClient.Builder().proxy(Proxy.NO_PROXY);
         okHttpClient.addInterceptor((new Interceptor() {
@@ -48,9 +54,11 @@ public class GlobalClass extends Application {
         return okHttpClient;
     }
 
+
     @Override
     public void onCreate() {
         createNotificationChannels();
+        LoadClass();
 
         super.onCreate();
     }
@@ -76,5 +84,14 @@ public class GlobalClass extends Application {
         }
     }
 
+    public void LoadClass() {
+        SharedPreferences mPrefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = mPrefs.getString(getResources().getString(R.string.USER_INFO), null);
+        Type type = new TypeToken<UserAuth>() {
+        }.getType();
+        UserAuth userAuth = gson.fromJson(json, type);
+        current_user = userAuth;
+    }
 }
 
