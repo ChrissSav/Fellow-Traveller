@@ -229,7 +229,7 @@ public class NewOfferStage3Fragment extends Fragment {
         final TextView textView_number = mView.findViewById(R.id.choose_num_textView_number);
         TextView textView_title = mView.findViewById(R.id.choose_num_textView_title);
         if (!button_bags.getText().equals(TITLE_BAGS)) {
-            textView_number.setText(button_seats.getText().toString());
+            textView_number.setText(button_bags.getText().toString());
         }
 
         textView_title.setText("Καθόρισε τον αριθμό των αποσκεύων");
@@ -355,5 +355,21 @@ public class NewOfferStage3Fragment extends Fragment {
         mExampleList.add(car);
         buildRecyclerView(view, dialog);
 
+    }
+
+    public String getSeats() {
+        return button_seats.getText().toString();
+    }
+
+    public String getPets() {
+        return button_pet.getText().toString();
+    }
+
+    public String getCar() {
+        return button_car.getText().toString();
+    }
+
+    public String getBags() {
+        return button_bags.getText().toString();
     }
 }

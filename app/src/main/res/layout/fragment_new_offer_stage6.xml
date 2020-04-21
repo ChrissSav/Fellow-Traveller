@@ -61,13 +61,17 @@
 
                 <TextView
                     android:id="@+id/NewOfferStage6Fragment_textView_from"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+                    android:layout_marginEnd="4dp"
                     android:fontFamily="@font/firasans_medium"
+                    android:maxLines="2"
                     android:text="Athens"
                     android:textColor="@color/profile"
                     android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@+id/NewOfferStage6Fragment_textView_to"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/NewOfferStage6Fragment_textView"
                     app:layout_constraintTop_toBottomOf="@+id/NewOfferStage6Fragment_textView" />
 
@@ -84,12 +88,14 @@
 
                 <TextView
                     android:id="@+id/NewOfferStage6Fragment_textView_to"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/firasans_medium"
+                    android:maxLines="2"
                     android:text="Thessaloniki"
                     android:textColor="@color/profile"
                     android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline"
                     app:layout_constraintTop_toTopOf="@+id/NewOfferStage6Fragment_textView_from" />
 
@@ -143,6 +149,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/firasans_bold"
+                        android:maxLines="2"
                         android:text="20\nΙαν"
                         android:textAlignment="center"
                         android:textColor="@color/profile"
@@ -185,6 +192,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/firasans_bold"
+                        android:maxLines="2"
                         android:text="08:00\nΠΜ"
                         android:textAlignment="center"
                         android:textColor="@color/profile"
@@ -272,16 +280,17 @@
 
                 <TextView
                     android:id="@+id/NewOfferStage6Fragment_textView_pets"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     android:fontFamily="@font/firasans_medium"
+                    android:maxLines="1"
                     android:text="Allowed"
-                    android:textAlignment="center"
+                    android:textAlignment="textEnd"
                     android:textColor="@color/profile"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage6Fragment_textView15"
-                    app:layout_constraintEnd_toStartOf="@+id/NewOfferStage6Fragment_textView3"
+                    app:layout_constraintEnd_toEndOf="@+id/NewOfferStage6Fragment_textView_car"
+                    app:layout_constraintStart_toStartOf="@+id/NewOfferStage6Fragment_textView_car"
                     app:layout_constraintTop_toTopOf="@+id/NewOfferStage6Fragment_textView15" />
 
                 <ImageView
@@ -307,22 +316,24 @@
 
                 <TextView
                     android:id="@+id/NewOfferStage6Fragment_textView_price"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/firasans_medium"
+                    android:maxLines="1"
                     android:text="50"
-                    android:textAlignment="center"
+                    android:textAlignment="textEnd"
                     android:textColor="@color/profile"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage6Fragment_textView5"
-                    app:layout_constraintEnd_toEndOf="@+id/NewOfferStage6Fragment_textView_pets"
+                    app:layout_constraintEnd_toEndOf="@+id/NewOfferStage6Fragment_textView_car"
+                    app:layout_constraintStart_toStartOf="@+id/NewOfferStage6Fragment_textView_car"
                     app:layout_constraintTop_toTopOf="@+id/NewOfferStage6Fragment_textView5" />
 
                 <ImageView
                     android:id="@+id/NewOfferStage6Fragment_textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_bone"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/ic_payment"
                     app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage6Fragment_textView_price"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/NewOfferStage6Fragment_textView_price" />
@@ -341,15 +352,19 @@
 
                 <TextView
                     android:id="@+id/NewOfferStage6Fragment_textView_car"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="12dp"
                     android:fontFamily="@font/firasans_medium"
+                    android:maxLines="1"
                     android:text="Audi R8"
-                    android:textAlignment="center"
+                    android:textAlignment="textEnd"
                     android:textColor="@color/profile"
-                    android:textSize="20sp"
+                    android:textSize="17sp"
                     app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage6Fragment_textView14"
-                    app:layout_constraintEnd_toEndOf="@+id/NewOfferStage6Fragment_textView_pets"
+                    app:layout_constraintEnd_toStartOf="@+id/NewOfferStage6Fragment_textView16"
+                    app:layout_constraintStart_toEndOf="@+id/NewOfferStage6Fragment_textView14"
                     app:layout_constraintTop_toTopOf="@+id/NewOfferStage6Fragment_textView14" />
 
                 <ImageView
@@ -375,15 +390,17 @@
 
                 <TextView
                     android:id="@+id/NewOfferStage6Fragment_textView_bags"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/firasans_medium"
+                    android:maxLines="1"
                     android:text="5"
-                    android:textAlignment="center"
+                    android:textAlignment="textEnd"
                     android:textColor="@color/profile"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage6Fragment_textView_25"
-                    app:layout_constraintEnd_toEndOf="@+id/NewOfferStage6Fragment_textView_pets"
+                    app:layout_constraintEnd_toEndOf="@+id/NewOfferStage6Fragment_textView_car"
+                    app:layout_constraintStart_toStartOf="@+id/NewOfferStage6Fragment_textView_car"
                     app:layout_constraintTop_toTopOf="@+id/NewOfferStage6Fragment_textView_25" />
 
                 <ImageView

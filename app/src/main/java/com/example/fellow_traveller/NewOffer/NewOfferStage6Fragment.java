@@ -1,6 +1,7 @@
 package com.example.fellow_traveller.NewOffer;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,15 +14,29 @@ import android.widget.TextView;
 
 import com.example.fellow_traveller.R;
 
+import java.text.DateFormatSymbols;
+import java.time.Month;
+import java.time.format.TextStyle;
+
 
 public class NewOfferStage6Fragment extends Fragment {
     private View view;
-    private TextView textView_from,textView_to,textView_date,textView_time,
-            textView_seats,textView_bags,textView_pets,textView_price,textView_car,textView_msg;
+    private TextView textView_from, textView_to, textView_date, textView_time,
+            textView_seats, textView_bags, textView_pets, textView_price, textView_car, textView_msg;
+    private String from, to, date, time, seats, bags, pets, price, car, msg;
 
 
     public NewOfferStage6Fragment() {
-        // Required empty public constructor
+        this.from = "";
+        this.to = "";
+        this.date = "";
+        this.time = "";
+        this.seats = "";
+        this.bags = "";
+        this.pets = "";
+        this.price = "";
+        this.car = "";
+        this.msg = "";
     }
 
 
@@ -29,7 +44,8 @@ public class NewOfferStage6Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view =  inflater.inflate(R.layout.fragment_new_offer_stage6, container, false);
+        view = inflater.inflate(R.layout.fragment_new_offer_stage6, container, false);
+
         textView_from = view.findViewById(R.id.NewOfferStage6Fragment_textView_from);
         textView_to = view.findViewById(R.id.NewOfferStage6Fragment_textView_to);
         textView_date = view.findViewById(R.id.NewOfferStage6Fragment_textView_date);
@@ -41,8 +57,25 @@ public class NewOfferStage6Fragment extends Fragment {
         textView_car = view.findViewById(R.id.NewOfferStage6Fragment_textView_car);
         textView_msg = view.findViewById(R.id.NewOfferStage6Fragment_textView_msg);
 
+        textView_from.setText(from);
+        textView_to.setText(to);
+
+        textView_date.setText(date);
+        textView_time.setText(time);
+
+        textView_seats.setText(seats);
+        textView_bags.setText(bags);
+
+        textView_pets.setText(pets);
+        textView_price.setText(price);
+
+        textView_car.setText(car);
+        textView_msg.setText(msg);
+
+
         return view;
     }
+
     public String toString() {
         return "NewOfferStage6Fragment";
     }
@@ -52,44 +85,88 @@ public class NewOfferStage6Fragment extends Fragment {
     }
 
 
-
-    public void setTextView_from(String textView_from) {
-        this.textView_from.setText(textView_from);
+    public void setTo(String to) {
+        this.to = to;
     }
 
-    public void setTextView_to(String textView_to) {
-        this.textView_to.setText(textView_to);
+    public void setFrom(String from) {
+        this.from = from;
     }
 
-    public void setTextView_date(String textView_date) {
-        this.textView_date.setText(textView_date);
+    public void setDate(String date) {
+        int month = Integer.parseInt(date.substring(3, 5));
+        String month_str = "";
+        switch (month) {
+            case 1:
+                month_str = "Ιαν";
+                break;
+            case 2:
+                month_str = "Φεβ";
+                break;
+            case 3:
+                month_str = "Μαρ";
+                break;
+            case 4:
+                month_str = "Απρ";
+                break;
+            case 5:
+                month_str = "Μαΐ";
+                break;
+            case 6:
+                month_str = "Ιουν";
+                break;
+            case 7:
+                month_str = "Ιουλ";
+                break;
+            case 8:
+                month_str = "Αυγ";
+                break;
+            case 9:
+                month_str = "Σεπ";
+                break;
+
+            case 10:
+                month_str = "Οκτ";
+                break;
+            case 11:
+                month_str = "Νοε";
+                break;
+
+            case 12:
+                month_str = "Δεκ";
+                break;
+        }
+        this.date = date.substring(0, 2) + "\n" + month_str;
     }
 
-    public void setTextView_time(String textView_time) {
-        this.textView_time.setText(textView_time);
+    public void setTime(String time) {
+        int hourOfDay = Integer.parseInt(time.substring(0,2));
+        int minute = Integer.parseInt(time.substring(3,5));
+        time =  ((hourOfDay > 12) ? hourOfDay % 12 : hourOfDay) + ":" + (minute < 10 ? ("0" + minute) : minute) + "\n" + ((hourOfDay >= 12) ? "ΜΜ" : "ΠΜ");
+        this.time = time;
     }
 
-    public void setTextView_seats(String textView_seats) {
-        this.textView_seats.setText(textView_seats);
+    public void setSeats(String seats) {
+        this.seats = seats;
     }
 
-    public void setTextView_bags(String textView_bags) {
-        this.textView_bags.setText(textView_bags);
+    public void setBags(String bags) {
+        this.bags = bags;
     }
 
-    public void setTextView_pets(String textView_pets) {
-        this.textView_pets.setText(textView_pets);
+    public void setPets(String pets) {
+        this.pets = pets;
     }
 
-    public void setTextView_price(String textView_price) {
-        this.textView_price.setText(textView_price);
+    public void setPrice(String price) {
+        this.price = price;
     }
 
-    public void setTextView_car(String textView_car) {
-        this.textView_car.setText(textView_car);
+    public void setCar(String car) {
+        this.car = car;
     }
 
-    public void setTextView_msg(String textView_msg) {
-        this.textView_msg.setText(textView_msg);
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }

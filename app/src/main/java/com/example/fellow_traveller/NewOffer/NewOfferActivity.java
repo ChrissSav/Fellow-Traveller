@@ -65,6 +65,7 @@ public class NewOfferActivity extends AppCompatActivity {
 
                 }else if (fra.toString().equals("NewOfferStage3Fragment") ){//&& newOfferStage3Fragment.isOk() ) {
                     progressBar.setProgress(num_num * newOfferStage4Fragment.getRank());
+                    newOfferStage4Fragment.setNum_of_passengers(Integer.parseInt(newOfferStage3Fragment.getSeats()));
                     fra = newOfferStage4Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
@@ -76,6 +77,23 @@ public class NewOfferActivity extends AppCompatActivity {
                 }
                 else if (fra.toString().equals("NewOfferStage5Fragment")) {// && newOfferStage4Fragment.isOk()) {
                     progressBar.setProgress(num_num * newOfferStage6Fragment.getRank());
+                    newOfferStage6Fragment.setFrom(newOfferStage1Fragment.getDest_from());
+                    newOfferStage6Fragment.setTo(newOfferStage1Fragment.getDest_to());
+
+                    newOfferStage6Fragment.setDate(newOfferStage2Fragment.getDate());
+                    newOfferStage6Fragment.setTime(newOfferStage2Fragment.getTime());
+
+
+                    newOfferStage6Fragment.setSeats(newOfferStage3Fragment.getSeats());
+                    newOfferStage6Fragment.setBags(newOfferStage3Fragment.getBags());
+
+
+                    newOfferStage6Fragment.setPets(newOfferStage3Fragment.getPets());
+                    newOfferStage6Fragment.setPrice(newOfferStage4Fragment.getPrice()+" "+getResources().getString(R.string.euro_symbol));
+
+                    newOfferStage6Fragment.setCar(newOfferStage3Fragment.getCar());
+                    newOfferStage6Fragment.setMsg(newOfferStage5Fragment.getMsg());
+
                     fra = newOfferStage6Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
                     button_next.setText("Καταχώρηση");
