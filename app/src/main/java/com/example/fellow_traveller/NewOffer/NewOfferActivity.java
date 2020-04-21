@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 import com.example.fellow_traveller.R;
 
 public class NewOfferActivity extends AppCompatActivity {
-    private final int stages = 5;
+    private final int stages = 6;
     private Button button_next;
     private ImageButton btn_back;
     private FragmentManager fragmentManager;

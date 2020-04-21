@@ -26,6 +26,9 @@ import com.example.fellow_traveller.Settings.AddCarSettingsActivity;
 
 import java.util.ArrayList;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
+
 
 public class NewOfferStage3Fragment extends Fragment {
     private final String CLICK_COLOR = "#1C1C1C";
@@ -148,7 +151,8 @@ public class NewOfferStage3Fragment extends Fragment {
 
                 dialog.dismiss();
                 Intent intent = new Intent(getActivity(), AddCarSettingsActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
+
 
             }
         });
@@ -371,5 +375,21 @@ public class NewOfferStage3Fragment extends Fragment {
 
     public String getBags() {
         return button_bags.getText().toString();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                Car car = data.getParcelableExtra("car");
+                button_car.setText(car.getDescription());
+
+            }
+            if (resultCode == RESULT_CANCELED) {
+                // mTextViewResult.setText("Nothing selected");
+            }
+        }
     }
 }
