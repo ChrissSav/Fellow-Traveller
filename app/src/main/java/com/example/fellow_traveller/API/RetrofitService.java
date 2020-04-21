@@ -18,12 +18,6 @@ import retrofit2.http.Query;
 public interface RetrofitService {
 
 
-    @POST("user")
-    Call<UserAuth> registerUser(
-            @Body JsonObject user
-    );
-
-
     @POST("auth/login")
     Call<UserAuth> loginUser(
             @Body JsonObject user_obj
@@ -34,15 +28,34 @@ public interface RetrofitService {
             @Query("refresh_token") String token
     );
 
+    //User
+    @POST("user")
+    Call<UserAuth> registerUser(
+            @Body JsonObject user
+    );
+
+
+
+
+
+    //Trip
+    @POST("/trips")
+    Call<Status_Handling> registerTrip(
+            @Body JsonObject trip
+    );
+
+
 
     @GET(".")
     Call<Status_Handling> Test();
 
 
     //PlaceAPi
+
     @GET("json")
     Call<PlaceAPi> getPlaces(
             @Query("input") String input,
             @Query("key") String key,
-            @Query("language") String language);
+            @Query("language") String language,
+            @Query("components") String components);
 }

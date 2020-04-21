@@ -51,6 +51,8 @@ public class NewOfferStage3Fragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Car> mExampleList;
 
+    private Car current_car;
+
     public NewOfferStage3Fragment() {
         // Required empty public constructor
     }
@@ -160,7 +162,7 @@ public class NewOfferStage3Fragment extends Fragment {
 
     }
 
-    public void buildRecyclerView(View view, final AlertDialog dialog) {
+    public void buildRecyclerViewForCar(View view, final AlertDialog dialog) {
         mRecyclerView = view.findViewById(R.id.choose_car_recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -172,6 +174,7 @@ public class NewOfferStage3Fragment extends Fragment {
             public void onItemClick(int position) {
                 button_car.setTextColor(Color.parseColor(CLICK_COLOR));
                 button_car.setText(mExampleList.get(position).getDescription());
+                current_car = mExampleList.get(position);
                 dialog.dismiss();
 
 
@@ -200,11 +203,9 @@ public class NewOfferStage3Fragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 dialog.dismiss();
                 button_seats.setTextColor(Color.parseColor(CLICK_COLOR));
                 button_seats.setText(textView_number.getText().toString());
-
             }
         });
 
@@ -353,11 +354,11 @@ public class NewOfferStage3Fragment extends Fragment {
 
     public void FillList(View view, AlertDialog dialog) {
         mExampleList = new ArrayList<>();
-        Car car = new Car("Nissan", "Navara", "ZXB1025");
+        Car car = new Car(1,"Nissan", "Navara", "ZXB1025","Green");
         mExampleList.add(car);
-        car = new Car("Toyota", "Hilux", "ZXB1415");
+        car = new Car(2,"Toyota", "Hilux", "ZXB1415","Red");
         mExampleList.add(car);
-        buildRecyclerView(view, dialog);
+        buildRecyclerViewForCar(view, dialog);
 
     }
 
@@ -384,6 +385,7 @@ public class NewOfferStage3Fragment extends Fragment {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 Car car = data.getParcelableExtra("car");
+                current_car = car;
                 button_car.setText(car.getDescription());
 
             }
@@ -391,5 +393,9 @@ public class NewOfferStage3Fragment extends Fragment {
                 // mTextViewResult.setText("Nothing selected");
             }
         }
+    }
+
+    public Car getCarObject() {
+        return current_car;
     }
 }

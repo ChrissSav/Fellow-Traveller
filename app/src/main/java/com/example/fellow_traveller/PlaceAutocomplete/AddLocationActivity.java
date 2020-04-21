@@ -124,17 +124,15 @@ public class AddLocationActivity extends AppCompatActivity {
         retrofitService = retrofit.create(RetrofitService.class);
         String key = getResources().getString(R.string.PLACE_KEY);
         String language = getResources().getString(R.string.PLACE_LANGUAGE);
-
-        Call<PlaceAPi> call = retrofitService.getPlaces(input, key,language);
+        String country ="country:gr";
+        Call<PlaceAPi> call = retrofitService.getPlaces(input, key,language,country);
         call.enqueue(new Callback<PlaceAPi>() {
             @Override
             public void onResponse(Call<PlaceAPi> call, Response<PlaceAPi> response) {
-                Log.i("LoginUser", "μπηκα");
                 if (!response.isSuccessful()) {
 
                     return;
                 }
-                Log.i("LoginUser", "ολα καλα");
 
                 PlaceAPi placeAPi = response.body();
                 places_list = placeAPi.getPredictions();
@@ -145,9 +143,8 @@ public class AddLocationActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<PlaceAPi> call, Throwable t) {
-                Log.i("LoginUser", "φαιλ");
+                Log.i("GetPlaces", "onFailure "+t.getMessage());
 
-                Log.i("Register_Container", "onFailure: " + t.getMessage());
             }
         });
     }
