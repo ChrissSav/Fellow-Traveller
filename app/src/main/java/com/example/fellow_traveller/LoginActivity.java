@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.fellow_traveller.API.RetrofitService;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
@@ -17,6 +18,8 @@ import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
+
+import java.io.IOException;
 
 import retrofit2.Retrofit;
 
@@ -54,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(UserAuth user) {
                             SaveClass(user);
+//                            Log.d("Authentication", user.getName());
                         }
 
                         @Override
@@ -61,19 +65,20 @@ public class LoginActivity extends AppCompatActivity {
                             // TODO What happens when we didn't get any user object?
                             // TODO What happens with the activity?
                             Log.d("Authentication","INVALID LOGIN");
+                            Toast.makeText(LoginActivity.this, "Invalid credentials.", Toast.LENGTH_LONG).show();
                         }
                     });
                 }else {
-                    textInputLayout_email.setError("The email is not valid !");
+                    textInputLayout_email.setError("Invalid email address.");
                 }
             }
         });
     }
-
-    public boolean isValidEmail(CharSequence target) {
-        if (target == null)
+    // TODO this is a utility, should have its own class!
+    public boolean isValidEmail(CharSequence email) {
+        if (email == null)
             return false;
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     public void SaveClass(UserAuth userAuth) {

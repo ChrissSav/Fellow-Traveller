@@ -31,8 +31,9 @@ public class FellowTravellerAPI {
             @Override
             public void onResponse(Call<UserAuth> call, Response<UserAuth> response) {
                 if (!response.isSuccessful()) {
-                    Log.d("Authentication", "LOGIN FAILURE");
+                    Log.d("Authentication", "LOGIN FAILURE!!");
                     // TODO Implement onFailure callback and standardize errors
+                    userAuthCallback.onFailure();
                     return;
                 }
                 // TODO remove this debug line
