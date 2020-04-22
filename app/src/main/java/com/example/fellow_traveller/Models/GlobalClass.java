@@ -7,6 +7,7 @@ import android.content.Context;
 import android.os.Build;
 import android.content.SharedPreferences;
 import android.util.Log;
+import com.example.fellow_traveller.ClientAPI.Models.UserAuth;
 
 import com.example.fellow_traveller.R;
 import com.google.gson.Gson;
@@ -45,9 +46,9 @@ public class GlobalClass extends Application {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
-                Log.i("getAccess_token", current_user.getAccess_token());
+                Log.i("getAccess_token", current_user.getAccessToken());
 
-                Request.Builder newRequest = request.newBuilder().header("authorization", current_user.getAccess_token());
+                Request.Builder newRequest = request.newBuilder().header("authorization", current_user.getAccessToken());
                 return chain.proceed(newRequest.build());
             }
         }));

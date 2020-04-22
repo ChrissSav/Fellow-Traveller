@@ -4,7 +4,7 @@ package com.example.fellow_traveller.API;
 import com.example.fellow_traveller.Models.NotificationModel;
 import com.example.fellow_traveller.Models.Car;
 import com.example.fellow_traveller.Models.User;
-import com.example.fellow_traveller.Models.UserAuth;
+import com.example.fellow_traveller.ClientAPI.Models.UserAuth;
 import com.example.fellow_traveller.PlaceAutocomplete.PlaceAPi;
 import com.google.gson.JsonObject;
 
@@ -36,9 +36,6 @@ public interface RetrofitService {
     Call<UserAuth> registerUser(
             @Body JsonObject user
     );
-
-
-
 
 
     //Trip

@@ -89,14 +89,14 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void LogOut() {
-        Log.i("getAccess_token", globalClass.getCurrent_user().getAccess_token());
+        Log.i("getAccess_token", globalClass.getCurrent_user().getAccessToken());
 
         retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL)).client(globalClass.getOkHttpClient().build()).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitService = retrofit.create(RetrofitService.class);
 
         JsonObject user_object = new JsonObject();
-        user_object.addProperty("refresh_token", globalClass.getCurrent_user().getRefresh_token());
-        Call<Status_Handling> call = retrofitService.LogoutUser(globalClass.getCurrent_user().getRefresh_token());
+        user_object.addProperty("refresh_token", globalClass.getCurrent_user().getRefreshToken());
+        Call<Status_Handling> call = retrofitService.LogoutUser(globalClass.getCurrent_user().getRefreshToken());
         call.enqueue(new Callback<Status_Handling>() {
             @Override
             public void onResponse(Call<Status_Handling> call, Response<Status_Handling> response) {

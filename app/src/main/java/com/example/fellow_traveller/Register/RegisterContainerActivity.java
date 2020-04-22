@@ -16,25 +16,17 @@ import android.widget.Toast;
 
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
-import com.example.fellow_traveller.Models.User;
-import com.example.fellow_traveller.Models.UserAuth;
+import com.example.fellow_traveller.ClientAPI.Models.UserAuth;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.API.RetrofitService;
-import com.example.fellow_traveller.API.Status_Handling;
-import com.example.fellow_traveller.SplashActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
-import java.lang.reflect.Type;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

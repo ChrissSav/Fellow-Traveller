@@ -8,22 +8,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+
 import com.example.fellow_traveller.API.RetrofitService;
+import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
+import com.example.fellow_traveller.ClientAPI.Models.UserAuth;
+import com.example.fellow_traveller.ClientAPI.UserAuthCallback;
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
-import com.example.fellow_traveller.Models.UserAuth;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
-import java.io.IOException;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -54,7 +49,20 @@ public class LoginActivity extends AppCompatActivity {
                 if(isValidEmail(email)){
                     textInputLayout_email.setError(null);
                     textInputLayout_password.setError(null);
-                    LoginUser(email,password);
+                    // Authenticate user using ClientAPI
+                    FellowTravellerAPI.userAuthenticate(email, password, new UserAuthCallback() {
+                        @Override
+                        public void onSuccess(UserAuth user) {
+                            SaveClass(user);
+                        }
+
+                        @Override
+                        public void onFailure() {
+                            // TODO What happens when we didn't get any user object?
+                            // TODO What happens with the activity?
+                            Log.d("Authentication","INVALID LOGIN");
+                        }
+                    });
                 }else {
                     textInputLayout_email.setError("The email is not valid !");
                 }
@@ -62,58 +70,13 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
     public boolean isValidEmail(CharSequence target) {
         if (target == null)
             return false;
         return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
-    public void LoginUser(String email,String password) {
-        Log.i("LoginUser",email+" "+ password);
-        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL))
-                .addConverterFactory(GsonConverterFactory.create()).build();
-        retrofitService = retrofit.create(RetrofitService.class);
-        Log.i("LoginUser",email+" "+ password);
-        JsonObject user_object = new JsonObject();
-        user_object.addProperty("email", email);
-        user_object.addProperty("password", password);
-        Log.i("LoginUser","τελοσ ξσον");
-
-        Call<UserAuth> call = retrofitService.loginUser(user_object);
-        call.enqueue(new Callback<UserAuth>() {
-            @Override
-            public void onResponse(Call<UserAuth> call, Response<UserAuth> response) {
-                Log.i("LoginUser", "μπηκα");
-                if (!response.isSuccessful()) {
-                    try {
-                        Toast.makeText(LoginActivity.this, response.errorBody().string(), Toast.LENGTH_SHORT).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    return;
-                }
-                Log.i("LoginUser", "ολα καλα");
-
-                UserAuth userAuth = response.body();
-                SaveClass(userAuth);
-
-
-            }
-
-            @Override
-            public void onFailure(Call<UserAuth> call, Throwable t) {
-                Log.i("LoginUser", "φαιλ");
-
-                Log.i("Register_Container", "onFailure: " + t.getMessage());
-            }
-        });
-    }
-
-
-
     public void SaveClass(UserAuth userAuth) {
-        Log.i("LoginUser", "σαβε");
         SharedPreferences mPrefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = mPrefs.edit();
         Gson gson = new Gson();
