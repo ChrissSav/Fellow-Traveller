@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.fellow_traveller.API.RetrofitService;
 import com.example.fellow_traveller.API.Status_Handling;
+import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.google.gson.JsonObject;
 
@@ -48,6 +49,7 @@ public class NewOfferActivity extends AppCompatActivity {
 
     private RetrofitService retrofitService;
     private Retrofit retrofit;
+    private GlobalClass globalClass;
 
 
     @Override
@@ -55,6 +57,9 @@ public class NewOfferActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_offer);
         num_num = 100 / stages;
+
+
+        globalClass = (GlobalClass) getApplicationContext();
 
 
         progressBar = findViewById(R.id.NewOfferActivity_progressBar);
@@ -65,8 +70,6 @@ public class NewOfferActivity extends AppCompatActivity {
         progressBar.setProgress(num_num * newOfferStage1Fragment.getRank());
 
         //Fragment Management
-        String date ="19/04/2020";
-        String time = "15:13";
 
         fragmentManager = getSupportFragmentManager();
         fra = newOfferStage1Fragment;
@@ -177,7 +180,7 @@ public class NewOfferActivity extends AppCompatActivity {
     public void RegisterTrip() {
 
 
-        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL)).addConverterFactory(GsonConverterFactory.create()).build();
+        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL)).client(globalClass.getOkHttpClient().build()).addConverterFactory(GsonConverterFactory.create()).build();
         retrofitService = retrofit.create(RetrofitService.class);
 
         String dest_from = newOfferStage1Fragment.getDest_from();

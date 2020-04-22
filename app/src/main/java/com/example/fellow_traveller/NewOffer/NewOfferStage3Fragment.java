@@ -19,12 +19,23 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fellow_traveller.API.RetrofitService;
 import com.example.fellow_traveller.Adapters.CarAdapter;
 import com.example.fellow_traveller.Models.Car;
+import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.Settings.AddCarSettingsActivity;
+import com.google.gson.JsonObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -51,6 +62,10 @@ public class NewOfferStage3Fragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Car> mExampleList;
 
+    private RetrofitService retrofitService;
+    private Retrofit retrofit;
+    private GlobalClass globalClass;
+
     private Car current_car;
 
     public NewOfferStage3Fragment() {
@@ -63,7 +78,7 @@ public class NewOfferStage3Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_new_offer_stage3, container, false);
-
+        globalClass = (GlobalClass) getActivity().getApplicationContext();
         button_seats = view.findViewById(R.id.NewOfferStage3Fragment_button_seat);
         button_pet = view.findViewById(R.id.NewOfferStage3Fragment_button_pet);
         button_car = view.findViewById(R.id.NewOfferStage3Fragment_button_car);
@@ -141,11 +156,12 @@ public class NewOfferStage3Fragment extends Fragment {
         View mView = getLayoutInflater().inflate(R.layout.choose_car, null);
         Button button = mView.findViewById(R.id.choose_car_button_add_car);
 
+
         mBuilder.setView(mView);
 
         final AlertDialog dialog = mBuilder.create();
 
-        FillList(mView, dialog);
+        GetCars(mView, dialog);
         dialog.show();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -386,7 +402,9 @@ public class NewOfferStage3Fragment extends Fragment {
             if (resultCode == RESULT_OK) {
                 Car car = data.getParcelableExtra("car");
                 current_car = car;
+                button_car.setTextColor(Color.parseColor(CLICK_COLOR));
                 button_car.setText(car.getDescription());
+
 
             }
             if (resultCode == RESULT_CANCELED) {
@@ -397,5 +415,40 @@ public class NewOfferStage3Fragment extends Fragment {
 
     public Car getCarObject() {
         return current_car;
+    }
+
+    public void GetCars(final View view, final AlertDialog dialog) {
+        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL)).client(globalClass.getOkHttpClient().build())
+                .addConverterFactory(GsonConverterFactory.create()).build();
+        retrofitService = retrofit.create(RetrofitService.class);
+
+
+        Call<ArrayList<Car>> call = retrofitService.getUserCars();
+        call.enqueue(new Callback<ArrayList<Car>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Car>> call, Response<ArrayList<Car>> response) {
+                if (!response.isSuccessful()) {
+                    try {
+                        Toast.makeText(getActivity(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+
+                    return;
+                }
+                mExampleList = new ArrayList<>();
+                mExampleList = response.body();
+
+                buildRecyclerViewForCar(view, dialog);
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Car>> call, Throwable t) {
+
+            }
+        });
     }
 }
