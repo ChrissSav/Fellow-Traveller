@@ -60,6 +60,9 @@ public class NewOfferActivity extends AppCompatActivity {
 
 
 
+        globalClass = (GlobalClass) getApplicationContext();
+
+
         progressBar = findViewById(R.id.NewOfferActivity_progressBar);
         button_next = findViewById(R.id.NewOfferActivity_button_next);
         btn_back = findViewById(R.id.NewOfferActivity_imageButton);
@@ -68,7 +71,7 @@ public class NewOfferActivity extends AppCompatActivity {
         progressBar.setProgress(num_num * newOfferStage1Fragment.getRank());
 
         //Fragment Management
-;
+
 
         fragmentManager = getSupportFragmentManager();
         fra = newOfferStage1Fragment;
