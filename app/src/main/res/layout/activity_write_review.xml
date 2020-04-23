@@ -95,7 +95,7 @@
     <EditText
         android:id="@+id/write_review_et"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:background="@null"
         android:hint="Γράψτε μας κάτι.."
         android:textColor="@color/profile"
@@ -112,7 +112,7 @@
         android:paddingTop="10dp"
         android:gravity="top|left"
         android:windowSoftInputMode="adjustNothing"
-        android:inputType="textCapWords"
+        android:inputType="textCapSentences|textMultiLine"
         android:textCursorDrawable="@null"/>
     <View
         android:id="@+id/write_review_underline_bottom"
