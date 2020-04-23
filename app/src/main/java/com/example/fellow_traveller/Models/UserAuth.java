@@ -2,7 +2,7 @@ package com.example.fellow_traveller.Models;
 
 public class UserAuth{
 
-    private int id;
+    private Integer id;
     private String name;
     private String surname;
     private String email;

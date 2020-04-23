@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import com.example.fellow_traveller.R;
 import com.google.android.material.textfield.TextInputLayout;
 
+import static com.example.fellow_traveller.Utils.InputValidation.isValidEmail;
+
 public class RegisterStage1Fragment extends Fragment {
 
     private TextInputLayout textInputLayout;
@@ -49,12 +51,14 @@ public class RegisterStage1Fragment extends Fragment {
         return 1;
     }
 
+    // TODO validateFragment instead of isOk
     public Boolean isOk() {
         //Log.i("isOk",textInputLayout.getEditText().getText().length()+"");
         if (textInputLayout.getEditText().getText().length() < 1) {
             textInputLayout.setError("Please check the email field !");
             return false;
         } else {
+            // TODO remove `res` altogether.
             Boolean res = isValidEmail(textInputLayout.getEditText().getText());
             if (res) {
                 textInputLayout.setError(null);
@@ -67,14 +71,7 @@ public class RegisterStage1Fragment extends Fragment {
         }
     }
 
-    public final static boolean isValidEmail(CharSequence target) {
-        if (target == null)
-            return false;
-
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
-    }
-
-
+    // TODO rename GetEmail to getEmail to camelCase
     public String GetEmail(){
         return textInputLayout.getEditText().getText().toString();
     }

@@ -104,7 +104,7 @@ public class HomeFragment extends Fragment {
         retrofitService = retrofit.create(RetrofitService.class);
 
         JsonObject user_object = new JsonObject();
-        user_object.addProperty("refresh_token", globalClass.getCurrent_user().getRefresh_token());
+        user_object.addProperty("refresh_token", globalClass.getCurrent_user().getRefreshToken());
         Call<Status_Handling> call = retrofitService.Test();
         call.enqueue(new Callback<Status_Handling>() {
             @Override

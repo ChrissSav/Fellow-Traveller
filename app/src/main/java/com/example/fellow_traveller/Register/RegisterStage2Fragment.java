@@ -13,13 +13,14 @@ import android.view.ViewGroup;
 import com.example.fellow_traveller.R;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.regex.Pattern;
+import static com.example.fellow_traveller.Utils.InputValidation.isValidPassword;
 
 
 public class RegisterStage2Fragment extends Fragment {
-
+    // TODO rename variables
     private TextInputLayout textInputLayout_pass_1, textInputLayout_pass_2;
     private View view;
+
     private String pass_1 = "aD@ffff1";
     private String pass_2 = "aD@ffff1";
 
@@ -62,12 +63,15 @@ public class RegisterStage2Fragment extends Fragment {
     public int getRank() {
         return 2;
     }
-
+    // TODO rename method to validateFragment
     public Boolean isOk() {
+        // TODO rename variable names password, passwordVerify
         String password = textInputLayout_pass_1.getEditText().getText().toString();
         String password_1 = textInputLayout_pass_2.getEditText().getText().toString();
 
-        if (!isTextValid(password) || password.length() < 6) {
+        // TODO check password length on
+        // TODO check password complexity as user types in the first field.
+        if (!isValidPassword(password) || password.length() < 6) {
             textInputLayout_pass_1.setError("Password is not valid");
             return false;
         } else if (!password.equals(password_1)) {
@@ -82,13 +86,7 @@ public class RegisterStage2Fragment extends Fragment {
 
 
     }
-
-    public boolean isTextValid(String textToCheck) {
-        Pattern textPattern = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%&*()_+=|<>?{}\\\\[\\\\]~-]).+$");
-        return textPattern.matcher(textToCheck).matches();
-    }
-
-
+    // TODO rename to camelCase
     public String GetPassword(){
         return textInputLayout_pass_1.getEditText().getText().toString();
     }

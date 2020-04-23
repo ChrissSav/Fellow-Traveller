@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".Settings.PersonalSettingsActivity">
 
+    <!-- TODO use better naming for your identifiers, use activity name-->
+    <!--  e.g. personal_settings_header_section-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header_section"
         android:layout_width="match_parent"

@@ -238,6 +238,7 @@
         <item>+7840</item>
     </string-array>
     <string name="API_URL">http://167.172.189.78:8000/</string>
+    <string name="FT_API_URL">http://167.172.189.78:8000</string>
     <string name="PLACE_URL">https://maps.googleapis.com/maps/api/place/autocomplete/</string>
     <string name="PLACE_KEY">AIzaSyBJ8UG-fR3GSjfbfAcatZezGZi2Y8FDzqA</string>
     <string name="PLACE_LANGUAGE">el</string>
