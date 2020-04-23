@@ -7,6 +7,9 @@ import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONTokener;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,21 +22,23 @@ public class FellowTravellerAPI {
     private static RetrofitAPIEndpoints retrofitAPIEndpoints;
 
     /**
-     *
-     * @param email Email address
-     * @param password Password
+     * @param email            Email address
+     * @param password         Password
      * @param userAuthCallback Callback to access the returned user object
      */
-    public static void userAuthenticate(final GlobalClass cont, String email, String password, final UserAuthCallback userAuthCallback) {
+    public static void userAuthenticate(final GlobalClass cont, String email, final String password, final UserAuthCallback userAuthCallback) {
         // TODO remove this debug line
         Log.d("Authentication", email + " " + password);
         retrofit = new Retrofit.Builder().baseUrl(cont.getResources().getString(R.string.FT_API_URL))
                 .addConverterFactory(GsonConverterFactory.create()).build();
         retrofitAPIEndpoints = retrofit.create(RetrofitAPIEndpoints.class);
 
-        JsonObject userJSON = new JsonObject();
-        userJSON.addProperty("email", email);
-        userJSON.addProperty("password", password);
+//        JsonObject userJSON = new JsonObject();
+//        userJSON.addProperty("email", email);
+//        userJSON.addProperty("password", password);
+
+        JsonObject userJSON = new JsonParser().parse("{'email':'"+ email +"', 'password':'"+ password +"'}").getAsJsonObject();
+        buildJSON(new String[]{"email", "password"}, email, password);
 
         retrofitAPIEndpoints.userAuthenticate(userJSON).enqueue(new Callback<UserAuthModel>() {
             @Override
@@ -55,6 +60,7 @@ public class FellowTravellerAPI {
                 userAuthCallback.onFailure(cont.getResources().getString(R.string.API_UNREACHABLE));
             }
         });
+
     }
 
     // TODO write json builder for arbitrary number of key:value elements
@@ -62,13 +68,20 @@ public class FellowTravellerAPI {
     // test(new String[](
     // HashMap<String, Integer> dicCodeToIndex;
     // find a solution
-    public JsonObject buildJSON(String[] keys, String ... values){
-        JsonObject userJSON = new JsonObject();
 
-        for(String value: values){
-            userJSON.addProperty("email", value);
+
+    static JsonObject buildJSON(String[] keys, String... values) {
+
+        JsonObject jsonData = new JsonObject();
+        for(String key : keys){
+            Log.d("JSONKEY", key);
         }
 
-        return userJSON;
+        for (String value : values) {
+            jsonData.addProperty("email", value.indexOf(value));
+        }
+        Log.d("JSONKEYs", jsonData.toString());
+
+        return jsonData;
     }
 }
