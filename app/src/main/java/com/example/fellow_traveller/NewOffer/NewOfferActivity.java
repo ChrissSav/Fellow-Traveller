@@ -182,7 +182,11 @@ public class NewOfferActivity extends AppCompatActivity {
     public void RegisterTrip() {
 
 
-        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL)).client(globalClass.getOkHttpClient().build()).addConverterFactory(GsonConverterFactory.create()).build();
+        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL))
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(globalClass.getOkHttpClient().build())
+                .build();
+
         retrofitService = retrofit.create(RetrofitService.class);
 
         String dest_from = newOfferStage1Fragment.getDest_from();

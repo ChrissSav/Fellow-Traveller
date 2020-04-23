@@ -40,7 +40,7 @@ public class HomeActivity extends AppCompatActivity {
         globalClass = (GlobalClass) getApplicationContext();
 
 
-        scheduleJob();
+        //scheduleJob();
 
         bottomNav = findViewById(R.id.HomeActivity_bottomNavigationView);
 /*        Toast.makeText(HomeActivity.this, "id " + globalClass.getCurrent_user().getId()+"\n"+

@@ -58,7 +58,7 @@ public class GlobalClass extends Application {
 
     @Override
     public void onCreate() {
-        createNotificationChannels();
+       // createNotificationChannels();
         LoadClass();
 
         super.onCreate();
