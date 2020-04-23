@@ -50,12 +50,12 @@ public interface RetrofitService {
 
 
     //Car
-    @POST("/car")
+    @POST("/cars")
     Call<Car> registerCar(
             @Body JsonObject car
     );
 
-    @GET("/car")
+    @GET("/cars")
     Call<ArrayList<Car>> getUserCars();
 
     @GET(".")
