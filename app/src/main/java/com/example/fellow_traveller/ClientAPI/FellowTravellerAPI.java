@@ -61,7 +61,7 @@ public class FellowTravellerAPI {
     // test(email: "email@example.com", "pass");
     // test(new String[](
     // HashMap<String, Integer> dicCodeToIndex;
-    //
+    // find a solution
     public JsonObject buildJSON(String[] keys, String ... values){
         JsonObject userJSON = new JsonObject();
 
