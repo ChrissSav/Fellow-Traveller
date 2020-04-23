@@ -3,7 +3,7 @@ package com.example.fellow_traveller.ClientAPI.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UserAuth {
+public class UserAuthModel {
 
     @SerializedName("name")
     @Expose

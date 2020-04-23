@@ -3,8 +3,7 @@ package com.example.fellow_traveller.API;
 
 import com.example.fellow_traveller.Models.NotificationModel;
 import com.example.fellow_traveller.Models.Car;
-import com.example.fellow_traveller.Models.User;
-import com.example.fellow_traveller.ClientAPI.Models.UserAuth;
+import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.PlaceAutocomplete.PlaceAPi;
 import com.google.gson.JsonObject;
 
@@ -22,7 +21,7 @@ public interface RetrofitService {
 
 
     @POST("auth/login")
-    Call<UserAuth> loginUser(
+    Call<UserAuthModel> loginUser(
             @Body JsonObject user_obj
     );
 
@@ -33,7 +32,7 @@ public interface RetrofitService {
 
     //User
     @POST("user")
-    Call<UserAuth> registerUser(
+    Call<UserAuthModel> registerUser(
             @Body JsonObject user
     );
 

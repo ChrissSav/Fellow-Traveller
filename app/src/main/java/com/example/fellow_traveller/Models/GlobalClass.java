@@ -7,7 +7,7 @@ import android.content.Context;
 import android.os.Build;
 import android.content.SharedPreferences;
 import android.util.Log;
-import com.example.fellow_traveller.ClientAPI.Models.UserAuth;
+import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 
 import com.example.fellow_traveller.R;
 import com.google.gson.Gson;
@@ -27,14 +27,14 @@ public class GlobalClass extends Application {
     private static final String CHANNEL_NAME_1 = "This is Channel passenger_notification";
 
 
-    private UserAuth current_user;
+    private UserAuthModel current_user;
     private OkHttpClient.Builder okHttpClient;
 
-    public UserAuth getCurrent_user() {
+    public UserAuthModel getCurrent_user() {
         return current_user;
     }
 
-    public void setCurrent_user(UserAuth current_user) {
+    public void setCurrent_user(UserAuthModel current_user) {
         this.current_user = current_user;
     }
 
@@ -89,9 +89,9 @@ public class GlobalClass extends Application {
         SharedPreferences mPrefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = mPrefs.getString(getResources().getString(R.string.USER_INFO), null);
-        Type type = new TypeToken<UserAuth>() {
+        Type type = new TypeToken<UserAuthModel>() {
         }.getType();
-        UserAuth userAuth = gson.fromJson(json, type);
+        UserAuthModel userAuth = gson.fromJson(json, type);
         current_user = userAuth;
     }
 }
