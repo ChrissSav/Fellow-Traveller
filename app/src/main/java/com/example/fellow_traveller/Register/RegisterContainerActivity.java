@@ -16,25 +16,17 @@ import android.widget.Toast;
 
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
-import com.example.fellow_traveller.Models.User;
-import com.example.fellow_traveller.Models.UserAuth;
+import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.API.RetrofitService;
-import com.example.fellow_traveller.API.Status_Handling;
-import com.example.fellow_traveller.SplashActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
-import java.lang.reflect.Type;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -152,10 +144,10 @@ public class RegisterContainerActivity extends AppCompatActivity {
         user_obj.addProperty("password", password);
         user_obj.addProperty("phone", getIntent().getStringExtra("USER_PHONE"));
 
-        Call<UserAuth> call = retrofitService.registerUser(user_obj);
-        call.enqueue(new Callback<UserAuth>() {
+        Call<UserAuthModel> call = retrofitService.registerUser(user_obj);
+        call.enqueue(new Callback<UserAuthModel>() {
             @Override
-            public void onResponse(Call<UserAuth> call, Response<UserAuth> response) {
+            public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
                 Log.i("SaveClass", "-2");
                 if (!response.isSuccessful()) {
                     try {
@@ -166,7 +158,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
                     return;
                 }
                 Log.i("SaveClass", "-1");
-                UserAuth userAuth = response.body();
+                UserAuthModel userAuth = response.body();
                 //Toast.makeText(RegisterContainerActivity.this, userAuth.getName(), Toast.LENGTH_SHORT).show();
                 Log.i("SaveClass", "0");
 
@@ -177,7 +169,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<UserAuth> call, Throwable t) {
+            public void onFailure(Call<UserAuthModel> call, Throwable t) {
                 Log.i("Register_Container", "onFailure: " + t.getMessage());
             }
         });
@@ -195,7 +187,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
 
     }
 
-    public void SaveClass(UserAuth userAuth) {
+    public void SaveClass(UserAuthModel userAuth) {
         firebaseRegister(userAuth.getId()+"", userAuth.getName(), userAuth.getSurname());
         Log.i("SaveClass", "1");
         SharedPreferences mPrefs = getSharedPreferences("shared preferences", MODE_PRIVATE);

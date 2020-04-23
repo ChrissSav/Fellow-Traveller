@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="INVALID_CREDENTIALS">Invalid Credentials.</string>
+    <string name="API_UNREACHABLE">Couldn\'t reach API.</string>
+</resources>
