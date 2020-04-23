@@ -83,6 +83,7 @@ public class ChatConversationActivity extends AppCompatActivity {
         Intent intent = getIntent();
         groupId = intent.getIntExtra("groupId", 0);
 
+        //Notification's ApiService
         apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
 
         mRecyclerView = findViewById(R.id.messages_recycler_view);
