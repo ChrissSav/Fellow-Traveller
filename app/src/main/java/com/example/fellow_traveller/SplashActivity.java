@@ -40,10 +40,11 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         globalClass = (GlobalClass) getApplicationContext();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                LoadClass();
+
                 if (globalClass.getCurrent_user() != null) {
                     Intent mainIntent = new Intent(SplashActivity.this, HomeActivity.class);
                     startActivity(mainIntent);
@@ -57,13 +58,4 @@ public class SplashActivity extends AppCompatActivity {
         }, SPLASH_TIME);
     }
 
-    public void LoadClass() {
-        SharedPreferences mPrefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = mPrefs.getString(getResources().getString(R.string.USER_INFO), null);
-        Type type = new TypeToken<UserAuth>() {
-        }.getType();
-        UserAuth userAuth = gson.fromJson(json, type);
-        globalClass.setCurrent_user(userAuth);
-    }
 }

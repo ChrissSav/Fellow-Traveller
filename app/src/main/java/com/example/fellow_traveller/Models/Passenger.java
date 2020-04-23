@@ -1,32 +1,33 @@
 package com.example.fellow_traveller.Models;
 
 public class Passenger {
-    private int id;
-    private String name;
-    private String surname;
+
+    private UserBase user;
+    private int bags;
+    private String pets;
 
 
-    public int getId() {
-        return id;
+    public UserBase getUser() {
+        return user;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUser(UserBase user) {
+        this.user = user;
     }
 
-    public String getName() {
-        return name;
+    public int getBags() {
+        return bags;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBags(int bags) {
+        this.bags = bags;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getPets() {
+        return pets;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setPets(String pets) {
+        this.pets = pets;
     }
 }

@@ -1,9 +1,19 @@
 package com.example.fellow_traveller.Models;
 
 import android.app.Application;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.os.Build;
+import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.fellow_traveller.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.Proxy;
 
 import okhttp3.Interceptor;
@@ -12,6 +22,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class GlobalClass extends Application {
+    public static final String CHANNEL_1_ID = "passenger_notification";
+    private static final String CHANNEL_NAME_1 = "This is Channel passenger_notification";
+
 
     private UserAuth current_user;
     private OkHttpClient.Builder okHttpClient;
@@ -24,6 +37,8 @@ public class GlobalClass extends Application {
         this.current_user = current_user;
     }
 
+
+
     public OkHttpClient.Builder getOkHttpClient() {
         okHttpClient = new OkHttpClient.Builder().proxy(Proxy.NO_PROXY);
         okHttpClient.addInterceptor((new Interceptor() {
@@ -32,11 +47,51 @@ public class GlobalClass extends Application {
                 Request request = chain.request();
                 Log.i("getAccess_token", current_user.getAccess_token());
 
-                Request.Builder newRequest = request.newBuilder().header("authorization",current_user.getAccess_token());
+                Request.Builder newRequest = request.newBuilder().header("authorization", current_user.getAccess_token());
                 return chain.proceed(newRequest.build());
             }
         }));
         return okHttpClient;
+    }
+
+
+    @Override
+    public void onCreate() {
+        createNotificationChannels();
+        LoadClass();
+
+        super.onCreate();
+    }
+
+    private void createNotificationChannels() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel1 = new NotificationChannel(
+                    CHANNEL_1_ID,
+                    "Channel 1",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            channel1.setDescription(CHANNEL_NAME_1);
+            channel1.setVibrationPattern(new long[]{0, 1000, 500, 1000});
+            channel1.enableVibration(true);
+            channel1.setShowBadge(false);
+
+            NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+            if(manager == null){
+                manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            }
+            manager.createNotificationChannel(channel1);
+        }
+    }
+
+    public void LoadClass() {
+        SharedPreferences mPrefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = mPrefs.getString(getResources().getString(R.string.USER_INFO), null);
+        Type type = new TypeToken<UserAuth>() {
+        }.getType();
+        UserAuth userAuth = gson.fromJson(json, type);
+        current_user = userAuth;
     }
 }
 

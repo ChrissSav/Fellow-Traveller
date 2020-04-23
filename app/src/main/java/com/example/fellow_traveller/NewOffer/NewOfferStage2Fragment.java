@@ -19,7 +19,11 @@ import android.widget.TimePicker;
 import com.example.fellow_traveller.R;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 
 public class NewOfferStage2Fragment extends Fragment {
@@ -135,20 +139,23 @@ public class NewOfferStage2Fragment extends Fragment {
         // Log.i("textInputLayout_pass_1", "onDestroy");
         date = textInputLayout_date.getEditText().getText().toString();
         time = textInputLayout_time.getEditText().getText().toString();
+
+        Long timestamp = getTimeStamp();
+        Log.i("timestamptimestamp",timestamp+"");
         super.onDestroy();
     }
 
-    public  Boolean isOk(){
-        if(textInputLayout_date.getEditText().getText().length() < 1){
+    public Boolean isOk() {
+        if (textInputLayout_date.getEditText().getText().length() < 1) {
             textInputLayout_date.setError("Υποχρεωτικό πεδίο!");
             return false;
-        }else {
+        } else {
             textInputLayout_date.setError(null);
         }
-        if(textInputLayout_time.getEditText().getText().length() < 1){
+        if (textInputLayout_time.getEditText().getText().length() < 1) {
             textInputLayout_time.setError("Υποχρεωτικό πεδίο!");
             return false;
-        }else {
+        } else {
             textInputLayout_time.setError(null);
         }
         return true;
@@ -161,4 +168,19 @@ public class NewOfferStage2Fragment extends Fragment {
     public String getTime() {
         return textInputLayout_time.getEditText().getText().toString();
     }
+
+    public Long getTimeStamp() {
+        try {
+            String date_temp = textInputLayout_date.getEditText().getText().toString();
+            String time_temp = textInputLayout_time.getEditText().getText().toString();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+            Date parsedDate = dateFormat.parse(date_temp+ " " + time_temp);
+            return (parsedDate.getTime() / 1000);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return Long.valueOf(0);
+    }
+
 }

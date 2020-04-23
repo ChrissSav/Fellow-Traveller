@@ -2,33 +2,71 @@ package com.example.fellow_traveller.NewOffer;
 
 
 import android.app.AlertDialog;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fellow_traveller.API.RetrofitService;
+import com.example.fellow_traveller.Adapters.CarAdapter;
+import com.example.fellow_traveller.Models.Car;
+import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
+import com.example.fellow_traveller.Settings.AddCarSettingsActivity;
+import com.google.gson.JsonObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class NewOfferStage3Fragment extends Fragment {
-
+    private final String CLICK_COLOR = "#1C1C1C";
     private final String TITLE_PET = "Επέλεξε ...";
-    private View view;
-    private Button button_seats, button_pet;
-    private String pet_title = TITLE_PET;
-    private String seat_title = "Θέσεις ...";
+    private final String TITLE_SEAT = "Θέσεις ...";
+    private final String TITLE_CAR = "Διάλεξε αυτοκίνητο ...";
+    private final String TITLE_BAGS = "Αποσκεύες ...";
 
+    private View view;
+    private Button button_seats, button_pet, button_car, button_bags;
+    //Backup
+    private String pet_title = TITLE_PET;
+    private String seat_title = TITLE_SEAT;
+    private String car_title = TITLE_CAR;
+    private String bags_title = TITLE_BAGS;
+
+    //Recycle
+    private RecyclerView mRecyclerView;
+    private CarAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private ArrayList<Car> mExampleList;
+
+    private RetrofitService retrofitService;
+    private Retrofit retrofit;
+    private GlobalClass globalClass;
+
+    private Car current_car;
 
     public NewOfferStage3Fragment() {
         // Required empty public constructor
@@ -40,23 +78,63 @@ public class NewOfferStage3Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_new_offer_stage3, container, false);
+        globalClass = (GlobalClass) getActivity().getApplicationContext();
         button_seats = view.findViewById(R.id.NewOfferStage3Fragment_button_seat);
         button_pet = view.findViewById(R.id.NewOfferStage3Fragment_button_pet);
+        button_car = view.findViewById(R.id.NewOfferStage3Fragment_button_car);
+        button_bags = view.findViewById(R.id.NewOfferStage3Fragment_button_bags);
+
 
         button_pet.setText(pet_title);
         button_seats.setText(seat_title);
+        button_car.setText(car_title);
+        button_bags.setText(bags_title);
+
+
+        //Text Color
+        if (button_pet.getText() != TITLE_PET) {
+            button_pet.setTextColor(Color.parseColor(CLICK_COLOR));
+        }
+        if (button_bags.getText() != TITLE_BAGS) {
+            button_bags.setTextColor(Color.parseColor(CLICK_COLOR));
+        }
+        if (button_car.getText() != TITLE_CAR) {
+            button_car.setTextColor(Color.parseColor(CLICK_COLOR));
+        }
+        if (button_seats.getText() != TITLE_SEAT) {
+            button_seats.setTextColor(Color.parseColor(CLICK_COLOR));
+        }
+
 
         button_seats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                openDialog();
+                openDialogForSeats();
+            }
+        });
+
+        button_bags.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                openDialogForBags();
+            }
+        });
+
+
+        button_car.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                openDialogForCar();
             }
         });
 
         button_pet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                button_pet.setTextColor(Color.parseColor(CLICK_COLOR));
                 if (button_pet.getText().equals(TITLE_PET) || button_pet.getText().equals("Δεν επιτρέπω")) {
                     button_pet.setText("Επιτρέπω");
                     return;
@@ -72,15 +150,63 @@ public class NewOfferStage3Fragment extends Fragment {
         return view;
     }
 
-    public void openDialog() {
+
+    public void openDialogForCar() {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+        View mView = getLayoutInflater().inflate(R.layout.choose_car, null);
+        Button button = mView.findViewById(R.id.choose_car_button_add_car);
+
+
+        mBuilder.setView(mView);
+
+        final AlertDialog dialog = mBuilder.create();
+
+        GetCars(mView, dialog);
+        dialog.show();
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dialog.dismiss();
+                Intent intent = new Intent(getActivity(), AddCarSettingsActivity.class);
+                startActivityForResult(intent, 1);
+
+
+            }
+        });
+
+
+    }
+
+    public void buildRecyclerViewForCar(View view, final AlertDialog dialog) {
+        mRecyclerView = view.findViewById(R.id.choose_car_recyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mAdapter = new CarAdapter(mExampleList);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new CarAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                button_car.setTextColor(Color.parseColor(CLICK_COLOR));
+                button_car.setText(mExampleList.get(position).getDescription());
+                current_car = mExampleList.get(position);
+                dialog.dismiss();
+
+
+            }
+        });
+    }
+
+    public void openDialogForSeats() {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
         View mView = getLayoutInflater().inflate(R.layout.number_choose, null);
         Button button = mView.findViewById(R.id.choose_num_button);
         ImageButton increase = mView.findViewById(R.id.choose_num_imageButton_plus);
-        ImageButton dicrease = mView.findViewById(R.id.choose_num_imageButton_minus);
+        ImageButton decrease = mView.findViewById(R.id.choose_num_imageButton_minus);
         final TextView textView_number = mView.findViewById(R.id.choose_num_textView_number);
         TextView textView_title = mView.findViewById(R.id.choose_num_textView_title);
-        if (!button_seats.getText().equals("Θέσεις ...")) {
+        if (!button_seats.getText().equals(TITLE_SEAT)) {
             textView_number.setText(button_seats.getText().toString());
         }
 
@@ -93,9 +219,53 @@ public class NewOfferStage3Fragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.dismiss();
+                button_seats.setTextColor(Color.parseColor(CLICK_COLOR));
+                button_seats.setText(textView_number.getText().toString());
+            }
+        });
+
+        increase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Increase(textView_number);
+            }
+        });
+
+        decrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Decrease(textView_number);
+            }
+        });
+
+    }
+
+    public void openDialogForBags() {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+        View mView = getLayoutInflater().inflate(R.layout.number_choose, null);
+        Button button = mView.findViewById(R.id.choose_num_button);
+        ImageButton increase = mView.findViewById(R.id.choose_num_imageButton_plus);
+        ImageButton decrease = mView.findViewById(R.id.choose_num_imageButton_minus);
+        final TextView textView_number = mView.findViewById(R.id.choose_num_textView_number);
+        TextView textView_title = mView.findViewById(R.id.choose_num_textView_title);
+        if (!button_bags.getText().equals(TITLE_BAGS)) {
+            textView_number.setText(button_bags.getText().toString());
+        }
+
+        textView_title.setText("Καθόρισε τον αριθμό των αποσκεύων");
+        mBuilder.setView(mView);
+
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
                 dialog.dismiss();
-                button_seats.setText(textView_number.getText().toString());
+                button_bags.setTextColor(Color.parseColor(CLICK_COLOR));
+                button_bags.setText(textView_number.getText().toString());
 
             }
         });
@@ -107,7 +277,7 @@ public class NewOfferStage3Fragment extends Fragment {
             }
         });
 
-        dicrease.setOnClickListener(new View.OnClickListener() {
+        decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Decrease(textView_number);
@@ -141,26 +311,144 @@ public class NewOfferStage3Fragment extends Fragment {
     public void onDestroy() {
         pet_title = button_pet.getText().toString();
         seat_title = button_seats.getText().toString();
+        car_title = button_car.getText().toString();
+        bags_title = button_bags.getText().toString();
         super.onDestroy();
     }
 
     public boolean isOk() {
-        // if (Integer.parseInt(seats_tv.getText().toString()) < 1) {
-        //     Toast.makeText(getActivity(), "Ο αριθμός των θέσων πρέπει να ειναι τουλάστον 1!", Toast.LENGTH_SHORT).show();
-        //    return false;
-        //  }
-        return true;
+        if(CheckCar() && CheckSeats() && CheckBags()&& CheckPet()){
+            return true;
+        }
+        return false;
     }
 
-//    public String getNum_of_seats() {
-//        return seats_tv.getText().toString();
-//    }
-//
-//    public String getNum_of_bags() {
-//        return bags_tv.getText().toString();
-//    }
-//
-//    public String getPet() {
-//        return pet_switch.isChecked() + "";
-//    }
+
+    public Boolean CheckCar() {
+        if (button_car.getText().equals(TITLE_CAR)) {
+            Toast.makeText(getActivity(), "Παρακαλω καταχωρήστε το όχημα σας", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public Boolean CheckPet() {
+        if (button_pet.getText().equals(TITLE_PET)) {
+            Toast.makeText(getActivity(), "Παρακαλω καταχωρήστε αν δεχεστε κατοικίδια", Toast.LENGTH_SHORT).show();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public Boolean CheckSeats() {
+        try {
+            int res = Integer.parseInt(button_seats.getText().toString());
+            if (res < 1) {
+                Toast.makeText(getActivity(), "Οι θεσεις πρεπει να ειναι τουλαχιστον μια", Toast.LENGTH_SHORT).show();
+                return false;
+            } else {
+                return true;
+            }
+        } catch (NumberFormatException e) {
+            Toast.makeText(getActivity(), "Υπαρχει λαθος στην καταχωρηση των θεσεων", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
+
+    public Boolean CheckBags() {
+        try {
+            int res = Integer.parseInt(button_bags.getText().toString());
+            return true;
+
+        } catch (NumberFormatException e) {
+            Toast.makeText(getActivity(), "Υπαρχει λαθος στην καταχωρηση των αποσκευων", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
+
+    public void FillList(View view, AlertDialog dialog) {
+        mExampleList = new ArrayList<>();
+        Car car = new Car(1,"Nissan", "Navara", "ZXB1025","Green");
+        mExampleList.add(car);
+        car = new Car(2,"Toyota", "Hilux", "ZXB1415","Red");
+        mExampleList.add(car);
+        buildRecyclerViewForCar(view, dialog);
+
+    }
+
+    public String getSeats() {
+        return button_seats.getText().toString();
+    }
+
+    public String getPets() {
+        return button_pet.getText().toString();
+    }
+
+    public String getCar() {
+        return button_car.getText().toString();
+    }
+
+    public String getBags() {
+        return button_bags.getText().toString();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                Car car = data.getParcelableExtra("car");
+                current_car = car;
+                button_car.setTextColor(Color.parseColor(CLICK_COLOR));
+                button_car.setText(car.getDescription());
+
+
+            }
+            if (resultCode == RESULT_CANCELED) {
+                // mTextViewResult.setText("Nothing selected");
+            }
+        }
+    }
+
+    public Car getCarObject() {
+        return current_car;
+    }
+
+    public void GetCars(final View view, final AlertDialog dialog) {
+        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL)).client(globalClass.getOkHttpClient().build())
+                .addConverterFactory(GsonConverterFactory.create()).build();
+        retrofitService = retrofit.create(RetrofitService.class);
+
+
+        Call<ArrayList<Car>> call = retrofitService.getUserCars();
+        call.enqueue(new Callback<ArrayList<Car>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Car>> call, Response<ArrayList<Car>> response) {
+                if (!response.isSuccessful()) {
+                    try {
+                        Toast.makeText(getActivity(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+
+                    return;
+                }
+                mExampleList = new ArrayList<>();
+                mExampleList = response.body();
+
+                buildRecyclerViewForCar(view, dialog);
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Car>> call, Throwable t) {
+
+            }
+        });
+    }
 }
