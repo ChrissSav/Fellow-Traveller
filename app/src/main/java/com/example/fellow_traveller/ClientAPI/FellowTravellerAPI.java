@@ -86,7 +86,7 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void userRegister(final GlobalClass context, String name, String surname, String email, String password, String phone, final UserRegisterCallback userRegisterCallback) {
+    public static void userRegister(String name, String surname, String email, String password, String phone, final UserRegisterCallback userRegisterCallback) {
         JsonObject json = buildJSON(new String[]{"name", "surname", "email", "password", "phone"}, name, surname, email, password, phone);
         retrofitAPIEndpoints.userRegister(json).enqueue(new Callback<UserAuthModel>() {
             @Override
