@@ -47,6 +47,8 @@ public class AddCarSettingsActivity extends AppCompatActivity {
                     newRegisterCar();
 
 
+
+
             }
         });
         buttonBack.setOnClickListener(new View.OnClickListener() {

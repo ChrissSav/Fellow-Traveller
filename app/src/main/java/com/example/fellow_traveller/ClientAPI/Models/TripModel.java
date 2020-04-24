@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class TripModel {
 
+    
     @SerializedName("dest_from")
     @Expose
     private String destFrom;
