@@ -27,7 +27,7 @@ public interface RetrofitService {
 
     @POST("auth/logout")
     Call<Status_Handling> LogoutUser(
-            @Query("refresh_token") String token
+            @Body JsonObject token
     );
 
     //User

@@ -96,7 +96,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         JsonObject user_object = new JsonObject();
         user_object.addProperty("refresh_token", globalClass.getCurrent_user().getRefreshToken());
-        Call<Status_Handling> call = retrofitService.LogoutUser(globalClass.getCurrent_user().getRefreshToken());
+        Call<Status_Handling> call = retrofitService.LogoutUser(user_object);
         call.enqueue(new Callback<Status_Handling>() {
             @Override
             public void onResponse(Call<Status_Handling> call, Response<Status_Handling> response) {
@@ -113,7 +113,6 @@ public class SettingsActivity extends AppCompatActivity {
                 Log.i("SaveClass", "0");
 
                 Log.i("SaveClass", "4");
-                DeleteSharedPreferences();
 
 
             }
@@ -123,6 +122,8 @@ public class SettingsActivity extends AppCompatActivity {
                 Log.i("Register_Container", "onFailure: " + t.getMessage());
             }
         });
+        DeleteSharedPreferences();
+
     }
 
     public void DeleteSharedPreferences() {
