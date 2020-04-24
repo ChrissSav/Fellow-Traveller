@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,7 +12,10 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.API.RetrofitService;
+import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
+import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.Car;
+import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.google.gson.JsonObject;
@@ -26,11 +30,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AddCarSettingsActivity extends AppCompatActivity {
 
-    private EditText car_brand, car_model, car_plate, car_color;
-    private Button button_add;
-    private ImageButton button_back;
-    private RetrofitService retrofitService;
-    private Retrofit retrofit;
+    private EditText carBrand, carModel, carPlate, carColor;
+    private Button buttonAdd;
+    private ImageButton buttonBack;
     private GlobalClass globalClass;
 
 
@@ -42,24 +44,24 @@ public class AddCarSettingsActivity extends AppCompatActivity {
 
         globalClass = (GlobalClass) getApplicationContext();
 
-        car_brand = findViewById(R.id.AddCarSettingsActivity_EditText_brand);
-        car_model = findViewById(R.id.AddCarSettingsActivity_EditText_model);
-        car_plate = findViewById(R.id.AddCarSettingsActivity_EditText_plate);
-        car_color = findViewById(R.id.AddCarSettingsActivity_EditText_color);
-        button_add = findViewById(R.id.AddCarSettingsActivity_button_add);
-        button_back = findViewById(R.id.close_button_add_car_settings);
+        carBrand = findViewById(R.id.AddCarSettingsActivity_EditText_brand);
+        carModel = findViewById(R.id.AddCarSettingsActivity_EditText_model);
+        carPlate = findViewById(R.id.AddCarSettingsActivity_EditText_plate);
+        carColor = findViewById(R.id.AddCarSettingsActivity_EditText_color);
+        buttonAdd = findViewById(R.id.AddCarSettingsActivity_button_add);
+        buttonBack = findViewById(R.id.close_button_add_car_settings);
 
-        button_add.setOnClickListener(new View.OnClickListener() {
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (CheckBrand() && CheckModel() && CheckPlate() && CheckColor())
-                    RegisterCar();
+                if (checkBrand() && checkModel() && checkPlate() && checkColor())
+                    newRegisterCar();
 
 
             }
         });
-        button_back.setOnClickListener(new View.OnClickListener() {
+        buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -70,83 +72,79 @@ public class AddCarSettingsActivity extends AppCompatActivity {
         });
     }
 
-    public boolean CheckBrand() {
-        if (car_brand.getText().length() < 2) {
-            car_brand.setError("Υποχρεώτικο πεδίο");
+    public boolean checkBrand() {
+        if (carBrand.getText().length() < 2) {
+            carBrand.setError("Υποχρεώτικο πεδίο");
             return false;
         } else {
-            car_brand.setError(null);
+            carBrand.setError(null);
             return true;
 
         }
     }
 
-    public boolean CheckModel() {
-        if (car_model.getText().length() < 2) {
-            car_model.setError("Υποχρεώτικο πεδίο");
+    public boolean checkModel() {
+        if (carModel.getText().length() < 2) {
+            carModel.setError("Υποχρεώτικο πεδίο");
             return false;
         } else {
-            car_model.setError(null);
+            carModel.setError(null);
             return true;
         }
     }
 
-    public boolean CheckPlate() {
-        if (car_plate.getText().length() < 2) {
-            car_plate.setError("Υποχρεώτικο πεδίο");
+    public boolean checkPlate() {
+        if (carPlate.getText().length() < 2) {
+            carPlate.setError("Υποχρεώτικο πεδίο");
             return false;
         } else {
-            car_plate.setError(null);
+            carPlate.setError(null);
             return true;
         }
     }
 
-    public boolean CheckColor() {
-        if (car_color.getText().length() < 2) {
-            car_color.setError("Υποχρεώτικο πεδίο");
+    public boolean checkColor() {
+        if (carColor.getText().length() < 2) {
+            carColor.setError("Υποχρεώτικο πεδίο");
             return false;
         } else {
-            car_color.setError(null);
+            carColor.setError(null);
             return true;
         }
     }
 
-    public void RegisterCar() {
-        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL)).client(globalClass.getOkHttpClient().build())
-                .addConverterFactory(GsonConverterFactory.create()).build();
-        retrofitService = retrofit.create(RetrofitService.class);
 
-        JsonObject car_object = new JsonObject();
-        car_object.addProperty("brand", car_brand.getText().toString());
-        car_object.addProperty("model", car_model.getText().toString());
-        car_object.addProperty("plate", car_plate.getText().toString());
-        car_object.addProperty("color", car_color.getText().toString());
 
-        Call<Car> call = retrofitService.registerCar(car_object);
-        call.enqueue(new Callback<Car>() {
+    public void newRegisterCar(){
+        FellowTravellerAPI.carRegister(globalClass, carBrand.getText().toString(), carModel.getText().toString(),
+                carPlate.getText().toString(), carColor.getText().toString(), new CarRegisterCallBack() {
             @Override
-            public void onResponse(Call<Car> call, Response<Car> response) {
-                if (!response.isSuccessful()) {
-                    try {
-                        Toast.makeText(AddCarSettingsActivity.this, response.errorBody().string(), Toast.LENGTH_SHORT).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    return;
-                }
-                Car car = response.body();
+            public void onSuccess(CarModel car) {
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("car", car);
                 setResult(RESULT_OK, resultIntent);
                 finish();
-
             }
 
             @Override
-            public void onFailure(Call<Car> call, Throwable t) {
+            public void onFailure(String errorMsg) {
 
             }
         });
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

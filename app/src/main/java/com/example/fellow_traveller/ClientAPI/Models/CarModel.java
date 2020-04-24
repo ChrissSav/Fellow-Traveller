@@ -1,9 +1,12 @@
 package com.example.fellow_traveller.ClientAPI.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CarModel {
+public class CarModel   implements Parcelable {
 
     @SerializedName("brand")
     @Expose
@@ -20,6 +23,30 @@ public class CarModel {
     @SerializedName("id")
     @Expose
     private Integer id;
+
+    protected CarModel(Parcel in) {
+        brand = in.readString();
+        model = in.readString();
+        plate = in.readString();
+        color = in.readString();
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+    }
+
+    public static final Creator<CarModel> CREATOR = new Creator<CarModel>() {
+        @Override
+        public CarModel createFromParcel(Parcel in) {
+            return new CarModel(in);
+        }
+
+        @Override
+        public CarModel[] newArray(int size) {
+            return new CarModel[size];
+        }
+    };
 
     public String getBrand() {
         return brand;
@@ -65,4 +92,22 @@ public class CarModel {
         return brand + "  " + model + " | " + plate;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(brand);
+        dest.writeString(model);
+        dest.writeString(plate);
+        dest.writeString(color);
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(id);
+        }
+    }
 }
