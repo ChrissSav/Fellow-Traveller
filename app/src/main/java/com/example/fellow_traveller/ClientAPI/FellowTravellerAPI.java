@@ -181,7 +181,7 @@ public class FellowTravellerAPI {
 
 
 
-    public static void userCars(final GlobalClass cont, final UserCarsCallBack userCarsCallBack) {
+    public static void getUserCars(final GlobalClass cont, final UserCarsCallBack userCarsCallBack) {
         retrofit = buildRetrofitWithClient(cont);
 
         retrofitAPIEndpoints = retrofit.create(RetrofitAPIEndpoints.class);
