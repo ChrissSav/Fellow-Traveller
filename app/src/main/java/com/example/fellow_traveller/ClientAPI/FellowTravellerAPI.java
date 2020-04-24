@@ -1,9 +1,7 @@
 package com.example.fellow_traveller.ClientAPI;
 
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.fellow_traveller.API.Status_Handling;
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserAuthCallback;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserCarsCallBack;
@@ -14,11 +12,8 @@ import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
-import com.example.fellow_traveller.Settings.SettingsActivity;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
-import org.json.JSONTokener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -102,40 +97,7 @@ public class FellowTravellerAPI {
     }
 
 
-    public static void userCars(final GlobalClass cont, String brand, String model,String plate, String color, final CarRegisterCallBack carRegisterCallBack) {
-        retrofit = new Retrofit.Builder().baseUrl(cont.getResources().getString(R.string.FT_API_URL)).client(cont.getOkHttpClient().build())
-                .addConverterFactory(GsonConverterFactory.create()).build();
 
-        retrofitAPIEndpoints = retrofit.create(RetrofitAPIEndpoints.class);
-
-
-        JsonObject car_object = new JsonObject();
-        car_object.addProperty("brand", brand);
-        car_object.addProperty("model", model);
-        car_object.addProperty("plate", plate);
-        car_object.addProperty("color", color);
-
-        retrofitAPIEndpoints.carRegister(car_object).enqueue(new Callback<CarModel>() {
-            @Override
-            public void onResponse(Call<CarModel> call, Response<CarModel> response) {
-                if (!response.isSuccessful()) {
-                    try {
-                        carRegisterCallBack.onFailure(response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    return;
-                }
-                carRegisterCallBack.onSuccess(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<CarModel> call, Throwable t) {
-                carRegisterCallBack.onFailure(cont.getResources().getString(R.string.API_UNREACHABLE));
-            }
-        });
-
-    }
 
 
     public static void userRegister(final GlobalClass cont,String name, String surname,String email,String password,String phone,final UserRegisterCallback userRegisterCallback) {
@@ -178,13 +140,45 @@ public class FellowTravellerAPI {
 
 
 
-
-
-
-
-    public static void carRegister(final GlobalClass cont, final UserCarsCallBack userCarsCallBack) {
+    public static void carRegister(final GlobalClass cont, String brand, String model,String plate, String color, final CarRegisterCallBack carRegisterCallBack) {
         retrofit = new Retrofit.Builder().baseUrl(cont.getResources().getString(R.string.FT_API_URL)).client(cont.getOkHttpClient().build())
                 .addConverterFactory(GsonConverterFactory.create()).build();
+
+        retrofitAPIEndpoints = retrofit.create(RetrofitAPIEndpoints.class);
+
+
+        JsonObject car_object = new JsonObject();
+        car_object.addProperty("brand", brand);
+        car_object.addProperty("model", model);
+        car_object.addProperty("plate", plate);
+        car_object.addProperty("color", color);
+
+        retrofitAPIEndpoints.carRegister(car_object).enqueue(new Callback<CarModel>() {
+            @Override
+            public void onResponse(Call<CarModel> call, Response<CarModel> response) {
+                if (!response.isSuccessful()) {
+                    try {
+                        carRegisterCallBack.onFailure(response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+                carRegisterCallBack.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<CarModel> call, Throwable t) {
+                carRegisterCallBack.onFailure(cont.getResources().getString(R.string.API_UNREACHABLE));
+            }
+        });
+
+    }
+
+
+
+    public static void userCars(final GlobalClass cont, final UserCarsCallBack userCarsCallBack) {
+        retrofit = buildRetrofitWithClient(cont);
 
         retrofitAPIEndpoints = retrofit.create(RetrofitAPIEndpoints.class);
 
@@ -215,7 +209,11 @@ public class FellowTravellerAPI {
 
 
 
+    public static Retrofit buildRetrofitWithClient(GlobalClass globalClass){
+       return new Retrofit.Builder().baseUrl(globalClass.getResources().getString(R.string.FT_API_URL)).client(globalClass.getOkHttpClient().build())
+                .addConverterFactory(GsonConverterFactory.create()).build();
 
+    }
 
 
 

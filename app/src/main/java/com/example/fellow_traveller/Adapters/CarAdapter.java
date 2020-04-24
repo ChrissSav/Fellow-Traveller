@@ -7,12 +7,13 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.fellow_traveller.ClientAPI.Models.Car;
+import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.R;
 
 import java.util.ArrayList;
 
 public class CarAdapter extends RecyclerView.Adapter<CarAdapter.ExampleViewHolder> {
-    private ArrayList<Car> mExampleList;
+    private ArrayList<CarModel> mExampleList;
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener {
@@ -50,7 +51,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.ExampleViewHolde
         }
     }
 
-    public CarAdapter(ArrayList<Car> exampleList) {
+    public CarAdapter(ArrayList<CarModel> exampleList) {
         mExampleList = exampleList;
     }
 
@@ -63,7 +64,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.ExampleViewHolde
 
     @Override
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
-        Car currentItem = mExampleList.get(position);
+        CarModel currentItem = mExampleList.get(position);
         holder.description.setText(currentItem.getDescription());
     }
 

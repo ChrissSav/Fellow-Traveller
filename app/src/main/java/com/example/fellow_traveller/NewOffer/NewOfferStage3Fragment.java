@@ -20,7 +20,10 @@ import android.widget.Toast;
 
 import com.example.fellow_traveller.API.RetrofitService;
 import com.example.fellow_traveller.Adapters.CarAdapter;
+import com.example.fellow_traveller.ClientAPI.Callbacks.UserCarsCallBack;
+import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.Car;
+import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.Settings.AddCarSettingsActivity;
@@ -28,11 +31,7 @@ import com.example.fellow_traveller.Settings.AddCarSettingsActivity;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -46,27 +45,25 @@ public class NewOfferStage3Fragment extends Fragment {
     private final String TITLE_BAGS = "Αποσκεύες ...";
 
     private View view;
-    private Button button_seats, button_pet, button_car, button_bags;
+    private Button buttonSeats, buttonPet, buttonCar, button_bags;
     //Backup
-    private String pet_title = TITLE_PET;
-    private String seat_title = TITLE_SEAT;
-    private String car_title = TITLE_CAR;
-    private String bags_title = TITLE_BAGS;
+    private String petTitle = TITLE_PET;
+    private String seatTitle = TITLE_SEAT;
+    private String carTitle = TITLE_CAR;
+    private String bagsTitle = TITLE_BAGS;
 
     //Recycle
     private RecyclerView mRecyclerView;
     private CarAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<Car> mExampleList;
+    private ArrayList<CarModel> mExampleList;
 
-    private RetrofitService retrofitService;
-    private Retrofit retrofit;
     private GlobalClass globalClass;
 
-    private Car current_car;
+    private CarModel currentCar;
 
     public NewOfferStage3Fragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -76,34 +73,34 @@ public class NewOfferStage3Fragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_new_offer_stage3, container, false);
         globalClass = (GlobalClass) getActivity().getApplicationContext();
-        button_seats = view.findViewById(R.id.NewOfferStage3Fragment_button_seat);
-        button_pet = view.findViewById(R.id.NewOfferStage3Fragment_button_pet);
-        button_car = view.findViewById(R.id.NewOfferStage3Fragment_button_car);
+        buttonSeats = view.findViewById(R.id.NewOfferStage3Fragment_button_seat);
+        buttonPet = view.findViewById(R.id.NewOfferStage3Fragment_button_pet);
+        buttonCar = view.findViewById(R.id.NewOfferStage3Fragment_button_car);
         button_bags = view.findViewById(R.id.NewOfferStage3Fragment_button_bags);
 
 
-        button_pet.setText(pet_title);
-        button_seats.setText(seat_title);
-        button_car.setText(car_title);
-        button_bags.setText(bags_title);
+        buttonPet.setText(petTitle);
+        buttonSeats.setText(seatTitle);
+        buttonCar.setText(carTitle);
+        button_bags.setText(bagsTitle);
 
 
         //Text Color
-        if (button_pet.getText() != TITLE_PET) {
-            button_pet.setTextColor(Color.parseColor(CLICK_COLOR));
+        if (buttonPet.getText() != TITLE_PET) {
+            buttonPet.setTextColor(Color.parseColor(CLICK_COLOR));
         }
         if (button_bags.getText() != TITLE_BAGS) {
             button_bags.setTextColor(Color.parseColor(CLICK_COLOR));
         }
-        if (button_car.getText() != TITLE_CAR) {
-            button_car.setTextColor(Color.parseColor(CLICK_COLOR));
+        if (buttonCar.getText() != TITLE_CAR) {
+            buttonCar.setTextColor(Color.parseColor(CLICK_COLOR));
         }
-        if (button_seats.getText() != TITLE_SEAT) {
-            button_seats.setTextColor(Color.parseColor(CLICK_COLOR));
+        if (buttonSeats.getText() != TITLE_SEAT) {
+            buttonSeats.setTextColor(Color.parseColor(CLICK_COLOR));
         }
 
 
-        button_seats.setOnClickListener(new View.OnClickListener() {
+        buttonSeats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -120,7 +117,7 @@ public class NewOfferStage3Fragment extends Fragment {
         });
 
 
-        button_car.setOnClickListener(new View.OnClickListener() {
+        buttonCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -128,16 +125,16 @@ public class NewOfferStage3Fragment extends Fragment {
             }
         });
 
-        button_pet.setOnClickListener(new View.OnClickListener() {
+        buttonPet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                button_pet.setTextColor(Color.parseColor(CLICK_COLOR));
-                if (button_pet.getText().equals(TITLE_PET) || button_pet.getText().equals("Δεν επιτρέπω")) {
-                    button_pet.setText("Επιτρέπω");
+                buttonPet.setTextColor(Color.parseColor(CLICK_COLOR));
+                if (buttonPet.getText().equals(TITLE_PET) || buttonPet.getText().equals("Δεν επιτρέπω")) {
+                    buttonPet.setText("Επιτρέπω");
                     return;
                 }
-                if (button_pet.getText().equals("Επιτρέπω")) {
-                    button_pet.setText("Δεν επιτρέπω");
+                if (buttonPet.getText().equals("Επιτρέπω")) {
+                    buttonPet.setText("Δεν επιτρέπω");
                     return;
                 }
 
@@ -158,7 +155,7 @@ public class NewOfferStage3Fragment extends Fragment {
 
         final AlertDialog dialog = mBuilder.create();
 
-        GetCars(mView, dialog);
+        getCars(mView, dialog);
         dialog.show();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,9 +182,9 @@ public class NewOfferStage3Fragment extends Fragment {
         mAdapter.setOnItemClickListener(new CarAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                button_car.setTextColor(Color.parseColor(CLICK_COLOR));
-                button_car.setText(mExampleList.get(position).getDescription());
-                current_car = mExampleList.get(position);
+                buttonCar.setTextColor(Color.parseColor(CLICK_COLOR));
+                buttonCar.setText(mExampleList.get(position).getDescription());
+                currentCar = mExampleList.get(position);
                 dialog.dismiss();
 
 
@@ -203,8 +200,8 @@ public class NewOfferStage3Fragment extends Fragment {
         ImageButton decrease = mView.findViewById(R.id.choose_num_imageButton_minus);
         final TextView textView_number = mView.findViewById(R.id.choose_num_textView_number);
         TextView textView_title = mView.findViewById(R.id.choose_num_textView_title);
-        if (!button_seats.getText().equals(TITLE_SEAT)) {
-            textView_number.setText(button_seats.getText().toString());
+        if (!buttonSeats.getText().equals(TITLE_SEAT)) {
+            textView_number.setText(buttonSeats.getText().toString());
         }
 
         textView_title.setText("Καθόρισε τον αριθμό των θέσεων");
@@ -217,8 +214,8 @@ public class NewOfferStage3Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                button_seats.setTextColor(Color.parseColor(CLICK_COLOR));
-                button_seats.setText(textView_number.getText().toString());
+                buttonSeats.setTextColor(Color.parseColor(CLICK_COLOR));
+                buttonSeats.setText(textView_number.getText().toString());
             }
         });
 
@@ -306,23 +303,23 @@ public class NewOfferStage3Fragment extends Fragment {
 
     @Override
     public void onDestroy() {
-        pet_title = button_pet.getText().toString();
-        seat_title = button_seats.getText().toString();
-        car_title = button_car.getText().toString();
-        bags_title = button_bags.getText().toString();
+        petTitle = buttonPet.getText().toString();
+        seatTitle = buttonSeats.getText().toString();
+        carTitle = buttonCar.getText().toString();
+        bagsTitle = button_bags.getText().toString();
         super.onDestroy();
     }
 
     public boolean validateFragment() {
-        if(CheckCar() && CheckSeats() && CheckBags()&& CheckPet()){
+        if(checkCar() && checkSeats() && checkBags()&& checkPet()){
             return true;
         }
         return false;
     }
 
 
-    public Boolean CheckCar() {
-        if (button_car.getText().equals(TITLE_CAR)) {
+    public Boolean checkCar() {
+        if (buttonCar.getText().equals(TITLE_CAR)) {
             Toast.makeText(getActivity(), "Παρακαλω καταχωρήστε το όχημα σας", Toast.LENGTH_SHORT).show();
             return false;
         } else {
@@ -330,8 +327,8 @@ public class NewOfferStage3Fragment extends Fragment {
         }
     }
 
-    public Boolean CheckPet() {
-        if (button_pet.getText().equals(TITLE_PET)) {
+    public Boolean checkPet() {
+        if (buttonPet.getText().equals(TITLE_PET)) {
             Toast.makeText(getActivity(), "Παρακαλω καταχωρήστε αν δεχεστε κατοικίδια", Toast.LENGTH_SHORT).show();
             return false;
         } else {
@@ -339,9 +336,9 @@ public class NewOfferStage3Fragment extends Fragment {
         }
     }
 
-    public Boolean CheckSeats() {
+    public Boolean checkSeats() {
         try {
-            int res = Integer.parseInt(button_seats.getText().toString());
+            int res = Integer.parseInt(buttonSeats.getText().toString());
             if (res < 1) {
                 Toast.makeText(getActivity(), "Οι θεσεις πρεπει να ειναι τουλαχιστον μια", Toast.LENGTH_SHORT).show();
                 return false;
@@ -354,7 +351,7 @@ public class NewOfferStage3Fragment extends Fragment {
         }
     }
 
-    public Boolean CheckBags() {
+    public Boolean checkBags() {
         try {
             int res = Integer.parseInt(button_bags.getText().toString());
             return true;
@@ -367,15 +364,15 @@ public class NewOfferStage3Fragment extends Fragment {
 
 
     public String getSeats() {
-        return button_seats.getText().toString();
+        return buttonSeats.getText().toString();
     }
 
     public String getPets() {
-        return button_pet.getText().toString();
+        return buttonPet.getText().toString();
     }
 
     public String getCar() {
-        return button_car.getText().toString();
+        return buttonCar.getText().toString();
     }
 
     public String getBags() {
@@ -388,10 +385,10 @@ public class NewOfferStage3Fragment extends Fragment {
 
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-                Car car = data.getParcelableExtra("car");
-                current_car = car;
-                button_car.setTextColor(Color.parseColor(CLICK_COLOR));
-                button_car.setText(car.getDescription());
+                CarModel car = data.getParcelableExtra("car");
+                currentCar = car;
+                buttonCar.setTextColor(Color.parseColor(CLICK_COLOR));
+                buttonCar.setText(car.getDescription());
 
 
             }
@@ -401,42 +398,26 @@ public class NewOfferStage3Fragment extends Fragment {
         }
     }
 
-    public Car getCarObject() {
-        return current_car;
+    public CarModel getCarObject() {
+        return currentCar;
     }
 
-    public void GetCars(final View view, final AlertDialog dialog) {
-        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL)).client(globalClass.getOkHttpClient().build())
-                .addConverterFactory(GsonConverterFactory.create()).build();
-        retrofitService = retrofit.create(RetrofitService.class);
+    public void getCars(final View view, final AlertDialog dialog) {
 
-
-        Call<ArrayList<Car>> call = retrofitService.getUserCars();
-        call.enqueue(new Callback<ArrayList<Car>>() {
+        FellowTravellerAPI.userCars(globalClass, new UserCarsCallBack() {
             @Override
-            public void onResponse(Call<ArrayList<Car>> call, Response<ArrayList<Car>> response) {
-                if (!response.isSuccessful()) {
-                    try {
-                        Toast.makeText(getActivity(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-
-
-                    return;
-                }
+            public void onSuccess(ArrayList<CarModel> carList) {
                 mExampleList = new ArrayList<>();
-                mExampleList = response.body();
-
+                mExampleList = carList;
                 buildRecyclerViewForCar(view, dialog);
 
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Car>> call, Throwable t) {
+            public void onFailure(String errorMsg) {
 
             }
         });
+
     }
 }
