@@ -191,8 +191,6 @@ public class SearchActivity extends AppCompatActivity {
             public void onItemClick(int position) {
                 // SetNotificationsRead(mExampleList.get(position).getId(),position);
                 destinationAutoComplete.setText(places_list.get(position).getDescription());
-
-
             }
         });
     }
