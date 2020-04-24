@@ -3,21 +3,17 @@ package com.example.fellow_traveller.Settings;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.API.RetrofitService;
-import com.example.fellow_traveller.LoginActivity;
 import com.example.fellow_traveller.Models.Car;
 import com.example.fellow_traveller.Models.GlobalClass;
-import com.example.fellow_traveller.Models.Car;
-import com.example.fellow_traveller.PlaceAutocomplete.AddLocationActivity;
 import com.example.fellow_traveller.R;
 import com.google.gson.JsonObject;
 
@@ -39,6 +35,7 @@ public class AddCarSettingsActivity extends AppCompatActivity {
     private GlobalClass globalClass;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,12 +44,14 @@ public class AddCarSettingsActivity extends AppCompatActivity {
 
         globalClass = (GlobalClass) getApplicationContext();
 
+
         car_brand = findViewById(R.id.AddCarSettingsActivity_EditText_brand);
         car_model = findViewById(R.id.AddCarSettingsActivity_EditText_model);
         car_plate = findViewById(R.id.AddCarSettingsActivity_EditText_plate);
         car_color = findViewById(R.id.AddCarSettingsActivity_EditText_color);
-        button_add = findViewById(R.id.AddCarSettingsActivity_button_add);
+        button_add = findViewById(R.id.EditCarSettingsActivity_button_add);
         button_back = findViewById(R.id.close_button_add_car_settings);
+
 
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,8 +59,6 @@ public class AddCarSettingsActivity extends AppCompatActivity {
 
                 if (CheckBrand() && CheckModel() && CheckPlate() && CheckColor())
                     RegisterCar();
-
-
             }
         });
         button_back.setOnClickListener(new View.OnClickListener() {
@@ -69,10 +66,10 @@ public class AddCarSettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 onBackPressed();
-
-
             }
         });
+
+
     }
 
     public boolean CheckBrand() {
@@ -97,12 +94,12 @@ public class AddCarSettingsActivity extends AppCompatActivity {
     }
 
     public boolean CheckPlate() {
-        if (car_plate.getText().length() < 2) {
-            car_plate.setError("Υποχρεώτικο πεδίο");
-            return false;
-        } else {
+        if (car_plate.getText().toString().matches("[Α-Ω][Α-Ω][Α-Ω]\\s[0-9][0-9][0-9][0-9]")) {
             car_plate.setError(null);
             return true;
+        } else {
+            car_plate.setError("Πρέπει να είναι της μορφής ΧΧΧ 1234");
+            return false;
         }
     }
 

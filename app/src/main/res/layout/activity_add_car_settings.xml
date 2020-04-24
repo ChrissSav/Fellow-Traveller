@@ -75,7 +75,7 @@
                 android:background="@null"
                 android:fontFamily="@font/firasans_light"
                 android:hint="Συμπληρώστε την μάρκα"
-                android:inputType="text"
+                android:inputType="textCapWords"
                 android:maxLines="1"
                 android:textColor="@color/profile"
                 android:textCursorDrawable="@null"
@@ -86,7 +86,8 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/car_image_car_settings"
-                app:layout_constraintTop_toTopOf="@+id/car_image_car_settings" />
+                app:layout_constraintTop_toTopOf="@+id/car_image_car_settings"
+                />
 
             <View
                 android:id="@+id/car_underline_car_settings"
@@ -153,7 +154,7 @@
                 android:background="@null"
                 android:fontFamily="@font/firasans_light"
                 android:hint="Συμπληρώστε το μοντέλο "
-                android:inputType="text"
+                android:inputType="textCapWords"
                 android:maxLines="1"
                 android:textCursorDrawable="@null"
                 android:textSize="20sp"
@@ -218,7 +219,8 @@
                 android:background="@null"
                 android:fontFamily="@font/firasans_light"
                 android:hint="Συμπληρώστε τον αριθμό κυκλοφορίας"
-                android:inputType="text"
+                android:inputType="textCapCharacters"
+                android:textAllCaps="true"
                 android:maxLines="1"
                 android:textCursorDrawable="@null"
                 android:textSize="20sp"
@@ -239,7 +241,8 @@
                 android:backgroundTint="@color/profile"
                 app:layout_constraintBottom_toBottomOf="@id/plate_image_car_settings"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/plate_image_car_settings" />
+                app:layout_constraintTop_toTopOf="@id/plate_image_car_settings"
+                />
 
 
             <TextView
@@ -260,7 +263,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/ic_license_plate"
+                android:background="@drawable/ic_color"
                 app:layout_constraintStart_toStartOf="@id/color_label_car_settings"
                 app:layout_constraintTop_toBottomOf="@id/color_label_car_settings" />
 
@@ -283,7 +286,7 @@
                 android:background="@null"
                 android:fontFamily="@font/firasans_light"
                 android:hint="Συμπληρώστε το χρώμα"
-                android:inputType="text"
+                android:inputType="textCapWords"
                 android:maxLines="1"
                 android:textCursorDrawable="@null"
                 android:textSize="20sp"
@@ -307,7 +310,7 @@
                 app:layout_constraintTop_toTopOf="@id/color_image_car_settings" />
 
             <Button
-                android:id="@+id/AddCarSettingsActivity_button_add"
+                android:id="@+id/EditCarSettingsActivity_button_add"
                 android:layout_width="0dp"
                 android:layout_height="55dp"
                 android:layout_marginStart="25dp"
