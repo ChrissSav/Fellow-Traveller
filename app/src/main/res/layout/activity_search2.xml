@@ -67,6 +67,7 @@
         android:layout_marginEnd="10dp"
         android:layout_marginStart="40dp"
         android:background="@android:color/transparent"
+        android:textAllCaps="false"
         android:padding="0dp"
         android:minHeight="0dp"
         android:gravity="left"
@@ -97,7 +98,7 @@
        android:layout_marginTop="40dp"
        android:scaleX="1.5"
        android:scaleY="1.5"
-       android:padding="15dp"
+       android:padding="10dp"
        />
 
     <TextView
@@ -126,8 +127,8 @@
 
 
 
-    <AutoCompleteTextView
-        android:id="@+id/search2_autocomplete_destination"
+    <Button
+        android:id="@+id/search2_button_to"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Επιλογή προορισμού..."
@@ -137,8 +138,12 @@
         android:layout_marginEnd="10dp"
         android:layout_marginStart="40dp"
         android:background="@android:color/transparent"
-        android:inputType="text"
-        android:imeOptions="actionSearch"
+        android:textAllCaps="false"
+        android:padding="0dp"
+        android:minHeight="0dp"
+        android:gravity="left"
+        android:textSize="18sp"
+        android:fontFamily="@font/firasans_light"
         android:layout_marginTop="10dp"/>
 
     <View
@@ -147,7 +152,7 @@
         android:layout_height="1dp"
         android:background="@color/profile"
         app:layout_constraintStart_toStartOf="@id/search2_destination_image"
-        app:layout_constraintEnd_toEndOf="@id/search2_autocomplete_destination"
+        app:layout_constraintEnd_toEndOf="@id/search2_button_to"
         app:layout_constraintTop_toBottomOf="@id/search2_destination_image"
         android:layout_marginTop="5dp"
         />
@@ -160,7 +165,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginTop="100dp"
         android:background="@drawable/main_activity_login_button"
-        android:text="Υποβολή"
+        android:text="Αναζήτηση"
         android:textAllCaps="false"
         android:textColor="#fff"
         android:textSize="18sp"
