@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.fellow_traveller.Models.Car;
+import com.example.fellow_traveller.ClientAPI.Models.Car;
 import com.example.fellow_traveller.R;
 
 import java.util.ArrayList;

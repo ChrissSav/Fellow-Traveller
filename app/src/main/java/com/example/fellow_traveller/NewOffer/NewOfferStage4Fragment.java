@@ -66,7 +66,7 @@ public class NewOfferStage4Fragment extends Fragment {
         return 4;
     }
 
-    public boolean isOk() {
+    public boolean validateFragment() {
         return true;
     }
 

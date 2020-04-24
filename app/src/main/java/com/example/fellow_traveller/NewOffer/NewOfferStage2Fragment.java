@@ -145,7 +145,7 @@ public class NewOfferStage2Fragment extends Fragment {
         super.onDestroy();
     }
 
-    public Boolean isOk() {
+    public Boolean validateFragment() {
         if (textInputLayout_date.getEditText().getText().length() < 1) {
             textInputLayout_date.setError("Υποχρεωτικό πεδίο!");
             return false;

@@ -1,5 +1,7 @@
 package com.example.fellow_traveller.Models;
 
+import com.example.fellow_traveller.ClientAPI.Models.Trip;
+
 public class NotificationModel {
 
     private int id;

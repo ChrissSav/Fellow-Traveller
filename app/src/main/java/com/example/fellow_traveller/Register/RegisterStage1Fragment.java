@@ -17,16 +17,11 @@ import static com.example.fellow_traveller.Utils.InputValidation.isValidEmail;
 
 public class RegisterStage1Fragment extends Fragment {
 
-    private TextInputLayout textInputLayout;
-    //private TextInputEditText editText;
-    private String mail = "";
+    private TextInputLayout textInputLayoutEmail;
 
     private View view;
 
     public RegisterStage1Fragment() {
-        // Required empty public constructor
-        //Log.i("Fragment","contractor RegisterStage1Fragment");
-
 
     }
 
@@ -34,11 +29,8 @@ public class RegisterStage1Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_register_stage_1, container, false);
-        // editText = view.findViewById(R.id.RegisterStage1Fragment_editText_email);
-        textInputLayout = view.findViewById(R.id.RegisterStage1Fragment_textInputLayout_email);
-        Log.i("Fragment", "RegisterStage1Fragment");
+        textInputLayoutEmail = view.findViewById(R.id.RegisterStage1Fragment_textInputLayout_email);
 
         return view;
     }
@@ -51,29 +43,25 @@ public class RegisterStage1Fragment extends Fragment {
         return 1;
     }
 
-    // TODO validateFragment instead of isOk
-    public Boolean isOk() {
+    public Boolean validateFragment() {
         //Log.i("isOk",textInputLayout.getEditText().getText().length()+"");
-        if (textInputLayout.getEditText().getText().length() < 1) {
-            textInputLayout.setError("Please check the email field !");
+        if (textInputLayoutEmail.getEditText().getText().length() < 1) {
+            textInputLayoutEmail.setError("Please check the email field !");
             return false;
         } else {
-            // TODO remove `res` altogether.
-            Boolean res = isValidEmail(textInputLayout.getEditText().getText());
-            if (res) {
-                textInputLayout.setError(null);
+            if (isValidEmail(textInputLayoutEmail.getEditText().getText())) {
+                textInputLayoutEmail.setError(null);
                 return true;
 
             } else {
-                textInputLayout.setError("The email is incorrect !");
+                textInputLayoutEmail.setError("Το μαιλ ειναι λάθος");
                 return false;
             }
         }
     }
 
-    // TODO rename GetEmail to getEmail to camelCase
-    public String GetEmail(){
-        return textInputLayout.getEditText().getText().toString();
+    public String getEmail(){
+        return textInputLayoutEmail.getEditText().getText().toString();
     }
 
 }

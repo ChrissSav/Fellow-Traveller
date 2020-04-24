@@ -14,22 +14,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.API.RetrofitService;
 import com.example.fellow_traveller.Adapters.CarAdapter;
-import com.example.fellow_traveller.Models.Car;
+import com.example.fellow_traveller.ClientAPI.Models.Car;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.Settings.AddCarSettingsActivity;
-import com.google.gson.JsonObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -316,7 +313,7 @@ public class NewOfferStage3Fragment extends Fragment {
         super.onDestroy();
     }
 
-    public boolean isOk() {
+    public boolean validateFragment() {
         if(CheckCar() && CheckSeats() && CheckBags()&& CheckPet()){
             return true;
         }
@@ -368,15 +365,6 @@ public class NewOfferStage3Fragment extends Fragment {
         }
     }
 
-    public void FillList(View view, AlertDialog dialog) {
-        mExampleList = new ArrayList<>();
-        Car car = new Car(1,"Nissan", "Navara", "ZXB1025","Green");
-        mExampleList.add(car);
-        car = new Car(2,"Toyota", "Hilux", "ZXB1415","Red");
-        mExampleList.add(car);
-        buildRecyclerViewForCar(view, dialog);
-
-    }
 
     public String getSeats() {
         return button_seats.getText().toString();

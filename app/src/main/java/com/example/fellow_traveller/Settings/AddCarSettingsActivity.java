@@ -3,9 +3,7 @@ package com.example.fellow_traveller.Settings;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,11 +11,8 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.API.RetrofitService;
-import com.example.fellow_traveller.LoginActivity;
-import com.example.fellow_traveller.Models.Car;
+import com.example.fellow_traveller.ClientAPI.Models.Car;
 import com.example.fellow_traveller.Models.GlobalClass;
-import com.example.fellow_traveller.Models.Car;
-import com.example.fellow_traveller.PlaceAutocomplete.AddLocationActivity;
 import com.example.fellow_traveller.R;
 import com.google.gson.JsonObject;
 

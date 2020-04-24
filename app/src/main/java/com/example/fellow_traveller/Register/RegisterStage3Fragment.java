@@ -18,7 +18,7 @@ import com.google.android.material.textfield.TextInputLayout;
 public class RegisterStage3Fragment extends Fragment {
 
     private View view;
-    private TextInputLayout textInputLayout_name, textInputLayout_surname;
+    private TextInputLayout textInputLayoutName, textInputLayoutSurname;
     private String name = "Sypros";
     private String surname = "Rantoglou";
 
@@ -37,10 +37,10 @@ public class RegisterStage3Fragment extends Fragment {
        // Log.i("Lifecycle_Stage3", "onCreateView ");
         view = inflater.inflate(R.layout.fragment_register_stage_3, container, false);
 
-        textInputLayout_name = view.findViewById(R.id.RegisterStage3Fragment_textInputLayout_name);
-        textInputLayout_surname = view.findViewById(R.id.RegisterStage3Fragment_textInputLayout_surname);
-        textInputLayout_name.getEditText().setText(name);
-        textInputLayout_surname.getEditText().setText(surname);
+        textInputLayoutName = view.findViewById(R.id.RegisterStage3Fragment_textInputLayout_name);
+        textInputLayoutSurname = view.findViewById(R.id.RegisterStage3Fragment_textInputLayout_surname);
+        textInputLayoutName.getEditText().setText(name);
+        textInputLayoutSurname.getEditText().setText(surname);
 
 
         return view;
@@ -48,11 +48,9 @@ public class RegisterStage3Fragment extends Fragment {
 
     @Override
     public void onDestroy() {
-        //Log.i("Lifecycle_Stage3", "onDestroy ");
 
-        // Log.i("Lifecycle", "onDestroy");
-        name = textInputLayout_name.getEditText().getText().toString();
-        surname = textInputLayout_surname.getEditText().getText().toString();
+        name = textInputLayoutName.getEditText().getText().toString();
+        surname = textInputLayoutSurname.getEditText().getText().toString();
         super.onDestroy();
     }
 
@@ -64,19 +62,19 @@ public class RegisterStage3Fragment extends Fragment {
         return 3;
     }
 
-    public Boolean isOk() {
-        String name_1 = textInputLayout_name.getEditText().getText().toString();
-        String surname_1 = textInputLayout_surname.getEditText().getText().toString();
+    public Boolean validateFragment() {
+        String name_1 = textInputLayoutName.getEditText().getText().toString();
+        String surname_1 = textInputLayoutSurname.getEditText().getText().toString();
 
         if (name_1.length() < 3) {
-            textInputLayout_name.setError("Not Valid");
+            textInputLayoutName.setError("Not Valid");
             return false;
         } else if (surname_1.length() < 3) {
-            textInputLayout_surname.setError("Not Valid");
+            textInputLayoutSurname.setError("Not Valid");
             return false;
         } else {
-            textInputLayout_name.setError(null);
-            textInputLayout_surname.setError(null);
+            textInputLayoutName.setError(null);
+            textInputLayoutSurname.setError(null);
             return true;
         }
 
@@ -84,11 +82,11 @@ public class RegisterStage3Fragment extends Fragment {
     }
 
     public String GetName(){
-        return textInputLayout_name.getEditText().getText().toString();
+        return textInputLayoutName.getEditText().getText().toString();
     }
 
     public String GetSurName(){
-        return textInputLayout_surname.getEditText().getText().toString();
+        return textInputLayoutSurname.getEditText().getText().toString();
     }
 
 }

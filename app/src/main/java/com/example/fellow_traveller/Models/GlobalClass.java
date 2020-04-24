@@ -4,12 +4,16 @@ import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.content.SharedPreferences;
 import android.util.Log;
+
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 
+import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.R;
+import com.example.fellow_traveller.Register.RegisterContainerActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -27,17 +31,16 @@ public class GlobalClass extends Application {
     private static final String CHANNEL_NAME_1 = "This is Channel passenger_notification";
 
 
-    private UserAuthModel current_user;
+    private UserAuthModel currentUser;
     private OkHttpClient.Builder okHttpClient;
 
     public UserAuthModel getCurrent_user() {
-        return current_user;
+        return currentUser;
     }
 
-    public void setCurrent_user(UserAuthModel current_user) {
-        this.current_user = current_user;
+    public void setCurrent_user(UserAuthModel currentUser) {
+        this.currentUser = currentUser;
     }
-
 
 
     public OkHttpClient.Builder getOkHttpClient() {
@@ -46,9 +49,9 @@ public class GlobalClass extends Application {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
-                Log.i("getAccess_token", current_user.getAccessToken());
+                Log.i("getAccess_token", currentUser.getAccessToken());
 
-                Request.Builder newRequest = request.newBuilder().header("authorization", current_user.getAccessToken());
+                Request.Builder newRequest = request.newBuilder().header("authorization", currentUser.getAccessToken());
                 return chain.proceed(newRequest.build());
             }
         }));
@@ -58,7 +61,7 @@ public class GlobalClass extends Application {
 
     @Override
     public void onCreate() {
-       // createNotificationChannels();
+        // createNotificationChannels();
         LoadClass();
 
         super.onCreate();
@@ -78,7 +81,7 @@ public class GlobalClass extends Application {
 
             NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-            if(manager == null){
+            if (manager == null) {
                 manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             }
             manager.createNotificationChannel(channel1);
@@ -92,7 +95,21 @@ public class GlobalClass extends Application {
         Type type = new TypeToken<UserAuthModel>() {
         }.getType();
         UserAuthModel userAuth = gson.fromJson(json, type);
-        current_user = userAuth;
+        currentUser = userAuth;
+    }
+
+    public void SaveClass(UserAuthModel userAuth) {
+        SharedPreferences mPrefs = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(userAuth);
+        editor.putString(getResources().getString(R.string.USER_INFO), json);
+        Log.i("SaveClass", "2");
+
+        editor.apply();
+        currentUser = userAuth;
+
+
     }
 }
 

@@ -1,4 +1,4 @@
-package com.example.fellow_traveller.Models;
+package com.example.fellow_traveller.ClientAPI.Models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

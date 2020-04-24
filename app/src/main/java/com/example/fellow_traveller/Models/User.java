@@ -29,11 +29,7 @@ public class User {
         this.phone = phone;
     }
 
-    // TODO This needs to be removed.
-    //  Don't see a reason for it to exist.
-    public User() {
 
-    }
 
     public User(String name, String surname) {
         this.name = name;

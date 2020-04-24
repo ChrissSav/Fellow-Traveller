@@ -1,6 +1,9 @@
-package com.example.fellow_traveller.Models;
+package com.example.fellow_traveller.ClientAPI.Models;
 
-import java.sql.Date;
+import com.example.fellow_traveller.ClientAPI.Models.Car;
+import com.example.fellow_traveller.Models.Passenger;
+import com.example.fellow_traveller.Models.UserBase;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

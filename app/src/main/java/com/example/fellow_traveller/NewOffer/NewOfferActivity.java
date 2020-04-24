@@ -80,29 +80,29 @@ public class NewOfferActivity extends AppCompatActivity {
         button_next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.i("fff",fra.toString());
-                if (fra.toString().equals("NewOfferStage1Fragment") && newOfferStage1Fragment.isOk()) {
+                if (fra.toString().equals("NewOfferStage1Fragment") && newOfferStage1Fragment.validateFragment()) {
                     fra = newOfferStage2Fragment;
                     progressBar.setProgress(num_num * newOfferStage2Fragment.getRank());
                     //button_next.setText("Αποστολή");
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
-                } else if (fra.toString().equals("NewOfferStage2Fragment") && newOfferStage2Fragment.isOk() ) {
+                } else if (fra.toString().equals("NewOfferStage2Fragment") && newOfferStage2Fragment.validateFragment() ) {
                     progressBar.setProgress(num_num * newOfferStage3Fragment.getRank());
                     fra = newOfferStage3Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
-                }else if (fra.toString().equals("NewOfferStage3Fragment")  && newOfferStage3Fragment.isOk() ) {
+                }else if (fra.toString().equals("NewOfferStage3Fragment")  && newOfferStage3Fragment.validateFragment() ) {
                     progressBar.setProgress(num_num * newOfferStage4Fragment.getRank());
                     newOfferStage4Fragment.setNum_of_passengers(Integer.parseInt(newOfferStage3Fragment.getSeats()));
                     fra = newOfferStage4Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
-                }else if (fra.toString().equals("NewOfferStage4Fragment")  && newOfferStage4Fragment.isOk()) {
+                }else if (fra.toString().equals("NewOfferStage4Fragment")  && newOfferStage4Fragment.validateFragment()) {
                     progressBar.setProgress(num_num * newOfferStage5Fragment.getRank());
                     fra = newOfferStage5Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
                 }
-                else if (fra.toString().equals("NewOfferStage5Fragment")  && newOfferStage4Fragment.isOk()) {
+                else if (fra.toString().equals("NewOfferStage5Fragment")  && newOfferStage4Fragment.validateFragment()) {
                     progressBar.setProgress(num_num * newOfferStage6Fragment.getRank());
                     newOfferStage6Fragment.setFrom(newOfferStage1Fragment.getDest_from());
                     newOfferStage6Fragment.setTo(newOfferStage1Fragment.getDest_to());
