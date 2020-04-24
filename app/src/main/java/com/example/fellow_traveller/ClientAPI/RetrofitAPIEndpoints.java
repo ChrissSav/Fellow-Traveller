@@ -5,12 +5,10 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 
-import com.example.fellow_traveller.API.Status_Handling;
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
-import com.example.fellow_traveller.ClientAPI.Models.Car;
-import com.example.fellow_traveller.Models.NotificationModel;
+import com.example.fellow_traveller.ClientAPI.Models.NotificationModel;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;

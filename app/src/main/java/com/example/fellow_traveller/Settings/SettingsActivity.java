@@ -8,21 +8,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.API.RetrofitService;
 import com.example.fellow_traveller.API.Status_Handling;
-import com.example.fellow_traveller.Settings.ChangePassword;
-import com.example.fellow_traveller.HomeFragments.HomeActivity;
-import com.example.fellow_traveller.LoginActivity;
 import com.example.fellow_traveller.MainActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
-import com.example.fellow_traveller.Models.UserAuth;
 import com.example.fellow_traveller.R;
-import com.example.fellow_traveller.Register.RegisterContainerActivity;
-import com.example.fellow_traveller.SplashActivity;
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;

@@ -5,9 +5,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class PassengerModel {
 
+
     @SerializedName("user")
     @Expose
-    private UserModel user;
+    private UserBaseModel user;
     @SerializedName("bags")
     @Expose
     private int bags;
@@ -16,11 +17,11 @@ public class PassengerModel {
     private String pet;
 
 
-    public UserModel getUser() {
+    public UserBaseModel getUser() {
         return user;
     }
 
-    public void setUser(UserModel user) {
+    public void setUser(UserBaseModel user) {
         this.user = user;
     }
 

@@ -36,7 +36,7 @@ public class TripModel {
     private Integer id;
     @SerializedName("creator")
     @Expose
-    private UserModel creator;
+    private UserBaseModel creator;
     @SerializedName("car")
     @Expose
     private CarModel car;
@@ -123,11 +123,11 @@ public class TripModel {
         this.id = id;
     }
 
-    public UserModel getCreator() {
+    public UserBaseModel getCreator() {
         return creator;
     }
 
-    public void setCreator(UserModel creator) {
+    public void setCreator(UserBaseModel creator) {
         this.creator = creator;
     }
 

@@ -4,7 +4,7 @@ package com.example.fellow_traveller.ClientAPI.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UserModel {
+public class UserBaseModel {
 
     @SerializedName("name")
     @Expose
@@ -15,6 +15,11 @@ public class UserModel {
     @SerializedName("id")
     @Expose
     private Integer id;
+
+    public UserBaseModel(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
 
     public String getName() {
         return name;
@@ -38,6 +43,14 @@ public class UserModel {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getFullName() {
+        return name + " " + surname;
+    }
+
+    public Boolean user_Info_OK() {
+        return name != null && surname != null && id != 0;
     }
 
 }

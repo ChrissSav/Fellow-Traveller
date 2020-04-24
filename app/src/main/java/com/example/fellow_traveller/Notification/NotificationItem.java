@@ -1,9 +1,9 @@
 package com.example.fellow_traveller.Notification;
 
-import com.example.fellow_traveller.Models.User;
+import com.example.fellow_traveller.ClientAPI.Models.UserBaseModel;
 
 public class NotificationItem {
-    private User user;
+    private UserBaseModel user;
     private String Status;
 
 
@@ -15,11 +15,11 @@ public class NotificationItem {
         Status = status;
     }
 
-    public User getUser() {
+    public UserBaseModel getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserBaseModel user) {
         this.user = user;
     }
 }

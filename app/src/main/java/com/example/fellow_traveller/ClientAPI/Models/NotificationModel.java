@@ -1,12 +1,10 @@
-package com.example.fellow_traveller.Models;
-
-import com.example.fellow_traveller.ClientAPI.Models.Trip;
+package com.example.fellow_traveller.ClientAPI.Models;
 
 public class NotificationModel {
 
     private int id;
-    private UserBase user;
-    private Trip trip;
+    private UserBaseModel user;
+    private TripModel trip;
     private String read;
 
     public int getId() {
@@ -17,19 +15,19 @@ public class NotificationModel {
         this.id = id;
     }
 
-    public UserBase getUser() {
+    public UserBaseModel getUser() {
         return user;
     }
 
-    public void setUser(UserBase user) {
+    public void setUser(UserBaseModel user) {
         this.user = user;
     }
 
-    public Trip getTrip() {
+    public TripModel getTrip() {
         return trip;
     }
 
-    public void setTrip(Trip trip) {
+    public void setTrip(TripModel trip) {
         this.trip = trip;
     }
 

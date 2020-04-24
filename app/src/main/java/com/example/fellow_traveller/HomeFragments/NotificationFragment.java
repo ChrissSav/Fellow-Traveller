@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.API.RetrofitService;
-import com.example.fellow_traveller.Models.User;
+import com.example.fellow_traveller.ClientAPI.Models.UserBaseModel;
 import com.example.fellow_traveller.Notification.NotificationAdapter;
 import com.example.fellow_traveller.Notification.NotificationItem;
 import com.example.fellow_traveller.R;
@@ -21,7 +21,6 @@ import com.example.fellow_traveller.R;
 import java.util.ArrayList;
 
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class NotificationFragment extends Fragment {
@@ -73,12 +72,12 @@ public class NotificationFragment extends Fragment {
         retrofitService = retrofit.create(RetrofitService.class);*/
         notificationList = new ArrayList<>();
         NotificationItem notificationItem = new NotificationItem();
-        notificationItem.setUser(new User("Φωτης", "Πεχλιβανης"));
+        notificationItem.setUser(new UserBaseModel("Φωτης", "Πεχλιβανης"));
         notificationItem.setStatus("read");
         notificationList.add(notificationItem);
         notificationItem = new NotificationItem();
         notificationItem.setStatus("notread");
-        notificationItem.setUser(new User("Σπυρος", "Ραντογλου"));
+        notificationItem.setUser(new UserBaseModel("Σπυρος", "Ραντογλου"));
         notificationList.add(notificationItem);
         buildRecyclerView();
     }

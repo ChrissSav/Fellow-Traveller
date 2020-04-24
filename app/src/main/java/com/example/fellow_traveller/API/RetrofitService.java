@@ -1,7 +1,7 @@
 package com.example.fellow_traveller.API;
 
 
-import com.example.fellow_traveller.Models.NotificationModel;
+import com.example.fellow_traveller.ClientAPI.Models.NotificationModel;
 import com.example.fellow_traveller.ClientAPI.Models.Car;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.PlaceAutocomplete.PlaceAPi;
