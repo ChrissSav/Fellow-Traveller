@@ -12,19 +12,13 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.fellow_traveller.API.RetrofitService;
-import com.example.fellow_traveller.Notification.NotificationAdapter;
+import com.example.fellow_traveller.ClientAPI.RetrofitAPIEndpoints;
 import com.example.fellow_traveller.R;
-import com.example.fellow_traveller.SearchAndBook.Search2Activity;
-import com.example.fellow_traveller.SearchAndBook.SearchActivity;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -37,8 +31,8 @@ public class AddLocationActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private PlaceAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<Predictions> places_list;
-    private RetrofitService retrofitService;
+    private ArrayList<PredictionsModel> places_list;
+    private RetrofitAPIEndpoints retrofitService;
     private Retrofit retrofit;
     private EditText editText;
     private ImageButton button_back;
@@ -121,20 +115,20 @@ public class AddLocationActivity extends AppCompatActivity {
 
         retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.PLACE_URL))
                 .addConverterFactory(GsonConverterFactory.create()).build();
-        retrofitService = retrofit.create(RetrofitService.class);
+        retrofitService = retrofit.create(RetrofitAPIEndpoints.class);
         String key = getResources().getString(R.string.PLACE_KEY);
         String language = getResources().getString(R.string.PLACE_LANGUAGE);
         String country ="country:gr";
-        Call<PlaceAPi> call = retrofitService.getPlaces(input, key,language,country);
-        call.enqueue(new Callback<PlaceAPi>() {
+        Call<PlaceAPiModel> call = retrofitService.getPlaces(input, key,language,country);
+        call.enqueue(new Callback<PlaceAPiModel>() {
             @Override
-            public void onResponse(Call<PlaceAPi> call, Response<PlaceAPi> response) {
+            public void onResponse(Call<PlaceAPiModel> call, Response<PlaceAPiModel> response) {
                 if (!response.isSuccessful()) {
 
                     return;
                 }
 
-                PlaceAPi placeAPi = response.body();
+                PlaceAPiModel placeAPi = response.body();
                 places_list = placeAPi.getPredictions();
                 buildRecyclerView();
 
@@ -142,7 +136,7 @@ public class AddLocationActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<PlaceAPi> call, Throwable t) {
+            public void onFailure(Call<PlaceAPiModel> call, Throwable t) {
                 Log.i("GetPlaces", "onFailure "+t.getMessage());
 
             }

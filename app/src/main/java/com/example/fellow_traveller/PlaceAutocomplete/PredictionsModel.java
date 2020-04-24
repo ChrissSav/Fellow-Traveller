@@ -1,6 +1,6 @@
 package com.example.fellow_traveller.PlaceAutocomplete;
 
-public class Predictions {
+public class PredictionsModel {
     private String description;
     private String id;
     private String place_id;

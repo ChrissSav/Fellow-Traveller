@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ExampleViewHolder> {
 
-    private ArrayList<Predictions> mExampleList;
+    private ArrayList<PredictionsModel> mExampleList;
     private OnItemClickListener mListener;
 
 
@@ -53,7 +53,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ExampleViewH
         }
     }
 
-    public PlaceAdapter(ArrayList<Predictions> exampleList) {
+    public PlaceAdapter(ArrayList<PredictionsModel> exampleList) {
         mExampleList = exampleList;
     }
 
@@ -66,7 +66,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ExampleViewH
 
     @Override
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
-        Predictions currentItem = mExampleList.get(position);
+        PredictionsModel currentItem = mExampleList.get(position);
         holder.button.setText(currentItem.getDescription());
 
     }

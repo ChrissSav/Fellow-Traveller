@@ -2,15 +2,15 @@ package com.example.fellow_traveller.PlaceAutocomplete;
 
 import java.util.ArrayList;
 
-public class PlaceAPi {
-    private ArrayList<Predictions> predictions;
+public class PlaceAPiModel {
+    private ArrayList<PredictionsModel> predictions;
     private String status;
 
-    public ArrayList<Predictions> getPredictions() {
+    public ArrayList<PredictionsModel> getPredictions() {
         return predictions;
     }
 
-    public void setPredictions(ArrayList<Predictions> predictions) {
+    public void setPredictions(ArrayList<PredictionsModel> predictions) {
         this.predictions = predictions;
     }
 

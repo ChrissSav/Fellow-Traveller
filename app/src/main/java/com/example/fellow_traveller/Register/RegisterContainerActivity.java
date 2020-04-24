@@ -5,9 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -20,20 +18,10 @@ import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.R;
-import com.example.fellow_traveller.API.RetrofitService;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
-import java.io.IOException;
 import java.util.HashMap;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterContainerActivity extends AppCompatActivity {
 
@@ -53,9 +41,6 @@ public class RegisterContainerActivity extends AppCompatActivity {
 
     //Retrofit
 
-    private RetrofitService retrofitService;
-    private Retrofit retrofit;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +51,6 @@ public class RegisterContainerActivity extends AppCompatActivity {
 
         num_num = 100 / stages;
         userPhone = getIntent().getStringExtra("USER_PHONE");
-
-        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL)).addConverterFactory(GsonConverterFactory.create()).build();
-        retrofitService = retrofit.create(RetrofitService.class);
 
         progressBar = findViewById(R.id.RegisterActivity_progressBar);
         buttonNext = findViewById(R.id.RegisterActivity_button_next);

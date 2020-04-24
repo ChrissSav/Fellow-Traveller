@@ -12,25 +12,15 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.fellow_traveller.API.RetrofitService;
-import com.example.fellow_traveller.ClientAPI.Status_Handling;
 import com.example.fellow_traveller.ClientAPI.Callbacks.TripRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
-import com.google.gson.JsonObject;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NewOfferActivity extends AppCompatActivity {
     private final int stages = 6;
@@ -48,10 +38,6 @@ public class NewOfferActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private int num_num;
     private GlobalClass globalClass;
-
-
-    private RetrofitService retrofitService;
-    private Retrofit retrofit;
 
 
     @Override
@@ -182,68 +168,7 @@ public class NewOfferActivity extends AppCompatActivity {
 
 
 
-    public void RegisterTrip() {
 
-
-        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL))
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(globalClass.getOkHttpClient().build())
-                .build();
-
-        retrofitService = retrofit.create(RetrofitService.class);
-
-        String dest_from = newOfferStage1Fragment.getDest_from();
-        String dest_to = newOfferStage1Fragment.getDest_to();
-
-        String date = newOfferStage2Fragment.getDate();
-        String time = newOfferStage2Fragment.getTime();
-        String pet = newOfferStage3Fragment.getPets();
-        int max_seats =  Integer.parseInt(newOfferStage3Fragment.getSeats());
-
-
-        int max_bags = Integer.parseInt(newOfferStage3Fragment.getBags());
-        int car_id = newOfferStage3Fragment.getCarObject().getId();
-
-        Float price = Float.parseFloat(newOfferStage4Fragment.getPrice());
-        String msg = newOfferStage5Fragment.getMsg();
-
-        JsonObject trip_object = new JsonObject();
-        trip_object.addProperty("dest_from", dest_from);
-        trip_object.addProperty("dest_to", dest_to);
-        trip_object.addProperty("pet", pet == "Επιτρέπω" ? "yes" : "no");
-        trip_object.addProperty("max_seats", max_seats);
-        trip_object.addProperty("max_bags", max_bags);
-        trip_object.addProperty("car_id", car_id);
-        trip_object.addProperty("price", price);
-        trip_object.addProperty("timestamp", dateTimeToTimestamp(date,time));
-
-        trip_object.addProperty("msg", msg);
-
-        Call<Status_Handling> call = retrofitService.registerTrip(trip_object);
-        call.enqueue(new Callback<Status_Handling>() {
-            @Override
-            public void onResponse(Call<Status_Handling> call, Response<Status_Handling> response) {
-                if (!response.isSuccessful()) {
-                    try {
-                        Toast.makeText(NewOfferActivity.this, response.errorBody().string(), Toast.LENGTH_SHORT).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    return;
-                }
-
-                Toast.makeText(NewOfferActivity.this,"Επιτυχείς καταχώρηση", Toast.LENGTH_SHORT).show();
-                onBackPressed();
-                finish();
-
-            }
-
-            @Override
-            public void onFailure(Call<Status_Handling> call, Throwable t) {
-
-            }
-        });
-    }
 
     public void tripRegister(){
         String dest_from = newOfferStage1Fragment.getDest_from();

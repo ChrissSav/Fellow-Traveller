@@ -4,11 +4,13 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.ClientAPI.Models.NotificationModel;
+import com.example.fellow_traveller.PlaceAutocomplete.PlaceAPiModel;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
@@ -53,4 +55,15 @@ public interface RetrofitAPIEndpoints {
 
     @GET("/notifications")
     Call<List<NotificationModel>> userNotifications();
+
+
+
+    //PlaceAPi
+
+    @GET("json")
+    Call<PlaceAPiModel> getPlaces(
+            @Query("input") String input,
+            @Query("key") String key,
+            @Query("language") String language,
+            @Query("components") String components);
 }

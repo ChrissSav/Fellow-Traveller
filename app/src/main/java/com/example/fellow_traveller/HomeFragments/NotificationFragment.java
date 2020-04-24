@@ -12,15 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.fellow_traveller.API.RetrofitService;
 import com.example.fellow_traveller.ClientAPI.Models.UserBaseModel;
 import com.example.fellow_traveller.Notification.NotificationAdapter;
 import com.example.fellow_traveller.Notification.NotificationItem;
 import com.example.fellow_traveller.R;
 
 import java.util.ArrayList;
-
-import retrofit2.Retrofit;
 
 
 public class NotificationFragment extends Fragment {
@@ -30,8 +27,6 @@ public class NotificationFragment extends Fragment {
     private NotificationAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<NotificationItem> notificationList;
-    private RetrofitService retrofitService;
-    private Retrofit retrofit;
 
     public NotificationFragment() {
         // Required empty public constructor
