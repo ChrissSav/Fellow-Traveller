@@ -8,6 +8,7 @@ import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserAuthCallback;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserCarsCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserLogoutCallBack;
+import com.example.fellow_traveller.ClientAPI.Callbacks.UserRegisterCallback;
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
@@ -134,6 +135,42 @@ public class FellowTravellerAPI {
             }
         });
 
+    }
+
+
+    public static void userRegister(final GlobalClass cont,String name, String surname,String email,String password,String phone,final UserRegisterCallback userRegisterCallback) {
+        retrofit = new Retrofit.Builder().baseUrl(cont.getResources().getString(R.string.FT_API_URL))
+                .addConverterFactory(GsonConverterFactory.create()).build();
+
+        retrofitAPIEndpoints = retrofit.create(RetrofitAPIEndpoints.class);
+
+
+        JsonObject user_obj = new JsonObject();
+        user_obj.addProperty("name", name);
+        user_obj.addProperty("surname", surname);
+        user_obj.addProperty("email", email);
+        user_obj.addProperty("password", password);
+        user_obj.addProperty("phone",phone);
+
+        retrofitAPIEndpoints.userRegister(user_obj).enqueue(new Callback<UserAuthModel>() {
+            @Override
+            public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
+                if (!response.isSuccessful()) {
+                    try {
+                        userRegisterCallback.onFailure(response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+                userRegisterCallback.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<UserAuthModel> call, Throwable t) {
+                userRegisterCallback.onFailure(cont.getResources().getString(R.string.API_UNREACHABLE));
+            }
+        });
     }
 
 

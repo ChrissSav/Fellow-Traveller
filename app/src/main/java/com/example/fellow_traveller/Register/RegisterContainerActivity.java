@@ -14,6 +14,8 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.fellow_traveller.ClientAPI.Callbacks.UserRegisterCallback;
+import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
@@ -97,8 +99,8 @@ public class RegisterContainerActivity extends AppCompatActivity {
                     buttonNext.setText("Complete");
 
                 } else if (fra.toString().equals("RegisterStage3Fragment") && registerStage3Fragment.validateFragment()) {
-                    ////   Toast.makeText(RegisterContainerActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                    RegisterUser();
+                    Toast.makeText(RegisterContainerActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                    newRegisterUser();
                 }
             }
         });
@@ -130,47 +132,29 @@ public class RegisterContainerActivity extends AppCompatActivity {
 
     }
 
-    public void RegisterUser() {
-        final String email = registerStage1Fragment.getEmail();
-        final String password = registerStage2Fragment.getPassword();
+
+    public void newRegisterUser() {
+        String email = registerStage1Fragment.getEmail();
+        String password = registerStage2Fragment.getPassword();
         String name = registerStage3Fragment.GetName();
         String surname = registerStage3Fragment.GetSurName();
 
-
-        JsonObject user_obj = new JsonObject();
-        user_obj.addProperty("name", name);
-        user_obj.addProperty("surname", surname);
-        user_obj.addProperty("email", email);
-        user_obj.addProperty("password", password);
-        user_obj.addProperty("phone",userPhone);
-
-        Call<UserAuthModel> call = retrofitService.registerUser(user_obj);
-        call.enqueue(new Callback<UserAuthModel>() {
+        FellowTravellerAPI.userRegister(globalClass, name, surname, email, password, userPhone, new UserRegisterCallback() {
             @Override
-            public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
-                Log.i("SaveClass", "-2");
-                if (!response.isSuccessful()) {
-                    try {
-                        Toast.makeText(RegisterContainerActivity.this, response.errorBody().string(), Toast.LENGTH_SHORT).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    return;
-                }
-                UserAuthModel userAuth = response.body();
-                Save(userAuth);
-
+            public void onSuccess(UserAuthModel user) {
+                Save(user);
             }
 
             @Override
-            public void onFailure(Call<UserAuthModel> call, Throwable t) {
-                Log.i("Register_Container", "onFailure: " + t.getMessage());
+            public void onFailure(String errorMsg) {
+                Toast.makeText(RegisterContainerActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
 
-    private void firebaseRegister(String id, String name, String surname) {
+        private void firebaseRegister(String id, String name, String surname) {
         userDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
         HashMap<String, String> userMap = new HashMap<>();
         userMap.put("name", name);
