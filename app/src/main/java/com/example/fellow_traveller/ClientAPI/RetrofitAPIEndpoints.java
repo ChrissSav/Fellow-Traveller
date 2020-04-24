@@ -35,7 +35,7 @@ public interface RetrofitAPIEndpoints {
 
     //Trip
     @POST("/trips")
-    Call<Status_Handling> tripRegister(
+    Call<StatusHandleModel> tripRegister(
             @Body JsonObject trip
     );
 

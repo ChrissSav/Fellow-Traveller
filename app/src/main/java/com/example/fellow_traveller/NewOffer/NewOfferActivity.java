@@ -14,6 +14,9 @@ import android.widget.Toast;
 
 import com.example.fellow_traveller.API.RetrofitService;
 import com.example.fellow_traveller.API.Status_Handling;
+import com.example.fellow_traveller.ClientAPI.Callbacks.TripRegisterCallBack;
+import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
+import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.google.gson.JsonObject;
@@ -31,8 +34,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NewOfferActivity extends AppCompatActivity {
     private final int stages = 6;
-    private Button button_next;
-    private ImageButton btn_back;
+    private Button buttonNext;
+    private ImageButton btnBack;
     private FragmentManager fragmentManager;
     private Fragment fra;
     private NewOfferStage1Fragment newOfferStage1Fragment = new NewOfferStage1Fragment();
@@ -64,8 +67,8 @@ public class NewOfferActivity extends AppCompatActivity {
 
 
         progressBar = findViewById(R.id.NewOfferActivity_progressBar);
-        button_next = findViewById(R.id.NewOfferActivity_button_next);
-        btn_back = findViewById(R.id.NewOfferActivity_imageButton);
+        buttonNext = findViewById(R.id.NewOfferActivity_button_next);
+        btnBack = findViewById(R.id.NewOfferActivity_imageButton);
 
 
         progressBar.setProgress(num_num * newOfferStage1Fragment.getRank());
@@ -77,13 +80,13 @@ public class NewOfferActivity extends AppCompatActivity {
         fra = newOfferStage1Fragment;
         fragmentManager.beginTransaction().replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
-        button_next.setOnClickListener(new View.OnClickListener() {
+        buttonNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.i("fff",fra.toString());
                 if (fra.toString().equals("NewOfferStage1Fragment") && newOfferStage1Fragment.validateFragment()) {
                     fra = newOfferStage2Fragment;
                     progressBar.setProgress(num_num * newOfferStage2Fragment.getRank());
-                    //button_next.setText("Αποστολή");
+                    //buttonNext.setText("Αποστολή");
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
                 } else if (fra.toString().equals("NewOfferStage2Fragment") && newOfferStage2Fragment.validateFragment() ) {
                     progressBar.setProgress(num_num * newOfferStage3Fragment.getRank());
@@ -123,16 +126,16 @@ public class NewOfferActivity extends AppCompatActivity {
 
                     fra = newOfferStage6Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
-                    button_next.setText("Καταχώρηση");
+                    buttonNext.setText("Καταχώρηση");
 
                 }else if (fra.toString().equals("NewOfferStage6Fragment")) {
-                    RegisterTrip();
+                    tripRegister();
                 }
 
             }
         });
 
-        btn_back.setOnClickListener(new View.OnClickListener() {
+        btnBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 onBackPressed();
             }
@@ -144,7 +147,7 @@ public class NewOfferActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (fra.toString().equals("NewOfferStage6Fragment")) {
             progressBar.setProgress(num_num * newOfferStage5Fragment.getRank());
-            button_next.setText("Επόμενο");
+            buttonNext.setText("Επόμενο");
             fra = newOfferStage5Fragment;
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
@@ -212,7 +215,7 @@ public class NewOfferActivity extends AppCompatActivity {
         trip_object.addProperty("max_bags", max_bags);
         trip_object.addProperty("car_id", car_id);
         trip_object.addProperty("price", price);
-        trip_object.addProperty("timestamp", DateTimeToTimestamp(date,time));
+        trip_object.addProperty("timestamp", dateTimeToTimestamp(date,time));
 
         trip_object.addProperty("msg", msg);
 
@@ -242,7 +245,41 @@ public class NewOfferActivity extends AppCompatActivity {
         });
     }
 
-    public long DateTimeToTimestamp(String date, String time){
+    public void tripRegister(){
+        String dest_from = newOfferStage1Fragment.getDest_from();
+        String dest_to = newOfferStage1Fragment.getDest_to();
+
+        String date = newOfferStage2Fragment.getDate();
+        String time = newOfferStage2Fragment.getTime();
+        String pet = newOfferStage3Fragment.getPets();
+        int max_seats =  Integer.parseInt(newOfferStage3Fragment.getSeats());
+
+
+        int max_bags = Integer.parseInt(newOfferStage3Fragment.getBags());
+        int car_id = newOfferStage3Fragment.getCarObject().getId();
+
+        Float price = Float.parseFloat(newOfferStage4Fragment.getPrice());
+        String msg = newOfferStage5Fragment.getMsg();
+
+        FellowTravellerAPI.tripRegister(globalClass,dest_from,dest_to,pet,max_seats,max_bags,car_id,
+                price,dateTimeToTimestamp(date,time),msg, new TripRegisterCallBack() {
+            @Override
+            public void onSuccess(StatusHandleModel status) {
+                Toast.makeText(NewOfferActivity.this,"Επιτυχείς καταχώρηση", Toast.LENGTH_SHORT).show();
+                onBackPressed();
+                finish();
+            }
+
+            @Override
+            public void onFailure(String errorMsg) {
+                Toast.makeText(NewOfferActivity.this,errorMsg, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
+    public long dateTimeToTimestamp(String date, String time){
         long p = Long.parseLong("0");
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");

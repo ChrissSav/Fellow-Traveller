@@ -16,6 +16,7 @@ import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.Car;
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
+import com.example.fellow_traveller.LoginActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.google.gson.JsonObject;
@@ -128,6 +129,7 @@ public class AddCarSettingsActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(String errorMsg) {
+                Toast.makeText(AddCarSettingsActivity.this, errorMsg, Toast.LENGTH_LONG).show();
 
             }
         });

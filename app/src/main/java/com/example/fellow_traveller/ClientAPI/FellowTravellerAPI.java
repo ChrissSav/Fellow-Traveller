@@ -3,6 +3,7 @@ package com.example.fellow_traveller.ClientAPI;
 import android.util.Log;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
+import com.example.fellow_traveller.ClientAPI.Callbacks.TripRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserAuthCallback;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserCarsCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserLogoutCallBack;
@@ -16,7 +17,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -205,9 +209,47 @@ public class FellowTravellerAPI {
 
 
 
+    //Trip
 
 
+    public static void tripRegister(final GlobalClass cont, String dest_from,String dest_to, String pet, int max_seats, int max_bags, int car_id,
+                                    float price,long timestamp,String msg, final TripRegisterCallBack tripRegisterCallBack) {
+        retrofit = buildRetrofitWithClient(cont);
 
+        retrofitAPIEndpoints = retrofit.create(RetrofitAPIEndpoints.class);
+
+
+        JsonObject trip_object = new JsonObject();
+        trip_object.addProperty("dest_from", dest_from);
+        trip_object.addProperty("dest_to", dest_to);
+        trip_object.addProperty("pet", pet == "Επιτρέπω" ? "yes" : "no");
+        trip_object.addProperty("max_seats", max_seats);
+        trip_object.addProperty("max_bags", max_bags);
+        trip_object.addProperty("car_id", car_id);
+        trip_object.addProperty("price", price);
+        trip_object.addProperty("timestamp", timestamp);
+        trip_object.addProperty("msg", msg);
+
+        retrofitAPIEndpoints.tripRegister(trip_object).enqueue(new Callback<StatusHandleModel>() {
+            @Override
+            public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
+                if (!response.isSuccessful()) {
+                    try {
+                        tripRegisterCallBack.onFailure(response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+                tripRegisterCallBack.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<StatusHandleModel> call, Throwable t) {
+                tripRegisterCallBack.onFailure(cont.getResources().getString(R.string.API_UNREACHABLE));
+            }
+        });
+    }
 
     public static Retrofit buildRetrofitWithClient(GlobalClass globalClass){
        return new Retrofit.Builder().baseUrl(globalClass.getResources().getString(R.string.FT_API_URL)).client(globalClass.getOkHttpClient().build())
