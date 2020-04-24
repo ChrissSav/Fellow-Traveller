@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.API.RetrofitService;
-import com.example.fellow_traveller.API.Status_Handling;
+import com.example.fellow_traveller.ClientAPI.Status_Handling;
 import com.example.fellow_traveller.MainActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;

@@ -1,4 +1,4 @@
-package com.example.fellow_traveller.API;
+package com.example.fellow_traveller.ClientAPI;
 
 public class Status_Handling {
     private String status;

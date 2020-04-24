@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.API.RetrofitService;
-import com.example.fellow_traveller.API.Status_Handling;
+import com.example.fellow_traveller.ClientAPI.Status_Handling;
 import com.example.fellow_traveller.ClientAPI.Callbacks.TripRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;

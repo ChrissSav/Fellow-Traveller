@@ -18,17 +18,14 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.fellow_traveller.API.RetrofitService;
 import com.example.fellow_traveller.Adapters.CarAdapter;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserCarsCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
-import com.example.fellow_traveller.ClientAPI.Models.Car;
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.Settings.AddCarSettingsActivity;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 

@@ -15,21 +15,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.API.RetrofitService;
-import com.example.fellow_traveller.API.Status_Handling;
+import com.example.fellow_traveller.ClientAPI.Status_Handling;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.NewOffer.NewOfferActivity;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.SearchAndBook.SearchActivity;
-import com.example.fellow_traveller.Settings.SettingsActivity;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
