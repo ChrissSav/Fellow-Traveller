@@ -46,6 +46,8 @@ public class MessengerFragment extends Fragment {
     private GlobalClass globalClass;
     private int myId;
     private ArrayList<ConversationItem> conversationsList = new ArrayList<>();
+    private boolean notifyFlag = true;
+
 
 
     public MessengerFragment() {
@@ -88,12 +90,18 @@ public class MessengerFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.conversations_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-        mAdapter = new ConversationAdapter(conversationsList);
+        mAdapter = new ConversationAdapter(conversationsList, getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
+        if(notifyFlag){
+            mAdapter.notifyDataSetChanged();
+            notifyFlag = false;
+
+        }
 
         loadConversation();
+
         
 
     mAdapter.setOnItemClickListener(new ConversationAdapter.OnItemClickListener() {
@@ -102,8 +110,10 @@ public class MessengerFragment extends Fragment {
 
             ConversationItem item = conversationsList.get(position);
             Toast.makeText(globalClass, "Χτυπήθηκε το item " + item.getTripId(), Toast.LENGTH_SHORT).show();
+            notifyFlag = true;
             Intent mainIntent = new Intent(getActivity(), ChatConversationActivity.class);
             mainIntent.putExtra("groupId", item.getTripId());
+
             startActivity(mainIntent);
         }
     });
@@ -119,6 +129,7 @@ public class MessengerFragment extends Fragment {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     conversationsList.clear();
+
                     if(dataSnapshot.getChildrenCount()>0){
                         for (DataSnapshot datasnapshot : dataSnapshot.getChildren()) {
                             ConversationItem item = datasnapshot.getValue(ConversationItem.class);
@@ -134,7 +145,8 @@ public class MessengerFragment extends Fragment {
 
                 }
             });
-
     }
+
+
 
 }

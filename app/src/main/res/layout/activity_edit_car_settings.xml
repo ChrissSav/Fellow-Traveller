@@ -66,7 +66,7 @@
                 android:layout_marginTop="10dp"
                 />
             <EditText
-                android:id="@+id/car_et_car_settings"
+                android:id="@+id/EditCarSettings_car_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@+id/car_image_car_settings"
@@ -83,7 +83,7 @@
                 android:windowSoftInputMode="adjustPan"
                 android:textCursorDrawable="@null"
                 android:maxLines="1"
-                android:inputType="text"
+                android:inputType="textCapWords"
 
                 />
             <View
@@ -152,7 +152,7 @@
                 />
 
             <EditText
-                android:id="@+id/model_et_car_settings"
+                android:id="@+id/EditCarSettings_model_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@+id/model_image_car_settings"
@@ -168,7 +168,7 @@
                 android:windowSoftInputMode="adjustPan"
                 android:textCursorDrawable="@null"
                 android:maxLines="1"
-                android:inputType="text"
+                android:inputType="textCapWords"
 
                 />
 
@@ -223,7 +223,7 @@
                 />
 
             <EditText
-                android:id="@+id/plate_et_car_settings"
+                android:id="@+id/EditCarSettings_plate_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@+id/plate_image_car_settings"
@@ -239,7 +239,8 @@
                 android:windowSoftInputMode="adjustPan"
                 android:textCursorDrawable="@null"
                 android:maxLines="1"
-                android:inputType="text"
+                android:inputType="textCapCharacters"
+                android:textAllCaps="true"
 
                 />
 
@@ -275,7 +276,7 @@
                 android:id="@+id/color_image_car_settings"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:background="@drawable/ic_license_plate"
+                android:background="@drawable/ic_color"
                 app:layout_constraintTop_toBottomOf="@id/color_label_car_settings"
                 app:layout_constraintStart_toStartOf="@id/color_label_car_settings"
                 android:layout_marginTop="10dp"
@@ -294,7 +295,7 @@
                 />
 
             <EditText
-                android:id="@+id/color_et_car_settings"
+                android:id="@+id/EditCarSettings_color_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@+id/color_image_car_settings"
@@ -310,7 +311,7 @@
                 android:windowSoftInputMode="adjustPan"
                 android:textCursorDrawable="@null"
                 android:maxLines="1"
-                android:inputType="text"
+                android:inputType="textCapWords"
 
                 />
 
@@ -326,7 +327,7 @@
                 android:backgroundTint="@color/profile"/>
 
             <Button
-                android:id="@+id/delete_car_button_car_settings"
+                android:id="@+id/EditCarSettings_delete_button"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -347,7 +348,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/color_underline_car_settings" />
             <Button
-                android:id="@+id/AddCarSettingsActivity_button_add"
+                android:id="@+id/EditCarSettingsActivity_button_add"
                 android:layout_width="0dp"
                 android:layout_height="55dp"
                 android:layout_marginStart="25dp"
@@ -360,7 +361,7 @@
                 android:textColor="#fff"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/delete_car_button_car_settings"
+                app:layout_constraintTop_toBottomOf="@id/EditCarSettings_delete_button"
                 android:layout_marginTop="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

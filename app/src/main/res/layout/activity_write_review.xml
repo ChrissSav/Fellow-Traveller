@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Reviews.WriteReviewActivity">
+
+    <TextView
+        android:id="@+id/write_review_rate_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Αξιολογείστε"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="26sp"
+        android:textColor="@color/profile"
+        android:fontFamily="@font/firasans_bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        />
+
+    <ImageButton
+        android:id="@+id/write_review_close_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_close"
+        android:scaleY="1.4"
+        android:scaleX="1.4"
+        android:padding="5dp"
+        app:layout_constraintTop_toTopOf="@id/write_review_rate_tv"
+        app:layout_constraintBottom_toBottomOf="@id/write_review_rate_tv"
+        android:background="?android:selectableItemBackgroundBorderless"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="20dp"
+        />
+
+    <TextView
+        android:id="@+id/write_review_your_rate_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Η αξιολόγηση σας"
+        android:fontFamily="@font/firasans_medium"
+        android:textColor="@color/profile"
+        app:layout_constraintTop_toBottomOf="@id/write_review_rate_tv"
+        app:layout_constraintStart_toStartOf="@id/write_review_rate_tv"
+        android:layout_marginTop="40dp"
+        android:textSize="18sp"
+        />
+
+    <com.willy.ratingbar.ScaleRatingBar
+        android:id="@+id/write_review_simpleRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srb_numStars="5"
+        app:srb_starWidth="42dp"
+        app:srb_starHeight="42dp"
+        app:srb_starPadding="8dp"
+        app:srb_stepSize="1"
+        app:srb_isIndicator="false"
+        app:srb_clickable="true"
+        app:srb_scrollable="true"
+        app:srb_clearRatingEnabled="false"
+        app:layout_constraintBottom_toTopOf="@id/write_review_your_comments_tv"
+        app:layout_constraintTop_toBottomOf="@id/write_review_your_rate_tv"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srb_drawableFilled="@drawable/ic_rating"
+        app:srb_drawableEmpty="@drawable/ic_star"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        >
+    </com.willy.ratingbar.ScaleRatingBar>
+
+    <TextView
+        android:id="@+id/write_review_your_comments_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Τα σχόλια σας"
+        android:fontFamily="@font/firasans_medium"
+        android:textColor="@color/profile"
+        app:layout_constraintTop_toBottomOf="@id/write_review_simpleRatingBar"
+        app:layout_constraintStart_toStartOf="@id/write_review_rate_tv"
+        android:layout_marginTop="40dp"
+        android:textSize="18sp"
+        />
+    <View
+        android:id="@+id/write_review_underline_upper"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/lightGrey"
+        app:layout_constraintTop_toBottomOf="@id/write_review_your_comments_tv"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+    <EditText
+        android:id="@+id/write_review_et"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@null"
+        android:hint="Γράψτε μας κάτι.."
+        android:textColor="@color/profile"
+        android:textSize="16sp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/firasans_light"
+        android:maxLines="10"
+        app:layout_constraintTop_toBottomOf="@id/write_review_underline_upper"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:gravity="top|left"
+        android:windowSoftInputMode="adjustNothing"
+        android:inputType="textCapSentences|textMultiLine"
+        android:textCursorDrawable="@null"/>
+    <View
+        android:id="@+id/write_review_underline_bottom"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/lightGrey"
+        app:layout_constraintTop_toBottomOf="@id/write_review_et"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <Button
+        android:id="@+id/write_review_submit_button"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/main_activity_login_button"
+        android:text="Υποβολή"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/write_review_underline_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
