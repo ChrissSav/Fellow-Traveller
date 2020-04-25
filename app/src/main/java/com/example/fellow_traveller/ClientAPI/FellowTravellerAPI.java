@@ -34,7 +34,7 @@ public class FellowTravellerAPI {
     public FellowTravellerAPI(GlobalClass context) {
         // Pass context from the activity we were called from
         FellowTravellerAPI.context = context;
-        retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.FT_API_URL))
+        retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.API_BASE_URL))
                 .addConverterFactory(GsonConverterFactory.create()).build();
         retrofitAPIEndpoints = retrofit.create(RetrofitAPIEndpoints.class);
     }

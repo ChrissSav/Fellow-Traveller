@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="INVALID_CREDENTIALS">Invalid Credentials.</string>
-    <string name="API_UNREACHABLE">Couldn\'t reach API.</string>
+    <!--API connection-->
+    <string name="API_UNREACHABLE">Αδυναμία επικοινωνίας με το API.</string>
+    <!--Unauthorized API endpoint access-->
+    <string name="API_UNAUTHORIZED">Μη εξουσιοδοτημένη ενέργεια.</string>
+    <!--User registration-->
+    <string name="INVALID_EMAIL_FORMAT">Μη έγκυρο e-mail.</string>
+    <string name="PASSWORD_COMPLEXITY_INVALID">Μη έγκυρος κωδικός πρόσβασης.</string>
+    <string name="PASSWORD_COMPLEXITY_LENGTH">Το ελάχιστο μήκος είναι 8 χαρακτήρες.</string>
+    <string name="PASSWORD_COMPLEXITY_SHOULD_CONTAIN">Πρέπει να περιλαμβάνει τουλάχιστον:</string>
+    <string name="PASSWORD_COMPLEXITY_LOWERCASE_LETTER">ένα πεζό γράμμα.</string>
+    <string name="PASSWORD_COMPLEXITY_CAPITAL_LETTER">ένα κεφαλαίο γράμμα.</string>
+    <string name="PASSWORD_COMPLEXITY_NUMBER">έναν αριθμό.</string>
+    <string name="PASSWORD_COMPLEXITY_SPECIAL_CHARACTER">έναν ειδικό χαρακτήρα</string>
+    <string name="PASSWORD_DO_NOT_MATCH">Οι κωδικοί πρόσβασης δεν ταιριάζουν.</string>
+    <string name="EMAIL_ALREADY_EXISTS">Υπάρχει ήδη λογαριασμός με αυτό το email.</string>
+    <string name="PHONE_ALREADY_EXISTS">Υπάρχει ήδη λογαριασμός με αυτόν τον αριθμό τηλεφώνου.</string>
+    <!--User authentication-->
+    <string name="INVALID_CREDENTIALS">Λάθος email/κωδικός πρόσβασης.</string>
+    <!--Password change-->
+    <string name="PASSWORD_CHANGE_INVALID_CURRENT_PASSWORD">Μη έκγυρος τρέχον κωδικός πρόσβασης.</string>
 </resources>
