@@ -23,8 +23,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.fellow_traveller.ClientAPI.Callbacks.PlaceApiCallBack;
+import com.example.fellow_traveller.ClientAPI.Callbacks.UserAuthCallback;
+import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
+import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
+import com.example.fellow_traveller.LoginActivity;
+import com.example.fellow_traveller.Models.GlobalClass;
+import com.example.fellow_traveller.PlaceAutocomplete.PlaceAPiModel;
 import com.example.fellow_traveller.PlaceAutocomplete.PlaceAdapter;
 import com.example.fellow_traveller.PlaceAutocomplete.PredictionsModel;
 import com.example.fellow_traveller.PlacesAPI.PlaceAutocompleteAdapter;
@@ -44,12 +52,14 @@ public class SearchActivity extends AppCompatActivity {
     private PlaceAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<PredictionsModel> places_list;
-   // private RetrofitService retrofitService;
-    private Retrofit retrofit;
+    private GlobalClass globalClass;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        globalClass = (GlobalClass) getApplicationContext();
 
         destinationAutoComplete = findViewById(R.id.autocomplete_search_destination);
         backButton = findViewById(R.id.back_button_search);
@@ -148,35 +158,23 @@ public class SearchActivity extends AppCompatActivity {
     }
     public void GetPlaces(String input) {
 
-//        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.PLACE_URL))
-//                .addConverterFactory(GsonConverterFactory.create()).build();
-//        retrofitService = retrofit.create(RetrofitService.class);
-//        String key = getResources().getString(R.string.PLACE_KEY);
-//        String language = getResources().getString(R.string.PLACE_LANGUAGE);
-//        String country ="country:gr";
-//        Call<PlaceAPi> call = retrofitService.getPlaces(input, key,language,country);
-//        call.enqueue(new Callback<PlaceAPi>() {
-//            @Override
-//            public void onResponse(Call<PlaceAPi> call, Response<PlaceAPi> response) {
-//                if (!response.isSuccessful()) {
-//
-//                    return;
-//                }
-//
-//                PlaceAPi placeAPi = response.body();
-//                places_list = placeAPi.getPredictions();
-//                buildRecyclerView();
-//
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<PlaceAPi> call, Throwable t) {
-//                Log.i("GetPlaces", "onFailure "+t.getMessage());
-//
-//            }
-//        });
+        new FellowTravellerAPI(globalClass).getPlaces(input, new PlaceApiCallBack() {
+            @Override
+            public void onSuccess(PlaceAPiModel p) {
+                places_list = p.getPredictions();
+                buildRecyclerView();
+            }
+
+            @Override
+            public void onFailure(String errorMsg) {
+                // TODO remove this debug line.
+                Log.d("Authentication", "INVALID LOGIN");
+                //Toast.makeText(LoginActivity.this, errorMsg, Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
+
     public void buildRecyclerView() {
         mRecyclerView = findViewById(R.id.ActivitySearch_recycler_view);
         mRecyclerView.setHasFixedSize(true);
