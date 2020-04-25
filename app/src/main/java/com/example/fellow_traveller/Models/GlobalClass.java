@@ -32,6 +32,7 @@ public class GlobalClass extends Application {
 
 
     private UserAuthModel currentUser;
+
     private OkHttpClient.Builder okHttpClient;
 
     public UserAuthModel getCurrent_user() {
@@ -49,9 +50,9 @@ public class GlobalClass extends Application {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
-                Log.i("getAccess_token", currentUser.getAccessToken());
+                Log.i("getAccess_token", currentUser.getSessionKey());
 
-                Request.Builder newRequest = request.newBuilder().header("authorization", currentUser.getAccessToken());
+                Request.Builder newRequest = request.newBuilder().header("authorization", currentUser.getSessionKey());
                 return chain.proceed(newRequest.build());
             }
         }));

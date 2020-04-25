@@ -22,9 +22,7 @@ public interface RetrofitAPIEndpoints {
 
 
     @POST("auth/logout")
-    Call<StatusHandleModel> userLogout(
-            @Body JsonObject token
-    );
+    Call<StatusHandleModel> userLogout();
 
     //User
     @POST("user")

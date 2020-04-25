@@ -17,7 +17,10 @@ import com.google.gson.JsonObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
+import okhttp3.Headers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,13 +37,24 @@ public class FellowTravellerAPI {
     public FellowTravellerAPI(GlobalClass context) {
         // Pass context from the activity we were called from
         FellowTravellerAPI.context = context;
-        retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.FT_API_URL))
-                .addConverterFactory(GsonConverterFactory.create()).build();
+        if (context.getCurrent_user() == null) {
+            Log.d("FellowTravellerAPI", " with out client");
+
+            retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.FELLOW_API_URL))
+                    .addConverterFactory(GsonConverterFactory.create()).build();
+        }else{
+            Log.d("FellowTravellerAPI", " with  client");
+
+            retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.FELLOW_API_URL))
+                    .client(context.getOkHttpClient().build())
+                    .addConverterFactory(GsonConverterFactory.create()).build();
+        }
         retrofitAPIEndpoints = retrofit.create(RetrofitAPIEndpoints.class);
     }
 
     public static void userAuthenticate(String email, final String password, final UserAuthCallback userAuthCallback) {
         JsonObject json = buildJSON(new String[]{"email", "password"}, email, password);
+
         retrofitAPIEndpoints.userAuthenticate(json).enqueue(new Callback<UserAuthModel>() {
             @Override
             public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
@@ -49,6 +63,9 @@ public class FellowTravellerAPI {
                     userAuthCallback.onFailure(context.getResources().getString(R.string.INVALID_CREDENTIALS));
                     return;
                 }
+                String key = response.headers().get("Set-Cookie").split(";")[0].split("=")[1];
+                UserAuthModel userAuthModel = response.body();
+                userAuthModel.setSessionKey(key);
                 userAuthCallback.onSuccess(response.body());
             }
 
@@ -62,8 +79,7 @@ public class FellowTravellerAPI {
 
     public static void userLogout(final UserLogoutCallBack userLogoutCallBack) {
         // TODO change this method of logging out with sessionID cookie instead.
-        JsonObject json = buildJSON(new String[]{"refresh_token"}, context.getCurrent_user().getRefreshToken());
-        retrofitAPIEndpoints.userLogout(json).enqueue(new Callback<StatusHandleModel>() {
+        retrofitAPIEndpoints.userLogout().enqueue(new Callback<StatusHandleModel>() {
             @Override
             public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
                 if (!response.isSuccessful()) {
