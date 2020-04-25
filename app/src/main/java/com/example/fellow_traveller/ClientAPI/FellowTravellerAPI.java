@@ -19,10 +19,7 @@ import com.google.gson.JsonObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
-import okhttp3.Headers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,12 +36,13 @@ public class FellowTravellerAPI {
     public FellowTravellerAPI(GlobalClass context) {
         // Pass context from the activity we were called from
         FellowTravellerAPI.context = context;
+        // TODO getCurrentUser()
         if (context.getCurrent_user() == null) {
             Log.d("FellowTravellerAPI", " with out client");
 
             retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.API_BASE_URL))
                     .addConverterFactory(GsonConverterFactory.create()).build();
-        }else{
+        } else {
             Log.d("FellowTravellerAPI", " with  client");
 
             retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.API_BASE_URL))
@@ -215,13 +213,13 @@ public class FellowTravellerAPI {
     public static void getPlaces(String place, final PlaceApiCallBack placeApiCallBack) {
         String key = context.getResources().getString(R.string.PLACE_KEY);
         String language = context.getResources().getString(R.string.PLACE_LANGUAGE);
-        String country ="country:gr";
+        String country = "country:gr";
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.PLACE_URL))
                 .addConverterFactory(GsonConverterFactory.create()).build();
-        RetrofitAPIEndpoints  retrofitService = retrofit.create(RetrofitAPIEndpoints.class);
+        RetrofitAPIEndpoints retrofitService = retrofit.create(RetrofitAPIEndpoints.class);
 
-        Call<PlaceAPiModel> call = retrofitService.getPlaces(place, key,language,country);
+        Call<PlaceAPiModel> call = retrofitService.getPlaces(place, key, language, country);
         call.enqueue(new Callback<PlaceAPiModel>() {
             @Override
             public void onResponse(Call<PlaceAPiModel> call, Response<PlaceAPiModel> response) {
