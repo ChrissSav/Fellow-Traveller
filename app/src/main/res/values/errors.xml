@@ -2,7 +2,7 @@
 <resources>
     <!--API connection-->
     <string name="API_UNREACHABLE">Αδυναμία επικοινωνίας με το API.</string>
-    <!--Unauthorized API endpoint access-->
+    <!--Unauthorized API access-->
     <string name="API_UNAUTHORIZED">Μη εξουσιοδοτημένη ενέργεια.</string>
     <!--User registration-->
     <string name="INVALID_EMAIL_FORMAT">Μη έγκυρο e-mail.</string>
