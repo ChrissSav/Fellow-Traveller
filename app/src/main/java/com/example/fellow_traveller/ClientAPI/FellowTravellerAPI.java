@@ -47,7 +47,7 @@ public class FellowTravellerAPI {
         }else{
             Log.d("FellowTravellerAPI", " with  client");
 
-            retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.FELLOW_API_URL))
+            retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.API_BASE_URL))
                     .client(context.getOkHttpClient().build())
                     .addConverterFactory(GsonConverterFactory.create()).build();
         }
