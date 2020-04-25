@@ -104,7 +104,7 @@ public class AddCarSettingsActivity extends AppCompatActivity {
 
 
     public void newRegisterCar(){
-        FellowTravellerAPI.carRegister(globalClass, carBrand.getText().toString(), carModel.getText().toString(),
+        new FellowTravellerAPI(globalClass).carRegister(carBrand.getText().toString(), carModel.getText().toString(),
                 carPlate.getText().toString(), carColor.getText().toString(), new CarRegisterCallBack() {
             @Override
             public void onSuccess(CarModel car) {

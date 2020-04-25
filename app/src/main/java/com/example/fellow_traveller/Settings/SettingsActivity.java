@@ -71,10 +71,10 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void LogOut() {
-        FellowTravellerAPI.userLogout(globalClass, new UserLogoutCallBack() {
+        new FellowTravellerAPI(globalClass).userLogout(new UserLogoutCallBack() {
             @Override
             public void onSuccess(StatusHandleModel user) {
-
+                // TODO handle this one.
             }
 
             @Override

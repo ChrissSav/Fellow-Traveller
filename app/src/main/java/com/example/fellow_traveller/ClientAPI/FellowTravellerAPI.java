@@ -14,13 +14,9 @@ import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,34 +24,29 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.fellow_traveller.ClientAPI.Utils.buildJSON;
+
 public class FellowTravellerAPI {
     private static Retrofit retrofit;
     private static RetrofitAPIEndpoints retrofitAPIEndpoints;
+    private static GlobalClass context;
 
-    /**
-     * @param email            Email address
-     * @param password         Password
-     * @param userAuthCallback Callback to access the returned user object
-     */
-    public static void userAuthenticate(final GlobalClass cont, String email, final String password, final UserAuthCallback userAuthCallback) {
-        retrofit = new Retrofit.Builder().baseUrl(cont.getResources().getString(R.string.FT_API_URL))
+    public FellowTravellerAPI(GlobalClass context) {
+        // Pass context from the activity we were called from
+        FellowTravellerAPI.context = context;
+        retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.FT_API_URL))
                 .addConverterFactory(GsonConverterFactory.create()).build();
         retrofitAPIEndpoints = retrofit.create(RetrofitAPIEndpoints.class);
+    }
 
-//        JsonObject userJSON = new JsonObject();
-//        userJSON.addProperty("email", email);
-//        userJSON.addProperty("password", password);
-
-        JsonObject userJSON = new JsonParser().parse("{'email':'"+ email +"', 'password':'"+ password +"'}").getAsJsonObject();
-        buildJSON(new String[]{"email", "password"}, email, password);
-
-        retrofitAPIEndpoints.userAuthenticate(userJSON).enqueue(new Callback<UserAuthModel>() {
+    public static void userAuthenticate(String email, final String password, final UserAuthCallback userAuthCallback) {
+        JsonObject json = buildJSON(new String[]{"email", "password"}, email, password);
+        retrofitAPIEndpoints.userAuthenticate(json).enqueue(new Callback<UserAuthModel>() {
             @Override
             public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
                 if (!response.isSuccessful()) {
                     Log.d("Authentication", "LOGIN FAILURE!!");
-                    // TODO Implement onFailure callback and standardize errors
-                    userAuthCallback.onFailure(cont.getResources().getString(R.string.INVALID_CREDENTIALS));
+                    userAuthCallback.onFailure(context.getResources().getString(R.string.INVALID_CREDENTIALS));
                     return;
                 }
                 userAuthCallback.onSuccess(response.body());
@@ -63,66 +54,46 @@ public class FellowTravellerAPI {
 
             @Override
             public void onFailure(Call<UserAuthModel> call, Throwable t) {
-                Log.i("ClientAPI", "[REQUEST FAILED]: Failed to reach back-end API server.");
-                userAuthCallback.onFailure(cont.getResources().getString(R.string.API_UNREACHABLE));
+                userAuthCallback.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
             }
         });
 
     }
 
-    public static void userLogout(final GlobalClass cont, final UserLogoutCallBack userLogoutCallBack) {
-        retrofit = new Retrofit.Builder().baseUrl(cont.getResources().getString(R.string.FT_API_URL))
-                .addConverterFactory(GsonConverterFactory.create()).build();
-
-        retrofitAPIEndpoints = retrofit.create(RetrofitAPIEndpoints.class);
-
-
-        JsonObject userJSON = new JsonObject();
-        userJSON.addProperty("refresh_token", cont.getCurrent_user().getRefreshToken());
-        retrofitAPIEndpoints.userLogout(userJSON).enqueue(new Callback<StatusHandleModel>() {
+    public static void userLogout(final UserLogoutCallBack userLogoutCallBack) {
+        // TODO change this method of logging out with sessionID cookie instead.
+        JsonObject json = buildJSON(new String[]{"refresh_token"}, context.getCurrent_user().getRefreshToken());
+        retrofitAPIEndpoints.userLogout(json).enqueue(new Callback<StatusHandleModel>() {
             @Override
             public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
                 if (!response.isSuccessful()) {
                     try {
+                        // TODO what is errorBody? the API is supposed to give a status code when logging out...
                         userLogoutCallBack.onFailure(response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                     return;
                 }
+                // TODO should you display a message at all?
                 userLogoutCallBack.onSuccess(response.body());
             }
 
             @Override
             public void onFailure(Call<StatusHandleModel> call, Throwable t) {
-                userLogoutCallBack.onFailure(cont.getResources().getString(R.string.API_UNREACHABLE));
+                userLogoutCallBack.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
             }
         });
     }
 
-
-
-
-
-    public static void userRegister(final GlobalClass cont,String name, String surname,String email,String password,String phone,final UserRegisterCallback userRegisterCallback) {
-        retrofit = new Retrofit.Builder().baseUrl(cont.getResources().getString(R.string.FT_API_URL))
-                .addConverterFactory(GsonConverterFactory.create()).build();
-
-        retrofitAPIEndpoints = retrofit.create(RetrofitAPIEndpoints.class);
-
-
-        JsonObject user_obj = new JsonObject();
-        user_obj.addProperty("name", name);
-        user_obj.addProperty("surname", surname);
-        user_obj.addProperty("email", email);
-        user_obj.addProperty("password", password);
-        user_obj.addProperty("phone",phone);
-
-        retrofitAPIEndpoints.userRegister(user_obj).enqueue(new Callback<UserAuthModel>() {
+    public static void userRegister(String name, String surname, String email, String password, String phone, final UserRegisterCallback userRegisterCallback) {
+        JsonObject json = buildJSON(new String[]{"name", "surname", "email", "password", "phone"}, name, surname, email, password, phone);
+        retrofitAPIEndpoints.userRegister(json).enqueue(new Callback<UserAuthModel>() {
             @Override
             public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
                 if (!response.isSuccessful()) {
                     try {
+                        // TODO Display generalized error message from errors.xml
                         userRegisterCallback.onFailure(response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -134,34 +105,20 @@ public class FellowTravellerAPI {
 
             @Override
             public void onFailure(Call<UserAuthModel> call, Throwable t) {
-                userRegisterCallback.onFailure(cont.getResources().getString(R.string.API_UNREACHABLE));
+                userRegisterCallback.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
             }
         });
     }
 
-
-
-
-
-
-    public static void carRegister(final GlobalClass cont, String brand, String model,String plate, String color, final CarRegisterCallBack carRegisterCallBack) {
-        retrofit = new Retrofit.Builder().baseUrl(cont.getResources().getString(R.string.FT_API_URL)).client(cont.getOkHttpClient().build())
-                .addConverterFactory(GsonConverterFactory.create()).build();
-
-        retrofitAPIEndpoints = retrofit.create(RetrofitAPIEndpoints.class);
-
-
-        JsonObject car_object = new JsonObject();
-        car_object.addProperty("brand", brand);
-        car_object.addProperty("model", model);
-        car_object.addProperty("plate", plate);
-        car_object.addProperty("color", color);
-
-        retrofitAPIEndpoints.carRegister(car_object).enqueue(new Callback<CarModel>() {
+    // TODO what about carAdd?
+    public static void carRegister(String brand, String model, String plate, String color, final CarRegisterCallBack carRegisterCallBack) {
+        JsonObject json = buildJSON(new String[]{"brand", "model", "plate", "color"}, brand, model, plate, color);
+        retrofitAPIEndpoints.carRegister(json).enqueue(new Callback<CarModel>() {
             @Override
             public void onResponse(Call<CarModel> call, Response<CarModel> response) {
                 if (!response.isSuccessful()) {
                     try {
+                        // TODO show error message from errors.xml instead
                         carRegisterCallBack.onFailure(response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -173,24 +130,18 @@ public class FellowTravellerAPI {
 
             @Override
             public void onFailure(Call<CarModel> call, Throwable t) {
-                carRegisterCallBack.onFailure(cont.getResources().getString(R.string.API_UNREACHABLE));
+                carRegisterCallBack.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
             }
         });
-
     }
 
-
-
-    public static void getUserCars(final GlobalClass cont, final UserCarsCallBack userCarsCallBack) {
-        retrofit = buildRetrofitWithClient(cont);
-
-        retrofitAPIEndpoints = retrofit.create(RetrofitAPIEndpoints.class);
-
+    public static void getUserCars(final UserCarsCallBack userCarsCallBack) {
         retrofitAPIEndpoints.userCars().enqueue(new Callback<ArrayList<CarModel>>() {
             @Override
             public void onResponse(Call<ArrayList<CarModel>> call, Response<ArrayList<CarModel>> response) {
                 if (!response.isSuccessful()) {
                     try {
+                        // TODO show generalized error message from errors.xml
                         userCarsCallBack.onFailure(response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -202,39 +153,31 @@ public class FellowTravellerAPI {
 
             @Override
             public void onFailure(Call<ArrayList<CarModel>> call, Throwable t) {
-                userCarsCallBack.onFailure(cont.getResources().getString(R.string.API_UNREACHABLE));
+                userCarsCallBack.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
             }
         });
     }
 
+    // TODO what about another more sensible name, like tripCreate?
+    public static void tripRegister(String dest_from, String dest_to, String pet, int max_seats, int max_bags, int car_id,
+                                    float price, long timestamp, String msg, final TripRegisterCallBack tripRegisterCallBack) {
+        JsonObject json = buildJSON(new String[]{
+                        "dest_from", "dest_to",
+                        "pet", "max_seats",
+                        "max_bags", "car_id",
+                        "price", "timestamp", "msg"},
+                dest_from, dest_to, pet, String.valueOf(max_seats),
+                String.valueOf(max_bags), String.valueOf(car_id),
+                String.valueOf(price), String.valueOf(timestamp), msg);
 
-
-    //Trip
-
-
-    public static void tripRegister(final GlobalClass cont, String dest_from,String dest_to, String pet, int max_seats, int max_bags, int car_id,
-                                    float price,long timestamp,String msg, final TripRegisterCallBack tripRegisterCallBack) {
-        retrofit = buildRetrofitWithClient(cont);
-
-        retrofitAPIEndpoints = retrofit.create(RetrofitAPIEndpoints.class);
-
-
-        JsonObject trip_object = new JsonObject();
-        trip_object.addProperty("dest_from", dest_from);
-        trip_object.addProperty("dest_to", dest_to);
-        trip_object.addProperty("pet", pet == "Επιτρέπω" ? "yes" : "no");
-        trip_object.addProperty("max_seats", max_seats);
-        trip_object.addProperty("max_bags", max_bags);
-        trip_object.addProperty("car_id", car_id);
-        trip_object.addProperty("price", price);
-        trip_object.addProperty("timestamp", timestamp);
-        trip_object.addProperty("msg", msg);
-
-        retrofitAPIEndpoints.tripRegister(trip_object).enqueue(new Callback<StatusHandleModel>() {
+        // TODO add a better comparison than: pet == "Επιτρέπω" ? "yes" : "no"
+        // TODO get some boolean value instead, this is sloppy
+        retrofitAPIEndpoints.tripRegister(json).enqueue(new Callback<StatusHandleModel>() {
             @Override
             public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
                 if (!response.isSuccessful()) {
                     try {
+                        // TODO use generic error message from errors.xml
                         tripRegisterCallBack.onFailure(response.errorBody().string());
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -246,38 +189,8 @@ public class FellowTravellerAPI {
 
             @Override
             public void onFailure(Call<StatusHandleModel> call, Throwable t) {
-                tripRegisterCallBack.onFailure(cont.getResources().getString(R.string.API_UNREACHABLE));
+                tripRegisterCallBack.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
             }
         });
-    }
-
-    public static Retrofit buildRetrofitWithClient(GlobalClass globalClass){
-       return new Retrofit.Builder().baseUrl(globalClass.getResources().getString(R.string.FT_API_URL)).client(globalClass.getOkHttpClient().build())
-                .addConverterFactory(GsonConverterFactory.create()).build();
-
-    }
-
-
-
-    // TODO write json builder for arbitrary number of key:value elements
-    // test(email: "email@example.com", "pass");
-    // test(new String[](
-    // HashMap<String, Integer> dicCodeToIndex;
-    // find a solution
-
-
-    static JsonObject buildJSON(String[] keys, String... values) {
-
-        JsonObject jsonData = new JsonObject();
-        for(String key : keys){
-            Log.d("JSONKEY", key);
-        }
-
-        for (String value : values) {
-            jsonData.addProperty("email", value.indexOf(value));
-        }
-        Log.d("JSONKEYs", jsonData.toString());
-
-        return jsonData;
     }
 }
