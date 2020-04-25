@@ -9,6 +9,6 @@
       android:fillColor="#fff"
       android:fillAlpha="0"/>
   <path
-      android:pathData="M21.13,4.29l-1.42,-1.42l-7.71,7.72l-7.71,-7.72l-1.42,1.42l7.72,7.71l-7.72,7.71l1.42,1.42l7.71,-7.72l7.71,7.72l1.42,-1.42l-7.72,-7.71l7.72,-7.71z"
-      android:fillColor="#262322"/>
+      android:pathData="M20.77,3.93l-0.7,-0.7l-8.07,8.06l-8.07,-8.06l-0.7,0.7l8.06,8.07l-8.06,8.07l0.7,0.7l8.07,-8.06l8.07,8.06l0.7,-0.7l-8.06,-8.07l8.06,-8.07z"
+      android:fillColor="@color/profile"/>
 </vector>

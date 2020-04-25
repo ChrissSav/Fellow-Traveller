@@ -7,35 +7,44 @@
     tools:context=".SearchAndBook.SearchActivity"
     android:padding="18dp">
 
+    <ImageButton
+        android:id="@+id/back_button_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back_button"
+        android:background="?android:selectableItemBackgroundBorderless"
+        android:scaleY="1.2"
+        android:scaleX="1.2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:padding="10dp"/>
+    <TextView
+        android:id="@+id/ActivitySearch_start_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Επιλέξτε την αφετηρία σας"
+        android:fontFamily="@font/firasans_bold"
+        android:textColor="@color/profile"
+        android:textSize="26sp"
+        app:layout_constraintStart_toStartOf="@id/back_button_search"
+        app:layout_constraintTop_toBottomOf="@id/back_button_search"
+        android:layout_marginTop="20dp"/>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/search_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ActivitySearch_start_tv"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:background="@drawable/search_border"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:padding="10dp"
         android:elevation="1dp"
         >
-
-        <ImageButton
-            android:id="@+id/back_button_search"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:background="@drawable/ic_back_button"
-            android:backgroundTint="@color/profile"
-            app:layout_constraintTop_toTopOf="@id/autocomplete_search_destination"
-            app:layout_constraintBottom_toBottomOf="@+id/autocomplete_search_destination"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:padding="10dp"/>
-
-
-
         
-        <AutoCompleteTextView
+        <EditText
             android:id="@+id/autocomplete_search_destination"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,7 +54,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="50dp"
-            android:layout_marginStart="60dp"
+            android:layout_marginStart="20dp"
             android:dropDownVerticalOffset="20dp"
             android:inputType="text"
             android:imeOptions="actionSearch"
@@ -56,14 +65,17 @@
 
         <ImageButton
             android:id="@+id/erase_search"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:background="@drawable/ic_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_erase"
+            android:background="?android:selectableItemBackgroundBorderless"
             android:backgroundTint="@color/profile"
             app:layout_constraintTop_toTopOf="@id/autocomplete_search_destination"
             app:layout_constraintBottom_toBottomOf="@id/autocomplete_search_destination"
             app:layout_constraintRight_toRightOf="parent"
-            android:padding="10dp"/>
+            android:padding="8dp"
+            android:visibility="invisible"
+            />
         <ImageView
             android:id="@+id/search_icon"
             android:layout_width="38dp"
@@ -75,21 +87,29 @@
             app:layout_constraintRight_toRightOf="parent"
             android:padding="10dp"
             android:rotation="90"
-            android:visibility="invisible"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ActivitySearch_suggest_section"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/search_section"
+        android:layout_marginTop="20dp"
+
+        >
         <TextView
             android:id="@+id/alternative_choices_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Εναλλακτικές προτάσεις"
-            app:layout_constraintTop_toBottomOf="@id/search_section"
-            app:layout_constraintStart_toStartOf="@id/search_section"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
             android:textSize="20sp"
             android:textColor="@color/profile"
             android:fontFamily="@font/firasans_bold"
-            android:layout_marginTop="40dp"/>
+
+            />
     <Button
         android:id="@+id/your_location_search"
         android:layout_width="match_parent"
@@ -231,4 +251,25 @@
         android:gravity="left|center_vertical"
         android:background="@drawable/search_button_items"
         />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ActivitySearch_results_section"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/search_section"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="gone">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ActivitySearch_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="5dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
