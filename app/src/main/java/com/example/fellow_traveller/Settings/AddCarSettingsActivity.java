@@ -8,11 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
+import com.example.fellow_traveller.API.RetrofitService;
+import com.example.fellow_traveller.Models.Car;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 
@@ -22,6 +25,7 @@ public class AddCarSettingsActivity extends AppCompatActivity {
     private Button buttonAdd;
     private ImageButton buttonBack;
     private GlobalClass globalClass;
+
 
 
     @Override
@@ -47,6 +51,21 @@ public class AddCarSettingsActivity extends AppCompatActivity {
                     newRegisterCar();
 
 
+
+        car_brand = findViewById(R.id.AddCarSettingsActivity_EditText_brand);
+        car_model = findViewById(R.id.AddCarSettingsActivity_EditText_model);
+        car_plate = findViewById(R.id.AddCarSettingsActivity_EditText_plate);
+        car_color = findViewById(R.id.AddCarSettingsActivity_EditText_color);
+        button_add = findViewById(R.id.EditCarSettingsActivity_button_add);
+        button_back = findViewById(R.id.close_button_add_car_settings);
+
+
+        button_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (CheckBrand() && CheckModel() && CheckPlate() && CheckColor())
+                    RegisterCar();
             }
         });
         buttonBack.setOnClickListener(new View.OnClickListener() {
@@ -54,10 +73,10 @@ public class AddCarSettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 onBackPressed();
-
-
             }
         });
+
+
     }
 
     public boolean checkBrand() {
@@ -81,13 +100,13 @@ public class AddCarSettingsActivity extends AppCompatActivity {
         }
     }
 
-    public boolean checkPlate() {
-        if (carPlate.getText().length() < 2) {
-            carPlate.setError("Υποχρεώτικο πεδίο");
-            return false;
-        } else {
-            carPlate.setError(null);
+    public boolean CheckPlate() {
+        if (car_plate.getText().toString().matches("[Α-Ω][Α-Ω][Α-Ω]\\s[0-9][0-9][0-9][0-9]")) {
+            car_plate.setError(null);
             return true;
+        } else {
+            car_plate.setError("Πρέπει να είναι της μορφής ΧΧΧ 1234");
+            return false;
         }
     }
 
