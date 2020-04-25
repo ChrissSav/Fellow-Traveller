@@ -42,7 +42,7 @@ public class FellowTravellerAPI {
         if (context.getCurrent_user() == null) {
             Log.d("FellowTravellerAPI", " with out client");
 
-            retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.FELLOW_API_URL))
+            retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.API_BASE_URL))
                     .addConverterFactory(GsonConverterFactory.create()).build();
         }else{
             Log.d("FellowTravellerAPI", " with  client");
