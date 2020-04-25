@@ -5,10 +5,12 @@ public class MessageItem {
     private String text;
     private int groupId;
     private long timestamp;
+    private String senderName;
 
     public MessageItem(int aId, String aText, String aName, int aGroupId, long aTimestamp){
         id = aId;
         text = aText;
+        senderName = aName;
         groupId = aGroupId;
         timestamp = aTimestamp;
     }
@@ -30,6 +32,13 @@ public class MessageItem {
         this.text = text;
     }
 
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
 
     public int getGroupId() {
         return groupId;

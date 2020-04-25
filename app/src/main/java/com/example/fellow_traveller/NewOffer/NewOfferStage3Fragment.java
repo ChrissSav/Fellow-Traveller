@@ -42,7 +42,7 @@ public class NewOfferStage3Fragment extends Fragment {
     private final String TITLE_BAGS = "Αποσκεύες ...";
 
     private View view;
-    private Button buttonSeats, buttonPet, buttonCar, button_bags;
+    private Button buttonSeats, buttonPet, buttonCar, buttonΒags;
     //Backup
     private String petTitle = TITLE_PET;
     private String seatTitle = TITLE_SEAT;
@@ -73,21 +73,21 @@ public class NewOfferStage3Fragment extends Fragment {
         buttonSeats = view.findViewById(R.id.NewOfferStage3Fragment_button_seat);
         buttonPet = view.findViewById(R.id.NewOfferStage3Fragment_button_pet);
         buttonCar = view.findViewById(R.id.NewOfferStage3Fragment_button_car);
-        button_bags = view.findViewById(R.id.NewOfferStage3Fragment_button_bags);
+        buttonΒags = view.findViewById(R.id.NewOfferStage3Fragment_button_bags);
 
 
         buttonPet.setText(petTitle);
         buttonSeats.setText(seatTitle);
         buttonCar.setText(carTitle);
-        button_bags.setText(bagsTitle);
+        buttonΒags.setText(bagsTitle);
 
 
         //Text Color
         if (buttonPet.getText() != TITLE_PET) {
             buttonPet.setTextColor(Color.parseColor(CLICK_COLOR));
         }
-        if (button_bags.getText() != TITLE_BAGS) {
-            button_bags.setTextColor(Color.parseColor(CLICK_COLOR));
+        if (buttonΒags.getText() != TITLE_BAGS) {
+            buttonΒags.setTextColor(Color.parseColor(CLICK_COLOR));
         }
         if (buttonCar.getText() != TITLE_CAR) {
             buttonCar.setTextColor(Color.parseColor(CLICK_COLOR));
@@ -105,7 +105,7 @@ public class NewOfferStage3Fragment extends Fragment {
             }
         });
 
-        button_bags.setOnClickListener(new View.OnClickListener() {
+        buttonΒags.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -240,8 +240,8 @@ public class NewOfferStage3Fragment extends Fragment {
         ImageButton decrease = mView.findViewById(R.id.choose_num_imageButton_minus);
         final TextView textView_number = mView.findViewById(R.id.choose_num_textView_number);
         TextView textView_title = mView.findViewById(R.id.choose_num_textView_title);
-        if (!button_bags.getText().equals(TITLE_BAGS)) {
-            textView_number.setText(button_bags.getText().toString());
+        if (!buttonΒags.getText().equals(TITLE_BAGS)) {
+            textView_number.setText(buttonΒags.getText().toString());
         }
 
         textView_title.setText("Καθόρισε τον αριθμό των αποσκεύων");
@@ -255,8 +255,8 @@ public class NewOfferStage3Fragment extends Fragment {
             public void onClick(View view) {
 
                 dialog.dismiss();
-                button_bags.setTextColor(Color.parseColor(CLICK_COLOR));
-                button_bags.setText(textView_number.getText().toString());
+                buttonΒags.setTextColor(Color.parseColor(CLICK_COLOR));
+                buttonΒags.setText(textView_number.getText().toString());
 
             }
         });
@@ -303,7 +303,7 @@ public class NewOfferStage3Fragment extends Fragment {
         petTitle = buttonPet.getText().toString();
         seatTitle = buttonSeats.getText().toString();
         carTitle = buttonCar.getText().toString();
-        bagsTitle = button_bags.getText().toString();
+        bagsTitle = buttonΒags.getText().toString();
         super.onDestroy();
     }
 
@@ -350,7 +350,7 @@ public class NewOfferStage3Fragment extends Fragment {
 
     public Boolean checkBags() {
         try {
-            int res = Integer.parseInt(button_bags.getText().toString());
+            int res = Integer.parseInt(buttonΒags.getText().toString());
             return true;
 
         } catch (NumberFormatException e) {
@@ -373,7 +373,7 @@ public class NewOfferStage3Fragment extends Fragment {
     }
 
     public String getBags() {
-        return button_bags.getText().toString();
+        return buttonΒags.getText().toString();
     }
 
     @Override

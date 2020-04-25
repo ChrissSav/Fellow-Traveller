@@ -5,30 +5,24 @@ import com.google.gson.annotations.SerializedName;
 
 public class UserAuthModel {
 
-    @SerializedName("name")
-    @Expose
+
+    private int id;
     private String name;
-    @SerializedName("surname")
-    @Expose
     private String surname;
-    @SerializedName("id")
-    @Expose
-    private Integer id;
-    @SerializedName("picture")
-    @Expose
     private String picture;
-    @SerializedName("about_me")
-    @Expose
     private String aboutMe;
-    @SerializedName("phone")
-    @Expose
     private String phone;
-    @SerializedName("access_token")
-    @Expose
-    private String accessToken;
-    @SerializedName("refresh_token")
-    @Expose
-    private String refreshToken;
+    @SerializedName("session_key")
+    private String sessionKey;
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -44,14 +38,6 @@ public class UserAuthModel {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getPicture() {
@@ -78,20 +64,11 @@ public class UserAuthModel {
         this.phone = phone;
     }
 
-    public String getAccessToken() {
-        return accessToken;
+    public String getSessionKey() {
+        return sessionKey;
     }
 
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
+    public void setSessionKey(String sessionKey) {
+        this.sessionKey = sessionKey;
     }
-
-    public String getRefreshToken() {
-        return refreshToken;
-    }
-
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
-
 }

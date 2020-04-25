@@ -36,7 +36,7 @@ public class AddCarSettingsActivity extends AppCompatActivity {
         carModel = findViewById(R.id.AddCarSettingsActivity_EditText_model);
         carPlate = findViewById(R.id.AddCarSettingsActivity_EditText_plate);
         carColor = findViewById(R.id.AddCarSettingsActivity_EditText_color);
-        buttonAdd = findViewById(R.id.AddCarSettingsActivity_button_add);
+        buttonAdd = findViewById(R.id.EditCarSettingsActivity_button_add);
         buttonBack = findViewById(R.id.close_button_add_car_settings);
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
@@ -102,38 +102,22 @@ public class AddCarSettingsActivity extends AppCompatActivity {
     }
 
 
-
-    public void newRegisterCar(){
+    public void newRegisterCar() {
         new FellowTravellerAPI(globalClass).carRegister(carBrand.getText().toString(), carModel.getText().toString(),
                 carPlate.getText().toString(), carColor.getText().toString(), new CarRegisterCallBack() {
-            @Override
-            public void onSuccess(CarModel car) {
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("car", car);
-                setResult(RESULT_OK, resultIntent);
-                finish();
-            }
+                    @Override
+                    public void onSuccess(CarModel car) {
+                        Intent resultIntent = new Intent();
+                        resultIntent.putExtra("car", car);
+                        setResult(RESULT_OK, resultIntent);
+                        finish();
+                    }
 
-            @Override
-            public void onFailure(String errorMsg) {
-                Toast.makeText(AddCarSettingsActivity.this, errorMsg, Toast.LENGTH_LONG).show();
+                    @Override
+                    public void onFailure(String errorMsg) {
+                        Toast.makeText(AddCarSettingsActivity.this, errorMsg, Toast.LENGTH_LONG).show();
 
-            }
-        });
+                    }
+                });
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

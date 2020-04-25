@@ -36,7 +36,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public static class ExampleViewHolder extends RecyclerView.ViewHolder {
         private ConstraintLayout constraintLayout;
         private CircleImageView circleImageView;
-        private TextView tv_des, tv_read;
+        private TextView tvDes, tvRead;
 
 
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
@@ -44,8 +44,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
             constraintLayout = itemView.findViewById(R.id.NotificationItem_ConstraintLayout);
             circleImageView = itemView.findViewById(R.id.NotificationItem_profile_picture);
-            tv_des = itemView.findViewById(R.id.NotificationItem_textView_des);
-            tv_read = itemView.findViewById(R.id.NotificationItem_textView_read);
+            tvDes = itemView.findViewById(R.id.NotificationItem_textView_des);
+            tvRead = itemView.findViewById(R.id.NotificationItem_textView_read);
             constraintLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -75,10 +75,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @Override
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
         NotificationItem currentItem = mExampleList.get(position);
-        holder.tv_des.setText(currentItem.getUser().getFullName());
+        holder.tvDes.setText(currentItem.getUser().getFullName());
         Log.i("onBindViewHolder", currentItem.getStatus());
         if (currentItem.getStatus().equals("read")) {
-            holder.tv_read.setVisibility(View.GONE);
+            holder.tvRead.setVisibility(View.GONE);
         }
     }
 

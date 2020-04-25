@@ -3,6 +3,7 @@ package com.example.fellow_traveller.ClientAPI;
 import android.util.Log;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
+import com.example.fellow_traveller.ClientAPI.Callbacks.PlaceApiCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.TripRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserAuthCallback;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserCarsCallBack;
@@ -12,12 +13,16 @@ import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.Models.GlobalClass;
+import com.example.fellow_traveller.PlaceAutocomplete.PlaceAPiModel;
 import com.example.fellow_traveller.R;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
+import okhttp3.Headers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,13 +39,24 @@ public class FellowTravellerAPI {
     public FellowTravellerAPI(GlobalClass context) {
         // Pass context from the activity we were called from
         FellowTravellerAPI.context = context;
-        retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.API_BASE_URL))
-                .addConverterFactory(GsonConverterFactory.create()).build();
+        if (context.getCurrent_user() == null) {
+            Log.d("FellowTravellerAPI", " with out client");
+
+            retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.API_BASE_URL))
+                    .addConverterFactory(GsonConverterFactory.create()).build();
+        }else{
+            Log.d("FellowTravellerAPI", " with  client");
+
+            retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.FELLOW_API_URL))
+                    .client(context.getOkHttpClient().build())
+                    .addConverterFactory(GsonConverterFactory.create()).build();
+        }
         retrofitAPIEndpoints = retrofit.create(RetrofitAPIEndpoints.class);
     }
 
     public static void userAuthenticate(String email, final String password, final UserAuthCallback userAuthCallback) {
         JsonObject json = buildJSON(new String[]{"email", "password"}, email, password);
+
         retrofitAPIEndpoints.userAuthenticate(json).enqueue(new Callback<UserAuthModel>() {
             @Override
             public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
@@ -49,6 +65,9 @@ public class FellowTravellerAPI {
                     userAuthCallback.onFailure(context.getResources().getString(R.string.INVALID_CREDENTIALS));
                     return;
                 }
+                String key = response.headers().get("Set-Cookie").split(";")[0].split("=")[1];
+                UserAuthModel userAuthModel = response.body();
+                userAuthModel.setSessionKey(key);
                 userAuthCallback.onSuccess(response.body());
             }
 
@@ -62,8 +81,7 @@ public class FellowTravellerAPI {
 
     public static void userLogout(final UserLogoutCallBack userLogoutCallBack) {
         // TODO change this method of logging out with sessionID cookie instead.
-        JsonObject json = buildJSON(new String[]{"refresh_token"}, context.getCurrent_user().getRefreshToken());
-        retrofitAPIEndpoints.userLogout(json).enqueue(new Callback<StatusHandleModel>() {
+        retrofitAPIEndpoints.userLogout().enqueue(new Callback<StatusHandleModel>() {
             @Override
             public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
                 if (!response.isSuccessful()) {
@@ -193,4 +211,38 @@ public class FellowTravellerAPI {
             }
         });
     }
+
+    public static void getPlaces(String place, final PlaceApiCallBack placeApiCallBack) {
+        String key = context.getResources().getString(R.string.PLACE_KEY);
+        String language = context.getResources().getString(R.string.PLACE_LANGUAGE);
+        String country ="country:gr";
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.PLACE_URL))
+                .addConverterFactory(GsonConverterFactory.create()).build();
+        RetrofitAPIEndpoints  retrofitService = retrofit.create(RetrofitAPIEndpoints.class);
+
+        Call<PlaceAPiModel> call = retrofitService.getPlaces(place, key,language,country);
+        call.enqueue(new Callback<PlaceAPiModel>() {
+            @Override
+            public void onResponse(Call<PlaceAPiModel> call, Response<PlaceAPiModel> response) {
+                if (!response.isSuccessful()) {
+                    try {
+                        placeApiCallBack.onFailure(response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+                placeApiCallBack.onSuccess(response.body());
+
+            }
+
+            @Override
+            public void onFailure(Call<PlaceAPiModel> call, Throwable t) {
+                placeApiCallBack.onFailure(t.getMessage());
+
+            }
+        });
+    }
+
 }

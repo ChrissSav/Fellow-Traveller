@@ -21,9 +21,9 @@ import com.example.fellow_traveller.R;
 public class NewOfferStage4Fragment extends Fragment {
 
     private View view;
-    private TextView textView_total;
-    private EditText editText_price;
-    private int num_of_passengers = 2;
+    private TextView textViewTotal;
+    private EditText editTextPrice;
+    private int numOfPassengers = 2;
 
     public NewOfferStage4Fragment() {
         // Required empty public constructor
@@ -36,9 +36,9 @@ public class NewOfferStage4Fragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_new_offer_stage4, container, false);
 
-        textView_total = view.findViewById(R.id.NewOfferStage4Fragment_textView_total_price);
-        editText_price = view.findViewById(R.id.NewOfferStage4Fragment_editText_price);
-        editText_price.addTextChangedListener(new TextWatcher() {
+        textViewTotal = view.findViewById(R.id.NewOfferStage4Fragment_textView_total_price);
+        editTextPrice = view.findViewById(R.id.NewOfferStage4Fragment_editText_price);
+        editTextPrice.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
             }
@@ -48,9 +48,9 @@ public class NewOfferStage4Fragment extends Fragment {
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.toString().length() > 0)
-                    textView_total.setText((Float.parseFloat(s.toString()) * num_of_passengers) + " "+getResources().getString(R.string.euro_symbol));
+                    textViewTotal.setText((Float.parseFloat(s.toString()) * numOfPassengers) + " "+getResources().getString(R.string.euro_symbol));
                 else
-                    textView_total.setText( "0 "+getResources().getString(R.string.euro_symbol));
+                    textViewTotal.setText( "0 "+getResources().getString(R.string.euro_symbol));
             }
         });
 
@@ -71,11 +71,11 @@ public class NewOfferStage4Fragment extends Fragment {
     }
 
     public String getPrice() {
-        return editText_price.getText().toString();
+        return editTextPrice.getText().toString();
     }
 
 
-    public void setNum_of_passengers(int num_of_passengers) {
-        this.num_of_passengers = num_of_passengers;
+    public void setNum_of_passengers(int numOfPassengers) {
+        this.numOfPassengers = numOfPassengers;
     }
 }
