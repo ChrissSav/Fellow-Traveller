@@ -1,9 +1,5 @@
 package com.example.fellow_traveller.NewOffer;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +7,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.TripRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
@@ -48,7 +48,6 @@ public class NewOfferActivity extends AppCompatActivity {
         globalClass = (GlobalClass) getApplicationContext();
 
 
-
         globalClass = (GlobalClass) getApplicationContext();
 
 
@@ -68,30 +67,29 @@ public class NewOfferActivity extends AppCompatActivity {
 
         buttonNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.i("fff",fra.toString());
+                Log.i("fff", fra.toString());
                 if (fra.toString().equals("NewOfferStage1Fragment") && newOfferStage1Fragment.validateFragment()) {
                     fra = newOfferStage2Fragment;
                     progressBar.setProgress(num_num * newOfferStage2Fragment.getRank());
                     //buttonNext.setText("Αποστολή");
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
-                } else if (fra.toString().equals("NewOfferStage2Fragment") && newOfferStage2Fragment.validateFragment() ) {
+                } else if (fra.toString().equals("NewOfferStage2Fragment") && newOfferStage2Fragment.validateFragment()) {
                     progressBar.setProgress(num_num * newOfferStage3Fragment.getRank());
                     fra = newOfferStage3Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
-                }else if (fra.toString().equals("NewOfferStage3Fragment")  && newOfferStage3Fragment.validateFragment() ) {
+                } else if (fra.toString().equals("NewOfferStage3Fragment") && newOfferStage3Fragment.validateFragment()) {
                     progressBar.setProgress(num_num * newOfferStage4Fragment.getRank());
                     newOfferStage4Fragment.setNum_of_passengers(Integer.parseInt(newOfferStage3Fragment.getSeats()));
                     fra = newOfferStage4Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
-                }else if (fra.toString().equals("NewOfferStage4Fragment")  && newOfferStage4Fragment.validateFragment()) {
+                } else if (fra.toString().equals("NewOfferStage4Fragment") && newOfferStage4Fragment.validateFragment()) {
                     progressBar.setProgress(num_num * newOfferStage5Fragment.getRank());
                     fra = newOfferStage5Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
-                }
-                else if (fra.toString().equals("NewOfferStage5Fragment")  && newOfferStage4Fragment.validateFragment()) {
+                } else if (fra.toString().equals("NewOfferStage5Fragment") && newOfferStage4Fragment.validateFragment()) {
                     progressBar.setProgress(num_num * newOfferStage6Fragment.getRank());
                     newOfferStage6Fragment.setFrom(newOfferStage1Fragment.getDest_from());
                     newOfferStage6Fragment.setTo(newOfferStage1Fragment.getDest_to());
@@ -105,7 +103,7 @@ public class NewOfferActivity extends AppCompatActivity {
 
 
                     newOfferStage6Fragment.setPets(newOfferStage3Fragment.getPets());
-                    newOfferStage6Fragment.setPrice(newOfferStage4Fragment.getPrice()+" "+getResources().getString(R.string.euro_symbol));
+                    newOfferStage6Fragment.setPrice(newOfferStage4Fragment.getPrice() + " " + getResources().getString(R.string.euro_symbol));
 
                     newOfferStage6Fragment.setCar(newOfferStage3Fragment.getCar());
                     newOfferStage6Fragment.setMsg(newOfferStage5Fragment.getMsg());
@@ -114,7 +112,7 @@ public class NewOfferActivity extends AppCompatActivity {
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
                     buttonNext.setText("Καταχώρηση");
 
-                }else if (fra.toString().equals("NewOfferStage6Fragment")) {
+                } else if (fra.toString().equals("NewOfferStage6Fragment")) {
                     tripRegister();
                 }
 
@@ -137,8 +135,7 @@ public class NewOfferActivity extends AppCompatActivity {
             fra = newOfferStage5Fragment;
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
-        }
-        else if (fra.toString().equals("NewOfferStage5Fragment")) {
+        } else if (fra.toString().equals("NewOfferStage5Fragment")) {
             progressBar.setProgress(num_num * newOfferStage4Fragment.getRank());
             fra = newOfferStage4Fragment;
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.NewOfferActivity_frame_container, fra).commit();
@@ -148,36 +145,31 @@ public class NewOfferActivity extends AppCompatActivity {
             fra = newOfferStage3Fragment;
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
-        }
-        else if (fra.toString().equals("NewOfferStage3Fragment")) {
+        } else if (fra.toString().equals("NewOfferStage3Fragment")) {
             progressBar.setProgress(num_num * newOfferStage2Fragment.getRank());
             fra = newOfferStage2Fragment;
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
-        }
-        else if (fra.toString().equals("NewOfferStage2Fragment")) {
+        } else if (fra.toString().equals("NewOfferStage2Fragment")) {
             progressBar.setProgress(num_num * newOfferStage1Fragment.getRank());
             fra = newOfferStage1Fragment;
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
-        }else {
+        } else {
             super.onBackPressed();
         }
 
     }
 
 
-
-
-
-    public void tripRegister(){
+    public void tripRegister() {
         String dest_from = newOfferStage1Fragment.getDest_from();
         String dest_to = newOfferStage1Fragment.getDest_to();
 
         String date = newOfferStage2Fragment.getDate();
         String time = newOfferStage2Fragment.getTime();
         String pet = newOfferStage3Fragment.getPets();
-        int max_seats =  Integer.parseInt(newOfferStage3Fragment.getSeats());
+        int max_seats = Integer.parseInt(newOfferStage3Fragment.getSeats());
 
 
         int max_bags = Integer.parseInt(newOfferStage3Fragment.getBags());
@@ -186,29 +178,30 @@ public class NewOfferActivity extends AppCompatActivity {
         Float price = Float.parseFloat(newOfferStage4Fragment.getPrice());
         String msg = newOfferStage5Fragment.getMsg();
 
-        FellowTravellerAPI.tripRegister(globalClass,dest_from,dest_to,pet,max_seats,max_bags,car_id,
-                price,dateTimeToTimestamp(date,time),msg, new TripRegisterCallBack() {
-            @Override
-            public void onSuccess(StatusHandleModel status) {
-                Toast.makeText(NewOfferActivity.this,"Επιτυχείς καταχώρηση", Toast.LENGTH_SHORT).show();
-                onBackPressed();
-                finish();
-            }
+        new FellowTravellerAPI(globalClass).tripRegister(dest_from, dest_to, pet, max_seats, max_bags, car_id,
+                price, dateTimeToTimestamp(date, time), msg, new TripRegisterCallBack() {
+                    @Override
+                    public void onSuccess(StatusHandleModel status) {
+                        // TODO take generic message from a resource file.
+                        Toast.makeText(NewOfferActivity.this, "Επιτυχείς καταχώρηση", Toast.LENGTH_SHORT).show();
+                        onBackPressed();
+                        finish();
+                    }
 
-            @Override
-            public void onFailure(String errorMsg) {
-                Toast.makeText(NewOfferActivity.this,errorMsg, Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onFailure(String errorMsg) {
+                        Toast.makeText(NewOfferActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
 
-            }
-        });
+                    }
+                });
 
     }
 
-    public long dateTimeToTimestamp(String date, String time){
+    public long dateTimeToTimestamp(String date, String time) {
         long p = Long.parseLong("0");
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-            Date parsedDate = dateFormat.parse(date+" "+time);
+            Date parsedDate = dateFormat.parse(date + " " + time);
             return parsedDate.getTime() / 1000;
         } catch (ParseException e) {
             e.printStackTrace();
