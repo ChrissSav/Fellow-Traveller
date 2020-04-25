@@ -50,9 +50,10 @@ public class GlobalClass extends Application {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
-                Log.i("getAccess_token", currentUser.getSessionKey());
-
-                Request.Builder newRequest = request.newBuilder().header("authorization", currentUser.getSessionKey());
+                Request.Builder newRequest = request.newBuilder();
+                if (currentUser!=null) {
+                    newRequest.header("authorization", currentUser.getSessionKey());
+                }
                 return chain.proceed(newRequest.build());
             }
         }));
