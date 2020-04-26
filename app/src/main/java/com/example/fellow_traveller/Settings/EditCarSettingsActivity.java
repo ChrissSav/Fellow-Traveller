@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,12 +13,11 @@ import com.example.fellow_traveller.ClientAPI.Callbacks.CarDeleteCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
-import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.google.android.material.snackbar.Snackbar;
 
-import static com.example.fellow_traveller.Utils.InputValidation.isValidPlate;
+import static com.example.fellow_traveller.Util.InputValidation.isValidPlate;
 
 public class EditCarSettingsActivity extends AppCompatActivity {
     private Button editButton, deleteButton;

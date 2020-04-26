@@ -16,7 +16,7 @@ import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 
-import static com.example.fellow_traveller.Utils.InputValidation.isValidPlate;
+import static com.example.fellow_traveller.Util.InputValidation.isValidPlate;
 
 public class AddCarSettingsActivity extends AppCompatActivity {
 
