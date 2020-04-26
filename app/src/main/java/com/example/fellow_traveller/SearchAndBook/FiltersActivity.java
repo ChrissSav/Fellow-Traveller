@@ -3,6 +3,7 @@ package com.example.fellow_traveller.SearchAndBook;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Pair;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClic
 import com.wisnu.datetimerangepickerandroid.CalendarPickerView;
 
 import java.awt.font.NumericShaper;
+import java.time.Year;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,6 +31,9 @@ public class FiltersActivity extends AppCompatActivity {
     private TextView rangeBarTV;
     private Button sortByButton, dateButton, timeButton, seatsButton, ratingButton, resetButton, applyButton;
     private ImageButton closeButton;
+    private final long five_years_forward = (1000*60*60*24*365*5);
+    private long startRange = 0, endRange = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,28 +51,37 @@ public class FiltersActivity extends AppCompatActivity {
         closeButton = findViewById(R.id.close_button_filters);
 
 
+        //<----------Initialize Calender------------->
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
         calendar.clear();
 
         long today = MaterialDatePicker.todayInUtcMilliseconds();
-        long leftConstraint = MaterialDatePicker.thisMonthInUtcMilliseconds();
+        //long leftConstraint = MaterialDatePicker.thisMonthInUtcMilliseconds();
 
-//        calendar.roll(Calendar.MONTH, Calendar.);
-//        long january = calendar.getTimeInMillis();
-//        calendar.roll(Calendar.MONTH, Calendar.DECEMBER);
-//        long december = calendar.getTimeInMillis();
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(today);
 
+        calendar.setTimeInMillis(today);
+
+        calendar.set(Calendar.YEAR, cal.get(Calendar.YEAR));
+        long left = calendar.getTimeInMillis();
+        calendar.set(Calendar.YEAR, cal.get(Calendar.YEAR) + 1);
+        long right = calendar.getTimeInMillis();
+
+        //<------ Finished initialization of Calender------->
 
         //Calendar Constraints
         CalendarConstraints.Builder constraintBuilder = new CalendarConstraints.Builder();
-        constraintBuilder.setStart(leftConstraint);
+        constraintBuilder.setStart(left);
+        constraintBuilder.setEnd(right);
         constraintBuilder.setValidator(DateValidatorPointForward.now());
 
         //MaterialDatePicker
-        MaterialDatePicker.Builder<Pair<Long, Long>> builder = MaterialDatePicker.Builder.dateRangePicker();
+        final MaterialDatePicker.Builder<Pair<Long, Long>> builder = MaterialDatePicker.Builder.dateRangePicker();
         builder.setTitleText("Επιλέξτε το εύρος των ημερών");
         builder.setCalendarConstraints(constraintBuilder.build());
-        //builder.setSelection(today);
+
+
         final MaterialDatePicker<Pair<Long,Long>> materialDatePicker = builder.build();
 
         dateButton.setOnClickListener(new View.OnClickListener() {
@@ -82,10 +96,32 @@ public class FiltersActivity extends AppCompatActivity {
             public void onPositiveButtonClick(Pair<Long, Long> selection) {
                 Toast.makeText(FiltersActivity.this, "Start: " + selection.first + " End: " + selection.second, Toast.LENGTH_SHORT).show();
                 dateButton.setText(materialDatePicker.getHeaderText());
+
+                //Parse the selections
+                startRange = selection.first;
+                endRange = selection.second;
             }
         });
 
-        materialDatePicker.addOnCancelListener(new )
+        materialDatePicker.addOnNegativeButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Don't parse Values
+                startRange = 0;
+                endRange = 0;
+                dateButton.setText("Όρισε ημ/νία");
+
+                //Reset selections
+                Pair setDefault = new Pair(null,null);
+                builder.setSelection(setDefault);
+                builder.build();
+                Toast.makeText(FiltersActivity.this, materialDatePicker.getSelection()+ "", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
         //Range bar change listener
         rangeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
