@@ -56,6 +56,12 @@ public class CarsSettingsActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        getUserCars();
+    }
+
     public void buildRecycleView() {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);

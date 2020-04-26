@@ -3,6 +3,7 @@ package com.example.fellow_traveller.ClientAPI;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.fellow_traveller.ClientAPI.Callbacks.CarDeleteCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.PlaceApiCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.TripRegisterCallBack;
@@ -171,6 +172,33 @@ public class FellowTravellerAPI {
             @Override
             public void onFailure(Call<ArrayList<CarModel>> call, Throwable t) {
                 userCarsCallBack.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
+            }
+        });
+    }
+
+    public static void deleteUserCar(int car_id, final CarDeleteCallBack carDeleteCallBack) {
+        retrofitAPIEndpoints.deleteUserCar(car_id).enqueue(new Callback<StatusHandleModel>() {
+            @Override
+            public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
+                if (!response.isSuccessful()) {
+                    try {
+                        // TODO show generalized error message from errors.xml
+                        if( response.code()==401){
+                            carDeleteCallBack.onFailure(context.getResources().getString(R.string.API_UNAUTHORIZED));
+                            return;
+                        }
+                        carDeleteCallBack.onFailure(response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+                carDeleteCallBack.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<StatusHandleModel> call, Throwable t) {
+                carDeleteCallBack.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
             }
         });
     }

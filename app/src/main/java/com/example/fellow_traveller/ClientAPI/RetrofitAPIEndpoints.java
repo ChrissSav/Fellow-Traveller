@@ -2,6 +2,7 @@ package com.example.fellow_traveller.ClientAPI;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -47,6 +48,15 @@ public interface RetrofitAPIEndpoints {
 
     @GET("/cars")
     Call<ArrayList<CarModel>> userCars();
+
+    @DELETE("/cars")
+    Call<StatusHandleModel> deleteUserCar(
+            @Query("car_id") int car_id
+    );
+
+
+
+
 
     @GET(".")
     Call<StatusHandleModel> Test();
