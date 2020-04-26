@@ -14,8 +14,8 @@ import android.widget.Toast;
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
-import com.example.fellow_traveller.API.RetrofitService;
-import com.example.fellow_traveller.Models.Car;
+//import com.example.fellow_traveller.API.RetrofitService;
+//import com.example.fellow_traveller.Models.Car;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 
@@ -25,7 +25,6 @@ public class AddCarSettingsActivity extends AppCompatActivity {
     private Button buttonAdd;
     private ImageButton buttonBack;
     private GlobalClass globalClass;
-
 
 
     @Override
@@ -49,23 +48,16 @@ public class AddCarSettingsActivity extends AppCompatActivity {
 
                 if (checkBrand() && checkModel() && checkPlate() && checkColor())
                     newRegisterCar();
+            }
+        });
 
 
-
-        car_brand = findViewById(R.id.AddCarSettingsActivity_EditText_brand);
-        car_model = findViewById(R.id.AddCarSettingsActivity_EditText_model);
-        car_plate = findViewById(R.id.AddCarSettingsActivity_EditText_plate);
-        car_color = findViewById(R.id.AddCarSettingsActivity_EditText_color);
-        button_add = findViewById(R.id.EditCarSettingsActivity_button_add);
-        button_back = findViewById(R.id.close_button_add_car_settings);
-
-
-        button_add.setOnClickListener(new View.OnClickListener() {
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (CheckBrand() && CheckModel() && CheckPlate() && CheckColor())
-                    RegisterCar();
+                if (checkBrand() && checkModel() && checkPlate() && checkColor())
+                    newRegisterCar();
             }
         });
         buttonBack.setOnClickListener(new View.OnClickListener() {
@@ -100,12 +92,12 @@ public class AddCarSettingsActivity extends AppCompatActivity {
         }
     }
 
-    public boolean CheckPlate() {
-        if (car_plate.getText().toString().matches("[Α-Ω][Α-Ω][Α-Ω]\\s[0-9][0-9][0-9][0-9]")) {
-            car_plate.setError(null);
+    public boolean checkPlate() {
+        if (carPlate.getText().toString().matches("[Α-Ω][Α-Ω][Α-Ω]\\s[0-9][0-9][0-9][0-9]")) {
+            carPlate.setError(null);
             return true;
         } else {
-            car_plate.setError("Πρέπει να είναι της μορφής ΧΧΧ 1234");
+            carPlate.setError("Πρέπει να είναι της μορφής ΧΧΧ 1234");
             return false;
         }
     }
@@ -121,26 +113,26 @@ public class AddCarSettingsActivity extends AppCompatActivity {
     }
 
 
-
-    public void newRegisterCar(){
+    public void newRegisterCar() {
         new FellowTravellerAPI(globalClass).carRegister(carBrand.getText().toString(), carModel.getText().toString(),
                 carPlate.getText().toString(), carColor.getText().toString(), new CarRegisterCallBack() {
-            @Override
-            public void onSuccess(CarModel car) {
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("car", car);
-                setResult(RESULT_OK, resultIntent);
-                finish();
-            }
+                    @Override
+                    public void onSuccess(CarModel car) {
+                        Intent resultIntent = new Intent();
+                        resultIntent.putExtra("car", car);
+                        setResult(RESULT_OK, resultIntent);
+                        finish();
+                    }
 
-            @Override
-            public void onFailure(String errorMsg) {
-                Toast.makeText(AddCarSettingsActivity.this, errorMsg, Toast.LENGTH_LONG).show();
+                    @Override
+                    public void onFailure(String errorMsg) {
+                        Toast.makeText(AddCarSettingsActivity.this, errorMsg, Toast.LENGTH_LONG).show();
 
-            }
-        });
+                    }
+                });
     }
 }
+
 
 
 

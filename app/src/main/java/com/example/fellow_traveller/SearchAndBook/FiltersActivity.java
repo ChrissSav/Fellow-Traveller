@@ -3,12 +3,19 @@ package com.example.fellow_traveller.SearchAndBook;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.fellow_traveller.R;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.wisnu.datetimerangepickerandroid.CalendarPickerView;
+
+import java.awt.font.NumericShaper;
+import java.util.Calendar;
+import java.util.Date;
 
 public class FiltersActivity extends AppCompatActivity {
     private SeekBar rangeBar;
@@ -30,6 +37,21 @@ public class FiltersActivity extends AppCompatActivity {
         ratingButton = findViewById(R.id.rate_button);
         applyButton = findViewById(R.id.apply_button);
         closeButton = findViewById(R.id.close_button_filters);
+
+
+        //MaterialDatePicker
+        MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.dateRangePicker();
+        builder.setTitleText("Επιλέξτε το εύρος των ημερών");
+        final MaterialDatePicker materialDatePicker = builder.build();
+
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                materialDatePicker.show(getSupportFragmentManager(), "DATE_PICKER");
+
+            }
+        });
+
 
         rangeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

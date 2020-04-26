@@ -286,8 +286,7 @@
         app:layout_constraintBottom_toBottomOf="@id/reset_button"
         android:padding="15dp"
         android:layout_marginStart="20dp"
-
         />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

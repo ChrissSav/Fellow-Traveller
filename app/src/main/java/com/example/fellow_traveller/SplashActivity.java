@@ -8,8 +8,7 @@ import android.os.Handler;
 
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
-import com.example.fellow_traveller.Models.User;
-import com.example.fellow_traveller.Models.UserAuth;
+
 import com.example.fellow_traveller.NewOffer.NewOfferActivity;
 import com.example.fellow_traveller.NewOffer.NewOfferStage1Fragment;
 import com.example.fellow_traveller.Register.RegisterContainerActivity;

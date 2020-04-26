@@ -18,7 +18,7 @@ public class EditCarSettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_car_settings);
 
-        editButton = findViewById(R.id.EditCarSettingsActivity_button_add);
+        editButton = findViewById(R.id.AddCarSettingsActivity_button_add);
         deleteButton = findViewById(R.id.EditCarSettings_delete_button);
         car_brand = findViewById(R.id.EditCarSettings_car_et);
         car_model = findViewById(R.id.EditCarSettings_model_et);
