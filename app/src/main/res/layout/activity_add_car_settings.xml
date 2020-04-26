@@ -221,6 +221,7 @@
                 android:hint="Συμπληρώστε τον αριθμό κυκλοφορίας"
                 android:inputType="textCapCharacters"
                 android:textAllCaps="true"
+                android:maxLength="8"
                 android:maxLines="1"
                 android:textCursorDrawable="@null"
                 android:textSize="20sp"
