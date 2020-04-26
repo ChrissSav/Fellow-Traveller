@@ -12,8 +12,7 @@ public class UserAuthModel {
     private String picture;
     private String aboutMe;
     private String phone;
-    @SerializedName("session_key")
-    private String sessionKey;
+    private String sessionId;
 
 
     public int getId() {
@@ -64,11 +63,12 @@ public class UserAuthModel {
         this.phone = phone;
     }
 
-    public String getSessionKey() {
-        return sessionKey;
+
+    public String getSessionId() {
+        return sessionId;
     }
 
-    public void setSessionKey(String sessionKey) {
-        this.sessionKey = sessionKey;
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 }

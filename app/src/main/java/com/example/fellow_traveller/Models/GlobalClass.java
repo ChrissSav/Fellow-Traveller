@@ -53,7 +53,7 @@ public class GlobalClass extends Application {
                 // TODO Request.Builder newRequest = request.newBuilder().header("Cookie", "session_id=9ab540c3-0d20-411b-bdae-131449a8a2f2");
                 Request.Builder newRequest = request.newBuilder();
                 if (currentUser!=null) {
-                    newRequest.header("authorization", currentUser.getSessionKey());
+                    newRequest.header("Cookie", currentUser.getSessionId());
                 }
                 return chain.proceed(newRequest.build());
             }

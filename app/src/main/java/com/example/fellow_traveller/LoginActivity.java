@@ -52,14 +52,14 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(UserAuthModel user) {
                             SaveClass(user);
-                            Log.d("Authentication", user.getSessionKey());
+                            //Log.d("Authentication", user.getSessionId());
                         }
 
                         @Override
                         public void onFailure(String errorMsg) {
                             // TODO remove this debug line.
                             Log.d("Authentication", "INVALID LOGIN");
-                            Toast.makeText(LoginActivity.this, errorMsg, Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {

@@ -1,6 +1,7 @@
 package com.example.fellow_traveller.ClientAPI;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.PlaceApiCallBack;
@@ -63,9 +64,10 @@ public class FellowTravellerAPI {
                     userAuthCallback.onFailure(context.getResources().getString(R.string.INVALID_CREDENTIALS));
                     return;
                 }
-                String key = response.headers().get("Set-Cookie").split(";")[0].split("=")[1];
+
+                String key = response.headers().get("Set-Cookie").split(";")[0];
                 UserAuthModel userAuthModel = response.body();
-                userAuthModel.setSessionKey(key);
+                userAuthModel.setSessionId(key);
                 userAuthCallback.onSuccess(response.body());
             }
 
