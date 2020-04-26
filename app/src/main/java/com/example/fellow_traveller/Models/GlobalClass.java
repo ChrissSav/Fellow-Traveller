@@ -35,11 +35,11 @@ public class GlobalClass extends Application {
 
     private OkHttpClient.Builder okHttpClient;
 
-    public UserAuthModel getCurrent_user() {
+    public UserAuthModel getCurrentUser() {
         return currentUser;
     }
 
-    public void setCurrent_user(UserAuthModel currentUser) {
+    public void setCurrentUser(UserAuthModel currentUser) {
         this.currentUser = currentUser;
     }
 
@@ -108,11 +108,8 @@ public class GlobalClass extends Application {
         String json = gson.toJson(userAuth);
         editor.putString(getResources().getString(R.string.USER_INFO), json);
         Log.i("SaveClass", "2");
-
         editor.apply();
         currentUser = userAuth;
-
-
     }
 }
 

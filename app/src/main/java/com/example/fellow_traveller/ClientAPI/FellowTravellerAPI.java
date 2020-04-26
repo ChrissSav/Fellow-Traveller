@@ -37,8 +37,7 @@ public class FellowTravellerAPI {
     public FellowTravellerAPI(GlobalClass context) {
         // Pass context from the activity we were called from
         FellowTravellerAPI.context = context;
-        // TODO getCurrentUser()
-        if (context.getCurrent_user() == null) {
+        if (context.getCurrentUser() == null) {
             Log.d("FellowTravellerAPI", " with out client");
 
             retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.API_BASE_URL))
