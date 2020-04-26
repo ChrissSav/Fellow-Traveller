@@ -170,7 +170,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
 
         //Get myId from Global Class
         globalClass = (GlobalClass) myContext.getApplicationContext();
-        myId = globalClass.getCurrent_user().getId();
+        myId = globalClass.getCurrentUser().getId();
         //Initialize and check if we run out of the list
         if (position + 1 < messagesList.size()) {
             currNext = messagesList.get(position + 1).getId();

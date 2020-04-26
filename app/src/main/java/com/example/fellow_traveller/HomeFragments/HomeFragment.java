@@ -52,7 +52,7 @@ public class HomeFragment extends Fragment {
         welcome_user = view.findViewById(R.id.FragmentHome_textView_welcome_user);
         btnΝewΟffer = view.findViewById(R.id.FragmentHome_button_CreateTrip);
 
-        welcome_user.setText("Γεια σου " + globalClass.getCurrent_user().getName() + ",");
+        welcome_user.setText("Γεια σου " + globalClass.getCurrentUser().getName() + ",");
         searchForTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

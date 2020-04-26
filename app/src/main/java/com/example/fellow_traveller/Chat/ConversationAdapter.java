@@ -146,7 +146,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
 
         //Get myId from Global Class
         globalClass = (GlobalClass) myContext.getApplicationContext();
-        myId = globalClass.getCurrent_user().getId();
+        myId = globalClass.getCurrentUser().getId();
 
         theLastMessage = "default";
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Messages").child(groupId);

@@ -15,6 +15,7 @@ import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
+import com.example.fellow_traveller.Register.RegisterContainerActivity;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
@@ -52,14 +53,14 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(UserAuthModel user) {
                             SaveClass(user);
-                            Log.d("Authentication", user.getSessionKey());
+                            //Log.d("Authentication", user.getSessionId());
                         }
 
                         @Override
                         public void onFailure(String errorMsg) {
                             // TODO remove this debug line.
                             Log.d("Authentication", "INVALID LOGIN");
-                            Toast.makeText(LoginActivity.this, errorMsg, Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
@@ -75,12 +76,8 @@ public class LoginActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String json = gson.toJson(userAuth);
         editor.putString(getResources().getString(R.string.USER_INFO), json);
-        Log.i("LoginUser", "2");
-
         editor.apply();
-        globalClass.setCurrent_user(userAuth);
-        Log.i("LoginUser", "3");
-
+        globalClass.setCurrentUser(userAuth);
         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_CLEAR_TASK);

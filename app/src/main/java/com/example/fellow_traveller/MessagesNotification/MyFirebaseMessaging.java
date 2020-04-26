@@ -28,7 +28,7 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
 
         //Retrieve current user's id
         globalClass = (GlobalClass) getApplicationContext();
-        myId = globalClass.getCurrent_user().getId();
+        myId = globalClass.getCurrentUser().getId();
 
 
         String sented = remoteMessage.getData().get("sented");

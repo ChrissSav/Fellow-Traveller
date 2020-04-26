@@ -1,6 +1,7 @@
 package com.example.fellow_traveller.ClientAPI;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.PlaceApiCallBack;
@@ -19,10 +20,7 @@ import com.google.gson.JsonObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
-import okhttp3.Headers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,15 +37,15 @@ public class FellowTravellerAPI {
     public FellowTravellerAPI(GlobalClass context) {
         // Pass context from the activity we were called from
         FellowTravellerAPI.context = context;
-        if (context.getCurrent_user() == null) {
+        if (context.getCurrentUser() == null) {
             Log.d("FellowTravellerAPI", " with out client");
 
-            retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.FELLOW_API_URL))
+            retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.API_BASE_URL))
                     .addConverterFactory(GsonConverterFactory.create()).build();
-        }else{
+        } else {
             Log.d("FellowTravellerAPI", " with  client");
 
-            retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.FELLOW_API_URL))
+            retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.API_BASE_URL))
                     .client(context.getOkHttpClient().build())
                     .addConverterFactory(GsonConverterFactory.create()).build();
         }
@@ -65,9 +63,10 @@ public class FellowTravellerAPI {
                     userAuthCallback.onFailure(context.getResources().getString(R.string.INVALID_CREDENTIALS));
                     return;
                 }
-                String key = response.headers().get("Set-Cookie").split(";")[0].split("=")[1];
+
+                String key = response.headers().get("Set-Cookie").split(";")[0];
                 UserAuthModel userAuthModel = response.body();
-                userAuthModel.setSessionKey(key);
+                userAuthModel.setSessionId(key);
                 userAuthCallback.onSuccess(response.body());
             }
 
@@ -215,13 +214,13 @@ public class FellowTravellerAPI {
     public static void getPlaces(String place, final PlaceApiCallBack placeApiCallBack) {
         String key = context.getResources().getString(R.string.PLACE_KEY);
         String language = context.getResources().getString(R.string.PLACE_LANGUAGE);
-        String country ="country:gr";
+        String country = "country:gr";
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.PLACE_URL))
                 .addConverterFactory(GsonConverterFactory.create()).build();
-        RetrofitAPIEndpoints  retrofitService = retrofit.create(RetrofitAPIEndpoints.class);
+        RetrofitAPIEndpoints retrofitService = retrofit.create(RetrofitAPIEndpoints.class);
 
-        Call<PlaceAPiModel> call = retrofitService.getPlaces(place, key,language,country);
+        Call<PlaceAPiModel> call = retrofitService.getPlaces(place, key, language, country);
         call.enqueue(new Callback<PlaceAPiModel>() {
             @Override
             public void onResponse(Call<PlaceAPiModel> call, Response<PlaceAPiModel> response) {

@@ -35,11 +35,11 @@ public class GlobalClass extends Application {
 
     private OkHttpClient.Builder okHttpClient;
 
-    public UserAuthModel getCurrent_user() {
+    public UserAuthModel getCurrentUser() {
         return currentUser;
     }
 
-    public void setCurrent_user(UserAuthModel currentUser) {
+    public void setCurrentUser(UserAuthModel currentUser) {
         this.currentUser = currentUser;
     }
 
@@ -50,9 +50,11 @@ public class GlobalClass extends Application {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
-                Log.i("getAccess_token", currentUser.getSessionKey());
-
-                Request.Builder newRequest = request.newBuilder().header("authorization", currentUser.getSessionKey());
+                // TODO Request.Builder newRequest = request.newBuilder().header("Cookie", "session_id=9ab540c3-0d20-411b-bdae-131449a8a2f2");
+                Request.Builder newRequest = request.newBuilder();
+                if (currentUser!=null) {
+                    newRequest.header("Cookie", currentUser.getSessionId());
+                }
                 return chain.proceed(newRequest.build());
             }
         }));
@@ -106,11 +108,8 @@ public class GlobalClass extends Application {
         String json = gson.toJson(userAuth);
         editor.putString(getResources().getString(R.string.USER_INFO), json);
         Log.i("SaveClass", "2");
-
         editor.apply();
         currentUser = userAuth;
-
-
     }
 }
 

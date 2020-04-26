@@ -90,6 +90,7 @@ public class SettingsActivity extends AppCompatActivity {
     public void DeleteSharedPreferences() {
         SharedPreferences settings = getSharedPreferences("shared preferences", MODE_PRIVATE);
         settings.edit().clear().commit();
+        globalClass.setCurrentUser(null);
         Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_CLEAR_TASK);
