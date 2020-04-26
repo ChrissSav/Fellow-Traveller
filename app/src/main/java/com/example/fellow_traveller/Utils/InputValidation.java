@@ -14,4 +14,9 @@ public class InputValidation {
         Pattern regexPattern = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%&*()_+=|<>?{}\\\\[\\\\]~-]).+$");
         return regexPattern.matcher(password).matches();
     }
+
+    public static boolean isValidPlate(String plate) {
+        Pattern regexPattern = Pattern.compile("^[Α-Ω]{3}[0-9]{4}$");
+        return regexPattern.matcher(plate).matches();
+    }
 }

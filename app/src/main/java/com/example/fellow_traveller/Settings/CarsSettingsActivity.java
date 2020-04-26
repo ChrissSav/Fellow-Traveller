@@ -38,10 +38,7 @@ public class CarsSettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cars_settings);
         globalClass = (GlobalClass) getApplicationContext();
 
-        // carsList.add(new MyCarItem("Lamborghini, Huracan 720LP - ΤΣΖ 3954"));
-        // carsList.add(new MyCarItem("Lamborghini, Huracan Spyder - ΤΞΣ 3264"));
-        //carsList.add(new MyCarItem("Lamborghini, Urus - ΙΓΞ 3853"));
-
+        mRecyclerView = findViewById(R.id.my_cars_recycler_view);
 
         addCarButton = findViewById(R.id.new_car_button_settings_car);
 
@@ -49,15 +46,13 @@ public class CarsSettingsActivity extends AppCompatActivity {
         addCarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mainIntent = new Intent(CarsSettingsActivity.this, AddCarSettingsActivity.class);
-                startActivity(mainIntent);
+                Intent intent = new Intent(CarsSettingsActivity.this, AddCarSettingsActivity.class);
+                startActivity(intent);
 
             }
         });
 
-
-
-
+        getUserCars();
 
     }
 
@@ -70,8 +65,9 @@ public class CarsSettingsActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new MyCarAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent mainIntent = new Intent(CarsSettingsActivity.this, EditCarSettingsActivity.class);
-                startActivity(mainIntent);
+                Intent intent = new Intent(CarsSettingsActivity.this, EditCarSettingsActivity.class);
+                intent.putExtra("car", carsList.get(position));
+                startActivity(intent);
             }
         });
     }

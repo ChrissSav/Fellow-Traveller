@@ -16,9 +16,11 @@ import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 
+import static com.example.fellow_traveller.Utils.InputValidation.isValidPlate;
+
 public class AddCarSettingsActivity extends AppCompatActivity {
 
-    private EditText carBrand, carModel, carPlate, carColor;
+    private EditText EditTextCarBrand, EditTextCarModel, EditTextCarPlate, EditTextCarColor;
     private Button buttonAdd;
     private ImageButton buttonBack;
     private GlobalClass globalClass;
@@ -32,10 +34,10 @@ public class AddCarSettingsActivity extends AppCompatActivity {
 
         globalClass = (GlobalClass) getApplicationContext();
 
-        carBrand = findViewById(R.id.AddCarSettingsActivity_EditText_brand);
-        carModel = findViewById(R.id.AddCarSettingsActivity_EditText_model);
-        carPlate = findViewById(R.id.AddCarSettingsActivity_EditText_plate);
-        carColor = findViewById(R.id.AddCarSettingsActivity_EditText_color);
+        EditTextCarBrand = findViewById(R.id.AddCarSettingsActivity_EditText_brand);
+        EditTextCarModel = findViewById(R.id.AddCarSettingsActivity_EditText_model);
+        EditTextCarPlate = findViewById(R.id.AddCarSettingsActivity_EditText_plate);
+        EditTextCarColor = findViewById(R.id.AddCarSettingsActivity_EditText_color);
         buttonAdd = findViewById(R.id.EditCarSettingsActivity_button_add);
         buttonBack = findViewById(R.id.close_button_add_car_settings);
 
@@ -61,50 +63,50 @@ public class AddCarSettingsActivity extends AppCompatActivity {
     }
 
     public boolean checkBrand() {
-        if (carBrand.getText().length() < 2) {
-            carBrand.setError("Υποχρεώτικο πεδίο");
+        if (EditTextCarBrand.getText().length() < 2) {
+            EditTextCarBrand.setError("Υποχρεώτικο πεδίο");
             return false;
         } else {
-            carBrand.setError(null);
+            EditTextCarBrand.setError(null);
             return true;
 
         }
     }
 
     public boolean checkModel() {
-        if (carModel.getText().length() < 2) {
-            carModel.setError("Υποχρεώτικο πεδίο");
+        if (EditTextCarModel.getText().length() < 2) {
+            EditTextCarModel.setError("Υποχρεώτικο πεδίο");
             return false;
         } else {
-            carModel.setError(null);
+            EditTextCarModel.setError(null);
             return true;
         }
     }
 
     public boolean checkPlate() {
-        if (carPlate.getText().length() < 2) {
-            carPlate.setError("Υποχρεώτικο πεδίο");
-            return false;
-        } else {
-            carPlate.setError(null);
+        if (isValidPlate(EditTextCarPlate.getText().toString())) {
+            EditTextCarPlate.setError(null);
             return true;
+        } else {
+            EditTextCarPlate.setError("Πρέπει να είναι της μορφής ΧΧΧ1234");
+            return false;
         }
     }
 
     public boolean checkColor() {
-        if (carColor.getText().length() < 2) {
-            carColor.setError("Υποχρεώτικο πεδίο");
+        if (EditTextCarColor.getText().length() < 2) {
+            EditTextCarColor.setError("Υποχρεώτικο πεδίο");
             return false;
         } else {
-            carColor.setError(null);
+            EditTextCarColor.setError(null);
             return true;
         }
     }
 
 
     public void newRegisterCar() {
-        new FellowTravellerAPI(globalClass).carRegister(carBrand.getText().toString(), carModel.getText().toString(),
-                carPlate.getText().toString(), carColor.getText().toString(), new CarRegisterCallBack() {
+        new FellowTravellerAPI(globalClass).carRegister(EditTextCarBrand.getText().toString(), EditTextCarModel.getText().toString(),
+                EditTextCarPlate.getText().toString(), EditTextCarColor.getText().toString(), new CarRegisterCallBack() {
                     @Override
                     public void onSuccess(CarModel car) {
                         Intent resultIntent = new Intent();
