@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +29,7 @@ public class AddCarSettingsActivity extends AppCompatActivity {
     private Button buttonAdd;
     private ImageButton buttonBack;
     private GlobalClass globalClass;
+    private String previousWord;
 
 
     @Override
@@ -63,6 +66,11 @@ public class AddCarSettingsActivity extends AppCompatActivity {
 
             }
         });
+
+        EditTextCarPlate.setFilters(new InputFilter[]{
+                new InputFilter.AllCaps(),
+                new InputFilter.LengthFilter(8)
+        });
         EditTextCarPlate.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -71,13 +79,19 @@ public class AddCarSettingsActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(before == 2 && count == 3){
+                if (before == 2 && count == 3) {
                     EditTextCarPlate.append("-");
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (s.length() >= 4) {
+                    EditTextCarPlate.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+                } else {
+                    EditTextCarPlate.setInputType(InputType.TYPE_CLASS_TEXT);
+                }
 
             }
 

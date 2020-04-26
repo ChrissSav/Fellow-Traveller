@@ -5,6 +5,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -68,6 +70,10 @@ public class EditCarSettingsActivity extends AppCompatActivity {
             }
         });
 
+        EditTextCarPlate.setFilters(new InputFilter[]{
+                new InputFilter.AllCaps(),
+                new InputFilter.LengthFilter(8)
+        });
         EditTextCarPlate.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -76,13 +82,19 @@ public class EditCarSettingsActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(before == 2 && count == 3){
+                if (before == 2 && count == 3) {
                     EditTextCarPlate.append("-");
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+                if (s.length() >= 4) {
+                    EditTextCarPlate.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+                } else {
+                    EditTextCarPlate.setInputType(InputType.TYPE_CLASS_TEXT);
+                }
 
             }
 
