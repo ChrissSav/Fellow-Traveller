@@ -1,7 +1,6 @@
 package com.example.fellow_traveller.ClientAPI;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarDeleteCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
@@ -61,7 +60,7 @@ public class FellowTravellerAPI {
             public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
                 if (!response.isSuccessful()) {
                     Log.d("Authentication", "LOGIN FAILURE!!");
-                    userAuthCallback.onFailure(context.getResources().getString(R.string.INVALID_CREDENTIALS));
+                    userAuthCallback.onFailure(context.getResources().getString(R.string.ERROR_INVALID_CREDENTIALS));
                     return;
                 }
 
@@ -73,7 +72,7 @@ public class FellowTravellerAPI {
 
             @Override
             public void onFailure(Call<UserAuthModel> call, Throwable t) {
-                userAuthCallback.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
+                userAuthCallback.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
             }
         });
 
@@ -99,7 +98,7 @@ public class FellowTravellerAPI {
 
             @Override
             public void onFailure(Call<StatusHandleModel> call, Throwable t) {
-                userLogoutCallBack.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
+                userLogoutCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
             }
         });
     }
@@ -123,7 +122,7 @@ public class FellowTravellerAPI {
 
             @Override
             public void onFailure(Call<UserAuthModel> call, Throwable t) {
-                userRegisterCallback.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
+                userRegisterCallback.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
             }
         });
     }
@@ -148,7 +147,7 @@ public class FellowTravellerAPI {
 
             @Override
             public void onFailure(Call<CarModel> call, Throwable t) {
-                carRegisterCallBack.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
+                carRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
             }
         });
     }
@@ -171,7 +170,7 @@ public class FellowTravellerAPI {
 
             @Override
             public void onFailure(Call<ArrayList<CarModel>> call, Throwable t) {
-                userCarsCallBack.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
+                userCarsCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
             }
         });
     }
@@ -184,7 +183,7 @@ public class FellowTravellerAPI {
                     try {
                         // TODO show generalized error message from errors.xml
                         if( response.code()==401){
-                            carDeleteCallBack.onFailure(context.getResources().getString(R.string.API_UNAUTHORIZED));
+                            carDeleteCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
                             return;
                         }
                         carDeleteCallBack.onFailure(response.errorBody().string());
@@ -198,7 +197,7 @@ public class FellowTravellerAPI {
 
             @Override
             public void onFailure(Call<StatusHandleModel> call, Throwable t) {
-                carDeleteCallBack.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
+                carDeleteCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
             }
         });
     }
@@ -234,7 +233,7 @@ public class FellowTravellerAPI {
 
             @Override
             public void onFailure(Call<StatusHandleModel> call, Throwable t) {
-                tripRegisterCallBack.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
+                tripRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
             }
         });
     }

@@ -68,11 +68,11 @@ public class RegisterStage2Fragment extends Fragment {
         ArrayList<Integer> errors = isValidPassword(password);
 
         if (!errors.isEmpty()) {
-            textInputLayoutPassword.setError(getContext().getString(R.string.PASSWORD_DOES_NOT_MEET_COMPLEXITY_REQUIREMENTS));
+            textInputLayoutPassword.setError(getContext().getString(R.string.ERROR_PASSWORD_DOES_NOT_MEET_COMPLEXITY_REQUIREMENTS));
             textInputLayoutConfirmPassword.setError(null);
 
             // TODO this is for debug only, to show how the isValidPassword() works
-            Toast.makeText(getContext(), getResources().getString(R.string.PASSWORD_COMPLEXITY_SHOULD_CONTAIN), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getResources().getString(R.string.ERROR_PASSWORD_COMPLEXITY_SHOULD_CONTAIN), Toast.LENGTH_SHORT).show();
             for (Integer error : errors) {
                 // TODO implement how you will display the errors to the user.
                 // TODO remove debug output
@@ -81,7 +81,7 @@ public class RegisterStage2Fragment extends Fragment {
             return false;
         } else if (!password.equals(confirmPassword)) {
             textInputLayoutPassword.setError(null);
-            textInputLayoutConfirmPassword.setError(getContext().getString(R.string.PASSWORD_DO_NOT_MATCH));
+            textInputLayoutConfirmPassword.setError(getContext().getString(R.string.ERROR_PASSWORD_DO_NOT_MATCH));
             return false;
         } else {
             textInputLayoutPassword.setError(null);

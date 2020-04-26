@@ -22,19 +22,19 @@ public class InputValidation {
         ArrayList<Integer> errors = new ArrayList<>();
 
         if (password.length() < 8) {
-            errors.add(R.string.PASSWORD_COMPLEXITY_LENGTH);
+            errors.add(R.string.ERROR_PASSWORD_COMPLEXITY_LENGTH);
         }
         if (!passwordLowerCasePattern.matcher(password).matches()) {
-            errors.add(R.string.PASSWORD_COMPLEXITY_LOWERCASE_LETTER);
+            errors.add(R.string.ERROR_PASSWORD_COMPLEXITY_LOWERCASE_LETTER);
         }
         if (!passwordUpperCasePattern.matcher(password).matches()) {
-            errors.add(R.string.PASSWORD_COMPLEXITY_UPPERCASE_LETTER);
+            errors.add(R.string.ERROR_PASSWORD_COMPLEXITY_UPPERCASE_LETTER);
         }
         if (!passwordDigitsPattern.matcher(password).matches()) {
-            errors.add(R.string.PASSWORD_COMPLEXITY_DIGIT);
+            errors.add(R.string.ERROR_PASSWORD_COMPLEXITY_DIGIT);
         }
         if (!passwordSpecialCharsPattern.matcher(password).matches()) {
-            errors.add(R.string.PASSWORD_COMPLEXITY_SPECIAL_CHARACTER);
+            errors.add(R.string.ERROR_PASSWORD_COMPLEXITY_SPECIAL_CHARACTER);
         }
 
         return errors;
