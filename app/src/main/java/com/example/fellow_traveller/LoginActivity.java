@@ -15,11 +15,10 @@ import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
-import com.example.fellow_traveller.Register.RegisterContainerActivity;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
-import static com.example.fellow_traveller.Utils.InputValidation.isValidEmail;
+import static com.example.fellow_traveller.Util.InputValidation.isValidEmail;
 
 public class LoginActivity extends AppCompatActivity {
 

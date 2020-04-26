@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import android.view.ViewGroup;
 import com.example.fellow_traveller.R;
 import com.google.android.material.textfield.TextInputLayout;
 
-import static com.example.fellow_traveller.Utils.InputValidation.isValidEmail;
+import static com.example.fellow_traveller.Util.InputValidation.isValidEmail;
 
 public class RegisterStage1Fragment extends Fragment {
 
