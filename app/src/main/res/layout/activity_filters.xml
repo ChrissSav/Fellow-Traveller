@@ -164,8 +164,7 @@
         android:fontFamily="@font/firasans_light"
         android:textSize="16sp"
         android:textColor="@color/profile"
-        android:gravity="right|center_vertical"
-        android:padding="0dp"
+        android:padding="10dp"
 
         />
     <Button
@@ -182,8 +181,7 @@
         android:fontFamily="@font/firasans_light"
         android:textSize="16sp"
         android:textColor="@color/profile"
-        android:gravity="right|center_vertical"
-        android:padding="0dp"
+        android:padding="10dp"
         />
     <Button
         android:id="@+id/price_button"
@@ -200,7 +198,7 @@
         android:textSize="16sp"
         android:textColor="@color/profile"
         android:gravity="right|center_vertical"
-        android:padding="0dp"
+        android:padding="10dp"
         />
     <TextView
         android:id="@+id/range_km_tv"
