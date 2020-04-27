@@ -118,7 +118,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
     }
 
     public void fillFields() {
-        FellowTravellerAPI.getUserInfo(new UserAuthCallback() {
+        new FellowTravellerAPI(globalClass).getUserInfo(new UserAuthCallback() {
             @Override
             public void onSuccess(UserAuthModel user) {
                 firstNameEditText.setText(user.getName());
