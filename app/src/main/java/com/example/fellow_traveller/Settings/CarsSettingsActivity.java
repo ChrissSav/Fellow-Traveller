@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.fellow_traveller.Chat.ChatConversationActivity;
 import com.example.fellow_traveller.Chat.ConversationAdapter;
@@ -31,6 +32,7 @@ public class CarsSettingsActivity extends AppCompatActivity {
     private ArrayList<CarModel> carsList;
     private Button addCarButton;
     private GlobalClass globalClass;
+    private ImageButton imageButtonBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +43,20 @@ public class CarsSettingsActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.my_cars_recycler_view);
 
         addCarButton = findViewById(R.id.new_car_button_settings_car);
-
+        imageButtonBack = findViewById(R.id.back_button_cars_settings);
 
         addCarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CarsSettingsActivity.this, AddCarSettingsActivity.class);
                 startActivity(intent);
+
+            }
+        });
+        imageButtonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               finish();
 
             }
         });

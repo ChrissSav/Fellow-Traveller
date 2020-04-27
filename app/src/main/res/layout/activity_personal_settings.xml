@@ -12,63 +12,62 @@
         android:id="@+id/header_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="2dp"
+        android:padding="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:elevation="2dp"
-        android:background="@color/white"
-        android:padding="10dp"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/close_button_personal_settings"
+            android:id="@+id/PersonalSettingsActivity_button_close"
             android:layout_width="34dp"
             android:layout_height="34dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginTop="5dp"
             android:layout_marginLeft="15dp"
-            android:padding="20dp"
-            android:backgroundTint="@color/profile"
+            android:layout_marginTop="5dp"
             android:background="@drawable/ic_close"
+            android:backgroundTint="@color/profile"
+            android:padding="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
 
             />
+
         <TextView
             android:id="@+id/info_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/close_button_personal_settings"
-            app:layout_constraintBottom_toBottomOf="@id/close_button_personal_settings"
-            android:text="Στοιχεία Προφίλ"
-            app:layout_constraintStart_toEndOf="@id/close_button_personal_settings"
             android:layout_marginStart="30dp"
-            android:textSize="20sp"
-            android:textColor="@color/profile"
             android:fontFamily="@font/firasans_medium"
-            />
-            <ImageButton
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                app:layout_constraintTop_toTopOf="@id/close_button_personal_settings"
-                app:layout_constraintBottom_toBottomOf="@id/close_button_personal_settings"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginRight="15dp"
-                android:padding="20dp"
-                android:background="@drawable/ic_check"
-                android:backgroundTint="@color/home_blue"
-                />
+            android:text="Στοιχεία Προφίλ"
+            android:textColor="@color/profile"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/PersonalSettingsActivity_button_close"
+            app:layout_constraintStart_toEndOf="@id/PersonalSettingsActivity_button_close"
+            app:layout_constraintTop_toTopOf="@id/PersonalSettingsActivity_button_close" />
+
+        <ImageButton
+            android:id="@+id/PersonalSettingsActivity_button_update"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/ic_check"
+            android:backgroundTint="@color/home_blue"
+            android:padding="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/PersonalSettingsActivity_button_close"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/PersonalSettingsActivity_button_close" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_picture"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/null_icon"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_section"
-        android:layout_marginTop="30dp"
-        />
+        app:layout_constraintTop_toBottomOf="@id/header_section" />
 
     <Button
         android:id="@+id/change_image_button"
@@ -83,117 +82,182 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_picture" />
 
-    <TextView
-        android:id="@+id/user_name_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/change_image_button"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:text="Όνομα χρήστη"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/firasans_light"
-        android:textColor="@color/grey"
-        />
-    <EditText
-        android:id="@+id/user_name_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/user_name_tv"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:background="@null"
-        android:windowSoftInputMode="adjustPan"
-        android:textCursorDrawable="@null"
-        />
-    <View
-        android:id="@+id/underline_user_name"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/lightGrey"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_name_et"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/change_image_button">
 
-        />
-    <TextView
-        android:id="@+id/about_me_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/underline_user_name"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:text="Σχετικά με εμένα"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/firasans_light"
-        android:textColor="@color/grey"
-        />
-    <EditText
-        android:id="@+id/about_me_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/about_me_tv"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:background="@null"
-        android:windowSoftInputMode="adjustPan"
-        android:textCursorDrawable="@null"
-        />
-    <View
-        android:id="@+id/underline_about_me"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/lightGrey"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/about_me_et"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/change_image_button">
 
-        />
-    <TextView
-        android:id="@+id/phone_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/underline_about_me"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:text="Αριθμός τηλεφώνου"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/firasans_light"
-        android:textColor="@color/grey"
-        />
-    <EditText
-        android:id="@+id/phone_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/phone_tv"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:background="@null"
-        android:windowSoftInputMode="adjustPan"
-        android:textCursorDrawable="@null"
-        />
-    <View
-        android:id="@+id/underline_phone"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/lightGrey"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone_et"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        />
+            <TextView
+                android:id="@+id/user_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/firasans_light"
+                android:text="Όνομα"
+                android:textColor="@color/grey"
+                android:textSize="17dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/PersonalSettingsActivity_editText_first_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@null"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textCursorDrawable="@null"
+                android:windowSoftInputMode="adjustPan"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/user_name_tv"
+                app:layout_constraintTop_toBottomOf="@+id/user_name_tv" />
+
+            <View
+                android:id="@+id/underline_user_name"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+
+                android:background="@color/lightGrey"
+                app:layout_constraintEnd_toEndOf="@+id/PersonalSettingsActivity_editText_first_name"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/PersonalSettingsActivity_editText_first_name"
+                app:layout_constraintTop_toBottomOf="@+id/PersonalSettingsActivity_editText_first_name" />
+
+
+            <TextView
+                android:id="@+id/user_last_name_tcv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/firasans_light"
+                android:text="Επώνυμο"
+                android:textColor="@color/grey"
+                android:textSize="17dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/user_name_tv"
+                app:layout_constraintTop_toBottomOf="@+id/underline_user_name" />
+
+
+            <EditText
+                android:id="@+id/PersonalSettingsActivity_editText_last_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:background="@null"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textCursorDrawable="@null"
+                android:windowSoftInputMode="adjustPan"
+                app:layout_constraintEnd_toEndOf="@+id/PersonalSettingsActivity_editText_first_name"
+                app:layout_constraintStart_toStartOf="@+id/user_last_name_tcv"
+                app:layout_constraintTop_toBottomOf="@+id/user_last_name_tcv" />
+
+
+            <View
+                android:id="@+id/underline_last_name"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/lightGrey"
+                app:layout_constraintEnd_toEndOf="@+id/PersonalSettingsActivity_editText_last_name"
+                app:layout_constraintStart_toStartOf="@+id/PersonalSettingsActivity_editText_last_name"
+                app:layout_constraintTop_toBottomOf="@+id/PersonalSettingsActivity_editText_last_name" />
+
+            <TextView
+                android:id="@+id/about_me_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/firasans_light"
+                android:text="Σχετικά με εμένα"
+                android:textColor="@color/grey"
+                android:textSize="17dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/user_name_tv"
+                app:layout_constraintTop_toBottomOf="@+id/underline_last_name" />
+
+            <EditText
+                android:id="@+id/PersonalSettingsActivity_editText_about_me"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:textCursorDrawable="@null"
+                android:windowSoftInputMode="adjustPan"
+                app:layout_constraintEnd_toEndOf="@+id/PersonalSettingsActivity_editText_first_name"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/about_me_tv"
+                app:layout_constraintTop_toBottomOf="@+id/about_me_tv" />
+
+            <View
+                android:id="@+id/underline_about_me"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/lightGrey"
+                app:layout_constraintEnd_toEndOf="@+id/PersonalSettingsActivity_editText_about_me"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/PersonalSettingsActivity_editText_about_me"
+                app:layout_constraintTop_toBottomOf="@+id/PersonalSettingsActivity_editText_about_me" />
+
+            <TextView
+                android:id="@+id/phone_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/firasans_light"
+                android:text="Αριθμός τηλεφώνου"
+                android:textColor="@color/grey"
+                android:textSize="17dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/user_name_tv"
+                app:layout_constraintTop_toBottomOf="@+id/underline_about_me" />
+
+            <EditText
+                android:id="@+id/PersonalSettingsActivity_editText_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:inputType="number"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textCursorDrawable="@null"
+                android:windowSoftInputMode="adjustPan"
+                app:layout_constraintEnd_toEndOf="@+id/PersonalSettingsActivity_editText_first_name"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/phone_tv"
+                app:layout_constraintTop_toBottomOf="@+id/phone_tv" />
+
+            <View
+                android:id="@+id/underline_phone"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/lightGrey"
+                app:layout_constraintEnd_toEndOf="@+id/PersonalSettingsActivity_editText_phone"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/PersonalSettingsActivity_editText_phone"
+                app:layout_constraintTop_toBottomOf="@+id/PersonalSettingsActivity_editText_phone" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,7 @@ public class UserAuthModel {
     private String name;
     private String surname;
     private String picture;
+    @SerializedName("about_me")
     private String aboutMe;
     private String phone;
     private String sessionId;
@@ -71,4 +72,12 @@ public class UserAuthModel {
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
     }
+
+
+    public String getFullName() {
+        return name+" "+surname;
+    }
+
+
+
 }

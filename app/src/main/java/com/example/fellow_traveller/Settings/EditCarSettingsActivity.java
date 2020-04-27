@@ -153,7 +153,7 @@ public class EditCarSettingsActivity extends AppCompatActivity {
 
     public void deleteCar() {
         Snackbar snackbar = Snackbar
-                .make(constraintLayout, "Θες σιγουρα να το διαγραψεις;", Snackbar.LENGTH_LONG)
+                .make(constraintLayout, getResources().getString(R.string.CONFIRM_DELETION), Snackbar.LENGTH_LONG)
                 .setAction("ΝΑΙ", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

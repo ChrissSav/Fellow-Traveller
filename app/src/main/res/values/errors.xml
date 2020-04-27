@@ -16,6 +16,9 @@
     <string name="PASSWORD_DO_NOT_MATCH">Οι κωδικοί πρόσβασης δεν ταιριάζουν.</string>
     <string name="EMAIL_ALREADY_EXISTS">Υπάρχει ήδη λογαριασμός με αυτό το email.</string>
     <string name="PHONE_ALREADY_EXISTS">Υπάρχει ήδη λογαριασμός με αυτόν τον αριθμό τηλεφώνου.</string>
+    <string name="INVALID_PHONE_FORMAT">Μη έγκυρος αριθμός τηλεφώνου.</string>
+    <string name="CONFIRM_DELETION">Είσαι σίγουρος για την διργαφή ;.</string>
+
     <!--User authentication-->
     <string name="INVALID_CREDENTIALS">Λάθος email/κωδικός πρόσβασης.</string>
     <!--Password change-->

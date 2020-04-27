@@ -5,6 +5,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
@@ -30,6 +31,15 @@ public interface RetrofitAPIEndpoints {
     Call<UserAuthModel> userRegister(
             @Body JsonObject user
     );
+    //User
+    @GET("user")
+    Call<UserAuthModel> userInfo();
+
+    @PUT("user")
+    Call<UserAuthModel> userUpdate(
+            @Body JsonObject user
+    );
+
 
 
     //Trip

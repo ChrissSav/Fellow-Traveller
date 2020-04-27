@@ -128,6 +128,55 @@ public class FellowTravellerAPI {
         });
     }
 
+
+    public static void getUserInfo(final UserAuthCallback userAuthCallback) {
+        retrofitAPIEndpoints.userInfo().enqueue(new Callback<UserAuthModel>() {
+            @Override
+            public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
+                if (!response.isSuccessful()) {
+                    try {
+                        // TODO Display generalized error message from errors.xml
+                        userAuthCallback.onFailure(response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+                userAuthCallback.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<UserAuthModel> call, Throwable t) {
+                userAuthCallback.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
+            }
+        });
+    }
+
+    public static void updateUserInfo(String name,String lastName,String picture,String aboutMe,String phone,final UserAuthCallback userAuthCallback) {
+        JsonObject json = buildJSON(new String[]{"name", "surname", "picture", "about_me", "phone"}, name, lastName, picture, aboutMe, phone);
+
+        retrofitAPIEndpoints.userUpdate(json).enqueue(new Callback<UserAuthModel>() {
+            @Override
+            public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
+                if (!response.isSuccessful()) {
+                    try {
+                        // TODO Display generalized error message from errors.xml
+                        userAuthCallback.onFailure(response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+                userAuthCallback.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<UserAuthModel> call, Throwable t) {
+                userAuthCallback.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
+            }
+        });
+    }
+
     // TODO what about carAdd?
     public static void carRegister(String brand, String model, String plate, String color, final CarRegisterCallBack carRegisterCallBack) {
         JsonObject json = buildJSON(new String[]{"brand", "model", "plate", "color"}, brand, model, plate, color);
