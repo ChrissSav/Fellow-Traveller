@@ -136,7 +136,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
 
 
     public void updateUser(String firstName, String lastName, String aboutMe, String phoneNumber) {
-        FellowTravellerAPI.updateUserInfo(firstName, lastName, "", aboutMe, phoneNumber, new UserAuthCallback() {
+       new  FellowTravellerAPI(globalClass).updateUserInfo(firstName, lastName, "", aboutMe, phoneNumber, new UserAuthCallback() {
             @Override
             public void onSuccess(UserAuthModel user) {
                 user.setSessionId(globalClass.getCurrentUser().getSessionId());
