@@ -103,7 +103,7 @@ public class EditCarSettingsActivity extends AppCompatActivity {
 
     public boolean CheckBrand() {
         if (EditTextCarBrand.getText().length() < 2) {
-            EditTextCarBrand.setError("Υποχρεώτικο πεδίο");
+            EditTextCarBrand.setError(getResources().getString(R.string.ERROR_REQUIRED_FIELD));
             return false;
         } else {
             EditTextCarBrand.setError(null);
@@ -114,7 +114,7 @@ public class EditCarSettingsActivity extends AppCompatActivity {
 
     public boolean CheckModel() {
         if (EditTextCarModel.getText().length() < 2) {
-            EditTextCarModel.setError("Υποχρεώτικο πεδίο");
+            EditTextCarModel.setError(getResources().getString(R.string.ERROR_REQUIRED_FIELD));
             return false;
         } else {
             EditTextCarModel.setError(null);
@@ -127,14 +127,14 @@ public class EditCarSettingsActivity extends AppCompatActivity {
             EditTextCarPlate.setError(null);
             return true;
         } else {
-            EditTextCarPlate.setError("Πρέπει να είναι της μορφής ΑΒΓ-1234");
+            EditTextCarPlate.setError(getResources().getString(R.string.ERROR_INVALID_PLATE_FORMAT));
             return false;
         }
     }
 
     public boolean CheckColor() {
         if (EditTextCarColor.getText().length() < 2) {
-            EditTextCarColor.setError("Υποχρεώτικο πεδίο");
+            EditTextCarColor.setError(getResources().getString(R.string.ERROR_REQUIRED_FIELD));
             return false;
         } else {
             EditTextCarColor.setError(null);

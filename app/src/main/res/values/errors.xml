@@ -22,6 +22,8 @@
     <!--Password change-->
     <string name="ERROR_PASSWORD_CHANGE_INVALID_CURRENT_PASSWORD">Μη έκγυρος τρέχον κωδικός πρόσβασης.</string>
     <string name="INVALID_PHONE_FORMAT">Μη έγκυρος αριθμός τηλεφώνου.</string>
-    <string name="CONFIRM_DELETION">Είσαι σίγουρος για την διργαφή ;</string>
+    <string name="CONFIRM_DELETION">Είσαι σίγουρος για την διαγραφή;</string>
+    <string name="ERROR_INVALID_PLATE_FORMAT">Πρέπει να είναι της μορφής ΧΥΖ-1234.</string>
+    <string name="ERROR_REQUIRED_FIELD">Υποχρεωτικό πεδίο.</string>
 
 </resources>
