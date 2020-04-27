@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     });
                 } else {
-                    textInputLayout_email.setError("Invalid email address.");
+                    textInputLayout_email.setError(getResources().getString(R.string.ERROR_INVALID_EMAIL_FORMAT));
                 }
             }
         });
