@@ -4,16 +4,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Pair;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
+import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.example.fellow_traveller.R;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
@@ -31,8 +40,9 @@ import java.util.TimeZone;
 public class FiltersActivity extends AppCompatActivity {
     private SeekBar rangeBar;
     private TextView rangeBarTV;
-    private Button sortByButton, dateButton, seatsButton, petsButton, bagsButton, resetButton, applyButton;
+    private Button  dateButton, priceButton, seatsButton, petsButton, bagsButton, resetButton, applyButton;
     private ImageButton closeButton;
+    private Spinner sortSpinner;
     private final long five_years_forward = (1000*60*60*24*365*5);
     private long startRange = 0, endRange = 0;
 
@@ -52,7 +62,8 @@ public class FiltersActivity extends AppCompatActivity {
 
         rangeBar = findViewById(R.id.slider_filters);
         rangeBarTV = findViewById(R.id.range_km_tv);
-        sortByButton = findViewById(R.id.sort_by_button);
+        sortSpinner = findViewById(R.id.ActivityFilter_sort_spinner);
+        priceButton = findViewById(R.id.price_button);
         dateButton = findViewById(R.id.date_button);
         seatsButton = findViewById(R.id.seats_button);
         resetButton = findViewById(R.id.reset_button);
@@ -72,7 +83,10 @@ public class FiltersActivity extends AppCompatActivity {
             seatsButton.setTextColor(Color.parseColor(CLICK_COLOR));
         }
 
+        String[] items = new String[]{"     Πιο σχετική", "    Με βάση τιμή", "Με βάση απόσταση"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
 
+        sortSpinner.setAdapter(adapter);
         //<----------Initialize Calender------------->
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
         calendar.clear();
@@ -170,11 +184,16 @@ public class FiltersActivity extends AppCompatActivity {
                 openDialogForSeats();
             }
         });
-
         bagsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openDialogForBags();
+            }
+        });
+        priceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDialogForPrice();
             }
         });
         petsButton.setOnClickListener(new View.OnClickListener() {
@@ -194,27 +213,35 @@ public class FiltersActivity extends AppCompatActivity {
 
     }
     public void openDialogForSeats() {
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(FiltersActivity.this);
-        View mView = getLayoutInflater().inflate(R.layout.number_choose, null);
-        Button button = mView.findViewById(R.id.choose_num_button);
-        ImageButton increase = mView.findViewById(R.id.choose_num_imageButton_plus);
-        ImageButton decrease = mView.findViewById(R.id.choose_num_imageButton_minus);
-        final TextView textView_number = mView.findViewById(R.id.choose_num_textView_number);
-        TextView textView_title = mView.findViewById(R.id.choose_num_textView_title);
+
+        final Dialog myDialog = new Dialog(FiltersActivity.this, R.style.Theme_Dialog);
+        myDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.setContentView(R.layout.number_choose);
+        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+        myDialog.setCancelable(true);
+        myDialog.setCanceledOnTouchOutside(true);
+
+        //get Elements
+        Button button = myDialog.findViewById(R.id.choose_num_button);
+        ImageButton increase = myDialog.findViewById(R.id.choose_num_imageButton_plus);
+        ImageButton decrease = myDialog.findViewById(R.id.choose_num_imageButton_minus);
+        final TextView textView_number = myDialog.findViewById(R.id.choose_num_textView_number);
+        TextView textView_title = myDialog.findViewById(R.id.choose_num_textView_title);
         if (!seatsButton.getText().equals(TITLE_SEAT)) {
             textView_number.setText(seatsButton.getText().toString());
         }
 
         textView_title.setText("Ελάχιστες θέσεις που θέλετε");
-        mBuilder.setView(mView);
 
-        final AlertDialog dialog = mBuilder.create();
-        dialog.show();
+
+
+        myDialog.show();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
+                myDialog.dismiss();
                 seatsButton.setTextColor(Color.parseColor(CLICK_COLOR));
                 seatsButton.setText(textView_number.getText().toString());
             }
@@ -236,28 +263,37 @@ public class FiltersActivity extends AppCompatActivity {
 
     }
     public void openDialogForBags() {
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(FiltersActivity.this);
-        View mView = getLayoutInflater().inflate(R.layout.number_choose, null);
-        Button button = mView.findViewById(R.id.choose_num_button);
-        ImageButton increase = mView.findViewById(R.id.choose_num_imageButton_plus);
-        ImageButton decrease = mView.findViewById(R.id.choose_num_imageButton_minus);
-        final TextView textView_number = mView.findViewById(R.id.choose_num_textView_number);
-        TextView textView_title = mView.findViewById(R.id.choose_num_textView_title);
+
+        final Dialog myDialog = new Dialog(FiltersActivity.this,
+                R.style.Theme_Dialog);
+        myDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.setContentView(R.layout.number_choose);
+        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+        myDialog.setCancelable(true);
+        myDialog.setCanceledOnTouchOutside(true);
+
+        //get Elements
+        Button button = myDialog.findViewById(R.id.choose_num_button);
+        ImageButton increase = myDialog.findViewById(R.id.choose_num_imageButton_plus);
+        ImageButton decrease = myDialog.findViewById(R.id.choose_num_imageButton_minus);
+        final TextView textView_number = myDialog.findViewById(R.id.choose_num_textView_number);
+        TextView textView_title = myDialog.findViewById(R.id.choose_num_textView_title);
         if (!bagsButton.getText().equals(TITLE_BAGS)) {
             textView_number.setText(bagsButton.getText().toString());
         }
 
         textView_title.setText("Ελάχιστες αποσκευές που θέλετε");
-        mBuilder.setView(mView);
 
-        final AlertDialog dialog = mBuilder.create();
-        dialog.show();
+
+
+        myDialog.show();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                dialog.dismiss();
+                myDialog.dismiss();
                 bagsButton.setTextColor(Color.parseColor(CLICK_COLOR));
                 bagsButton.setText(textView_number.getText().toString());
 
@@ -277,6 +313,37 @@ public class FiltersActivity extends AppCompatActivity {
                 Decrease(textView_number);
             }
         });
+
+    }
+    public void openDialogForPrice() {
+
+        final Dialog myDialog = new Dialog(FiltersActivity.this, R.style.Theme_Dialog);
+        myDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.setContentView(R.layout.filter_price_range_dialog);
+        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+        myDialog.setCancelable(true);
+        myDialog.setCanceledOnTouchOutside(true);
+
+        // get elements
+        final TextView tvMin = (TextView) myDialog.findViewById(R.id.filter_price_start);
+        final TextView tvMax = (TextView) myDialog.findViewById(R.id.filter_price_end);
+        final CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) myDialog.findViewById(R.id.rangeSeekbar1);
+
+        // set listener
+        rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
+            @Override
+            public void valueChanged(Number minValue, Number maxValue) {
+                tvMin.setText("€" + String.valueOf(minValue));
+                tvMax.setText("€" + String.valueOf(maxValue));
+            }
+        });
+        myDialog.show();
+
+
+
+
+
 
     }
     public void Increase(TextView textView) {

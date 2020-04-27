@@ -69,5 +69,11 @@
         <item name="android:minHeight">10dip</item>
         <item name="android:maxHeight">20dip</item>
     </style>
+    <style name="Theme_Dialog" parent="android:Theme.Holo.Dialog">
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:textColor">@color/profile </item>
+    </style>
 
 </resources>
