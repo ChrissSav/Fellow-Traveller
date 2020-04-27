@@ -52,7 +52,8 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(UserAuthModel user) {
                             SaveClass(user);
-                            //Log.d("Authentication", user.getSessionId());
+                            Log.d("Chriss","user "+ user.getSessionId());
+
                         }
 
                         @Override

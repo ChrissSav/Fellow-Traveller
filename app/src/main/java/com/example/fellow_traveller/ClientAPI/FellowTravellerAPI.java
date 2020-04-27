@@ -67,7 +67,7 @@ public class FellowTravellerAPI {
                 String key = response.headers().get("Set-Cookie").split(";")[0];
                 UserAuthModel userAuthModel = response.body();
                 userAuthModel.setSessionId(key);
-                userAuthCallback.onSuccess(response.body());
+                userAuthCallback.onSuccess(userAuthModel);
             }
 
             @Override
@@ -120,7 +120,7 @@ public class FellowTravellerAPI {
                 String key = response.headers().get("Set-Cookie").split(";")[0];
                 UserAuthModel userAuthModel = response.body();
                 userAuthModel.setSessionId(key);
-                userRegisterCallback.onSuccess(response.body());
+                userRegisterCallback.onSuccess(userAuthModel);
             }
 
             @Override
