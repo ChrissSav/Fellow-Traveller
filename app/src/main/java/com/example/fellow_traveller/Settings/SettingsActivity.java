@@ -41,7 +41,6 @@ public class SettingsActivity extends AppCompatActivity {
         imageButtonBack = findViewById(R.id.back_button);
 
 
-
         imageButtonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -156,6 +156,7 @@ public class FellowTravellerAPI {
 
     public static void updateUserInfo(String firstName,String lastName,String picture,String aboutMe,String phone,final UserAuthCallback userAuthCallback) {
         JsonObject json = buildJSON(new String[]{"first_name", "last_name", "picture", "about_me", "phone"}, firstName, lastName, picture, aboutMe, phone);
+        Log.i("response", "aboutMe "+aboutMe+ (aboutMe==null));
 
         retrofitAPIEndpoints.userUpdate(json).enqueue(new Callback<UserAuthModel>() {
             @Override
@@ -169,6 +170,7 @@ public class FellowTravellerAPI {
                     }
                     return;
                 }
+
                 userAuthCallback.onSuccess(response.body());
             }
 

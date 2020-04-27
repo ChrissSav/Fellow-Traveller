@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ import com.example.fellow_traveller.Settings.SettingsActivity;
 public class AccountFragment extends Fragment {
     private ImageButton settingsButton;
     private Button newCarButton, reviewsButton;
-    private TextView textViewUserName;
+    private TextView textViewUserName, textViewAboutMe;
     private GlobalClass globalClass;
 
     public AccountFragment() {
@@ -40,13 +41,11 @@ public class AccountFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
 
 
-
-        settingsButton =  view.findViewById(R.id.settings_button);
+        settingsButton = view.findViewById(R.id.settings_button);
         newCarButton = view.findViewById(R.id.new_car_button_account);
         reviewsButton = view.findViewById(R.id.fragment_account_reviews_button);
         textViewUserName = view.findViewById(R.id.user_name);
-
-
+        textViewAboutMe = view.findViewById(R.id.AccountFragment_textView_aboutMe);
 
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +80,13 @@ public class AccountFragment extends Fragment {
         super.onStart();
         globalClass = (GlobalClass) getActivity().getApplicationContext();
         textViewUserName.setText(globalClass.getCurrentUser().getFullName());
+
+        if (globalClass.getCurrentUser().getAboutMe() == null || globalClass.getCurrentUser().getAboutMe().length() < 1)
+            textViewAboutMe.setText(globalClass.getResources().getString(R.string.account_fragment_about_me));
+        else {
+            textViewAboutMe.setText(globalClass.getCurrentUser().getAboutMe());
+
+        }
 
     }
 }
