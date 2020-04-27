@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarDeleteCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.PlaceApiCallBack;
+import com.example.fellow_traveller.ClientAPI.Callbacks.StatusCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.TripRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserAuthCallback;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserCarsCallBack;
@@ -130,6 +131,28 @@ public class FellowTravellerAPI {
         });
     }
 
+    public static void userChangePassword(String passwordPrev,String passwordNew, final String password, final StatusCallBack statusCallBack) {
+        JsonObject json = buildJSON(new String[]{"password_prev", "password_new"}, passwordPrev, passwordNew);
+
+        retrofitAPIEndpoints.userChangePassword(json).enqueue(new Callback<StatusHandleModel>() {
+            @Override
+            public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
+                if (!response.isSuccessful()) {
+                    Log.d("Authentication", "LOGIN FAILURE!!");
+                    statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+                    return;
+                }
+
+                statusCallBack.onSuccess(context.getResources().getString(R.string.success));
+            }
+
+            @Override
+            public void onFailure(Call<StatusHandleModel> call, Throwable t) {
+                statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+            }
+        });
+
+    }
 
     public static void getUserInfo(final UserAuthCallback userAuthCallback) {
         retrofitAPIEndpoints.userInfo().enqueue(new Callback<UserAuthModel>() {

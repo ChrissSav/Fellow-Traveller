@@ -260,6 +260,8 @@
     <string name="change_password_activity_new_password_label">Νέος κωδικός</string>
     <string name="change_password_activity_confirm_new_password_label">Επιβεβαίωση κωδικού</string>
     <string name="change_password_activity_change_password_button_label">Αλλαγή</string>
+    <string name="success">Επιτυχής αλλαγή κωδικού.</string>
+
 
 
 </resources>

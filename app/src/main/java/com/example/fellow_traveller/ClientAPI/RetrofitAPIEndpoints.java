@@ -23,19 +23,25 @@ public interface RetrofitAPIEndpoints {
     Call<UserAuthModel> userAuthenticate(@Body JsonObject user);
 
 
-    @POST("auth/logout")
+    @POST("/auth/logout")
     Call<StatusHandleModel> userLogout();
 
+
+    @POST("/auth/password")
+    Call<StatusHandleModel> userChangePassword(
+            @Body JsonObject password
+    );
+
     //User
-    @POST("user")
+    @POST("/users")
     Call<UserAuthModel> userRegister(
             @Body JsonObject user
     );
     //User
-    @GET("user")
+    @GET("/users")
     Call<UserAuthModel> userInfo();
 
-    @PUT("user")
+    @PUT("/users")
     Call<UserAuthModel> userUpdate(
             @Body JsonObject user
     );
@@ -59,7 +65,7 @@ public interface RetrofitAPIEndpoints {
     @GET("/cars")
     Call<ArrayList<CarModel>> userCars();
 
-    @DELETE("/cars")
+    @DELETE("cars")
     Call<StatusHandleModel> deleteUserCar(
             @Query("car_id") int car_id
     );
