@@ -255,6 +255,11 @@
     <string name="register_fragment_become_a_fellow_traveller">Γίνε κι εσύ ένας Fellow Traveller</string>
     <string name="register_fragment_six_digit_code_notice_description">*Θα λάβετε έναν 6-ψήφιο κωδικό για την επιβεβαίωση του λογαριασμού.</string>
     <string name="account_fragment_about_me">Δεν υπαρχει περιγραφή</string>
+    <string name="change_password_activity_change_password_button_text">Αλλαγή Κωδικού</string>
+    <string name="change_password_activity_old_password_label">Παλιός κωδικός</string>
+    <string name="change_password_activity_new_password_label">Νέος κωδικός</string>
+    <string name="change_password_activity_confirm_new_password_label">Επιβεβαίωση κωδικού</string>
+    <string name="change_password_activity_change_password_button_label">Αλλαγή</string>
 
 
 </resources>

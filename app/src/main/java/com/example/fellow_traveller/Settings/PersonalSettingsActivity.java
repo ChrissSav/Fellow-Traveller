@@ -152,7 +152,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
 
 
     public void updateUser(String name, String lastName, String aboutMe, String phone) {
-        
+
         new FellowTravellerAPI(globalClass).updateUserInfo(name, lastName, "", aboutMe, phone, new UserAuthCallback() {
             @Override
             public void onSuccess(UserAuthModel user) {
