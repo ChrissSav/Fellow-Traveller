@@ -28,6 +28,8 @@ import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.util.regex.Pattern;
 
+import static com.example.fellow_traveller.Util.InputValidation.isValidPhone;
+
 public class PersonalSettingsActivity extends AppCompatActivity {
     private Button changeImageButton;
     private ImageButton imageButtonClose, imageButtonUpdate;
@@ -88,11 +90,9 @@ public class PersonalSettingsActivity extends AppCompatActivity {
         CropImage.activity().start(PersonalSettingsActivity.this);
     }
 
-    // TODO remove to Utils
     public boolean phoneValidation() {
         String phone = editTextNumber.getText().toString();
-        Pattern regexPattern = Pattern.compile("^[6][9][0-9]{8}$");
-        if (!regexPattern.matcher(phone).matches()) {
+        if (!isValidPhone(phone)) {
             Toast.makeText(this, getResources().getString(R.string.INVALID_PHONE_FORMAT), Toast.LENGTH_SHORT).show();
             return false;
 

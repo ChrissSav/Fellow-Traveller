@@ -55,7 +55,7 @@ public class EditCarSettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (CheckBrand() && CheckModel() && CheckPlate() && CheckColor()) {
-                    Toast.makeText(EditCarSettingsActivity.this, "mpompes", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditCarSettingsActivity.this, "Επιτυχής επεξεργασία.", Toast.LENGTH_SHORT).show();
                 }
 
             }

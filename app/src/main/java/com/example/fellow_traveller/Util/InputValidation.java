@@ -41,7 +41,12 @@ public class InputValidation {
     }
 
     public static boolean isValidPlate(String plate) {
-        Pattern regexPattern = Pattern.compile("^[Α-Ω]{3}[0-9]{4}$");
+        Pattern regexPattern = Pattern.compile("^[Α-Ω]{3}-[0-9]{4}$");
         return regexPattern.matcher(plate).matches();
+    }
+
+    public static boolean isValidPhone(String phone) {
+        Pattern regexPattern = Pattern.compile("^[6][9][0-9]{8}$");
+        return regexPattern.matcher(phone).matches();
     }
 }
