@@ -29,11 +29,12 @@ import okhttp3.Response;
 public class GlobalClass extends Application {
     public static final String CHANNEL_1_ID = "passenger_notification";
     private static final String CHANNEL_NAME_1 = "This is Channel passenger_notification";
-
-
     private UserAuthModel currentUser;
-
     private OkHttpClient.Builder okHttpClient;
+
+
+
+
 
     public UserAuthModel getCurrentUser() {
         return currentUser;
@@ -50,9 +51,11 @@ public class GlobalClass extends Application {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
-                // TODO Request.Builder newRequest = request.newBuilder().header("Cookie", "session_id=9ab540c3-0d20-411b-bdae-131449a8a2f2");
                 Request.Builder newRequest = request.newBuilder();
-                if (currentUser!=null) {
+                Log.i("setSessionId","getOkHttpClient if"+currentUser.getSessionId());
+
+                if (currentUser != null) {
+                    Log.i("setSessionId","getOkHttpClient "+currentUser.getSessionId());
                     newRequest.header("Cookie", currentUser.getSessionId());
                 }
                 return chain.proceed(newRequest.build());
@@ -62,9 +65,9 @@ public class GlobalClass extends Application {
     }
 
 
+
     @Override
     public void onCreate() {
-        // createNotificationChannels();
         LoadClass();
 
         super.onCreate();

@@ -5,8 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserLogoutCallBack;
@@ -18,8 +22,9 @@ import com.example.fellow_traveller.R;
 
 public class SettingsActivity extends AppCompatActivity {
     private Button personalButton, btnLogout, changePasswordButton, manageCarsButton;
-
+    private TextView textViewUserName;
     private GlobalClass globalClass;
+    private ImageButton imageButtonBack;
 
 
     @Override
@@ -31,7 +36,19 @@ public class SettingsActivity extends AppCompatActivity {
         personalButton = findViewById(R.id.personal_info);
         btnLogout = findViewById(R.id.logout);
         manageCarsButton = findViewById(R.id.manage_cars);
-        changePasswordButton=findViewById(R.id.change_password);
+        changePasswordButton = findViewById(R.id.change_password);
+        textViewUserName = findViewById(R.id.user_name_settings);
+        imageButtonBack = findViewById(R.id.back_button);
+
+
+
+        imageButtonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
         personalButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +58,6 @@ public class SettingsActivity extends AppCompatActivity {
                 //finish();
             }
         });
-
 
 
         changePasswordButton.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +100,14 @@ public class SettingsActivity extends AppCompatActivity {
         });
         DeleteSharedPreferences();
 
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        globalClass = (GlobalClass) getApplicationContext();
+        textViewUserName.setText(globalClass.getCurrentUser().getFullName());
 
     }
 

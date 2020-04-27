@@ -4,6 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.InputType;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -63,6 +68,37 @@ public class EditCarSettingsActivity extends AppCompatActivity {
                 deleteCar();
             }
         });
+
+        EditTextCarPlate.setFilters(new InputFilter[]{
+                new InputFilter.AllCaps(),
+                new InputFilter.LengthFilter(8)
+        });
+        EditTextCarPlate.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (before == 2 && count == 3) {
+                    EditTextCarPlate.append("-");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() >= 4) {
+                    EditTextCarPlate.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+                } else {
+                    EditTextCarPlate.setInputType(InputType.TYPE_CLASS_TEXT);
+                }
+
+            }
+
+
+        });
     }
 
     public boolean CheckBrand() {
@@ -91,7 +127,7 @@ public class EditCarSettingsActivity extends AppCompatActivity {
             EditTextCarPlate.setError(null);
             return true;
         } else {
-            EditTextCarPlate.setError("Πρέπει να είναι της μορφής ΧΧΧ1234");
+            EditTextCarPlate.setError("Πρέπει να είναι της μορφής ΑΒΓ-1234");
             return false;
         }
     }
@@ -116,7 +152,7 @@ public class EditCarSettingsActivity extends AppCompatActivity {
 
     public void deleteCar() {
         Snackbar snackbar = Snackbar
-                .make(constraintLayout, "Θες σιγουρα να το διαγραψεις;", Snackbar.LENGTH_LONG)
+                .make(constraintLayout, getResources().getString(R.string.CONFIRM_DELETION), Snackbar.LENGTH_LONG)
                 .setAction("ΝΑΙ", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

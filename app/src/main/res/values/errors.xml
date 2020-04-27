@@ -21,4 +21,7 @@
     <string name="ERROR_INVALID_CREDENTIALS">Λάθος email/κωδικός πρόσβασης.</string>
     <!--Password change-->
     <string name="ERROR_PASSWORD_CHANGE_INVALID_CURRENT_PASSWORD">Μη έκγυρος τρέχον κωδικός πρόσβασης.</string>
+    <string name="INVALID_PHONE_FORMAT">Μη έγκυρος αριθμός τηλεφώνου.</string>
+    <string name="CONFIRM_DELETION">Είσαι σίγουρος για την διργαφή ;</string>
+
 </resources>
