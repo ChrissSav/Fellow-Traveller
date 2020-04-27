@@ -7,7 +7,9 @@ public class UserAuthModel {
 
 
     private int id;
+    @SerializedName("first_name")
     private String name;
+    @SerializedName("last_name")
     private String surname;
     private String picture;
     @SerializedName("about_me")

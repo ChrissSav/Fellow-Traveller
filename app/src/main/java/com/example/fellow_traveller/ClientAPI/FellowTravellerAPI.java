@@ -103,8 +103,8 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void userRegister(String name, String surname, String email, String password, String phone, final UserRegisterCallback userRegisterCallback) {
-        JsonObject json = buildJSON(new String[]{"name", "surname", "email", "password", "phone"}, name, surname, email, password, phone);
+    public static void userRegister(String firstName, String lastName, String email, String password, String phone, final UserRegisterCallback userRegisterCallback) {
+        JsonObject json = buildJSON(new String[]{"first_name", "last_name", "email", "password", "phone"}, firstName, lastName, email, password, phone);
         retrofitAPIEndpoints.userRegister(json).enqueue(new Callback<UserAuthModel>() {
             @Override
             public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
@@ -151,8 +151,8 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void updateUserInfo(String name,String lastName,String picture,String aboutMe,String phone,final UserAuthCallback userAuthCallback) {
-        JsonObject json = buildJSON(new String[]{"name", "surname", "picture", "about_me", "phone"}, name, lastName, picture, aboutMe, phone);
+    public static void updateUserInfo(String firstName,String lastName,String picture,String aboutMe,String phone,final UserAuthCallback userAuthCallback) {
+        JsonObject json = buildJSON(new String[]{"first_name", "last_name", "picture", "about_me", "phone"}, firstName, lastName, picture, aboutMe, phone);
 
         retrofitAPIEndpoints.userUpdate(json).enqueue(new Callback<UserAuthModel>() {
             @Override
