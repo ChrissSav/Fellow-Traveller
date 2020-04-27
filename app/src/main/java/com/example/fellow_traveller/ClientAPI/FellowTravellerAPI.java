@@ -117,6 +117,9 @@ public class FellowTravellerAPI {
                     }
                     return;
                 }
+                String key = response.headers().get("Set-Cookie").split(";")[0];
+                UserAuthModel userAuthModel = response.body();
+                userAuthModel.setSessionId(key);
                 userRegisterCallback.onSuccess(response.body());
             }
 
