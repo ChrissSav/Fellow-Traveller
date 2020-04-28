@@ -6,6 +6,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
@@ -65,9 +66,9 @@ public interface RetrofitAPIEndpoints {
     @GET("/cars")
     Call<ArrayList<CarModel>> userCars();
 
-    @DELETE("cars")
+    @DELETE("cars/{car_id}")
     Call<StatusHandleModel> deleteUserCar(
-            @Query("car_id") int car_id
+            @Path("car_id") int car_id
     );
 
 
