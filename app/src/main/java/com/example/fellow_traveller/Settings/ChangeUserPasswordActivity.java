@@ -22,7 +22,7 @@ import java.util.Objects;
 
 import static com.example.fellow_traveller.Util.InputValidation.isValidPassword;
 
-public class ChangePassword extends AppCompatActivity {
+public class ChangeUserPasswordActivity extends AppCompatActivity {
 
     private ImageButton backButton;
     private Button changePasswordButton;

@@ -43,7 +43,7 @@
         <activity android:name=".HomeFragments.HomeActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".Settings.ChangePassword" />
+        <activity android:name=".Settings.ChangeUserPasswordActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
