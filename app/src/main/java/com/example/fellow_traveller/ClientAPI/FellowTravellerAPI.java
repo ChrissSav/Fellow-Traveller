@@ -130,6 +130,8 @@ public class FellowTravellerAPI {
     }
 
     public static void userChangePassword(UserChangePasswordModel user, final StatusCallBack statusCallBack) {
+
+        retrofitAPIEndpoints.userChangePassword(user).enqueue(new Callback<StatusHandleModel>() {
             @Override
             public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
                 if (!response.isSuccessful()) {

@@ -84,6 +84,12 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        
+        super.onBackPressed();
+    }
+
     public void scheduleJob() {
         ComponentName componentName = new ComponentName(this, ExampleJobService.class);
         JobInfo info = new JobInfo.Builder(123, componentName)
