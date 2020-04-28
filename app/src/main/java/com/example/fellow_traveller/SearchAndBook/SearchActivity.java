@@ -19,16 +19,17 @@ import android.widget.TextView;
 
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
-import com.example.fellow_traveller.PlaceAPI.Models.PlaceAPiModel;
-import com.example.fellow_traveller.PlaceAPI.PlaceAdapter;
-import com.example.fellow_traveller.PlaceAPI.CallBack.PlaceApiCallBack;
-import com.example.fellow_traveller.PlaceAPI.Models.PredictionsModel;
-import com.example.fellow_traveller.PlaceAPI.PlaceApiConnection;
+import com.example.fellow_traveller.PlacesAPI.Models.PlaceAPiModel;
+import com.example.fellow_traveller.PlacesAPI.PlaceAdapter;
+import com.example.fellow_traveller.PlacesAPI.CallBack.PlaceApiCallBack;
+import com.example.fellow_traveller.PlacesAPI.Models.PredictionsModel;
+import com.example.fellow_traveller.PlacesAPI.PlaceApiConnection;
 import com.example.fellow_traveller.R;
 
 import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
+
     private EditText destinationAutoComplete;
     private ImageButton backButton, eraseButton;
     private ImageView searchIcon;

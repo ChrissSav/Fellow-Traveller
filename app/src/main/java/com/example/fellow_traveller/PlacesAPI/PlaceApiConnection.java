@@ -1,8 +1,8 @@
-package com.example.fellow_traveller.PlaceAPI;
+package com.example.fellow_traveller.PlacesAPI;
 
 import com.example.fellow_traveller.Models.GlobalClass;
-import com.example.fellow_traveller.PlaceAPI.CallBack.PlaceApiCallBack;
-import com.example.fellow_traveller.PlaceAPI.Models.PlaceAPiModel;
+import com.example.fellow_traveller.PlacesAPI.CallBack.PlaceApiCallBack;
+import com.example.fellow_traveller.PlacesAPI.Models.PlaceAPiModel;
 import com.example.fellow_traveller.R;
 
 import java.io.IOException;

@@ -1,6 +1,6 @@
-package com.example.fellow_traveller.PlaceAPI.CallBack;
+package com.example.fellow_traveller.PlacesAPI.CallBack;
 
-import com.example.fellow_traveller.PlaceAPI.Models.PlaceAPiModel;
+import com.example.fellow_traveller.PlacesAPI.Models.PlaceAPiModel;
 
 public interface PlaceApiCallBack {
     void onSuccess(PlaceAPiModel placeAPiModel);

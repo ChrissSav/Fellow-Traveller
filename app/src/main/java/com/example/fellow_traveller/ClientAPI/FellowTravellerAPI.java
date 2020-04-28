@@ -202,7 +202,7 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void carAdd(String brand, String model, String plate, String color, final CarRegisterCallBack carRegisterCallBack) {
+    public static void addUserCar(String brand, String model, String plate, String color, final CarRegisterCallBack carRegisterCallBack) {
         JsonObject json = buildJSON(new String[]{"brand", "model", "plate", "color"}, brand, model, plate, color);
         retrofitAPIEndpoints.carRegister(json).enqueue(new Callback<CarModel>() {
             @Override
