@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -16,22 +15,15 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.fellow_traveller.ClientAPI.RetrofitAPIEndpoints;
 import com.example.fellow_traveller.Models.GlobalClass;
-import com.example.fellow_traveller.Place.CallBack.PlaceApiCallBack;
-import com.example.fellow_traveller.Place.Models.PlaceAPiModel;
-import com.example.fellow_traveller.Place.PlaceAdapter;
-import com.example.fellow_traveller.Place.Models.PredictionsModel;
-import com.example.fellow_traveller.Place.PlaceApiConnection;
+import com.example.fellow_traveller.PlaceAPI.CallBack.PlaceApiCallBack;
+import com.example.fellow_traveller.PlaceAPI.Models.PlaceAPiModel;
+import com.example.fellow_traveller.PlaceAPI.PlaceAdapter;
+import com.example.fellow_traveller.PlaceAPI.Models.PredictionsModel;
+import com.example.fellow_traveller.PlaceAPI.PlaceApiConnection;
 import com.example.fellow_traveller.R;
 
 import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AddLocationActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;

@@ -1,4 +1,4 @@
-package com.example.fellow_traveller.Place;
+package com.example.fellow_traveller.PlaceAPI;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +7,7 @@ import android.widget.Button;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.fellow_traveller.Place.Models.PredictionsModel;
+import com.example.fellow_traveller.PlaceAPI.Models.PredictionsModel;
 import com.example.fellow_traveller.R;
 
 import java.util.ArrayList;

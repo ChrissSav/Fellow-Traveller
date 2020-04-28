@@ -1,6 +1,6 @@
-package com.example.fellow_traveller.Place;
+package com.example.fellow_traveller.PlaceAPI;
 
-import com.example.fellow_traveller.Place.Models.PlaceAPiModel;
+import com.example.fellow_traveller.PlaceAPI.Models.PlaceAPiModel;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

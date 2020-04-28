@@ -1,4 +1,4 @@
-package com.example.fellow_traveller.Place.Models;
+package com.example.fellow_traveller.PlaceAPI.Models;
 
 public class PredictionsModel {
     private String description;
