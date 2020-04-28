@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.TripRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
+import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
@@ -178,8 +179,11 @@ public class NewOfferActivity extends AppCompatActivity {
         Float price = Float.parseFloat(newOfferStage4Fragment.getPrice());
         String msg = newOfferStage5Fragment.getMsg();
 
-        new FellowTravellerAPI(globalClass).tripRegister(dest_from, dest_to, pet, max_seats, max_bags, car_id,
-                price, dateTimeToTimestamp(date, time), msg, new TripRegisterCallBack() {
+        // Creates the trip object
+        CreateTripModel trip = new CreateTripModel(dest_from, dest_to, pet, max_seats, max_bags, car_id,
+                price, dateTimeToTimestamp(date, time), msg);
+
+        new FellowTravellerAPI(globalClass).createTrip(trip, new TripRegisterCallBack() {
                     @Override
                     public void onSuccess(StatusHandleModel status) {
                         // TODO take generic message from a resource file.

@@ -1,22 +1,22 @@
 package com.example.fellow_traveller.Settings;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
+import com.example.fellow_traveller.ClientAPI.Models.AddCarModel;
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
@@ -26,6 +26,7 @@ import static com.example.fellow_traveller.Util.InputValidation.isValidPlate;
 public class AddCarSettingsActivity extends AppCompatActivity {
 
     private EditText EditTextCarBrand, EditTextCarModel, EditTextCarPlate, EditTextCarColor;
+    private String brand, model, plate, color;
     private Button buttonAdd;
     private ImageButton buttonBack;
     private GlobalClass globalClass;
@@ -51,19 +52,19 @@ public class AddCarSettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (checkBrand() && checkModel() && checkPlate() && checkColor())
-                    newRegisterCar();
-
-
+                if (checkBrand() && checkModel() && checkPlate() && checkColor()) {
+                    brand = EditTextCarBrand.getText().toString();
+                    model = EditTextCarModel.getText().toString();
+                    plate = EditTextCarPlate.getText().toString();
+                    color = EditTextCarColor.getText().toString();
+                    newRegisterCar(brand, model, plate, color);
+                }
             }
         });
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 onBackPressed();
-
-
             }
         });
 
@@ -92,10 +93,7 @@ public class AddCarSettingsActivity extends AppCompatActivity {
                 } else {
                     EditTextCarPlate.setInputType(InputType.TYPE_CLASS_TEXT);
                 }
-
             }
-
-
         });
     }
 
@@ -106,7 +104,6 @@ public class AddCarSettingsActivity extends AppCompatActivity {
         } else {
             EditTextCarBrand.setError(null);
             return true;
-
         }
     }
 
@@ -140,23 +137,23 @@ public class AddCarSettingsActivity extends AppCompatActivity {
         }
     }
 
+    public void newRegisterCar(String brand, String model, String plate, String color) {
+        // Create car object using model
+        AddCarModel car = new AddCarModel(brand, model, plate, color);
+        new FellowTravellerAPI(globalClass).addCar(car, new CarRegisterCallBack() {
+            @Override
+            public void onSuccess(CarModel car) {
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("car", car);
+                setResult(RESULT_OK, resultIntent);
+                finish();
+            }
 
-    public void newRegisterCar() {
-        new FellowTravellerAPI(globalClass).addUserCar(EditTextCarBrand.getText().toString(), EditTextCarModel.getText().toString(),
-                EditTextCarPlate.getText().toString(), EditTextCarColor.getText().toString(), new CarRegisterCallBack() {
-                    @Override
-                    public void onSuccess(CarModel car) {
-                        Intent resultIntent = new Intent();
-                        resultIntent.putExtra("car", car);
-                        setResult(RESULT_OK, resultIntent);
-                        finish();
-                    }
+            @Override
+            public void onFailure(String errorMsg) {
+                Toast.makeText(AddCarSettingsActivity.this, errorMsg, Toast.LENGTH_LONG).show();
 
-                    @Override
-                    public void onFailure(String errorMsg) {
-                        Toast.makeText(AddCarSettingsActivity.this, errorMsg, Toast.LENGTH_LONG).show();
-
-                    }
-                });
+            }
+        });
     }
 }

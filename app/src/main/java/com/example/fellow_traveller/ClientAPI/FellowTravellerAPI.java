@@ -10,12 +10,17 @@ import com.example.fellow_traveller.ClientAPI.Callbacks.UserAuthCallback;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserCarsCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserLogoutCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserRegisterCallback;
+import com.example.fellow_traveller.ClientAPI.Models.AddCarModel;
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
+import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
+import com.example.fellow_traveller.ClientAPI.Models.UserChangePasswordModel;
+import com.example.fellow_traveller.ClientAPI.Models.UserLoginModel;
+import com.example.fellow_traveller.ClientAPI.Models.UserRegisterModel;
+import com.example.fellow_traveller.ClientAPI.Models.UserUpdateModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
-import com.google.gson.JsonObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,8 +30,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import static com.example.fellow_traveller.ClientAPI.Utils.buildJSON;
 
 public class FellowTravellerAPI {
     private static Retrofit retrofit;
@@ -51,10 +54,8 @@ public class FellowTravellerAPI {
         retrofitAPIEndpoints = retrofit.create(RetrofitAPIEndpoints.class);
     }
 
-    public static void userAuthenticate(String email, final String password, final UserAuthCallback userAuthCallback) {
-        JsonObject json = buildJSON(new String[]{"email", "password"}, email, password);
-
-        retrofitAPIEndpoints.userAuthenticate(json).enqueue(new Callback<UserAuthModel>() {
+    public static void userLogin(UserLoginModel user, final UserAuthCallback userAuthCallback) {
+        retrofitAPIEndpoints.userAuthenticate(user).enqueue(new Callback<UserAuthModel>() {
             @Override
             public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
                 if (!response.isSuccessful()) {
@@ -102,9 +103,8 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void userRegister(String firstName, String lastName, String email, String password, String phone, final UserRegisterCallback userRegisterCallback) {
-        JsonObject json = buildJSON(new String[]{"first_name", "last_name", "email", "password", "phone"}, firstName, lastName, email, password, phone);
-        retrofitAPIEndpoints.userRegister(json).enqueue(new Callback<UserAuthModel>() {
+    public static void userRegister(UserRegisterModel user, final UserRegisterCallback userRegisterCallback) {
+        retrofitAPIEndpoints.userRegister(user).enqueue(new Callback<UserAuthModel>() {
             @Override
             public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
                 if (!response.isSuccessful()) {
@@ -129,10 +129,8 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void userChangePassword(String passwordPrev,String passwordNew, final String password, final StatusCallBack statusCallBack) {
-        JsonObject json = buildJSON(new String[]{"password_prev", "password_new"}, passwordPrev, passwordNew);
-
-        retrofitAPIEndpoints.userChangePassword(json).enqueue(new Callback<StatusHandleModel>() {
+    public static void userChangePassword(UserChangePasswordModel user, final StatusCallBack statusCallBack) {
+        retrofitAPIEndpoints.userChangePassword(user).enqueue(new Callback<StatusHandleModel>() {
             @Override
             public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
                 if (!response.isSuccessful()) {
@@ -175,11 +173,8 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void updateUserInfo(String firstName,String lastName,String picture,String aboutMe,String phone,final UserAuthCallback userAuthCallback) {
-        JsonObject json = buildJSON(new String[]{"first_name", "last_name", "picture", "about_me", "phone"}, firstName, lastName, picture, aboutMe, phone);
-        Log.i("response", "aboutMe "+aboutMe+ (aboutMe==null));
-
-        retrofitAPIEndpoints.userUpdate(json).enqueue(new Callback<UserAuthModel>() {
+    public static void updateUserInfo(UserUpdateModel user, final UserAuthCallback userAuthCallback) {
+        retrofitAPIEndpoints.userUpdate(user).enqueue(new Callback<UserAuthModel>() {
             @Override
             public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
                 if (!response.isSuccessful()) {
@@ -202,9 +197,8 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void addUserCar(String brand, String model, String plate, String color, final CarRegisterCallBack carRegisterCallBack) {
-        JsonObject json = buildJSON(new String[]{"brand", "model", "plate", "color"}, brand, model, plate, color);
-        retrofitAPIEndpoints.carRegister(json).enqueue(new Callback<CarModel>() {
+    public static void addCar(AddCarModel car, final CarRegisterCallBack carRegisterCallBack) {
+        retrofitAPIEndpoints.carRegister(car).enqueue(new Callback<CarModel>() {
             @Override
             public void onResponse(Call<CarModel> call, Response<CarModel> response) {
                 if (!response.isSuccessful()) {
@@ -226,7 +220,7 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void getUserCars(final UserCarsCallBack userCarsCallBack) {
+    public static void getCars(final UserCarsCallBack userCarsCallBack) {
         retrofitAPIEndpoints.userCars().enqueue(new Callback<ArrayList<CarModel>>() {
             @Override
             public void onResponse(Call<ArrayList<CarModel>> call, Response<ArrayList<CarModel>> response) {
@@ -249,14 +243,14 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void deleteUserCar(int car_id, final CarDeleteCallBack carDeleteCallBack) {
+    public static void deleteCars(int car_id, final CarDeleteCallBack carDeleteCallBack) {
         retrofitAPIEndpoints.deleteUserCar(car_id).enqueue(new Callback<StatusHandleModel>() {
             @Override
             public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
                 if (!response.isSuccessful()) {
                     try {
                         // TODO show generalized error message from errors.xml
-                        if( response.code()==401){
+                        if (response.code() == 401) {
                             carDeleteCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
                             return;
                         }
@@ -276,21 +270,8 @@ public class FellowTravellerAPI {
         });
     }
 
-    // TODO what about another more sensible name, like tripCreate?
-    public static void tripRegister(String dest_from, String dest_to, String pet, int max_seats, int max_bags, int car_id,
-                                    float price, long timestamp, String msg, final TripRegisterCallBack tripRegisterCallBack) {
-        JsonObject json = buildJSON(new String[]{
-                        "dest_from", "dest_to",
-                        "pet", "max_seats",
-                        "max_bags", "car_id",
-                        "price", "timestamp", "msg"},
-                dest_from, dest_to, pet, String.valueOf(max_seats),
-                String.valueOf(max_bags), String.valueOf(car_id),
-                String.valueOf(price), String.valueOf(timestamp), msg);
-
-        // TODO add a better comparison than: pet == "Επιτρέπω" ? "yes" : "no"
-        // TODO get some boolean value instead, this is sloppy
-        retrofitAPIEndpoints.tripRegister(json).enqueue(new Callback<StatusHandleModel>() {
+    public static void createTrip(CreateTripModel trip, final TripRegisterCallBack tripRegisterCallBack) {
+        retrofitAPIEndpoints.tripRegister(trip).enqueue(new Callback<StatusHandleModel>() {
             @Override
             public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
                 if (!response.isSuccessful()) {

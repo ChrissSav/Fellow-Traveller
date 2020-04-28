@@ -10,18 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-import com.example.fellow_traveller.Chat.ChatConversationActivity;
-import com.example.fellow_traveller.Chat.ConversationAdapter;
-import com.example.fellow_traveller.Chat.MessageItem;
-import com.example.fellow_traveller.Chat.MessagesAdapter;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserCarsCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
-import com.example.fellow_traveller.SearchAndBook.SearchDetailsActivity;
-import com.example.fellow_traveller.SearchAndBook.SearchResultsActivity;
-import com.example.fellow_traveller.SearchAndBook.SearchResultsAdapter;
 
 import java.util.ArrayList;
 
@@ -88,7 +81,7 @@ public class CarsSettingsActivity extends AppCompatActivity {
     }
 
     public void getUserCars() {
-        new FellowTravellerAPI(globalClass).getUserCars(new UserCarsCallBack() {
+        new FellowTravellerAPI(globalClass).getCars(new UserCarsCallBack() {
             @Override
             public void onSuccess(ArrayList<CarModel> carList) {
                 carsList = carList;
