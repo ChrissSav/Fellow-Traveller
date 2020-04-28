@@ -1,4 +1,4 @@
-package com.example.fellow_traveller.PlaceAutocomplete;
+package com.example.fellow_traveller.Place.Models;
 
 public class PredictionsModel {
     private String description;

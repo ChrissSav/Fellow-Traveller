@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarDeleteCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
-import com.example.fellow_traveller.ClientAPI.Callbacks.PlaceApiCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.StatusCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.TripRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserAuthCallback;
@@ -15,7 +14,6 @@ import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.Models.GlobalClass;
-import com.example.fellow_traveller.PlaceAutocomplete.PlaceAPiModel;
 import com.example.fellow_traveller.R;
 import com.google.gson.JsonObject;
 
@@ -204,8 +202,7 @@ public class FellowTravellerAPI {
         });
     }
 
-    // TODO what about carAdd?
-    public static void carRegister(String brand, String model, String plate, String color, final CarRegisterCallBack carRegisterCallBack) {
+    public static void carAdd(String brand, String model, String plate, String color, final CarRegisterCallBack carRegisterCallBack) {
         JsonObject json = buildJSON(new String[]{"brand", "model", "plate", "color"}, brand, model, plate, color);
         retrofitAPIEndpoints.carRegister(json).enqueue(new Callback<CarModel>() {
             @Override
@@ -311,39 +308,6 @@ public class FellowTravellerAPI {
             @Override
             public void onFailure(Call<StatusHandleModel> call, Throwable t) {
                 tripRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
-            }
-        });
-    }
-
-    public static void getPlaces(String place, final PlaceApiCallBack placeApiCallBack) {
-        String key = context.getResources().getString(R.string.PLACE_KEY);
-        String language = context.getResources().getString(R.string.PLACE_LANGUAGE);
-        String country = "country:gr";
-
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.PLACE_URL))
-                .addConverterFactory(GsonConverterFactory.create()).build();
-        RetrofitAPIEndpoints retrofitService = retrofit.create(RetrofitAPIEndpoints.class);
-
-        Call<PlaceAPiModel> call = retrofitService.getPlaces(place, key, language, country);
-        call.enqueue(new Callback<PlaceAPiModel>() {
-            @Override
-            public void onResponse(Call<PlaceAPiModel> call, Response<PlaceAPiModel> response) {
-                if (!response.isSuccessful()) {
-                    try {
-                        placeApiCallBack.onFailure(response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    return;
-                }
-                placeApiCallBack.onSuccess(response.body());
-
-            }
-
-            @Override
-            public void onFailure(Call<PlaceAPiModel> call, Throwable t) {
-                placeApiCallBack.onFailure(t.getMessage());
-
             }
         });
     }

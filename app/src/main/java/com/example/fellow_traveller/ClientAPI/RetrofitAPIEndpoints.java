@@ -13,7 +13,7 @@ import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.ClientAPI.Models.NotificationModel;
-import com.example.fellow_traveller.PlaceAutocomplete.PlaceAPiModel;
+import com.example.fellow_traveller.Place.Models.PlaceAPiModel;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;

@@ -1,4 +1,6 @@
-package com.example.fellow_traveller.PlaceAutocomplete;
+package com.example.fellow_traveller.Place.Models;
+
+import com.example.fellow_traveller.Place.Models.PredictionsModel;
 
 import java.util.ArrayList;
 
