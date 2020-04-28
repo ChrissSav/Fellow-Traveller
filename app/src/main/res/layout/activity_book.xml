@@ -333,7 +333,7 @@
 
             <TextView
                 android:id="@+id/pets_available_book"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:text="Ο οδηγός επιτρέπει μόνο ένα μικρόσωμο ζώο μέσα σε κλουβί"
@@ -342,8 +342,9 @@
                 app:layout_constraintTop_toBottomOf="@id/pets_book_tv"
                 android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="@id/pets_book_tv"
+                app:layout_constraintEnd_toEndOf="@id/pets_book_edit_text"
                 app:layout_constraintRight_toRightOf="parent"
-                android:paddingRight="50dp"
+
                 />
             <EditText
                 android:id="@+id/pets_book_edit_text"

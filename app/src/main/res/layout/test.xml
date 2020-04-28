@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="1dp"
     android:layout_marginBottom="1dp">
 
@@ -42,7 +43,60 @@
             android:visibility="gone"
             />
 
-
     </LinearLayout>
 
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ActivityFilter_seats_increaser_section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/increaser_border_stroke_shape"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="100dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        >
+        <ImageButton
+            android:id="@+id/ActivityFilters_seats_minus_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_minus"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:padding="8dp"/>
+
+        <TextView
+            android:id="@+id/ActivityFilter_seats_value_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@id/ActivityFilters_seats_minus_button"
+            android:layout_marginStart="15dp"
+            android:fontFamily="@font/firasans_light"
+            app:layout_constraintTop_toTopOf="@id/ActivityFilters_seats_minus_button"
+            app:layout_constraintBottom_toBottomOf="@id/ActivityFilters_seats_minus_button"/>
+        <ImageButton
+            android:id="@+id/ActivityFilters_seats_plus_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_plus"
+            app:layout_constraintStart_toEndOf="@id/ActivityFilter_seats_value_tv"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="15dp"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:padding="8dp"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>

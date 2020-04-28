@@ -22,7 +22,9 @@ import android.widget.Toast;
 
 
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
+import com.crystal.crystalrangeseekbar.interfaces.OnSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
+import com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar;
 import com.example.fellow_traveller.R;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
@@ -32,19 +34,26 @@ import com.wisnu.datetimerangepickerandroid.CalendarPickerView;
 
 import java.awt.font.NumericShaper;
 import java.time.Year;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.TimeZone;
 
 public class FiltersActivity extends AppCompatActivity {
-    private SeekBar rangeBar;
+    private CrystalSeekbar rangeBar;
     private TextView rangeBarTV;
     private Button  dateButton, priceButton, seatsButton, petsButton, bagsButton, resetButton, applyButton;
     private ImageButton closeButton;
     private Spinner sortSpinner;
+    private int priceStartFinal=0, priceEndFinal=200, seatsFinal = 0, bagsFinal = 0;
+    private long startDateFinal, endDateFinal;
     private final long five_years_forward = (1000*60*60*24*365*5);
     private long startRange = 0, endRange = 0;
+
+    private ArrayList<PaymentItem> petsChoicesList;
+    private PaymentAdapter mAdapter;
+    private Spinner petsSpinner;
 
     private final String CLICK_COLOR = "#1C1C1C";
     private final String TITLE_PET = "Επέλεξε ...            ";
@@ -65,23 +74,28 @@ public class FiltersActivity extends AppCompatActivity {
         sortSpinner = findViewById(R.id.ActivityFilter_sort_spinner);
         priceButton = findViewById(R.id.price_button);
         dateButton = findViewById(R.id.date_button);
-        seatsButton = findViewById(R.id.seats_button);
+
         resetButton = findViewById(R.id.reset_button);
         petsButton = findViewById(R.id.pets_button);
         applyButton = findViewById(R.id.apply_button);
         closeButton = findViewById(R.id.close_button_filters);
-        bagsButton = findViewById(R.id.bags_button);
+
+        petsSpinner = findViewById(R.id.ActivityFilters_pets_spinner);
+
+        petsChoicesList = new ArrayList<>();
+        petsChoicesList.add(new PaymentItem("Όλες", R.drawable.ic_bone));
+        petsChoicesList.add(new PaymentItem("Με κατοικίδιο", R.drawable.ic_bone));
+        petsChoicesList.add(new PaymentItem("Χωρίς κατοικίδιο", R.drawable.ic_bone));
+
+
+        mAdapter = new PaymentAdapter(this, petsChoicesList);
+        petsSpinner.setAdapter(mAdapter);
 
         //Text Color
         if (petsButton.getText() != TITLE_PET) {
             petsButton.setTextColor(Color.parseColor(CLICK_COLOR));
         }
-        if (bagsButton.getText() != TITLE_BAGS) {
-            bagsButton.setTextColor(Color.parseColor(CLICK_COLOR));
-        }
-        if (seatsButton.getText() != TITLE_SEAT) {
-            seatsButton.setTextColor(Color.parseColor(CLICK_COLOR));
-        }
+//
 
         String[] items = new String[]{"     Πιο σχετική", "    Με βάση τιμή", "Με βάση απόσταση"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -157,39 +171,22 @@ public class FiltersActivity extends AppCompatActivity {
             }
         });
 
-        rangeBar.setEnabled(false);
         //Range bar change listener
-        rangeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        rangeBar.setOnSeekbarChangeListener(new OnSeekbarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                rangeBarTV.setText(progress + " χλμ");
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+            public void valueChanged(Number value) {
+                if(value.intValue() == 0){
+                    rangeBarTV.setText("Εμφάνιση όλων");
+                }else{
+                    rangeBarTV.setText("Εύρος " + value + " χλμ");
+                }
 
             }
         });
 
 
-
-        seatsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openDialogForSeats();
-            }
-        });
-        bagsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openDialogForBags();
-            }
-        });
+        openDialogForSeats();
+        openDialogForBags();
         priceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -214,38 +211,10 @@ public class FiltersActivity extends AppCompatActivity {
     }
     public void openDialogForSeats() {
 
-        final Dialog myDialog = new Dialog(FiltersActivity.this, R.style.Theme_Dialog);
-        myDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.setContentView(R.layout.number_choose);
-        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-        myDialog.setCancelable(true);
-        myDialog.setCanceledOnTouchOutside(true);
-
         //get Elements
-        Button button = myDialog.findViewById(R.id.choose_num_button);
-        ImageButton increase = myDialog.findViewById(R.id.choose_num_imageButton_plus);
-        ImageButton decrease = myDialog.findViewById(R.id.choose_num_imageButton_minus);
-        final TextView textView_number = myDialog.findViewById(R.id.choose_num_textView_number);
-        TextView textView_title = myDialog.findViewById(R.id.choose_num_textView_title);
-        if (!seatsButton.getText().equals(TITLE_SEAT)) {
-            textView_number.setText(seatsButton.getText().toString());
-        }
-
-        textView_title.setText("Ελάχιστες θέσεις που θέλετε");
-
-
-
-        myDialog.show();
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myDialog.dismiss();
-                seatsButton.setTextColor(Color.parseColor(CLICK_COLOR));
-                seatsButton.setText(textView_number.getText().toString());
-            }
-        });
+        ImageButton decrease = findViewById(R.id.ActivityFilters_seats_minus_button);
+        ImageButton increase = findViewById(R.id.ActivityFilters_seats_plus_button);
+        final TextView textView_number = findViewById(R.id.ActivityFilter_seats_value_tv);
 
         increase.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -253,7 +222,6 @@ public class FiltersActivity extends AppCompatActivity {
                 Increase(textView_number);
             }
         });
-
         decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -264,41 +232,11 @@ public class FiltersActivity extends AppCompatActivity {
     }
     public void openDialogForBags() {
 
-        final Dialog myDialog = new Dialog(FiltersActivity.this,
-                R.style.Theme_Dialog);
-        myDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.setContentView(R.layout.number_choose);
-        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-        myDialog.setCancelable(true);
-        myDialog.setCanceledOnTouchOutside(true);
 
         //get Elements
-        Button button = myDialog.findViewById(R.id.choose_num_button);
-        ImageButton increase = myDialog.findViewById(R.id.choose_num_imageButton_plus);
-        ImageButton decrease = myDialog.findViewById(R.id.choose_num_imageButton_minus);
-        final TextView textView_number = myDialog.findViewById(R.id.choose_num_textView_number);
-        TextView textView_title = myDialog.findViewById(R.id.choose_num_textView_title);
-        if (!bagsButton.getText().equals(TITLE_BAGS)) {
-            textView_number.setText(bagsButton.getText().toString());
-        }
-
-        textView_title.setText("Ελάχιστες αποσκευές που θέλετε");
-
-
-
-        myDialog.show();
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                myDialog.dismiss();
-                bagsButton.setTextColor(Color.parseColor(CLICK_COLOR));
-                bagsButton.setText(textView_number.getText().toString());
-
-            }
-        });
+        ImageButton increase = findViewById(R.id.ActivityFilters_bags_plus_button);
+        ImageButton decrease = findViewById(R.id.ActivityFilters_bags_minus_button);
+        final TextView textView_number = findViewById(R.id.ActivityFilter_bags_value_tv);
 
         increase.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -306,7 +244,6 @@ public class FiltersActivity extends AppCompatActivity {
                 Increase(textView_number);
             }
         });
-
         decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -328,6 +265,7 @@ public class FiltersActivity extends AppCompatActivity {
         // get elements
         final TextView tvMin = (TextView) myDialog.findViewById(R.id.filter_price_start);
         final TextView tvMax = (TextView) myDialog.findViewById(R.id.filter_price_end);
+        final Button selectButton = (Button) myDialog.findViewById(R.id.filter_price_button);
         final CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) myDialog.findViewById(R.id.rangeSeekbar1);
 
         // set listener
@@ -336,12 +274,18 @@ public class FiltersActivity extends AppCompatActivity {
             public void valueChanged(Number minValue, Number maxValue) {
                 tvMin.setText("€" + String.valueOf(minValue));
                 tvMax.setText("€" + String.valueOf(maxValue));
+                priceStartFinal = minValue.intValue();
+                priceEndFinal = maxValue.intValue();
+            }
+        });
+        selectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                priceButton.setText("€" + String.valueOf(priceStartFinal) + " - " + "€" + String.valueOf(priceEndFinal));
+                myDialog.dismiss();
             }
         });
         myDialog.show();
-
-
-
 
 
 
