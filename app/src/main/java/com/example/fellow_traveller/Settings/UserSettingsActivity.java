@@ -19,7 +19,7 @@ import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 
 public class UserSettingsActivity extends AppCompatActivity {
-    private GlobalClass globalClass;
+    private GlobalClass globalClass = (GlobalClass) getApplicationContext();;
     private TextView userFullNameTextView, userEmailAddressTextView;
     private Button personalUserInfoButton, userLogoutButton, manageUserCarsButton, changeUserPasswordButton;
     private ImageButton goBackImageButton;
@@ -28,7 +28,6 @@ public class UserSettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_settings);
-        globalClass = (GlobalClass) getApplicationContext();
 
         personalUserInfoButton = findViewById(R.id.activity_user_settings_personal_user_info_button);
         userLogoutButton = findViewById(R.id.activity_user_settings_user_logout_button);
