@@ -1,4 +1,4 @@
-package com.example.fellow_traveller.PlaceAutocomplete;
+package com.example.fellow_traveller.NewOffer;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -16,24 +15,21 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.fellow_traveller.ClientAPI.RetrofitAPIEndpoints;
+import com.example.fellow_traveller.Models.GlobalClass;
+import com.example.fellow_traveller.PlacesAPI.CallBack.PlaceApiCallBack;
+import com.example.fellow_traveller.PlacesAPI.Models.PlaceAPiModel;
+import com.example.fellow_traveller.PlacesAPI.PlaceAdapter;
+import com.example.fellow_traveller.PlacesAPI.Models.PredictionsModel;
+import com.example.fellow_traveller.PlacesAPI.PlaceApiConnection;
 import com.example.fellow_traveller.R;
 
 import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AddLocationActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private PlaceAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<PredictionsModel> places_list;
-    private RetrofitAPIEndpoints retrofitService;
-    private Retrofit retrofit;
     private EditText editText;
     private ImageButton button_back;
 
@@ -113,33 +109,20 @@ public class AddLocationActivity extends AppCompatActivity {
 
     public void GetPlaces(String input) {
 
-        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.PLACE_URL))
-                .addConverterFactory(GsonConverterFactory.create()).build();
-        retrofitService = retrofit.create(RetrofitAPIEndpoints.class);
-        String key = getResources().getString(R.string.PLACE_KEY);
-        String language = getResources().getString(R.string.PLACE_LANGUAGE);
-        String country ="country:gr";
-        Call<PlaceAPiModel> call = retrofitService.getPlaces(input, key,language,country);
-        call.enqueue(new Callback<PlaceAPiModel>() {
+        GlobalClass globalClass = (GlobalClass) getApplicationContext();
+        new PlaceApiConnection(globalClass).getPlaces(input,new PlaceApiCallBack() {
             @Override
-            public void onResponse(Call<PlaceAPiModel> call, Response<PlaceAPiModel> response) {
-                if (!response.isSuccessful()) {
-
-                    return;
-                }
-
-                PlaceAPiModel placeAPi = response.body();
-                places_list = placeAPi.getPredictions();
+            public void onSuccess(PlaceAPiModel placeAPiModel) {
+                places_list = placeAPiModel.getPredictions();
                 buildRecyclerView();
-
-
             }
 
             @Override
-            public void onFailure(Call<PlaceAPiModel> call, Throwable t) {
-                Log.i("GetPlaces", "onFailure "+t.getMessage());
+            public void onFailure(String errorMsg) {
 
             }
         });
+
+
     }
 }

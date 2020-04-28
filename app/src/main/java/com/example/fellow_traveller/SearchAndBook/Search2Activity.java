@@ -5,39 +5,25 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.fellow_traveller.ClientAPI.Callbacks.PlaceApiCallBack;
-import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.Models.GlobalClass;
-import com.example.fellow_traveller.PlaceAutocomplete.AddLocationActivity;
-import com.example.fellow_traveller.PlaceAutocomplete.PlaceAPiModel;
-import com.example.fellow_traveller.PlaceAutocomplete.PlaceAdapter;
-import com.example.fellow_traveller.PlaceAutocomplete.PredictionsModel;
-import com.example.fellow_traveller.PlacesAPI.PlaceAutocompleteAdapter;
+import com.example.fellow_traveller.PlacesAPI.CallBack.PlaceApiCallBack;
+import com.example.fellow_traveller.PlacesAPI.Models.PlaceAPiModel;
+import com.example.fellow_traveller.PlacesAPI.PlaceAdapter;
+import com.example.fellow_traveller.PlacesAPI.Models.PredictionsModel;
+import com.example.fellow_traveller.PlacesAPI.PlaceApiConnection;
 import com.example.fellow_traveller.R;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 
@@ -141,19 +127,16 @@ public class Search2Activity extends AppCompatActivity {
 
     public void GetPlaces(String input) {
 
-
-        new FellowTravellerAPI(globalClass).getPlaces(input, new PlaceApiCallBack() {
+        new PlaceApiConnection(globalClass).getPlaces(input,new PlaceApiCallBack() {
             @Override
-            public void onSuccess(PlaceAPiModel p) {
-                places_list = p.getPredictions();
+            public void onSuccess(PlaceAPiModel placeAPiModel) {
+                places_list = placeAPiModel.getPredictions();
                 buildRecyclerView();
             }
 
             @Override
             public void onFailure(String errorMsg) {
-                // TODO remove this debug line.
-                Log.d("Authentication", "INVALID LOGIN");
-                //Toast.makeText(LoginActivity.this, errorMsg, Toast.LENGTH_LONG).show();
+
             }
         });
             

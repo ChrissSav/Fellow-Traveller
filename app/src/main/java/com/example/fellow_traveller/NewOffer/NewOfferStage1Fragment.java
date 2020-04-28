@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.fellow_traveller.PlaceAutocomplete.AddLocationActivity;
 import com.example.fellow_traveller.R;
 import com.google.android.material.textfield.TextInputLayout;
 
