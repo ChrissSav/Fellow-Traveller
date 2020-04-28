@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="INVALID_CREDENTIALS">Invalid Credentials.</string>
-    <string name="API_UNREACHABLE">Couldn\'t reach API.</string>
+    <!--API connection-->
+    <string name="ERROR_API_UNREACHABLE">Αδυναμία επικοινωνίας με το API.</string>
+    <!--Unauthorized API access-->
+    <string name="ERROR_API_UNAUTHORIZED">Μη εξουσιοδοτημένη ενέργεια.</string>
+    <!--User registration-->
+    <string name="ERROR_INVALID_EMAIL_FORMAT">Μη έγκυρο e-mail.</string>
+    <string name="ERROR_PASSWORD_COMPLEXITY_INVALID">Μη έγκυρος κωδικός πρόσβασης.</string>
+    <string name="ERROR_PASSWORD_DOES_NOT_MEET_COMPLEXITY_REQUIREMENTS">Ο κωδικός δεν πληρεί τους κανόνες πολυπλοκότητας.</string>
+    <string name="ERROR_PASSWORD_COMPLEXITY_SHOULD_CONTAIN">Ο κωδικός πρόσβασης πρέπει να:</string>
+    <string name="ERROR_PASSWORD_COMPLEXITY_LENGTH">έχει μήκος τουλάχιστον 8 χαρακτήρες.</string>
+    <string name="ERROR_PASSWORD_COMPLEXITY_LOWERCASE_LETTER">έχει ένα πεζό γράμμα.</string>
+    <string name="ERROR_PASSWORD_COMPLEXITY_UPPERCASE_LETTER">έχει ένα κεφαλαίο γράμμα.</string>
+    <string name="ERROR_PASSWORD_COMPLEXITY_DIGIT">έχει έναν αριθμό.</string>
+    <string name="ERROR_PASSWORD_COMPLEXITY_SPECIAL_CHARACTER">έχει έναν ειδικό χαρακτήρα</string>
+    <string name="ERROR_PASSWORD_DO_NOT_MATCH">Οι κωδικοί πρόσβασης δεν ταιριάζουν.</string>
+    <string name="ERROR_EMAIL_ALREADY_EXISTS">Υπάρχει ήδη λογαριασμός με αυτό το email.</string>
+    <string name="ERROR_PHONE_ALREADY_EXISTS">Υπάρχει ήδη λογαριασμός με αυτόν τον αριθμό τηλεφώνου.</string>
+    <!--User authentication-->
+    <string name="ERROR_INVALID_CREDENTIALS">Λάθος email/κωδικός πρόσβασης.</string>
+    <!--Password change-->
+    <string name="ERROR_PASSWORD_CHANGE_INVALID_CURRENT_PASSWORD">Μη έκγυρος τρέχον κωδικός πρόσβασης.</string>
+    <string name="INVALID_PHONE_FORMAT">Μη έγκυρος αριθμός τηλεφώνου.</string>
+    <string name="CONFIRM_DELETION">Είσαι σίγουρος για την διαγραφή;</string>
+    <string name="ERROR_INVALID_PLATE_FORMAT">Πρέπει να είναι της μορφής ΧΥΖ-1234.</string>
+    <string name="ERROR_REQUIRED_FIELD">Υποχρεωτικό πεδίο.</string>
+
 </resources>

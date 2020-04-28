@@ -77,7 +77,7 @@ public class ChatConversationActivity extends AppCompatActivity {
 
         //Retrieve current user's id
         globalClass = (GlobalClass) getApplicationContext();
-        myId = globalClass.getCurrent_user().getId();
+        myId = globalClass.getCurrentUser().getId();
 
         //Retrieve groupChat id
         Intent intent = getIntent();
@@ -138,7 +138,7 @@ public class ChatConversationActivity extends AppCompatActivity {
         hashMap.put("groupId", groupId);
         hashMap.put("text", message);
         hashMap.put("timestamp", System.currentTimeMillis()/1000);
-        hashMap.put("senderName", globalClass.getCurrent_user().getName());
+        hashMap.put("senderName", globalClass.getCurrentUser().getName());
 
         referenceMessage.push().setValue(hashMap);
 
@@ -147,7 +147,7 @@ public class ChatConversationActivity extends AppCompatActivity {
         if (notify) {
             for(int j = 0; j < convParticipantsId.size();j++) {
                 if(convParticipantsId.get(j) != myId){
-                    sendNotification(Integer.toString(convParticipantsId.get(j)), globalClass.getCurrent_user().getName(), msg);
+                    sendNotification(Integer.toString(convParticipantsId.get(j)), globalClass.getCurrentUser().getName(), msg);
                 }
             }
         }

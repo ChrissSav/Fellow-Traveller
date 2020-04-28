@@ -11,11 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
+import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.Reviews.ReviewsActivity;
 import com.example.fellow_traveller.Settings.AddCarSettingsActivity;
-import com.example.fellow_traveller.Settings.SettingsActivity;
+import com.example.fellow_traveller.Settings.UserSettingsActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,7 +25,8 @@ import com.example.fellow_traveller.Settings.SettingsActivity;
 public class AccountFragment extends Fragment {
     private ImageButton settingsButton;
     private Button newCarButton, reviewsButton;
-
+    private TextView textViewUserName, textViewAboutMe;
+    private GlobalClass globalClass;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -36,14 +39,18 @@ public class AccountFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account, container, false);
 
-        settingsButton =  view.findViewById(R.id.settings_button);
+
+        settingsButton = view.findViewById(R.id.settings_button);
         newCarButton = view.findViewById(R.id.new_car_button_account);
         reviewsButton = view.findViewById(R.id.fragment_account_reviews_button);
+        textViewUserName = view.findViewById(R.id.user_name);
+        textViewAboutMe = view.findViewById(R.id.AccountFragment_textView_aboutMe);
+
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                Intent intent = new Intent(getActivity(), UserSettingsActivity.class);
                 startActivity(intent);
             }
         });
@@ -67,4 +74,18 @@ public class AccountFragment extends Fragment {
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        globalClass = (GlobalClass) getActivity().getApplicationContext();
+        textViewUserName.setText(globalClass.getCurrentUser().getFullName());
+
+        if (globalClass.getCurrentUser().getAboutMe() == null || globalClass.getCurrentUser().getAboutMe().length() < 1)
+            textViewAboutMe.setText(globalClass.getResources().getString(R.string.account_fragment_about_me));
+        else {
+            textViewAboutMe.setText(globalClass.getCurrentUser().getAboutMe());
+
+        }
+
+    }
 }

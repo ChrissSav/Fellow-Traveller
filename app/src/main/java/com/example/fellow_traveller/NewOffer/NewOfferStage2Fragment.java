@@ -147,13 +147,13 @@ public class NewOfferStage2Fragment extends Fragment {
 
     public Boolean validateFragment() {
         if (textInputLayout_date.getEditText().getText().length() < 1) {
-            textInputLayout_date.setError("Υποχρεωτικό πεδίο!");
+            textInputLayout_date.setError(getResources().getString(R.string.ERROR_REQUIRED_FIELD));
             return false;
         } else {
             textInputLayout_date.setError(null);
         }
         if (textInputLayout_time.getEditText().getText().length() < 1) {
-            textInputLayout_time.setError("Υποχρεωτικό πεδίο!");
+            textInputLayout_time.setError(getResources().getString(R.string.ERROR_REQUIRED_FIELD));
             return false;
         } else {
             textInputLayout_time.setError(null);

@@ -63,7 +63,7 @@ public class MessengerFragment extends Fragment {
 
         //Retrieve current user's id
         globalClass = (GlobalClass) getActivity().getApplicationContext();
-        myId = globalClass.getCurrent_user().getId();
+        myId = globalClass.getCurrentUser().getId();
 
 //        conversationsList.add(new ConversationItem("Martin Garrix", "Yes i finished the last one", "20:27", true));
 //        conversationsList.add(new ConversationItem("Martin Garrix", "Yes i finished the last one", "20:27", true));

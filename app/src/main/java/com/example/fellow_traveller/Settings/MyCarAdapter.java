@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.SearchAndBook.SearchResultsAdapter;
 import com.example.fellow_traveller.Settings.MyCarItem;
@@ -20,7 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MyCarAdapter extends RecyclerView.Adapter<MyCarAdapter.MyCarViewHolder>{
-    private ArrayList<MyCarItem> carsList;
+    private ArrayList<CarModel> carsList;
     private MyCarAdapter.OnItemClickListener mListener;
 
 
@@ -34,6 +35,7 @@ public class MyCarAdapter extends RecyclerView.Adapter<MyCarAdapter.MyCarViewHol
 
     public static class MyCarViewHolder extends RecyclerView.ViewHolder{
         public TextView carSpecs;
+
 
 
 
@@ -55,7 +57,7 @@ public class MyCarAdapter extends RecyclerView.Adapter<MyCarAdapter.MyCarViewHol
             });
         }
     }
-    public MyCarAdapter(ArrayList<MyCarItem> aList){
+    public MyCarAdapter(ArrayList<CarModel> aList){
         carsList = aList;
 
     }
@@ -70,9 +72,8 @@ public class MyCarAdapter extends RecyclerView.Adapter<MyCarAdapter.MyCarViewHol
 
     @Override
     public void onBindViewHolder(@NonNull MyCarViewHolder holder, int position) {
-
-        MyCarItem currentItem = carsList.get(position);
-        holder.carSpecs.setText(currentItem.getCarSpecs());
+        CarModel currentItem = carsList.get(position);
+        holder.carSpecs.setText(currentItem.getDescription());
     }
 
 

@@ -2,7 +2,9 @@ package com.example.fellow_traveller.ClientAPI;
 
 import android.util.Log;
 
+import com.example.fellow_traveller.ClientAPI.Callbacks.CarDeleteCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
+import com.example.fellow_traveller.ClientAPI.Callbacks.StatusCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.TripRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserAuthCallback;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserCarsCallBack;
@@ -34,27 +36,42 @@ public class FellowTravellerAPI {
     public FellowTravellerAPI(GlobalClass context) {
         // Pass context from the activity we were called from
         FellowTravellerAPI.context = context;
-        retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.FT_API_URL))
-                .addConverterFactory(GsonConverterFactory.create()).build();
+        if (context.getCurrentUser() == null) {
+            Log.d("FellowTravellerAPI", " with out client");
+
+            retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.API_BASE_URL))
+                    .addConverterFactory(GsonConverterFactory.create()).build();
+        } else {
+            Log.d("FellowTravellerAPI", " with  client");
+
+            retrofit = new Retrofit.Builder().baseUrl(context.getResources().getString(R.string.API_BASE_URL))
+                    .client(context.getOkHttpClient().build())
+                    .addConverterFactory(GsonConverterFactory.create()).build();
+        }
         retrofitAPIEndpoints = retrofit.create(RetrofitAPIEndpoints.class);
     }
 
     public static void userAuthenticate(String email, final String password, final UserAuthCallback userAuthCallback) {
         JsonObject json = buildJSON(new String[]{"email", "password"}, email, password);
+
         retrofitAPIEndpoints.userAuthenticate(json).enqueue(new Callback<UserAuthModel>() {
             @Override
             public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
                 if (!response.isSuccessful()) {
                     Log.d("Authentication", "LOGIN FAILURE!!");
-                    userAuthCallback.onFailure(context.getResources().getString(R.string.INVALID_CREDENTIALS));
+                    userAuthCallback.onFailure(context.getResources().getString(R.string.ERROR_INVALID_CREDENTIALS));
                     return;
                 }
-                userAuthCallback.onSuccess(response.body());
+
+                String key = response.headers().get("Set-Cookie").split(";")[0];
+                UserAuthModel userAuthModel = response.body();
+                userAuthModel.setSessionId(key);
+                userAuthCallback.onSuccess(userAuthModel);
             }
 
             @Override
             public void onFailure(Call<UserAuthModel> call, Throwable t) {
-                userAuthCallback.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
+                userAuthCallback.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
             }
         });
 
@@ -62,8 +79,7 @@ public class FellowTravellerAPI {
 
     public static void userLogout(final UserLogoutCallBack userLogoutCallBack) {
         // TODO change this method of logging out with sessionID cookie instead.
-        JsonObject json = buildJSON(new String[]{"refresh_token"}, context.getCurrent_user().getRefreshToken());
-        retrofitAPIEndpoints.userLogout(json).enqueue(new Callback<StatusHandleModel>() {
+        retrofitAPIEndpoints.userLogout().enqueue(new Callback<StatusHandleModel>() {
             @Override
             public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
                 if (!response.isSuccessful()) {
@@ -81,13 +97,13 @@ public class FellowTravellerAPI {
 
             @Override
             public void onFailure(Call<StatusHandleModel> call, Throwable t) {
-                userLogoutCallBack.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
+                userLogoutCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
             }
         });
     }
 
-    public static void userRegister(String name, String surname, String email, String password, String phone, final UserRegisterCallback userRegisterCallback) {
-        JsonObject json = buildJSON(new String[]{"name", "surname", "email", "password", "phone"}, name, surname, email, password, phone);
+    public static void userRegister(String firstName, String lastName, String email, String password, String phone, final UserRegisterCallback userRegisterCallback) {
+        JsonObject json = buildJSON(new String[]{"first_name", "last_name", "email", "password", "phone"}, firstName, lastName, email, password, phone);
         retrofitAPIEndpoints.userRegister(json).enqueue(new Callback<UserAuthModel>() {
             @Override
             public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
@@ -100,18 +116,93 @@ public class FellowTravellerAPI {
                     }
                     return;
                 }
-                userRegisterCallback.onSuccess(response.body());
+                String key = response.headers().get("Set-Cookie").split(";")[0];
+                UserAuthModel userAuthModel = response.body();
+                userAuthModel.setSessionId(key);
+                userRegisterCallback.onSuccess(userAuthModel);
             }
 
             @Override
             public void onFailure(Call<UserAuthModel> call, Throwable t) {
-                userRegisterCallback.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
+                userRegisterCallback.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
             }
         });
     }
 
-    // TODO what about carAdd?
-    public static void carRegister(String brand, String model, String plate, String color, final CarRegisterCallBack carRegisterCallBack) {
+    public static void userChangePassword(String passwordPrev,String passwordNew, final String password, final StatusCallBack statusCallBack) {
+        JsonObject json = buildJSON(new String[]{"password_prev", "password_new"}, passwordPrev, passwordNew);
+
+        retrofitAPIEndpoints.userChangePassword(json).enqueue(new Callback<StatusHandleModel>() {
+            @Override
+            public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
+                if (!response.isSuccessful()) {
+                    Log.d("Authentication", "LOGIN FAILURE!!");
+                    statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+                    return;
+                }
+
+                statusCallBack.onSuccess(context.getResources().getString(R.string.success));
+            }
+
+            @Override
+            public void onFailure(Call<StatusHandleModel> call, Throwable t) {
+                statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+            }
+        });
+
+    }
+
+    public static void getUserInfo(final UserAuthCallback userAuthCallback) {
+        retrofitAPIEndpoints.userInfo().enqueue(new Callback<UserAuthModel>() {
+            @Override
+            public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
+                if (!response.isSuccessful()) {
+                    try {
+                        // TODO Display generalized error message from errors.xml
+                        userAuthCallback.onFailure(response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+                userAuthCallback.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<UserAuthModel> call, Throwable t) {
+                userAuthCallback.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            }
+        });
+    }
+
+    public static void updateUserInfo(String firstName,String lastName,String picture,String aboutMe,String phone,final UserAuthCallback userAuthCallback) {
+        JsonObject json = buildJSON(new String[]{"first_name", "last_name", "picture", "about_me", "phone"}, firstName, lastName, picture, aboutMe, phone);
+        Log.i("response", "aboutMe "+aboutMe+ (aboutMe==null));
+
+        retrofitAPIEndpoints.userUpdate(json).enqueue(new Callback<UserAuthModel>() {
+            @Override
+            public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
+                if (!response.isSuccessful()) {
+                    try {
+                        // TODO Display generalized error message from errors.xml
+                        userAuthCallback.onFailure(response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+
+                userAuthCallback.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<UserAuthModel> call, Throwable t) {
+                userAuthCallback.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            }
+        });
+    }
+
+    public static void addUserCar(String brand, String model, String plate, String color, final CarRegisterCallBack carRegisterCallBack) {
         JsonObject json = buildJSON(new String[]{"brand", "model", "plate", "color"}, brand, model, plate, color);
         retrofitAPIEndpoints.carRegister(json).enqueue(new Callback<CarModel>() {
             @Override
@@ -130,7 +221,7 @@ public class FellowTravellerAPI {
 
             @Override
             public void onFailure(Call<CarModel> call, Throwable t) {
-                carRegisterCallBack.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
+                carRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
             }
         });
     }
@@ -153,7 +244,34 @@ public class FellowTravellerAPI {
 
             @Override
             public void onFailure(Call<ArrayList<CarModel>> call, Throwable t) {
-                userCarsCallBack.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
+                userCarsCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            }
+        });
+    }
+
+    public static void deleteUserCar(int car_id, final CarDeleteCallBack carDeleteCallBack) {
+        retrofitAPIEndpoints.deleteUserCar(car_id).enqueue(new Callback<StatusHandleModel>() {
+            @Override
+            public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
+                if (!response.isSuccessful()) {
+                    try {
+                        // TODO show generalized error message from errors.xml
+                        if( response.code()==401){
+                            carDeleteCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+                            return;
+                        }
+                        carDeleteCallBack.onFailure(response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+                carDeleteCallBack.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<StatusHandleModel> call, Throwable t) {
+                carDeleteCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
             }
         });
     }
@@ -189,8 +307,9 @@ public class FellowTravellerAPI {
 
             @Override
             public void onFailure(Call<StatusHandleModel> call, Throwable t) {
-                tripRegisterCallBack.onFailure(context.getResources().getString(R.string.API_UNREACHABLE));
+                tripRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
             }
         });
     }
+
 }

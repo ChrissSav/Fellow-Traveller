@@ -21,8 +21,8 @@ import java.time.format.TextStyle;
 
 public class NewOfferStage6Fragment extends Fragment {
     private View view;
-    private TextView textView_from, textView_to, textView_date, textView_time,
-            textView_seats, textView_bags, textView_pets, textView_price, textView_car, textView_msg;
+    private TextView textViewFrom, textViewTo, textViewDate, textViewTime,
+            textViewSeats, textViewBags, textViewPets, textViewPrice, textViewCar, textViewMsg;
     private String from, to, date, time, seats, bags, pets, price, car, msg;
 
 
@@ -46,31 +46,31 @@ public class NewOfferStage6Fragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_new_offer_stage6, container, false);
 
-        textView_from = view.findViewById(R.id.NewOfferStage6Fragment_textView_from);
-        textView_to = view.findViewById(R.id.NewOfferStage6Fragment_textView_to);
-        textView_date = view.findViewById(R.id.NewOfferStage6Fragment_textView_date);
-        textView_time = view.findViewById(R.id.NewOfferStage6Fragment_textView_time);
-        textView_seats = view.findViewById(R.id.NewOfferStage6Fragment_textView_seats);
-        textView_bags = view.findViewById(R.id.NewOfferStage6Fragment_textView_bags);
-        textView_pets = view.findViewById(R.id.NewOfferStage6Fragment_textView_pets);
-        textView_price = view.findViewById(R.id.NewOfferStage6Fragment_textView_price);
-        textView_car = view.findViewById(R.id.NewOfferStage6Fragment_textView_car);
-        textView_msg = view.findViewById(R.id.NewOfferStage6Fragment_textView_msg);
+        textViewFrom = view.findViewById(R.id.NewOfferStage6Fragment_textView_from);
+        textViewTo = view.findViewById(R.id.NewOfferStage6Fragment_textView_to);
+        textViewDate = view.findViewById(R.id.NewOfferStage6Fragment_textView_date);
+        textViewTime = view.findViewById(R.id.NewOfferStage6Fragment_textView_time);
+        textViewSeats = view.findViewById(R.id.NewOfferStage6Fragment_textView_seats);
+        textViewBags = view.findViewById(R.id.NewOfferStage6Fragment_textView_bags);
+        textViewPets = view.findViewById(R.id.NewOfferStage6Fragment_textView_pets);
+        textViewPrice = view.findViewById(R.id.NewOfferStage6Fragment_textView_price);
+        textViewCar = view.findViewById(R.id.NewOfferStage6Fragment_textView_car);
+        textViewMsg = view.findViewById(R.id.NewOfferStage6Fragment_textView_msg);
 
-        textView_from.setText(from);
-        textView_to.setText(to);
+        textViewFrom.setText(from);
+        textViewTo.setText(to);
 
-        textView_date.setText(date);
-        textView_time.setText(time);
+        textViewDate.setText(date);
+        textViewTime.setText(time);
 
-        textView_seats.setText(seats);
-        textView_bags.setText(bags);
+        textViewSeats.setText(seats);
+        textViewBags.setText(bags);
 
-        textView_pets.setText(pets);
-        textView_price.setText(price);
+        textViewPets.setText(pets);
+        textViewPrice.setText(price);
 
-        textView_car.setText(car);
-        textView_msg.setText(msg);
+        textViewCar.setText(car);
+        textViewMsg.setText(msg);
 
 
         return view;

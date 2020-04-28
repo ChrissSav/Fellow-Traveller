@@ -4,43 +4,32 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-import com.example.fellow_traveller.ClientAPI.RetrofitAPIEndpoints;
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
-
-import com.example.fellow_traveller.PlaceAutocomplete.PlaceAPiModel;
-import com.example.fellow_traveller.PlaceAutocomplete.PlaceAdapter;
-
-import com.example.fellow_traveller.PlaceAutocomplete.PredictionsModel;
-import com.example.fellow_traveller.PlacesAPI.PlaceAutocompleteAdapter;
+import com.example.fellow_traveller.Models.GlobalClass;
+import com.example.fellow_traveller.PlacesAPI.Models.PlaceAPiModel;
+import com.example.fellow_traveller.PlacesAPI.PlaceAdapter;
+import com.example.fellow_traveller.PlacesAPI.CallBack.PlaceApiCallBack;
+import com.example.fellow_traveller.PlacesAPI.Models.PredictionsModel;
+import com.example.fellow_traveller.PlacesAPI.PlaceApiConnection;
 import com.example.fellow_traveller.R;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class SearchActivity extends AppCompatActivity {
+
     private EditText destinationAutoComplete;
     private ImageButton backButton, eraseButton;
     private ImageView searchIcon;
@@ -49,12 +38,14 @@ public class SearchActivity extends AppCompatActivity {
     private PlaceAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<PredictionsModel> places_list;
-    private RetrofitAPIEndpoints retrofitService;
-    private Retrofit retrofit;
+    private GlobalClass globalClass;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        globalClass = (GlobalClass) getApplicationContext();
 
         destinationAutoComplete = findViewById(R.id.autocomplete_search_destination);
         backButton = findViewById(R.id.back_button_search);
@@ -153,35 +144,21 @@ public class SearchActivity extends AppCompatActivity {
     }
     public void GetPlaces(String input) {
 
-        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.PLACE_URL))
-                .addConverterFactory(GsonConverterFactory.create()).build();
-        retrofitService = retrofit.create(RetrofitAPIEndpoints.class);
-        String key = getResources().getString(R.string.PLACE_KEY);
-        String language = getResources().getString(R.string.PLACE_LANGUAGE);
-        String country ="country:gr";
-        Call<PlaceAPiModel> call = retrofitService.getPlaces(input, key,language,country);
-        call.enqueue(new Callback<PlaceAPiModel>() {
+        new PlaceApiConnection(globalClass).getPlaces(input,new PlaceApiCallBack() {
             @Override
-            public void onResponse(Call<PlaceAPiModel> call, Response<PlaceAPiModel> response) {
-                if (!response.isSuccessful()) {
-
-                    return;
-                }
-
-                PlaceAPiModel placeAPi = response.body();
-                places_list = placeAPi.getPredictions();
+            public void onSuccess(PlaceAPiModel placeAPiModel) {
+                places_list = placeAPiModel.getPredictions();
                 buildRecyclerView();
-
-
             }
 
             @Override
-            public void onFailure(Call<PlaceAPiModel> call, Throwable t) {
-                Log.i("GetPlaces", "onFailure "+t.getMessage());
+            public void onFailure(String errorMsg) {
 
             }
         });
+
     }
+
     public void buildRecyclerView() {
         mRecyclerView = findViewById(R.id.ActivitySearch_recycler_view);
         mRecyclerView.setHasFixedSize(true);

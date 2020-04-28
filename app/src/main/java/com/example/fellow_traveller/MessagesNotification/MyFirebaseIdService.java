@@ -17,7 +17,7 @@ public class MyFirebaseIdService extends FirebaseMessagingService {
         super.onNewToken(s);
         //Retrieve current user's id
         globalClass = (GlobalClass) getApplicationContext();
-        myId = globalClass.getCurrent_user().getId();
+        myId = globalClass.getCurrentUser().getId();
 
         String refreshToken = FirebaseInstanceId.getInstance().getToken();
         if(Integer.toString(myId)!=null){
@@ -28,7 +28,7 @@ public class MyFirebaseIdService extends FirebaseMessagingService {
     private void updateToken(String refreshToken){
         //Retrieve current user's id
         globalClass = (GlobalClass) getApplicationContext();
-        myId = globalClass.getCurrent_user().getId();
+        myId = globalClass.getCurrentUser().getId();
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Tokens");
         Token token = new Token(refreshToken);

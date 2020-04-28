@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:layout_marginTop="24dp"
-            android:text="Add your Email"
+            android:text="@string/register_fragment_stage_1_add_email_title"
             android:textColor="#000"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Email"
+            android:text="@string/register_fragment_stage_1_email_input_field_title"
             android:textColor="#000"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@+id/RegisterStage1Fragment_textView4"
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:text="spurakos98@gmail.com"
+                android:text="@string/temp_spyros_email_address"
                 android:textColor="@color/edit_text_color"
                 android:textSize="20sp" />
         </com.google.android.material.textfield.TextInputLayout>

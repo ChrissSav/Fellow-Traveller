@@ -10,10 +10,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Settings.SettingsActivity">
+        tools:context=".Settings.UserSettingsActivity">
 
         <ImageButton
-            android:id="@+id/back_button"
+            android:id="@+id/activity_user_settings_go_back_button"
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:layout_marginLeft="15dp"
@@ -35,7 +35,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/user_name_settings"
+            android:id="@+id/activity_user_settings_user_full_name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -49,18 +49,18 @@
             app:layout_constraintTop_toBottomOf="@id/profile_picture_settings" />
 
         <TextView
-            android:id="@+id/email_settings"
+            android:id="@+id/activity_user_settings_user_email_address_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/firasans_light"
-            android:text="fotispechli@gmail.com"
+            android:text="@string/EMAIL_PLACEHOLDER"
             android:textColor="@color/profile"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/user_name_settings" />
+            app:layout_constraintTop_toBottomOf="@id/activity_user_settings_user_full_name_text_view" />
 
         <TextView
             android:id="@+id/account_settings"
@@ -69,15 +69,15 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="40dp"
             android:fontFamily="@font/firasans_medium"
-            android:text="Ρυθμίσεις λογαριασμού"
+            android:text="@string/activity_user_settings_account_settings_text_label"
             android:textColor="@color/profile"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/email_settings" />
+            app:layout_constraintTop_toBottomOf="@id/activity_user_settings_user_email_address_text_view" />
 
         <Button
-            android:id="@+id/personal_info"
+            android:id="@+id/activity_user_settings_personal_user_info_button"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
             />
 
         <Button
-            android:id="@+id/change_password"
+            android:id="@+id/activity_user_settings_change_user_password_button"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -117,7 +117,7 @@
             android:textColor="@color/profile"
             android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/personal_info" />
+            app:layout_constraintTop_toBottomOf="@+id/activity_user_settings_personal_user_info_button" />
 
         <Button
             android:id="@+id/payments"
@@ -137,7 +137,7 @@
             android:textColor="@color/profile"
             android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/change_password" />
+            app:layout_constraintTop_toBottomOf="@+id/activity_user_settings_change_user_password_button" />
 
         <Button
             android:id="@+id/notifications"
@@ -195,7 +195,7 @@
             app:layout_constraintTop_toBottomOf="@+id/fellow_drivers" />
 
         <Button
-            android:id="@+id/manage_cars"
+            android:id="@+id/activity_user_settings_manage_user_cars_button"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -232,7 +232,7 @@
             android:textColor="@color/profile"
             android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/manage_cars" />
+            app:layout_constraintTop_toBottomOf="@+id/activity_user_settings_manage_user_cars_button" />
 
         <Button
             android:id="@+id/support"
@@ -275,7 +275,7 @@
             app:layout_constraintTop_toBottomOf="@+id/support" />
 
         <Button
-            android:id="@+id/logout"
+            android:id="@+id/activity_user_settings_user_logout_button"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
