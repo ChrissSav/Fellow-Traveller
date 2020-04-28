@@ -37,7 +37,7 @@
         <activity android:name=".SearchAndBook.FiltersActivity" />
         <activity android:name=".Settings.PersonalSettingsActivity" />
         <activity android:name=".Chat.ChatConversationActivity" />
-        <activity android:name=".Settings.SettingsActivity" />
+        <activity android:name=".Settings.UserSettingsActivity" />
         <activity android:name=".Trips.TripPageActivity" />
         <activity android:name=".Register.RegisterContainerActivity" />
         <activity android:name=".HomeFragments.HomeActivity" />

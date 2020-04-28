@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,7 @@ import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.Reviews.ReviewsActivity;
 import com.example.fellow_traveller.Settings.AddCarSettingsActivity;
-import com.example.fellow_traveller.Settings.SettingsActivity;
+import com.example.fellow_traveller.Settings.UserSettingsActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,7 +50,7 @@ public class AccountFragment extends Fragment {
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                Intent intent = new Intent(getActivity(), UserSettingsActivity.class);
                 startActivity(intent);
             }
         });
