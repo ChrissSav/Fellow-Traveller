@@ -16,6 +16,18 @@ public class UserAuthModel {
     private String aboutMe;
     private String phone;
     private String sessionId;
+    @SerializedName("email")
+    private String emailAddress;
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+
 
 
     public int getId() {
