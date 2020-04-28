@@ -19,21 +19,19 @@ import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 
 public class UserSettingsActivity extends AppCompatActivity {
-    private GlobalClass globalClass = (GlobalClass) getApplicationContext();;
+    private GlobalClass globalClass;
     private TextView userFullNameTextView, userEmailAddressTextView;
-    private Button personalUserInfoButton, userLogoutButton, manageUserCarsButton, changeUserPasswordButton;
-    private ImageButton goBackImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_settings);
 
-        personalUserInfoButton = findViewById(R.id.activity_user_settings_personal_user_info_button);
-        userLogoutButton = findViewById(R.id.activity_user_settings_user_logout_button);
-        manageUserCarsButton = findViewById(R.id.activity_user_settings_manage_user_cars_button);
-        changeUserPasswordButton = findViewById(R.id.activity_user_settings_change_user_password_button);
-        goBackImageButton = findViewById(R.id.activity_user_settings_go_back_button);
+        Button personalUserInfoButton = findViewById(R.id.activity_user_settings_personal_user_info_button);
+        Button userLogoutButton = findViewById(R.id.activity_user_settings_user_logout_button);
+        Button manageUserCarsButton = findViewById(R.id.activity_user_settings_manage_user_cars_button);
+        Button changeUserPasswordButton = findViewById(R.id.activity_user_settings_change_user_password_button);
+        ImageButton goBackImageButton = findViewById(R.id.activity_user_settings_go_back_button);
         userFullNameTextView = findViewById(R.id.activity_user_settings_user_full_name_text_view);
         userEmailAddressTextView = findViewById(R.id.activity_user_settings_user_email_address_text_view);
 
