@@ -87,6 +87,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (!(selectedFragment instanceof HomeFragment)) {
+            bottomNav.setSelectedItemId(R.id.bottom_nav_main);
             selectedFragment = new HomeFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.HomeActivity_frame_container,
                     selectedFragment).commit();
