@@ -184,8 +184,9 @@ public class NewOfferActivity extends AppCompatActivity {
                     public void onSuccess(StatusHandleModel status) {
                         // TODO take generic message from a resource file.
                         Toast.makeText(NewOfferActivity.this, "Επιτυχείς καταχώρηση", Toast.LENGTH_SHORT).show();
-                        onBackPressed();
                         finish();
+                        onBackPressed();
+
                     }
 
                     @Override

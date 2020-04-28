@@ -129,7 +129,7 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void userChangePassword(String passwordPrev,String passwordNew, final String password, final StatusCallBack statusCallBack) {
+    public static void userChangePassword(String passwordPrev, String passwordNew, final String password, final StatusCallBack statusCallBack) {
         JsonObject json = buildJSON(new String[]{"password_prev", "password_new"}, passwordPrev, passwordNew);
 
         retrofitAPIEndpoints.userChangePassword(json).enqueue(new Callback<StatusHandleModel>() {
@@ -175,9 +175,9 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void updateUserInfo(String firstName,String lastName,String picture,String aboutMe,String phone,final UserAuthCallback userAuthCallback) {
+    public static void updateUserInfo(String firstName, String lastName, String picture, String aboutMe, String phone, final UserAuthCallback userAuthCallback) {
         JsonObject json = buildJSON(new String[]{"first_name", "last_name", "picture", "about_me", "phone"}, firstName, lastName, picture, aboutMe, phone);
-        Log.i("response", "aboutMe "+aboutMe+ (aboutMe==null));
+        Log.i("response", "aboutMe " + aboutMe + (aboutMe == null));
 
         retrofitAPIEndpoints.userUpdate(json).enqueue(new Callback<UserAuthModel>() {
             @Override
@@ -256,7 +256,7 @@ public class FellowTravellerAPI {
                 if (!response.isSuccessful()) {
                     try {
                         // TODO show generalized error message from errors.xml
-                        if( response.code()==401){
+                        if (response.code() == 401) {
                             carDeleteCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
                             return;
                         }
@@ -277,16 +277,27 @@ public class FellowTravellerAPI {
     }
 
     // TODO what about another more sensible name, like tripCreate?
-    public static void tripRegister(String dest_from, String dest_to, String pet, int max_seats, int max_bags, int car_id,
+    public static void tripRegister(String destFrom, String desTo, String pet, int maxSeats, int maxBags, int carId,
                                     float price, long timestamp, String msg, final TripRegisterCallBack tripRegisterCallBack) {
-        JsonObject json = buildJSON(new String[]{
-                        "dest_from", "dest_to",
-                        "pet", "max_seats",
-                        "max_bags", "car_id",
-                        "price", "timestamp", "msg"},
-                dest_from, dest_to, pet, String.valueOf(max_seats),
-                String.valueOf(max_bags), String.valueOf(car_id),
-                String.valueOf(price), String.valueOf(timestamp), msg);
+//        JsonObject json = buildJSON(new String[]{
+//                        "dest_from", "dest_to",
+//                        "pet", "max_seats",
+//                        "max_bags", "car_id",
+//                        "price", "timestamp", "msg"},
+//                dest_from, dest_to, pet, String.valueOf(max_seats),
+//                String.valueOf(max_bags), String.valueOf(car_id),
+//                String.valueOf(price), String.valueOf(timestamp), msg);
+        JsonObject json = new JsonObject();
+        json.addProperty("dest_from", destFrom);
+        json.addProperty("dest_to", desTo);
+        json.addProperty("car_id", carId);
+        json.addProperty("pet", pet == "Επιτρέπω" ? "yes" : "no");
+        json.addProperty("max_seats", maxSeats);
+        json.addProperty("max_bags", maxBags);
+        json.addProperty("price", price);
+        json.addProperty("timestamp", timestamp);
+        json.addProperty("msg", msg);
+
 
         // TODO add a better comparison than: pet == "Επιτρέπω" ? "yes" : "no"
         // TODO get some boolean value instead, this is sloppy
