@@ -20,7 +20,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".Reviews.WriteReviewActivity"></activity>
         <activity android:name=".Reviews.ReviewsActivity" />
-        <activity android:name=".PlaceAutocomplete.AddLocationActivity" />
+        <activity android:name=".NewOffer.AddLocationActivity" />
         <activity android:name=".Settings.EditCarSettingsActivity" />
         <activity android:name=".Settings.AddCarSettingsActivity" />
         <activity android:name=".Settings.CarsSettingsActivity" />

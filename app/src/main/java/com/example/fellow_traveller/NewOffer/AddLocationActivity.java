@@ -1,4 +1,4 @@
-package com.example.fellow_traveller.PlaceAutocomplete;
+package com.example.fellow_traveller.NewOffer;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,8 +38,6 @@ public class AddLocationActivity extends AppCompatActivity {
     private PlaceAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<PredictionsModel> places_list;
-    private RetrofitAPIEndpoints retrofitService;
-    private Retrofit retrofit;
     private EditText editText;
     private ImageButton button_back;
 
