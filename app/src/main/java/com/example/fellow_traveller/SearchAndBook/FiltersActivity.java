@@ -157,7 +157,7 @@ public class FiltersActivity extends AppCompatActivity {
             }
         });
 
-
+        rangeBar.setEnabled(false);
         //Range bar change listener
         rangeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
