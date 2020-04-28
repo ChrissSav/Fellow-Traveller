@@ -31,7 +31,7 @@ public interface RetrofitAPIEndpoints {
     Call<StatusHandleModel> userLogout();
 
 
-    @POST("/auth/password")
+    @PUT("/auth/password")
     Call<StatusHandleModel> userChangePassword(
             @Body UserChangePasswordModel password
     );

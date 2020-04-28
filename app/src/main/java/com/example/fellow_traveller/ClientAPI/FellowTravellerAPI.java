@@ -140,7 +140,7 @@ public class FellowTravellerAPI {
                     return;
                 }
 
-                statusCallBack.onSuccess(context.getResources().getString(R.string.success));
+                statusCallBack.onSuccess(context.getResources().getString(R.string.PASSWORD_CHANGED_SUCCESSFULLY));
             }
 
             @Override
