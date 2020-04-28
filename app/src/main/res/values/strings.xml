@@ -261,7 +261,8 @@
     <string name="change_password_activity_confirm_new_password_label">Επιβεβαίωση κωδικού</string>
     <string name="change_password_activity_change_password_button_label">Αλλαγή</string>
     <string name="success">Επιτυχής αλλαγή κωδικού.</string>
-
+    <string name="EMAIL_PLACEHOLDER">user@example.com</string>
+    <string name="activity_user_settings_account_settings_text_label">Ρυθμίσεις λογαριασμού</string>
 
 
 </resources>
