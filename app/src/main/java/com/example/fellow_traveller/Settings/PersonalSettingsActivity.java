@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserAuthCallback;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
+import com.example.fellow_traveller.ClientAPI.Models.UserUpdateModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.google.gson.Gson;
@@ -136,7 +137,8 @@ public class PersonalSettingsActivity extends AppCompatActivity {
 
 
     public void updateUser(String firstName, String lastName, String aboutMe, String phoneNumber) {
-       new  FellowTravellerAPI(globalClass).updateUserInfo(firstName, lastName, "", aboutMe, phoneNumber, new UserAuthCallback() {
+        UserUpdateModel user = new UserUpdateModel(firstName, lastName,"", aboutMe, phoneNumber);
+        new FellowTravellerAPI(globalClass).updateUserInfo(user, new UserAuthCallback() {
             @Override
             public void onSuccess(UserAuthModel user) {
                 user.setSessionId(globalClass.getCurrentUser().getSessionId());

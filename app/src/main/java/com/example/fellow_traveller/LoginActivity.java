@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserAuthCallback;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
+import com.example.fellow_traveller.ClientAPI.Models.UserLoginModel;
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.google.android.material.textfield.TextInputLayout;
@@ -47,13 +48,17 @@ public class LoginActivity extends AppCompatActivity {
                     textInputLayout_email.setError(null);
                     // TODO remove password error from here, this is an email field.
                     textInputLayout_password.setError(null);
+
+                    // Create user object from model
+                    UserLoginModel user = new UserLoginModel(email, password);
+
                     // Authenticate user using ClientAPI
-                    new FellowTravellerAPI(globalClass).userAuthenticate(email, password, new UserAuthCallback() {
+                    new FellowTravellerAPI(globalClass).userLogin(user, new UserAuthCallback() {
                         @Override
                         public void onSuccess(UserAuthModel user) {
                             SaveClass(user);
+                            // TODO DEBUG LINE
                             Log.d("Chriss","user "+ user.getSessionId());
-
                         }
 
                         @Override

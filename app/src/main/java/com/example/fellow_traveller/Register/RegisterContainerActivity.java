@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserRegisterCallback;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
+import com.example.fellow_traveller.ClientAPI.Models.UserRegisterModel;
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
@@ -118,10 +119,13 @@ public class RegisterContainerActivity extends AppCompatActivity {
     public void newRegisterUser() {
         String email = registerStage1Fragment.getEmail();
         String password = registerStage2Fragment.getPassword();
-        String name = registerStage3Fragment.GetName();
-        String surname = registerStage3Fragment.GetSurName();
+        String firstName = registerStage3Fragment.getFirstName();
+        String lastName = registerStage3Fragment.getLastName();
 
-        new FellowTravellerAPI(globalClass).userRegister(name, surname, email, password, userPhone, new UserRegisterCallback() {
+        // Create user object from model
+        UserRegisterModel user = new UserRegisterModel(firstName, lastName, email, password, userPhone);
+
+        new FellowTravellerAPI(globalClass).userRegister(user, new UserRegisterCallback() {
             @Override
             public void onSuccess(UserAuthModel user) {
                 Save(user);

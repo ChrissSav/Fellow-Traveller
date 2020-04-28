@@ -401,7 +401,7 @@ public class NewOfferStage3Fragment extends Fragment {
 
     public void getCars(final View view, final AlertDialog dialog) {
 
-        new FellowTravellerAPI(globalClass).getUserCars(new UserCarsCallBack() {
+        new FellowTravellerAPI(globalClass).getCars(new UserCarsCallBack() {
             @Override
             public void onSuccess(ArrayList<CarModel> carList) {
                 mExampleList = new ArrayList<>();
