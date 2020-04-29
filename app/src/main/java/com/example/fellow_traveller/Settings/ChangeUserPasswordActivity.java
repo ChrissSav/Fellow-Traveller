@@ -2,12 +2,14 @@ package com.example.fellow_traveller.Settings;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
-import android.util.Log;
+import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +24,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static com.example.fellow_traveller.Util.InputValidation.isValidPassword;
+import static com.example.fellow_traveller.Util.InputValidation.validatePasswordComplexity;
 
 public class ChangeUserPasswordActivity extends AppCompatActivity {
 
@@ -31,6 +33,8 @@ public class ChangeUserPasswordActivity extends AppCompatActivity {
     private TextInputLayout oldPasswordInputLayout;
     private TextInputLayout newPasswordInputLayout;
     private TextInputLayout confirmNewPasswordInputLayout;
+    private ArrayList<TextView> passwordComplexityRequirementsTextViews;
+
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -45,6 +49,14 @@ public class ChangeUserPasswordActivity extends AppCompatActivity {
         newPasswordInputLayout = findViewById(R.id.ChangePassword_editText_new_password);
         confirmNewPasswordInputLayout = findViewById(R.id.ChangePassword_editText_repeat_password);
 
+        passwordComplexityRequirementsTextViews = new ArrayList<>();
+        passwordComplexityRequirementsTextViews.add((TextView) findViewById(R.id.activity_change_password_password_complexity_digit_TextView));
+        passwordComplexityRequirementsTextViews.add((TextView) findViewById(R.id.activity_change_password_password_complexity_lowercase_letter_TextView));
+        passwordComplexityRequirementsTextViews.add((TextView) findViewById(R.id.activity_change_password_password_complexity_uppercase_letter_TextView));
+        passwordComplexityRequirementsTextViews.add((TextView) findViewById(R.id.activity_change_password_password_complexity_special_char_TextView));
+        passwordComplexityRequirementsTextViews.add((TextView) findViewById(R.id.activity_change_password_password_complexity_min_length_TextView));
+
+
         changePasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -54,12 +66,12 @@ public class ChangeUserPasswordActivity extends AppCompatActivity {
                 String confirmNewPassword = confirmNewPasswordInputLayout.getEditText().getText().toString();
                 GlobalClass context = (GlobalClass) getApplicationContext();
 
-                // remove any errors from previous clicks
+                // remove any previous errors
                 oldPasswordInputLayout.setError(null);
                 newPasswordInputLayout.setError(null);
                 confirmNewPasswordInputLayout.setError(null);
 
-                // check if any of the fields is empty
+                // check for empty input fields
                 if (oldPassword.isEmpty()) {
                     oldPasswordInputLayout.setError(getResources().getString(R.string.ERROR_REQUIRED_FIELD));
                 }
@@ -69,21 +81,10 @@ public class ChangeUserPasswordActivity extends AppCompatActivity {
                 if (confirmNewPassword.isEmpty()) {
                     confirmNewPasswordInputLayout.setError(getResources().getString(R.string.ERROR_REQUIRED_FIELD));
                 } else {
-                    // check the complexity of the new password
-                    ArrayList<Integer> errors = isValidPassword(newPassword);
-
                     // see if there's any errors
-                    if (!errors.isEmpty()) {
+                    if (!validatePasswordComplexity(newPassword, passwordComplexityRequirementsTextViews)) {
                         newPasswordInputLayout.setError(getResources().getString(R.string.ERROR_PASSWORD_DOES_NOT_MEET_COMPLEXITY_REQUIREMENTS));
                         confirmNewPasswordInputLayout.setError(null);
-
-                        // TODO remove this debug loop once you implement proper password complexity error handling
-                        Toast.makeText(v.getContext(), getResources().getString(R.string.ERROR_PASSWORD_COMPLEXITY_SHOULD_CONTAIN), Toast.LENGTH_SHORT).show();
-                        for (Integer error : errors) {
-                            // TODO implement how you will display the errors to the user.
-                            // TODO remove debug output
-                            Toast.makeText(v.getContext(), getResources().getString(error), Toast.LENGTH_SHORT).show();
-                        }
                     } else if (!newPassword.equals(confirmNewPassword)) {
                         newPasswordInputLayout.setError(null);
                         confirmNewPasswordInputLayout.setError(getResources().getString(R.string.ERROR_PASSWORD_DO_NOT_MATCH));
@@ -91,15 +92,14 @@ public class ChangeUserPasswordActivity extends AppCompatActivity {
                         newPasswordInputLayout.setError(null);
                         confirmNewPasswordInputLayout.setError(null);
 
-                        // Check if old and new passwords are not the same
                         if (!oldPassword.equals(newPassword)) {
                             // TODO check if user object is null before calling the client API, maybe try-catch
                             // Create user object from model
                             UserChangePasswordModel user = new UserChangePasswordModel(oldPassword, newPassword);
-                            new FellowTravellerAPI(context).userChangePassword(user, new StatusCallBack() {
+                            new FellowTravellerAPI(context).userChangePassword(Objects.requireNonNull(user), new StatusCallBack() {
                                 @Override
                                 public void onSuccess(String status) {
-                                    // TODO password was changed successfully, note! this fragment's View v was made final on the onClick method.
+                                    // TODO password was changed successfully
                                     Toast.makeText(v.getContext(), getResources().getString(R.string.PASSWORD_CHANGED_SUCCESSFULLY), Toast.LENGTH_SHORT).show();
                                 }
 
@@ -170,6 +170,25 @@ public class ChangeUserPasswordActivity extends AppCompatActivity {
                     newPasswordInputLayout.getEditText().setInputType(passwordVisible);
                     confirmNewPasswordInputLayout.getEditText().setInputType(passwordVisible);
                 }
+            }
+        });
+
+        Objects.requireNonNull(newPasswordInputLayout.getEditText()).addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // clear any previous errors for the input layouts
+                newPasswordInputLayout.setError(null);
+                confirmNewPasswordInputLayout.setError(null);
+                validatePasswordComplexity(s.toString(), passwordComplexityRequirementsTextViews);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
             }
         });
 
