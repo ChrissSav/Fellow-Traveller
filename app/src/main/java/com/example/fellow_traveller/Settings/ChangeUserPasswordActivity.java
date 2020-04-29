@@ -2,6 +2,8 @@ package com.example.fellow_traveller.Settings;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.InputType;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -144,6 +146,30 @@ public class ChangeUserPasswordActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 confirmNewPasswordInputLayout.setError(null);
                 return false;
+            }
+        });
+
+        oldPasswordInputLayout.setEndIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // gets current  visibility of the input field
+                int oldPasswordEditTextVisibility = oldPasswordInputLayout.getEditText().getInputType();
+
+                // indicates whether text on the password field is visible or hidden
+                int passwordVisible = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
+                int passwordHidden = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
+
+                if (oldPasswordEditTextVisibility == passwordVisible) {
+                    // hide all input
+                    oldPasswordInputLayout.getEditText().setInputType(passwordHidden);
+                    newPasswordInputLayout.getEditText().setInputType(passwordHidden);
+                    confirmNewPasswordInputLayout.getEditText().setInputType(passwordHidden);
+                } else if (oldPasswordEditTextVisibility == passwordHidden) {
+                    // make all input visible
+                    oldPasswordInputLayout.getEditText().setInputType(passwordVisible);
+                    newPasswordInputLayout.getEditText().setInputType(passwordVisible);
+                    confirmNewPasswordInputLayout.getEditText().setInputType(passwordVisible);
+                }
             }
         });
 
