@@ -3,7 +3,6 @@ package com.example.fellow_traveller.Settings;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;

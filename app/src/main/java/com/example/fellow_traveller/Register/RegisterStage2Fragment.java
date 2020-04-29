@@ -2,11 +2,13 @@ package com.example.fellow_traveller.Register;
 
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -14,13 +16,15 @@ import com.example.fellow_traveller.R;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-import static com.example.fellow_traveller.Util.InputValidation.isValidPassword;
+import static com.example.fellow_traveller.Util.InputValidation.validatePasswordComplexity;
 
 
 public class RegisterStage2Fragment extends Fragment {
-    private TextInputLayout passwordTextInputLayout, confirmPasswordTextInputLayout;
     private View view;
+    private TextInputLayout passwordTextInputLayout, confirmPasswordTextInputLayout;
+    private ArrayList<TextView> passwordComplexityRequirementsTextViews;
 
     // TODO remove and replace with proper placeholder
     private String tempPassword = "aD@ffff1";
@@ -35,11 +39,18 @@ public class RegisterStage2Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_user_register_stage2, container, false);
+        view = inflater.inflate(R.layout.fragment_user_register_stage_2, container, false);
         passwordTextInputLayout = view.findViewById(R.id.fragment_user_register_stage2_password_textInputLayout);
         confirmPasswordTextInputLayout = view.findViewById(R.id.fragment_user_register_stage2_confirmPassword_textInputLayout);
         passwordTextInputLayout.getEditText().setText(tempPassword);
         confirmPasswordTextInputLayout.getEditText().setText(tempConfirmPassword);
+
+        passwordComplexityRequirementsTextViews = new ArrayList<>();
+        passwordComplexityRequirementsTextViews.add((TextView) view.findViewById(R.id.fragment_user_register_password_complexity_digit_TextView));
+        passwordComplexityRequirementsTextViews.add((TextView) view.findViewById(R.id.fragment_user_register_password_complexity_lowercase_letter_TextView));
+        passwordComplexityRequirementsTextViews.add((TextView) view.findViewById(R.id.fragment_user_register_password_complexity_uppercase_letter_TextView));
+        passwordComplexityRequirementsTextViews.add((TextView) view.findViewById(R.id.fragment_user_register_password_complexity_special_char_TextView));
+        passwordComplexityRequirementsTextViews.add((TextView) view.findViewById(R.id.fragment_user_register_password_complexity_min_length_TextView));
 
         passwordTextInputLayout.setEndIconOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +71,25 @@ public class RegisterStage2Fragment extends Fragment {
                     passwordTextInputLayout.getEditText().setInputType(passwordVisible);
                     confirmPasswordTextInputLayout.getEditText().setInputType(passwordVisible);
                 }
+            }
+        });
+
+        Objects.requireNonNull(passwordTextInputLayout.getEditText()).addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // clear any previous errors for the input layouts
+                passwordTextInputLayout.setError(null);
+                confirmPasswordTextInputLayout.setError(null);
+                validatePasswordComplexity(s.toString(), passwordComplexityRequirementsTextViews);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
             }
         });
 
@@ -85,24 +115,9 @@ public class RegisterStage2Fragment extends Fragment {
         String password = passwordTextInputLayout.getEditText().getText().toString();
         String confirmPassword = confirmPasswordTextInputLayout.getEditText().getText().toString();
 
-        // TODO check password complexity as user types in the input field.
-        // TODO isValidPassword returns an array resource identifiers, access them by getResources().getString(ResID)
-        // TODO remember to include the first message below manually as it is not returned by the method itself
-        // TODO see R.string.PASSWORD_COMPLEXITY_SHOULD_CONTAIN
-
-        ArrayList<Integer> errors = isValidPassword(password);
-
-        if (!errors.isEmpty()) {
+        if (!validatePasswordComplexity(password, passwordComplexityRequirementsTextViews)) {
             passwordTextInputLayout.setError(getContext().getString(R.string.ERROR_PASSWORD_DOES_NOT_MEET_COMPLEXITY_REQUIREMENTS));
             confirmPasswordTextInputLayout.setError(null);
-
-            // TODO this is for debug only, to show how the isValidPassword() works
-            Toast.makeText(getContext(), getResources().getString(R.string.ERROR_PASSWORD_COMPLEXITY_SHOULD_CONTAIN), Toast.LENGTH_SHORT).show();
-            for (Integer error : errors) {
-                // TODO implement how you will display the errors to the user.
-                // TODO remove debug output
-                Toast.makeText(getContext(), getResources().getString(error), Toast.LENGTH_SHORT).show();
-            }
             return false;
         } else if (!password.equals(confirmPassword)) {
             passwordTextInputLayout.setError(null);
@@ -113,7 +128,6 @@ public class RegisterStage2Fragment extends Fragment {
             confirmPasswordTextInputLayout.setError(null);
             return true;
         }
-
 
     }
 
