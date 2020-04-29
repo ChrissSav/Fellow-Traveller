@@ -42,7 +42,7 @@
             app:layout_constraintTop_toBottomOf="@+id/RegisterStage2Fragment_textView4" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/RegisterStage2Fragment_textInputLayout_password_1"
+            android:id="@+id/fragment_user_register_stage2_password_textInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -65,12 +65,13 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/RegisterStage2Fragment_textInputLayout_password_2"
+            android:id="@+id/fragment_user_register_stage2_confirmPassword_textInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             app:counterEnabled="true"
             app:counterMaxLength="32"
+            app:endIconMode="none"
             app:hintAnimationEnabled="false"
             app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +97,7 @@
             android:textColor="#000"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/RegisterStage2Fragment_textInputLayout_password_1" />
+            app:layout_constraintTop_toBottomOf="@+id/fragment_user_register_stage2_password_textInputLayout" />
 
         <TextView
             android:id="@+id/RegisterStage2Fragment_textView7"
@@ -108,6 +109,6 @@
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/RegisterStage2Fragment_textInputLayout_password_2" />
+            app:layout_constraintTop_toBottomOf="@+id/fragment_user_register_stage2_confirmPassword_textInputLayout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

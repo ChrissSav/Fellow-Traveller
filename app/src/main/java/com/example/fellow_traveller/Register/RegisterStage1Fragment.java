@@ -28,7 +28,7 @@ public class RegisterStage1Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_register_stage_1, container, false);
+        view = inflater.inflate(R.layout.fragment_user_register_stage_1, container, false);
         textInputLayoutEmail = view.findViewById(R.id.RegisterStage1Fragment_textInputLayout_email);
 
         return view;

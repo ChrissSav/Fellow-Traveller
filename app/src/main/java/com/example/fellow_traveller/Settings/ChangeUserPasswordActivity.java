@@ -152,7 +152,7 @@ public class ChangeUserPasswordActivity extends AppCompatActivity {
         oldPasswordInputLayout.setEndIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // gets current  visibility of the input field
+                // gets current visibility of the input field
                 int oldPasswordEditTextVisibility = oldPasswordInputLayout.getEditText().getInputType();
 
                 // indicates whether text on the password field is visible or hidden
