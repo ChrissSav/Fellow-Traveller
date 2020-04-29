@@ -155,7 +155,7 @@ public class EditCarSettingsActivity extends AppCompatActivity {
                 .setAction("ΝΑΙ", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        new FellowTravellerAPI(globalClass).deleteCars(carModel.getId(), new CarDeleteCallBack() {
+                        new FellowTravellerAPI(globalClass).deleteCar(carModel.getId(), new CarDeleteCallBack() {
                             @Override
                             public void onSuccess(StatusHandleModel status) {
                                 Toast.makeText(EditCarSettingsActivity.this, "Επιτυχής διαγραφή", Toast.LENGTH_SHORT).show();

@@ -140,7 +140,7 @@ public class FellowTravellerAPI {
                     return;
                 }
 
-                statusCallBack.onSuccess(context.getResources().getString(R.string.success));
+                statusCallBack.onSuccess(context.getResources().getString(R.string.PASSWORD_CHANGED_SUCCESSFULLY));
             }
 
             @Override
@@ -244,7 +244,7 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void deleteCars(int car_id, final CarDeleteCallBack carDeleteCallBack) {
+    public static void deleteCar(int car_id, final CarDeleteCallBack carDeleteCallBack) {
         retrofitAPIEndpoints.deleteUserCar(car_id).enqueue(new Callback<StatusHandleModel>() {
             @Override
             public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
