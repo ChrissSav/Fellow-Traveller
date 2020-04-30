@@ -36,7 +36,6 @@ public class MaterialDatePickerBuilder {
 
         // see if we have to return either a rangePicker or a datePicker
         if (isRangePicker) {
-            //MaterialDatePicker
             builder = MaterialDatePicker.Builder.dateRangePicker();
             builder.setTitleText("Επιλέξτε το εύρος των ημερών");
         } else {
