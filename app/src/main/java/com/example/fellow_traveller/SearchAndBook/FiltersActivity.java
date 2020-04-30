@@ -21,7 +21,9 @@ import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.interfaces.OnSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar;
+import com.example.fellow_traveller.ClientAPI.Utils;
 import com.example.fellow_traveller.R;
+import com.example.fellow_traveller.Utils.MaterialDatePickerBuilder;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -222,6 +224,11 @@ public class FiltersActivity extends AppCompatActivity {
     }
 
     public void initializeCalendar() {  //<----------Initialize Calender------------->
+          // get builder from utility class
+//        MaterialDatePicker.Builder builder = MaterialDatePickerBuilder.buildMaterialDatePicker(true);
+//        MaterialDatePicker<Pair<Long, Long>> materialDatePicker = builder.build();
+
+        // TODO you can replace from here
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
         calendar.clear();
 
@@ -253,6 +260,7 @@ public class FiltersActivity extends AppCompatActivity {
 
 
         final MaterialDatePicker<Pair<Long, Long>> materialDatePicker = builder.build();
+        // TODO to here by uncommenting the first two lines.
 
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
