@@ -8,7 +8,6 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +30,7 @@ public class AddCarSettingsActivity extends AppCompatActivity {
     private GlobalClass globalClass;
     private String previousWord;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +52,6 @@ public class AddCarSettingsActivity extends AppCompatActivity {
 
                 if (checkBrand() && checkModel() && checkPlate() && checkColor())
                     newRegisterCar();
-            }
-        });
 
 
             }

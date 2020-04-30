@@ -265,6 +265,7 @@ public class FiltersActivity extends AppCompatActivity {
             }
         });
 
+
         materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>() {
             @Override
             public void onPositiveButtonClick(Pair<Long, Long> selection) {

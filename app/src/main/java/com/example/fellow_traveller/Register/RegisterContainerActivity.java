@@ -119,12 +119,14 @@ public class RegisterContainerActivity extends AppCompatActivity {
         String email = registerStage1Fragment.getEmail();
         String password = registerStage2Fragment.getPassword();
         String name = registerStage3Fragment.GetName();
-        String surname = registerStage3Fragment.GetSurName();
+        final String surname = registerStage3Fragment.GetSurName();
 
         new FellowTravellerAPI(globalClass).userRegister(name, surname, email, password, userPhone, new UserRegisterCallback() {
             @Override
             public void onSuccess(UserAuthModel user) {
+
                 Save(user);
+                firebaseRegister(String.valueOf(user.getId()),user.getName(), user.getSurname());
             }
 
             @Override

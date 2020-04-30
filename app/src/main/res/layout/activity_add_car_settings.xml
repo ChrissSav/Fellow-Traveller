@@ -311,7 +311,7 @@
                 app:layout_constraintTop_toTopOf="@id/color_image_car_settings" />
 
             <Button
-                android:id="@+id/AddCarSettingsActivity_button_add"
+                android:id="@+id/EditCarSettingsActivity_button_add"
                 android:layout_width="0dp"
                 android:layout_height="55dp"
                 android:layout_marginStart="25dp"

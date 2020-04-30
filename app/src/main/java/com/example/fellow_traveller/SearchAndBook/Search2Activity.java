@@ -19,13 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.ClientAPI.RetrofitAPIEndpoints;
-import com.example.fellow_traveller.ClientAPI.RetrofitAPIEndpoints;
-import com.example.fellow_traveller.PlaceAutocomplete.AddLocationActivity;
-import com.example.fellow_traveller.PlaceAutocomplete.PlaceAPiModel;
-import com.example.fellow_traveller.PlaceAutocomplete.PlaceAdapter;
-import com.example.fellow_traveller.PlaceAutocomplete.PredictionsModel;
-import com.example.fellow_traveller.PlaceAutocomplete.PredictionsModel;
-import com.example.fellow_traveller.PlacesAPI.PlaceAutocompleteAdapter;
+
 
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.PlacesAPI.CallBack.PlaceApiCallBack;
@@ -48,7 +42,7 @@ public class Search2Activity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<PredictionsModel> places_list;
     private RetrofitAPIEndpoints retrofitService;
-    private Retrofit retrofit;
+
     private GlobalClass globalClass;
 
     @Override
