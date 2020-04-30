@@ -1,5 +1,6 @@
 package com.example.fellow_traveller.NewOffer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,10 +19,13 @@ import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
+import com.example.fellow_traveller.SuccessActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static com.example.fellow_traveller.Util.InputValidation.dateTimeToTimestamp;
 
 public class NewOfferActivity extends AppCompatActivity {
     private final int stages = 6;
@@ -169,8 +173,7 @@ public class NewOfferActivity extends AppCompatActivity {
 
         String date = newOfferStage2Fragment.getDate();
         String time = newOfferStage2Fragment.getTime();
-        // TODO get a boolean value from your fragment, either hasPet = true or false in order to remove the error from line 184
-        String pet = newOfferStage3Fragment.getPets();
+        Boolean pet = newOfferStage3Fragment.getPetsBoolean();
         int max_seats = Integer.parseInt(newOfferStage3Fragment.getSeats());
 
 
@@ -188,10 +191,10 @@ public class NewOfferActivity extends AppCompatActivity {
         new FellowTravellerAPI(globalClass).createTrip(trip, new TripRegisterCallBack() {
             @Override
             public void onSuccess(StatusHandleModel status) {
-                // TODO take generic message from a resource file.
-                Toast.makeText(NewOfferActivity.this, "Επιτυχείς καταχώρηση", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(NewOfferActivity.this, SuccessActivity.class);
+                intent.putExtra("title",getResources().getString(R.string.success_add));
+                startActivity(intent);
                 finish();
-                onBackPressed();
             }
 
             @Override
@@ -203,16 +206,4 @@ public class NewOfferActivity extends AppCompatActivity {
 
     }
 
-    // TODO make this a utility method
-    public long dateTimeToTimestamp(String date, String time) {
-        long p = Long.parseLong("0");
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-            Date parsedDate = dateFormat.parse(date + " " + time);
-            return parsedDate.getTime() / 1000;
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return p;
-    }
 }

@@ -72,10 +72,10 @@ public class AddLocationActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_SEARCH) {
                     if (!editText.getText().toString().trim().isEmpty()) {
-                        Intent resultIntent = new Intent();
-                        resultIntent.putExtra("result", editText.getText().toString());
-                        setResult(RESULT_OK, resultIntent);
-                        finish();
+//                        Intent resultIntent = new Intent();
+//                        resultIntent.putExtra("result", editText.getText().toString());
+//                        setResult(RESULT_OK, resultIntent);
+//                        finish();
 
                     } else {
                         editText.setError("Δεν έχετε επιλέξει την αφετηρία σας");
@@ -101,6 +101,10 @@ public class AddLocationActivity extends AppCompatActivity {
             public void onItemClick(int position) {
                 // SetNotificationsRead(mExampleList.get(position).getId(),position);
                 editText.setText(places_list.get(position).getDescription());
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("result", editText.getText().toString());
+                setResult(RESULT_OK, resultIntent);
+                finish();
 
 
             }

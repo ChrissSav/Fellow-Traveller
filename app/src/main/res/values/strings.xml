@@ -263,6 +263,8 @@
     <string name="PASSWORD_CHANGED_SUCCESSFULLY">Επιτυχής αλλαγή κωδικού.</string>
     <string name="EMAIL_PLACEHOLDER">user@example.com</string>
     <string name="activity_user_settings_account_settings_text_label">Ρυθμίσεις λογαριασμού</string>
+    <string name="success_add">Επιτυχής καταχώρηση!</string>
+
     <integer name="anim_duration">250</integer>
 
 

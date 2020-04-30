@@ -18,7 +18,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Reviews.WriteReviewActivity"></activity>
+        <activity android:name=".SuccessActivity"></activity>
+        <activity android:name=".Reviews.WriteReviewActivity" />
         <activity android:name=".Reviews.ReviewsActivity" />
         <activity android:name=".NewOffer.AddLocationActivity" />
         <activity android:name=".Settings.EditCarSettingsActivity" />

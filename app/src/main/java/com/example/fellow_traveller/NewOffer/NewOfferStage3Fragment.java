@@ -368,6 +368,11 @@ public class NewOfferStage3Fragment extends Fragment {
         return buttonPet.getText().toString();
     }
 
+    public Boolean getPetsBoolean() {
+
+        return buttonPet.getText().toString().equals("Επιτρέπω");
+    }
+
     public String getCar() {
         return buttonCar.getText().toString();
     }

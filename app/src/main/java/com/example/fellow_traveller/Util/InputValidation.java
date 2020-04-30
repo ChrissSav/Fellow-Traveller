@@ -3,7 +3,10 @@ package com.example.fellow_traveller.Util;
 import android.graphics.Typeface;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 public class InputValidation {
@@ -78,5 +81,17 @@ public class InputValidation {
         }
 
         return isValidPass;
+    }
+
+    public static long dateTimeToTimestamp(String date, String time) {
+        long p = Long.parseLong("0");
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+            Date parsedDate = dateFormat.parse(date + " " + time);
+            return parsedDate.getTime() / 1000;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return p;
     }
 }
