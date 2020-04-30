@@ -1,4 +1,4 @@
-package com.example.fellow_traveller.SearchAndBook;
+package com.example.fellow_traveller.Utils;
 
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
