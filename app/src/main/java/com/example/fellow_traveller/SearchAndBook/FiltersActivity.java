@@ -1,8 +1,5 @@
 package com.example.fellow_traveller.SearchAndBook;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.util.Pair;
-
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -17,6 +14,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.util.Pair;
 
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.interfaces.OnSeekbarChangeListener;
@@ -33,26 +32,22 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 public class FiltersActivity extends AppCompatActivity {
-    private CrystalSeekbar rangeBar;
-    private TextView rangeBarTV;
-    private Button  dateButton, priceButton, seatsButton, resetButton, applyButton;
-    private ImageButton closeButton;
-    private Spinner sortSpinner;
-    private int priceStartFinal=0, priceEndFinal=200, rangeFinal = 0, seatsFinal = 0, bagsFinal = 0;
-    private long startDateFinal, endDateFinal;
-    private final long five_years_forward = (1000*60*60*24*365*5);
-    boolean dateValidator = false, priceValidator = false, rangeValidator = false, seatsValidator = false, bagsValidator = false;
-
-
-    private ArrayList<PaymentItem> petsChoicesList;
-    private PaymentAdapter mAdapter;
-    private Spinner petsSpinner;
-
+    private final long five_years_forward = (1000 * 60 * 60 * 24 * 365 * 5);
     private final String CLICK_COLOR = "#1C1C1C";
     private final String TITLE_PET = "Επέλεξε ...            ";
     private final String TITLE_SEAT = "Θέσεις ...";
     private final String TITLE_BAGS = "Αποσκεύες ...";
-
+    boolean dateValidator = false, priceValidator = false, rangeValidator = false, seatsValidator = false, bagsValidator = false;
+    private CrystalSeekbar rangeBar;
+    private TextView rangeBarTV;
+    private Button dateButton, priceButton, seatsButton, resetButton, applyButton;
+    private ImageButton closeButton;
+    private Spinner sortSpinner;
+    private int priceStartFinal = 0, priceEndFinal = 200, rangeFinal = 0, seatsFinal = 0, bagsFinal = 0;
+    private long startDateFinal, endDateFinal;
+    private ArrayList<PaymentItem> petsChoicesList;
+    private PaymentAdapter mAdapter;
+    private Spinner petsSpinner;
     private String petTitle = TITLE_PET;
     private String seatTitle = TITLE_SEAT;
     private String bagsTitle = TITLE_BAGS;
@@ -87,7 +82,6 @@ public class FiltersActivity extends AppCompatActivity {
         sortSpinner.setAdapter(adapter);
 
 
-
         openDialogForSeats();
         openDialogForBags();
         initializeCalendar();
@@ -97,17 +91,16 @@ public class FiltersActivity extends AppCompatActivity {
         rangeBar.setOnSeekbarChangeListener(new OnSeekbarChangeListener() {
             @Override
             public void valueChanged(Number value) {
-                if(value.intValue() == 0){
+                if (value.intValue() == 0) {
                     rangeBarTV.setText("Εμφάνιση όλων");
                     rangeFinal = value.intValue();
-                }else{
+                } else {
                     rangeBarTV.setText("Εύρος " + value + " χλμ");
                     rangeFinal = value.intValue();
                 }
 
             }
         });
-
 
 
         priceButton.setOnClickListener(new View.OnClickListener() {
@@ -120,11 +113,12 @@ public class FiltersActivity extends AppCompatActivity {
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(FiltersActivity.this, "Ημερομηνία " + String.valueOf(startDateFinal) + "-" + String.valueOf(endDateFinal) + "Τιμή " + String.valueOf(priceStartFinal) + "-" + String.valueOf(priceEndFinal) + String.valueOf(rangeFinal) + String.valueOf(seatsFinal) + String.valueOf(bagsFinal), Toast.LENGTH_SHORT).show();
+                Toast.makeText(FiltersActivity.this, "Ημερομηνία " + startDateFinal + "-" + endDateFinal + "Τιμή " + priceStartFinal + "-" + priceEndFinal + rangeFinal + seatsFinal + bagsFinal, Toast.LENGTH_SHORT).show();
             }
         });
 
     }
+
     public void openDialogForSeats() {
 
         //get Elements
@@ -148,6 +142,7 @@ public class FiltersActivity extends AppCompatActivity {
         });
 
     }
+
     public void openDialogForBags() {
 
         //get Elements
@@ -173,30 +168,30 @@ public class FiltersActivity extends AppCompatActivity {
         });
 
 
-
     }
+
     public void openDialogForPrice() {
 
         final Dialog myDialog = new Dialog(FiltersActivity.this, R.style.Theme_Dialog);
         myDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.setContentView(R.layout.filter_price_range_dialog);
-        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         myDialog.setCancelable(true);
         myDialog.setCanceledOnTouchOutside(true);
 
         // get elements
-        final TextView tvMin = (TextView) myDialog.findViewById(R.id.filter_price_start);
-        final TextView tvMax = (TextView) myDialog.findViewById(R.id.filter_price_end);
-        final Button selectButton = (Button) myDialog.findViewById(R.id.filter_price_button);
-        final CrystalRangeSeekbar rangeSeekbar = (CrystalRangeSeekbar) myDialog.findViewById(R.id.rangeSeekbar1);
+        final TextView tvMin = myDialog.findViewById(R.id.filter_price_start);
+        final TextView tvMax = myDialog.findViewById(R.id.filter_price_end);
+        final Button selectButton = myDialog.findViewById(R.id.filter_price_button);
+        final CrystalRangeSeekbar rangeSeekbar = myDialog.findViewById(R.id.rangeSeekbar1);
 
         // set listener
         rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
             @Override
             public void valueChanged(Number minValue, Number maxValue) {
-                tvMin.setText("€" + String.valueOf(minValue));
-                tvMax.setText("€" + String.valueOf(maxValue));
+                tvMin.setText("€" + minValue);
+                tvMax.setText("€" + maxValue);
                 priceStartFinal = minValue.intValue();
                 priceEndFinal = maxValue.intValue();
             }
@@ -204,28 +199,29 @@ public class FiltersActivity extends AppCompatActivity {
         selectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                priceButton.setText("€" + String.valueOf(priceStartFinal) + " - " + "€" + String.valueOf(priceEndFinal));
+                priceButton.setText("€" + priceStartFinal + " - " + "€" + priceEndFinal);
                 myDialog.dismiss();
-                Toast.makeText(FiltersActivity.this, "Start: " + String.valueOf(priceStartFinal) + " End: " + String.valueOf(priceEndFinal), Toast.LENGTH_SHORT).show();
+                Toast.makeText(FiltersActivity.this, "Start: " + priceStartFinal + " End: " + priceEndFinal, Toast.LENGTH_SHORT).show();
             }
         });
         myDialog.show();
 
 
-
     }
+
     public void Increase(TextView textView) {
         int current_num = Integer.parseInt(textView.getText().toString());
         textView.setText((current_num + 1) + "");
 
     }
+
     public void Decrease(TextView textView) {
         int current_num = Integer.parseInt(textView.getText().toString());
         if (current_num > 0)
             textView.setText((current_num - 1) + "");
     }
 
-    public void initializeCalendar(){  //<----------Initialize Calender------------->
+    public void initializeCalendar() {  //<----------Initialize Calender------------->
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
         calendar.clear();
 
@@ -256,7 +252,7 @@ public class FiltersActivity extends AppCompatActivity {
         builder.setCalendarConstraints(constraintBuilder.build());
 
 
-        final MaterialDatePicker<Pair<Long,Long>> materialDatePicker = builder.build();
+        final MaterialDatePicker<Pair<Long, Long>> materialDatePicker = builder.build();
 
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -270,13 +266,12 @@ public class FiltersActivity extends AppCompatActivity {
             public void onPositiveButtonClick(Pair<Long, Long> selection) {
 
 
-
                 dateButton.setText(materialDatePicker.getHeaderText());
 
                 //Parse the selections
                 startDateFinal = selection.first;
                 endDateFinal = selection.second;
-                Toast.makeText(FiltersActivity.this, "Start: " + String.valueOf(startDateFinal) + " End: " + String.valueOf(endDateFinal), Toast.LENGTH_SHORT).show();
+                Toast.makeText(FiltersActivity.this, "Start: " + startDateFinal + " End: " + endDateFinal, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -290,10 +285,10 @@ public class FiltersActivity extends AppCompatActivity {
                 startDateFinal = 0;
                 endDateFinal = 0;
                 //Reset selections
-                Pair setDefault = new Pair(null,null);
+                Pair setDefault = new Pair(null, null);
                 builder.setSelection(setDefault);
                 builder.build();
-                Toast.makeText(FiltersActivity.this, "Start: " + String.valueOf(startDateFinal) + " End: " + String.valueOf(endDateFinal), Toast.LENGTH_SHORT).show();
+                Toast.makeText(FiltersActivity.this, "Start: " + startDateFinal + " End: " + endDateFinal, Toast.LENGTH_SHORT).show();
 
             }
         });
