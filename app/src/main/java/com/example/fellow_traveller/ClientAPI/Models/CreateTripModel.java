@@ -16,7 +16,7 @@ public class CreateTripModel {
     private Long timestamp;
     @SerializedName("pet")
     @Expose
-    private String pet;
+    private boolean hasPet;
     @SerializedName("max_seats")
     @Expose
     private Integer maxSeats;
@@ -33,11 +33,13 @@ public class CreateTripModel {
     @Expose
     private Integer carId;
 
-    public CreateTripModel(String dest_from, String dest_to, String pet, int max_seats, int max_bags, int car_id, float price, Long timestamp, String msg) {
+    public CreateTripModel(String destFrom, String destTo, Long timestamp,
+                           boolean hasPet, Integer maxSeats, Integer maxBags,
+                           String msg, Float price, Integer carId) {
         this.destFrom = destFrom;
         this.destTo = destTo;
         this.timestamp = timestamp;
-        this.pet = pet;
+        this.hasPet = hasPet;
         this.maxSeats = maxSeats;
         this.maxBags = maxBags;
         this.msg = msg;

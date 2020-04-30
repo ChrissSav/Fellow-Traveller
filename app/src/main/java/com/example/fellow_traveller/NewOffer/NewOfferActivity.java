@@ -169,6 +169,7 @@ public class NewOfferActivity extends AppCompatActivity {
 
         String date = newOfferStage2Fragment.getDate();
         String time = newOfferStage2Fragment.getTime();
+        // TODO get a boolean value from your fragment, either hasPet = true or false in order to remove the error from line 184
         String pet = newOfferStage3Fragment.getPets();
         int max_seats = Integer.parseInt(newOfferStage3Fragment.getSeats());
 
@@ -179,29 +180,30 @@ public class NewOfferActivity extends AppCompatActivity {
         Float price = Float.parseFloat(newOfferStage4Fragment.getPrice());
         String msg = newOfferStage5Fragment.getMsg();
 
-        // Creates the trip object
-        CreateTripModel trip = new CreateTripModel(dest_from, dest_to, pet, max_seats, max_bags, car_id,
-                price, dateTimeToTimestamp(date, time), msg);
+        // Create trip object from model
+        CreateTripModel trip = new CreateTripModel(dest_from, dest_to, dateTimeToTimestamp(date, time),
+                pet, max_seats, max_bags,
+                msg, price, car_id);
 
         new FellowTravellerAPI(globalClass).createTrip(trip, new TripRegisterCallBack() {
-                    @Override
-                    public void onSuccess(StatusHandleModel status) {
-                        // TODO take generic message from a resource file.
-                        Toast.makeText(NewOfferActivity.this, "Επιτυχείς καταχώρηση", Toast.LENGTH_SHORT).show();
-                        finish();
-                        onBackPressed();
+            @Override
+            public void onSuccess(StatusHandleModel status) {
+                // TODO take generic message from a resource file.
+                Toast.makeText(NewOfferActivity.this, "Επιτυχείς καταχώρηση", Toast.LENGTH_SHORT).show();
+                finish();
+                onBackPressed();
+            }
 
-                    }
+            @Override
+            public void onFailure(String errorMsg) {
+                Toast.makeText(NewOfferActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
 
-                    @Override
-                    public void onFailure(String errorMsg) {
-                        Toast.makeText(NewOfferActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
-
-                    }
-                });
+            }
+        });
 
     }
 
+    // TODO make this a utility method
     public long dateTimeToTimestamp(String date, String time) {
         long p = Long.parseLong("0");
         try {
