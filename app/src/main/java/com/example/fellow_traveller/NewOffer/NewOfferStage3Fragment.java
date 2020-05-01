@@ -2,8 +2,10 @@ package com.example.fellow_traveller.NewOffer;
 
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -233,21 +236,28 @@ public class NewOfferStage3Fragment extends Fragment {
     }
 
     public void openDialogForBags() {
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
-        View mView = getLayoutInflater().inflate(R.layout.number_choose, null);
-        Button button = mView.findViewById(R.id.choose_num_button);
-        ImageButton increase = mView.findViewById(R.id.choose_num_imageButton_plus);
-        ImageButton decrease = mView.findViewById(R.id.choose_num_imageButton_minus);
-        final TextView textView_number = mView.findViewById(R.id.choose_num_textView_number);
-        TextView textView_title = mView.findViewById(R.id.choose_num_textView_title);
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.number_choose);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
+
+
+        //AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+        //View mView = getLayoutInflater().inflate(R.layout.number_choose, null);
+        Button button = dialog.findViewById(R.id.choose_num_button);
+        ImageButton increase = dialog.findViewById(R.id.choose_num_imageButton_plus);
+        ImageButton decrease = dialog.findViewById(R.id.choose_num_imageButton_minus);
+        final TextView textView_number = dialog.findViewById(R.id.choose_num_textView_number);
+        TextView textView_title = dialog.findViewById(R.id.choose_num_textView_title);
         if (!buttonΒags.getText().equals(TITLE_BAGS)) {
             textView_number.setText(buttonΒags.getText().toString());
         }
 
         textView_title.setText("Καθόρισε τον αριθμό των αποσκεύων");
-        mBuilder.setView(mView);
+       // mBuilder.setView(mView);
 
-        final AlertDialog dialog = mBuilder.create();
+       // final AlertDialog dialog = mBuilder.create();
         dialog.show();
 
         button.setOnClickListener(new View.OnClickListener() {

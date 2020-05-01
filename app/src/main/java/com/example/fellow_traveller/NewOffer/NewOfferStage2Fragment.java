@@ -9,6 +9,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import android.view.ViewGroup;
 import com.example.fellow_traveller.Pickers.DatePickerDialogCustom;
 import com.example.fellow_traveller.Pickers.TimePickerDialogCustom;
 import com.example.fellow_traveller.R;
+import com.example.fellow_traveller.Util.MaterialDatePickerBuilder;
+import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -33,7 +36,9 @@ public class NewOfferStage2Fragment extends Fragment {
     private String time = "";
     private DatePickerDialog.OnDateSetListener mDateListener;
     private TimePickerDialog.OnTimeSetListener mTimeListener;
-    private DialogFragment timeDialog,dateDialog;
+   // private DialogFragment timeDialog, dateDialog;
+    private MaterialDatePicker materialDatePicker;
+    private MaterialDatePicker.Builder builder;
 
     public NewOfferStage2Fragment() {
 
@@ -51,26 +56,30 @@ public class NewOfferStage2Fragment extends Fragment {
         textInputLayout_time.getEditText().setText(time);
 
 
-        timeDialog = new TimePickerDialogCustom(textInputLayout_time.getEditText());
-        dateDialog = new DatePickerDialogCustom(textInputLayout_date.getEditText());
+        //timeDialog = new TimePickerDialogCustom(textInputLayout_time.getEditText());
+        //dateDialog = new DatePickerDialogCustom(textInputLayout_date.getEditText());
 
+
+         builder = MaterialDatePickerBuilder.buildMaterialDatePicker(false);
+         materialDatePicker = builder.build();
 
 
         textInputLayout_date.getEditText().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dateDialog.show(getFragmentManager(),"dateDialog");
+               // dateDialog.show(getFragmentManager(), "dateDialog");
+                materialDatePicker.show(getActivity().getSupportFragmentManager(), "DATE_PICKxER");
+
 
             }
         });
-
 
 
         textInputLayout_time.getEditText().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                timeDialog.show(getFragmentManager(),"timeDialog");
+              //  timeDialog.show(getFragmentManager(), "timeDialog");
 
             }
         });
@@ -110,7 +119,7 @@ public class NewOfferStage2Fragment extends Fragment {
         }
 
         Long timestamp = currentTimeStamp();
-        if(!(timestamp - getTimeStamp() <= 120)){
+        if (!(timestamp - getTimeStamp() <= 120)) {
             createSnackBar(getActivity().getResources().getString(R.string.ERROR_TIME_DATE_VALIDATION));
             return false;
         }
@@ -129,25 +138,20 @@ public class NewOfferStage2Fragment extends Fragment {
 
         String date_temp = textInputLayout_date.getEditText().getText().toString();
         String time_temp = textInputLayout_time.getEditText().getText().toString();
-        return  dateTimeToTimestamp(date_temp,time_temp);
+        return dateTimeToTimestamp(date_temp, time_temp);
     }
 
 
-    public void createSnackBar(String msg){
+    public void createSnackBar(String msg) {
         Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
                 .setActionTextColor(getResources().getColor(R.color.colorPrimary))
                 .show();
     }
 
 
-
-    public Long currentTimeStamp(){
+    public Long currentTimeStamp() {
         return System.currentTimeMillis() / 1000L;
     }
-
-
-
-
 
 
 }

@@ -20,8 +20,8 @@ import static android.app.Activity.RESULT_OK;
 public class NewOfferStage1Fragment extends Fragment {
     private View view;
     private TextInputLayout textInputLayout_from, textInputLayout_to;
-    private String from = "";
-    private String to = "";
+    private String from = "fefef";
+    private String to = "efefef";
     private int txt_click = 0;
 
     public NewOfferStage1Fragment() {

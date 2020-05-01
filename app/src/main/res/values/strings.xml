@@ -266,6 +266,7 @@
     <string name="success_add">Επιτυχής καταχώρηση!</string>
 
     <integer name="anim_duration">250</integer>
+    <dimen name="space_between_lines">10</dimen>
 
 
 </resources>
