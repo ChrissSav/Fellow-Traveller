@@ -62,7 +62,6 @@ public class InputValidation {
         // validates password complexity while user is typing in the password input field
         ArrayList<Integer> errors = isValidPassword(password);
         TextView complexityRequirementTextView;
-        Boolean isValidPass = null;
 
         for (int i = 0; i < 5; i++) {
             // extract TextView from the array
@@ -71,17 +70,13 @@ public class InputValidation {
             if (!errors.isEmpty() && errors.contains(i)) {
                 // current TextView should be changed to indicate there's a unfulfilled complexity requirement
                 complexityRequirementTextView.setTypeface(complexityRequirementTextView.getTypeface(), Typeface.BOLD_ITALIC);
-                // current input doesn't password doesn't pass complexity requirements yet
-                isValidPass = false;
             } else {
                 // clear any error that was left from the previous check and isn't needed anymore
                 complexityRequirementTextView.setTypeface(complexityRequirementTextView.getTypeface(), Typeface.ITALIC);
-                // input passes complexity check
-                isValidPass = true;
             }
         }
 
-        return isValidPass;
+        return errors.isEmpty();
     }
 
 }
