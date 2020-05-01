@@ -21,8 +21,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="What's your name ?"
-            style="@style/titleStyle"
             android:layout_marginStart="16dp"
             android:text="Πώς ονομάζεσαι ;"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,9 +32,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Name"
-            style="@style/labelStyle"
-            app:layout_constraintStart_toStartOf="parent"
             android:text="Όνομα"
             app:layout_constraintStart_toStartOf="@+id/RegisterStage3Fragment_textView4"
             app:layout_constraintTop_toBottomOf="@+id/RegisterStage3Fragment_textView4" />
@@ -64,9 +59,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="39dp"
-            android:text="Surname"
-            style="@style/labelStyle"
-            app:layout_constraintStart_toStartOf="parent"
             android:text="Έπωνυμο"
             app:layout_constraintStart_toStartOf="@+id/RegisterStage3Fragment_textView4"
             app:layout_constraintTop_toBottomOf="@+id/RegisterStage3Fragment_textInputLayout_name" />
