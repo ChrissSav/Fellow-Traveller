@@ -13,6 +13,7 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@color/white_opaque</item>
         <item name="android:colorBackground">@color/white_opaque</item>
+        <item name="android:overScrollMode">never</item>
 
 
         <!-- New MaterialComponents attributes. -->

@@ -11,10 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:fontFamily="@font/firasans_medium"
         android:text="Choose number of bags"
-        android:textColor="@color/profile"
-        android:textSize="16sp"
+        style="@style/dialogTitleStyle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,8 +42,8 @@
 
         <ImageButton
             android:id="@+id/choose_num_imageButton_minus"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginEnd="64dp"
             android:background="?android:selectableItemBackgroundBorderless"
             android:padding="5dp"
@@ -57,8 +55,8 @@
 
         <ImageButton
             android:id="@+id/choose_num_imageButton_plus"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginStart="64dp"
             android:layout_marginTop="4dp"
             android:background="?android:selectableItemBackgroundBorderless"
@@ -79,7 +77,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
         android:background="@drawable/buttons_background_blue"
-        android:text="Επλογή"
+        android:text="Επιλογή"
         android:textAllCaps="false"
         android:textColor="#fff"
         android:textSize="18sp"
