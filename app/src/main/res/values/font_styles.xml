@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="titleStyle">
+        <item name="android:fontFamily">@font/firasans_light</item>
+        <item name="android:textColor">@color/profile</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="labelStyle">
+        <item name="android:fontFamily">@font/firasans_medium</item>
+        <item name="android:textColor">@color/profile</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+</resources>
