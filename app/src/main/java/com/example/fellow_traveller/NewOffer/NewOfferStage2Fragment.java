@@ -3,27 +3,24 @@ package com.example.fellow_traveller.NewOffer;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
-import android.widget.TimePicker;
 
+import com.example.fellow_traveller.Pickers.DatePickerDialogCustom;
+import com.example.fellow_traveller.Pickers.TimePickerDialogCustom;
 import com.example.fellow_traveller.R;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 import static com.example.fellow_traveller.Util.InputValidation.dateTimeToTimestamp;
 
@@ -36,9 +33,10 @@ public class NewOfferStage2Fragment extends Fragment {
     private String time = "";
     private DatePickerDialog.OnDateSetListener mDateListener;
     private TimePickerDialog.OnTimeSetListener mTimeListener;
+    private DialogFragment timeDialog,dateDialog;
 
     public NewOfferStage2Fragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -52,79 +50,31 @@ public class NewOfferStage2Fragment extends Fragment {
         textInputLayout_date.getEditText().setText(date);
         textInputLayout_time.getEditText().setText(time);
 
+
+        timeDialog = new TimePickerDialogCustom(textInputLayout_time.getEditText());
+        dateDialog = new DatePickerDialogCustom(textInputLayout_date.getEditText());
+
+
+
         textInputLayout_date.getEditText().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dialog = new DatePickerDialog(
-                        getActivity(),
-                        android.R.style.Theme_Holo_Dialog_MinWidth,
-                        mDateListener, year, month, day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
-                dialog.show();
+                dateDialog.show(getFragmentManager(),"dateDialog");
 
             }
         });
 
 
-        mDateListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
-                String mon, d;
-                if (month <= 9) {
-                    mon = "0" + month;
-                } else {
-                    mon = month + "";
-                }
-                if (day <= 9) {
-                    d = "0" + day;
-                } else {
-                    d = day + "";
-                }
-                String ddate = d + "/" + mon + "/" + year;
-                textInputLayout_date.getEditText().setText(ddate + "");
-            }
-        };
 
         textInputLayout_time.getEditText().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Calendar cal = Calendar.getInstance();
-                int hour = cal.get(Calendar.HOUR_OF_DAY);
-                int minute = cal.get(Calendar.MINUTE);
-                TimePickerDialog dialog = new TimePickerDialog(
-                        getActivity(),
-                        android.R.style.Theme_Holo_Dialog_MinWidth,
-                        mTimeListener, hour, minute, true);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
-                dialog.show();
-
+                timeDialog.show(getFragmentManager(),"timeDialog");
 
             }
         });
-        mTimeListener = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                String hour, min;
-                if (hourOfDay <= 9) {
-                    hour = "0" + hourOfDay;
-                } else {
-                    hour = hourOfDay + "";
-                }
-                if (minute <= 9) {
-                    min = "0" + minute;
-                } else {
-                    min = minute + "";
-                }
-                String tiime = hour + ":" + min;
-                textInputLayout_time.getEditText().setText(tiime + "");
-            }
-        };
+
         return view;
     }
 
@@ -142,8 +92,6 @@ public class NewOfferStage2Fragment extends Fragment {
         date = textInputLayout_date.getEditText().getText().toString();
         time = textInputLayout_time.getEditText().getText().toString();
 
-        Long timestamp = getTimeStamp();
-        Log.i("timestamptimestamp",timestamp+"");
         super.onDestroy();
     }
 
@@ -159,6 +107,12 @@ public class NewOfferStage2Fragment extends Fragment {
             return false;
         } else {
             textInputLayout_time.setError(null);
+        }
+
+        Long timestamp = currentTimeStamp();
+        if(!(timestamp - getTimeStamp() <= 120)){
+            createSnackBar(getActivity().getResources().getString(R.string.ERROR_TIME_DATE_VALIDATION));
+            return false;
         }
         return true;
     }
@@ -177,5 +131,23 @@ public class NewOfferStage2Fragment extends Fragment {
         String time_temp = textInputLayout_time.getEditText().getText().toString();
         return  dateTimeToTimestamp(date_temp,time_temp);
     }
+
+
+    public void createSnackBar(String msg){
+        Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
+                .setActionTextColor(getResources().getColor(R.color.colorPrimary))
+                .show();
+    }
+
+
+
+    public Long currentTimeStamp(){
+        return System.currentTimeMillis() / 1000L;
+    }
+
+
+
+
+
 
 }
