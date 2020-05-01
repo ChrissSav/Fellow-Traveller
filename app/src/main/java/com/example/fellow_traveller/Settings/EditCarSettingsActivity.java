@@ -8,7 +8,6 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -156,7 +155,7 @@ public class EditCarSettingsActivity extends AppCompatActivity {
                 .setAction("ΝΑΙ", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        new FellowTravellerAPI(globalClass).deleteUserCar(carModel.getId(), new CarDeleteCallBack() {
+                        new FellowTravellerAPI(globalClass).deleteCar(carModel.getId(), new CarDeleteCallBack() {
                             @Override
                             public void onSuccess(StatusHandleModel status) {
                                 Toast.makeText(EditCarSettingsActivity.this, "Επιτυχής διαγραφή", Toast.LENGTH_SHORT).show();

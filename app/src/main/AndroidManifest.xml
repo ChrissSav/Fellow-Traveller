@@ -18,7 +18,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Reviews.WriteReviewActivity"></activity>
+        <activity android:name=".SuccessActivity"></activity>
+        <activity android:name=".Reviews.WriteReviewActivity" />
         <activity android:name=".Reviews.ReviewsActivity" />
         <activity android:name=".NewOffer.AddLocationActivity" />
         <activity android:name=".Settings.EditCarSettingsActivity" />
@@ -43,7 +44,7 @@
         <activity android:name=".HomeFragments.HomeActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".Settings.ChangePassword" />
+        <activity android:name=".Settings.ChangeUserPasswordActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

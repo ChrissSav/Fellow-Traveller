@@ -55,7 +55,7 @@ public class UserSettingsActivity extends AppCompatActivity {
         changeUserPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent changePassword = new Intent(UserSettingsActivity.this, ChangePassword.class);
+                Intent changePassword = new Intent(UserSettingsActivity.this, ChangeUserPasswordActivity.class);
                 startActivity(changePassword);
             }
         });

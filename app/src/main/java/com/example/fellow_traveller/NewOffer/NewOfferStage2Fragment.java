@@ -25,6 +25,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import static com.example.fellow_traveller.Util.InputValidation.dateTimeToTimestamp;
+
 
 public class NewOfferStage2Fragment extends Fragment {
 
@@ -170,17 +172,10 @@ public class NewOfferStage2Fragment extends Fragment {
     }
 
     public Long getTimeStamp() {
-        try {
-            String date_temp = textInputLayout_date.getEditText().getText().toString();
-            String time_temp = textInputLayout_time.getEditText().getText().toString();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-            Date parsedDate = dateFormat.parse(date_temp+ " " + time_temp);
-            return (parsedDate.getTime() / 1000);
 
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return Long.valueOf(0);
+        String date_temp = textInputLayout_date.getEditText().getText().toString();
+        String time_temp = textInputLayout_time.getEditText().getText().toString();
+        return  dateTimeToTimestamp(date_temp,time_temp);
     }
 
 }

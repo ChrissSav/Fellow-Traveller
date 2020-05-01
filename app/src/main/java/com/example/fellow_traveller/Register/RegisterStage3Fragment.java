@@ -35,7 +35,7 @@ public class RegisterStage3Fragment extends Fragment {
         // Inflate the layout for this fragment
         //Log.i("dd", "RegisterStage1Fragment");
        // Log.i("Lifecycle_Stage3", "onCreateView ");
-        view = inflater.inflate(R.layout.fragment_register_stage_3, container, false);
+        view = inflater.inflate(R.layout.fragment_user_register_stage_3, container, false);
 
         textInputLayoutName = view.findViewById(R.id.RegisterStage3Fragment_textInputLayout_name);
         textInputLayoutSurname = view.findViewById(R.id.RegisterStage3Fragment_textInputLayout_surname);
@@ -81,11 +81,11 @@ public class RegisterStage3Fragment extends Fragment {
 
     }
 
-    public String GetName(){
+    public String getFirstName(){
         return textInputLayoutName.getEditText().getText().toString();
     }
 
-    public String GetSurName(){
+    public String getLastName(){
         return textInputLayoutSurname.getEditText().getText().toString();
     }
 

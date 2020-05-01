@@ -368,6 +368,11 @@ public class NewOfferStage3Fragment extends Fragment {
         return buttonPet.getText().toString();
     }
 
+    public Boolean getPetsBoolean() {
+
+        return buttonPet.getText().toString().equals("Επιτρέπω");
+    }
+
     public String getCar() {
         return buttonCar.getText().toString();
     }
@@ -401,7 +406,7 @@ public class NewOfferStage3Fragment extends Fragment {
 
     public void getCars(final View view, final AlertDialog dialog) {
 
-        new FellowTravellerAPI(globalClass).getUserCars(new UserCarsCallBack() {
+        new FellowTravellerAPI(globalClass).getCars(new UserCarsCallBack() {
             @Override
             public void onSuccess(ArrayList<CarModel> carList) {
                 mExampleList = new ArrayList<>();

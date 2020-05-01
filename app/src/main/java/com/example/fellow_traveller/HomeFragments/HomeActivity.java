@@ -31,7 +31,7 @@ public class HomeActivity extends AppCompatActivity {
     private GlobalClass globalClass;
     private BottomNavigationView bottomNav;
     private static final String TAG = "ExampleJobService";
-
+    private Fragment selectedFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment selectedFragment = null;
+                selectedFragment = null;
 
                 switch (item.getItemId()) {
                     case R.id.bottom_nav_main:
@@ -82,6 +82,18 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!(selectedFragment instanceof HomeFragment)) {
+            bottomNav.setSelectedItemId(R.id.bottom_nav_main);
+            selectedFragment = new HomeFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.HomeActivity_frame_container,
+                    selectedFragment).commit();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     public void scheduleJob() {
