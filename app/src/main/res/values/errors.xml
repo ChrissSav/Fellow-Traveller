@@ -26,5 +26,6 @@
     <string name="CONFIRM_DELETION">Είσαι σίγουρος για την διαγραφή;</string>
     <string name="ERROR_INVALID_PLATE_FORMAT">Πρέπει να είναι της μορφής ΧΥΖ-1234.</string>
     <string name="ERROR_REQUIRED_FIELD">Υποχρεωτικό πεδίο.</string>
+    <string name="ERROR_TIME_DATE_VALIDATION">Η ημερ/νια που επιλέξατε δεν είναι έγκυρη.</string>
 
 </resources>

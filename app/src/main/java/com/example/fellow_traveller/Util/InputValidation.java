@@ -1,6 +1,7 @@
 package com.example.fellow_traveller.Util;
 
 import android.graphics.Typeface;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.text.ParseException;
@@ -78,15 +79,4 @@ public class InputValidation {
         return errors.isEmpty();
     }
 
-    public static long dateTimeToTimestamp(String date, String time) {
-        long p = Long.parseLong("0");
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-            Date parsedDate = dateFormat.parse(date + " " + time);
-            return parsedDate.getTime() / 1000;
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return p;
-    }
 }

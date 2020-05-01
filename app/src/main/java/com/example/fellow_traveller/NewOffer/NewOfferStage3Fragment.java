@@ -2,18 +2,23 @@ package com.example.fellow_traveller.NewOffer;
 
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,20 +34,20 @@ import com.example.fellow_traveller.Settings.AddCarSettingsActivity;
 import java.util.ArrayList;
 
 
-
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
+import static com.example.fellow_traveller.Util.SomeMethods.createSnackBar;
 
 
 public class NewOfferStage3Fragment extends Fragment {
     private final String CLICK_COLOR = "#1C1C1C";
     private final String TITLE_PET = "Επέλεξε ...";
-    private final String TITLE_SEAT = "Θέσεις ...";
+    private final String TITLE_SEAT = "1";
     private final String TITLE_CAR = "Διάλεξε αυτοκίνητο ...";
-    private final String TITLE_BAGS = "Αποσκεύες ...";
+    private final String TITLE_BAGS = "0";
 
     private View view;
-    private Button buttonSeats, buttonPet, buttonCar, buttonΒags;
+    private Button buttonPet, buttonCar;
     //Backup
     private String petTitle = TITLE_PET;
     private String seatTitle = TITLE_SEAT;
@@ -55,12 +60,16 @@ public class NewOfferStage3Fragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<CarModel> mExampleList;
 
+    private TextView textViewBags, textViewSeats;
+    private ImageButton imageButtonIncreaseSeats, imageButtonIncreaseBags;
+    private ImageButton imageButtonDecreaseSeats, imageButtonDecreaseBags;
+
+
     private GlobalClass globalClass;
 
     private CarModel currentCar;
 
     public NewOfferStage3Fragment() {
-
     }
 
 
@@ -70,48 +79,70 @@ public class NewOfferStage3Fragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_new_offer_stage3, container, false);
         globalClass = (GlobalClass) getActivity().getApplicationContext();
-        buttonSeats = view.findViewById(R.id.NewOfferStage3Fragment_button_seat);
         buttonPet = view.findViewById(R.id.NewOfferStage3Fragment_button_pet);
         buttonCar = view.findViewById(R.id.NewOfferStage3Fragment_button_car);
-        buttonΒags = view.findViewById(R.id.NewOfferStage3Fragment_button_bags);
+
+        //Seats
+        textViewSeats = view.findViewById(R.id.NewOfferStage3Fragment_seats_value_tv);
+        imageButtonIncreaseSeats = view.findViewById(R.id.NewOfferStage3Fragment_plus_button_seats);
+        imageButtonDecreaseSeats = view.findViewById(R.id.NewOfferStage3Fragment_minus_button_seats);
+
+        //Bags
+        textViewBags = view.findViewById(R.id.NewOfferStage3Fragment_bags_value_tv);
+        imageButtonIncreaseBags = view.findViewById(R.id.NewOfferStage3Fragment_plus_button_bags);
+        imageButtonDecreaseBags = view.findViewById(R.id.NewOfferStage3Fragment_minus_button_bags);
 
 
+
+
+
+        // Seat OnClickListener
+        imageButtonIncreaseSeats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Increase( textViewSeats);
+            }
+        });
+
+        imageButtonDecreaseSeats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Decrease(textViewSeats,1);
+            }
+        });
+
+        // Bag OnClickListener
+
+        imageButtonIncreaseBags.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Increase( textViewBags);
+            }
+        });
+
+        imageButtonDecreaseBags.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Decrease(textViewBags,0);
+            }
+        });
+
+
+
+        textViewBags.setText(bagsTitle);
+        textViewSeats.setText(seatTitle);
         buttonPet.setText(petTitle);
-        buttonSeats.setText(seatTitle);
         buttonCar.setText(carTitle);
-        buttonΒags.setText(bagsTitle);
-
 
         //Text Color
         if (buttonPet.getText() != TITLE_PET) {
             buttonPet.setTextColor(Color.parseColor(CLICK_COLOR));
         }
-        if (buttonΒags.getText() != TITLE_BAGS) {
-            buttonΒags.setTextColor(Color.parseColor(CLICK_COLOR));
-        }
         if (buttonCar.getText() != TITLE_CAR) {
             buttonCar.setTextColor(Color.parseColor(CLICK_COLOR));
         }
-        if (buttonSeats.getText() != TITLE_SEAT) {
-            buttonSeats.setTextColor(Color.parseColor(CLICK_COLOR));
-        }
 
 
-        buttonSeats.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                openDialogForSeats();
-            }
-        });
-
-        buttonΒags.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                openDialogForBags();
-            }
-        });
 
 
         buttonCar.setOnClickListener(new View.OnClickListener() {
@@ -143,16 +174,16 @@ public class NewOfferStage3Fragment extends Fragment {
 
 
     public void openDialogForCar() {
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
-        View mView = getLayoutInflater().inflate(R.layout.choose_car, null);
-        Button button = mView.findViewById(R.id.choose_car_button_add_car);
+
+        final Dialog dialog = new Dialog(getActivity(), R.style.ThemeDialogNew);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.choose_car);
+        dialog.setCancelable(true);
+
+        Button button = dialog.findViewById(R.id.choose_car_button_add_car);
 
 
-        mBuilder.setView(mView);
-
-        final AlertDialog dialog = mBuilder.create();
-
-        getCars(mView, dialog);
+        getCars(dialog);
         dialog.show();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,8 +200,8 @@ public class NewOfferStage3Fragment extends Fragment {
 
     }
 
-    public void buildRecyclerViewForCar(View view, final AlertDialog dialog) {
-        mRecyclerView = view.findViewById(R.id.choose_car_recyclerView);
+    public void buildRecyclerViewForCar(final Dialog dialog) {
+        mRecyclerView = dialog.findViewById(R.id.choose_car_recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mAdapter = new CarAdapter(mExampleList);
@@ -189,93 +220,10 @@ public class NewOfferStage3Fragment extends Fragment {
         });
     }
 
-    public void openDialogForSeats() {
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
-        View mView = getLayoutInflater().inflate(R.layout.number_choose, null);
-        Button button = mView.findViewById(R.id.choose_num_button);
-        ImageButton increase = mView.findViewById(R.id.choose_num_imageButton_plus);
-        ImageButton decrease = mView.findViewById(R.id.choose_num_imageButton_minus);
-        final TextView textView_number = mView.findViewById(R.id.choose_num_textView_number);
-        TextView textView_title = mView.findViewById(R.id.choose_num_textView_title);
-        if (!buttonSeats.getText().equals(TITLE_SEAT)) {
-            textView_number.setText(buttonSeats.getText().toString());
-        }
 
-        textView_title.setText("Καθόρισε τον αριθμό των θέσεων");
-        mBuilder.setView(mView);
 
-        final AlertDialog dialog = mBuilder.create();
-        dialog.show();
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-                buttonSeats.setTextColor(Color.parseColor(CLICK_COLOR));
-                buttonSeats.setText(textView_number.getText().toString());
-            }
-        });
 
-        increase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Increase(textView_number);
-            }
-        });
-
-        decrease.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Decrease(textView_number);
-            }
-        });
-
-    }
-
-    public void openDialogForBags() {
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
-        View mView = getLayoutInflater().inflate(R.layout.number_choose, null);
-        Button button = mView.findViewById(R.id.choose_num_button);
-        ImageButton increase = mView.findViewById(R.id.choose_num_imageButton_plus);
-        ImageButton decrease = mView.findViewById(R.id.choose_num_imageButton_minus);
-        final TextView textView_number = mView.findViewById(R.id.choose_num_textView_number);
-        TextView textView_title = mView.findViewById(R.id.choose_num_textView_title);
-        if (!buttonΒags.getText().equals(TITLE_BAGS)) {
-            textView_number.setText(buttonΒags.getText().toString());
-        }
-
-        textView_title.setText("Καθόρισε τον αριθμό των αποσκεύων");
-        mBuilder.setView(mView);
-
-        final AlertDialog dialog = mBuilder.create();
-        dialog.show();
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                dialog.dismiss();
-                buttonΒags.setTextColor(Color.parseColor(CLICK_COLOR));
-                buttonΒags.setText(textView_number.getText().toString());
-
-            }
-        });
-
-        increase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Increase(textView_number);
-            }
-        });
-
-        decrease.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Decrease(textView_number);
-            }
-        });
-
-    }
 
 
     public String toString() {
@@ -292,23 +240,23 @@ public class NewOfferStage3Fragment extends Fragment {
 
     }
 
-    public void Decrease(TextView textView) {
+    public void Decrease(TextView textView,int min) {
         int current_num = Integer.parseInt(textView.getText().toString());
-        if (current_num > 0)
+        if (current_num > min)
             textView.setText((current_num - 1) + "");
     }
 
     @Override
     public void onDestroy() {
         petTitle = buttonPet.getText().toString();
-        seatTitle = buttonSeats.getText().toString();
+        seatTitle = textViewSeats.getText().toString();
         carTitle = buttonCar.getText().toString();
-        bagsTitle = buttonΒags.getText().toString();
+        bagsTitle = textViewBags.getText().toString();
         super.onDestroy();
     }
 
     public boolean validateFragment() {
-        if(checkCar() && checkSeats() && checkBags()&& checkPet()){
+        if (checkCar() && checkSeats() && checkBags() && checkPet()) {
             return true;
         }
         return false;
@@ -317,7 +265,7 @@ public class NewOfferStage3Fragment extends Fragment {
 
     public Boolean checkCar() {
         if (buttonCar.getText().equals(TITLE_CAR)) {
-            Toast.makeText(getActivity(), "Παρακαλω καταχωρήστε το όχημα σας", Toast.LENGTH_SHORT).show();
+            createSnackBar(view, "Παρακαλω καταχωρήστε το όχημα σας");
             return false;
         } else {
             return true;
@@ -326,7 +274,7 @@ public class NewOfferStage3Fragment extends Fragment {
 
     public Boolean checkPet() {
         if (buttonPet.getText().equals(TITLE_PET)) {
-            Toast.makeText(getActivity(), "Παρακαλω καταχωρήστε αν δεχεστε κατοικίδια", Toast.LENGTH_SHORT).show();
+            createSnackBar(view, "Παρακαλω καταχωρήστε αν δεχεστε κατοικίδια");
             return false;
         } else {
             return true;
@@ -335,33 +283,33 @@ public class NewOfferStage3Fragment extends Fragment {
 
     public Boolean checkSeats() {
         try {
-            int res = Integer.parseInt(buttonSeats.getText().toString());
+            int res = Integer.parseInt(textViewSeats.getText().toString());
             if (res < 1) {
-                Toast.makeText(getActivity(), "Οι θεσεις πρεπει να ειναι τουλαχιστον μια", Toast.LENGTH_SHORT).show();
+                createSnackBar(view, "Οι θεσεις πρεπει να ειναι τουλαχιστον μια");
                 return false;
             } else {
                 return true;
             }
         } catch (NumberFormatException e) {
-            Toast.makeText(getActivity(), "Υπαρχει λαθος στην καταχωρηση των θεσεων", Toast.LENGTH_SHORT).show();
+            createSnackBar(view, "Υπαρχει λαθος στην καταχωρηση των θεσεων");
             return false;
         }
     }
 
     public Boolean checkBags() {
         try {
-            int res = Integer.parseInt(buttonΒags.getText().toString());
+            int res = Integer.parseInt(textViewBags.getText().toString());
             return true;
 
         } catch (NumberFormatException e) {
-            Toast.makeText(getActivity(), "Υπαρχει λαθος στην καταχωρηση των αποσκευων", Toast.LENGTH_SHORT).show();
+            createSnackBar(view, "Υπαρχει λαθος στην καταχωρηση των αποσκευων") ;
             return false;
         }
     }
 
 
     public String getSeats() {
-        return buttonSeats.getText().toString();
+        return textViewSeats.getText().toString();
     }
 
     public String getPets() {
@@ -378,7 +326,7 @@ public class NewOfferStage3Fragment extends Fragment {
     }
 
     public String getBags() {
-        return buttonΒags.getText().toString();
+        return textViewBags.getText().toString();
     }
 
     @Override
@@ -404,14 +352,14 @@ public class NewOfferStage3Fragment extends Fragment {
         return currentCar;
     }
 
-    public void getCars(final View view, final AlertDialog dialog) {
+    public void getCars(final Dialog dialog) {
 
         new FellowTravellerAPI(globalClass).getCars(new UserCarsCallBack() {
             @Override
             public void onSuccess(ArrayList<CarModel> carList) {
                 mExampleList = new ArrayList<>();
                 mExampleList = carList;
-                buildRecyclerViewForCar(view, dialog);
+                buildRecyclerViewForCar(dialog);
 
             }
 
@@ -422,4 +370,6 @@ public class NewOfferStage3Fragment extends Fragment {
         });
 
     }
+
+
 }

@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@string/register_fragment_stage_1_add_email_title"
+            style="@style/titleStyle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/register_fragment_stage_1_email_input_field_title"
+            style="@style/labelStyle"
             style="@style/labelRegisterStyle"
             app:layout_constraintStart_toStartOf="@+id/RegisterStage1Fragment_textView4"
             app:layout_constraintTop_toBottomOf="@+id/RegisterStage1Fragment_textView4" />

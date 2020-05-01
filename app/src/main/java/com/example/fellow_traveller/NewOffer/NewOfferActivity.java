@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +26,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.example.fellow_traveller.Util.InputValidation.dateTimeToTimestamp;
+import static com.example.fellow_traveller.Util.SomeMethods.dateTimeToTimestamp;
+
 
 public class NewOfferActivity extends AppCompatActivity {
     private final int stages = 6;
@@ -39,7 +41,7 @@ public class NewOfferActivity extends AppCompatActivity {
     private NewOfferStage4Fragment newOfferStage4Fragment = new NewOfferStage4Fragment();
     private NewOfferStage5Fragment newOfferStage5Fragment = new NewOfferStage5Fragment();
     private NewOfferStage6Fragment newOfferStage6Fragment = new NewOfferStage6Fragment();
-
+    private TextView textViewTitleStage6;
     private ProgressBar progressBar;
     private int num_num;
     private GlobalClass globalClass;
@@ -53,9 +55,8 @@ public class NewOfferActivity extends AppCompatActivity {
         globalClass = (GlobalClass) getApplicationContext();
 
 
-        globalClass = (GlobalClass) getApplicationContext();
 
-
+        textViewTitleStage6 = findViewById(R.id.NewOfferActivity_textView_stage_6);
         progressBar = findViewById(R.id.NewOfferActivity_progressBar);
         buttonNext = findViewById(R.id.NewOfferActivity_button_next);
         btnBack = findViewById(R.id.NewOfferActivity_imageButton);
@@ -114,6 +115,7 @@ public class NewOfferActivity extends AppCompatActivity {
                     newOfferStage6Fragment.setMsg(newOfferStage5Fragment.getMsg());
 
                     fra = newOfferStage6Fragment;
+                    textViewTitleStage6.setVisibility(View.VISIBLE);
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
                     buttonNext.setText("Καταχώρηση");
 
@@ -131,9 +133,41 @@ public class NewOfferActivity extends AppCompatActivity {
         });
     }
 
+    public void getDateFromFragment(String tag){
+        textViewTitleStage6.setVisibility(View.GONE);
+        buttonNext.setText("Επόμενο");
+        switch(tag) {
+            case "1":
+                progressBar.setProgress(num_num * newOfferStage1Fragment.getRank());
+                fra = newOfferStage1Fragment;
+                break;
+            case "2":
+                progressBar.setProgress(num_num * newOfferStage2Fragment.getRank());
+                fra = newOfferStage2Fragment;
+                break;
+            case "3":
+                progressBar.setProgress(num_num * newOfferStage3Fragment.getRank());
+                fra = newOfferStage3Fragment;
+                break;
+            case "4":
+                progressBar.setProgress(num_num * newOfferStage4Fragment.getRank());
+                fra = newOfferStage4Fragment;
+                break;
+            case "5":
+                progressBar.setProgress(num_num * newOfferStage5Fragment.getRank());
+                fra = newOfferStage5Fragment;
+                break;
+            default:
+                break;
+        }
+        fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.NewOfferActivity_frame_container, fra).commit();
+
+
+    }
 
     @Override
     public void onBackPressed() {
+        textViewTitleStage6.setVisibility(View.GONE);
         if (fra.toString().equals("NewOfferStage6Fragment")) {
             progressBar.setProgress(num_num * newOfferStage5Fragment.getRank());
             buttonNext.setText("Επόμενο");
