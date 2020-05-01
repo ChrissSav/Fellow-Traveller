@@ -14,9 +14,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="@string/register_fragment_become_a_fellow_traveller"
-        android:textColor="#000"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        style="@style/titleRegisterStyle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,8 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         android:text="Αριθμός τηλεφώνου"
-        android:textColor="#000"
-        android:textStyle="bold"
+        style="@style/labelRegisterStyle"
         app:layout_constraintStart_toStartOf="@+id/RegisterActivity_textView"
         app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_textView" />
 
@@ -48,6 +45,7 @@
             android:layout_height="0dp"
             android:background="@null"
             android:ems="10"
+            style="@style/inputStyle"
             android:inputType="number"
             android:maxLength="10"
             android:text="6999999999"
@@ -61,6 +59,7 @@
             android:layout_width="100dp"
             android:layout_height="0dp"
             android:drawSelectorOnTop="true"
+            style="@style/inputStyle"
             android:entries="@array/spinner_phone_codes"
             android:prompt="@string/app_name"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -20,14 +20,11 @@
 
         <TextView
             android:id="@+id/RegisterStage1Fragment_textView4"
+            style="@style/titleRegisterStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="16dp"
             android:text="@string/register_fragment_stage_1_add_email_title"
-            android:textColor="#000"
-            android:textSize="24sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,8 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/register_fragment_stage_1_email_input_field_title"
-            android:textColor="#000"
-            android:textSize="18sp"
+            style="@style/labelRegisterStyle"
             app:layout_constraintStart_toStartOf="@+id/RegisterStage1Fragment_textView4"
             app:layout_constraintTop_toBottomOf="@+id/RegisterStage1Fragment_textView4" />
 
@@ -48,19 +44,19 @@
             android:id="@+id/RegisterStage1Fragment_textInputLayout_email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="16dp"
             app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/RegisterStage1Fragment_textView4"
             app:layout_constraintTop_toBottomOf="@+id/RegisterStage1Fragment_textView5">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/RegisterStage1Fragment_editText_email"
+                style="@style/inputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:text="@string/temp_spyros_email_address"
-                android:textColor="@color/edit_text_color"
-                android:textSize="20sp" />
+                android:text="@string/temp_spyros_email_address" />
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
