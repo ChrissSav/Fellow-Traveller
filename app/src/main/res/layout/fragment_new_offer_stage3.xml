@@ -47,10 +47,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:fontFamily="@font/firasans_medium"
                 android:text="Αμάξι"
-                android:textColor="@color/profile"
-                android:textSize="18sp"
+                style="@style/labelStyle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
