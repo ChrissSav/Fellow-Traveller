@@ -81,11 +81,12 @@
 
 
 
+
+
     <style name="ThemeDialogNew" parent="android:Theme.Holo.Dialog">
         <item name="android:windowMinWidthMajor">100%</item>
         <item name="android:windowMinWidthMinor">100%</item>
-        <item name="android:windowBackground">@color/white</item>
-        <item name="android:textColor">@color/profile </item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
 </resources>

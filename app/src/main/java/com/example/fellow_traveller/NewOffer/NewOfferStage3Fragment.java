@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,12 +42,12 @@ import static com.example.fellow_traveller.Util.SomeMethods.createSnackBar;
 public class NewOfferStage3Fragment extends Fragment {
     private final String CLICK_COLOR = "#1C1C1C";
     private final String TITLE_PET = "Επέλεξε ...";
-    private final String TITLE_SEAT = "Θέσεις ...";
+    private final String TITLE_SEAT = "1";
     private final String TITLE_CAR = "Διάλεξε αυτοκίνητο ...";
-    private final String TITLE_BAGS = "Αποσκεύες ...";
+    private final String TITLE_BAGS = "0";
 
     private View view;
-    private Button buttonSeats, buttonPet, buttonCar, buttonΒags;
+    private Button buttonPet, buttonCar;
     //Backup
     private String petTitle = TITLE_PET;
     private String seatTitle = TITLE_SEAT;
@@ -58,12 +60,16 @@ public class NewOfferStage3Fragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<CarModel> mExampleList;
 
+    private TextView textViewBags, textViewSeats;
+    private ImageButton imageButtonIncreaseSeats, imageButtonIncreaseBags;
+    private ImageButton imageButtonDecreaseSeats, imageButtonDecreaseBags;
+
+
     private GlobalClass globalClass;
 
     private CarModel currentCar;
 
     public NewOfferStage3Fragment() {
-
     }
 
 
@@ -73,48 +79,70 @@ public class NewOfferStage3Fragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_new_offer_stage3, container, false);
         globalClass = (GlobalClass) getActivity().getApplicationContext();
-        buttonSeats = view.findViewById(R.id.NewOfferStage3Fragment_button_seat);
         buttonPet = view.findViewById(R.id.NewOfferStage3Fragment_button_pet);
         buttonCar = view.findViewById(R.id.NewOfferStage3Fragment_button_car);
-        buttonΒags = view.findViewById(R.id.NewOfferStage3Fragment_button_bags);
+
+        //Seats
+        textViewSeats = view.findViewById(R.id.NewOfferStage3Fragment_seats_value_tv);
+        imageButtonIncreaseSeats = view.findViewById(R.id.NewOfferStage3Fragment_plus_button_seats);
+        imageButtonDecreaseSeats = view.findViewById(R.id.NewOfferStage3Fragment_minus_button_seats);
+
+        //Bags
+        textViewBags = view.findViewById(R.id.NewOfferStage3Fragment_bags_value_tv);
+        imageButtonIncreaseBags = view.findViewById(R.id.NewOfferStage3Fragment_plus_button_bags);
+        imageButtonDecreaseBags = view.findViewById(R.id.NewOfferStage3Fragment_minus_button_bags);
 
 
+
+
+
+        // Seat OnClickListener
+        imageButtonIncreaseSeats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Increase( textViewSeats);
+            }
+        });
+
+        imageButtonDecreaseSeats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Decrease(textViewSeats,1);
+            }
+        });
+
+        // Bag OnClickListener
+
+        imageButtonIncreaseBags.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Increase( textViewBags);
+            }
+        });
+
+        imageButtonDecreaseBags.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Decrease(textViewBags,0);
+            }
+        });
+
+
+
+        textViewBags.setText(bagsTitle);
+        textViewSeats.setText(seatTitle);
         buttonPet.setText(petTitle);
-        buttonSeats.setText(seatTitle);
         buttonCar.setText(carTitle);
-        buttonΒags.setText(bagsTitle);
-
 
         //Text Color
         if (buttonPet.getText() != TITLE_PET) {
             buttonPet.setTextColor(Color.parseColor(CLICK_COLOR));
         }
-        if (buttonΒags.getText() != TITLE_BAGS) {
-            buttonΒags.setTextColor(Color.parseColor(CLICK_COLOR));
-        }
         if (buttonCar.getText() != TITLE_CAR) {
             buttonCar.setTextColor(Color.parseColor(CLICK_COLOR));
         }
-        if (buttonSeats.getText() != TITLE_SEAT) {
-            buttonSeats.setTextColor(Color.parseColor(CLICK_COLOR));
-        }
 
 
-        buttonSeats.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                openDialogForSeats();
-            }
-        });
-
-        buttonΒags.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                openDialogForBags();
-            }
-        });
 
 
         buttonCar.setOnClickListener(new View.OnClickListener() {
@@ -192,99 +220,10 @@ public class NewOfferStage3Fragment extends Fragment {
         });
     }
 
-    public void openDialogForSeats() {
-
-        final Dialog dialog = new Dialog(getActivity(), R.style.ThemeDialogNew);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.number_choose);
-        dialog.setCancelable(true);
 
 
-        Button button = dialog.findViewById(R.id.choose_num_button);
-        ImageButton increase = dialog.findViewById(R.id.choose_num_imageButton_plus);
-        ImageButton decrease = dialog.findViewById(R.id.choose_num_imageButton_minus);
-        final TextView textView_number = dialog.findViewById(R.id.choose_num_textView_number);
-        TextView textView_title = dialog.findViewById(R.id.choose_num_textView_title);
-        if (!buttonSeats.getText().equals(TITLE_SEAT)) {
-            textView_number.setText(buttonSeats.getText().toString());
-        }
 
-        textView_title.setText("Καθόρισε τον αριθμό των θέσεων");
 
-        dialog.show();
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-                buttonSeats.setTextColor(Color.parseColor(CLICK_COLOR));
-                buttonSeats.setText(textView_number.getText().toString());
-            }
-        });
-
-        increase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Increase(textView_number);
-            }
-        });
-
-        decrease.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Decrease(textView_number);
-            }
-        });
-
-    }
-
-    public void openDialogForBags() {
-        final Dialog dialog = new Dialog(getActivity(), R.style.ThemeDialogNew);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.number_choose);
-        dialog.setCancelable(true);
-
-        Button button = dialog.findViewById(R.id.choose_num_button);
-        ImageButton increase = dialog.findViewById(R.id.choose_num_imageButton_plus);
-        ImageButton decrease = dialog.findViewById(R.id.choose_num_imageButton_minus);
-        final TextView textView_number = dialog.findViewById(R.id.choose_num_textView_number);
-        TextView textView_title = dialog.findViewById(R.id.choose_num_textView_title);
-        if (!buttonΒags.getText().equals(TITLE_BAGS)) {
-            textView_number.setText(buttonΒags.getText().toString());
-        }
-
-        textView_title.setText("Καθόρισε τον αριθμό των αποσκεύων");
-        // mBuilder.setView(mView);
-
-        // final AlertDialog dialog = mBuilder.create();
-        dialog.show();
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                dialog.dismiss();
-                buttonΒags.setTextColor(Color.parseColor(CLICK_COLOR));
-                buttonΒags.setText(textView_number.getText().toString());
-
-            }
-        });
-
-        increase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Increase(textView_number);
-            }
-        });
-
-        decrease.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Decrease(textView_number);
-            }
-        });
-
-    }
 
 
     public String toString() {
@@ -301,18 +240,18 @@ public class NewOfferStage3Fragment extends Fragment {
 
     }
 
-    public void Decrease(TextView textView) {
+    public void Decrease(TextView textView,int min) {
         int current_num = Integer.parseInt(textView.getText().toString());
-        if (current_num > 0)
+        if (current_num > min)
             textView.setText((current_num - 1) + "");
     }
 
     @Override
     public void onDestroy() {
         petTitle = buttonPet.getText().toString();
-        seatTitle = buttonSeats.getText().toString();
+        seatTitle = textViewSeats.getText().toString();
         carTitle = buttonCar.getText().toString();
-        bagsTitle = buttonΒags.getText().toString();
+        bagsTitle = textViewBags.getText().toString();
         super.onDestroy();
     }
 
@@ -344,7 +283,7 @@ public class NewOfferStage3Fragment extends Fragment {
 
     public Boolean checkSeats() {
         try {
-            int res = Integer.parseInt(buttonSeats.getText().toString());
+            int res = Integer.parseInt(textViewSeats.getText().toString());
             if (res < 1) {
                 createSnackBar(view, "Οι θεσεις πρεπει να ειναι τουλαχιστον μια");
                 return false;
@@ -359,7 +298,7 @@ public class NewOfferStage3Fragment extends Fragment {
 
     public Boolean checkBags() {
         try {
-            int res = Integer.parseInt(buttonΒags.getText().toString());
+            int res = Integer.parseInt(textViewBags.getText().toString());
             return true;
 
         } catch (NumberFormatException e) {
@@ -370,7 +309,7 @@ public class NewOfferStage3Fragment extends Fragment {
 
 
     public String getSeats() {
-        return buttonSeats.getText().toString();
+        return textViewSeats.getText().toString();
     }
 
     public String getPets() {
@@ -387,7 +326,7 @@ public class NewOfferStage3Fragment extends Fragment {
     }
 
     public String getBags() {
-        return buttonΒags.getText().toString();
+        return textViewBags.getText().toString();
     }
 
     @Override
@@ -431,4 +370,6 @@ public class NewOfferStage3Fragment extends Fragment {
         });
 
     }
+
+
 }

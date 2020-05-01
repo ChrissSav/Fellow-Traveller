@@ -82,29 +82,13 @@
 
             <TextView
                 android:id="@+id/NewOfferStage3Fragment_textView7"
+                style="@style/labelStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="53dp"
                 android:text="Θέσεις"
-                style="@style/labelStyle"
                 app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textView6"
                 app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_button_car" />
-
-            <Button
-                android:id="@+id/NewOfferStage3Fragment_button_seat"
-                android:layout_width="201dp"
-                android:layout_height="48dp"
-                android:background="@drawable/button_background_select"
-                android:drawableEnd="@drawable/ic_seat"
-                android:paddingStart="15dp"
-                android:paddingEnd="20dp"
-                android:text="Θέσεις ..."
-                android:textColor="#9AA7B0"
-                android:textAlignment="textStart"
-                android:textAllCaps="false"
-                app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_textView7"
-                app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_textView6"
-                app:layout_constraintTop_toTopOf="@+id/NewOfferStage3Fragment_textView7" />
 
             <TextView
                 android:id="@+id/NewOfferStage3Fragment_textView8"
@@ -112,9 +96,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod"
-                app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_button_seat"
+                app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_seats_increase_section"
                 app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textView7"
-                app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_button_seat" />
+                app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_seats_increase_section" />
 
             <TextView
                 android:id="@+id/NewOfferStage3Fragment_textView10"
@@ -128,19 +112,18 @@
 
             <Button
                 android:id="@+id/NewOfferStage3Fragment_button_pet"
-                android:layout_width="0dp"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_background_select"
                 android:drawableEnd="@drawable/ic_bone"
                 android:paddingStart="15dp"
                 android:paddingEnd="20dp"
                 android:text="Επέλεξε ..."
-                android:textColor="#9AA7B0"
                 android:textAlignment="textStart"
                 android:textAllCaps="false"
+                android:textColor="#9AA7B0"
                 app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_textView10"
-                app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_button_seat"
-                app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_button_seat"
+                app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_button_car"
                 app:layout_constraintTop_toTopOf="@+id/NewOfferStage3Fragment_textView10" />
 
             <TextView
@@ -165,33 +148,125 @@
                 app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textView8"
                 app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_textView8" />
 
-            <Button
-                android:id="@+id/NewOfferStage3Fragment_button_bags"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_background_select"
-                android:drawableEnd="@drawable/ic_luggage"
-                android:paddingStart="15dp"
-                android:paddingEnd="20dp"
-                android:text="Αποσκεύες ..."
-                android:textColor="#9AA7B0"
-                android:textAlignment="textStart"
-                android:textAllCaps="false"
-                app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_textView_2"
-                app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_button_seat"
-                app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_button_seat"
-                app:layout_constraintTop_toTopOf="@+id/NewOfferStage3Fragment_textView_2" />
-
             <TextView
                 android:id="@+id/NewOfferStage3Fragment_textView6v"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod"
-                app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_button_bags"
+                app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_bags_increase_section"
                 app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textView_2"
-                app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_button_bags" />
+                app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_bags_increase_section" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/NewOfferStage3Fragment_seats_increase_section"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/increaser_border_stroke_shape_1"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_textView7"
+                app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_button_car"
+                app:layout_constraintTop_toTopOf="@+id/NewOfferStage3Fragment_textView7">
+
+                <ImageButton
+                    android:id="@+id/NewOfferStage3Fragment_minus_button_seats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="5dp"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    android:src="@drawable/ic_minus_1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/NewOfferStage3Fragment_seats_value_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/firasans_light"
+                    android:text="0"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/NewOfferStage3Fragment_plus_button_seats"
+                    app:layout_constraintStart_toStartOf="@id/NewOfferStage3Fragment_minus_button_seats"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/NewOfferStage3Fragment_plus_button_seats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="5dp"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    android:src="@drawable/ic_plus"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/NewOfferStage3Fragment_bags_increase_section"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/increaser_border_stroke_shape_1"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_textView_2"
+                app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_button_car"
+                app:layout_constraintTop_toTopOf="@+id/NewOfferStage3Fragment_textView_2">
+
+                <ImageButton
+                    android:id="@+id/NewOfferStage3Fragment_minus_button_bags"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="5dp"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    android:src="@drawable/ic_minus_1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/NewOfferStage3Fragment_bags_value_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/firasans_light"
+                    android:text="0"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/NewOfferStage3Fragment_plus_button_bags"
+                    app:layout_constraintStart_toStartOf="@id/NewOfferStage3Fragment_minus_button_bags"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/NewOfferStage3Fragment_plus_button_bags"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="5dp"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    android:src="@drawable/ic_plus"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
