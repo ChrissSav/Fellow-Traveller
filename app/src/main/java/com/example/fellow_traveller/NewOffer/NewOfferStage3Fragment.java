@@ -32,9 +32,9 @@ import com.example.fellow_traveller.Settings.AddCarSettingsActivity;
 import java.util.ArrayList;
 
 
-
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
+import static com.example.fellow_traveller.Util.SomeMethods.createSnackBar;
 
 
 public class NewOfferStage3Fragment extends Fragment {
@@ -146,16 +146,16 @@ public class NewOfferStage3Fragment extends Fragment {
 
 
     public void openDialogForCar() {
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
-        View mView = getLayoutInflater().inflate(R.layout.choose_car, null);
-        Button button = mView.findViewById(R.id.choose_car_button_add_car);
+
+        final Dialog dialog = new Dialog(getActivity(), R.style.ThemeDialogNew);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.choose_car);
+        dialog.setCancelable(true);
+
+        Button button = dialog.findViewById(R.id.choose_car_button_add_car);
 
 
-        mBuilder.setView(mView);
-
-        final AlertDialog dialog = mBuilder.create();
-
-        getCars(mView, dialog);
+        getCars(dialog);
         dialog.show();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,8 +172,8 @@ public class NewOfferStage3Fragment extends Fragment {
 
     }
 
-    public void buildRecyclerViewForCar(View view, final AlertDialog dialog) {
-        mRecyclerView = view.findViewById(R.id.choose_car_recyclerView);
+    public void buildRecyclerViewForCar(final Dialog dialog) {
+        mRecyclerView = dialog.findViewById(R.id.choose_car_recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mAdapter = new CarAdapter(mExampleList);
@@ -193,21 +193,24 @@ public class NewOfferStage3Fragment extends Fragment {
     }
 
     public void openDialogForSeats() {
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
-        View mView = getLayoutInflater().inflate(R.layout.number_choose, null);
-        Button button = mView.findViewById(R.id.choose_num_button);
-        ImageButton increase = mView.findViewById(R.id.choose_num_imageButton_plus);
-        ImageButton decrease = mView.findViewById(R.id.choose_num_imageButton_minus);
-        final TextView textView_number = mView.findViewById(R.id.choose_num_textView_number);
-        TextView textView_title = mView.findViewById(R.id.choose_num_textView_title);
+
+        final Dialog dialog = new Dialog(getActivity(), R.style.ThemeDialogNew);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.number_choose);
+        dialog.setCancelable(true);
+
+
+        Button button = dialog.findViewById(R.id.choose_num_button);
+        ImageButton increase = dialog.findViewById(R.id.choose_num_imageButton_plus);
+        ImageButton decrease = dialog.findViewById(R.id.choose_num_imageButton_minus);
+        final TextView textView_number = dialog.findViewById(R.id.choose_num_textView_number);
+        TextView textView_title = dialog.findViewById(R.id.choose_num_textView_title);
         if (!buttonSeats.getText().equals(TITLE_SEAT)) {
             textView_number.setText(buttonSeats.getText().toString());
         }
 
         textView_title.setText("Καθόρισε τον αριθμό των θέσεων");
-        mBuilder.setView(mView);
 
-        final AlertDialog dialog = mBuilder.create();
         dialog.show();
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -236,15 +239,11 @@ public class NewOfferStage3Fragment extends Fragment {
     }
 
     public void openDialogForBags() {
-        final Dialog dialog = new Dialog(getActivity());
+        final Dialog dialog = new Dialog(getActivity(), R.style.ThemeDialogNew);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.number_choose);
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.setCancelable(false);
+        dialog.setCancelable(true);
 
-
-        //AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
-        //View mView = getLayoutInflater().inflate(R.layout.number_choose, null);
         Button button = dialog.findViewById(R.id.choose_num_button);
         ImageButton increase = dialog.findViewById(R.id.choose_num_imageButton_plus);
         ImageButton decrease = dialog.findViewById(R.id.choose_num_imageButton_minus);
@@ -255,9 +254,9 @@ public class NewOfferStage3Fragment extends Fragment {
         }
 
         textView_title.setText("Καθόρισε τον αριθμό των αποσκεύων");
-       // mBuilder.setView(mView);
+        // mBuilder.setView(mView);
 
-       // final AlertDialog dialog = mBuilder.create();
+        // final AlertDialog dialog = mBuilder.create();
         dialog.show();
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -318,7 +317,7 @@ public class NewOfferStage3Fragment extends Fragment {
     }
 
     public boolean validateFragment() {
-        if(checkCar() && checkSeats() && checkBags()&& checkPet()){
+        if (checkCar() && checkSeats() && checkBags() && checkPet()) {
             return true;
         }
         return false;
@@ -327,7 +326,7 @@ public class NewOfferStage3Fragment extends Fragment {
 
     public Boolean checkCar() {
         if (buttonCar.getText().equals(TITLE_CAR)) {
-            Toast.makeText(getActivity(), "Παρακαλω καταχωρήστε το όχημα σας", Toast.LENGTH_SHORT).show();
+            createSnackBar(view, "Παρακαλω καταχωρήστε το όχημα σας");
             return false;
         } else {
             return true;
@@ -336,7 +335,7 @@ public class NewOfferStage3Fragment extends Fragment {
 
     public Boolean checkPet() {
         if (buttonPet.getText().equals(TITLE_PET)) {
-            Toast.makeText(getActivity(), "Παρακαλω καταχωρήστε αν δεχεστε κατοικίδια", Toast.LENGTH_SHORT).show();
+            createSnackBar(view, "Παρακαλω καταχωρήστε αν δεχεστε κατοικίδια");
             return false;
         } else {
             return true;
@@ -347,13 +346,13 @@ public class NewOfferStage3Fragment extends Fragment {
         try {
             int res = Integer.parseInt(buttonSeats.getText().toString());
             if (res < 1) {
-                Toast.makeText(getActivity(), "Οι θεσεις πρεπει να ειναι τουλαχιστον μια", Toast.LENGTH_SHORT).show();
+                createSnackBar(view, "Οι θεσεις πρεπει να ειναι τουλαχιστον μια");
                 return false;
             } else {
                 return true;
             }
         } catch (NumberFormatException e) {
-            Toast.makeText(getActivity(), "Υπαρχει λαθος στην καταχωρηση των θεσεων", Toast.LENGTH_SHORT).show();
+            createSnackBar(view, "Υπαρχει λαθος στην καταχωρηση των θεσεων");
             return false;
         }
     }
@@ -364,7 +363,7 @@ public class NewOfferStage3Fragment extends Fragment {
             return true;
 
         } catch (NumberFormatException e) {
-            Toast.makeText(getActivity(), "Υπαρχει λαθος στην καταχωρηση των αποσκευων", Toast.LENGTH_SHORT).show();
+            createSnackBar(view, "Υπαρχει λαθος στην καταχωρηση των αποσκευων") ;
             return false;
         }
     }
@@ -414,14 +413,14 @@ public class NewOfferStage3Fragment extends Fragment {
         return currentCar;
     }
 
-    public void getCars(final View view, final AlertDialog dialog) {
+    public void getCars(final Dialog dialog) {
 
         new FellowTravellerAPI(globalClass).getCars(new UserCarsCallBack() {
             @Override
             public void onSuccess(ArrayList<CarModel> carList) {
                 mExampleList = new ArrayList<>();
                 mExampleList = carList;
-                buildRecyclerViewForCar(view, dialog);
+                buildRecyclerViewForCar(dialog);
 
             }
 

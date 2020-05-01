@@ -25,7 +25,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-import static com.example.fellow_traveller.Util.InputValidation.dateTimeToTimestamp;
+import static com.example.fellow_traveller.Util.SomeMethods.createSnackBar;
+import static com.example.fellow_traveller.Util.SomeMethods.dateTimeToTimestamp;
 
 
 public class NewOfferStage2Fragment extends Fragment {
@@ -36,9 +37,7 @@ public class NewOfferStage2Fragment extends Fragment {
     private String time = "";
     private DatePickerDialog.OnDateSetListener mDateListener;
     private TimePickerDialog.OnTimeSetListener mTimeListener;
-   // private DialogFragment timeDialog, dateDialog;
-    private MaterialDatePicker materialDatePicker;
-    private MaterialDatePicker.Builder builder;
+    private DialogFragment timeDialog, dateDialog;
 
     public NewOfferStage2Fragment() {
 
@@ -56,19 +55,17 @@ public class NewOfferStage2Fragment extends Fragment {
         textInputLayout_time.getEditText().setText(time);
 
 
-        //timeDialog = new TimePickerDialogCustom(textInputLayout_time.getEditText());
-        //dateDialog = new DatePickerDialogCustom(textInputLayout_date.getEditText());
+        timeDialog = new TimePickerDialogCustom(textInputLayout_time.getEditText());
+        dateDialog = new DatePickerDialogCustom(textInputLayout_date.getEditText());
 
 
-         builder = MaterialDatePickerBuilder.buildMaterialDatePicker(false);
-         materialDatePicker = builder.build();
+
 
 
         textInputLayout_date.getEditText().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // dateDialog.show(getFragmentManager(), "dateDialog");
-                materialDatePicker.show(getActivity().getSupportFragmentManager(), "DATE_PICKxER");
+                dateDialog.show(getFragmentManager(), "dateDialog");
 
 
             }
@@ -79,7 +76,7 @@ public class NewOfferStage2Fragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-              //  timeDialog.show(getFragmentManager(), "timeDialog");
+                timeDialog.show(getFragmentManager(), "timeDialog");
 
             }
         });
@@ -120,7 +117,7 @@ public class NewOfferStage2Fragment extends Fragment {
 
         Long timestamp = currentTimeStamp();
         if (!(timestamp - getTimeStamp() <= 120)) {
-            createSnackBar(getActivity().getResources().getString(R.string.ERROR_TIME_DATE_VALIDATION));
+            createSnackBar(view,getActivity().getResources().getString(R.string.ERROR_TIME_DATE_VALIDATION));
             return false;
         }
         return true;
@@ -142,11 +139,6 @@ public class NewOfferStage2Fragment extends Fragment {
     }
 
 
-    public void createSnackBar(String msg) {
-        Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
-                .setActionTextColor(getResources().getColor(R.color.colorPrimary))
-                .show();
-    }
 
 
     public Long currentTimeStamp() {

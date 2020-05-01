@@ -84,15 +84,4 @@ public class InputValidation {
         return isValidPass;
     }
 
-    public static long dateTimeToTimestamp(String date, String time) {
-        long p = Long.parseLong("0");
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-            Date parsedDate = dateFormat.parse(date + " " + time);
-            return parsedDate.getTime() / 1000;
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return p;
-    }
 }

@@ -26,7 +26,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.example.fellow_traveller.Util.InputValidation.dateTimeToTimestamp;
+import static com.example.fellow_traveller.Util.SomeMethods.dateTimeToTimestamp;
+
 
 public class NewOfferActivity extends AppCompatActivity {
     private final int stages = 6;

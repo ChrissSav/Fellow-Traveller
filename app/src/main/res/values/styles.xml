@@ -16,30 +16,30 @@
 
 
         <!-- New MaterialComponents attributes. -->
-        <item name="colorPrimaryVariant">@color/profile</item>
-        <item name="colorSecondaryVariant">@color/profile</item>
-        <item name="colorSurface">@color/white</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorOnSecondary">@color/home_blue</item>
-        <item name="colorOnBackground">@color/white</item>
-        <item name="colorOnError">@color/red</item>
-        <item name="colorOnSurface">@color/home_blue</item>
-        <item name="scrimBackground">@color/mtrl_scrim_color</item>
-        <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1</item>
-        <item name="textAppearanceHeadline2">@style/TextAppearance.MaterialComponents.Headline2</item>
-        <item name="textAppearanceHeadline3">@style/TextAppearance.MaterialComponents.Headline3</item>
-        <item name="textAppearanceHeadline4">@style/TextAppearance.MaterialComponents.Headline4</item>
-        <item name="textAppearanceHeadline5">@style/TextAppearance.MaterialComponents.Headline5</item>
-        <item name="textAppearanceHeadline6">@style/TextAppearance.MaterialComponents.Headline6</item>
-        <item name="textAppearanceSubtitle1">@style/TextAppearance.MaterialComponents.Subtitle1</item>
-        <item name="textAppearanceSubtitle2">@style/TextAppearance.MaterialComponents.Subtitle2</item>
-        <item name="textAppearanceBody1">@style/TextAppearance.MaterialComponents.Body1</item>
-        <item name="textAppearanceBody2">@style/TextAppearance.MaterialComponents.Body2</item>
-        <item name="textAppearanceCaption">@style/TextAppearance.MaterialComponents.Caption</item>`
-        <item name="textAppearanceButton">@style/TextAppearance.MaterialComponents.Button</item>
-        <item name="textAppearanceOverline">@style/TextAppearance.MaterialComponents.Overline</item>
-        <item name="materialCalendarFullscreenTheme">@style/CustomThemeOverlay_MaterialCalendar_Fullscreen</item>
-        <item name="materialCalendarTheme">@style/CustomThemeOverlayMaterialCalendar</item>
+<!--        <item name="colorPrimaryVariant">@color/profile</item>-->
+<!--        <item name="colorSecondaryVariant">@color/profile</item>-->
+<!--        <item name="colorSurface">@color/white</item>-->
+<!--        <item name="colorOnPrimary">@color/white</item>-->
+<!--        <item name="colorOnSecondary">@color/home_blue</item>-->
+<!--        <item name="colorOnBackground">@color/white</item>-->
+<!--        <item name="colorOnError">@color/red</item>-->
+<!--        <item name="colorOnSurface">@color/home_blue</item>-->
+<!--        <item name="scrimBackground">@color/mtrl_scrim_color</item>-->
+<!--        <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1</item>-->
+<!--        <item name="textAppearanceHeadline2">@style/TextAppearance.MaterialComponents.Headline2</item>-->
+<!--        <item name="textAppearanceHeadline3">@style/TextAppearance.MaterialComponents.Headline3</item>-->
+<!--        <item name="textAppearanceHeadline4">@style/TextAppearance.MaterialComponents.Headline4</item>-->
+<!--        <item name="textAppearanceHeadline5">@style/TextAppearance.MaterialComponents.Headline5</item>-->
+<!--        <item name="textAppearanceHeadline6">@style/TextAppearance.MaterialComponents.Headline6</item>-->
+<!--        <item name="textAppearanceSubtitle1">@style/TextAppearance.MaterialComponents.Subtitle1</item>-->
+<!--        <item name="textAppearanceSubtitle2">@style/TextAppearance.MaterialComponents.Subtitle2</item>-->
+<!--        <item name="textAppearanceBody1">@style/TextAppearance.MaterialComponents.Body1</item>-->
+<!--        <item name="textAppearanceBody2">@style/TextAppearance.MaterialComponents.Body2</item>-->
+<!--        <item name="textAppearanceCaption">@style/TextAppearance.MaterialComponents.Caption</item>`-->
+<!--        <item name="textAppearanceButton">@style/TextAppearance.MaterialComponents.Button</item>-->
+<!--        <item name="textAppearanceOverline">@style/TextAppearance.MaterialComponents.Overline</item>-->
+<!--        <item name="materialCalendarFullscreenTheme">@style/CustomThemeOverlay_MaterialCalendar_Fullscreen</item>-->
+<!--        <item name="materialCalendarTheme">@style/CustomThemeOverlayMaterialCalendar</item>-->
 
     </style>
 
@@ -50,19 +50,19 @@
         <item name="android:colorControlNormal">@color/login_button</item>
     </style>
 
-    <style name="CustomThemeOverlayMaterialCalendar" parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar">
-        <item name="materialCalendarStyle">@style/Custom_MaterialCalendar.Fullscreen</item>
-    </style>
+<!--    <style name="CustomThemeOverlayMaterialCalendar" parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar">-->
+<!--        <item name="materialCalendarStyle">@style/Custom_MaterialCalendar.Fullscreen</item>-->
+<!--    </style>-->
 
-    <style name="CustomThemeOverlay_MaterialCalendar_Fullscreen"
-        parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar.Fullscreen">
-        <item name="materialCalendarStyle">@style/Custom_MaterialCalendar.Fullscreen</item>
-    </style>
-    
-    <style name="Custom_MaterialCalendar.Fullscreen"
-        parent="@style/Widget.MaterialComponents.MaterialCalendar.Fullscreen">
-        <item name="android:windowFullscreen">false</item>
-    </style>
+<!--    <style name="CustomThemeOverlay_MaterialCalendar_Fullscreen"-->
+<!--        parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar.Fullscreen">-->
+<!--        <item name="materialCalendarStyle">@style/Custom_MaterialCalendar.Fullscreen</item>-->
+<!--    </style>-->
+<!--    -->
+<!--    <style name="Custom_MaterialCalendar.Fullscreen"-->
+<!--        parent="@style/Widget.MaterialComponents.MaterialCalendar.Fullscreen">-->
+<!--        <item name="android:windowFullscreen">false</item>-->
+<!--    </style>-->
 
 
 
@@ -73,9 +73,18 @@
         <item name="android:maxHeight">20dip</item>
     </style>
 
+
     <style name="DialogCostumeTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
+
+
+    <style name="ThemeDialogNew" parent="android:Theme.Holo.Dialog">
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:textColor">@color/profile </item>
+    </style>
 
 </resources>

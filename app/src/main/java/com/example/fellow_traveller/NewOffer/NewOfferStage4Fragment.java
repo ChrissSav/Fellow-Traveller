@@ -48,9 +48,9 @@ public class NewOfferStage4Fragment extends Fragment {
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.toString().length() > 0)
-                    textViewTotal.setText((Float.parseFloat(s.toString()) * numOfPassengers) + " "+getResources().getString(R.string.euro_symbol));
+                    textViewTotal.setText((Float.parseFloat(s.toString()) * numOfPassengers) + " " + getResources().getString(R.string.euro_symbol));
                 else
-                    textViewTotal.setText( "0 "+getResources().getString(R.string.euro_symbol));
+                    textViewTotal.setText("0 " + getResources().getString(R.string.euro_symbol));
             }
         });
 
@@ -71,6 +71,8 @@ public class NewOfferStage4Fragment extends Fragment {
     }
 
     public String getPrice() {
+        if (editTextPrice.getText().toString().length() < 1)
+            return "0";
         return editTextPrice.getText().toString();
     }
 
