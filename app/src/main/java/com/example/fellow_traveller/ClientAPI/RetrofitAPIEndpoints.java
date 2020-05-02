@@ -2,6 +2,7 @@ package com.example.fellow_traveller.ClientAPI;
 
 import com.example.fellow_traveller.ClientAPI.Models.AddCarModel;
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
+import com.example.fellow_traveller.ClientAPI.Models.CreatePassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
 import com.example.fellow_traveller.ClientAPI.Models.NotificationModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
@@ -10,6 +11,7 @@ import com.example.fellow_traveller.ClientAPI.Models.UserChangePasswordModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserLoginModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserRegisterModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserUpdateModel;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,11 @@ public interface RetrofitAPIEndpoints {
             @Body UserChangePasswordModel password
     );
 
+    @POST("/auth/check")
+    Call<StatusHandleModel> checkItemIfExist(
+            @Body JsonObject jsonObject
+    );
+
     //User
     @POST("/users")
     Call<UserAuthModel> userRegister(
@@ -58,6 +65,10 @@ public interface RetrofitAPIEndpoints {
             @Body CreateTripModel trip
     );
 
+    @PUT("/trips/passengers")
+    Call<StatusHandleModel> addPassenger(
+            @Body CreatePassengerModel passenger
+    );
 
     //Car
     @POST("/cars")
