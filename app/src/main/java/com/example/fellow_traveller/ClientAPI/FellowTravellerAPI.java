@@ -13,6 +13,7 @@ import com.example.fellow_traveller.ClientAPI.Callbacks.UserLogoutCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserRegisterCallback;
 import com.example.fellow_traveller.ClientAPI.Models.AddCarModel;
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
+import com.example.fellow_traveller.ClientAPI.Models.CreatePassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
 import com.example.fellow_traveller.ClientAPI.Models.ErrorResponseModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
@@ -83,22 +84,6 @@ public class FellowTravellerAPI {
 
     }
 
-    public static boolean checkFieldIfExistV(final String item, final String value) {
-        JsonObject json = new JsonObject();
-        json.addProperty("item", item);
-        json.addProperty("value", value);
-        final Call<StatusHandleModel> call = retrofitAPIEndpoints.checkItemIfExist(json);
-        try {
-            Response<StatusHandleModel> response = call.execute();
-            if (!response.isSuccessful()) {
-                return false;
-            }
-            return true;
-        } catch (IOException e) {
-            return false;
-        }
-
-    }
     public static void checkFieldIfExist(String item, String value, final StatusCallBack statusCallBack) {
         JsonObject json = new JsonObject();
         json.addProperty("item", item);
@@ -189,7 +174,19 @@ public class FellowTravellerAPI {
             public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
                 if (!response.isSuccessful()) {
                     Log.d("Authentication", "LOGIN FAILURE!!");
-                    statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+
+                    ErrorResponseModel errorResponseModel = getModelFromResponseErrorBody(response);
+                    switch (errorResponseModel.getDetail().getStatusCode()) {
+                        case 101:
+                            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_OLD_PASSWORD_CANNOT_BE_SAME_AS_NEW_PASSWORD));
+                            break;
+                        case 102:
+                            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_PASSWORD_CHANGE_INVALID_CURRENT_PASSWORD));
+                            break;
+                        default:
+                            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                            break;
+                    }
                     return;
                 }
 
@@ -257,11 +254,15 @@ public class FellowTravellerAPI {
             @Override
             public void onResponse(Call<CarModel> call, Response<CarModel> response) {
                 if (!response.isSuccessful()) {
-                    try {
-                        // TODO show error message from errors.xml instead
-                        carRegisterCallBack.onFailure(response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+
+                    ErrorResponseModel errorResponseModel = getModelFromResponseErrorBody(response);
+                    switch (errorResponseModel.getDetail().getStatusCode()) {
+                        case 300:
+                            carRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_PLATE__ALREADY_EXISTS));
+                            break;
+                        default:
+                            carRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                            break;
                     }
                     return;
                 }
@@ -280,12 +281,10 @@ public class FellowTravellerAPI {
             @Override
             public void onResponse(Call<ArrayList<CarModel>> call, Response<ArrayList<CarModel>> response) {
                 if (!response.isSuccessful()) {
-                    try {
-                        // TODO show generalized error message from errors.xml
-                        userCarsCallBack.onFailure(response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+
+                    userCarsCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+
+
                     return;
                 }
                 userCarsCallBack.onSuccess(response.body());
@@ -293,7 +292,7 @@ public class FellowTravellerAPI {
 
             @Override
             public void onFailure(Call<ArrayList<CarModel>> call, Throwable t) {
-                userCarsCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+                userCarsCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
             }
         });
     }
@@ -303,15 +302,14 @@ public class FellowTravellerAPI {
             @Override
             public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
                 if (!response.isSuccessful()) {
-                    try {
-                        // TODO show generalized error message from errors.xml
-                        if (response.code() == 401) {
+                    ErrorResponseModel errorResponseModel = getModelFromResponseErrorBody(response);
+                    switch (errorResponseModel.getDetail().getStatusCode()) {
+                        case 301:
+                            carDeleteCallBack.onFailure(context.getResources().getString(R.string.ERROR_CAR_NOT_BELONG_TO_USER));
+                            break;
+                        default:
                             carDeleteCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
-                            return;
-                        }
-                        carDeleteCallBack.onFailure(response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                            break;
                     }
                     return;
                 }
@@ -320,22 +318,27 @@ public class FellowTravellerAPI {
 
             @Override
             public void onFailure(Call<StatusHandleModel> call, Throwable t) {
-                carDeleteCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+                carDeleteCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
             }
         });
     }
 
-    public static void createTrip(CreateTripModel trip, final TripRegisterCallBack tripRegisterCallBack) {
+    public static void createTrip(CreateTripModel trip,
+                                  final TripRegisterCallBack tripRegisterCallBack) {
         retrofitAPIEndpoints.tripRegister(trip).enqueue(new Callback<StatusHandleModel>() {
 
             @Override
             public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
                 if (!response.isSuccessful()) {
-                    try {
-                        // TODO use generic error message from errors.xml
-                        tripRegisterCallBack.onFailure(response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+
+                    ErrorResponseModel errorResponseModel = getModelFromResponseErrorBody(response);
+                    switch (errorResponseModel.getDetail().getStatusCode()) {
+                        case 402:
+                            tripRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_CAR_NOT_BELONG_TO_USER));
+                            break;
+                        default:
+                            tripRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+                            break;
                     }
                     return;
                 }
@@ -349,6 +352,48 @@ public class FellowTravellerAPI {
         });
     }
 
+
+    public static void addPassengerToTrip(CreatePassengerModel passenger, final StatusCallBack statusCallBack) {
+        retrofitAPIEndpoints.addPassenger(passenger).enqueue(new Callback<StatusHandleModel>() {
+            @Override
+            public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
+                if (!response.isSuccessful()) {
+                    ErrorResponseModel errorResponseModel = getModelFromResponseErrorBody(response);
+                    switch (errorResponseModel.getDetail().getStatusCode()) {
+                        case 400:
+                            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_TRIP_NOT_FOUND));
+                            break;
+                        case 403:
+                            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_TRIP_USER_ALREADY_PASSENGER));
+                            break;
+                        case 404:
+                            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_TRIP_USER_IS_CREATOR));
+                            break;
+                        case 405:
+                            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_TRIP_NOT_AVAILABLE_SEATS));
+                            break;
+                        case 406:
+                            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_TRIP_NOT_AVAILABLE_LUGGAGE));
+                            break;
+                        case 407:
+                            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_TRIP_CHECK_PET_ACCEPTS));
+                            break;
+                        default:
+                            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                            break;
+                    }
+                    return;
+                }
+                statusCallBack.onSuccess(response.body().getMsg());
+
+            }
+
+            @Override
+            public void onFailure(Call<StatusHandleModel> call, Throwable t) {
+                statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            }
+        });
+    }
 
     public static ErrorResponseModel getModelFromResponseErrorBody(Response response) {
         Gson gson = new Gson();
