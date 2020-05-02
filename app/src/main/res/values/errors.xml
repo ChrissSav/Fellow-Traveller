@@ -28,4 +28,9 @@
     <string name="ERROR_REQUIRED_FIELD">Υποχρεωτικό πεδίο.</string>
     <string name="ERROR_TIME_DATE_VALIDATION">Η ημερ/νια που επιλέξατε δεν είναι έγκυρη.</string>
 
+    <!--api status codes-->
+
+
+
+
 </resources>

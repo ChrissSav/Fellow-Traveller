@@ -1,5 +1,6 @@
 package com.example.fellow_traveller.ClientAPI;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarDeleteCallBack;
@@ -13,6 +14,7 @@ import com.example.fellow_traveller.ClientAPI.Callbacks.UserRegisterCallback;
 import com.example.fellow_traveller.ClientAPI.Models.AddCarModel;
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
+import com.example.fellow_traveller.ClientAPI.Models.ErrorResponseModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserChangePasswordModel;
@@ -21,9 +23,12 @@ import com.example.fellow_traveller.ClientAPI.Models.UserRegisterModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserUpdateModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -78,6 +83,47 @@ public class FellowTravellerAPI {
 
     }
 
+    public static boolean checkFieldIfExistV(final String item, final String value) {
+        JsonObject json = new JsonObject();
+        json.addProperty("item", item);
+        json.addProperty("value", value);
+        final Call<StatusHandleModel> call = retrofitAPIEndpoints.checkItemIfExist(json);
+        try {
+            Response<StatusHandleModel> response = call.execute();
+            if (!response.isSuccessful()) {
+                return false;
+            }
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+
+    }
+    public static void checkFieldIfExist(String item, String value, final StatusCallBack statusCallBack) {
+        JsonObject json = new JsonObject();
+        json.addProperty("item", item);
+        json.addProperty("value", value);
+
+        retrofitAPIEndpoints.checkItemIfExist(json).enqueue(new Callback<StatusHandleModel>() {
+            @Override
+            public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
+                if (!response.isSuccessful()) {
+                    statusCallBack.onFailure("");
+                    return;
+                }
+
+                statusCallBack.onSuccess("");
+            }
+
+            @Override
+            public void onFailure(Call<StatusHandleModel> call, Throwable t) {
+                statusCallBack.onFailure("");
+
+            }
+        });
+    }
+
+
     public static void userLogout(final UserLogoutCallBack userLogoutCallBack) {
         // TODO change this method of logging out with sessionID cookie instead.
         retrofitAPIEndpoints.userLogout().enqueue(new Callback<StatusHandleModel>() {
@@ -108,12 +154,19 @@ public class FellowTravellerAPI {
             @Override
             public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
                 if (!response.isSuccessful()) {
-                    try {
-                        // TODO Display generalized error message from errors.xml
-                        userRegisterCallback.onFailure(response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    ErrorResponseModel errorResponseModel = getModelFromResponseErrorBody(response);
+                    switch (errorResponseModel.getDetail().getStatusCode()) {
+                        case 200:
+                            userRegisterCallback.onFailure(context.getResources().getString(R.string.ERROR_PHONE_ALREADY_EXISTS));
+                            break;
+                        case 201:
+                            userRegisterCallback.onFailure(context.getResources().getString(R.string.ERROR_EMAIL_ALREADY_EXISTS));
+                            break;
+                        default:
+                            userRegisterCallback.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                            break;
                     }
+
                     return;
                 }
                 String key = response.headers().get("Set-Cookie").split(";")[0];
@@ -150,6 +203,7 @@ public class FellowTravellerAPI {
         });
 
     }
+
 
     public static void getUserInfo(final UserAuthCallback userAuthCallback) {
         retrofitAPIEndpoints.userInfo().enqueue(new Callback<UserAuthModel>() {
@@ -293,6 +347,12 @@ public class FellowTravellerAPI {
                 tripRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
             }
         });
+    }
+
+
+    public static ErrorResponseModel getModelFromResponseErrorBody(Response response) {
+        Gson gson = new Gson();
+        return gson.fromJson(response.errorBody().charStream(), ErrorResponseModel.class);
     }
 
 }

@@ -10,6 +10,7 @@ import com.example.fellow_traveller.ClientAPI.Models.UserChangePasswordModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserLoginModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserRegisterModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserUpdateModel;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,11 @@ public interface RetrofitAPIEndpoints {
     @PUT("/auth/password")
     Call<StatusHandleModel> userChangePassword(
             @Body UserChangePasswordModel password
+    );
+
+    @POST("/auth/check")
+    Call<StatusHandleModel> checkItemIfExist(
+            @Body JsonObject jsonObject
     );
 
     //User
