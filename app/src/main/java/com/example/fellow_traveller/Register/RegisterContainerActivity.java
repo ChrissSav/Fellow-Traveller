@@ -177,7 +177,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(String errorMsg) {
-                    registerStage1Fragment.setErrorToEditText(getResources().getString(R.string.ERROR_PHONE_ALREADY_EXISTS));
+                    registerStage1Fragment.setErrorToEditText(getResources().getString(R.string.ERROR_EMAIL_ALREADY_EXISTS));
 
                 }
             });
