@@ -1,11 +1,13 @@
 package com.example.fellow_traveller.Register;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -35,6 +37,7 @@ public class RegisterStage2Fragment extends Fragment {
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,8 +45,8 @@ public class RegisterStage2Fragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_user_register_stage_2, container, false);
         passwordTextInputLayout = view.findViewById(R.id.fragment_user_register_stage2_password_textInputLayout);
         confirmPasswordTextInputLayout = view.findViewById(R.id.fragment_user_register_stage2_confirmPassword_textInputLayout);
-        passwordTextInputLayout.getEditText().setText(tempPassword);
-        confirmPasswordTextInputLayout.getEditText().setText(tempConfirmPassword);
+        Objects.requireNonNull(passwordTextInputLayout.getEditText()).setText(tempPassword);
+        Objects.requireNonNull(confirmPasswordTextInputLayout.getEditText()).setText(tempConfirmPassword);
 
         passwordComplexityRequirementsTextViews = new ArrayList<>();
         passwordComplexityRequirementsTextViews.add((TextView) view.findViewById(R.id.fragment_user_register_password_complexity_digit_TextView));
@@ -82,14 +85,27 @@ public class RegisterStage2Fragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // clear any previous errors for the input layouts
-                passwordTextInputLayout.setError(null);
-                confirmPasswordTextInputLayout.setError(null);
                 validatePasswordComplexity(s.toString(), passwordComplexityRequirementsTextViews);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+            }
+        });
+
+        Objects.requireNonNull(passwordTextInputLayout.getEditText()).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                passwordTextInputLayout.setError(null);
+                return false;
+            }
+        });
+
+        Objects.requireNonNull(confirmPasswordTextInputLayout.getEditText()).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                confirmPasswordTextInputLayout.setError(null);
+                return false;
             }
         });
 
@@ -114,20 +130,30 @@ public class RegisterStage2Fragment extends Fragment {
     public Boolean validateFragment() {
         String password = passwordTextInputLayout.getEditText().getText().toString();
         String confirmPassword = confirmPasswordTextInputLayout.getEditText().getText().toString();
+        Boolean isValidFragment;
 
-        if (!validatePasswordComplexity(password, passwordComplexityRequirementsTextViews)) {
+        if (password.isEmpty()) {
+            passwordTextInputLayout.setError(getResources().getString(R.string.ERROR_REQUIRED_FIELD));
+            isValidFragment = false;
+        }
+        if (confirmPassword.isEmpty()) {
+            confirmPasswordTextInputLayout.setError(getResources().getString(R.string.ERROR_REQUIRED_FIELD));
+            isValidFragment = false;
+        } else if (!validatePasswordComplexity(password, passwordComplexityRequirementsTextViews)) {
             passwordTextInputLayout.setError(getContext().getString(R.string.ERROR_PASSWORD_DOES_NOT_MEET_COMPLEXITY_REQUIREMENTS));
             confirmPasswordTextInputLayout.setError(null);
-            return false;
+            isValidFragment = false;
         } else if (!password.equals(confirmPassword)) {
             passwordTextInputLayout.setError(null);
             confirmPasswordTextInputLayout.setError(getContext().getString(R.string.ERROR_PASSWORD_DO_NOT_MATCH));
-            return false;
+            isValidFragment = false;
         } else {
             passwordTextInputLayout.setError(null);
             confirmPasswordTextInputLayout.setError(null);
-            return true;
+            isValidFragment = true;
         }
+
+        return isValidFragment;
 
     }
 

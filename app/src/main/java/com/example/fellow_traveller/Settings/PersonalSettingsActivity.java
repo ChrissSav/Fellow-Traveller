@@ -21,6 +21,8 @@ import com.example.fellow_traveller.R;
 import com.google.gson.Gson;
 import com.theartofdev.edmodo.cropper.CropImage;
 
+import java.util.Objects;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.example.fellow_traveller.Util.InputValidation.isValidPhone;
@@ -141,11 +143,11 @@ public class PersonalSettingsActivity extends AppCompatActivity {
         new FellowTravellerAPI(globalClass).updateUserInfo(user, new UserAuthCallback() {
             @Override
             public void onSuccess(UserAuthModel user) {
-                user.setSessionId(globalClass.getCurrentUser().getSessionId());
-                globalClass.setCurrentUser(user);
+                Objects.requireNonNull(user).setSessionId(globalClass.getCurrentUser().getSessionId());
+                globalClass.setCurrentUser(Objects.requireNonNull(user));
 
                 DeleteSharedPreferences();
-                SaveClass(user);
+                SaveClass(Objects.requireNonNull(user));
                 finish();
             }
 

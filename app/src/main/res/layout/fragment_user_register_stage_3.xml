@@ -17,68 +17,74 @@
 
         <TextView
             android:id="@+id/RegisterStage3Fragment_textView4"
+            style="@style/titleRegisterStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:text="What's your name ?"
             style="@style/titleStyle"
+            android:layout_marginStart="16dp"
+            android:text="Πώς ονομάζεσαι ;"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/RegisterStage3Fragment_textView5"
+            style="@style/labelRegisterStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="Name"
             style="@style/labelStyle"
             app:layout_constraintStart_toStartOf="parent"
+            android:text="Όνομα"
+            app:layout_constraintStart_toStartOf="@+id/RegisterStage3Fragment_textView4"
             app:layout_constraintTop_toBottomOf="@+id/RegisterStage3Fragment_textView4" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/RegisterStage3Fragment_textInputLayout_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
+            android:layout_marginEnd="16dp"
             app:endIconMode="clear_text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/RegisterStage3Fragment_textView5"
             app:layout_constraintTop_toBottomOf="@+id/RegisterStage3Fragment_textView5">
 
             <com.google.android.material.textfield.TextInputEditText
+                style="@style/inputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="@color/edit_text_color"
-                android:textSize="20sp" />
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/RegisterStage3Fragment_textView6"
+            style="@style/labelRegisterStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="39dp"
             android:text="Surname"
             style="@style/labelStyle"
             app:layout_constraintStart_toStartOf="parent"
+            android:text="Έπωνυμο"
+            app:layout_constraintStart_toStartOf="@+id/RegisterStage3Fragment_textView4"
             app:layout_constraintTop_toBottomOf="@+id/RegisterStage3Fragment_textInputLayout_name" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/RegisterStage3Fragment_textInputLayout_surname"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
             app:endIconMode="clear_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/RegisterStage3Fragment_textInputLayout_name"
+            app:layout_constraintStart_toStartOf="@+id/RegisterStage3Fragment_textInputLayout_name"
             app:layout_constraintTop_toBottomOf="@+id/RegisterStage3Fragment_textView6">
 
             <com.google.android.material.textfield.TextInputEditText
+                style="@style/inputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="@color/edit_text_color"
-                android:textSize="20sp" />
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
