@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Register.RegisterStagePhoneFragment">
+
+    <TextView
+        android:id="@+id/RegisterStagePhoneFragment_textView"
+        style="@style/titleRegisterStyle"
+        android:layout_width="0dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/register_fragment_become_a_fellow_traveller"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/RegisterStagePhoneFragment_textView_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="Αριθμός τηλεφώνου"
+        style="@style/labelRegisterStyle"
+        app:layout_constraintStart_toStartOf="@+id/RegisterStagePhoneFragment_textView"
+        app:layout_constraintTop_toBottomOf="@+id/RegisterStagePhoneFragment_textView" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/RegisterStagePhoneFragment_constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/RegisterStagePhoneFragment_textView"
+        app:layout_constraintStart_toStartOf="@+id/RegisterStagePhoneFragment_textView"
+        app:layout_constraintTop_toBottomOf="@+id/RegisterStagePhoneFragment_textView_text">
+
+        <EditText
+            android:id="@+id/RegisterStagePhoneFragment_editText_number"
+            style="@style/inputStyle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:background="@null"
+            android:ems="10"
+            android:hint="69xxxxxxxx"
+            android:inputType="number"
+            android:maxLength="10"
+            android:text="6999999999"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/RegisterStagePhoneFragment_textView5"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/RegisterStagePhoneFragment_spinner_num_code"
+            style="@style/inputStyle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            android:drawSelectorOnTop="true"
+            android:entries="@array/spinner_phone_codes"
+            android:prompt="@string/app_name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/RegisterStagePhoneFragment_textView5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/RegisterStagePhoneFragment_textView5"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#F0F1F0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="127dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/RegisterStagePhoneFragment_textView3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/register_fragment_six_digit_code_notice_description"
+        android:textColor="#8B8C8A"
+        app:layout_constraintEnd_toEndOf="@+id/RegisterStagePhoneFragment_textView"
+        app:layout_constraintStart_toStartOf="@+id/RegisterStagePhoneFragment_textView"
+        app:layout_constraintTop_toBottomOf="@+id/RegisterStagePhoneFragment_constraintLayout" />
+
+    <TextView
+        android:id="@+id/RegisterStagePhoneFragment_textView2"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="4dp"
+        android:background="#F0F1F0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RegisterStagePhoneFragment_constraintLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

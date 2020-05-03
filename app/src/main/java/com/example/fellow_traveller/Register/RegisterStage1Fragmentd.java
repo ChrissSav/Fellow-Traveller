@@ -27,13 +27,13 @@ import java.util.concurrent.ExecutionException;
 
 import static com.example.fellow_traveller.Util.InputValidation.isValidEmail;
 
-public class RegisterStage1Fragment extends Fragment {
+public class RegisterStage1Fragmentd extends Fragment {
 
     private TextInputLayout textInputLayoutEmail;
     private GlobalClass globalClass;
     private View view;
 
-    public RegisterStage1Fragment() {
+    public RegisterStage1Fragmentd() {
 
     }
 
@@ -56,17 +56,15 @@ public class RegisterStage1Fragment extends Fragment {
     }
 
     public int getRank() {
-        return 1;
+        return 2;
     }
+
+
 
 
     public String getEmail() {
         return textInputLayoutEmail.getEditText().getText().toString();
     }
-
-
-
-
 
 
     public EditText getEditText() {

@@ -124,7 +124,7 @@ public class RegisterStage2Fragment extends Fragment {
     }
 
     public int getRank() {
-        return 2;
+        return 3;
     }
 
     public Boolean validateFragment() {

@@ -21,22 +21,23 @@ import com.example.fellow_traveller.ClientAPI.Models.UserRegisterModel;
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
-import com.example.fellow_traveller.RegisterActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
 import static com.example.fellow_traveller.Util.InputValidation.isValidEmail;
+import static com.example.fellow_traveller.Util.InputValidation.isValidPhone;
 
 public class RegisterContainerActivity extends AppCompatActivity {
 
-    private final int stages = 3;
+    private final int stages = 4;
     private Button buttonNext;
     private ImageButton btnBack;
     private FragmentManager fragmentManager;
     private Fragment fra;
-    private RegisterStage1Fragment registerStage1Fragment = new RegisterStage1Fragment();
+    private RegisterStagePhoneFragment registerStagePhoneFragment = new RegisterStagePhoneFragment();
+    private RegisterStage1Fragmentd registerStage1Fragment = new RegisterStage1Fragmentd();
     private RegisterStage2Fragment registerStage2Fragment = new RegisterStage2Fragment();
     private RegisterStage3Fragment registerStage3Fragment = new RegisterStage3Fragment();
     private ProgressBar progressBar;
@@ -56,34 +57,35 @@ public class RegisterContainerActivity extends AppCompatActivity {
 
 
         num_num = 100 / stages;
-        userPhone = getIntent().getStringExtra("USER_PHONE");
 
         progressBar = findViewById(R.id.RegisterActivity_progressBar);
         buttonNext = findViewById(R.id.RegisterActivity_button_next);
         btnBack = findViewById(R.id.RegisterActivity_imageButton);
 
 
-        progressBar.setProgress(num_num * registerStage1Fragment.getRank());
+        progressBar.setProgress(num_num * registerStagePhoneFragment.getRank());
 
         //Fragment Management
 
 
         fragmentManager = getSupportFragmentManager();
-        fra = registerStage1Fragment;
+        fra = registerStagePhoneFragment;
         fragmentManager.beginTransaction().replace(R.id.RegisterActivity_frame_container, fra).commit();
 
 
         buttonNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (fra.toString().equals("RegisterStage1Fragment")) {
-                    validateRegisterStage1();
-                } else if (fra.toString().equals("RegisterStage2Fragment") && registerStage2Fragment.validateFragment()) {
+                if (fra.toString().equals("RegisterStagePhoneFragment")) {
+                    validateRegisterStagePhone();
+                }
+                else if (fra.toString().equals("RegisterStage2Fragment")) {
+                    validateRegisterStageEmail();
+                } else if (fra.toString().equals("RegisterStage3Fragment") && registerStage2Fragment.validateFragment()) {
                     progressBar.setProgress(num_num * registerStage3Fragment.getRank());
                     fra = registerStage3Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.RegisterActivity_frame_container, fra).commit();
-                    buttonNext.setText("Complete");
-
-                } else if (fra.toString().equals("RegisterStage3Fragment") && registerStage3Fragment.validateFragment()) {
+                    buttonNext.setText("Εγγραφή");
+                } else if (fra.toString().equals("RegisterStage4Fragment") && registerStage3Fragment.validateFragment()) {
                     newRegisterUser();
                 }
             }
@@ -99,9 +101,10 @@ public class RegisterContainerActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
+        buttonNext.setText("Επόμενο");
         if (fra.toString().equals("RegisterStage3Fragment")) {
             progressBar.setProgress(num_num * registerStage2Fragment.getRank());
-            buttonNext.setText("Επόμενο");
             fra = registerStage2Fragment;
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.RegisterActivity_frame_container, fra).commit();
 
@@ -110,7 +113,13 @@ public class RegisterContainerActivity extends AppCompatActivity {
             fra = registerStage1Fragment;
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.RegisterActivity_frame_container, fra).commit();
 
-        } else {
+        }
+        else if (fra.toString().equals("RegisterStage1Fragment")) {
+            progressBar.setProgress(num_num * registerStagePhoneFragment.getRank());
+            fra = registerStagePhoneFragment;
+            fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.RegisterActivity_frame_container, fra).commit();
+
+        }else {
             super.onBackPressed();
         }
 
@@ -121,16 +130,17 @@ public class RegisterContainerActivity extends AppCompatActivity {
         String password = registerStage2Fragment.getPassword();
         String firstName = registerStage3Fragment.getFirstName();
         String lastName = registerStage3Fragment.getLastName();
+        String phone = registerStagePhoneFragment.getPhone();
 
         // Create user object from model
-        UserRegisterModel user = new UserRegisterModel(firstName, lastName, email, password, userPhone);
+        UserRegisterModel user = new UserRegisterModel(firstName, lastName, email, password, phone);
 
         new FellowTravellerAPI(globalClass).userRegister(user, new UserRegisterCallback() {
             @Override
             public void onSuccess(UserAuthModel user) {
 
                 Save(user);
-                firebaseRegister(String.valueOf(user.getId()),user.getName(), user.getSurname());
+                firebaseRegister(String.valueOf(user.getId()), user.getName(), user.getSurname());
             }
 
             @Override
@@ -164,7 +174,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
     }
 
 
-    public void validateRegisterStage1() {
+    public void validateRegisterStageEmail() {
         EditText editText = registerStage1Fragment.getEditText();
         if (isValidEmail(editText.getText())) {
             registerStage1Fragment.setErrorToEditText(null);
@@ -187,6 +197,31 @@ public class RegisterContainerActivity extends AppCompatActivity {
 
         } else {
             registerStage1Fragment.setErrorToEditText(getResources().getString(R.string.ERROR_INVALID_EMAIL_FORMAT));
+        }
+    }
+
+
+    public void validateRegisterStagePhone() {
+        EditText editText = registerStagePhoneFragment.getEditText();
+        if (isValidPhone(editText.getText().toString())) {
+            registerStagePhoneFragment.setErrorToEditText(null);
+            new FellowTravellerAPI(globalClass).checkFieldIfExist("phone", editText.getText().toString(), new StatusCallBack() {
+                @Override
+                public void onSuccess(String status) {
+                    fra = registerStage1Fragment;
+                    progressBar.setProgress(num_num * registerStage1Fragment.getRank());
+                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.RegisterActivity_frame_container, fra).commit();
+                }
+
+                @Override
+                public void onFailure(String errorMsg) {
+                    registerStagePhoneFragment.setErrorToEditText(getResources().getString(R.string.ERROR_PHONE_ALREADY_EXISTS));
+
+                }
+            });
+
+        } else {
+            registerStagePhoneFragment.setErrorToEditText(getResources().getString(R.string.INVALID_PHONE_FORMAT));
         }
     }
 
