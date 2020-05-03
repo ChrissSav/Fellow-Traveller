@@ -89,7 +89,7 @@
         android:text="10 €"
         android:fontFamily="@font/firasans_bold"
         android:textSize="24sp"
-        android:textColor="@color/login_button"
+        android:textColor="@color/orange_color"
         />
     <TextView
         android:id="@+id/from_tv_search"

@@ -130,7 +130,7 @@
             android:paddingLeft="15dp"
             android:drawableLeft="@drawable/ic_my_location"
             android:drawablePadding="15dp"
-            android:drawableTint="@color/login_button"
+            android:drawableTint="@color/orange_color"
             android:gravity="left|center_vertical"
             android:background="@drawable/search_button_items"
 
@@ -155,7 +155,7 @@
             android:paddingLeft="15dp"
             android:drawableLeft="@drawable/ic_location"
             android:drawablePadding="15dp"
-            android:drawableTint="@color/login_button"
+            android:drawableTint="@color/orange_color"
             android:gravity="left|center_vertical"
             android:background="@drawable/search_button_items"
             />
@@ -179,7 +179,7 @@
             android:paddingLeft="15dp"
             android:drawableLeft="@drawable/ic_location"
             android:drawablePadding="15dp"
-            android:drawableTint="@color/login_button"
+            android:drawableTint="@color/orange_color"
             android:gravity="left|center_vertical"
             android:background="@drawable/search_button_items"
             />
@@ -202,7 +202,7 @@
             android:paddingLeft="15dp"
             android:drawableLeft="@drawable/ic_location"
             android:drawablePadding="15dp"
-            android:drawableTint="@color/login_button"
+            android:drawableTint="@color/orange_color"
             android:gravity="left|center_vertical"
             android:background="@drawable/search_button_items"
             />
@@ -225,7 +225,7 @@
             android:paddingLeft="15dp"
             android:drawableLeft="@drawable/ic_location"
             android:drawablePadding="15dp"
-            android:drawableTint="@color/login_button"
+            android:drawableTint="@color/orange_color"
             android:gravity="left|center_vertical"
             android:background="@drawable/search_button_items"
             />
@@ -248,7 +248,7 @@
             android:paddingLeft="15dp"
             android:drawableLeft="@drawable/ic_location"
             android:drawablePadding="15dp"
-            android:drawableTint="@color/login_button"
+            android:drawableTint="@color/orange_color"
             android:gravity="left|center_vertical"
             android:background="@drawable/search_button_items"
             />

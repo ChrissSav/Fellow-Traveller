@@ -15,7 +15,7 @@
         <shape>
 
 
-            <solid android:color="@color/login_button"/>
+            <solid android:color="@color/orange_color"/>
             <corners
                 android:bottomLeftRadius="8dp"
                 android:bottomRightRadius="8dp"

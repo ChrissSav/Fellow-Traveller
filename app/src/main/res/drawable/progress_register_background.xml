@@ -31,8 +31,8 @@
         <clip>
             <shape>
                 <gradient
-                    android:startColor="@color/login_button"
-                    android:endColor="@color/login_button"
+                    android:startColor="@color/orange_color"
+                    android:endColor="@color/orange_color"
                     android:angle="270" />
             </shape>
         </clip>
