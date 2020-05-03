@@ -96,6 +96,15 @@ public class NewOfferStage1Fragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        if (textInputLayout_from.getEditText().getText().length() > 0)
+            textInputLayout_from.setError(null);
+        if (textInputLayout_to.getEditText().getText().length() > 0)
+            textInputLayout_to.setError(null);
+    }
+
+    @Override
     public void onDestroy() {
         // Log.i("textInputLayout_pass_1", "onDestroy");
         from = textInputLayout_from.getEditText().getText().toString();
