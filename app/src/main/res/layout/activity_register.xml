@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
+    android:id="@+id/RegisterActivityConstraintLayout"
     tools:context=".RegisterActivity">
 
     <TextView
@@ -14,9 +15,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="@string/register_fragment_become_a_fellow_traveller"
-        android:textColor="#000"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        style="@style/titleRegisterStyle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,8 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         android:text="Αριθμός τηλεφώνου"
-        android:textColor="#000"
-        android:textStyle="bold"
+        style="@style/labelRegisterStyle"
         app:layout_constraintStart_toStartOf="@+id/RegisterActivity_textView"
         app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_textView" />
 
@@ -44,26 +42,33 @@
 
         <EditText
             android:id="@+id/RegisterActivity_editText_number"
-            android:layout_width="240dp"
+            style="@style/inputStyle"
+            android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
             android:background="@null"
             android:ems="10"
+            android:hint="69xxxxxxxx"
             android:inputType="number"
             android:maxLength="10"
             android:text="6999999999"
-            android:hint="69xxxxxxxx"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/RegisterActivity_textView5"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
             android:id="@+id/RegisterActivity_spinner_num_code"
-            android:layout_width="100dp"
+            style="@style/inputStyle"
+            android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
             android:drawSelectorOnTop="true"
             android:entries="@array/spinner_phone_codes"
             android:prompt="@string/app_name"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/RegisterActivity_textView5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -75,8 +80,7 @@
             android:layout_marginBottom="8dp"
             android:background="#F0F1F0"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/RegisterActivity_editText_number"
-            app:layout_constraintStart_toEndOf="@+id/RegisterActivity_spinner_num_code"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -87,6 +91,13 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="127dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

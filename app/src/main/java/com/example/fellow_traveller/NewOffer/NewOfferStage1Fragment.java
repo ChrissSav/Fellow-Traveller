@@ -22,7 +22,7 @@ public class NewOfferStage1Fragment extends Fragment {
     private TextInputLayout textInputLayout_from, textInputLayout_to;
     private String from = "";
     private String to = "";
-    private int txt_click = 0;
+    private int witchFieldIsCLick = 0;
 
     public NewOfferStage1Fragment() {
         // Required empty public constructor
@@ -44,7 +44,7 @@ public class NewOfferStage1Fragment extends Fragment {
             public void onClick(View v) {
 
                 Intent intent = new Intent(getActivity(), AddLocationActivity.class);
-                txt_click = 1;
+                witchFieldIsCLick = 1;
                 startActivityForResult(intent, 1);
 
             }
@@ -56,7 +56,7 @@ public class NewOfferStage1Fragment extends Fragment {
 
                 Intent intent = new Intent(getActivity(), AddLocationActivity.class);
                 startActivityForResult(intent, 1);
-                txt_click = 2;
+                witchFieldIsCLick = 2;
 
 
             }
@@ -72,10 +72,10 @@ public class NewOfferStage1Fragment extends Fragment {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 String result = data.getStringExtra("result");
-                if (txt_click == 1) {
+                if (witchFieldIsCLick == 1) {
                     textInputLayout_from.getEditText().setText(result);
 
-                } else if (txt_click == 2) {
+                } else if (witchFieldIsCLick == 2) {
                     textInputLayout_to.getEditText().setText(result);
 
                 }
@@ -93,6 +93,15 @@ public class NewOfferStage1Fragment extends Fragment {
 
     public int getRank() {
         return 1;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (textInputLayout_from.getEditText().getText().length() > 0)
+            textInputLayout_from.setError(null);
+        if (textInputLayout_to.getEditText().getText().length() > 0)
+            textInputLayout_to.setError(null);
     }
 
     @Override

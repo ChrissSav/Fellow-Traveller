@@ -6,34 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".NewOffer.NewOfferStage6Fragment">
 
-    <TextView
-        android:id="@+id/NewOfferStage6Fragment_textView1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/firasans_light"
-        android:text="Επισκόπηση"
-        android:textColor="@color/profile"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NewOfferStage6Fragment_textView1">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="20dp"
+            android:paddingTop="16dp"
             android:paddingBottom="20dp">
 
 
@@ -67,6 +51,7 @@
                     android:layout_marginEnd="4dp"
                     android:fontFamily="@font/firasans_medium"
                     android:maxLines="2"
+                    android:tag="1"
                     android:text="Athens"
                     android:textColor="@color/profile"
                     android:textSize="18sp"
@@ -93,6 +78,7 @@
                     android:fontFamily="@font/firasans_medium"
                     android:maxLines="2"
                     android:text="Thessaloniki"
+                    android:tag="1"
                     android:textColor="@color/profile"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -122,9 +108,10 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout_date"
-                    android:layout_width="90dp"
-                    android:layout_height="110dp"
+                    android:layout_width="91dp"
+                    android:layout_height="119dp"
                     android:background="@drawable/grey_border"
+                    android:tag="2"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -132,14 +119,16 @@
                         android:id="@+id/NewOfferStage6Fragment_textView10"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
                         android:layout_marginEnd="10dp"
                         android:fontFamily="@font/firasans_light"
+                        android:tag="2"
                         android:text="Ημ/νία"
                         android:textColor="@color/profile"
                         android:textSize="15sp"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -149,13 +138,15 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/firasans_bold"
+                        android:lineSpacingExtra="@dimen/space_between_lines"
                         android:maxLines="2"
+                        android:tag="2"
                         android:text="20\nΙαν"
                         android:textAlignment="center"
                         android:textColor="@color/profile"
                         android:textSize="20sp"
-                        app:layout_constraintEnd_toEndOf="@+id/NewOfferStage6Fragment_textView10"
-                        app:layout_constraintStart_toStartOf="@+id/NewOfferStage6Fragment_textView10"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/NewOfferStage6Fragment_textView10" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -165,6 +156,7 @@
                     android:id="@+id/constraintLayout_time"
                     android:layout_width="90dp"
                     android:layout_height="0dp"
+                    android:tag="2"
                     android:background="@drawable/grey_border"
                     app:layout_constraintBottom_toBottomOf="@+id/constraintLayout_date"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -175,14 +167,15 @@
                         android:id="@+id/NewOfferStage6Fragment_textView11"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
                         android:layout_marginEnd="10dp"
                         android:fontFamily="@font/firasans_light"
                         android:text="Ώρα"
                         android:textColor="@color/profile"
                         android:textSize="15sp"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -192,15 +185,17 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/firasans_bold"
+                        android:lineSpacingExtra="@dimen/space_between_lines"
                         android:maxLines="2"
+                        android:tag="2"
                         android:text="08:00\nΠΜ"
                         android:textAlignment="center"
                         android:textColor="@color/profile"
                         android:textSize="20sp"
-                        app:layout_constraintEnd_toEndOf="@+id/NewOfferStage6Fragment_textView11"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/NewOfferStage6Fragment_textView11"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/NewOfferStage6Fragment_textView11" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -209,6 +204,7 @@
                     android:id="@+id/constraintLayout_seats"
                     android:layout_width="90dp"
                     android:layout_height="0dp"
+                    android:tag="3"
                     android:background="@drawable/grey_border"
                     app:layout_constraintBottom_toBottomOf="@+id/constraintLayout_time"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -218,14 +214,15 @@
                         android:id="@+id/NewOfferStage6Fragment_textView13"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
                         android:layout_marginEnd="10dp"
                         android:fontFamily="@font/firasans_light"
                         android:text="Θέσεις"
                         android:textColor="@color/profile"
                         android:textSize="15sp"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -235,22 +232,25 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/firasans_bold"
+                        android:tag="3"
                         android:text="1"
                         android:textAlignment="center"
                         android:textColor="@color/profile"
                         android:textSize="20sp"
-                        app:layout_constraintEnd_toEndOf="@+id/NewOfferStage6Fragment_textView13"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/NewOfferStage6Fragment_textView13"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/NewOfferStage6Fragment_textView13" />
 
                     <TextView
                         android:id="@+id/ewOfferStage6Fragment_textView01"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_between_lines"
                         android:background="@drawable/ic_seat"
                         app:layout_constraintEnd_toEndOf="@+id/NewOfferStage6Fragment_textView13"
+                        app:layout_constraintHorizontal_bias="0.521"
                         app:layout_constraintStart_toStartOf="@+id/NewOfferStage6Fragment_textView13"
                         app:layout_constraintTop_toBottomOf="@+id/NewOfferStage6Fragment_textView_seats" />
 
@@ -285,6 +285,7 @@
                     android:fontFamily="@font/firasans_medium"
                     android:maxLines="1"
                     android:text="Allowed"
+                    android:tag="3"
                     android:textAlignment="textEnd"
                     android:textColor="@color/profile"
                     android:textSize="18sp"
@@ -321,6 +322,7 @@
                     android:fontFamily="@font/firasans_medium"
                     android:maxLines="1"
                     android:text="50"
+                    android:tag="4"
                     android:textAlignment="textEnd"
                     android:textColor="@color/profile"
                     android:textSize="20sp"
@@ -359,6 +361,7 @@
                     android:fontFamily="@font/firasans_medium"
                     android:maxLines="1"
                     android:text="Audi R8"
+                    android:tag="3"
                     android:textAlignment="textEnd"
                     android:textColor="@color/profile"
                     android:textSize="17sp"
@@ -395,6 +398,7 @@
                     android:fontFamily="@font/firasans_medium"
                     android:maxLines="1"
                     android:text="5"
+                    android:tag="3"
                     android:textAlignment="textEnd"
                     android:textColor="@color/profile"
                     android:textSize="20sp"
@@ -435,6 +439,7 @@
                 android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est"
                 android:textColor="@color/profile"
                 android:textSize="16sp"
+                android:tag="5"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
                 app:layout_constraintStart_toStartOf="@+id/NewOfferStage6Fragment_textView_123"
                 app:layout_constraintTop_toBottomOf="@+id/NewOfferStage6Fragment_textView_123" />

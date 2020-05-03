@@ -11,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="16dp"
-        android:background="@drawable/search_border"
+        android:background="@android:color/transparent"
         android:elevation="1dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
@@ -23,12 +23,13 @@
 
         <ImageButton
             android:id="@+id/AddLocationActivity_back_button_search"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/ic_back_button"
-            android:backgroundTint="@color/profile"
-            android:padding="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:adjustViewBounds="true"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:padding="5dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back_button"
             app:layout_constraintBottom_toBottomOf="@+id/AddLocationActivity_EditText_search_place"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/AddLocationActivity_EditText_search_place" />
@@ -38,8 +39,8 @@
             android:id="@+id/AddLocationActivity_EditText_search_place"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
             android:background="@android:color/transparent"
             android:hint="Επιλογή τοποθεσίας..."
             android:imeOptions="actionSearch"
@@ -53,6 +54,16 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/AddLocationActivity_textView6"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AddLocationActivity_search_section" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/AddLocationActivity_RecyclerView"
         android:layout_width="0dp"
@@ -61,10 +72,9 @@
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AddLocationActivity_search_section"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/AddLocationActivity_textView6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

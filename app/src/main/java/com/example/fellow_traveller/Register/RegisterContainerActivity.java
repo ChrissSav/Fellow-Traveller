@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.fellow_traveller.ClientAPI.Callbacks.StatusCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserRegisterCallback;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
@@ -19,10 +21,13 @@ import com.example.fellow_traveller.ClientAPI.Models.UserRegisterModel;
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
+import com.example.fellow_traveller.RegisterActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+
+import static com.example.fellow_traveller.Util.InputValidation.isValidEmail;
 
 public class RegisterContainerActivity extends AppCompatActivity {
 
@@ -70,11 +75,8 @@ public class RegisterContainerActivity extends AppCompatActivity {
 
         buttonNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (fra.toString().equals("RegisterStage1Fragment") && registerStage1Fragment.validateFragment()) {
-                    fra = registerStage2Fragment;
-                    progressBar.setProgress(num_num * registerStage2Fragment.getRank());
-                    //buttonNext.setText("Αποστολή");
-                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.RegisterActivity_frame_container, fra).commit();
+                if (fra.toString().equals("RegisterStage1Fragment")) {
+                    validateRegisterStage1();
                 } else if (fra.toString().equals("RegisterStage2Fragment") && registerStage2Fragment.validateFragment()) {
                     progressBar.setProgress(num_num * registerStage3Fragment.getRank());
                     fra = registerStage3Fragment;
@@ -82,7 +84,6 @@ public class RegisterContainerActivity extends AppCompatActivity {
                     buttonNext.setText("Complete");
 
                 } else if (fra.toString().equals("RegisterStage3Fragment") && registerStage3Fragment.validateFragment()) {
-                    Toast.makeText(RegisterContainerActivity.this, "Success", Toast.LENGTH_SHORT).show();
                     newRegisterUser();
                 }
             }
@@ -100,7 +101,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (fra.toString().equals("RegisterStage3Fragment")) {
             progressBar.setProgress(num_num * registerStage2Fragment.getRank());
-            buttonNext.setText("Next");
+            buttonNext.setText("Επόμενο");
             fra = registerStage2Fragment;
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.RegisterActivity_frame_container, fra).commit();
 
@@ -115,7 +116,6 @@ public class RegisterContainerActivity extends AppCompatActivity {
 
     }
 
-    // TODO why not call this directly from above instead of having a separate method?
     public void newRegisterUser() {
         String email = registerStage1Fragment.getEmail();
         String password = registerStage2Fragment.getPassword();
@@ -161,6 +161,33 @@ public class RegisterContainerActivity extends AppCompatActivity {
                 | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
+    }
+
+
+    public void validateRegisterStage1() {
+        EditText editText = registerStage1Fragment.getEditText();
+        if (isValidEmail(editText.getText())) {
+            registerStage1Fragment.setErrorToEditText(null);
+
+            new FellowTravellerAPI(globalClass).checkFieldIfExist("email", editText.getText().toString(), new StatusCallBack() {
+                @Override
+                public void onSuccess(String status) {
+                    fra = registerStage2Fragment;
+                    progressBar.setProgress(num_num * registerStage2Fragment.getRank());
+                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.RegisterActivity_frame_container, fra).commit();
+                }
+
+                @Override
+                public void onFailure(String errorMsg) {
+                    registerStage1Fragment.setErrorToEditText(getResources().getString(R.string.ERROR_EMAIL_ALREADY_EXISTS));
+
+                }
+            });
+
+
+        } else {
+            registerStage1Fragment.setErrorToEditText(getResources().getString(R.string.ERROR_INVALID_EMAIL_FORMAT));
+        }
     }
 
 

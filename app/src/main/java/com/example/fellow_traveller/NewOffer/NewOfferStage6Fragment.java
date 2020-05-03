@@ -4,6 +4,7 @@ package com.example.fellow_traveller.NewOffer;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fellow_traveller.R;
 
@@ -19,12 +21,12 @@ import java.time.Month;
 import java.time.format.TextStyle;
 
 
-public class NewOfferStage6Fragment extends Fragment {
+public class NewOfferStage6Fragment extends Fragment implements View.OnClickListener {
     private View view;
     private TextView textViewFrom, textViewTo, textViewDate, textViewTime,
             textViewSeats, textViewBags, textViewPets, textViewPrice, textViewCar, textViewMsg;
     private String from, to, date, time, seats, bags, pets, price, car, msg;
-
+    private View.OnClickListener clickListener;
 
     public NewOfferStage6Fragment() {
         this.from = "";
@@ -57,6 +59,18 @@ public class NewOfferStage6Fragment extends Fragment {
         textViewCar = view.findViewById(R.id.NewOfferStage6Fragment_textView_car);
         textViewMsg = view.findViewById(R.id.NewOfferStage6Fragment_textView_msg);
 
+        textViewFrom.setOnClickListener(this);
+        textViewTo.setOnClickListener(this);
+        textViewDate.setOnClickListener(this);
+        textViewTime.setOnClickListener(this);
+        textViewSeats.setOnClickListener(this);
+        textViewBags.setOnClickListener(this);
+        textViewPets.setOnClickListener(this);
+        textViewPrice.setOnClickListener(this);
+        textViewCar.setOnClickListener(this);
+        textViewMsg.setOnClickListener(this);
+
+
         textViewFrom.setText(from);
         textViewTo.setText(to);
 
@@ -74,6 +88,16 @@ public class NewOfferStage6Fragment extends Fragment {
 
 
         return view;
+
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        NewOfferActivity newOfferActivity = (NewOfferActivity) getActivity();
+
+        newOfferActivity.getDateFromFragment(v.getTag().toString());
+
     }
 
     public String toString() {
@@ -140,9 +164,9 @@ public class NewOfferStage6Fragment extends Fragment {
     }
 
     public void setTime(String time) {
-        int hourOfDay = Integer.parseInt(time.substring(0,2));
-        int minute = Integer.parseInt(time.substring(3,5));
-        time =  ((hourOfDay > 12) ? hourOfDay % 12 : hourOfDay) + ":" + (minute < 10 ? ("0" + minute) : minute) + "\n" + ((hourOfDay >= 12) ? "ΜΜ" : "ΠΜ");
+        int hourOfDay = Integer.parseInt(time.substring(0, 2));
+        int minute = Integer.parseInt(time.substring(3, 5));
+        time = ((hourOfDay > 12) ? hourOfDay % 12 : hourOfDay) + ":" + (minute < 10 ? ("0" + minute) : minute) + "\n" + ((hourOfDay >= 12) ? "ΜΜ" : "ΠΜ");
         this.time = time;
     }
 
@@ -169,7 +193,6 @@ public class NewOfferStage6Fragment extends Fragment {
     public void setMsg(String msg) {
         this.msg = msg;
     }
-
 
 
 }

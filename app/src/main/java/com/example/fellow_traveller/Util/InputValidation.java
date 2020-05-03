@@ -1,6 +1,7 @@
 package com.example.fellow_traveller.Util;
 
 import android.graphics.Typeface;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.text.ParseException;
@@ -61,7 +62,6 @@ public class InputValidation {
         // validates password complexity while user is typing in the password input field
         ArrayList<Integer> errors = isValidPassword(password);
         TextView complexityRequirementTextView;
-        Boolean isValidPass = null;
 
         for (int i = 0; i < 5; i++) {
             // extract TextView from the array
@@ -70,28 +70,13 @@ public class InputValidation {
             if (!errors.isEmpty() && errors.contains(i)) {
                 // current TextView should be changed to indicate there's a unfulfilled complexity requirement
                 complexityRequirementTextView.setTypeface(complexityRequirementTextView.getTypeface(), Typeface.BOLD_ITALIC);
-                // current input doesn't password doesn't pass complexity requirements yet
-                isValidPass = false;
             } else {
                 // clear any error that was left from the previous check and isn't needed anymore
                 complexityRequirementTextView.setTypeface(complexityRequirementTextView.getTypeface(), Typeface.ITALIC);
-                // input passes complexity check
-                isValidPass = true;
             }
         }
 
-        return isValidPass;
+        return errors.isEmpty();
     }
 
-    public static long dateTimeToTimestamp(String date, String time) {
-        long p = Long.parseLong("0");
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-            Date parsedDate = dateFormat.parse(date + " " + time);
-            return parsedDate.getTime() / 1000;
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return p;
-    }
 }
