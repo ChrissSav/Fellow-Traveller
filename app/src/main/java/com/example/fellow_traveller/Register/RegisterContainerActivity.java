@@ -78,14 +78,15 @@ public class RegisterContainerActivity extends AppCompatActivity {
                 if (fra.toString().equals("RegisterStagePhoneFragment")) {
                     validateRegisterStagePhone();
                 }
-                else if (fra.toString().equals("RegisterStage2Fragment")) {
+                else if (fra.toString().equals("RegisterStage1Fragment")) {
                     validateRegisterStageEmail();
-                } else if (fra.toString().equals("RegisterStage3Fragment") && registerStage2Fragment.validateFragment()) {
+                } else if (fra.toString().equals("RegisterStage2Fragment") && registerStage2Fragment.validateFragment()) {
                     progressBar.setProgress(num_num * registerStage3Fragment.getRank());
                     fra = registerStage3Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.RegisterActivity_frame_container, fra).commit();
                     buttonNext.setText("Εγγραφή");
-                } else if (fra.toString().equals("RegisterStage4Fragment") && registerStage3Fragment.validateFragment()) {
+
+                } else if (fra.toString().equals("RegisterStage3Fragment") && registerStage3Fragment.validateFragment()) {
                     newRegisterUser();
                 }
             }
@@ -132,7 +133,6 @@ public class RegisterContainerActivity extends AppCompatActivity {
         String lastName = registerStage3Fragment.getLastName();
         String phone = registerStagePhoneFragment.getPhone();
 
-        // Create user object from model
         UserRegisterModel user = new UserRegisterModel(firstName, lastName, email, password, phone);
 
         new FellowTravellerAPI(globalClass).userRegister(user, new UserRegisterCallback() {
