@@ -18,8 +18,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,15 +43,17 @@ import static com.example.fellow_traveller.Util.SomeMethods.createSnackBar;
 
 public class NewOfferStage3Fragment extends Fragment {
     private final String CLICK_COLOR = "#1C1C1C";
-    private final String TITLE_PET = "Επέλεξε ...";
+    private final String ALLOWED = "Επιτρέπω";
+    private final String NOT_ALLOWED = "Δεν επιτρέπω";
+
     private final String TITLE_SEAT = "1";
     private final String TITLE_CAR = "Διάλεξε αυτοκίνητο ...";
     private final String TITLE_BAGS = "0";
 
     private View view;
-    private Button buttonPet, buttonCar;
+    private Button buttonCar;
     //Backup
-    private String petTitle = TITLE_PET;
+    private Boolean petTitle = false;
     private String seatTitle = TITLE_SEAT;
     private String carTitle = TITLE_CAR;
     private String bagsTitle = TITLE_BAGS;
@@ -63,7 +67,7 @@ public class NewOfferStage3Fragment extends Fragment {
     private TextView textViewBags, textViewSeats;
     private ImageButton imageButtonIncreaseSeats, imageButtonIncreaseBags;
     private ImageButton imageButtonDecreaseSeats, imageButtonDecreaseBags;
-
+    private Switch switchPet;
 
     private GlobalClass globalClass;
 
@@ -79,9 +83,8 @@ public class NewOfferStage3Fragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_new_offer_stage3, container, false);
         globalClass = (GlobalClass) getActivity().getApplicationContext();
-        buttonPet = view.findViewById(R.id.NewOfferStage3Fragment_button_pet);
         buttonCar = view.findViewById(R.id.NewOfferStage3Fragment_button_car);
-
+        switchPet = view.findViewById(R.id.NewOfferStage3Fragment_switch_pet);
         //Seats
         textViewSeats = view.findViewById(R.id.NewOfferStage3Fragment_seats_value_tv);
         imageButtonIncreaseSeats = view.findViewById(R.id.NewOfferStage3Fragment_plus_button_seats);
@@ -131,13 +134,17 @@ public class NewOfferStage3Fragment extends Fragment {
 
         textViewBags.setText(bagsTitle);
         textViewSeats.setText(seatTitle);
-        buttonPet.setText(petTitle);
+       // buttonPet.setText(petTitle);
         buttonCar.setText(carTitle);
-
-        //Text Color
-        if (buttonPet.getText() != TITLE_PET) {
-            buttonPet.setTextColor(Color.parseColor(CLICK_COLOR));
+        switchPet.setText(NOT_ALLOWED);
+        if (petTitle) {
+            switchPet.setChecked(true);
+            switchPet.setText(ALLOWED);
         }
+        //Text Color
+        //if (buttonPet.getText() != TITLE_PET) {
+        //    buttonPet.setTextColor(Color.parseColor(CLICK_COLOR));
+       // }
         if (buttonCar.getText() != TITLE_CAR) {
             buttonCar.setTextColor(Color.parseColor(CLICK_COLOR));
         }
@@ -153,20 +160,15 @@ public class NewOfferStage3Fragment extends Fragment {
             }
         });
 
-        buttonPet.setOnClickListener(new View.OnClickListener() {
+        switchPet.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                buttonPet.setTextColor(Color.parseColor(CLICK_COLOR));
-                if (buttonPet.getText().equals(TITLE_PET) || buttonPet.getText().equals("Δεν επιτρέπω")) {
-                    buttonPet.setText("Επιτρέπω");
-                    return;
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b) {
+                    switchPet.setText(ALLOWED);
                 }
-                if (buttonPet.getText().equals("Επιτρέπω")) {
-                    buttonPet.setText("Δεν επιτρέπω");
-                    return;
+                else {
+                    switchPet.setText(NOT_ALLOWED);
                 }
-
-
             }
         });
         return view;
@@ -248,7 +250,7 @@ public class NewOfferStage3Fragment extends Fragment {
 
     @Override
     public void onDestroy() {
-        petTitle = buttonPet.getText().toString();
+        petTitle = switchPet.isChecked();
         seatTitle = textViewSeats.getText().toString();
         carTitle = buttonCar.getText().toString();
         bagsTitle = textViewBags.getText().toString();
@@ -256,7 +258,7 @@ public class NewOfferStage3Fragment extends Fragment {
     }
 
     public boolean validateFragment() {
-        if (checkCar() && checkSeats() && checkBags() && checkPet()) {
+        if (checkCar() && checkSeats() && checkBags() ) {
             return true;
         }
         return false;
@@ -272,14 +274,14 @@ public class NewOfferStage3Fragment extends Fragment {
         }
     }
 
-    public Boolean checkPet() {
-        if (buttonPet.getText().equals(TITLE_PET)) {
-            createSnackBar(view, "Παρακαλω καταχωρήστε αν δεχεστε κατοικίδια");
-            return false;
-        } else {
-            return true;
-        }
-    }
+//    public Boolean checkPet() {
+//        if (buttonPet.getText().equals(TITLE_PET)) {
+//            createSnackBar(view, "Παρακαλω καταχωρήστε αν δεχεστε κατοικίδια");
+//            return false;
+//        } else {
+//            return true;
+//        }
+//    }
 
     public Boolean checkSeats() {
         try {
@@ -313,12 +315,12 @@ public class NewOfferStage3Fragment extends Fragment {
     }
 
     public String getPets() {
-        return buttonPet.getText().toString();
+        return switchPet.isChecked() ?  ALLOWED :  NOT_ALLOWED;
     }
 
     public Boolean getPetsBoolean() {
 
-        return buttonPet.getText().toString().equals("Επιτρέπω");
+        return switchPet.isChecked();
     }
 
     public String getCar() {

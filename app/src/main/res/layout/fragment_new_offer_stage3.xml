@@ -102,29 +102,13 @@
 
             <TextView
                 android:id="@+id/NewOfferStage3Fragment_textView10"
+                style="@style/labelStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="53dp"
                 android:text="Κατοικίδια"
-                style="@style/labelStyle"
                 app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textView6v"
                 app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_textView6v" />
-
-            <Button
-                android:id="@+id/NewOfferStage3Fragment_button_pet"
-                android:layout_width="170dp"
-                android:layout_height="55dp"
-                android:background="@drawable/button_background_select"
-                android:drawableEnd="@drawable/ic_bone"
-                android:paddingStart="15dp"
-                android:paddingEnd="20dp"
-                android:text="Επέλεξε ..."
-                android:textAlignment="textStart"
-                android:textAllCaps="false"
-                android:textColor="#9AA7B0"
-                app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_textView10"
-                app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_button_car"
-                app:layout_constraintTop_toTopOf="@+id/NewOfferStage3Fragment_textView10" />
 
             <TextView
                 android:id="@+id/NewOfferStage3Fragment_textView11"
@@ -134,9 +118,8 @@
                 android:layout_marginBottom="24dp"
                 android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_button_pet"
                 app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textView10"
-                app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_button_pet" />
+                app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_switch_pet" />
 
             <TextView
                 android:id="@+id/NewOfferStage3Fragment_textView_2"
@@ -261,6 +244,25 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Switch
+                android:id="@+id/NewOfferStage3Fragment_switch_pet"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginEnd="2dp"
+                android:background="@null"
+                android:checked="false"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:scaleX="1.1"
+                android:scaleY="1.1"
+                android:switchPadding="10dp"
+                android:text="Switch"
+                android:thumb="@drawable/switch_thumb_test"
+                android:track="@drawable/switch_tracker_blue"
+                app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage3Fragment_textView10"
+                app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_bags_increase_section"
+                app:layout_constraintTop_toTopOf="@+id/NewOfferStage3Fragment_textView10" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
