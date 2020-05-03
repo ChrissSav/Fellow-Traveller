@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <color name="white_opaque">#FFFFFFFF</color>
     <color name="pitch_black">#FF000000</color>
     <!-- Base application theme. -->
@@ -6,7 +6,7 @@
         <!-- Customize your theme here. -->
 
 
-        <item name="colorPrimary">@color/orange_color</item>
+        <item name="colorPrimary">@color/profile</item>
         <item name="colorPrimaryDark">@color/orange_color</item>
         <item name="colorAccent">@color/orange_color</item>
         <item name="windowNoTitle">true</item>
@@ -24,9 +24,9 @@
         <item name="colorSurface">@color/white</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorOnSecondary">@color/home_blue</item>
-        <item name="colorOnBackground">@color/white</item>
+        <item name="colorOnBackground">@color/profile</item>
         <item name="colorOnError">@color/red</item>
-        <item name="colorOnSurface">@color/home_blue</item>
+        <item name="colorOnSurface">@color/profile</item>
         <item name="scrimBackground">@color/mtrl_scrim_color</item>
         <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1</item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.MaterialComponents.Headline2</item>
@@ -72,6 +72,8 @@
     <style name="Theme_Dialog" parent="android:Theme.Holo.Dialog">
         <item name="android:windowMinWidthMajor">100%</item>
         <item name="android:windowMinWidthMinor">100%</item>
+        android:fromYDelta="50%p" android:toYDelta="0%p"
+        android:duration="@android:integer/config_longAnimTime"
         <item name="android:windowBackground">@color/white</item>
         <item name="android:textColor">@color/profile </item>
     </style>

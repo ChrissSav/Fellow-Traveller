@@ -1,12 +1,17 @@
 package com.example.fellow_traveller.SearchAndBook;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -14,7 +19,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.util.Pair;
 
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
@@ -39,12 +46,14 @@ public class FiltersActivity extends AppCompatActivity {
     private final String TITLE_SEAT = "Θέσεις ...";
     private final String TITLE_BAGS = "Αποσκεύες ...";
     boolean dateValidator = false, priceValidator = false, rangeValidator = false, seatsValidator = false, bagsValidator = false;
-    private CrystalSeekbar rangeBar;
-    private TextView rangeBarTV;
-    private Button dateButton, priceButton, seatsButton, resetButton, applyButton;
+    private ConstraintLayout mainConstraintLayout;
+    private CrystalSeekbar kmRangeSeekBar;
+    private CrystalRangeSeekbar priceRangeSeekBar;
+    private TextView kmRangeBarTV,priceRangeTV ;
+    private Button dateButton, priceButton, petsButton, seatsButton, resetButton, applyButton;
     private ImageButton closeButton;
     private Spinner sortSpinner;
-    private int priceStartFinal = 0, priceEndFinal = 200, rangeFinal = 0, seatsFinal = 0, bagsFinal = 0;
+    private int priceStartFinal = 0, priceEndFinal = 100, rangeFinal = 0, seatsFinal = 0, bagsFinal = 0;
     private long startDateFinal, endDateFinal;
     private ArrayList<PaymentItem> petsChoicesList;
     private PaymentAdapter mAdapter;
@@ -58,45 +67,50 @@ public class FiltersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filters);
 
-        rangeBar = findViewById(R.id.ActivityFilters_range_seekbar);
-        rangeBarTV = findViewById(R.id.ActivityFilters_range_radius_tv);
+        kmRangeSeekBar = findViewById(R.id.ActivityFilters_km_range_seekbar);
+        kmRangeBarTV = findViewById(R.id.ActivityFilters_km_range_radius_tv);
         sortSpinner = findViewById(R.id.ActivityFilters_sort_by_spinner);
-        priceButton = findViewById(R.id.ActivityFilters_price_button);
+
         dateButton = findViewById(R.id.ActivityFilters_date_button);
         resetButton = findViewById(R.id.ActivityFilters_reset_button);
         applyButton = findViewById(R.id.ActivityFilters_apply_button);
         closeButton = findViewById(R.id.ActivityFilters_close_button);
-        petsSpinner = findViewById(R.id.ActivityFilters_pets_spinner);
-
-        petsChoicesList = new ArrayList<>();
-        petsChoicesList.add(new PaymentItem("Όλες", R.drawable.ic_bone));
-        petsChoicesList.add(new PaymentItem("Με κατοικίδιο", R.drawable.ic_bone));
-        petsChoicesList.add(new PaymentItem("Χωρίς κατοικίδιο", R.drawable.ic_bone));
+        priceRangeTV = findViewById(R.id.ActivityFilters_price_range_radius_tv);
+        priceRangeSeekBar = findViewById(R.id.ActivityFilters_price_range_seekbar);
+        petsButton = findViewById(R.id.ActivityFilters_pets_button);
+        mainConstraintLayout = findViewById(R.id.ActivityFilters_main_constraint_layout);
 
 
-        mAdapter = new PaymentAdapter(this, petsChoicesList);
-        petsSpinner.setAdapter(mAdapter);
+
+
+
 
 
         String[] items = new String[]{"     Πιο σχετική", "    Με βάση τιμή", "Με βάση απόσταση"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         sortSpinner.setAdapter(adapter);
 
-
+        openDialogForPrice();
         openDialogForSeats();
         openDialogForBags();
         initializeCalendar();
 
 
+        petsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDialogForPets();
+            }
+        });
         //Range bar change listener
-        rangeBar.setOnSeekbarChangeListener(new OnSeekbarChangeListener() {
+        kmRangeSeekBar.setOnSeekbarChangeListener(new OnSeekbarChangeListener() {
             @Override
             public void valueChanged(Number value) {
                 if (value.intValue() == 0) {
-                    rangeBarTV.setText("Εμφάνιση όλων");
+                    kmRangeBarTV.setText("Εμφάνιση όλων");
                     rangeFinal = value.intValue();
                 } else {
-                    rangeBarTV.setText("Εύρος " + value + " χλμ");
+                    kmRangeBarTV.setText("Εύρος " + value + " χλμ");
                     rangeFinal = value.intValue();
                 }
 
@@ -104,12 +118,6 @@ public class FiltersActivity extends AppCompatActivity {
         });
 
 
-        priceButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openDialogForPrice();
-            }
-        });
 
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,13 +127,72 @@ public class FiltersActivity extends AppCompatActivity {
         });
 
     }
+    //Set background Color requires higher API
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @SuppressLint("ResourceAsColor")
+    private void openDialogForPets() {
+        final Dialog myDialog = new Dialog(FiltersActivity.this, R.style.Theme_Dialog);
+        Window window = myDialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+        window.requestFeature(Window.FEATURE_NO_TITLE);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.setContentView(R.layout.filter_pets_allowed_dialog);
+        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        myDialog.setCancelable(true);
+        myDialog.setCanceledOnTouchOutside(true);
+        wlp.gravity = Gravity.BOTTOM;
+        wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        mainConstraintLayout.setForeground(new ColorDrawable(getResources().getColor(R.color.greyBlack_transparent_color)));
+        window.setAttributes(wlp);
+        myDialog.show();
+
+        final Button allButton = myDialog.findViewById(R.id.ActivityFilters_date_button);
+        final Button allowedButton = myDialog.findViewById(R.id.ActivityFilters_pets_allowed_button);
+        final Button notAllowedButton = myDialog.findViewById(R.id.ActivityFilters_pets_not_allowed_button);
+
+
+        allButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                petsButton.setText("Όλα");
+                mainConstraintLayout.setForeground(null);
+                myDialog.dismiss();
+
+            }
+        });
+        allowedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                petsButton.setText("Με κατοικίδιο");
+                mainConstraintLayout.setForeground(null);
+                myDialog.dismiss();
+            }
+        });
+        notAllowedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                petsButton.setText("Χωρίς κατοικίδιο");
+                mainConstraintLayout.setForeground(null);
+                myDialog.dismiss();
+            }
+
+        });
+        myDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                mainConstraintLayout.setForeground(null);
+            }
+        });
+
+
+    }
 
     public void openDialogForSeats() {
 
         //get Elements
-        ImageButton decrease = findViewById(R.id.ActivityBook_seats_minus_button);
-        ImageButton increase = findViewById(R.id.ActivityBook_seats_plus_button);
-        final TextView textView_number = findViewById(R.id.ActivityBook_seats_value_tv);
+        ImageButton decrease = findViewById(R.id.ActivityFilters_seats_minus_button);
+        ImageButton increase = findViewById(R.id.ActivityFilters_seats_plus_button);
+        final TextView textView_number = findViewById(R.id.ActivityFilters_seats_value_tv);
 
         increase.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,41 +240,32 @@ public class FiltersActivity extends AppCompatActivity {
 
     public void openDialogForPrice() {
 
-        final Dialog myDialog = new Dialog(FiltersActivity.this, R.style.Theme_Dialog);
-        myDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.setContentView(R.layout.filter_price_range_dialog);
-        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        myDialog.setCancelable(true);
-        myDialog.setCanceledOnTouchOutside(true);
+//        final Dialog myDialog = new Dialog(FiltersActivity.this, R.style.Theme_Dialog);
+//        myDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+//        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        myDialog.setContentView(R.layout.filter_pets_allowed_dialog);
+//        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//        myDialog.setCancelable(true);
+//        myDialog.setCanceledOnTouchOutside(true);
 
-        // get elements
-        final TextView tvMin = myDialog.findViewById(R.id.filter_price_start);
-        final TextView tvMax = myDialog.findViewById(R.id.filter_price_end);
-        final Button selectButton = myDialog.findViewById(R.id.filter_price_button);
-        final CrystalRangeSeekbar rangeSeekbar = myDialog.findViewById(R.id.rangeSeekbar1);
+
+
 
         // set listener
-        rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
+        priceRangeSeekBar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
             @Override
             public void valueChanged(Number minValue, Number maxValue) {
-                tvMin.setText("€" + minValue);
-                tvMax.setText("€" + maxValue);
+                if(minValue.intValue() == 0 && maxValue.intValue() == 100){
+                    priceRangeTV.setText("Εμφάνιση όλων");
+                    priceStartFinal = minValue.intValue();
+                    priceEndFinal = maxValue.intValue();
+                }else{
+                priceRangeTV.setText(minValue.intValue() + " - " + maxValue.intValue() + " €" /*R.string.euro_symbol*/ );
                 priceStartFinal = minValue.intValue();
                 priceEndFinal = maxValue.intValue();
+                }
             }
         });
-        selectButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                priceButton.setText("€" + priceStartFinal + " - " + "€" + priceEndFinal);
-                myDialog.dismiss();
-                Toast.makeText(FiltersActivity.this, "Start: " + priceStartFinal + " End: " + priceEndFinal, Toast.LENGTH_SHORT).show();
-            }
-        });
-        myDialog.show();
-
-
     }
 
     public void Increase(TextView textView) {

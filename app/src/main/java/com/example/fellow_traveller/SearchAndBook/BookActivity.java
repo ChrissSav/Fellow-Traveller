@@ -34,9 +34,9 @@ public class BookActivity extends AppCompatActivity {
         paymentSpinner = findViewById(R.id.book_payment_spinner);
         petsSwitch = findViewById(R.id.BookActivity_pets_switch);
         havePetWithMeTextView = findViewById(R.id.BookActivity_have_pet_tv);
-        bagsCurrentTextView = findViewById(R.id.ActivityBook_seats_value_tv);
-        increaseBagsButton = findViewById(R.id.ActivityBook_seats_plus_button);
-        decreaseBagsButton = findViewById(R.id.ActivityBook_seats_minus_button);
+        bagsCurrentTextView = findViewById(R.id.ActivityFilters_seats_value_tv);
+        increaseBagsButton = findViewById(R.id.ActivityFilters_seats_plus_button);
+        decreaseBagsButton = findViewById(R.id.ActivityFilters_seats_minus_button);
 
         maxAvailableBags = 3;
 
@@ -110,7 +110,7 @@ public class BookActivity extends AppCompatActivity {
 
         paymentMethodsList = new ArrayList<>();
         paymentMethodsList.add(new PaymentItem("Πιστωτική κάρτα", R.drawable.ic_card));
-        paymentMethodsList.add(new PaymentItem("Μετρητά", R.drawable.ic_cash));
+        paymentMethodsList.add(new PaymentItem("Μετρητά", R.drawable.ic_cash_filled));
         paymentMethodsList.add(new PaymentItem("PayPal", R.drawable.ic_paypal));
     }
 }

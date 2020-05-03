@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/ActivityFilters_main_constraint_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchAndBook.FiltersActivity">
+    tools:context=".SearchAndBook.FiltersActivity"
+    >
 
     <TextView
         android:id="@+id/ActivityFilters_filters_tv"
@@ -32,11 +35,13 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="@id/ActivityFilters_filters_tv"
+       app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ActivityFilters_filters_tv"
         android:layout_marginTop="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/ActivityFilters_buttons_section">
+       app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/ActivityFilters_buttons_section"
+        android:overScrollMode="never"
+        android:paddingLeft="20dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="match_parent"
@@ -87,12 +92,12 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/firasans_light"
             android:textColor="@color/profile"
-            android:textSize="12sp"
+            android:textSize="15sp"
             app:layout_constraintTop_toBottomOf="@id/ActivityFilters_date_tv"
             app:layout_constraintStart_toStartOf="@id/ActivityFilters_date_tv"
-            app:layout_constraintEnd_toStartOf="@id/ActivityFilters_price_button"
+            app:layout_constraintEnd_toEndOf="@id/ActivityFilters_date_button"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:text="Επιλέξτε το εύρος των ημερομηνιών όπου εσείς θέλετε"
             />
             <Button
@@ -111,130 +116,185 @@
                 android:textColor="@color/profile"
                 android:padding="10dp"
                 />
-        <TextView
-            android:id="@+id/ActivityFilters_price_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/firasans_medium"
-            android:textColor="@color/profile"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@id/ActivityFilters_date_info_tv"
-            android:layout_marginTop="25dp"
-            android:text="Τιμή"
-            app:layout_constraintLeft_toLeftOf="parent"
-            />
-        <TextView
-            android:id="@+id/ActivityFilters_price_info_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/firasans_light"
-            android:textColor="@color/profile"
-            android:textSize="12sp"
-            app:layout_constraintTop_toBottomOf="@id/ActivityFilters_price_tv"
-            app:layout_constraintStart_toStartOf="@id/ActivityFilters_price_tv"
-            app:layout_constraintEnd_toStartOf="@id/ActivityFilters_price_button"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="5dp"
-            android:text="Επιλέξτε το εύρος της τιμής που εσείς θέλετε."
-            />
-            <Button
-                android:id="@+id/ActivityFilters_price_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/ActivityFilters_price_tv"
-                app:layout_constraintBottom_toBottomOf="@id/ActivityFilters_price_tv"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginRight="20dp"
-                style="?android:attr/borderlessButtonStyle"
-                android:text="Επιλογή τιμής"
-                android:textAllCaps="false"
-                android:fontFamily="@font/firasans_medium"
-                android:textSize="16sp"
-                android:textColor="@color/profile"
-                android:gravity="right|center_vertical"
-                android:padding="10dp"
-                />
+
+
+
 
         <View
-            android:id="@+id/ActivityFilters_underline_price"
+            android:id="@+id/ActivityFilters_underline_date"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:background="@color/lightGrey"
             android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="@+id/ActivityFilters_price_tv"
-            app:layout_constraintEnd_toEndOf="@+id/ActivityFilters_price_button"
-            app:layout_constraintTop_toBottomOf="@+id/ActivityFilters_price_info_tv"
+            app:layout_constraintStart_toStartOf="@+id/ActivityFilters_date_tv"
+            app:layout_constraintEnd_toEndOf="@+id/ActivityFilters_date_button"
+            app:layout_constraintTop_toBottomOf="@+id/ActivityFilters_date_info_tv"
             />
 
         <TextView
-            android:id="@+id/ActivityFilters_range_tv"
+            android:id="@+id/ActivityFilters_km_range_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/firasans_medium"
             android:textColor="@color/profile"
             android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@id/ActivityFilters_price_info_tv"
+            app:layout_constraintTop_toBottomOf="@id/ActivityFilters_underline_pets"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="35dp"
-            android:text="Εύρος"
-            />
-        <TextView
-            android:id="@+id/ActivityFilters_range_info_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/ActivityFilters_range_tv"
-            android:text="Επιλέξτε ένα εύρος απόστασης όπου θέλετε να αναζητήσουμε"
-            android:textColor="@color/profile"
-            android:layout_marginTop="5dp"
-            app:layout_constraintStart_toStartOf="@id/ActivityFilters_range_tv"
-            app:layout_constraintEnd_toStartOf="@id/ActivityFilters_range_radius_tv"
-            android:fontFamily="@font/firasans_light"
-            android:paddingEnd="10dp"
-            android:maxLines="2"
-            android:textSize="12sp"
+            android:text="Εύρος απόστασης"
             />
             <TextView
-                android:id="@+id/ActivityFilters_range_radius_tv"
-                android:layout_width="0dp"
+                android:id="@+id/ActivityFilters_km_range_radius_tv"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/ActivityFilters_range_tv"
-                app:layout_constraintBottom_toBottomOf="@id/ActivityFilters_range_tv"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginRight="22dp"
+                app:layout_constraintTop_toTopOf="@id/ActivityFilters_km_range_tv"
+                app:layout_constraintBottom_toBottomOf="@id/ActivityFilters_km_range_tv"
+                app:layout_constraintEnd_toStartOf="@id/ActivityFilters_km_range_image"
+                android:layout_marginEnd="10dp"
                 android:text="Εμφάνιση όλων"
                 android:fontFamily="@font/firasans_medium"
                 android:textSize="16sp"
                 android:textColor="@color/profile"
                 />
+            <ImageView
+                android:id="@+id/ActivityFilters_km_range_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/ActivityFilters_km_range_tv"
+                app:layout_constraintBottom_toBottomOf="@id/ActivityFilters_km_range_tv"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="22dp"
+                android:background="@drawable/ic_range"
+                />
+
+
             <com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar
-                android:id="@+id/ActivityFilters_range_seekbar"
+                android:id="@+id/ActivityFilters_km_range_seekbar"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                app:layout_constraintTop_toBottomOf="@id/ActivityFilters_range_info_tv"
-                android:layout_marginTop="30dp"
+                app:layout_constraintTop_toBottomOf="@id/ActivityFilters_km_range_tv"
+                android:layout_marginTop="25dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 app:min_value="0"
                 app:max_value="200"
-                app:bar_color="@color/orange_color"
-                app:bar_highlight_color="#CF957E"
-                app:left_thumb_color="@color/orange_color"
-                app:left_thumb_color_pressed="#914324"
+                app:bar_color="@color/lightGrey"
+                app:bar_highlight_color="@color/profile"
+                app:left_thumb_color="@color/profile"
+                app:left_thumb_color_pressed="@color/profile"
                 app:data_type="_integer"
+                />
+        <TextView
+            android:id="@+id/ActivityFilters_km_range_info_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/ActivityFilters_km_range_seekbar"
+            android:text="Επιλέξτε ένα εύρος απόστασης όπου θέλετε να αναζητήσουμε"
+            android:textColor="@color/profile"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="@id/ActivityFilters_km_range_tv"
+            app:layout_constraintEnd_toEndOf="@id/ActivityFilters_km_range_radius_tv"
+            android:fontFamily="@font/firasans_light"
+            android:maxLines="2"
+            android:textSize="15sp"
+            />
 
+
+
+            <TextView
+                android:id="@+id/ActivityFilters_price_range_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/firasans_medium"
+                android:textColor="@color/profile"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@id/ActivityFilters_km_range_info_tv"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="35dp"
+                android:text="Εύρος τιμής"
+                />
+            <TextView
+                android:id="@+id/ActivityFilters_price_range_radius_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/ActivityFilters_price_range_tv"
+                app:layout_constraintBottom_toBottomOf="@id/ActivityFilters_price_range_tv"
+                app:layout_constraintEnd_toStartOf="@id/ActivityFilters_price_range_image"
+                android:layout_marginEnd="10dp"
+                android:text="Εμφάνιση όλων"
+                android:fontFamily="@font/firasans_medium"
+                android:textSize="16sp"
+                android:textColor="@color/profile"
+                />
+            <ImageView
+                android:id="@+id/ActivityFilters_price_range_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/ActivityFilters_price_range_tv"
+                app:layout_constraintBottom_toBottomOf="@id/ActivityFilters_price_range_tv"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="22dp"
+                android:background="@drawable/ic_cash"
+                />
+            <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                android:id="@+id/ActivityFilters_price_range_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/ActivityFilters_price_range_tv"
+                android:layout_marginTop="40dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:min_value="0"
+                app:max_value="100"
+                app:bar_color="@color/lightGrey"
+                app:bar_highlight_color="@color/profile"
+                app:left_thumb_color="@color/profile"
+                app:right_thumb_color="@color/profile"
+                app:left_thumb_color_pressed="@color/profile"
+                app:right_thumb_color_pressed="@color/profile"
+                app:data_type="_integer"
+                />
+            <TextView
+                android:id="@+id/ActivityFilters_price_range_info_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/ActivityFilters_price_range_seekbar"
+                android:text="Η μέση τιμή για αυτό το ταξίδι είναι "
+                android:textColor="@color/profile"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="@id/ActivityFilters_price_range_tv"
+                android:fontFamily="@font/firasans_light"
+                android:maxLines="2"
+                android:textSize="15sp"
+                />
+            <TextView
+                android:id="@+id/ActivityFilters_price_range_info_value_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/ActivityFilters_price_range_info_tv"
+                app:layout_constraintBottom_toBottomOf="@id/ActivityFilters_price_range_info_tv"
+                android:text="5€"
+                android:textColor="@color/orange_color"
+                app:layout_constraintStart_toEndOf="@id/ActivityFilters_price_range_info_tv"
+                app:layout_constraintEnd_toEndOf="@id/ActivityFilters_price_range_seekbar"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/firasans_medium"
+                android:textSize="18sp"
                 />
 
         <View
-            android:id="@+id/ActivityFilters_underline_range"
+            android:id="@+id/ActivityFilters_underline_pets"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:background="@color/lightGrey"
             android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="@+id/ActivityFilters_price_tv"
-            app:layout_constraintEnd_toEndOf="@+id/ActivityFilters_price_button"
-            app:layout_constraintTop_toBottomOf="@+id/ActivityFilters_range_seekbar"
+            app:layout_constraintStart_toStartOf="@+id/ActivityFilters_underline_date"
+            app:layout_constraintEnd_toEndOf="@+id/ActivityFilters_underline_date"
+            app:layout_constraintTop_toBottomOf="@+id/ActivityFilters_pets_info_tv"
             />
 
         <TextView
@@ -244,7 +304,7 @@
             android:fontFamily="@font/firasans_medium"
             android:textColor="@color/profile"
             android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@id/ActivityFilters_underline_range"
+            app:layout_constraintTop_toBottomOf="@id/ActivityFilters_underline_date"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="38dp"
             android:text="Θέσεις"
@@ -255,27 +315,27 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/firasans_light"
                 android:textColor="@color/profile"
-                android:textSize="12sp"
-                app:layout_constraintTop_toBottomOf="@id/ActivityFilters_seats_tv"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@id/ActivityFilters_seats_increaser_section"
                 app:layout_constraintStart_toStartOf="@id/ActivityFilters_seats_tv"
-                app:layout_constraintEnd_toStartOf="@id/ActivityBook_seats_increaser_section"
+                app:layout_constraintEnd_toEndOf="@id/ActivityFilters_seats_increaser_section"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="20dp"
                 android:text="Επιλέξτε τον ελάχιστο αριθμό που εσείς θέλετε"
                 />
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ActivityBook_seats_increaser_section"
+                android:id="@+id/ActivityFilters_seats_increaser_section"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/increaser_border_stroke_shape"
                 android:drawablePadding="20dp"
                 app:layout_constraintTop_toTopOf="@id/ActivityFilters_seats_tv"
-                app:layout_constraintBottom_toBottomOf="@id/ActivityFilters_seats_info_tv"
+                app:layout_constraintBottom_toBottomOf="@id/ActivityFilters_seats_tv"
                 app:layout_constraintEnd_toEndOf="@id/ActivityFilters_date_button"
                 android:padding="10dp"
                 >
                 <ImageButton
-                    android:id="@+id/ActivityBook_seats_minus_button"
+                    android:id="@+id/ActivityFilters_seats_minus_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
@@ -288,19 +348,19 @@
                     android:padding="5dp"/>
 
                 <TextView
-                    android:id="@+id/ActivityBook_seats_value_tv"
+                    android:id="@+id/ActivityFilters_seats_value_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="@id/ActivityBook_seats_minus_button"
-                    app:layout_constraintEnd_toEndOf="@id/ActivityBook_seats_plus_button"
+                    app:layout_constraintStart_toStartOf="@id/ActivityFilters_seats_minus_button"
+                    app:layout_constraintEnd_toEndOf="@id/ActivityFilters_seats_plus_button"
                     android:fontFamily="@font/firasans_light"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     />
                 <ImageButton
-                    android:id="@+id/ActivityBook_seats_plus_button"
+                    android:id="@+id/ActivityFilters_seats_plus_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
@@ -332,12 +392,12 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/firasans_light"
                 android:textColor="@color/profile"
-                android:textSize="12sp"
-                app:layout_constraintTop_toBottomOf="@id/ActivityFilters_bags_tv"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@id/ActivityFilters_bags_increaser_section"
                 app:layout_constraintStart_toStartOf="@id/ActivityFilters_bags_tv"
-                app:layout_constraintEnd_toStartOf="@id/ActivityFilters_bags_increaser_section"
+                app:layout_constraintEnd_toEndOf="@id/ActivityFilters_bags_increaser_section"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="20dp"
                 android:text="Επιλέξτε τον ελάχιστο αριθμό αποσκευών που εσείς θέλετε"
                 />
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -347,7 +407,7 @@
                 android:background="@drawable/increaser_border_stroke_shape"
                 android:drawablePadding="20dp"
                 app:layout_constraintTop_toTopOf="@id/ActivityFilters_bags_tv"
-                app:layout_constraintBottom_toBottomOf="@id/ActivityFilters_bags_info_tv"
+                app:layout_constraintBottom_toBottomOf="@id/ActivityFilters_bags_tv"
                 app:layout_constraintEnd_toEndOf="@id/ActivityFilters_date_button"
                 android:padding="10dp"
                 >
@@ -411,62 +471,41 @@
                 android:layout_marginTop="45dp"
                 android:text="Κατοικίδια"
                 />
+            <Button
+                android:id="@+id/ActivityFilters_pets_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/ActivityFilters_pets_tv"
+                app:layout_constraintBottom_toBottomOf="@id/ActivityFilters_pets_tv"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginRight="20dp"
+                style="?android:attr/borderlessButtonStyle"
+                android:text="Όλα"
+                android:textAllCaps="false"
+                android:fontFamily="@font/firasans_medium"
+                android:textSize="16sp"
+                android:textColor="@color/profile"
+
+
+                />
+
+
             <TextView
                 android:id="@+id/ActivityFilters_pets_info_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/firasans_light"
                 android:textColor="@color/profile"
-                android:textSize="12sp"
-                app:layout_constraintTop_toBottomOf="@id/ActivityFilters_pets_spinner_section"
+                android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="@id/ActivityFilters_pets_tv"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/ActivityFilters_pets_tv"
                 android:text="Επιλέξτε διαδρομές που επιτρέπουν ή όχι κατοικίδια"
                 />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ActivityFilters_pets_spinner_section"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/ActivityFilters_pets_tv"
-                android:layout_marginTop="10dp"
-                app:layout_constraintStart_toStartOf="@id/ActivityFilters_pets_tv"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/payment_method_border"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                >
-                <Spinner
-                    android:id="@+id/ActivityFilters_pets_spinner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="20dp"
-                    android:overlapAnchor="false"
-                    android:dropDownWidth="match_parent"
-                    android:background="@null"
-                    android:spinnerMode="dropdown"
-                    app:layout_constraintStart_toStartOf="parent"
 
-                    />
-                <ImageView
-                    android:id="@+id/ActivityFilters_spinner_arrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/profile"
-                    app:layout_constraintTop_toTopOf="@+id/ActivityFilters_pets_spinner"
-                    app:layout_constraintBottom_toBottomOf="@+id/ActivityFilters_pets_spinner"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:background="@drawable/ic_down_arrow"
-                    android:layout_marginEnd="20dp"
-
-                    />
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -475,14 +514,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ActivityFilters_buttons_section"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:layout_marginTop="50dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:background="@color/white"
         android:elevation="10dp"
         >
@@ -504,13 +543,13 @@
         android:id="@+id/ActivityFilters_apply_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/main_activity_login_button"
+        android:background="@drawable/black_button_shape"
         android:text="Επιλογή (3)"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/ActivityFilters_reset_button"
+        android:layout_marginEnd="20dp"
         app:layout_constraintTop_toTopOf="@id/ActivityFilters_reset_button"
         app:layout_constraintBottom_toBottomOf="@id/ActivityFilters_reset_button"
         android:paddingTop="15dp"
