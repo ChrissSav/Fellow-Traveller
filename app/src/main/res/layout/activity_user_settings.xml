@@ -288,7 +288,7 @@
             android:padding="10dp"
             android:text="Αποσύνδεση"
             android:textAllCaps="false"
-            android:textColor="@color/login_button"
+            android:textColor="@color/orange_color"
             android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/terms" />

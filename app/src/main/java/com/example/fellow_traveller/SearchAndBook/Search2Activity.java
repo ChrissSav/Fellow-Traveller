@@ -16,6 +16,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.fellow_traveller.ClientAPI.RetrofitAPIEndpoints;
+
 
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.PlacesAPI.CallBack.PlaceApiCallBack;
@@ -37,6 +41,8 @@ public class Search2Activity extends AppCompatActivity {
     private PlaceAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<PredictionsModel> places_list;
+    private RetrofitAPIEndpoints retrofitService;
+
     private GlobalClass globalClass;
 
     @Override
@@ -133,6 +139,8 @@ public class Search2Activity extends AppCompatActivity {
                 places_list = placeAPiModel.getPredictions();
                 buildRecyclerView();
             }
+
+
 
             @Override
             public void onFailure(String errorMsg) {

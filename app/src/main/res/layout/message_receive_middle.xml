@@ -71,7 +71,6 @@
             android:fontFamily="@font/firasans_medium"
             android:text="Καλημέραααααααααααααααααααααααααα!!"
             app:layout_constraintTop_toBottomOf="@+id/sender_message"
-
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

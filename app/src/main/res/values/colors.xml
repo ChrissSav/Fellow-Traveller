@@ -3,7 +3,8 @@
     <color name="colorPrimary">#D36134</color>
     <color name="colorPrimaryDark">#205890</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="login_button">#D36134</color>
+    <color name="orange_color">#e2631a</color>
+    <color name="orange_color_pressed">#ee7d3b</color>
     <color name="login_button_click">#205890</color>
     <color name="hoverOrange">#E9B381</color>
     <color name="blue">#8297FF</color>
@@ -14,6 +15,8 @@
     <color name="lightGrey">#EEEEEE</color>
     <color name="black">#171717</color>
     <color name="profile">#262322</color>
+    <color name="greyBlack_color">#7c7b7a</color>
+    <color name="greyBlack_transparent_color">#807c7b7a</color>
     <color name="home_blue">#3ca9cb</color>
     <color name="white">#fff</color>
     <color name="background">#FFF </color>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:paddingBottom="50dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/dialog_shape">
+
+
+    <TextView
+        android:id="@+id/ActivityFilters_pets_dialog_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="Κατοικίδια"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/firasans_bold"
+        android:textColor="@color/profile"/>
+    <Button
+        android:id="@+id/ActivityFilters_date_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ActivityFilters_pets_dialog_tv"
+        app:layout_constraintStart_toStartOf="@id/ActivityFilters_pets_dialog_tv"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_marginTop="20dp"
+        android:text="Όλα"
+        android:textAllCaps="false"
+        android:fontFamily="@font/firasans_light"
+        android:textSize="20sp"
+        android:textColor="@color/profile"
+        android:padding="0dp"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        />
+    <View
+        android:id="@+id/ActivityFilters_underline_all"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/lightGrey"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/ActivityFilters_pets_dialog_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ActivityFilters_date_button"
+        android:layout_marginEnd="20dp"
+        />
+    <Button
+        android:id="@+id/ActivityFilters_pets_allowed_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ActivityFilters_underline_all"
+        app:layout_constraintStart_toStartOf="@id/ActivityFilters_pets_dialog_tv"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_marginTop="20dp"
+        android:text="Επιτρέπουν κατοικίδιο"
+        android:textAllCaps="false"
+        android:fontFamily="@font/firasans_light"
+        android:textSize="20sp"
+        android:textColor="@color/profile"
+        android:padding="0dp"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        />
+    <View
+        android:id="@+id/ActivityFilters_underline_allowed"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/lightGrey"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/ActivityFilters_pets_dialog_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ActivityFilters_pets_allowed_button"
+        android:layout_marginEnd="20dp"
+        />
+    <Button
+        android:id="@+id/ActivityFilters_pets_not_allowed_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ActivityFilters_underline_allowed"
+        app:layout_constraintStart_toStartOf="@id/ActivityFilters_pets_dialog_tv"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_marginTop="20dp"
+        android:text="Δεν επιτρέπουν κατοικίδιο"
+        android:textAllCaps="false"
+        android:fontFamily="@font/firasans_light"
+        android:textSize="20sp"
+        android:textColor="@color/profile"
+        android:padding="0dp"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

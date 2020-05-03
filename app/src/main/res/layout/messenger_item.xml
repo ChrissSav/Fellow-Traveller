@@ -76,7 +76,7 @@
         app:layout_constraintStart_toStartOf="@id/message_date_chat"
         app:layout_constraintEnd_toEndOf="@id/message_date_chat"
         android:background="@drawable/null_icon"
-        android:backgroundTint="@color/login_button"
+        android:backgroundTint="@color/orange_color"
         android:visibility="invisible"
 
         />

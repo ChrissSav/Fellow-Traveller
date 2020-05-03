@@ -17,7 +17,7 @@
         android:elevation="5dp"
         >
     <TextView
-        android:id="@+id/book_seat_tv"
+        android:id="@+id/ActivityBook_book_trip_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Κλείσιμο της θέσης"
@@ -33,8 +33,8 @@
         android:layout_width="34dp"
         android:layout_height="34dp"
         android:background="@drawable/ic_close"
-        app:layout_constraintTop_toTopOf="@id/book_seat_tv"
-        app:layout_constraintBottom_toBottomOf="@+id/book_seat_tv"
+        app:layout_constraintTop_toTopOf="@id/ActivityBook_book_trip_tv"
+        app:layout_constraintBottom_toBottomOf="@+id/ActivityBook_book_trip_tv"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="20dp"
         />
@@ -117,9 +117,6 @@
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginTop="40dp"
                 >
-
-
-
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/date_book_section"
@@ -278,7 +275,7 @@
 
             <TextView
                 android:id="@+id/bags_book_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:text="Πόσες αποσκευές θα έχετε;"
@@ -286,8 +283,9 @@
                 android:textColor="@color/profile"
                 app:layout_constraintTop_toBottomOf="@id/info_book_section"
                 android:layout_marginTop="40dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginLeft="40dp"
+                android:paddingRight="20dp"
+                app:layout_constraintStart_toStartOf="@id/info_book_section"
+                app:layout_constraintEnd_toStartOf="@id/ActivityFilters_seats_increaser_section"
                 />
 
             <TextView
@@ -304,22 +302,60 @@
                 app:layout_constraintRight_toRightOf="parent"
                 android:paddingRight="50dp"
                 />
-            <EditText
-                android:id="@+id/bags_book_edit_text"
-                android:layout_width="40dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ActivityFilters_seats_increaser_section"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/increaser_border_stroke_shape"
                 app:layout_constraintTop_toTopOf="@id/bags_book_tv"
                 app:layout_constraintBottom_toBottomOf="@id/bags_book_tv"
-                app:layout_constraintStart_toEndOf="@id/bags_book_tv"
-                android:layout_marginStart="30dp"
-                android:maxLength="2"
-                android:inputType="number"
-                android:hint="0"
-                android:background="@android:color/transparent"
-                />
+                app:layout_constraintEnd_toEndOf="@id/info_book_section"
+                android:padding="10dp"
+                >
+                <ImageButton
+                    android:id="@+id/ActivityFilters_seats_minus_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:src="@drawable/ic_minus"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    android:padding="5dp"/>
+
+                <TextView
+                    android:id="@+id/ActivityFilters_seats_value_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="@id/ActivityFilters_seats_minus_button"
+                    app:layout_constraintEnd_toEndOf="@id/ActivityFilters_seats_plus_button"
+                    android:fontFamily="@font/firasans_light"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+                <ImageButton
+                    android:id="@+id/ActivityFilters_seats_plus_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:src="@drawable/ic_plus"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    android:padding="5dp"/>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <TextView
                 android:id="@+id/pets_book_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:text="Έχετε κάποιο κατοικίδιο;"
@@ -327,13 +363,15 @@
                 android:textColor="@color/profile"
                 app:layout_constraintTop_toBottomOf="@id/bags_available_book"
                 android:layout_marginTop="40dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginLeft="40dp"
+                android:paddingRight="20dp"
+                app:layout_constraintEnd_toStartOf="@id/BookActivity_have_pet_tv"
+                app:layout_constraintStart_toStartOf="@id/bags_book_tv"
+
                 />
 
             <TextView
                 android:id="@+id/pets_available_book"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:text="Ο οδηγός επιτρέπει μόνο ένα μικρόσωμο ζώο μέσα σε κλουβί"
@@ -342,21 +380,37 @@
                 app:layout_constraintTop_toBottomOf="@id/pets_book_tv"
                 android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="@id/pets_book_tv"
+                app:layout_constraintEnd_toEndOf="@id/BookActivity_pets_switch"
                 app:layout_constraintRight_toRightOf="parent"
-                android:paddingRight="50dp"
+
                 />
-            <EditText
-                android:id="@+id/pets_book_edit_text"
-                android:layout_width="40dp"
+
+            <Switch
+                android:id="@+id/BookActivity_pets_switch"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@id/pets_book_tv"
                 app:layout_constraintBottom_toBottomOf="@id/pets_book_tv"
-                app:layout_constraintStart_toEndOf="@id/pets_book_tv"
-                android:layout_marginStart="30dp"
-                android:maxLength="2"
-                android:inputType="number"
-                android:hint="Yes"
-                android:background="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="@id/info_book_section"
+                android:track="@drawable/switch_tracker"
+                android:checked="false"
+                android:thumb="@drawable/switch_thumb"
+                android:background="@null"
+                android:scaleX="1.1"
+                android:scaleY="1.1"
+               />
+            <TextView
+                android:id="@+id/BookActivity_have_pet_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Όχι, δεν έχω"
+                app:layout_constraintTop_toTopOf="@id/pets_book_tv"
+                app:layout_constraintBottom_toBottomOf="@id/pets_book_tv"
+                app:layout_constraintEnd_toStartOf="@id/BookActivity_pets_switch"
+                android:layout_marginEnd="20dp"
+                android:textSize="18sp"
+                android:textColor="@color/profile"
+                android:fontFamily="@font/firasans_light"
                 />
 
 
@@ -403,7 +457,6 @@
                 android:dropDownWidth="match_parent"
                 android:background="@null"
                 android:spinnerMode="dropdown"
-
                 />
                 <ImageView
                     android:layout_width="wrap_content"

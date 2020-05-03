@@ -1,18 +1,53 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <color name="white_opaque">#FFFFFFFF</color>
     <color name="pitch_black">#FF000000</color>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/login_button</item>
-        <item name="colorAccent">@color/login_button</item>
+
+
+        <item name="colorPrimary">@color/profile</item>
+        <item name="colorPrimaryDark">@color/orange_color</item>
+        <item name="colorAccent">@color/orange_color</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@color/white_opaque</item>
         <item name="android:colorBackground">@color/white_opaque</item>
+        <item name="colorSecondary">@color/home_blue</item>
+        <item name="colorError">@color/home_blue</item>
+
+        <!-- New MaterialComponents attributes. -->
+        <item name="colorPrimaryVariant">@color/profile</item>
+        <item name="colorSecondaryVariant">@color/profile</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnSecondary">@color/home_blue</item>
+        <item name="colorOnBackground">@color/profile</item>
+        <item name="colorOnError">@color/red</item>
+        <item name="colorOnSurface">@color/profile</item>
+        <item name="scrimBackground">@color/mtrl_scrim_color</item>
+        <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.MaterialComponents.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.MaterialComponents.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.MaterialComponents.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.MaterialComponents.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.MaterialComponents.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.MaterialComponents.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.MaterialComponents.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.MaterialComponents.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.MaterialComponents.Body2</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.MaterialComponents.Caption</item>
+        <item name="textAppearanceButton">@style/TextAppearance.MaterialComponents.Button</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.MaterialComponents.Overline</item>
+        <item name="materialCalendarFullscreenTheme">@style/CustomThemeOverlay_MaterialCalendar_Fullscreen</item>
+    </style>
+
+    <!-- New MaterialComponents styles for full screen -->
+    <style name="CustomThemeOverlay_MaterialCalendar_Fullscreen"
+        parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar.Fullscreen">
+        <item name="materialCalendarStyle">@style/Custom_MaterialCalendar.Fullscreen</item>
         <item name="android:overScrollMode">never</item>
 
 
@@ -43,12 +78,18 @@
         <!--        <item name="materialCalendarTheme">@style/CustomThemeOverlayMaterialCalendar</item>-->
 
     </style>
+    <style name="Custom_MaterialCalendar.Fullscreen"
+        parent="@style/Widget.MaterialComponents.MaterialCalendar.Fullscreen">
+        <item name="android:windowFullscreen">false</item>
+    </style>
+
+
 
     <style name="MySeekBar" parent="Widget.AppCompat.SeekBar">
         <item name="android:progressBackgroundTint">@color/grey</item>
-        <item name="android:progressTint">@color/login_button</item>
-        <item name="android:colorControlActivated">@color/login_button</item>
-        <item name="android:colorControlNormal">@color/login_button</item>
+        <item name="android:progressTint">@color/orange_color</item>
+        <item name="android:colorControlActivated">@color/orange_color</item>
+        <item name="android:colorControlNormal">@color/orange_color</item>
     </style>
 
     <!--    <style name="CustomThemeOverlayMaterialCalendar" parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar">-->
@@ -84,6 +125,14 @@
         <item name="android:windowMinWidthMajor">100%</item>
         <item name="android:windowMinWidthMinor">100%</item>
         <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+    <style name="Theme_Dialog" parent="android:Theme.Holo.Dialog">
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+        android:fromYDelta="50%p" android:toYDelta="0%p"
+        android:duration="@android:integer/config_longAnimTime"
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:textColor">@color/profile </item>
     </style>
 
 </resources>

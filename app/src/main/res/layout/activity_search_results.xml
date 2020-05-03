@@ -126,7 +126,7 @@
             app:layout_constraintTop_toTopOf="@id/from_search_result_section"
             app:layout_constraintBottom_toBottomOf="@id/from_search_result_section"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:backgroundTint="@color/login_button"
+            android:backgroundTint="@color/orange_color"
             app:layout_constraintStart_toStartOf="@id/close_search_result_button"
             app:layout_constraintEnd_toEndOf="@id/close_search_result_button"/>
         <ImageView
@@ -137,7 +137,7 @@
             app:layout_constraintTop_toTopOf="@id/to_search_result_section"
             app:layout_constraintBottom_toBottomOf="@id/to_search_result_section"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:backgroundTint="@color/login_button"
+            android:backgroundTint="@color/orange_color"
             app:layout_constraintStart_toStartOf="@id/my_location_search_results"
             app:layout_constraintEnd_toEndOf="@id/my_location_search_results"
             />
@@ -155,7 +155,7 @@
                 android:layout_width="5dp"
                 android:layout_height="5dp"
                 android:background="@drawable/null_icon"
-                android:backgroundTint="@color/login_button"
+                android:backgroundTint="@color/orange_color"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"/>
@@ -164,7 +164,7 @@
                 android:layout_width="5dp"
                 android:layout_height="5dp"
                 android:background="@drawable/null_icon"
-                android:backgroundTint="@color/login_button"
+                android:backgroundTint="@color/orange_color"
                 app:layout_constraintTop_toBottomOf="@id/search_results_img1"
                 android:layout_marginTop="10dp"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -174,7 +174,7 @@
                 android:layout_width="5dp"
                 android:layout_height="5dp"
                 android:background="@drawable/null_icon"
-                android:backgroundTint="@color/login_button"
+                android:backgroundTint="@color/orange_color"
                 app:layout_constraintTop_toBottomOf="@id/search_results_img2"
                 android:layout_marginTop="10dp"
                 app:layout_constraintLeft_toLeftOf="parent"

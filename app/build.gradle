@@ -56,6 +56,10 @@ dependencies {
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.google.firebase:firebase-messaging:19.0.0'
+    implementation 'com.github.wisnukurniawan:date-time-range-picker-android:1.0.9'
+    //Material Components
+    implementation 'com.google.android.material:material:1.2.0-alpha03'
+    implementation 'com.crystal:crystalrangeseekbar:1.0.0'
 
 
 }

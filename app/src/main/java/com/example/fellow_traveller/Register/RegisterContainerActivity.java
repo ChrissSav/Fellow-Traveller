@@ -128,7 +128,9 @@ public class RegisterContainerActivity extends AppCompatActivity {
         new FellowTravellerAPI(globalClass).userRegister(user, new UserRegisterCallback() {
             @Override
             public void onSuccess(UserAuthModel user) {
+
                 Save(user);
+                firebaseRegister(String.valueOf(user.getId()),user.getName(), user.getSurname());
             }
 
             @Override
