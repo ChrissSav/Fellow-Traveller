@@ -6,35 +6,69 @@ import com.google.gson.annotations.SerializedName;
 
 public class UserBaseModel {
 
-    @SerializedName("name")
-    @Expose
-    private String name;
-    @SerializedName("surname")
-    @Expose
-    private String surname;
     @SerializedName("id")
     @Expose
     private Integer id;
+    @SerializedName("first_name")
+    @Expose
+    private String firstName;
+    @SerializedName("last_name")
+    @Expose
+    private String lastName;
+    @SerializedName("rate")
+    @Expose
+    private double rate;
+    @SerializedName("reviews")
+    @Expose
+    private int reviews;
+    @SerializedName("picture")
+    @Expose
+    private String picture;
 
     public UserBaseModel(String name, String surname) {
-        this.name = name;
-        this.surname = surname;
+        this.firstName = name;
+        this.lastName = surname;
+
     }
 
-    public String getName() {
-        return name;
+    public double getRate() {
+        return rate;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getPicture() {
+        return picture;
     }
 
-    public String getSurname() {
-        return surname;
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
+    public int getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(int reviews) {
+        this.reviews = reviews;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Integer getId() {
@@ -43,14 +77,12 @@ public class UserBaseModel {
 
     public void setId(Integer id) {
         this.id = id;
-    }
+}
 
     public String getFullName() {
-        return name + " " + surname;
+        return firstName + " " + lastName;
     }
 
-    public Boolean user_Info_OK() {
-        return name != null && surname != null && id != 0;
-    }
+
 
 }

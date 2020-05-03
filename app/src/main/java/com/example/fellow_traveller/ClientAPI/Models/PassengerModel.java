@@ -14,7 +14,7 @@ public class PassengerModel {
     private int bags;
     @SerializedName("pet")
     @Expose
-    private String pet;
+    private Boolean pet;
 
 
     public UserBaseModel getUser() {
@@ -33,11 +33,11 @@ public class PassengerModel {
         this.bags = bags;
     }
 
-    public String getPet() {
+    public Boolean getPet() {
         return pet;
     }
 
-    public void setPet(String pet) {
+    public void setPet(Boolean pet) {
         this.pet = pet;
     }
 }
