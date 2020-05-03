@@ -1,5 +1,6 @@
 package com.example.fellow_traveller.SearchAndBook;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,12 +75,12 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
 
         holder.userName.setText(currentItem.getCreator().getFullName());
         // TODO cast this to double
-        holder.rate.setText((int) currentItem.getCreator().getRate());
-        holder.review.setText(currentItem.getCreator().getReviews());
-        holder.from.setText(currentItem.getDestFrom());
-        holder.to.setText(currentItem.getDestTo());
-        holder.date.setText(currentItem.getTimestamp());
-        holder.time.setText(currentItem.getTimestamp());
+        holder.rate.setText(String.valueOf(currentItem.getCreator().getRate()));
+        holder.review.setText(String.valueOf(currentItem.getCreator().getReviews()));
+        holder.from.setText(String.valueOf(currentItem.getDestFrom()));
+        holder.to.setText(String.valueOf(currentItem.getDestTo()));
+        holder.date.setText(String.valueOf(currentItem.getTimestamp()));
+        holder.time.setText(String.valueOf(currentItem.getTimestamp()));
     }
 
     @Override

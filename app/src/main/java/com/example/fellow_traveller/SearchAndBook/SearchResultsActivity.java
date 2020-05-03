@@ -57,6 +57,20 @@ public class SearchResultsActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(ArrayList<TripModel> trips) {
                         resultList.addAll(trips);
+                        mRecyclerView = findViewById(R.id.search_results_recycler_view);
+                        mRecyclerView.setHasFixedSize(true);
+                        mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                        mAdapter = new SearchResultsAdapter(resultList);
+                        mRecyclerView.setLayoutManager(mLayoutManager);
+                        mRecyclerView.setAdapter(mAdapter);
+
+                        mAdapter.setOnItemClickListener(new SearchResultsAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(int position) {
+                                Intent mainIntent = new Intent(SearchResultsActivity.this, SearchDetailsActivity.class);
+                                startActivity(mainIntent);
+                            }
+                        });
                     }
 
                     @Override
@@ -65,21 +79,6 @@ public class SearchResultsActivity extends AppCompatActivity {
                     }
                 });
 
-        mRecyclerView = findViewById(R.id.search_results_recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new SearchResultsAdapter(resultList);
-
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-
-        mAdapter.setOnItemClickListener(new SearchResultsAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Intent mainIntent = new Intent(SearchResultsActivity.this, SearchDetailsActivity.class);
-                startActivity(mainIntent);
-            }
-        });
 
         filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
