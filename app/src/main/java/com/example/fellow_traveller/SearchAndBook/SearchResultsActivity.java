@@ -1,17 +1,21 @@
 package com.example.fellow_traveller.SearchAndBook;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.fellow_traveller.ClientAPI.Callbacks.SearchTripsCallback;
+import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
+import com.example.fellow_traveller.ClientAPI.Models.TripModel;
+import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
-import com.example.fellow_traveller.SplashActivity;
 
 import java.util.ArrayList;
 
@@ -20,11 +24,13 @@ public class SearchResultsActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private SearchResultsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ImageButton filterButton,swapButton, backButton;
+    private ImageButton filterButton, swapButton, backButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
+        GlobalClass globalClass = (GlobalClass) getApplicationContext();
 
         from = findViewById(R.id.from_search_results);
         to = findViewById(R.id.to_search_results);
@@ -39,11 +45,25 @@ public class SearchResultsActivity extends AppCompatActivity {
         to.setText(toString);
         from.setText(fromString);
 
-        ArrayList<SearchResultItem> resultList = new ArrayList<>();
-        resultList.add(new SearchResultItem("Martin Garrix","4.9","1033","Athens","Filotas", "7 Apr 2020", "10:00"));
-        resultList.add(new SearchResultItem("Martin Garrix","4.9","1033","Athens","Filotas", "7 Apr 2020", "10:00"));
-        resultList.add(new SearchResultItem("Martin Garrix","4.9","1033","Athens","Filotas", "7 Apr 2020", "10:00"));
-        resultList.add(new SearchResultItem("Martin Garrix","4.9","1033","Athens","Filotas", "7 Apr 2020", "10:00"));
+        final ArrayList<TripModel> resultList = new ArrayList<>();
+//        resultList.add(new SearchResultItem("Martin Garrix","4.9","1033","Athens","Filotas", "7 Apr 2020", "10:00"));
+//        resultList.add(new SearchResultItem("Martin Garrix","4.9","1033","Athens","Filotas", "7 Apr 2020", "10:00"));
+//        resultList.add(new SearchResultItem("Martin Garrix","4.9","1033","Athens","Filotas", "7 Apr 2020", "10:00"));
+//        resultList.add(new SearchResultItem("Martin Garrix","4.9","1033","Athens","Filotas", "7 Apr 2020", "10:00"));
+
+
+        new FellowTravellerAPI(globalClass).getTrips(toString, fromString, null, null, null, null, null, null,
+                null, null, null, new SearchTripsCallback() {
+                    @Override
+                    public void onSuccess(ArrayList<TripModel> trips) {
+                        resultList.addAll(trips);
+                    }
+
+                    @Override
+                    public void onFailure(String errorMsg) {
+                        Log.d("FILTER", "Couldnt find any trips");
+                    }
+                });
 
         mRecyclerView = findViewById(R.id.search_results_recycler_view);
         mRecyclerView.setHasFixedSize(true);

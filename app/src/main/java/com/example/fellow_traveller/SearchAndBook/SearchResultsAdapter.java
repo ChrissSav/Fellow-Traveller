@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.R;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdapter.SearchResultsViewHolder>{
-    private ArrayList<SearchResultItem> searchResultList;
+    private ArrayList<TripModel> searchResultList;
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener{
@@ -54,7 +55,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
 
         }
     }
-    public SearchResultsAdapter(ArrayList<SearchResultItem> searchList){
+    public SearchResultsAdapter(ArrayList<TripModel> searchList){
         searchResultList = searchList;
 
     }
@@ -69,15 +70,16 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
 
     @Override
     public void onBindViewHolder(@NonNull SearchResultsViewHolder holder, int position) {
-        SearchResultItem currentItem = searchResultList.get(position);
+        TripModel currentItem = searchResultList.get(position);
 
-        holder.userName.setText(currentItem.getUserName());
-        holder.rate.setText(currentItem.getRate());
-        holder.review.setText(currentItem.getReview());
-        holder.from.setText(currentItem.getFrom());
-        holder.to.setText(currentItem.getTo());
-        holder.date.setText(currentItem.getDate());
-        holder.time.setText(currentItem.getTime());
+        holder.userName.setText(currentItem.getCreator().getFullName());
+        // TODO cast this to double
+        holder.rate.setText((int) currentItem.getCreator().getRate());
+        holder.review.setText(currentItem.getCreator().getReviews());
+        holder.from.setText(currentItem.getDestFrom());
+        holder.to.setText(currentItem.getDestTo());
+        holder.date.setText(currentItem.getTimestamp());
+        holder.time.setText(currentItem.getTimestamp());
     }
 
     @Override

@@ -1,10 +1,10 @@
 package com.example.fellow_traveller.ClientAPI;
 
-import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarDeleteCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
+import com.example.fellow_traveller.ClientAPI.Callbacks.SearchTripsCallback;
 import com.example.fellow_traveller.ClientAPI.Callbacks.StatusCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.TripRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserAuthCallback;
@@ -17,6 +17,7 @@ import com.example.fellow_traveller.ClientAPI.Models.CreatePassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
 import com.example.fellow_traveller.ClientAPI.Models.ErrorResponseModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
+import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserChangePasswordModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserLoginModel;
@@ -29,7 +30,6 @@ import com.google.gson.JsonObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -352,6 +352,23 @@ public class FellowTravellerAPI {
         });
     }
 
+    public static void getTrips(String destTo, String destFrom, Integer timestampMin, Integer timestampMax,
+                                Integer seatsMin, Integer seatsMax, Integer bagsMin, Integer bagsMax,
+                                Integer priceMin, Integer priceMax, Boolean hasPet, final SearchTripsCallback searchTripsCallback) {
+        retrofitAPIEndpoints.getTrips(destTo, destFrom, timestampMin, timestampMax, seatsMin,
+                seatsMax, bagsMin, bagsMax, priceMin,
+                priceMax, hasPet).enqueue(new Callback<ArrayList<TripModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<TripModel>> call, Response<ArrayList<TripModel>> response) {
+                searchTripsCallback.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<TripModel>> call, Throwable t) {
+                searchTripsCallback.onFailure("No trips available.");
+            }
+        });
+    }
 
     public static void addPassengerToTrip(CreatePassengerModel passenger, final StatusCallBack statusCallBack) {
         retrofitAPIEndpoints.addPassenger(passenger).enqueue(new Callback<StatusHandleModel>() {
