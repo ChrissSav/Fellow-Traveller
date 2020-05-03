@@ -13,9 +13,7 @@
     </item>
     <item>
         <shape>
-
-
-            <solid android:color="#3CA9CB"/>
+            <solid android:color="@color/blue_offer"/>
             <corners
                 android:bottomLeftRadius="8dp"
                 android:bottomRightRadius="8dp"
