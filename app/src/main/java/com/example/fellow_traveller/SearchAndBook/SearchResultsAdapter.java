@@ -44,8 +44,8 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         holder.review.setText(String.valueOf(currentItem.getCreator().getReviews()));
         holder.from.setText(String.valueOf(currentItem.getDestFrom()));
         holder.to.setText(String.valueOf(currentItem.getDestTo()));
-        holder.date.setText(String.valueOf(currentItem.getTimestamp()));
-        holder.time.setText(String.valueOf(currentItem.getTimestamp()));
+        holder.date.setText(currentItem.getDate());
+        holder.time.setText(currentItem.getTime());
     }
 
     @Override

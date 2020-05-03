@@ -1,9 +1,14 @@
 package com.example.fellow_traveller.ClientAPI.Models;
 
+import android.util.Log;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class TripModel {
 
@@ -161,5 +166,17 @@ public class TripModel {
 
     public void setPassengers(ArrayList<PassengerModel> passengers) {
         this.passengers = passengers;
+    }
+
+    public String getDate(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("d MMM yyyy");
+        Date date = new Date((long)timestamp*1000);
+        return dateFormat.format(date);
+    }
+
+    public String getTime(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        Date date = new Date((long)timestamp*1000);
+        return dateFormat.format(date);
     }
 }
