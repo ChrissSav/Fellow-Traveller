@@ -1,39 +1,26 @@
 package com.example.fellow_traveller.Register;
 
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.os.HandlerThread;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.example.fellow_traveller.ClientAPI.Callbacks.StatusCallBack;
-import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
-import com.example.fellow_traveller.RegisterActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.concurrent.ExecutionException;
-
-import static com.example.fellow_traveller.Util.InputValidation.isValidEmail;
-
-public class RegisterStage1Fragment extends Fragment {
+public class RegisterStage1Fragmentd extends Fragment {
 
     private TextInputLayout textInputLayoutEmail;
     private GlobalClass globalClass;
     private View view;
 
-    public RegisterStage1Fragment() {
+    public RegisterStage1Fragmentd() {
 
     }
 
@@ -56,17 +43,15 @@ public class RegisterStage1Fragment extends Fragment {
     }
 
     public int getRank() {
-        return 1;
+        return 2;
     }
+
+
 
 
     public String getEmail() {
         return textInputLayoutEmail.getEditText().getText().toString();
     }
-
-
-
-
 
 
     public EditText getEditText() {

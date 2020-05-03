@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.fellow_traveller.Register.RegisterContainerActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button btn_login, btn_register;
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(MainActivity.this, RegisterContainerActivity.class);
                 startActivity(intent);
                 //finish();
             }
