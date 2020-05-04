@@ -44,7 +44,6 @@
         <activity android:name=".Trips.TripPageActivity" />
         <activity android:name=".Register.RegisterContainerActivity" />
         <activity android:name=".HomeFragments.HomeActivity" />
-        <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".Settings.ChangeUserPasswordActivity" />
         <activity android:name=".SplashActivity">
