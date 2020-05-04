@@ -6,7 +6,7 @@
         <!-- Customize your theme here. -->
 
 
-        <item name="colorPrimary">@color/profile</item>
+        <item name="colorPrimary">@color/black_color</item>
         <item name="colorPrimaryDark">@color/orange_color</item>
         <item name="colorAccent">@color/orange_color</item>
         <item name="windowNoTitle">true</item>
@@ -19,14 +19,14 @@
         <item name="colorError">@color/home_blue</item>
 
         <!-- New MaterialComponents attributes. -->
-        <item name="colorPrimaryVariant">@color/profile</item>
-        <item name="colorSecondaryVariant">@color/profile</item>
+        <item name="colorPrimaryVariant">@color/black_color</item>
+        <item name="colorSecondaryVariant">@color/black_color</item>
         <item name="colorSurface">@color/white</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorOnSecondary">@color/home_blue</item>
-        <item name="colorOnBackground">@color/profile</item>
+        <item name="colorOnBackground">@color/black_color</item>
         <item name="colorOnError">@color/red</item>
-        <item name="colorOnSurface">@color/profile</item>
+        <item name="colorOnSurface">@color/black_color</item>
         <item name="scrimBackground">@color/mtrl_scrim_color</item>
         <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1</item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.MaterialComponents.Headline2</item>
@@ -132,7 +132,7 @@
         android:fromYDelta="50%p" android:toYDelta="0%p"
         android:duration="@android:integer/config_longAnimTime"
         <item name="android:windowBackground">@color/white</item>
-        <item name="android:textColor">@color/profile </item>
+        <item name="android:textColor">@color/black_color</item>
     </style>
 
 </resources>

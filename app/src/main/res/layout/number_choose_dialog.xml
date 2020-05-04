@@ -21,7 +21,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
         android:fontFamily="@font/firasans_bold"
-        android:textColor="@color/profile"/>
+        android:textColor="@color/black_color"/>
     <TextView
         android:id="@+id/filter_header_tv2"
         android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
         app:layout_constraintBottom_toBottomOf="@id/filter_header_tv"
         app:layout_constraintLeft_toLeftOf="parent"
         android:fontFamily="@font/firasans_light"
-        android:textColor="@color/profile"
+        android:textColor="@color/black_color"
         app:layout_constraintStart_toEndOf="@id/filter_header_tv"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,7 +52,7 @@
             android:fontFamily="@font/firasans_medium"
             android:text="0"
             android:gravity="center"
-            android:textColor="@color/profile"
+            android:textColor="@color/black_color"
             android:textSize="40sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -128,7 +128,7 @@
         android:textAllCaps="false"
         android:fontFamily="@font/firasans_medium"
         android:textSize="18sp"
-        android:textColor="@color/profile"
+        android:textColor="@color/black_color"
         app:layout_constraintTop_toTopOf="@id/choose_num_button"
         app:layout_constraintBottom_toBottomOf="@id/choose_num_button"
         />

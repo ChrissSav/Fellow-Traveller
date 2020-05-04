@@ -24,6 +24,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+
                 <TextView
                     android:id="@+id/FragmentHome_textView_welcome_user"
                     android:layout_width="wrap_content"
@@ -339,15 +340,14 @@
 
             <Button
                 android:id="@+id/FragmentHome_button_CreateTrip"
-                android:layout_width="340dp"
-                android:layout_height="65dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/home_fragment_button"
+                style="@style/button_blue_filled"
                 android:text="Δημιουργία ταξιδιού"
-                android:fontFamily="@font/firasans_bold"
-                android:textColor="@color/white_opaque"
-                android:textSize="20sp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/Layout3"
                 app:layout_constraintTop_toBottomOf="@id/Layout3"
                 app:layout_constraintBottom_toBottomOf="parent"/>

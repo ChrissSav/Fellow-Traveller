@@ -23,7 +23,7 @@
         app:layout_constraintStart_toEndOf="@id/profile_search_item"
         app:layout_constraintTop_toTopOf="@id/profile_search_item"
         android:layout_marginStart="20dp"
-        android:textColor="@color/profile"
+        android:textColor="@color/black_color"
         android:layout_marginTop="10dp"
         />
     <TextView
@@ -35,7 +35,7 @@
         app:layout_constraintBottom_toBottomOf="@id/profile_search_item"
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/firasans_light"
-        android:textColor="@color/profile"
+        android:textColor="@color/black_color"
         android:textSize="16sp"/>
     <ImageView
         android:id="@+id/rate_image_search"
@@ -51,7 +51,7 @@
         android:layout_width="4dp"
         android:layout_height="4dp"
         android:background="@drawable/null_icon"
-        android:backgroundTint="@color/profile"
+        android:backgroundTint="@color/black_color"
         app:layout_constraintStart_toEndOf="@id/rate_image_search"
         app:layout_constraintTop_toTopOf="@id/rate_search_item"
         app:layout_constraintBottom_toBottomOf="@id/rate_search_item"
@@ -65,7 +65,7 @@
         app:layout_constraintBottom_toBottomOf="@id/rate_search_item"
         app:layout_constraintTop_toTopOf="@id/rate_search_item"
         android:fontFamily="@font/firasans_light"
-        android:textColor="@color/profile"
+        android:textColor="@color/black_color"
         android:textSize="16sp"
         android:layout_marginStart="5dp"/>
     <ImageView
@@ -101,7 +101,7 @@
         app:layout_constraintTop_toBottomOf="@id/profile_search_item"
         android:layout_marginTop="30dp"
         android:textSize="16sp"
-        android:textColor="@color/profile"
+        android:textColor="@color/black_color"
         android:layout_marginStart="5dp"
         />
     <TextView
@@ -114,7 +114,7 @@
         android:layout_marginTop="5dp"
         android:fontFamily="@font/firasans_bold"
         android:textSize="18sp"
-        android:textColor="@color/profile"
+        android:textColor="@color/black_color"
         />
     <TextView
         android:id="@+id/to_tv_search"
@@ -126,7 +126,7 @@
         app:layout_constraintBottom_toBottomOf="@id/from_tv_search"
         app:layout_constraintStart_toEndOf="@id/review_image_search"
         android:textSize="16sp"
-        android:textColor="@color/profile"
+        android:textColor="@color/black_color"
         android:layout_marginStart="15dp"
         />
     <TextView
@@ -139,7 +139,7 @@
         android:layout_marginTop="5dp"
         android:fontFamily="@font/firasans_bold"
         android:textSize="18sp"
-        android:textColor="@color/profile"
+        android:textColor="@color/black_color"
         />
     <TextView
         android:id="@+id/date_tv_search"
@@ -151,7 +151,7 @@
         app:layout_constraintTop_toBottomOf="@id/from_search_item"
         android:layout_marginTop="15dp"
         android:textSize="16sp"
-        android:textColor="@color/profile"
+        android:textColor="@color/black_color"
         />
     <TextView
         android:id="@+id/date_search_item"
@@ -163,7 +163,7 @@
         android:layout_marginTop="5dp"
         android:fontFamily="@font/firasans_bold"
         android:textSize="18sp"
-        android:textColor="@color/profile"
+        android:textColor="@color/black_color"
         />
     <TextView
         android:id="@+id/time_tv_search"
@@ -175,7 +175,7 @@
         app:layout_constraintBottom_toBottomOf="@id/date_tv_search"
         app:layout_constraintStart_toStartOf="@id/to_tv_search"
         android:textSize="16sp"
-        android:textColor="@color/profile"
+        android:textColor="@color/black_color"
         />
     <TextView
         android:id="@+id/time_search_item"
@@ -187,13 +187,13 @@
         android:layout_marginTop="5dp"
         android:fontFamily="@font/firasans_bold"
         android:textSize="18sp"
-        android:textColor="@color/profile"
+        android:textColor="@color/black_color"
         />
     <View
         android:id="@+id/ActivityProfile_about_me_underline"
         android:layout_width="0dp"
         android:layout_height="2dp"
-        android:background="@color/lightGrey"
+        android:background="@color/softGrey_color"
         app:layout_constraintTop_toBottomOf="@+id/date_search_item"
         android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"

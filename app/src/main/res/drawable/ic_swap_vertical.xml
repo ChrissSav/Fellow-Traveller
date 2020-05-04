@@ -6,12 +6,12 @@
   <path
       android:pathData="M0,0h24v24h-24z"
       android:strokeAlpha="0"
-      android:fillColor="@color/profile"
+      android:fillColor="@color/black_color"
       android:fillAlpha="0"/>
   <path
       android:pathData="M8.39,19.13l-0.01,-10.21l-1.5,0l0.01,10.21l-3.83,-3.82l-1.06,1.06l5.63,5.63l5.64,-5.64l-1.06,-1.06l-3.82,3.83z"
-      android:fillColor="@color/profile"/>
+      android:fillColor="@color/black_color"/>
   <path
       android:pathData="M22,7.63l-5.63,-5.63l-5.64,5.63l1.06,1.07l3.82,-3.82l0.01,10.2l1.49,0l0,-10.21l3.83,3.82l1.06,-1.06z"
-      android:fillColor="@color/profile"/>
+      android:fillColor="@color/black_color"/>
 </vector>

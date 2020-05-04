@@ -36,7 +36,7 @@
             android:layout_height="30dp"
             android:layout_marginStart="10dp"
             android:background="@drawable/ic_car"
-            android:backgroundTint="@color/profile"
+            android:backgroundTint="@color/black_color"
             app:layout_constraintBottom_toBottomOf="@+id/car_item_textView_title"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView61"

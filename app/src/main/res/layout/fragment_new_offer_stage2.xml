@@ -50,7 +50,7 @@
             android:longClickable="false"
             android:padding="15dp"
             android:singleLine="true"
-            android:textColor="@color/profile"
+            android:textColor="@color/black_color"
             android:drawableRight="@drawable/ic_calendar"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -87,7 +87,7 @@
             android:padding="15dp"
             android:drawableRight="@drawable/ic_clock"
             android:singleLine="true"
-            android:textColor="@color/profile"
+            android:textColor="@color/black_color"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -51,7 +51,7 @@
         android:gravity="right"
         android:hint="0.00"
         android:inputType="numberDecimal"
-        android:textColor="@color/profile"
+        android:textColor="@color/black_color"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="@+id/NewOfferStage4Fragment_textView"
         app:layout_constraintHorizontal_bias="0.39"
@@ -63,7 +63,7 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="64dp"
-        android:background="@color/lightGrey"
+        android:background="@color/softGrey_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NewOfferStage4Fragment_editText_price" />
@@ -96,7 +96,7 @@
         android:fontFamily="@font/firasans_medium"
         android:text="@string/euro_symbol"
         android:textAlignment="center"
-        android:textColor="@color/profile"
+        android:textColor="@color/black_color"
         android:textSize="40sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/NewOfferStage4Fragment_editText_price"
         app:layout_constraintStart_toEndOf="@+id/NewOfferStage4Fragment_editText_price" />

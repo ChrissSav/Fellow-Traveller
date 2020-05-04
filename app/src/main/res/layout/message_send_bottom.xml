@@ -29,7 +29,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:textSize="10sp"
             android:fontFamily="@font/firasans_light"
-            android:textColor="@color/profile"
+            android:textColor="@color/black_color"
             android:visibility="gone"
             />
         <TextView
@@ -58,7 +58,7 @@
             android:layout_marginEnd="20dp"
             android:textSize="10sp"
             android:fontFamily="@font/firasans_light"
-            android:textColor="@color/profile"
+            android:textColor="@color/black_color"
             android:visibility="gone"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>

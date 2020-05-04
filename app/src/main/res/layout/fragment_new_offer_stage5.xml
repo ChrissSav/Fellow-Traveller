@@ -41,7 +41,7 @@
         android:hint="Γράψε κάτι ... "
         android:inputType="textCapSentences|textMultiLine"
         android:singleLine="false"
-        android:textColor="@color/profile"
+        android:textColor="@color/black_color"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/NewOfferStage5Fragment_textView1"
         app:layout_constraintStart_toStartOf="@+id/NewOfferStage5Fragment_textView1"
@@ -63,7 +63,7 @@
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
         android:text="TextView"
-        android:background="@color/lightGrey"
+        android:background="@color/softGrey_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NewOfferStage5Fragment_textView2" />
@@ -73,7 +73,7 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="24dp"
-        android:background="@color/lightGrey"
+        android:background="@color/softGrey_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NewOfferStage5Fragment_editText" />

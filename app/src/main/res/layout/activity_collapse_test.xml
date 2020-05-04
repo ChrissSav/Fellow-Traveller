@@ -59,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Αξιολογήσεις"
-                android:textColor="@color/profile"
+                android:textColor="@color/black_color"
                 android:fontFamily="@font/firasans_bold"
                 android:textSize="26sp"
                 app:layout_constraintStart_toStartOf="@id/reviews_back_button"
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="125 Κριτικές"
-                android:textColor="@color/profile"
+                android:textColor="@color/black_color"
                 android:fontFamily="@font/firasans_light"
                 app:layout_constraintTop_toBottomOf="@id/reviews_review_tv"
                 android:layout_marginTop="10dp"
@@ -83,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ταξινόμηση με βάση: Ημ/νία"
-                android:textColor="@color/profile"
+                android:textColor="@color/black_color"
                 android:fontFamily="@font/firasans_light"
                 app:layout_constraintTop_toTopOf="@id/reviews_num_of_reviews"
                 app:layout_constraintBottom_toBottomOf="@id/reviews_num_of_reviews"
@@ -94,7 +94,7 @@
                 android:id="@+id/reviews_underline_bottom"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:background="@color/lightGrey"
+                android:background="@color/softGrey_color"
                 app:layout_constraintTop_toBottomOf="@id/reviews_sort_by"
                 android:layout_marginTop="10dp"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -139,6 +139,7 @@
                 android:nestedScrollingEnabled="false"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
     </androidx.core.widget.NestedScrollView>

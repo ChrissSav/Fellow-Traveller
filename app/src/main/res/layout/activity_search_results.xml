@@ -71,7 +71,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:text="Αθήνα"
                 android:textSize="16sp"
-                android:textColor="@color/profile"
+                android:textColor="@color/black_color"
                 android:fontFamily="@font/firasans_light"
                 />
 
@@ -100,7 +100,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:text="Θεσσαλονίκη"
                 android:textSize="16sp"
-                android:textColor="@color/profile"
+                android:textColor="@color/black_color"
                 android:fontFamily="@font/firasans_light"
                 />
 
@@ -192,7 +192,7 @@
         android:text="Βρέθηκαν 4 ταξίδια"
         android:textSize="20sp"
         android:fontFamily="@font/firasans_bold"
-        android:textColor="@color/profile"
+        android:textColor="@color/black_color"
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="20dp"
