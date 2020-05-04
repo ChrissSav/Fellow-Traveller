@@ -10,21 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <ImageButton
-                android:id="@+id/settings_button"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/ic_settings"
-                android:padding="20dp"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ActivityProfile_user_image"
@@ -73,6 +61,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/ActivityProfile_verify_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -170,7 +159,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:fontFamily="@font/firasans_bold"
-                    android:text="Σχετικά με εμένα"
+                    android:text="Σχετικά με τον χρήστη"
                     android:textColor="@color/profile"
                     android:textSize="23sp"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -207,104 +196,54 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ActivityProfile_reviews_section"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:background="@color/profile"
                 android:paddingLeft="10dp"
                 android:paddingRight="15dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ActivityProfile_about_me_section">
 
                 <TextView
-                    android:id="@+id/become_driver_tv"
+                    android:id="@+id/ActivityProfile_review_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/firasans_bold"
-                    android:text="Γίνε Fellow Traveller οδηγός"
-                    android:textColor="@color/lightGrey"
+                    android:text="Οι αξιολογήσεις του"
+                    android:textColor="@color/white"
                     android:textSize="23sp"
-                    android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <View
-                    android:id="@+id/underline_become_driver"
+                    android:id="@+id/ActivityProfile_underline_review"
                     android:layout_width="0dp"
                     android:layout_height="3dp"
-                    android:background="@color/lightGrey"
-                    app:layout_constraintEnd_toEndOf="@id/become_driver_tv"
-                    app:layout_constraintStart_toStartOf="@+id/become_driver_tv"
-                    app:layout_constraintTop_toBottomOf="@id/become_driver_tv" />
-
-                <TextView
-                    android:id="@+id/new_car_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/firasans_light"
-                    android:text="Πρόσθεσε τα στοιχεία του αυτοκινήτου σου για να αποκτήσεις την δυνατότητα να πραγματοποιήσεις προσφορά διαδρομής"
-                    android:textColor="@color/lightGrey"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="@id/underline_become_driver"
-                    app:layout_constraintTop_toBottomOf="@id/underline_become_driver" />
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="@id/ActivityProfile_review_tv"
+                    app:layout_constraintStart_toStartOf="@+id/ActivityProfile_review_tv"
+                    app:layout_constraintTop_toBottomOf="@id/ActivityProfile_review_tv" />
 
                 <Button
-                    android:id="@+id/new_car_button_account"
+                    android:id="@+id/ActivityProfile_more_reviews_button"
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:layout_marginRight="20dp"
                     android:fontFamily="@font/firasans_light"
-                    android:text="Κάνε προσθήκη εδώ..."
+                    android:text="Δείτε περισσότερες"
                     android:textAllCaps="false"
-                    android:textColor="@color/lightGrey"
+                    android:textColor="@color/white"
                     android:textSize="15sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/new_car_tv" />
-
+                    app:layout_constraintTop_toBottomOf="@+id/ActivityProfile_underline_review"
+                    />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/ActivityProfile_review_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="30dp"
-                android:fontFamily="@font/firasans_bold"
-                android:text="Δεν έχετε αξιολογήσεις"
-                android:textColor="@color/profile"
-                android:textSize="23sp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ActivityProfile_reviews_section" />
-
-            <View
-                android:id="@+id/ActivityProfile_underline_review"
-                android:layout_width="0dp"
-                android:layout_height="3dp"
-                android:background="@color/profile"
-                app:layout_constraintEnd_toEndOf="@id/ActivityProfile_review_tv"
-                app:layout_constraintStart_toStartOf="@+id/ActivityProfile_review_tv"
-                app:layout_constraintTop_toBottomOf="@id/ActivityProfile_review_tv" />
-
-            <Button
-                android:id="@+id/ActivityProfile_more_reviews_button"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/firasans_light"
-                android:text="Δείτε περισσότερες"
-                android:textAllCaps="false"
-                android:textColor="@color/profile"
-                android:textSize="15sp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ActivityProfile_underline_review" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </FrameLayout>

@@ -60,7 +60,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_picture"
+        android:id="@+id/ActivityProfile_user_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="30dp"
@@ -80,7 +80,7 @@
         android:textColor="@color/home_blue"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_picture" />
+        app:layout_constraintTop_toBottomOf="@+id/ActivityProfile_user_image" />
 
     <ScrollView
         android:layout_width="0dp"
@@ -178,7 +178,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/PersonalSettingsActivity_editText_last_name" />
 
             <TextView
-                android:id="@+id/about_me_tv"
+                android:id="@+id/ActivityProfile_about_me_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -200,8 +200,8 @@
                 app:layout_constraintEnd_toEndOf="@+id/PersonalSettingsActivity_editText_first_name"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/about_me_tv"
-                app:layout_constraintTop_toBottomOf="@+id/about_me_tv" />
+                app:layout_constraintStart_toStartOf="@+id/ActivityProfile_about_me_tv"
+                app:layout_constraintTop_toBottomOf="@+id/ActivityProfile_about_me_tv" />
 
             <View
                 android:id="@+id/underline_about_me"

@@ -190,7 +190,7 @@
         android:textColor="@color/profile"
         />
     <View
-        android:id="@+id/underline"
+        android:id="@+id/ActivityProfile_about_me_underline"
         android:layout_width="0dp"
         android:layout_height="2dp"
         android:background="@color/lightGrey"

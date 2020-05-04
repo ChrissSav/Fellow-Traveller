@@ -42,9 +42,9 @@ public class AccountFragment extends Fragment {
 
         settingsButton = view.findViewById(R.id.settings_button);
         newCarButton = view.findViewById(R.id.new_car_button_account);
-        reviewsButton = view.findViewById(R.id.fragment_account_reviews_button);
-        textViewUserName = view.findViewById(R.id.user_name);
-        textViewAboutMe = view.findViewById(R.id.AccountFragment_textView_aboutMe);
+        reviewsButton = view.findViewById(R.id.ActivityProfile_more_reviews_button);
+        textViewUserName = view.findViewById(R.id.ActivityProfile_user_name);
+        textViewAboutMe = view.findViewById(R.id.ActivityProfile_about_me_info);
 
 
         settingsButton.setOnClickListener(new View.OnClickListener() {

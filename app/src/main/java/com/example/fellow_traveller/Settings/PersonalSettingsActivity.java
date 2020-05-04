@@ -43,7 +43,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
         globalClass = (GlobalClass) getApplicationContext();
 
         changeImageButton = findViewById(R.id.change_image_button);
-        profilePicture = findViewById(R.id.profile_picture);
+        profilePicture = findViewById(R.id.ActivityProfile_user_image);
         imageButtonClose = findViewById(R.id.PersonalSettingsActivity_button_close);
         imageButtonUpdate = findViewById(R.id.PersonalSettingsActivity_button_update);
 
