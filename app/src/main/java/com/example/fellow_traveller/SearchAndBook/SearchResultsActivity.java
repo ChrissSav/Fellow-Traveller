@@ -47,12 +47,6 @@ public class SearchResultsActivity extends AppCompatActivity {
         from.setText(fromString);
 
         final ArrayList<TripModel> resultList = new ArrayList<>();
-//        resultList.add(new SearchResultItem("Martin Garrix","4.9","1033","Athens","Filotas", "7 Apr 2020", "10:00"));
-//        resultList.add(new SearchResultItem("Martin Garrix","4.9","1033","Athens","Filotas", "7 Apr 2020", "10:00"));
-//        resultList.add(new SearchResultItem("Martin Garrix","4.9","1033","Athens","Filotas", "7 Apr 2020", "10:00"));
-//        resultList.add(new SearchResultItem("Martin Garrix","4.9","1033","Athens","Filotas", "7 Apr 2020", "10:00"));
-
-
         new FellowTravellerAPI(globalClass).getTrips(toString, fromString, null, null, null, null, null, null,
                 null, null, null, new SearchTripsCallback() {
                     @Override
