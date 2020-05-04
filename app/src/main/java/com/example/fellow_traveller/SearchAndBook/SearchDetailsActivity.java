@@ -17,7 +17,7 @@ import com.example.fellow_traveller.R;
 public class SearchDetailsActivity extends AppCompatActivity {
     private Button bookButton;
     private TextView textViewDestFrom, textViewDestTo, textViewDate,
-            textViewTime, textViewSeats, textViewBags, textViewPets, textViewCar, textViewMsg;
+            textViewTime, textViewSeats, textViewBags, textViewPets, textViewCar, textViewMsg,textViewPrice;
     private Button buttonCreator, buttonRate;
     private TripModel tripModel;
     private GlobalClass globalClass;
@@ -33,7 +33,7 @@ public class SearchDetailsActivity extends AppCompatActivity {
         bookButton = findViewById(R.id.book_details_search_button);
         buttonCreator = findViewById(R.id.user_name_search_details_button);
         buttonRate = findViewById(R.id.rate_and_reviews_search_details_button);
-
+        textViewPrice = findViewById(R.id. price_search_details);
         textViewDestFrom = findViewById(R.id.from_detail_search);
         textViewDestTo = findViewById(R.id.to_detail_search);
         textViewDate = findViewById(R.id.date_search_details);
@@ -43,7 +43,6 @@ public class SearchDetailsActivity extends AppCompatActivity {
         textViewPets = findViewById(R.id.pet_search_details);
         textViewCar = findViewById(R.id.car_search_details);
         textViewMsg = findViewById(R.id.driver_message_search_details_tv);
-
         textViewDestFrom.setText(tripModel.getDestFrom());
         textViewDestTo.setText(tripModel.getDestTo());
         textViewDate.setText(tripModel.getDate());
@@ -53,7 +52,7 @@ public class SearchDetailsActivity extends AppCompatActivity {
         textViewPets.setText(tripModel.getPetString());
         textViewCar.setText(tripModel.getCar().getDescription());
         textViewMsg.setText(tripModel.getMsg());
-
+        textViewPrice.setText(tripModel.getPrice()+getResources().getString(R.string.euro_symbol));
         buttonCreator.setText(tripModel.getCreatorUser().getFullName());
         buttonRate.setText(tripModel.getCreatorUser().getRate() + " | " + tripModel.getCreatorUser().getReviews());
 
