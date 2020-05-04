@@ -21,7 +21,7 @@ import com.example.fellow_traveller.R;
 import java.util.ArrayList;
 
 public class SearchResultsActivity extends AppCompatActivity {
-    private TextView to, from;
+    private TextView to, from, searchResultsCount;
     private RecyclerView mRecyclerView;
     private SearchResultsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -38,6 +38,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         filterButton = findViewById(R.id.filter_search_result_button);
         swapButton = findViewById(R.id.swap_search_results_button);
         backButton = findViewById(R.id.close_search_result_button);
+        searchResultsCount = findViewById(R.id.results_found_search);
 
         Intent intent = getIntent();
         final String toString = intent.getExtras().getString("ToPlace");
@@ -58,6 +59,8 @@ public class SearchResultsActivity extends AppCompatActivity {
                         mAdapter = new SearchResultsAdapter(resultList);
                         mRecyclerView.setLayoutManager(mLayoutManager);
                         mRecyclerView.setAdapter(mAdapter);
+
+                        searchResultsCount.setText(String.format("Βρέθηκαν %d ταξίδια.", resultList.size()));
 
                         mAdapter.setOnItemClickListener(new SearchResultsAdapter.OnItemClickListener() {
                             @Override
