@@ -1,28 +1,24 @@
 package com.example.fellow_traveller.ClientAPI.Models;
 
 
-import com.google.gson.annotations.Expose;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class UserBaseModel {
+public class UserBaseModel implements Parcelable {
 
     @SerializedName("id")
-    @Expose
     private Integer id;
     @SerializedName("first_name")
-    @Expose
     private String firstName;
     @SerializedName("last_name")
-    @Expose
     private String lastName;
     @SerializedName("rate")
-    @Expose
     private double rate;
     @SerializedName("reviews")
-    @Expose
     private int reviews;
     @SerializedName("picture")
-    @Expose
     private String picture;
 
     public UserBaseModel(String name, String surname) {
@@ -30,6 +26,32 @@ public class UserBaseModel {
         this.lastName = surname;
 
     }
+
+
+    protected UserBaseModel(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        firstName = in.readString();
+        lastName = in.readString();
+        rate = in.readDouble();
+        reviews = in.readInt();
+        picture = in.readString();
+    }
+
+    public static final Creator<UserBaseModel> CREATOR = new Creator<UserBaseModel>() {
+        @Override
+        public UserBaseModel createFromParcel(Parcel in) {
+            return new UserBaseModel(in);
+        }
+
+        @Override
+        public UserBaseModel[] newArray(int size) {
+            return new UserBaseModel[size];
+        }
+    };
 
     public double getRate() {
         return rate;
@@ -84,5 +106,23 @@ public class UserBaseModel {
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(id);
+        }
+        dest.writeString(firstName);
+        dest.writeString(lastName);
+        dest.writeDouble(rate);
+        dest.writeInt(reviews);
+        dest.writeString(picture);
+    }
 }

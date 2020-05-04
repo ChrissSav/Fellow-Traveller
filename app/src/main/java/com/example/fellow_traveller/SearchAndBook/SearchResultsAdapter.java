@@ -38,10 +38,10 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     public void onBindViewHolder(@NonNull SearchResultsViewHolder holder, int position) {
         TripModel currentItem = searchResultList.get(position);
 
-        holder.userName.setText(currentItem.getCreator().getFullName());
+        holder.userName.setText(currentItem.getCreatorUser().getFullName());
         // TODO cast this to double
-        holder.rate.setText(String.valueOf(currentItem.getCreator().getRate()));
-        holder.review.setText(String.valueOf(currentItem.getCreator().getReviews()));
+        holder.rate.setText(String.valueOf(currentItem.getCreatorUser().getRate()));
+        holder.review.setText(String.valueOf(currentItem.getCreatorUser().getReviews()));
         holder.from.setText(String.valueOf(currentItem.getDestFrom()));
         holder.to.setText(String.valueOf(currentItem.getDestTo()));
         holder.date.setText(currentItem.getDate());
