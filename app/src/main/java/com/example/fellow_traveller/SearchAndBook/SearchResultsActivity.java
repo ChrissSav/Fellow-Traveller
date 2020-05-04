@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,12 +32,12 @@ public class SearchResultsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_results);
         GlobalClass globalClass = (GlobalClass) getApplicationContext();
 
-        from = findViewById(R.id.from_search_results);
-        to = findViewById(R.id.to_search_results);
-        filterButton = findViewById(R.id.filter_search_result_button);
-        swapButton = findViewById(R.id.swap_search_results_button);
-        backButton = findViewById(R.id.close_search_result_button);
-        searchResultsCount = findViewById(R.id.results_found_search);
+        from = findViewById(R.id.ActivitySearchResults_from_textView);
+        to = findViewById(R.id.ActivitySearchResults_to_textView);
+        filterButton = findViewById(R.id.ActivitySearchResults_filter_button);
+        swapButton = findViewById(R.id.ActivitySearchResults_swap_button);
+        backButton = findViewById(R.id.ActivitySearchResults_close_button);
+        searchResultsCount = findViewById(R.id.ActivitySearchResults_results_label);
 
         Intent intent = getIntent();
         final String toString = intent.getExtras().getString("ToPlace");
@@ -53,7 +52,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(ArrayList<TripModel> trips) {
                         resultList.addAll(trips);
-                        mRecyclerView = findViewById(R.id.search_results_recycler_view);
+                        mRecyclerView = findViewById(R.id.ActivitySearchResults_recycler_view);
                         mRecyclerView.setHasFixedSize(true);
                         mLayoutManager = new LinearLayoutManager(getApplicationContext());
                         mAdapter = new SearchResultsAdapter(resultList);

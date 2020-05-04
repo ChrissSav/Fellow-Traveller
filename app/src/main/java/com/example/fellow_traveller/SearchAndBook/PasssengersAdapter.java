@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class PassengersAdapter extends RecyclerView.Adapter<PassengersAdapter.PassengersViewHolder>{
+public class PasssengersAdapter extends RecyclerView.Adapter<PasssengersAdapter.PassengersViewHolder>{
     private ArrayList<PassengerModel> passengersList;
     private OnItemClickListener mListener;
 
@@ -54,7 +54,7 @@ public class PassengersAdapter extends RecyclerView.Adapter<PassengersAdapter.Pa
 
         }
     }
-    public PassengersAdapter(ArrayList<PassengerModel> aPassengerList){
+    public PasssengersAdapter(ArrayList<PassengerModel> aPassengerList){
         passengersList = aPassengerList;
 
     }
@@ -71,13 +71,14 @@ public class PassengersAdapter extends RecyclerView.Adapter<PassengersAdapter.Pa
     public void onBindViewHolder(@NonNull PassengersViewHolder holder, int position) {
         PassengerModel currentItem = passengersList.get(position);
 
-        holder.userName.setText(currentItem.getUserName());
-        holder.rate.setText(currentItem.getRate());
-        holder.review.setText(currentItem.getReview());
-        holder.from.setText(currentItem.getFrom());
-        holder.to.setText(currentItem.getTo());
-        holder.date.setText(currentItem.getDate());
-        holder.time.setText(currentItem.getTime());
+        holder.userName.setText(currentItem.getUser().getFullName());
+        holder.rating.setText(String.valueOf(currentItem.getUser().getRate()));
+        holder.reviews.setText(String.valueOf(currentItem.getUser().getReviews()));
+        if(currentItem.getPet())
+            holder.havePet.setText("Ναι");
+        else
+            holder.havePet.setText("Όχι");
+        holder.numOfBags.setText(String.valueOf(currentItem.getBags()));
     }
 
     @Override

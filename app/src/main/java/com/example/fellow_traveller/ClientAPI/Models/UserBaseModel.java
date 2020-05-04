@@ -21,12 +21,14 @@ public class UserBaseModel implements Parcelable {
     @SerializedName("picture")
     private String picture;
 
-    public UserBaseModel(String name, String surname) {
-        this.firstName = name;
-        this.lastName = surname;
-
+    public UserBaseModel(Integer id, String firstName, String lastName, double rate, int reviews, String picture) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.rate = rate;
+        this.reviews = reviews;
+        this.picture = picture;
     }
-
 
     protected UserBaseModel(Parcel in) {
         if (in.readByte() == 0) {

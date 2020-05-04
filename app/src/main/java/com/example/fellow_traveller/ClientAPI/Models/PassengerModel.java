@@ -16,6 +16,11 @@ public class PassengerModel {
     @Expose
     private Boolean pet;
 
+    public PassengerModel(UserBaseModel user, int bags, Boolean pet) {
+        this.user = user;
+        this.bags = bags;
+        this.pet = pet;
+    }
 
     public UserBaseModel getUser() {
         return user;
