@@ -37,6 +37,7 @@ public class Search2Activity extends AppCompatActivity {
     private PlaceAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<PredictionsModel> places_list;
+
     private GlobalClass globalClass;
 
     @Override
@@ -118,9 +119,6 @@ public class Search2Activity extends AppCompatActivity {
                     return true;
                 }
 
-                return false;
-            }
-        });
     }
 
     public void GetPlaces(String input) {
@@ -152,6 +150,10 @@ public class Search2Activity extends AppCompatActivity {
             public void onItemClick(int position) {
                 // SetNotificationsRead(mExampleList.get(position).getId(),position);
                 destinationAutoComplete.setText(places_list.get(position).getDescription());
+                Intent mainIntent = new Intent(Search2Activity.this, SearchResultsActivity.class);
+                mainIntent.putExtra("ToPlace", destinationAutoComplete.getText().toString());
+                mainIntent.putExtra("FromPlace", fromString);
+                startActivity(mainIntent);
             }
         });
     }
