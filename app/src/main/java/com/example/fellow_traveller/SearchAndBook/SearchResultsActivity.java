@@ -64,8 +64,6 @@ public class SearchResultsActivity extends AppCompatActivity {
                             public void onItemClick(int position) {
                                 Intent mainIntent = new Intent(SearchResultsActivity.this, SearchDetailsActivity.class);
                                 mainIntent.putExtra("trip",resultList.get(position));
-                                mainIntent.putExtra("trip1",resultList.get(1));
-
                                 startActivity(mainIntent);
                             }
                         });

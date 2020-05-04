@@ -44,6 +44,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         holder.review.setText(String.valueOf(currentItem.getCreatorUser().getReviews()));
         holder.from.setText(String.valueOf(currentItem.getDestFrom()));
         holder.to.setText(String.valueOf(currentItem.getDestTo()));
+        holder.price.setText(currentItem.getPrice()+ "€");
         holder.date.setText(currentItem.getDate());
         holder.time.setText(currentItem.getTime());
     }
@@ -58,7 +59,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     }
 
     public static class SearchResultsViewHolder extends RecyclerView.ViewHolder {
-        public TextView userName, rate, review, from, to, date, time;
+        public TextView userName, rate, review, from, to, date, time,price;
 
 
         public SearchResultsViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
@@ -71,7 +72,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
             to = itemView.findViewById(R.id.to_search_item);
             date = itemView.findViewById(R.id.date_search_item);
             time = itemView.findViewById(R.id.time_search_item);
-
+            price = itemView.findViewById(R.id.price_search_item);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
