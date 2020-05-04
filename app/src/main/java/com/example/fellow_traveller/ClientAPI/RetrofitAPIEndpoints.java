@@ -6,6 +6,7 @@ import com.example.fellow_traveller.ClientAPI.Models.CreatePassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
 import com.example.fellow_traveller.ClientAPI.Models.NotificationModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
+import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserChangePasswordModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserLoginModel;
@@ -23,6 +24,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface RetrofitAPIEndpoints {
     @POST("/auth/login")
@@ -91,4 +93,18 @@ public interface RetrofitAPIEndpoints {
     @GET("/notifications")
     Call<List<NotificationModel>> userNotifications();
 
+    @GET("/trips")
+    Call<ArrayList<TripModel>> getTrips(
+            @Query("dest_to") String destTo,
+            @Query("dest_from") String destFrom,
+            @Query("timestamp_min") Integer timestampMin,
+            @Query("timestamp_max") Integer timestampMax,
+            @Query("seats_min") Integer seatsMin,
+            @Query("seats_max") Integer seatsMax,
+            @Query("bags_min") Integer bagsMin,
+            @Query("bags_max") Integer bagsMax,
+            @Query("price_min") Integer priceMin,
+            @Query("price_max") Integer priceMax,
+            @Query("pet") Boolean hasPet
+    );
 }
