@@ -101,7 +101,6 @@ public class Search2Activity extends AppCompatActivity {
 
         //destinationAutoComplete.setAdapter(new PlaceAutocompleteAdapter(Search2Activity.this, android.R.layout.simple_list_item_1));
         final Intent intent = getIntent();
-//        final String fromString = intent.getExtras().getString("FromPlace");
 
         destinationAutoComplete.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -118,7 +117,10 @@ public class Search2Activity extends AppCompatActivity {
 
                     return true;
                 }
+                return false;
 
+            }
+        });
     }
 
     public void GetPlaces(String input) {
@@ -129,7 +131,7 @@ public class Search2Activity extends AppCompatActivity {
                 places_list = placeAPiModel.getPredictions();
                 buildRecyclerView();
             }
-            
+
             @Override
             public void onFailure(String errorMsg) {
 
@@ -145,6 +147,7 @@ public class Search2Activity extends AppCompatActivity {
         mAdapter = new PlaceAdapter(places_list);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+        final Intent intent = getIntent();
         mAdapter.setOnItemClickListener(new PlaceAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -152,9 +155,11 @@ public class Search2Activity extends AppCompatActivity {
                 destinationAutoComplete.setText(places_list.get(position).getDescription());
                 Intent mainIntent = new Intent(Search2Activity.this, SearchResultsActivity.class);
                 mainIntent.putExtra("ToPlace", destinationAutoComplete.getText().toString());
-                mainIntent.putExtra("FromPlace", fromString);
+                // TODO fix this error when no re-searching for a trip
+                mainIntent.putExtra("FromPlace", intent.getExtras().getString("FromPlace"));
                 startActivity(mainIntent);
             }
         });
     }
 }
+
