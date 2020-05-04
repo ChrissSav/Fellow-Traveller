@@ -17,8 +17,13 @@ import androidx.fragment.app.FragmentManager;
 import com.example.fellow_traveller.ClientAPI.Callbacks.TripRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
+import com.example.fellow_traveller.ClientAPI.Models.CreateTripModelTest;
+import com.example.fellow_traveller.ClientAPI.Models.DestinationModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.Models.GlobalClass;
+import com.example.fellow_traveller.PlacesAPI.CallBack.PlaceApiResultCallBack;
+import com.example.fellow_traveller.PlacesAPI.Models.ResultModel;
+import com.example.fellow_traveller.PlacesAPI.PlaceApiConnectionTest;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.SuccessActivity;
 
@@ -45,6 +50,8 @@ public class NewOfferActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private int num_num;
     private GlobalClass globalClass;
+    private DestinationModel destinationModelFrom;
+    private DestinationModel destinationModelTo;
 
 
     @Override
@@ -53,7 +60,6 @@ public class NewOfferActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_offer);
         num_num = 100 / stages;
         globalClass = (GlobalClass) getApplicationContext();
-
 
 
         textViewTitleStage6 = findViewById(R.id.NewOfferActivity_textView_stage_6);
@@ -73,11 +79,9 @@ public class NewOfferActivity extends AppCompatActivity {
 
         buttonNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.i("fff", fra.toString());
                 if (fra.toString().equals("NewOfferStage1Fragment") && newOfferStage1Fragment.validateFragment()) {
                     fra = newOfferStage2Fragment;
                     progressBar.setProgress(num_num * newOfferStage2Fragment.getRank());
-                    //buttonNext.setText("Αποστολή");
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
                 } else if (fra.toString().equals("NewOfferStage2Fragment") && newOfferStage2Fragment.validateFragment()) {
                     progressBar.setProgress(num_num * newOfferStage3Fragment.getRank());
@@ -97,8 +101,9 @@ public class NewOfferActivity extends AppCompatActivity {
 
                 } else if (fra.toString().equals("NewOfferStage5Fragment") && newOfferStage4Fragment.validateFragment()) {
                     progressBar.setProgress(num_num * newOfferStage6Fragment.getRank());
-                    newOfferStage6Fragment.setFrom(newOfferStage1Fragment.getDest_from());
-                    newOfferStage6Fragment.setTo(newOfferStage1Fragment.getDest_to());
+
+                    newOfferStage6Fragment.setFrom(newOfferStage1Fragment.getDestFrom());
+                    newOfferStage6Fragment.setTo(newOfferStage1Fragment.getDestTo());
 
                     newOfferStage6Fragment.setDate(newOfferStage2Fragment.getDate());
                     newOfferStage6Fragment.setTime(newOfferStage2Fragment.getTime());
@@ -120,7 +125,9 @@ public class NewOfferActivity extends AppCompatActivity {
                     buttonNext.setText("Καταχώρηση");
 
                 } else if (fra.toString().equals("NewOfferStage6Fragment")) {
-                    tripRegister();
+                    GetDestinationsModel(newOfferStage1Fragment.getDestFromModel().getPlace_id(),
+                            newOfferStage1Fragment.getDestToModel().getPlace_id());
+                   // tripRegister();
                 }
 
             }
@@ -133,10 +140,10 @@ public class NewOfferActivity extends AppCompatActivity {
         });
     }
 
-    public void getDateFromFragment(String tag){
+    public void getDateFromFragment(String tag) {
         textViewTitleStage6.setVisibility(View.GONE);
         buttonNext.setText("Επόμενο");
-        switch(tag) {
+        switch (tag) {
             case "1":
                 progressBar.setProgress(num_num * newOfferStage1Fragment.getRank());
                 fra = newOfferStage1Fragment;
@@ -202,8 +209,8 @@ public class NewOfferActivity extends AppCompatActivity {
 
 
     public void tripRegister() {
-        String dest_from = newOfferStage1Fragment.getDest_from();
-        String dest_to = newOfferStage1Fragment.getDest_to();
+        //String dest_from = newOfferStage1Fragment.getDestFrom();
+       // String dest_to = newOfferStage1Fragment.getDestTo();
 
         String date = newOfferStage2Fragment.getDate();
         String time = newOfferStage2Fragment.getTime();
@@ -218,7 +225,7 @@ public class NewOfferActivity extends AppCompatActivity {
         String msg = newOfferStage5Fragment.getMsg();
 
         // Create trip object from model
-        CreateTripModel trip = new CreateTripModel(dest_from, dest_to, dateTimeToTimestamp(date, time),
+        CreateTripModelTest trip = new CreateTripModelTest(destinationModelFrom, destinationModelTo, dateTimeToTimestamp(date, time),
                 pet, max_seats, max_bags,
                 msg, price, car_id);
 
@@ -226,7 +233,7 @@ public class NewOfferActivity extends AppCompatActivity {
             @Override
             public void onSuccess(StatusHandleModel status) {
                 Intent intent = new Intent(NewOfferActivity.this, SuccessActivity.class);
-                intent.putExtra("title",getResources().getString(R.string.success_add));
+                intent.putExtra("title", getResources().getString(R.string.success_add));
                 startActivity(intent);
                 finish();
             }
@@ -240,4 +247,50 @@ public class NewOfferActivity extends AppCompatActivity {
 
     }
 
+    public void GetDestinationsModel(final String placeIdFrom,final String  placeIdTo) {
+        new PlaceApiConnectionTest(globalClass, true).getLatLonFromPlace(placeIdFrom, new PlaceApiResultCallBack() {
+            @Override
+            public void onSuccess(ResultModel resultModel) {
+                destinationModelFrom = new DestinationModel(resultModel.getPlaceΙd(), resultModel.getFormattedAddress()
+                        , resultModel.getGeometry().getLocation().getLatitude(), resultModel.getGeometry().getLocation().getLongitude());
+
+                new PlaceApiConnectionTest(globalClass, true).getLatLonFromPlace(placeIdTo, new PlaceApiResultCallBack() {
+                    @Override
+                    public void onSuccess(ResultModel resultModel) {
+                        destinationModelTo = new DestinationModel(resultModel.getPlaceΙd(), resultModel.getFormattedAddress()
+                                , resultModel.getGeometry().getLocation().getLatitude(), resultModel.getGeometry().getLocation().getLongitude());
+
+                        tripRegister();
+
+                    }
+
+                    @Override
+                    public void onFailure(String errorMsg) {
+                        Toast.makeText(NewOfferActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+            }
+
+            @Override
+            public void onFailure(String errorMsg) {
+                Toast.makeText(NewOfferActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
