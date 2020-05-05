@@ -23,7 +23,7 @@ public class SearchDetailsActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private PassengerImageAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private TextView textViewDestFrom, textViewDestTo, textViewDate,
+    private TextView textViewCreator, textViewRating, textViewReviews, textViewDestFrom, textViewDestTo, textViewDate,
             textViewTime, textViewSeats, textViewBags, textViewPets, textViewCar, textViewMsg,textViewPrice;
     private Button buttonCreator, buttonRate;
     private TripModel tripModel;
@@ -40,8 +40,9 @@ public class SearchDetailsActivity extends AppCompatActivity {
         bookButton = findViewById(R.id.ActivitySearchDetails_book_button);
 
 
-        buttonCreator = findViewById(R.id.ActivitySearchDetails_user_name);
-        buttonRate = findViewById(R.id.rate_and_reviews_search_details_button);
+        textViewCreator = findViewById(R.id.ActivitySearchDetails_user_name);
+        textViewRating = findViewById(R.id.ActivitySearchDetails_rating_tv);
+        textViewReviews = findViewById(R.id.ActivitySearchDetails_reviews_tv);
         textViewPrice = findViewById(R.id.ActivitySearchDetails_price_tv);
         textViewDestFrom = findViewById(R.id.ActivitySearchDetails_from_dest_tv);
         textViewDestTo = findViewById(R.id.ActivitySearchDetails_to_dest_tv);
@@ -62,8 +63,8 @@ public class SearchDetailsActivity extends AppCompatActivity {
         textViewCar.setText(tripModel.getCar().getBrand());
         //textViewMsg.setText(tripModel.getMsg());
         textViewPrice.setText(tripModel.getPrice()+getResources().getString(R.string.euro_symbol));
-        buttonCreator.setText(tripModel.getCreatorUser().getFullName());
-        buttonRate.setText(tripModel.getCreatorUser().getRate() + " | " + tripModel.getCreatorUser().getReviews());
+//        buttonCreator.setText(tripModel.getCreatorUser().getFullName());
+//        buttonRate.setText(tripModel.getCreatorUser().getRate() + " | " + tripModel.getCreatorUser().getReviews());
 
         ArrayList<PassengerModel> passengersList = new ArrayList<>();
         UserBaseModel userBaseModel = new UserBaseModel(1, "Tyler",   "Joseph", 4.7, 34, "default" );

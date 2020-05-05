@@ -8,7 +8,7 @@
     <color name="orange_color_pressed">#ee7d3b</color>
     <color name="white_color">#F8F8F8</color>
     <color name="black_color">#262322</color>
-    <color name="black_pressed_color">#333130</color>
+    <color name="black_color_pressed">#333130</color>
     <color name="greyBlack_color">#7c7b7a</color>
     <color name="greyBlack_transparent_color">#807c7b7a</color>
     <color name="blue_color">#5B9AD9</color>

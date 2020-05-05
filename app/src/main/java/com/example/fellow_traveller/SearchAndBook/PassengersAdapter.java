@@ -36,8 +36,8 @@ public class PassengersAdapter extends RecyclerView.Adapter<PassengersAdapter.Pa
             super(itemView);
 
             userName = itemView.findViewById(R.id.passenger_item_user_name);
-            rating = itemView.findViewById(R.id.ActivitySearchDetails_rating);
-            reviews = itemView.findViewById(R.id.ActivitySearchDetails_reviews);
+            rating = itemView.findViewById(R.id.ActivitySearchDetails_rating_tv);
+            reviews = itemView.findViewById(R.id.ActivitySearchDetails_reviews_tv);
             havePet = itemView.findViewById(R.id.passenger_item_have_pet);
             numOfBags = itemView.findViewById(R.id.passenger_item_number_of_bags);
             userImage = itemView.findViewById(R.id.passenger_item_user_image);
