@@ -269,7 +269,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/ActivityProfile_review_tv"
+                android:id="@+id/ActivityProfile_review_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -286,9 +286,9 @@
                 android:layout_width="0dp"
                 android:layout_height="3dp"
                 android:background="@color/black_color"
-                app:layout_constraintEnd_toEndOf="@id/ActivityProfile_review_tv"
-                app:layout_constraintStart_toStartOf="@+id/ActivityProfile_review_tv"
-                app:layout_constraintTop_toBottomOf="@id/ActivityProfile_review_tv" />
+                app:layout_constraintEnd_toEndOf="@id/ActivityProfile_review_label"
+                app:layout_constraintStart_toStartOf="@+id/ActivityProfile_review_label"
+                app:layout_constraintTop_toBottomOf="@id/ActivityProfile_review_label" />
 
             <Button
                 android:id="@+id/ActivityProfile_more_reviews_button"

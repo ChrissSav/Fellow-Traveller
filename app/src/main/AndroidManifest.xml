@@ -18,7 +18,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".SearchAndBook.SearchPassengersActivity" />
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".CollapseTest" />
         <activity android:name=".SuccessActivity" />
         <activity android:name=".Reviews.WriteReviewActivity" />

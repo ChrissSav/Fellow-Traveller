@@ -437,6 +437,7 @@
                 android:textColor="@color/black_color"
                 />
             <Button
+                android:id="@+id/ActivitySearchDetails_more_passengers_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/button_orange_empty"
@@ -444,6 +445,7 @@
                 app:layout_constraintTop_toTopOf="@id/ActivitySearchDetails_passengers_label"
                 app:layout_constraintBottom_toBottomOf="@id/ActivitySearchDetails_passengers_label"
                 app:layout_constraintEnd_toEndOf="@id/ActivitySearchDetails_more_button"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/ActivitySearchDetails_passenger_recycler_view"
                 android:layout_width="match_parent"

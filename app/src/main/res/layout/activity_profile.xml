@@ -13,6 +13,16 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <ImageButton
+                android:id="@+id/ActivityProfile_close_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_close"
+                style="@style/border_icon_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ActivityProfile_user_image"
@@ -201,19 +211,20 @@
                 android:background="@color/black_color"
                 android:paddingLeft="10dp"
                 android:paddingRight="15dp"
+                android:paddingBottom="20dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ActivityProfile_about_me_section">
 
                 <TextView
-                    android:id="@+id/ActivityProfile_review_tv"
+                    android:id="@+id/ActivityProfile_review_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/firasans_bold"
-                    android:text="Οι αξιολογήσεις του"
+                    android:text="Αξιολογήσεις"
                     android:textColor="@color/white"
                     android:textSize="23sp"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -224,24 +235,117 @@
                     android:layout_width="0dp"
                     android:layout_height="3dp"
                     android:background="@color/white"
-                    app:layout_constraintEnd_toEndOf="@id/ActivityProfile_review_tv"
-                    app:layout_constraintStart_toStartOf="@+id/ActivityProfile_review_tv"
-                    app:layout_constraintTop_toBottomOf="@id/ActivityProfile_review_tv" />
+                    app:layout_constraintEnd_toEndOf="@id/ActivityProfile_review_label"
+                    app:layout_constraintStart_toStartOf="@+id/ActivityProfile_review_label"
+                    app:layout_constraintTop_toBottomOf="@id/ActivityProfile_review_label" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ActivityProfile_last_review_section"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/ActivityProfile_underline_review"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/review_item_user_image"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/null_icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    />
+
+                <TextView
+                    android:id="@+id/review_item_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Γιασεμής Μαραμένος"
+                    app:layout_constraintTop_toTopOf="@id/review_item_user_image"
+                    app:layout_constraintStart_toEndOf="@id/review_item_user_image"
+                    android:layout_marginStart="15dp"
+                    android:textColor="@color/white_color"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/firasans_medium"
+                    android:layout_marginTop="8dp"
+                    />
+                <TextView
+                    android:id="@+id/review_item_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="22 Ιαν 2020"
+                    android:padding="0dp"
+                    app:layout_constraintBottom_toBottomOf="@id/review_item_user_image"
+                    app:layout_constraintStart_toEndOf="@id/review_item_user_image"
+                    android:layout_marginStart="15dp"
+                    android:textColor="@color/white_color"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/firasans_light"
+                    android:layout_marginBottom="8dp"
+                    />
+                <ImageView
+                    android:id="@+id/review_item_rating_image"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:background="@drawable/ic_rating"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/review_item_user_name"
+                    android:layout_marginRight="10dp"/>
+                <TextView
+                    android:id="@+id/review_item_out_of_five_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/5"
+                    app:layout_constraintTop_toTopOf="@id/review_item_rating_image"
+                    app:layout_constraintBottom_toBottomOf="@id/review_item_rating_image"
+                    android:textColor="@color/white_color"
+                    android:fontFamily="@font/firasans_medium"
+                    app:layout_constraintEnd_toStartOf="@id/review_item_rating_image"
+                    android:layout_marginEnd="10dp"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/review_item_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/firasans_bold"
+                    android:text="4,5"
+                    android:textColor="@color/white_color"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@id/review_item_rating_image"
+                    app:layout_constraintEnd_toStartOf="@id/review_item_out_of_five_tv"
+                    app:layout_constraintTop_toTopOf="@id/review_item_rating_image"
+                    app:layout_constraintVertical_bias="0.4" />
+
+                <TextView
+                    android:id="@+id/review_item_review_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea r..."
+                    android:fontFamily="@font/firasans_light"
+                    android:textColor="@color/white_color"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toBottomOf="@id/review_item_user_image"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="10dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <Button
                     android:id="@+id/ActivityProfile_more_reviews_button"
-                    style="?android:attr/borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="@font/firasans_light"
-                    android:text="Δείτε περισσότερες"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    app:layout_constraintLeft_toLeftOf="parent"
+                    style="@style/button_orange_empty"
+                    android:text="Δείτε όλες"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ActivityProfile_underline_review"
+
+                    app:layout_constraintTop_toTopOf="@id/ActivityProfile_review_label"
+                    app:layout_constraintBottom_toBottomOf="@id/ActivityProfile_underline_review"
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

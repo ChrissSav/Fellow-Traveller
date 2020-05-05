@@ -24,8 +24,8 @@ public class SearchDetailsActivity extends AppCompatActivity {
     private PassengerImageAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private TextView textViewCreator, textViewRating, textViewReviews, textViewDestFrom, textViewDestTo, textViewDate,
-            textViewTime, textViewSeats, textViewBags, textViewPets, textViewCar, textViewMsg,textViewPrice;
-    private Button buttonCreator, buttonRate;
+                        textViewTime, textViewSeats, textViewBags, textViewPets, textViewCar, textViewMsg,textViewPrice;
+    private Button passengersButton;
     private TripModel tripModel;
     private GlobalClass globalClass;
 
@@ -53,6 +53,8 @@ public class SearchDetailsActivity extends AppCompatActivity {
         textViewPets = findViewById(R.id.ActivitySearchDetails_pets_tv);
         textViewCar = findViewById(R.id.ActivitySearchDetails_car_tv);
         textViewMsg = findViewById(R.id.ActivitySearchDetails_driver_message_tv);
+        passengersButton = findViewById(R.id.ActivitySearchDetails_more_passengers_button);
+
         textViewDestFrom.setText(tripModel.getDestFrom());
         textViewDestTo.setText(tripModel.getDestTo());
         textViewDate.setText(tripModel.getDate());
@@ -63,16 +65,13 @@ public class SearchDetailsActivity extends AppCompatActivity {
         textViewCar.setText(tripModel.getCar().getBrand());
         //textViewMsg.setText(tripModel.getMsg());
         textViewPrice.setText(tripModel.getPrice()+getResources().getString(R.string.euro_symbol));
-//        buttonCreator.setText(tripModel.getCreatorUser().getFullName());
-//        buttonRate.setText(tripModel.getCreatorUser().getRate() + " | " + tripModel.getCreatorUser().getReviews());
+        textViewCreator.setText(tripModel.getCreatorUser().getFullName());
+        textViewRating.setText(String.valueOf(tripModel.getCreatorUser().getRate()));
+        textViewReviews.setText(String.valueOf(tripModel.getCreatorUser().getReviews()));
 
         ArrayList<PassengerModel> passengersList = new ArrayList<>();
         UserBaseModel userBaseModel = new UserBaseModel(1, "Tyler",   "Joseph", 4.7, 34, "default" );
         PassengerModel passengerModel = new PassengerModel(userBaseModel, 3, true);
-        passengersList.add(passengerModel);
-        passengersList.add(passengerModel);
-        passengersList.add(passengerModel);
-        passengersList.add(passengerModel);
         passengersList.add(passengerModel);
         passengersList.add(passengerModel);
         passengersList.add(passengerModel);
@@ -93,6 +92,13 @@ public class SearchDetailsActivity extends AppCompatActivity {
 
 
 
+        passengersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainIntent = new Intent(SearchDetailsActivity.this, SearchPassengersActivity.class);
+                startActivity(mainIntent);
+            }
+        });
 
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
