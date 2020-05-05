@@ -124,10 +124,10 @@
         android:fontFamily="@font/firasans_light"
         app:layout_constraintTop_toTopOf="@id/from_tv_search"
         app:layout_constraintBottom_toBottomOf="@id/from_tv_search"
-        app:layout_constraintStart_toEndOf="@id/review_image_search"
+        app:layout_constraintStart_toEndOf="@id/dot_image_search"
         android:textSize="16sp"
         android:textColor="@color/black_color"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="40dp"
         />
     <TextView
         android:id="@+id/to_search_item"

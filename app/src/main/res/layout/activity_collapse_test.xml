@@ -12,7 +12,10 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="false"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+
+
 
         >
     <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -20,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -211,17 +214,33 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
     </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+            app:layout_anchor="@id/collapsingToolbar"
+            android:nestedScrollingEnabled="false"
+            app:contentInsetEndWithActions="@dimen/inner_padding_left"
+
+
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/red"
+
+
+                >
+                <TextView
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="sdadsadda"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -237,22 +256,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/ActivitySearchResults_results_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Βρέθηκαν 4 ταξίδια"
+                android:textSize="20sp"
+                android:fontFamily="@font/firasans_bold"
+                android:textColor="@color/black_color"
+                android:layout_marginTop="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/reviews_recycler_view"
+                android:id="@+id/ActivitySearchResults_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                android:layout_height="0dp"
+                android:scrollbars="vertical"
+                android:layout_marginTop="10dp"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ActivitySearchResults_results_label"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:paddingBottom="100dp"
-                android:nestedScrollingEnabled="false"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
     </androidx.core.widget.NestedScrollView>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
