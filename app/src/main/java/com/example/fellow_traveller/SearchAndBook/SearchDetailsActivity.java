@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class SearchDetailsActivity extends AppCompatActivity {
     private Button bookButton;
     private RecyclerView mRecyclerView;
-    private PasssengersAdapter mAdapter;
+    private PassengerImageAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private TextView textViewDestFrom, textViewDestTo, textViewDate,
             textViewTime, textViewSeats, textViewBags, textViewPets, textViewCar, textViewMsg,textViewPrice;
@@ -37,21 +37,21 @@ public class SearchDetailsActivity extends AppCompatActivity {
 
         tripModel = getIntent().getParcelableExtra("trip");
 
-        bookButton = findViewById(R.id.book_details_search_button);
+        bookButton = findViewById(R.id.ActivitySearchDetails_book_button);
 
 
-        buttonCreator = findViewById(R.id.user_name_search_details_button);
+        buttonCreator = findViewById(R.id.ActivitySearchDetails_user_name);
         buttonRate = findViewById(R.id.rate_and_reviews_search_details_button);
-        textViewPrice = findViewById(R.id. price_search_details);
-        textViewDestFrom = findViewById(R.id.from_detail_search);
-        textViewDestTo = findViewById(R.id.to_detail_search);
-        textViewDate = findViewById(R.id.date_search_details);
-        textViewTime = findViewById(R.id.time_search_details);
-        textViewSeats = findViewById(R.id.seats_search_details);
-        textViewBags = findViewById(R.id.bags_search_details);
-        textViewPets = findViewById(R.id.pet_search_details);
-        textViewCar = findViewById(R.id.car_search_details);
-        textViewMsg = findViewById(R.id.driver_message_search_details_tv);
+        textViewPrice = findViewById(R.id.ActivitySearchDetails_price_tv);
+        textViewDestFrom = findViewById(R.id.ActivitySearchDetails_from_dest_tv);
+        textViewDestTo = findViewById(R.id.ActivitySearchDetails_to_dest_tv);
+        textViewDate = findViewById(R.id.ActivitySearchDetails_date_tv);
+        textViewTime = findViewById(R.id.ActivitySearchDetails_time_tv);
+        textViewSeats = findViewById(R.id.ActivitySearchDetails_seats_tv);
+        textViewBags = findViewById(R.id.ActivitySearchDetails_bags_tv);
+        textViewPets = findViewById(R.id.ActivitySearchDetails_pets_tv);
+        textViewCar = findViewById(R.id.ActivitySearchDetails_car_tv);
+        textViewMsg = findViewById(R.id.ActivitySearchDetails_driver_message_tv);
         textViewDestFrom.setText(tripModel.getDestFrom());
         textViewDestTo.setText(tripModel.getDestTo());
         textViewDate.setText(tripModel.getDate());
@@ -59,8 +59,8 @@ public class SearchDetailsActivity extends AppCompatActivity {
         textViewSeats.setText(tripModel.getSeatStatus());
         textViewBags.setText(tripModel.getBagsStatus());
         textViewPets.setText(tripModel.getPetString());
-        textViewCar.setText(tripModel.getCar().getDescription());
-        textViewMsg.setText(tripModel.getMsg());
+        textViewCar.setText(tripModel.getCar().getBrand());
+        //textViewMsg.setText(tripModel.getMsg());
         textViewPrice.setText(tripModel.getPrice()+getResources().getString(R.string.euro_symbol));
         buttonCreator.setText(tripModel.getCreatorUser().getFullName());
         buttonRate.setText(tripModel.getCreatorUser().getRate() + " | " + tripModel.getCreatorUser().getReviews());
@@ -71,10 +71,15 @@ public class SearchDetailsActivity extends AppCompatActivity {
         passengersList.add(passengerModel);
         passengersList.add(passengerModel);
         passengersList.add(passengerModel);
+        passengersList.add(passengerModel);
+        passengersList.add(passengerModel);
+        passengersList.add(passengerModel);
+        passengersList.add(passengerModel);
+        passengersList.add(passengerModel);
 
         mRecyclerView = findViewById(R.id.ActivitySearchDetails_passenger_recycler_view);
-        mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new PasssengersAdapter(passengersList);
+        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mAdapter = new PassengerImageAdapter(passengersList);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);

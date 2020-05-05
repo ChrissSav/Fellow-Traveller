@@ -12,8 +12,9 @@ import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
-public class PasssengersAdapter extends RecyclerView.Adapter<PasssengersAdapter.PassengersViewHolder>{
+public class PassengersAdapter extends RecyclerView.Adapter<PassengersAdapter.PassengersViewHolder>{
     private ArrayList<PassengerModel> passengersList;
     private OnItemClickListener mListener;
 
@@ -26,6 +27,7 @@ public class PasssengersAdapter extends RecyclerView.Adapter<PasssengersAdapter.
     }
     public static class PassengersViewHolder extends RecyclerView.ViewHolder{
         public TextView userName, rating, reviews, havePet, numOfBags;
+        public CircleImageView userImage;
 
 
 
@@ -34,10 +36,11 @@ public class PasssengersAdapter extends RecyclerView.Adapter<PasssengersAdapter.
             super(itemView);
 
             userName = itemView.findViewById(R.id.passenger_item_user_name);
-            rating = itemView.findViewById(R.id.passenger_item_rating);
-            reviews = itemView.findViewById(R.id.passenger_item_reviews);
+            rating = itemView.findViewById(R.id.ActivitySearchDetails_rating);
+            reviews = itemView.findViewById(R.id.ActivitySearchDetails_reviews);
             havePet = itemView.findViewById(R.id.passenger_item_have_pet);
             numOfBags = itemView.findViewById(R.id.passenger_item_number_of_bags);
+            userImage = itemView.findViewById(R.id.passenger_item_user_image);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +57,7 @@ public class PasssengersAdapter extends RecyclerView.Adapter<PasssengersAdapter.
 
         }
     }
-    public PasssengersAdapter(ArrayList<PassengerModel> aPassengerList){
+    public PassengersAdapter(ArrayList<PassengerModel> aPassengerList){
         passengersList = aPassengerList;
 
     }

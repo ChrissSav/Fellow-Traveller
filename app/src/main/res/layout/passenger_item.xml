@@ -27,7 +27,7 @@
         />
 
     <TextView
-        android:id="@+id/passenger_item_rating"
+        android:id="@+id/ActivitySearchDetails_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="4.5"
@@ -38,34 +38,34 @@
         app:layout_constraintBottom_toBottomOf="@id/passenger_item_user_image"
         android:layout_marginBottom="8dp"/>
     <ImageView
-        android:id="@+id/passenger_item_rating_image"
+        android:id="@+id/ActivitySearchDetails_rating_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_rating"
-        app:layout_constraintTop_toTopOf="@id/passenger_item_rating"
-        app:layout_constraintBottom_toBottomOf="@id/passenger_item_rating"
-        app:layout_constraintStart_toEndOf="@id/passenger_item_rating"
+        app:layout_constraintTop_toTopOf="@id/ActivitySearchDetails_rating"
+        app:layout_constraintBottom_toBottomOf="@id/ActivitySearchDetails_rating"
+        app:layout_constraintStart_toEndOf="@id/ActivitySearchDetails_rating"
         android:layout_marginStart="5dp"/>
     <TextView
-        android:id="@+id/passenger_item_reviews"
+        android:id="@+id/ActivitySearchDetails_reviews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="125"
         android:textColor="@color/black_color"
         android:fontFamily="@font/firasans_light"
         android:textSize="17sp"
-        app:layout_constraintStart_toEndOf="@id/passenger_item_rating_image"
-        app:layout_constraintTop_toTopOf="@id/passenger_item_rating"
-        app:layout_constraintBottom_toBottomOf="@id/passenger_item_rating"
+        app:layout_constraintStart_toEndOf="@id/ActivitySearchDetails_rating_image"
+        app:layout_constraintTop_toTopOf="@id/ActivitySearchDetails_rating"
+        app:layout_constraintBottom_toBottomOf="@id/ActivitySearchDetails_rating"
         android:layout_marginStart="10dp"/>
     <ImageView
-        android:id="@+id/passenger_item_reviews_image"
+        android:id="@+id/ActivitySearchDetails_reviews_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_review_filled"
-        app:layout_constraintTop_toTopOf="@id/passenger_item_reviews"
-        app:layout_constraintBottom_toBottomOf="@id/passenger_item_reviews"
-        app:layout_constraintStart_toEndOf="@id/passenger_item_reviews"
+        app:layout_constraintTop_toTopOf="@id/ActivitySearchDetails_reviews"
+        app:layout_constraintBottom_toBottomOf="@id/ActivitySearchDetails_reviews"
+        app:layout_constraintStart_toEndOf="@id/ActivitySearchDetails_reviews"
         android:layout_marginStart="5dp"/>
 
 

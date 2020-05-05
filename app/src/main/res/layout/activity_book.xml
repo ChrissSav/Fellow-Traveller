@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:padding="15dp"
         android:background="@color/white"
-        android:elevation="5dp"
+
         >
     <TextView
         android:id="@+id/ActivityBook_book_trip_tv"
