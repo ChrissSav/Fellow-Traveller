@@ -102,25 +102,7 @@ public class Search2Activity extends AppCompatActivity {
         //destinationAutoComplete.setAdapter(new PlaceAutocompleteAdapter(Search2Activity.this, android.R.layout.simple_list_item_1));
         final Intent intent = getIntent();
 
-        destinationAutoComplete.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_SEARCH) {
-                    if (!destinationAutoComplete.getText().toString().trim().isEmpty()) {
-                        Intent mainIntent = new Intent(Search2Activity.this, SearchResultsActivity.class);
-                        mainIntent.putExtra("ToPlace", destinationAutoComplete.getText().toString());
-                        mainIntent.putExtra("FromPlace", intent.getExtras().getString("FromPlace"));
-                        startActivity(mainIntent);
-                    } else {
-                        destinationAutoComplete.setError("Δεν έχετε επιλέξει τον προορισμό σας");
-                    }
 
-                    return true;
-                }
-                return false;
-
-            }
-        });
     }
 
     public void GetPlaces(String input) {

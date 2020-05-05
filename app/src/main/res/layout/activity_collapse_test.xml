@@ -5,16 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CollapseTest"
+    tools:context=".Reviews.ReviewsActivity"
     android:fitsSystemWindows="true">
     
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-
+        android:fitsSystemWindows="false"
 
 
         >
@@ -43,27 +41,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_back_button"
-                android:padding="10dp"
-                android:background="?android:selectableItemBackgroundBorderless"
+                style="@style/border_icon_button"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
-                android:scaleY="1.2"
-                android:scaleX="1.2"/>
+                />
             <ImageButton
                 android:id="@+id/reviews_filter_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_sort"
-                android:padding="10dp"
-                android:background="?android:selectableItemBackgroundBorderless"
+                style="@style/border_icon_button"
                 app:layout_constraintTop_toTopOf="@id/reviews_back_button"
                 app:layout_constraintBottom_toBottomOf="@id/reviews_back_button"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginRight="20dp"
-                android:scaleY="1.2"
-                android:scaleX="1.2"/>
+               />
 
 
 
@@ -122,31 +116,7 @@
 
     </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
-            app:layout_anchor="@id/collapsingToolbar"
-            android:nestedScrollingEnabled="false"
-            app:contentInsetEndWithActions="@dimen/inner_padding_left"
 
-
-            >
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/red"
-
-
-                >
-                <TextView
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="sdadsadda"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 

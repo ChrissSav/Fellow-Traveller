@@ -2,9 +2,11 @@ package com.example.fellow_traveller.SearchAndBook;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -12,7 +14,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.R;
+import com.example.fellow_traveller.SplashActivity;
+import com.example.fellow_traveller.SuccessActivity;
 
 import java.util.ArrayList;
 
@@ -25,6 +30,7 @@ public class BookActivity extends AppCompatActivity {
     private ImageButton increaseBagsButton, decreaseBagsButton;
     private boolean havePet = false;
     private int currentBags = 0, maxAvailableBags;
+    private Button nextButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,7 @@ public class BookActivity extends AppCompatActivity {
         bagsCurrentTextView = findViewById(R.id.ActivityFilters_seats_value_tv);
         increaseBagsButton = findViewById(R.id.ActivityFilters_seats_plus_button);
         decreaseBagsButton = findViewById(R.id.ActivityFilters_seats_minus_button);
+        nextButton = findViewById(R.id.next_book_button);
 
         maxAvailableBags = 3;
 
@@ -78,6 +85,16 @@ public class BookActivity extends AppCompatActivity {
             }
         });
 
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainIntent = new Intent(BookActivity.this, SuccessActivity.class);
+                mainIntent.putExtra("title",getResources().getString(R.string.success_search));
+                startActivity(mainIntent);
+                finish();
+            }
+        });
     }
 
     private void getUserBags() {

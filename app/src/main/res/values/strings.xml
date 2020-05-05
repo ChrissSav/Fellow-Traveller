@@ -264,6 +264,8 @@
     <string name="EMAIL_PLACEHOLDER">user@example.com</string>
     <string name="activity_user_settings_account_settings_text_label">Ρυθμίσεις λογαριασμού</string>
     <string name="success_add">Επιτυχής καταχώρηση!</string>
+    <string name="success_search">Συγχαρητήρια! Συμμετέχετε στο ταξίδι</string>
+
 
     <integer name="anim_duration">250</integer>
     <dimen name="space_between_lines">10dp</dimen>

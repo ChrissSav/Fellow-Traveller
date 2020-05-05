@@ -3,10 +3,13 @@ package com.example.fellow_traveller;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.Animator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.Animation;
 import android.widget.TextView;
+
+import com.example.fellow_traveller.HomeFragments.HomeActivity;
 
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -46,6 +49,8 @@ public class SuccessActivity extends AppCompatActivity {
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
+                                Intent mainIntent = new Intent(SuccessActivity.this, HomeActivity.class);
+                                startActivity(mainIntent);
                                 finish();
                             }
 
