@@ -2,24 +2,24 @@ package com.example.fellow_traveller.ClientAPI.Models;
 
 public class DestinationModel {
 
-    private String id;
+    private String place_id;
     private String title;
     private Float latitude;
     private Float longitude;
 
-    public DestinationModel(String id, String title, Float latitude, Float longitude) {
-        this.id = id;
+    public DestinationModel(String place_id, String title, Float latitude, Float longitude) {
+        this.place_id = place_id;
         this.title = title;
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    public String getId() {
-        return id;
+    public String getPlace_id() {
+        return place_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setPlace_id(String place_id) {
+        this.place_id = place_id;
     }
 
     public String getTitle() {

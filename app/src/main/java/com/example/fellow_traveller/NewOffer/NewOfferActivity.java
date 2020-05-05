@@ -49,7 +49,10 @@ public class NewOfferActivity extends AppCompatActivity {
     private TextView textViewTitleStage6;
     private ProgressBar progressBar;
     private int num_num;
+
     private GlobalClass globalClass;
+
+
     private DestinationModel destinationModelFrom;
     private DestinationModel destinationModelTo;
 
@@ -251,13 +254,13 @@ public class NewOfferActivity extends AppCompatActivity {
         new PlaceApiConnectionTest(globalClass, true).getLatLonFromPlace(placeIdFrom, new PlaceApiResultCallBack() {
             @Override
             public void onSuccess(ResultModel resultModel) {
-                destinationModelFrom = new DestinationModel(resultModel.getPlaceΙd(), resultModel.getFormattedAddress()
+                destinationModelFrom = new DestinationModel(resultModel.getPlaceΙd(),newOfferStage1Fragment.getDestFrom()
                         , resultModel.getGeometry().getLocation().getLatitude(), resultModel.getGeometry().getLocation().getLongitude());
 
                 new PlaceApiConnectionTest(globalClass, true).getLatLonFromPlace(placeIdTo, new PlaceApiResultCallBack() {
                     @Override
                     public void onSuccess(ResultModel resultModel) {
-                        destinationModelTo = new DestinationModel(resultModel.getPlaceΙd(), resultModel.getFormattedAddress()
+                        destinationModelTo = new DestinationModel(resultModel.getPlaceΙd(), newOfferStage1Fragment.getDestTo()
                                 , resultModel.getGeometry().getLocation().getLatitude(), resultModel.getGeometry().getLocation().getLongitude());
 
                         tripRegister();
