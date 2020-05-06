@@ -44,12 +44,12 @@ public class Search2Activity extends AppCompatActivity {
 
         globalClass = (GlobalClass) getApplicationContext();
 
-        destinationAutoComplete = findViewById(R.id.ActivitySearch_start_dest_editText);
-        backButton = findViewById(R.id.ActivitySearch_back_button);
-        eraseButton = findViewById(R.id.ActivitySearch_erase_button);
-        searchIcon = findViewById(R.id.ActivitySearch_search_image);
-        suggestSection = findViewById(R.id.ActivitySearch_suggest_section);
-        resultsSection = findViewById(R.id.ActivitySearch_results_section);
+        destinationAutoComplete = findViewById(R.id.ActivitySearch2_end_dest_editText);
+        backButton = findViewById(R.id.ActivitySearch2_back_button);
+        eraseButton = findViewById(R.id.ActivitySearch2_erase_button);
+        searchIcon = findViewById(R.id.ActivitySearch2_search_image);
+        suggestSection = findViewById(R.id.ActivitySearch2_suggest_section);
+        resultsSection = findViewById(R.id.ActivitySearch2_results_section);
 
         //If we search for something suggest section disappears
         destinationAutoComplete.addTextChangedListener(new TextWatcher() {
@@ -99,7 +99,18 @@ public class Search2Activity extends AppCompatActivity {
         //destinationAutoComplete.setAdapter(new PlaceAutocompleteAdapter(Search2Activity.this, android.R.layout.simple_list_item_1));
         final Intent intent = getIntent();
 
-
+        eraseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                destinationAutoComplete.setText("");
+            }
+        });
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     public void GetPlaces(String input) {
@@ -120,7 +131,7 @@ public class Search2Activity extends AppCompatActivity {
     }
 
     public void buildRecyclerView() {
-        mRecyclerView = findViewById(R.id.ActivitySearch_recycler_view);
+        mRecyclerView = findViewById(R.id.ActivitySearch2_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mAdapter = new PlaceAdapter(places_list);
@@ -139,6 +150,12 @@ public class Search2Activity extends AppCompatActivity {
                 startActivity(mainIntent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }
 
