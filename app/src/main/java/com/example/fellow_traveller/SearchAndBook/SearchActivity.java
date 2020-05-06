@@ -223,13 +223,16 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onItemClick(int position) {
                 // SetNotificationsRead(mExampleList.get(position).getId(),position);
+                //Set editText with the recommended place
                 destinationStartEditText.setText(places_list.get(position).getDescription());
 
                 //We parse the DestinationModel to the next activity
                 Intent mainIntent = new Intent(SearchActivity.this, Search2Activity.class);
                 startDestinationModel = new DestinationModel(places_list.get(position).getPlaceId(), places_list.get(position).getDescription(), Float.valueOf(0), Float.valueOf(0));
-                //mainIntent.putExtra("startDestination", (Parcelable) startDestinationModel);
+
+
                 mainIntent.putExtra("startDestination",  startDestinationModel);
+
                 //We also parse a value code to check if we clicked on a suggested destination to disable to the next step
                 mainIntent.putExtra("DestStartChoice", 0);
                 startActivity(mainIntent);
