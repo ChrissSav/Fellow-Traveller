@@ -1,21 +1,30 @@
 package com.example.fellow_traveller.SearchAndBook;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
@@ -25,8 +34,15 @@ import com.example.fellow_traveller.PlacesAPI.CallBack.PlaceApiCallBack;
 import com.example.fellow_traveller.PlacesAPI.Models.PredictionsModel;
 import com.example.fellow_traveller.PlacesAPI.PlaceApiConnection;
 import com.example.fellow_traveller.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -39,6 +55,9 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<PredictionsModel> places_list;
     private GlobalClass globalClass;
+
+    private Button yourLocationButton;
+    private FusedLocationProviderClient fusedLocationProviderClient;
 
 
     @Override
@@ -53,10 +72,31 @@ public class SearchActivity extends AppCompatActivity {
         searchIcon = findViewById(R.id.search_icon);
         suggestSection = findViewById(R.id.ActivitySearch_suggest_section);
         resultsSection = findViewById(R.id.ActivitySearch_results_section);
+        yourLocationButton = findViewById(R.id.your_location_search);
 
         //Alternative way to create places API with adapter
         //destinationAutoComplete.setAdapter(new PlaceAutocompleteAdapter(SearchActivity.this, android.R.layout.simple_list_item_1));
 
+        //initialize fusedLocationProviderClient
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        yourLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //check permission
+                if(ActivityCompat.checkSelfPermission(SearchActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                    //When permission granted
+                    //putExtra GeocodeModel
+                    //Intent new Activity
+                    Toast.makeText(SearchActivity.this, "Permission already allowed", Toast.LENGTH_SHORT).show();
+                    getMyLocation();
+                }else{
+                    //When permission denied
+                    ActivityCompat.requestPermissions(SearchActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
+
+
+                }
+            }
+        });
 
         //If we search for something suggest section disappears
         destinationAutoComplete.addTextChangedListener(new TextWatcher() {
@@ -103,25 +143,6 @@ public class SearchActivity extends AppCompatActivity {
         });
 
 
-        //Event Listener for search action of user keyboard
-//         destinationAutoComplete.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-//
-//                if (i == EditorInfo.IME_ACTION_SEARCH) {
-//                    if (!destinationAutoComplete.getText().toString().trim().isEmpty()) {
-//                        Intent mainIntent = new Intent(SearchActivity.this, Search2Activity.class);
-//                        mainIntent.putExtra("FromPlace", destinationAutoComplete.getText().toString());
-//                        startActivity(mainIntent);
-//                    } else {
-//                        destinationAutoComplete.setError("Δεν έχετε επιλέξει την αφετηρία σας");
-//                    }
-//                    return true;
-//                }
-//
-//                return false;
-//            }
-//        });
 
         //Erase button to clear text
         eraseButton.setOnClickListener(new View.OnClickListener() {
@@ -142,6 +163,34 @@ public class SearchActivity extends AppCompatActivity {
 
 
     }
+
+    private void getMyLocation() {
+
+        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+            @Override
+            public void onComplete(@NonNull Task<Location> task) {
+                Location location = task.getResult();
+                if(location != null){
+
+                    try {
+                        //initialize Geocode
+                        Geocoder geocoder = new Geocoder(SearchActivity.this, Locale.getDefault());
+                        //initialize address
+                        List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(), 1);
+//                        Toast.makeText(SearchActivity.this, String.valueOf(addresses.get(0).getLatitude()), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(SearchActivity.this, String.valueOf(addresses.get(0).getLongitude()), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SearchActivity.this, "Περιοχή " + addresses.get(0).getLocality() + " Latitude: " + String.valueOf(addresses.get(0).getLatitude()) + " Longtitude: " + String.valueOf(addresses.get(0).getLongitude()), Toast.LENGTH_SHORT).show();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+            }
+        });
+    }
+
     public void GetPlaces(String input) {
 
         new PlaceApiConnection(globalClass).getPlaces(input,new PlaceApiCallBack() {
