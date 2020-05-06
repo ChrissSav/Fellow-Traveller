@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.example.fellow_traveller.ClientAPI.Models.DestinationModel;
 import com.example.fellow_traveller.ClientAPI.Models.LatLongModel;
 import com.example.fellow_traveller.ClientAPI.Models.SearchDestinationsModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
+import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.NewOffer.NewOfferActivity;
 import com.example.fellow_traveller.PlacesAPI.CallBack.PlaceApiResultCallBack;
@@ -33,12 +35,13 @@ public class SearchResultsActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private SearchResultsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ImageButton filterButton, swapButton, backButton;
+    private ImageButton filterButton, swapButton, closeButton;
     private DestinationModel startDestinationModel, endDestinationModel;
     private GlobalClass globalClass;
     private LatLongModel latlongModelStart, latlongModelEnd;
     private SearchDestinationsModel searchDestinationsModel;
     private ArrayList<TripModel> resultList = new ArrayList<>();
+    private ImageView notFoundImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +53,9 @@ public class SearchResultsActivity extends AppCompatActivity {
         endDestTextView = findViewById(R.id.ActivitySearchResults_to_textView);
         filterButton = findViewById(R.id.ActivitySearchResults_filter_button);
         swapButton = findViewById(R.id.ActivitySearchResults_swap_button);
-        backButton = findViewById(R.id.ActivitySearchResults_close_button);
+        closeButton = findViewById(R.id.ActivitySearchResults_close_button);
         searchResultsCount = findViewById(R.id.ActivitySearchResults_results_label);
+        notFoundImage = findViewById(R.id.ActivitySearchResults_not_found_image);
 
 
         //Get the Start-End DestinationModels
@@ -64,13 +68,13 @@ public class SearchResultsActivity extends AppCompatActivity {
         getLatLongFromPlaceId(startDestinationModel);
         getLatLongFromPlaceId(endDestinationModel);
 
-        latlongModelStart = new LatLongModel(startDestinationModel.getLatitude(), startDestinationModel.getLongitude());
-        latlongModelEnd = new LatLongModel(endDestinationModel.getLatitude(), endDestinationModel.getLongitude());
+        latlongModelStart = new LatLongModel(startDestinationModel.getLatitude().floatValue(), startDestinationModel.getLongitude().floatValue());
+        latlongModelEnd = new LatLongModel(endDestinationModel.getLatitude().floatValue(), endDestinationModel.getLongitude().floatValue());
 
         searchDestinationsModel = new SearchDestinationsModel(latlongModelStart, latlongModelEnd);
 //
 //
-        Toast.makeText(SearchResultsActivity.this, searchDestinationsModel.getDestFrom().getLatitude().toString() + "", Toast.LENGTH_SHORT).show();
+        Toast.makeText(SearchResultsActivity.this, searchDestinationsModel.getDestFrom().getLatitude().toString() + " " + searchDestinationsModel.getDestFrom().getLongitude().toString() , Toast.LENGTH_SHORT).show();
 //        SearchDestinationsModel searchDestinationsModel = null;
 //        searchDestinationsModel.setDestFrom(latlongModelStart);
 //        searchDestinationsModel.setDestTo(latlongModelEnd);
@@ -82,25 +86,29 @@ public class SearchResultsActivity extends AppCompatActivity {
                     public void onSuccess(ArrayList<TripModel> trips) {
                         // TODO πρωτα να ελεγξεις αμα εχει ταξιδια και μετα να παρεις το πρωτο στοιχειο
                         //     Toast.makeText(SearchResultsActivity.this, trips.get(0).getCreatorUser().getFullName() + "", Toast.LENGTH_SHORT).show();
+                        if(trips.size()>0) {
+                            notFoundImage.setVisibility(View.GONE);
+                            resultList.addAll(trips);
+                            mRecyclerView = findViewById(R.id.ActivitySearchResults_recycler_view);
+                            mRecyclerView.setHasFixedSize(true);
+                            mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                            mAdapter = new SearchResultsAdapter(resultList);
+                            mRecyclerView.setLayoutManager(mLayoutManager);
+                            mRecyclerView.setAdapter(mAdapter);
 
-                        resultList = trips;
-                        mRecyclerView = findViewById(R.id.ActivitySearchResults_recycler_view);
-                        mRecyclerView.setHasFixedSize(true);
-                        mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                        mAdapter = new SearchResultsAdapter(resultList);
-                        mRecyclerView.setLayoutManager(mLayoutManager);
-                        mRecyclerView.setAdapter(mAdapter);
+                            searchResultsCount.setText(String.format("Βρέθηκαν %d ταξίδια.", resultList.size()));
 
-                        searchResultsCount.setText(String.format("Βρέθηκαν %d ταξίδια.", resultList.size()));
-
-                        mAdapter.setOnItemClickListener(new SearchResultsAdapter.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(int position) {
-                                Intent mainIntent = new Intent(SearchResultsActivity.this, SearchDetailsActivity.class);
-                                mainIntent.putExtra("trip", resultList.get(position));
-                                startActivity(mainIntent);
-                            }
-                        });
+                            mAdapter.setOnItemClickListener(new SearchResultsAdapter.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(int position) {
+                                    Intent mainIntent = new Intent(SearchResultsActivity.this, SearchDetailsActivity.class);
+                                    mainIntent.putExtra("trip", resultList.get(position));
+                                    startActivity(mainIntent);
+                                }
+                            });
+                        }else{
+                            notFoundImage.setVisibility(View.VISIBLE);
+                        }
                     }
 
                     @Override
@@ -125,10 +133,10 @@ public class SearchResultsActivity extends AppCompatActivity {
                 endDestTextView.setText(swapString);
             }
         });
-        backButton.setOnClickListener(new View.OnClickListener() {
+        closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mainIntent = new Intent(SearchResultsActivity.this, Search2Activity.class);
+                Intent mainIntent = new Intent(SearchResultsActivity.this, HomeActivity.class);
                 startActivity(mainIntent);
 
             }
