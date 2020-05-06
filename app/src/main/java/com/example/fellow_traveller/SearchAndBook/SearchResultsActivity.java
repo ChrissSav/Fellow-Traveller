@@ -1,6 +1,7 @@
 package com.example.fellow_traveller.SearchAndBook;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -39,6 +40,8 @@ public class SearchResultsActivity extends AppCompatActivity {
     private LatLongModel latlongModelStart, latlongModelEnd;
     private SearchDestinationsModel searchDestinationsModel;
     private ArrayList<TripModel> resultList = new ArrayList<>();
+    private boolean destFromDone = false;
+    private boolean destToDone = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +59,16 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         //Get the Start-End DestinationModels
         final Intent intent = getIntent();
-        startDestinationModel = (DestinationModel) intent.getExtras().getParcelable("startDestination");
-        endDestinationModel = (DestinationModel) intent.getExtras().getParcelable("endDestination");
+        startDestinationModel = (DestinationModel) intent.getParcelableExtra("startDestination");
+        endDestinationModel = (DestinationModel) intent.getParcelableExtra("endDestination");
         startDestTextView.setText(startDestinationModel.getTitle());
         endDestTextView.setText(endDestinationModel.getTitle());
 
-        getLatLongFromPlaceId(startDestinationModel);
-        getLatLongFromPlaceId(endDestinationModel);
-
+       // getLatLongFromPlaceId(startDestinationModel);
+        //getLatLongFromPlaceId(endDestinationModel);
+        getLatLongFromPlaceIFrom();
+        getLatLongFromPlaceITo();
+        Trip();
         latlongModelStart = new LatLongModel(startDestinationModel.getLatitude(), startDestinationModel.getLongitude());
         latlongModelEnd = new LatLongModel(endDestinationModel.getLatitude(), endDestinationModel.getLongitude());
 
@@ -79,7 +84,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         LatLongModel latLongModel2 = new LatLongModel(endDestinationModel.getLatitude(), endDestinationModel.getLongitude());
 
         SearchDestinationsModel destinationsModel = new SearchDestinationsModel(latLongModel1,latLongModel2);
-        new FellowTravellerAPI(globalClass).getTrips(destinationsModel, null, null, null, null, null, null,
+        /*new FellowTravellerAPI(globalClass).getTrips(destinationsModel, null, null, null, null, null, null,
                 null, null, null, null, new SearchTripsCallback() {
                     @Override
                     public void onSuccess(ArrayList<TripModel> trips) {
@@ -110,7 +115,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                     public void onFailure(String errorMsg) {
                         Log.d("FILTER", "Couldnt find any trips");
                     }
-                });
+                });*/
 
 
         filterButton.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +144,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     }
 
     public void getLatLongFromPlaceId(final DestinationModel destModel) {
+        Log.i("default",destModel.getPlaceId().equals("default")+"");
         if (!destModel.getPlaceId().equals("default")) {
             new PlaceApiConnection(globalClass, true).getLatLonFromPlace(destModel.getPlaceId(), new PlaceApiResultCallBack() {
                 @Override
@@ -146,7 +152,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
                     destModel.setLatitude(resultModel.getGeometry().getLocation().getLatitude());
                     destModel.setLongitude(resultModel.getGeometry().getLocation().getLongitude());
-                    Toast.makeText(SearchResultsActivity.this, String.valueOf(destModel.getLatitude() + " " + String.valueOf(destModel.getLongitude())), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SearchResultsActivity.this, destModel.getLatitude() + " " + (destModel.getLongitude()), Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -156,5 +162,118 @@ public class SearchResultsActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    //getLatLongFromPlaceId(startDestinationModel);
+    public void getLatLongFromPlaceIFrom() {
+        Log.i("default",startDestinationModel.getPlaceId().equals("default")+"");
+        if (!startDestinationModel.getPlaceId().equals("default")) {
+            new PlaceApiConnection(globalClass, true).getLatLonFromPlace(startDestinationModel.getPlaceId(), new PlaceApiResultCallBack() {
+                @Override
+                public void onSuccess(ResultModel resultModel) {
+
+                    startDestinationModel.setLatitude(resultModel.getGeometry().getLocation().getLatitude());
+                    startDestinationModel.setLongitude(resultModel.getGeometry().getLocation().getLongitude());
+                    Toast.makeText(SearchResultsActivity.this, startDestinationModel.getLatitude() + " " + (startDestinationModel.getLongitude()), Toast.LENGTH_SHORT).show();
+                    destFromDone = true;
+                }
+
+                @Override
+                public void onFailure(String errorMsg) {
+                    Toast.makeText(SearchResultsActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+                    destFromDone = true;
+                }
+            });
+        }
+        else {
+            destFromDone = true;
+        }
+    }
+
+    public void getLatLongFromPlaceITo() {
+        Log.i("default",endDestinationModel.getPlaceId().equals("default")+"");
+        if (!endDestinationModel.getPlaceId().equals("default")) {
+            new PlaceApiConnection(globalClass, true).getLatLonFromPlace(endDestinationModel.getPlaceId(), new PlaceApiResultCallBack() {
+                @Override
+                public void onSuccess(ResultModel resultModel) {
+
+                    endDestinationModel.setLatitude(resultModel.getGeometry().getLocation().getLatitude());
+                    endDestinationModel.setLongitude(resultModel.getGeometry().getLocation().getLongitude());
+                    Toast.makeText(SearchResultsActivity.this, endDestinationModel.getLatitude() + " " + (endDestinationModel.getLongitude()), Toast.LENGTH_SHORT).show();
+                    destToDone = true;
+                }
+
+                @Override
+                public void onFailure(String errorMsg) {
+                    Toast.makeText(SearchResultsActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+                    destToDone = true;
+                }
+            });
+        }else {
+            destToDone = true;
+        }
+    }
+
+
+
+    public void Trip() {
+        AsyncTask<Void, Void, Boolean> task = new AsyncTask<Void, Void, Boolean>() {
+            @Override
+            protected Boolean doInBackground(Void... voids) {
+                while (!(destFromDone && destToDone)) {
+
+                }
+                //if (destinationModelFrom.getTitle() == null && destinationModelTo.getTitle() == null)
+             //       return false;
+                return true;
+            }
+
+            @Override
+            protected void onPostExecute(Boolean aVoid) {
+                if (aVoid) {
+
+                    latlongModelStart = new LatLongModel(startDestinationModel.getLatitude(), startDestinationModel.getLongitude());
+                    latlongModelEnd = new LatLongModel(endDestinationModel.getLatitude(), endDestinationModel.getLongitude());
+                    searchDestinationsModel = new SearchDestinationsModel(latlongModelStart, latlongModelEnd);
+
+
+                    new FellowTravellerAPI(globalClass).getTrips(searchDestinationsModel, null, null, null, null, null, null,
+                            null, null, null, null, new SearchTripsCallback() {
+                                @Override
+                                public void onSuccess(ArrayList<TripModel> trips) {
+                                    resultList = trips;
+                                    mRecyclerView = findViewById(R.id.ActivitySearchResults_recycler_view);
+                                    mRecyclerView.setHasFixedSize(true);
+                                    mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                                    mAdapter = new SearchResultsAdapter(resultList);
+                                    mRecyclerView.setLayoutManager(mLayoutManager);
+                                    mRecyclerView.setAdapter(mAdapter);
+
+                                    searchResultsCount.setText(String.format("Βρέθηκαν %d ταξίδια.", resultList.size()));
+
+                                    mAdapter.setOnItemClickListener(new SearchResultsAdapter.OnItemClickListener() {
+                                        @Override
+                                        public void onItemClick(int position) {
+                                            Intent mainIntent = new Intent(SearchResultsActivity.this, SearchDetailsActivity.class);
+                                            mainIntent.putExtra("trip", resultList.get(position));
+                                            startActivity(mainIntent);
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onFailure(String errorMsg) {
+                                    Log.d("FILTER", "Couldnt find any trips");
+                                }
+                            });
+                } else {
+                    Toast.makeText(SearchResultsActivity.this, "Υπάρχει κάποιο πρόβλημα επικοινωνίας", Toast.LENGTH_SHORT).show();
+                }
+                super.onPostExecute(aVoid);
+            }
+        };
+
+        task.execute();
+
     }
 }

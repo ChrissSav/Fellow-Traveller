@@ -23,12 +23,33 @@ public class DestinationModel  implements Parcelable {
         this.longitude = longitude;
     }
 
-    public DestinationModel(Parcel in) {
+
+    protected DestinationModel(Parcel in) {
         placeId = in.readString();
         title = in.readString();
-        latitude = in.readFloat();
-        longitude = in.readFloat();
+        if (in.readByte() == 0) {
+            latitude = null;
+        } else {
+            latitude = in.readFloat();
+        }
+        if (in.readByte() == 0) {
+            longitude = null;
+        } else {
+            longitude = in.readFloat();
+        }
     }
+
+    public static final Creator<DestinationModel> CREATOR = new Creator<DestinationModel>() {
+        @Override
+        public DestinationModel createFromParcel(Parcel in) {
+            return new DestinationModel(in);
+        }
+
+        @Override
+        public DestinationModel[] newArray(int size) {
+            return new DestinationModel[size];
+        }
+    };
 
     public String getPlaceId() {
         return placeId;
@@ -62,27 +83,27 @@ public class DestinationModel  implements Parcelable {
         this.longitude = longitude;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(placeId);
-        parcel.writeString(title);
-        parcel.writeFloat(latitude);
-        parcel.writeFloat(longitude);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(placeId);
+        dest.writeString(title);
+        if (latitude == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeFloat(latitude);
+        }
+        if (longitude == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeFloat(longitude);
+        }
     }
-    public static final Creator<DestinationModel> CREATOR = new Creator<DestinationModel>() {
-        @Override
-        public DestinationModel createFromParcel(Parcel in) {
-            return new DestinationModel(in);
-        }
-
-        @Override
-        public DestinationModel[] newArray(int size) {
-            return new DestinationModel[size];
-        }
-    };
 }

@@ -1,5 +1,7 @@
 package com.example.fellow_traveller.ClientAPI.Models;
 
+import androidx.annotation.NonNull;
+
 public class LatLongModel {
 
     private Float latitude;
@@ -24,5 +26,11 @@ public class LatLongModel {
 
     public void setLongitude(Float longitude) {
         this.longitude = longitude;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "latitude: "+latitude+" longitude: "+longitude;
     }
 }

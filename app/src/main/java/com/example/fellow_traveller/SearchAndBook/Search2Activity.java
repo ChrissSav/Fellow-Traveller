@@ -78,7 +78,7 @@ public class Search2Activity extends AppCompatActivity implements View.OnClickLi
 
         //Get the StartDestinationModel
         final Intent intent = getIntent();
-        startDestinationModel = (DestinationModel) intent.getExtras().getParcelable("startDestination");
+        startDestinationModel = (DestinationModel) intent.getParcelableExtra("startDestination");
         previousChoice = intent.getIntExtra("DestStartChoice", 0);
 
         Toast.makeText(Search2Activity.this, startDestinationModel.getTitle() + " " + startDestinationModel.getPlaceId() + " " + startDestinationModel.getLatitude() + " " + startDestinationModel.getLongitude(), Toast.LENGTH_SHORT).show();
