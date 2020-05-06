@@ -75,8 +75,11 @@ public class SearchResultsActivity extends AppCompatActivity {
 //        searchDestinationsModel.setDestFrom(latlongModelStart);
 //        searchDestinationsModel.setDestTo(latlongModelEnd);
 
+        LatLongModel latLongModel1 = new LatLongModel(startDestinationModel.getLatitude(), startDestinationModel.getLongitude());
+        LatLongModel latLongModel2 = new LatLongModel(endDestinationModel.getLatitude(), endDestinationModel.getLongitude());
 
-        new FellowTravellerAPI(globalClass).getTrips(searchDestinationsModel, null, null, null, null, null, null,
+        SearchDestinationsModel destinationsModel = new SearchDestinationsModel(latLongModel1,latLongModel2);
+        new FellowTravellerAPI(globalClass).getTrips(destinationsModel, null, null, null, null, null, null,
                 null, null, null, null, new SearchTripsCallback() {
                     @Override
                     public void onSuccess(ArrayList<TripModel> trips) {
