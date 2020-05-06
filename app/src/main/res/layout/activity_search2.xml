@@ -9,7 +9,7 @@
     >
 
     <ImageButton
-        android:id="@+id/back_button_search"
+        android:id="@+id/ActivitySearch_back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_back_button"
@@ -20,23 +20,23 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:padding="10dp"/>
     <TextView
-        android:id="@+id/ActivitySearch_start_tv"
+        android:id="@+id/ActivitySearch_start_dest_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Επιλέξτε τον προορισμό σας"
         android:fontFamily="@font/firasans_bold"
         android:textColor="@color/black_color"
         android:textSize="26sp"
-        app:layout_constraintStart_toStartOf="@id/back_button_search"
-        app:layout_constraintTop_toBottomOf="@id/back_button_search"
+        app:layout_constraintStart_toStartOf="@id/ActivitySearch_back_button"
+        app:layout_constraintTop_toBottomOf="@id/ActivitySearch_back_button"
         android:layout_marginTop="20dp"/>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/search_section"
+        android:id="@+id/ActivitySearch_start_dest_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/ActivitySearch_start_tv"
+        app:layout_constraintTop_toBottomOf="@id/ActivitySearch_start_dest_label"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:background="@drawable/search_border"
@@ -46,7 +46,7 @@
         >
 
         <EditText
-            android:id="@+id/autocomplete_search_destination"
+            android:id="@+id/ActivitySearch_start_dest_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Επιλογή προορισμού..."
@@ -65,26 +65,26 @@
             />
 
         <ImageButton
-            android:id="@+id/erase_search"
+            android:id="@+id/ActivitySearch_erase_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_erase"
             android:background="?android:selectableItemBackgroundBorderless"
             android:backgroundTint="@color/black_color"
-            app:layout_constraintTop_toTopOf="@id/autocomplete_search_destination"
-            app:layout_constraintBottom_toBottomOf="@id/autocomplete_search_destination"
+            app:layout_constraintTop_toTopOf="@id/ActivitySearch_start_dest_editText"
+            app:layout_constraintBottom_toBottomOf="@id/ActivitySearch_start_dest_editText"
             app:layout_constraintRight_toRightOf="parent"
             android:padding="8dp"
             android:visibility="invisible"
             />
         <ImageView
-            android:id="@+id/search_icon"
+            android:id="@+id/ActivitySearch_search_image"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:background="@drawable/ic_search"
             android:backgroundTint="@color/black_color"
-            app:layout_constraintTop_toTopOf="@id/autocomplete_search_destination"
-            app:layout_constraintBottom_toBottomOf="@id/autocomplete_search_destination"
+            app:layout_constraintTop_toTopOf="@id/ActivitySearch_start_dest_editText"
+            app:layout_constraintBottom_toBottomOf="@id/ActivitySearch_start_dest_editText"
             app:layout_constraintRight_toRightOf="parent"
             android:padding="10dp"
             android:rotation="90"
@@ -95,12 +95,12 @@
         android:id="@+id/ActivitySearch_suggest_section"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/search_section"
+        app:layout_constraintTop_toBottomOf="@id/ActivitySearch_start_dest_section"
         android:layout_marginTop="20dp"
 
         >
         <TextView
-            android:id="@+id/alternative_choices_search"
+            android:id="@+id/ActivitySearch_alternative_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Εναλλακτικές προτάσεις"
@@ -112,11 +112,11 @@
 
             />
         <Button
-            android:id="@+id/your_location_search"
+            android:id="@+id/ActivitySearch_your_location_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?android:attr/borderlessButtonStyle"
-            app:layout_constraintTop_toBottomOf="@id/alternative_choices_search"
+            app:layout_constraintTop_toBottomOf="@id/ActivitySearch_alternative_label"
             android:layout_marginTop="20dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -137,11 +137,11 @@
             />
 
         <Button
-            android:id="@+id/athens_search"
+            android:id="@+id/ActivitySearch_athens_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?android:attr/borderlessButtonStyle"
-            app:layout_constraintTop_toBottomOf="@id/your_location_search"
+            app:layout_constraintTop_toBottomOf="@id/ActivitySearch_your_location_button"
             android:layout_marginTop="20dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -161,11 +161,11 @@
             />
 
         <Button
-            android:id="@+id/thessaloniki_search"
+            android:id="@+id/ActivitySearch_thessaloniki_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?android:attr/borderlessButtonStyle"
-            app:layout_constraintTop_toBottomOf="@id/athens_search"
+            app:layout_constraintTop_toBottomOf="@id/ActivitySearch_athens_button"
             android:layout_marginTop="20dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -184,11 +184,11 @@
             android:background="@drawable/search_button_items"
             />
         <Button
-            android:id="@+id/ioannina_search"
+            android:id="@+id/ActivitySearch_ioannina_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?android:attr/borderlessButtonStyle"
-            app:layout_constraintTop_toBottomOf="@id/thessaloniki_search"
+            app:layout_constraintTop_toBottomOf="@id/ActivitySearch_thessaloniki_button"
             android:layout_marginTop="20dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -207,11 +207,11 @@
             android:background="@drawable/search_button_items"
             />
         <Button
-            android:id="@+id/patra_search"
+            android:id="@+id/ActivitySearch_patra_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?android:attr/borderlessButtonStyle"
-            app:layout_constraintTop_toBottomOf="@id/ioannina_search"
+            app:layout_constraintTop_toBottomOf="@id/ActivitySearch_ioannina_button"
             android:layout_marginTop="20dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -230,11 +230,11 @@
             android:background="@drawable/search_button_items"
             />
         <Button
-            android:id="@+id/larisa_search"
+            android:id="@+id/ActivitySearch_larisa_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?android:attr/borderlessButtonStyle"
-            app:layout_constraintTop_toBottomOf="@id/patra_search"
+            app:layout_constraintTop_toBottomOf="@id/ActivitySearch_patra_button"
             android:layout_marginTop="20dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -258,7 +258,7 @@
         android:id="@+id/ActivitySearch_results_section"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/search_section"
+        app:layout_constraintTop_toBottomOf="@id/ActivitySearch_start_dest_section"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:visibility="gone">

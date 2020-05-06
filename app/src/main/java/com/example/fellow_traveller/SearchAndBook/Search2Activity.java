@@ -4,13 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -47,10 +44,10 @@ public class Search2Activity extends AppCompatActivity {
 
         globalClass = (GlobalClass) getApplicationContext();
 
-        destinationAutoComplete = findViewById(R.id.autocomplete_search_destination);
-        backButton = findViewById(R.id.back_button_search);
-        eraseButton = findViewById(R.id.erase_search);
-        searchIcon = findViewById(R.id.search_icon);
+        destinationAutoComplete = findViewById(R.id.ActivitySearch_start_dest_editText);
+        backButton = findViewById(R.id.ActivitySearch_back_button);
+        eraseButton = findViewById(R.id.ActivitySearch_erase_button);
+        searchIcon = findViewById(R.id.ActivitySearch_search_image);
         suggestSection = findViewById(R.id.ActivitySearch_suggest_section);
         resultsSection = findViewById(R.id.ActivitySearch_results_section);
 

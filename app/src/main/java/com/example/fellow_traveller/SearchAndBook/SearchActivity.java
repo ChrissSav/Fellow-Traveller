@@ -16,14 +16,11 @@ import android.location.Location;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
@@ -44,9 +41,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText destinationAutoComplete;
+    private EditText destinationStartEditText;
     private ImageButton backButton, eraseButton;
     private ImageView searchIcon;
     private ConstraintLayout suggestSection, resultsSection;
@@ -56,7 +53,7 @@ public class SearchActivity extends AppCompatActivity {
     private ArrayList<PredictionsModel> places_list;
     private GlobalClass globalClass;
 
-    private Button yourLocationButton;
+    private Button yourLocationButton, athensButton, thessalonikiButton, ioanninaButton, patraButton, larissaButton;
     private FusedLocationProviderClient fusedLocationProviderClient;
 
 
@@ -66,40 +63,37 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         globalClass = (GlobalClass) getApplicationContext();
 
-        destinationAutoComplete = findViewById(R.id.autocomplete_search_destination);
-        backButton = findViewById(R.id.back_button_search);
-        eraseButton = findViewById(R.id.erase_search);
-        searchIcon = findViewById(R.id.search_icon);
+        destinationStartEditText = findViewById(R.id.ActivitySearch_start_dest_editText);
+        backButton = findViewById(R.id.ActivitySearch_back_button);
+        eraseButton = findViewById(R.id.ActivitySearch_erase_button);
+        searchIcon = findViewById(R.id.ActivitySearch_search_image);
         suggestSection = findViewById(R.id.ActivitySearch_suggest_section);
         resultsSection = findViewById(R.id.ActivitySearch_results_section);
-        yourLocationButton = findViewById(R.id.your_location_search);
+        yourLocationButton = findViewById(R.id.ActivitySearch_your_location_button);
+        athensButton = findViewById(R.id.ActivitySearch_athens_button);
+        thessalonikiButton = findViewById(R.id.ActivitySearch_thessaloniki_button);
+        ioanninaButton = findViewById(R.id.ActivitySearch_ioannina_button);
+        patraButton = findViewById(R.id.ActivitySearch_patra_button);
+        larissaButton = findViewById(R.id.ActivitySearch_larisa_button);
+
+        //Assign buttons to a button listener
+        yourLocationButton.setOnClickListener(this);
+        athensButton.setOnClickListener(this);
+        thessalonikiButton.setOnClickListener(this);
+        ioanninaButton.setOnClickListener(this);
+        patraButton.setOnClickListener(this);
+        larissaButton.setOnClickListener(this);
+
 
         //Alternative way to create places API with adapter
         //destinationAutoComplete.setAdapter(new PlaceAutocompleteAdapter(SearchActivity.this, android.R.layout.simple_list_item_1));
 
         //initialize fusedLocationProviderClient
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        yourLocationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //check permission
-                if(ActivityCompat.checkSelfPermission(SearchActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-                    //When permission granted
-                    //putExtra GeocodeModel
-                    //Intent new Activity
-                    Toast.makeText(SearchActivity.this, "Permission already allowed", Toast.LENGTH_SHORT).show();
-                    getMyLocation();
-                }else{
-                    //When permission denied
-                    ActivityCompat.requestPermissions(SearchActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
-
-
-                }
-            }
-        });
+//
 
         //If we search for something suggest section disappears
-        destinationAutoComplete.addTextChangedListener(new TextWatcher() {
+        destinationStartEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -143,12 +137,11 @@ public class SearchActivity extends AppCompatActivity {
         });
 
 
-
         //Erase button to clear text
         eraseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                destinationAutoComplete.setText("");
+                destinationStartEditText.setText("");
             }
         });
 
@@ -170,13 +163,13 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Location> task) {
                 Location location = task.getResult();
-                if(location != null){
+                if (location != null) {
 
                     try {
                         //initialize Geocode
                         Geocoder geocoder = new Geocoder(SearchActivity.this, Locale.getDefault());
                         //initialize address
-                        List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(), 1);
+                        List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
 //                        Toast.makeText(SearchActivity.this, String.valueOf(addresses.get(0).getLatitude()), Toast.LENGTH_SHORT).show();
 //                        Toast.makeText(SearchActivity.this, String.valueOf(addresses.get(0).getLongitude()), Toast.LENGTH_SHORT).show();
                         Toast.makeText(SearchActivity.this, "Περιοχή " + addresses.get(0).getLocality() + " Latitude: " + String.valueOf(addresses.get(0).getLatitude()) + " Longtitude: " + String.valueOf(addresses.get(0).getLongitude()), Toast.LENGTH_SHORT).show();
@@ -193,7 +186,7 @@ public class SearchActivity extends AppCompatActivity {
 
     public void GetPlaces(String input) {
 
-        new PlaceApiConnection(globalClass).getPlaces(input,new PlaceApiCallBack() {
+        new PlaceApiConnection(globalClass).getPlaces(input, new PlaceApiCallBack() {
             @Override
             public void onSuccess(PlaceAPiModel placeAPiModel) {
                 places_list = placeAPiModel.getPredictions();
@@ -219,11 +212,41 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
                 // SetNotificationsRead(mExampleList.get(position).getId(),position);
-                destinationAutoComplete.setText(places_list.get(position).getDescription());
+                destinationStartEditText.setText(places_list.get(position).getDescription());
                 Intent mainIntent = new Intent(SearchActivity.this, Search2Activity.class);
-                mainIntent.putExtra("FromPlace", destinationAutoComplete.getText().toString());
+                mainIntent.putExtra("FromPlace", destinationStartEditText.getText().toString());
+                //We also parse a value code to check if we clicked on a suggested destination to disable to the next step
+                mainIntent.putExtra("DestStartChoice", 0);
                 startActivity(mainIntent);
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+
+            case R.id.ActivitySearch_your_location_button:
+                if (ActivityCompat.checkSelfPermission(SearchActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    //When permission granted
+                    //putExtra GeocodeModel
+                    //Intent new Activity
+                    Toast.makeText(SearchActivity.this, "Permission already allowed", Toast.LENGTH_SHORT).show();
+                    getMyLocation();
+                } else {
+                    //When permission denied
+                    ActivityCompat.requestPermissions(SearchActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+                }
+                break;
+
+            case R.id.ActivitySearch_athens_button:
+            case R.id.ActivitySearch_thessaloniki_button:
+            case R.id.ActivitySearch_ioannina_button:
+            case R.id.ActivitySearch_patra_button:
+            case R.id.ActivitySearch_larisa_button:
+
+
+        }
     }
 }
