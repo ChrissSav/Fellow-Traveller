@@ -15,7 +15,6 @@ import com.example.fellow_traveller.ClientAPI.Models.AddCarModel;
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreatePassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
-import com.example.fellow_traveller.ClientAPI.Models.CreateTripModelTest;
 import com.example.fellow_traveller.ClientAPI.Models.ErrorResponseModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
@@ -324,7 +323,7 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void createTrip(CreateTripModelTest trip,
+    public static void createTrip(CreateTripModel trip,
                                   final TripRegisterCallBack tripRegisterCallBack) {
         retrofitAPIEndpoints.tripRegister(trip).enqueue(new Callback<StatusHandleModel>() {
 

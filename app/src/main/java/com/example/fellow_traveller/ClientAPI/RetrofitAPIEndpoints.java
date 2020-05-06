@@ -4,7 +4,6 @@ import com.example.fellow_traveller.ClientAPI.Models.AddCarModel;
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreatePassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
-import com.example.fellow_traveller.ClientAPI.Models.CreateTripModelTest;
 import com.example.fellow_traveller.ClientAPI.Models.NotificationModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
@@ -65,7 +64,7 @@ public interface RetrofitAPIEndpoints {
     //Trip
     @POST("/trips")
     Call<StatusHandleModel> tripRegister(
-            @Body CreateTripModelTest trip
+            @Body CreateTripModel trip
     );
 
     @PUT("/trips/passengers")

@@ -2,7 +2,6 @@ package com.example.fellow_traveller.NewOffer;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -17,19 +16,14 @@ import androidx.fragment.app.FragmentManager;
 import com.example.fellow_traveller.ClientAPI.Callbacks.TripRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
-import com.example.fellow_traveller.ClientAPI.Models.CreateTripModelTest;
 import com.example.fellow_traveller.ClientAPI.Models.DestinationModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.PlacesAPI.CallBack.PlaceApiResultCallBack;
 import com.example.fellow_traveller.PlacesAPI.Models.ResultModel;
-import com.example.fellow_traveller.PlacesAPI.PlaceApiConnectionTest;
+import com.example.fellow_traveller.PlacesAPI.PlaceApiConnection;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.SuccessActivity;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import static com.example.fellow_traveller.Util.SomeMethods.dateTimeToTimestamp;
 
@@ -128,8 +122,8 @@ public class NewOfferActivity extends AppCompatActivity {
                     buttonNext.setText("Καταχώρηση");
 
                 } else if (fra.toString().equals("NewOfferStage6Fragment")) {
-                    GetDestinationsModel(newOfferStage1Fragment.getDestFromModel().getPlace_id(),
-                            newOfferStage1Fragment.getDestToModel().getPlace_id());
+                    getDestinationsModel(newOfferStage1Fragment.getDestFromModel().getPlaceId(),
+                            newOfferStage1Fragment.getDestToModel().getPlaceId());
                    // tripRegister();
                 }
 
@@ -228,7 +222,7 @@ public class NewOfferActivity extends AppCompatActivity {
         String msg = newOfferStage5Fragment.getMsg();
 
         // Create trip object from model
-        CreateTripModelTest trip = new CreateTripModelTest(destinationModelFrom, destinationModelTo, dateTimeToTimestamp(date, time),
+        CreateTripModel trip = new CreateTripModel(destinationModelFrom, destinationModelTo, dateTimeToTimestamp(date, time),
                 pet, max_seats, max_bags,
                 msg, price, car_id);
 
@@ -250,14 +244,14 @@ public class NewOfferActivity extends AppCompatActivity {
 
     }
 
-    public void GetDestinationsModel(final String placeIdFrom,final String  placeIdTo) {
-        new PlaceApiConnectionTest(globalClass, true).getLatLonFromPlace(placeIdFrom, new PlaceApiResultCallBack() {
+    public void getDestinationsModel(final String placeIdFrom,final String  placeIdTo) {
+        new PlaceApiConnection(globalClass, true).getLatLonFromPlace(placeIdFrom, new PlaceApiResultCallBack() {
             @Override
             public void onSuccess(ResultModel resultModel) {
                 destinationModelFrom = new DestinationModel(resultModel.getPlaceΙd(),newOfferStage1Fragment.getDestFrom()
                         , resultModel.getGeometry().getLocation().getLatitude(), resultModel.getGeometry().getLocation().getLongitude());
 
-                new PlaceApiConnectionTest(globalClass, true).getLatLonFromPlace(placeIdTo, new PlaceApiResultCallBack() {
+                new PlaceApiConnection(globalClass, true).getLatLonFromPlace(placeIdTo, new PlaceApiResultCallBack() {
                     @Override
                     public void onSuccess(ResultModel resultModel) {
                         destinationModelTo = new DestinationModel(resultModel.getPlaceΙd(), newOfferStage1Fragment.getDestTo()

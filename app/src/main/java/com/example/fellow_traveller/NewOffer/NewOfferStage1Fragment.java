@@ -21,7 +21,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class NewOfferStage1Fragment extends Fragment {
     private View view;
-    private TextInputLayout textInputLayout_from, textInputLayout_to;
+    private TextInputLayout textInputLayoutFrom, textInputLayoutTo;
     // private String from = "";
     //private String to = "";
     private int witchFieldIsCLick = 0;
@@ -39,15 +39,15 @@ public class NewOfferStage1Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_new_offer_stage1, container, false);
-        textInputLayout_from = view.findViewById(R.id.NewOfferStage1Fragment_TextInputLayout_from);
-        textInputLayout_to = view.findViewById(R.id.NewOfferStage1Fragment_TextInputLayout_to);
-        // textInputLayout_from.getEditText().setText(from);
-        // textInputLayout_to.getEditText().setText(to);
+        textInputLayoutFrom = view.findViewById(R.id.NewOfferStage1Fragment_TextInputLayout_from);
+        textInputLayoutTo = view.findViewById(R.id.NewOfferStage1Fragment_TextInputLayout_to);
+        // textInputLayoutFrom.getEditText().setText(from);
+        // textInputLayoutTo.getEditText().setText(to);
 
-        textInputLayout_from.getEditText().setText(predictionsModelDestFrom.getDescription());
-        textInputLayout_to.getEditText().setText(predictionsModelDestTo.getDescription());
+        textInputLayoutFrom.getEditText().setText(predictionsModelDestFrom.getDescription());
+        textInputLayoutTo.getEditText().setText(predictionsModelDestTo.getDescription());
 
-        textInputLayout_from.getEditText().setOnClickListener(new View.OnClickListener() {
+        textInputLayoutFrom.getEditText().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -58,7 +58,7 @@ public class NewOfferStage1Fragment extends Fragment {
             }
         });
 
-        textInputLayout_to.getEditText().setOnClickListener(new View.OnClickListener() {
+        textInputLayoutTo.getEditText().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -82,11 +82,11 @@ public class NewOfferStage1Fragment extends Fragment {
                 PredictionsModel resultPredictionsModel = data.getParcelableExtra("resultPredictionsModel");
                 if (witchFieldIsCLick == 1) {
                     predictionsModelDestFrom = resultPredictionsModel;
-                    textInputLayout_from.getEditText().setText(resultPredictionsModel.getDescription());
+                    textInputLayoutFrom.getEditText().setText(resultPredictionsModel.getDescription());
 
                 } else if (witchFieldIsCLick == 2) {
                     predictionsModelDestTo = resultPredictionsModel;
-                    textInputLayout_to.getEditText().setText(resultPredictionsModel.getDescription());
+                    textInputLayoutTo.getEditText().setText(resultPredictionsModel.getDescription());
 
                 }
                 //Toast.makeText(getContext(),predictionsModelDestFrom.toString(), Toast.LENGTH_SHORT).show();
@@ -111,43 +111,43 @@ public class NewOfferStage1Fragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        if (textInputLayout_from.getEditText().getText().length() > 0)
-            textInputLayout_from.setError(null);
-        if (textInputLayout_to.getEditText().getText().length() > 0)
-            textInputLayout_to.setError(null);
+        if (textInputLayoutFrom.getEditText().getText().length() > 0)
+            textInputLayoutFrom.setError(null);
+        if (textInputLayoutTo.getEditText().getText().length() > 0)
+            textInputLayoutTo.setError(null);
     }
 
     @Override
     public void onDestroy() {
         // Log.i("textInputLayout_pass_1", "onDestroy");
-        // from = textInputLayout_from.getEditText().getText().toString();
-        // to = textInputLayout_to.getEditText().getText().toString();
+        // from = textInputLayoutFrom.getEditText().getText().toString();
+        // to = textInputLayoutTo.getEditText().getText().toString();
         super.onDestroy();
     }
 
     public Boolean validateFragment() {
-        if (textInputLayout_from.getEditText().getText().length() < 1) {
-            textInputLayout_from.setError(getResources().getString(R.string.ERROR_REQUIRED_FIELD));
+        if (textInputLayoutFrom.getEditText().getText().length() < 1) {
+            textInputLayoutFrom.setError(getResources().getString(R.string.ERROR_REQUIRED_FIELD));
             return false;
         } else {
-            textInputLayout_from.setError(null);
+            textInputLayoutFrom.setError(null);
         }
-        if (textInputLayout_to.getEditText().getText().length() < 1) {
-            textInputLayout_to.setError(getResources().getString(R.string.ERROR_REQUIRED_FIELD));
+        if (textInputLayoutTo.getEditText().getText().length() < 1) {
+            textInputLayoutTo.setError(getResources().getString(R.string.ERROR_REQUIRED_FIELD));
             return false;
         } else {
-            textInputLayout_to.setError(null);
+            textInputLayoutTo.setError(null);
         }
         return true;
     }
 
 
     public String getDestFrom() {
-        return textInputLayout_from.getEditText().getText().toString();
+        return textInputLayoutFrom.getEditText().getText().toString();
     }
 
     public String getDestTo() {
-        return textInputLayout_to.getEditText().getText().toString();
+        return textInputLayoutTo.getEditText().getText().toString();
     }
 
 

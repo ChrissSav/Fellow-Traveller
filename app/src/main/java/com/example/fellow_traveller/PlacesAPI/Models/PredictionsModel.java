@@ -5,21 +5,24 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.annotations.SerializedName;
+
 public class PredictionsModel implements Parcelable {
     private String description;
     private String id;
-    private String place_id;
+    @SerializedName("place_id")
+    private String placeId;
 
     public PredictionsModel() {
         this.description = "";
         this.id = "";
-        this.place_id = "";
+        this.placeId = "";
     }
 
     protected PredictionsModel(Parcel in) {
         description = in.readString();
         id = in.readString();
-        place_id = in.readString();
+        placeId = in.readString();
     }
 
     public static final Creator<PredictionsModel> CREATOR = new Creator<PredictionsModel>() {
@@ -50,12 +53,12 @@ public class PredictionsModel implements Parcelable {
         this.id = id;
     }
 
-    public String getPlace_id() {
-        return place_id;
+    public String getPlaceId() {
+        return placeId;
     }
 
-    public void setPlace_id(String place_id) {
-        this.place_id = place_id;
+    public void setPlaceId(String placeId) {
+        this.placeId = placeId;
     }
 
     @Override
@@ -67,13 +70,13 @@ public class PredictionsModel implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(description);
         dest.writeString(id);
-        dest.writeString(place_id);
+        dest.writeString(placeId);
     }
 
     @NonNull
     @Override
     public String toString() {
-        return id+ " | "+ place_id+" | "+ description;
+        return id+ " | "+ placeId+" | "+ description;
     }
 }
 
