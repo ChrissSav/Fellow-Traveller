@@ -64,7 +64,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         startDestTextView.setText(startDestinationModel.getTitle());
         endDestTextView.setText(endDestinationModel.getTitle());
 
-       // getLatLongFromPlaceId(startDestinationModel);
+        // getLatLongFromPlaceId(startDestinationModel);
         //getLatLongFromPlaceId(endDestinationModel);
         getLatLongFromPlaceIFrom();
         getLatLongFromPlaceITo();
@@ -224,7 +224,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
                 }
                 //if (destinationModelFrom.getTitle() == null && destinationModelTo.getTitle() == null)
-             //       return false;
+                //       return false;
                 return true;
             }
 
