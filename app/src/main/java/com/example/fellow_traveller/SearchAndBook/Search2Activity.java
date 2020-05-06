@@ -137,15 +137,16 @@ public class Search2Activity extends AppCompatActivity {
 
     private void unrecommendDestination() {
 
-        if(previousChoice == 2)
+        //Check if we selected one of the recommended destinations or search one of them with autocomplete, to unrecommended them
+        if(previousChoice == 2 || startDestinationModel.getPlaceId().equals("ChIJ8UNwBh-9oRQR3Y1mdkU1Nic"))
             athensButton.setVisibility(View.GONE);
-        else if(previousChoice == 3)
+        else if(previousChoice == 3 || startDestinationModel.getPlaceId().equals("ChIJ7eAoFPQ4qBQRqXTVuBXnugk"))
             thessalonikiButton.setVisibility(View.GONE);
-        else if(previousChoice == 4)
+        else if(previousChoice == 4 || startDestinationModel.getPlaceId().equals("ChIJZ93-3qLpWxMRwJe54iy9AAQ"))
             ioanninaButton.setVisibility(View.GONE);
-        else if(previousChoice == 5)
+        else if(previousChoice == 5 || startDestinationModel.getPlaceId().equals("ChIJLe0kpZk1XhMRoIy54iy9AAQ"))
             patraButton.setVisibility(View.GONE);
-        else if(previousChoice == 6)
+        else if(previousChoice == 6 || startDestinationModel.getPlaceId().equals("ChIJoUddWVyIWBMRMJy54iy9AAQ"))
             larisaButton.setVisibility(View.GONE);
     }
 
