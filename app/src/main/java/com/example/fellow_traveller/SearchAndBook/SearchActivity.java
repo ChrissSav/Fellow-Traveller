@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -155,6 +156,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         });
 
 
+
     }
 
     private void getMyLocation() {
@@ -220,6 +222,17 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(mainIntent);
             }
         });
+
+//        mRecyclerView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+//            @Override
+//            public void onLayoutChange(View view, int i, int i1, int i2, int i3, int i4, int i5, int i6, int i7) {
+//                mAdapter.notifyDataSetChanged();
+//                mRecyclerView.smoothScrollToPosition(places_list.size()-1);
+//
+//            }
+//        });
+
+
     }
 
     @Override
