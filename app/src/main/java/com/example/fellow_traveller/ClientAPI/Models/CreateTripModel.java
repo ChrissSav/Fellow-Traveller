@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class CreateTripModel {
 
-    @SerializedName("dest_from")
+    @SerializedName("destFrom")
     @Expose
     private DestinationModel destFrom;
-    @SerializedName("dest_to")
+    @SerializedName("destTo")
     @Expose
     private DestinationModel destTo;
     @SerializedName("timestamp")
@@ -23,7 +23,7 @@ public class CreateTripModel {
     @SerializedName("max_bags")
     @Expose
     private Integer maxBags;
-    @SerializedName("msg")
+    @SerializedName("message")
     @Expose
     private String msg;
     @SerializedName("price")

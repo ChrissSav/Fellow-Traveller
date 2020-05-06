@@ -5,6 +5,7 @@ import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreatePassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
 import com.example.fellow_traveller.ClientAPI.Models.NotificationModel;
+import com.example.fellow_traveller.ClientAPI.Models.SearchDestinationsModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
@@ -67,6 +68,21 @@ public interface RetrofitAPIEndpoints {
             @Body CreateTripModel trip
     );
 
+    @PUT("/trips/search")
+    Call<ArrayList<TripModel>> getTrips(
+            @Body SearchDestinationsModel destinations,
+            @Query("timestamp_min") Integer timestampMin,
+            @Query("timestamp_max") Integer timestampMax,
+            @Query("seats_min") Integer seatsMin,
+            @Query("seats_max") Integer seatsMax,
+            @Query("bags_min") Integer bagsMin,
+            @Query("bags_max") Integer bagsMax,
+            @Query("price_min") Integer priceMin,
+            @Query("price_max") Integer priceMax,
+            @Query("pet") Boolean hasPet,
+            @Query("range") int range
+    );
+
     @PUT("/trips/passengers")
     Call<StatusHandleModel> addPassenger(
             @Body CreatePassengerModel passenger
@@ -93,18 +109,5 @@ public interface RetrofitAPIEndpoints {
     @GET("/notifications")
     Call<List<NotificationModel>> userNotifications();
 
-    @GET("/trips")
-    Call<ArrayList<TripModel>> getTrips(
-            @Query("dest_to") String destTo,
-            @Query("dest_from") String destFrom,
-            @Query("timestamp_min") Integer timestampMin,
-            @Query("timestamp_max") Integer timestampMax,
-            @Query("seats_min") Integer seatsMin,
-            @Query("seats_max") Integer seatsMax,
-            @Query("bags_min") Integer bagsMin,
-            @Query("bags_max") Integer bagsMax,
-            @Query("price_min") Integer priceMin,
-            @Query("price_max") Integer priceMax,
-            @Query("pet") Boolean hasPet
-    );
+
 }

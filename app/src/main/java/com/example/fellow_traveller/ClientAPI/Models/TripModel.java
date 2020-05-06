@@ -9,78 +9,80 @@ import com.google.gson.annotations.SerializedName;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class TripModel implements Parcelable {
 
-    @SerializedName("dest_from")
-    @Expose
-    private String destFrom;
-    @SerializedName("dest_to")
-    @Expose
-    private String destTo;
-    @SerializedName("timestamp")
-    @Expose
-    private Integer timestamp;
-    @SerializedName("pet")
-    @Expose
-    private boolean pet;
-    @SerializedName("max_seats")
-    @Expose
-    private Integer maxSeats;
-    @SerializedName("max_bags")
-    @Expose
-    private Integer maxBags;
-    @SerializedName("msg")
-    @Expose
-    private String msg;
-    @SerializedName("price")
-    @Expose
-    private Integer price;
     @SerializedName("id")
     @Expose
     private Integer id;
+
+    @SerializedName("destFrom")
+    @Expose
+    private DestinationModel destFrom;
+    @SerializedName("destTo")
+    @Expose
+    private DestinationModel destTo;
+
     @SerializedName("creator")
     @Expose
     private UserBaseModel creatorUser;
+
     @SerializedName("car")
     @Expose
     private CarModel car;
+
+    @SerializedName("timestamp")
+    @Expose
+    private Long timestamp;
+
+
     @SerializedName("current_seats")
     @Expose
     private Integer currentSeats;
+    @SerializedName("max_seats")
+    @Expose
+    private Integer maxSeats;
     @SerializedName("current_bags")
     @Expose
     private Integer currentBags;
+    @SerializedName("max_bags")
+    @Expose
+    private Integer maxBags;
+
+
+    @SerializedName("pet")
+    @Expose
+    private Boolean pet;
+
+    @SerializedName("price")
+    @Expose
+    private Float price;
+
+    @SerializedName("message")
+    @Expose
+    private String message;
+
+
+
+
     @SerializedName("passengers")
     @Expose
-    private ArrayList<PassengerModel> passengers = null;
+    private List<PassengerModel> passengers = new ArrayList<>();
 
+    @SerializedName("active")
+    @Expose
+    private Boolean active;
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
 
     protected TripModel(Parcel in) {
-        destFrom = in.readString();
-        destTo = in.readString();
-        if (in.readByte() == 0) {
-            timestamp = null;
-        } else {
-            timestamp = in.readInt();
-        }
-        pet = in.readByte() != 0;
-        if (in.readByte() == 0) {
-            maxSeats = null;
-        } else {
-            maxSeats = in.readInt();
-        }
-        if (in.readByte() == 0) {
-            maxBags = null;
-        } else {
-            maxBags = in.readInt();
-        }
-        msg = in.readString();
-        if (in.readByte() == 0) {
-            price = null;
-        } else {
-            price = in.readInt();
-        }
         if (in.readByte() == 0) {
             id = null;
         } else {
@@ -89,15 +91,40 @@ public class TripModel implements Parcelable {
         creatorUser = in.readParcelable(UserBaseModel.class.getClassLoader());
         car = in.readParcelable(CarModel.class.getClassLoader());
         if (in.readByte() == 0) {
+            timestamp = null;
+        } else {
+            timestamp = in.readLong();
+        }
+        if (in.readByte() == 0) {
             currentSeats = null;
         } else {
             currentSeats = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            maxSeats = null;
+        } else {
+            maxSeats = in.readInt();
         }
         if (in.readByte() == 0) {
             currentBags = null;
         } else {
             currentBags = in.readInt();
         }
+        if (in.readByte() == 0) {
+            maxBags = null;
+        } else {
+            maxBags = in.readInt();
+        }
+        byte tmpPet = in.readByte();
+        pet = tmpPet == 0 ? null : tmpPet == 1;
+        if (in.readByte() == 0) {
+            price = null;
+        } else {
+            price = in.readFloat();
+        }
+        message = in.readString();
+        byte tmpActive = in.readByte();
+        active = tmpActive == 0 ? null : tmpActive == 1;
     }
 
     public static final Creator<TripModel> CREATOR = new Creator<TripModel>() {
@@ -112,85 +139,6 @@ public class TripModel implements Parcelable {
         }
     };
 
-    public boolean isPet() {
-        return pet;
-    }
-
-    public UserBaseModel getCreatorUser() {
-        return creatorUser;
-    }
-
-    public void setCreatorUser(UserBaseModel creatord) {
-        this.creatorUser = creatord;
-    }
-
-    public String getDestFrom() {
-        return destFrom;
-    }
-
-    public void setDestFrom(String destFrom) {
-        this.destFrom = destFrom;
-    }
-
-    public String getDestTo() {
-        return destTo;
-    }
-
-    public void setDestTo(String destTo) {
-        this.destTo = destTo;
-    }
-
-    public Integer getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Integer timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public boolean getPet() {
-        return pet;
-    }
-
-    public String getPetString() {
-        return pet? "Επιτρέπω": "Δεν επιτρέπω";
-    }
-    public void setPet(boolean pet) {
-        this.pet = pet;
-    }
-
-    public Integer getMaxSeats() {
-        return maxSeats;
-    }
-
-    public void setMaxSeats(Integer maxSeats) {
-        this.maxSeats = maxSeats;
-    }
-
-    public Integer getMaxBags() {
-        return maxBags;
-    }
-
-    public void setMaxBags(Integer maxBags) {
-        this.maxBags = maxBags;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -199,7 +147,29 @@ public class TripModel implements Parcelable {
         this.id = id;
     }
 
+    public DestinationModel getDestFrom() {
+        return destFrom;
+    }
 
+    public void setDestFrom(DestinationModel destFrom) {
+        this.destFrom = destFrom;
+    }
+
+    public DestinationModel getDestTo() {
+        return destTo;
+    }
+
+    public void setDestTo(DestinationModel destTo) {
+        this.destTo = destTo;
+    }
+
+    public UserBaseModel getCreatorUser() {
+        return creatorUser;
+    }
+
+    public void setCreatorUser(UserBaseModel creatorUser) {
+        this.creatorUser = creatorUser;
+    }
 
     public CarModel getCar() {
         return car;
@@ -207,6 +177,14 @@ public class TripModel implements Parcelable {
 
     public void setCar(CarModel car) {
         this.car = car;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public Integer getCurrentSeats() {
@@ -217,6 +195,14 @@ public class TripModel implements Parcelable {
         this.currentSeats = currentSeats;
     }
 
+    public Integer getMaxSeats() {
+        return maxSeats;
+    }
+
+    public void setMaxSeats(Integer maxSeats) {
+        this.maxSeats = maxSeats;
+    }
+
     public Integer getCurrentBags() {
         return currentBags;
     }
@@ -225,11 +211,35 @@ public class TripModel implements Parcelable {
         this.currentBags = currentBags;
     }
 
-    public ArrayList<PassengerModel> getPassengers() {
+    public Integer getMaxBags() {
+        return maxBags;
+    }
+
+    public void setMaxBags(Integer maxBags) {
+        this.maxBags = maxBags;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public List<PassengerModel> getPassengers() {
         return passengers;
     }
 
-    public void setPassengers(ArrayList<PassengerModel> passengers) {
+    public void setPassengers(List<PassengerModel> passengers) {
         this.passengers = passengers;
     }
 
@@ -239,6 +249,10 @@ public class TripModel implements Parcelable {
 
     public String getBagsStatus() {
         return currentBags + "/" + maxBags;
+    }
+
+    public String getPetString() {
+        return pet? "Επιτρέπω": "Δεν επιτρέπω";
     }
 
     public String getDate() {
@@ -253,6 +267,13 @@ public class TripModel implements Parcelable {
         return dateFormat.format(date);
     }
 
+    public Boolean getPet() {
+        return pet;
+    }
+
+    public void setPet(Boolean pet) {
+        this.pet = pet;
+    }
 
     @Override
     public int describeContents() {
@@ -261,34 +282,6 @@ public class TripModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(destFrom);
-        dest.writeString(destTo);
-        if (timestamp == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(timestamp);
-        }
-        dest.writeByte((byte) (pet ? 1 : 0));
-        if (maxSeats == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(maxSeats);
-        }
-        if (maxBags == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(maxBags);
-        }
-        dest.writeString(msg);
-        if (price == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(price);
-        }
         if (id == null) {
             dest.writeByte((byte) 0);
         } else {
@@ -297,11 +290,23 @@ public class TripModel implements Parcelable {
         }
         dest.writeParcelable(creatorUser, flags);
         dest.writeParcelable(car, flags);
+        if (timestamp == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(timestamp);
+        }
         if (currentSeats == null) {
             dest.writeByte((byte) 0);
         } else {
             dest.writeByte((byte) 1);
             dest.writeInt(currentSeats);
+        }
+        if (maxSeats == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(maxSeats);
         }
         if (currentBags == null) {
             dest.writeByte((byte) 0);
@@ -309,5 +314,20 @@ public class TripModel implements Parcelable {
             dest.writeByte((byte) 1);
             dest.writeInt(currentBags);
         }
+        if (maxBags == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(maxBags);
+        }
+        dest.writeByte((byte) (pet == null ? 0 : pet ? 1 : 2));
+        if (price == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeFloat(price);
+        }
+        dest.writeString(message);
+        dest.writeByte((byte) (active == null ? 0 : active ? 1 : 2));
     }
 }

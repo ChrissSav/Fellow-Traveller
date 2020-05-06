@@ -16,6 +16,7 @@ import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreatePassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
 import com.example.fellow_traveller.ClientAPI.Models.ErrorResponseModel;
+import com.example.fellow_traveller.ClientAPI.Models.SearchDestinationsModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
@@ -352,12 +353,12 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void getTrips(String destTo, String destFrom, Integer timestampMin, Integer timestampMax,
+    public static void getTrips(SearchDestinationsModel destinations, Integer timestampMin, Integer timestampMax,
                                 Integer seatsMin, Integer seatsMax, Integer bagsMin, Integer bagsMax,
-                                Integer priceMin, Integer priceMax, Boolean hasPet, final SearchTripsCallback searchTripsCallback) {
-        retrofitAPIEndpoints.getTrips(destTo, destFrom, timestampMin, timestampMax, seatsMin,
+                                Integer priceMin, Integer priceMax, Boolean hasPet,int range, final SearchTripsCallback searchTripsCallback) {
+        retrofitAPIEndpoints.getTrips(destinations, timestampMin, timestampMax, seatsMin,
                 seatsMax, bagsMin, bagsMax, priceMin,
-                priceMax, hasPet).enqueue(new Callback<ArrayList<TripModel>>() {
+                priceMax, hasPet,range).enqueue(new Callback<ArrayList<TripModel>>() {
             @Override
             public void onResponse(Call<ArrayList<TripModel>> call, Response<ArrayList<TripModel>> response) {
                 searchTripsCallback.onSuccess(response.body());
