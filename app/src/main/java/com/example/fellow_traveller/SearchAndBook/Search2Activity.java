@@ -5,15 +5,19 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fellow_traveller.ClientAPI.Models.DestinationModel;
+import com.example.fellow_traveller.ClientAPI.Models.UserBaseModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.PlacesAPI.CallBack.PlaceApiCallBack;
 import com.example.fellow_traveller.PlacesAPI.Models.PlaceAPiModel;
@@ -34,6 +38,10 @@ public class Search2Activity extends AppCompatActivity {
     private PlaceAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<PredictionsModel> places_list;
+    private DestinationModel startDestinationModel, endDestinationModel;
+    private int previousChoice;
+    private Button athensButton, thessalonikiButton, ioanninaButton, patraButton, larisaButton;
+
 
     private GlobalClass globalClass;
 
@@ -51,6 +59,20 @@ public class Search2Activity extends AppCompatActivity {
         suggestSection = findViewById(R.id.ActivitySearch2_suggest_section);
         resultsSection = findViewById(R.id.ActivitySearch2_results_section);
 
+        athensButton = findViewById(R.id.ActivitySearch2_athens_button);
+        thessalonikiButton = findViewById(R.id.ActivitySearch2_thessaloniki_button);
+        ioanninaButton = findViewById(R.id.ActivitySearch2_ioannina_button);
+        patraButton = findViewById(R.id.ActivitySearch2_patra_button);
+        larisaButton = findViewById(R.id.ActivitySearch2_larisa_button);
+
+
+        final Intent intent = getIntent();
+        startDestinationModel = (DestinationModel) intent.getExtras().getParcelable("startDestination");
+        previousChoice = intent.getIntExtra("DestStartChoice", 0);
+
+        Toast.makeText(Search2Activity.this, startDestinationModel.getTitle() + " " + startDestinationModel.getPlaceId() + " " + startDestinationModel.getLatitude() + " " + startDestinationModel.getLongitude(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(Search2Activity.this, String.valueOf(previousChoice) + "", Toast.LENGTH_SHORT).show();
+        unrecommendDestination();
         //If we search for something suggest section disappears
         destinationAutoComplete.addTextChangedListener(new TextWatcher() {
             @Override
@@ -97,7 +119,7 @@ public class Search2Activity extends AppCompatActivity {
 
 
         //destinationAutoComplete.setAdapter(new PlaceAutocompleteAdapter(Search2Activity.this, android.R.layout.simple_list_item_1));
-        final Intent intent = getIntent();
+
 
         eraseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +133,20 @@ public class Search2Activity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void unrecommendDestination() {
+
+        if(previousChoice == 2)
+            athensButton.setVisibility(View.GONE);
+        else if(previousChoice == 3)
+            thessalonikiButton.setVisibility(View.GONE);
+        else if(previousChoice == 4)
+            ioanninaButton.setVisibility(View.GONE);
+        else if(previousChoice == 5)
+            patraButton.setVisibility(View.GONE);
+        else if(previousChoice == 6)
+            larisaButton.setVisibility(View.GONE);
     }
 
     public void GetPlaces(String input) {

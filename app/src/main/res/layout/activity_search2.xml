@@ -122,6 +122,7 @@
             android:text="Η τοποθεσία σας"
             style="@style/button_outline_with_left_drawable"
             android:drawableLeft="@drawable/ic_location"
+            android:visibility="gone"
             />
 
         <Button
