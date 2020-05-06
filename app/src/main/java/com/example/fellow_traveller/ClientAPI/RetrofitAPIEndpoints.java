@@ -80,7 +80,7 @@ public interface RetrofitAPIEndpoints {
             @Query("price_min") Integer priceMin,
             @Query("price_max") Integer priceMax,
             @Query("pet") Boolean hasPet,
-            @Query("range") int range
+            @Query("range") Integer range
     );
 
     @PUT("/trips/passengers")

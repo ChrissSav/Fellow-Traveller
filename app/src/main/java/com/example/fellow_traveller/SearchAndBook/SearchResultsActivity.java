@@ -28,7 +28,7 @@ import com.example.fellow_traveller.R;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class SearchResultsActivity extends AppCompatActivity  {
+public class SearchResultsActivity extends AppCompatActivity {
     private TextView endDestTextView, startDestTextView, searchResultsCount;
     private RecyclerView mRecyclerView;
     private SearchResultsAdapter mAdapter;
@@ -44,7 +44,7 @@ public class SearchResultsActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
-       globalClass = (GlobalClass) getApplicationContext();
+        globalClass = (GlobalClass) getApplicationContext();
 
         startDestTextView = findViewById(R.id.ActivitySearchResults_from_textView);
         endDestTextView = findViewById(R.id.ActivitySearchResults_to_textView);
@@ -52,7 +52,6 @@ public class SearchResultsActivity extends AppCompatActivity  {
         swapButton = findViewById(R.id.ActivitySearchResults_swap_button);
         backButton = findViewById(R.id.ActivitySearchResults_close_button);
         searchResultsCount = findViewById(R.id.ActivitySearchResults_results_label);
-
 
 
         //Get the Start-End DestinationModels
@@ -71,24 +70,18 @@ public class SearchResultsActivity extends AppCompatActivity  {
         searchDestinationsModel = new SearchDestinationsModel(latlongModelStart, latlongModelEnd);
 //
 //
-        Toast.makeText(SearchResultsActivity.this,searchDestinationsModel.getDestFrom().getLatitude().toString() + "", Toast.LENGTH_SHORT).show();
+        Toast.makeText(SearchResultsActivity.this, searchDestinationsModel.getDestFrom().getLatitude().toString() + "", Toast.LENGTH_SHORT).show();
 //        SearchDestinationsModel searchDestinationsModel = null;
 //        searchDestinationsModel.setDestFrom(latlongModelStart);
 //        searchDestinationsModel.setDestTo(latlongModelEnd);
 
 
-
-        
-
-
-
-
-
         new FellowTravellerAPI(globalClass).getTrips(searchDestinationsModel, null, null, null, null, null, null,
-                null, null, null, 5, new SearchTripsCallback() {
+                null, null, null, null, new SearchTripsCallback() {
                     @Override
                     public void onSuccess(ArrayList<TripModel> trips) {
-                        Toast.makeText(SearchResultsActivity.this, trips.get(0).getCreatorUser().getFullName() + "", Toast.LENGTH_SHORT).show();
+                        // TODO πρωτα να ελεγξεις αμα εχει ταξιδια και μετα να παρεις το πρωτο στοιχειο
+                        //     Toast.makeText(SearchResultsActivity.this, trips.get(0).getCreatorUser().getFullName() + "", Toast.LENGTH_SHORT).show();
 
                         resultList = trips;
                         mRecyclerView = findViewById(R.id.ActivitySearchResults_recycler_view);
@@ -104,7 +97,7 @@ public class SearchResultsActivity extends AppCompatActivity  {
                             @Override
                             public void onItemClick(int position) {
                                 Intent mainIntent = new Intent(SearchResultsActivity.this, SearchDetailsActivity.class);
-                                mainIntent.putExtra("trip",resultList.get(position));
+                                mainIntent.putExtra("trip", resultList.get(position));
                                 startActivity(mainIntent);
                             }
                         });
@@ -142,23 +135,23 @@ public class SearchResultsActivity extends AppCompatActivity  {
         });
     }
 
- public void  getLatLongFromPlaceId(final DestinationModel destModel) {
-     if (!destModel.getPlaceId().equals("default")) {
-         new PlaceApiConnection(globalClass, true).getLatLonFromPlace(destModel.getPlaceId(), new PlaceApiResultCallBack() {
-             @Override
-             public void onSuccess(ResultModel resultModel) {
+    public void getLatLongFromPlaceId(final DestinationModel destModel) {
+        if (!destModel.getPlaceId().equals("default")) {
+            new PlaceApiConnection(globalClass, true).getLatLonFromPlace(destModel.getPlaceId(), new PlaceApiResultCallBack() {
+                @Override
+                public void onSuccess(ResultModel resultModel) {
 
                     destModel.setLatitude(resultModel.getGeometry().getLocation().getLatitude());
                     destModel.setLongitude(resultModel.getGeometry().getLocation().getLongitude());
-                 Toast.makeText(SearchResultsActivity.this, String.valueOf(destModel.getLatitude() + " " + String.valueOf(destModel.getLongitude())), Toast.LENGTH_SHORT).show();
-             }
+                    Toast.makeText(SearchResultsActivity.this, String.valueOf(destModel.getLatitude() + " " + String.valueOf(destModel.getLongitude())), Toast.LENGTH_SHORT).show();
+                }
 
-             @Override
-             public void onFailure(String errorMsg) {
-                 Toast.makeText(SearchResultsActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+                @Override
+                public void onFailure(String errorMsg) {
+                    Toast.makeText(SearchResultsActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
 
-             }
-         });
-     }
-     }
+                }
+            });
+        }
+    }
 }
