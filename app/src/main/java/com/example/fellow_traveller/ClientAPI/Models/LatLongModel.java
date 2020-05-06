@@ -5,6 +5,10 @@ public class LatLongModel {
     private Float latitude;
     private Float longitude;
 
+    public LatLongModel(Float latitude, Float longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 
     public Float getLatitude() {
         return latitude;

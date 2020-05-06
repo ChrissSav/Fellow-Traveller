@@ -26,6 +26,7 @@ import com.example.fellow_traveller.PlacesAPI.PlaceApiConnection;
 import com.example.fellow_traveller.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class SearchResultsActivity extends AppCompatActivity  {
     private TextView endDestTextView, startDestTextView, searchResultsCount;
@@ -36,6 +37,8 @@ public class SearchResultsActivity extends AppCompatActivity  {
     private DestinationModel startDestinationModel, endDestinationModel;
     private GlobalClass globalClass;
     private LatLongModel latlongModelStart, latlongModelEnd;
+    private SearchDestinationsModel searchDestinationsModel;
+    private ArrayList<TripModel> resultList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,54 +65,56 @@ public class SearchResultsActivity extends AppCompatActivity  {
         getLatLongFromPlaceId(startDestinationModel);
         getLatLongFromPlaceId(endDestinationModel);
 
-//        latlongModelStart.setLatitude(startDestinationModel.getLatitude());
-//        latlongModelStart.setLongitude(startDestinationModel.getLongitude());
+        latlongModelStart = new LatLongModel(startDestinationModel.getLatitude(), startDestinationModel.getLongitude());
+        latlongModelEnd = new LatLongModel(endDestinationModel.getLatitude(), endDestinationModel.getLongitude());
+
+        searchDestinationsModel = new SearchDestinationsModel(latlongModelStart, latlongModelEnd);
 //
-//        latlongModelEnd.setLatitude(endDestinationModel.getLatitude());
-//        latlongModelEnd.setLongitude(endDestinationModel.getLongitude());
 //
-//
+        Toast.makeText(SearchResultsActivity.this,searchDestinationsModel.getDestFrom().getLatitude().toString() + "", Toast.LENGTH_SHORT).show();
 //        SearchDestinationsModel searchDestinationsModel = null;
 //        searchDestinationsModel.setDestFrom(latlongModelStart);
 //        searchDestinationsModel.setDestTo(latlongModelEnd);
 
 
+
         
-        
-        final ArrayList<TripModel> resultList = new ArrayList<>();
 
 
 
 
-//        new FellowTravellerAPI(globalClass).getTrips(searchDestinationsModel, null, null, null, null, null, null,
-//                null, null, null, 0, new SearchTripsCallback() {
-//                    @Override
-//                    public void onSuccess(ArrayList<TripModel> trips) {
-//                        resultList.addAll(trips);
-//                        mRecyclerView = findViewById(R.id.ActivitySearchResults_recycler_view);
-//                        mRecyclerView.setHasFixedSize(true);
-//                        mLayoutManager = new LinearLayoutManager(getApplicationContext());
-//                        mAdapter = new SearchResultsAdapter(resultList);
-//                        mRecyclerView.setLayoutManager(mLayoutManager);
-//                        mRecyclerView.setAdapter(mAdapter);
-//
-//                        searchResultsCount.setText(String.format("Βρέθηκαν %d ταξίδια.", resultList.size()));
-//
-//                        mAdapter.setOnItemClickListener(new SearchResultsAdapter.OnItemClickListener() {
-//                            @Override
-//                            public void onItemClick(int position) {
-//                                Intent mainIntent = new Intent(SearchResultsActivity.this, SearchDetailsActivity.class);
-//                                mainIntent.putExtra("trip",resultList.get(position));
-//                                startActivity(mainIntent);
-//                            }
-//                        });
-//                    }
-//
-//                    @Override
-//                    public void onFailure(String errorMsg) {
-//                        Log.d("FILTER", "Couldnt find any trips");
-//                    }
-//                });
+
+        new FellowTravellerAPI(globalClass).getTrips(searchDestinationsModel, null, null, null, null, null, null,
+                null, null, null, 5, new SearchTripsCallback() {
+                    @Override
+                    public void onSuccess(ArrayList<TripModel> trips) {
+                        Toast.makeText(SearchResultsActivity.this, trips.get(0).getCreatorUser().getFullName() + "", Toast.LENGTH_SHORT).show();
+
+                        resultList = trips;
+                        mRecyclerView = findViewById(R.id.ActivitySearchResults_recycler_view);
+                        mRecyclerView.setHasFixedSize(true);
+                        mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                        mAdapter = new SearchResultsAdapter(resultList);
+                        mRecyclerView.setLayoutManager(mLayoutManager);
+                        mRecyclerView.setAdapter(mAdapter);
+
+                        searchResultsCount.setText(String.format("Βρέθηκαν %d ταξίδια.", resultList.size()));
+
+                        mAdapter.setOnItemClickListener(new SearchResultsAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(int position) {
+                                Intent mainIntent = new Intent(SearchResultsActivity.this, SearchDetailsActivity.class);
+                                mainIntent.putExtra("trip",resultList.get(position));
+                                startActivity(mainIntent);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onFailure(String errorMsg) {
+                        Log.d("FILTER", "Couldnt find any trips");
+                    }
+                });
 
 
         filterButton.setOnClickListener(new View.OnClickListener() {

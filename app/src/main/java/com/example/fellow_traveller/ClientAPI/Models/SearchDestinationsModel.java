@@ -5,6 +5,11 @@ public class SearchDestinationsModel {
     private LatLongModel destFrom;
     private LatLongModel destTo;
 
+    public SearchDestinationsModel(LatLongModel destFrom, LatLongModel destTo) {
+        this.destFrom = destFrom;
+        this.destTo = destTo;
+    }
+
     public LatLongModel getDestFrom() {
         return destFrom;
     }
