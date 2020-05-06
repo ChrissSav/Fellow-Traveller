@@ -102,7 +102,8 @@ public class AddLocationActivity extends AppCompatActivity {
                 // SetNotificationsRead(mExampleList.get(position).getId(),position);
                 editText.setText(places_list.get(position).getDescription());
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra("result", editText.getText().toString());
+               // resultIntent.putExtra("result", editText.getText().toString());
+                resultIntent.putExtra("resultPredictionsModel", places_list.get(position));
                 setResult(RESULT_OK, resultIntent);
                 finish();
 
