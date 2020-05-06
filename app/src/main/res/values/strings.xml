@@ -237,8 +237,9 @@
         <item>+1876</item>
         <item>+7840</item>
     </string-array>
-    <string name="API_BASE_URL">http://167.172.189.78:8000</string>
+    <string name="API_BASE_URL">https://api.fellowtraveller.gr/</string>
     <string name="PLACE_URL">https://maps.googleapis.com/maps/api/place/autocomplete/</string>
+    <string name="PLACE_DETAIL_URL">https://maps.googleapis.com/maps/api/place/details/</string>
     <string name="PLACE_KEY">AIzaSyBJ8UG-fR3GSjfbfAcatZezGZi2Y8FDzqA</string>
     <string name="PLACE_LANGUAGE">el</string>
     <string name="USER_INFO_FILE">user_info.txt</string>

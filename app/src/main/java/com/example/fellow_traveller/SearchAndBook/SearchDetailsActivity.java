@@ -55,8 +55,8 @@ public class SearchDetailsActivity extends AppCompatActivity {
         textViewMsg = findViewById(R.id.ActivitySearchDetails_driver_message_tv);
         passengersButton = findViewById(R.id.ActivitySearchDetails_more_passengers_button);
 
-        textViewDestFrom.setText(tripModel.getDestFrom());
-        textViewDestTo.setText(tripModel.getDestTo());
+        textViewDestFrom.setText(tripModel.getDestFrom().getTitle());
+        textViewDestTo.setText(tripModel.getDestTo().getTitle());
         textViewDate.setText(tripModel.getDate());
         textViewTime.setText(tripModel.getTime());
         textViewSeats.setText(tripModel.getSeatStatus());

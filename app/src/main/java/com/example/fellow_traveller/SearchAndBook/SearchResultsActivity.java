@@ -47,7 +47,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         from.setText(fromString);
 
         final ArrayList<TripModel> resultList = new ArrayList<>();
-        new FellowTravellerAPI(globalClass).getTrips(toString, fromString, null, null, null, null, null, null,
+       /* new FellowTravellerAPI(globalClass).getTrips(toString, fromString, null, null, null, null, null, null,
                 null, null, null, new SearchTripsCallback() {
                     @Override
                     public void onSuccess(ArrayList<TripModel> trips) {
@@ -76,7 +76,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                         Log.d("FILTER", "Couldnt find any trips");
                     }
                 });
-
+*/
 
         filterButton.setOnClickListener(new View.OnClickListener() {
             @Override

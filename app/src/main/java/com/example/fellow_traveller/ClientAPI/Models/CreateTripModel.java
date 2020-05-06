@@ -5,25 +5,25 @@ import com.google.gson.annotations.SerializedName;
 
 public class CreateTripModel {
 
-    @SerializedName("dest_from")
+    @SerializedName("destFrom")
     @Expose
-    private String destFrom;
-    @SerializedName("dest_to")
+    private DestinationModel destFrom;
+    @SerializedName("destTo")
     @Expose
-    private String destTo;
+    private DestinationModel destTo;
     @SerializedName("timestamp")
     @Expose
     private Long timestamp;
     @SerializedName("pet")
     @Expose
-    private boolean hasPet;
+    private Boolean hasPet;
     @SerializedName("max_seats")
     @Expose
     private Integer maxSeats;
     @SerializedName("max_bags")
     @Expose
     private Integer maxBags;
-    @SerializedName("msg")
+    @SerializedName("message")
     @Expose
     private String msg;
     @SerializedName("price")
@@ -33,9 +33,7 @@ public class CreateTripModel {
     @Expose
     private Integer carId;
 
-    public CreateTripModel(String destFrom, String destTo, Long timestamp,
-                           boolean hasPet, Integer maxSeats, Integer maxBags,
-                           String msg, Float price, Integer carId) {
+    public CreateTripModel(DestinationModel destFrom, DestinationModel destTo, Long timestamp, Boolean hasPet, Integer maxSeats, Integer maxBags, String msg, Float price, Integer carId) {
         this.destFrom = destFrom;
         this.destTo = destTo;
         this.timestamp = timestamp;
