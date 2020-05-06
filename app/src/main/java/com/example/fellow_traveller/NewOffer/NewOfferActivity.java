@@ -213,7 +213,7 @@ public class NewOfferActivity extends AppCompatActivity {
         AsyncTask<Void, Void, Boolean> task = new AsyncTask<Void, Void, Boolean>() {
             @Override
             protected Boolean doInBackground(Void... voids) {
-                while (!detailTo || !detailFrom) {
+                while (!(detailTo && detailFrom)) {
 
                 }
                 if (destinationModelFrom.getTitle() == null && destinationModelTo.getTitle() == null)
