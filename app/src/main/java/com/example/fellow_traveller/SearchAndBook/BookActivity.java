@@ -1,9 +1,11 @@
 package com.example.fellow_traveller.SearchAndBook;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -14,7 +16,17 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fellow_traveller.ClientAPI.Callbacks.SearchTripsCallback;
+import com.example.fellow_traveller.ClientAPI.Callbacks.StatusCallBack;
+import com.example.fellow_traveller.ClientAPI.Callbacks.TripRegisterCallBack;
+import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
+import com.example.fellow_traveller.ClientAPI.Models.CreatePassengerModel;
+import com.example.fellow_traveller.ClientAPI.Models.PassengerModel;
+import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
+import com.example.fellow_traveller.ClientAPI.Models.UserBaseModel;
+import com.example.fellow_traveller.Models.GlobalClass;
+import com.example.fellow_traveller.NewOffer.NewOfferActivity;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.SuccessActivity;
 
@@ -35,11 +47,14 @@ public class BookActivity extends AppCompatActivity {
     private int currentBags = 0, maxAvailableBags;
     private TripModel tripModel;
     private Button nextButton;
+    private GlobalClass globalClass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book);
+
+        globalClass = (GlobalClass) getApplicationContext();
 
         paymentSpinner = findViewById(R.id.ActivityBook_payment_spinner);
         petsSwitch = findViewById(R.id.ActivityBook_pets_switch);
@@ -65,8 +80,8 @@ public class BookActivity extends AppCompatActivity {
 
         getUserBags();
 
-        destStartTextView.setText(tripModel.getDestFrom().getTitle());
-        destEndTextView.setText(tripModel.getDestTo().getTitle());
+        destStartTextView.setText(tripModel.getDestTo().getTitle());
+        destEndTextView.setText(tripModel.getDestFrom().getTitle());
 
         timeTextView.setText(tripModel.getTime());
         seatsTextView.setText(String.valueOf(tripModel.getMaxSeats()));
@@ -130,12 +145,28 @@ public class BookActivity extends AppCompatActivity {
 
 
         nextButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                Intent mainIntent = new Intent(BookActivity.this, SuccessActivity.class);
-                mainIntent.putExtra("title",getResources().getString(R.string.success_search));
-                startActivity(mainIntent);
-                finish();
+
+                CreatePassengerModel createPassengerModel = new CreatePassengerModel(tripModel.getId(), currentBags, havePet);
+
+                new FellowTravellerAPI(globalClass).addPassengerToTrip(createPassengerModel, new StatusCallBack() {
+                    @Override
+                    public void onSuccess(String status) {
+                        Toast.makeText(BookActivity.this, "Success", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onFailure(String errorMsg) {
+                        Toast.makeText(BookActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+
+
             }
         });
     }
