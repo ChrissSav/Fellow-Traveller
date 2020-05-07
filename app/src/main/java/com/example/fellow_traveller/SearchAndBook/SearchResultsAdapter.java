@@ -42,8 +42,8 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         // TODO cast this to double
         holder.rate.setText(String.valueOf(currentItem.getCreatorUser().getRate()));
         holder.review.setText(String.valueOf(currentItem.getCreatorUser().getReviews()));
-        holder.from.setText(String.valueOf(currentItem.getDestFrom()));
-        holder.to.setText(String.valueOf(currentItem.getDestTo()));
+        holder.from.setText(String.valueOf(currentItem.getDestFrom().getTitle()));
+        holder.to.setText(String.valueOf(currentItem.getDestTo().getTitle()));
         holder.price.setText(currentItem.getPrice()+ "€");
         holder.date.setText(currentItem.getDate());
         holder.time.setText(currentItem.getTime());

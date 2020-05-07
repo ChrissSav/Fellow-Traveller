@@ -24,6 +24,7 @@ public class CarModel   implements Parcelable {
     @Expose
     private Integer id;
 
+
     protected CarModel(Parcel in) {
         brand = in.readString();
         model = in.readString();
@@ -92,22 +93,23 @@ public class CarModel   implements Parcelable {
         return brand + "  " + model + " | " + plate;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(brand);
-        dest.writeString(model);
-        dest.writeString(plate);
-        dest.writeString(color);
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(brand);
+        parcel.writeString(model);
+        parcel.writeString(plate);
+        parcel.writeString(color);
         if (id == null) {
-            dest.writeByte((byte) 0);
+            parcel.writeByte((byte) 0);
         } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(id);
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(id);
         }
     }
 }

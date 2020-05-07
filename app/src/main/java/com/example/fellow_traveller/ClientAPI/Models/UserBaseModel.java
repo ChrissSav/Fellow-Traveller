@@ -50,7 +50,8 @@ public class UserBaseModel implements Parcelable {
         }
 
         @Override
-        public UserBaseModel[] newArray(int size) {
+        public UserBaseModel[] newArray(int size)
+        {
             return new UserBaseModel[size];
         }
     };

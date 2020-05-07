@@ -9,6 +9,11 @@ public class CreatePassengerModel {
     private int bags;
     private Boolean pet;
 
+    public CreatePassengerModel(int tripId, int bags, Boolean pet) {
+        this.tripId = tripId;
+        this.bags = bags;
+        this.pet = pet;
+    }
 
     public int getTripId() {
         return tripId;

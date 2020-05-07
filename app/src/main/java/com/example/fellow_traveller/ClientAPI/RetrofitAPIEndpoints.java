@@ -5,6 +5,7 @@ import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreatePassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
 import com.example.fellow_traveller.ClientAPI.Models.NotificationModel;
+import com.example.fellow_traveller.ClientAPI.Models.PassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.SearchDestinationsModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
@@ -80,7 +81,7 @@ public interface RetrofitAPIEndpoints {
             @Query("price_min") Integer priceMin,
             @Query("price_max") Integer priceMax,
             @Query("pet") Boolean hasPet,
-            @Query("range") int range
+            @Query("range") Integer range
     );
 
     @PUT("/trips/passengers")

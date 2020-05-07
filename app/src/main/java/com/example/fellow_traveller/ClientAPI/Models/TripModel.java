@@ -74,20 +74,14 @@ public class TripModel implements Parcelable {
     @Expose
     private Boolean active;
 
-    public Float getPrice() {
-        return price;
-    }
-
-    public void setPrice(Float price) {
-        this.price = price;
-    }
-
     protected TripModel(Parcel in) {
         if (in.readByte() == 0) {
             id = null;
         } else {
             id = in.readInt();
         }
+        destFrom = in.readParcelable(DestinationModel.class.getClassLoader());
+        destTo = in.readParcelable(DestinationModel.class.getClassLoader());
         creatorUser = in.readParcelable(UserBaseModel.class.getClassLoader());
         car = in.readParcelable(CarModel.class.getClassLoader());
         if (in.readByte() == 0) {
@@ -138,6 +132,18 @@ public class TripModel implements Parcelable {
             return new TripModel[size];
         }
     };
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+
+
+
 
     public Integer getId() {
         return id;
@@ -275,6 +281,7 @@ public class TripModel implements Parcelable {
         this.pet = pet;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -288,6 +295,8 @@ public class TripModel implements Parcelable {
             dest.writeByte((byte) 1);
             dest.writeInt(id);
         }
+        dest.writeParcelable(destFrom, flags);
+        dest.writeParcelable(destTo, flags);
         dest.writeParcelable(creatorUser, flags);
         dest.writeParcelable(car, flags);
         if (timestamp == null) {

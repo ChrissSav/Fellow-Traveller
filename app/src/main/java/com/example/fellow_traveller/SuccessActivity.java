@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.Animation;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
@@ -17,6 +18,7 @@ public class SuccessActivity extends AppCompatActivity {
 
     private final int SPLASH_TIME = 500,DELAY = 1000;
     private TextView textViewHover, textViewTitle;
+    private ImageView imageView;
     private String title;
 
     @Override
@@ -27,7 +29,14 @@ public class SuccessActivity extends AppCompatActivity {
         title = getIntent().getStringExtra("title");
         textViewTitle = findViewById(R.id.SuccessActivity_textView_title);
         textViewHover = findViewById(R.id.SuccessActivity_textView_hover);
+        imageView = findViewById(R.id.SuccessActivity_imageView);
         textViewTitle.setText(title);
+
+        if(title.equals(getResources().getString(R.string.success_add))){
+            imageView.setColorFilter(getResources().getColor(R.color.blue_color));
+        }else{
+            imageView.setColorFilter(getResources().getColor(R.color.orange_color));
+        }
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

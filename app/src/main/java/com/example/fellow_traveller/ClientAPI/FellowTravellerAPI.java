@@ -16,6 +16,7 @@ import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreatePassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
 import com.example.fellow_traveller.ClientAPI.Models.ErrorResponseModel;
+import com.example.fellow_traveller.ClientAPI.Models.PassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.SearchDestinationsModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
@@ -355,12 +356,16 @@ public class FellowTravellerAPI {
 
     public static void getTrips(SearchDestinationsModel destinations, Integer timestampMin, Integer timestampMax,
                                 Integer seatsMin, Integer seatsMax, Integer bagsMin, Integer bagsMax,
-                                Integer priceMin, Integer priceMax, Boolean hasPet,int range, final SearchTripsCallback searchTripsCallback) {
+                                Integer priceMin, Integer priceMax, Boolean hasPet,Integer range, final SearchTripsCallback searchTripsCallback) {
         retrofitAPIEndpoints.getTrips(destinations, timestampMin, timestampMax, seatsMin,
                 seatsMax, bagsMin, bagsMax, priceMin,
                 priceMax, hasPet,range).enqueue(new Callback<ArrayList<TripModel>>() {
             @Override
             public void onResponse(Call<ArrayList<TripModel>> call, Response<ArrayList<TripModel>> response) {
+                if (!response.isSuccessful()) {
+                    searchTripsCallback.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                    return;
+                }
                 searchTripsCallback.onSuccess(response.body());
             }
 
