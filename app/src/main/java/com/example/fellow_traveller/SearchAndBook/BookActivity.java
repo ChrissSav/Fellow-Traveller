@@ -28,7 +28,7 @@ public class BookActivity extends AppCompatActivity {
     private PaymentAdapter mAdapter;
     private Spinner paymentSpinner;
     private Switch petsSwitch;
-    private TextView destStartTextView, destEndTextView, dateTextView, timeTextView, seatsTextView;
+    private TextView destStartTextView, destEndTextView, dateTextView, timeTextView, seatsTextView, dateMonthTextView, timePmTextView, seatsDefinitionTextView, priceTextView;
     private TextView havePetWithMeTextView, bagsCurrentTextView;
     private ImageButton increaseBagsButton, decreaseBagsButton;
     private boolean havePet = false;
@@ -47,12 +47,16 @@ public class BookActivity extends AppCompatActivity {
         bagsCurrentTextView = findViewById(R.id.ActivityBook_seats_value_tv);
         increaseBagsButton = findViewById(R.id.ActivityBook_seats_plus_button);
         decreaseBagsButton = findViewById(R.id.ActivityBook_seats_minus_button);
-        nextButton = findViewById(R.id.next_book_button);
+        nextButton = findViewById(R.id.ActivityBooks_next_button);
         destStartTextView = findViewById(R.id.ActivityBook_start_textView);
         destEndTextView = findViewById(R.id.ActivityBook_start_textView);
         dateTextView = findViewById(R.id.ActivityBook_date_textView);
         timeTextView = findViewById(R.id.ActivityBook_time_textView);
         seatsTextView = findViewById(R.id.ActivityBook_seats_textView);
+        dateMonthTextView = findViewById(R.id.ActivityBook_date_month_textView);
+        timePmTextView = findViewById(R.id.ActivityBook_time_pm_textView);
+        seatsDefinitionTextView = findViewById(R.id.ActivityBook_seats_definition_textView);
+        priceTextView = findViewById(R.id.ActivityBook_price_textView);
 
 
         tripModel = getIntent().getParcelableExtra("trip");
@@ -65,12 +69,20 @@ public class BookActivity extends AppCompatActivity {
         destEndTextView.setText(tripModel.getDestTo().getTitle());
 
         timeTextView.setText(tripModel.getTime());
-        seatsTextView.setText(tripModel.getMaxSeats());
+        seatsTextView.setText(String.valueOf(tripModel.getMaxSeats()));
+        if(tripModel.getMaxSeats() > 1)
+            seatsDefinitionTextView.setText("Θέσεις");
+        else
+            seatsDefinitionTextView.setText("Θέση");
 
-
-//        Date currentDate = new Date(tripModel.getTimestamp());
-//        DateFormat dateFormat = new SimpleDateFormat("d MMM yyyy - h:mm a");
-//        dateTextView.setText(String.valueOf(dateFormat.format(currentDate)));
+        Date currentDate = new Date(tripModel.getTimestamp()*1000);
+        DateFormat day = new SimpleDateFormat("dd");
+        DateFormat month = new SimpleDateFormat("MMM");
+        DateFormat pm = new SimpleDateFormat("a");
+        dateTextView.setText(day.format(currentDate));
+        dateMonthTextView.setText(month.format(currentDate));
+        timePmTextView.setText(pm.format(currentDate));
+        priceTextView.setText(String.valueOf(tripModel.getPrice()) + " €");
 
         fillList();
         if(tripModel.getPet()){
