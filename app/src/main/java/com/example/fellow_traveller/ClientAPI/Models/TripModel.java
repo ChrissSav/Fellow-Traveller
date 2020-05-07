@@ -9,7 +9,6 @@ import com.google.gson.annotations.SerializedName;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class TripModel implements Parcelable {
 
@@ -68,11 +67,12 @@ public class TripModel implements Parcelable {
 
     @SerializedName("passengers")
     @Expose
-    private List<PassengerModel> passengers = new ArrayList<>();
+    private ArrayList<PassengerModel> passengers;
 
     @SerializedName("active")
     @Expose
     private Boolean active;
+
 
     protected TripModel(Parcel in) {
         if (in.readByte() == 0) {
@@ -117,6 +117,7 @@ public class TripModel implements Parcelable {
             price = in.readFloat();
         }
         message = in.readString();
+        passengers = in.createTypedArrayList(PassengerModel.CREATOR);
         byte tmpActive = in.readByte();
         active = tmpActive == 0 ? null : tmpActive == 1;
     }
@@ -133,6 +134,7 @@ public class TripModel implements Parcelable {
         }
     };
 
+    //====================================================================
     public Float getPrice() {
         return price;
     }
@@ -140,8 +142,6 @@ public class TripModel implements Parcelable {
     public void setPrice(Float price) {
         this.price = price;
     }
-
-
 
 
 
@@ -241,11 +241,11 @@ public class TripModel implements Parcelable {
         this.active = active;
     }
 
-    public List<PassengerModel> getPassengers() {
+    public ArrayList<PassengerModel> getPassengers() {
         return passengers;
     }
 
-    public void setPassengers(List<PassengerModel> passengers) {
+    public void setPassengers(ArrayList<PassengerModel> passengers) {
         this.passengers = passengers;
     }
 
@@ -280,7 +280,6 @@ public class TripModel implements Parcelable {
     public void setPet(Boolean pet) {
         this.pet = pet;
     }
-
 
     @Override
     public int describeContents() {
@@ -337,6 +336,11 @@ public class TripModel implements Parcelable {
             dest.writeFloat(price);
         }
         dest.writeString(message);
+        dest.writeTypedList(passengers);
         dest.writeByte((byte) (active == null ? 0 : active ? 1 : 2));
     }
+
+//====================================================================
+
+
 }
