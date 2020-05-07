@@ -14,22 +14,26 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.fellow_traveller.HomeFragments.HomeActivity;
+import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.R;
-import com.example.fellow_traveller.SplashActivity;
 import com.example.fellow_traveller.SuccessActivity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class BookActivity extends AppCompatActivity {
     private ArrayList<PaymentItem> paymentMethodsList;
     private PaymentAdapter mAdapter;
     private Spinner paymentSpinner;
     private Switch petsSwitch;
+    private TextView destStartTextView, destEndTextView, dateTextView, timeTextView, seatsTextView;
     private TextView havePetWithMeTextView, bagsCurrentTextView;
     private ImageButton increaseBagsButton, decreaseBagsButton;
     private boolean havePet = false;
     private int currentBags = 0, maxAvailableBags;
+    private TripModel tripModel;
     private Button nextButton;
 
     @Override
@@ -37,23 +41,39 @@ public class BookActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book);
 
-        paymentSpinner = findViewById(R.id.book_payment_spinner);
-        petsSwitch = findViewById(R.id.BookActivity_pets_switch);
-        havePetWithMeTextView = findViewById(R.id.BookActivity_have_pet_tv);
-        bagsCurrentTextView = findViewById(R.id.ActivityFilters_seats_value_tv);
-        increaseBagsButton = findViewById(R.id.ActivityFilters_seats_plus_button);
-        decreaseBagsButton = findViewById(R.id.ActivityFilters_seats_minus_button);
+        paymentSpinner = findViewById(R.id.ActivityBook_payment_spinner);
+        petsSwitch = findViewById(R.id.ActivityBook_pets_switch);
+        havePetWithMeTextView = findViewById(R.id.ActivityBook_have_pet_textView);
+        bagsCurrentTextView = findViewById(R.id.ActivityBook_seats_value_tv);
+        increaseBagsButton = findViewById(R.id.ActivityBook_seats_plus_button);
+        decreaseBagsButton = findViewById(R.id.ActivityBook_seats_minus_button);
         nextButton = findViewById(R.id.next_book_button);
+        destStartTextView = findViewById(R.id.ActivityBook_start_textView);
+        destEndTextView = findViewById(R.id.ActivityBook_start_textView);
+        dateTextView = findViewById(R.id.ActivityBook_date_textView);
+        timeTextView = findViewById(R.id.ActivityBook_time_textView);
+        seatsTextView = findViewById(R.id.ActivityBook_seats_textView);
 
-        maxAvailableBags = 3;
+
+        tripModel = getIntent().getParcelableExtra("trip");
+
+        maxAvailableBags = tripModel.getMaxBags();
 
         getUserBags();
 
+        destStartTextView.setText(tripModel.getDestFrom().getTitle());
+        destEndTextView.setText(tripModel.getDestTo().getTitle());
+
+        timeTextView.setText(tripModel.getTime());
+        seatsTextView.setText(tripModel.getMaxSeats());
 
 
+//        Date currentDate = new Date(tripModel.getTimestamp());
+//        DateFormat dateFormat = new SimpleDateFormat("d MMM yyyy - h:mm a");
+//        dateTextView.setText(String.valueOf(dateFormat.format(currentDate)));
 
         fillList();
-
+        if(tripModel.getPet()){
         petsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -67,6 +87,17 @@ public class BookActivity extends AppCompatActivity {
                 }
             }
         });
+        }else{
+            petsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    Toast.makeText(BookActivity.this, "Ο οδηγός δεν επιτρέπει κατοικίδιο", Toast.LENGTH_SHORT).show();
+                    havePet = false;
+                    petsSwitch.setChecked(false);
+
+                }
+            });
+        }
 
         mAdapter = new PaymentAdapter(this, paymentMethodsList);
         paymentSpinner.setAdapter(mAdapter);

@@ -190,9 +190,9 @@ public class FiltersActivity extends AppCompatActivity {
     public void openDialogForSeats() {
 
         //get Elements
-        ImageButton decrease = findViewById(R.id.ActivityFilters_seats_minus_button);
-        ImageButton increase = findViewById(R.id.ActivityFilters_seats_plus_button);
-        final TextView textView_number = findViewById(R.id.ActivityFilters_seats_value_tv);
+        ImageButton decrease = findViewById(R.id.ActivityBook_seats_minus_button);
+        ImageButton increase = findViewById(R.id.ActivityBook_seats_plus_button);
+        final TextView textView_number = findViewById(R.id.ActivityBook_seats_value_tv);
 
         increase.setOnClickListener(new View.OnClickListener() {
             @Override

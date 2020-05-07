@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     private ArrayList<TripModel> resultList = new ArrayList<>();
     private boolean destFromDone = false;
     private boolean destToDone = false;
+    private ImageView notFoundImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +57,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         swapButton = findViewById(R.id.ActivitySearchResults_swap_button);
         backButton = findViewById(R.id.ActivitySearchResults_close_button);
         searchResultsCount = findViewById(R.id.ActivitySearchResults_results_label);
-
+        notFoundImage = findViewById(R.id.ActivitySearchResults_not_found_image);
 
         //Get the Start-End DestinationModels
         final Intent intent = getIntent();
@@ -241,6 +243,11 @@ public class SearchResultsActivity extends AppCompatActivity {
                             null, null, null, null, new SearchTripsCallback() {
                                 @Override
                                 public void onSuccess(ArrayList<TripModel> trips) {
+                                    if(trips.size()==0)
+                                        notFoundImage.setVisibility(View.VISIBLE);
+                                    else
+                                        notFoundImage.setVisibility(View.GONE);
+
                                     resultList = trips;
                                     mRecyclerView = findViewById(R.id.ActivitySearchResults_recycler_view);
                                     mRecyclerView.setHasFixedSize(true);

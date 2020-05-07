@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -70,13 +71,14 @@ public class SearchDetailsActivity extends AppCompatActivity {
         textViewReviews.setText(String.valueOf(tripModel.getCreatorUser().getReviews()));
 
         ArrayList<PassengerModel> passengersList = new ArrayList<>();
-        UserBaseModel userBaseModel = new UserBaseModel(1, "Tyler",   "Joseph", 4.7, 34, "default" );
-        PassengerModel passengerModel = new PassengerModel(userBaseModel, 3, true);
-        passengersList.add(passengerModel);
-        passengersList.add(passengerModel);
-        passengersList.add(passengerModel);
-        passengersList.add(passengerModel);
+//        UserBaseModel userBaseModel = new UserBaseModel(1, "Tyler",   "Joseph", 4.7, 34, "default" );
+//        PassengerModel passengerModel = new PassengerModel(userBaseModel, 3, true);
+//        passengersList.add(passengerModel);
+//        passengersList.add(passengerModel);
+//        passengersList.add(passengerModel);
+//        passengersList.add(passengerModel);
 
+        passengersList.addAll(tripModel.getPassengers());
         mRecyclerView = findViewById(R.id.ActivitySearchDetails_passenger_recycler_view);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mAdapter = new PassengerImageAdapter(passengersList);
@@ -104,6 +106,7 @@ public class SearchDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent mainIntent = new Intent(SearchDetailsActivity.this, BookActivity.class);
+                mainIntent.putExtra("trip", tripModel);
                 startActivity(mainIntent);
             }
         });
