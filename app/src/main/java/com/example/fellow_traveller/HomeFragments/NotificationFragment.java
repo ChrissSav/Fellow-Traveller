@@ -67,12 +67,12 @@ public class NotificationFragment extends Fragment {
         retrofitService = retrofit.create(RetrofitService.class);*/
         notificationList = new ArrayList<>();
         NotificationItem notificationItem = new NotificationItem();
-       // notificationItem.setUser(new UserBaseModel("Φωτης", "Πεχλιβανης"));
+        notificationItem.setUser(new UserBaseModel(0,"Φωτης", "Πεχλιβανης",0,0,""));
         notificationItem.setStatus("read");
         notificationList.add(notificationItem);
         notificationItem = new NotificationItem();
         notificationItem.setStatus("notread");
-        //notificationItem.setUser(new UserBaseModel("Σπυρος", "Ραντογλου"));
+        notificationItem.setUser(new UserBaseModel(1,"Σπυρος", "Ραντογλου",0,0,""));
         notificationList.add(notificationItem);
         buildRecyclerView();
     }

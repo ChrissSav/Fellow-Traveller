@@ -1,7 +1,9 @@
 package com.example.fellow_traveller.NewOffer;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -24,10 +26,6 @@ import com.example.fellow_traveller.PlacesAPI.Models.ResultModel;
 import com.example.fellow_traveller.PlacesAPI.PlaceApiConnection;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.SuccessActivity;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.HashMap;
 
 import static com.example.fellow_traveller.Util.SomeMethods.dateTimeToTimestamp;
 
@@ -47,10 +45,11 @@ public class NewOfferActivity extends AppCompatActivity {
     private TextView textViewTitleStage6;
     private ProgressBar progressBar;
     private int num_num;
-    private DatabaseReference userDatabase;
 
     private GlobalClass globalClass;
 
+    private Boolean detailFrom = false;
+    private Boolean detailTo = false;
 
     private DestinationModel destinationModelFrom;
     private DestinationModel destinationModelTo;
@@ -129,7 +128,7 @@ public class NewOfferActivity extends AppCompatActivity {
                 } else if (fra.toString().equals("NewOfferStage6Fragment")) {
                     getDestinationsModel(newOfferStage1Fragment.getDestFromModel().getPlaceId(),
                             newOfferStage1Fragment.getDestToModel().getPlaceId());
-                   // tripRegister();
+                    // tripRegister();
                 }
 
             }
@@ -211,91 +210,95 @@ public class NewOfferActivity extends AppCompatActivity {
 
 
     public void tripRegister() {
-        //String dest_from = newOfferStage1Fragment.getDestFrom();
-       // String dest_to = newOfferStage1Fragment.getDestTo();
-
-        String date = newOfferStage2Fragment.getDate();
-        String time = newOfferStage2Fragment.getTime();
-        Boolean pet = newOfferStage3Fragment.getPetsBoolean();
-        int max_seats = Integer.parseInt(newOfferStage3Fragment.getSeats());
-
-
-        int max_bags = Integer.parseInt(newOfferStage3Fragment.getBags());
-        int car_id = newOfferStage3Fragment.getCarObject().getId();
-
-        Float price = Float.parseFloat(newOfferStage4Fragment.getPrice());
-        String msg = newOfferStage5Fragment.getMsg();
-
-        // Create trip object from model
-        CreateTripModel trip = new CreateTripModel(destinationModelFrom, destinationModelTo, dateTimeToTimestamp(date, time),
-                pet, max_seats, max_bags,
-                msg, price, car_id);
-
-        new FellowTravellerAPI(globalClass).createTrip(trip, new TripRegisterCallBack() {
+        AsyncTask<Void, Void, Boolean> task = new AsyncTask<Void, Void, Boolean>() {
             @Override
-            public void onSuccess(StatusHandleModel status) {
-                Intent intent = new Intent(NewOfferActivity.this, SuccessActivity.class);
-                intent.putExtra("title", getResources().getString(R.string.success_add));
-                createConversationForTrip();
-                startActivity(intent);
-                finish();
+            protected Boolean doInBackground(Void... voids) {
+                while (!(detailTo && detailFrom)) {
+
+                }
+                if (destinationModelFrom.getTitle() == null && destinationModelTo.getTitle() == null)
+                    return false;
+                return true;
             }
 
             @Override
-            public void onFailure(String errorMsg) {
-                Toast.makeText(NewOfferActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+            protected void onPostExecute(Boolean aVoid) {
+                if (aVoid) {
+                    String date = newOfferStage2Fragment.getDate();
+                    String time = newOfferStage2Fragment.getTime();
+                    Boolean pet = newOfferStage3Fragment.getPetsBoolean();
+                    int max_seats = Integer.parseInt(newOfferStage3Fragment.getSeats());
 
+
+                    int max_bags = Integer.parseInt(newOfferStage3Fragment.getBags());
+                    int car_id = newOfferStage3Fragment.getCarObject().getId();
+
+                    Float price = Float.parseFloat(newOfferStage4Fragment.getPrice());
+                    String msg = newOfferStage5Fragment.getMsg();
+
+                    CreateTripModel trip = new CreateTripModel(destinationModelFrom, destinationModelTo, dateTimeToTimestamp(date, time),
+                            pet, max_seats, max_bags,
+                            msg, price, car_id);
+
+                    new FellowTravellerAPI(globalClass).createTrip(trip, new TripRegisterCallBack() {
+                        @Override
+                        public void onSuccess(StatusHandleModel status) {
+                            Intent intent = new Intent(NewOfferActivity.this, SuccessActivity.class);
+                            intent.putExtra("title", getResources().getString(R.string.success_add));
+                            startActivity(intent);
+                            finish();
+                        }
+
+                        @Override
+                        public void onFailure(String errorMsg) {
+                            Toast.makeText(NewOfferActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                } else {
+                    Toast.makeText(NewOfferActivity.this, "Υπάρχει κάποιο πρόβλημα επικοινωνίας", Toast.LENGTH_SHORT).show();
+                }
+                super.onPostExecute(aVoid);
             }
-        });
+        };
+
+        task.execute();
 
     }
 
-    private void createConversationForTrip() {  {
-
-//            userDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
-//            HashMap<String, String> userMap = new HashMap<>();
-
-//            userMap.put("name", name);
-//            userMap.put("surname", surname);
-//            userMap.put("image", "default");
-
-//            userDatabase.setValue(userMap);
-//
-        }
-    }
-
-    public void getDestinationsModel(final String placeIdFrom,final String  placeIdTo) {
+    public void getDestinationsModel(final String placeIdFrom, final String placeIdTo) {
         new PlaceApiConnection(globalClass, true).getLatLonFromPlace(placeIdFrom, new PlaceApiResultCallBack() {
             @Override
             public void onSuccess(ResultModel resultModel) {
-                destinationModelFrom = new DestinationModel(resultModel.getPlaceΙd(),newOfferStage1Fragment.getDestFrom()
+                destinationModelFrom = new DestinationModel(resultModel.getPlaceΙd(), newOfferStage1Fragment.getDestFrom()
                         , resultModel.getGeometry().getLocation().getLatitude(), resultModel.getGeometry().getLocation().getLongitude());
-
-                new PlaceApiConnection(globalClass, true).getLatLonFromPlace(placeIdTo, new PlaceApiResultCallBack() {
-                    @Override
-                    public void onSuccess(ResultModel resultModel) {
-                        destinationModelTo = new DestinationModel(resultModel.getPlaceΙd(), newOfferStage1Fragment.getDestTo()
-                                , resultModel.getGeometry().getLocation().getLatitude(), resultModel.getGeometry().getLocation().getLongitude());
-
-                        tripRegister();
-
-                    }
-
-                    @Override
-                    public void onFailure(String errorMsg) {
-                        Toast.makeText(NewOfferActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
-
-                    }
-                });
+                detailFrom = true;
 
             }
 
             @Override
             public void onFailure(String errorMsg) {
                 Toast.makeText(NewOfferActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
-
+                detailFrom = true;
             }
         });
+
+        new PlaceApiConnection(globalClass, true).getLatLonFromPlace(placeIdTo, new PlaceApiResultCallBack() {
+            @Override
+            public void onSuccess(ResultModel resultModel) {
+                destinationModelTo = new DestinationModel(resultModel.getPlaceΙd(), newOfferStage1Fragment.getDestTo()
+                        , resultModel.getGeometry().getLocation().getLatitude(), resultModel.getGeometry().getLocation().getLongitude());
+                detailTo = true;
+
+            }
+
+            @Override
+            public void onFailure(String errorMsg) {
+                Toast.makeText(NewOfferActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+                detailTo = true;
+            }
+        });
+        tripRegister();
     }
 
 }
