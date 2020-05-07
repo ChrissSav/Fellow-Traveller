@@ -161,8 +161,8 @@ public class BookActivity extends AppCompatActivity {
                         Toast.makeText(BookActivity.this, "Success", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(BookActivity.this, SuccessActivity.class);
                         intent.putExtra("title", getResources().getString(R.string.success_search));
-                        assignPassengerToTripConversation();
-                        assignTripToPassengersConversation();
+                        //assignPassengerToTripConversation();
+                        //assignTripToPassengersConversation();
                         startActivity(intent);
                         finish();
 
