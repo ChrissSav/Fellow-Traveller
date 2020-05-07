@@ -24,6 +24,10 @@ import com.example.fellow_traveller.PlacesAPI.Models.ResultModel;
 import com.example.fellow_traveller.PlacesAPI.PlaceApiConnection;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.SuccessActivity;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 import static com.example.fellow_traveller.Util.SomeMethods.dateTimeToTimestamp;
 
@@ -43,6 +47,7 @@ public class NewOfferActivity extends AppCompatActivity {
     private TextView textViewTitleStage6;
     private ProgressBar progressBar;
     private int num_num;
+    private DatabaseReference userDatabase;
 
     private GlobalClass globalClass;
 
@@ -231,6 +236,7 @@ public class NewOfferActivity extends AppCompatActivity {
             public void onSuccess(StatusHandleModel status) {
                 Intent intent = new Intent(NewOfferActivity.this, SuccessActivity.class);
                 intent.putExtra("title", getResources().getString(R.string.success_add));
+                createConversationForTrip();
                 startActivity(intent);
                 finish();
             }
@@ -242,6 +248,20 @@ public class NewOfferActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void createConversationForTrip() {  {
+
+//            userDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(id);
+//            HashMap<String, String> userMap = new HashMap<>();
+
+//            userMap.put("name", name);
+//            userMap.put("surname", surname);
+//            userMap.put("image", "default");
+
+//            userDatabase.setValue(userMap);
+//
+        }
     }
 
     public void getDestinationsModel(final String placeIdFrom,final String  placeIdTo) {

@@ -29,11 +29,14 @@ import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.NewOffer.NewOfferActivity;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.SuccessActivity;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 public class BookActivity extends AppCompatActivity {
     private ArrayList<PaymentItem> paymentMethodsList;
@@ -48,6 +51,7 @@ public class BookActivity extends AppCompatActivity {
     private TripModel tripModel;
     private Button nextButton;
     private GlobalClass globalClass;
+    private DatabaseReference tripsDatabase, tripsAndParticipantsDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,6 +159,12 @@ public class BookActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(String status) {
                         Toast.makeText(BookActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(BookActivity.this, SuccessActivity.class);
+                        intent.putExtra("title", getResources().getString(R.string.success_search));
+                        assignPassengerToTripConversation();
+                        assignTripToPassengersConversation();
+                        startActivity(intent);
+                        finish();
 
                     }
 
@@ -169,6 +179,29 @@ public class BookActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void assignTripToPassengersConversation() {
+        tripsAndParticipantsDatabase = FirebaseDatabase.getInstance().getReference().child("TripsAndParticipants").child(String.valueOf(tripModel.getId())).child(String.valueOf(globalClass.getCurrentUser().getId()));
+
+        HashMap<String, Object> tripsAndParticipantsMap = new HashMap<>();
+        tripsAndParticipantsMap.put("userId",  globalClass.getCurrentUser().getId());
+
+        tripsAndParticipantsDatabase.setValue(tripsAndParticipantsMap);
+    }
+
+    private void assignPassengerToTripConversation() {
+            tripsDatabase = FirebaseDatabase.getInstance().getReference().child("Trips").child(String.valueOf(globalClass.getCurrentUser().getId())).child(String.valueOf(tripModel.getId()));
+
+            HashMap<String, Object> tripsMap = new HashMap<>();
+            tripsMap.put("date", System.currentTimeMillis() / 1000);
+            tripsMap.put("seen", true);
+            tripsMap.put("tripId", tripModel.getId());
+            tripsMap.put("tripName", tripModel.getDestFrom().getTitle() + " - " + tripModel.getDestTo().getTitle());
+
+
+            tripsDatabase.setValue(tripsMap);
+
     }
 
     private void getUserBags() {
