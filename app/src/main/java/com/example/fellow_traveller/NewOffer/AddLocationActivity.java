@@ -67,25 +67,7 @@ public class AddLocationActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_SEARCH) {
-                    if (!editText.getText().toString().trim().isEmpty()) {
-//                        Intent resultIntent = new Intent();
-//                        resultIntent.putExtra("result", editText.getText().toString());
-//                        setResult(RESULT_OK, resultIntent);
-//                        finish();
 
-                    } else {
-                        editText.setError("Δεν έχετε επιλέξει την αφετηρία σας");
-                    }
-                    return true;
-                }
-
-                return false;
-            }
-        });
 
     }
 
@@ -99,15 +81,12 @@ public class AddLocationActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new PlaceAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                // SetNotificationsRead(mExampleList.get(position).getId(),position);
                 editText.setText(places_list.get(position).getDescription());
                 Intent resultIntent = new Intent();
-               // resultIntent.putExtra("result", editText.getText().toString());
+                places_list.get(position).setDescription(places_list.get(position).getDescription().split(", Ελλάδα")[0]);
                 resultIntent.putExtra("resultPredictionsModel", places_list.get(position));
                 setResult(RESULT_OK, resultIntent);
-                finish();
-
-
+                finish();οχ
             }
         });
     }
