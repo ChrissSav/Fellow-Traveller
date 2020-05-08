@@ -8,27 +8,36 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.fellow_traveller.ClientAPI.Callbacks.ReviewModelCallBack;
+import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
+import com.example.fellow_traveller.ClientAPI.Models.ReviewModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserBaseModel;
+import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.Reviews.ReviewsActivity;
-import com.example.fellow_traveller.SearchAndBook.Search2Activity;
-import com.example.fellow_traveller.SearchAndBook.SearchActivity;
-import com.example.fellow_traveller.SearchAndBook.SearchPassengersActivity;
+
+
+import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity {
     private UserBaseModel userBaseModel;
-    private TextView userNameTextView, ratingTextView, reviewsTextView;
+    private TextView userNameTextView, ratingTextView, reviewsTextView, aboutMeTextView;
     private Button seeAllReviewsButton;
     private ImageButton closeButton;
+    private GlobalClass globalClass;
+    private ArrayList<ReviewModel> reviewsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        globalClass = (GlobalClass) getApplicationContext();
 
         userNameTextView = findViewById(R.id.ActivityProfile_user_name);
         ratingTextView = findViewById(R.id.ActivityProfile_rate);
         reviewsTextView = findViewById(R.id.ActivityProfile_reviews);
+        aboutMeTextView = findViewById(R.id.ActivityProfile_about_me_info);
         seeAllReviewsButton = findViewById(R.id.ActivityProfile_more_reviews_button);
         closeButton = findViewById(R.id.ActivityProfile_close_button);
 
@@ -38,6 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
         userNameTextView.setText(userBaseModel.getFullName());
         ratingTextView.setText(String.valueOf(userBaseModel.getRate()));
         reviewsTextView.setText(String.valueOf(userBaseModel.getReviews()));
+        aboutMeTextView.setText(userBaseModel.getAboutMe());
 
 
         seeAllReviewsButton.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +62,20 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
               finish();
+            }
+        });
+
+        new FellowTravellerAPI(globalClass).getUserReviews(userBaseModel.getId(), new ReviewModelCallBack() {
+            @Override
+            public void onSuccess(ArrayList<ReviewModel> reviews) {
+                reviewsList = reviews;
+          
+
+            }
+
+            @Override
+            public void onFailure(String errorMsg) {
+
             }
         });
 
