@@ -5,8 +5,8 @@ import android.os.Parcelable;
 
 public class FilterModel implements Parcelable {
 
-    private Long timestampMin;
-    private Long timestampMax;
+    private Integer timestampMin;
+    private Integer timestampMax;
     private Integer seatsMin;
     private Integer seatsMax;
     private Integer bagsMin;
@@ -16,7 +16,7 @@ public class FilterModel implements Parcelable {
     private Boolean havePet;
     private Integer range;
 
-    public FilterModel(Long timestampMin, Long timestampMax, Integer seatsMin, Integer seatsMax, Integer bagsMin, Integer bagsMax, Integer priceMin, Integer priceMax, Boolean havePet, Integer range) {
+    public FilterModel(Integer timestampMin, Integer timestampMax, Integer seatsMin, Integer seatsMax, Integer bagsMin, Integer bagsMax, Integer priceMin, Integer priceMax, Boolean havePet, Integer range) {
         this.timestampMin = timestampMin;
         this.timestampMax = timestampMax;
         this.seatsMin = seatsMin;
@@ -46,12 +46,12 @@ public class FilterModel implements Parcelable {
         if (in.readByte() == 0) {
             timestampMin = null;
         } else {
-            timestampMin = in.readLong();
+            timestampMin = in.readInt();
         }
         if (in.readByte() == 0) {
             timestampMax = null;
         } else {
-            timestampMax = in.readLong();
+            timestampMax = in.readInt();
         }
         if (in.readByte() == 0) {
             seatsMin = null;
@@ -104,19 +104,19 @@ public class FilterModel implements Parcelable {
         }
     };
 
-    public Long getTimestampMin() {
+    public Integer getTimestampMin() {
         return timestampMin;
     }
 
-    public void setTimestampMin(Long timestampMin) {
+    public void setTimestampMin(Integer timestampMin) {
         this.timestampMin = timestampMin;
     }
 
-    public Long getTimestampMax() {
+    public Integer getTimestampMax() {
         return timestampMax;
     }
 
-    public void setTimestampMax(Long timestampMax) {
+    public void setTimestampMax(Integer timestampMax) {
         this.timestampMax = timestampMax;
     }
 

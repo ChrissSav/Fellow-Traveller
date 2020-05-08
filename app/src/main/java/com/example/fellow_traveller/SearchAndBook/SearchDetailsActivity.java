@@ -99,7 +99,7 @@ public class SearchDetailsActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);
-        
+
 
         imageButtonBack.setOnClickListener(new View.OnClickListener() {
             @Override
