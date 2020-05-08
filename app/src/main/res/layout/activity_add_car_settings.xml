@@ -87,6 +87,24 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/car_image_car_settings"
                 app:layout_constraintTop_toTopOf="@+id/car_image_car_settings"
+
+                />
+            <Spinner
+                android:id="@+id/cars_spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/car_image_car_settings"
+                app:layout_constraintEnd_toEndOf="@id/car_underline_car_settings"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/car_image_car_settings"
+                app:layout_constraintTop_toTopOf="@+id/car_image_car_settings"
+                android:entries="@array/car_brands"
+                android:overlapAnchor="false"
+                android:dropDownWidth="match_parent"
+                android:background="@null"
+                android:spinnerMode="dropdown"
+                android:visibility="gone"
                 />
 
             <View
@@ -110,7 +128,9 @@
                 android:backgroundTint="@color/black_color"
                 app:layout_constraintBottom_toBottomOf="@id/car_image_car_settings"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/car_image_car_settings" />
+                app:layout_constraintTop_toTopOf="@id/car_image_car_settings"
+                android:visibility="gone"
+                />
 
 
             <TextView
@@ -164,7 +184,25 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/AddCarSettingsActivity_EditText_brand"
-                app:layout_constraintTop_toTopOf="@+id/model_image_car_settings" />
+                app:layout_constraintTop_toTopOf="@+id/model_image_car_settings"
+                />
+            <Spinner
+                android:id="@+id/models_spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/model_image_car_settings"
+                app:layout_constraintEnd_toEndOf="@+id/AddCarSettingsActivity_EditText_brand"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/AddCarSettingsActivity_EditText_brand"
+                app:layout_constraintTop_toTopOf="@+id/model_image_car_settings"
+                android:entries="@array/car_brands"
+                android:overlapAnchor="false"
+                android:dropDownWidth="match_parent"
+                android:background="@null"
+                android:spinnerMode="dropdown"
+                android:visibility="gone"
+                />
 
             <ImageButton
                 android:id="@+id/clear_model_car_settings"
@@ -175,7 +213,8 @@
                 android:backgroundTint="@color/black_color"
                 app:layout_constraintBottom_toBottomOf="@id/model_image_car_settings"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/model_image_car_settings" />
+                app:layout_constraintTop_toTopOf="@id/model_image_car_settings"
+                android:visibility="gone"/>
 
 
             <TextView
@@ -243,6 +282,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/plate_image_car_settings"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@id/plate_image_car_settings"
+                android:visibility="gone"
                 />
 
 
@@ -308,7 +348,9 @@
                 android:backgroundTint="@color/black_color"
                 app:layout_constraintBottom_toBottomOf="@id/color_image_car_settings"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/color_image_car_settings" />
+                app:layout_constraintTop_toTopOf="@id/color_image_car_settings"
+                android:visibility="gone"
+                />
 
             <Button
                 android:id="@+id/EditCarSettingsActivity_button_add"

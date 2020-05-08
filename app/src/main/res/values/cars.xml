@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="car_brands">
+        <item>Audi</item>
+        <item>Alfa Romeo</item>
+        <item>Koutsarigias</item>
+        <item>Lamborghini</item>
+        <item>Ferrari</item>
+        <item>Fiat</item>
+        <item>Lerer</item>
+        <item>BMW</item>
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+        <item>Large</item>
+        <item>Large</item>
+        <item>Large</item>
+        <item>Aston</item>
+        <item>Large</item>
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+        <item>Large</item>
+        <item>Large</item>
+        <item>Large</item>
+        <item>Aston</item>
+        <item>Large</item>
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+        <item>Large</item>
+        <item>Large</item>
+        <item>Large</item>
+        <item>Aston</item>
+        <item>Large</item>
+    </string-array>
+
+    <string-array name="audi">
+        <item>R8</item>
+        <item>TT</item>
+    </string-array>
+    <string-array name="alfa_romeo">
+        <item>Guilietta</item>
+        <item>6C</item>
+    </string-array>
+
+</resources>

@@ -21,7 +21,6 @@ import com.example.fellow_traveller.ClientAPI.Models.LatLongModel;
 import com.example.fellow_traveller.ClientAPI.Models.SearchDestinationsModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.Models.GlobalClass;
-import com.example.fellow_traveller.NewOffer.NewOfferActivity;
 import com.example.fellow_traveller.PlacesAPI.CallBack.PlaceApiResultCallBack;
 import com.example.fellow_traveller.PlacesAPI.Models.ResultModel;
 import com.example.fellow_traveller.PlacesAPI.PlaceApiConnection;

@@ -26,7 +26,7 @@ import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserBaseModel;
 import com.example.fellow_traveller.Models.GlobalClass;
-import com.example.fellow_traveller.NewOffer.NewOfferActivity;
+
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.SuccessActivity;
 import com.google.firebase.database.DatabaseReference;
@@ -161,8 +161,11 @@ public class BookActivity extends AppCompatActivity {
                         Toast.makeText(BookActivity.this, "Success", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(BookActivity.this, SuccessActivity.class);
                         intent.putExtra("title", getResources().getString(R.string.success_search));
-                        //assignPassengerToTripConversation();
-                        //assignTripToPassengersConversation();
+                        assignPassengerToTripConversation();
+                        assignTripToPassengersConversation();
+
+                        assignTripToCreatorConversation();
+                        assignCreatorToTripConversation();
                         startActivity(intent);
                         finish();
 
@@ -189,6 +192,15 @@ public class BookActivity extends AppCompatActivity {
 
         tripsAndParticipantsDatabase.setValue(tripsAndParticipantsMap);
     }
+    private void assignTripToCreatorConversation() {
+        tripsAndParticipantsDatabase = FirebaseDatabase.getInstance().getReference().child("TripsAndParticipants").child(String.valueOf(tripModel.getId())).child(String.valueOf(tripModel.getCreatorUser().getId()));
+
+        HashMap<String, Object> tripsAndParticipantsMap = new HashMap<>();
+        tripsAndParticipantsMap.put("userId",  globalClass.getCurrentUser().getId());
+
+        tripsAndParticipantsDatabase.setValue(tripsAndParticipantsMap);
+    }
+
 
     private void assignPassengerToTripConversation() {
             tripsDatabase = FirebaseDatabase.getInstance().getReference().child("Trips").child(String.valueOf(globalClass.getCurrentUser().getId())).child(String.valueOf(tripModel.getId()));
@@ -201,6 +213,19 @@ public class BookActivity extends AppCompatActivity {
 
 
             tripsDatabase.setValue(tripsMap);
+
+    }
+    private void assignCreatorToTripConversation() {
+        tripsDatabase = FirebaseDatabase.getInstance().getReference().child("Trips").child(String.valueOf(tripModel.getCreatorUser().getId())).child(String.valueOf(tripModel.getId()));
+
+        HashMap<String, Object> tripsMap = new HashMap<>();
+        tripsMap.put("date", System.currentTimeMillis() / 1000);
+        tripsMap.put("seen", true);
+        tripsMap.put("tripId", tripModel.getId());
+        tripsMap.put("tripName", tripModel.getDestFrom().getTitle() + " - " + tripModel.getDestTo().getTitle());
+
+
+        tripsDatabase.setValue(tripsMap);
 
     }
 
