@@ -1,5 +1,6 @@
 package com.example.fellow_traveller.SearchAndBook;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,8 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.fellow_traveller.ClientAPI.Models.PassengerModel;
@@ -25,21 +28,22 @@ public class SearchDetailsActivity extends AppCompatActivity {
     private PassengerImageAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private TextView textViewCreator, textViewRating, textViewReviews, textViewDestFrom, textViewDestTo, textViewDate,
-                        textViewTime, textViewSeats, textViewBags, textViewPets, textViewCar, textViewMsg,textViewPrice;
+            textViewTime, textViewSeats, textViewBags, textViewPets, textViewCar, textViewMsg, textViewPrice;
     private Button passengersButton;
     private TripModel tripModel;
+    private ImageButton imageButtonBack;
     private GlobalClass globalClass;
+    private ArrayList<PassengerModel> passengersList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_details);
         globalClass = (GlobalClass) getApplicationContext();
-
         tripModel = getIntent().getParcelableExtra("trip");
 
         bookButton = findViewById(R.id.ActivitySearchDetails_book_button);
-
+        imageButtonBack = findViewById(R.id.ActivitySearchDetails_back_button);
 
         textViewCreator = findViewById(R.id.ActivitySearchDetails_user_name);
         textViewRating = findViewById(R.id.ActivitySearchDetails_rating_tv);
@@ -56,6 +60,7 @@ public class SearchDetailsActivity extends AppCompatActivity {
         textViewMsg = findViewById(R.id.ActivitySearchDetails_driver_message_tv);
         passengersButton = findViewById(R.id.ActivitySearchDetails_more_passengers_button);
 
+
         textViewDestFrom.setText(tripModel.getDestFrom().getTitle());
         textViewDestTo.setText(tripModel.getDestTo().getTitle());
         textViewDate.setText(tripModel.getDate());
@@ -64,13 +69,14 @@ public class SearchDetailsActivity extends AppCompatActivity {
         textViewBags.setText(tripModel.getBagsStatus());
         textViewPets.setText(tripModel.getPetString());
         textViewCar.setText(tripModel.getCar().getBrand());
-        //textViewMsg.setText(tripModel.getMsg());
-        textViewPrice.setText(tripModel.getPrice()+getResources().getString(R.string.euro_symbol));
+        textViewMsg.setText(tripModel.getMessage());
+        textViewPrice.setText(tripModel.getPrice() + getResources().getString(R.string.euro_symbol));
         textViewCreator.setText(tripModel.getCreatorUser().getFullName());
         textViewRating.setText(String.valueOf(tripModel.getCreatorUser().getRate()));
         textViewReviews.setText(String.valueOf(tripModel.getCreatorUser().getReviews()));
+        passengersList = tripModel.getPassengers();
 
-        ArrayList<PassengerModel> passengersList = new ArrayList<>();
+
 //        UserBaseModel userBaseModel = new UserBaseModel(1, "Tyler",   "Joseph", 4.7, 34, "default" );
 //        PassengerModel passengerModel = new PassengerModel(userBaseModel, 3, true);
 //        passengersList.add(passengerModel);
@@ -78,7 +84,14 @@ public class SearchDetailsActivity extends AppCompatActivity {
 //        passengersList.add(passengerModel);
 //        passengersList.add(passengerModel);
 
-        passengersList.addAll(tripModel.getPassengers());
+        try{
+            Log.i("passengersList",passengersList.size()+"  |   "+tripModel.getPassengers().size());
+
+        }catch (Exception e ){
+            Log.i("passengersList",e.toString());
+
+        }
+
         mRecyclerView = findViewById(R.id.ActivitySearchDetails_passenger_recycler_view);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mAdapter = new PassengerImageAdapter(passengersList);
@@ -86,12 +99,12 @@ public class SearchDetailsActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);
 
-
-
-
-
-
-
+        imageButtonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
 
         passengersButton.setOnClickListener(new View.OnClickListener() {
@@ -111,4 +124,24 @@ public class SearchDetailsActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -243,15 +243,14 @@
                 android:id="@+id/ActivitySearchResults_results_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Βρέθηκαν 4 ταξίδια"
                 android:textSize="20sp"
                 android:fontFamily="@font/firasans_bold"
                 android:textColor="@color/black_color"
                 android:layout_marginTop="10dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginLeft="20dp"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
+            <!--android:text="Βρέθηκαν 4 ταξίδια"-->
 
 
             <androidx.recyclerview.widget.RecyclerView

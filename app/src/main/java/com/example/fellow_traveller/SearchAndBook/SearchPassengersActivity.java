@@ -31,7 +31,7 @@ public class SearchPassengersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_passengers);
 
         final ArrayList<PassengerModel> passengersList = new ArrayList<>();
-        UserBaseModel userBaseModel = new UserBaseModel(1, "Tyler",   "Joseph", 4.7, 34, "default" );
+        UserBaseModel userBaseModel = new UserBaseModel(1, "Tyler", "Joseph", 4.7, 34, "default");
         PassengerModel passengerModel = new PassengerModel(userBaseModel, 3, true);
         passengersList.add(passengerModel);
         passengersList.add(passengerModel);
@@ -53,11 +53,10 @@ public class SearchPassengersActivity extends AppCompatActivity {
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mainIntent = new Intent(SearchPassengersActivity.this, SearchDetailsActivity.class);
-                startActivity(mainIntent);
-                finish();
+                onBackPressed();
             }
         });
+
         mAdapter.setOnItemClickListener(new PassengersAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -72,9 +71,7 @@ public class SearchPassengersActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        Intent mainIntent = new Intent(SearchPassengersActivity.this, SearchDetailsActivity.class);
-        startActivity(mainIntent);
         finish();
+        super.onBackPressed();
     }
 }

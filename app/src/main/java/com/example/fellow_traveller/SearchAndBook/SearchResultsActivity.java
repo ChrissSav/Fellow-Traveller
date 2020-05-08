@@ -262,6 +262,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                                         public void onItemClick(int position) {
                                             Intent mainIntent = new Intent(SearchResultsActivity.this, SearchDetailsActivity.class);
                                             mainIntent.putExtra("trip", resultList.get(position));
+                                            mainIntent.putExtra("example", "resultList.get(position)");
                                             startActivity(mainIntent);
                                         }
                                     });

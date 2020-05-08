@@ -91,104 +91,114 @@
         android:textSize="24sp"
         android:textColor="@color/orange_color"
         />
+
     <TextView
         android:id="@+id/from_tv_search"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Από"
-        android:fontFamily="@font/firasans_light"
-        app:layout_constraintStart_toStartOf="@id/profile_search_item"
-        app:layout_constraintTop_toBottomOf="@id/profile_search_item"
-        android:layout_marginTop="30dp"
-        android:textSize="16sp"
-        android:textColor="@color/black_color"
         android:layout_marginStart="5dp"
-        />
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="4dp"
+        android:fontFamily="@font/firasans_light"
+        android:text="Από"
+        android:textColor="@color/black_color"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@id/profile_search_item"
+        app:layout_constraintTop_toBottomOf="@id/profile_search_item" />
+
     <TextView
         android:id="@+id/from_search_item"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Αθήνα"
-        app:layout_constraintStart_toStartOf="@id/from_tv_search"
-        app:layout_constraintTop_toBottomOf="@id/from_tv_search"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/firasans_bold"
-        android:textSize="18sp"
+        android:text="Αθήνα"
         android:textColor="@color/black_color"
-        />
+        android:textSize="18sp"
+        android:maxLines="2"
+        app:layout_constraintEnd_toEndOf="@+id/from_tv_search"
+        app:layout_constraintStart_toStartOf="@id/from_tv_search"
+        app:layout_constraintTop_toBottomOf="@id/from_tv_search" />
+
     <TextView
         android:id="@+id/to_tv_search"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Προς"
-        android:fontFamily="@font/firasans_light"
-        app:layout_constraintTop_toTopOf="@id/from_tv_search"
-        app:layout_constraintBottom_toBottomOf="@id/from_tv_search"
-        app:layout_constraintStart_toEndOf="@id/dot_image_search"
-        android:textSize="16sp"
-        android:textColor="@color/black_color"
         android:layout_marginStart="40dp"
-        />
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/firasans_light"
+        android:text="Προς"
+        android:textColor="@color/black_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/from_tv_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/dot_image_search"
+        app:layout_constraintTop_toTopOf="@id/from_tv_search" />
+
     <TextView
         android:id="@+id/to_search_item"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Θεσσαλονίκη"
-        app:layout_constraintStart_toStartOf="@id/to_tv_search"
-        app:layout_constraintTop_toBottomOf="@id/to_tv_search"
-        android:layout_marginTop="5dp"
         android:fontFamily="@font/firasans_bold"
-        android:textSize="18sp"
+        android:text="Θεσσαλονίκη"
         android:textColor="@color/black_color"
-        />
+        android:textSize="18sp"
+        android:maxLines="2"
+        app:layout_constraintEnd_toEndOf="@+id/to_tv_search"
+        app:layout_constraintStart_toStartOf="@id/to_tv_search"
+        app:layout_constraintTop_toTopOf="@+id/from_search_item" />
+
     <TextView
         android:id="@+id/date_tv_search"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Ημερομηνία"
-        android:fontFamily="@font/firasans_light"
-        app:layout_constraintStart_toStartOf="@id/from_tv_search"
-        app:layout_constraintTop_toBottomOf="@id/from_search_item"
         android:layout_marginTop="15dp"
-        android:textSize="16sp"
+        android:fontFamily="@font/firasans_light"
+        android:text="Ημερομηνία"
         android:textColor="@color/black_color"
-        />
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/from_tv_search"
+        app:layout_constraintStart_toStartOf="@id/from_tv_search"
+        app:layout_constraintTop_toBottomOf="@id/from_search_item" />
+
     <TextView
         android:id="@+id/date_search_item"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="22 Φεβ. 2020"
-        app:layout_constraintStart_toStartOf="@id/from_tv_search"
-        app:layout_constraintTop_toBottomOf="@id/date_tv_search"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/firasans_bold"
-        android:textSize="18sp"
+        android:text="22 Φεβ. 2020"
         android:textColor="@color/black_color"
-        />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/from_tv_search"
+        app:layout_constraintStart_toStartOf="@id/from_tv_search"
+        app:layout_constraintTop_toBottomOf="@id/date_tv_search" />
+
     <TextView
         android:id="@+id/time_tv_search"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Ώρα"
         android:fontFamily="@font/firasans_light"
-        app:layout_constraintTop_toTopOf="@id/date_tv_search"
-        app:layout_constraintBottom_toBottomOf="@id/date_tv_search"
-        app:layout_constraintStart_toStartOf="@id/to_tv_search"
-        android:textSize="16sp"
+        android:text="Ώρα"
         android:textColor="@color/black_color"
-        />
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/date_tv_search"
+        app:layout_constraintEnd_toEndOf="@+id/to_tv_search"
+        app:layout_constraintStart_toStartOf="@id/to_tv_search"
+        app:layout_constraintTop_toTopOf="@+id/date_tv_search" />
+
     <TextView
         android:id="@+id/time_search_item"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="20:30"
-        app:layout_constraintStart_toStartOf="@id/time_tv_search"
-        app:layout_constraintTop_toBottomOf="@id/time_tv_search"
-        android:layout_marginTop="5dp"
         android:fontFamily="@font/firasans_bold"
-        android:textSize="18sp"
+        android:text="20:30"
         android:textColor="@color/black_color"
-        />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/time_tv_search"
+        app:layout_constraintStart_toStartOf="@id/time_tv_search"
+        app:layout_constraintTop_toTopOf="@+id/date_search_item" />
     <View
         android:id="@+id/ActivityProfile_about_me_underline"
         android:layout_width="0dp"
@@ -201,6 +211,13 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
