@@ -38,7 +38,7 @@ public class NotificationFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_notification, container, false);
-        LoadNotifications();
+        //LoadNotifications();
         return view;
     }
 
@@ -67,12 +67,12 @@ public class NotificationFragment extends Fragment {
         retrofitService = retrofit.create(RetrofitService.class);*/
         notificationList = new ArrayList<>();
         NotificationItem notificationItem = new NotificationItem();
-        notificationItem.setUser(new UserBaseModel(0,"Φωτης", "Πεχλιβανης",0,0,""));
+        //notificationItem.setUser(new UserBaseModel(0,"Φωτης", "Πεχλιβανης",0,0,""));
         notificationItem.setStatus("read");
         notificationList.add(notificationItem);
         notificationItem = new NotificationItem();
         notificationItem.setStatus("notread");
-        notificationItem.setUser(new UserBaseModel(1,"Σπυρος", "Ραντογλου",0,0,""));
+        //notificationItem.setUser(new UserBaseModel(1,"Σπυρος", "Ραντογλου",0,0,""));
         notificationList.add(notificationItem);
         buildRecyclerView();
     }

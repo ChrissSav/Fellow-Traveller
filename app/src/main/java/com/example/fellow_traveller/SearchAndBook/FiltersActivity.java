@@ -350,7 +350,6 @@ public class FiltersActivity extends AppCompatActivity {
 
 
         materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onPositiveButtonClick(Pair<Long, Long> selection) {
 
@@ -360,8 +359,8 @@ public class FiltersActivity extends AppCompatActivity {
                 //Parse the selections
                 startDateFinal = selection.first;
                 endDateFinal = selection.second;
-//                selectedFilters.setTimestampMin(Integer.valueOf(Math.toIntExact(startDateFinal)));
-//                selectedFilters.setTimestampMax(Integer.valueOf(Math.toIntExact(endDateFinal)));
+                selectedFilters.setTimestampMin(startDateFinal);
+                selectedFilters.setTimestampMax(endDateFinal);
                 Toast.makeText(FiltersActivity.this, "Start: " + startDateFinal + " End: " + endDateFinal, Toast.LENGTH_SHORT).show();
             }
         });
@@ -376,8 +375,8 @@ public class FiltersActivity extends AppCompatActivity {
                 startDateFinal = 0;
                 endDateFinal = 0;
 
-//                selectedFilters.setTimestampMin(null);
-//                selectedFilters.setTimestampMax(null);
+               selectedFilters.setTimestampMin(null);
+               selectedFilters.setTimestampMax(null);
                 //Reset selections
                 Pair setDefault = new Pair(null, null);
                 builder.setSelection(setDefault);
