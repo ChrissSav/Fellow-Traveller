@@ -43,13 +43,18 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String email = textInputLayout_email.getEditText().getText().toString();
                 String password = textInputLayout_password.getEditText().getText().toString();
-                if (isValidEmail(email)) {
-                    // TODO Fix error message on input field
-                    textInputLayout_email.setError(null);
-                    // TODO remove password error from here, this is an email field.
-                    textInputLayout_password.setError(null);
 
+
+                if (isValidEmail(email)) {
+                    textInputLayout_email.setError(null);
+                    textInputLayout_password.setError(null);
                     // Create user object from model
+
+
+                    if (password.length() < 8) {
+                        textInputLayout_password.setError(getResources().getString(R.string.ERROR_PASSWORD_COMPLEXITY_LENGTH));
+                        return;
+                    }
                     UserLoginModel user = new UserLoginModel(email, password);
 
                     // Authenticate user using ClientAPI
@@ -57,14 +62,10 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(UserAuthModel user) {
                             SaveClass(user);
-                            // TODO DEBUG LINE
-                            Log.d("Chriss","user "+ user.getSessionId());
                         }
 
                         @Override
                         public void onFailure(String errorMsg) {
-                            // TODO remove this debug line.
-                            Log.d("Authentication", "INVALID LOGIN");
                             Toast.makeText(LoginActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
                         }
                     });
