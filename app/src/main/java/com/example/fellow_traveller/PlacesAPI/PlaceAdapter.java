@@ -68,7 +68,8 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ExampleViewH
     @Override
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
         PredictionsModel currentItem = mExampleList.get(position);
-        holder.button.setText(currentItem.getDescription().split(", Ελλάδα")[0]);
+        currentItem.setDescription(currentItem.getDescription().split(", Ελλάδα")[0]);
+        holder.button.setText(currentItem.getDescription());
 
     }
 

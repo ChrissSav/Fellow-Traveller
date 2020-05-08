@@ -83,10 +83,9 @@ public class AddLocationActivity extends AppCompatActivity {
             public void onItemClick(int position) {
                 editText.setText(places_list.get(position).getDescription());
                 Intent resultIntent = new Intent();
-                places_list.get(position).setDescription(places_list.get(position).getDescription().split(", Ελλάδα")[0]);
                 resultIntent.putExtra("resultPredictionsModel", places_list.get(position));
                 setResult(RESULT_OK, resultIntent);
-                finish();οχ
+                finish();
             }
         });
     }
