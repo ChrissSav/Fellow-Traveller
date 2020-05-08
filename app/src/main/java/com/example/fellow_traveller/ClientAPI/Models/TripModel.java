@@ -340,7 +340,4 @@ public class TripModel implements Parcelable {
         dest.writeByte((byte) (active == null ? 0 : active ? 1 : 2));
     }
 
-//====================================================================
-
-
 }

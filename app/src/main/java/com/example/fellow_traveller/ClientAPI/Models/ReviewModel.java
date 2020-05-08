@@ -3,6 +3,9 @@ package com.example.fellow_traveller.ClientAPI.Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ReviewModel implements Parcelable {
 
     private String description;
@@ -91,5 +94,17 @@ public class ReviewModel implements Parcelable {
             dest.writeLong(timestamp);
         }
         dest.writeParcelable(user, flags);
+    }
+
+    public String getDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("d MMM yyyy");
+        Date date = new Date((long) timestamp * 1000);
+        return dateFormat.format(date);
+    }
+
+    public String getTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        Date date = new Date((long) timestamp * 1000);
+        return dateFormat.format(date);
     }
 }
