@@ -15,20 +15,24 @@ public class UserBaseModel implements Parcelable {
     @SerializedName("last_name")
     private String lastName;
     @SerializedName("rate")
-    private double rate;
+    private Float rate;
     @SerializedName("reviews")
-    private int reviews;
+    private Integer reviews;
     @SerializedName("picture")
     private String picture;
+    @SerializedName("about_me")
+    private String aboutMe;
 
-    public UserBaseModel(Integer id, String firstName, String lastName, double rate, int reviews, String picture) {
+    public UserBaseModel(Integer id, String firstName, String lastName, Float rate, Integer reviews, String picture) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.rate = rate;
         this.reviews = reviews;
         this.picture = picture;
+        this.aboutMe = null;
     }
+
 
     protected UserBaseModel(Parcel in) {
         if (in.readByte() == 0) {
@@ -38,9 +42,18 @@ public class UserBaseModel implements Parcelable {
         }
         firstName = in.readString();
         lastName = in.readString();
-        rate = in.readDouble();
-        reviews = in.readInt();
+        if (in.readByte() == 0) {
+            rate = null;
+        } else {
+            rate = in.readFloat();
+        }
+        if (in.readByte() == 0) {
+            reviews = null;
+        } else {
+            reviews = in.readInt();
+        }
         picture = in.readString();
+        aboutMe = in.readString();
     }
 
     public static final Creator<UserBaseModel> CREATOR = new Creator<UserBaseModel>() {
@@ -50,13 +63,20 @@ public class UserBaseModel implements Parcelable {
         }
 
         @Override
-        public UserBaseModel[] newArray(int size)
-        {
+        public UserBaseModel[] newArray(int size) {
             return new UserBaseModel[size];
         }
     };
 
-    public double getRate() {
+    public String getAboutMe() {
+        return aboutMe;
+    }
+
+    public void setAboutMe(String aboutMe) {
+        this.aboutMe = aboutMe;
+    }
+
+    public Float getRate() {
         return rate;
     }
 
@@ -68,7 +88,7 @@ public class UserBaseModel implements Parcelable {
         this.picture = picture;
     }
 
-    public void setRate(double rate) {
+    public void setRate(Float rate) {
         this.rate = rate;
     }
 
@@ -124,8 +144,19 @@ public class UserBaseModel implements Parcelable {
         }
         dest.writeString(firstName);
         dest.writeString(lastName);
-        dest.writeDouble(rate);
-        dest.writeInt(reviews);
+        if (rate == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeFloat(rate);
+        }
+        if (reviews == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(reviews);
+        }
         dest.writeString(picture);
+        dest.writeString(aboutMe);
     }
 }

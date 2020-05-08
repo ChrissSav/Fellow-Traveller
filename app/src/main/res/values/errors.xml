@@ -39,7 +39,8 @@
     <string name="ERROR_TRIP_CHECK_PET_ACCEPTS">Ελέγξτε αν το ταξίδι δέχεται κατοικίδιαε.</string>
 
 
-
+    <string name="ERROR_REVIEW_YOURSELF">Δεν μπορείτε να αξιολογήσετε τον εαυτό σας</string>
+    <string name="ERROR_REVIEW_USER_TARGET_NOT_FOUND">Ο χρήστη δεν βρέθηκε.</string>
 
 
 

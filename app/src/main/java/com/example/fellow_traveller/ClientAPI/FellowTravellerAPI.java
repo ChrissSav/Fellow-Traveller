@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarDeleteCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
+import com.example.fellow_traveller.ClientAPI.Callbacks.ReviewModelCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.SearchTripsCallback;
 import com.example.fellow_traveller.ClientAPI.Callbacks.StatusCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.TripRegisterCallBack;
@@ -14,9 +15,11 @@ import com.example.fellow_traveller.ClientAPI.Callbacks.UserRegisterCallback;
 import com.example.fellow_traveller.ClientAPI.Models.AddCarModel;
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreatePassengerModel;
+import com.example.fellow_traveller.ClientAPI.Models.CreateReviewModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
 import com.example.fellow_traveller.ClientAPI.Models.ErrorResponseModel;
 import com.example.fellow_traveller.ClientAPI.Models.PassengerModel;
+import com.example.fellow_traveller.ClientAPI.Models.ReviewModel;
 import com.example.fellow_traveller.ClientAPI.Models.SearchDestinationsModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
@@ -356,10 +359,10 @@ public class FellowTravellerAPI {
 
     public static void getTrips(SearchDestinationsModel destinations, Integer timestampMin, Integer timestampMax,
                                 Integer seatsMin, Integer seatsMax, Integer bagsMin, Integer bagsMax,
-                                Integer priceMin, Integer priceMax, Boolean hasPet,Integer range, final SearchTripsCallback searchTripsCallback) {
+                                Integer priceMin, Integer priceMax, Boolean hasPet, Integer range, final SearchTripsCallback searchTripsCallback) {
         retrofitAPIEndpoints.getTrips(destinations, timestampMin, timestampMax, seatsMin,
                 seatsMax, bagsMin, bagsMax, priceMin,
-                priceMax, hasPet,range).enqueue(new Callback<ArrayList<TripModel>>() {
+                priceMax, hasPet, range).enqueue(new Callback<ArrayList<TripModel>>() {
             @Override
             public void onResponse(Call<ArrayList<TripModel>> call, Response<ArrayList<TripModel>> response) {
                 if (!response.isSuccessful()) {
@@ -371,7 +374,44 @@ public class FellowTravellerAPI {
 
             @Override
             public void onFailure(Call<ArrayList<TripModel>> call, Throwable t) {
-                searchTripsCallback.onFailure("No trips available.");
+                searchTripsCallback.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            }
+        });
+    }
+
+
+    public static void getTripsAsCreator(final SearchTripsCallback searchTripsCallback) {
+        retrofitAPIEndpoints.tripsAsCreator().enqueue(new Callback<ArrayList<TripModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<TripModel>> call, Response<ArrayList<TripModel>> response) {
+                if (!response.isSuccessful()) {
+                    searchTripsCallback.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                    return;
+                }
+                searchTripsCallback.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<TripModel>> call, Throwable t) {
+                searchTripsCallback.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            }
+        });
+    }
+
+    public static void getTripsAsPassenger(final SearchTripsCallback searchTripsCallback) {
+        retrofitAPIEndpoints.tripsTakesPart().enqueue(new Callback<ArrayList<TripModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<TripModel>> call, Response<ArrayList<TripModel>> response) {
+                if (!response.isSuccessful()) {
+                    searchTripsCallback.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                    return;
+                }
+                searchTripsCallback.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<TripModel>> call, Throwable t) {
+                searchTripsCallback.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
             }
         });
     }
@@ -418,9 +458,80 @@ public class FellowTravellerAPI {
         });
     }
 
+    //Review
+
+
+    public static void getUserReviews(int userId, final ReviewModelCallBack reviewModelCallBack) {
+        retrofitAPIEndpoints.userReviews(userId).enqueue(new Callback<ArrayList<ReviewModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ReviewModel>> call, Response<ArrayList<ReviewModel>> response) {
+                if (!response.isSuccessful()) {
+                    reviewModelCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                    return;
+                }
+
+
+                reviewModelCallBack.onSuccess(response.body());
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ReviewModel>> call, Throwable t) {
+                reviewModelCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            }
+        });
+    }
+
+
+
+    public static void addUserReview(CreateReviewModel createReviewModel, final StatusCallBack statusCallBack) {
+        retrofitAPIEndpoints.addUserReview(createReviewModel).enqueue(new Callback<StatusHandleModel>() {
+            @Override
+            public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
+                if (!response.isSuccessful()) {
+                    ErrorResponseModel errorResponseModel = getModelFromResponseErrorBody(response);
+                    switch (errorResponseModel.getDetail().getStatusCode()) {
+                        case 501:
+                            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_REVIEW_YOURSELF));
+                            break;
+                        case 502:
+                            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_REVIEW_USER_TARGET_NOT_FOUND));
+                            break;
+                        default:
+                            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                            break;
+                    }
+                    return;
+                }
+                statusCallBack.onSuccess(context.getResources().getString(R.string.success_add_review));
+
+            }
+
+            @Override
+            public void onFailure(Call<StatusHandleModel> call, Throwable t) {
+                statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static ErrorResponseModel getModelFromResponseErrorBody(Response response) {
         Gson gson = new Gson();
         return gson.fromJson(response.errorBody().charStream(), ErrorResponseModel.class);
     }
+
 
 }

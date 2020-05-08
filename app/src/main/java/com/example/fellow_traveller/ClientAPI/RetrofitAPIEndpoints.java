@@ -3,9 +3,11 @@ package com.example.fellow_traveller.ClientAPI;
 import com.example.fellow_traveller.ClientAPI.Models.AddCarModel;
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreatePassengerModel;
+import com.example.fellow_traveller.ClientAPI.Models.CreateReviewModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
 import com.example.fellow_traveller.ClientAPI.Models.NotificationModel;
 import com.example.fellow_traveller.ClientAPI.Models.PassengerModel;
+import com.example.fellow_traveller.ClientAPI.Models.ReviewModel;
 import com.example.fellow_traveller.ClientAPI.Models.SearchDestinationsModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
@@ -64,6 +66,14 @@ public interface RetrofitAPIEndpoints {
 
 
     //Trip
+    @GET("/trips/as_creator")
+    Call<ArrayList<TripModel>> tripsAsCreator();
+
+
+    @GET("/trips/takes_part")
+    Call<ArrayList<TripModel>> tripsTakesPart();
+
+
     @POST("/trips")
     Call<StatusHandleModel> tripRegister(
             @Body CreateTripModel trip
@@ -110,5 +120,17 @@ public interface RetrofitAPIEndpoints {
     @GET("/notifications")
     Call<List<NotificationModel>> userNotifications();
 
+
+    //Reviews
+
+    @GET("/reviews/{user_id}")
+    Call<ArrayList<ReviewModel>> userReviews(
+            @Path("user_id") int user_id
+    );
+
+    @POST("/reviews")
+    Call<StatusHandleModel> addUserReview(
+            @Body CreateReviewModel createReviewModel
+    );
 
 }
