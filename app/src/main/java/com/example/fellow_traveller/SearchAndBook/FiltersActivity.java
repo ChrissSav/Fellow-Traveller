@@ -359,6 +359,7 @@ public class FiltersActivity extends AppCompatActivity {
                 //Parse the selections
                 startDateFinal = selection.first;
                 endDateFinal = selection.second;
+                // TODO startDateFinal and endDateFinal /1000
                 selectedFilters.setTimestampMin(startDateFinal);
                 selectedFilters.setTimestampMax(endDateFinal);
                 Toast.makeText(FiltersActivity.this, "Start: " + startDateFinal + " End: " + endDateFinal, Toast.LENGTH_SHORT).show();
