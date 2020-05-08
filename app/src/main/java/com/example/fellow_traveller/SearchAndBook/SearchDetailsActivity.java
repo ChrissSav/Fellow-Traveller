@@ -18,6 +18,7 @@ import com.example.fellow_traveller.ClientAPI.Models.PassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserBaseModel;
 import com.example.fellow_traveller.Models.GlobalClass;
+import com.example.fellow_traveller.ProfileActivity;
 import com.example.fellow_traveller.R;
 
 import java.util.ArrayList;
@@ -99,6 +100,7 @@ public class SearchDetailsActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);
 
+
         imageButtonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +113,10 @@ public class SearchDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent mainIntent = new Intent(SearchDetailsActivity.this, SearchPassengersActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList("tripPassengers", tripModel.getPassengers());
+                mainIntent.putExtras(bundle);
+                //mainIntent.putExtra("tripPassengers",  tripModel.getPassengers());
                 startActivity(mainIntent);
             }
         });

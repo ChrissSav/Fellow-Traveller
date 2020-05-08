@@ -3,6 +3,7 @@ package com.example.fellow_traveller.SearchAndBook;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -14,6 +15,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,6 +31,7 @@ import com.crystal.crystalrangeseekbar.interfaces.OnSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar;
 
+import com.example.fellow_traveller.ClientAPI.Models.FilterModel;
 import com.example.fellow_traveller.R;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
@@ -61,6 +64,7 @@ public class FiltersActivity extends AppCompatActivity {
     private String petTitle = TITLE_PET;
     private String seatTitle = TITLE_SEAT;
     private String bagsTitle = TITLE_BAGS;
+    private FilterModel selectedFilters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +86,7 @@ public class FiltersActivity extends AppCompatActivity {
 
 
 
-
+        selectedFilters = new FilterModel();
 
 
 
@@ -97,6 +101,7 @@ public class FiltersActivity extends AppCompatActivity {
 
 
         petsButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
                 openDialogForPets();
@@ -109,9 +114,11 @@ public class FiltersActivity extends AppCompatActivity {
                 if (value.intValue() == 0) {
                     kmRangeBarTV.setText("Εμφάνιση όλων");
                     rangeFinal = value.intValue();
+                    selectedFilters.setRange(null);
                 } else {
                     kmRangeBarTV.setText("Εύρος " + value + " χλμ");
                     rangeFinal = value.intValue();
+                    selectedFilters.setRange(value.intValue());
                 }
 
             }
@@ -123,6 +130,10 @@ public class FiltersActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(FiltersActivity.this, "Ημερομηνία " + startDateFinal + "-" + endDateFinal + "Τιμή " + priceStartFinal + "-" + priceEndFinal + rangeFinal + seatsFinal + bagsFinal, Toast.LENGTH_SHORT).show();
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("resultFilterModel", selectedFilters);
+                setResult(RESULT_OK, resultIntent);
+                finish();
             }
         });
 
@@ -156,6 +167,7 @@ public class FiltersActivity extends AppCompatActivity {
             public void onClick(View view) {
                 petsButton.setText("Όλα");
                 mainConstraintLayout.setForeground(null);
+                selectedFilters.setHavePet(null);
                 myDialog.dismiss();
 
             }
@@ -164,6 +176,7 @@ public class FiltersActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 petsButton.setText("Με κατοικίδιο");
+                selectedFilters.setHavePet(true);
                 mainConstraintLayout.setForeground(null);
                 myDialog.dismiss();
             }
@@ -172,6 +185,7 @@ public class FiltersActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 petsButton.setText("Χωρίς κατοικίδιο");
+                selectedFilters.setHavePet(false);
                 mainConstraintLayout.setForeground(null);
                 myDialog.dismiss();
             }
@@ -199,6 +213,7 @@ public class FiltersActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Increase(textView_number);
                 seatsFinal = Integer.valueOf(textView_number.getText().toString());
+                selectedFilters.setBagsMin(seatsFinal);
             }
         });
         decrease.setOnClickListener(new View.OnClickListener() {
@@ -206,6 +221,7 @@ public class FiltersActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Decrease(textView_number);
                 seatsFinal = Integer.valueOf(textView_number.getText().toString());
+                selectedFilters.setBagsMin(seatsFinal);
             }
         });
 
@@ -223,6 +239,7 @@ public class FiltersActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Increase(textView_number);
                 bagsFinal = Integer.valueOf(textView_number.getText().toString());
+                selectedFilters.setBagsMin(bagsFinal);
 
             }
         });
@@ -231,6 +248,7 @@ public class FiltersActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Decrease(textView_number);
                 bagsFinal = Integer.valueOf(textView_number.getText().toString());
+                selectedFilters.setBagsMin(bagsFinal);
 
             }
         });
@@ -259,10 +277,14 @@ public class FiltersActivity extends AppCompatActivity {
                     priceRangeTV.setText("Εμφάνιση όλων");
                     priceStartFinal = minValue.intValue();
                     priceEndFinal = maxValue.intValue();
+                    selectedFilters.setPriceMin(null);
+                    selectedFilters.setPriceMax(null);
                 }else{
                 priceRangeTV.setText(minValue.intValue() + " - " + maxValue.intValue() + " €" /*R.string.euro_symbol*/ );
                 priceStartFinal = minValue.intValue();
                 priceEndFinal = maxValue.intValue();
+                    selectedFilters.setPriceMin(minValue.intValue());
+                    selectedFilters.setPriceMax(maxValue.intValue());
                 }
             }
         });
@@ -328,6 +350,7 @@ public class FiltersActivity extends AppCompatActivity {
 
 
         materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onPositiveButtonClick(Pair<Long, Long> selection) {
 
@@ -337,6 +360,8 @@ public class FiltersActivity extends AppCompatActivity {
                 //Parse the selections
                 startDateFinal = selection.first;
                 endDateFinal = selection.second;
+//                selectedFilters.setTimestampMin(Integer.valueOf(Math.toIntExact(startDateFinal)));
+//                selectedFilters.setTimestampMax(Integer.valueOf(Math.toIntExact(endDateFinal)));
                 Toast.makeText(FiltersActivity.this, "Start: " + startDateFinal + " End: " + endDateFinal, Toast.LENGTH_SHORT).show();
             }
         });
@@ -350,6 +375,9 @@ public class FiltersActivity extends AppCompatActivity {
                 dateButton.setText("Όρισε ημ/νία");
                 startDateFinal = 0;
                 endDateFinal = 0;
+
+//                selectedFilters.setTimestampMin(null);
+//                selectedFilters.setTimestampMax(null);
                 //Reset selections
                 Pair setDefault = new Pair(null, null);
                 builder.setSelection(setDefault);

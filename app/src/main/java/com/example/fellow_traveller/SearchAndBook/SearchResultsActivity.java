@@ -17,11 +17,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fellow_traveller.ClientAPI.Callbacks.SearchTripsCallback;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.DestinationModel;
+import com.example.fellow_traveller.ClientAPI.Models.FilterModel;
 import com.example.fellow_traveller.ClientAPI.Models.LatLongModel;
 import com.example.fellow_traveller.ClientAPI.Models.SearchDestinationsModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
+import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.PlacesAPI.CallBack.PlaceApiResultCallBack;
+import com.example.fellow_traveller.PlacesAPI.Models.PredictionsModel;
 import com.example.fellow_traveller.PlacesAPI.Models.ResultModel;
 import com.example.fellow_traveller.PlacesAPI.PlaceApiConnection;
 import com.example.fellow_traveller.R;
@@ -43,6 +46,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     private boolean destFromDone = false;
     private boolean destToDone = false;
     private ImageView notFoundImage;
+    private FilterModel  filterModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,8 @@ public class SearchResultsActivity extends AppCompatActivity {
         backButton = findViewById(R.id.ActivitySearchResults_close_button);
         searchResultsCount = findViewById(R.id.ActivitySearchResults_results_label);
         notFoundImage = findViewById(R.id.ActivitySearchResults_not_found_image);
+
+        filterModel = new FilterModel();
 
         //Get the Start-End DestinationModels
         final Intent intent = getIntent();
@@ -123,7 +129,9 @@ public class SearchResultsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent mainIntent = new Intent(SearchResultsActivity.this, FiltersActivity.class);
-                startActivity(mainIntent);
+                startActivityForResult(mainIntent, 1);
+
+
             }
         });
         swapButton.setOnClickListener(new View.OnClickListener() {
@@ -137,7 +145,8 @@ public class SearchResultsActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mainIntent = new Intent(SearchResultsActivity.this, Search2Activity.class);
+                Intent mainIntent = new Intent(SearchResultsActivity.this, HomeActivity.class);
+
                 startActivity(mainIntent);
 
             }
@@ -238,8 +247,10 @@ public class SearchResultsActivity extends AppCompatActivity {
                     searchDestinationsModel = new SearchDestinationsModel(latlongModelStart, latlongModelEnd);
 
 
-                    new FellowTravellerAPI(globalClass).getTrips(searchDestinationsModel, null, null, null, null, null, null,
-                            null, null, null, null, new SearchTripsCallback() {
+                    new FellowTravellerAPI(globalClass).getTrips(searchDestinationsModel, filterModel.getTimestampMin(), filterModel.getTimestampMax(),
+                            filterModel.getSeatsMin(),filterModel.getSeatsMax(), filterModel.getBagsMin(), filterModel.getBagsMax(),
+                            filterModel.getPriceMin(), filterModel.getPriceMax(),
+                            filterModel.getHavePet(), filterModel.getRange(), new SearchTripsCallback() {
                                 @Override
                                 public void onSuccess(ArrayList<TripModel> trips) {
                                     if(trips.size()==0)
@@ -282,5 +293,21 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         task.execute();
 
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                int result = data.getIntExtra("result", 0);
+                filterModel = data.getParcelableExtra("resultFilterModel");
+                Trip();
+
+            }
+            if (resultCode == RESULT_CANCELED) {
+
+            }
+        }
     }
 }

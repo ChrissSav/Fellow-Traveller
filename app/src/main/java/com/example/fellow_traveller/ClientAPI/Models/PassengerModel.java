@@ -19,6 +19,8 @@ public class PassengerModel implements Parcelable {
     @Expose
     private Boolean pet;
 
+
+
     public PassengerModel(UserBaseModel user, int bags, Boolean pet) {
         this.user = user;
         this.bags = bags;

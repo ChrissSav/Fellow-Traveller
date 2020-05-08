@@ -39,6 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
         ratingTextView.setText(String.valueOf(userBaseModel.getRate()));
         reviewsTextView.setText(String.valueOf(userBaseModel.getReviews()));
 
+
         seeAllReviewsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

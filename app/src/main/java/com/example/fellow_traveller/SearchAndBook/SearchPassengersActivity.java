@@ -23,6 +23,7 @@ public class SearchPassengersActivity extends AppCompatActivity {
     private PassengersAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
     private ImageButton closeButton;
+    private ArrayList<PassengerModel> passengersList = new ArrayList<>();
 
 
     @Override
@@ -30,13 +31,14 @@ public class SearchPassengersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_passengers);
 
-        final ArrayList<PassengerModel> passengersList = new ArrayList<>();
-        UserBaseModel userBaseModel = new UserBaseModel(1, "Tyler", "Joseph", 4.7, 34, "default");
-        PassengerModel passengerModel = new PassengerModel(userBaseModel, 3, true);
-        passengersList.add(passengerModel);
-        passengersList.add(passengerModel);
-        passengersList.add(passengerModel);
-        passengersList.add(passengerModel);
+        passengersList = this.getIntent().getExtras().getParcelableArrayList("tripPassengers");
+       // passengersList = getIntent().getParcelableExtra("tripPassengers");
+//        UserBaseModel userBaseModel = new UserBaseModel(1, "Tyler", "Joseph", 4.7, 34, "default");
+//        PassengerModel passengerModel = new PassengerModel(userBaseModel, 3, true);
+//        passengersList.add(passengerModel);
+//        passengersList.add(passengerModel);
+//        passengersList.add(passengerModel);
+//        passengersList.add(passengerModel);
 
 
         closeButton = findViewById(R.id.ActivitySearchPassengers_close_button);
@@ -48,15 +50,6 @@ public class SearchPassengersActivity extends AppCompatActivity {
         mAdapter = new PassengersAdapter(passengersList);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-
-
-        closeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-
         mAdapter.setOnItemClickListener(new PassengersAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -66,6 +59,17 @@ public class SearchPassengersActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
+
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+
 
     }
 
