@@ -65,6 +65,9 @@ public class FiltersActivity extends AppCompatActivity {
     private String seatTitle = TITLE_SEAT;
     private String bagsTitle = TITLE_BAGS;
     private FilterModel selectedFilters;
+    private TextView bagsTextView, seatsTextView;
+    private MaterialDatePicker.Builder<Pair<Long, Long>> builder = MaterialDatePicker.Builder.dateRangePicker();
+    //private MaterialDatePicker<Pair<Long, Long>> materialDatePicker = builder.build();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,12 +86,43 @@ public class FiltersActivity extends AppCompatActivity {
         priceRangeSeekBar = findViewById(R.id.ActivityFilters_price_range_seekbar);
         petsButton = findViewById(R.id.ActivityFilters_pets_button);
         mainConstraintLayout = findViewById(R.id.ActivityFilters_main_constraint_layout);
+        seatsTextView = findViewById(R.id.ActivityBook_seats_value_tv);
+        bagsTextView = findViewById(R.id.ActivityFilters_bags_value_tv);
 
 
 
-        selectedFilters = new FilterModel();
+        selectedFilters = getIntent().getParcelableExtra("getSelections");
+        if(selectedFilters.getPriceMin()!=null){
+            Toast.makeText(this, String.valueOf(selectedFilters.getPriceMin()), Toast.LENGTH_SHORT).show();
+            priceRangeSeekBar.setMinStartValue((float) selectedFilters.getPriceMin()).apply();
+        }
+        if(selectedFilters.getPriceMax()!=null){
+            Toast.makeText(this, String.valueOf(selectedFilters.getPriceMin()), Toast.LENGTH_SHORT).show();
+            priceRangeSeekBar.setMaxStartValue((float) selectedFilters.getPriceMax()).apply();
+        }
+        if(selectedFilters.getRange()!=null){
+            Toast.makeText(this, String.valueOf(selectedFilters.getPriceMin()), Toast.LENGTH_SHORT).show();
+            kmRangeSeekBar.setMinStartValue((float) selectedFilters.getRange()).apply();
+        }if(selectedFilters.getHavePet()!=null){
+            if(selectedFilters.getHavePet())
+                petsButton.setText("Με κατοικίδιο");
+            else
+                petsButton.setText("Χωρίς κατοικίδιο");
+        }
+        if(selectedFilters.getSeatsMin()!=null){
+            seatsTextView.setText(String.valueOf(selectedFilters.getSeatsMin()));
+        }
+        if(selectedFilters.getBagsMin()!=null){
+            bagsTextView.setText(String.valueOf(selectedFilters.getBagsMin()));
+        }
+        if(selectedFilters.getTimestampMin() !=null && selectedFilters.getTimestampMax() != null){
+            Toast.makeText(this, "Διαφορετικό", Toast.LENGTH_SHORT).show();
+            Pair setDefault = new Pair(selectedFilters.getTimestampMin()*1000,selectedFilters.getTimestampMax()*1000);
+            builder.setSelection(setDefault);
+            //dateButton.setText(materialDatePicker.getHeaderText());
+            builder.build();
 
-
+        }
 
         String[] items = new String[]{"     Πιο σχετική", "    Με βάση τιμή", "Με βάση απόσταση"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -206,22 +240,25 @@ public class FiltersActivity extends AppCompatActivity {
         //get Elements
         ImageButton decrease = findViewById(R.id.ActivityBook_seats_minus_button);
         ImageButton increase = findViewById(R.id.ActivityBook_seats_plus_button);
-        final TextView textView_number = findViewById(R.id.ActivityBook_seats_value_tv);
+
 
         increase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Increase(textView_number);
-                seatsFinal = Integer.valueOf(textView_number.getText().toString());
-                selectedFilters.setBagsMin(seatsFinal);
+                Increase(seatsTextView);
+                seatsFinal = Integer.valueOf(seatsTextView.getText().toString());
+                selectedFilters.setSeatsMin(seatsFinal);
             }
         });
         decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Decrease(textView_number);
-                seatsFinal = Integer.valueOf(textView_number.getText().toString());
-                selectedFilters.setBagsMin(seatsFinal);
+                Decrease(seatsTextView);
+                seatsFinal = Integer.valueOf(seatsTextView.getText().toString());
+                if(seatsFinal==0)
+                    selectedFilters.setSeatsMin(null);
+                else
+                    selectedFilters.setSeatsMin(seatsFinal);
             }
         });
 
@@ -232,13 +269,13 @@ public class FiltersActivity extends AppCompatActivity {
         //get Elements
         ImageButton increase = findViewById(R.id.ActivityFilters_bags_plus_button);
         ImageButton decrease = findViewById(R.id.ActivityFilters_bags_minus_button);
-        final TextView textView_number = findViewById(R.id.ActivityFilters_bags_value_tv);
+
 
         increase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Increase(textView_number);
-                bagsFinal = Integer.valueOf(textView_number.getText().toString());
+                Increase(bagsTextView);
+                bagsFinal = Integer.valueOf(bagsTextView.getText().toString());
                 selectedFilters.setBagsMin(bagsFinal);
 
             }
@@ -246,9 +283,12 @@ public class FiltersActivity extends AppCompatActivity {
         decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Decrease(textView_number);
-                bagsFinal = Integer.valueOf(textView_number.getText().toString());
-                selectedFilters.setBagsMin(bagsFinal);
+                Decrease(bagsTextView);
+                bagsFinal = Integer.valueOf(bagsTextView.getText().toString());
+                if(bagsFinal==0)
+                    selectedFilters.setBagsMin(null);
+                else
+                    selectedFilters.setBagsMin(bagsFinal);
 
             }
         });
@@ -333,9 +373,11 @@ public class FiltersActivity extends AppCompatActivity {
         constraintBuilder.setValidator(DateValidatorPointForward.now());
 
         //MaterialDatePicker
-        final MaterialDatePicker.Builder<Pair<Long, Long>> builder = MaterialDatePicker.Builder.dateRangePicker();
+        //final MaterialDatePicker.Builder<Pair<Long, Long>> builder = MaterialDatePicker.Builder.dateRangePicker();
         builder.setTitleText("Επιλέξτε το εύρος των ημερών");
         builder.setCalendarConstraints(constraintBuilder.build());
+
+
 
 
         final MaterialDatePicker<Pair<Long, Long>> materialDatePicker = builder.build();
@@ -359,8 +401,8 @@ public class FiltersActivity extends AppCompatActivity {
                 //Parse the selections
                 startDateFinal = selection.first;
                 endDateFinal = selection.second;
-                selectedFilters.setTimestampMin(startDateFinal);
-                selectedFilters.setTimestampMax(endDateFinal);
+                selectedFilters.setTimestampMin(startDateFinal/1000);
+                selectedFilters.setTimestampMax(endDateFinal/1000);
                 Toast.makeText(FiltersActivity.this, "Start: " + startDateFinal + " End: " + endDateFinal, Toast.LENGTH_SHORT).show();
             }
         });
