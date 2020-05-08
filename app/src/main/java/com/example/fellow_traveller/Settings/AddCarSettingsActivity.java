@@ -7,9 +7,12 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +34,7 @@ public class AddCarSettingsActivity extends AppCompatActivity {
     private ImageButton buttonBack;
     private GlobalClass globalClass;
     private String previousWord;
+    private Spinner spinner, spinner2;
 
 
     @Override
@@ -47,6 +51,39 @@ public class AddCarSettingsActivity extends AppCompatActivity {
         EditTextCarColor = findViewById(R.id.AddCarSettingsActivity_EditText_color);
         buttonAdd = findViewById(R.id.EditCarSettingsActivity_button_add);
         buttonBack = findViewById(R.id.close_button_add_car_settings);
+//        spinner = findViewById(R.id.cars_spinner);
+//        spinner2 = findViewById(R.id.models_spinner);
+//        // Create an ArrayAdapter using the string array and a default spinner layout
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+//                R.array.car_brands, android.R.layout.simple_spinner_item);
+//        // Specify the layout to use when the list of choices appears
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        // Apply the adapter to the spinner
+//        spinner.setAdapter(adapter);
+//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                Toast.makeText(AddCarSettingsActivity.this, String.valueOf(i), Toast.LENGTH_SHORT).show();
+//                if(i==0){
+//                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(),
+//                            R.array.audi, android.R.layout.simple_spinner_item);
+//                    // Specify the layout to use when the list of choices appears
+//                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                    spinner2.setAdapter(adapter);
+//                }else{
+//                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(),
+//                R.array.alfa_romeo, android.R.layout.simple_spinner_item);
+//        // Specify the layout to use when the list of choices appears
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner2.setAdapter(adapter);
+//    }
+//}
+//
+//    @Override
+//    public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//    }
+//});
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
