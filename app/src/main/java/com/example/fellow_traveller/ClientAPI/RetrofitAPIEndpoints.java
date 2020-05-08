@@ -82,8 +82,8 @@ public interface RetrofitAPIEndpoints {
     @PUT("/trips/search")
     Call<ArrayList<TripModel>> getTrips(
             @Body SearchDestinationsModel destinations,
-            @Query("timestamp_min") Integer timestampMin,
-            @Query("timestamp_max") Integer timestampMax,
+            @Query("timestamp_min") Long timestampMin,
+            @Query("timestamp_max") Long timestampMax,
             @Query("seats_min") Integer seatsMin,
             @Query("seats_max") Integer seatsMax,
             @Query("bags_min") Integer bagsMin,

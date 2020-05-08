@@ -357,7 +357,7 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void getTrips(SearchDestinationsModel destinations, Integer timestampMin, Integer timestampMax,
+    public static void getTrips(SearchDestinationsModel destinations, Long timestampMin, Long timestampMax,
                                 Integer seatsMin, Integer seatsMax, Integer bagsMin, Integer bagsMax,
                                 Integer priceMin, Integer priceMax, Boolean hasPet, Integer range, final SearchTripsCallback searchTripsCallback) {
         retrofitAPIEndpoints.getTrips(destinations, timestampMin, timestampMax, seatsMin,
