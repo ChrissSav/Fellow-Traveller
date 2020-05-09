@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -56,53 +57,69 @@ public class NotificationFragment extends Fragment {
 
         swipeRefreshLayout = view.findViewById(R.id.NotificationFragment_SwipeRefreshLayout);
         mRecyclerView = view.findViewById(R.id.NotificationFragment_RecyclerView);
+
         lastId = 0;
+
+
         if (notificationArrayList.size() > 0) {
-            lastId = notificationArrayList.get(notificationArrayList.size() - 1).getId();
-            buildRecyclerView();
+            lastId = notificationArrayList.get(notificationArrayList.size() - 2).getId();
+            buildRecyclerView(false);
+        }else{
+            LoadNotifications(0);
         }
-        LoadNotifications(lastId);
+
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mRecyclerView.setNestedScrollingEnabled(false);
-
                 LoadNotifications(0);
             }
         });
+
 
         return view;
     }
 
 
-    public void buildRecyclerView() {
+    public void buildRecyclerView(boolean flag) {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mAdapter = new NotificationAdapter(notificationArrayList);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+        if(flag){
+            mRecyclerView.smoothScrollToPosition(mAdapter.getItemCount());
+        }
         mAdapter.setOnItemClickListener(new NotificationAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(final int position) {
-                new FellowTravellerAPI(globalClass).setNotificationsRead(notificationArrayList.get(position).getId(), new StatusCallBack() {
-                    @Override
-                    public void onSuccess(String notificationModels) {
-                        notificationArrayList.get(position).setHasRead(true);
-                        mAdapter.notifyDataSetChanged();
-                    }
+                if(notificationArrayList.get(position).getHasRead()){
+                    Intent intent = new Intent(getActivity(),TripPageActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    new FellowTravellerAPI(globalClass).setNotificationsRead(notificationArrayList.get(position).getId(), new StatusCallBack() {
+                        @Override
+                        public void onSuccess(String notificationModels) {
+                            notificationArrayList.get(position).setHasRead(true);
+                            mAdapter.notifyItemChanged(position);
+                            Intent intent = new Intent(getActivity(),TripPageActivity.class);
+                            startActivity(intent);
+                        }
 
-                    @Override
-                    public void onFailure(String msg) {
-                        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+                        @Override
+                        public void onFailure(String msg) {
+                            Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
 
-                    }
-                });
-//                Toast.makeText(getActivity(), "position : " + position + " id: " + notificationArrayList.get(position).getId() + " ρεαδ " + notificationArrayList.get(position).getHasRead(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
 
 
             }
         });
+
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -136,14 +153,13 @@ public class NotificationFragment extends Fragment {
                         if (id > 0) {
                             int position = notificationArrayList.size();
                             notificationArrayList.addAll(notificationModels);
-
-                            mAdapter.notifyDataSetChanged();
-                            mRecyclerView.scrollToPosition(position - 1);
+                            buildRecyclerView(true);
                             swipeRefreshLayout.setRefreshing(false);
+
 
                         } else {
                             notificationArrayList = notificationModels;
-                            buildRecyclerView();
+                            buildRecyclerView(false);
                             swipeRefreshLayout.setRefreshing(false);
 
                         }
