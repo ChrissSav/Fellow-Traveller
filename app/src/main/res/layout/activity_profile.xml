@@ -342,7 +342,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/button_orange_empty"
-                    android:text="Δείτε όλες"
+                    android:text="Περισσότερα"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@id/ActivityProfile_review_label"
                     app:layout_constraintBottom_toBottomOf="@id/ActivityProfile_underline_review"
@@ -392,6 +392,16 @@
                     app:layout_constraintStart_toStartOf="@id/ActivityProfile_no_review_label"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="20dp"
+                    />
+                <Button
+                    android:id="@+id/ActivityProfile_no_reviews_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/button_orange_empty"
+                    android:text="Αξιολόγείστε εδώ"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/ActivityProfile_no_review_label"
+                    app:layout_constraintBottom_toBottomOf="@id/ActivityProfile_underline_no_review"
                     />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

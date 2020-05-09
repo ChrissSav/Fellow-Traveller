@@ -2,6 +2,7 @@ package com.example.fellow_traveller.Reviews;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.example.fellow_traveller.ClientAPI.Callbacks.StatusCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.CreateReviewModel;
+import com.example.fellow_traveller.ClientAPI.Models.UserBaseModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.willy.ratingbar.BaseRatingBar;
@@ -23,12 +25,16 @@ public class WriteReviewActivity extends AppCompatActivity {
     private Button submitButton;
     private EditText commentSection;
     private GlobalClass globalClass;
+    private UserBaseModel userBaseModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_review);
         globalClass = (GlobalClass) getApplicationContext();
+
+        final Intent intent = getIntent();
+        userBaseModel = (UserBaseModel) intent.getExtras().getParcelable("userToReview");
 
         ratingBar = findViewById(R.id.write_review_simpleRatingBar);
         submitButton = findViewById(R.id.write_review_submit_button);
@@ -61,7 +67,7 @@ public class WriteReviewActivity extends AppCompatActivity {
     }
 
     private void sendReview() {
-        CreateReviewModel createReviewModel = new CreateReviewModel(commentSection.getText().toString().trim(), (int) rate, System.currentTimeMillis()/1000, 9);
+        CreateReviewModel createReviewModel = new CreateReviewModel(commentSection.getText().toString().trim(), (int) rate, System.currentTimeMillis()/1000, userBaseModel.getId());
         
         new FellowTravellerAPI(globalClass).addUserReview(createReviewModel, new StatusCallBack() {
             @Override

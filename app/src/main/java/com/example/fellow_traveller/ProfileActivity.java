@@ -6,6 +6,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 public class ProfileActivity extends AppCompatActivity {
     private UserBaseModel userBaseModel;
     private TextView userNameTextView, ratingTextView, reviewsTextView, aboutMeTextView;
-    private Button seeAllReviewsButton;
+    private Button seeAllReviewsButton, noReviewsButton;
     private ImageButton closeButton;
     private GlobalClass globalClass;
     private ArrayList<ReviewModel> reviewsList = new ArrayList<>();
@@ -52,30 +53,31 @@ public class ProfileActivity extends AppCompatActivity {
         reviewDateTextView = findViewById(R.id.ActivityProfile_review_date);
         reviewCommentsTextView = findViewById(R.id.ActivityProfile_review_comments);
         reviewRatingTextView = findViewById(R.id.ActivityProfile_review_rating);
+        noReviewsButton = findViewById(R.id.ActivityProfile_no_reviews_button);
 
         final Intent intent = getIntent();
         userBaseModel = (UserBaseModel) intent.getExtras().getParcelable("ThisUser");
 
-        userNameTextView.setText(userBaseModel.getFullName());
-        ratingTextView.setText(String.valueOf(userBaseModel.getRate()));
-        reviewsTextView.setText(String.valueOf(userBaseModel.getReviews()));
-        if(userBaseModel.getAboutMe()==null)
-            aboutMeTextView.setText("Ο χρήστης " + userBaseModel.getFullName() + " δεν έχει ορίσει κάποια περιγραφή για τον εαυτό του" );
-        else {
-            if(userBaseModel.getAboutMe().trim().isEmpty())
-                aboutMeTextView.setText("Ο χρήστης " + userBaseModel.getFullName() + " δεν έχει ορίσει κάποια περιγραφή για τον εαυτό του" );
-            else
-                aboutMeTextView.setText(userBaseModel.getAboutMe());
-        }
+       getUserProfileInfo();
+       //TODO we need to load user info again to retrive the last review, now we only putExtra the non notified userBaseModel
+
 
         seeAllReviewsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mainIntent = new Intent(ProfileActivity.this, ReviewsActivity.class);
+                mainIntent.putExtra("userToReview", (Parcelable) userBaseModel);
                 startActivity(mainIntent);
             }
         });
-
+        noReviewsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainIntent = new Intent(ProfileActivity.this, ReviewsActivity.class);
+                mainIntent.putExtra("userToReview", (Parcelable) userBaseModel);
+                startActivity(mainIntent);
+            }
+        });
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,6 +85,10 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        getUserReviewsInfo();
+
+    }
+    public void getUserReviewsInfo(){
         new FellowTravellerAPI(globalClass).getUserReviews(userBaseModel.getId(), new ReviewModelCallBack() {
             @Override
             public void onSuccess(ArrayList<ReviewModel> reviews) {
@@ -106,6 +112,25 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+    }
+    public void getUserProfileInfo(){
+        userNameTextView.setText(userBaseModel.getFullName());
+        ratingTextView.setText(String.valueOf(userBaseModel.getRate()));
+        reviewsTextView.setText(String.valueOf(userBaseModel.getReviews()));
+        if(userBaseModel.getAboutMe()==null)
+            aboutMeTextView.setText("Ο χρήστης " + userBaseModel.getFullName() + " δεν έχει ορίσει κάποια περιγραφή για τον εαυτό του" );
+        else {
+            if(userBaseModel.getAboutMe().trim().isEmpty())
+                aboutMeTextView.setText("Ο χρήστης " + userBaseModel.getFullName() + " δεν έχει ορίσει κάποια περιγραφή για τον εαυτό του" );
+            else
+                aboutMeTextView.setText(userBaseModel.getAboutMe());
+        }
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getUserProfileInfo();
+        getUserReviewsInfo();
     }
 }
