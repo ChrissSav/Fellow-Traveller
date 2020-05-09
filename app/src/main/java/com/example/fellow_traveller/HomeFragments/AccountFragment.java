@@ -25,7 +25,7 @@ import com.example.fellow_traveller.Settings.UserSettingsActivity;
 public class AccountFragment extends Fragment {
     private ImageButton settingsButton;
     private Button newCarButton, reviewsButton;
-    private TextView textViewUserName, textViewAboutMe;
+    private TextView textViewUserName, textViewAboutMe, rateTextView, reviewsTextView;
     private GlobalClass globalClass;
 
     public AccountFragment() {
@@ -42,9 +42,11 @@ public class AccountFragment extends Fragment {
 
         settingsButton = view.findViewById(R.id.settings_button);
         newCarButton = view.findViewById(R.id.new_car_button_account);
-        reviewsButton = view.findViewById(R.id.ActivityProfile_more_reviews_button);
-        textViewUserName = view.findViewById(R.id.ActivityProfile_user_name);
-        textViewAboutMe = view.findViewById(R.id.ActivityProfile_about_me_info);
+        reviewsButton = view.findViewById(R.id.FragmentAccount_more_reviews_button);
+        textViewUserName = view.findViewById(R.id.FragmentAccount_user_name);
+        textViewAboutMe = view.findViewById(R.id.FragmentAccount_about_me_info);
+        rateTextView = view.findViewById(R.id.FragmentAccount_rate);
+        reviewsTextView = view.findViewById(R.id.FragmentAccount_reviews);
 
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +81,7 @@ public class AccountFragment extends Fragment {
         super.onStart();
         globalClass = (GlobalClass) getActivity().getApplicationContext();
         textViewUserName.setText(globalClass.getCurrentUser().getFullName());
+       //TODO να βάλω τα στοιχεία του χρήστη rate και review
 
         if (globalClass.getCurrentUser().getAboutMe() == null || globalClass.getCurrentUser().getAboutMe().length() < 1)
             textViewAboutMe.setText(globalClass.getResources().getString(R.string.account_fragment_about_me));

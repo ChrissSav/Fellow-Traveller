@@ -2,6 +2,7 @@ package com.example.fellow_traveller.SearchAndBook;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +36,7 @@ public class SearchDetailsActivity extends AppCompatActivity {
     private ImageButton imageButtonBack;
     private GlobalClass globalClass;
     private ArrayList<PassengerModel> passengersList = new ArrayList<>();
+    private ConstraintLayout userLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,7 @@ public class SearchDetailsActivity extends AppCompatActivity {
         textViewCar = findViewById(R.id.ActivitySearchDetails_car_tv);
         textViewMsg = findViewById(R.id.ActivitySearchDetails_driver_message_tv);
         passengersButton = findViewById(R.id.ActivitySearchDetails_more_passengers_button);
+        userLayout = findViewById(R.id.ActivitySearchDetails_user_section);
 
 
         textViewDestFrom.setText(tripModel.getDestFrom().getTitle());
@@ -140,6 +143,14 @@ public class SearchDetailsActivity extends AppCompatActivity {
             public void onItemClick(int position) {
                 Intent mainIntent = new Intent(SearchDetailsActivity.this, ProfileActivity.class);
                 mainIntent.putExtra("ThisUser", passengersList.get(position).getUser());
+                startActivity(mainIntent);
+            }
+        });
+        userLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainIntent = new Intent(SearchDetailsActivity.this, ProfileActivity.class);
+                mainIntent.putExtra("ThisUser", tripModel.getCreatorUser());
                 startActivity(mainIntent);
             }
         });
