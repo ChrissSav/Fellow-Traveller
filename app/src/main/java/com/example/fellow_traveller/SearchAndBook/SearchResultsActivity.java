@@ -1,11 +1,18 @@
 package com.example.fellow_traveller.SearchAndBook;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -147,10 +154,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mainIntent = new Intent(SearchResultsActivity.this, HomeActivity.class);
-
-                startActivity(mainIntent);
-
+                abortDialog();
             }
         });
     }
@@ -311,5 +315,44 @@ public class SearchResultsActivity extends AppCompatActivity {
 
             }
         }
+    }
+    public void abortDialog(){
+        final Dialog myDialog = new Dialog(SearchResultsActivity.this, R.style.Theme_Dialog_Abort);
+        Window window = myDialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+        window.requestFeature(Window.FEATURE_NO_TITLE);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.setContentView(R.layout.abort_dialog);
+        //getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        myDialog.setCancelable(true);
+        myDialog.setCanceledOnTouchOutside(true);
+
+        //get elements
+
+        Button abortButton = myDialog.findViewById(R.id.abort_dialog_abort_button);
+        Button stayButton = myDialog.findViewById(R.id.abort_dialog_stay_button);
+
+        abortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+                Intent mainIntent = new Intent(SearchResultsActivity.this, HomeActivity.class);
+                startActivity(mainIntent);
+
+            }
+        });
+        stayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+        myDialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        abortDialog();
     }
 }
