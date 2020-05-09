@@ -7,8 +7,11 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -30,12 +33,14 @@ import java.util.ArrayList;
 public class NotificationFragment extends Fragment {
 
     private View view;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private NotificationAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<NotificationModel> notificationArrayList = new ArrayList<>();
     private GlobalClass globalClass;
     private int lastId = 0;
+    private boolean conection;
 
     public NotificationFragment() {
         // Required empty public constructor
@@ -46,17 +51,27 @@ public class NotificationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_notification, container, false);
-
+        conection = true;
         globalClass = (GlobalClass) getActivity().getApplicationContext();
 
-
+        swipeRefreshLayout = view.findViewById(R.id.NotificationFragment_SwipeRefreshLayout);
         mRecyclerView = view.findViewById(R.id.NotificationFragment_RecyclerView);
-
+        lastId = 0;
         if (notificationArrayList.size() > 0) {
             lastId = notificationArrayList.get(notificationArrayList.size() - 1).getId();
             buildRecyclerView();
         }
-        LoadNotifications();
+        LoadNotifications(lastId);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mRecyclerView.setNestedScrollingEnabled(false);
+
+                LoadNotifications(0);
+            }
+        });
+
         return view;
     }
 
@@ -73,9 +88,6 @@ public class NotificationFragment extends Fragment {
                 new FellowTravellerAPI(globalClass).setNotificationsRead(notificationArrayList.get(position).getId(), new StatusCallBack() {
                     @Override
                     public void onSuccess(String notificationModels) {
-                        //Intent intent = new Intent(getActivity(), TripPageActivity.class);
-                        //intent.putExtra("trip",notificationArrayList.get(position).getTrip());
-                        //startActivity(intent);
                         notificationArrayList.get(position).setHasRead(true);
                         mAdapter.notifyDataSetChanged();
                     }
@@ -86,7 +98,7 @@ public class NotificationFragment extends Fragment {
 
                     }
                 });
-                Toast.makeText(getActivity(), "position : " + position, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "position : " + position + " id: " + notificationArrayList.get(position).getId() + " ρεαδ " + notificationArrayList.get(position).getHasRead(), Toast.LENGTH_SHORT).show();
 
 
             }
@@ -98,8 +110,11 @@ public class NotificationFragment extends Fragment {
                 super.onScrollStateChanged(recyclerView, newState);
 
                 if (!recyclerView.canScrollVertically(1)) {
-                    lastId = notificationArrayList.get(notificationArrayList.size() - 1).getId();
-                    LoadNotifications();
+                    if (notificationArrayList.size() > 0) {
+                        lastId = notificationArrayList.get(notificationArrayList.size() - 1).getId();
+                        LoadNotifications(lastId);
+                    }
+
 
                 }
             }
@@ -111,26 +126,38 @@ public class NotificationFragment extends Fragment {
         super.onDestroy();
     }
 
-    public void LoadNotifications() {
-        new FellowTravellerAPI(globalClass).getNotificationsById(lastId, new NotificationCallBack() {
-            @Override
-            public void onSuccess(ArrayList<NotificationModel> notificationModels) {
-                if (notificationArrayList.size() > 0) {
-                    notificationArrayList.addAll(notificationModels);
-                    mAdapter.notifyDataSetChanged();
+    public void LoadNotifications(final int id) {
+        if (conection) {
+            conection = false;
+            new FellowTravellerAPI(globalClass).getNotificationsById(id, new NotificationCallBack() {
+                @Override
+                public void onSuccess(ArrayList<NotificationModel> notificationModels) {
+                    if (notificationModels.size() > 0) {
+                        if (id > 0) {
+                            int position = notificationArrayList.size();
+                            notificationArrayList.addAll(notificationModels);
 
-                } else {
-                    notificationArrayList = notificationModels;
-                    buildRecyclerView();
+                            mAdapter.notifyDataSetChanged();
+                            mRecyclerView.scrollToPosition(position - 1);
+                            swipeRefreshLayout.setRefreshing(false);
+
+                        } else {
+                            notificationArrayList = notificationModels;
+                            buildRecyclerView();
+                            swipeRefreshLayout.setRefreshing(false);
+
+                        }
+                    }
+                    conection = true;
                 }
-            }
 
-            @Override
-            public void onFailure(String msg) {
+                @Override
+                public void onFailure(String msg) {
+                    conection = true;
+                }
+            });
 
-            }
-        });
-
+        }
     }
 
 }
