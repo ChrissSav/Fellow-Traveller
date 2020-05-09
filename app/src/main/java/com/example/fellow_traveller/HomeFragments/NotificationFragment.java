@@ -154,21 +154,22 @@ public class NotificationFragment extends Fragment {
                             int position = notificationArrayList.size();
                             notificationArrayList.addAll(notificationModels);
                             buildRecyclerView(true);
-                            swipeRefreshLayout.setRefreshing(false);
 
 
                         } else {
                             notificationArrayList = notificationModels;
                             buildRecyclerView(false);
-                            swipeRefreshLayout.setRefreshing(false);
 
                         }
                     }
+                    swipeRefreshLayout.setRefreshing(false);
                     connectToApi = true;
                 }
 
                 @Override
                 public void onFailure(String msg) {
+                    Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+
                     connectToApi = true;
                 }
             });
