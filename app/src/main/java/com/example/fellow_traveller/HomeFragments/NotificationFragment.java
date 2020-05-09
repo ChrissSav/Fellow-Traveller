@@ -40,7 +40,7 @@ public class NotificationFragment extends Fragment {
     private ArrayList<NotificationModel> notificationArrayList = new ArrayList<>();
     private GlobalClass globalClass;
     private int lastId = 0;
-    private boolean conection;
+    private boolean connectToApi;
 
     public NotificationFragment() {
         // Required empty public constructor
@@ -51,7 +51,7 @@ public class NotificationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_notification, container, false);
-        conection = true;
+        connectToApi = true;
         globalClass = (GlobalClass) getActivity().getApplicationContext();
 
         swipeRefreshLayout = view.findViewById(R.id.NotificationFragment_SwipeRefreshLayout);
@@ -127,8 +127,8 @@ public class NotificationFragment extends Fragment {
     }
 
     public void LoadNotifications(final int id) {
-        if (conection) {
-            conection = false;
+        if (connectToApi) {
+            connectToApi = false;
             new FellowTravellerAPI(globalClass).getNotificationsById(id, new NotificationCallBack() {
                 @Override
                 public void onSuccess(ArrayList<NotificationModel> notificationModels) {
@@ -148,12 +148,12 @@ public class NotificationFragment extends Fragment {
 
                         }
                     }
-                    conection = true;
+                    connectToApi = true;
                 }
 
                 @Override
                 public void onFailure(String msg) {
-                    conection = true;
+                    connectToApi = true;
                 }
             });
 
