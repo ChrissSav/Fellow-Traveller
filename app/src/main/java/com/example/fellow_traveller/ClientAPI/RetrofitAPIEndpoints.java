@@ -117,8 +117,22 @@ public interface RetrofitAPIEndpoints {
     @GET(".")
     Call<StatusHandleModel> Test();
 
+    //Notifications
+
     @GET("/notifications")
-    Call<List<NotificationModel>> userNotifications();
+    Call<ArrayList<NotificationModel>> userNotifications();
+
+
+    @GET("/notifications/{notification_id}")
+    Call<ArrayList<NotificationModel>> userNotifications(
+            @Path("notification_id") int notification_id
+    );
+
+    @PUT("/notifications")
+    Call<StatusHandleModel> updateNotifications(
+            @Body JsonObject jsonObject
+    );
+
 
 
     //Reviews

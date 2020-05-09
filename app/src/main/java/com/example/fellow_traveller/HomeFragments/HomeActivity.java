@@ -32,6 +32,11 @@ public class HomeActivity extends AppCompatActivity {
     private BottomNavigationView bottomNav;
     private static final String TAG = "ExampleJobService";
     private Fragment selectedFragment = null;
+    private HomeFragment homeFragment = new HomeFragment();
+    private AccountFragment accountFragment = new AccountFragment();
+    private MessengerFragment messengerFragment = new MessengerFragment();
+    private TripFragment tripFragment = new TripFragment();
+    private NotificationFragment notificationFragment = new NotificationFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,38 +48,33 @@ public class HomeActivity extends AppCompatActivity {
         //scheduleJob();
 
         bottomNav = findViewById(R.id.HomeActivity_bottomNavigationView);
-/*        Toast.makeText(HomeActivity.this, "id " + globalClass.getCurrent_user().getId()+"\n"+
-                "name " + globalClass.getCurrent_user().getName()+"\n"+
-                "surname " + globalClass.getCurrent_user().getSurname(), Toast.LENGTH_SHORT).show();*/
-
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.HomeActivity_frame_container,
-                    new HomeFragment()).commit();
+                   homeFragment).commit();
         }
 
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                selectedFragment = null;
-
                 switch (item.getItemId()) {
                     case R.id.bottom_nav_main:
-                        selectedFragment = new HomeFragment();
+                        selectedFragment = homeFragment;
                         break;
                     case R.id.bottom_nav_trips:
-                        selectedFragment = new TripFragment();
+                        selectedFragment = tripFragment;
                         break;
                     case R.id.bottom_nav_messages:
                         selectedFragment = new MessengerFragment();
                         break;
                     case R.id.bottom_nav_notification:
-                        selectedFragment = new NotificationFragment();
+                        selectedFragment = notificationFragment;
                         break;
                     case R.id.bottom_nav_user_info:
-                        selectedFragment = new AccountFragment();
+                        selectedFragment = accountFragment;
                         break;
                 }
+
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.HomeActivity_frame_container,
                         selectedFragment).commit();
@@ -88,7 +88,7 @@ public class HomeActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (!(selectedFragment instanceof HomeFragment)) {
             bottomNav.setSelectedItemId(R.id.bottom_nav_main);
-            selectedFragment = new HomeFragment();
+            selectedFragment = homeFragment;
             getSupportFragmentManager().beginTransaction().replace(R.id.HomeActivity_frame_container,
                     selectedFragment).commit();
         } else {
@@ -98,7 +98,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void scheduleJob() {
         ComponentName componentName = new ComponentName(this, ExampleJobService.class);
-        JobInfo info = new JobInfo.Builder(123, componentName)
+        JobInfo info = new JobInfo.Builder(1232, componentName)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
                 .setPersisted(true)
                 .setPeriodic(15 * 60 * 1000)
