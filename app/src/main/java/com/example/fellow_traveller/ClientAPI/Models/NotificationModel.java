@@ -7,6 +7,12 @@ public class NotificationModel {
     private TripModel trip;
     private String read;
 
+
+    public NotificationModel(int id, UserBaseModel user) {
+        this.id = id;
+        this.user = user;
+    }
+
     public int getId() {
         return id;
     }

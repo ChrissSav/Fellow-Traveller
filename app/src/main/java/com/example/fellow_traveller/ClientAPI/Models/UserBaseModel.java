@@ -33,6 +33,11 @@ public class UserBaseModel implements Parcelable {
         this.aboutMe = null;
     }
 
+    public UserBaseModel(Integer id, String firstName, String lastName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     protected UserBaseModel(Parcel in) {
         if (in.readByte() == 0) {

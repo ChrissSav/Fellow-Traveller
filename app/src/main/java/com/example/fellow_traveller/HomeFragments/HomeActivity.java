@@ -98,7 +98,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void scheduleJob() {
         ComponentName componentName = new ComponentName(this, ExampleJobService.class);
-        JobInfo info = new JobInfo.Builder(123, componentName)
+        JobInfo info = new JobInfo.Builder(1232, componentName)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
                 .setPersisted(true)
                 .setPeriodic(15 * 60 * 1000)
