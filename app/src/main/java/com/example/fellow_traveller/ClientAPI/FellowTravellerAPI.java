@@ -561,8 +561,7 @@ public class FellowTravellerAPI {
 
     public static void setNotificationsRead(int notificationId,final StatusCallBack statusCallBack) {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("notification_id",notificationId);
-
+        jsonObject.addProperty("id",notificationId);
         retrofitAPIEndpoints.updateNotifications(jsonObject).enqueue(new Callback<StatusHandleModel>() {
             @Override
             public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {

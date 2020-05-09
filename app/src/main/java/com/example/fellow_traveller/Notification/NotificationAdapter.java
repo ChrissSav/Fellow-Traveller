@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fellow_traveller.ClientAPI.Models.NotificationModel;
 import com.example.fellow_traveller.R;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ExampleViewHolder> {
 
-    private ArrayList<NotificationItem> mExampleList;
+    private ArrayList<NotificationModel> mExampleList;
     private OnItemClickListener mListener;
 
 
@@ -36,7 +37,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public static class ExampleViewHolder extends RecyclerView.ViewHolder {
         private ConstraintLayout constraintLayout;
         private CircleImageView circleImageView;
-        private TextView tvDes, tvRead;
+        private TextView textViewDes,textViewRead,textViewTime;
 
 
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
@@ -44,8 +45,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
             constraintLayout = itemView.findViewById(R.id.NotificationItem_ConstraintLayout);
             circleImageView = itemView.findViewById(R.id.NotificationItem_profile_picture);
-            tvDes = itemView.findViewById(R.id.NotificationItem_textView_des);
-            tvRead = itemView.findViewById(R.id.NotificationItem_textView_read);
+            textViewDes = itemView.findViewById(R.id.NotificationItem_textView_des);
+            textViewRead = itemView.findViewById(R.id.NotificationItem_textView_read);
+            textViewTime=  itemView.findViewById(R.id.NotificationItem_textView_time);
             constraintLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -61,7 +63,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         }
     }
 
-    public NotificationAdapter(ArrayList<NotificationItem> exampleList) {
+    public NotificationAdapter(ArrayList<NotificationModel> exampleList) {
         mExampleList = exampleList;
     }
 
@@ -74,12 +76,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     @Override
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
-        NotificationItem currentItem = mExampleList.get(position);
-        holder.tvDes.setText(currentItem.getUser().getFullName());
-        Log.i("onBindViewHolder", currentItem.getStatus());
-        if (currentItem.getStatus().equals("read")) {
-            holder.tvRead.setVisibility(View.GONE);
+        NotificationModel currentItem = mExampleList.get(position);
+        holder.textViewDes.setText(currentItem.getUser().getFullName());
+        if (currentItem.getHasRead()) {
+            holder.textViewRead.setVisibility(View.GONE);
         }
+        holder.textViewTime.setText(currentItem.getDate());
     }
 
     @Override

@@ -73,7 +73,7 @@ public class GlobalClass extends Application {
         LoadClass();
         if (currentUser != null) {
             createNotificationChannels();
-            scheduleJob();
+            //scheduleJob();
         }
         super.onCreate();
     }

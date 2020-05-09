@@ -93,17 +93,17 @@ public class ExampleJobService extends JobService {
     }
 
     public void CheckConnection() {
-        UserBaseModel userBaseModel = new UserBaseModel(1, "makis", "takis");
-        NotificationModel notificationModel = new NotificationModel(12, userBaseModel);
-        ArrayList<NotificationModel> list = new ArrayList<>();
-        list.add(notificationModel);
-
-
-        for (NotificationModel notificationItem : list) {
-            String text = "Ο χρήστης " + notificationItem.getUser().getFirstName() + " " + notificationItem.getUser().getLastName()
-                    + " μόλις προστεθηκε στο ταξίδι σου";
-            ViewNotification(text, notificationItem.getId());
-        }
+//        UserBaseModel userBaseModel = new UserBaseModel(1, "makis", "takis");
+//        NotificationModel notificationModel = new NotificationModel(12, userBaseModel);
+//        ArrayList<NotificationModel> list = new ArrayList<>();
+//        list.add(notificationModel);
+//
+//
+//        for (NotificationModel notificationItem : list) {
+//            String text = "Ο χρήστης " + notificationItem.getUser().getFirstName() + " " + notificationItem.getUser().getLastName()
+//                    + " μόλις προστεθηκε στο ταξίδι σου";
+//            ViewNotification(text, notificationItem.getId());
+//        }
 //        GlobalClass globalClass = (GlobalClass) getApplicationContext();
 //        retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.API_URL)).client(globalClass.getOkHttpClient().build()).addConverterFactory(GsonConverterFactory.create()).build();
 //        retrofitService = retrofit.create(RetrofitService.class);

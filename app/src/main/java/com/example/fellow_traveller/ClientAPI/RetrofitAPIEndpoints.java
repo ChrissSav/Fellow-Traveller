@@ -123,9 +123,9 @@ public interface RetrofitAPIEndpoints {
     Call<ArrayList<NotificationModel>> userNotifications();
 
 
-    @GET("/notifications/{notification_id")
+    @GET("/notifications/{notification_id}")
     Call<ArrayList<NotificationModel>> userNotifications(
-            @Path("user_id") int notification_id
+            @Path("notification_id") int notification_id
     );
 
     @PUT("/notifications")
