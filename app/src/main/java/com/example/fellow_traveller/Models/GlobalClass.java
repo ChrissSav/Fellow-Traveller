@@ -73,7 +73,7 @@ public class GlobalClass extends Application {
         LoadClass();
         if (currentUser != null) {
             createNotificationChannels();
-            //scheduleJob();
+            scheduleJob();
         }
         super.onCreate();
     }
@@ -86,7 +86,7 @@ public class GlobalClass extends Application {
                     NotificationManager.IMPORTANCE_HIGH
             );
             channel1.setDescription(CHANNEL_NAME_1);
-            channel1.setVibrationPattern(new long[]{0, 1000, 500, 1000});
+            //channel1.setVibrationPattern(new long[]{0, 1000, 500, 1000});
             channel1.enableVibration(true);
             channel1.setShowBadge(false);
 
