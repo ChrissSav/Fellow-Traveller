@@ -12,6 +12,14 @@ public class CreateReviewModel implements Parcelable {
     @SerializedName("target_id")
     private int targetId;
 
+
+    public CreateReviewModel(String description, int rate, long timestamp, int targetId) {
+        this.description = description;
+        this.rate = rate;
+        this.timestamp = timestamp;
+        this.targetId = targetId;
+    }
+
     protected CreateReviewModel(Parcel in) {
         description = in.readString();
         rate = in.readInt();
@@ -30,6 +38,8 @@ public class CreateReviewModel implements Parcelable {
             return new CreateReviewModel[size];
         }
     };
+
+
 
     public String getDescription() {
         return description;
