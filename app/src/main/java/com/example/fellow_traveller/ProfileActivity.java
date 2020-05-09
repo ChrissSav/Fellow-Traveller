@@ -69,7 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onSuccess(ArrayList<ReviewModel> reviews) {
                 reviewsList = reviews;
-          
+
 
             }
 

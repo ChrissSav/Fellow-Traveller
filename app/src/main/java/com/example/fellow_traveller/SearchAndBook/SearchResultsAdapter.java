@@ -44,9 +44,16 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         holder.review.setText(String.valueOf(currentItem.getCreatorUser().getReviews()));
         holder.from.setText(String.valueOf(currentItem.getDestFrom().getTitle()));
         holder.to.setText(String.valueOf(currentItem.getDestTo().getTitle()));
-        holder.price.setText(currentItem.getPrice()+ "€");
+
         holder.date.setText(currentItem.getDate());
         holder.time.setText(currentItem.getTime());
+
+        //Delete the 0 decimals
+        if(currentItem.getPrice().intValue() == currentItem.getPrice())
+            holder.price.setText(currentItem.getPrice().intValue() + "€");
+        else
+            holder.price.setText(currentItem.getPrice()+ "€");
+
     }
 
     @Override

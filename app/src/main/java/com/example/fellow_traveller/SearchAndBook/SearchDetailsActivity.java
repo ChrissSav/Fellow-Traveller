@@ -71,7 +71,13 @@ public class SearchDetailsActivity extends AppCompatActivity {
         textViewPets.setText(tripModel.getPetString());
         textViewCar.setText(tripModel.getCar().getBrand());
         textViewMsg.setText(tripModel.getMessage());
-        textViewPrice.setText(tripModel.getPrice() + getResources().getString(R.string.euro_symbol));
+
+        //Delete 0 decimals
+        if(tripModel.getPrice().intValue() == tripModel.getPrice())
+            textViewPrice.setText(tripModel.getPrice().intValue() + getResources().getString(R.string.euro_symbol));
+        else
+            textViewPrice.setText(tripModel.getPrice() + getResources().getString(R.string.euro_symbol));
+
         textViewCreator.setText(tripModel.getCreatorUser().getFullName());
         textViewRating.setText(String.valueOf(tripModel.getCreatorUser().getRate()));
         textViewReviews.setText(String.valueOf(tripModel.getCreatorUser().getReviews()));
