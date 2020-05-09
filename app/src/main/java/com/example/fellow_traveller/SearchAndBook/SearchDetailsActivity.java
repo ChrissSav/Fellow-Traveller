@@ -135,6 +135,14 @@ public class SearchDetailsActivity extends AppCompatActivity {
                 startActivity(mainIntent);
             }
         });
+        mAdapter.setOnItemClickListener(new PassengerImageAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent mainIntent = new Intent(SearchDetailsActivity.this, ProfileActivity.class);
+                mainIntent.putExtra("ThisUser", passengersList.get(position).getUser());
+                startActivity(mainIntent);
+            }
+        });
     }
 
     @Override
