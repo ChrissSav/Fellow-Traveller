@@ -18,9 +18,12 @@ import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserUpdateModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.theartofdev.edmodo.cropper.CropImage;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -34,6 +37,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
     private Uri mImageUri;
     private EditText firstNameEditText, lastNameEditText, aboutMeEditText, phoneNumberEditText;
     private GlobalClass globalClass;
+    private DatabaseReference updateUserInfo;
 
 
     @Override
@@ -138,14 +142,14 @@ public class PersonalSettingsActivity extends AppCompatActivity {
     }
 
 
-    public void updateUser(String firstName, String lastName, String aboutMe, String phoneNumber) {
+    public void updateUser(final String firstName, final String lastName, String aboutMe, String phoneNumber) {
         UserUpdateModel user = new UserUpdateModel(firstName, lastName,"", aboutMe, phoneNumber);
         new FellowTravellerAPI(globalClass).updateUserInfo(user, new UserAuthCallback() {
             @Override
             public void onSuccess(UserAuthModel user) {
                 Objects.requireNonNull(user).setSessionId(globalClass.getCurrentUser().getSessionId());
                 globalClass.setCurrentUser(Objects.requireNonNull(user));
-
+                updateUserInfoOnFirebase(firstName, lastName);
                 DeleteSharedPreferences();
                 SaveClass(Objects.requireNonNull(user));
                 finish();
@@ -156,6 +160,18 @@ public class PersonalSettingsActivity extends AppCompatActivity {
                 Toast.makeText(PersonalSettingsActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void updateUserInfoOnFirebase(String firstName, String lastName) {
+        updateUserInfo= FirebaseDatabase.getInstance().getReference().child("Users").child(String.valueOf(globalClass.getCurrentUser().getId()));
+
+        HashMap<String, String> userHashMap = new HashMap<>();
+
+        userHashMap.put("image",  "default");
+        userHashMap.put("name",  firstName);
+        userHashMap.put("surname",  lastName);
+
+        updateUserInfo.setValue(userHashMap);
     }
 
 

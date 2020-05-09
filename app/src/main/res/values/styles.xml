@@ -25,7 +25,7 @@
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorOnSecondary">@color/home_blue</item>
         <item name="colorOnBackground">@color/black_color</item>
-        <item name="colorOnError">@color/red</item>
+        <item name="colorOnError">@color/red_color</item>
         <item name="colorOnSurface">@color/black_color</item>
         <item name="scrimBackground">@color/mtrl_scrim_color</item>
         <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1</item>
@@ -142,5 +142,12 @@
         <item name="android:windowBackground">@color/white</item>
         <item name="android:textColor">@color/black_color</item>
     </style>
-
+    <style name="Theme_Dialog_Abort" parent="android:Theme.Holo.Dialog">
+        <item name="android:windowMinWidthMajor">80%</item>
+        <item name="android:windowMinWidthMinor">80%</item>
+        android:fromYDelta="50%p" android:toYDelta="0%p"
+        android:duration="@android:integer/config_longAnimTime"
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:textColor">@color/black_color</item>
+    </style>
 </resources>

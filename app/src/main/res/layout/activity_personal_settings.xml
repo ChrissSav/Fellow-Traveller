@@ -21,13 +21,12 @@
 
         <ImageButton
             android:id="@+id/PersonalSettingsActivity_button_close"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/ic_close"
-            android:backgroundTint="@color/black_color"
-            android:padding="20dp"
+            android:src="@drawable/ic_close"
+            style="@style/border_icon_button"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
 

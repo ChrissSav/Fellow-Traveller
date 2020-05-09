@@ -17,17 +17,17 @@
 
             <ImageButton
                 android:id="@+id/settings_button"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
-                android:background="@drawable/ic_settings"
-                android:padding="20dp"
+                android:src="@drawable/ic_settings"
+                style="@style/border_icon_button"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/ActivityProfile_user_image"
+                android:id="@+id/FragmentAccount_user_image"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_centerHorizontal="true"
@@ -39,7 +39,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/ActivityProfile_user_name"
+                android:id="@+id/FragmentAccount_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -50,19 +50,19 @@
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ActivityProfile_user_image" />
+                app:layout_constraintTop_toBottomOf="@id/FragmentAccount_user_image" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ActivityProfile_verify_section"
+                android:id="@+id/FragmentAccount_verify_section"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ActivityProfile_user_name">
+                app:layout_constraintTop_toBottomOf="@+id/FragmentAccount_user_name">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/ActivityProfile_verify_icon"
+                    android:id="@+id/FragmentAccount_verify_icon"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_centerHorizontal="true"
@@ -80,23 +80,23 @@
                     android:text="Έμπιστος οδηγός"
                     android:textColor="@color/black_color"
                     android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="@id/ActivityProfile_verify_icon"
+                    app:layout_constraintBottom_toBottomOf="@id/FragmentAccount_verify_icon"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/ActivityProfile_verify_icon"
-                    app:layout_constraintTop_toTopOf="@id/ActivityProfile_verify_icon" />
+                    app:layout_constraintStart_toEndOf="@id/FragmentAccount_verify_icon"
+                    app:layout_constraintTop_toTopOf="@id/FragmentAccount_verify_icon" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ActivityProfile_rate_section"
+                android:id="@+id/FragmentAccount_rate_section"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ActivityProfile_verify_section">
+                app:layout_constraintTop_toBottomOf="@id/FragmentAccount_verify_section">
 
                 <TextView
-                    android:id="@+id/ActivityProfile_rate"
+                    android:id="@+id/FragmentAccount_rate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/firasans_bold"
@@ -107,30 +107,30 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/ActivityProfile_rate_icon"
+                    android:id="@+id/FragmentAccount_rate_icon"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="18dp"
                     android:background="@drawable/ic_rating"
-                    app:layout_constraintBottom_toBottomOf="@id/ActivityProfile_rate"
-                    app:layout_constraintStart_toEndOf="@id/ActivityProfile_rate"
-                    app:layout_constraintTop_toTopOf="@id/ActivityProfile_rate" />
+                    app:layout_constraintBottom_toBottomOf="@id/FragmentAccount_rate"
+                    app:layout_constraintStart_toEndOf="@id/FragmentAccount_rate"
+                    app:layout_constraintTop_toTopOf="@id/FragmentAccount_rate" />
 
                 <View
-                    android:id="@+id/ActivityProfile_rate_split_line"
+                    android:id="@+id/FragmentAccount_rate_split_line"
                     android:layout_width="2dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="18dp"
                     android:background="@color/softGrey_color"
-                    app:layout_constraintBottom_toBottomOf="@id/ActivityProfile_rate"
-                    app:layout_constraintStart_toEndOf="@id/ActivityProfile_rate_icon"
-                    app:layout_constraintTop_toTopOf="@id/ActivityProfile_rate"
+                    app:layout_constraintBottom_toBottomOf="@id/FragmentAccount_rate"
+                    app:layout_constraintStart_toEndOf="@id/FragmentAccount_rate_icon"
+                    app:layout_constraintTop_toTopOf="@id/FragmentAccount_rate"
 
                     />
 
                 <TextView
-                    android:id="@+id/ActivityProfile_reviews"
+                    android:id="@+id/FragmentAccount_reviews"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
@@ -138,34 +138,34 @@
                     android:text="125"
                     android:textColor="@color/black_color"
                     android:textSize="32sp"
-                    app:layout_constraintBottom_toBottomOf="@id/ActivityProfile_rate"
-                    app:layout_constraintStart_toEndOf="@id/ActivityProfile_rate_split_line"
-                    app:layout_constraintTop_toTopOf="@id/ActivityProfile_rate" />
+                    app:layout_constraintBottom_toBottomOf="@id/FragmentAccount_rate"
+                    app:layout_constraintStart_toEndOf="@id/FragmentAccount_rate_split_line"
+                    app:layout_constraintTop_toTopOf="@id/FragmentAccount_rate" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/ActivityProfile_reviews_icon"
+                    android:id="@+id/FragmentAccount_reviews_icon"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="18dp"
                     android:background="@drawable/ic_review"
-                    app:layout_constraintBottom_toBottomOf="@id/ActivityProfile_rate"
-                    app:layout_constraintStart_toEndOf="@id/ActivityProfile_reviews"
-                    app:layout_constraintTop_toTopOf="@id/ActivityProfile_rate" />
+                    app:layout_constraintBottom_toBottomOf="@id/FragmentAccount_rate"
+                    app:layout_constraintStart_toEndOf="@id/FragmentAccount_reviews"
+                    app:layout_constraintTop_toTopOf="@id/FragmentAccount_rate" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ActivityProfile_about_me_section"
+                android:id="@+id/FragmentAccount_about_me_section"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ActivityProfile_rate_section">
+                app:layout_constraintTop_toBottomOf="@id/FragmentAccount_rate_section">
 
                 <TextView
-                    android:id="@+id/ActivityProfile_about_me_tv"
+                    android:id="@+id/FragmentAccount_about_me_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -177,16 +177,16 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <View
-                    android:id="@+id/ActivityProfile_about_me_underline"
+                    android:id="@+id/FragmentAccount_about_me_underline"
                     android:layout_width="0dp"
                     android:layout_height="3dp"
                     android:background="@color/black_color"
-                    app:layout_constraintEnd_toEndOf="@id/ActivityProfile_about_me_tv"
-                    app:layout_constraintStart_toStartOf="@+id/ActivityProfile_about_me_tv"
-                    app:layout_constraintTop_toBottomOf="@id/ActivityProfile_about_me_tv" />
+                    app:layout_constraintEnd_toEndOf="@id/FragmentAccount_about_me_tv"
+                    app:layout_constraintStart_toStartOf="@+id/FragmentAccount_about_me_tv"
+                    app:layout_constraintTop_toBottomOf="@id/FragmentAccount_about_me_tv" />
 
                 <TextView
-                    android:id="@+id/ActivityProfile_about_me_info"
+                    android:id="@+id/FragmentAccount_about_me_info"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
@@ -196,8 +196,8 @@
                     android:textColor="@color/black_color"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/ActivityProfile_about_me_tv"
-                    app:layout_constraintTop_toBottomOf="@id/ActivityProfile_about_me_underline"
+                    app:layout_constraintStart_toStartOf="@+id/FragmentAccount_about_me_tv"
+                    app:layout_constraintTop_toBottomOf="@id/FragmentAccount_about_me_underline"
 
                     />
 
@@ -205,7 +205,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ActivityProfile_reviews_section"
+                android:id="@+id/FragmentAccount_reviews_section"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="30dp"
@@ -214,7 +214,7 @@
                 android:paddingRight="15dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ActivityProfile_about_me_section">
+                app:layout_constraintTop_toBottomOf="@+id/FragmentAccount_about_me_section">
 
                 <TextView
                     android:id="@+id/become_driver_tv"
@@ -269,7 +269,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/ActivityProfile_review_label"
+                android:id="@+id/FragmentAccount_review_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -279,19 +279,19 @@
                 android:textColor="@color/black_color"
                 android:textSize="23sp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ActivityProfile_reviews_section" />
+                app:layout_constraintTop_toBottomOf="@id/FragmentAccount_reviews_section" />
 
             <View
-                android:id="@+id/ActivityProfile_underline_review"
+                android:id="@+id/FragmentAccount_underline_review"
                 android:layout_width="0dp"
                 android:layout_height="3dp"
                 android:background="@color/black_color"
-                app:layout_constraintEnd_toEndOf="@id/ActivityProfile_review_label"
-                app:layout_constraintStart_toStartOf="@+id/ActivityProfile_review_label"
-                app:layout_constraintTop_toBottomOf="@id/ActivityProfile_review_label" />
+                app:layout_constraintEnd_toEndOf="@id/FragmentAccount_review_label"
+                app:layout_constraintStart_toStartOf="@+id/FragmentAccount_review_label"
+                app:layout_constraintTop_toBottomOf="@id/FragmentAccount_review_label" />
 
             <Button
-                android:id="@+id/ActivityProfile_more_reviews_button"
+                android:id="@+id/FragmentAccount_more_reviews_button"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -303,7 +303,7 @@
                 android:textSize="15sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ActivityProfile_underline_review" />
+                app:layout_constraintTop_toBottomOf="@+id/FragmentAccount_underline_review" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -343,9 +343,9 @@
                 android:padding="10dp"
                 android:drawablePadding="20dp"
                 android:text="Διαγραφή αυτοκινήτου"
-                android:drawableTint="@color/red"
+                android:drawableTint="@color/red_color"
                 android:textAllCaps="false"
-                android:textColor="@color/red"
+                android:textColor="@color/red_color"
                 android:textSize="15sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/color_underline_car_settings" />

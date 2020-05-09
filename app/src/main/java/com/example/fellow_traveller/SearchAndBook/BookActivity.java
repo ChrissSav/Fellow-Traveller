@@ -101,7 +101,12 @@ public class BookActivity extends AppCompatActivity {
         dateTextView.setText(day.format(currentDate));
         dateMonthTextView.setText(month.format(currentDate));
         timePmTextView.setText(pm.format(currentDate));
-        priceTextView.setText(String.valueOf(tripModel.getPrice()) + " €");
+
+        //Delete 0 decimals
+        if (tripModel.getPrice().intValue() == tripModel.getPrice())
+            priceTextView.setText(tripModel.getPrice().intValue() + getResources().getString(R.string.euro_symbol));
+        else
+            priceTextView.setText(tripModel.getPrice() + getResources().getString(R.string.euro_symbol));
 
         fillList();
         if(tripModel.getPet()){

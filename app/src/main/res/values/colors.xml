@@ -16,6 +16,7 @@
     <color name="lightGrey_color">#EBEBEB</color>
     <color name="grey_color">#B1B1B1</color>
     <color name="softGrey_color">#EEEEEE</color>
+    <color name="red_color">#E21A1A</color>
 
     <color name="hoverOrange">#E9B381</color>
     <color name="blue">#8297FF</color>
@@ -32,6 +33,6 @@
     <color name="receiverFill">#F8F8F8</color>
     <color name="shadowForButtons">#EEEEEE</color>
     <color name="login_button_click">#205890</color>
-    <color name="red">#E21A1A</color>
+
     <color name="blue_offer">#3A9FEC</color>
 </resources>
