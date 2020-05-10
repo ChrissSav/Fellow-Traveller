@@ -109,7 +109,7 @@ public class ExampleJobService extends JobService {
                 .setContentText(text)
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(text)
-                        .setBigContentTitle("Προστέθηκε εβιβάτης"))
+                        .setBigContentTitle("Προστέθηκε επιβάτης"))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_EVENT)
                 .setContentIntent(contentIntent)
