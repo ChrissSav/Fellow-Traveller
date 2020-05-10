@@ -3,6 +3,9 @@ package com.example.fellow_traveller.Models;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -27,14 +30,13 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 public class GlobalClass extends Application {
     public static final String CHANNEL_1_ID = "passenger_notification";
     private static final String CHANNEL_NAME_1 = "This is Channel passenger_notification";
     private UserAuthModel currentUser;
     private OkHttpClient.Builder okHttpClient;
-
-
-
 
 
     public UserAuthModel getCurrentUser() {
@@ -53,10 +55,10 @@ public class GlobalClass extends Application {
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
                 Request.Builder newRequest = request.newBuilder();
-                Log.i("setSessionId","getOkHttpClient if"+Objects.requireNonNull(currentUser.getSessionId()));
+                Log.i("setSessionId", "getOkHttpClient if" + Objects.requireNonNull(currentUser.getSessionId()));
 
                 if (currentUser != null) {
-                    Log.i("setSessionId","getOkHttpClient "+Objects.requireNonNull(currentUser.getSessionId()));
+                    Log.i("setSessionId", "getOkHttpClient " + Objects.requireNonNull(currentUser.getSessionId()));
                     newRequest.header("Cookie", Objects.requireNonNull(currentUser.getSessionId()));
                 }
                 return chain.proceed(newRequest.build());
@@ -66,11 +68,13 @@ public class GlobalClass extends Application {
     }
 
 
-
     @Override
     public void onCreate() {
         LoadClass();
-
+        if (currentUser != null) {
+            createNotificationChannels();
+            scheduleJob();
+        }
         super.onCreate();
     }
 
@@ -82,7 +86,7 @@ public class GlobalClass extends Application {
                     NotificationManager.IMPORTANCE_HIGH
             );
             channel1.setDescription(CHANNEL_NAME_1);
-            channel1.setVibrationPattern(new long[]{0, 1000, 500, 1000});
+            //channel1.setVibrationPattern(new long[]{0, 1000, 500, 1000});
             channel1.enableVibration(true);
             channel1.setShowBadge(false);
 
@@ -115,5 +119,24 @@ public class GlobalClass extends Application {
         editor.apply();
         currentUser = userAuth;
     }
+
+    public void scheduleJob() {
+        ComponentName componentName = new ComponentName(this, ExampleJobService.class);
+        JobInfo info = new JobInfo.Builder(1232, componentName)
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
+                .setPersisted(true)
+                .setPeriodic(15 * 60 * 1000)
+                .build();
+
+        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
+        int resultCode = scheduler.schedule(info);
+        if (resultCode == JobScheduler.RESULT_SUCCESS) {
+            Log.d(TAG, "Job scheduled");
+        } else {
+            Log.d(TAG, "Job scheduling failed");
+        }
+    }
+
+
 }
 

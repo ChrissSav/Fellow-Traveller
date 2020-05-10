@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarDeleteCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
+import com.example.fellow_traveller.ClientAPI.Callbacks.NotificationCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.ReviewModelCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.SearchTripsCallback;
 import com.example.fellow_traveller.ClientAPI.Callbacks.StatusCallBack;
@@ -18,6 +19,7 @@ import com.example.fellow_traveller.ClientAPI.Models.CreatePassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreateReviewModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
 import com.example.fellow_traveller.ClientAPI.Models.ErrorResponseModel;
+import com.example.fellow_traveller.ClientAPI.Models.NotificationModel;
 import com.example.fellow_traveller.ClientAPI.Models.PassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.ReviewModel;
 import com.example.fellow_traveller.ClientAPI.Models.SearchDestinationsModel;
@@ -520,8 +522,62 @@ public class FellowTravellerAPI {
 
 
 
+    public static void getNotifications(final NotificationCallBack notificationCallBack) {
+        retrofitAPIEndpoints.userNotifications().enqueue(new Callback<ArrayList<NotificationModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<NotificationModel>> call, Response<ArrayList<NotificationModel>> response) {
+                if (!response.isSuccessful()) {
+                    notificationCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                    return;
+                }
+                notificationCallBack.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<NotificationModel>> call, Throwable t) {
+                notificationCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            }
+        });
+    }
 
 
+    public static void getNotificationsById(int notificationId,final NotificationCallBack notificationCallBack) {
+        retrofitAPIEndpoints.userNotifications(notificationId).enqueue(new Callback<ArrayList<NotificationModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<NotificationModel>> call, Response<ArrayList<NotificationModel>> response) {
+                if (!response.isSuccessful()) {
+                    notificationCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                    return;
+                }
+                notificationCallBack.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<NotificationModel>> call, Throwable t) {
+                notificationCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            }
+        });
+    }
+
+    public static void setNotificationsRead(int notificationId,final StatusCallBack statusCallBack) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("id",notificationId);
+        retrofitAPIEndpoints.updateNotifications(jsonObject).enqueue(new Callback<StatusHandleModel>() {
+            @Override
+            public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
+                if (!response.isSuccessful()) {
+                    statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                    return;
+                }
+                statusCallBack.onSuccess(response.body().getMsg());
+            }
+
+            @Override
+            public void onFailure(Call<StatusHandleModel> call, Throwable t) {
+                statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            }
+        });
+    }
 
 
 
