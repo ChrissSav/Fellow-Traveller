@@ -544,7 +544,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/black_button_shape"
-        android:text="Επιλογή (3)"
+        android:text="Επιλογή"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"

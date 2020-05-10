@@ -81,7 +81,7 @@ public class Search2Activity extends AppCompatActivity implements View.OnClickLi
         startDestinationModel = (DestinationModel) intent.getParcelableExtra("startDestination");
         previousChoice = intent.getIntExtra("DestStartChoice", 0);
 
-        Toast.makeText(Search2Activity.this, startDestinationModel.getTitle() + " " + startDestinationModel.getPlaceId() + " " + startDestinationModel.getLatitude() + " " + startDestinationModel.getLongitude(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(Search2Activity.this, startDestinationModel.getTitle() + " " + /*startDestinationModel.getPlaceId()*/   + startDestinationModel.getLatitude() + " " + startDestinationModel.getLongitude(), Toast.LENGTH_SHORT).show();
         //Toast.makeText(Search2Activity.this, String.valueOf(previousChoice) + "", Toast.LENGTH_SHORT).show();
         unrecommendDestination();
         //If we search for something suggest section disappears

@@ -163,7 +163,7 @@ public class BookActivity extends AppCompatActivity {
                 new FellowTravellerAPI(globalClass).addPassengerToTrip(createPassengerModel, new StatusCallBack() {
                     @Override
                     public void onSuccess(String status) {
-                        Toast.makeText(BookActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(BookActivity.this, "Success", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(BookActivity.this, SuccessActivity.class);
                         intent.putExtra("title", getResources().getString(R.string.success_search));
                         assignPassengerToTripConversation();

@@ -109,7 +109,7 @@ public class MessengerFragment extends Fragment {
         public void onItemClick(int position) {
 
             ConversationItem item = conversationsList.get(position);
-            Toast.makeText(globalClass, "Χτυπήθηκε το item " + item.getTripId(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(globalClass, "Χτυπήθηκε το item " + item.getTripId(), Toast.LENGTH_SHORT).show();
             notifyFlag = true;
             Intent mainIntent = new Intent(getActivity(), ChatConversationActivity.class);
             mainIntent.putExtra("groupId", item.getTripId());

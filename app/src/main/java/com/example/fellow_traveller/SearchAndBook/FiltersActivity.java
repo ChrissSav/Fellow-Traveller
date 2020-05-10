@@ -94,15 +94,15 @@ public class FiltersActivity extends AppCompatActivity {
 
         selectedFilters = getIntent().getParcelableExtra("getSelections");
         if(selectedFilters.getPriceMin()!=null){
-            Toast.makeText(this, String.valueOf(selectedFilters.getPriceMin()), Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, String.valueOf(selectedFilters.getPriceMin()), Toast.LENGTH_SHORT).show();
             priceRangeSeekBar.setMinStartValue((float) selectedFilters.getPriceMin()).apply();
         }
         if(selectedFilters.getPriceMax()!=null){
-            Toast.makeText(this, String.valueOf(selectedFilters.getPriceMin()), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, String.valueOf(selectedFilters.getPriceMin()), Toast.LENGTH_SHORT).show();
             priceRangeSeekBar.setMaxStartValue((float) selectedFilters.getPriceMax()).apply();
         }
         if(selectedFilters.getRange()!=null){
-            Toast.makeText(this, String.valueOf(selectedFilters.getPriceMin()), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, String.valueOf(selectedFilters.getPriceMin()), Toast.LENGTH_SHORT).show();
             kmRangeSeekBar.setMinStartValue((float) selectedFilters.getRange()).apply();
         }if(selectedFilters.getHavePet()!=null){
             if(selectedFilters.getHavePet())
@@ -117,7 +117,7 @@ public class FiltersActivity extends AppCompatActivity {
             bagsTextView.setText(String.valueOf(selectedFilters.getBagsMin()));
         }
         if(selectedFilters.getTimestampMin() !=null && selectedFilters.getTimestampMax() != null){
-            Toast.makeText(this, "Διαφορετικό", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Διαφορετικό", Toast.LENGTH_SHORT).show();
             Pair setDefault = new Pair(selectedFilters.getTimestampMin()*1000,selectedFilters.getTimestampMax()*1000);
             builder.setSelection(setDefault);
             //dateButton.setText(materialDatePicker.getHeaderText());
@@ -164,7 +164,7 @@ public class FiltersActivity extends AppCompatActivity {
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(FiltersActivity.this, "Ημερομηνία " + startDateFinal + "-" + endDateFinal + "Τιμή " + priceStartFinal + "-" + priceEndFinal + rangeFinal + seatsFinal + bagsFinal, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(FiltersActivity.this, "Ημερομηνία " + startDateFinal + "-" + endDateFinal + "Τιμή " + priceStartFinal + "-" + priceEndFinal + rangeFinal + seatsFinal + bagsFinal, Toast.LENGTH_SHORT).show();
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("resultFilterModel", selectedFilters);
                 setResult(RESULT_OK, resultIntent);
@@ -404,7 +404,7 @@ public class FiltersActivity extends AppCompatActivity {
                 endDateFinal = selection.second;
                 selectedFilters.setTimestampMin(startDateFinal/1000);
                 selectedFilters.setTimestampMax(endDateFinal/1000);
-                Toast.makeText(FiltersActivity.this, "Start: " + startDateFinal + " End: " + endDateFinal, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(FiltersActivity.this, "Start: " + startDateFinal + " End: " + endDateFinal, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -424,7 +424,7 @@ public class FiltersActivity extends AppCompatActivity {
                 Pair setDefault = new Pair(null, null);
                 builder.setSelection(setDefault);
                 builder.build();
-                Toast.makeText(FiltersActivity.this, "Start: " + startDateFinal + " End: " + endDateFinal, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(FiltersActivity.this, "Start: " + startDateFinal + " End: " + endDateFinal, Toast.LENGTH_SHORT).show();
 
             }
         });

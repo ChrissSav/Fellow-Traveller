@@ -90,7 +90,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         searchDestinationsModel = new SearchDestinationsModel(latlongModelStart, latlongModelEnd);
 //
 //
-        Toast.makeText(SearchResultsActivity.this, searchDestinationsModel.getDestFrom().getLatitude().toString() + "", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(SearchResultsActivity.this, searchDestinationsModel.getDestFrom().getLatitude().toString() + "", Toast.LENGTH_SHORT).show();
 //        SearchDestinationsModel searchDestinationsModel = null;
 //        searchDestinationsModel.setDestFrom(latlongModelStart);
 //        searchDestinationsModel.setDestTo(latlongModelEnd);
@@ -168,7 +168,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
                     destModel.setLatitude(resultModel.getGeometry().getLocation().getLatitude());
                     destModel.setLongitude(resultModel.getGeometry().getLocation().getLongitude());
-                    Toast.makeText(SearchResultsActivity.this, destModel.getLatitude() + " " + (destModel.getLongitude()), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(SearchResultsActivity.this, destModel.getLatitude() + " " + (destModel.getLongitude()), Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -190,7 +190,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
                     startDestinationModel.setLatitude(resultModel.getGeometry().getLocation().getLatitude());
                     startDestinationModel.setLongitude(resultModel.getGeometry().getLocation().getLongitude());
-                    Toast.makeText(SearchResultsActivity.this, startDestinationModel.getLatitude() + " " + (startDestinationModel.getLongitude()), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SearchResultsActivity.this, startDestinationModel.getLatitude() + " " + (startDestinationModel.getLongitude()), Toast.LENGTH_SHORT).show();
                     destFromDone = true;
                 }
 
@@ -215,7 +215,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
                     endDestinationModel.setLatitude(resultModel.getGeometry().getLocation().getLatitude());
                     endDestinationModel.setLongitude(resultModel.getGeometry().getLocation().getLongitude());
-                    Toast.makeText(SearchResultsActivity.this, endDestinationModel.getLatitude() + " " + (endDestinationModel.getLongitude()), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(SearchResultsActivity.this, endDestinationModel.getLatitude() + " " + (endDestinationModel.getLongitude()), Toast.LENGTH_SHORT).show();
                     destToDone = true;
                 }
 

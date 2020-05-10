@@ -260,7 +260,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 if (ActivityCompat.checkSelfPermission(SearchActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     //When permission granted
                     //Intent new Activity
-                    Toast.makeText(SearchActivity.this, "Permission already allowed", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SearchActivity.this, "Permission already allowed", Toast.LENGTH_SHORT).show();
                     getMyLocation();
                 } else {
                     //When permission denied
