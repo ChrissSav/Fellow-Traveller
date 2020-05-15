@@ -5,6 +5,7 @@
     <color name="colorAccent">#D81B60</color>
     <!-- Custom colors for app-->
     <color name="orange_color">#e2631a</color>
+    <color name="lightOrange_color"> #E16234</color>
     <color name="orange_color_pressed">#ee7d3b</color>
     <color name="white_color">#F8F8F8</color>
     <color name="black_color">#262322</color>
