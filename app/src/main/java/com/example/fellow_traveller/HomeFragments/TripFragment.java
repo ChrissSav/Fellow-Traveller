@@ -23,6 +23,7 @@ public class TripFragment extends Fragment {
     View view;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private boolean flag = true;
 
     public TripFragment() {
         // Required empty public constructor
@@ -37,14 +38,14 @@ public class TripFragment extends Fragment {
         tabLayout = view.findViewById(R.id.fragmentTrip_TabLayout);
         viewPager = view.findViewById(R.id.fragmentTrip_ViewPager);
 
-        TripsViewPagerAdapter tripsViewPagerAdapter = new TripsViewPagerAdapter(getFragmentManager());
-        //Attaching fragments to tabLayout
-        tripsViewPagerAdapter.addFragment(new SearchsTabLayout(), "Αναζητήσεις");
-        tripsViewPagerAdapter.addFragment(new OffersTabLayout(), "Προσφορές");
 
-        viewPager.setAdapter(tripsViewPagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
+            TripsViewPagerAdapter tripsViewPagerAdapter = new TripsViewPagerAdapter(getChildFragmentManager());
+            //Attaching fragments to tabLayout
+            tripsViewPagerAdapter.addFragment(new SearchsTabLayout(), "Αναζητήσεις");
+            tripsViewPagerAdapter.addFragment(new OffersTabLayout(), "Προσφορές");
 
+            viewPager.setAdapter(tripsViewPagerAdapter);
+            tabLayout.setupWithViewPager(viewPager);
 
 
         return view;

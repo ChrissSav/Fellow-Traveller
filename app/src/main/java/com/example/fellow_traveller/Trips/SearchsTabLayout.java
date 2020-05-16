@@ -30,12 +30,12 @@ import androidx.recyclerview.widget.RecyclerView;
 public class SearchsTabLayout extends Fragment {
     View view;
     private GlobalClass globalClass;
-    private RecyclerView mRecyclerViewActive;
-    private ActiveTripsAdapter mAdapterActive;
-    private RecyclerView.LayoutManager mLayoutManagerActive;
+    private RecyclerView mRecyclerViewActive, mRecyclerViewNotActive;
+    private ActiveTripsAdapter mAdapterActive, mAdapterNotActive;
+    private RecyclerView.LayoutManager mLayoutManagerActive, mLayoutManagerNotActive;
     private ArrayList<TripModel> activeTrips = new ArrayList<>();
     private ArrayList<TripModel> notActiveTrips = new ArrayList<>();
-    private TextView activeTripsTextview;
+    private TextView activeTripsTextview, notActiveTripsTextView;
     private ImageView notFoundImage;
     private Button searchButton;
 
@@ -50,6 +50,7 @@ public class SearchsTabLayout extends Fragment {
         //myContext = container.getContext();
         globalClass = (GlobalClass) getActivity().getApplicationContext();
         activeTripsTextview = view.findViewById(R.id.fragment_trip_searchs_active_trips_textView);
+        notActiveTripsTextView = view.findViewById(R.id.fragment_trip_searchs_completed_label);
         notFoundImage = view.findViewById(R.id.fragment_trip_searchs_image_not_found);
         searchButton = view.findViewById(R.id.fragment_trip_searchs_button);
 
