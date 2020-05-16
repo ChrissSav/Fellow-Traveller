@@ -37,7 +37,7 @@
                 app:tabIndicatorColor="@color/black_color"
                 app:tabTextAppearance="@style/MyCustomTabLayoutTextAppearance"
                 app:layout_constraintStart_toStartOf="@id/fragmentTrip_trips_label"
-                app:tabBackground="@color/softGrey_color"
+                
                 />
             
             <androidx.viewpager.widget.ViewPager
