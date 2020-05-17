@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.R;
@@ -31,6 +32,7 @@ public class MapsRouteActivity extends AppCompatActivity implements OnMapReadyCa
     private Polyline currentPolyline;
     private TripModel tripModel;
     private LatLng startDestinationToZoomOnMap;
+    private Context myContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,24 +41,36 @@ public class MapsRouteActivity extends AppCompatActivity implements OnMapReadyCa
 
         //getDirectionsButton = findViewById(R.id.maps_route_button);
 
+        myContext = getApplicationContext();
+
         //Parse the trip model
         tripModel = getIntent().getParcelableExtra("trip");
         place1 = new MarkerOptions().position(new LatLng(tripModel.getDestFrom().getLatitude(), tripModel.getDestFrom().getLongitude())).title(tripModel.getDestFrom().getTitle());
         place2 = new MarkerOptions().position(new LatLng(tripModel.getDestTo().getLatitude(), tripModel.getDestTo().getLongitude())).title(tripModel.getDestTo().getTitle());
+
         //Initialize the FromDestination to zoom when we open the map
         startDestinationToZoomOnMap = new LatLng(tripModel.getDestFrom().getLatitude(),tripModel.getDestFrom().getLongitude());
+
+
 //        place1 = new MarkerOptions().position(new LatLng(40.736851, 22.920227)).title("Θεσσαλονίκη");
 //        place2 = new MarkerOptions().position(new LatLng(37.983810, 23.727539)).title("Αθήνα");
+
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.maps_route_fragment);
         mapFragment.getMapAsync(this);
+
 //        SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager()
 //                .findFragmentById(R.id.maps_route_fragment);
 //        fm.getMapAsync(this);
 
-        String url = getUrl(place1.getPosition(), place2.getPosition(), "driving");
-        new FetchURL(MapsRouteActivity.this).execute(url, "driving");
+        if(isNetworkAvailable(myContext)) {
+            String url = getUrl(place1.getPosition(), place2.getPosition(), "driving");
+            new FetchURL(MapsRouteActivity.this).execute(url, "driving");
+        }else
+            Toast.makeText(this, "Ελέξτε την σύνδεση σας", Toast.LENGTH_SHORT).show();
 
     }
+
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
