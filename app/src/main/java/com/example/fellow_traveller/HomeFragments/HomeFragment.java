@@ -53,15 +53,8 @@ public class HomeFragment extends Fragment {
         constraintLayout2 = view.findViewById(R.id.Layout3);
         welcome_user = view.findViewById(R.id.FragmentHome_textView_welcome_user);
         btnΝewΟffer = view.findViewById(R.id.FragmentHome_button_CreateTrip);
-        mycrazybutton = view.findViewById(R.id.mycrazybutton);
 
-        mycrazybutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent mainIntent = new Intent(getActivity(), MapsRouteActivity.class);
-                startActivity(mainIntent);
-            }
-        });
+
 
         welcome_user.setText("Γεια σου " + globalClass.getCurrentUser().getName() + ",");
         searchForTrip.setOnClickListener(new View.OnClickListener() {
