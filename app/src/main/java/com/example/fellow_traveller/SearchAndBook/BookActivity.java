@@ -201,7 +201,7 @@ public class BookActivity extends AppCompatActivity {
         tripsAndParticipantsDatabase = FirebaseDatabase.getInstance().getReference().child("TripsAndParticipants").child(String.valueOf(tripModel.getId())).child(String.valueOf(tripModel.getCreatorUser().getId()));
 
         HashMap<String, Object> tripsAndParticipantsMap = new HashMap<>();
-        tripsAndParticipantsMap.put("userId",  globalClass.getCurrentUser().getId());
+        tripsAndParticipantsMap.put("userId",  tripModel.getCreatorUser().getId());
 
         tripsAndParticipantsDatabase.setValue(tripsAndParticipantsMap);
     }
