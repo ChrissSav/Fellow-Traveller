@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.fellow_traveller.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -28,11 +29,11 @@ public class MapsRouteActivity extends AppCompatActivity implements OnMapReadyCa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps_route);
 
-        getDirectionsButton = findViewById(R.id.maps_route_button);
+        //getDirectionsButton = findViewById(R.id.maps_route_button);
 
 
-        place1 = new MarkerOptions().position(new LatLng(27.658143, 85.3199503)).title("Location1");
-        place2 = new MarkerOptions().position(new LatLng(27.667491, 85.3208583)).title("Location2");
+        place1 = new MarkerOptions().position(new LatLng(40.736851, 22.920227)).title("Θεσσαλονίκη");
+        place2 = new MarkerOptions().position(new LatLng(37.983810, 23.727539)).title("Αθήνα");
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.maps_route_fragment);
         mapFragment.getMapAsync(this);
 //        SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager()
@@ -49,6 +50,9 @@ public class MapsRouteActivity extends AppCompatActivity implements OnMapReadyCa
         map = googleMap;
         map.addMarker(place1);
         map.addMarker(place2);
+        LatLng destFrom = new LatLng(40.736851, 22.920227);
+        //map.moveCamera(CameraUpdateFactory.newLatLng(destFrom));
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(destFrom, 7));
     }
     private String getUrl(LatLng origin, LatLng dest, String directionMode) {
         // Origin of route

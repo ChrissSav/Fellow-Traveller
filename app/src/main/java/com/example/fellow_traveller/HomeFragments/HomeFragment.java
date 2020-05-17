@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fellow_traveller.MapDirections.MapsActivity;
 import com.example.fellow_traveller.MapDirections.MapsRouteActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.NewOffer.NewOfferActivity;
