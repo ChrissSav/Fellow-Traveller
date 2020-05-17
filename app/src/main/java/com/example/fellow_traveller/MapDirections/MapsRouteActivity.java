@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
@@ -27,7 +28,7 @@ import java.net.UnknownHostException;
 public class MapsRouteActivity extends AppCompatActivity implements OnMapReadyCallback, TaskLoadedCallback {
 
     private GoogleMap map;
-    private Button getDirectionsButton;
+    private ImageButton closeButton;
     private MarkerOptions place1, place2;
     private Polyline currentPolyline;
     private TripModel tripModel;
@@ -39,7 +40,7 @@ public class MapsRouteActivity extends AppCompatActivity implements OnMapReadyCa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps_route);
 
-        //getDirectionsButton = findViewById(R.id.maps_route_button);
+        closeButton = findViewById(R.id.maps_route_close_button);
 
         myContext = getApplicationContext();
 
@@ -68,6 +69,13 @@ public class MapsRouteActivity extends AppCompatActivity implements OnMapReadyCa
         }else
             Toast.makeText(this, "Ελέξτε την σύνδεση σας", Toast.LENGTH_SHORT).show();
 
+
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
 
