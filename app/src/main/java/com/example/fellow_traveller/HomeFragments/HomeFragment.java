@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fellow_traveller.MapDirections.MapsActivity;
+import com.example.fellow_traveller.MapDirections.MapsRouteActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.NewOffer.NewOfferActivity;
 import com.example.fellow_traveller.R;
@@ -28,7 +30,7 @@ public class HomeFragment extends Fragment {
     private View view;
     private GlobalClass globalClass;
     private CircleImageView circleImageView;
-    private Button btnΝewΟffer;
+    private Button btnΝewΟffer, mycrazybutton;
 
 
     public HomeFragment() {
@@ -51,6 +53,8 @@ public class HomeFragment extends Fragment {
         constraintLayout2 = view.findViewById(R.id.Layout3);
         welcome_user = view.findViewById(R.id.FragmentHome_textView_welcome_user);
         btnΝewΟffer = view.findViewById(R.id.FragmentHome_button_CreateTrip);
+
+
 
         welcome_user.setText("Γεια σου " + globalClass.getCurrentUser().getName() + ",");
         searchForTrip.setOnClickListener(new View.OnClickListener() {

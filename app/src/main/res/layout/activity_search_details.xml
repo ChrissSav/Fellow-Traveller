@@ -196,6 +196,18 @@
                 android:layout_marginTop="5dp"
                 android:textSize="20sp"
                 />
+            <Button
+                android:id="@+id/ActivitySearchDetails_show_map_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/button_black_empty"
+                android:text="Εμφάνιση στον χάρτη"
+                android:fontFamily="@font/firasans_mediumitalic"
+                app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_to_dest_tv"
+                app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_trip_label"
+                android:layout_marginTop="20dp"
+                />
+
             <TextView
                 android:id="@+id/ActivitySearchDetails_date_label"
                 android:layout_width="wrap_content"
@@ -205,8 +217,8 @@
                 android:textColor="@color/black_color"
                 android:fontFamily="@font/firasans_light"
                 app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_trip_label"
-                app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_to_dest_tv"
-                android:layout_marginTop="50dp"
+                app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_show_map_button"
+                android:layout_marginTop="20dp"
                 />
             <TextView
                 android:id="@+id/ActivitySearchDetails_time_label"

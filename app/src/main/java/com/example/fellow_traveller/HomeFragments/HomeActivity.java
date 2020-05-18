@@ -62,7 +62,7 @@ public class HomeActivity extends AppCompatActivity {
                         selectedFragment = homeFragment;
                         break;
                     case R.id.bottom_nav_trips:
-                        selectedFragment = tripFragment;
+                        selectedFragment = new TripFragment();
                         break;
                     case R.id.bottom_nav_messages:
                         selectedFragment = new MessengerFragment();

@@ -61,7 +61,10 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.0-alpha03'
     //Crystal Range SeekBar
     implementation 'com.crystal:crystalrangeseekbar:1.1.1'
+    //Track my location
     implementation 'com.google.android.gms:play-services-location:17.0.0'
+    //Get Directions
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
 
 }

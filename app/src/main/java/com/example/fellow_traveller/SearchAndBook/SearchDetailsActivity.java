@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.example.fellow_traveller.ClientAPI.Models.PassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserBaseModel;
+import com.example.fellow_traveller.MapDirections.MapsRouteActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.ProfileActivity;
 import com.example.fellow_traveller.R;
@@ -31,7 +32,7 @@ public class SearchDetailsActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private TextView textViewCreator, textViewRating, textViewReviews, textViewDestFrom, textViewDestTo, textViewDate,
             textViewTime, textViewSeats, textViewBags, textViewPets, textViewCar, textViewMsg, textViewPrice;
-    private Button passengersButton;
+    private Button passengersButton, showOnMapButton;
     private TripModel tripModel;
     private ImageButton imageButtonBack;
     private GlobalClass globalClass;
@@ -63,6 +64,7 @@ public class SearchDetailsActivity extends AppCompatActivity {
         textViewMsg = findViewById(R.id.ActivitySearchDetails_driver_message_tv);
         passengersButton = findViewById(R.id.ActivitySearchDetails_more_passengers_button);
         userLayout = findViewById(R.id.ActivitySearchDetails_user_section);
+        showOnMapButton = findViewById(R.id.ActivitySearchDetails_show_map_button);
 
 
         textViewDestFrom.setText(tripModel.getDestFrom().getTitle());
@@ -151,6 +153,14 @@ public class SearchDetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent mainIntent = new Intent(SearchDetailsActivity.this, ProfileActivity.class);
                 mainIntent.putExtra("ThisUser", tripModel.getCreatorUser());
+                startActivity(mainIntent);
+            }
+        });
+        showOnMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainIntent = new Intent(SearchDetailsActivity.this, MapsRouteActivity.class);
+                mainIntent.putExtra("trip", tripModel);
                 startActivity(mainIntent);
             }
         });
