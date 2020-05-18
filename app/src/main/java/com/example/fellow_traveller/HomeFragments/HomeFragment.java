@@ -13,12 +13,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fellow_traveller.ClientAPI.Models.SearchDestinationsModel;
 import com.example.fellow_traveller.MapDirections.MapsActivity;
 import com.example.fellow_traveller.MapDirections.MapsRouteActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.NewOffer.NewOfferActivity;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.SearchAndBook.SearchActivity;
+import com.example.fellow_traveller.SearchAndBook.SearchDestinationsActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -61,7 +63,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Intent mainIntent = new Intent(getActivity(), SearchActivity.class);
+                Intent mainIntent = new Intent(getActivity(), SearchDestinationsActivity.class);
                 startActivity(mainIntent);
             }
         });

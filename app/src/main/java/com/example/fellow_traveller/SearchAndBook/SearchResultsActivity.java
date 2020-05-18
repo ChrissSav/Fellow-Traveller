@@ -1,6 +1,7 @@
 package com.example.fellow_traveller.SearchAndBook;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,6 +19,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,6 +64,8 @@ public class SearchResultsActivity extends AppCompatActivity {
     private FilterModel  filterModel;
     private CoordinatorLayout mainCoordinatorLayout;
     private int sortListMethodFlag = 0;
+    private ProgressDialog pd;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +82,10 @@ public class SearchResultsActivity extends AppCompatActivity {
         searchResultsCount = findViewById(R.id.ActivitySearchResults_results_label);
         notFoundImage = findViewById(R.id.ActivitySearchResults_not_found_image);
         mainCoordinatorLayout = findViewById(R.id.ActivitySearchResults_main_coordinator_layout);
+        progressBar = findViewById(R.id.ActivitySearchResults_progress_bar);
+        pd = new ProgressDialog(SearchResultsActivity.this);
+        pd.setMessage("Αναζήτηση... ");
+        //pd.show();
 
         filterModel = new FilterModel();
 
@@ -155,6 +163,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         swapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 String swapString = startDestTextView.getText().toString();
                 startDestTextView.setText(endDestTextView.getText().toString());
                 endDestTextView.setText(swapString);
@@ -219,6 +228,8 @@ public class SearchResultsActivity extends AppCompatActivity {
                 public void onFailure(String errorMsg) {
                     Toast.makeText(SearchResultsActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
                     destFromDone = true;
+                    pd.dismiss();
+                    progressBar.setVisibility(View.GONE);
                 }
             });
         }
@@ -244,6 +255,8 @@ public class SearchResultsActivity extends AppCompatActivity {
                 public void onFailure(String errorMsg) {
                     Toast.makeText(SearchResultsActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
                     destToDone = true;
+                    pd.dismiss();
+                    progressBar.setVisibility(View.GONE);
                 }
             });
         }else {
@@ -299,6 +312,8 @@ public class SearchResultsActivity extends AppCompatActivity {
                                         Collections.sort(resultList, TripModel.RatesComparator);
 
                                     buildRecyclerView();
+                                    pd.dismiss();
+                                    progressBar.setVisibility(View.GONE);
 
 
                                     searchResultsCount.setText(String.format("Βρέθηκαν %d ταξίδια.", resultList.size()));
@@ -316,7 +331,9 @@ public class SearchResultsActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onFailure(String errorMsg) {
-                                    Log.d("FILTER", "Couldnt find any trips");
+                                    Log.d("FILTER", "Couldn't find any trips");
+                                    pd.dismiss();
+                                    progressBar.setVisibility(View.GONE);
                                 }
                             });
                 } else {
@@ -337,6 +354,7 @@ public class SearchResultsActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 int result = data.getIntExtra("result", 0);
                 filterModel = data.getParcelableExtra("resultFilterModel");
+                pd.show();
                 Trip();
 
             }

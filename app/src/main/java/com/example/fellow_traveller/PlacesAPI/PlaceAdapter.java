@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,15 +32,15 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ExampleViewH
     }
 
     public static class ExampleViewHolder extends RecyclerView.ViewHolder {
-        private Button button;
+        private TextView locationTextView;
 
 
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
 
-            button = itemView.findViewById(R.id.place_item_button);
+            locationTextView= itemView.findViewById(R.id.place_item_textView);
 
-            button.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
@@ -69,7 +70,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ExampleViewH
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
         PredictionsModel currentItem = mExampleList.get(position);
         currentItem.setDescription(currentItem.getDescription().split(", Ελλάδα")[0]);
-        holder.button.setText(currentItem.getDescription());
+        holder.locationTextView.setText(currentItem.getDescription());
 
     }
 

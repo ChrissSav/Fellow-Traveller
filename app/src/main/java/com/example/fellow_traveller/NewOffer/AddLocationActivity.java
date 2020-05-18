@@ -106,6 +106,5 @@ public class AddLocationActivity extends AppCompatActivity {
             }
         });
 
-
     }
 }
