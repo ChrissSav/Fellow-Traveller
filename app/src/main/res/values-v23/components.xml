@@ -11,6 +11,20 @@
         <item name="android:drawableTint">@color/orange_color</item>
         <item name="android:gravity">left|center_vertical</item>
         <item name="android:background">@drawable/component_orange_button_outline_rectangle_shape</item>
+    </style>
+    <style name="button_empty_with_left_drawable">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/firasans_medium</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:drawablePadding">15dp</item>
+        <item name="android:drawableTint">@color/orange_color</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:background">@drawable/component_orange_button_empty_rectangle_shape</item>
 
     </style>
 </resources>
