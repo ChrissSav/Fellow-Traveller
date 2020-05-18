@@ -34,6 +34,7 @@ public class SearchLocationActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private DestinationModel destinationModelToReturn;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,7 @@ public class SearchLocationActivity extends AppCompatActivity {
         clearButton = findViewById(R.id.ActivitySearchLocation_erase_button);
         progressBar = findViewById(R.id.ActivitySearchLocation_progress_bar);
 
+        destinationsEditText.requestFocus();
         destinationsEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

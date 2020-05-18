@@ -58,14 +58,16 @@ public class SearchResultsActivity extends AppCompatActivity {
     private LatLongModel latlongModelStart, latlongModelEnd;
     private SearchDestinationsModel searchDestinationsModel;
     private ArrayList<TripModel> resultList = new ArrayList<>();
-    private boolean destFromDone = false;
-    private boolean destToDone = false;
+    private boolean destFromDone = false, destToDone = false, destOnReturnDone = true;
     private ImageView notFoundImage;
     private FilterModel  filterModel;
     private CoordinatorLayout mainCoordinatorLayout;
     private int sortListMethodFlag = 0;
     private ProgressDialog pd;
     private ProgressBar progressBar;
+    private Button startDestButton, endDestButton;
+    private DestinationModel onReturnDestinationModel;
+    private int witchFieldIsCLick = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +85,9 @@ public class SearchResultsActivity extends AppCompatActivity {
         notFoundImage = findViewById(R.id.ActivitySearchResults_not_found_image);
         mainCoordinatorLayout = findViewById(R.id.ActivitySearchResults_main_coordinator_layout);
         progressBar = findViewById(R.id.ActivitySearchResults_progress_bar);
+        startDestButton = findViewById(R.id.ActivitySearchResults_from_button);
+        endDestButton = findViewById(R.id.ActivitySearchResults_to_button);
+
         pd = new ProgressDialog(SearchResultsActivity.this);
         pd.setMessage("Αναζήτηση... ");
         //pd.show();
@@ -95,6 +100,9 @@ public class SearchResultsActivity extends AppCompatActivity {
         endDestinationModel = (DestinationModel) intent.getParcelableExtra("endDestination");
         startDestTextView.setText(startDestinationModel.getTitle());
         endDestTextView.setText(endDestinationModel.getTitle());
+
+        startDestButton.setText(startDestinationModel.getTitle());
+        endDestButton.setText(endDestinationModel.getTitle());
 
         // getLatLongFromPlaceId(startDestinationModel);
         //getLatLongFromPlaceId(endDestinationModel);
@@ -148,7 +156,22 @@ public class SearchResultsActivity extends AppCompatActivity {
                         Log.d("FILTER", "Couldnt find any trips");
                     }
                 });*/
-
+        startDestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainIntent = new Intent(SearchResultsActivity.this, SearchLocationActivity.class);
+                witchFieldIsCLick = 1;
+                startActivityForResult(mainIntent, 2);
+            }
+        });
+        endDestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainIntent = new Intent(SearchResultsActivity.this, SearchLocationActivity.class);
+                witchFieldIsCLick = 2;
+                startActivityForResult(mainIntent, 2);
+            }
+        });
 
         filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,9 +187,15 @@ public class SearchResultsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
-                String swapString = startDestTextView.getText().toString();
-                startDestTextView.setText(endDestTextView.getText().toString());
-                endDestTextView.setText(swapString);
+//                String swapString = startDestTextView.getText().toString();
+//                startDestTextView.setText(endDestTextView.getText().toString());
+//                endDestTextView.setText(swapString);
+
+                String swapString = startDestButton.getText().toString();
+                startDestButton.setText(endDestButton.getText().toString());
+                endDestButton.setText(swapString);
+
+
                 tempDestination = startDestinationModel;
                 startDestinationModel = endDestinationModel;
                 endDestinationModel = tempDestination;
@@ -187,6 +216,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                 sortDialog();
             }
         });
+
     }
 
     public void getLatLongFromPlaceId(final DestinationModel destModel) {
@@ -263,14 +293,41 @@ public class SearchResultsActivity extends AppCompatActivity {
             destToDone = true;
         }
     }
+    public void getLatLongFromPlace(final DestinationModel destinationModel) {
 
+        destOnReturnDone = false;
+
+        Log.i("default",destinationModel.getPlaceId().equals("default")+"");
+        if (!destinationModel.getPlaceId().equals("default")) {
+            new PlaceApiConnection(globalClass, true).getLatLonFromPlace(destinationModel.getPlaceId(), new PlaceApiResultCallBack() {
+                @Override
+                public void onSuccess(ResultModel resultModel) {
+
+                    destinationModel.setLatitude(resultModel.getGeometry().getLocation().getLatitude());
+                    destinationModel.setLongitude(resultModel.getGeometry().getLocation().getLongitude());
+                    // Toast.makeText(SearchResultsActivity.this, endDestinationModel.getLatitude() + " " + (endDestinationModel.getLongitude()), Toast.LENGTH_SHORT).show();
+                    destOnReturnDone = true;
+                }
+
+                @Override
+                public void onFailure(String errorMsg) {
+                    Toast.makeText(SearchResultsActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+                    destOnReturnDone = true;
+                    pd.dismiss();
+                    progressBar.setVisibility(View.GONE);
+                }
+            });
+        }else {
+            destOnReturnDone = true;
+        }
+    }
 
 
     public void Trip() {
         AsyncTask<Void, Void, Boolean> task = new AsyncTask<Void, Void, Boolean>() {
             @Override
             protected Boolean doInBackground(Void... voids) {
-                while (!(destFromDone && destToDone)) {
+                while (!(destFromDone && destToDone && destOnReturnDone)) {
 
                 }
                 //if (destinationModelFrom.getTitle() == null && destinationModelTo.getTitle() == null)
@@ -360,6 +417,32 @@ public class SearchResultsActivity extends AppCompatActivity {
             }
             if (resultCode == RESULT_CANCELED) {
 
+            }
+        }else if(requestCode == 2){
+            if (resultCode == RESULT_OK) {
+                DestinationModel resultPredictionsModel = data.getParcelableExtra("resultPredictionsModel");
+                if (witchFieldIsCLick == 1) {
+                    onReturnDestinationModel = resultPredictionsModel;
+                    startDestButton.setText(resultPredictionsModel.getTitle());
+                    startDestinationModel = onReturnDestinationModel;
+                    getLatLongFromPlace(startDestinationModel);
+                    Trip();
+
+
+                } else if (witchFieldIsCLick == 2) {
+                    onReturnDestinationModel = resultPredictionsModel;
+                    endDestButton.setText(resultPredictionsModel.getTitle());
+                    endDestinationModel = onReturnDestinationModel;
+                    getLatLongFromPlace(endDestinationModel);
+                    Trip();
+
+                }
+                //Toast.makeText(getContext(),predictionsModelDestFrom.toString(), Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getContext(),predictionsModelDestTo.toString(), Toast.LENGTH_SHORT).show();
+
+            }
+            if (resultCode == RESULT_CANCELED) {
+                // mTextViewResult.setText("Nothing selected");
             }
         }
     }

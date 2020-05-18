@@ -71,6 +71,19 @@
                     app:layout_constraintTop_toBottomOf="@id/ActivitySearchResults_close_button"
                     android:layout_marginTop="30dp"/>
 
+                <Button
+                    android:id="@+id/ActivitySearchResults_from_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/button_outline_with_left_drawable"
+                    android:drawableRight="@drawable/ic_location"
+                    app:layout_constraintTop_toBottomOf="@id/ActivitySearchResults_from_label"
+                    app:layout_constraintStart_toStartOf="@id/ActivitySearchResults_close_button"
+                    app:layout_constraintEnd_toStartOf="@id/ActivitySearchResults_swap_button"
+                    android:layout_marginEnd="20dp"
+                    android:lines="1"
+                    android:ellipsize="end"/>
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/ActivitySearchResults_from_section"
                     android:layout_width="0dp"
@@ -83,6 +96,7 @@
                     android:paddingBottom="15dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/search_results_border"
+                    android:visibility="gone"
                     >
                     <TextView
                         android:id="@+id/ActivitySearchResults_from_textView"
@@ -122,8 +136,21 @@
                     android:text="Προς"
                     style="@style/header5"
                     app:layout_constraintStart_toStartOf="@id/ActivitySearchResults_close_button"
-                    app:layout_constraintTop_toBottomOf="@id/ActivitySearchResults_from_section"
+                    app:layout_constraintTop_toBottomOf="@id/ActivitySearchResults_from_button"
                     android:layout_marginTop="30dp"/>
+                <Button
+                    android:id="@+id/ActivitySearchResults_to_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/button_outline_with_left_drawable"
+                    android:drawableRight="@drawable/ic_pin"
+                    app:layout_constraintTop_toBottomOf="@id/ActivitySearchResults_to_label"
+                    app:layout_constraintStart_toStartOf="@id/ActivitySearchResults_close_button"
+                    app:layout_constraintEnd_toStartOf="@id/ActivitySearchResults_swap_button"
+                    android:layout_marginEnd="20dp"
+                    android:lines="1"
+                    android:ellipsize="end"/>
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/ActivitySearchResults_to_section"
@@ -138,6 +165,7 @@
                     android:paddingBottom="15dp"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/search_results_border"
+                    android:visibility="gone"
                     >
                     <TextView
                         android:id="@+id/ActivitySearchResults_to_textView"
@@ -172,11 +200,11 @@
                 <ImageButton
                     android:id="@+id/ActivitySearchResults_swap_button"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="70dp"
                     android:src="@drawable/ic_swap_vertical"
                     style="@style/border_icon_button"
-                    app:layout_constraintTop_toTopOf="@id/ActivitySearchResults_from_section"
-                    app:layout_constraintBottom_toBottomOf="@id/ActivitySearchResults_to_section"
+                    app:layout_constraintTop_toBottomOf="@id/ActivitySearchResults_from_button"
+                    app:layout_constraintBottom_toTopOf="@id/ActivitySearchResults_to_button"
                     app:layout_constraintStart_toStartOf="@id/ActivitySearchResults_filter_button"
                     app:layout_constraintEnd_toEndOf="@id/ActivitySearchResults_filter_button"
                     />
@@ -185,7 +213,7 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:background="@color/softGrey_color"
-                    app:layout_constraintTop_toBottomOf="@+id/ActivitySearchResults_to_section"
+                    app:layout_constraintTop_toBottomOf="@+id/ActivitySearchResults_to_button"
                     android:layout_marginTop="30dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
