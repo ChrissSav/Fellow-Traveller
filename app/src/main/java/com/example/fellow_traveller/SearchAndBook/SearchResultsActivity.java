@@ -61,6 +61,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     private ImageView notFoundImage;
     private FilterModel  filterModel;
     private CoordinatorLayout mainCoordinatorLayout;
+    private int sortListMethodFlag = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -288,12 +289,17 @@ public class SearchResultsActivity extends AppCompatActivity {
                                     }
 
                                     resultList = trips;
-                                    mRecyclerView = findViewById(R.id.ActivitySearchResults_recycler_view);
-                                    mRecyclerView.setHasFixedSize(true);
-                                    mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                                    mAdapter = new SearchResultsAdapter(resultList);
-                                    mRecyclerView.setLayoutManager(mLayoutManager);
-                                    mRecyclerView.setAdapter(mAdapter);
+
+                                    //Check when we retrieve again data from server, which sort method was previous selected
+                                    if(sortListMethodFlag==0)
+                                        Collections.sort(resultList, TripModel.DateComparator);
+                                    else if(sortListMethodFlag==1)
+                                        Collections.sort(resultList, TripModel.PriceComparator);
+                                    else
+                                        Collections.sort(resultList, TripModel.RatesComparator);
+
+                                    buildRecyclerView();
+
 
                                     searchResultsCount.setText(String.format("Βρέθηκαν %d ταξίδια.", resultList.size()));
 
@@ -407,7 +413,9 @@ public class SearchResultsActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 mainCoordinatorLayout.setForeground(null);
-
+                sortListMethodFlag = 0;
+                Collections.sort(resultList, TripModel.DateComparator);
+                mAdapter.notifyDataSetChanged();
                 myDialog.dismiss();
 
             }
@@ -418,6 +426,9 @@ public class SearchResultsActivity extends AppCompatActivity {
 
 
                 mainCoordinatorLayout.setForeground(null);
+                sortListMethodFlag = 1;
+                Collections.sort(resultList, TripModel.PriceComparator);
+                mAdapter.notifyDataSetChanged();
                 myDialog.dismiss();
             }
         });
@@ -426,6 +437,9 @@ public class SearchResultsActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 mainCoordinatorLayout.setForeground(null);
+                sortListMethodFlag = 2;
+                Collections.sort(resultList, TripModel.RatesComparator);
+                mAdapter.notifyDataSetChanged();
                 myDialog.dismiss();
             }
 
@@ -436,6 +450,15 @@ public class SearchResultsActivity extends AppCompatActivity {
                 mainCoordinatorLayout.setForeground(null);
             }
         });
+
+    }
+    public void buildRecyclerView(){
+        mRecyclerView = findViewById(R.id.ActivitySearchResults_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        mAdapter = new SearchResultsAdapter(resultList);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
 
     }
 }
