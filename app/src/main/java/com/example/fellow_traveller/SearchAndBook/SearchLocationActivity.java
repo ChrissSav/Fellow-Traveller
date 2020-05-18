@@ -204,7 +204,7 @@ public class SearchLocationActivity extends AppCompatActivity implements View.On
                 destinationModelToReturn = new DestinationModel("default", "Ιωάννινα",    (float) 39.674530 ,  (float) 20.840210);
                 mainIntent.putExtra("resultPredictionsModel", (Parcelable) destinationModelToReturn);
                 //We also parse a value code to check if we clicked on a suggested destination to disable to the next step
-                mainIntent.putExtra("resultPredictionsModel", 4);
+                mainIntent.putExtra("DestStartChoice", 4);
                 setResult(RESULT_OK, mainIntent);
                 finish();
                 break;

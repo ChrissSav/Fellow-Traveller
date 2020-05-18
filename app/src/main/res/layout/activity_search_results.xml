@@ -218,21 +218,29 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     />
-                <TextView
-                    android:id="@+id/ActivitySearchResults_filters_textView"
-                    android:layout_width="wrap_content"
+                <HorizontalScrollView
+                    android:id="@+id/ActivitySearchResults_horizontal_scrollView"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Δεν έχετε ορίσει κάποιο φίλτρο"
-                    style="@style/paragraph2"
                     app:layout_constraintTop_toBottomOf="@id/ActivitySearchResults_top_underline"
-                    app:layout_constraintStart_toStartOf="@id/ActivitySearchResults_close_button"
-                    android:layout_marginTop="15dp"/>
+                    app:layout_constraintBottom_toTopOf="@id/ActivitySearchResults_bottom_underline"
+                    android:paddingLeft="20dp"
+                    >
+                    <TextView
+                        android:id="@+id/ActivitySearchResults_filters_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Δεν έχετε ορίσει κάποιο φίλτρο"
+                        style="@style/paragraph2"
+                        android:layout_marginTop="15dp"/>
+                </HorizontalScrollView>
+
                 <View
                     android:id="@+id/ActivitySearchResults_bottom_underline"
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:background="@color/softGrey_color"
-                    app:layout_constraintTop_toBottomOf="@+id/ActivitySearchResults_filters_textView"
+                    app:layout_constraintTop_toBottomOf="@id/ActivitySearchResults_horizontal_scrollView"
                     android:layout_marginTop="15dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -274,7 +282,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="40dp"
                 android:indeterminateTint="@color/black_color"
                 android:indeterminate="true"
                 android:indeterminateTintMode="src_atop"/>

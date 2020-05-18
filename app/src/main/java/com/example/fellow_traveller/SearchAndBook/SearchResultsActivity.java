@@ -48,7 +48,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class SearchResultsActivity extends AppCompatActivity {
-    private TextView endDestTextView, startDestTextView, searchResultsCount;
+    private TextView endDestTextView, startDestTextView, searchResultsCount, filterHeaderOverView;
     private RecyclerView mRecyclerView;
     private SearchResultsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -77,6 +77,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         startDestTextView = findViewById(R.id.ActivitySearchResults_from_textView);
         endDestTextView = findViewById(R.id.ActivitySearchResults_to_textView);
+        filterHeaderOverView = findViewById(R.id.ActivitySearchResults_filters_textView);
         filterButton = findViewById(R.id.ActivitySearchResults_filter_button);
         swapButton = findViewById(R.id.ActivitySearchResults_swap_button);
         backButton = findViewById(R.id.ActivitySearchResults_close_button);
@@ -410,9 +411,19 @@ public class SearchResultsActivity extends AppCompatActivity {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 int result = data.getIntExtra("result", 0);
-                filterModel = data.getParcelableExtra("resultFilterModel");
-                pd.show();
-                Trip();
+
+                //Parse the header filter to display which filters was selected
+                String filterHeader = data.getStringExtra("filterHeaderOverview");
+                if(filterHeader.equals(""))
+                    filterHeaderOverView.setText("Δεν έχετε ορίσει κάποιο φίλτρο");
+                else
+                    filterHeaderOverView.setText(filterHeader);
+
+                //Parse a filter model to for our search results
+                if(!filterModel.equals(data.getParcelableExtra("resultFilterModel"))){
+                    filterModel = data.getParcelableExtra("resultFilterModel");
+                    Trip();
+                }
 
             }
             if (resultCode == RESULT_CANCELED) {
