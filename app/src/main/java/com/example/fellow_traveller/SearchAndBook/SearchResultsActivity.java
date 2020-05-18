@@ -1,13 +1,16 @@
 package com.example.fellow_traveller.SearchAndBook;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -18,7 +21,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,8 +50,8 @@ public class SearchResultsActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private SearchResultsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ImageButton filterButton, swapButton, backButton;
-    private DestinationModel startDestinationModel, endDestinationModel;
+    private ImageButton filterButton, swapButton, backButton, sortButton;
+    private DestinationModel startDestinationModel, endDestinationModel, tempDestination;
     private GlobalClass globalClass;
     private LatLongModel latlongModelStart, latlongModelEnd;
     private SearchDestinationsModel searchDestinationsModel;
@@ -55,6 +60,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     private boolean destToDone = false;
     private ImageView notFoundImage;
     private FilterModel  filterModel;
+    private CoordinatorLayout mainCoordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +73,10 @@ public class SearchResultsActivity extends AppCompatActivity {
         filterButton = findViewById(R.id.ActivitySearchResults_filter_button);
         swapButton = findViewById(R.id.ActivitySearchResults_swap_button);
         backButton = findViewById(R.id.ActivitySearchResults_close_button);
+        sortButton = findViewById(R.id.ActivitySearchResults_sort_button);
         searchResultsCount = findViewById(R.id.ActivitySearchResults_results_label);
         notFoundImage = findViewById(R.id.ActivitySearchResults_not_found_image);
+        mainCoordinatorLayout = findViewById(R.id.ActivitySearchResults_main_coordinator_layout);
 
         filterModel = new FilterModel();
 
@@ -149,12 +157,24 @@ public class SearchResultsActivity extends AppCompatActivity {
                 String swapString = startDestTextView.getText().toString();
                 startDestTextView.setText(endDestTextView.getText().toString());
                 endDestTextView.setText(swapString);
+                tempDestination = startDestinationModel;
+                startDestinationModel = endDestinationModel;
+                endDestinationModel = tempDestination;
+                Trip();
             }
         });
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 abortDialog();
+            }
+        });
+        sortButton.setOnClickListener(new View.OnClickListener() {
+
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View view) {
+                sortDialog();
             }
         });
     }
@@ -259,10 +279,13 @@ public class SearchResultsActivity extends AppCompatActivity {
                             filterModel.getHavePet(), filterModel.getRange(), new SearchTripsCallback() {
                                 @Override
                                 public void onSuccess(ArrayList<TripModel> trips) {
-                                    if(trips.size()==0)
+                                    if(trips.size()==0) {
                                         notFoundImage.setVisibility(View.VISIBLE);
-                                    else
+                                        sortButton.setVisibility(View.INVISIBLE);
+                                    }else {
                                         notFoundImage.setVisibility(View.GONE);
+                                        sortButton.setVisibility(View.VISIBLE);
+                                    }
 
                                     resultList = trips;
                                     mRecyclerView = findViewById(R.id.ActivitySearchResults_recycler_view);
@@ -354,5 +377,65 @@ public class SearchResultsActivity extends AppCompatActivity {
     public void onBackPressed() {
         //super.onBackPressed();
         abortDialog();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void sortDialog(){
+        final Dialog myDialog = new Dialog(SearchResultsActivity.this, R.style.Theme_Dialog);
+        Window window = myDialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+        window.requestFeature(Window.FEATURE_NO_TITLE);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.setContentView(R.layout.sort_options_dialog);
+        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        myDialog.setCancelable(true);
+        myDialog.setCanceledOnTouchOutside(true);
+        wlp.gravity = Gravity.BOTTOM;
+        wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        mainCoordinatorLayout.setForeground(new ColorDrawable(getResources().getColor(R.color.greyBlack_transparent_color)));
+        window.setAttributes(wlp);
+        myDialog.show();
+
+        final Button moreRelevant = myDialog.findViewById(R.id.sort_options_dialog_label_relevant_button);
+        final Button byPrice = myDialog.findViewById(R.id.sort_options_dialog_label_price_button);
+        final Button byRates = myDialog.findViewById(R.id.sort_options_dialog_label_rates_button);
+
+
+        moreRelevant.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View view) {
+
+                mainCoordinatorLayout.setForeground(null);
+
+                myDialog.dismiss();
+
+            }
+        });
+        byPrice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                mainCoordinatorLayout.setForeground(null);
+                myDialog.dismiss();
+            }
+        });
+       byRates.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mainCoordinatorLayout.setForeground(null);
+                myDialog.dismiss();
+            }
+
+        });
+        myDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                mainCoordinatorLayout.setForeground(null);
+            }
+        });
+
     }
 }

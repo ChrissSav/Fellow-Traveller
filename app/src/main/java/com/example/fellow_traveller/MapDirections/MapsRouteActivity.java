@@ -87,7 +87,7 @@ public class MapsRouteActivity extends AppCompatActivity implements OnMapReadyCa
         map.addMarker(place2);
 
         //map.moveCamera(CameraUpdateFactory.newLatLng(destFrom));
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(startDestinationToZoomOnMap, 7));
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(startDestinationToZoomOnMap, 8));
     }
     private String getUrl(LatLng origin, LatLng dest, String directionMode) {
         // Origin of route
