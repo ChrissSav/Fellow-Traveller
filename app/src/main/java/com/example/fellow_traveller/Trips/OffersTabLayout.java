@@ -1,5 +1,6 @@
 package com.example.fellow_traveller.Trips;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,6 +70,16 @@ public class OffersTabLayout extends Fragment {
                     notFoundImage.setVisibility(View.INVISIBLE);
                     searchButton.setVisibility(View.INVISIBLE);
                     mRecyclerViewActive.setVisibility(View.VISIBLE);
+                    mAdapterActive.setOnItemClickListener(new ActiveTripsAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            Intent mainIntent = new Intent(getActivity().getApplicationContext(), TripPageDriverActivity.class);
+                            mainIntent.putExtra("isCompleted", false);
+                            mainIntent.putExtra("isDriver", true);
+                            mainIntent.putExtra("trip", activeTrips.get(position));
+                            startActivity(mainIntent);
+                        }
+                    });
                     if (activeTrips.size()==1)
                         activeTripsTextview.setText("Έχετε " + String.valueOf(activeTrips.size()) + " ενεργό ταξίδι");
                     else
@@ -81,6 +92,16 @@ public class OffersTabLayout extends Fragment {
                         mAdapterNotActive = new CompletedTripsAdapter(notActiveTrips);
                         mRecyclerViewNotActive.setLayoutManager(mLayoutManagerNotActive);
                         mRecyclerViewNotActive.setAdapter(mAdapterNotActive);
+                        mAdapterNotActive.setOnItemClickListener(new CompletedTripsAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(int position) {
+                                Intent mainIntent = new Intent(getActivity().getApplicationContext(), TripPageDriverActivity.class);
+                                mainIntent.putExtra("isCompleted", true);
+                                mainIntent.putExtra("isDriver", true);
+                                mainIntent.putExtra("trip", notActiveTrips.get(position));
+                                startActivity(mainIntent);
+                            }
+                        });
 //                        activeTripsTextview.setVisibility(View.VISIBLE);
 //                        notFoundImage.setVisibility(View.GONE);
 //                        searchButton.setVisibility(View.GONE);

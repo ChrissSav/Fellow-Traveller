@@ -497,7 +497,7 @@
                 android:id="@+id/ActivityTripPageDriver_scan_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Σκάναρε το QR κωδικό"
+                android:text="Σκάναρε τον QR κωδικό"
                 style="@style/button_orange_filled"
                 app:layout_constraintTop_toBottomOf="@id/ActivityTripPageDriver_qr_image"
                 android:layout_marginTop="20dp"
@@ -505,17 +505,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
 
                 />
-            <TextView
-                android:id="@+id/ActivityTripPageDriver_qr_result_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/paragraph3"
-                app:layout_constraintTop_toBottomOf="@id/ActivityTripPageDriver_scan_button"
-                android:layout_marginTop="20dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:text="Αποτέλεσμα"/>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

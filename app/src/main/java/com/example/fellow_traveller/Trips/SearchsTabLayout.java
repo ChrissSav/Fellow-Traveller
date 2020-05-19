@@ -85,6 +85,9 @@ public class SearchsTabLayout extends Fragment {
                             @Override
                             public void onItemClick(int position) {
                                 Intent mainIntent = new Intent(getActivity().getApplicationContext(), TripPageDriverActivity.class);
+                                mainIntent.putExtra("isCompleted", false);
+                                mainIntent.putExtra("isDriver", false);
+                                mainIntent.putExtra("trip", activeTrips.get(position));
                                 startActivity(mainIntent);
                             }
                         });
@@ -106,6 +109,16 @@ public class SearchsTabLayout extends Fragment {
 //                        notFoundImage.setVisibility(View.GONE);
 //                        searchButton.setVisibility(View.GONE);
 //                        mRecyclerViewActive.setVisibility(View.VISIBLE);
+                        mAdapterNotActive.setOnItemClickListener(new CompletedTripsAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(int position) {
+                                Intent mainIntent = new Intent(getActivity().getApplicationContext(), TripPageDriverActivity.class);
+                                mainIntent.putExtra("isCompleted", true);
+                                mainIntent.putExtra("isDriver", false);
+                                mainIntent.putExtra("trip",  notActiveTrips.get(position));
+                                startActivity(mainIntent);
+                            }
+                        });
 
                     }
                 }
