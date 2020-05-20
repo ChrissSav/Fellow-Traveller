@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -19,13 +20,22 @@ import com.example.fellow_traveller.ClientAPI.Models.PassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserBaseModel;
 import com.example.fellow_traveller.MapDirections.MapsRouteActivity;
+import com.example.fellow_traveller.MapDirections.TaskLoadedCallback;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.ProfileActivity;
 import com.example.fellow_traveller.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
-public class SearchDetailsActivity extends AppCompatActivity {
+public class SearchDetailsActivity extends AppCompatActivity implements OnMapReadyCallback {
     private Button bookButton;
     private RecyclerView mRecyclerView;
     private PassengerImageAdapter mAdapter;
@@ -38,6 +48,9 @@ public class SearchDetailsActivity extends AppCompatActivity {
     private GlobalClass globalClass;
     private ArrayList<PassengerModel> passengersList = new ArrayList<>();
     private ConstraintLayout userLayout;
+    private GoogleMap map;
+    private MarkerOptions pickUpPoint;
+    private LatLng zoomToThePoint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +101,14 @@ public class SearchDetailsActivity extends AppCompatActivity {
         textViewReviews.setText(String.valueOf(tripModel.getCreatorUser().getReviews()));
         passengersList = tripModel.getPassengers();
 
+
+
+        //Get the Map
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.ActivitySearchDetails_map_fragment);
+        mapFragment.getMapAsync(this);
+
+        pickUpPoint = new MarkerOptions().position(new LatLng(tripModel.getDestFrom().getLatitude(), tripModel.getDestFrom().getLongitude())).title(tripModel.getDestFrom().getTitle());
+        zoomToThePoint = new LatLng(tripModel.getDestFrom().getLatitude(),tripModel.getDestFrom().getLongitude());
 
 //        UserBaseModel userBaseModel = new UserBaseModel(1, "Tyler",   "Joseph", 4.7, 34, "default" );
 //        PassengerModel passengerModel = new PassengerModel(userBaseModel, 3, true);
@@ -169,6 +190,20 @@ public class SearchDetailsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        map = googleMap;
+        map.addCircle(new CircleOptions()
+                .center(new LatLng(tripModel.getDestFrom().getLatitude(), tripModel.getDestFrom().getLongitude()))
+                .radius(400)
+                .strokeColor(Color.argb(20, 255, 0,0))
+                .fillColor(Color.argb(50, 255, 0,0)));
+        //map.addMarker(pickUpPoint);
+
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(zoomToThePoint, 15));
     }
 }
 

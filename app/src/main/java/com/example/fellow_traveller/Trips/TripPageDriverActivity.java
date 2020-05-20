@@ -27,14 +27,23 @@ import com.example.fellow_traveller.SearchAndBook.SearchDestinationsActivity;
 import com.example.fellow_traveller.SearchAndBook.SearchDetailsActivity;
 import com.example.fellow_traveller.SearchAndBook.SearchLocationActivity;
 import com.example.fellow_traveller.SearchAndBook.SearchPassengersActivity;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
-public class TripPageDriverActivity extends AppCompatActivity {
+public class TripPageDriverActivity extends AppCompatActivity implements OnMapReadyCallback {
     private ImageView QRImage;
     public static TextView QRResultTextView;
     private Button scanButton;
@@ -51,6 +60,9 @@ public class TripPageDriverActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<PassengerModel> passengersList = new ArrayList<>();
     private long oneHour = 60*60;
+    private GoogleMap map;
+    private MarkerOptions pickUpPoint;
+    private LatLng zoomToThePoint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +99,13 @@ public class TripPageDriverActivity extends AppCompatActivity {
         isDriver = bundle.getBoolean("isDriver");
         tripModel = getIntent().getParcelableExtra("trip");
 
+        //Get the Map
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.ActivityTripPageDriver_map_fragment);
+        mapFragment.getMapAsync(this);
+
+        pickUpPoint = new MarkerOptions().position(new LatLng(tripModel.getDestFrom().getLatitude(), tripModel.getDestFrom().getLongitude())).title(tripModel.getDestFrom().getTitle());
+        zoomToThePoint = new LatLng(tripModel.getDestFrom().getLatitude(),tripModel.getDestFrom().getLongitude());
+
         //Set the values
         textViewDestFrom.setText(tripModel.getDestFrom().getTitle());
         textViewDestTo.setText(tripModel.getDestTo().getTitle());
@@ -99,6 +118,11 @@ public class TripPageDriverActivity extends AppCompatActivity {
         textViewCreator.setText(tripModel.getCreatorUser().getFullName());
         textViewRating.setText(String.valueOf(tripModel.getCreatorUser().getRate()));
         textViewReviews.setText(String.valueOf(tripModel.getCreatorUser().getReviews()));
+
+
+
+
+
         if (tripModel.getMessage().equals(""))
             textViewMsg.setText("Ο οδηγός δεν έχει αναφέρει κάποιο συγκεκριμένο μήνυμα");
         else
@@ -231,5 +255,13 @@ public class TripPageDriverActivity extends AppCompatActivity {
                 Toast.makeText(this, "Δεν σκανάρατε έγκυρο κωδικό ταξιδιού", Toast.LENGTH_SHORT).show();
         }else
             Toast.makeText(this, "Δεν είναι ακόμα η ώρα του ταξιδιού. Ο κωδικός θα γίνει ενεργός λίγο πριν την ώρα αναχώρησης του ταξιδιού", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        map = googleMap;
+        map.addMarker(pickUpPoint);
+
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(zoomToThePoint, 18));
     }
 }

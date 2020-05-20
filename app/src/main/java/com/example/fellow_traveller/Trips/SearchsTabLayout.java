@@ -73,7 +73,7 @@ public class SearchsTabLayout extends Fragment {
                     if (activeTrips.size() > 0) {
                         mRecyclerViewActive = view.findViewById(R.id.fragment_trip_searchs_recycler_view);
                         mRecyclerViewActive.setHasFixedSize(true);
-                        mLayoutManagerActive = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+                        mLayoutManagerActive = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
                         mAdapterActive = new ActiveTripsAdapter(activeTrips);
                         mRecyclerViewActive.setLayoutManager(mLayoutManagerActive);
                         mRecyclerViewActive.setAdapter(mAdapterActive);
@@ -101,7 +101,7 @@ public class SearchsTabLayout extends Fragment {
                     if(notActiveTrips.size() > 0){
                         mRecyclerViewNotActive = view.findViewById(R.id.fragment_trip_searchs_completed_recycler_view);
                         mRecyclerViewNotActive.setHasFixedSize(true);
-                        mLayoutManagerNotActive = new LinearLayoutManager(getActivity().getApplicationContext());
+                        mLayoutManagerNotActive = new LinearLayoutManager(getActivity());
                         mAdapterNotActive = new CompletedTripsAdapter(notActiveTrips);
                         mRecyclerViewNotActive.setLayoutManager(mLayoutManagerNotActive);
                         mRecyclerViewNotActive.setAdapter(mAdapterNotActive);

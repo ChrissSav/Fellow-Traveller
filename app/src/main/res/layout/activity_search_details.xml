@@ -208,6 +208,23 @@
                 android:layout_marginTop="20dp"
                 />
 
+            <View
+                android:id="@+id/ActivitySearchDetails_user_info_underline"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_show_map_button"
+                android:background="@color/softGrey_color"
+                android:layout_marginTop="20dp"/>
+            <TextView
+                android:id="@+id/ActivitySearchDetails_trip_info_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Λεπτομέρειες Ταξιδιού"
+                style="@style/header5"
+                app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_back_button"
+                app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_user_info_underline"
+                android:layout_marginTop="20dp"/>
+
             <TextView
                 android:id="@+id/ActivitySearchDetails_date_label"
                 android:layout_width="wrap_content"
@@ -217,7 +234,7 @@
                 android:textColor="@color/black_color"
                 android:fontFamily="@font/firasans_light"
                 app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_trip_label"
-                app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_show_map_button"
+                app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_trip_info_label"
                 android:layout_marginTop="20dp"
                 />
             <TextView
@@ -418,40 +435,59 @@
                 app:layout_constraintBottom_toBottomOf="@id/ActivitySearchDetails_car_label"
                 app:layout_constraintEnd_toStartOf="@id/ActivitySearchDetails_car_image"
                 android:layout_marginEnd="20dp"/>
-
+            
+           <View
+               android:id="@+id/ActivitySearchDetails_trip_info_underline"
+               android:layout_width="match_parent"
+               android:layout_height="1dp"
+               android:background="@color/softGrey_color"
+               app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_car_tv"
+               android:layout_marginTop="20dp"/>
 
             <TextView
-                android:id="@+id/ActivitySearchDetails_driver_message_label"
+                android:id="@+id/ActivitySearchDetails_pick_up_point_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                style="@style/header3"
-                android:text="Μήνυμα από τον οδηγό"
-
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginLeft="20dp"
-                app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_car_label" />
-
+                android:text="Σημείο αναχώρησης"
+                style="@style/header5"
+                app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_trip_info_underline"
+                app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_back_button"
+                android:layout_marginTop="20dp"/>
             <TextView
-                android:id="@+id/ActivitySearchDetails_driver_message_tv"
-                android:layout_width="0dp"
+                android:id="@+id/ActivitySearchDetails_pick_up_point_info"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_trip_label"
-                app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_driver_message_label"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="20dp"
-                android:fontFamily="@font/firasans_light"
-                android:textSize="18sp"
-                android:textColor="@color/black_color"
+                style="@style/paragraph3"
+                android:text="Καλαμαριά. Θεσσαλονίκη"
+                app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_pick_up_point_label"
+                app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_back_button"
+                android:layout_marginTop="10dp"/>
+            <fragment
+                android:id="@+id/ActivitySearchDetails_map_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:name="com.google.android.gms.maps.MapFragment"
+                android:layout_weight="1"
+                app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_pick_up_point_info"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="20dp"
                 />
+
+            <View
+                android:id="@+id/ActivitySearchDetails_map_underline"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/softGrey_color"
+                app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_map_fragment"
+                android:layout_marginTop="40dp"/>
+
+
             <TextView
                 android:id="@+id/ActivitySearchDetails_passengers_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/ActivitySearchDetails_driver_message_tv"
+                app:layout_constraintTop_toBottomOf="@+id/ActivitySearchDetails_map_underline"
                 app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_trip_label"
                 android:layout_marginTop="40dp"
                 android:text="Επιβάτες"
@@ -479,6 +515,77 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
+                />
+
+            <View
+                android:id="@+id/ActivitySearchDetails_passengers_underline"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/softGrey_color"
+                app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_passenger_recycler_view"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/ActivitySearchDetails_driver_message_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                style="@style/header3"
+                android:text="Μήνυμα από τον οδηγό"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_passengers_underline" />
+
+            <TextView
+                android:id="@+id/ActivitySearchDetails_driver_message_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_trip_label"
+                app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_driver_message_label"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/firasans_light"
+                android:textSize="18sp"
+                android:textColor="@color/black_color"
+                />
+
+            <View
+                android:id="@+id/ActivitySearchDetails_driver_message_underline"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/softGrey_color"
+                app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_driver_message_tv"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/ActivitySearchDetails_cancellation_policy_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                style="@style/header3"
+                android:text="Πολιτική ακύρωσης"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_driver_message_underline" />
+
+            <TextView
+                android:id="@+id/ActivitySearchDetails_cancellation_policy_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Σε περίπτωηση ακύρωσης της κράτησης σας θα δεσμευθεί το 50% του ποσού σας για το ταξίδι. Για τον τρόπο πληρωμής με μετρητά, έπειτα από συνεχείς ακυρώσεις θα πέσει το σκορ σας και για την χρήση της εφαρμογής θα πρέπει να δηλώσετε μία κάρτα"
+                app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_trip_label"
+                app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_cancellation_policy_label"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/firasans_light"
+                android:textSize="18sp"
+                android:textColor="@color/black_color"
                 />
 
 
