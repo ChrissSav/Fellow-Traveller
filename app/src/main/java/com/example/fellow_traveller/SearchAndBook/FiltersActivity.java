@@ -51,9 +51,9 @@ public class FiltersActivity extends AppCompatActivity {
     private final String TITLE_BAGS = "Αποσκεύες ...";
     boolean dateValidator = false, priceValidator = false, rangeValidator = false, seatsValidator = false, bagsValidator = false;
     private ConstraintLayout mainConstraintLayout;
-    private CrystalSeekbar kmRangeSeekBar;
+    private CrystalSeekbar kmRangeSeekBar, kmRangeEndSeekBar;
     private CrystalRangeSeekbar priceRangeSeekBar;
-    private TextView kmRangeBarTV,priceRangeTV ;
+    private TextView kmRangeBarTV, kmRangeEndBarTV, priceRangeTV;
     private Button dateButton, priceButton, petsButton, seatsButton, resetButton, applyButton;
     private ImageButton closeButton;
     private Spinner sortSpinner;
@@ -77,6 +77,8 @@ public class FiltersActivity extends AppCompatActivity {
 
         kmRangeSeekBar = findViewById(R.id.ActivityFilters_km_range_seekbar);
         kmRangeBarTV = findViewById(R.id.ActivityFilters_km_range_radius_tv);
+        kmRangeEndSeekBar = findViewById(R.id.ActivityFilters_km_range_end_seekbar);
+        kmRangeEndBarTV = findViewById(R.id.ActivityFilters_km_range_end_radius_tv);
 
 
         dateButton = findViewById(R.id.ActivityFilters_date_button);
@@ -150,6 +152,21 @@ public class FiltersActivity extends AppCompatActivity {
                     selectedFilters.setRange(null);
                 } else {
                     kmRangeBarTV.setText("Εύρος " + value + " χλμ");
+                    rangeFinal = value.intValue();
+                    selectedFilters.setRange(value.intValue());
+                }
+
+            }
+        });
+        kmRangeEndSeekBar.setOnSeekbarChangeListener(new OnSeekbarChangeListener() {
+            @Override
+            public void valueChanged(Number value) {
+                if (value.intValue() == 0) {
+                    kmRangeEndBarTV.setText("Εμφάνιση όλων");
+                    rangeFinal = value.intValue();
+                    selectedFilters.setRange(null);
+                } else {
+                    kmRangeEndBarTV.setText("Εύρος " + value + " χλμ");
                     rangeFinal = value.intValue();
                     selectedFilters.setRange(value.intValue());
                 }
