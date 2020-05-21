@@ -13,13 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,7 +28,6 @@ import com.crystal.crystalrangeseekbar.interfaces.OnSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar;
 
-import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.FilterModel;
 import com.example.fellow_traveller.R;
 import com.google.android.material.datepicker.CalendarConstraints;
@@ -40,7 +36,6 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -55,13 +50,13 @@ public class FiltersActivity extends AppCompatActivity {
     private final String TITLE_BAGS = "Αποσκεύες ...";
     boolean dateValidator = false, priceValidator = false, rangeValidator = false, seatsValidator = false, bagsValidator = false;
     private ConstraintLayout mainConstraintLayout;
-    private CrystalSeekbar kmRangeSeekBar, kmRangeEndSeekBar;
+    private CrystalSeekbar kmRangeStartSeekBar, kmRangeEndSeekBar;
     private CrystalRangeSeekbar priceRangeSeekBar;
-    private TextView kmRangeBarTV, kmRangeEndBarTV, priceRangeTV;
+    private TextView kmRangeStartBarTV, kmRangeEndBarTV, priceRangeTV;
     private Button dateButton, priceButton, petsButton, seatsButton, resetButton, applyButton;
     private ImageButton closeButton;
     private Spinner sortSpinner;
-    private int priceStartFinal = 0, priceEndFinal = 100, rangeFinal = 0, seatsFinal = 0, bagsFinal = 0;
+    private int priceStartFinal = 0, priceEndFinal = 100, rangeStartFinal = 0, rangeEndFinal = 0, seatsFinal = 0, bagsFinal = 0;
     private long startDateFinal, endDateFinal;
     private ArrayList<PaymentItem> petsChoicesList;
     private PaymentAdapter mAdapter;
@@ -81,8 +76,8 @@ public class FiltersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filters);
 
-        kmRangeSeekBar = findViewById(R.id.ActivityFilters_km_range_seekbar);
-        kmRangeBarTV = findViewById(R.id.ActivityFilters_km_range_radius_tv);
+        kmRangeStartSeekBar = findViewById(R.id.ActivityFilters_km_range_seekbar);
+        kmRangeStartBarTV = findViewById(R.id.ActivityFilters_km_range_radius_tv);
         kmRangeEndSeekBar = findViewById(R.id.ActivityFilters_km_range_end_seekbar);
         kmRangeEndBarTV = findViewById(R.id.ActivityFilters_km_range_end_radius_tv);
 
@@ -104,41 +99,7 @@ public class FiltersActivity extends AppCompatActivity {
 
         //In case user saved some filter options, we load them back
         selectedFilters = getIntent().getParcelableExtra("getSelections");
-        if(selectedFilters.getPriceMin()!=null){
-           // Toast.makeText(this, String.valueOf(selectedFilters.getPriceMin()), Toast.LENGTH_SHORT).show();
-            priceRangeSeekBar.setMinStartValue((float) selectedFilters.getPriceMin()).apply();
-        }
-        if(selectedFilters.getPriceMax()!=null){
-            //Toast.makeText(this, String.valueOf(selectedFilters.getPriceMin()), Toast.LENGTH_SHORT).show();
-            priceRangeSeekBar.setMaxStartValue((float) selectedFilters.getPriceMax()).apply();
-        }
-        if(selectedFilters.getRange()!=null){
-            //Toast.makeText(this, String.valueOf(selectedFilters.getPriceMin()), Toast.LENGTH_SHORT).show();
-            kmRangeSeekBar.setMinStartValue((float) selectedFilters.getRange()).apply();
-        }if(selectedFilters.getHavePet()!=null){
-            if(selectedFilters.getHavePet())
-                petsButton.setText("Με κατοικίδιο");
-            else
-                petsButton.setText("Χωρίς κατοικίδιο");
-        }
-        if(selectedFilters.getSeatsMin()!=null){
-            seatsTextView.setText(String.valueOf(selectedFilters.getSeatsMin()));
-        }
-        if(selectedFilters.getBagsMin()!=null){
-            bagsTextView.setText(String.valueOf(selectedFilters.getBagsMin()));
-        }
-        if(selectedFilters.getTimestampMin() !=null && selectedFilters.getTimestampMax() != null){
-            //Toast.makeText(this, "Διαφορετικό", Toast.LENGTH_SHORT).show();
-            //Select again the user's dates
-            Pair setDefault = new Pair(selectedFilters.getTimestampMin()*1000,selectedFilters.getTimestampMax()*1000);
-            builder.setSelection(setDefault);
-            //Rename the dateButton
-            Date startDate = new Date(selectedFilters.getTimestampMin()*1000);
-            Date endDate = new Date(selectedFilters.getTimestampMax()*1000);
-            DateFormat date = new SimpleDateFormat("dd MMM");
-            dateButton.setText(date.format(startDate) + " - " + date.format(endDate));
-            builder.build();
-        }
+        setSelectedFilters();
 
 
         //Get average price
@@ -151,9 +112,7 @@ public class FiltersActivity extends AppCompatActivity {
             averagePriceTextView.setText(averagePrice + "€");
 
 
-        String[] items = new String[]{"     Πιο σχετική", "    Με βάση τιμή", "Με βάση απόσταση"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        sortSpinner.setAdapter(adapter);
+
 
         openDialogForPrice();
         openDialogForSeats();
@@ -169,17 +128,17 @@ public class FiltersActivity extends AppCompatActivity {
             }
         });
         //Range bar change listener
-        kmRangeSeekBar.setOnSeekbarChangeListener(new OnSeekbarChangeListener() {
+        kmRangeStartSeekBar.setOnSeekbarChangeListener(new OnSeekbarChangeListener() {
             @Override
             public void valueChanged(Number value) {
                 if (value.intValue() == 0) {
-                    kmRangeBarTV.setText("Εμφάνιση όλων");
-                    rangeFinal = value.intValue();
-                    selectedFilters.setRange(null);
+                    kmRangeStartBarTV.setText("Εμφάνιση όλων");
+                    rangeStartFinal = value.intValue();
+                    selectedFilters.setRangeStart(null);
                 } else {
-                    kmRangeBarTV.setText("Εύρος " + value + " χλμ");
-                    rangeFinal = value.intValue();
-                    selectedFilters.setRange(value.intValue());
+                    kmRangeStartBarTV.setText("Εύρος " + value + " χλμ");
+                    rangeStartFinal = value.intValue();
+                    selectedFilters.setRangeStart(value.intValue());
                 }
 
             }
@@ -189,12 +148,12 @@ public class FiltersActivity extends AppCompatActivity {
             public void valueChanged(Number value) {
                 if (value.intValue() == 0) {
                     kmRangeEndBarTV.setText("Εμφάνιση όλων");
-                    rangeFinal = value.intValue();
-                    selectedFilters.setRange(null);
+                    rangeEndFinal = value.intValue();
+                    selectedFilters.setRangeEnd(null);
                 } else {
                     kmRangeEndBarTV.setText("Εύρος " + value + " χλμ");
-                    rangeFinal = value.intValue();
-                    selectedFilters.setRange(value.intValue());
+                    rangeEndFinal = value.intValue();
+                    selectedFilters.setRangeEnd(value.intValue());
                 }
 
             }
@@ -212,6 +171,25 @@ public class FiltersActivity extends AppCompatActivity {
                 resultIntent.putExtra("filterHeaderOverview", filterHeaderOverview);
                 setResult(RESULT_OK, resultIntent);
                 finish();
+            }
+        });
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedFilters = new FilterModel();
+                filterHeaderOverview = "";
+                dateButton.setText("Όρισε ημ/νία");
+                petsButton.setText("Όλα");
+                seatsTextView.setText("0");
+                bagsTextView.setText("0");
+                kmRangeEndSeekBar.setMinStartValue(0).apply();
+                kmRangeStartSeekBar.setMinStartValue(0).apply();
+                priceRangeSeekBar.setMinStartValue(0).apply();
+                priceRangeSeekBar.setMaxStartValue(100).apply();
+
+                //Didn't set the values to default by calling setSelectedFilters, set them manually
+                setSelectedFilters();
+
             }
         });
 
@@ -513,9 +491,12 @@ public class FiltersActivity extends AppCompatActivity {
             else
                 filterHeaderOverview = filterHeaderOverview + ("Χωρίς κατοικίδιο   ");
         }
-        //Km Range
-        if (selectedFilters.getRange() != null)
-            filterHeaderOverview = filterHeaderOverview + ("Εύρος " + selectedFilters.getRange() +   " χλμ   ");
+        //Km Range Start
+        if (selectedFilters.getRangeStart() != null)
+            filterHeaderOverview = filterHeaderOverview + ("Εύρος αφετηρίας " + selectedFilters.getRangeStart() +   " χλμ   ");
+        //Km Range End
+        if (selectedFilters.getRangeEnd() != null)
+            filterHeaderOverview = filterHeaderOverview + ("Εύρος προορισμού " + selectedFilters.getRangeEnd() +   " χλμ   ");
 
         //Seats
         if(selectedFilters.getSeatsMin() != null)
@@ -531,8 +512,51 @@ public class FiltersActivity extends AppCompatActivity {
             else
                 filterHeaderOverview = filterHeaderOverview + (selectedFilters.getBagsMin() +   " Αποσκευές   ");
 
+    }
+
+    public void setSelectedFilters (){
 
 
+        if(selectedFilters.getPriceMin()!=null){
+            // Toast.makeText(this, String.valueOf(selectedFilters.getPriceMin()), Toast.LENGTH_SHORT).show();
+            priceRangeSeekBar.setMinStartValue((float) selectedFilters.getPriceMin()).apply();
+        }
+        if(selectedFilters.getPriceMax()!=null){
+            //Toast.makeText(this, String.valueOf(selectedFilters.getPriceMin()), Toast.LENGTH_SHORT).show();
+            priceRangeSeekBar.setMaxStartValue((float) selectedFilters.getPriceMax()).apply();
+        }
+        if(selectedFilters.getRangeStart()!=null){
+            //Toast.makeText(this, String.valueOf(selectedFilters.getPriceMin()), Toast.LENGTH_SHORT).show();
+            kmRangeStartSeekBar.setMinStartValue((float) selectedFilters.getRangeStart()).apply();
+        }
+        if(selectedFilters.getRangeEnd()!=null){
+            //Toast.makeText(this, String.valueOf(selectedFilters.getPriceMin()), Toast.LENGTH_SHORT).show();
+            kmRangeEndSeekBar.setMinStartValue((float) selectedFilters.getRangeEnd()).apply();
+        }
+        if(selectedFilters.getHavePet()!=null){
+            if(selectedFilters.getHavePet())
+                petsButton.setText("Με κατοικίδιο");
+            else
+                petsButton.setText("Χωρίς κατοικίδιο");
+        }
+        if(selectedFilters.getSeatsMin()!=null){
+            seatsTextView.setText(String.valueOf(selectedFilters.getSeatsMin()));
+        }
+        if(selectedFilters.getBagsMin()!=null){
+            bagsTextView.setText(String.valueOf(selectedFilters.getBagsMin()));
+        }
+        if(selectedFilters.getTimestampMin() !=null && selectedFilters.getTimestampMax() != null){
+            //Toast.makeText(this, "Διαφορετικό", Toast.LENGTH_SHORT).show();
+            //Select again the user's dates
+            Pair setDefault = new Pair(selectedFilters.getTimestampMin()*1000,selectedFilters.getTimestampMax()*1000);
+            builder.setSelection(setDefault);
+            //Rename the dateButton
+            Date startDate = new Date(selectedFilters.getTimestampMin()*1000);
+            Date endDate = new Date(selectedFilters.getTimestampMax()*1000);
+            DateFormat date = new SimpleDateFormat("dd MMM");
+            dateButton.setText(date.format(startDate) + " - " + date.format(endDate));
+            builder.build();
+        }
     }
 
 

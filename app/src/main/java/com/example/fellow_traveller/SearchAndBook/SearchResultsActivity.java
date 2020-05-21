@@ -317,7 +317,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                     new FellowTravellerAPI(globalClass).getTrips(searchDestinationsModel, filterModel.getTimestampMin(), filterModel.getTimestampMax(),
                             filterModel.getSeatsMin(),filterModel.getSeatsMax(), filterModel.getBagsMin(), filterModel.getBagsMax(),
                             filterModel.getPriceMin(), filterModel.getPriceMax(),
-                            filterModel.getHavePet(), filterModel.getRange(), new SearchTripsCallback() {
+                            filterModel.getHavePet(), filterModel.getRangeStart(), new SearchTripsCallback() {
                                 @Override
                                 public void onSuccess(ArrayList<TripModel> trips) {
                                     if(trips.size()==0) {

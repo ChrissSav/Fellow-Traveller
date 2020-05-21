@@ -14,9 +14,10 @@ public class FilterModel implements Parcelable {
     private Integer priceMin;
     private Integer priceMax;
     private Boolean havePet;
-    private Integer range;
+    private Integer rangeStart;
+    private Integer rangeEnd;
 
-    public FilterModel(Long timestampMin, Long timestampMax, Integer seatsMin, Integer seatsMax, Integer bagsMin, Integer bagsMax, Integer priceMin, Integer priceMax, Boolean havePet, Integer range) {
+    public FilterModel(Long timestampMin, Long timestampMax, Integer seatsMin, Integer seatsMax, Integer bagsMin, Integer bagsMax, Integer priceMin, Integer priceMax, Boolean havePet, Integer rangeStart, Integer rangeEnd) {
         this.timestampMin = timestampMin;
         this.timestampMax = timestampMax;
         this.seatsMin = seatsMin;
@@ -26,7 +27,8 @@ public class FilterModel implements Parcelable {
         this.priceMin = priceMin;
         this.priceMax = priceMax;
         this.havePet = havePet;
-        this.range = range;
+        this.rangeStart = rangeStart;
+        this.rangeEnd = rangeEnd;
     }
 
     public FilterModel() {
@@ -39,7 +41,8 @@ public class FilterModel implements Parcelable {
         this.priceMin = null;
         this.priceMax = null;
         this.havePet = null;
-        this.range = null;
+        this.rangeStart = null;
+        this.rangeEnd = null;
     }
 
     protected FilterModel(Parcel in) {
@@ -86,9 +89,14 @@ public class FilterModel implements Parcelable {
         byte tmpHavePet = in.readByte();
         havePet = tmpHavePet == 0 ? null : tmpHavePet == 1;
         if (in.readByte() == 0) {
-            range = null;
+            rangeStart = null;
         } else {
-            range = in.readInt();
+            rangeStart = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            rangeEnd = null;
+        } else {
+            rangeEnd = in.readInt();
         }
     }
 
@@ -176,12 +184,20 @@ public class FilterModel implements Parcelable {
         this.havePet = havePet;
     }
 
-    public Integer getRange() {
-        return range;
+    public Integer getRangeStart() {
+        return rangeStart;
     }
 
-    public void setRange(Integer range) {
-        this.range = range;
+    public void setRangeStart(Integer range) {
+        this.rangeStart = range;
+    }
+
+    public Integer getRangeEnd() {
+        return rangeEnd;
+    }
+
+    public void setRangeEnd(Integer range) {
+        this.rangeEnd = range;
     }
 
     @Override
@@ -240,11 +256,17 @@ public class FilterModel implements Parcelable {
             parcel.writeInt(priceMax);
         }
         parcel.writeByte((byte) (havePet == null ? 0 : havePet ? 1 : 2));
-        if (range == null) {
+        if (rangeStart == null) {
             parcel.writeByte((byte) 0);
         } else {
             parcel.writeByte((byte) 1);
-            parcel.writeInt(range);
+            parcel.writeInt(rangeStart);
+        }
+        if (rangeEnd == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(rangeEnd);
         }
     }
 }
