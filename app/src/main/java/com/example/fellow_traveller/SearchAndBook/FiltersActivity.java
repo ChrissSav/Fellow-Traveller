@@ -77,7 +77,7 @@ public class FiltersActivity extends AppCompatActivity {
 
         kmRangeSeekBar = findViewById(R.id.ActivityFilters_km_range_seekbar);
         kmRangeBarTV = findViewById(R.id.ActivityFilters_km_range_radius_tv);
-        sortSpinner = findViewById(R.id.ActivityFilters_sort_by_spinner);
+
 
         dateButton = findViewById(R.id.ActivityFilters_date_button);
         resetButton = findViewById(R.id.ActivityFilters_reset_button);
@@ -125,9 +125,7 @@ public class FiltersActivity extends AppCompatActivity {
 
         }
 
-        String[] items = new String[]{"     Πιο σχετική", "    Με βάση τιμή", "Με βάση απόσταση"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        sortSpinner.setAdapter(adapter);
+
 
         openDialogForPrice();
         openDialogForSeats();
