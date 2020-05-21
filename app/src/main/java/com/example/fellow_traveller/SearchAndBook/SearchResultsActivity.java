@@ -44,6 +44,7 @@ import com.example.fellow_traveller.PlacesAPI.Models.ResultModel;
 import com.example.fellow_traveller.PlacesAPI.PlaceApiConnection;
 import com.example.fellow_traveller.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -68,6 +69,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     private Button startDestButton, endDestButton;
     private DestinationModel onReturnDestinationModel;
     private int witchFieldIsCLick = 0;
+    private float averagePrice = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,49 +116,17 @@ public class SearchResultsActivity extends AppCompatActivity {
         latlongModelEnd = new LatLongModel(endDestinationModel.getLatitude(), endDestinationModel.getLongitude());
 
         searchDestinationsModel = new SearchDestinationsModel(latlongModelStart, latlongModelEnd);
-//
-//
-        //Toast.makeText(SearchResultsActivity.this, searchDestinationsModel.getDestFrom().getLatitude().toString() + "", Toast.LENGTH_SHORT).show();
-//        SearchDestinationsModel searchDestinationsModel = null;
-//        searchDestinationsModel.setDestFrom(latlongModelStart);
-//        searchDestinationsModel.setDestTo(latlongModelEnd);
+
 
         LatLongModel latLongModel1 = new LatLongModel(startDestinationModel.getLatitude(), startDestinationModel.getLongitude());
         LatLongModel latLongModel2 = new LatLongModel(endDestinationModel.getLatitude(), endDestinationModel.getLongitude());
 
         SearchDestinationsModel destinationsModel = new SearchDestinationsModel(latLongModel1,latLongModel2);
-        /*new FellowTravellerAPI(globalClass).getTrips(destinationsModel, null, null, null, null, null, null,
-                null, null, null, null, new SearchTripsCallback() {
-                    @Override
-                    public void onSuccess(ArrayList<TripModel> trips) {
-                        // TODO πρωτα να ελεγξεις αμα εχει ταξιδια και μετα να παρεις το πρωτο στοιχειο
-                        //     Toast.makeText(SearchResultsActivity.this, trips.get(0).getCreatorUser().getFullName() + "", Toast.LENGTH_SHORT).show();
 
-                        resultList = trips;
-                        mRecyclerView = findViewById(R.id.ActivitySearchResults_recycler_view);
-                        mRecyclerView.setHasFixedSize(true);
-                        mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                        mAdapter = new SearchResultsAdapter(resultList);
-                        mRecyclerView.setLayoutManager(mLayoutManager);
-                        mRecyclerView.setAdapter(mAdapter);
 
-                        searchResultsCount.setText(String.format("Βρέθηκαν %d ταξίδια.", resultList.size()));
 
-                        mAdapter.setOnItemClickListener(new SearchResultsAdapter.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(int position) {
-                                Intent mainIntent = new Intent(SearchResultsActivity.this, SearchDetailsActivity.class);
-                                mainIntent.putExtra("trip", resultList.get(position));
-                                startActivity(mainIntent);
-                            }
-                        });
-                    }
 
-                    @Override
-                    public void onFailure(String errorMsg) {
-                        Log.d("FILTER", "Couldnt find any trips");
-                    }
-                });*/
+        //Button listeners
         startDestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -179,6 +149,7 @@ public class SearchResultsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent mainIntent = new Intent(SearchResultsActivity.this, FiltersActivity.class);
                 mainIntent.putExtra("getSelections", filterModel);
+                mainIntent.putExtra("averagePrice", averagePrice);
                 startActivityForResult(mainIntent, 1);
 
 
@@ -188,15 +159,13 @@ public class SearchResultsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
-//                String swapString = startDestTextView.getText().toString();
-//                startDestTextView.setText(endDestTextView.getText().toString());
-//                endDestTextView.setText(swapString);
 
+                //Change button names
                 String swapString = startDestButton.getText().toString();
                 startDestButton.setText(endDestButton.getText().toString());
                 endDestButton.setText(swapString);
 
-
+                //Change destination models
                 tempDestination = startDestinationModel;
                 startDestinationModel = endDestinationModel;
                 endDestinationModel = tempDestination;
@@ -375,6 +344,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
 
                                     searchResultsCount.setText(String.format("Βρέθηκαν %d ταξίδια.", resultList.size()));
+                                    getAveragePriceOfTrips();
 
                                     mAdapter.setOnItemClickListener(new SearchResultsAdapter.OnItemClickListener() {
                                         @Override
@@ -408,9 +378,10 @@ public class SearchResultsActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        //Return a filter Model and a header
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-                int result = data.getIntExtra("result", 0);
+                //int result = data.getIntExtra("result", 0);
 
                 //Parse the header filter to display which filters was selected
                 String filterHeader = data.getStringExtra("filterHeaderOverview");
@@ -429,6 +400,7 @@ public class SearchResultsActivity extends AppCompatActivity {
             if (resultCode == RESULT_CANCELED) {
 
             }
+            //Return a destination from autocomplete
         }else if(requestCode == 2){
             if (resultCode == RESULT_OK) {
                 DestinationModel resultPredictionsModel = data.getParcelableExtra("resultPredictionsModel");
@@ -457,6 +429,7 @@ public class SearchResultsActivity extends AppCompatActivity {
             }
         }
     }
+
     public void abortDialog(){
         final Dialog myDialog = new Dialog(SearchResultsActivity.this, R.style.Theme_Dialog_Abort);
         Window window = myDialog.getWindow();
@@ -571,6 +544,39 @@ public class SearchResultsActivity extends AppCompatActivity {
         mAdapter = new SearchResultsAdapter(resultList);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    public void getAveragePriceOfTrips(){
+        averagePrice = 0;
+
+        for(int i = 0; i < resultList.size(); i++){
+            averagePrice = averagePrice + resultList.get(i).getPrice();
+        }
+        if (resultList.size() != 0 && resultList != null)
+            averagePrice = averagePrice / resultList.size();
+
+
+        int integerPart = (int) averagePrice;
+        float decimalPart = averagePrice - (float) integerPart;
+        float priceRounded;
+
+        if(decimalPart < 0.25 || decimalPart == 0.25)
+            priceRounded = integerPart;
+        else if(decimalPart < 0.75 || decimalPart == 0.75)
+            priceRounded = integerPart  + (float) 0.5;
+        else
+            priceRounded = integerPart + 1;
+
+        averagePrice = priceRounded;
+        Toast.makeText(this, "Μέση τιμή " + averagePrice, Toast.LENGTH_SHORT).show();
+
+
+        //TODO if there is only 1 trip with price for example 10.7€ it will display as average price 10.5€
+
+//        averagePrice /= Math.pow(10, (int) Math.log10(averagePrice));
+//        averagePrice = ((int) (averagePrice * 10)) / 10.0f; // <-- performs one digit floor
+//        Toast.makeText(this, "Ακέραιο " + integerPart + " Δεκαδικό " + decimalPart, Toast.LENGTH_SHORT).show();
+
 
     }
 }

@@ -40,6 +40,7 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -69,9 +70,10 @@ public class FiltersActivity extends AppCompatActivity {
     private String seatTitle = TITLE_SEAT;
     private String bagsTitle = TITLE_BAGS;
     private FilterModel selectedFilters;
-    private TextView bagsTextView, seatsTextView;
+    private TextView bagsTextView, seatsTextView, averagePriceTextView;
     private MaterialDatePicker.Builder<Pair<Long, Long>> builder = MaterialDatePicker.Builder.dateRangePicker();
     private String filterHeaderOverview = "";
+    private float averagePrice;
     //private MaterialDatePicker<Pair<Long, Long>> materialDatePicker = builder.build();
 
     @Override
@@ -93,6 +95,9 @@ public class FiltersActivity extends AppCompatActivity {
         mainConstraintLayout = findViewById(R.id.ActivityFilters_main_constraint_layout);
         seatsTextView = findViewById(R.id.ActivityBook_seats_value_tv);
         bagsTextView = findViewById(R.id.ActivityFilters_bags_value_tv);
+        averagePriceTextView = findViewById(R.id.ActivityFilters_price_range_info_value_tv);
+
+
 
 
         //In case user saved some filter options, we load them back
@@ -131,8 +136,18 @@ public class FiltersActivity extends AppCompatActivity {
             DateFormat date = new SimpleDateFormat("dd MMM");
             dateButton.setText(date.format(startDate) + " - " + date.format(endDate));
             builder.build();
-
         }
+
+
+        //Get average price
+        Bundle bundle = getIntent().getExtras();
+        averagePrice = bundle.getFloat("averagePrice");
+        //Display decimal if average price is not integer
+        if((int) averagePrice == averagePrice)
+            averagePriceTextView.setText((int) averagePrice + "€");
+        else
+            averagePriceTextView.setText(averagePrice + "€");
+
 
         String[] items = new String[]{"     Πιο σχετική", "    Με βάση τιμή", "Με βάση απόσταση"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -502,5 +517,6 @@ public class FiltersActivity extends AppCompatActivity {
 
 
     }
+
 
 }
