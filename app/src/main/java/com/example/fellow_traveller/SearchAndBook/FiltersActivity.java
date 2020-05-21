@@ -39,8 +39,12 @@ import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
 
 public class FiltersActivity extends AppCompatActivity {
@@ -66,8 +70,10 @@ public class FiltersActivity extends AppCompatActivity {
     private String seatTitle = TITLE_SEAT;
     private String bagsTitle = TITLE_BAGS;
     private FilterModel selectedFilters;
-    private TextView bagsTextView, seatsTextView;
+    private TextView bagsTextView, seatsTextView, averagePriceTextView;
     private MaterialDatePicker.Builder<Pair<Long, Long>> builder = MaterialDatePicker.Builder.dateRangePicker();
+    private String filterHeaderOverview = "";
+    private float averagePrice;
     //private MaterialDatePicker<Pair<Long, Long>> materialDatePicker = builder.build();
 
     @Override
@@ -91,9 +97,12 @@ public class FiltersActivity extends AppCompatActivity {
         mainConstraintLayout = findViewById(R.id.ActivityFilters_main_constraint_layout);
         seatsTextView = findViewById(R.id.ActivityBook_seats_value_tv);
         bagsTextView = findViewById(R.id.ActivityFilters_bags_value_tv);
+        averagePriceTextView = findViewById(R.id.ActivityFilters_price_range_info_value_tv);
 
 
 
+
+        //In case user saved some filter options, we load them back
         selectedFilters = getIntent().getParcelableExtra("getSelections");
         if(selectedFilters.getPriceMin()!=null){
            // Toast.makeText(this, String.valueOf(selectedFilters.getPriceMin()), Toast.LENGTH_SHORT).show();
@@ -120,14 +129,31 @@ public class FiltersActivity extends AppCompatActivity {
         }
         if(selectedFilters.getTimestampMin() !=null && selectedFilters.getTimestampMax() != null){
             //Toast.makeText(this, "Διαφορετικό", Toast.LENGTH_SHORT).show();
+            //Select again the user's dates
             Pair setDefault = new Pair(selectedFilters.getTimestampMin()*1000,selectedFilters.getTimestampMax()*1000);
             builder.setSelection(setDefault);
-            //dateButton.setText(materialDatePicker.getHeaderText());
+            //Rename the dateButton
+            Date startDate = new Date(selectedFilters.getTimestampMin()*1000);
+            Date endDate = new Date(selectedFilters.getTimestampMax()*1000);
+            DateFormat date = new SimpleDateFormat("dd MMM");
+            dateButton.setText(date.format(startDate) + " - " + date.format(endDate));
             builder.build();
-
         }
 
 
+        //Get average price
+        Bundle bundle = getIntent().getExtras();
+        averagePrice = bundle.getFloat("averagePrice");
+        //Display decimal if average price is not integer
+        if((int) averagePrice == averagePrice)
+            averagePriceTextView.setText((int) averagePrice + "€");
+        else
+            averagePriceTextView.setText(averagePrice + "€");
+
+
+        String[] items = new String[]{"     Πιο σχετική", "    Με βάση τιμή", "Με βάση απόσταση"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        sortSpinner.setAdapter(adapter);
 
         openDialogForPrice();
         openDialogForSeats();
@@ -181,7 +207,9 @@ public class FiltersActivity extends AppCompatActivity {
             public void onClick(View view) {
                // Toast.makeText(FiltersActivity.this, "Ημερομηνία " + startDateFinal + "-" + endDateFinal + "Τιμή " + priceStartFinal + "-" + priceEndFinal + rangeFinal + seatsFinal + bagsFinal, Toast.LENGTH_SHORT).show();
                 Intent resultIntent = new Intent();
+                getFilterHeader();
                 resultIntent.putExtra("resultFilterModel", selectedFilters);
+                resultIntent.putExtra("filterHeaderOverview", filterHeaderOverview);
                 setResult(RESULT_OK, resultIntent);
                 finish();
             }
@@ -228,6 +256,7 @@ public class FiltersActivity extends AppCompatActivity {
                 petsButton.setText("Με κατοικίδιο");
                 selectedFilters.setHavePet(true);
                 mainConstraintLayout.setForeground(null);
+
                 myDialog.dismiss();
             }
         });
@@ -237,6 +266,7 @@ public class FiltersActivity extends AppCompatActivity {
                 petsButton.setText("Χωρίς κατοικίδιο");
                 selectedFilters.setHavePet(false);
                 mainConstraintLayout.setForeground(null);
+
                 myDialog.dismiss();
             }
 
@@ -335,10 +365,21 @@ public class FiltersActivity extends AppCompatActivity {
                     priceEndFinal = maxValue.intValue();
                     selectedFilters.setPriceMin(null);
                     selectedFilters.setPriceMax(null);
+                }else if(minValue.intValue() == 0){
+                    priceRangeTV.setText("0 - " + maxValue.intValue() + " €" /*R.string.euro_symbol*/ );
+                    priceEndFinal = maxValue.intValue();
+                    selectedFilters.setPriceMin(null);
+                    selectedFilters.setPriceMax(maxValue.intValue());
+                }else if(maxValue.intValue() == 100){
+                    priceRangeTV.setText(minValue.intValue() + " - " + maxValue.intValue() + " €" /*R.string.euro_symbol*/ );
+                    priceStartFinal = minValue.intValue();
+                    priceEndFinal = maxValue.intValue();
+                    selectedFilters.setPriceMin(minValue.intValue());
+                    selectedFilters.setPriceMax(null);
                 }else{
-                priceRangeTV.setText(minValue.intValue() + " - " + maxValue.intValue() + " €" /*R.string.euro_symbol*/ );
-                priceStartFinal = minValue.intValue();
-                priceEndFinal = maxValue.intValue();
+                    priceRangeTV.setText(minValue.intValue() + " - " + maxValue.intValue() + " €" /*R.string.euro_symbol*/ );
+                    priceStartFinal = minValue.intValue();
+                    priceEndFinal = maxValue.intValue();
                     selectedFilters.setPriceMin(minValue.intValue());
                     selectedFilters.setPriceMax(maxValue.intValue());
                 }
@@ -443,6 +484,53 @@ public class FiltersActivity extends AppCompatActivity {
 
             }
         });
+
+
+    }
+
+    public void getFilterHeader(){
+
+        //Date
+        if (selectedFilters.getTimestampMin() != null && selectedFilters.getTimestampMax() != null){
+            Date startDate = new Date(selectedFilters.getTimestampMin()*1000);
+            Date endDate = new Date(selectedFilters.getTimestampMax()*1000);
+            DateFormat date = new SimpleDateFormat("dd MMM");
+            filterHeaderOverview = filterHeaderOverview + (date.format(startDate) + " - " + date.format(endDate) + "   ");
+        }
+
+        //Price Range
+        if(selectedFilters.getPriceMin() != null && selectedFilters.getPriceMax() != null)
+            filterHeaderOverview = filterHeaderOverview + (selectedFilters.getPriceMin() +   " - " + selectedFilters.getPriceMax() + "€   ");
+        else if(selectedFilters.getPriceMin() != null && selectedFilters.getPriceMax() == null)
+            filterHeaderOverview = filterHeaderOverview + (selectedFilters.getPriceMin() +   "€+   ");
+        else if(selectedFilters.getPriceMin() == null && selectedFilters.getPriceMax() != null)
+            filterHeaderOverview = filterHeaderOverview + ("0 - " + selectedFilters.getPriceMax() + "€   ");
+
+        //Pets
+        if(selectedFilters.getHavePet() != null){
+            if(selectedFilters.getHavePet())
+                filterHeaderOverview = filterHeaderOverview + ("Με κατοικίδιο   ");
+            else
+                filterHeaderOverview = filterHeaderOverview + ("Χωρίς κατοικίδιο   ");
+        }
+        //Km Range
+        if (selectedFilters.getRange() != null)
+            filterHeaderOverview = filterHeaderOverview + ("Εύρος " + selectedFilters.getRange() +   " χλμ   ");
+
+        //Seats
+        if(selectedFilters.getSeatsMin() != null)
+            if(selectedFilters.getSeatsMin() == 1)
+                filterHeaderOverview = filterHeaderOverview + (selectedFilters.getSeatsMin() +   " Θέση   ");
+            else
+                filterHeaderOverview = filterHeaderOverview + (selectedFilters.getSeatsMin() +   " Θέσεις   ");
+
+            //Bags
+        if(selectedFilters.getBagsMin() != null)
+            if(selectedFilters.getBagsMin() == 1)
+                filterHeaderOverview = filterHeaderOverview + (selectedFilters.getBagsMin() +   " Αποσκευή   ");
+            else
+                filterHeaderOverview = filterHeaderOverview + (selectedFilters.getBagsMin() +   " Αποσκευές   ");
+
 
 
     }

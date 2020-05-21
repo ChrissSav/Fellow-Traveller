@@ -6,7 +6,6 @@ import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.content.Context;
 import android.content.Intent;
-import android.provider.Settings;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
@@ -15,9 +14,8 @@ import androidx.core.app.NotificationManagerCompat;
 import com.example.fellow_traveller.ClientAPI.Callbacks.NotificationCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.NotificationModel;
-import com.example.fellow_traveller.ClientAPI.Models.UserBaseModel;
 import com.example.fellow_traveller.R;
-import com.example.fellow_traveller.Trips.TripPageActivity;
+import com.example.fellow_traveller.Trips.TripPageDriverActivity;
 
 import java.util.ArrayList;
 
@@ -98,7 +96,7 @@ public class ExampleJobService extends JobService {
         notificationManager = NotificationManagerCompat.from(mContext);
 
 
-        Intent activityIntent = new Intent(this, TripPageActivity.class);
+        Intent activityIntent = new Intent(this, TripPageDriverActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this,
                 0, activityIntent, 0);
 

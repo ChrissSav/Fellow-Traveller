@@ -31,7 +31,7 @@ public class CompletedTripsAdapter extends RecyclerView.Adapter<CompletedTripsAd
     @NonNull
     @Override
     public CompletedTripsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_trip_layout_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_trip_completed_layout_item, parent, false);
         CompletedTripsViewHolder evh = new CompletedTripsViewHolder(v, mListener);
         return evh;
     }
@@ -40,20 +40,14 @@ public class CompletedTripsAdapter extends RecyclerView.Adapter<CompletedTripsAd
     public void onBindViewHolder(@NonNull CompletedTripsViewHolder holder, int position) {
         TripModel currentItem = completedTripsList.get(position);
 
-        holder.destinations.setText(currentItem.getDestFrom().getTitle() + " - " + currentItem.getDestTo().getTitle());
+        holder.startDate.setText(currentItem.getDestFrom().getTitle());
+        holder.endDate.setText(currentItem.getDestTo().getTitle());
         // TODO cast this to double
-        holder.seats.setText(currentItem.getSeatStatus());
-        holder.bags.setText(currentItem.getBagsStatus());
-
 
         holder.date.setText(currentItem.getDate());
         holder.time.setText(currentItem.getTime());
 
-        //Delete the 0 decimals
-        if(currentItem.getPrice().intValue() == currentItem.getPrice())
-            holder.price.setText(currentItem.getPrice().intValue() + "€");
-        else
-            holder.price.setText(currentItem.getPrice()+ "€");
+
 
     }
 
@@ -67,18 +61,17 @@ public class CompletedTripsAdapter extends RecyclerView.Adapter<CompletedTripsAd
     }
 
     public static class CompletedTripsViewHolder extends RecyclerView.ViewHolder {
-        public TextView destinations, seats, bags, date, time, price;
+        public TextView startDate, endDate, date, time;
 
 
         public CompletedTripsViewHolder(@NonNull View itemView, final CompletedTripsAdapter.OnItemClickListener listener) {
             super(itemView);
 
-            destinations = itemView.findViewById(R.id.fragment_trip_layout_item_destination);
-            seats = itemView.findViewById(R.id.fragment_trip_layout_item_seats);
-            bags = itemView.findViewById(R.id.fragment_trip_layout_item_bags);
-            date = itemView.findViewById(R.id.fragment_trip_layout_item_date_textView);
-            time = itemView.findViewById(R.id.fragment_trip_layout_item_time_textView);
-            price = itemView.findViewById(R.id.fragment_trip_layout_item_price_textView);
+            startDate = itemView.findViewById(R.id.fragment_trip_completed_dest_from);
+            endDate = itemView.findViewById(R.id.fragment_trip_completed_dest_to);
+            date = itemView.findViewById(R.id.fragment_trip_completed_date);
+            time = itemView.findViewById(R.id.fragment_trip_completed_time);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

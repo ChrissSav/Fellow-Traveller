@@ -5,28 +5,23 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.NotificationCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.StatusCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.NotificationModel;
-import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.Notification.NotificationAdapter;
 import com.example.fellow_traveller.R;
-import com.example.fellow_traveller.Trips.TripPageActivity;
+import com.example.fellow_traveller.Trips.TripPageDriverActivity;
 
 import java.util.ArrayList;
 
@@ -94,7 +89,7 @@ public class NotificationFragment extends Fragment {
             @Override
             public void onItemClick(final int position) {
                 if(notificationArrayList.get(position).getHasRead()){
-                    Intent intent = new Intent(getActivity(),TripPageActivity.class);
+                    Intent intent = new Intent(getActivity(), TripPageDriverActivity.class);
                     startActivity(intent);
                 }
                 else{
@@ -103,7 +98,7 @@ public class NotificationFragment extends Fragment {
                         public void onSuccess(String notificationModels) {
                             notificationArrayList.get(position).setHasRead(true);
                             mAdapter.notifyItemChanged(position);
-                            Intent intent = new Intent(getActivity(),TripPageActivity.class);
+                            Intent intent = new Intent(getActivity(), TripPageDriverActivity.class);
                             startActivity(intent);
                         }
 

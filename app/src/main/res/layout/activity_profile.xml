@@ -398,7 +398,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/button_orange_empty"
-                    android:text="Αξιολόγείστε εδώ"
+                    android:text="Αξιολογείστε εδώ"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="@id/ActivityProfile_no_review_label"
                     app:layout_constraintBottom_toBottomOf="@id/ActivityProfile_underline_no_review"

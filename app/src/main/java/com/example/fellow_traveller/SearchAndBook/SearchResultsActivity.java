@@ -44,11 +44,12 @@ import com.example.fellow_traveller.PlacesAPI.Models.ResultModel;
 import com.example.fellow_traveller.PlacesAPI.PlaceApiConnection;
 import com.example.fellow_traveller.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class SearchResultsActivity extends AppCompatActivity {
-    private TextView endDestTextView, startDestTextView, searchResultsCount;
+    private TextView endDestTextView, startDestTextView, searchResultsCount, filterHeaderOverView;
     private RecyclerView mRecyclerView;
     private SearchResultsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -58,14 +59,17 @@ public class SearchResultsActivity extends AppCompatActivity {
     private LatLongModel latlongModelStart, latlongModelEnd;
     private SearchDestinationsModel searchDestinationsModel;
     private ArrayList<TripModel> resultList = new ArrayList<>();
-    private boolean destFromDone = false;
-    private boolean destToDone = false;
+    private boolean destFromDone = false, destToDone = false, destOnReturnDone = true;
     private ImageView notFoundImage;
     private FilterModel  filterModel;
     private CoordinatorLayout mainCoordinatorLayout;
     private int sortListMethodFlag = 0;
     private ProgressDialog pd;
     private ProgressBar progressBar;
+    private Button startDestButton, endDestButton;
+    private DestinationModel onReturnDestinationModel;
+    private int witchFieldIsCLick = 0;
+    private float averagePrice = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +79,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         startDestTextView = findViewById(R.id.ActivitySearchResults_from_textView);
         endDestTextView = findViewById(R.id.ActivitySearchResults_to_textView);
+        filterHeaderOverView = findViewById(R.id.ActivitySearchResults_filters_textView);
         filterButton = findViewById(R.id.ActivitySearchResults_filter_button);
         swapButton = findViewById(R.id.ActivitySearchResults_swap_button);
         backButton = findViewById(R.id.ActivitySearchResults_close_button);
@@ -83,6 +88,9 @@ public class SearchResultsActivity extends AppCompatActivity {
         notFoundImage = findViewById(R.id.ActivitySearchResults_not_found_image);
         mainCoordinatorLayout = findViewById(R.id.ActivitySearchResults_main_coordinator_layout);
         progressBar = findViewById(R.id.ActivitySearchResults_progress_bar);
+        startDestButton = findViewById(R.id.ActivitySearchResults_from_button);
+        endDestButton = findViewById(R.id.ActivitySearchResults_to_button);
+
         pd = new ProgressDialog(SearchResultsActivity.this);
         pd.setMessage("Αναζήτηση... ");
         //pd.show();
@@ -96,6 +104,9 @@ public class SearchResultsActivity extends AppCompatActivity {
         startDestTextView.setText(startDestinationModel.getTitle());
         endDestTextView.setText(endDestinationModel.getTitle());
 
+        startDestButton.setText(startDestinationModel.getTitle());
+        endDestButton.setText(endDestinationModel.getTitle());
+
         // getLatLongFromPlaceId(startDestinationModel);
         //getLatLongFromPlaceId(endDestinationModel);
         getLatLongFromPlaceIFrom();
@@ -105,56 +116,40 @@ public class SearchResultsActivity extends AppCompatActivity {
         latlongModelEnd = new LatLongModel(endDestinationModel.getLatitude(), endDestinationModel.getLongitude());
 
         searchDestinationsModel = new SearchDestinationsModel(latlongModelStart, latlongModelEnd);
-//
-//
-        //Toast.makeText(SearchResultsActivity.this, searchDestinationsModel.getDestFrom().getLatitude().toString() + "", Toast.LENGTH_SHORT).show();
-//        SearchDestinationsModel searchDestinationsModel = null;
-//        searchDestinationsModel.setDestFrom(latlongModelStart);
-//        searchDestinationsModel.setDestTo(latlongModelEnd);
+
 
         LatLongModel latLongModel1 = new LatLongModel(startDestinationModel.getLatitude(), startDestinationModel.getLongitude());
         LatLongModel latLongModel2 = new LatLongModel(endDestinationModel.getLatitude(), endDestinationModel.getLongitude());
 
         SearchDestinationsModel destinationsModel = new SearchDestinationsModel(latLongModel1,latLongModel2);
-        /*new FellowTravellerAPI(globalClass).getTrips(destinationsModel, null, null, null, null, null, null,
-                null, null, null, null, new SearchTripsCallback() {
-                    @Override
-                    public void onSuccess(ArrayList<TripModel> trips) {
-                        // TODO πρωτα να ελεγξεις αμα εχει ταξιδια και μετα να παρεις το πρωτο στοιχειο
-                        //     Toast.makeText(SearchResultsActivity.this, trips.get(0).getCreatorUser().getFullName() + "", Toast.LENGTH_SHORT).show();
 
-                        resultList = trips;
-                        mRecyclerView = findViewById(R.id.ActivitySearchResults_recycler_view);
-                        mRecyclerView.setHasFixedSize(true);
-                        mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                        mAdapter = new SearchResultsAdapter(resultList);
-                        mRecyclerView.setLayoutManager(mLayoutManager);
-                        mRecyclerView.setAdapter(mAdapter);
 
-                        searchResultsCount.setText(String.format("Βρέθηκαν %d ταξίδια.", resultList.size()));
 
-                        mAdapter.setOnItemClickListener(new SearchResultsAdapter.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(int position) {
-                                Intent mainIntent = new Intent(SearchResultsActivity.this, SearchDetailsActivity.class);
-                                mainIntent.putExtra("trip", resultList.get(position));
-                                startActivity(mainIntent);
-                            }
-                        });
-                    }
 
-                    @Override
-                    public void onFailure(String errorMsg) {
-                        Log.d("FILTER", "Couldnt find any trips");
-                    }
-                });*/
-
+        //Button listeners
+        startDestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainIntent = new Intent(SearchResultsActivity.this, SearchLocationActivity.class);
+                witchFieldIsCLick = 1;
+                startActivityForResult(mainIntent, 2);
+            }
+        });
+        endDestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainIntent = new Intent(SearchResultsActivity.this, SearchLocationActivity.class);
+                witchFieldIsCLick = 2;
+                startActivityForResult(mainIntent, 2);
+            }
+        });
 
         filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mainIntent = new Intent(SearchResultsActivity.this, FiltersActivity.class);
                 mainIntent.putExtra("getSelections", filterModel);
+                mainIntent.putExtra("averagePrice", averagePrice);
                 startActivityForResult(mainIntent, 1);
 
 
@@ -164,9 +159,13 @@ public class SearchResultsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
-                String swapString = startDestTextView.getText().toString();
-                startDestTextView.setText(endDestTextView.getText().toString());
-                endDestTextView.setText(swapString);
+
+                //Change button names
+                String swapString = startDestButton.getText().toString();
+                startDestButton.setText(endDestButton.getText().toString());
+                endDestButton.setText(swapString);
+
+                //Change destination models
                 tempDestination = startDestinationModel;
                 startDestinationModel = endDestinationModel;
                 endDestinationModel = tempDestination;
@@ -187,6 +186,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                 sortDialog();
             }
         });
+
     }
 
     public void getLatLongFromPlaceId(final DestinationModel destModel) {
@@ -263,14 +263,41 @@ public class SearchResultsActivity extends AppCompatActivity {
             destToDone = true;
         }
     }
+    public void getLatLongFromPlace(final DestinationModel destinationModel) {
 
+        destOnReturnDone = false;
+
+        Log.i("default",destinationModel.getPlaceId().equals("default")+"");
+        if (!destinationModel.getPlaceId().equals("default")) {
+            new PlaceApiConnection(globalClass, true).getLatLonFromPlace(destinationModel.getPlaceId(), new PlaceApiResultCallBack() {
+                @Override
+                public void onSuccess(ResultModel resultModel) {
+
+                    destinationModel.setLatitude(resultModel.getGeometry().getLocation().getLatitude());
+                    destinationModel.setLongitude(resultModel.getGeometry().getLocation().getLongitude());
+                    // Toast.makeText(SearchResultsActivity.this, endDestinationModel.getLatitude() + " " + (endDestinationModel.getLongitude()), Toast.LENGTH_SHORT).show();
+                    destOnReturnDone = true;
+                }
+
+                @Override
+                public void onFailure(String errorMsg) {
+                    Toast.makeText(SearchResultsActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+                    destOnReturnDone = true;
+                    pd.dismiss();
+                    progressBar.setVisibility(View.GONE);
+                }
+            });
+        }else {
+            destOnReturnDone = true;
+        }
+    }
 
 
     public void Trip() {
         AsyncTask<Void, Void, Boolean> task = new AsyncTask<Void, Void, Boolean>() {
             @Override
             protected Boolean doInBackground(Void... voids) {
-                while (!(destFromDone && destToDone)) {
+                while (!(destFromDone && destToDone && destOnReturnDone)) {
 
                 }
                 //if (destinationModelFrom.getTitle() == null && destinationModelTo.getTitle() == null)
@@ -317,6 +344,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
 
                                     searchResultsCount.setText(String.format("Βρέθηκαν %d ταξίδια.", resultList.size()));
+                                    getAveragePriceOfTrips();
 
                                     mAdapter.setOnItemClickListener(new SearchResultsAdapter.OnItemClickListener() {
                                         @Override
@@ -350,19 +378,58 @@ public class SearchResultsActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        //Return a filter Model and a header
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-                int result = data.getIntExtra("result", 0);
-                filterModel = data.getParcelableExtra("resultFilterModel");
-                pd.show();
-                Trip();
+                //int result = data.getIntExtra("result", 0);
+
+                //Parse the header filter to display which filters was selected
+                String filterHeader = data.getStringExtra("filterHeaderOverview");
+                if(filterHeader.equals(""))
+                    filterHeaderOverView.setText("Δεν έχετε ορίσει κάποιο φίλτρο");
+                else
+                    filterHeaderOverView.setText(filterHeader);
+
+                //Parse a filter model to for our search results
+                if(!filterModel.equals(data.getParcelableExtra("resultFilterModel"))){
+                    filterModel = data.getParcelableExtra("resultFilterModel");
+                    Trip();
+                }
 
             }
             if (resultCode == RESULT_CANCELED) {
 
             }
+            //Return a destination from autocomplete
+        }else if(requestCode == 2){
+            if (resultCode == RESULT_OK) {
+                DestinationModel resultPredictionsModel = data.getParcelableExtra("resultPredictionsModel");
+                if (witchFieldIsCLick == 1) {
+                    onReturnDestinationModel = resultPredictionsModel;
+                    startDestButton.setText(resultPredictionsModel.getTitle());
+                    startDestinationModel = onReturnDestinationModel;
+                    getLatLongFromPlace(startDestinationModel);
+                    Trip();
+
+
+                } else if (witchFieldIsCLick == 2) {
+                    onReturnDestinationModel = resultPredictionsModel;
+                    endDestButton.setText(resultPredictionsModel.getTitle());
+                    endDestinationModel = onReturnDestinationModel;
+                    getLatLongFromPlace(endDestinationModel);
+                    Trip();
+
+                }
+                //Toast.makeText(getContext(),predictionsModelDestFrom.toString(), Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getContext(),predictionsModelDestTo.toString(), Toast.LENGTH_SHORT).show();
+
+            }
+            if (resultCode == RESULT_CANCELED) {
+                // mTextViewResult.setText("Nothing selected");
+            }
         }
     }
+
     public void abortDialog(){
         final Dialog myDialog = new Dialog(SearchResultsActivity.this, R.style.Theme_Dialog_Abort);
         Window window = myDialog.getWindow();
@@ -477,6 +544,39 @@ public class SearchResultsActivity extends AppCompatActivity {
         mAdapter = new SearchResultsAdapter(resultList);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    public void getAveragePriceOfTrips(){
+        averagePrice = 0;
+
+        for(int i = 0; i < resultList.size(); i++){
+            averagePrice = averagePrice + resultList.get(i).getPrice();
+        }
+        if (resultList.size() != 0 && resultList != null)
+            averagePrice = averagePrice / resultList.size();
+
+
+        int integerPart = (int) averagePrice;
+        float decimalPart = averagePrice - (float) integerPart;
+        float priceRounded;
+
+        if(decimalPart < 0.25 || decimalPart == 0.25)
+            priceRounded = integerPart;
+        else if(decimalPart < 0.75 || decimalPart == 0.75)
+            priceRounded = integerPart  + (float) 0.5;
+        else
+            priceRounded = integerPart + 1;
+
+        averagePrice = priceRounded;
+        Toast.makeText(this, "Μέση τιμή " + averagePrice, Toast.LENGTH_SHORT).show();
+
+
+        //TODO if there is only 1 trip with price for example 10.7€ it will display as average price 10.5€
+
+//        averagePrice /= Math.pow(10, (int) Math.log10(averagePrice));
+//        averagePrice = ((int) (averagePrice * 10)) / 10.0f; // <-- performs one digit floor
+//        Toast.makeText(this, "Ακέραιο " + integerPart + " Δεκαδικό " + decimalPart, Toast.LENGTH_SHORT).show();
+
 
     }
 }

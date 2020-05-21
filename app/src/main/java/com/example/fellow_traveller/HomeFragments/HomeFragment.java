@@ -1,8 +1,10 @@
 package com.example.fellow_traveller.HomeFragments;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
@@ -13,13 +15,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.fellow_traveller.ClientAPI.Models.SearchDestinationsModel;
-import com.example.fellow_traveller.MapDirections.MapsActivity;
-import com.example.fellow_traveller.MapDirections.MapsRouteActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.NewOffer.NewOfferActivity;
 import com.example.fellow_traveller.R;
-import com.example.fellow_traveller.SearchAndBook.SearchActivity;
 import com.example.fellow_traveller.SearchAndBook.SearchDestinationsActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -39,6 +37,7 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,13 +48,27 @@ public class HomeFragment extends Fragment {
 
         globalClass = (GlobalClass) getActivity().getApplicationContext();
 
-        circleImageView= view.findViewById(R.id.image_icon_home);
-        searchForTrip = view.findViewById(R.id.FragmentHome_textView_Search);
-        constraintLayout = view.findViewById(R.id.Layout2);
-        constraintLayout2 = view.findViewById(R.id.Layout3);
-        welcome_user = view.findViewById(R.id.FragmentHome_textView_welcome_user);
-        btnΝewΟffer = view.findViewById(R.id.FragmentHome_button_CreateTrip);
 
+        searchForTrip = view.findViewById(R.id.FragmentHome_search_button);
+        constraintLayout2 = view.findViewById(R.id.Layout3);
+        welcome_user = view.findViewById(R.id.FragmentHome_user_welcome_textView);
+        btnΝewΟffer = view.findViewById(R.id.FragmentHome_offer_button);
+
+//        Calendar time = Calendar.getInstance();
+//        time.add(Calendar.MILLISECOND, -time.getTimeZone().getOffset(time.getTimeInMillis()));
+//        Date date = time.getTime();
+//        Calendar cal = Calendar.getInstance();
+//        TimeZone tz = cal.getTimeZone();
+//        final Date currentTime = new Date();
+//
+//        final SimpleDateFormat sdf =
+//                new SimpleDateFormat("EEE, MMM d, yyyy hh:mm:ss a z");
+//        long unixTimestamp = Instant.now().getEpochSecond();
+//// Give it to me in GMT time.
+//        //sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+//        //System.out.println("GMT time: " + sdf.format(currentTime));
+//        ZonedDateTime currentDate = ZonedDateTime.now( ZoneOffset.UTC );
+//        Toast.makeText(getActivity(), "Σύστημα" + String.valueOf(System.currentTimeMillis())+ " " + unixTimestamp, Toast.LENGTH_SHORT).show();
 
 
         welcome_user.setText("Γεια σου " + globalClass.getCurrentUser().getName() + ",");
@@ -67,12 +80,7 @@ public class HomeFragment extends Fragment {
                 startActivity(mainIntent);
             }
         });
-        circleImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "Το πατησες", Toast.LENGTH_SHORT).show();
-            }
-        });
+
         btnΝewΟffer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
