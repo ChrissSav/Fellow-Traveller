@@ -31,12 +31,13 @@ import static com.example.fellow_traveller.Util.SomeMethods.dateTimeToTimestamp;
 
 
 public class NewOfferActivity extends AppCompatActivity {
-    private final int stages = 6;
+    private final int stages = 7;
     private Button buttonNext;
     private ImageButton btnBack;
     private FragmentManager fragmentManager;
     private Fragment fra;
     private NewOfferStage1Fragment newOfferStage1Fragment = new NewOfferStage1Fragment();
+    private NewOfferStagePickUpFragment newOfferStagePickUpFragment = new NewOfferStagePickUpFragment();
     private NewOfferStage2Fragment newOfferStage2Fragment = new NewOfferStage2Fragment();
     private NewOfferStage3Fragment newOfferStage3Fragment = new NewOfferStage3Fragment();
     private NewOfferStage4Fragment newOfferStage4Fragment = new NewOfferStage4Fragment();
@@ -50,10 +51,11 @@ public class NewOfferActivity extends AppCompatActivity {
 
     private Boolean detailFrom = false;
     private Boolean detailTo = false;
+    private Boolean detailPickUP = false;
 
     private DestinationModel destinationModelFrom;
     private DestinationModel destinationModelTo;
-
+    private DestinationModel destinationModelPickUP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,10 +83,15 @@ public class NewOfferActivity extends AppCompatActivity {
         buttonNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (fra.toString().equals("NewOfferStage1Fragment") && newOfferStage1Fragment.validateFragment()) {
+                    fra = newOfferStagePickUpFragment;
+                    progressBar.setProgress(num_num * newOfferStagePickUpFragment.getRank());
+                    fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
+                }else if (fra.toString().equals("NewOfferStagePickUpFragment") && newOfferStagePickUpFragment.validateFragment()) {
                     fra = newOfferStage2Fragment;
                     progressBar.setProgress(num_num * newOfferStage2Fragment.getRank());
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
-                } else if (fra.toString().equals("NewOfferStage2Fragment") && newOfferStage2Fragment.validateFragment()) {
+                }
+                else if (fra.toString().equals("NewOfferStage2Fragment") && newOfferStage2Fragment.validateFragment()) {
                     progressBar.setProgress(num_num * newOfferStage3Fragment.getRank());
                     fra = newOfferStage3Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
@@ -127,7 +134,7 @@ public class NewOfferActivity extends AppCompatActivity {
 
                 } else if (fra.toString().equals("NewOfferStage6Fragment")) {
                     getDestinationsModel(newOfferStage1Fragment.getDestFromModel().getPlaceId(),
-                            newOfferStage1Fragment.getDestToModel().getPlaceId());
+                            newOfferStage1Fragment.getDestToModel().getPlaceId(),newOfferStagePickUpFragment.getDestPickUpModel().getPlaceId());
                     // tripRegister();
                 }
 
@@ -198,11 +205,17 @@ public class NewOfferActivity extends AppCompatActivity {
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
         } else if (fra.toString().equals("NewOfferStage2Fragment")) {
+            progressBar.setProgress(num_num * newOfferStagePickUpFragment.getRank());
+            fra = newOfferStagePickUpFragment;
+            fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.NewOfferActivity_frame_container, fra).commit();
+
+        } else if (fra.toString().equals("NewOfferStagePickUpFragment")) {
             progressBar.setProgress(num_num * newOfferStage1Fragment.getRank());
             fra = newOfferStage1Fragment;
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
-        } else {
+        }
+        else {
             super.onBackPressed();
         }
 
@@ -213,16 +226,17 @@ public class NewOfferActivity extends AppCompatActivity {
         AsyncTask<Void, Void, Boolean> task = new AsyncTask<Void, Void, Boolean>() {
             @Override
             protected Boolean doInBackground(Void... voids) {
-                while (!(detailTo && detailFrom)) {
+                while (!(detailTo && detailFrom && detailPickUP)) {
 
                 }
-                if (destinationModelFrom.getTitle() == null && destinationModelTo.getTitle() == null)
+                if (destinationModelFrom.getTitle() == null && destinationModelTo.getTitle() == null && destinationModelPickUP.getTitle() == null)
                     return false;
                 return true;
             }
 
             @Override
             protected void onPostExecute(Boolean aVoid) {
+                Log.i("TAG", "onPostExecute: "+aVoid);
                 if (aVoid) {
                     String date = newOfferStage2Fragment.getDate();
                     String time = newOfferStage2Fragment.getTime();
@@ -236,7 +250,7 @@ public class NewOfferActivity extends AppCompatActivity {
                     Float price = Float.parseFloat(newOfferStage4Fragment.getPrice());
                     String msg = newOfferStage5Fragment.getMsg();
 
-                    CreateTripModel trip = new CreateTripModel(destinationModelFrom, destinationModelTo, dateTimeToTimestamp(date, time),
+                    CreateTripModel trip = new CreateTripModel(destinationModelFrom, destinationModelTo, destinationModelPickUP,dateTimeToTimestamp(date, time),
                             pet, max_seats, max_bags,
                             msg, price, car_id);
 
@@ -266,7 +280,7 @@ public class NewOfferActivity extends AppCompatActivity {
 
     }
 
-    public void getDestinationsModel(final String placeIdFrom, final String placeIdTo) {
+    public void getDestinationsModel(final String placeIdFrom, final String placeIdTo,final String placeIdPickUp) {
         new PlaceApiConnection(globalClass, true).getLatLonFromPlace(placeIdFrom, new PlaceApiResultCallBack() {
             @Override
             public void onSuccess(ResultModel resultModel) {
@@ -296,6 +310,22 @@ public class NewOfferActivity extends AppCompatActivity {
             public void onFailure(String errorMsg) {
                 Toast.makeText(NewOfferActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
                 detailTo = true;
+            }
+        });
+
+        new PlaceApiConnection(globalClass, true).getLatLonFromPlace(placeIdPickUp, new PlaceApiResultCallBack() {
+            @Override
+            public void onSuccess(ResultModel resultModel) {
+                destinationModelPickUP = new DestinationModel(resultModel.getPlaceΙd(), newOfferStage1Fragment.getDestTo()
+                        , resultModel.getGeometry().getLocation().getLatitude(), resultModel.getGeometry().getLocation().getLongitude());
+                detailPickUP = true;
+
+            }
+
+            @Override
+            public void onFailure(String errorMsg) {
+                Toast.makeText(NewOfferActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+                detailPickUP = true;
             }
         });
         tripRegister();

@@ -48,7 +48,7 @@ public class NewOfferStage5Fragment extends Fragment {
     }
 
     public int getRank() {
-        return 5;
+        return 6;
     }
 
 

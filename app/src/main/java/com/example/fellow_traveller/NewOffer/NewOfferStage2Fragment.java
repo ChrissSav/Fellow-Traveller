@@ -89,7 +89,7 @@ public class NewOfferStage2Fragment extends Fragment {
     }
 
     public int getRank() {
-        return 2;
+        return 3;
     }
 
     @Override

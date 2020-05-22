@@ -233,7 +233,7 @@ public class NewOfferStage3Fragment extends Fragment {
     }
 
     public int getRank() {
-        return 3;
+        return 4;
     }
 
     public void Increase(TextView textView) {

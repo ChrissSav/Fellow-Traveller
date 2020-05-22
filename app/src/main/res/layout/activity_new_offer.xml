@@ -19,16 +19,19 @@
 
     <ImageButton
         android:id="@+id/NewOfferActivity_imageButton"
+        style="@style/border_icon_button"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:adjustViewBounds="true"
-        android:background="?android:selectableItemBackgroundBorderless"
         android:padding="12dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_back_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NewOfferActivity_progressBar" />
+
+
 
 
     <FrameLayout

@@ -55,10 +55,10 @@ public class GlobalClass extends Application {
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
                 Request.Builder newRequest = request.newBuilder();
-                Log.i("setSessionId", "getOkHttpClient if" + Objects.requireNonNull(currentUser.getSessionId()));
+                //Log.i("setSessionId", "getOkHttpClient if " + Objects.requireNonNull(currentUser.getSessionId()));
 
                 if (currentUser != null) {
-                    Log.i("setSessionId", "getOkHttpClient " + Objects.requireNonNull(currentUser.getSessionId()));
+                  //  Log.i("setSessionId", "getOkHttpClient " + Objects.requireNonNull(currentUser.getSessionId()));
                     newRequest.header("Cookie", Objects.requireNonNull(currentUser.getSessionId()));
                 }
                 return chain.proceed(newRequest.build());

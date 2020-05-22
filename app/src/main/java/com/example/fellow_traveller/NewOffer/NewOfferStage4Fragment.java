@@ -63,7 +63,7 @@ public class NewOfferStage4Fragment extends Fragment {
     }
 
     public int getRank() {
-        return 4;
+        return 5;
     }
 
     public boolean validateFragment() {

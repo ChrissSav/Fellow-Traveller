@@ -105,7 +105,7 @@ public class NewOfferStage6Fragment extends Fragment implements View.OnClickList
     }
 
     public int getRank() {
-        return 6;
+        return 7;
     }
 
 
