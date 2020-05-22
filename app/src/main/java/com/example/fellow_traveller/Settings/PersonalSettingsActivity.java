@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +41,8 @@ public class PersonalSettingsActivity extends AppCompatActivity {
     private EditText firstNameEditText, lastNameEditText, aboutMeEditText, phoneNumberEditText;
     private GlobalClass globalClass;
     private DatabaseReference updateUserInfo;
+    private ImageView editImageView;
+    private UserAuthModel userAuth;
 
 
     @Override
@@ -50,6 +55,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
         profilePicture = findViewById(R.id.ActivityProfile_user_image);
         imageButtonClose = findViewById(R.id.PersonalSettingsActivity_button_close);
         imageButtonUpdate = findViewById(R.id.PersonalSettingsActivity_button_update);
+        editImageView = findViewById(R.id.PersonalSettingsActivity_edit_imageview);
 
 
         firstNameEditText = findViewById(R.id.PersonalSettingsActivity_editText_first_name);
@@ -66,6 +72,9 @@ public class PersonalSettingsActivity extends AppCompatActivity {
         });
 
         fillFields();
+
+
+
         imageButtonClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,10 +137,13 @@ public class PersonalSettingsActivity extends AppCompatActivity {
         new FellowTravellerAPI(globalClass).getUserInfo(new UserAuthCallback() {
             @Override
             public void onSuccess(UserAuthModel user) {
+                userAuth = user;
                 firstNameEditText.setText(user.getName());
                 lastNameEditText.setText(user.getSurname());
                 aboutMeEditText.setText(user.getAboutMe());
                 phoneNumberEditText.setText(user.getPhone());
+                //TODO we dont need to call the API to get the users, put extra from the account and have the text watchers on create
+                textWatchers();
             }
 
             @Override
@@ -189,6 +201,98 @@ public class PersonalSettingsActivity extends AppCompatActivity {
     public void DeleteSharedPreferences() {
         SharedPreferences settings = getSharedPreferences("shared preferences", MODE_PRIVATE);
         settings.edit().clear().commit();
+    }
+
+    public void textWatchers(){
+        firstNameEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(!editable.equals(userAuth.getName())) {
+                    editImageView.setVisibility(View.INVISIBLE);
+                    imageButtonUpdate.setVisibility(View.VISIBLE);
+                }else{
+                    imageButtonUpdate.setVisibility(View.INVISIBLE);
+                    editImageView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        lastNameEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(!editable.equals(userAuth.getSurname())) {
+                    editImageView.setVisibility(View.INVISIBLE);
+                    imageButtonUpdate.setVisibility(View.VISIBLE);
+                }else{
+                    imageButtonUpdate.setVisibility(View.INVISIBLE);
+                    editImageView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        aboutMeEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(!editable.equals(userAuth.getAboutMe())) {
+                    editImageView.setVisibility(View.INVISIBLE);
+                    imageButtonUpdate.setVisibility(View.VISIBLE);
+                }else {
+                    imageButtonUpdate.setVisibility(View.INVISIBLE);
+                    editImageView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        phoneNumberEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(!editable.equals(userAuth.getPhone())) {
+                    editImageView.setVisibility(View.INVISIBLE);
+                    imageButtonUpdate.setVisibility(View.VISIBLE);
+                }else{
+                    imageButtonUpdate.setVisibility(View.INVISIBLE);
+                    editImageView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 }
 

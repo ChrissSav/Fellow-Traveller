@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.MessagesNotification.APIService;
@@ -54,14 +55,15 @@ public class ChatConversationActivity extends AppCompatActivity {
     private String lastKey = "";
     private String prevKey = "";
     private SwipeRefreshLayout mRefreshLayout;
-    APIService apiService;
+    private APIService apiService;
     boolean notify = false;
     private GlobalClass globalClass;
     private int myId;
     private int groupId;
     private boolean updateStatus = false;
-    ValueEventListener seenListener, updateListener;
-    DatabaseReference reference, referenceStatus ;
+    private ValueEventListener seenListener, updateListener;
+    private DatabaseReference reference, referenceStatus;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -73,6 +75,7 @@ public class ChatConversationActivity extends AppCompatActivity {
         plusButton = findViewById(R.id.plus_button_chat);
         sendButton = findViewById(R.id.send_chat);
         mRefreshLayout = findViewById(R.id.swipe_refresh_chat_conversation);
+        progressBar = findViewById(R.id.ActivityChatConversation_progress_bar);
 
 
         //Retrieve current user's id
@@ -220,6 +223,7 @@ public class ChatConversationActivity extends AppCompatActivity {
                 messagesList.add(item);
                 mAdapter.notifyDataSetChanged();
                 mRecyclerView.scrollToPosition(messagesList.size()-1);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -241,7 +245,9 @@ public class ChatConversationActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
+
         });
+        progressBar.setVisibility(View.GONE);
     }
 
     public void readMoreMessages(){

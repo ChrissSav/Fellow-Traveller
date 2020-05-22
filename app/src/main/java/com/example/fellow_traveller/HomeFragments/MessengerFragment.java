@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.Chat.ChatConversationActivity;
@@ -47,6 +48,7 @@ public class MessengerFragment extends Fragment {
     private int myId;
     private ArrayList<ConversationItem> conversationsList = new ArrayList<>();
     private boolean notifyFlag = true;
+    private ProgressBar progressBar;
 
 
 
@@ -86,6 +88,7 @@ public class MessengerFragment extends Fragment {
 //        hashMap.put("seen",true );
 //
 //        reference.setValue(hashMap);
+        progressBar = view.findViewById(R.id.FragmentMessenger_progress_bar);
 
         mRecyclerView = view.findViewById(R.id.conversations_recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -138,11 +141,12 @@ public class MessengerFragment extends Fragment {
                         Collections.sort(conversationsList);
                         mAdapter.notifyDataSetChanged();
                     }
+                    progressBar.setVisibility(View.GONE);
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                    progressBar.setVisibility(View.GONE);
                 }
             });
     }
