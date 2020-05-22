@@ -29,7 +29,7 @@
         android:id="@+id/fragment_trip_searchs_image_not_found"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/not_found_orange"
+        android:src="@drawable/ic_no_trip"
         app:layout_constraintTop_toBottomOf="@id/fragment_trip_searchs_active_trips_textView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
