@@ -8,6 +8,7 @@ import com.example.fellow_traveller.ClientAPI.Callbacks.NotificationCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.ReviewModelCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.SearchTripsCallback;
 import com.example.fellow_traveller.ClientAPI.Callbacks.StatusCallBack;
+import com.example.fellow_traveller.ClientAPI.Callbacks.TripInvolvedCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.TripRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserAuthCallback;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserCarsCallBack;
@@ -24,6 +25,7 @@ import com.example.fellow_traveller.ClientAPI.Models.PassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.ReviewModel;
 import com.example.fellow_traveller.ClientAPI.Models.SearchDestinationsModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
+import com.example.fellow_traveller.ClientAPI.Models.TripInvolvedModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserChangePasswordModel;
@@ -396,6 +398,44 @@ public class FellowTravellerAPI {
             @Override
             public void onFailure(Call<ArrayList<TripModel>> call, Throwable t) {
                 searchTripsCallback.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            }
+        });
+    }
+
+    // TODO Set this as the main method to get the trips  as creator
+    public static void getTripsAsCreatorTest(final TripInvolvedCallBack tripInvolvedCallBack) {
+        retrofitAPIEndpoints.tripsAsCreatorTest().enqueue(new Callback<ArrayList<TripInvolvedModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<TripInvolvedModel>> call, Response<ArrayList<TripInvolvedModel>> response) {
+                if (!response.isSuccessful()) {
+                    tripInvolvedCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                    return;
+                }
+                tripInvolvedCallBack.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<TripInvolvedModel>> call, Throwable t) {
+                tripInvolvedCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            }
+        });
+    }
+
+    // TODO Set this as the main method to get the trips as passenger
+    public static void getTripsAsPassengerTest(final TripInvolvedCallBack tripInvolvedCallBack) {
+        retrofitAPIEndpoints.tripsTakesPartTest().enqueue(new Callback<ArrayList<TripInvolvedModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<TripInvolvedModel>> call, Response<ArrayList<TripInvolvedModel>> response) {
+                if (!response.isSuccessful()) {
+                    tripInvolvedCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                    return;
+                }
+                tripInvolvedCallBack.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<TripInvolvedModel>> call, Throwable t) {
+                tripInvolvedCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
             }
         });
     }

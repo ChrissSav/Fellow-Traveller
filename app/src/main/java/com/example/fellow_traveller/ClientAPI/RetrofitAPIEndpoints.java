@@ -10,6 +10,7 @@ import com.example.fellow_traveller.ClientAPI.Models.PassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.ReviewModel;
 import com.example.fellow_traveller.ClientAPI.Models.SearchDestinationsModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
+import com.example.fellow_traveller.ClientAPI.Models.TripInvolvedModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserChangePasswordModel;
@@ -69,9 +70,14 @@ public interface RetrofitAPIEndpoints {
     @GET("/trips/as_creator")
     Call<ArrayList<TripModel>> tripsAsCreator();
 
+    @GET("/trips/as_creator")
+    Call<ArrayList<TripInvolvedModel>> tripsAsCreatorTest();
 
     @GET("/trips/takes_part")
     Call<ArrayList<TripModel>> tripsTakesPart();
+
+    @GET("/trips/takes_part")
+    Call<ArrayList<TripInvolvedModel>> tripsTakesPartTest();
 
 
     @POST("/trips")
