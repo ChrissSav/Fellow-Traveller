@@ -200,12 +200,12 @@
                 android:id="@+id/ActivityTripPageDriver_show_map_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/button_black_empty"
-                android:text="Εμφάνιση στον χάρτη"
-                android:fontFamily="@font/firasans_mediumitalic"
+                style="@style/button_empty_with_left_drawable"
+                android:text="Άνοιγμα στους χάρτες"
+                android:drawableRight="@drawable/ic_map"
+                android:drawableTint="@null"
                 app:layout_constraintTop_toBottomOf="@id/ActivityTripPageDriver_to_dest_tv"
-                app:layout_constraintStart_toStartOf="@id/ActivityTripPageDriver_trip_label"
-                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="@id/ActivityTripPageDriver_more_button"
                 />
 
             <View
@@ -297,6 +297,30 @@
                 app:layout_constraintTop_toBottomOf="@id/ActivityTripPageDriver_pets_label"
                 android:layout_marginTop="20dp"
                 />
+            <TextView
+                android:id="@+id/ActivityTripPageDriver_color_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Χρώμα"
+                android:textSize="18sp"
+                android:textColor="@color/black_color"
+                android:fontFamily="@font/firasans_light"
+                app:layout_constraintStart_toStartOf="@id/ActivityTripPageDriver_trip_label"
+                app:layout_constraintTop_toBottomOf="@id/ActivityTripPageDriver_car_label"
+                android:layout_marginTop="20dp"
+                />
+            <TextView
+                android:id="@+id/ActivityTripPageDriver_plate_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Αριθμός κυκλοφορίας"
+                android:textSize="18sp"
+                android:textColor="@color/black_color"
+                android:fontFamily="@font/firasans_light"
+                app:layout_constraintStart_toStartOf="@id/ActivityTripPageDriver_trip_label"
+                app:layout_constraintTop_toBottomOf="@id/ActivityTripPageDriver_color_label"
+                android:layout_marginTop="20dp"
+                />
             <ImageView
                 android:id="@+id/ActivityTripPageDriver_date_image"
                 android:layout_width="28dp"
@@ -360,6 +384,28 @@
                 android:backgroundTint="@color/black_color"
                 app:layout_constraintTop_toTopOf="@id/ActivityTripPageDriver_car_label"
                 app:layout_constraintBottom_toBottomOf="@id/ActivityTripPageDriver_car_label"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginRight="20dp"
+                />
+            <ImageView
+                android:id="@+id/ActivityTripPageDriver_color_image"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/ic_color"
+                android:backgroundTint="@color/black_color"
+                app:layout_constraintTop_toTopOf="@id/ActivityTripPageDriver_color_label"
+                app:layout_constraintBottom_toBottomOf="@id/ActivityTripPageDriver_color_label"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginRight="20dp"
+                />
+            <ImageView
+                android:id="@+id/ActivityTripPageDriver_plate_image"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/ic_license_plate"
+                android:backgroundTint="@color/black_color"
+                app:layout_constraintTop_toTopOf="@id/ActivityTripPageDriver_plate_label"
+                app:layout_constraintBottom_toBottomOf="@id/ActivityTripPageDriver_plate_label"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginRight="20dp"
                 />
@@ -435,13 +481,37 @@
                 app:layout_constraintBottom_toBottomOf="@id/ActivityTripPageDriver_car_label"
                 app:layout_constraintEnd_toStartOf="@id/ActivityTripPageDriver_car_image"
                 android:layout_marginEnd="20dp"/>
+            <TextView
+                android:id="@+id/ActivityTripPageDriver_color_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Matte, White"
+                android:fontFamily="@font/firasans_medium"
+                android:textColor="@color/black_color"
+                android:textSize="18sp"
+                app:layout_constraintTop_toTopOf="@id/ActivityTripPageDriver_color_label"
+                app:layout_constraintBottom_toBottomOf="@id/ActivityTripPageDriver_color_label"
+                app:layout_constraintEnd_toStartOf="@id/ActivityTripPageDriver_color_image"
+                android:layout_marginEnd="20dp"/>
+            <TextView
+                android:id="@+id/ActivityTripPageDriver_plate_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ΧΣΦ-5386"
+                android:fontFamily="@font/firasans_medium"
+                android:textColor="@color/black_color"
+                android:textSize="18sp"
+                app:layout_constraintTop_toTopOf="@id/ActivityTripPageDriver_plate_label"
+                app:layout_constraintBottom_toBottomOf="@id/ActivityTripPageDriver_plate_label"
+                app:layout_constraintEnd_toStartOf="@id/ActivityTripPageDriver_plate_image"
+                android:layout_marginEnd="20dp"/>
 
             <View
                 android:id="@+id/ActivityTripPageDriver_trip_info_underline"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/softGrey_color"
-                app:layout_constraintTop_toBottomOf="@id/ActivityTripPageDriver_car_tv"
+                app:layout_constraintTop_toBottomOf="@id/ActivityTripPageDriver_plate_tv"
                 android:layout_marginTop="20dp"/>
 
             <TextView
@@ -462,6 +532,15 @@
                 app:layout_constraintTop_toBottomOf="@id/ActivityTripPageDriver_pick_up_point_label"
                 app:layout_constraintStart_toStartOf="@id/ActivityTripPageDriver_back_button"
                 android:layout_marginTop="10dp"/>
+            <ImageButton
+                android:id="@+id/ActivityTripPageDriver_pick_up_point_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_help"
+                app:layout_constraintTop_toTopOf="@id/ActivityTripPageDriver_pick_up_point_label"
+                app:layout_constraintBottom_toBottomOf="@id/ActivityTripPageDriver_pick_up_point_label"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginRight="20dp"/>
             <fragment
                 android:id="@+id/ActivityTripPageDriver_map_fragment"
                 android:layout_width="match_parent"

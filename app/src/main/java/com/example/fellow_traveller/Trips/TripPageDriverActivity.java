@@ -52,7 +52,7 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
     private boolean isCompleted, isDriver;
     private TripModel tripModel;
     private TextView textViewCreator, textViewRating, textViewReviews, textViewDestFrom, textViewDestTo, textViewDate,
-            textViewTime, textViewSeats, textViewBags, textViewPets, textViewCar, textViewMsg, textViewPrice;
+            textViewTime, textViewSeats, textViewBags, textViewPets, textViewCar, textViewMsg, textViewPrice, textViewColor, textViewPlate;
     private Button passengersButton, showOnMapButton;
     private ConstraintLayout userLayout;
     private RecyclerView mRecyclerView;
@@ -86,6 +86,8 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
         textViewBags = findViewById(R.id.ActivityTripPageDriver_bags_tv);
         textViewPets = findViewById(R.id.ActivityTripPageDriver_pets_tv);
         textViewCar = findViewById(R.id.ActivityTripPageDriver_car_tv);
+        textViewColor = findViewById(R.id.ActivityTripPageDriver_color_tv);
+        textViewPlate = findViewById(R.id.ActivityTripPageDriver_plate_tv);
         textViewMsg = findViewById(R.id.ActivityTripPageDriver_driver_message_tv);
         passengersButton = findViewById(R.id.ActivityTripPageDriver_more_passengers_button);
         userLayout = findViewById(R.id.ActivityTripPageDriver_user_section);
@@ -115,6 +117,8 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
         textViewBags.setText(tripModel.getBagsStatus());
         textViewPets.setText(tripModel.getPetString());
         textViewCar.setText(tripModel.getCar().getBrand());
+        textViewColor.setText(tripModel.getCar().getColor());
+        textViewPlate.setText(tripModel.getCar().getPlate());
         textViewCreator.setText(tripModel.getCreatorUser().getFullName());
         textViewRating.setText(String.valueOf(tripModel.getCreatorUser().getRate()));
         textViewReviews.setText(String.valueOf(tripModel.getCreatorUser().getReviews()));

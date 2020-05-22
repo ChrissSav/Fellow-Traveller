@@ -49,7 +49,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class SearchResultsActivity extends AppCompatActivity {
-    private TextView endDestTextView, startDestTextView, searchResultsCount, filterHeaderOverView;
+    private TextView endDestTextView, startDestTextView, searchResultsCount, filterHeaderOverView, sortByTextView;
     private RecyclerView mRecyclerView;
     private SearchResultsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -75,6 +75,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
+
         globalClass = (GlobalClass) getApplicationContext();
 
         startDestTextView = findViewById(R.id.ActivitySearchResults_from_textView);
@@ -90,6 +91,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.ActivitySearchResults_progress_bar);
         startDestButton = findViewById(R.id.ActivitySearchResults_from_button);
         endDestButton = findViewById(R.id.ActivitySearchResults_to_button);
+        sortByTextView = findViewById(R.id.ActivitySearchResults_sort_TextView);
 
         pd = new ProgressDialog(SearchResultsActivity.this);
         pd.setMessage("Αναζήτηση... ");
@@ -323,9 +325,11 @@ public class SearchResultsActivity extends AppCompatActivity {
                                     if(trips.size()==0) {
                                         notFoundImage.setVisibility(View.VISIBLE);
                                         sortButton.setVisibility(View.INVISIBLE);
+                                        sortByTextView.setVisibility(View.INVISIBLE);
                                     }else {
                                         notFoundImage.setVisibility(View.GONE);
                                         sortButton.setVisibility(View.VISIBLE);
+                                        sortByTextView.setVisibility(View.VISIBLE);
                                     }
 
                                     resultList = trips;
@@ -393,6 +397,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                 //Parse a filter model to for our search results
                 if(!filterModel.equals(data.getParcelableExtra("resultFilterModel"))){
                     filterModel = data.getParcelableExtra("resultFilterModel");
+                    progressBar.setVisibility(View.VISIBLE);
                     Trip();
                 }
 
@@ -409,6 +414,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                     startDestButton.setText(resultPredictionsModel.getTitle());
                     startDestinationModel = onReturnDestinationModel;
                     getLatLongFromPlace(startDestinationModel);
+                    progressBar.setVisibility(View.VISIBLE);
                     Trip();
 
 
@@ -417,6 +423,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                     endDestButton.setText(resultPredictionsModel.getTitle());
                     endDestinationModel = onReturnDestinationModel;
                     getLatLongFromPlace(endDestinationModel);
+                    progressBar.setVisibility(View.VISIBLE);
                     Trip();
 
                 }
@@ -500,6 +507,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                 mainCoordinatorLayout.setForeground(null);
                 sortListMethodFlag = 0;
                 Collections.sort(resultList, TripModel.DateComparator);
+                sortByTextView.setText("Πιο σχετικά");
                 mAdapter.notifyDataSetChanged();
                 myDialog.dismiss();
 
@@ -513,6 +521,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                 mainCoordinatorLayout.setForeground(null);
                 sortListMethodFlag = 1;
                 Collections.sort(resultList, TripModel.PriceComparator);
+                sortByTextView.setText("Τιμή");
                 mAdapter.notifyDataSetChanged();
                 myDialog.dismiss();
             }
@@ -524,6 +533,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                 mainCoordinatorLayout.setForeground(null);
                 sortListMethodFlag = 2;
                 Collections.sort(resultList, TripModel.RatesComparator);
+                sortByTextView.setText("Αξιολογήσεις");
                 mAdapter.notifyDataSetChanged();
                 myDialog.dismiss();
             }

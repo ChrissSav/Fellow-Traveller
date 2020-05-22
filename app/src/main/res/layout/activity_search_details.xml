@@ -200,12 +200,12 @@
                 android:id="@+id/ActivitySearchDetails_show_map_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/button_black_empty"
-                android:text="Εμφάνιση στον χάρτη"
-                android:fontFamily="@font/firasans_mediumitalic"
+                style="@style/button_empty_with_left_drawable"
+                android:text="Άνοιγμα στους χάρτες"
+                android:drawableRight="@drawable/ic_map"
+                android:drawableTint="@null"
                 app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_to_dest_tv"
-                app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_trip_label"
-                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="@id/ActivitySearchDetails_more_button"
                 />
 
             <View
@@ -462,6 +462,15 @@
                 app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_pick_up_point_label"
                 app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_back_button"
                 android:layout_marginTop="10dp"/>
+            <ImageButton
+                android:id="@+id/ActivitySearchDetails_pick_up_point_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_help"
+                app:layout_constraintTop_toTopOf="@id/ActivitySearchDetails_pick_up_point_label"
+                app:layout_constraintBottom_toBottomOf="@id/ActivitySearchDetails_pick_up_point_label"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginRight="20dp"/>
             <fragment
                 android:id="@+id/ActivitySearchDetails_map_fragment"
                 android:layout_width="match_parent"

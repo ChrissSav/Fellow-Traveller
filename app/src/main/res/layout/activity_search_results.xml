@@ -300,6 +300,19 @@
                 app:layout_constraintTop_toTopOf="parent" />
             <!--android:text="Βρέθηκαν 4 ταξίδια"-->
 
+
+            <TextView
+                android:id="@+id/ActivitySearchResults_sort_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/paragraph4"
+                app:layout_constraintTop_toTopOf="@id/ActivitySearchResults_sort_button"
+                app:layout_constraintBottom_toBottomOf="@id/ActivitySearchResults_sort_button"
+                app:layout_constraintEnd_toStartOf="@id/ActivitySearchResults_sort_button"
+                android:layout_marginEnd="15dp"
+                android:text="Πιο σχετικά"
+                android:visibility="invisible"/>
+
             <ImageButton
                 android:id="@+id/ActivitySearchResults_sort_button"
                 android:layout_width="wrap_content"
