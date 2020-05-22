@@ -88,6 +88,7 @@
         app:layout_constraintTop_toBottomOf="@+id/status_chat"
         app:layout_constraintBottom_toTopOf="@id/ActivityProfile_about_me_underline"
         android:background="@color/white"
+        android:paddingBottom="5dp"
         >
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh_chat_conversation"
