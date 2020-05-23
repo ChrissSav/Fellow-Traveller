@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RegisterContainerActivity.class);
+                Intent intent = new Intent(MainActivity.this, PhoneActivity.class);
                 startActivity(intent);
                 //finish();
             }

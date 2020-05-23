@@ -25,6 +25,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:visibility="gone"
         />
+
     <ImageView
         android:id="@+id/fragment_trip_searchs_image_not_found"
         android:layout_width="wrap_content"
@@ -53,7 +54,7 @@
         android:layout_height="wrap_content"
         android:text="Ολοκληρωμένα"
         style="@style/header5"
-        app:layout_constraintTop_toBottomOf="@id/fragment_trip_searchs_recycler_view"
+        app:layout_constraintTop_toBottomOf="@id/fragment_trip_searchs_button"
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="@id/fragment_trip_searchs_button"/>
 

@@ -97,6 +97,13 @@
                     app:layout_constraintEnd_toEndOf="@id/FragmentHome_offer_label"
                     app:layout_constraintTop_toBottomOf="@id/FragmentHome_offer_label"/>
 
+                <Button
+                    android:id="@+id/FragmentAccount_verButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

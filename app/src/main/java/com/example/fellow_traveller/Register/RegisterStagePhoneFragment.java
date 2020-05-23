@@ -10,9 +10,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.fellow_traveller.R;
-import com.google.android.material.textfield.TextInputLayout;
-
-import static com.example.fellow_traveller.Util.InputValidation.isValidPhone;
 
 
 public class RegisterStagePhoneFragment extends Fragment {
@@ -30,7 +27,7 @@ public class RegisterStagePhoneFragment extends Fragment {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_register_stage_phone, container, false);
 
-        editTextPhone = view.findViewById(R.id.RegisterStagePhoneFragment_editText_number);
+        editTextPhone = view.findViewById(R.id.ActivityPhone_number_editText);
 
         return  view;
     }

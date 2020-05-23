@@ -19,6 +19,7 @@ import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.NewOffer.NewOfferActivity;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.SearchAndBook.SearchDestinationsActivity;
+import com.example.fellow_traveller.VerificationActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -30,7 +31,7 @@ public class HomeFragment extends Fragment {
     private View view;
     private GlobalClass globalClass;
     private CircleImageView circleImageView;
-    private Button btnΝewΟffer, mycrazybutton;
+    private Button btnΝewΟffer, verifyButton;
 
 
     public HomeFragment() {
@@ -53,7 +54,7 @@ public class HomeFragment extends Fragment {
         constraintLayout2 = view.findViewById(R.id.Layout3);
         welcome_user = view.findViewById(R.id.FragmentHome_user_welcome_textView);
         btnΝewΟffer = view.findViewById(R.id.FragmentHome_offer_button);
-
+        verifyButton = view.findViewById(R.id.FragmentAccount_verButton);
 //        Calendar time = Calendar.getInstance();
 //        time.add(Calendar.MILLISECOND, -time.getTimeZone().getOffset(time.getTimeInMillis()));
 //        Date date = time.getTime();
@@ -85,6 +86,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent mainIntent = new Intent(getActivity(), NewOfferActivity.class);
+                startActivity(mainIntent);
+            }
+        });
+        verifyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainIntent = new Intent(getActivity(), VerificationActivity.class);
                 startActivity(mainIntent);
             }
         });
