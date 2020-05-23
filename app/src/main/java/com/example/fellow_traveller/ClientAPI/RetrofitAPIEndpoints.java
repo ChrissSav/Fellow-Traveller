@@ -65,6 +65,10 @@ public interface RetrofitAPIEndpoints {
             @Body UserUpdateModel user
     );
 
+    @PUT("/users/photo")
+    Call<StatusHandleModel> userUpdatePhoto(
+            @Body JsonObject jsonObject
+    );
 
     //Trip
     @GET("/trips/as_creator")
