@@ -31,22 +31,20 @@ import static com.example.fellow_traveller.Util.InputValidation.isValidPhone;
 
 public class RegisterContainerActivity extends AppCompatActivity {
 
-    private final int stages = 4;
+    private final int stages = 3;
     private Button buttonNext;
     private ImageButton btnBack;
     private FragmentManager fragmentManager;
     private Fragment fra;
-    private RegisterStagePhoneFragment registerStagePhoneFragment = new RegisterStagePhoneFragment();
+    //private RegisterStagePhoneFragment registerStagePhoneFragment = new RegisterStagePhoneFragment();
     private RegisterStage1Fragmentd registerStage1Fragment = new RegisterStage1Fragmentd();
     private RegisterStage2Fragment registerStage2Fragment = new RegisterStage2Fragment();
     private RegisterStage3Fragment registerStage3Fragment = new RegisterStage3Fragment();
     private ProgressBar progressBar;
     private int num_num;
-    private String userPhone;
+    private String userPhone = "6999999999";
     private GlobalClass globalClass;
     private DatabaseReference userDatabase;
-
-    //Retrofit
 
 
     @Override
@@ -55,7 +53,8 @@ public class RegisterContainerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register_container);
         globalClass = (GlobalClass) getApplicationContext();
 
-
+        // TODO get phone from previous activity
+        // TODO  activate this line : userPhone = getIntent().getStringExtra("phone");
         num_num = 100 / stages;
 
         progressBar = findViewById(R.id.RegisterActivity_progressBar);
@@ -63,22 +62,19 @@ public class RegisterContainerActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.RegisterActivity_imageButton);
 
 
-        progressBar.setProgress(num_num * registerStagePhoneFragment.getRank());
-
         //Fragment Management
-
-
         fragmentManager = getSupportFragmentManager();
-        fra = registerStagePhoneFragment;
+        progressBar.setProgress(num_num * registerStage1Fragment.getRank());
+        fra = registerStage1Fragment;
         fragmentManager.beginTransaction().replace(R.id.RegisterActivity_frame_container, fra).commit();
 
 
         buttonNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (fra.toString().equals("RegisterStagePhoneFragment")) {
-                    validateRegisterStagePhone();
-                }
-                else if (fra.toString().equals("RegisterStage1Fragment")) {
+                // if (fra.toString().equals("RegisterStagePhoneFragment")) {
+                //     validateRegisterStagePhone();
+                //  }
+                if (fra.toString().equals("RegisterStage1Fragment")) {
                     validateRegisterStageEmail();
                 } else if (fra.toString().equals("RegisterStage2Fragment") && registerStage2Fragment.validateFragment()) {
                     progressBar.setProgress(num_num * registerStage3Fragment.getRank());
@@ -113,14 +109,14 @@ public class RegisterContainerActivity extends AppCompatActivity {
             progressBar.setProgress(num_num * registerStage1Fragment.getRank());
             fra = registerStage1Fragment;
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.RegisterActivity_frame_container, fra).commit();
-
         }
-        else if (fra.toString().equals("RegisterStage1Fragment")) {
+       /* else if (fra.toString().equals("RegisterStage1Fragment")) {
             progressBar.setProgress(num_num * registerStagePhoneFragment.getRank());
             fra = registerStagePhoneFragment;
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.RegisterActivity_frame_container, fra).commit();
 
-        }else {
+        }*/
+        else {
             super.onBackPressed();
         }
 
@@ -131,9 +127,8 @@ public class RegisterContainerActivity extends AppCompatActivity {
         String password = registerStage2Fragment.getPassword();
         String firstName = registerStage3Fragment.getFirstName();
         String lastName = registerStage3Fragment.getLastName();
-        String phone = registerStagePhoneFragment.getPhone();
 
-        UserRegisterModel user = new UserRegisterModel(firstName, lastName, email, password, phone);
+        UserRegisterModel user = new UserRegisterModel(firstName, lastName, email, password, userPhone);
 
         new FellowTravellerAPI(globalClass).userRegister(user, new UserRegisterCallback() {
             @Override
@@ -201,7 +196,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
     }
 
 
-    public void validateRegisterStagePhone() {
+    /*public void validateRegisterStagePhone() {
         EditText editText = registerStagePhoneFragment.getEditText();
         if (isValidPhone(editText.getText().toString())) {
             registerStagePhoneFragment.setErrorToEditText(null);
@@ -223,7 +218,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
         } else {
             registerStagePhoneFragment.setErrorToEditText(getResources().getString(R.string.INVALID_PHONE_FORMAT));
         }
-    }
+    }*/
 
 
 }

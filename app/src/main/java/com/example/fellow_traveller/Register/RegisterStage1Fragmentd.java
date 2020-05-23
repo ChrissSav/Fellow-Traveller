@@ -43,7 +43,7 @@ public class RegisterStage1Fragmentd extends Fragment {
     }
 
     public int getRank() {
-        return 2;
+        return 1;
     }
 
 

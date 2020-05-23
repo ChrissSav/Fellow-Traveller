@@ -59,7 +59,7 @@ public class RegisterStage3Fragment extends Fragment {
     }
 
     public int getRank() {
-        return 4;
+        return 3;
     }
 
     public Boolean validateFragment() {
