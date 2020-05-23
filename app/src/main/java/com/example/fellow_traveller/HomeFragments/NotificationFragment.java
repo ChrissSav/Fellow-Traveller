@@ -12,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.NotificationCallBack;
@@ -37,6 +38,8 @@ public class NotificationFragment extends Fragment {
     private GlobalClass globalClass;
     private int lastId = 0;
     private boolean connectToApi;
+    private ProgressBar progressBar;
+
 
     public NotificationFragment() {
         // Required empty public constructor
@@ -50,6 +53,11 @@ public class NotificationFragment extends Fragment {
         connectToApi = true;
         globalClass = (GlobalClass) getActivity().getApplicationContext();
 
+
+
+
+        progressBar = view.findViewById(R.id.NotificationFragment_progressBar);
+
         swipeRefreshLayout = view.findViewById(R.id.NotificationFragment_SwipeRefreshLayout);
         mRecyclerView = view.findViewById(R.id.NotificationFragment_RecyclerView);
 
@@ -57,6 +65,7 @@ public class NotificationFragment extends Fragment {
 
 
         if (notificationArrayList.size() > 0) {
+            progressBar.setVisibility(View.GONE);
             lastId = notificationArrayList.get(notificationArrayList.size() - 2).getId();
             buildRecyclerView(false);
         }else{
@@ -159,13 +168,16 @@ public class NotificationFragment extends Fragment {
                     }
                     swipeRefreshLayout.setRefreshing(false);
                     connectToApi = true;
+                    progressBar.setVisibility(View.GONE);
+
                 }
 
                 @Override
                 public void onFailure(String msg) {
                     Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
-
                     connectToApi = true;
+                    progressBar.setVisibility(View.GONE);
+
                 }
             });
 
