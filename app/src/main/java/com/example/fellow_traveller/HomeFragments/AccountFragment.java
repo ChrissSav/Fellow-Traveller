@@ -84,6 +84,8 @@ public class AccountFragment extends Fragment {
         super.onStart();
         globalClass = (GlobalClass) getActivity().getApplicationContext();
         textViewUserName.setText(globalClass.getCurrentUser().getFullName());
+        if(globalClass.getCurrentUser().getPicture() != null)
+            Picasso.get().load(globalClass.getCurrentUser().getPicture()).into(userProfileImage);
        //TODO να βάλω τα στοιχεία του χρήστη rate και review
 
         if (globalClass.getCurrentUser().getAboutMe() == null || globalClass.getCurrentUser().getAboutMe().length() < 1)

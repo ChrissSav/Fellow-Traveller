@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserLogoutCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
@@ -17,10 +18,12 @@ import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.MainActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
+import com.squareup.picasso.Picasso;
 
 public class UserSettingsActivity extends AppCompatActivity {
     private GlobalClass globalClass;
     private TextView userFullNameTextView, userEmailAddressTextView;
+    private CircleImageView userImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class UserSettingsActivity extends AppCompatActivity {
         Button manageUserCarsButton = findViewById(R.id.activity_user_settings_manage_user_cars_button);
         Button changeUserPasswordButton = findViewById(R.id.activity_user_settings_change_user_password_button);
         ImageButton goBackImageButton = findViewById(R.id.activity_user_settings_go_back_button);
+        userImage = findViewById(R.id.profile_picture_settings);
         userFullNameTextView = findViewById(R.id.activity_user_settings_user_full_name_text_view);
         userEmailAddressTextView = findViewById(R.id.activity_user_settings_user_email_address_text_view);
 
@@ -101,6 +105,8 @@ public class UserSettingsActivity extends AppCompatActivity {
         globalClass = (GlobalClass) getApplicationContext();
         userFullNameTextView.setText(globalClass.getCurrentUser().getFullName());
         userEmailAddressTextView.setText(globalClass.getCurrentUser().getEmailAddress());
+        if(globalClass.getCurrentUser().getPicture() != null)
+            Picasso.get().load(globalClass.getCurrentUser().getPicture()).into(userImage);
     }
 
     public void deleteSharedPreferences() {

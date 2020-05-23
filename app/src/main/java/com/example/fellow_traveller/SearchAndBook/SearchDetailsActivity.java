@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -32,6 +33,7 @@ import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -42,6 +44,7 @@ public class SearchDetailsActivity extends AppCompatActivity implements OnMapRea
     private RecyclerView.LayoutManager mLayoutManager;
     private TextView textViewCreator, textViewRating, textViewReviews, textViewDestFrom, textViewDestTo, textViewDate,
             textViewTime, textViewSeats, textViewBags, textViewPets, textViewCar, textViewMsg, textViewPrice;
+    private CircleImageView creatorUserImage;
     private Button passengersButton, showOnMapButton;
     private TripModel tripModel;
     private ImageButton imageButtonBack;
@@ -62,6 +65,7 @@ public class SearchDetailsActivity extends AppCompatActivity implements OnMapRea
         bookButton = findViewById(R.id.ActivitySearchDetails_book_button);
         imageButtonBack = findViewById(R.id.ActivitySearchDetails_back_button);
 
+        creatorUserImage = findViewById(R.id.ActivitySearchDetails_user_image);
         textViewCreator = findViewById(R.id.ActivitySearchDetails_user_name);
         textViewRating = findViewById(R.id.ActivitySearchDetails_rating_tv);
         textViewReviews = findViewById(R.id.ActivitySearchDetails_reviews_tv);
@@ -79,7 +83,8 @@ public class SearchDetailsActivity extends AppCompatActivity implements OnMapRea
         userLayout = findViewById(R.id.ActivitySearchDetails_user_section);
         showOnMapButton = findViewById(R.id.ActivitySearchDetails_show_map_button);
 
-
+        if(tripModel.getCreatorUser().getPicture() != null)
+            Picasso.get().load(tripModel.getCreatorUser().getPicture()).into(creatorUserImage);
         textViewDestFrom.setText(tripModel.getDestFrom().getTitle());
         textViewDestTo.setText(tripModel.getDestTo().getTitle());
         textViewDate.setText(tripModel.getDate());

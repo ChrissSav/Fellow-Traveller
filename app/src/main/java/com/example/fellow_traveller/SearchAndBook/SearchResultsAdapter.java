@@ -7,9 +7,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -48,6 +50,9 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         holder.date.setText(currentItem.getDate());
         holder.time.setText(currentItem.getTime());
 
+        if(currentItem.getCreatorUser().getPicture() != null)
+            Picasso.get().load(currentItem.getCreatorUser().getPicture()).into(holder.creatorUserImage);
+
         //Delete the 0 decimals
         if(currentItem.getPrice().intValue() == currentItem.getPrice())
             holder.price.setText(currentItem.getPrice().intValue() + "€");
@@ -67,6 +72,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
 
     public static class SearchResultsViewHolder extends RecyclerView.ViewHolder {
         public TextView userName, rate, review, from, to, date, time,price;
+        public CircleImageView creatorUserImage;
 
 
         public SearchResultsViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
@@ -80,6 +86,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
             date = itemView.findViewById(R.id.date_search_item);
             time = itemView.findViewById(R.id.time_search_item);
             price = itemView.findViewById(R.id.price_search_item);
+            creatorUserImage = itemView.findViewById(R.id.profile_search_item);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
