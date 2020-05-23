@@ -258,6 +258,33 @@ public class FellowTravellerAPI {
         });
     }
 
+    public static void updateUserUploadPhoto(String url, final StatusCallBack statusCallBack) {
+
+        JsonObject jsonObject  = new JsonObject();
+        jsonObject.addProperty("url",url);
+
+        retrofitAPIEndpoints.userUpdatePhoto(jsonObject).enqueue(new Callback<StatusHandleModel>() {
+            @Override
+            public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
+                if (!response.isSuccessful()) {
+                    try {
+                        statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+
+                statusCallBack.onSuccess(response.body().getMsg());
+            }
+
+            @Override
+            public void onFailure(Call<StatusHandleModel> call, Throwable t) {
+                statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            }
+        });
+    }
+
     public static void addCar(AddCarModel car, final CarRegisterCallBack carRegisterCallBack) {
         retrofitAPIEndpoints.carRegister(car).enqueue(new Callback<CarModel>() {
             @Override
@@ -367,6 +394,29 @@ public class FellowTravellerAPI {
         retrofitAPIEndpoints.getTrips(destinations, timestampMin, timestampMax, seatsMin,
                 seatsMax, bagsMin, bagsMax, priceMin,
                 priceMax, hasPet, range).enqueue(new Callback<ArrayList<TripModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<TripModel>> call, Response<ArrayList<TripModel>> response) {
+                if (!response.isSuccessful()) {
+                    searchTripsCallback.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                    return;
+                }
+                searchTripsCallback.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<TripModel>> call, Throwable t) {
+                searchTripsCallback.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            }
+        });
+    }
+
+    // TODO set this as default method to search trips
+    public static void getTripsTest(float latitudeFrom,float longitudeFrom,float latitudeTo, float longitudeTo,
+            Long timestampMin, Long timestampMax,Integer seatsMin, Integer seatsMax, Integer bagsMin, Integer bagsMax,
+                                Integer priceMin, Integer priceMax, Boolean hasPet, Integer rangeTo,Integer rangeFrom, final SearchTripsCallback searchTripsCallback) {
+        retrofitAPIEndpoints.getTripsTest(latitudeFrom,longitudeFrom, latitudeTo,  longitudeTo, timestampMin, timestampMax, seatsMin,
+                seatsMax, bagsMin, bagsMax, priceMin,
+                priceMax, hasPet, rangeTo,rangeFrom).enqueue(new Callback<ArrayList<TripModel>>() {
             @Override
             public void onResponse(Call<ArrayList<TripModel>> call, Response<ArrayList<TripModel>> response) {
                 if (!response.isSuccessful()) {

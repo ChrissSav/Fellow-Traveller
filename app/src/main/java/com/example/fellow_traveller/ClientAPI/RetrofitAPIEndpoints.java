@@ -65,6 +65,10 @@ public interface RetrofitAPIEndpoints {
             @Body UserUpdateModel user
     );
 
+    @PUT("/users/photo")
+    Call<StatusHandleModel> userUpdatePhoto(
+            @Body JsonObject jsonObject
+    );
 
     //Trip
     @GET("/trips/as_creator")
@@ -98,6 +102,25 @@ public interface RetrofitAPIEndpoints {
             @Query("price_max") Integer priceMax,
             @Query("pet") Boolean hasPet,
             @Query("range") Integer range
+    );
+
+    @GET("/trips/search")
+    Call<ArrayList<TripModel>> getTripsTest(
+            @Query("latitude_from") float latitudeFrom,
+            @Query("longitude_from") float longitudeFrom,
+            @Query("latitude_to") float latitudeTo,
+            @Query("longitude_to") float longitudeTo,
+            @Query("timestamp_min") Long timestampMin,
+            @Query("timestamp_max") Long timestampMax,
+            @Query("seats_min") Integer seatsMin,
+            @Query("seats_max") Integer seatsMax,
+            @Query("bags_min") Integer bagsMin,
+            @Query("bags_max") Integer bagsMax,
+            @Query("price_min") Integer priceMin,
+            @Query("price_max") Integer priceMax,
+            @Query("pet") Boolean hasPet,
+            @Query("range_from") Integer rangeFrom,
+            @Query("range_to") Integer rangeTo
     );
 
     @PUT("/trips/passengers")

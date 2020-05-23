@@ -229,7 +229,7 @@ public class NewOfferActivity extends AppCompatActivity {
                 while (!(detailTo && detailFrom && detailPickUP)) {
 
                 }
-                if (destinationModelFrom.getTitle() == null && destinationModelTo.getTitle() == null && destinationModelPickUP.getTitle() == null)
+                if (destinationModelFrom.getLatitude() == null || destinationModelTo.getLatitude() == null || destinationModelPickUP.getLatitude() == null)
                     return false;
                 return true;
             }
