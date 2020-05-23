@@ -1,28 +1,41 @@
 package com.example.fellow_traveller.Settings;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserAuthCallback;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
+import com.example.fellow_traveller.ClientAPI.Models.UserBaseModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserUpdateModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 import com.theartofdev.edmodo.cropper.CropImage;
 
@@ -41,8 +54,10 @@ public class PersonalSettingsActivity extends AppCompatActivity {
     private EditText firstNameEditText, lastNameEditText, aboutMeEditText, phoneNumberEditText;
     private GlobalClass globalClass;
     private DatabaseReference updateUserInfo;
+    private StorageReference mStorageRef;
     private ImageView editImageView;
     private UserAuthModel userAuth;
+    private String newImage = "";
 
 
     @Override
@@ -62,6 +77,8 @@ public class PersonalSettingsActivity extends AppCompatActivity {
         lastNameEditText = findViewById(R.id.PersonalSettingsActivity_editText_last_name);
         aboutMeEditText = findViewById(R.id.PersonalSettingsActivity_editText_about_me);
         phoneNumberEditText = findViewById(R.id.PersonalSettingsActivity_editText_phone);
+
+        mStorageRef = FirebaseStorage.getInstance().getReference("userImages");
 
 
         changeImageButton.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +143,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 mImageUri = result.getUri();
                 profilePicture.setImageURI(mImageUri);
+                uploadImage();
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception e = result.getError();
                 Toast.makeText(this, "Error: " + e, Toast.LENGTH_SHORT).show();
@@ -155,7 +173,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
 
 
     public void updateUser(final String firstName, final String lastName, String aboutMe, String phoneNumber) {
-        UserUpdateModel user = new UserUpdateModel(firstName, lastName,"", aboutMe, phoneNumber);
+        UserUpdateModel user = new UserUpdateModel(firstName, lastName, newImage, aboutMe, phoneNumber);
         new FellowTravellerAPI(globalClass).updateUserInfo(user, new UserAuthCallback() {
             @Override
             public void onSuccess(UserAuthModel user) {
@@ -293,6 +311,53 @@ public class PersonalSettingsActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    //Get the extension of the image
+    private String getFileExtension(Uri uri){
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return  mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+    private void uploadImage(){
+
+        //Storage the image in Firebase
+        if(mImageUri != null){
+            //TODO possibility for same name if user changed his time or name of image
+            final StorageReference fileReference = mStorageRef.child("user-" + globalClass.getCurrentUser().getId());
+            fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            newImage = uri.toString();
+                            Log.i("ImageInside", uri.toString());
+                            Toast.makeText(PersonalSettingsActivity.this, "Η φωτογραφία ανέβηκε επιτυχώς", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                 Log.i("Image", taskSnapshot.getUploadSessionUri().toString());
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(PersonalSettingsActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                    //We get progress from uploading the image file
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                    //TODO add progress bar
+                }
+            });
+
+        }else{
+            Toast.makeText(this, "Δεν επιλέξατε έγκυρη εικόνα", Toast.LENGTH_SHORT).show();
+        }
     }
 }
 
