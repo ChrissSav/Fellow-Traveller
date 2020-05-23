@@ -72,6 +72,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation 'me.dm7.barcodescanner:zxing:1.9'
     implementation 'com.google.firebase:firebase-storage:19.0.0'
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 
 }

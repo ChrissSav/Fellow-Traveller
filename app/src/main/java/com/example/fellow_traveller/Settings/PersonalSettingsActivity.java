@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.util.HashMap;
@@ -58,6 +60,8 @@ public class PersonalSettingsActivity extends AppCompatActivity {
     private ImageView editImageView;
     private UserAuthModel userAuth;
     private String newImage = "";
+    private ProgressBar imageProgressBar;
+
 
 
     @Override
@@ -71,6 +75,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
         imageButtonClose = findViewById(R.id.PersonalSettingsActivity_button_close);
         imageButtonUpdate = findViewById(R.id.PersonalSettingsActivity_button_update);
         editImageView = findViewById(R.id.PersonalSettingsActivity_edit_imageview);
+        imageProgressBar = findViewById(R.id.ActivityPersonalSettings_progress_bar);
 
 
         firstNameEditText = findViewById(R.id.PersonalSettingsActivity_editText_first_name);
@@ -142,7 +147,8 @@ public class PersonalSettingsActivity extends AppCompatActivity {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 mImageUri = result.getUri();
-                profilePicture.setImageURI(mImageUri);
+                //profilePicture.setImageURI(mImageUri);
+                imageProgressBar.setVisibility(View.VISIBLE);
                 uploadImage();
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception e = result.getError();
@@ -160,6 +166,8 @@ public class PersonalSettingsActivity extends AppCompatActivity {
                 lastNameEditText.setText(user.getSurname());
                 aboutMeEditText.setText(user.getAboutMe());
                 phoneNumberEditText.setText(user.getPhone());
+                Toast.makeText(PersonalSettingsActivity.this, user.getPicture(), Toast.LENGTH_SHORT).show();
+                //Picasso.load(user.getPicture()).into(profilePicture);
                 //TODO we dont need to call the API to get the users, put extra from the account and have the text watchers on create
                 textWatchers();
             }
@@ -324,6 +332,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
         //Storage the image in Firebase
         if(mImageUri != null){
             //TODO possibility for same name if user changed his time or name of image
+            //TODO dont upload large images
             final StorageReference fileReference = mStorageRef.child("user-" + globalClass.getCurrentUser().getId());
             fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -332,7 +341,9 @@ public class PersonalSettingsActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             newImage = uri.toString();
+
                             Log.i("ImageInside", uri.toString());
+                            loadImageToImageView();
                             Toast.makeText(PersonalSettingsActivity.this, "Η φωτογραφία ανέβηκε επιτυχώς", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -352,12 +363,18 @@ public class PersonalSettingsActivity extends AppCompatActivity {
                     //We get progress from uploading the image file
                     double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
                     //TODO add progress bar
+                    imageProgressBar.setProgress((int) progress);
                 }
             });
 
         }else{
             Toast.makeText(this, "Δεν επιλέξατε έγκυρη εικόνα", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void loadImageToImageView(){
+        Picasso.get().load(newImage).into(profilePicture);
+        imageProgressBar.setVisibility(View.GONE);
     }
 }
 

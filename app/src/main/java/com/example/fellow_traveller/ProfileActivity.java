@@ -19,6 +19,7 @@ import com.example.fellow_traveller.ClientAPI.Models.ReviewModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserBaseModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.Reviews.ReviewsActivity;
+import com.squareup.picasso.Picasso;
 
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
     private GlobalClass globalClass;
     private ArrayList<ReviewModel> reviewsList = new ArrayList<>();
     private ConstraintLayout reviewsLayout, noReviewsLayout;
-    private CircleImageView reviewerCircleImage;
+    private CircleImageView userProfile, reviewerCircleImage;
     private TextView reviewerNameTextView, reviewDateTextView, reviewCommentsTextView, reviewRatingTextView;
 
     @Override
@@ -40,6 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         globalClass = (GlobalClass) getApplicationContext();
 
+        userProfile = findViewById(R.id.ActivityProfile_user_image);
         userNameTextView = findViewById(R.id.ActivityProfile_user_name);
         ratingTextView = findViewById(R.id.ActivityProfile_rate);
         reviewsTextView = findViewById(R.id.ActivityProfile_reviews);
@@ -61,6 +63,7 @@ public class ProfileActivity extends AppCompatActivity {
        getUserProfileInfo();
        //TODO we need to load user info again to retrive the last review, now we only putExtra the non notified userBaseModel
 
+        getUserReviewsInfo();
 
         seeAllReviewsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +88,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        getUserReviewsInfo();
+
 
     }
     public void getUserReviewsInfo(){
@@ -114,6 +117,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
     public void getUserProfileInfo(){
+        //Picasso.get().load(userBaseModel.getPicture()).into(userProfile);
         userNameTextView.setText(userBaseModel.getFullName());
         ratingTextView.setText(String.valueOf(userBaseModel.getRate()));
         reviewsTextView.setText(String.valueOf(userBaseModel.getReviews()));

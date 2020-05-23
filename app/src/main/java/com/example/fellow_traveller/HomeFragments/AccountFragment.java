@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.Reviews.ReviewsActivity;
 import com.example.fellow_traveller.Settings.AddCarSettingsActivity;
 import com.example.fellow_traveller.Settings.UserSettingsActivity;
+import com.squareup.picasso.Picasso;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +28,7 @@ public class AccountFragment extends Fragment {
     private ImageButton settingsButton;
     private Button newCarButton, reviewsButton;
     private TextView textViewUserName, textViewAboutMe, rateTextView, reviewsTextView;
+    private CircleImageView userProfileImage;
     private GlobalClass globalClass;
 
     public AccountFragment() {
@@ -39,7 +42,7 @@ public class AccountFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account, container, false);
 
-
+        userProfileImage = view.findViewById(R.id.FragmentAccount_user_image);
         settingsButton = view.findViewById(R.id.settings_button);
         newCarButton = view.findViewById(R.id.new_car_button_account);
         reviewsButton = view.findViewById(R.id.FragmentAccount_more_reviews_button);
