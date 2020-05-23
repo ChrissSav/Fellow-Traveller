@@ -38,9 +38,12 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
+import com.iceteck.silicompressorr.FileUtils;
+import com.iceteck.silicompressorr.SiliCompressor;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -61,6 +64,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
     private UserAuthModel userAuth;
     private String newImage = "";
     private ProgressBar imageProgressBar;
+    private File tempImagefile;
 
 
 
@@ -149,7 +153,8 @@ public class PersonalSettingsActivity extends AppCompatActivity {
                 mImageUri = result.getUri();
                 //profilePicture.setImageURI(mImageUri);
                 imageProgressBar.setVisibility(View.VISIBLE);
-                uploadImage();
+                //uploadImage();
+                compressUriImage();
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception e = result.getError();
                 Toast.makeText(this, "Error: " + e, Toast.LENGTH_SHORT).show();
@@ -327,14 +332,14 @@ public class PersonalSettingsActivity extends AppCompatActivity {
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return  mime.getExtensionFromMimeType(cR.getType(uri));
     }
-    private void uploadImage(){
+    private void uploadImage(Uri imageUri){
 
         //Storage the image in Firebase
-        if(mImageUri != null){
+        if(imageUri != null){
             //TODO possibility for same name if user changed his time or name of image
             //TODO dont upload large images
             final StorageReference fileReference = mStorageRef.child("user-" + globalClass.getCurrentUser().getId());
-            fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            fileReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -344,6 +349,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
 
                             Log.i("ImageInside", uri.toString());
                             loadImageToImageView();
+                            tempImagefile.delete();
                             Toast.makeText(PersonalSettingsActivity.this, "Η φωτογραφία ανέβηκε επιτυχώς", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -354,6 +360,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
+                    tempImagefile.delete();
                     Toast.makeText(PersonalSettingsActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
                 }
@@ -375,6 +382,14 @@ public class PersonalSettingsActivity extends AppCompatActivity {
     public void loadImageToImageView(){
         Picasso.get().load(newImage).into(profilePicture);
         imageProgressBar.setVisibility(View.GONE);
+    }
+
+    public void compressUriImage(){
+        if(mImageUri != null){
+            tempImagefile = new File(SiliCompressor.with(this).compress(FileUtils.getPath(this, mImageUri), new File(this.getCacheDir(), "temp")));
+            Uri compressedUri = Uri.fromFile(tempImagefile);
+            uploadImage(compressedUri);
+        }
     }
 }
 
