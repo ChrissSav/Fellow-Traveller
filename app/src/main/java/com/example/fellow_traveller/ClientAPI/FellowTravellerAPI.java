@@ -383,6 +383,29 @@ public class FellowTravellerAPI {
         });
     }
 
+    // TODO set this as default method to search trips
+    public static void getTripsTest(float latitudeFrom,float longitudeFrom,float latitudeTo, float longitudeTo,
+            Long timestampMin, Long timestampMax,Integer seatsMin, Integer seatsMax, Integer bagsMin, Integer bagsMax,
+                                Integer priceMin, Integer priceMax, Boolean hasPet, Integer rangeTo,Integer rangeFrom, final SearchTripsCallback searchTripsCallback) {
+        retrofitAPIEndpoints.getTripsTest(latitudeFrom,longitudeFrom, latitudeTo,  longitudeTo, timestampMin, timestampMax, seatsMin,
+                seatsMax, bagsMin, bagsMax, priceMin,
+                priceMax, hasPet, rangeTo,rangeFrom).enqueue(new Callback<ArrayList<TripModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<TripModel>> call, Response<ArrayList<TripModel>> response) {
+                if (!response.isSuccessful()) {
+                    searchTripsCallback.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                    return;
+                }
+                searchTripsCallback.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<TripModel>> call, Throwable t) {
+                searchTripsCallback.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            }
+        });
+    }
+
 
     public static void getTripsAsCreator(final SearchTripsCallback searchTripsCallback) {
         retrofitAPIEndpoints.tripsAsCreator().enqueue(new Callback<ArrayList<TripModel>>() {
