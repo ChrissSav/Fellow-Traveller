@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment {
         constraintLayout2 = view.findViewById(R.id.Layout3);
         welcome_user = view.findViewById(R.id.FragmentHome_user_welcome_textView);
         btnΝewΟffer = view.findViewById(R.id.FragmentHome_offer_button);
-        verifyButton = view.findViewById(R.id.FragmentAccount_verButton);
+
 //        Calendar time = Calendar.getInstance();
 //        time.add(Calendar.MILLISECOND, -time.getTimeZone().getOffset(time.getTimeInMillis()));
 //        Date date = time.getTime();
@@ -89,13 +89,7 @@ public class HomeFragment extends Fragment {
                 startActivity(mainIntent);
             }
         });
-        verifyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent mainIntent = new Intent(getActivity(), VerificationActivity.class);
-                startActivity(mainIntent);
-            }
-        });
+
         return view;
     }
 

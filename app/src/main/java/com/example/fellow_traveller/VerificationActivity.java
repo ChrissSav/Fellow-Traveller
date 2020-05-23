@@ -19,8 +19,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
 import com.google.firebase.FirebaseException;
+import com.google.firebase.FirebaseTooManyRequestsException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
@@ -34,16 +36,15 @@ public class VerificationActivity extends AppCompatActivity {
     private PhoneAuthProvider.ForceResendingToken resendToken;
     private FirebaseAuth mAuth;
     private String phoneNumber;
-    private boolean buttonClicked = false;
     private long timeLeftInMillis = 60000; //One minute
     private CountDownTimer countDownTimer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verification);
 
 
-        mAuth = FirebaseAuth.getInstance();
         verifyEditText = findViewById(R.id.ActivityVerification_editText_verification);
         resendButton = findViewById(R.id.ActivityVerification_resend_button);
         verifyButton = findViewById(R.id.ActivityVerification_verify_button);
@@ -51,6 +52,10 @@ public class VerificationActivity extends AppCompatActivity {
         numberTextView = findViewById(R.id.ActivityVerification_phone_number);
         countdownTextView = findViewById(R.id.ActivityVerification_countdown_textView);
         //firebase.auth().currentUser.unlink(firebase.auth.PhoneAuthProvider.PROVIDER_ID);
+        //Toast.makeText(this, mAuth.getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
+
+        //firebase.auth().currentUser.unlink(firebase.auth.PhoneAuthProvider.PROVIDER_ID)
+
 
         phoneNumber = getIntent().getStringExtra("phoneNumber");
 
@@ -66,6 +71,9 @@ public class VerificationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 verifyEditText.setText("");
+                stopTimer();
+                timeLeftInMillis = 60000;
+                startTimer();
                 resendVerificationCode(phoneNumber, resendToken);
             }
         });
@@ -73,9 +81,13 @@ public class VerificationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String verification = verifyEditText.getText().toString();
-                buttonClicked = true;
-                //TODO validate the input
-                verifyCode(verification);
+                if(verification.trim().isEmpty() || verification.length() < 6)
+                    Toast.makeText(VerificationActivity.this, "Εισάγεται έγκυρο κωδικό επιβεβαίωσης", Toast.LENGTH_SHORT).show();
+                else {
+                    //TODO validate the input
+                    verifyCode(verification);
+
+                }
             }
         });
 
@@ -103,11 +115,11 @@ public class VerificationActivity extends AppCompatActivity {
                     mainIntent.putExtra("phoneNumber", phoneNumber);
                     //It may be do this to the final step of register
                     mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    countDownTimer.cancel();
                     Toast.makeText(VerificationActivity.this, "Επιτυχής", Toast.LENGTH_SHORT).show();
                     startActivity(mainIntent);
                 }else{
                     Toast.makeText(VerificationActivity.this, task.getException().getLocalizedMessage() , Toast.LENGTH_SHORT).show();
-                    buttonClicked = false;
                 }
 
             }
@@ -115,7 +127,7 @@ public class VerificationActivity extends AppCompatActivity {
     }
 
     private void sendVerificationCode(String number){
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(number, 60, TimeUnit.SECONDS, TaskExecutors.MAIN_THREAD, mCallBack);
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(number, 60, TimeUnit.SECONDS, this, mCallBack);
         startTimer();
 
     }
@@ -139,7 +151,7 @@ public class VerificationActivity extends AppCompatActivity {
             String code = phoneAuthCredential.getSmsCode();
             if(code != null){
                 verifyEditText.setText(code);
-                verifyCode(code);
+                //verifyCode(code);
             }
 
         }
@@ -147,7 +159,16 @@ public class VerificationActivity extends AppCompatActivity {
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
             Toast.makeText(VerificationActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            if (e instanceof FirebaseAuthInvalidCredentialsException) {
+                // Invalid request
+                // ...
+            } else if (e instanceof FirebaseTooManyRequestsException) {
+                // The SMS quota for the project has been exceeded
+                // ...
+            }
 
+            // Show a message and update the UI
+            // ...
         }
     };
 
@@ -165,6 +186,9 @@ public class VerificationActivity extends AppCompatActivity {
             }
         }.start();
     }
+    public void stopTimer(){
+        countDownTimer.cancel();
+    }
 
     public void updateTimer(){
         int minutes = (int) timeLeftInMillis / 60000;
@@ -181,7 +205,13 @@ public class VerificationActivity extends AppCompatActivity {
         countdownTextView.setText(timeleftText);
     }
     private void resendVerificationCode(String phoneNumber,PhoneAuthProvider.ForceResendingToken token) {
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(phoneNumber, 60, TimeUnit.SECONDS, TaskExecutors.MAIN_THREAD, mCallBack, token);
-//        a
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(phoneNumber, 60, TimeUnit.SECONDS, this, mCallBack, token);
+//     a
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //if(FirebaseAuth.getInstance().getCurrentUser() != null)
     }
 }
