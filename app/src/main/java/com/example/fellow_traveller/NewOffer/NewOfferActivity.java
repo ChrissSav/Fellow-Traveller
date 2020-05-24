@@ -27,6 +27,7 @@ import com.example.fellow_traveller.PlacesAPI.PlaceApiConnection;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.SuccessActivity;
 
+import static com.example.fellow_traveller.Util.SomeMethods.createSnackBar;
 import static com.example.fellow_traveller.Util.SomeMethods.dateTimeToTimestamp;
 
 
@@ -265,7 +266,8 @@ public class NewOfferActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(String errorMsg) {
-                            Toast.makeText(NewOfferActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+                            createSnackBar(findViewById(R.id.NewOfferActivity_layout),errorMsg);
+                            //Toast.makeText(NewOfferActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
 
                         }
                     });

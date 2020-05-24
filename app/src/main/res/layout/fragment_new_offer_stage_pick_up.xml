@@ -44,7 +44,7 @@
         android:id="@+id/NewOfferStagePickUpFragment_TextInputLayout_to"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="@+id/NewOfferStagePickUpFragment_textView"
         app:layout_constraintStart_toStartOf="@+id/NewOfferStagePickUpFragment_textView"

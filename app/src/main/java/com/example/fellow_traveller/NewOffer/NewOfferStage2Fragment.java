@@ -116,8 +116,8 @@ public class NewOfferStage2Fragment extends Fragment {
         }
 
         Long timestamp = currentTimeStamp();
-        if (!(timestamp - getTimeStamp() <= 120)) {
-            createSnackBar(view,getActivity().getResources().getString(R.string.ERROR_TIME_DATE_VALIDATION));
+        if (!( getTimeStamp() -timestamp >= getResources().getInteger(R.integer.Time_difference))) {
+            createSnackBar(view,getActivity().getResources().getString(R.string.ERROR_TRIP_TIMESTAMP));
             return false;
         }
         return true;

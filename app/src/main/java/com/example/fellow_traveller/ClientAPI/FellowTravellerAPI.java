@@ -376,6 +376,9 @@ public class FellowTravellerAPI {
                         case 402:
                             tripRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_CAR_NOT_BELONG_TO_USER));
                             break;
+                        case 409:
+                            tripRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_TRIP_TIMESTAMP));
+                            break;
                         default:
                             tripRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
                             break;
