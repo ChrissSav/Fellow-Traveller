@@ -77,7 +77,7 @@ public class ExampleJobService extends JobService {
                 for (NotificationModel notificationModel: notificationModels){
                     String text = "Ο χρήστης "+notificationModel.getUser().getFirstName()+ " "+notificationModel.getUser().getLastName()
                             + " μόλις προστεθηκε στο ταξίδι σου";
-                    ViewNotification( text, notificationModel.getId());
+                    ViewNotification( text, notificationModel.getId(),notificationModel);
                 }
             }
 
@@ -89,7 +89,7 @@ public class ExampleJobService extends JobService {
     }
 
 
-    public void ViewNotification(String text, int i) {
+    public void ViewNotification(String text, int i,NotificationModel notificationModel) {
 
         Context mContext = this;
 
@@ -97,6 +97,7 @@ public class ExampleJobService extends JobService {
 
 
         Intent activityIntent = new Intent(this, TripPageDriverActivity.class);
+        activityIntent.putExtra("trip",notificationModel.getTrip());
         PendingIntent contentIntent = PendingIntent.getActivity(this,
                 0, activityIntent, 0);
 
