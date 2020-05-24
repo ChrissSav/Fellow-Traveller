@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.example.fellow_traveller.ClientAPI.Models.PassengerModel;
 import com.example.fellow_traveller.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -72,6 +73,8 @@ public class PassengerImageAdapter extends RecyclerView.Adapter<PassengerImageAd
         PassengerModel currentItem = passengersList.get(position);
 
         holder.userName.setText(currentItem.getUser().getFirstName());
+        if(currentItem.getUser().getPicture() != null)
+            Picasso.get().load(currentItem.getUser().getPicture()).into(holder.userImage);
 
     }
 

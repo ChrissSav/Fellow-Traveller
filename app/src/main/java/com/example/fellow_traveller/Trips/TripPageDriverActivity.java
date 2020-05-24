@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -38,6 +39,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -53,6 +55,7 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
     private TripModel tripModel;
     private TextView textViewCreator, textViewRating, textViewReviews, textViewDestFrom, textViewDestTo, textViewDate,
             textViewTime, textViewSeats, textViewBags, textViewPets, textViewCar, textViewMsg, textViewPrice, textViewColor, textViewPlate;
+    private CircleImageView creatorUserImage;
     private Button passengersButton, showOnMapButton;
     private ConstraintLayout userLayout;
     private RecyclerView mRecyclerView;
@@ -74,6 +77,7 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
 
 
         //TextView Initialization
+        creatorUserImage = findViewById(R.id.ActivityTripPageDriver_user_image);
         textViewCreator = findViewById(R.id.ActivityTripPageDriver_user_name);
         textViewRating = findViewById(R.id.ActivityTripPageDriver_rating_tv);
         textViewReviews = findViewById(R.id.ActivityTripPageDriver_reviews_tv);
@@ -122,6 +126,8 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
         textViewCreator.setText(tripModel.getCreatorUser().getFullName());
         textViewRating.setText(String.valueOf(tripModel.getCreatorUser().getRate()));
         textViewReviews.setText(String.valueOf(tripModel.getCreatorUser().getReviews()));
+        if(tripModel.getCreatorUser().getPicture() != null)
+            Picasso.get().load(tripModel.getCreatorUser().getPicture()).into(creatorUserImage);
 
 
 

@@ -171,7 +171,9 @@ public class PersonalSettingsActivity extends AppCompatActivity {
                 lastNameEditText.setText(user.getSurname());
                 aboutMeEditText.setText(user.getAboutMe());
                 phoneNumberEditText.setText(user.getPhone());
-                Toast.makeText(PersonalSettingsActivity.this, user.getPicture(), Toast.LENGTH_SHORT).show();
+                if(globalClass.getCurrentUser().getPicture() != null)
+                    Picasso.get().load(user.getPicture()).into(profilePicture);
+
                 //Picasso.load(user.getPicture()).into(profilePicture);
                 //TODO we dont need to call the API to get the users, put extra from the account and have the text watchers on create
                 textWatchers();
