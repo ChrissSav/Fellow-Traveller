@@ -35,7 +35,6 @@ public class SplashActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(UserAuthModel user) {
                             String session_id = globalClass.getCurrentUser().getSessionId();
-                            deleteSharedPreferences();
                             user.setSessionId(session_id);
                             SaveClass(user);
                             Intent mainIntent = new Intent(SplashActivity.this, HomeActivity.class);
@@ -69,9 +68,6 @@ public class SplashActivity extends AppCompatActivity {
         globalClass.setCurrentUser(userAuth);
     }
 
-    public void deleteSharedPreferences() {
-        SharedPreferences settings = getSharedPreferences("shared preferences", MODE_PRIVATE);
-        settings.edit().clear().commit();
-    }
+
 
 }
