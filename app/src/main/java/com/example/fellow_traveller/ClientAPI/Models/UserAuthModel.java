@@ -1,7 +1,11 @@
 package com.example.fellow_traveller.ClientAPI.Models;
 
+import android.widget.ArrayAdapter;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 
 public class UserAuthModel {
 
@@ -19,6 +23,9 @@ public class UserAuthModel {
     @SerializedName("email")
     private String emailAddress;
 
+    private ArrayList<ReviewModel> listOfReviews;
+
+
     public String getEmailAddress() {
         return emailAddress;
     }
@@ -28,7 +35,13 @@ public class UserAuthModel {
     }
 
 
+    public ArrayList<ReviewModel> getListOfReviews() {
+        return listOfReviews;
+    }
 
+    public void setListOfReviews(ArrayList<ReviewModel> listOfReviews) {
+        this.listOfReviews = listOfReviews;
+    }
 
     public int getId() {
         return id;

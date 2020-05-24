@@ -71,16 +71,16 @@ public interface RetrofitAPIEndpoints {
     );
 
     //Trip
-    @GET("/trips/as_creator")
+    @GET("/trips?type_as=creator")
     Call<ArrayList<TripModel>> tripsAsCreator();
 
-    @GET("/trips/as_creator")
+    @GET("/trips?type_as=creator")
     Call<ArrayList<TripInvolvedModel>> tripsAsCreatorTest();
 
-    @GET("/trips/takes_part")
+    @GET("/trips?type_as=passenger")
     Call<ArrayList<TripModel>> tripsTakesPart();
 
-    @GET("/trips/takes_part")
+    @GET("/trips?type_as=passenger")
     Call<ArrayList<TripInvolvedModel>> tripsTakesPartTest();
 
 
