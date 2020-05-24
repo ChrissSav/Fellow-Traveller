@@ -8,6 +8,11 @@ public class DetailModel {
     private String msg;
 
 
+    public DetailModel(int statusCode) {
+        this.statusCode = statusCode;
+        this.msg = "msg";
+    }
+
     public int getStatusCode() {
         return statusCode;
     }

@@ -19,6 +19,7 @@ import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreatePassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreateReviewModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
+import com.example.fellow_traveller.ClientAPI.Models.DetailModel;
 import com.example.fellow_traveller.ClientAPI.Models.ErrorResponseModel;
 import com.example.fellow_traveller.ClientAPI.Models.NotificationModel;
 import com.example.fellow_traveller.ClientAPI.Models.PassengerModel;
@@ -32,10 +33,16 @@ import com.example.fellow_traveller.ClientAPI.Models.UserChangePasswordModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserLoginModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserRegisterModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserUpdateModel;
+import com.example.fellow_traveller.LoginActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -260,18 +267,15 @@ public class FellowTravellerAPI {
 
     public static void updateUserUploadPhoto(String url, final StatusCallBack statusCallBack) {
 
-        JsonObject jsonObject  = new JsonObject();
-        jsonObject.addProperty("url",url);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("url", url);
 
         retrofitAPIEndpoints.userUpdatePhoto(jsonObject).enqueue(new Callback<StatusHandleModel>() {
             @Override
             public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
                 if (!response.isSuccessful()) {
-                    try {
-                        statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+
+                    statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
                     return;
                 }
 
@@ -411,12 +415,12 @@ public class FellowTravellerAPI {
     }
 
     // TODO set this as default method to search trips
-    public static void getTripsTest(float latitudeFrom,float longitudeFrom,float latitudeTo, float longitudeTo,
-            Long timestampMin, Long timestampMax,Integer seatsMin, Integer seatsMax, Integer bagsMin, Integer bagsMax,
-                                Integer priceMin, Integer priceMax, Boolean hasPet, Integer rangeTo,Integer rangeFrom, final SearchTripsCallback searchTripsCallback) {
-        retrofitAPIEndpoints.getTripsTest(latitudeFrom,longitudeFrom, latitudeTo,  longitudeTo, timestampMin, timestampMax, seatsMin,
+    public static void getTripsTest(float latitudeFrom, float longitudeFrom, float latitudeTo, float longitudeTo,
+                                    Long timestampMin, Long timestampMax, Integer seatsMin, Integer seatsMax, Integer bagsMin, Integer bagsMax,
+                                    Integer priceMin, Integer priceMax, Boolean hasPet, Integer rangeTo, Integer rangeFrom, final SearchTripsCallback searchTripsCallback) {
+        retrofitAPIEndpoints.getTripsTest(latitudeFrom, longitudeFrom, latitudeTo, longitudeTo, timestampMin, timestampMax, seatsMin,
                 seatsMax, bagsMin, bagsMax, priceMin,
-                priceMax, hasPet, rangeTo,rangeFrom).enqueue(new Callback<ArrayList<TripModel>>() {
+                priceMax, hasPet, rangeTo, rangeFrom).enqueue(new Callback<ArrayList<TripModel>>() {
             @Override
             public void onResponse(Call<ArrayList<TripModel>> call, Response<ArrayList<TripModel>> response) {
                 if (!response.isSuccessful()) {
@@ -576,7 +580,6 @@ public class FellowTravellerAPI {
     }
 
 
-
     public static void addUserReview(CreateReviewModel createReviewModel, final StatusCallBack statusCallBack) {
         retrofitAPIEndpoints.addUserReview(createReviewModel).enqueue(new Callback<StatusHandleModel>() {
             @Override
@@ -608,10 +611,6 @@ public class FellowTravellerAPI {
     }
 
 
-
-
-
-
     public static void getNotifications(final NotificationCallBack notificationCallBack) {
         retrofitAPIEndpoints.userNotifications().enqueue(new Callback<ArrayList<NotificationModel>>() {
             @Override
@@ -631,7 +630,7 @@ public class FellowTravellerAPI {
     }
 
 
-    public static void getNotificationsById(int notificationId,final NotificationCallBack notificationCallBack) {
+    public static void getNotificationsById(int notificationId, final NotificationCallBack notificationCallBack) {
         retrofitAPIEndpoints.userNotifications(notificationId).enqueue(new Callback<ArrayList<NotificationModel>>() {
             @Override
             public void onResponse(Call<ArrayList<NotificationModel>> call, Response<ArrayList<NotificationModel>> response) {
@@ -649,9 +648,9 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void setNotificationsRead(int notificationId,final StatusCallBack statusCallBack) {
+    public static void setNotificationsRead(int notificationId, final StatusCallBack statusCallBack) {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("id",notificationId);
+        jsonObject.addProperty("id", notificationId);
         retrofitAPIEndpoints.updateNotifications(jsonObject).enqueue(new Callback<StatusHandleModel>() {
             @Override
             public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
@@ -670,13 +669,20 @@ public class FellowTravellerAPI {
     }
 
 
-
-
-
-
     public static ErrorResponseModel getModelFromResponseErrorBody(Response response) {
         Gson gson = new Gson();
-        return gson.fromJson(response.errorBody().charStream(), ErrorResponseModel.class);
+        ErrorResponseModel errorResponseModel = new ErrorResponseModel();
+        DetailModel detailModel = new DetailModel(1000);
+        errorResponseModel.setDetail(detailModel);
+        try {
+            String mJsonString = response.errorBody().string();
+            JsonParser parser = new JsonParser();
+            JsonElement mJson = parser.parse(mJsonString);
+            errorResponseModel = gson.fromJson(mJson, ErrorResponseModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return errorResponseModel;
     }
 
 
