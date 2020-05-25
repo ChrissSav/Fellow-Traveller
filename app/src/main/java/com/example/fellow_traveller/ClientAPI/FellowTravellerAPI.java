@@ -12,6 +12,7 @@ import com.example.fellow_traveller.ClientAPI.Callbacks.TripInvolvedCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.TripRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserAuthCallback;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserCarsCallBack;
+import com.example.fellow_traveller.ClientAPI.Callbacks.UserInfoModelCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserLogoutCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserRegisterCallback;
 import com.example.fellow_traveller.ClientAPI.Models.AddCarModel;
@@ -30,6 +31,7 @@ import com.example.fellow_traveller.ClientAPI.Models.TripInvolvedModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserChangePasswordModel;
+import com.example.fellow_traveller.ClientAPI.Models.UserInfoModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserLoginModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserRegisterModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserUpdateModel;
@@ -237,6 +239,26 @@ public class FellowTravellerAPI {
             @Override
             public void onFailure(Call<UserAuthModel> call, Throwable t) {
                 userAuthCallback.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            }
+        });
+    }
+
+    public static void getUserById(int userId, final UserInfoModelCallBack userInfoModelCallBack) {
+        retrofitAPIEndpoints.userInfoById(userId).enqueue(new Callback<UserInfoModel>() {
+            @Override
+            public void onResponse(Call<UserInfoModel> call, Response<UserInfoModel> response) {
+                if (!response.isSuccessful()) {
+
+                    userInfoModelCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+
+                    return;
+                }
+                userInfoModelCallBack.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<UserInfoModel> call, Throwable t) {
+                userInfoModelCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
             }
         });
     }

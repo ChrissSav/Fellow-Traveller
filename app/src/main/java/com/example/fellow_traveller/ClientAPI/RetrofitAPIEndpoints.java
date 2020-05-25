@@ -14,6 +14,7 @@ import com.example.fellow_traveller.ClientAPI.Models.TripInvolvedModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserChangePasswordModel;
+import com.example.fellow_traveller.ClientAPI.Models.UserInfoModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserLoginModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserRegisterModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserUpdateModel;
@@ -59,6 +60,11 @@ public interface RetrofitAPIEndpoints {
     //User
     @GET("/users")
     Call<UserAuthModel> userInfo();
+
+    @GET("/users/{user_id}")
+    Call<UserInfoModel> userInfoById(
+            @Path("user_id") int userId
+    );
 
     @PUT("/users")
     Call<UserAuthModel> userUpdate(
