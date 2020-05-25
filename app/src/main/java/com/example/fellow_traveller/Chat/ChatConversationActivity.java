@@ -42,7 +42,7 @@ import java.util.HashMap;
 
 public class ChatConversationActivity extends AppCompatActivity {
     private EditText writeEdtText;
-    private ConstraintLayout borderOfEdtText;
+    private ConstraintLayout noMessagesSection;
     private ImageButton plusButton, sendButton;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -71,7 +71,7 @@ public class ChatConversationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_conversation);
         writeEdtText = findViewById(R.id.write_et_chat);
-        borderOfEdtText = findViewById(R.id.border_of_et);
+        noMessagesSection = findViewById(R.id.ActivityChatConversation_no_message_section);
         plusButton = findViewById(R.id.plus_button_chat);
         sendButton = findViewById(R.id.send_chat);
         mRefreshLayout = findViewById(R.id.swipe_refresh_chat_conversation);
@@ -221,6 +221,9 @@ public class ChatConversationActivity extends AppCompatActivity {
                 }
 
                 messagesList.add(item);
+                if(messagesList.size() > 0)
+                    noMessagesSection.setVisibility(View.GONE);
+
                 mAdapter.notifyDataSetChanged();
                 mRecyclerView.scrollToPosition(messagesList.size()-1);
                 progressBar.setVisibility(View.GONE);
@@ -300,6 +303,7 @@ public class ChatConversationActivity extends AppCompatActivity {
 
             }
         });
+        mRefreshLayout.setRefreshing(false);
     }
 
     private void updateToken(String token){

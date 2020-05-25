@@ -698,7 +698,7 @@
                 android:textSize="18sp"
                 android:textColor="@color/black_color"
                 />
-            
+
             <ImageView
                 android:id="@+id/ActivityTripPageDriver_qr_image"
                 android:layout_width="wrap_content"

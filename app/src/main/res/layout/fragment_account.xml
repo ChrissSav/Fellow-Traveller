@@ -205,7 +205,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/FragmentAccount_reviews_section"
+                android:id="@+id/FragmentAccount_car_section"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="30dp"
@@ -275,11 +275,11 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/firasans_bold"
-                android:text="Δεν έχετε αξιολογήσεις"
+                android:text="Αξιολογήσεις"
                 android:textColor="@color/black_color"
                 android:textSize="23sp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/FragmentAccount_reviews_section" />
+                app:layout_constraintTop_toBottomOf="@id/FragmentAccount_car_section" />
 
             <View
                 android:id="@+id/FragmentAccount_underline_review"
@@ -291,19 +291,160 @@
                 app:layout_constraintTop_toBottomOf="@id/FragmentAccount_review_label" />
 
             <Button
-                android:id="@+id/FragmentAccount_more_reviews_button"
-                style="?android:attr/borderlessButtonStyle"
+                android:id="@+id/FragmentAccount_review_see_all_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/firasans_light"
-                android:text="Δείτε περισσότερες"
-                android:textAllCaps="false"
-                android:textColor="@color/black_color"
-                android:textSize="15sp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/FragmentAccount_underline_review" />
+                style="@style/button_orange_empty"
+                app:layout_constraintTop_toTopOf="@id/FragmentAccount_review_label"
+                app:layout_constraintBottom_toBottomOf="@id/FragmentAccount_underline_review"
+                android:text="Δείτε όλες"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="20dp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/FragmentAccount_no_reviews_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/FragmentAccount_underline_review"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:id="@+id/FragmentAccount_no_review_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Καμία αξιολόγηση"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="20dp"
+                    style="@style/paragraph3"
+                    />
+
+                <ImageView
+                    android:id="@+id/FragmentAccount_review_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/FragmentAccount_no_review_textView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_no_review"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/FragmentAccount_review_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/FragmentAccount_underline_review">
+
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/FragmentAccount_review_user_image"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/null_icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    />
+
+                <TextView
+                    android:id="@+id/FragmentAccount_review_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Γιασεμής Μαραμένος"
+                    app:layout_constraintTop_toTopOf="@id/FragmentAccount_review_user_image"
+                    app:layout_constraintStart_toEndOf="@id/FragmentAccount_review_user_image"
+                    android:layout_marginStart="15dp"
+                    android:textColor="@color/black_color"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/firasans_medium"
+                    android:layout_marginTop="8dp"
+                    />
+                <TextView
+                    android:id="@+id/FragmentAccount_review_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="22 Ιαν 2020"
+                    android:padding="0dp"
+                    app:layout_constraintBottom_toBottomOf="@id/FragmentAccount_review_user_image"
+                    app:layout_constraintStart_toEndOf="@id/FragmentAccount_review_user_image"
+                    android:layout_marginStart="15dp"
+                    android:textColor="@color/black_color"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/firasans_light"
+                    android:layout_marginBottom="8dp"
+                    />
+                <ImageView
+                    android:id="@+id/FragmentAccount_review_rating_image"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:background="@drawable/ic_rating"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/FragmentAccount_review_user_name"
+                    android:layout_marginRight="10dp"/>
+
+                <TextView
+                    android:id="@+id/FragmentAccount_review_out_of_five_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/5"
+                    app:layout_constraintTop_toTopOf="@id/FragmentAccount_review_rating_image"
+                    app:layout_constraintBottom_toBottomOf="@id/FragmentAccount_review_rating_image"
+                    android:textColor="@color/black_color"
+                    android:fontFamily="@font/firasans_medium"
+                    app:layout_constraintEnd_toStartOf="@id/FragmentAccount_review_rating_image"
+                    android:layout_marginEnd="10dp"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/FragmentAccount_review_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fontFamily="@font/firasans_bold"
+                    android:text="4,5"
+                    android:textColor="@color/black_color"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@id/FragmentAccount_review_rating_image"
+                    app:layout_constraintEnd_toStartOf="@id/FragmentAccount_review_out_of_five_tv"
+                    app:layout_constraintTop_toTopOf="@id/FragmentAccount_review_rating_image"
+                    app:layout_constraintVertical_bias="0.4" />
+
+                <TextView
+                    android:id="@+id/FragmentAccount_review_review_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea r..."
+                    android:fontFamily="@font/firasans_light"
+                    android:textColor="@color/black_color"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toBottomOf="@id/FragmentAccount_review_user_image"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginTop="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="10dp"/>
+                <View
+                    android:id="@+id/FragmentAccount_review_underline"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/softGrey_color"
+                    app:layout_constraintTop_toBottomOf="@id/FragmentAccount_review_review_text"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

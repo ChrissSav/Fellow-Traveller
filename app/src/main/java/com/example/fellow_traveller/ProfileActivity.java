@@ -118,6 +118,8 @@ public class ProfileActivity extends AppCompatActivity {
     }
     public void getUserProfileInfo(){
         //Picasso.get().load(userBaseModel.getPicture()).into(userProfile);
+        if(userBaseModel.getPicture() != null)
+            Picasso.get().load(userBaseModel.getPicture()).into(userProfile);
         userNameTextView.setText(userBaseModel.getFullName());
         ratingTextView.setText(String.valueOf(userBaseModel.getRate()));
         reviewsTextView.setText(String.valueOf(userBaseModel.getReviews()));
