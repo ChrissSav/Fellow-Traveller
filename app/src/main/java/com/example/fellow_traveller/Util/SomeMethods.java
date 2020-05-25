@@ -31,4 +31,8 @@ public class SomeMethods {
                 .show();
         return;
     }
+
+    public static Long currentTimeStamp() {
+        return System.currentTimeMillis() / 1000L;
+    }
 }

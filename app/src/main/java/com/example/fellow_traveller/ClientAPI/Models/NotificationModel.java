@@ -16,6 +16,8 @@ public class NotificationModel implements Parcelable {
     @SerializedName("has_read")
     private Boolean hasRead;
     private Long timestamp;
+    @SerializedName("type_of")
+    private String typeOf;
 
 
     protected NotificationModel(Parcel in) {
@@ -29,6 +31,7 @@ public class NotificationModel implements Parcelable {
         } else {
             timestamp = in.readLong();
         }
+        typeOf = in.readString();
     }
 
     public static final Creator<NotificationModel> CREATOR = new Creator<NotificationModel>() {
@@ -42,6 +45,14 @@ public class NotificationModel implements Parcelable {
             return new NotificationModel[size];
         }
     };
+
+    public String getTypeOf() {
+        return typeOf;
+    }
+
+    public void setTypeOf(String typeOf) {
+        this.typeOf = typeOf;
+    }
 
     public int getId() {
         return id;
@@ -83,6 +94,20 @@ public class NotificationModel implements Parcelable {
         this.timestamp = timestamp;
     }
 
+
+
+    public String getDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("d MMM yyyy");
+        Date date = new Date((long) timestamp * 1000);
+        return dateFormat.format(date);
+    }
+
+    public String getTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        Date date = new Date((long) timestamp * 1000);
+        return dateFormat.format(date);
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -100,17 +125,6 @@ public class NotificationModel implements Parcelable {
             dest.writeByte((byte) 1);
             dest.writeLong(timestamp);
         }
-    }
-
-    public String getDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("d MMM yyyy");
-        Date date = new Date((long) timestamp * 1000);
-        return dateFormat.format(date);
-    }
-
-    public String getTime() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        Date date = new Date((long) timestamp * 1000);
-        return dateFormat.format(date);
+        dest.writeString(typeOf);
     }
 }

@@ -26,6 +26,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 import static com.example.fellow_traveller.Util.SomeMethods.createSnackBar;
+import static com.example.fellow_traveller.Util.SomeMethods.currentTimeStamp;
 import static com.example.fellow_traveller.Util.SomeMethods.dateTimeToTimestamp;
 
 
@@ -57,9 +58,6 @@ public class NewOfferStage2Fragment extends Fragment {
 
         timeDialog = new TimePickerDialogCustom(textInputLayout_time.getEditText());
         dateDialog = new DatePickerDialogCustom(textInputLayout_date.getEditText());
-
-
-
 
 
         textInputLayout_date.getEditText().setOnClickListener(new View.OnClickListener() {
@@ -116,8 +114,8 @@ public class NewOfferStage2Fragment extends Fragment {
         }
 
         Long timestamp = currentTimeStamp();
-        if (!( getTimeStamp() -timestamp >= getResources().getInteger(R.integer.Time_difference))) {
-            createSnackBar(view,getActivity().getResources().getString(R.string.ERROR_TRIP_TIMESTAMP));
+        if (!(getTimeStamp() - timestamp >= getResources().getInteger(R.integer.Time_difference))) {
+            createSnackBar(view, getActivity().getResources().getString(R.string.ERROR_TRIP_TIMESTAMP));
             return false;
         }
         return true;
@@ -139,11 +137,6 @@ public class NewOfferStage2Fragment extends Fragment {
     }
 
 
-
-
-    public Long currentTimeStamp() {
-        return System.currentTimeMillis() / 1000L;
-    }
 
 
 }

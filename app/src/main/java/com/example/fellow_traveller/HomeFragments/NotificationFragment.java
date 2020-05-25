@@ -54,8 +54,6 @@ public class NotificationFragment extends Fragment {
         globalClass = (GlobalClass) getActivity().getApplicationContext();
 
 
-
-
         progressBar = view.findViewById(R.id.NotificationFragment_progressBar);
 
         swipeRefreshLayout = view.findViewById(R.id.NotificationFragment_SwipeRefreshLayout);
@@ -66,9 +64,9 @@ public class NotificationFragment extends Fragment {
 
         if (notificationArrayList.size() > 0) {
             progressBar.setVisibility(View.GONE);
-            lastId = notificationArrayList.get(notificationArrayList.size() - 2).getId();
+            lastId = notificationArrayList.get(notificationArrayList.size() - 1).getId();
             buildRecyclerView(false);
-        }else{
+        } else {
             LoadNotifications(0);
         }
 
@@ -91,36 +89,37 @@ public class NotificationFragment extends Fragment {
         mAdapter = new NotificationAdapter(notificationArrayList);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-        if(flag){
+        if (flag) {
             mRecyclerView.smoothScrollToPosition(mAdapter.getItemCount());
         }
         mAdapter.setOnItemClickListener(new NotificationAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(final int position) {
-                if(notificationArrayList.get(position).getHasRead()){
-                    Intent intent = new Intent(getActivity(), TripPageDriverActivity.class);
-                    startActivity(intent);
+                if (notificationArrayList.get(position).getTypeOf().equals("passenger")) {
+                    if (notificationArrayList.get(position).getHasRead()) {
+
+                        Intent intent = new Intent(getActivity(), TripPageDriverActivity.class);
+                        intent.putExtra("trip", notificationArrayList.get(position).getTrip());
+                        startActivity(intent);
+                    } else {
+                        new FellowTravellerAPI(globalClass).setNotificationsRead(notificationArrayList.get(position).getId(), new StatusCallBack() {
+                            @Override
+                            public void onSuccess(String notificationModels) {
+                                notificationArrayList.get(position).setHasRead(true);
+                                mAdapter.notifyItemChanged(position);
+                                Intent intent = new Intent(getActivity(), TripPageDriverActivity.class);
+                                intent.putExtra("trip", notificationArrayList.get(position).getTrip());
+                                startActivity(intent);
+                            }
+
+                            @Override
+                            public void onFailure(String msg) {
+                                Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+                    }
                 }
-                else{
-                    new FellowTravellerAPI(globalClass).setNotificationsRead(notificationArrayList.get(position).getId(), new StatusCallBack() {
-                        @Override
-                        public void onSuccess(String notificationModels) {
-                            notificationArrayList.get(position).setHasRead(true);
-                            mAdapter.notifyItemChanged(position);
-                            Intent intent = new Intent(getActivity(), TripPageDriverActivity.class);
-                            startActivity(intent);
-                        }
-
-                        @Override
-                        public void onFailure(String msg) {
-                            Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
-
-                        }
-                    });
-                }
-
-
-
             }
         });
 
@@ -140,11 +139,6 @@ public class NotificationFragment extends Fragment {
                 }
             }
         });
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
     }
 
     public void LoadNotifications(final int id) {

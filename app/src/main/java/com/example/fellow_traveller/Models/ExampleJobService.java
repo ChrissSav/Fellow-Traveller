@@ -74,10 +74,12 @@ public class ExampleJobService extends JobService {
         new FellowTravellerAPI(globalClass).getNotifications(new NotificationCallBack() {
             @Override
             public void onSuccess(ArrayList<NotificationModel> notificationModels) {
-                for (NotificationModel notificationModel: notificationModels){
-                    String text = "Ο χρήστης "+notificationModel.getUser().getFirstName()+ " "+notificationModel.getUser().getLastName()
-                            + " μόλις προστεθηκε στο ταξίδι σου";
-                    ViewNotification( text, notificationModel.getId(),notificationModel);
+                for (NotificationModel notificationItem: notificationModels){
+                    if (notificationItem.getTypeOf().equals("passenger")) {
+                        String text = "Ο χρήστης " + notificationItem.getUser().getFirstName() + " " + notificationItem.getUser().getLastName()
+                                + " μόλις προστεθηκε στο ταξίδι σου";
+                        ViewNotification(text, notificationItem.getId(), notificationItem);
+                    }
                 }
             }
 

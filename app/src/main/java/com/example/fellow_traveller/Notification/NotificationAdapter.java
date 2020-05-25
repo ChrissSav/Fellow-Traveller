@@ -18,6 +18,8 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.example.fellow_traveller.Util.SomeMethods.currentTimeStamp;
+
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ExampleViewHolder> {
 
     private ArrayList<NotificationModel> mExampleList;
@@ -37,17 +39,16 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public static class ExampleViewHolder extends RecyclerView.ViewHolder {
         private ConstraintLayout constraintLayout;
         private CircleImageView circleImageView;
-        private TextView textViewDes,textViewRead,textViewTime;
+        private TextView textViewDes, textViewRead, textViewTime;
 
 
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
-
             constraintLayout = itemView.findViewById(R.id.NotificationItem_ConstraintLayout);
             circleImageView = itemView.findViewById(R.id.NotificationItem_profile_picture);
             textViewDes = itemView.findViewById(R.id.NotificationItem_textView_des);
             textViewRead = itemView.findViewById(R.id.NotificationItem_textView_read);
-            textViewTime=  itemView.findViewById(R.id.NotificationItem_textView_time);
+            textViewTime = itemView.findViewById(R.id.NotificationItem_textView_time);
             constraintLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -81,7 +82,32 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         if (currentItem.getHasRead()) {
             holder.textViewRead.setVisibility(View.GONE);
         }
+        String label;
+        Long timeDifferenceMinutes = (currentTimeStamp() - currentItem.getTimestamp()) / (60);
+        if (timeDifferenceMinutes <= 60) {
+            label = " λεπτά";
+            if (timeDifferenceMinutes == 60)
+                label = " λεπτό";
+            holder.textViewTime.setText("πριν από" + timeDifferenceMinutes + label);
+            return;
+        }
+        if (timeDifferenceMinutes < (60 * 24)) {
+            label = " ώρες";
+            if (timeDifferenceMinutes / 60 == 1)
+                label = " ώρα";
+            holder.textViewTime.setText("πριν από " + timeDifferenceMinutes / 60 + label);
+            return;
+        }
+        if (timeDifferenceMinutes < (60 * 24 * 7)) {
+            label = " μέρες";
+            if ((timeDifferenceMinutes / (60 * 60)) == 1)
+                label = " μέρα";
+            holder.textViewTime.setText("πριν από " + timeDifferenceMinutes / (60 * 60) + label);
+            return;
+        }
         holder.textViewTime.setText(currentItem.getDate());
+
+
     }
 
     @Override
