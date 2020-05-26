@@ -59,15 +59,19 @@
             android:id="@+id/ActivityPhone_country_code_spinner"
             style="@style/inputStyle"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:drawSelectorOnTop="true"
-            android:entries="@array/spinner_phone_codes"
+            android:overlapAnchor="false"
+            android:dropDownWidth="match_parent"
+            android:background="@null"
+            android:spinnerMode="dropdown"
             android:prompt="@string/app_name"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ActivityPhone_split_line"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
 
         <TextView
             android:id="@+id/ActivityPhone_split_line"

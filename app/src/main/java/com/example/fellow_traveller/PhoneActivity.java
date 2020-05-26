@@ -10,19 +10,29 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.StatusCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.NewOffer.NewOfferActivity;
+import com.example.fellow_traveller.Register.CountryCodeAdapter;
+import com.example.fellow_traveller.Register.CountryCodeItem;
+import com.example.fellow_traveller.SearchAndBook.PaymentAdapter;
+import com.example.fellow_traveller.SearchAndBook.PaymentItem;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
 
 import static com.example.fellow_traveller.Util.InputValidation.isValidPhone;
 
 public class PhoneActivity extends AppCompatActivity {
     private EditText numberEditText;
     private Button registerButton, loginButton;
+    private Spinner countryCodeSpinner;
+    private ArrayList<CountryCodeItem> countryCodeList;
+    private CountryCodeAdapter mAdapter;
     private GlobalClass globalClass;
 
     @Override
@@ -33,8 +43,14 @@ public class PhoneActivity extends AppCompatActivity {
         globalClass = (GlobalClass) getApplicationContext();
 
         numberEditText = findViewById(R.id.ActivityPhone_number_editText);
+        countryCodeSpinner = findViewById(R.id.ActivityPhone_country_code_spinner);
         registerButton = findViewById(R.id.ActivityPhone_register_button);
         loginButton = findViewById(R.id.ActivityPhone_login_button);
+
+        countryCodeList = new ArrayList<>();
+        countryCodeList.add(new CountryCodeItem("+30", R.drawable.ic_greek_flag));
+        mAdapter = new CountryCodeAdapter(this, countryCodeList);
+        countryCodeSpinner.setAdapter(mAdapter);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
