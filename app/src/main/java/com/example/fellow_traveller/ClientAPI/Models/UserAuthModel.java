@@ -15,12 +15,15 @@ public class UserAuthModel {
     private String name;
     @SerializedName("last_name")
     private String surname;
+    private int reviews;
+    private float rate;
     private String picture;
     @SerializedName("about_me")
     private String aboutMe;
     private String phone;
     private String sessionId;
     @SerializedName("email")
+
     private String emailAddress;
 
     private ArrayList<ReviewModel> listOfReviews;
@@ -106,5 +109,19 @@ public class UserAuthModel {
     }
 
 
+    public int getReviews() {
+        return reviews;
+    }
 
+    public void setReviews(int reviews) {
+        this.reviews = reviews;
+    }
+
+    public float getRate() {
+        return rate;
+    }
+
+    public void setRate(float rate) {
+        this.rate = rate;
+    }
 }
