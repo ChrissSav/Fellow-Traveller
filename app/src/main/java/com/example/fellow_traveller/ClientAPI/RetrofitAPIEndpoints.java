@@ -1,6 +1,7 @@
 package com.example.fellow_traveller.ClientAPI;
 
 import com.example.fellow_traveller.ClientAPI.Models.AddCarModel;
+import com.example.fellow_traveller.ClientAPI.Models.BooleanResponseModel;
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreatePassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreateReviewModel;
@@ -169,12 +170,17 @@ public interface RetrofitAPIEndpoints {
     );
 
 
-
     //Reviews
 
     @GET("/reviews/{user_id}")
     Call<ArrayList<ReviewModel>> userReviews(
             @Path("user_id") int user_id
+    );
+
+    @GET("/check/review")
+    Call<BooleanResponseModel> checkReview(
+            @Query("user_id") int user_id ,
+            @Query("trip_id") int trip_id
     );
 
     @POST("/reviews")

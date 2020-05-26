@@ -2,6 +2,7 @@ package com.example.fellow_traveller.ClientAPI;
 
 import android.util.Log;
 
+import com.example.fellow_traveller.ClientAPI.Callbacks.BooleanResponseModelCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarDeleteCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.NotificationCallBack;
@@ -16,6 +17,7 @@ import com.example.fellow_traveller.ClientAPI.Callbacks.UserInfoModelCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserLogoutCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserRegisterCallback;
 import com.example.fellow_traveller.ClientAPI.Models.AddCarModel;
+import com.example.fellow_traveller.ClientAPI.Models.BooleanResponseModel;
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreatePassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreateReviewModel;
@@ -604,19 +606,43 @@ public class FellowTravellerAPI {
         });
     }
 
+    public static void checkReviewIfAllReadeRegi(int userId,int tripId, final BooleanResponseModelCallBack booleanResponseModelCallBack) {
+        retrofitAPIEndpoints.checkReview(userId,tripId).enqueue(new Callback<BooleanResponseModel>() {
+            @Override
+            public void onResponse(Call<BooleanResponseModel> call, Response<BooleanResponseModel> response) {
+                if (!response.isSuccessful()) {
+                    booleanResponseModelCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
 
+                    return;
+                }
+                booleanResponseModelCallBack.onSuccess(response.body());
+
+            }
+
+            @Override
+            public void onFailure(Call<BooleanResponseModel> call, Throwable t) {
+                booleanResponseModelCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            }
+        });
+    }
     public static void addUserReview(CreateReviewModel createReviewModel, final StatusCallBack statusCallBack) {
         retrofitAPIEndpoints.addUserReview(createReviewModel).enqueue(new Callback<StatusHandleModel>() {
             @Override
             public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
                 if (!response.isSuccessful()) {
                     ErrorResponseModel errorResponseModel = getModelFromResponseErrorBody(response);
+                    Log.i("getStatusCode", "onResponse: " + errorResponseModel.getDetail().getStatusCode());
                     switch (errorResponseModel.getDetail().getStatusCode()) {
                         case 501:
                             statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_REVIEW_YOURSELF));
                             break;
                         case 502:
                             statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_REVIEW_USER_TARGET_NOT_FOUND));
+                            break;
+                        case 503:
+                            //TODO Replace this
+                            statusCallBack.onFailure("test");
+                            //statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_REVIEW_CANT_REGISTER_THE_REVIEW));
                             break;
                         default:
                             statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));

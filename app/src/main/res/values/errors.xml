@@ -41,6 +41,7 @@
 
     <string name="ERROR_REVIEW_YOURSELF">Δεν μπορείτε να αξιολογήσετε τον εαυτό σας</string>
     <string name="ERROR_REVIEW_USER_TARGET_NOT_FOUND">Ο χρήστη δεν βρέθηκε.</string>
+    <string name="ERROR_REVIEW_CANT_REGISTER_THE_REVIEW">Έχετε ήδη αξιολογήση τον χρήστη.</string>
 
 
 

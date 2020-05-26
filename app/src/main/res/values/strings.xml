@@ -274,4 +274,7 @@
     <string name="title_activity_maps">Map</string>
 
 
+    <string name="passenger_notification">Ο χρήστης % μόλις προστέθηκε στο ταξίδι σου.</string>
+    <string name="rate_notification">Ήρθε η ώρα να σξιολογήσης τον χρήστη  %.</string>
+
 </resources>

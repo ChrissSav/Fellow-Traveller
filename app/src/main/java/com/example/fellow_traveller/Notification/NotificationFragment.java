@@ -1,4 +1,4 @@
-package com.example.fellow_traveller.HomeFragments;
+package com.example.fellow_traveller.Notification;
 
 
 import android.content.Intent;
@@ -9,19 +9,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.fellow_traveller.ClientAPI.Callbacks.BooleanResponseModelCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.NotificationCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.StatusCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
+import com.example.fellow_traveller.ClientAPI.Models.BooleanResponseModel;
 import com.example.fellow_traveller.ClientAPI.Models.NotificationModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.Notification.NotificationAdapter;
 import com.example.fellow_traveller.R;
+import com.example.fellow_traveller.Reviews.WriteReviewActivity;
 import com.example.fellow_traveller.Trips.TripPageDriverActivity;
 
 import java.util.ArrayList;
@@ -95,7 +99,10 @@ public class NotificationFragment extends Fragment {
         mAdapter.setOnItemClickListener(new NotificationAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(final int position) {
+                Toast.makeText(getActivity(), position + " " + notificationArrayList.get(position).getTypeOf(), Toast.LENGTH_SHORT).show();
+
                 if (notificationArrayList.get(position).getTypeOf().equals("passenger")) {
+
                     if (notificationArrayList.get(position).getHasRead()) {
 
                         Intent intent = new Intent(getActivity(), TripPageDriverActivity.class);
@@ -119,6 +126,50 @@ public class NotificationFragment extends Fragment {
                             }
                         });
                     }
+                } else {
+                    if (!notificationArrayList.get(position).getHasRead()) {
+                        new FellowTravellerAPI(globalClass).setNotificationsRead(notificationArrayList.get(position).getId(), new StatusCallBack() {
+                            @Override
+                            public void onSuccess(String notificationModels) {
+                                notificationArrayList.get(position).setHasRead(true);
+                                mAdapter.notifyItemChanged(position);
+                                Intent intent = new Intent(getActivity(), WriteReviewActivity.class);
+                                intent.putExtra("trip", notificationArrayList.get(position).getTrip());
+                                intent.putExtra("user", notificationArrayList.get(position).getUser());
+                                startActivity(intent);
+                            }
+
+                            @Override
+                            public void onFailure(String msg) {
+                                Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+                    } else {
+                        new FellowTravellerAPI(globalClass).checkReviewIfAllReadeRegi(notificationArrayList.get(position).getUser().getId(), notificationArrayList.get(position).getTrip().getId(), new BooleanResponseModelCallBack() {
+                            @Override
+                            public void onSuccess(BooleanResponseModel booleanResponseModel) {
+                                if (booleanResponseModel.getFlag()) {
+                                    notificationArrayList.get(position).setHasRead(true);
+                                    mAdapter.notifyItemChanged(position);
+                                    Intent intent = new Intent(getActivity(), WriteReviewActivity.class);
+                                    intent.putExtra("trip", notificationArrayList.get(position).getTrip());
+                                    intent.putExtra("user", notificationArrayList.get(position).getUser());
+                                    startActivity(intent);
+                                }else{
+
+                                    Toast.makeText(getActivity(), getResources().getString(R.string.ERROR_REVIEW_CANT_REGISTER_THE_REVIEW), Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(String msg) {
+                                Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+                    }
                 }
             }
         });
@@ -126,16 +177,13 @@ public class NotificationFragment extends Fragment {
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-
-                if (!recyclerView.canScrollVertically(1)) {
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                Log.i("dy", "onScrolled: " + dy);
+                if (dy > 0) {
                     if (notificationArrayList.size() > 0) {
                         lastId = notificationArrayList.get(notificationArrayList.size() - 1).getId();
                         LoadNotifications(lastId);
                     }
-
-
                 }
             }
         });

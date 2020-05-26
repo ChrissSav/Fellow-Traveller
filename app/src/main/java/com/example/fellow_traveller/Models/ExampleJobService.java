@@ -15,6 +15,7 @@ import com.example.fellow_traveller.ClientAPI.Callbacks.NotificationCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.NotificationModel;
 import com.example.fellow_traveller.R;
+import com.example.fellow_traveller.Reviews.WriteReviewActivity;
 import com.example.fellow_traveller.Trips.TripPageDriverActivity;
 
 import java.util.ArrayList;
@@ -79,9 +80,11 @@ public class ExampleJobService extends JobService {
             public void onSuccess(ArrayList<NotificationModel> notificationModels) {
                 for (NotificationModel notificationItem : notificationModels) {
                     if (notificationItem.getTypeOf().equals("passenger")) {
-                        String text = "Ο χρήστης " + notificationItem.getUser().getFirstName() + " " + notificationItem.getUser().getLastName()
-                                + " μόλις προστεθηκε στο ταξίδι σου";
-                        ViewNotification(text, notificationItem.getId(), notificationItem);
+                        String text = getResources().getString(R.string.passenger_notification).replace("%",notificationItem.getUser().getFullName());
+                        ViewNotification(text, notificationItem.getId(), notificationItem,true);
+                    }else if(notificationItem.getTypeOf().equals("rate")){
+                        String text = getResources().getString(R.string.rate_notification).replace("%",notificationItem.getUser().getFullName());
+                        ViewNotification(text, notificationItem.getId(), notificationItem,false);
                     }
                 }
             }
@@ -94,36 +97,56 @@ public class ExampleJobService extends JobService {
     }
 
 
-    public void ViewNotification(String text, int i, NotificationModel notificationModel) {
+    public void ViewNotification(String text, int i, NotificationModel notificationModel, boolean flag) {
 
         Context mContext = this;
 
         notificationManager = NotificationManagerCompat.from(mContext);
+        Notification notification;
 
+        if (flag) {
+            Intent activityIntent = new Intent(this, TripPageDriverActivity.class);
+            activityIntent.putExtra("trip", notificationModel.getTrip());
+            PendingIntent contentIntent = PendingIntent.getActivity(this,
+                    0, activityIntent, 0);
 
-        Intent activityIntent = new Intent(this, TripPageDriverActivity.class);
-        activityIntent.putExtra("trip", notificationModel.getTrip());
-        PendingIntent contentIntent = PendingIntent.getActivity(this,
-                0, activityIntent, 0);
+            notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+                    .setSmallIcon(R.drawable.ic_logo)
+                    .setContentTitle(TITLE)
+                    .setContentText(text)
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText(text)
+                            .setBigContentTitle("Προστέθηκε επιβάτης"))
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .setCategory(NotificationCompat.CATEGORY_EVENT)
+                    .setContentIntent(contentIntent)
+                    .setAutoCancel(true)
+                    .setOnlyAlertOnce(true)
+                    .build();
+        } else {
 
+            Intent activityIntent = new Intent(this, WriteReviewActivity.class);
+            activityIntent.putExtra("trip", notificationModel.getTrip());
+            activityIntent.putExtra("user", notificationModel.getUser());
 
-        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
-                .setSmallIcon(R.drawable.ic_logo)
-                .setContentTitle(TITLE)
-                .setContentText(text)
-                .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText(text)
-                        .setBigContentTitle("Προστέθηκε επιβάτης"))
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setCategory(NotificationCompat.CATEGORY_EVENT)
-                .setContentIntent(contentIntent)
-                .setAutoCancel(true)
-                .setOnlyAlertOnce(true)
-                .build();
+            PendingIntent contentIntent = PendingIntent.getActivity(this,
+                    0, activityIntent, 0);
 
-
+            notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+                    .setSmallIcon(R.drawable.ic_logo)
+                    .setContentTitle(TITLE)
+                    .setContentText(text)
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText(text)
+                            .setBigContentTitle("Αξιολόγηση χρήστη"))
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .setCategory(NotificationCompat.CATEGORY_EVENT)
+                    .setContentIntent(contentIntent)
+                    .setAutoCancel(true)
+                    .setOnlyAlertOnce(true)
+                    .build();
+        }
         notificationManager.notify(i, notification);
-
     }
 
 
