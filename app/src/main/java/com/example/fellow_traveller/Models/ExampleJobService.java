@@ -48,7 +48,8 @@ public class ExampleJobService extends JobService {
                     if (jobCancelled) {
                         return;
                     }
-                    CheckConnection();
+                    if (globalClass.getCurrentUser() != null)
+                        CheckConnection();
                     try {
                         Thread.sleep(25000);
                     } catch (InterruptedException e) {
@@ -74,7 +75,7 @@ public class ExampleJobService extends JobService {
         new FellowTravellerAPI(globalClass).getNotifications(new NotificationCallBack() {
             @Override
             public void onSuccess(ArrayList<NotificationModel> notificationModels) {
-                for (NotificationModel notificationItem: notificationModels){
+                for (NotificationModel notificationItem : notificationModels) {
                     if (notificationItem.getTypeOf().equals("passenger")) {
                         String text = "Ο χρήστης " + notificationItem.getUser().getFirstName() + " " + notificationItem.getUser().getLastName()
                                 + " μόλις προστεθηκε στο ταξίδι σου";
@@ -91,7 +92,7 @@ public class ExampleJobService extends JobService {
     }
 
 
-    public void ViewNotification(String text, int i,NotificationModel notificationModel) {
+    public void ViewNotification(String text, int i, NotificationModel notificationModel) {
 
         Context mContext = this;
 
@@ -99,7 +100,7 @@ public class ExampleJobService extends JobService {
 
 
         Intent activityIntent = new Intent(this, TripPageDriverActivity.class);
-        activityIntent.putExtra("trip",notificationModel.getTrip());
+        activityIntent.putExtra("trip", notificationModel.getTrip());
         PendingIntent contentIntent = PendingIntent.getActivity(this,
                 0, activityIntent, 0);
 

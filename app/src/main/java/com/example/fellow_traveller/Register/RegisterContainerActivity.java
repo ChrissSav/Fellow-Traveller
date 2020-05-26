@@ -2,6 +2,7 @@ package com.example.fellow_traveller.Register;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -128,6 +129,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
         String lastName = registerStage3Fragment.getLastName();
 
         UserRegisterModel user = new UserRegisterModel(firstName, lastName, email, password, userPhone);
+        Log.i("userPhone", "userPhone: userPhone");
 
         new FellowTravellerAPI(globalClass).userRegister(user, new UserRegisterCallback() {
             @Override
