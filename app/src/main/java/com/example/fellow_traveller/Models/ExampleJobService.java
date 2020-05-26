@@ -33,6 +33,8 @@ public class ExampleJobService extends JobService {
     @Override
     public boolean onStartJob(JobParameters params) {
         Log.d(TAG, "ExampleJobService started");
+        globalClass = (GlobalClass) getApplicationContext();
+
         doBackgroundWork(params);
 
         return true;
