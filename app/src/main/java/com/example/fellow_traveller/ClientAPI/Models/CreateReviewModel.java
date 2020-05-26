@@ -6,25 +6,31 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 public class CreateReviewModel implements Parcelable {
+
     private String description;
     private int rate;
     private long timestamp;
     @SerializedName("target_id")
     private int targetId;
+    @SerializedName("trip_id")
+    private int tripId;
 
 
-    public CreateReviewModel(String description, int rate, long timestamp, int targetId) {
+    public CreateReviewModel(String description, int rate, long timestamp, int targetId, int tripId) {
+        this.tripId = tripId;
         this.description = description;
         this.rate = rate;
         this.timestamp = timestamp;
         this.targetId = targetId;
     }
 
+
     protected CreateReviewModel(Parcel in) {
         description = in.readString();
         rate = in.readInt();
         timestamp = in.readLong();
         targetId = in.readInt();
+        tripId = in.readInt();
     }
 
     public static final Creator<CreateReviewModel> CREATOR = new Creator<CreateReviewModel>() {
@@ -38,8 +44,6 @@ public class CreateReviewModel implements Parcelable {
             return new CreateReviewModel[size];
         }
     };
-
-
 
     public String getDescription() {
         return description;
@@ -84,5 +88,6 @@ public class CreateReviewModel implements Parcelable {
         dest.writeInt(rate);
         dest.writeLong(timestamp);
         dest.writeInt(targetId);
+        dest.writeInt(tripId);
     }
 }

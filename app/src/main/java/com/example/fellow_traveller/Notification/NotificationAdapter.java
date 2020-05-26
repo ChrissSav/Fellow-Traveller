@@ -1,5 +1,6 @@
 package com.example.fellow_traveller.Notification;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     private ArrayList<NotificationModel> mExampleList;
     private OnItemClickListener mListener;
+    private Context context;
 
 
     public interface OnItemClickListener {
@@ -71,6 +73,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @Override
     public ExampleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_item, parent, false);
+        this.context = v.getContext();
         ExampleViewHolder evh = new ExampleViewHolder(v, mListener);
         return evh;
     }
@@ -78,7 +81,13 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @Override
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
         NotificationModel currentItem = mExampleList.get(position);
-        holder.textViewDes.setText(currentItem.getUser().getFullName());
+
+        if (currentItem.getTypeOf().equals("passenger")) {
+            holder.textViewDes.setText(context.getResources().getString(R.string.passenger_notification).replace("%", currentItem.getUser().getFullName()));
+
+        } else {
+            holder.textViewDes.setText(context.getResources().getString(R.string.rate_notification).replace("%", currentItem.getUser().getFullName()));
+        }
         if (currentItem.getHasRead()) {
             holder.textViewRead.setVisibility(View.GONE);
         }
@@ -100,12 +109,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         }
         if (timeDifferenceMinutes < (60 * 24 * 7)) {
             label = " μέρες";
-            if ((timeDifferenceMinutes / (60 * 60)) == 1)
+            if ((timeDifferenceMinutes / (60 * 24)) == 1)
                 label = " μέρα";
-            holder.textViewTime.setText("πριν από " + timeDifferenceMinutes / (60 * 60) + label);
+            holder.textViewTime.setText("πριν από " + timeDifferenceMinutes / (60 * 24) + label);
             return;
         }
-        holder.textViewTime.setText(currentItem.getDate());
+        holder.textViewTime.setText(currentItem.getDate() + " στις " + currentItem.getTime());
 
 
     }

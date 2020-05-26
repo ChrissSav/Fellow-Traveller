@@ -10,21 +10,12 @@ import android.content.ComponentName;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
-import com.example.fellow_traveller.HomeFragments.AccountFragment;
-import com.example.fellow_traveller.HomeFragments.HomeFragment;
-import com.example.fellow_traveller.HomeFragments.MessengerFragment;
-import com.example.fellow_traveller.HomeFragments.NotificationFragment;
-import com.example.fellow_traveller.HomeFragments.TripFragment;
+import com.example.fellow_traveller.Notification.NotificationFragment;
 import com.example.fellow_traveller.Models.ExampleJobService;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
-import com.example.fellow_traveller.Register.RegisterContainerActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import static android.app.job.JobInfo.NETWORK_TYPE_UNMETERED;
 
 public class HomeActivity extends AppCompatActivity {
 
