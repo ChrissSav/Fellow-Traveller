@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.ReviewModelCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
@@ -76,6 +77,7 @@ public class AccountFragment extends Fragment {
             public void onSuccess(ArrayList<ReviewModel> reviews) {
             myReviews = reviews;
             if(myReviews.size() > 0){
+                Toast.makeText(getActivity(), myReviews.get(0).getDescription(), Toast.LENGTH_SHORT).show();
                 noReviewsSection.setVisibility(View.GONE);
                 reviewsSection.setVisibility(View.VISIBLE);
                 reviewsButton.setVisibility(View.VISIBLE);
@@ -133,7 +135,6 @@ public class AccountFragment extends Fragment {
         if(globalClass.getCurrentUser().getPicture() != null)
             Picasso.get().load(globalClass.getCurrentUser().getPicture()).into(userProfileImage);
        //TODO να βάλω τα στοιχεία του χρήστη rate και review
-
         if (globalClass.getCurrentUser().getAboutMe() == null || globalClass.getCurrentUser().getAboutMe().length() < 1)
             textViewAboutMe.setText(globalClass.getResources().getString(R.string.account_fragment_about_me));
         else {

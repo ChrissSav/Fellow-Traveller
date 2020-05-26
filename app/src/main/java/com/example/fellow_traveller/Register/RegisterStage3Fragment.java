@@ -39,8 +39,8 @@ public class RegisterStage3Fragment extends Fragment {
 
         textInputLayoutName = view.findViewById(R.id.RegisterStage3Fragment_textInputLayout_name);
         textInputLayoutSurname = view.findViewById(R.id.RegisterStage3Fragment_textInputLayout_surname);
-        textInputLayoutName.getEditText().setText(name);
-        textInputLayoutSurname.getEditText().setText(surname);
+        //textInputLayoutName.getEditText().setText(name);
+        //textInputLayoutSurname.getEditText().setText(surname);
 
 
         return view;

@@ -20,15 +20,13 @@
     <ImageButton
         android:id="@+id/RegisterActivity_imageButton"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginTop="12dp"
-        android:adjustViewBounds="true"
-        android:background="?android:selectableItemBackgroundBorderless"
-        android:padding="12dp"
-        android:scaleType="fitCenter"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        style="@style/border_icon_button"
         android:src="@drawable/ic_back_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_progressBar" />
+        app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_progressBar"/>
 
 
     <FrameLayout
@@ -49,19 +47,14 @@
     <Button
         android:id="@+id/RegisterActivity_button_next"
         android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="24dp"
-        android:background="@drawable/main_activity_login_button"
         android:text="Επόμενο"
-        android:textAllCaps="false"
-        android:textColor="#fff"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        style="@style/button_orange_filled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 

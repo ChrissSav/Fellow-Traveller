@@ -17,12 +17,12 @@
 
         <TextView
             android:id="@+id/RegisterStage3Fragment_textView4"
-            style="@style/titleRegisterStyle"
+            style="@style/header3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:layout_marginStart="16dp"
-            android:text="Πώς ονομάζεσαι ;"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="20dp"
+            android:text="Πώς ονομάζεστε;"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,7 +50,8 @@
                 style="@style/inputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="text"
+                android:hint="Το όνομα σας"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -76,7 +77,8 @@
                 style="@style/inputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="text"
+                android:hint="Το επώνυμο σας"/>
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

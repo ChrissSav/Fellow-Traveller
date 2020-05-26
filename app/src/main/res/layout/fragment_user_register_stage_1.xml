@@ -20,13 +20,14 @@
 
         <TextView
             android:id="@+id/RegisterStage1Fragment_textView4"
-            style="@style/titleRegisterStyle"
+            style="@style/header3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="20dp"
             android:text="@string/register_fragment_stage_1_add_email_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="15dp"/>
 
 
         <TextView
@@ -35,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/register_fragment_stage_1_email_input_field_title"
-            style="@style/labelRegisterStyle"
+           style="@style/header5"
             app:layout_constraintStart_toStartOf="@+id/RegisterStage1Fragment_textView4"
             app:layout_constraintTop_toBottomOf="@+id/RegisterStage1Fragment_textView4" />
 
@@ -56,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:text="@string/temp_spyros_email_address" />
+               android:hint="example@email.com" />
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

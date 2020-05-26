@@ -60,7 +60,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.RegisterActivity_progressBar);
         buttonNext = findViewById(R.id.RegisterActivity_button_next);
         btnBack = findViewById(R.id.RegisterActivity_imageButton);
-
+        
 
         //Fragment Management
         fragmentManager = getSupportFragmentManager();
