@@ -20,13 +20,25 @@
 
         <TextView
             android:id="@+id/fragment_user_register_stage2_choose_password_title_TextView"
-            style="@style/titleRegisterStyle"
+            style="@style/header3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="20dp"
             android:text="@string/register_fragment_stage_2_choose_password_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="15dp"/>
+        <TextView
+            android:id="@+id/FragmentRegisterStage2_password_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Ο κωδικός πρέπει να είναι τουλάχιστον 8 χαρακτήρες εκ των οποιών ένα ψηφία, ένα πεζό και ένα κεφαλαίο γράμμα, καθώς και ένας ειδικός χαρακτήρας"
+            app:layout_constraintTop_toBottomOf="@id/fragment_user_register_stage2_choose_password_title_TextView"
+            app:layout_constraintStart_toStartOf="@id/fragment_user_register_stage2_choose_password_title_TextView"
+            android:layout_marginTop="10dp"
+            style="@style/paragraph4"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="20dp"/>
 
         <TextView
             android:id="@+id/fragment_user_register_stage2_password_title_TextView"
@@ -36,7 +48,7 @@
             android:layout_marginTop="55dp"
             android:text="@string/register_fragment_stage_2_password_input_field_title"
             app:layout_constraintStart_toStartOf="@+id/fragment_user_register_stage2_choose_password_title_TextView"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_user_register_stage2_choose_password_title_TextView" />
+            app:layout_constraintTop_toBottomOf="@+id/FragmentRegisterStage2_password_info" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/fragment_user_register_stage2_password_textInputLayout"
@@ -116,7 +128,9 @@
                 android:text="@string/ERROR_PASSWORD_COMPLEXITY_SHOULD_CONTAIN"
                 android:textAllCaps="false"
                 android:textIsSelectable="false"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone"
+                />
 
             <TextView
                 android:id="@+id/fragment_user_register_password_complexity_digit_TextView"
@@ -127,7 +141,7 @@
                 android:textColorHighlight="#FFFFFF"
                 android:textIsSelectable="false"
                 android:textStyle="italic"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/fragment_user_register_password_complexity_lowercase_letter_TextView"
@@ -137,7 +151,8 @@
                 android:inputType="none"
                 android:text="@string/ERROR_PASSWORD_COMPLEXITY_LOWERCASE_LETTER"
                 android:textIsSelectable="false"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/fragment_user_register_password_complexity_uppercase_letter_TextView"
@@ -146,7 +161,8 @@
                 android:layout_weight="1"
                 android:text="@string/ERROR_PASSWORD_COMPLEXITY_UPPERCASE_LETTER"
                 android:textIsSelectable="false"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/fragment_user_register_password_complexity_special_char_TextView"
@@ -155,7 +171,8 @@
                 android:layout_weight="1"
                 android:text="@string/ERROR_PASSWORD_COMPLEXITY_SPECIAL_CHARACTER"
                 android:textIsSelectable="false"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/fragment_user_register_password_complexity_min_length_TextView"
@@ -164,7 +181,8 @@
                 android:layout_weight="1"
                 android:text="@string/ERROR_PASSWORD_COMPLEXITY_LENGTH"
                 android:textIsSelectable="false"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:visibility="gone"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
