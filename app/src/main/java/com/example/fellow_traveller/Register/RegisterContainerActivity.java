@@ -53,8 +53,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register_container);
         globalClass = (GlobalClass) getApplicationContext();
 
-        // TODO get phone from previous activity
-        // TODO  activate this line : userPhone = getIntent().getStringExtra("phone");
+        userPhone = getIntent().getStringExtra("phoneNumber");
         num_num = 100 / stages;
 
         progressBar = findViewById(R.id.RegisterActivity_progressBar);
