@@ -66,7 +66,7 @@ public class AccountFragment extends Fragment {
         reviewerNameTextview = view.findViewById(R.id.FragmentAccount_review_user_name);
         reviewDateTextview = view.findViewById(R.id.FragmentAccount_review_date);
         reviewTextTextView = view.findViewById(R.id.FragmentAccount_review_review_text);
-        reviewRateTextView = view.findViewById(R.id.FragmentAccount_review_out_of_five_tv);
+        reviewRateTextView = view.findViewById(R.id.FragmentAccount_review_rating);
         reviewerUserImage = view.findViewById(R.id.FragmentAccount_review_user_image);
         reviewsSection = view.findViewById(R.id.FragmentAccount_review_section);
         myReviews = new ArrayList<>();
@@ -132,8 +132,20 @@ public class AccountFragment extends Fragment {
         super.onStart();
         globalClass = (GlobalClass) getActivity().getApplicationContext();
         textViewUserName.setText(globalClass.getCurrentUser().getFullName());
-        if(globalClass.getCurrentUser().getPicture() != null)
-            Picasso.get().load(globalClass.getCurrentUser().getPicture()).into(userProfileImage);
+        if((int) globalClass.getCurrentUser().getRate() == globalClass.getCurrentUser().getRate())
+            rateTextView.setText(String.valueOf((int) globalClass.getCurrentUser().getRate()));
+        else
+            rateTextView.setText(String.valueOf(globalClass.getCurrentUser().getRate()));
+        reviewsTextView.setText(String.valueOf(globalClass.getCurrentUser().getReviews()));
+        try {
+            if(globalClass.getCurrentUser().getPicture() != null)
+                Picasso.get().load(globalClass.getCurrentUser().getPicture()).into(userProfileImage);
+        }
+        catch(Exception e) {
+            //  Block of code to handle errors
+        }
+
+
        //TODO να βάλω τα στοιχεία του χρήστη rate και review
         if (globalClass.getCurrentUser().getAboutMe() == null || globalClass.getCurrentUser().getAboutMe().length() < 1)
             textViewAboutMe.setText(globalClass.getResources().getString(R.string.account_fragment_about_me));

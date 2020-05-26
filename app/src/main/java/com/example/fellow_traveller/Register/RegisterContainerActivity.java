@@ -43,7 +43,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
     private RegisterStage3Fragment registerStage3Fragment = new RegisterStage3Fragment();
     private ProgressBar progressBar;
     private int num_num;
-    private String userPhone = "6999999999";
+    private String userPhone = "+306940184085";
     private GlobalClass globalClass;
     private DatabaseReference userDatabase;
 
@@ -54,7 +54,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register_container);
         globalClass = (GlobalClass) getApplicationContext();
 
-        userPhone = getIntent().getStringExtra("phoneNumber");
+        //userPhone = getIntent().getStringExtra("phoneNumber");
         num_num = 100 / stages;
 
         progressBar = findViewById(R.id.RegisterActivity_progressBar);
@@ -128,7 +128,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
         String firstName = registerStage3Fragment.getFirstName();
         String lastName = registerStage3Fragment.getLastName();
 
-        UserRegisterModel user = new UserRegisterModel(firstName, lastName, email, password, userPhone);
+        UserRegisterModel user = new UserRegisterModel(firstName, lastName, email, password, userPhone.substring(3, 13));
         Log.i("userPhone", "userPhone: userPhone");
 
         new FellowTravellerAPI(globalClass).userRegister(user, new UserRegisterCallback() {

@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -25,6 +26,7 @@ import java.util.Date;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MessagesViewHolder> {
     private ArrayList<MessageItem> messagesList;
@@ -45,6 +47,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         public TextView text;
         public TextView name;
         public TextView date;
+        public CircleImageView userImage;
 
 
         public MessagesViewHolder(@NonNull View itemView) {
@@ -53,6 +56,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
             text = itemView.findViewById(R.id.message);
             name = itemView.findViewById(R.id.sender_message);
             date = itemView.findViewById(R.id.message_time);
+            userImage = itemView.findViewById(R.id.image_message);
         }
     }
 
@@ -102,13 +106,15 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
 
     @Override
     public void onBindViewHolder(@NonNull final MessagesViewHolder  holder, int position) {
-        MessageItem currentItem = messagesList.get(position);
+       final MessageItem currentItem = messagesList.get(position);
 
         holder.text.setText(currentItem.getText());
 
         Date currentDate = new Date(currentItem.getTimestamp()*1000);
         DateFormat dateFormat = convertDateFormat(currentItem.getTimestamp()*1000);
         holder.date.setText(dateFormat.format(currentDate));
+
+        final int viewType = getItemViewType(position);
 
 
         //Retrieve the id of sender of the message, to get the sender's username
@@ -118,7 +124,19 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String nameFirebase = (String) dataSnapshot.child("name").getValue(String.class);
+                String userImage = (String) dataSnapshot.child("image").getValue(String.class);
                 holder.name.setText(nameFirebase);
+
+                //Get the image URL and check the viewType, if message is type received then try to load senders image
+                if(viewType == 4 || viewType == 5 || viewType == 6 || viewType == 7){
+                    try {
+                        Picasso.get().load(userImage).into(holder.userImage);
+                    }
+                    catch(Exception e) {
+                        //  Block of code to handle errors
+                    }
+                }
+
             }
 
             @Override
@@ -206,4 +224,5 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
 
 
     }
+
 }

@@ -142,6 +142,7 @@ public class ChatConversationActivity extends AppCompatActivity {
         hashMap.put("text", message);
         hashMap.put("timestamp", System.currentTimeMillis()/1000);
         hashMap.put("senderName", globalClass.getCurrentUser().getName());
+        //hashMap.put("senderImage", globalClass.getCurrentUser().getPicture());
 
         referenceMessage.push().setValue(hashMap);
 

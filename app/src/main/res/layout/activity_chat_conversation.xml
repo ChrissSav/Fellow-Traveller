@@ -89,6 +89,7 @@
         app:layout_constraintBottom_toTopOf="@id/ActivityProfile_about_me_underline"
         android:background="@color/white"
         android:paddingBottom="5dp"
+        android:animateLayoutChanges="true"
         >
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh_chat_conversation"
@@ -99,7 +100,6 @@
             android:id="@+id/messages_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:scrollbars="vertical"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

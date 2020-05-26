@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -29,6 +30,7 @@ import java.util.Date;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapter.ConversationViewHolder>{
     private ArrayList<ConversationItem> conversationList;
@@ -38,6 +40,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     boolean seen;
     private GlobalClass globalClass;
     private int myId;
+    private String senderId = "default", senderImage = "";
 
     public interface OnItemClickListener{
         void onItemClick(int position);
@@ -51,6 +54,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         public TextView description;
         public TextView date;
         public ImageView seenIcon;
+        public CircleImageView userImage;
 
 
         public ConversationViewHolder(@NonNull View itemView, final ConversationAdapter.OnItemClickListener listener) {
@@ -60,6 +64,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             description = itemView.findViewById(R.id.description_chat);
             date = itemView.findViewById(R.id.message_date_chat);
             seenIcon = itemView.findViewById(R.id.seen_image_messega_item);
+            userImage = itemView.findViewById(R.id.image_icon_chat);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -94,7 +99,9 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
         holder.userName.setText(currentItem.getTripName());
 
         //Call the method to get the last message and we parse the Trip Id to retrieve the messages and the TextView to set the text
-        lastMessage(Integer.toString(currentItem.getTripId()), holder.description);
+        lastMessage(Integer.toString(currentItem.getTripId()), holder.description, holder.userImage);
+
+        loadImageToConversation(String.valueOf(currentItem.getTripId()), holder.userImage);
 
 
         //isSeen(Integer.toString(currentItem.getTripId()), holder.description);
@@ -142,11 +149,12 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     }
 
     //Check for the last message
-    private void lastMessage(String groupId, final TextView last_message ) {
+    private void lastMessage(String groupId, final TextView last_message, final CircleImageView circleImageView) {
 
         //Get myId from Global Class
         globalClass = (GlobalClass) myContext.getApplicationContext();
         myId = globalClass.getCurrentUser().getId();
+
 
         theLastMessage = "default";
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Messages").child(groupId);
@@ -155,6 +163,8 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     MessageItem item = snapshot.getValue(MessageItem.class);
+                    senderId = String.valueOf(item.getId());
+                    //senderImage = String.valueOf(item.getSenderImage());
                     if(item.getId()== myId){
                         theLastMessage = "Εσείς: " + item.getText();
                     }else {
@@ -169,11 +179,19 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
                         break;
 
                     default:
+                        //loadImageToConversation(senderId, circleImageView);
                         last_message.setText(theLastMessage);
                         break;
                 }
                 theLastMessage = "default";
+//                try {
+//                    Picasso.get().load(senderImage).into(circleImageView);
+//                }
+//                catch(Exception e) {
+//                    //  Block of code to handle errors
+//                }
             }
+
 
 
             @Override
@@ -182,6 +200,35 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
             }
         });
     }
+    public void loadImageToConversation(String userId, final CircleImageView circleImageView){
+
+                DatabaseReference userProfileImage = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+
+                userProfileImage.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String userImage = (String) dataSnapshot.child("image").getValue(String.class);
+
+
+                        //Get the image URL and check the viewType, if message is type received then try to load senders image
+
+                            try {
+                                Picasso.get().load(userImage).into(circleImageView);
+                            }
+                            catch(Exception e) {
+                                //  Block of code to handle errors
+                            }
+                        }
+
+
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
 
 
 }

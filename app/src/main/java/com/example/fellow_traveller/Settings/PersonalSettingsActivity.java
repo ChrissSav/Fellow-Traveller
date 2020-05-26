@@ -194,7 +194,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
             public void onSuccess(UserAuthModel user) {
                 Objects.requireNonNull(user).setSessionId(globalClass.getCurrentUser().getSessionId());
                 globalClass.setCurrentUser(Objects.requireNonNull(user));
-                updateUserInfoOnFirebase(firstName, lastName);
+                updateUserInfoOnFirebase(firstName, lastName, newImage);
                 DeleteSharedPreferences();
                 SaveClass(Objects.requireNonNull(user));
                 finish();
@@ -207,12 +207,12 @@ public class PersonalSettingsActivity extends AppCompatActivity {
         });
     }
 
-    private void updateUserInfoOnFirebase(String firstName, String lastName) {
+    private void updateUserInfoOnFirebase(String firstName, String lastName, String image) {
         updateUserInfo= FirebaseDatabase.getInstance().getReference().child("Users").child(String.valueOf(globalClass.getCurrentUser().getId()));
 
         HashMap<String, String> userHashMap = new HashMap<>();
 
-        userHashMap.put("image",  "default");
+        userHashMap.put("image",  image);
         userHashMap.put("name",  firstName);
         userHashMap.put("surname",  lastName);
 

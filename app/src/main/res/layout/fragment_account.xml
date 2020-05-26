@@ -418,18 +418,17 @@
 
                 <TextView
                     android:id="@+id/FragmentAccount_review_review_text"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea r..."
                     android:fontFamily="@font/firasans_light"
                     android:textColor="@color/black_color"
                     android:textSize="16sp"
                     app:layout_constraintTop_toBottomOf="@id/FragmentAccount_review_user_image"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/FragmentAccount_review_user_image"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="20dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="10dp"/>
+                    android:paddingEnd="20dp"/>
                 <View
                     android:id="@+id/FragmentAccount_review_underline"
                     android:layout_width="0dp"

@@ -6,13 +6,15 @@ public class MessageItem {
     private int groupId;
     private long timestamp;
     private String senderName;
+    private String senderImage;
 
-    public MessageItem(int aId, String aText, String aName, int aGroupId, long aTimestamp){
+    public MessageItem(int aId, String aText, String aName, int aGroupId, long aTimestamp, String aImage){
         id = aId;
         text = aText;
         senderName = aName;
         groupId = aGroupId;
         timestamp = aTimestamp;
+        senderImage = aImage;
     }
     public MessageItem(){}
 
@@ -54,5 +56,13 @@ public class MessageItem {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getSenderImage() {
+        return senderImage;
+    }
+
+    public void setSenderImage(String senderImage) {
+        this.senderImage = senderImage;
     }
 }

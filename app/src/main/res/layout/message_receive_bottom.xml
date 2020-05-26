@@ -7,7 +7,7 @@
     android:paddingBottom="10dp"
     android:paddingLeft="5dp"
     >
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/image_message"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -16,11 +16,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:baselineAlignBottom="true"
         app:layout_constraintBaseline_toBaselineOf="@id/section_message"
-
         app:layout_constraintBottom_toBottomOf="@id/section_message"
-
-
-
         />
 
     <androidx.constraintlayout.widget.ConstraintLayout
