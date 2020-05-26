@@ -3,8 +3,11 @@ package com.example.fellow_traveller;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -13,6 +16,7 @@ import com.example.fellow_traveller.ClientAPI.Callbacks.StatusCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.NewOffer.NewOfferActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 import static com.example.fellow_traveller.Util.InputValidation.isValidPhone;
 
@@ -59,6 +63,7 @@ public class PhoneActivity extends AppCompatActivity {
                     String code = "+30";            //TODO get the code from spinner from each country
                     String number = numberEditText.getText().toString();
                     mainIntent.putExtra("phoneNumber", code + number);
+
                     startActivity(mainIntent);
                 }
 
@@ -75,4 +80,6 @@ public class PhoneActivity extends AppCompatActivity {
 
         }
     }
+
+
 }
