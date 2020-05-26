@@ -79,7 +79,7 @@ public class AccountFragment extends Fragment {
             public void onSuccess(ArrayList<ReviewModel> reviews) {
             myReviews = reviews;
             if(myReviews.size() > 0){
-                Toast.makeText(getActivity(), myReviews.get(0).getDescription(), Toast.LENGTH_SHORT).show();
+
                 noReviewsSection.setVisibility(View.GONE);
                 reviewsSection.setVisibility(View.VISIBLE);
                 reviewsButton.setVisibility(View.VISIBLE);

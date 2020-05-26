@@ -342,7 +342,7 @@ public class TripModel implements Parcelable {
         dest.writeByte((byte) (active == null ? 0 : active ? 1 : 2));
     }
 
-    //Sort with the lowest price
+    //Sort by the lowest price
     public static Comparator<TripModel> PriceComparator = new Comparator<TripModel>() {
 
         public int compare(TripModel trip1, TripModel trip2) {
@@ -358,7 +358,7 @@ public class TripModel implements Parcelable {
         }
 
     };
-    //Sort with the highest rate
+    //Sort by the highest rate
     public static Comparator<TripModel> RatesComparator = new Comparator<TripModel>() {
 
         public int compare(TripModel trip1, TripModel trip2) {
@@ -374,7 +374,7 @@ public class TripModel implements Parcelable {
         }
 
     };
-    //Sort with the most recent date
+    //Sort by the most recent date
     public static Comparator<TripModel> DateComparator = new Comparator<TripModel>() {
 
         public int compare(TripModel trip1, TripModel trip2) {

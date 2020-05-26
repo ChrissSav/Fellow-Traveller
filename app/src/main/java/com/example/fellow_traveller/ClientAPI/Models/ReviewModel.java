@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 
 public class ReviewModel implements Parcelable {
@@ -107,4 +108,36 @@ public class ReviewModel implements Parcelable {
         Date date = new Date((long) timestamp * 1000);
         return dateFormat.format(date);
     }
+    //Sort by the most recent
+    public static Comparator<ReviewModel> DateComparator = new Comparator<ReviewModel>() {
+
+        public int compare(ReviewModel review1, ReviewModel review2) {
+
+            long date1 = review1.getTimestamp();
+            long date2 = review2.getTimestamp();
+
+            //ascending order
+            return Long.compare(date2, date1);
+
+
+            //descending order
+            //return fruitName2.compareTo(fruitName1);
+        }
+    };
+    //Sort by the highest rate
+    public static Comparator<ReviewModel> RatesComparator = new Comparator<ReviewModel>() {
+
+        public int compare(ReviewModel review1, ReviewModel review2) {
+
+            float rate1 = review1.getRate();
+            float rate2 = review2.getRate();
+
+            //ascending order
+            return Float.compare(rate2, rate1);
+
+            //descending order
+            //return fruitName2.compareTo(fruitName1);
+        }
+
+    };
 }
