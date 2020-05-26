@@ -33,7 +33,7 @@
 
         <TextView
             android:id="@+id/user_name_chat"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Φιλώτας - Θεσσαλονίκη"
             android:textSize="18sp"
@@ -44,6 +44,11 @@
             app:layout_constraintBottom_toBottomOf="@id/back_button_chat"
             app:layout_constraintStart_toEndOf="@id/back_button_chat"
             app:layout_constraintEnd_toStartOf="@id/ActivityChat_vertical_dots_buttons"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:singleLine="true"
+            android:ellipsize="middle"
+            android:textAlignment="center"
             />
 
         <TextView

@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.example.fellow_traveller.ClientAPI.Callbacks.ReviewModelCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.ReviewModel;
+import com.example.fellow_traveller.ClientAPI.Models.UserBaseModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.Reviews.ReviewsActivity;
@@ -119,6 +121,9 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ReviewsActivity.class);
+                UserBaseModel userBaseModel = new UserBaseModel(globalClass.getCurrentUser().getId(), globalClass.getCurrentUser().getName(), globalClass.getCurrentUser().getSurname(),
+                        globalClass.getCurrentUser().getRate(), globalClass.getCurrentUser().getReviews(), globalClass.getCurrentUser().getPicture());
+                intent.putExtra("userToReview", (Parcelable) userBaseModel);
                 startActivity(intent);
             }
         });

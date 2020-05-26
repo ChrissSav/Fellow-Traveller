@@ -116,6 +116,7 @@ public class MessengerFragment extends Fragment {
             notifyFlag = true;
             Intent mainIntent = new Intent(getActivity(), ChatConversationActivity.class);
             mainIntent.putExtra("groupId", item.getTripId());
+            mainIntent.putExtra("tripName", item.getTripName());
 
             startActivity(mainIntent);
         }

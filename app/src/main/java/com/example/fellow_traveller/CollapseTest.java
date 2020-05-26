@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.fellow_traveller.ClientAPI.Models.ReviewModel;
 import com.example.fellow_traveller.Reviews.ReviewItem;
 import com.example.fellow_traveller.Reviews.ReviewsAdapter;
 
@@ -18,7 +19,7 @@ public class CollapseTest extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private LinearLayoutManager mLayoutManager;
-    private ArrayList<ReviewItem> reviewsList = new ArrayList<>();
+    private ArrayList<ReviewModel> reviewsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,14 +28,14 @@ public class CollapseTest extends AppCompatActivity {
 //        Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 //        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        reviewsList.add(new ReviewItem("Γιασεμής Μαραμένος", "22 Ιαν 2020", "3,5", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam"));
-        reviewsList.add(new ReviewItem("Tyler Joseph" , "22 Ιαν 2020", "3,5", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam"));
-        reviewsList.add(new ReviewItem("Martin Garrix", "22 Ιαν 2020", "3,5", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam"));
-        reviewsList.add(new ReviewItem("Tyler Joseph" , "22 Ιαν 2020", "3,5", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam"));
-        reviewsList.add(new ReviewItem("Martin Garrix", "22 Ιαν 2020", "3,5", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam"));
-        reviewsList.add(new ReviewItem("Josh Dun", "22 Ιαν 2020", "3,5", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam"));
-        reviewsList.add(new ReviewItem("Kshmr", "22 Ιαν 2020", "3,5", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam"));
-        reviewsList.add(new ReviewItem("21 Pilots Limouzin", "22 Ιαν 2020", "3,5", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam"));
+//        reviewsList.add(new ReviewItem("Γιασεμής Μαραμένος", "22 Ιαν 2020", "3,5", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam"));
+//        reviewsList.add(new ReviewItem("Tyler Joseph" , "22 Ιαν 2020", "3,5", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam"));
+//        reviewsList.add(new ReviewItem("Martin Garrix", "22 Ιαν 2020", "3,5", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam"));
+//        reviewsList.add(new ReviewItem("Tyler Joseph" , "22 Ιαν 2020", "3,5", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam"));
+//        reviewsList.add(new ReviewItem("Martin Garrix", "22 Ιαν 2020", "3,5", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam"));
+//        reviewsList.add(new ReviewItem("Josh Dun", "22 Ιαν 2020", "3,5", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam"));
+//        reviewsList.add(new ReviewItem("Kshmr", "22 Ιαν 2020", "3,5", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam"));
+//        reviewsList.add(new ReviewItem("21 Pilots Limouzin", "22 Ιαν 2020", "3,5", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam"));
 
 
         mRecyclerView = findViewById(R.id.reviews_recycler_view);

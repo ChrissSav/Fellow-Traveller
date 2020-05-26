@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+import com.example.fellow_traveller.ClientAPI.Models.ReviewModel;
 import com.example.fellow_traveller.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -17,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewsViewHolder> {
-    private ArrayList<ReviewItem> reviewsList;
+    private ArrayList<ReviewModel> reviewsList;
 
 
 
@@ -40,7 +42,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewsV
         }
     }
 
-    public ReviewsAdapter(ArrayList<ReviewItem> revList) {
+    public ReviewsAdapter(ArrayList<ReviewModel> revList) {
         reviewsList = revList;
 
     }
@@ -59,12 +61,18 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewsV
     @Override
     public void onBindViewHolder(@NonNull final ReviewsAdapter.ReviewsViewHolder holder, int position) {
 
-        ReviewItem currentItem = reviewsList.get(position);
+        ReviewModel currentItem = reviewsList.get(position);
 
-        holder.name.setText(currentItem.getUserName());
+        holder.name.setText(currentItem.getUser().getFullName());
         holder.date.setText(currentItem.getDate());
-        holder.textReview.setText(currentItem.getReviewText());
-        holder.rating.setText(currentItem.getRating());
+        holder.textReview.setText(currentItem.getDescription());
+        holder.rating.setText(String.valueOf(currentItem.getRate()));
+        try {
+                Picasso.get().load(currentItem.getUser().getPicture()).into(holder.userImage);
+        }
+        catch(Exception e) {
+            //  Block of code to handle errors
+        }
     }
 
 

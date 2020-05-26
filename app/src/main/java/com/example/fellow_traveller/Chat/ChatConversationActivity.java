@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.MessagesNotification.APIService;
@@ -44,6 +45,7 @@ public class ChatConversationActivity extends AppCompatActivity {
     private EditText writeEdtText;
     private ConstraintLayout noMessagesSection;
     private ImageButton plusButton, sendButton;
+    private TextView tripNameTextView;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private LinearLayoutManager mLayoutManager;
@@ -60,6 +62,7 @@ public class ChatConversationActivity extends AppCompatActivity {
     private GlobalClass globalClass;
     private int myId;
     private int groupId;
+    private String tripName;
     private boolean updateStatus = false;
     private ValueEventListener seenListener, updateListener;
     private DatabaseReference reference, referenceStatus;
@@ -70,6 +73,7 @@ public class ChatConversationActivity extends AppCompatActivity {
     protected void onCreate(Bundle  savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_conversation);
+        tripNameTextView = findViewById(R.id.user_name_chat);
         writeEdtText = findViewById(R.id.write_et_chat);
         noMessagesSection = findViewById(R.id.ActivityChatConversation_no_message_section);
         plusButton = findViewById(R.id.plus_button_chat);
@@ -85,6 +89,11 @@ public class ChatConversationActivity extends AppCompatActivity {
         //Retrieve groupChat id
         Intent intent = getIntent();
         groupId = intent.getIntExtra("groupId", 0);
+        tripName = intent.getStringExtra("tripName");
+
+        tripNameTextView.setText(tripName);
+
+
 
         //Notification's ApiService
         apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
