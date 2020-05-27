@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.fellow_traveller.ClientAPI.Callbacks.StatusCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.UserAuthCallback;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
@@ -352,6 +353,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
                             Log.i("ImageInside", uri.toString());
                             loadImageToImageView();
                             tempImagefile.delete();
+                            updateUserPicture(uri.toString());
                             Toast.makeText(PersonalSettingsActivity.this, "Η φωτογραφία ανέβηκε επιτυχώς", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -381,6 +383,22 @@ public class PersonalSettingsActivity extends AppCompatActivity {
         }
     }
 
+
+    public void updateUserPicture(final String uri){
+        new FellowTravellerAPI(globalClass).updateUserUploadPhoto(uri, new StatusCallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                globalClass.getCurrentUser().setPhone(uri);
+                SaveClass(globalClass.getCurrentUser());
+            }
+
+            @Override
+            public void onFailure(String errorMsg) {
+                Toast.makeText(PersonalSettingsActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     public void loadImageToImageView(){
         Picasso.get().load(newImage).into(profilePicture);
         imageProgressBar.setVisibility(View.GONE);
@@ -392,6 +410,13 @@ public class PersonalSettingsActivity extends AppCompatActivity {
             Uri compressedUri = Uri.fromFile(tempImagefile);
             uploadImage(compressedUri);
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(globalClass.getCurrentUser().getPicture() != null)
+            Picasso.get().load(globalClass.getCurrentUser().getPicture()).into(profilePicture);
     }
 }
 
