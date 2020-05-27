@@ -25,34 +25,67 @@
             android:text="Πώς ονομάζεστε;"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/RegisterStage3Fragment_info_textView"
+            style="@style/paragraph3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Για καλύτερη εμπειρία είναι απαραίτητο να γνωρίζουμε ολόκληρο το όνομα σας"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintStart_toStartOf="@id/RegisterStage3Fragment_textView4"
+            app:layout_constraintTop_toBottomOf="@id/RegisterStage3Fragment_textView4"/>
 
         <TextView
             android:id="@+id/RegisterStage3Fragment_textView5"
             style="@style/labelRegisterStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="35dp"
             android:text="Όνομα"
             app:layout_constraintStart_toStartOf="@+id/RegisterStage3Fragment_textView4"
-            app:layout_constraintTop_toBottomOf="@+id/RegisterStage3Fragment_textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/RegisterStage3Fragment_info_textView" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/RegisterStage3Fragment_textInputLayout_name"
+
+        <EditText
+            android:id="@+id/FragmentRegisterStage3_name_editText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            app:endIconMode="clear_text"
+            android:hint="Το όνομα σας"
+            android:background="@null"
+            style="@style/paragraph2"
+            android:singleLine="true"
+            android:maxLength="20"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/RegisterStage3Fragment_textView5"
-            app:layout_constraintTop_toBottomOf="@+id/RegisterStage3Fragment_textView5">
+            app:layout_constraintTop_toBottomOf="@+id/RegisterStage3Fragment_textView5"/>
+        <ImageButton
+            android:id="@+id/FragmentRegisterStage3_name_erase_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/FragmentRegisterStage3_name_editText"
+            app:layout_constraintBottom_toBottomOf="@id/FragmentRegisterStage3_name_editText"
+            app:layout_constraintEnd_toEndOf="@id/FragmentRegisterStage3_name_editText"
+            android:background="@drawable/ic_close"
+            android:visibility="invisible"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/inputStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="Το όνομα σας"/>
-        </com.google.android.material.textfield.TextInputLayout>
+        <View
+            android:id="@+id/FragmentRegisterStage3_name_underline"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            app:layout_constraintStart_toStartOf="@+id/FragmentRegisterStage3_name_editText"
+            app:layout_constraintEnd_toEndOf="@+id/FragmentRegisterStage3_name_editText"
+            app:layout_constraintTop_toBottomOf="@+id/FragmentRegisterStage3_name_editText"
+            android:background="@drawable/component_edit_text_line"
+            android:layout_marginTop="15dp"
+            android:focusable="true"
+
+
+            />
+
 
         <TextView
             android:id="@+id/RegisterStage3Fragment_textView6"
@@ -62,24 +95,46 @@
             android:layout_marginTop="39dp"
             android:text="Έπωνυμο"
             app:layout_constraintStart_toStartOf="@+id/RegisterStage3Fragment_textView4"
-            app:layout_constraintTop_toBottomOf="@+id/RegisterStage3Fragment_textInputLayout_name" />
+            app:layout_constraintTop_toBottomOf="@+id/FragmentRegisterStage3_name_editText" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/RegisterStage3Fragment_textInputLayout_surname"
+        <EditText
+            android:id="@+id/FragmentRegisterStage3_surname_editText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:endIconMode="clear_text"
-            app:layout_constraintEnd_toEndOf="@+id/RegisterStage3Fragment_textInputLayout_name"
-            app:layout_constraintStart_toStartOf="@+id/RegisterStage3Fragment_textInputLayout_name"
-            app:layout_constraintTop_toBottomOf="@+id/RegisterStage3Fragment_textView6">
+            android:layout_marginEnd="16dp"
+            android:hint="Το επίθετο σας"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:singleLine="true"
+            android:maxLength="20"
+            style="@style/paragraph2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/RegisterStage3Fragment_textView5"
+            app:layout_constraintTop_toBottomOf="@+id/RegisterStage3Fragment_textView6"
+            />
 
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/inputStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="Το επώνυμο σας"/>
-        </com.google.android.material.textfield.TextInputLayout>
+        <ImageButton
+            android:id="@+id/FragmentRegisterStage3_surname_erase_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/FragmentRegisterStage3_surname_editText"
+            app:layout_constraintBottom_toBottomOf="@id/FragmentRegisterStage3_surname_editText"
+            app:layout_constraintEnd_toEndOf="@id/FragmentRegisterStage3_surname_editText"
+            android:background="@drawable/ic_close"
+            android:visibility="invisible"/>
+        <View
+            android:id="@+id/FragmentRegisterStage3_surname_underline"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            app:layout_constraintStart_toStartOf="@+id/FragmentRegisterStage3_name_editText"
+            app:layout_constraintEnd_toEndOf="@+id/FragmentRegisterStage3_name_editText"
+            app:layout_constraintTop_toBottomOf="@+id/FragmentRegisterStage3_surname_editText"
+            android:background="@drawable/component_edit_text_line"
+            android:layout_marginTop="15dp"
+            android:focusable="true"
+
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -52,6 +52,7 @@ public class PhoneActivity extends AppCompatActivity {
         mAdapter = new CountryCodeAdapter(this, countryCodeList);
         countryCodeSpinner.setAdapter(mAdapter);
 
+
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
