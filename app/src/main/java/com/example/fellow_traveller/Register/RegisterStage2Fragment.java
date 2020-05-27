@@ -17,7 +17,6 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.fellow_traveller.R;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -52,8 +51,8 @@ public class RegisterStage2Fragment extends Fragment {
         confirmPasswordEditText = view.findViewById(R.id.FragmentRegisterStage2_password2_edit_text);
         underlinePassword = view.findViewById(R.id.FragmentRegisterStage1_password_underline);
         underlineConfirmPassword = view.findViewById(R.id.FragmentRegisterStage1_password2_underline);
-        passwordShowButton = view.findViewById(R.id.FragmentRegisterStage2_password_erase_button);
-        confirmPasswordShowButton = view.findViewById(R.id.FragmentRegisterStage2_password2_erase_button);
+        passwordShowButton = view.findViewById(R.id.FragmentRegisterStage2_display_password_button);
+        confirmPasswordShowButton = view.findViewById(R.id.FragmentRegisterStage2_display_password2_button);
 
 //        Objects.requireNonNull(passwordEditText).setText(tempPassword);
 //        Objects.requireNonNull(confirmPasswordEditText).setText(tempConfirmPassword);

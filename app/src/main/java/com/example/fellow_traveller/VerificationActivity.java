@@ -176,7 +176,7 @@ public class VerificationActivity extends AppCompatActivity {
             mainIntent.putExtra("phoneNumber", phoneNumber);
             //It may be do this to the final step of register
             try {
-                TimeUnit.SECONDS.sleep(4);
+                TimeUnit.SECONDS.sleep(2);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

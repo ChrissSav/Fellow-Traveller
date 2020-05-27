@@ -67,7 +67,7 @@
             android:layout_marginTop="10dp"/>
 
         <Button
-            android:id="@+id/FragmentRegisterStage2_password_erase_button"
+            android:id="@+id/FragmentRegisterStage2_display_password_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/button_black_empty"
@@ -120,7 +120,7 @@
             android:layout_marginTop="10dp"/>
 
         <Button
-            android:id="@+id/FragmentRegisterStage2_password2_erase_button"
+            android:id="@+id/FragmentRegisterStage2_display_password2_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/button_black_empty"

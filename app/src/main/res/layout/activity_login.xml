@@ -11,8 +11,8 @@
         android:id="@+id/LoginActivity_textView_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:text="Είσοδος"
         android:textColor="#000"
         android:textSize="30sp"
@@ -32,31 +32,45 @@
         app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header"
         app:layout_constraintTop_toBottomOf="@+id/LoginActivity_textView_header" />
 
-    <com.google.android.material.textfield.TextInputLayout
+    <EditText
         android:id="@+id/LoginActivity_editText_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="24dp"
-        android:textColorHint="#000"
-        app:hintEnabled="false"
-        app:endIconMode="clear_text"
+        android:layout_marginEnd="20dp"
+        android:hint="example@email.com"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:singleLine="true"
+        android:maxLength="20"
+        android:inputType="textWebEmailAddress"
+        style="@style/paragraph2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header"
-        app:layout_constraintTop_toBottomOf="@+id/LoginActivity_textView2">
+        app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView2"
+        app:layout_constraintTop_toBottomOf="@+id/LoginActivity_textView2"
+        />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginStart="-3dp"
-            android:backgroundTint="#817F7F"
-            android:inputType="textEmailAddress"
-            android:paddingEnd="15dp"
-            android:text="spurakos98@gmail.com"
-            android:textColor="#817F7F"
-            android:textSize="20sp" />
+    <ImageButton
+        android:id="@+id/LoginActivity_email_erase_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/LoginActivity_editText_email"
+        app:layout_constraintBottom_toBottomOf="@id/LoginActivity_editText_email"
+        app:layout_constraintEnd_toEndOf="@id/LoginActivity_editText_email"
+        android:background="@drawable/ic_close"
+        android:visibility="gone"/>
+    <View
+        android:id="@+id/LoginActivity_email_underline"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        app:layout_constraintStart_toStartOf="@+id/LoginActivity_editText_email"
+        app:layout_constraintEnd_toEndOf="@+id/LoginActivity_editText_email"
+        app:layout_constraintTop_toBottomOf="@+id/LoginActivity_editText_email"
+        android:background="@drawable/component_edit_text_line"
+        android:layout_marginTop="15dp"
+        android:focusable="true"
+        />
 
-    </com.google.android.material.textfield.TextInputLayout>
+
 
 
     <TextView
@@ -69,63 +83,81 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header"
-        app:layout_constraintTop_toBottomOf="@+id/LoginActivity_editText_email" />
+        app:layout_constraintTop_toBottomOf="@+id/LoginActivity_email_underline" />
 
-    <com.google.android.material.textfield.TextInputLayout
+    <EditText
         android:id="@+id/LoginActivity_editText_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColorHint="#000"
-        app:hintEnabled="false"
-        app:layout_constraintEnd_toEndOf="@+id/LoginActivity_editText_email"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:layout_marginEnd="20dp"
+        android:hint="Κωδικός πρόσβασης"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:singleLine="true"
+        android:maxLength="20"
+        android:inputType="textPassword"
+        style="@style/paragraph2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header"
         app:layout_constraintTop_toBottomOf="@+id/LoginActivity_textView3"
-        app:passwordToggleEnabled="true">
+        app:layout_goneMarginEnd="20dp"
+        />
+    <View
+        android:id="@+id/LoginActivity_password_underline"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        app:layout_constraintStart_toStartOf="@+id/LoginActivity_editText_password"
+        app:layout_constraintEnd_toEndOf="@+id/LoginActivity_editText_password"
+        app:layout_constraintTop_toBottomOf="@+id/LoginActivity_editText_password"
+        android:background="@drawable/component_edit_text_line"
+        android:layout_marginTop="15dp"
+        android:focusable="true"
+        />
+    <Button
+        android:id="@+id/LoginActivity_display_password_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/button_black_empty"
+        android:text="Εμφάνιση"
+        android:textSize="15sp"
+        app:layout_constraintTop_toTopOf="@id/LoginActivity_editText_password"
+        app:layout_constraintBottom_toBottomOf="@id/LoginActivity_editText_password"
+        app:layout_constraintEnd_toEndOf="@id/LoginActivity_editText_password"
+        android:visibility="gone"/>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginStart="-3dp"
-            android:backgroundTint="#817F7F"
-            android:inputType="textPassword"
-            android:paddingEnd="15dp"
-            android:text="aD@ffff1"
-            android:textColor="#817F7F"
-            android:textColorHint="#000"
-            android:textSize="20sp" />
 
-    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/LoginActivity_button_login"
-        style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="78dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
         android:text="Είσοδος"
-        android:background="@drawable/main_activity_login_button"
-        android:textAllCaps="false"
-        android:textColor="#fff"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        style="@style/button_orange_filled"
         app:layout_constraintEnd_toEndOf="@+id/LoginActivity_editText_email"
         app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header"
-        app:layout_constraintTop_toBottomOf="@+id/LoginActivity_editText_password" />
+        app:layout_constraintTop_toBottomOf="@+id/LoginActivity_password_underline" />
 
-    <TextView
-        android:id="@+id/LoginActivity_textView_forgot_password"
+    <Button
+        android:id="@+id/LoginActivity_forgot_password_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="196dp"
-        android:drawableTop="@android:color/black"
-        android:drawableBottom="@android:color/black"
+        android:layout_marginTop="5dp"
         android:text="Ξέχασα τον κωδικό μου"
-        android:textColor="#000"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        style="@style/button_black_empty"
+        android:gravity="center|bottom"
         app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header"
-        app:layout_constraintTop_toBottomOf="@+id/LoginActivity_editText_password" />
+        app:layout_constraintTop_toBottomOf="@+id/LoginActivity_button_login" />
+    <View
+        android:id="@+id/LoginActivity_forgot_password_underline"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        app:layout_constraintStart_toStartOf="@+id/LoginActivity_forgot_password_button"
+        app:layout_constraintEnd_toEndOf="@+id/LoginActivity_forgot_password_button"
+        app:layout_constraintTop_toBottomOf="@+id/LoginActivity_forgot_password_button"
+        android:background="@color/black_color"
+
+        android:focusable="true"/>
 
 
     <TextView
@@ -133,19 +165,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
-        android:text="Δεν έχεις λογαρισμό ;"
-        android:textColor="#000"
+        android:text="Δεν έχεις λογαρισμό;"
+        style="@style/paragraph3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header" />
 
-    <TextView
-        android:id="@+id/LoginActivity_textView_register"
+    <Button
+        android:id="@+id/LoginActivity_register_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Become a Fellow"
-        android:textColor="#000"
-        android:textStyle="bold"
+        style="@style/button_black_empty"
         app:layout_constraintBottom_toBottomOf="@+id/LoginActivity_textView8"
         app:layout_constraintStart_toEndOf="@+id/LoginActivity_textView8"
         app:layout_constraintTop_toTopOf="@+id/LoginActivity_textView8" />
