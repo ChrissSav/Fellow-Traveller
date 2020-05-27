@@ -44,7 +44,10 @@ public class SplashActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(String errorMsg) {
-                            Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
+                            /*Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
+                            startActivity(mainIntent);
+                            finish();*/
+                            Intent mainIntent = new Intent(SplashActivity.this, HomeActivity.class);
                             startActivity(mainIntent);
                             finish();
                         }
