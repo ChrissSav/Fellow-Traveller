@@ -45,6 +45,6 @@
         <item name="android:drawablePadding">15dp</item>
         <item name="android:drawableTint">@color/orange_color</item>
         <item name="android:gravity">left|center_vertical</item>
-        <item name="android:background">@drawable/component_orange_button_empty_rectangle_shape</item>
+        <item name="android:background">@null</item>
     </style>
 </resources>

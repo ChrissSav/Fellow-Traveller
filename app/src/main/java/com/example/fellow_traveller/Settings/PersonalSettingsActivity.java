@@ -172,8 +172,13 @@ public class PersonalSettingsActivity extends AppCompatActivity {
                 lastNameEditText.setText(user.getSurname());
                 aboutMeEditText.setText(user.getAboutMe());
                 phoneNumberEditText.setText(user.getPhone());
-                if(globalClass.getCurrentUser().getPicture() != null)
-                    Picasso.get().load(user.getPicture()).into(profilePicture);
+
+                try {
+                    if(globalClass.getCurrentUser().getPicture() != null)
+                        Picasso.get().load(user.getPicture()).into(profilePicture);
+                } catch (Exception e) {
+                    //  Block of code to handle errors
+                }
 
                 //Picasso.load(user.getPicture()).into(profilePicture);
                 //TODO we dont need to call the API to get the users, put extra from the account and have the text watchers on create
@@ -400,8 +405,13 @@ public class PersonalSettingsActivity extends AppCompatActivity {
     }
 
     public void loadImageToImageView(){
-        Picasso.get().load(newImage).into(profilePicture);
-        imageProgressBar.setVisibility(View.GONE);
+        try {
+            Picasso.get().load(newImage).into(profilePicture);
+            imageProgressBar.setVisibility(View.GONE);
+        } catch (Exception e) {
+            //  Block of code to handle errors
+        }
+
     }
 
     public void compressUriImage(){

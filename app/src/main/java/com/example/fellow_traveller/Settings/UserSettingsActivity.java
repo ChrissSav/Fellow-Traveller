@@ -105,8 +105,13 @@ public class UserSettingsActivity extends AppCompatActivity {
         globalClass = (GlobalClass) getApplicationContext();
         userFullNameTextView.setText(globalClass.getCurrentUser().getFullName());
         userEmailAddressTextView.setText(globalClass.getCurrentUser().getEmailAddress());
-        if(globalClass.getCurrentUser().getPicture() != null)
-            Picasso.get().load(globalClass.getCurrentUser().getPicture()).into(userImage);
+        try {
+            if(globalClass.getCurrentUser().getPicture() != null)
+                Picasso.get().load(globalClass.getCurrentUser().getPicture()).into(userImage);
+        } catch (Exception e) {
+            //  Block of code to handle errors
+        }
+
     }
 
     public void deleteSharedPreferences() {

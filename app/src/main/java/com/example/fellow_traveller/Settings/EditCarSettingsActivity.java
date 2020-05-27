@@ -23,6 +23,7 @@ import com.example.fellow_traveller.ClientAPI.Models.UpdateCarModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.google.android.material.snackbar.Snackbar;
+import com.squareup.picasso.Picasso;
 
 import static com.example.fellow_traveller.Util.InputValidation.isValidPlate;
 
@@ -179,21 +180,26 @@ public class EditCarSettingsActivity extends AppCompatActivity {
                 .setAction("ΝΑΙ", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        new FellowTravellerAPI(globalClass).deleteCar(carModel.getId(), new CarDeleteCallBack() {
-                            @Override
-                            public void onSuccess(StatusHandleModel status) {
-                                Toast.makeText(EditCarSettingsActivity.this, "Επιτυχής διαγραφή", Toast.LENGTH_SHORT).show();
+                        try {
+                            new FellowTravellerAPI(globalClass).deleteCar(carModel.getId(), new CarDeleteCallBack() {
+                                @Override
+                                public void onSuccess(StatusHandleModel status) {
+                                    Toast.makeText(EditCarSettingsActivity.this, "Επιτυχής διαγραφή", Toast.LENGTH_SHORT).show();
 
-                                onBackPressed();
-                                finish();
-                            }
+                                    onBackPressed();
+                                    finish();
+                                }
 
-                            @Override
-                            public void onFailure(String errorMsg) {
-                                Toast.makeText(EditCarSettingsActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+                                @Override
+                                public void onFailure(String errorMsg) {
+                                    Toast.makeText(EditCarSettingsActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
 
-                            }
-                        });
+                                }
+                            });
+                        } catch (Exception e) {
+                            //  Block of code to handle errors
+                        }
+
                     }
                 });
 
