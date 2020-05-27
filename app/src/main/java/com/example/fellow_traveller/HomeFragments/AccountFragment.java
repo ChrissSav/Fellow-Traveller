@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import android.os.Parcelable;
@@ -15,16 +18,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.ReviewModelCallBack;
+import com.example.fellow_traveller.ClientAPI.Callbacks.UserCarsCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
+import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.ClientAPI.Models.ReviewModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserBaseModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.Reviews.ReviewsActivity;
 import com.example.fellow_traveller.Settings.AddCarSettingsActivity;
+import com.example.fellow_traveller.Settings.MyCarModelAdapter;
 import com.example.fellow_traveller.Settings.UserSettingsActivity;
 import com.squareup.picasso.Picasso;
 
@@ -40,8 +45,13 @@ public class AccountFragment extends Fragment {
     private CircleImageView userProfileImage, reviewerUserImage;
     private GlobalClass globalClass;
     private ArrayList<ReviewModel> myReviews;
-    private ConstraintLayout noReviewsSection, reviewsSection;
+    private ArrayList<CarModel> myCarsList;
+    private ConstraintLayout noReviewsSectionLayout, reviewsSectionLayout, haveCarsSectionLayout, dontHaveCarsSectionLayout;
     private TextView reviewerNameTextview, reviewDateTextview, reviewRateTextView, reviewTextTextView;
+    private RecyclerView mRecyclerView;
+    private MyCarModelAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
 
     public AccountFragment() {
         // Required empty public constructor
@@ -52,7 +62,7 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_account, container, false);
+        final View view = inflater.inflate(R.layout.fragment_account, container, false);
 
         globalClass = (GlobalClass) getActivity().getApplicationContext();
 
@@ -64,15 +74,47 @@ public class AccountFragment extends Fragment {
         textViewAboutMe = view.findViewById(R.id.FragmentAccount_about_me_info);
         rateTextView = view.findViewById(R.id.FragmentAccount_rate);
         reviewsTextView = view.findViewById(R.id.FragmentAccount_reviews);
-        noReviewsSection = view.findViewById(R.id.FragmentAccount_no_reviews_section);
+        noReviewsSectionLayout = view.findViewById(R.id.FragmentAccount_no_reviews_section);
         reviewerNameTextview = view.findViewById(R.id.FragmentAccount_review_user_name);
         reviewDateTextview = view.findViewById(R.id.FragmentAccount_review_date);
         reviewTextTextView = view.findViewById(R.id.FragmentAccount_review_review_text);
         reviewRateTextView = view.findViewById(R.id.FragmentAccount_review_rating);
         reviewerUserImage = view.findViewById(R.id.FragmentAccount_review_user_image);
-        reviewsSection = view.findViewById(R.id.FragmentAccount_review_section);
+        reviewsSectionLayout = view.findViewById(R.id.FragmentAccount_review_section);
+        haveCarsSectionLayout = view.findViewById(R.id.FragmentAccount_my_cars_section);
+        dontHaveCarsSectionLayout = view.findViewById(R.id.FragmentAccount_car_section);
         myReviews = new ArrayList<>();
+        myCarsList = new ArrayList<>();
 
+        //Change TextView Color
+        //textViewAboutMe.setTextColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.orange_color));
+
+        new FellowTravellerAPI(globalClass).getCars(new UserCarsCallBack() {
+            @Override
+            public void onSuccess(ArrayList<CarModel> carList) {
+                myCarsList = carList;
+                if(myCarsList.size() > 0) {
+                    dontHaveCarsSectionLayout.setVisibility(View.GONE);
+                    haveCarsSectionLayout.setVisibility(View.VISIBLE);
+                    mRecyclerView = view.findViewById(R.id.FragmentAccount_my_cars_recycler_view);
+                    mRecyclerView.setHasFixedSize(true);
+                    mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+                    mAdapter = new MyCarModelAdapter(myCarsList);
+                    mRecyclerView.setLayoutManager(mLayoutManager);
+                    mRecyclerView.setAdapter(mAdapter);
+
+                }else{
+                    haveCarsSectionLayout.setVisibility(View.GONE);
+                    dontHaveCarsSectionLayout.setVisibility(View.VISIBLE);
+                }
+
+            }
+
+            @Override
+            public void onFailure(String errorMsg) {
+
+            }
+        });
 
         new FellowTravellerAPI(globalClass).getUserReviews(globalClass.getCurrentUser().getId(), new ReviewModelCallBack() {
             @Override
@@ -80,8 +122,8 @@ public class AccountFragment extends Fragment {
             myReviews = reviews;
             if(myReviews.size() > 0){
 
-                noReviewsSection.setVisibility(View.GONE);
-                reviewsSection.setVisibility(View.VISIBLE);
+                noReviewsSectionLayout.setVisibility(View.GONE);
+                reviewsSectionLayout.setVisibility(View.VISIBLE);
                 reviewsButton.setVisibility(View.VISIBLE);
                 reviewerNameTextview.setText(myReviews.get(0).getUser().getFullName());
                 reviewDateTextview.setText(myReviews.get(0).getDate());
@@ -90,9 +132,9 @@ public class AccountFragment extends Fragment {
                 if(myReviews.get(0).getUser().getPicture() != null)
                     Picasso.get().load(myReviews.get(0).getUser().getPicture()).into(reviewerUserImage);
             }else{
-                reviewsSection.setVisibility(View.GONE);
+                reviewsSectionLayout.setVisibility(View.GONE);
                 reviewsButton.setVisibility(View.GONE);
-                noReviewsSection.setVisibility(View.VISIBLE);
+                noReviewsSectionLayout.setVisibility(View.VISIBLE);
                 }
             }
 
