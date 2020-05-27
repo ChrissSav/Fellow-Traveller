@@ -1,12 +1,17 @@
 package com.example.fellow_traveller.Trips;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -34,6 +39,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.squareup.picasso.Picasso;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.ArrayList;
 
@@ -59,6 +65,7 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
     private GoogleMap map;
     private MarkerOptions pickUpPoint;
     private LatLng zoomToThePoint;
+    private static final int MY_CAMERA_REQUEST_CODE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,7 +211,11 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
             @Override
             public void onClick(View view) {
                 Intent mainIntent = new Intent(TripPageDriverActivity.this, ScanQRCodeActivity.class);
-                startActivityForResult(mainIntent, 1);
+                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED)
+                    Toast.makeText(TripPageDriverActivity.this, "Δεν έχει άδεια", Toast.LENGTH_SHORT).show();
+                ActivityCompat.requestPermissions(TripPageDriverActivity.this, new String[] {Manifest.permission.CAMERA}, 100);
+
+                //startActivityForResult(mainIntent, 1);
             }
         });
 
@@ -269,5 +280,16 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
         map.addMarker(pickUpPoint);
 
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(zoomToThePoint, 18));
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_CAMERA_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

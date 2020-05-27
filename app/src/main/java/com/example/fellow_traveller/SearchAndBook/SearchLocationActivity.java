@@ -88,9 +88,7 @@ public class SearchLocationActivity extends AppCompatActivity implements View.On
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 //Log.i("addTextChangedListener", "beforeTextChanged");
-
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 //Log.i("addTextChangedListener", "onTextChanged");

@@ -171,6 +171,7 @@ public class BookActivity extends AppCompatActivity {
 
                         assignTripToCreatorConversation();
                         assignCreatorToTripConversation();
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
 
