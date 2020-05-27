@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fellow_traveller.ClientAPI.Models.NotificationModel;
 import com.example.fellow_traveller.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -81,6 +82,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @Override
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
         NotificationModel currentItem = mExampleList.get(position);
+
+        if(currentItem.getUser().getPicture() != null && currentItem.getUser().getPicture().length() > 1){
+            Picasso.get().load(currentItem.getUser().getPicture()).into(holder.circleImageView);
+        }
 
         if (currentItem.getTypeOf().equals("passenger")) {
             holder.textViewDes.setText(context.getResources().getString(R.string.passenger_notification).replace("%", currentItem.getUser().getFullName()));

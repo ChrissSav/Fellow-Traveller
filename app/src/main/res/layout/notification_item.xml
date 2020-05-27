@@ -35,8 +35,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/NotificationItem_profile_picture"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/null_icon"
             android:elevation="1dp"
@@ -60,7 +60,7 @@
             android:id="@+id/NotificationItem_textView_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="20dp"
             android:fontFamily="@font/firasans_light"
             android:text="5 minutes ago"
             android:textSize="12sp"
