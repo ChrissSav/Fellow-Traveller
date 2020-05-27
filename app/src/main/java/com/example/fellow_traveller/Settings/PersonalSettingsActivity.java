@@ -393,7 +393,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
         new FellowTravellerAPI(globalClass).updateUserUploadPhoto(uri, new StatusCallBack() {
             @Override
             public void onSuccess(String msg) {
-                globalClass.getCurrentUser().setPhone(uri);
+                globalClass.getCurrentUser().setPicture(uri);
                 SaveClass(globalClass.getCurrentUser());
             }
 
