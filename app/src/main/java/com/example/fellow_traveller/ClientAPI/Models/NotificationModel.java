@@ -12,7 +12,7 @@ public class NotificationModel implements Parcelable {
 
     private int id;
     private UserBaseModel user;
-    private TripModel trip;
+    private TripInvolvedModel trip;
     @SerializedName("has_read")
     private Boolean hasRead;
     private Long timestamp;
@@ -23,7 +23,7 @@ public class NotificationModel implements Parcelable {
     protected NotificationModel(Parcel in) {
         id = in.readInt();
         user = in.readParcelable(UserBaseModel.class.getClassLoader());
-        trip = in.readParcelable(TripModel.class.getClassLoader());
+        trip = in.readParcelable(TripInvolvedModel.class.getClassLoader());
         byte tmpHasRead = in.readByte();
         hasRead = tmpHasRead == 0 ? null : tmpHasRead == 1;
         if (in.readByte() == 0) {
@@ -46,14 +46,6 @@ public class NotificationModel implements Parcelable {
         }
     };
 
-    public String getTypeOf() {
-        return typeOf;
-    }
-
-    public void setTypeOf(String typeOf) {
-        this.typeOf = typeOf;
-    }
-
     public int getId() {
         return id;
     }
@@ -70,11 +62,11 @@ public class NotificationModel implements Parcelable {
         this.user = user;
     }
 
-    public TripModel getTrip() {
+    public TripInvolvedModel getTrip() {
         return trip;
     }
 
-    public void setTrip(TripModel trip) {
+    public void setTrip(TripInvolvedModel trip) {
         this.trip = trip;
     }
 
@@ -94,7 +86,13 @@ public class NotificationModel implements Parcelable {
         this.timestamp = timestamp;
     }
 
+    public String getTypeOf() {
+        return typeOf;
+    }
 
+    public void setTypeOf(String typeOf) {
+        this.typeOf = typeOf;
+    }
 
     public String getDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("d MMM yyyy");
@@ -107,6 +105,7 @@ public class NotificationModel implements Parcelable {
         Date date = new Date((long) timestamp * 1000);
         return dateFormat.format(date);
     }
+
 
     @Override
     public int describeContents() {
