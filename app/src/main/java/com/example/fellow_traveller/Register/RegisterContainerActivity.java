@@ -28,7 +28,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 
 import static com.example.fellow_traveller.Util.InputValidation.isValidEmail;
-import static com.example.fellow_traveller.Util.InputValidation.isValidPhone;
 
 public class RegisterContainerActivity extends AppCompatActivity {
 
@@ -38,7 +37,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private Fragment fra;
     //private RegisterStagePhoneFragment registerStagePhoneFragment = new RegisterStagePhoneFragment();
-    private RegisterStage1Fragmentd registerStage1Fragment = new RegisterStage1Fragmentd();
+    private RegisterStage1Fragment registerStage1Fragment = new RegisterStage1Fragment();
     private RegisterStage2Fragment registerStage2Fragment = new RegisterStage2Fragment();
     private RegisterStage3Fragment registerStage3Fragment = new RegisterStage3Fragment();
     private ProgressBar progressBar;
@@ -80,7 +79,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
                     progressBar.setProgress(num_num * registerStage3Fragment.getRank());
                     fra = registerStage3Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.RegisterActivity_frame_container, fra).commit();
-                    buttonNext.setText("Εγγραφή");
+                    buttonNext.setText("");
 
                 } else if (fra.toString().equals("RegisterStage3Fragment") && registerStage3Fragment.validateFragment()) {
                     newRegisterUser();
@@ -99,7 +98,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        buttonNext.setText("Επόμενο");
+        buttonNext.setText("");
         if (fra.toString().equals("RegisterStage3Fragment")) {
             progressBar.setProgress(num_num * registerStage2Fragment.getRank());
             fra = registerStage2Fragment;

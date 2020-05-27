@@ -50,30 +50,48 @@
             app:layout_constraintStart_toStartOf="@+id/fragment_user_register_stage2_choose_password_title_TextView"
             app:layout_constraintTop_toBottomOf="@+id/FragmentRegisterStage2_password_info" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/fragment_user_register_stage2_password_textInputLayout"
+        <EditText
+            android:id="@+id/FragmentRegisterStage2_password_edit_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:counterEnabled="true"
-            app:counterMaxLength="32"
-            app:hintAnimationEnabled="false"
-            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/fragment_user_register_stage2_choose_password_title_TextView"
             app:layout_constraintTop_toBottomOf="@+id/fragment_user_register_stage2_password_title_TextView"
-            app:passwordToggleEnabled="true"
-            app:startIconDrawable="@drawable/ic_lock">
+            style="@style/paragraph2"
+            android:singleLine="true"
+            android:layout_marginEnd="20dp"
+            android:hint="Κωδικός πρόσβασης"
+            android:background="@null"
+            android:maxLength="32"
+            android:inputType="textPassword"
+            android:layout_marginTop="10dp"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/inputStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:maxLength="32" />
+        <Button
+            android:id="@+id/FragmentRegisterStage2_password_erase_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/button_black_empty"
+            android:text="Εμφάνιση"
+            android:textSize="15sp"
+            app:layout_constraintTop_toTopOf="@id/FragmentRegisterStage2_password_edit_text"
+            app:layout_constraintBottom_toBottomOf="@id/FragmentRegisterStage2_password_edit_text"
+            app:layout_constraintEnd_toEndOf="@id/FragmentRegisterStage2_password_edit_text"
+            android:visibility="gone"/>
 
-        </com.google.android.material.textfield.TextInputLayout>
+        <View
+            android:id="@+id/FragmentRegisterStage1_password_underline"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            app:layout_constraintStart_toStartOf="@+id/FragmentRegisterStage2_password_edit_text"
+            app:layout_constraintEnd_toEndOf="@+id/FragmentRegisterStage2_password_edit_text"
+            app:layout_constraintTop_toBottomOf="@+id/FragmentRegisterStage2_password_edit_text"
+            android:background="@drawable/component_edit_text_line"
+            android:layout_marginTop="15dp"
+            android:focusable="true"
+            />
+
+
+
 
         <TextView
             android:id="@+id/RegisterStage2Fragment_textView6"
@@ -82,41 +100,59 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:text="@string/register_fragment_stage_2_confirm_password_input_field_title"
-            app:layout_constraintStart_toStartOf="@+id/fragment_user_register_stage2_choose_password_title_TextView"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_user_register_stage2_password_textInputLayout" />
+            app:layout_constraintStart_toStartOf="@+id/FragmentRegisterStage2_password_edit_text"
+            app:layout_constraintTop_toBottomOf="@+id/FragmentRegisterStage1_password_underline" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/fragment_user_register_stage2_confirmPassword_textInputLayout"
+        <EditText
+            android:id="@+id/FragmentRegisterStage2_password2_edit_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:counterEnabled="true"
-            app:counterMaxLength="32"
-            app:endIconMode="none"
-            app:hintAnimationEnabled="false"
-            app:hintEnabled="false"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_user_register_stage2_password_textInputLayout"
-            app:layout_constraintStart_toStartOf="@+id/fragment_user_register_stage2_password_textInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/fragment_user_register_stage2_choose_password_title_TextView"
             app:layout_constraintTop_toBottomOf="@+id/RegisterStage2Fragment_textView6"
-            app:passwordToggleEnabled="true"
-            app:startIconDrawable="@drawable/ic_lock">
+            style="@style/paragraph2"
+            android:singleLine="true"
+            android:layout_marginEnd="20dp"
+            android:hint="Επιβεβαίωση κωδικού πρόσβασης"
+            android:background="@null"
+            android:maxLength="32"
+            android:inputType="textPassword"
+            android:layout_marginTop="10dp"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/inputStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:maxLength="32" />
+        <Button
+            android:id="@+id/FragmentRegisterStage2_password2_erase_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/button_black_empty"
+            android:text="Εμφάνιση"
+            android:textSize="15sp"
+            app:layout_constraintTop_toTopOf="@id/FragmentRegisterStage2_password2_edit_text"
+            app:layout_constraintBottom_toBottomOf="@id/FragmentRegisterStage2_password2_edit_text"
+            app:layout_constraintEnd_toEndOf="@id/FragmentRegisterStage2_password2_edit_text"
+            android:visibility="gone"/>
 
-        </com.google.android.material.textfield.TextInputLayout>
+        <View
+            android:id="@+id/FragmentRegisterStage1_password2_underline"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            app:layout_constraintStart_toStartOf="@+id/FragmentRegisterStage2_password2_edit_text"
+            app:layout_constraintEnd_toEndOf="@+id/FragmentRegisterStage2_password2_edit_text"
+            app:layout_constraintTop_toBottomOf="@+id/FragmentRegisterStage2_password2_edit_text"
+            android:background="@drawable/component_edit_text_line"
+            android:layout_marginTop="15dp"
+            android:focusable="true"
+            />
+
+
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/fragment_user_register_stage2_password_complexity_requirements_textInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_user_register_stage2_confirmPassword_textInputLayout"
-            app:layout_constraintStart_toStartOf="@+id/fragment_user_register_stage2_confirmPassword_textInputLayout"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_user_register_stage2_confirmPassword_textInputLayout">
+            app:layout_constraintEnd_toEndOf="@+id/FragmentRegisterStage1_password2_underline"
+            app:layout_constraintStart_toStartOf="@+id/FragmentRegisterStage1_password2_underline"
+            app:layout_constraintTop_toBottomOf="@+id/FragmentRegisterStage1_password2_underline">
 
             <TextView
                 android:id="@+id/fragment_user_register_stage2_password_complexity_title_TextView"

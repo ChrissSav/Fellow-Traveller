@@ -52,12 +52,13 @@
             android:id="@+id/FragmentRegisterStage3_name_editText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="20dp"
             android:hint="Το όνομα σας"
             android:background="@null"
             style="@style/paragraph2"
             android:singleLine="true"
             android:maxLength="20"
+            android:inputType="textCapWords"
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/RegisterStage3Fragment_textView5"
@@ -82,8 +83,6 @@
             android:background="@drawable/component_edit_text_line"
             android:layout_marginTop="15dp"
             android:focusable="true"
-
-
             />
 
 
@@ -101,12 +100,13 @@
             android:id="@+id/FragmentRegisterStage3_surname_editText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="20dp"
             android:hint="Το επίθετο σας"
             android:layout_marginTop="10dp"
             android:background="@null"
             android:singleLine="true"
             android:maxLength="20"
+            android:inputType="textCapWords"
             style="@style/paragraph2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/RegisterStage3Fragment_textView5"
@@ -132,7 +132,6 @@
             android:background="@drawable/component_edit_text_line"
             android:layout_marginTop="15dp"
             android:focusable="true"
-
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

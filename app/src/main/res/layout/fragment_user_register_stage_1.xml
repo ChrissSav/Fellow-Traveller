@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Register.RegisterStage1Fragmentd">
+    tools:context=".Register.RegisterStage1Fragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,6 +29,18 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="15dp"/>
 
+        <TextView
+            android:id="@+id/RegisterStage1Fragment_info_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Εισάγεται μία έγκυρη διεύθυνση email για να είστε ενήμεροι και να μπορείτε να επαναφέρεται οποιαδήποτε στιγμή τον λογαριασμό σας"
+            style="@style/paragraph3"
+            app:layout_constraintStart_toStartOf="@id/RegisterStage1Fragment_textView4"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintTop_toBottomOf="@id/RegisterStage1Fragment_textView4"
+            android:layout_marginTop="15dp"/>
+
 
         <TextView
             android:id="@+id/RegisterStage1Fragment_textView5"
@@ -38,27 +50,46 @@
             android:text="@string/register_fragment_stage_1_email_input_field_title"
            style="@style/header5"
             app:layout_constraintStart_toStartOf="@+id/RegisterStage1Fragment_textView4"
-            app:layout_constraintTop_toBottomOf="@+id/RegisterStage1Fragment_textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/RegisterStage1Fragment_info_textView" />
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/RegisterStage1Fragment_textInputLayout_email"
+        <EditText
+            android:id="@+id/FragmentRegisterStage1_email_editText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            app:endIconMode="clear_text"
+            android:hint="example@email.com"
+            android:background="@null"
+            style="@style/paragraph2"
+            android:singleLine="true"
+            android:maxLength="30"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/RegisterStage1Fragment_textView4"
-            app:layout_constraintTop_toBottomOf="@+id/RegisterStage1Fragment_textView5">
+            app:layout_constraintTop_toBottomOf="@+id/RegisterStage1Fragment_textView5"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/RegisterStage1Fragment_editText_email"
-                style="@style/inputStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-               android:hint="example@email.com" />
-        </com.google.android.material.textfield.TextInputLayout>
+        <ImageButton
+            android:id="@+id/FragmentRegisterStage1_email_eraseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_close"
+            app:layout_constraintTop_toTopOf="@id/FragmentRegisterStage1_email_editText"
+            app:layout_constraintBottom_toBottomOf="@id/FragmentRegisterStage1_email_editText"
+            app:layout_constraintEnd_toEndOf="@id/FragmentRegisterStage1_email_editText"
+            android:visibility="gone"/>
+        <View
+            android:id="@+id/FragmentRegisterStage1_email_underline"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            app:layout_constraintStart_toStartOf="@+id/FragmentRegisterStage1_email_editText"
+            app:layout_constraintEnd_toEndOf="@+id/FragmentRegisterStage1_email_editText"
+            app:layout_constraintTop_toBottomOf="@+id/FragmentRegisterStage1_email_editText"
+            android:background="@drawable/component_edit_text_line"
+            android:layout_marginTop="15dp"
+            android:focusable="true"
+            />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
