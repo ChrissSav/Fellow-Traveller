@@ -1,6 +1,5 @@
 package com.example.fellow_traveller.Trips;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,21 +10,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.fellow_traveller.Chat.ConversationAdapter;
-import com.example.fellow_traveller.Chat.ConversationItem;
 import com.example.fellow_traveller.ClientAPI.Callbacks.SearchTripsCallback;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
-import com.example.fellow_traveller.SearchAndBook.FiltersActivity;
-import com.example.fellow_traveller.SearchAndBook.SearchResultsActivity;
-import com.google.firebase.database.DatabaseReference;
+import com.example.fellow_traveller.SearchAndBook.SearchDestinationsActivity;
 
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,11 +33,11 @@ public class SearchsTabLayout extends Fragment {
     private ActiveTripsAdapter mAdapterActive;
     private CompletedTripsAdapter mAdapterNotActive;
     private RecyclerView.LayoutManager mLayoutManagerActive, mLayoutManagerNotActive;
-    private ArrayList<TripModel> activeTrips = new ArrayList<>();
-    private ArrayList<TripModel> notActiveTrips = new ArrayList<>();
-    private TextView activeTripsTextview, notActiveTripsTextView;
-    private ImageView notFoundImage;
+    private ArrayList<TripModel> activeTripsList = new ArrayList<>();
+    private ArrayList<TripModel> completedTripsList = new ArrayList<>();
+    private TextView activeTripsTextview;
     private Button searchButton;
+    private ConstraintLayout activeTripsSectionLayout, noActiveTripsSectionLayout, completedTripsSectionLayout;
 
 
     public SearchsTabLayout() {
@@ -54,72 +50,78 @@ public class SearchsTabLayout extends Fragment {
         //myContext = container.getContext();
         globalClass = (GlobalClass) getActivity().getApplicationContext();
         activeTripsTextview = view.findViewById(R.id.fragment_trip_searchs_active_trips_textView);
-        notActiveTripsTextView = view.findViewById(R.id.fragment_trip_searchs_completed_label);
-        notFoundImage = view.findViewById(R.id.fragment_trip_searchs_image_not_found);
         searchButton = view.findViewById(R.id.fragment_trip_searchs_button);
+        activeTripsSectionLayout = view.findViewById(R.id.FragmentTrip_searchs_active_trips_section);
+        noActiveTripsSectionLayout = view.findViewById(R.id.FragmentTrip_searchs_no_trips_section);
+        completedTripsSectionLayout = view.findViewById(R.id.FragmentTrip_searchs_completed_trips_section);
 
 
         new FellowTravellerAPI(globalClass).getTripsAsPassenger( new SearchTripsCallback() {
             @Override
             public void onSuccess(ArrayList<TripModel> trips) {
 
+                //Check if users has any trips
                 if (trips.size() > 0) {
+                    //seperate them to active and completed
                     for(int i = 0; i < trips.size(); i++){
                         if(!isCompleted(trips.get(i)))
-                            activeTrips.add(trips.get(i));
+                            activeTripsList.add(trips.get(i));
                         else
-                            notActiveTrips.add(trips.get(i));
+                            completedTripsList.add(trips.get(i));
                     }
-                    if (activeTrips.size() > 0) {
+                    //check if user has active trips
+                    if (activeTripsList.size() > 0) {
                         mRecyclerViewActive = view.findViewById(R.id.fragment_trip_searchs_recycler_view);
                         mRecyclerViewActive.setHasFixedSize(true);
                         mLayoutManagerActive = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-                        mAdapterActive = new ActiveTripsAdapter(activeTrips);
+                        mAdapterActive = new ActiveTripsAdapter(activeTripsList);
                         mRecyclerViewActive.setLayoutManager(mLayoutManagerActive);
                         mRecyclerViewActive.setAdapter(mAdapterActive);
-                        activeTripsTextview.setVisibility(View.VISIBLE);
-                        notFoundImage.setVisibility(View.INVISIBLE);
-                        searchButton.setVisibility(View.INVISIBLE);
-                        mRecyclerViewActive.setVisibility(View.VISIBLE);
+                        noActiveTripsSectionLayout.setVisibility(View.GONE);
+                        activeTripsSectionLayout.setVisibility(View.VISIBLE);
                         mAdapterActive.setOnItemClickListener(new ActiveTripsAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(int position) {
                                 Intent mainIntent = new Intent(getActivity().getApplicationContext(), TripPageDriverActivity.class);
                                 mainIntent.putExtra("isCompleted", false);
                                 mainIntent.putExtra("isDriver", false);
-                                mainIntent.putExtra("trip", activeTrips.get(position));
+                                mainIntent.putExtra("trip", activeTripsList.get(position));
                                 startActivity(mainIntent);
                             }
                         });
-                        if (activeTrips.size() == 1)
-                            activeTripsTextview.setText("Έχετε " + String.valueOf(activeTrips.size()) + " ενεργό ταξίδι");
+                        if (activeTripsList.size() == 1)
+                            activeTripsTextview.setText("Έχετε " + String.valueOf(activeTripsList.size()) + " ενεργό ταξίδι");
                         else
-                            activeTripsTextview.setText("Έχετε " + String.valueOf(activeTrips.size()) + " ενεργά ταξίδια");
+                            activeTripsTextview.setText("Έχετε " + String.valueOf(activeTripsList.size()) + " ενεργά ταξίδια");
+                    }else{
+                        activeTripsSectionLayout.setVisibility(View.GONE);
+                        noActiveTripsSectionLayout.setVisibility(View.VISIBLE);
                     }
 
-
-                    if(notActiveTrips.size() > 0){
+                    //check if we have completed trips
+                    if(completedTripsList.size() > 0){
                         mRecyclerViewNotActive = view.findViewById(R.id.fragment_trip_searchs_completed_recycler_view);
                         mRecyclerViewNotActive.setHasFixedSize(true);
                         mLayoutManagerNotActive = new LinearLayoutManager(getActivity());
-                        mAdapterNotActive = new CompletedTripsAdapter(notActiveTrips);
+                        mAdapterNotActive = new CompletedTripsAdapter(completedTripsList);
                         mRecyclerViewNotActive.setLayoutManager(mLayoutManagerNotActive);
                         mRecyclerViewNotActive.setAdapter(mAdapterNotActive);
-//                        activeTripsTextview.setVisibility(View.VISIBLE);
-//                        notFoundImage.setVisibility(View.GONE);
-//                        searchButton.setVisibility(View.GONE);
-//                        mRecyclerViewActive.setVisibility(View.VISIBLE);
+                        completedTripsSectionLayout.setVisibility(View.VISIBLE);
+
                         mAdapterNotActive.setOnItemClickListener(new CompletedTripsAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(int position) {
                                 Intent mainIntent = new Intent(getActivity().getApplicationContext(), TripPageDriverActivity.class);
                                 mainIntent.putExtra("isCompleted", true);
                                 mainIntent.putExtra("isDriver", false);
-                                mainIntent.putExtra("trip",  notActiveTrips.get(position));
+                                mainIntent.putExtra("trip",  completedTripsList.get(position));
                                 startActivity(mainIntent);
                             }
                         });
 
+                    }
+                    else {
+                        completedTripsSectionLayout.setVisibility(View.GONE);
                     }
                 }
                 else
@@ -132,6 +134,14 @@ public class SearchsTabLayout extends Fragment {
             @Override
             public void onFailure(String errorMsg) {
 
+            }
+        });
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainIntent = new Intent(getActivity().getApplicationContext(), SearchDestinationsActivity.class);
+                startActivity(mainIntent);
             }
         });
 
