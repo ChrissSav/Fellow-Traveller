@@ -99,7 +99,7 @@ public class NotificationFragment extends Fragment {
         mAdapter.setOnItemClickListener(new NotificationAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(final int position) {
-                Toast.makeText(getActivity(), position + " " + notificationArrayList.get(position).getTypeOf(), Toast.LENGTH_SHORT).show();
+                //.makeText(getActivity(), position + " " + notificationArrayList.get(position).getTypeOf(), Toast.LENGTH_SHORT).show();
 
                 if (notificationArrayList.get(position).getTypeOf().equals("passenger")) {
 

@@ -3,12 +3,16 @@ package com.example.fellow_traveller.Reviews;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Html;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.StatusCallBack;
@@ -31,6 +35,7 @@ public class WriteReviewActivity extends AppCompatActivity {
     private GlobalClass globalClass;
     private TripModel trip;
     private UserBaseModel user;
+    private TextView textViewTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +49,15 @@ public class WriteReviewActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.write_review_simpleRatingBar);
         submitButton = findViewById(R.id.write_review_submit_button);
         commentSection = findViewById(R.id.write_review_et);
+        textViewTitle = findViewById(R.id.write_review_textView_title);
 
+        String tempTitle = getResources().getString(R.string.write_review_title);
+        tempTitle = tempTitle.replace("user", user.getFullName());
+        tempTitle = tempTitle.replace("from", trip.getDestFrom().getTitle());
+        tempTitle = tempTitle.replace("to", trip.getDestTo().getTitle());
+        tempTitle = tempTitle.replace("date", trip.getDate());
 
+        textViewTitle.setText(tempTitle);
         ratingBar.setOnRatingChangeListener(new BaseRatingBar.OnRatingChangeListener() {
             @Override
             public void onRatingChange(BaseRatingBar ratingBar, float rating, boolean fromUser) {
@@ -77,19 +89,20 @@ public class WriteReviewActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String status) {
                 Toast.makeText(WriteReviewActivity.this, "Η αξιολόγηση σας καταχωρήθηκε", Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             @Override
             public void onFailure(String errorMsg) {
-                if(errorMsg.equals("test")){
-                    Toast.makeText(WriteReviewActivity.this,getResources().getString(R.string.ERROR_REVIEW_CANT_REGISTER_THE_REVIEW), Toast.LENGTH_SHORT).show();
+                if (errorMsg.equals("test")) {
+                    Toast.makeText(WriteReviewActivity.this, getResources().getString(R.string.ERROR_REVIEW_CANT_REGISTER_THE_REVIEW), Toast.LENGTH_SHORT).show();
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             finish();
                         }
                     }, 1500);
-                }else{
+                } else {
                     Toast.makeText(WriteReviewActivity.this, "Κάτι, πήγε στραβά με την καταχώρηση, οι ειδικευμένες ζέβρες μας θα το επιλύσουν αμέσως", Toast.LENGTH_SHORT).show();
                 }
             }
