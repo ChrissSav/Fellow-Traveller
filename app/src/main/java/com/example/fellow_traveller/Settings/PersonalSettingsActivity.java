@@ -79,7 +79,6 @@ public class PersonalSettingsActivity extends AppCompatActivity {
         profilePicture = findViewById(R.id.ActivityProfile_user_image);
         imageButtonClose = findViewById(R.id.PersonalSettingsActivity_button_close);
         imageButtonUpdate = findViewById(R.id.PersonalSettingsActivity_button_update);
-        editImageView = findViewById(R.id.PersonalSettingsActivity_edit_imageview);
         imageProgressBar = findViewById(R.id.ActivityPersonalSettings_progress_bar);
 
 
@@ -115,6 +114,8 @@ public class PersonalSettingsActivity extends AppCompatActivity {
                 if (namesValidation() && phoneValidation()) {
                     updateUser(firstNameEditText.getText().toString(), lastNameEditText.getText().toString(),
                             aboutMeEditText.getText().toString(), phoneNumberEditText.getText().toString());
+
+                    updateUserInfoOnFirebase(firstNameEditText.getText().toString(), lastNameEditText.getText().toString());
                 }
             }
         });
@@ -182,7 +183,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
 
                 //Picasso.load(user.getPicture()).into(profilePicture);
                 //TODO we dont need to call the API to get the users, put extra from the account and have the text watchers on create
-                textWatchers();
+
             }
 
             @Override
@@ -200,7 +201,6 @@ public class PersonalSettingsActivity extends AppCompatActivity {
             public void onSuccess(UserAuthModel user) {
                 Objects.requireNonNull(user).setSessionId(globalClass.getCurrentUser().getSessionId());
                 globalClass.setCurrentUser(Objects.requireNonNull(user));
-                updateUserInfoOnFirebase(firstName, lastName, newImage);
                 DeleteSharedPreferences();
                 SaveClass(Objects.requireNonNull(user));
                 finish();
@@ -213,16 +213,25 @@ public class PersonalSettingsActivity extends AppCompatActivity {
         });
     }
 
-    private void updateUserInfoOnFirebase(String firstName, String lastName, String image) {
+    private void updateUserInfoOnFirebase(String firstName, String lastName) {
         updateUserInfo= FirebaseDatabase.getInstance().getReference().child("Users").child(String.valueOf(globalClass.getCurrentUser().getId()));
 
-        HashMap<String, String> userHashMap = new HashMap<>();
+        HashMap<String, Object> userHashMap = new HashMap<>();
 
-        userHashMap.put("image",  image);
         userHashMap.put("name",  firstName);
         userHashMap.put("surname",  lastName);
 
-        updateUserInfo.setValue(userHashMap);
+        updateUserInfo.updateChildren(userHashMap);
+    }
+    private void updateUserImageOnFirebase(String image){
+        updateUserInfo = FirebaseDatabase.getInstance().getReference().child("Users").child(String.valueOf(globalClass.getCurrentUser().getId()));
+
+
+        HashMap<String, Object> userHashMap = new HashMap<>();
+
+        userHashMap.put("image",  image);
+
+        updateUserInfo.updateChildren(userHashMap);
     }
 
 
@@ -242,97 +251,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
         settings.edit().clear().commit();
     }
 
-    public void textWatchers(){
-        firstNameEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if(!editable.equals(userAuth.getName())) {
-                    editImageView.setVisibility(View.INVISIBLE);
-                    imageButtonUpdate.setVisibility(View.VISIBLE);
-                }else{
-                    imageButtonUpdate.setVisibility(View.INVISIBLE);
-                    editImageView.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-        lastNameEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if(!editable.equals(userAuth.getSurname())) {
-                    editImageView.setVisibility(View.INVISIBLE);
-                    imageButtonUpdate.setVisibility(View.VISIBLE);
-                }else{
-                    imageButtonUpdate.setVisibility(View.INVISIBLE);
-                    editImageView.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-        aboutMeEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if(!editable.equals(userAuth.getAboutMe())) {
-                    editImageView.setVisibility(View.INVISIBLE);
-                    imageButtonUpdate.setVisibility(View.VISIBLE);
-                }else {
-                    imageButtonUpdate.setVisibility(View.INVISIBLE);
-                    editImageView.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-        phoneNumberEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if(!editable.equals(userAuth.getPhone())) {
-                    editImageView.setVisibility(View.INVISIBLE);
-                    imageButtonUpdate.setVisibility(View.VISIBLE);
-                }else{
-                    imageButtonUpdate.setVisibility(View.INVISIBLE);
-                    editImageView.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-    }
 
     //Get the extension of the image
     private String getFileExtension(Uri uri){
@@ -358,6 +277,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
                             Log.i("ImageInside", uri.toString());
                             loadImageToImageView();
                             tempImagefile.delete();
+                            updateUserImageOnFirebase(uri.toString());
                             updateUserPicture(uri.toString());
                             Toast.makeText(PersonalSettingsActivity.this, "Η φωτογραφία ανέβηκε επιτυχώς", Toast.LENGTH_SHORT).show();
                         }
