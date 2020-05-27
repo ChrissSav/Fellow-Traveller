@@ -31,6 +31,7 @@ import com.example.fellow_traveller.ClientAPI.Models.SearchDestinationsModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripInvolvedModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
+import com.example.fellow_traveller.ClientAPI.Models.UpdateCarModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserChangePasswordModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserInfoModel;
@@ -323,6 +324,33 @@ public class FellowTravellerAPI {
                     switch (errorResponseModel.getDetail().getStatusCode()) {
                         case 300:
                             carRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_PLATE__ALREADY_EXISTS));
+                            break;
+                        default:
+                            carRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                            break;
+                    }
+                    return;
+                }
+                carRegisterCallBack.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<CarModel> call, Throwable t) {
+                carRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            }
+        });
+    }
+
+
+    public static void updateUserCar(UpdateCarModel car, final CarRegisterCallBack carRegisterCallBack) {
+        retrofitAPIEndpoints.updateCar(car).enqueue(new Callback<CarModel>() {
+            @Override
+            public void onResponse(Call<CarModel> call, Response<CarModel> response) {
+                if (!response.isSuccessful()) {
+                    ErrorResponseModel errorResponseModel = getModelFromResponseErrorBody(response);
+                    switch (errorResponseModel.getDetail().getStatusCode()) {
+                        case 301:
+                            carRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_CAR_NOT_BELONG_TO_USER));
                             break;
                         default:
                             carRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));

@@ -13,6 +13,7 @@ import com.example.fellow_traveller.ClientAPI.Models.SearchDestinationsModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripInvolvedModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
+import com.example.fellow_traveller.ClientAPI.Models.UpdateCarModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserAuthModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserChangePasswordModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserInfoModel;
@@ -144,9 +145,14 @@ public interface RetrofitAPIEndpoints {
     @GET("/cars")
     Call<ArrayList<CarModel>> userCars();
 
-    @DELETE("cars/{car_id}")
+    @DELETE("/cars/{car_id}")
     Call<StatusHandleModel> deleteUserCar(
             @Path("car_id") int car_id
+    );
+
+    @PUT("/cars")
+    Call<CarModel> updateCar(
+            @Body UpdateCarModel car
     );
 
 

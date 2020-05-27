@@ -11,12 +11,15 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarDeleteCallBack;
+import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.CarModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
+import com.example.fellow_traveller.ClientAPI.Models.UpdateCarModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.google.android.material.snackbar.Snackbar;
@@ -29,6 +32,7 @@ public class EditCarSettingsActivity extends AppCompatActivity {
     private GlobalClass globalClass;
     private CarModel carModel;
     private ConstraintLayout constraintLayout;
+    private ImageButton imageButtonBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,7 @@ public class EditCarSettingsActivity extends AppCompatActivity {
 
         carModel = getIntent().getParcelableExtra("car");
         constraintLayout = findViewById(R.id.AddCarSettingsActivity_ConstraintLayout);
-
+        imageButtonBack = findViewById(R.id.close_button_add_car_settings);
         editButton = findViewById(R.id.EditCarSettingsActivity_button_add);
         deleteButton = findViewById(R.id.EditCarSettings_delete_button);
         EditTextCarBrand = findViewById(R.id.EditCarSettings_car_et);
@@ -49,12 +53,32 @@ public class EditCarSettingsActivity extends AppCompatActivity {
 
         fillFields(carModel);
 
-
+        imageButtonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (CheckBrand() && CheckModel() && CheckPlate() && CheckColor()) {
-                    Toast.makeText(EditCarSettingsActivity.this, "Επιτυχής επεξεργασία.", Toast.LENGTH_SHORT).show();
+                    UpdateCarModel updateCarModel = new UpdateCarModel(carModel.getId(),EditTextCarBrand.getText().toString(),
+                            EditTextCarModel.getText().toString(),EditTextCarColor.getText().toString());
+                    new FellowTravellerAPI(globalClass).updateUserCar(updateCarModel, new CarRegisterCallBack() {
+
+                        @Override
+                        public void onSuccess(CarModel car) {
+                            Toast.makeText(EditCarSettingsActivity.this, "Επιτυχής επεξεργασία", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+
+                        @Override
+                        public void onFailure(String errorMsg) {
+                            Toast.makeText(EditCarSettingsActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
                 }
 
             }
