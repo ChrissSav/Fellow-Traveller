@@ -188,7 +188,7 @@ public class PersonalSettingsActivity extends AppCompatActivity {
 
 
     public void updateUser(final String firstName, final String lastName, String aboutMe, String phoneNumber) {
-        UserUpdateModel user = new UserUpdateModel(firstName, lastName, newImage, aboutMe, phoneNumber);
+        UserUpdateModel user = new UserUpdateModel(firstName, lastName,aboutMe, phoneNumber);
         new FellowTravellerAPI(globalClass).updateUserInfo(user, new UserAuthCallback() {
             @Override
             public void onSuccess(UserAuthModel user) {
