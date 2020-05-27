@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fellow_traveller.ClientAPI.Models.TripInvolvedModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.SearchAndBook.SearchResultsAdapter;
@@ -16,10 +17,10 @@ import com.example.fellow_traveller.SearchAndBook.SearchResultsAdapter;
 import java.util.ArrayList;
 
 public class CompletedTripsAdapter extends RecyclerView.Adapter<CompletedTripsAdapter.CompletedTripsViewHolder> {
-    private ArrayList<TripModel> completedTripsList;
+    private ArrayList<TripInvolvedModel> completedTripsList;
     private CompletedTripsAdapter.OnItemClickListener mListener;
 
-    public CompletedTripsAdapter(ArrayList<TripModel> tripsList) {
+    public CompletedTripsAdapter(ArrayList<TripInvolvedModel> tripsList) {
         completedTripsList = tripsList;
 
     }
@@ -38,7 +39,7 @@ public class CompletedTripsAdapter extends RecyclerView.Adapter<CompletedTripsAd
 
     @Override
     public void onBindViewHolder(@NonNull CompletedTripsViewHolder holder, int position) {
-        TripModel currentItem = completedTripsList.get(position);
+        TripInvolvedModel currentItem = completedTripsList.get(position);
 
         holder.startDate.setText(currentItem.getDestFrom().getTitle());
         holder.endDate.setText(currentItem.getDestTo().getTitle());

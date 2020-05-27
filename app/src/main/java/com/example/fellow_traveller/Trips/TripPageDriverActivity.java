@@ -17,33 +17,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.fellow_traveller.ClientAPI.Models.DestinationModel;
 import com.example.fellow_traveller.ClientAPI.Models.PassengerModel;
-import com.example.fellow_traveller.ClientAPI.Models.TripModel;
+import com.example.fellow_traveller.ClientAPI.Models.TripInvolvedModel;
 import com.example.fellow_traveller.MapDirections.MapsRouteActivity;
 import com.example.fellow_traveller.ProfileActivity;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.SearchAndBook.PassengerImageAdapter;
-import com.example.fellow_traveller.SearchAndBook.SearchDestinationsActivity;
-import com.example.fellow_traveller.SearchAndBook.SearchDetailsActivity;
-import com.example.fellow_traveller.SearchAndBook.SearchLocationActivity;
 import com.example.fellow_traveller.SearchAndBook.SearchPassengersActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class TripPageDriverActivity extends AppCompatActivity implements OnMapReadyCallback {
     private ImageView QRImage;
@@ -52,11 +44,12 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
     private ImageButton imageButtonBack;
     private final int demensionPixels = 700;
     private boolean isCompleted, isDriver;
-    private TripModel tripModel;
+    private TripInvolvedModel tripInvolvedModel;
     private TextView textViewCreator, textViewRating, textViewReviews, textViewDestFrom, textViewDestTo, textViewDate,
             textViewTime, textViewSeats, textViewBags, textViewPets, textViewCar, textViewMsg, textViewPrice, textViewColor, textViewPlate;
     private CircleImageView creatorUserImage;
     private Button passengersButton, showOnMapButton;
+    private TextView pickUpPointTextView;
     private ConstraintLayout userLayout;
     private RecyclerView mRecyclerView;
     private PassengerImageAdapter mAdapter;
@@ -97,48 +90,51 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
         userLayout = findViewById(R.id.ActivityTripPageDriver_user_section);
         showOnMapButton = findViewById(R.id.ActivityTripPageDriver_show_map_button);
         imageButtonBack = findViewById(R.id.ActivityTripPageDriver_back_button);
+        pickUpPointTextView = findViewById(R.id.ActivityTripPageDriver_pick_up_point_info);
 
         createQR();
 
         Bundle bundle = getIntent().getExtras();
         isCompleted = bundle.getBoolean("isCompleted");
         isDriver = bundle.getBoolean("isDriver");
-        tripModel = getIntent().getParcelableExtra("trip");
+        tripInvolvedModel = getIntent().getParcelableExtra("trip");
 
         //Get the Map
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.ActivityTripPageDriver_map_fragment);
         mapFragment.getMapAsync(this);
 
-        pickUpPoint = new MarkerOptions().position(new LatLng(tripModel.getDestFrom().getLatitude(), tripModel.getDestFrom().getLongitude())).title(tripModel.getDestFrom().getTitle());
-        zoomToThePoint = new LatLng(tripModel.getDestFrom().getLatitude(),tripModel.getDestFrom().getLongitude());
+        pickUpPoint = new MarkerOptions().position(new LatLng(tripInvolvedModel.getDestFrom().getLatitude(), tripInvolvedModel.getDestFrom().getLongitude())).title(tripInvolvedModel.getDestFrom().getTitle());
+        zoomToThePoint = new LatLng(tripInvolvedModel.getDestFrom().getLatitude(), tripInvolvedModel.getDestFrom().getLongitude());
 
         //Set the values
-        textViewDestFrom.setText(tripModel.getDestFrom().getTitle());
-        textViewDestTo.setText(tripModel.getDestTo().getTitle());
-        textViewDate.setText(tripModel.getDate());
-        textViewTime.setText(tripModel.getTime());
-        textViewSeats.setText(tripModel.getSeatStatus());
-        textViewBags.setText(tripModel.getBagsStatus());
-        textViewPets.setText(tripModel.getPetString());
-        textViewCar.setText(tripModel.getCar().getBrand());
-        textViewColor.setText(tripModel.getCar().getColor());
-        textViewPlate.setText(tripModel.getCar().getPlate());
-        textViewCreator.setText(tripModel.getCreatorUser().getFullName());
-        textViewRating.setText(String.valueOf(tripModel.getCreatorUser().getRate()));
-        textViewReviews.setText(String.valueOf(tripModel.getCreatorUser().getReviews()));
-        if(tripModel.getCreatorUser().getPicture() != null)
-            Picasso.get().load(tripModel.getCreatorUser().getPicture()).into(creatorUserImage);
+        if(tripInvolvedModel.getCreatorUser().getPicture() != null)
+            Picasso.get().load(tripInvolvedModel.getCreatorUser().getPicture()).into(creatorUserImage);
+
+        textViewDestFrom.setText(tripInvolvedModel.getDestFrom().getTitle());
+        textViewDestTo.setText(tripInvolvedModel.getDestTo().getTitle());
+        textViewDate.setText(tripInvolvedModel.getDate());
+        textViewTime.setText(tripInvolvedModel.getTime());
+        textViewSeats.setText(tripInvolvedModel.getSeatStatus());
+        textViewBags.setText(tripInvolvedModel.getBagsStatus());
+        textViewPets.setText(tripInvolvedModel.getPetString());
+        textViewCar.setText(tripInvolvedModel.getCar().getBrand());
+        textViewColor.setText(tripInvolvedModel.getCar().getColor());
+        textViewPlate.setText(tripInvolvedModel.getCar().getPlate());
+        textViewCreator.setText(tripInvolvedModel.getCreatorUser().getFullName());
+        textViewRating.setText(String.valueOf(tripInvolvedModel.getCreatorUser().getRate()));
+        textViewReviews.setText(String.valueOf(tripInvolvedModel.getCreatorUser().getReviews()));
+        pickUpPointTextView.setText(tripInvolvedModel.getPickUpPoint().getTitle());
 
 
 
 
 
-        if (tripModel.getMessage().equals(""))
+        if (tripInvolvedModel.getMessage().equals(""))
             textViewMsg.setText("Ο οδηγός δεν έχει αναφέρει κάποιο συγκεκριμένο μήνυμα");
         else
-            textViewMsg.setText(tripModel.getMessage());
+            textViewMsg.setText(tripInvolvedModel.getMessage());
 
-        passengersList = tripModel.getPassengers();
+        passengersList = tripInvolvedModel.getPassengers();
 
         //Build the passengers recycler view
         mRecyclerView = findViewById(R.id.ActivityTripPageDriver_passenger_recycler_view);
@@ -174,7 +170,7 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
             public void onClick(View view) {
                 Intent mainIntent = new Intent(TripPageDriverActivity.this, SearchPassengersActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putParcelableArrayList("tripPassengers", tripModel.getPassengers());
+                bundle.putParcelableArrayList("tripPassengers", tripInvolvedModel.getPassengers());
                 mainIntent.putExtras(bundle);
                 //mainIntent.putExtra("tripPassengers",  tripModel.getPassengers());
                 startActivity(mainIntent);
@@ -192,7 +188,7 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
             @Override
             public void onClick(View view) {
                 Intent mainIntent = new Intent(TripPageDriverActivity.this, ProfileActivity.class);
-                mainIntent.putExtra("ThisUser", tripModel.getCreatorUser());
+                mainIntent.putExtra("ThisUser", tripInvolvedModel.getCreatorUser());
                 startActivity(mainIntent);
             }
         });
@@ -200,7 +196,7 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
             @Override
             public void onClick(View view) {
                 Intent mainIntent = new Intent(TripPageDriverActivity.this, MapsRouteActivity.class);
-                mainIntent.putExtra("trip", tripModel);
+                mainIntent.putExtra("trip", tripInvolvedModel);
                 startActivity(mainIntent);
             }
         });
@@ -258,7 +254,7 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
     public void checkResultFromQR(String result){
 
         //Current time must be between one hour +- of the trip's departure time
-        if((tripModel.getTimestamp() > (System.currentTimeMillis()/1000) - oneHour) && (tripModel.getTimestamp() < (System.currentTimeMillis()/1000) + oneHour)){
+        if((tripInvolvedModel.getTimestamp() > (System.currentTimeMillis()/1000) - oneHour) && (tripInvolvedModel.getTimestamp() < (System.currentTimeMillis()/1000) + oneHour)){
             if(result.equals("ft764535"))
                 Toast.makeText(this, "Ευχαριστούμε πολύ... Καλό σας ταξίδι!", Toast.LENGTH_SHORT).show();
             else

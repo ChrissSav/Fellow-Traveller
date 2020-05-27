@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.fellow_traveller.ClientAPI.Models.TripInvolvedModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,7 +32,7 @@ public class MapsRouteActivity extends AppCompatActivity implements OnMapReadyCa
     private ImageButton closeButton;
     private MarkerOptions place1, place2;
     private Polyline currentPolyline;
-    private TripModel tripModel;
+    private TripInvolvedModel tripModel;
     private LatLng startDestinationToZoomOnMap;
     private Context myContext;
 
