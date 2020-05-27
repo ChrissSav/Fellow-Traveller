@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.fellow_traveller.ClientAPI.Models.DestinationModel;
 import com.example.fellow_traveller.Models.GlobalClass;
@@ -31,6 +32,8 @@ import com.example.fellow_traveller.PlacesAPI.Models.PredictionsModel;
 import com.example.fellow_traveller.PlacesAPI.PlaceAdapter;
 import com.example.fellow_traveller.PlacesAPI.PlaceApiConnection;
 import com.example.fellow_traveller.R;
+import com.example.fellow_traveller.Trips.ScanQRCodeActivity;
+import com.example.fellow_traveller.Trips.TripPageDriverActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -53,6 +56,7 @@ public class SearchLocationActivity extends AppCompatActivity implements View.On
     private ConstraintLayout suggestSectionLayout;
     private Button yourLocationButton, athensButton, thessalonikiButton, ioanninaButton, patraButton, larissaButton;
     private FusedLocationProviderClient fusedLocationProviderClient;
+    private static final int MY_FINE_LOCATION_REQUEST_CODE = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,7 +182,7 @@ public class SearchLocationActivity extends AppCompatActivity implements View.On
                     getMyLocation();
                 } else {
                     //When permission denied
-                    ActivityCompat.requestPermissions(SearchLocationActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+                    ActivityCompat.requestPermissions(SearchLocationActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_FINE_LOCATION_REQUEST_CODE);
                 }
                 break;
 
@@ -256,6 +260,16 @@ public class SearchLocationActivity extends AppCompatActivity implements View.On
 
             }
         });
+    }
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_FINE_LOCATION_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getMyLocation();
+            } else {
+                Toast.makeText(this, "Δεν έχετε δώσει άδεια στην εφαρμογή για να χρησιμοποιήσει την τοποθεσία σας. Ελέξτε τις άδειες σας στις ρυθμίσεις για να συνεχίσετε", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
 

@@ -39,7 +39,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.squareup.picasso.Picasso;
-import com.tbruyelle.rxpermissions2.RxPermissions;
+
 
 import java.util.ArrayList;
 
@@ -211,11 +211,11 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
             @Override
             public void onClick(View view) {
                 Intent mainIntent = new Intent(TripPageDriverActivity.this, ScanQRCodeActivity.class);
-                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED)
-                    Toast.makeText(TripPageDriverActivity.this, "Δεν έχει άδεια", Toast.LENGTH_SHORT).show();
-                ActivityCompat.requestPermissions(TripPageDriverActivity.this, new String[] {Manifest.permission.CAMERA}, 100);
-
-                //startActivityForResult(mainIntent, 1);
+                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                    startActivityForResult(mainIntent, 1);
+                } else {
+                    ActivityCompat.requestPermissions(TripPageDriverActivity.this, new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+                }
             }
         });
 
@@ -286,9 +286,10 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == MY_CAMERA_REQUEST_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+                Intent mainIntent = new Intent(TripPageDriverActivity.this, ScanQRCodeActivity.class);
+                startActivityForResult(mainIntent, 1);
             } else {
-                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Δεν έχετε δώσει άδεια στην εφαρμογή για να χρησιμοποιήσει την κάμερα σας. Ελέξτε τις άδειες σας στις ρυθμίσεις για να συνεχίσετε", Toast.LENGTH_LONG).show();
             }
         }
     }
