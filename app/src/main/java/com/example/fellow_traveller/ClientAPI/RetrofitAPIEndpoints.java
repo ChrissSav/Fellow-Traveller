@@ -156,8 +156,7 @@ public interface RetrofitAPIEndpoints {
     );
 
 
-    @GET(".")
-    Call<StatusHandleModel> Test();
+
 
     //Notifications
 

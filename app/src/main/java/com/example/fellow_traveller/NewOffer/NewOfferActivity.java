@@ -318,7 +318,7 @@ public class NewOfferActivity extends AppCompatActivity {
         new PlaceApiConnection(globalClass, true).getLatLonFromPlace(placeIdPickUp, new PlaceApiResultCallBack() {
             @Override
             public void onSuccess(ResultModel resultModel) {
-                destinationModelPickUP = new DestinationModel(resultModel.getPlaceΙd(), newOfferStage1Fragment.getDestTo()
+                destinationModelPickUP = new DestinationModel(resultModel.getPlaceΙd(), newOfferStagePickUpFragment.getDestPickUp()
                         , resultModel.getGeometry().getLocation().getLatitude(), resultModel.getGeometry().getLocation().getLongitude());
                 detailPickUP = true;
 

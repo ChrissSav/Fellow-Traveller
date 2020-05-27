@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.fellow_traveller.ClientAPI.Callbacks.StatusCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.CreateReviewModel;
+import com.example.fellow_traveller.ClientAPI.Models.TripInvolvedModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.ClientAPI.Models.UserBaseModel;
 import com.example.fellow_traveller.Models.GlobalClass;
@@ -33,7 +34,7 @@ public class WriteReviewActivity extends AppCompatActivity {
     private Button submitButton;
     private EditText commentSection;
     private GlobalClass globalClass;
-    private TripModel trip;
+    private TripInvolvedModel trip;
     private UserBaseModel user;
     private TextView textViewTitle;
 

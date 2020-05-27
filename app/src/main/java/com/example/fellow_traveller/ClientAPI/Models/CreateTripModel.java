@@ -48,4 +48,84 @@ public class CreateTripModel {
         this.price = price;
         this.carId = carId;
     }
+
+    public DestinationModel getDestFrom() {
+        return destFrom;
+    }
+
+    public void setDestFrom(DestinationModel destFrom) {
+        this.destFrom = destFrom;
+    }
+
+    public DestinationModel getDestTo() {
+        return destTo;
+    }
+
+    public void setDestTo(DestinationModel destTo) {
+        this.destTo = destTo;
+    }
+
+    public DestinationModel getPickUP() {
+        return PickUP;
+    }
+
+    public void setPickUP(DestinationModel pickUP) {
+        PickUP = pickUP;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public Boolean getHasPet() {
+        return hasPet;
+    }
+
+    public void setHasPet(Boolean hasPet) {
+        this.hasPet = hasPet;
+    }
+
+    public Integer getMaxSeats() {
+        return maxSeats;
+    }
+
+    public void setMaxSeats(Integer maxSeats) {
+        this.maxSeats = maxSeats;
+    }
+
+    public Integer getMaxBags() {
+        return maxBags;
+    }
+
+    public void setMaxBags(Integer maxBags) {
+        this.maxBags = maxBags;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+    public Integer getCarId() {
+        return carId;
+    }
+
+    public void setCarId(Integer carId) {
+        this.carId = carId;
+    }
 }
