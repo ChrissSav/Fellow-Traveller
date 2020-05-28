@@ -1,11 +1,13 @@
 package com.example.fellow_traveller.SearchAndBook;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.fellow_traveller.ClientAPI.Models.PassengerModel;
+import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.squareup.picasso.Picasso;
 
@@ -18,6 +20,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class PassengerImageAdapter extends RecyclerView.Adapter<PassengerImageAdapter.PassengerImageViewHolder>{
     private ArrayList<PassengerModel> passengersList;
     private OnItemClickListener mListener;
+    private Context myContext;
+    private GlobalClass globalClass;
+    private int myId;
 
     public interface OnItemClickListener{
         void onItemClick(int position);
@@ -55,8 +60,9 @@ public class PassengerImageAdapter extends RecyclerView.Adapter<PassengerImageAd
 
         }
     }
-    public PassengerImageAdapter(ArrayList<PassengerModel> aPassengerList){
+    public PassengerImageAdapter(ArrayList<PassengerModel> aPassengerList, Context context){
         passengersList = aPassengerList;
+        myContext = context;
 
     }
 
@@ -71,8 +77,19 @@ public class PassengerImageAdapter extends RecyclerView.Adapter<PassengerImageAd
     @Override
     public void onBindViewHolder(@NonNull PassengerImageViewHolder holder, int position) {
         PassengerModel currentItem = passengersList.get(position);
+        currentItem.getUser().getId();
 
-        holder.userName.setText(currentItem.getUser().getFirstName());
+        //Get user's id
+        int userId = currentItem.getUser().getId();
+        //Get myId from Global Class
+        globalClass = (GlobalClass) myContext.getApplicationContext();
+        myId = globalClass.getCurrentUser().getId();
+
+        if(myId == userId)
+            holder.userName.setText("Εσείς");
+        else
+            holder.userName.setText(currentItem.getUser().getFirstName());
+
         if(currentItem.getUser().getPicture() != null)
             Picasso.get().load(currentItem.getUser().getPicture()).into(holder.userImage);
 

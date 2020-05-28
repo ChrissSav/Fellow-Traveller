@@ -132,7 +132,7 @@ public class SearchDetailsActivity extends AppCompatActivity implements OnMapRea
 
         mRecyclerView = findViewById(R.id.ActivitySearchDetails_passenger_recycler_view);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        mAdapter = new PassengerImageAdapter(passengersList);
+        mAdapter = new PassengerImageAdapter(passengersList, this.getApplicationContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);
