@@ -38,6 +38,8 @@
     <string name="ERROR_TRIP_NOT_AVAILABLE_LUGGAGE">Δεν είναι ο διαθέσιμος χώρος αποσκευών που ζητήσατε.</string>
     <string name="ERROR_TRIP_CHECK_PET_ACCEPTS">Ελέγξτε αν το ταξίδι δέχεται κατοικίδια.</string>
     <string name="ERROR_TRIP_TIMESTAMP">Η αναχωρηση του ταξιδιού πρέπει να είναι τουλάχιστον 15 λεπτά αργότερα.</string>
+    <string name="ERROR_TRIP_PICKUP_POINT">Το σημείο της συνάντησης πρέπει να είναι σε ακτίνα 5 χμλ με βάση την τοποθέσια αναχώρησης.</string>
+
 
     <string name="ERROR_REVIEW_YOURSELF">Δεν μπορείτε να αξιολογήσετε τον εαυτό σας</string>
     <string name="ERROR_REVIEW_USER_TARGET_NOT_FOUND">Ο χρήστη δεν βρέθηκε.</string>

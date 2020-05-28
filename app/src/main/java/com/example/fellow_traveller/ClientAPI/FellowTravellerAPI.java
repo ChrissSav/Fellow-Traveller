@@ -431,6 +431,9 @@ public class FellowTravellerAPI {
                         case 409:
                             tripRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_TRIP_TIMESTAMP));
                             break;
+                        case 410:
+                            tripRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_TRIP_PICKUP_POINT));
+                            break;
                         default:
                             tripRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
                             break;
