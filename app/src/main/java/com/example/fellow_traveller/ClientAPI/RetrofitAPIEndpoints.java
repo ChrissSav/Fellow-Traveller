@@ -113,7 +113,7 @@ public interface RetrofitAPIEndpoints {
     );
 
     @GET("/trips/search")
-    Call<ArrayList<TripModel>> getTripsTest(
+    Call<ArrayList<TripInvolvedModel>> getTripsTest(
             @Query("latitude_from") float latitudeFrom,
             @Query("longitude_from") float longitudeFrom,
             @Query("latitude_to") float latitudeTo,

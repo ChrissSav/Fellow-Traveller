@@ -431,6 +431,9 @@ public class FellowTravellerAPI {
                         case 409:
                             tripRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_TRIP_TIMESTAMP));
                             break;
+                        case 410:
+                            tripRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_TRIP_PICKUP_POINT));
+                            break;
                         default:
                             tripRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
                             break;
@@ -472,22 +475,22 @@ public class FellowTravellerAPI {
     // TODO set this as default method to search trips
     public static void getTripsTest(float latitudeFrom, float longitudeFrom, float latitudeTo, float longitudeTo,
                                     Long timestampMin, Long timestampMax, Integer seatsMin, Integer seatsMax, Integer bagsMin, Integer bagsMax,
-                                    Integer priceMin, Integer priceMax, Boolean hasPet, Integer rangeTo, Integer rangeFrom, final SearchTripsCallback searchTripsCallback) {
+                                    Integer priceMin, Integer priceMax, Boolean hasPet, Integer rangeTo, Integer rangeFrom, final TripInvolvedCallBack tripInvolvedCallBack) {
         retrofitAPIEndpoints.getTripsTest(latitudeFrom, longitudeFrom, latitudeTo, longitudeTo, timestampMin, timestampMax, seatsMin,
                 seatsMax, bagsMin, bagsMax, priceMin,
-                priceMax, hasPet, rangeTo, rangeFrom).enqueue(new Callback<ArrayList<TripModel>>() {
+                priceMax, hasPet, rangeTo, rangeFrom).enqueue(new Callback<ArrayList<TripInvolvedModel>>() {
             @Override
-            public void onResponse(Call<ArrayList<TripModel>> call, Response<ArrayList<TripModel>> response) {
+            public void onResponse(Call<ArrayList<TripInvolvedModel>> call, Response<ArrayList<TripInvolvedModel>> response) {
                 if (!response.isSuccessful()) {
-                    searchTripsCallback.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                    tripInvolvedCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
                     return;
                 }
-                searchTripsCallback.onSuccess(response.body());
+                tripInvolvedCallBack.onSuccess(response.body());
             }
 
             @Override
-            public void onFailure(Call<ArrayList<TripModel>> call, Throwable t) {
-                searchTripsCallback.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            public void onFailure(Call<ArrayList<TripInvolvedModel>> call, Throwable t) {
+                tripInvolvedCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
             }
         });
     }

@@ -49,7 +49,7 @@ public class InputValidation {
     }
 
     public static boolean isValidPlate(String plate) {
-        Pattern regexPattern = Pattern.compile("^[Α-Ω]{3}-[0-9]{4}$");
+        Pattern regexPattern = Pattern.compile("^[ΑΒΕΖΗΙΚΜΝΟΡΤΥΧ|ABEZHIKMNOPRYX][ΑΒΕΖΗΙΚΜΝΟΡΤΥΧ|ABEZHIKMNOPRYX][ΑΒΕΖΗΙΚΜΝΟΡΤΥΧ|ABEZHIKMNOPRYX]-[0-9]{4}$");
         return regexPattern.matcher(plate).matches();
     }
 
