@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class WriteReviewActivity extends AppCompatActivity {
     private TripInvolvedModel trip;
     private UserBaseModel user;
     private TextView textViewTitle;
+    private ImageButton imageButtonExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,8 @@ public class WriteReviewActivity extends AppCompatActivity {
         submitButton = findViewById(R.id.write_review_submit_button);
         commentSection = findViewById(R.id.write_review_et);
         textViewTitle = findViewById(R.id.write_review_textView_title);
+        imageButtonExit = findViewById(R.id.write_review_close_button);
+
 
         String tempTitle = getResources().getString(R.string.write_review_title);
         tempTitle = tempTitle.replace("user", user.getFullName());
@@ -77,6 +81,13 @@ public class WriteReviewActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(WriteReviewActivity.this, "Failure", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        imageButtonExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
