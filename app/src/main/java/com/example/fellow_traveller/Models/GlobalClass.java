@@ -57,9 +57,9 @@ public class GlobalClass extends Application {
                 Request.Builder newRequest = request.newBuilder();
                 //Log.i("setSessionId", "getOkHttpClient if " + Objects.requireNonNull(currentUser.getSessionId()));
 
-                if (currentUser != null) {
-                  //  Log.i("setSessionId", "getOkHttpClient " + Objects.requireNonNull(currentUser.getSessionId()));
-                    newRequest.header("Cookie", Objects.requireNonNull(currentUser.getSessionId()));
+                if (currentUser.getSessionId() != null) {
+                    //  Log.i("setSessionId", "getOkHttpClient " + Objects.requireNonNull(currentUser.getSessionId()));
+                    newRequest.header("Cookie", currentUser.getSessionId());
                 }
                 return chain.proceed(newRequest.build());
             }

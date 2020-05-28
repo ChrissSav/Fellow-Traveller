@@ -131,10 +131,10 @@ public class LoginActivity extends AppCompatActivity {
                     // Create user object from model
 
 
-                    if (password.length() < 8) {
+                  /*  if (password.length() < 8) {
                         passwordEditText.setError(getResources().getString(R.string.ERROR_PASSWORD_COMPLEXITY_LENGTH));
                         return;
-                    }
+                    }*/
                     UserLoginModel user = new UserLoginModel(email, password);
 
                     // Authenticate user using ClientAPI
