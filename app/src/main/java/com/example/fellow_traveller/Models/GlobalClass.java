@@ -56,10 +56,14 @@ public class GlobalClass extends Application {
                 Request request = chain.request();
                 Request.Builder newRequest = request.newBuilder();
                 //Log.i("setSessionId", "getOkHttpClient if " + Objects.requireNonNull(currentUser.getSessionId()));
-
-                if (currentUser.getSessionId() != null) {
-                    //  Log.i("setSessionId", "getOkHttpClient " + Objects.requireNonNull(currentUser.getSessionId()));
+//                if (currentUser != null) {
+//                  //  Log.i("setSessionId", "getOkHttpClient " + Objects.requireNonNull(currentUser.getSessionId()));
+//                    newRequest.header("Cookie", Objects.requireNonNull(currentUser.getSessionId()));
+//                }
+                try {
                     newRequest.header("Cookie", currentUser.getSessionId());
+                } catch (NullPointerException e) {
+                    // do something other
                 }
                 return chain.proceed(newRequest.build());
             }
