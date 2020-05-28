@@ -43,7 +43,7 @@ public class PassengerImageAdapter extends RecyclerView.Adapter<PassengerImageAd
             super(itemView);
 
             userName = itemView.findViewById(R.id.passenger_image_item_username);
-           userImage = itemView.findViewById(R.id.passenger_image_item_image);
+            userImage = itemView.findViewById(R.id.passenger_image_item_image);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +77,7 @@ public class PassengerImageAdapter extends RecyclerView.Adapter<PassengerImageAd
     @Override
     public void onBindViewHolder(@NonNull PassengerImageViewHolder holder, int position) {
         PassengerModel currentItem = passengersList.get(position);
-        currentItem.getUser().getId();
+
 
         //Get user's id
         int userId = currentItem.getUser().getId();

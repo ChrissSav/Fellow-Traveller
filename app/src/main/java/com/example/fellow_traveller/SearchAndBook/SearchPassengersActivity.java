@@ -47,7 +47,7 @@ public class SearchPassengersActivity extends AppCompatActivity {
 
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new PassengersAdapter(passengersList);
+        mAdapter = new PassengersAdapter(passengersList, getApplicationContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new PassengersAdapter.OnItemClickListener() {

@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -39,6 +40,7 @@ public class SearchDetailsActivity extends AppCompatActivity implements OnMapRea
     private RecyclerView.LayoutManager mLayoutManager;
     private TextView textViewCreator, textViewRating, textViewReviews, textViewDestFrom, textViewDestTo, textViewDate,
             textViewTime, textViewSeats, textViewBags, textViewPets, textViewCar, textViewMsg, textViewPrice;
+    private TextView pickUpPointTextView;
     private CircleImageView creatorUserImage;
     private Button passengersButton, showOnMapButton;
     private TripInvolvedModel tripInvolvedModel;
@@ -74,6 +76,7 @@ public class SearchDetailsActivity extends AppCompatActivity implements OnMapRea
         textViewPets = findViewById(R.id.ActivitySearchDetails_pets_tv);
         textViewCar = findViewById(R.id.ActivitySearchDetails_car_tv);
         textViewMsg = findViewById(R.id.ActivitySearchDetails_driver_message_tv);
+        pickUpPointTextView = findViewById(R.id.ActivitySearchDetails_pick_up_point_info);
         passengersButton = findViewById(R.id.ActivitySearchDetails_more_passengers_button);
         userLayout = findViewById(R.id.ActivitySearchDetails_user_section);
         showOnMapButton = findViewById(R.id.ActivitySearchDetails_show_map_button);
@@ -101,6 +104,7 @@ public class SearchDetailsActivity extends AppCompatActivity implements OnMapRea
         textViewReviews.setText(String.valueOf(tripInvolvedModel.getCreatorUser().getReviews()));
         passengersList = tripInvolvedModel.getPassengers();
 
+        pickUpPointTextView.setText(tripInvolvedModel.getDestFrom().getTitle());
 
 
         //Get the Map
@@ -108,7 +112,7 @@ public class SearchDetailsActivity extends AppCompatActivity implements OnMapRea
         mapFragment.getMapAsync(this);
 
         pickUpPoint = new MarkerOptions().position(new LatLng(tripInvolvedModel.getDestFrom().getLatitude(), tripInvolvedModel.getDestFrom().getLongitude())).title(tripInvolvedModel.getDestFrom().getTitle());
-        zoomToThePoint = new LatLng(tripInvolvedModel.getDestFrom().getLatitude(), tripInvolvedModel.getDestFrom().getLongitude());
+        zoomToThePoint = new LatLng(tripInvolvedModel.getPickUpPoint().getLatitude(), tripInvolvedModel.getPickUpPoint().getLongitude());
 
 //        UserBaseModel userBaseModel = new UserBaseModel(1, "Tyler",   "Joseph", 4.7, 34, "default" );
 //        PassengerModel passengerModel = new PassengerModel(userBaseModel, 3, true);
@@ -131,6 +135,7 @@ public class SearchDetailsActivity extends AppCompatActivity implements OnMapRea
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);
+
 
 
         imageButtonBack.setOnClickListener(new View.OnClickListener() {
@@ -197,12 +202,12 @@ public class SearchDetailsActivity extends AppCompatActivity implements OnMapRea
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         map.addCircle(new CircleOptions()
-                .center(new LatLng(tripInvolvedModel.getDestFrom().getLatitude(), tripInvolvedModel.getDestFrom().getLongitude()))
+                .center(new LatLng(tripInvolvedModel.getPickUpPoint().getLatitude(), tripInvolvedModel.getPickUpPoint().getLongitude()))
                 .radius(400)
                 .strokeColor(Color.argb(20, 255, 0,0))
                 .fillColor(Color.argb(50, 255, 0,0)));
         //map.addMarker(pickUpPoint);
-
+        map.getUiSettings().setZoomControlsEnabled(true);
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(zoomToThePoint, 15));
     }
 }

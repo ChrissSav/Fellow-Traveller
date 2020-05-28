@@ -1,11 +1,13 @@
 package com.example.fellow_traveller.SearchAndBook;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.fellow_traveller.ClientAPI.Models.PassengerModel;
+import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.squareup.picasso.Picasso;
 
@@ -18,6 +20,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class PassengersAdapter extends RecyclerView.Adapter<PassengersAdapter.PassengersViewHolder>{
     private ArrayList<PassengerModel> passengersList;
     private OnItemClickListener mListener;
+    private Context myContext;
+    private GlobalClass globalClass;
+    private int myId;
+
 
     public interface OnItemClickListener{
         void onItemClick(int position);
@@ -58,8 +64,9 @@ public class PassengersAdapter extends RecyclerView.Adapter<PassengersAdapter.Pa
 
         }
     }
-    public PassengersAdapter(ArrayList<PassengerModel> aPassengerList){
+    public PassengersAdapter(ArrayList<PassengerModel> aPassengerList, Context context){
         passengersList = aPassengerList;
+        myContext = context;
 
     }
 
@@ -75,7 +82,16 @@ public class PassengersAdapter extends RecyclerView.Adapter<PassengersAdapter.Pa
     public void onBindViewHolder(@NonNull PassengersViewHolder holder, int position) {
         PassengerModel currentItem = passengersList.get(position);
 
-        holder.userName.setText(currentItem.getUser().getFullName());
+        //Get user's id
+        int userId = currentItem.getUser().getId();
+        //Get myId from Global Class
+        globalClass = (GlobalClass) myContext.getApplicationContext();
+        myId = globalClass.getCurrentUser().getId();
+        if(myId == userId)
+            holder.userName.setText("(Εσείς) " + currentItem.getUser().getFullName());
+        else
+            holder.userName.setText(currentItem.getUser().getFullName());
+
         holder.rating.setText(String.valueOf(currentItem.getUser().getRate()));
         holder.reviews.setText(String.valueOf(currentItem.getUser().getReviews()));
         if(currentItem.getPet())
