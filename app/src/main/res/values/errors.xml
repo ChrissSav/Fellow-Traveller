@@ -46,5 +46,9 @@
     <string name="ERROR_REVIEW_CANT_REGISTER_THE_REVIEW">Έχετε ήδη αξιολογήση τον χρήστη.</string>
 
 
+    <string name="ERROR_TRIP_USER_NOT_PASSENGER">Δεν συμμετέχετε σε αυτό το ταξίδι.</string>
+    <string name="ERROR_TRIP_QRCODE_EARLY">Είναι νωρίς ακόμα για την σάρωση.</string>
+    <string name="ERROR_TRIP_QRCODE_WRONG">Το QRCode ειναι λάθος.</string>
+
 
 </resources>

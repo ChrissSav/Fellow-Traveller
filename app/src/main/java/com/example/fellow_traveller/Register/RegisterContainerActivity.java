@@ -22,6 +22,7 @@ import com.example.fellow_traveller.ClientAPI.Models.UserRegisterModel;
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
+import com.example.fellow_traveller.SuccessRegisterActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -161,9 +162,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
     public void Save(UserAuthModel userAuth) {
         firebaseRegister(userAuth.getId() + "", userAuth.getName(), userAuth.getSurname());
         globalClass.SaveClass(userAuth);
-        Intent intent = new Intent(RegisterContainerActivity.this, HomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Intent intent = new Intent(RegisterContainerActivity.this, SuccessRegisterActivity.class);
         startActivity(intent);
         finish();
     }

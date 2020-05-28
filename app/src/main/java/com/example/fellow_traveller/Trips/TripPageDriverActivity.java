@@ -146,7 +146,7 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
         //Build the passengers recycler view
         mRecyclerView = findViewById(R.id.ActivityTripPageDriver_passenger_recycler_view);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        mAdapter = new PassengerImageAdapter(passengersList);
+        mAdapter = new PassengerImageAdapter(passengersList, this.getApplicationContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);

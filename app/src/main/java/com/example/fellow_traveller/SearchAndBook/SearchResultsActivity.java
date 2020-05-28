@@ -30,11 +30,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fellow_traveller.ClientAPI.Callbacks.SearchTripsCallback;
+import com.example.fellow_traveller.ClientAPI.Callbacks.TripInvolvedCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.DestinationModel;
 import com.example.fellow_traveller.ClientAPI.Models.FilterModel;
 import com.example.fellow_traveller.ClientAPI.Models.LatLongModel;
 import com.example.fellow_traveller.ClientAPI.Models.SearchDestinationsModel;
+import com.example.fellow_traveller.ClientAPI.Models.TripInvolvedModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
@@ -58,7 +60,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     private GlobalClass globalClass;
     private LatLongModel latlongModelStart, latlongModelEnd;
     private SearchDestinationsModel searchDestinationsModel;
-    private ArrayList<TripModel> resultList = new ArrayList<>();
+    private ArrayList<TripInvolvedModel> resultList = new ArrayList<>();
     private boolean destFromDone = false, destToDone = false, destOnReturnDone = true;
     private ImageView notFoundImage;
     private FilterModel  filterModel;
@@ -315,32 +317,36 @@ public class SearchResultsActivity extends AppCompatActivity {
                     latlongModelEnd = new LatLongModel(endDestinationModel.getLatitude(), endDestinationModel.getLongitude());
                     searchDestinationsModel = new SearchDestinationsModel(latlongModelStart, latlongModelEnd);
 
-
-                    new FellowTravellerAPI(globalClass).getTrips(searchDestinationsModel, filterModel.getTimestampMin(), filterModel.getTimestampMax(),
-                            filterModel.getSeatsMin(),filterModel.getSeatsMax(), filterModel.getBagsMin(), filterModel.getBagsMax(),
+                    new FellowTravellerAPI(globalClass).getTripsTest(searchDestinationsModel.getDestFrom().getLatitude(), searchDestinationsModel.getDestFrom().getLongitude(),
+                            searchDestinationsModel.getDestTo().getLatitude(), searchDestinationsModel.getDestTo().getLongitude(),
+                            filterModel.getTimestampMin(), filterModel.getTimestampMax(),
+                            filterModel.getSeatsMin(), filterModel.getSeatsMax(), filterModel.getBagsMin(), filterModel.getBagsMax(),
                             filterModel.getPriceMin(), filterModel.getPriceMax(),
-                            filterModel.getHavePet(), filterModel.getRangeStart(), new SearchTripsCallback() {
+                            filterModel.getHavePet(), filterModel.getRangeStart(), filterModel.getRangeEnd(), new TripInvolvedCallBack() {
                                 @Override
-                                public void onSuccess(ArrayList<TripModel> trips) {
+                                public void onSuccess(ArrayList<TripInvolvedModel> trips) {
+                                    Toast.makeText(SearchResultsActivity.this, "Βρήκα ταξίδια", Toast.LENGTH_SHORT).show();
                                     if(trips.size()==0) {
                                         notFoundImage.setVisibility(View.VISIBLE);
                                         sortButton.setVisibility(View.INVISIBLE);
                                         sortByTextView.setVisibility(View.INVISIBLE);
+                                        Toast.makeText(SearchResultsActivity.this, "Δεν ταξίδια", Toast.LENGTH_SHORT).show();
                                     }else {
                                         notFoundImage.setVisibility(View.GONE);
                                         sortButton.setVisibility(View.VISIBLE);
                                         sortByTextView.setVisibility(View.VISIBLE);
+                                        Toast.makeText(SearchResultsActivity.this, "Βρήκα πολλά ταξίδια", Toast.LENGTH_SHORT).show();
                                     }
 
                                     resultList = trips;
 
                                     //Check when we retrieve again data from server, which sort method was previous selected
                                     if(sortListMethodFlag==0)
-                                        Collections.sort(resultList, TripModel.DateComparator);
+                                        Collections.sort(resultList, TripInvolvedModel.DateComparator);
                                     else if(sortListMethodFlag==1)
-                                        Collections.sort(resultList, TripModel.PriceComparator);
+                                        Collections.sort(resultList, TripInvolvedModel.PriceComparator);
                                     else
-                                        Collections.sort(resultList, TripModel.RatesComparator);
+                                        Collections.sort(resultList, TripInvolvedModel.RatesComparator);
 
                                     buildRecyclerView();
                                     pd.dismiss();
@@ -359,15 +365,71 @@ public class SearchResultsActivity extends AppCompatActivity {
                                             startActivity(mainIntent);
                                         }
                                     });
+
                                 }
 
                                 @Override
                                 public void onFailure(String errorMsg) {
                                     Log.d("FILTER", "Couldn't find any trips");
+                                    Toast.makeText(SearchResultsActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
                                     pd.dismiss();
                                     progressBar.setVisibility(View.GONE);
                                 }
                             });
+//                    new FellowTravellerAPI(globalClass).getTripsTest(searchDestinationsModel.getDestFrom().getLatitude(),searchDestinationsModel.getDestFrom().getLongitude(),
+//                            searchDestinationsModel.getDestTo().getLatitude(), searchDestinationsModel.getDestTo().getLongitude(),
+//                            filterModel.getTimestampMin(), filterModel.getTimestampMax(),
+//                            filterModel.getSeatsMin(),filterModel.getSeatsMax(), filterModel.getBagsMin(), filterModel.getBagsMax(),
+//                            filterModel.getPriceMin(), filterModel.getPriceMax(),
+//                            filterModel.getHavePet(), filterModel.getRangeStart(), new SearchTripsCallback() {
+//                                @Override
+//                                public void onSuccess(ArrayList<TripModel> trips) {
+//                                    if(trips.size()==0) {
+//                                        notFoundImage.setVisibility(View.VISIBLE);
+//                                        sortButton.setVisibility(View.INVISIBLE);
+//                                        sortByTextView.setVisibility(View.INVISIBLE);
+//                                    }else {
+//                                        notFoundImage.setVisibility(View.GONE);
+//                                        sortButton.setVisibility(View.VISIBLE);
+//                                        sortByTextView.setVisibility(View.VISIBLE);
+//                                    }
+//
+//                                    resultList = trips;
+//
+//                                    //Check when we retrieve again data from server, which sort method was previous selected
+//                                    if(sortListMethodFlag==0)
+//                                        Collections.sort(resultList, TripModel.DateComparator);
+//                                    else if(sortListMethodFlag==1)
+//                                        Collections.sort(resultList, TripModel.PriceComparator);
+//                                    else
+//                                        Collections.sort(resultList, TripModel.RatesComparator);
+//
+//                                    buildRecyclerView();
+//                                    pd.dismiss();
+//                                    progressBar.setVisibility(View.GONE);
+//
+//
+//                                    searchResultsCount.setText(String.format("Βρέθηκαν %d ταξίδια.", resultList.size()));
+//                                    getAveragePriceOfTrips();
+//
+//                                    mAdapter.setOnItemClickListener(new SearchResultsAdapter.OnItemClickListener() {
+//                                        @Override
+//                                        public void onItemClick(int position) {
+//                                            Intent mainIntent = new Intent(SearchResultsActivity.this, SearchDetailsActivity.class);
+//                                            mainIntent.putExtra("trip", resultList.get(position));
+//                                            mainIntent.putExtra("example", "resultList.get(position)");
+//                                            startActivity(mainIntent);
+//                                        }
+//                                    });
+//                                }
+//
+//                                @Override
+//                                public void onFailure(String errorMsg) {
+//                                    Log.d("FILTER", "Couldn't find any trips");
+//                                    pd.dismiss();
+//                                    progressBar.setVisibility(View.GONE);
+//                                }
+//                            });
                 } else {
                     Toast.makeText(SearchResultsActivity.this, "Υπάρχει κάποιο πρόβλημα επικοινωνίας", Toast.LENGTH_SHORT).show();
                 }
@@ -506,7 +568,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
                 mainCoordinatorLayout.setForeground(null);
                 sortListMethodFlag = 0;
-                Collections.sort(resultList, TripModel.DateComparator);
+                Collections.sort(resultList, TripInvolvedModel.DateComparator);
                 sortByTextView.setText("Πιο σχετικά");
                 mAdapter.notifyDataSetChanged();
                 myDialog.dismiss();
@@ -520,7 +582,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
                 mainCoordinatorLayout.setForeground(null);
                 sortListMethodFlag = 1;
-                Collections.sort(resultList, TripModel.PriceComparator);
+                Collections.sort(resultList, TripInvolvedModel.PriceComparator);
                 sortByTextView.setText("Τιμή");
                 mAdapter.notifyDataSetChanged();
                 myDialog.dismiss();
@@ -532,7 +594,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
                 mainCoordinatorLayout.setForeground(null);
                 sortListMethodFlag = 2;
-                Collections.sort(resultList, TripModel.RatesComparator);
+                Collections.sort(resultList, TripInvolvedModel.RatesComparator);
                 sortByTextView.setText("Αξιολογήσεις");
                 mAdapter.notifyDataSetChanged();
                 myDialog.dismiss();

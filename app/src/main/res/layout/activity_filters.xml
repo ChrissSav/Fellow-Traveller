@@ -120,7 +120,7 @@
             app:layout_constraintTop_toBottomOf="@id/ActivityFilters_underline_pets"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="35dp"
-            android:text="Εύρος αφετηρίας"
+            android:text="Αφετηρία"
             />
             <TextView
                 android:id="@+id/ActivityFilters_km_range_radius_tv"
@@ -192,7 +192,7 @@
                 app:layout_constraintTop_toBottomOf="@id/ActivityFilters_km_range_info_tv"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginTop="35dp"
-                android:text="Εύρος προορισμού"
+                android:text="Προορισμός"
                 />
             <TextView
                 android:id="@+id/ActivityFilters_km_range_end_radius_tv"

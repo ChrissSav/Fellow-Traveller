@@ -13,16 +13,17 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <ImageButton
                 android:id="@+id/ActivityProfile_close_button"
+                style="@style/border_icon_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_close"
-                style="@style/border_icon_button"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_close"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ActivityProfile_user_image"
@@ -212,11 +213,11 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="15dp"
                 android:paddingBottom="20dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ActivityProfile_about_me_section"
-                android:visibility="gone">
+                app:layout_constraintTop_toBottomOf="@+id/ActivityProfile_about_me_section">
 
                 <TextView
                     android:id="@+id/ActivityProfile_review_label"
@@ -244,109 +245,106 @@
                     android:id="@+id/ActivityProfile_last_review_section"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    app:layout_constraintTop_toBottomOf="@id/ActivityProfile_underline_review"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    >
+                    app:layout_constraintTop_toBottomOf="@id/ActivityProfile_underline_review">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/ActivityProfile_review_user_image"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@drawable/null_icon"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="20dp"
-                    />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ActivityProfile_review_user_image"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/null_icon"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/ActivityProfile_review_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Γιασεμής Μαραμένος"
-                    app:layout_constraintTop_toTopOf="@id/ActivityProfile_review_user_image"
-                    app:layout_constraintStart_toEndOf="@id/ActivityProfile_review_user_image"
-                    android:layout_marginStart="15dp"
-                    android:textColor="@color/white_color"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/firasans_medium"
-                    android:layout_marginTop="8dp"
-                    />
-                <TextView
-                    android:id="@+id/ActivityProfile_review_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="22 Ιαν 2020"
-                    android:padding="0dp"
-                    app:layout_constraintBottom_toBottomOf="@id/ActivityProfile_review_user_image"
-                    app:layout_constraintStart_toEndOf="@id/ActivityProfile_review_user_image"
-                    android:layout_marginStart="15dp"
-                    android:textColor="@color/white_color"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/firasans_light"
-                    android:layout_marginBottom="8dp"
-                    />
-                <ImageView
-                    android:id="@+id/ActivityProfile_review_image_icon"
-                    android:layout_width="38dp"
-                    android:layout_height="38dp"
-                    android:background="@drawable/ic_rating"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/ActivityProfile_review_name"
-                    android:layout_marginRight="10dp"/>
-                <TextView
-                    android:id="@+id/ActivityProfile_review_out_of_five"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="/5"
-                    app:layout_constraintTop_toTopOf="@id/ActivityProfile_review_image_icon"
-                    app:layout_constraintBottom_toBottomOf="@id/ActivityProfile_review_image_icon"
-                    android:textColor="@color/white_color"
-                    android:fontFamily="@font/firasans_medium"
-                    app:layout_constraintEnd_toStartOf="@id/ActivityProfile_review_image_icon"
-                    android:layout_marginEnd="10dp"
-                    android:textSize="16sp"/>
+                    <TextView
+                        android:id="@+id/ActivityProfile_review_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/firasans_medium"
+                        android:text="Γιασεμής Μαραμένος"
+                        android:textColor="@color/white_color"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@id/ActivityProfile_review_user_image"
+                        app:layout_constraintTop_toTopOf="@id/ActivityProfile_review_user_image" />
 
-                <TextView
-                    android:id="@+id/ActivityProfile_review_rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:fontFamily="@font/firasans_bold"
-                    android:text="4,5"
-                    android:textColor="@color/white_color"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="@id/ActivityProfile_review_image_icon"
-                    app:layout_constraintEnd_toStartOf="@id/ActivityProfile_review_out_of_five"
-                    app:layout_constraintTop_toTopOf="@id/ActivityProfile_review_image_icon"
-                    app:layout_constraintVertical_bias="0.4" />
+                    <TextView
+                        android:id="@+id/ActivityProfile_review_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/firasans_light"
+                        android:padding="0dp"
+                        android:text="22 Ιαν 2020"
+                        android:textColor="@color/white_color"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@id/ActivityProfile_review_user_image"
+                        app:layout_constraintStart_toEndOf="@id/ActivityProfile_review_user_image" />
 
-                <TextView
-                    android:id="@+id/ActivityProfile_review_comments"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea r..."
-                    android:fontFamily="@font/firasans_light"
-                    android:textColor="@color/white_color"
-                    android:textSize="16sp"
-                    app:layout_constraintTop_toBottomOf="@id/ActivityProfile_review_user_image"
-                    app:layout_constraintStart_toStartOf="@id/ActivityProfile_review_user_image"
-                    app:layout_constraintEnd_toEndOf="@id/ActivityProfile_review_image_icon"
-                    android:layout_marginTop="20dp"
-                   />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:id="@+id/ActivityProfile_review_image_icon"
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/ic_rating"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/ActivityProfile_review_name" />
+
+                    <TextView
+                        android:id="@+id/ActivityProfile_review_out_of_five"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:fontFamily="@font/firasans_medium"
+                        android:text="/5"
+                        android:textColor="@color/white_color"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@id/ActivityProfile_review_image_icon"
+                        app:layout_constraintEnd_toStartOf="@id/ActivityProfile_review_image_icon"
+                        app:layout_constraintTop_toTopOf="@id/ActivityProfile_review_image_icon" />
+
+                    <TextView
+                        android:id="@+id/ActivityProfile_review_rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/firasans_bold"
+                        android:text="4,5"
+                        android:textColor="@color/white_color"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="@id/ActivityProfile_review_image_icon"
+                        app:layout_constraintEnd_toStartOf="@id/ActivityProfile_review_out_of_five"
+                        app:layout_constraintTop_toTopOf="@id/ActivityProfile_review_image_icon"
+                        app:layout_constraintVertical_bias="0.4" />
+
+                    <TextView
+                        android:id="@+id/ActivityProfile_review_comments"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/firasans_light"
+                        android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea r..."
+                        android:textColor="@color/white_color"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@id/ActivityProfile_review_image_icon"
+                        app:layout_constraintStart_toStartOf="@id/ActivityProfile_review_user_image"
+                        app:layout_constraintTop_toBottomOf="@id/ActivityProfile_review_user_image" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <Button
                     android:id="@+id/ActivityProfile_more_reviews_button"
+                    style="@style/button_orange_empty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/button_orange_empty"
                     android:text="Περισσότερα"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/ActivityProfile_review_label"
                     app:layout_constraintBottom_toBottomOf="@id/ActivityProfile_underline_review"
-                    />
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/ActivityProfile_review_label" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -358,10 +356,11 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="15dp"
                 android:paddingBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ActivityProfile_about_me_section">
+
                 <TextView
                     android:id="@+id/ActivityProfile_no_review_label"
                     android:layout_width="wrap_content"
@@ -374,6 +373,7 @@
                     android:textSize="23sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
                 <View
                     android:id="@+id/ActivityProfile_underline_no_review"
                     android:layout_width="0dp"
@@ -382,27 +382,27 @@
                     app:layout_constraintEnd_toEndOf="@id/ActivityProfile_no_review_label"
                     app:layout_constraintStart_toStartOf="@+id/ActivityProfile_no_review_label"
                     app:layout_constraintTop_toBottomOf="@id/ActivityProfile_no_review_label" />
+
                 <TextView
+                    style="@style/paragraph1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Δεν υπάρχουν αξιολογήσεις για τον συγκεκριμένο χρήστη"
-                    style="@style/paragraph1"
-                    android:textColor="@color/white_color"
-                    app:layout_constraintTop_toBottomOf="@id/ActivityProfile_underline_no_review"
-                    app:layout_constraintStart_toStartOf="@id/ActivityProfile_no_review_label"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="20dp"
-                    />
+                    android:text="Δεν υπάρχουν αξιολογήσεις για τον συγκεκριμένο χρήστη"
+                    android:textColor="@color/white_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/ActivityProfile_no_review_label"
+                    app:layout_constraintTop_toBottomOf="@id/ActivityProfile_underline_no_review" />
+
                 <Button
                     android:id="@+id/ActivityProfile_no_reviews_button"
+                    style="@style/button_orange_empty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/button_orange_empty"
-                    android:text="Αξιολογείστε εδώ"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/ActivityProfile_no_review_label"
+                    android:text="Περισσότερα"
                     app:layout_constraintBottom_toBottomOf="@id/ActivityProfile_underline_no_review"
-                    />
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/ActivityProfile_no_review_label" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 
 public class TripInvolvedModel implements Parcelable {
@@ -351,4 +352,52 @@ public class TripInvolvedModel implements Parcelable {
         dest.writeTypedList(passengers);
         dest.writeByte((byte) (active == null ? 0 : active ? 1 : 2));
     }
+    //Sort by the lowest price
+    public static Comparator<TripInvolvedModel> PriceComparator = new Comparator<TripInvolvedModel>() {
+
+        public int compare(TripInvolvedModel trip1, TripInvolvedModel trip2) {
+
+            float price1 = trip1.getPrice();
+            float price2 = trip2.getPrice();
+
+            //ascending order
+            return Float.compare(price1, price2);
+
+            //descending order
+            //return fruitName2.compareTo(fruitName1);
+        }
+
+    };
+    //Sort by the highest rate
+    public static Comparator<TripInvolvedModel> RatesComparator = new Comparator<TripInvolvedModel>() {
+
+        public int compare(TripInvolvedModel trip1, TripInvolvedModel trip2) {
+
+            float rate1 = trip1.getCreatorUser().getRate();
+            float rate2 = trip2.getCreatorUser().getRate();
+
+            //ascending order
+            return Float.compare(rate2, rate1);
+
+            //descending order
+            //return fruitName2.compareTo(fruitName1);
+        }
+
+    };
+    //Sort by the most recent date
+    public static Comparator<TripInvolvedModel> DateComparator = new Comparator<TripInvolvedModel>() {
+
+        public int compare(TripInvolvedModel trip1, TripInvolvedModel trip2) {
+
+            long date1 = trip1.getTimestamp();
+            long date2 = trip2.getTimestamp();
+
+            //ascending order
+            return Long.compare(date1, date2);
+
+            //descending order
+            //return fruitName2.compareTo(fruitName1);
+        }
+
+    };
 }

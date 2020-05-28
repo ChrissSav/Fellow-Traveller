@@ -1,11 +1,9 @@
 package com.example.fellow_traveller.SearchAndBook;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -16,15 +14,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.fellow_traveller.ClientAPI.Callbacks.SearchTripsCallback;
 import com.example.fellow_traveller.ClientAPI.Callbacks.StatusCallBack;
-import com.example.fellow_traveller.ClientAPI.Callbacks.TripRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.CreatePassengerModel;
-import com.example.fellow_traveller.ClientAPI.Models.PassengerModel;
-import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
-import com.example.fellow_traveller.ClientAPI.Models.TripModel;
-import com.example.fellow_traveller.ClientAPI.Models.UserBaseModel;
+import com.example.fellow_traveller.ClientAPI.Models.TripInvolvedModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 
 import com.example.fellow_traveller.R;
@@ -48,7 +41,7 @@ public class BookActivity extends AppCompatActivity {
     private ImageButton increaseBagsButton, decreaseBagsButton;
     private boolean havePet = false;
     private int currentBags = 0, maxAvailableBags;
-    private TripModel tripModel;
+    private TripInvolvedModel tripInvolvedModel;
     private Button nextButton;
     private GlobalClass globalClass;
     private DatabaseReference tripsDatabase, tripsAndParticipantsDatabase;
@@ -78,23 +71,23 @@ public class BookActivity extends AppCompatActivity {
         priceTextView = findViewById(R.id.ActivityBook_price_textView);
 
 
-        tripModel = getIntent().getParcelableExtra("trip");
+        tripInvolvedModel = getIntent().getParcelableExtra("trip");
 
-        maxAvailableBags = tripModel.getMaxBags();
+        maxAvailableBags = tripInvolvedModel.getMaxBags();
 
         getUserBags();
 
-        destStartTextView.setText(tripModel.getDestTo().getTitle());
-        destEndTextView.setText(tripModel.getDestFrom().getTitle());
+        destStartTextView.setText(tripInvolvedModel.getDestTo().getTitle());
+        destEndTextView.setText(tripInvolvedModel.getDestFrom().getTitle());
 
-        timeTextView.setText(tripModel.getTime());
-        seatsTextView.setText(String.valueOf(tripModel.getMaxSeats()));
-        if(tripModel.getMaxSeats() > 1)
+        timeTextView.setText(tripInvolvedModel.getTime());
+        seatsTextView.setText(String.valueOf(tripInvolvedModel.getMaxSeats()));
+        if(tripInvolvedModel.getMaxSeats() > 1)
             seatsDefinitionTextView.setText("Θέσεις");
         else
             seatsDefinitionTextView.setText("Θέση");
 
-        Date currentDate = new Date(tripModel.getTimestamp()*1000);
+        Date currentDate = new Date(tripInvolvedModel.getTimestamp()*1000);
         DateFormat day = new SimpleDateFormat("dd");
         DateFormat month = new SimpleDateFormat("MMM");
         DateFormat pm = new SimpleDateFormat("a");
@@ -103,13 +96,13 @@ public class BookActivity extends AppCompatActivity {
         timePmTextView.setText(pm.format(currentDate));
 
         //Delete 0 decimals
-        if (tripModel.getPrice().intValue() == tripModel.getPrice())
-            priceTextView.setText(tripModel.getPrice().intValue() + getResources().getString(R.string.euro_symbol));
+        if (tripInvolvedModel.getPrice().intValue() == tripInvolvedModel.getPrice())
+            priceTextView.setText(tripInvolvedModel.getPrice().intValue() + getResources().getString(R.string.euro_symbol));
         else
-            priceTextView.setText(tripModel.getPrice() + getResources().getString(R.string.euro_symbol));
+            priceTextView.setText(tripInvolvedModel.getPrice() + getResources().getString(R.string.euro_symbol));
 
         fillList();
-        if(tripModel.getPet()){
+        if(tripInvolvedModel.getPet()){
         petsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -158,7 +151,7 @@ public class BookActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                CreatePassengerModel createPassengerModel = new CreatePassengerModel(tripModel.getId(), currentBags, havePet);
+                CreatePassengerModel createPassengerModel = new CreatePassengerModel(tripInvolvedModel.getId(), currentBags, havePet);
 
                 new FellowTravellerAPI(globalClass).addPassengerToTrip(createPassengerModel, new StatusCallBack() {
                     @Override
@@ -191,7 +184,7 @@ public class BookActivity extends AppCompatActivity {
     }
 
     private void assignTripToPassengersConversation() {
-        tripsAndParticipantsDatabase = FirebaseDatabase.getInstance().getReference().child("TripsAndParticipants").child(String.valueOf(tripModel.getId())).child(String.valueOf(globalClass.getCurrentUser().getId()));
+        tripsAndParticipantsDatabase = FirebaseDatabase.getInstance().getReference().child("TripsAndParticipants").child(String.valueOf(tripInvolvedModel.getId())).child(String.valueOf(globalClass.getCurrentUser().getId()));
 
         HashMap<String, Object> tripsAndParticipantsMap = new HashMap<>();
         tripsAndParticipantsMap.put("userId",  globalClass.getCurrentUser().getId());
@@ -199,36 +192,36 @@ public class BookActivity extends AppCompatActivity {
         tripsAndParticipantsDatabase.setValue(tripsAndParticipantsMap);
     }
     private void assignTripToCreatorConversation() {
-        tripsAndParticipantsDatabase = FirebaseDatabase.getInstance().getReference().child("TripsAndParticipants").child(String.valueOf(tripModel.getId())).child(String.valueOf(tripModel.getCreatorUser().getId()));
+        tripsAndParticipantsDatabase = FirebaseDatabase.getInstance().getReference().child("TripsAndParticipants").child(String.valueOf(tripInvolvedModel.getId())).child(String.valueOf(tripInvolvedModel.getCreatorUser().getId()));
 
         HashMap<String, Object> tripsAndParticipantsMap = new HashMap<>();
-        tripsAndParticipantsMap.put("userId",  tripModel.getCreatorUser().getId());
+        tripsAndParticipantsMap.put("userId",  tripInvolvedModel.getCreatorUser().getId());
 
         tripsAndParticipantsDatabase.setValue(tripsAndParticipantsMap);
     }
 
 
     private void assignPassengerToTripConversation() {
-            tripsDatabase = FirebaseDatabase.getInstance().getReference().child("Trips").child(String.valueOf(globalClass.getCurrentUser().getId())).child(String.valueOf(tripModel.getId()));
+            tripsDatabase = FirebaseDatabase.getInstance().getReference().child("Trips").child(String.valueOf(globalClass.getCurrentUser().getId())).child(String.valueOf(tripInvolvedModel.getId()));
 
             HashMap<String, Object> tripsMap = new HashMap<>();
             tripsMap.put("date", System.currentTimeMillis() / 1000);
             tripsMap.put("seen", true);
-            tripsMap.put("tripId", tripModel.getId());
-            tripsMap.put("tripName", tripModel.getDestFrom().getTitle() + " - " + tripModel.getDestTo().getTitle());
+            tripsMap.put("tripId", tripInvolvedModel.getId());
+            tripsMap.put("tripName", tripInvolvedModel.getDestFrom().getTitle() + " - " + tripInvolvedModel.getDestTo().getTitle());
 
 
             tripsDatabase.setValue(tripsMap);
 
     }
     private void assignCreatorToTripConversation() {
-        tripsDatabase = FirebaseDatabase.getInstance().getReference().child("Trips").child(String.valueOf(tripModel.getCreatorUser().getId())).child(String.valueOf(tripModel.getId()));
+        tripsDatabase = FirebaseDatabase.getInstance().getReference().child("Trips").child(String.valueOf(tripInvolvedModel.getCreatorUser().getId())).child(String.valueOf(tripInvolvedModel.getId()));
 
         HashMap<String, Object> tripsMap = new HashMap<>();
         tripsMap.put("date", System.currentTimeMillis() / 1000);
         tripsMap.put("seen", true);
-        tripsMap.put("tripId", tripModel.getId());
-        tripsMap.put("tripName", tripModel.getDestFrom().getTitle() + " - " + tripModel.getDestTo().getTitle());
+        tripsMap.put("tripId", tripInvolvedModel.getId());
+        tripsMap.put("tripName", tripInvolvedModel.getDestFrom().getTitle() + " - " + tripInvolvedModel.getDestTo().getTitle());
 
 
         tripsDatabase.setValue(tripsMap);

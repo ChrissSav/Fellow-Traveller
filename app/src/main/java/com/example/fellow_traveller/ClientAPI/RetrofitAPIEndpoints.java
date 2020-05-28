@@ -8,6 +8,8 @@ import com.example.fellow_traveller.ClientAPI.Models.CreateReviewModel;
 import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
 import com.example.fellow_traveller.ClientAPI.Models.NotificationModel;
 import com.example.fellow_traveller.ClientAPI.Models.PassengerModel;
+import com.example.fellow_traveller.ClientAPI.Models.QRCodeModel;
+import com.example.fellow_traveller.ClientAPI.Models.QRCodeVerifyModel;
 import com.example.fellow_traveller.ClientAPI.Models.ReviewModel;
 import com.example.fellow_traveller.ClientAPI.Models.SearchDestinationsModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
@@ -29,6 +31,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -113,7 +116,7 @@ public interface RetrofitAPIEndpoints {
     );
 
     @GET("/trips/search")
-    Call<ArrayList<TripModel>> getTripsTest(
+    Call<ArrayList<TripInvolvedModel>> getTripsTest(
             @Query("latitude_from") float latitudeFrom,
             @Query("longitude_from") float longitudeFrom,
             @Query("latitude_to") float latitudeTo,
@@ -193,4 +196,44 @@ public interface RetrofitAPIEndpoints {
             @Body CreateReviewModel createReviewModel
     );
 
+
+    //QR CODES
+    @GET("/qrcode/{trip_id}")
+    Call<QRCodeModel> getQrCode(
+            @Path("trip_id") int tripId
+    );
+
+    @PATCH("/qrcode/verify")
+    Call<StatusHandleModel> qrCodeVerify(
+            @Body QRCodeVerifyModel qrCodeVerifyModel
+    );
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
