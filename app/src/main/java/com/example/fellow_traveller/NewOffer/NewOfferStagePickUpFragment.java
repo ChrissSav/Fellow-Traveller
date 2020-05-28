@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.fellow_traveller.PlacesAPI.Models.PredictionsModel;
 import com.example.fellow_traveller.R;
@@ -16,12 +17,14 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
+import static com.example.fellow_traveller.Util.SomeMethods.createSnackBar;
 
 
 public class NewOfferStagePickUpFragment extends Fragment {
     private View view;
-    private TextInputLayout textInputLayoutPickUp;
+    private Button buttonPickUp;
     private PredictionsModel predictionsModelDestPickUp;
+    private final String PICKUP_TITLE = "Διάλεξε τον προορισμό ...";
 
 
     public NewOfferStagePickUpFragment() {
@@ -34,10 +37,9 @@ public class NewOfferStagePickUpFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_new_offer_stage_pick_up, container, false);
-        textInputLayoutPickUp = view.findViewById(R.id.NewOfferStagePickUpFragment_TextInputLayout_to);
-        textInputLayoutPickUp.getEditText().setText(predictionsModelDestPickUp.getDescription());
+        buttonPickUp = view.findViewById(R.id.NewOfferStage1Fragment_button_pickup);
 
-        textInputLayoutPickUp.getEditText().setOnClickListener(new View.OnClickListener() {
+        buttonPickUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -54,9 +56,10 @@ public class NewOfferStagePickUpFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        if (textInputLayoutPickUp.getEditText().getText().length() > 0)
-            textInputLayoutPickUp.setError(null);
-
+        if (predictionsModelDestPickUp.getDescription().length() > 1) {
+            buttonPickUp.setText(predictionsModelDestPickUp.getDescription());
+            buttonPickUp.setTextColor(getResources().getColor(R.color.black_color));
+        }
     }
 
     public String toString() {
@@ -68,11 +71,11 @@ public class NewOfferStagePickUpFragment extends Fragment {
     }
 
     public Boolean validateFragment() {
-        if (textInputLayoutPickUp.getEditText().getText().length() < 1) {
-            textInputLayoutPickUp.setError(getResources().getString(R.string.ERROR_REQUIRED_FIELD));
+
+        if (buttonPickUp.getText().equals(PICKUP_TITLE)) {
+            createSnackBar(view, "Παρακαλώ επιλέξτε σημείο αναχώρησης");
             return false;
         }
-        textInputLayoutPickUp.setError(null);
         return true;
 
     }
@@ -85,7 +88,7 @@ public class NewOfferStagePickUpFragment extends Fragment {
             if (resultCode == RESULT_OK) {
                 PredictionsModel resultPredictionsModel = data.getParcelableExtra("resultPredictionsModel");
                 predictionsModelDestPickUp = resultPredictionsModel;
-                textInputLayoutPickUp.getEditText().setText(resultPredictionsModel.getDescription());
+                buttonPickUp.setText(resultPredictionsModel.getDescription());
             }
             if (resultCode == RESULT_CANCELED) {
                 // mTextViewResult.setText("Nothing selected");
@@ -97,7 +100,7 @@ public class NewOfferStagePickUpFragment extends Fragment {
     }
 
     public String getDestPickUp() {
-        return textInputLayoutPickUp.getEditText().getText().toString();
+        return buttonPickUp.getText().toString();
     }
 
 }

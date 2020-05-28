@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.fragment.app.DialogFragment;
 
 import android.util.Log;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
@@ -22,12 +23,13 @@ public class DatePickerDialogCustom extends DialogFragment implements DatePicker
     private int month;
     private int day;
     private Calendar calendar;
-    private EditText editText;
+    private Button button;
+    private String defaultTitle;
 
 
-    public DatePickerDialogCustom(EditText editText) {
-        this.editText = editText;
-
+    public DatePickerDialogCustom(Button button, String title) {
+        this.button = button;
+        defaultTitle = title;
 
     }
 
@@ -35,15 +37,15 @@ public class DatePickerDialogCustom extends DialogFragment implements DatePicker
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
 
-        if (editText.getText().length() < 1) {
+        if (button.getText().equals(defaultTitle)) {
             calendar = Calendar.getInstance();
             year = calendar.get(Calendar.YEAR);
             month = calendar.get(Calendar.MONTH);
             day = calendar.get(Calendar.DAY_OF_MONTH);
         } else {
-            day = Integer.parseInt(editText.getText().toString().substring(0, 2));
-            month = Integer.parseInt(editText.getText().toString().substring(3, 5)) -1;
-            year = Integer.parseInt(editText.getText().toString().substring(6));
+            day = Integer.parseInt(button.getText().toString().substring(0, 2));
+            month = Integer.parseInt(button.getText().toString().substring(3, 5)) - 1;
+            year = Integer.parseInt(button.getText().toString().substring(6));
 
         }
 
@@ -71,7 +73,7 @@ public class DatePickerDialogCustom extends DialogFragment implements DatePicker
         }
         // TextView textview = (TextView)getActivity().findViewById(R.id.textView1);
 
-        editText.setText(dayString + "/" + monString + "/" + year);
+        button.setText(dayString + "/" + monString + "/" + year);
 
     }
 }

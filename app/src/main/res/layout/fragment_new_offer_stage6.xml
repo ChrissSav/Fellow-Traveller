@@ -424,14 +424,14 @@
                 android:id="@+id/NewOfferStage6Fragment_textView_123"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="40dp"
                 android:fontFamily="@font/firasans_bold"
                 android:text="Μήνυμα"
                 android:textAlignment="center"
                 android:textColor="@color/black_color"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/constraintLayout3"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
+                app:layout_constraintTop_toBottomOf="@+id/NewOfferStage6Fragment_textView_pickup" />
 
             <TextView
                 android:id="@+id/NewOfferStage6Fragment_textView_msg"
@@ -446,6 +446,43 @@
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
                 app:layout_constraintStart_toStartOf="@+id/NewOfferStage6Fragment_textView_123"
                 app:layout_constraintTop_toBottomOf="@+id/NewOfferStage6Fragment_textView_123" />
+
+            <TextView
+                android:id="@+id/NewOfferStage6Fragment_textView_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="45dp"
+                android:fontFamily="@font/firasans_bold"
+                android:text="Σημείο αναχώρησης"
+                android:textAlignment="center"
+                android:textColor="@color/black_color"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
+
+            <TextView
+                android:id="@+id/NewOfferStage6Fragment_textView_pickup"
+                android:fontFamily="@font/firasans_light"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="12dp"
+                android:tag="6"
+                android:text="TextView"
+                android:textColor="@color/black_color"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/NewOfferStage6Fragment_imageView"
+                app:layout_constraintStart_toStartOf="@+id/NewOfferStage6Fragment_textView_label"
+                app:layout_constraintTop_toBottomOf="@+id/NewOfferStage6Fragment_textView_label" />
+
+            <ImageView
+                android:id="@+id/NewOfferStage6Fragment_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_pin"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
+                app:layout_constraintTop_toTopOf="@+id/NewOfferStage6Fragment_textView_pickup" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
