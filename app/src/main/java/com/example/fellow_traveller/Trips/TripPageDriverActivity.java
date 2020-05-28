@@ -22,9 +22,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fellow_traveller.ClientAPI.Callbacks.QRCodeModelCallBack;
+import com.example.fellow_traveller.ClientAPI.Callbacks.StatusCallBack;
+import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.PassengerModel;
 import com.example.fellow_traveller.ClientAPI.Models.TripInvolvedModel;
 import com.example.fellow_traveller.MapDirections.MapsRouteActivity;
+import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.ProfileActivity;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.SearchAndBook.PassengerImageAdapter;
@@ -61,18 +65,27 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
     private PassengerImageAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<PassengerModel> passengersList = new ArrayList<>();
-    private long oneHour = 60*60;
+    private long oneHour = 60 * 60;
     private GoogleMap map;
     private MarkerOptions pickUpPoint;
     private LatLng zoomToThePoint;
     private static final int MY_CAMERA_REQUEST_CODE = 100;
+    private GlobalClass globalClass;
+    private ConstraintLayout driverQRLayout, passengerQRLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_page_driver);
-        QRImage = findViewById(R.id.ActivityTripPageDriver_qr_image);
-        //QRResultTextView = findViewById(R.id.ActivityTripPageDriver_qr_result_textView);
+
+        globalClass = (GlobalClass) getApplicationContext();
+
+        Bundle bundle = getIntent().getExtras();
+        isCompleted = bundle.getBoolean("isCompleted");
+        isDriver = bundle.getBoolean("isDriver");
+        tripInvolvedModel = getIntent().getParcelableExtra("trip");
+
+        QRImage = findViewById(R.id.ActivityTripPageDriver_driver_qr_image);
         scanButton = findViewById(R.id.ActivityTripPageDriver_scan_button);
 
 
@@ -98,14 +111,13 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
         showOnMapButton = findViewById(R.id.ActivityTripPageDriver_show_map_button);
         imageButtonBack = findViewById(R.id.ActivityTripPageDriver_back_button);
         pickUpPointTextView = findViewById(R.id.ActivityTripPageDriver_pick_up_point_info);
+        driverQRLayout = findViewById(R.id.ActivityTripPageDriver_qr_driver_section);
+        passengerQRLayout = findViewById(R.id.ActivityTripPageDriver_qr_passenger_section);
 
-        createQR();
 
-        Bundle bundle = getIntent().getExtras();
-        isCompleted = bundle.getBoolean("isCompleted");
-        isDriver = bundle.getBoolean("isDriver");
-        tripInvolvedModel = getIntent().getParcelableExtra("trip");
-
+        //Generate the QR Code
+        if (isDriver)
+            createQR();
         //Get the Map
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.ActivityTripPageDriver_map_fragment);
         mapFragment.getMapAsync(this);
@@ -114,7 +126,7 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
         zoomToThePoint = new LatLng(tripInvolvedModel.getDestFrom().getLatitude(), tripInvolvedModel.getDestFrom().getLongitude());
 
         //Set the values
-        if(tripInvolvedModel.getCreatorUser().getPicture() != null)
+        if (tripInvolvedModel.getCreatorUser().getPicture() != null)
             Picasso.get().load(tripInvolvedModel.getCreatorUser().getPicture()).into(creatorUserImage);
 
         textViewDestFrom.setText(tripInvolvedModel.getDestFrom().getTitle());
@@ -133,9 +145,6 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
         pickUpPointTextView.setText(tripInvolvedModel.getPickUpPoint().getTitle());
 
 
-
-
-
         if (tripInvolvedModel.getMessage().equals(""))
             textViewMsg.setText("Ο οδηγός δεν έχει αναφέρει κάποιο συγκεκριμένο μήνυμα");
         else
@@ -152,16 +161,16 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
         mRecyclerView.setHasFixedSize(true);
 
         //Display the settings for the driver or the user etc if is driver and the trip is not completed, it will show the QR Code
-        if (isCompleted){
-            QRImage.setVisibility(View.GONE);
-            scanButton.setVisibility(View.GONE);
-        }else{
-            if(isDriver){
-                QRImage.setVisibility(View.VISIBLE);
-                scanButton.setVisibility(View.GONE);
-            }else{
-                QRImage.setVisibility(View.GONE);
-                scanButton.setVisibility(View.VISIBLE);
+        if (isCompleted) {
+           driverQRLayout.setVisibility(View.GONE);
+           passengerQRLayout.setVisibility(View.GONE);
+        } else {
+            if (isDriver) {
+                passengerQRLayout.setVisibility(View.GONE);
+                driverQRLayout.setVisibility(View.VISIBLE);
+            } else {
+                driverQRLayout.setVisibility(View.GONE);
+                passengerQRLayout.setVisibility(View.VISIBLE);
             }
         }
 
@@ -221,26 +230,42 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
 
 
     }
+
     //We Build the QR Code in case the user is the driver
-    public void createQR(){
-        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+    public void createQR() {
 
-        try {
-            //The first value is the string we want to make QR for
-            BitMatrix bitMatrix = qrCodeWriter.encode("ft764535", BarcodeFormat.QR_CODE, demensionPixels, demensionPixels);
-            Bitmap bitmap = Bitmap.createBitmap(demensionPixels, demensionPixels, Bitmap.Config.RGB_565);
+        new FellowTravellerAPI(globalClass).getTripQRCode(tripInvolvedModel.getId(), new QRCodeModelCallBack() {
+            @Override
+            public void onSuccess(String qrCode) {
+                Toast.makeText(TripPageDriverActivity.this, qrCode, Toast.LENGTH_SHORT).show();
+                try {
+                    QRCodeWriter qrCodeWriter = new QRCodeWriter();
 
-            for(int x = 0; x < demensionPixels; x++){
-                for(int y = 0; y < demensionPixels; y++){
-                    bitmap.setPixel( x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
+                    //The first value is the string we want to make QR for
+                    BitMatrix bitMatrix = qrCodeWriter.encode(qrCode, BarcodeFormat.QR_CODE, demensionPixels, demensionPixels);
+                    Bitmap bitmap = Bitmap.createBitmap(demensionPixels, demensionPixels, Bitmap.Config.RGB_565);
+
+                    for (int x = 0; x < demensionPixels; x++) {
+                        for (int y = 0; y < demensionPixels; y++) {
+                            bitmap.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
+                        }
+                    }
+                    QRImage.setImageBitmap(bitmap);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
-            QRImage.setImageBitmap(bitmap);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            @Override
+            public void onFailure(String msg) {
+                Toast.makeText(TripPageDriverActivity.this, msg, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
+
     //We get the scan result in case user is a passenger
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -250,28 +275,29 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
             if (resultCode == RESULT_OK) {
                 String resultQR = data.getStringExtra("resultFromQRCode");
                 Toast.makeText(TripPageDriverActivity.this, resultQR, Toast.LENGTH_SHORT).show();
-                checkResultFromQR(resultQR
-                );
+                checkResultFromQR(resultQR);
 
-                //Toast.makeText(getContext(),predictionsModelDestFrom.toString(), Toast.LENGTH_SHORT).show();
-                // Toast.makeText(getContext(),predictionsModelDestTo.toString(), Toast.LENGTH_SHORT).show();
             }
             if (resultCode == RESULT_CANCELED) {
-                // mTextViewResult.setText("Nothing selected");
+
             }
         }
     }
 
-    public void checkResultFromQR(String result){
+    public void checkResultFromQR(String result) {
 
-        //Current time must be between one hour +- of the trip's departure time
-        if((tripInvolvedModel.getTimestamp() > (System.currentTimeMillis()/1000) - oneHour) && (tripInvolvedModel.getTimestamp() < (System.currentTimeMillis()/1000) + oneHour)){
-            if(result.equals("ft764535"))
-                Toast.makeText(this, "Ευχαριστούμε πολύ... Καλό σας ταξίδι!", Toast.LENGTH_SHORT).show();
-            else
-                Toast.makeText(this, "Δεν σκανάρατε έγκυρο κωδικό ταξιδιού", Toast.LENGTH_SHORT).show();
-        }else
-            Toast.makeText(this, "Δεν είναι ακόμα η ώρα του ταξιδιού. Ο κωδικός θα γίνει ενεργός λίγο πριν την ώρα αναχώρησης του ταξιδιού", Toast.LENGTH_SHORT).show();
+        new FellowTravellerAPI(globalClass).verifyTripQRCode(tripInvolvedModel.getId(), result, new StatusCallBack() {
+            @Override
+            public void onSuccess(String status) {
+                Toast.makeText(TripPageDriverActivity.this, "Ευχαριστούμε πολύ... Καλό σας ταξίδι!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(String errorMsg) {
+                Toast.makeText(TripPageDriverActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
@@ -279,8 +305,10 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
         map = googleMap;
         map.addMarker(pickUpPoint);
 
+        map.getUiSettings().setZoomControlsEnabled(true);
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(zoomToThePoint, 18));
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

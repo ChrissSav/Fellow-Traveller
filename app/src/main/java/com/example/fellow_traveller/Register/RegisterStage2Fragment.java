@@ -80,6 +80,7 @@ public class RegisterStage2Fragment extends Fragment {
             }
         });
 
+
         confirmPasswordEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
@@ -156,16 +157,15 @@ public class RegisterStage2Fragment extends Fragment {
         confirmPasswordShowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                confirmPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                 if(confirmPasswordHidden){
                     confirmPasswordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                     confirmPasswordEditText.setSelection(confirmPasswordEditText.length());
-                    confirmPasswordFlag = false;
+                    confirmPasswordHidden = false;
                 }
                 else{
                     confirmPasswordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     confirmPasswordEditText.setSelection(confirmPasswordEditText.length());
-                    confirmPasswordFlag = true;
+                    confirmPasswordHidden = true;
                 }
 
             }

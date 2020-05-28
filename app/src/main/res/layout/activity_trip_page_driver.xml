@@ -675,54 +675,107 @@
                 android:background="@color/softGrey_color"
                 app:layout_constraintTop_toBottomOf="@id/ActivityTripPageDriver_cancellation_policy_tv" />
 
-            <TextView
-                android:id="@+id/ActivityTripPageDriver_qr_label"
-                style="@style/header3"
-                android:layout_width="wrap_content"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ActivityTripPageDriver_qr_driver_section"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
                 android:layout_marginTop="40dp"
-                android:text="QR κωδικός"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ActivityTripPageDriver_cancellation_policy_underline" />
-
-            <TextView
-                android:id="@+id/ActivityTripPageDriver_qr_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="20dp"
-                android:fontFamily="@font/firasans_light"
-                android:text="Δείξτε τον κωδικό στους επιβάτες λίγα λεπτά πριν το ταξίδι για να δηλώσουν την παρουσία τους"
-                android:textColor="@color/black_color"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/ActivityTripPageDriver_trip_label"
-                app:layout_constraintTop_toBottomOf="@id/ActivityTripPageDriver_qr_label" />
-
-            <ImageView
-                android:id="@+id/ActivityTripPageDriver_qr_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:orientation="vertical"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ActivityTripPageDriver_qr_tv"
+                app:layout_constraintTop_toBottomOf="@id/ActivityTripPageDriver_cancellation_policy_underline">
 
-                />
+                <TextView
+                    android:id="@+id/ActivityTripPageDriver_driver_qr_label"
+                    style="@style/header3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="QR κωδικός"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/ActivityTripPageDriver_scan_button"
-                style="@style/button_orange_filled"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/ActivityTripPageDriver_driver_qr_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/firasans_light"
+                    android:text="Δείξτε τον κωδικό στους επιβάτες λίγα λεπτά πριν το ταξίδι για να δηλώσουν την παρουσία τους"
+                    android:textColor="@color/black_color"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/ActivityTripPageDriver_driver_qr_label"
+                    app:layout_constraintTop_toBottomOf="@id/ActivityTripPageDriver_driver_qr_label" />
+
+                <ImageView
+                    android:id="@+id/ActivityTripPageDriver_driver_qr_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ActivityTripPageDriver_driver_qr_tv"
+
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ActivityTripPageDriver_qr_passenger_section"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Σκάναρε τον QR κωδικό"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ActivityTripPageDriver_cancellation_policy_underline"
+                android:layout_marginTop="40dp"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ActivityTripPageDriver_cancellation_policy_underline">
 
-                />
+                <TextView
+                    android:id="@+id/ActivityTripPageDriver_passenger_qr_label"
+                    style="@style/header3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="Επιβεβαίωση QR Code"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="20dp"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/ActivityTripPageDriver_passenger_qr_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/firasans_light"
+                    android:text="Στο σημείο συνάντησης σκάναρε τον κωδικό από τον οδηγό έτσι ώστε να επιβεβαιώσεις την παρουσία σου στο ταξίδι"
+                    android:textColor="@color/black_color"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/ActivityTripPageDriver_passenger_qr_label"
+                    app:layout_constraintTop_toBottomOf="@id/ActivityTripPageDriver_passenger_qr_label" />
+
+                <Button
+                    android:id="@+id/ActivityTripPageDriver_scan_button"
+                    style="@style/button_orange_filled"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:text="Σκάναρε τον QR κωδικό"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ActivityTripPageDriver_passenger_qr_tv" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
