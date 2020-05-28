@@ -6,6 +6,7 @@ import com.example.fellow_traveller.ClientAPI.Callbacks.BooleanResponseModelCall
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarDeleteCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.CarRegisterCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.NotificationCallBack;
+import com.example.fellow_traveller.ClientAPI.Callbacks.QRCodeModelCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.ReviewModelCallBack;
 import com.example.fellow_traveller.ClientAPI.Callbacks.SearchTripsCallback;
 import com.example.fellow_traveller.ClientAPI.Callbacks.StatusCallBack;
@@ -26,6 +27,8 @@ import com.example.fellow_traveller.ClientAPI.Models.DetailModel;
 import com.example.fellow_traveller.ClientAPI.Models.ErrorResponseModel;
 import com.example.fellow_traveller.ClientAPI.Models.NotificationModel;
 import com.example.fellow_traveller.ClientAPI.Models.PassengerModel;
+import com.example.fellow_traveller.ClientAPI.Models.QRCodeModel;
+import com.example.fellow_traveller.ClientAPI.Models.QRCodeVerifyModel;
 import com.example.fellow_traveller.ClientAPI.Models.ReviewModel;
 import com.example.fellow_traveller.ClientAPI.Models.SearchDestinationsModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
@@ -637,8 +640,8 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void checkReviewIfAllReadeRegi(int userId,int tripId, final BooleanResponseModelCallBack booleanResponseModelCallBack) {
-        retrofitAPIEndpoints.checkReview(userId,tripId).enqueue(new Callback<BooleanResponseModel>() {
+    public static void checkReviewIfAllReadeRegi(int userId, int tripId, final BooleanResponseModelCallBack booleanResponseModelCallBack) {
+        retrofitAPIEndpoints.checkReview(userId, tripId).enqueue(new Callback<BooleanResponseModel>() {
             @Override
             public void onResponse(Call<BooleanResponseModel> call, Response<BooleanResponseModel> response) {
                 if (!response.isSuccessful()) {
@@ -656,6 +659,7 @@ public class FellowTravellerAPI {
             }
         });
     }
+
     public static void addUserReview(CreateReviewModel createReviewModel, final StatusCallBack statusCallBack) {
         retrofitAPIEndpoints.addUserReview(createReviewModel).enqueue(new Callback<StatusHandleModel>() {
             @Override
@@ -738,6 +742,61 @@ public class FellowTravellerAPI {
             public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
                 if (!response.isSuccessful()) {
                     statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                    return;
+                }
+                statusCallBack.onSuccess(response.body().getMsg());
+            }
+
+            @Override
+            public void onFailure(Call<StatusHandleModel> call, Throwable t) {
+                statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            }
+        });
+    }
+
+
+    public static void getTripQRCode(int tripId, final QRCodeModelCallBack qrCodeModelCallBack) {
+        retrofitAPIEndpoints.getQrCode(tripId).enqueue(new Callback<QRCodeModel>() {
+            @Override
+            public void onResponse(Call<QRCodeModel> call, Response<QRCodeModel> response) {
+                if (!response.isSuccessful()) {
+                    qrCodeModelCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                    return;
+                }
+                qrCodeModelCallBack.onSuccess(response.body().getCode());
+            }
+
+            @Override
+            public void onFailure(Call<QRCodeModel> call, Throwable t) {
+                qrCodeModelCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNAUTHORIZED));
+            }
+        });
+    }
+
+
+    public static void verifyTripQRCode(int tripId, String qrCode, final StatusCallBack statusCallBack) {
+        QRCodeVerifyModel qrCodeVerifyModel = new QRCodeVerifyModel(tripId, qrCode);
+
+        retrofitAPIEndpoints.qrCodeVerify(qrCodeVerifyModel).enqueue(new Callback<StatusHandleModel>() {
+            @Override
+            public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
+                if (!response.isSuccessful()) {
+                    ErrorResponseModel errorResponseModel = getModelFromResponseErrorBody(response);
+                    Log.i("getStatusCode", "onResponse: " + errorResponseModel.getDetail().getStatusCode());
+                    switch (errorResponseModel.getDetail().getStatusCode()) {
+                        case 411:
+                            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_TRIP_USER_NOT_PASSENGER));
+                            break;
+                        case 412:
+                            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_TRIP_QRCODE_EARLY));
+                            break;
+                        case 413:
+                            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_TRIP_QRCODE_WRONG));
+                            break;
+                        default:
+                            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_API_UNREACHABLE));
+                            break;
+                    }
                     return;
                 }
                 statusCallBack.onSuccess(response.body().getMsg());
