@@ -9,17 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import com.example.fellow_traveller.ClientAPI.Models.TripModel;
+import com.example.fellow_traveller.ClientAPI.Models.TripInvolvedModel;
+
 import com.example.fellow_traveller.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdapter.SearchResultsViewHolder> {
-    private ArrayList<TripModel> searchResultList;
+    private ArrayList<TripInvolvedModel> searchResultList;
     private OnItemClickListener mListener;
 
-    public SearchResultsAdapter(ArrayList<TripModel> searchList) {
+    public SearchResultsAdapter(ArrayList<TripInvolvedModel> searchList) {
         searchResultList = searchList;
 
     }
@@ -38,7 +39,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
 
     @Override
     public void onBindViewHolder(@NonNull SearchResultsViewHolder holder, int position) {
-        TripModel currentItem = searchResultList.get(position);
+        TripInvolvedModel currentItem = searchResultList.get(position);
 
         holder.userName.setText(currentItem.getCreatorUser().getFullName());
         // TODO cast this to double
