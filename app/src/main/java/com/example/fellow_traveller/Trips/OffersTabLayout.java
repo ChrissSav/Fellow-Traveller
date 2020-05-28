@@ -26,6 +26,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.CompositePageTransformer;
+import androidx.viewpager2.widget.MarginPageTransformer;
+import androidx.viewpager2.widget.ViewPager2;
 
 public class OffersTabLayout extends Fragment {
     View view;
@@ -39,6 +42,8 @@ public class OffersTabLayout extends Fragment {
     private TextView activeTripsTextview;
     private Button createTripButton;
     private ConstraintLayout activeTripsSectionLayout, noActiveTripsSectionLayout, completedTripsSectionLayout;
+
+    private ViewPager2 activeTripsViewPager;
 
     public OffersTabLayout() {
     }
@@ -69,26 +74,31 @@ public class OffersTabLayout extends Fragment {
                     //check if user has active trips
                     if (activeTripsList.size() > 0) {
 
+                        activeTripsViewPager = view.findViewById(R.id.fragment_trip_offers_recycler_view);
+
+                        activeTripsViewPager.setAdapter( new ActiveAdapter( activeTripsList ) );
+
+                        activeTripsViewPager.setClipToPadding(false);
+                        activeTripsViewPager.setClipChildren( false );
+                        activeTripsViewPager.setOffscreenPageLimit( 3 );
+                        activeTripsViewPager.getChildAt( 0 ).setOverScrollMode( RecyclerView.OVER_SCROLL_NEVER );
+
+                        CompositePageTransformer compositePageTransformer=new CompositePageTransformer();
+                        compositePageTransformer.addTransformer( new MarginPageTransformer( 20 ) );
+                        compositePageTransformer.addTransformer( new ViewPager2.PageTransformer() {
+                            @Override
+                            public void transformPage(@NonNull View page, float position) {
+                                float r=1-Math.abs( position );
+                                page.setScaleY( 0.9f+r*0.10f );
+
+                            }
+                        } );
+
+                        activeTripsViewPager.setPageTransformer( compositePageTransformer );
+
+
                         noActiveTripsSectionLayout.setVisibility(View.GONE);
                         activeTripsSectionLayout.setVisibility(View.VISIBLE);
-
-                        mRecyclerViewActive = view.findViewById(R.id.fragment_trip_offers_recycler_view);
-                        mRecyclerViewActive.setHasFixedSize(true);
-                        mLayoutManagerActive = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-                        mAdapterActive = new ActiveTripsAdapter(activeTripsList);
-                        mRecyclerViewActive.setLayoutManager(mLayoutManagerActive);
-                        mRecyclerViewActive.setAdapter(mAdapterActive);
-
-                        mAdapterActive.setOnItemClickListener(new ActiveTripsAdapter.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(int position) {
-                                Intent mainIntent = new Intent(getActivity().getApplicationContext(), TripPageDriverActivity.class);
-                                mainIntent.putExtra("isCompleted", false);
-                                mainIntent.putExtra("isDriver", true);
-                                mainIntent.putExtra("trip", activeTripsList.get(position));
-                                startActivity(mainIntent);
-                            }
-                        });
                         if (activeTripsList.size() == 1)
                             activeTripsTextview.setText("Έχετε " + String.valueOf(activeTripsList.size()) + " ενεργό ταξίδι");
                         else

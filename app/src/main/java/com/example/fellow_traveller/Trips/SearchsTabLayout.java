@@ -2,6 +2,7 @@ package com.example.fellow_traveller.Trips;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,12 +28,15 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.CompositePageTransformer;
+import androidx.viewpager2.widget.MarginPageTransformer;
+import androidx.viewpager2.widget.ViewPager2;
 
 public class SearchsTabLayout extends Fragment {
     View view;
     private GlobalClass globalClass;
     private RecyclerView mRecyclerViewActive, mRecyclerViewNotActive;
-    private ActiveTripsAdapter mAdapterActive;
+    private ActiveAdapter mAdapterActive;
     private CompletedTripsAdapter mAdapterNotActive;
     private RecyclerView.LayoutManager mLayoutManagerActive, mLayoutManagerNotActive;
     private ArrayList<TripInvolvedModel> activeTripsList = new ArrayList<>();
@@ -40,6 +44,10 @@ public class SearchsTabLayout extends Fragment {
     private TextView activeTripsTextview;
     private Button searchButton;
     private ConstraintLayout activeTripsSectionLayout, noActiveTripsSectionLayout, completedTripsSectionLayout;
+
+    private ViewPager2 activeTripsViewPager,completedTripsViewPager;
+
+
 
 
     public SearchsTabLayout() {
@@ -70,25 +78,35 @@ public class SearchsTabLayout extends Fragment {
                             completedTripsList.add(trips.get(i));
                     }
                     //check if user has active trips
+
+
                     if (activeTripsList.size() > 0) {
-                        mRecyclerViewActive = view.findViewById(R.id.fragment_trip_searchs_recycler_view);
-                        mRecyclerViewActive.setHasFixedSize(true);
-                        mLayoutManagerActive = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-                        mAdapterActive = new ActiveTripsAdapter(activeTripsList);
-                        mRecyclerViewActive.setLayoutManager(mLayoutManagerActive);
-                        mRecyclerViewActive.setAdapter(mAdapterActive);
+
+                        activeTripsViewPager = view.findViewById(R.id.fragment_trip_searchs_recycler_view);
+
+                        activeTripsViewPager.setAdapter( new ActiveAdapter( activeTripsList ) );
+
+                        activeTripsViewPager.setClipToPadding(false);
+                        activeTripsViewPager.setClipChildren( false );
+                        activeTripsViewPager.setOffscreenPageLimit( 3 );
+                        activeTripsViewPager.getChildAt( 0 ).setOverScrollMode( RecyclerView.OVER_SCROLL_NEVER );
+
+                        CompositePageTransformer compositePageTransformer=new CompositePageTransformer();
+                        compositePageTransformer.addTransformer( new MarginPageTransformer( 20 ) );
+                        compositePageTransformer.addTransformer( new ViewPager2.PageTransformer() {
+                            @Override
+                            public void transformPage(@NonNull View page, float position) {
+                                float r=1-Math.abs( position );
+                                page.setScaleY( 0.9f+r*0.10f );
+
+                            }
+                        } );
+
+                        activeTripsViewPager.setPageTransformer( compositePageTransformer );
+
+
                         noActiveTripsSectionLayout.setVisibility(View.GONE);
                         activeTripsSectionLayout.setVisibility(View.VISIBLE);
-                        mAdapterActive.setOnItemClickListener(new ActiveTripsAdapter.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(int position) {
-                                Intent mainIntent = new Intent(getActivity().getApplicationContext(), TripPageDriverActivity.class);
-                                mainIntent.putExtra("isCompleted", false);
-                                mainIntent.putExtra("isDriver", false);
-                                mainIntent.putExtra("trip", activeTripsList.get(position));
-                                startActivity(mainIntent);
-                            }
-                        });
                         if (activeTripsList.size() == 1)
                             activeTripsTextview.setText("Έχετε " + String.valueOf(activeTripsList.size()) + " ενεργό ταξίδι");
                         else
@@ -97,6 +115,7 @@ public class SearchsTabLayout extends Fragment {
                         activeTripsSectionLayout.setVisibility(View.GONE);
                         noActiveTripsSectionLayout.setVisibility(View.VISIBLE);
                     }
+
 
                     //check if we have completed trips
                     if(completedTripsList.size() > 0){
