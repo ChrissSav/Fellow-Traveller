@@ -43,7 +43,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
     private RegisterStage3Fragment registerStage3Fragment = new RegisterStage3Fragment();
     private ProgressBar progressBar;
     private int num_num;
-    private String userPhone = "+306940184085";
+    private String userPhone = "";
     private GlobalClass globalClass;
     private DatabaseReference userDatabase;
 
@@ -54,7 +54,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register_container);
         globalClass = (GlobalClass) getApplicationContext();
 
-        //userPhone = getIntent().getStringExtra("phoneNumber");
+        userPhone = getIntent().getStringExtra("phoneNumber");
         num_num = 100 / stages;
 
         progressBar = findViewById(R.id.RegisterActivity_progressBar);

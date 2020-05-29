@@ -41,7 +41,7 @@
         android:layout_marginTop="10dp"
         android:background="@null"
         android:singleLine="true"
-        android:maxLength="20"
+        android:maxLength="80"
         android:inputType="textWebEmailAddress"
         style="@style/paragraph2"
         app:layout_constraintEnd_toEndOf="parent"

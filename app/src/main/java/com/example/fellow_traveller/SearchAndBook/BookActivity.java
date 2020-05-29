@@ -61,7 +61,7 @@ public class BookActivity extends AppCompatActivity {
         decreaseBagsButton = findViewById(R.id.ActivityBook_seats_minus_button);
         nextButton = findViewById(R.id.ActivityBooks_next_button);
         destStartTextView = findViewById(R.id.ActivityBook_start_textView);
-        destEndTextView = findViewById(R.id.ActivityBook_start_textView);
+        destEndTextView = findViewById(R.id.ActivityBook_end_textView);
         dateTextView = findViewById(R.id.ActivityBook_date_textView);
         timeTextView = findViewById(R.id.ActivityBook_time_textView);
         seatsTextView = findViewById(R.id.ActivityBook_seats_textView);
@@ -77,8 +77,9 @@ public class BookActivity extends AppCompatActivity {
 
         getUserBags();
 
-        destStartTextView.setText(tripInvolvedModel.getDestTo().getTitle());
-        destEndTextView.setText(tripInvolvedModel.getDestFrom().getTitle());
+        destStartTextView.setText(tripInvolvedModel.getDestFrom().getTitle());
+        destEndTextView.setText(tripInvolvedModel.getDestTo().getTitle());
+
 
         timeTextView.setText(tripInvolvedModel.getTime());
         seatsTextView.setText(String.valueOf(tripInvolvedModel.getMaxSeats()));

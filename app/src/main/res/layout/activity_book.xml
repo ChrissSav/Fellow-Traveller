@@ -9,109 +9,112 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        >
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="20dp"
-            >
+            android:paddingBottom="20dp">
 
             <TextView
                 android:id="@+id/ActivityBook_book_trip_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Κλείσιμο της θέσης"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
                 android:fontFamily="@font/firasans_bold"
+                android:text="Κλείσιμο της θέσης"
                 android:textColor="@color/black_color"
                 android:textSize="24sp"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="20dp"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageButton
                 android:id="@+id/ActivityBook_close_button"
+                style="@style/border_icon_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
                 android:src="@drawable/ic_close"
-                style="@style/border_icon_button"
-                app:layout_constraintTop_toTopOf="@id/ActivityBook_book_trip_label"
                 app:layout_constraintBottom_toBottomOf="@+id/ActivityBook_book_trip_label"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginRight="20dp"
-                />
-            <TextView
-                android:id="@+id/ActivityBook_start_label"
-                android:layout_width="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/ActivityBook_book_trip_label" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ActivityBook_destinations_section"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Από"
-                android:fontFamily="@font/firasans_light"
-                android:textColor="@color/black_color"
-                app:layout_constraintTop_toBottomOf="@id/ActivityBook_book_trip_label"
-                app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginTop="50dp"
-                android:textSize="16sp"
-                android:layout_marginLeft="40dp"
-                />
-            <TextView
-                android:id="@+id/ActivityBook_start_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Αθήνα"
-                android:fontFamily="@font/firasans_bold"
-                android:textColor="@color/black_color"
-                app:layout_constraintStart_toStartOf="@id/ActivityBook_start_label"
-                app:layout_constraintTop_toBottomOf="@id/ActivityBook_start_label"
-                android:textSize="20sp"
-                />
-            <TextView
-                android:id="@+id/ActivityBook_end_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Προς"
-                android:fontFamily="@font/firasans_light"
-                android:textColor="@color/black_color"
-                app:layout_constraintTop_toTopOf="@id/ActivityBook_start_label"
-                app:layout_constraintBottom_toBottomOf="@id/ActivityBook_start_label"
-                app:layout_constraintStart_toEndOf="@id/ActivityBook_start_label"
-                android:layout_marginStart="140dp"
-                android:textSize="16sp"
-                />
-            <TextView
-                android:id="@+id/ActivityBook_end_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Θεσσαλονίκη"
-                android:fontFamily="@font/firasans_bold"
-                android:textColor="@color/black_color"
-                app:layout_constraintStart_toStartOf="@id/ActivityBook_end_label"
-                app:layout_constraintTop_toBottomOf="@id/ActivityBook_end_label"
-                android:textSize="20sp"
-                />
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ActivityBook_book_trip_label">
+
+                <TextView
+                    android:id="@+id/ActivityBook_start_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:fontFamily="@font/firasans_light"
+                    android:text="Από"
+                    android:textColor="@color/black_color"
+                    android:textSize="16sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/ActivityBook_start_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
+                    android:fontFamily="@font/firasans_bold"
+                    android:text="Αθήναdadsadadasdsdaadasdsda"
+                    android:textColor="@color/black_color"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toStartOf="@+id/ActivityBook_end_textView"
+                    app:layout_constraintStart_toStartOf="@id/ActivityBook_start_label"
+                    app:layout_constraintTop_toBottomOf="@id/ActivityBook_start_label" />
+
+                <TextView
+                    android:id="@+id/ActivityBook_end_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="140dp"
+                    android:fontFamily="@font/firasans_light"
+                    android:text="Προς"
+                    android:textColor="@color/black_color"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@id/ActivityBook_start_label"
+                    app:layout_constraintStart_toEndOf="@id/ActivityBook_start_label"
+                    app:layout_constraintTop_toTopOf="@id/ActivityBook_start_label" />
+
+                <TextView
+                    android:id="@+id/ActivityBook_end_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/firasans_bold"
+                    android:paddingEnd="20dp"
+                    android:text="Θεσσαλονίκdasddadadsadasdaddη"
+                    android:textColor="@color/black_color"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/ActivityBook_end_label"
+                    app:layout_constraintTop_toBottomOf="@id/ActivityBook_end_label" />
 
 
-
-
-
-
-
-
-
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ActivityBook_info__section"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/ActivityBook_start_textView"
-               app:layout_constraintStart_toStartOf="@id/ActivityBook_book_trip_label"
-                app:layout_constraintEnd_toEndOf="@id/ActivityBook_close_button"
                 android:layout_marginTop="40dp"
-                >
+                app:layout_constraintEnd_toEndOf="@id/ActivityBook_close_button"
+                app:layout_constraintStart_toStartOf="@id/ActivityBook_book_trip_label"
+                app:layout_constraintTop_toBottomOf="@id/ActivityBook_destinations_section">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/ActivityBook_date_section"
@@ -120,46 +123,44 @@
                     android:background="@drawable/book_search_border"
                     android:padding="15dp"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    >
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
                         android:id="@+id/ActivityBook_date_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ημ/νία"
                         android:fontFamily="@font/firasans_light"
+                        android:text="Ημ/νία"
                         android:textColor="@color/black_color"
                         android:textSize="15sp"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        />
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <TextView
                         android:id="@+id/ActivityBook_date_textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="22"
+                        android:layout_marginTop="10dp"
                         android:fontFamily="@font/firasans_bold"
+                        android:text="22"
                         android:textColor="@color/black_color"
+                        android:textSize="18sp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/ActivityBook_date_label"
-                        android:layout_marginTop="10dp"
-                        android:textSize="18sp"
-                        />
+                        app:layout_constraintTop_toBottomOf="@id/ActivityBook_date_label" />
+
                     <TextView
                         android:id="@+id/ActivityBook_date_month_textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ιαν"
+                        android:layout_marginTop="5sp"
                         android:fontFamily="@font/firasans_bold"
+                        android:text="Ιαν"
                         android:textColor="@color/black_color"
+                        android:textSize="18sp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/ActivityBook_date_textView"
-                        android:layout_marginTop="5sp"
-                        android:textSize="18sp"
-                        />
+                        app:layout_constraintTop_toBottomOf="@id/ActivityBook_date_textView" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -170,101 +171,98 @@
                     android:background="@drawable/book_search_border"
                     android:padding="15dp"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    >
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
                         android:id="@+id/ActivityBook_seats_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Θέσεις"
                         android:fontFamily="@font/firasans_light"
+                        android:text="Θέσεις"
                         android:textColor="@color/black_color"
                         android:textSize="15sp"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        />
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <TextView
                         android:id="@+id/ActivityBook_seats_textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1"
+                        android:layout_marginTop="10dp"
                         android:fontFamily="@font/firasans_bold"
+                        android:text="1"
                         android:textColor="@color/black_color"
+                        android:textSize="18sp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/ActivityBook_seats_label"
-                        android:layout_marginTop="10dp"
 
-                        android:textSize="18sp"
-                        />
+                        app:layout_constraintTop_toBottomOf="@id/ActivityBook_seats_label" />
+
                     <TextView
                         android:id="@+id/ActivityBook_seats_definition_textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Θέση"
+                        android:layout_marginTop="5sp"
                         android:fontFamily="@font/firasans_bold"
+                        android:text="Θέση"
                         android:textColor="@color/black_color"
+                        android:textSize="18sp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/ActivityBook_seats_textView"
-                        android:layout_marginTop="5sp"
-                        android:textSize="18sp"
-                        />
+                        app:layout_constraintTop_toBottomOf="@id/ActivityBook_seats_textView" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/ActivityBook_time_section"
                     android:layout_width="90dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/book_search_border"
-                    android:padding="15dp"
-                    app:layout_constraintStart_toEndOf="@id/ActivityBook_date_section"
-                    app:layout_constraintEnd_toStartOf="@id/ActivityBook_seats_section"
-                    app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginStart="30dp"
                     android:layout_marginEnd="30dp"
-                    >
+                    android:background="@drawable/book_search_border"
+                    android:padding="15dp"
+                    app:layout_constraintEnd_toStartOf="@id/ActivityBook_seats_section"
+                    app:layout_constraintStart_toEndOf="@id/ActivityBook_date_section"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
                         android:id="@+id/ActivityBook_time_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ώρα"
                         android:fontFamily="@font/firasans_light"
+                        android:text="Ώρα"
                         android:textColor="@color/black_color"
                         android:textSize="15sp"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        />
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <TextView
                         android:id="@+id/ActivityBook_time_textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="7:00"
+                        android:layout_marginTop="10dp"
                         android:fontFamily="@font/firasans_bold"
+                        android:text="7:00"
                         android:textColor="@color/black_color"
+                        android:textSize="18sp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/ActivityBook_time_label"
-                        android:layout_marginTop="10dp"
 
-                        android:textSize="18sp"
-                        />
+                        app:layout_constraintTop_toBottomOf="@id/ActivityBook_time_label" />
+
                     <TextView
                         android:id="@+id/ActivityBook_time_pm_textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Π.Μ."
+                        android:layout_marginTop="5sp"
                         android:fontFamily="@font/firasans_bold"
+                        android:text="Π.Μ."
+                        android:textAllCaps="true"
                         android:textColor="@color/black_color"
+                        android:textSize="18sp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/ActivityBook_time_textView"
-                        android:layout_marginTop="5sp"
-                        android:textAllCaps="true"
-                        android:textSize="18sp"
-                        />
+                        app:layout_constraintTop_toBottomOf="@id/ActivityBook_time_textView" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -273,78 +271,77 @@
                 android:id="@+id/ActivityBook_bags_label"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="Πόσες αποσκευές θα έχετε;"
-                android:fontFamily="@font/firasans_bold"
-                android:textColor="@color/black_color"
-                app:layout_constraintTop_toBottomOf="@id/ActivityBook_info__section"
                 android:layout_marginTop="40dp"
+                android:fontFamily="@font/firasans_bold"
                 android:paddingRight="20dp"
-                app:layout_constraintStart_toStartOf="@id/ActivityBook_info__section"
+                android:text="Πόσες αποσκευές θα έχετε;"
+                android:textColor="@color/black_color"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toStartOf="@id/ActivityBook_seats_increaser_section"
-                />
+                app:layout_constraintStart_toStartOf="@id/ActivityBook_info__section"
+                app:layout_constraintTop_toBottomOf="@id/ActivityBook_info__section" />
 
             <TextView
                 android:id="@+id/ActivityBook_bags_info_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:text="Μπορείτε να έχετε μαζί σας μέχρι 2 αποσκευές"
-                android:fontFamily="@font/firasans_light"
-                android:textColor="@color/black_color"
-                app:layout_constraintTop_toBottomOf="@id/ActivityBook_bags_label"
                 android:layout_marginTop="10dp"
-                app:layout_constraintStart_toStartOf="@id/ActivityBook_bags_label"
-                app:layout_constraintRight_toRightOf="parent"
+                android:fontFamily="@font/firasans_light"
                 android:paddingRight="50dp"
-                />
+                android:text="Μπορείτε να έχετε μαζί σας μέχρι 2 αποσκευές"
+                android:textColor="@color/black_color"
+                android:textSize="18sp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@id/ActivityBook_bags_label"
+                app:layout_constraintTop_toBottomOf="@id/ActivityBook_bags_label" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ActivityBook_seats_increaser_section"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/increaser_border_stroke_shape"
-                app:layout_constraintTop_toTopOf="@id/ActivityBook_bags_label"
+                android:padding="10dp"
                 app:layout_constraintBottom_toBottomOf="@id/ActivityBook_bags_label"
                 app:layout_constraintEnd_toEndOf="@id/ActivityBook_info__section"
-                android:padding="10dp"
-                >
+                app:layout_constraintTop_toTopOf="@id/ActivityBook_bags_label">
+
                 <ImageButton
                     android:id="@+id/ActivityBook_seats_minus_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:src="@drawable/ic_minus"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:padding="5dp"
                     android:scaleX="1.5"
                     android:scaleY="1.5"
-                    android:padding="5dp"/>
+                    android:src="@drawable/ic_minus"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/ActivityBook_seats_value_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/firasans_light"
                     android:text="0"
                     android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="@id/ActivityBook_seats_minus_button"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/ActivityBook_seats_plus_button"
-                    android:fontFamily="@font/firasans_light"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintStart_toStartOf="@id/ActivityBook_seats_minus_button"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <ImageButton
                     android:id="@+id/ActivityBook_seats_plus_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:padding="5dp"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
                     android:src="@drawable/ic_plus"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:scaleX="1.5"
-                    android:scaleY="1.5"
-                    android:padding="5dp"/>
-
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -353,15 +350,15 @@
                 android:id="@+id/ActivityBook_pets_label"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="Έχετε κάποιο κατοικίδιο;"
-                android:fontFamily="@font/firasans_bold"
-                android:textColor="@color/black_color"
-                app:layout_constraintTop_toBottomOf="@id/ActivityBook_bags_info_textView"
                 android:layout_marginTop="40dp"
+                android:fontFamily="@font/firasans_bold"
                 android:paddingRight="20dp"
+                android:text="Έχετε κάποιο κατοικίδιο;"
+                android:textColor="@color/black_color"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toStartOf="@id/ActivityBook_have_pet_textView"
                 app:layout_constraintStart_toStartOf="@id/ActivityBook_bags_label"
+                app:layout_constraintTop_toBottomOf="@id/ActivityBook_bags_info_textView"
 
                 />
 
@@ -369,15 +366,15 @@
                 android:id="@+id/ActivityBook_pets_info_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:text="Ο οδηγός επιτρέπει μόνο ένα μικρόσωμο ζώο μέσα σε κλουβί"
-                android:fontFamily="@font/firasans_light"
-                android:textColor="@color/black_color"
-                app:layout_constraintTop_toBottomOf="@id/ActivityBook_pets_label"
                 android:layout_marginTop="10dp"
-                app:layout_constraintStart_toStartOf="@id/ActivityBook_pets_label"
+                android:fontFamily="@font/firasans_light"
+                android:text="Ο οδηγός επιτρέπει μόνο ένα μικρόσωμο ζώο μέσα σε κλουβί"
+                android:textColor="@color/black_color"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@id/ActivityBook_pets_switch"
                 app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@id/ActivityBook_pets_label"
+                app:layout_constraintTop_toBottomOf="@id/ActivityBook_pets_label"
 
                 />
 
@@ -385,84 +382,82 @@
                 android:id="@+id/ActivityBook_pets_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/ActivityBook_pets_label"
-                app:layout_constraintBottom_toBottomOf="@id/ActivityBook_pets_label"
-                app:layout_constraintEnd_toEndOf="@id/ActivityBook_info__section"
-                android:track="@drawable/switch_tracker"
-                android:checked="false"
-                android:thumb="@drawable/switch_thumb"
                 android:background="@null"
+                android:checked="false"
                 android:scaleX="1.1"
                 android:scaleY="1.1"
-               />
+                android:thumb="@drawable/switch_thumb"
+                android:track="@drawable/switch_tracker"
+                app:layout_constraintBottom_toBottomOf="@id/ActivityBook_pets_label"
+                app:layout_constraintEnd_toEndOf="@id/ActivityBook_info__section"
+                app:layout_constraintTop_toTopOf="@id/ActivityBook_pets_label" />
+
             <TextView
                 android:id="@+id/ActivityBook_have_pet_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/firasans_light"
                 android:text="Όχι, δεν έχω"
-                app:layout_constraintTop_toTopOf="@id/ActivityBook_pets_label"
+                android:textColor="@color/black_color"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@id/ActivityBook_pets_label"
                 app:layout_constraintEnd_toStartOf="@id/ActivityBook_pets_switch"
-                android:layout_marginEnd="20dp"
-                android:textSize="18sp"
-                android:textColor="@color/black_color"
-                android:fontFamily="@font/firasans_light"
-                />
+                app:layout_constraintTop_toTopOf="@id/ActivityBook_pets_label" />
 
 
             <TextView
                 android:id="@+id/ActivityBook_payments_method_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="Τρόποι Πληρωμής"
-                android:fontFamily="@font/firasans_bold"
-                android:textColor="@color/black_color"
-                app:layout_constraintTop_toBottomOf="@id/ActivityBook_pets_info_textView"
+                android:layout_marginLeft="40dp"
                 android:layout_marginTop="40dp"
+                android:fontFamily="@font/firasans_bold"
+                android:text="Τρόποι Πληρωμής"
+                android:textColor="@color/black_color"
+                android:textSize="20sp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginLeft="40dp"/>
+                app:layout_constraintTop_toBottomOf="@id/ActivityBook_pets_info_textView" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ActivityBook_spinner_section"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/ActivityBook_payments_method_label"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="40dp"
                 android:background="@drawable/payment_method_border"
                 android:paddingLeft="10dp"
-                android:paddingRight="10dp"
                 android:paddingTop="5dp"
+                android:paddingRight="10dp"
                 android:paddingBottom="5dp"
-                >
-
-            <Spinner
-                android:id="@+id/ActivityBook_payment_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:overlapAnchor="false"
-                android:dropDownWidth="match_parent"
-                android:background="@null"
-                android:spinnerMode="dropdown"
-                />
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ActivityBook_payments_method_label">
+
+                <Spinner
+                    android:id="@+id/ActivityBook_payment_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:dropDownWidth="match_parent"
+                    android:overlapAnchor="false"
+                    android:spinnerMode="dropdown"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/ic_down_arrow"
                     android:backgroundTint="@color/black_color"
-                    app:layout_constraintTop_toTopOf="@+id/ActivityBook_payment_spinner"
                     app:layout_constraintBottom_toBottomOf="@+id/ActivityBook_payment_spinner"
                     app:layout_constraintEnd_toEndOf="@+id/ActivityBook_payment_spinner"
-                    android:background="@drawable/ic_down_arrow"
-                    android:layout_marginEnd="10dp"
+                    app:layout_constraintTop_toTopOf="@+id/ActivityBook_payment_spinner"
 
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -471,70 +466,66 @@
                 android:id="@+id/ActivityBook_underline_book"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:background="@color/softGrey_color"
-                app:layout_constraintTop_toBottomOf="@+id/ActivityBook_spinner_section"
-                android:layout_marginTop="20dp"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
-                />
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:background="@color/softGrey_color"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ActivityBook_spinner_section" />
 
             <TextView
                 android:id="@+id/ActivityBook_price_book_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Τιμή"
+                android:layout_marginTop="30dp"
                 android:fontFamily="@font/firasans_bold"
+                android:text="Τιμή"
                 android:textColor="@color/black_color"
                 android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@id/ActivityBook_underline_book"
                 app:layout_constraintStart_toStartOf="@id/ActivityBook_pets_label"
-                android:layout_marginTop="30dp"
-              />
+                app:layout_constraintTop_toBottomOf="@id/ActivityBook_underline_book" />
 
             <TextView
                 android:id="@+id/ActivityBook_price_description_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:text="Η τιμή περιέχει τους φόρους"
-                android:fontFamily="@font/firasans_light"
-                android:textColor="@color/black_color"
-                app:layout_constraintTop_toBottomOf="@id/ActivityBook_price_book_textView"
                 android:layout_marginTop="10dp"
-                app:layout_constraintStart_toStartOf="@id/ActivityBook_pets_label"
-                app:layout_constraintEnd_toStartOf="@id/ActivityBook_price_textView"
+                android:fontFamily="@font/firasans_light"
                 android:paddingEnd="20dp"
-                />
+                android:text="Η τιμή περιέχει τους φόρους"
+                android:textColor="@color/black_color"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@id/ActivityBook_price_textView"
+                app:layout_constraintStart_toStartOf="@id/ActivityBook_pets_label"
+                app:layout_constraintTop_toBottomOf="@id/ActivityBook_price_book_textView" />
 
             <TextView
                 android:id="@+id/ActivityBook_price_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10€"
+                android:layout_marginRight="40dp"
                 android:fontFamily="@font/firasans_light"
+                android:text="10€"
                 android:textColor="@color/black_color"
                 android:textSize="20sp"
-                app:layout_constraintTop_toTopOf="@id/ActivityBook_price_book_textView"
                 app:layout_constraintBottom_toBottomOf="@id/ActivityBook_price_book_textView"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginRight="40dp"
-                />
+                app:layout_constraintTop_toTopOf="@id/ActivityBook_price_book_textView" />
 
 
-                <Button
-                    android:id="@+id/ActivityBooks_next_button"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/ActivityBook_price_description_textView"
-                    style="@style/button_orange_filled"
-                    android:layout_marginTop="70dp"
-                    android:text="Επόμενο"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginEnd="40dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+            <Button
+                android:id="@+id/ActivityBooks_next_button"
+                style="@style/button_orange_filled"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginEnd="40dp"
+                android:text="Επόμενο"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ActivityBook_price_description_textView" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
