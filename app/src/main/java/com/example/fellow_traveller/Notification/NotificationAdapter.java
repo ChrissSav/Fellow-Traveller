@@ -98,11 +98,11 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         }
         String label;
         Long timeDifferenceMinutes = (currentTimeStamp() - currentItem.getTimestamp()) / (60);
-        if (timeDifferenceMinutes <= 60) {
+        if (timeDifferenceMinutes < 60) {
             label = " λεπτά";
-            if (timeDifferenceMinutes == 60)
+            if (timeDifferenceMinutes == 1)
                 label = " λεπτό";
-            holder.textViewTime.setText("πριν από" + timeDifferenceMinutes + label);
+            holder.textViewTime.setText("πριν από " + timeDifferenceMinutes + label);
             return;
         }
         if (timeDifferenceMinutes < (60 * 24)) {
