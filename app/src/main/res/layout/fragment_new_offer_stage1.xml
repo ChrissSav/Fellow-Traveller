@@ -9,92 +9,80 @@
 
     <TextView
         android:id="@+id/NewOfferStage1Fragment_textView"
+        style="@style/titleStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="16dp"
         android:text="Εισάγεται την αφετηρία και τον προορισμό"
-        style="@style/titleStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/NewOfferStage1Fragment_textView3"
+        style="@style/labelStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="50dp"
         android:text="Από"
-        style="@style/labelStyle"
         app:layout_constraintStart_toStartOf="@+id/NewOfferStage1Fragment_textView"
         app:layout_constraintTop_toBottomOf="@+id/NewOfferStage1Fragment_textView" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/NewOfferStage1Fragment_TextInputLayout_from"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
-        app:hintEnabled="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/NewOfferStage1Fragment_textView"
-        app:layout_constraintTop_toBottomOf="@+id/NewOfferStage1Fragment_textView3">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_background_select"
-            android:focusable="false"
-            android:fontFamily="@font/firasans_light"
-            android:hint="Διάλεξε την αφετηρία ..."
-            android:drawableRight="@drawable/ic_location"
-            android:inputType="text"
-            android:drawableTint="@color/blue_offer"
-            android:longClickable="false"
-            android:padding="15dp"
-            android:clickable="false"
-            android:singleLine="true"
-            android:textColor="@color/black_color"
-            android:textSize="18sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
     <TextView
         android:id="@+id/NewOfferStage1Fragment_textView2"
+        style="@style/labelStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:text="Προς"
-        style="@style/labelStyle"
-        app:layout_constraintStart_toStartOf="@+id/NewOfferStage1Fragment_TextInputLayout_from"
-        app:layout_constraintTop_toBottomOf="@+id/NewOfferStage1Fragment_TextInputLayout_from" />
+        app:layout_constraintStart_toStartOf="@+id/NewOfferStage1Fragment_button_from"
+        app:layout_constraintTop_toBottomOf="@+id/NewOfferStage1Fragment_button_from" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/NewOfferStage1Fragment_TextInputLayout_to"
+    <Button
+        android:id="@+id/NewOfferStage1Fragment_button_from"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:hintEnabled="false"
-        app:layout_constraintEnd_toEndOf="@+id/NewOfferStage1Fragment_TextInputLayout_from"
-        app:layout_constraintStart_toStartOf="@+id/NewOfferStage1Fragment_textView2"
-        app:layout_constraintTop_toBottomOf="@+id/NewOfferStage1Fragment_textView2">
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button_background_select"
+        android:drawableRight="@drawable/ic_location"
+        android:drawableTint="@color/blue_offer"
+        android:ellipsize="end"
+        android:fontFamily="@font/firasans_light"
+        android:maxLines="1"
+        android:padding="15dp"
+        android:singleLine="true"
+        android:text="Διάλεξε την αφετηρία ..."
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textColor="#9E9E9E"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/NewOfferStage1Fragment_textView"
+        app:layout_constraintStart_toStartOf="@+id/NewOfferStage1Fragment_textView"
+        app:layout_constraintTop_toBottomOf="@+id/NewOfferStage1Fragment_textView3" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_background_select"
-            android:fontFamily="@font/firasans_light"
-            android:hint="Διάλεξε τον προορισμό ..."
-            android:inputType="text"
-            android:padding="15dp"
-            android:drawableTint="@color/blue_offer"
-            android:drawableRight="@drawable/ic_pin"
-            android:singleLine="true"
-            android:focusable="false"
-            android:longClickable="false"
-            android:textColor="@color/black_color"
-            android:textSize="18sp" />
-    </com.google.android.material.textfield.TextInputLayout>
+    <Button
+        android:id="@+id/NewOfferStage1Fragment_button_to"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/button_background_select"
+        android:drawableRight="@drawable/ic_pin"
+        android:drawableTint="@color/blue_offer"
+        android:ellipsize="end"
+        android:fontFamily="@font/firasans_light"
+        android:maxLines="1"
+        android:padding="15dp"
+        android:singleLine="true"
+        android:text="Διάλεξε τον προορισμό ..."
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textColor="#9E9E9E"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/NewOfferStage1Fragment_textView"
+        app:layout_constraintStart_toStartOf="@+id/NewOfferStage1Fragment_textView"
+        app:layout_constraintTop_toBottomOf="@+id/NewOfferStage1Fragment_textView2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

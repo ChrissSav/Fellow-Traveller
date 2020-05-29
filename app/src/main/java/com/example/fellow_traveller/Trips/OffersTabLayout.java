@@ -75,8 +75,8 @@ public class OffersTabLayout extends Fragment {
                     if (activeTripsList.size() > 0) {
 
                         activeTripsViewPager = view.findViewById(R.id.fragment_trip_offers_recycler_view);
-
-                        activeTripsViewPager.setAdapter( new ActiveAdapter( activeTripsList ) );
+                        mAdapterActive=new ActiveTripsAdapter( activeTripsList );
+                        activeTripsViewPager.setAdapter( mAdapterActive );
 
                         activeTripsViewPager.setClipToPadding(false);
                         activeTripsViewPager.setClipChildren( false );
@@ -96,6 +96,16 @@ public class OffersTabLayout extends Fragment {
 
                         activeTripsViewPager.setPageTransformer( compositePageTransformer );
 
+                        mAdapterActive.setOnItemClickListener(new ActiveTripsAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(int position) {
+                                Intent mainIntent = new Intent(getActivity().getApplicationContext(), TripPageDriverActivity.class);
+                                mainIntent.putExtra("isCompleted", false);
+                                mainIntent.putExtra("isDriver", true);
+                                mainIntent.putExtra("trip", activeTripsList.get(position));
+                                startActivity(mainIntent);
+                            }
+                        });
 
                         noActiveTripsSectionLayout.setVisibility(View.GONE);
                         activeTripsSectionLayout.setVisibility(View.VISIBLE);

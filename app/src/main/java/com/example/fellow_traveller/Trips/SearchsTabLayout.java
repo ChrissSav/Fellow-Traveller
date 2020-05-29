@@ -36,7 +36,7 @@ public class SearchsTabLayout extends Fragment {
     View view;
     private GlobalClass globalClass;
     private RecyclerView mRecyclerViewActive, mRecyclerViewNotActive;
-    private ActiveAdapter mAdapterActive;
+    private ActiveTripsAdapter mAdapterActive;
     private CompletedTripsAdapter mAdapterNotActive;
     private RecyclerView.LayoutManager mLayoutManagerActive, mLayoutManagerNotActive;
     private ArrayList<TripInvolvedModel> activeTripsList = new ArrayList<>();
@@ -83,8 +83,8 @@ public class SearchsTabLayout extends Fragment {
                     if (activeTripsList.size() > 0) {
 
                         activeTripsViewPager = view.findViewById(R.id.fragment_trip_searchs_recycler_view);
-
-                        activeTripsViewPager.setAdapter( new ActiveAdapter( activeTripsList ) );
+                        mAdapterActive=new ActiveTripsAdapter( activeTripsList );
+                        activeTripsViewPager.setAdapter( mAdapterActive );
 
                         activeTripsViewPager.setClipToPadding(false);
                         activeTripsViewPager.setClipChildren( false );
@@ -104,6 +104,16 @@ public class SearchsTabLayout extends Fragment {
 
                         activeTripsViewPager.setPageTransformer( compositePageTransformer );
 
+                        mAdapterActive.setOnItemClickListener(new ActiveTripsAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(int position) {
+                                Intent mainIntent = new Intent(getActivity().getApplicationContext(), TripPageDriverActivity.class);
+                                mainIntent.putExtra("isCompleted", false);
+                                mainIntent.putExtra("isDriver", false);
+                                mainIntent.putExtra("trip", activeTripsList.get(position));
+                                startActivity(mainIntent);
+                            }
+                        });
 
                         noActiveTripsSectionLayout.setVisibility(View.GONE);
                         activeTripsSectionLayout.setVisibility(View.VISIBLE);

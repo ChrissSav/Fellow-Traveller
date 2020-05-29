@@ -3,6 +3,7 @@ package com.example.fellow_traveller.Pickers;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
@@ -16,26 +17,26 @@ public class TimePickerDialogCustom extends DialogFragment implements android.ap
 
     private int hour;
     private int min;
-    private EditText editText;
+    private Button button;
     private Calendar calendar;
+    private String defaultTitle;
 
 
-    public TimePickerDialogCustom(EditText editText) {
-        this.editText = editText;
-
+    public TimePickerDialogCustom(Button button,String title) {
+        this.button = button;
+        defaultTitle = title;
     }
 
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        if (editText.getText().length() < 1) {
-            calendar = Calendar.getInstance();
-            hour = calendar.get(Calendar.HOUR_OF_DAY);
-            min = calendar.get(Calendar.MINUTE);
+        if (button.getText().equals(defaultTitle)) {
+            hour = 12;
+            min = 0;
         } else {
-            hour = Integer.parseInt(editText.getText().toString().substring(0, 2));
-            min = Integer.parseInt(editText.getText().toString().substring(3));
+            hour = Integer.parseInt(button.getText().toString().substring(0, 2));
+            min = Integer.parseInt(button.getText().toString().substring(3));
         }
 
         android.app.TimePickerDialog timePickerDialog = new android.app.TimePickerDialog(getActivity(),
@@ -61,7 +62,7 @@ public class TimePickerDialogCustom extends DialogFragment implements android.ap
         } else {
             minString = minute + "";
         }
-        editText.setText(hourString + ":" + minString);
+        button.setText(hourString + ":" + minString);
 
     }
 

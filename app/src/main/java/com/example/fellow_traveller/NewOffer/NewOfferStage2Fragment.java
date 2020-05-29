@@ -13,6 +13,7 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.fellow_traveller.Pickers.DatePickerDialogCustom;
 import com.example.fellow_traveller.Pickers.TimePickerDialogCustom;
@@ -33,14 +34,18 @@ import static com.example.fellow_traveller.Util.SomeMethods.dateTimeToTimestamp;
 public class NewOfferStage2Fragment extends Fragment {
 
     private View view;
-    private TextInputLayout textInputLayout_date, textInputLayout_time;
-    private String date = "";
-    private String time = "";
-    private DatePickerDialog.OnDateSetListener mDateListener;
-    private TimePickerDialog.OnTimeSetListener mTimeListener;
+    private Button buttonDate, buttonTime;
+    private String DATE_TITLE = "Όρισε την ημερομηνία ... ";
+    private String TIME_TITLE = "Όρισε την ώρα ... ";
+
+    private String tempDate = "";
+    private String tempTime = "";
+
     private DialogFragment timeDialog, dateDialog;
 
     public NewOfferStage2Fragment() {
+        tempDate =  DATE_TITLE;
+        tempTime =  TIME_TITLE;
 
     }
 
@@ -50,17 +55,21 @@ public class NewOfferStage2Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_new_offer_stage2, container, false);
-        textInputLayout_date = view.findViewById(R.id.NewOfferStage2Fragment_TextInputLayout_date);
-        textInputLayout_time = view.findViewById(R.id.NewOfferStage2Fragment_TextInputLayout_time);
-        textInputLayout_date.getEditText().setText(date);
-        textInputLayout_time.getEditText().setText(time);
+        buttonDate = view.findViewById(R.id.NewOfferStage1Fragment_button_date);
+        buttonTime = view.findViewById(R.id.NewOfferStage1Fragment_button_time);
 
 
-        timeDialog = new TimePickerDialogCustom(textInputLayout_time.getEditText());
-        dateDialog = new DatePickerDialogCustom(textInputLayout_date.getEditText());
+        if (!tempDate.equals(DATE_TITLE))
+            buttonDate.setText(tempDate);
+        if (!tempTime.equals(TIME_TITLE))
+            buttonTime.setText(tempTime);
 
 
-        textInputLayout_date.getEditText().setOnClickListener(new View.OnClickListener() {
+        timeDialog = new TimePickerDialogCustom(buttonTime, TIME_TITLE);
+        dateDialog = new DatePickerDialogCustom(buttonDate, DATE_TITLE);
+
+
+        buttonDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dateDialog.show(getFragmentManager(), "dateDialog");
@@ -70,7 +79,7 @@ public class NewOfferStage2Fragment extends Fragment {
         });
 
 
-        textInputLayout_time.getEditText().setOnClickListener(new View.OnClickListener() {
+        buttonTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -92,25 +101,32 @@ public class NewOfferStage2Fragment extends Fragment {
 
     @Override
     public void onDestroy() {
-        // Log.i("textInputLayout_pass_1", "onDestroy");
-        date = textInputLayout_date.getEditText().getText().toString();
-        time = textInputLayout_time.getEditText().getText().toString();
-
         super.onDestroy();
+        tempDate = buttonDate.getText().toString();
+        tempTime = buttonTime.getText().toString();
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (!buttonDate.getText().equals(DATE_TITLE)) {
+            buttonDate.setTextColor(getResources().getColor(R.color.black_color));
+
+        }
+        if (!buttonTime.getText().equals(TIME_TITLE)) {
+            buttonTime.setTextColor(getResources().getColor(R.color.black_color));
+        }
     }
 
     public Boolean validateFragment() {
-        if (textInputLayout_date.getEditText().getText().length() < 1) {
-            textInputLayout_date.setError(getResources().getString(R.string.ERROR_REQUIRED_FIELD));
+        if (buttonTime.getText().equals(TIME_TITLE)) {
+            createSnackBar(view, "Παρακαλώ επιλέξτε την ημερ/νια");
             return false;
-        } else {
-            textInputLayout_date.setError(null);
         }
-        if (textInputLayout_time.getEditText().getText().length() < 1) {
-            textInputLayout_time.setError(getResources().getString(R.string.ERROR_REQUIRED_FIELD));
+        if (buttonTime.getText().equals(TIME_TITLE)) {
+            createSnackBar(view, "Παρακαλώ επιλέξτε την ώρα");
             return false;
-        } else {
-            textInputLayout_time.setError(null);
         }
 
         Long timestamp = currentTimeStamp();
@@ -122,21 +138,19 @@ public class NewOfferStage2Fragment extends Fragment {
     }
 
     public String getDate() {
-        return textInputLayout_date.getEditText().getText().toString();
+        return buttonDate.getText().toString();
     }
 
     public String getTime() {
-        return textInputLayout_time.getEditText().getText().toString();
+        return buttonTime.getText().toString();
     }
 
     public Long getTimeStamp() {
 
-        String date_temp = textInputLayout_date.getEditText().getText().toString();
-        String time_temp = textInputLayout_time.getEditText().getText().toString();
+        String date_temp = buttonDate.getText().toString();
+        String time_temp = buttonTime.getText().toString();
         return dateTimeToTimestamp(date_temp, time_temp);
     }
-
-
 
 
 }

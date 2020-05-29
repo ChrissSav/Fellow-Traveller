@@ -40,32 +40,28 @@
         app:layout_constraintStart_toStartOf="@+id/NewOfferStagePickUpFragment_textView"
         app:layout_constraintTop_toBottomOf="@+id/NewOfferStagePickUpFragment_textView" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/NewOfferStagePickUpFragment_TextInputLayout_to"
+
+    <Button
+        android:id="@+id/NewOfferStage1Fragment_button_pickup"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginTop="8dp"
-        app:hintEnabled="false"
+        android:background="@drawable/button_background_select"
+        android:drawableRight="@drawable/ic_pin"
+        android:drawableTint="@color/blue_offer"
+        android:ellipsize="end"
+        android:fontFamily="@font/firasans_light"
+        android:maxLines="1"
+        android:padding="15dp"
+        android:singleLine="true"
+        android:text="Διάλεξε τον προορισμό ..."
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textColor="#9E9E9E"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/NewOfferStagePickUpFragment_textView"
         app:layout_constraintStart_toStartOf="@+id/NewOfferStagePickUpFragment_textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView5">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_background_select"
-            android:drawableRight="@drawable/ic_pin"
-            android:drawableTint="@color/blue_offer"
-            android:focusable="false"
-            android:fontFamily="@font/firasans_light"
-            android:hint="Διάλεξε τον σημείο αναχώρησης ..."
-            android:inputType="text"
-            android:longClickable="false"
-            android:padding="15dp"
-            android:singleLine="true"
-            android:textColor="@color/black_color"
-            android:textSize="18sp" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
