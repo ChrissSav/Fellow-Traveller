@@ -10,7 +10,7 @@
         android:id="@+id/review_item_user_image"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:background="@drawable/null_icon"
+        android:background="@drawable/ic_boy"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="20dp"

@@ -9,7 +9,7 @@
         android:id="@+id/image_icon_chat"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/null_icon"
+        android:background="@drawable/ic_boy"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="10dp"
