@@ -2,13 +2,16 @@ package com.example.fellow_traveller.NewOffer;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.PlacesAPI.Models.PredictionsModel;
@@ -17,18 +20,18 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
+import static com.example.fellow_traveller.Util.SomeMethods.createSnackBar;
 
 
 public class NewOfferStage1Fragment extends Fragment {
     private View view;
-    private TextInputLayout textInputLayoutFrom, textInputLayoutTo;
-    // private String from = "";
-    //private String to = "";
+    private Button buttonFrom, buttonTo;
+    private final String FROM_TITLE = "Διάλεξε την αφετηρία ...";
+    private final String TO_TITLE = "Διάλεξε τον προορισμό ...";
     private int witchFieldIsCLick = 0;
     private PredictionsModel predictionsModelDestTo, predictionsModelDestFrom;
 
     public NewOfferStage1Fragment() {
-        // Required empty public constructor
         predictionsModelDestTo = new PredictionsModel();
         predictionsModelDestFrom = new PredictionsModel();
     }
@@ -37,34 +40,29 @@ public class NewOfferStage1Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_new_offer_stage1, container, false);
-        textInputLayoutFrom = view.findViewById(R.id.NewOfferStage1Fragment_TextInputLayout_from);
-        textInputLayoutTo = view.findViewById(R.id.NewOfferStage1Fragment_TextInputLayout_to);
-        // textInputLayoutFrom.getEditText().setText(from);
-        // textInputLayoutTo.getEditText().setText(to);
+        buttonFrom = view.findViewById(R.id.NewOfferStage1Fragment_button_from);
+        buttonTo = view.findViewById(R.id.NewOfferStage1Fragment_button_to);
 
-        textInputLayoutFrom.getEditText().setText(predictionsModelDestFrom.getDescription());
-        textInputLayoutTo.getEditText().setText(predictionsModelDestTo.getDescription());
 
-        textInputLayoutFrom.getEditText().setOnClickListener(new View.OnClickListener() {
+        buttonFrom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(getActivity(), AddLocationActivity.class);
-                witchFieldIsCLick = 1;
-                startActivityForResult(intent, 1);
+                //witchFieldIsCLick = 1;
+                 startActivityForResult(intent, 1);
 
             }
         });
 
-        textInputLayoutTo.getEditText().setOnClickListener(new View.OnClickListener() {
+        buttonTo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(getActivity(), AddLocationActivity.class);
-                startActivityForResult(intent, 1);
-                witchFieldIsCLick = 2;
+                startActivityForResult(intent, 2);
+                //witchFieldIsCLick = 2;
 
 
             }
@@ -80,19 +78,18 @@ public class NewOfferStage1Fragment extends Fragment {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 PredictionsModel resultPredictionsModel = data.getParcelableExtra("resultPredictionsModel");
-                if (witchFieldIsCLick == 1) {
-                    predictionsModelDestFrom = resultPredictionsModel;
-                    textInputLayoutFrom.getEditText().setText(resultPredictionsModel.getDescription());
-
-                } else if (witchFieldIsCLick == 2) {
-                    predictionsModelDestTo = resultPredictionsModel;
-                    textInputLayoutTo.getEditText().setText(resultPredictionsModel.getDescription());
-
-                }
-                //Toast.makeText(getContext(),predictionsModelDestFrom.toString(), Toast.LENGTH_SHORT).show();
-                // Toast.makeText(getContext(),predictionsModelDestTo.toString(), Toast.LENGTH_SHORT).show();
-
-
+                predictionsModelDestFrom = resultPredictionsModel;
+                buttonFrom.setText(resultPredictionsModel.getDescription());
+            }
+            if (resultCode == RESULT_CANCELED) {
+                // mTextViewResult.setText("Nothing selected");
+            }
+        }
+        else if (requestCode == 2) {
+            if (resultCode == RESULT_OK) {
+                PredictionsModel resultPredictionsModel = data.getParcelableExtra("resultPredictionsModel");
+                predictionsModelDestTo = resultPredictionsModel;
+                buttonTo.setText(resultPredictionsModel.getDescription());
             }
             if (resultCode == RESULT_CANCELED) {
                 // mTextViewResult.setText("Nothing selected");
@@ -111,43 +108,37 @@ public class NewOfferStage1Fragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        if (textInputLayoutFrom.getEditText().getText().length() > 0)
-            textInputLayoutFrom.setError(null);
-        if (textInputLayoutTo.getEditText().getText().length() > 0)
-            textInputLayoutTo.setError(null);
+        if (predictionsModelDestFrom.getDescription().length() > 1) {
+            buttonFrom.setText(predictionsModelDestFrom.getDescription());
+            buttonFrom.setTextColor(getResources().getColor(R.color.black_color));
+
+        }
+        if (predictionsModelDestTo.getDescription().length() > 1) {
+            buttonTo.setText(predictionsModelDestTo.getDescription());
+            buttonTo.setTextColor(getResources().getColor(R.color.black_color));
+        }
     }
 
-    @Override
-    public void onDestroy() {
-        // Log.i("textInputLayout_pass_1", "onDestroy");
-        // from = textInputLayoutFrom.getEditText().getText().toString();
-        // to = textInputLayoutTo.getEditText().getText().toString();
-        super.onDestroy();
-    }
 
     public Boolean validateFragment() {
-        if (textInputLayoutFrom.getEditText().getText().length() < 1) {
-            textInputLayoutFrom.setError(getResources().getString(R.string.ERROR_REQUIRED_FIELD));
+        if (buttonFrom.getText().equals(FROM_TITLE)) {
+            createSnackBar(view, "Παρακαλώ επιλέξτε σημείο αφετηρίας");
             return false;
-        } else {
-            textInputLayoutFrom.setError(null);
         }
-        if (textInputLayoutTo.getEditText().getText().length() < 1) {
-            textInputLayoutTo.setError(getResources().getString(R.string.ERROR_REQUIRED_FIELD));
+        if (buttonTo.getText().equals(TO_TITLE)) {
+            createSnackBar(view, "Παρακαλώ επιλέξτε σημείο προορισμού");
             return false;
-        } else {
-            textInputLayoutTo.setError(null);
         }
         return true;
     }
 
 
     public String getDestFrom() {
-        return textInputLayoutFrom.getEditText().getText().toString();
+        return buttonFrom.getText().toString();
     }
 
     public String getDestTo() {
-        return textInputLayoutTo.getEditText().getText().toString();
+        return buttonTo.getText().toString();
     }
 
 

@@ -24,9 +24,8 @@ import java.time.format.TextStyle;
 public class NewOfferStage6Fragment extends Fragment implements View.OnClickListener {
     private View view;
     private TextView textViewFrom, textViewTo, textViewDate, textViewTime,
-            textViewSeats, textViewBags, textViewPets, textViewPrice, textViewCar, textViewMsg;
-    private String from, to, date, time, seats, bags, pets, price, car, msg;
-    private View.OnClickListener clickListener;
+            textViewSeats, textViewBags, textViewPets, textViewPrice, textViewCar, textViewMsg,textViewPickUpPoint;
+    private String from, to, date, time, seats, bags, pets, price, car, msg,pickUpPoint;
 
     public NewOfferStage6Fragment() {
         this.from = "";
@@ -39,6 +38,8 @@ public class NewOfferStage6Fragment extends Fragment implements View.OnClickList
         this.price = "";
         this.car = "";
         this.msg = "";
+        this.pickUpPoint = "";
+
     }
 
 
@@ -58,6 +59,9 @@ public class NewOfferStage6Fragment extends Fragment implements View.OnClickList
         textViewPrice = view.findViewById(R.id.NewOfferStage6Fragment_textView_price);
         textViewCar = view.findViewById(R.id.NewOfferStage6Fragment_textView_car);
         textViewMsg = view.findViewById(R.id.NewOfferStage6Fragment_textView_msg);
+        textViewPickUpPoint = view.findViewById(R.id.NewOfferStage6Fragment_textView_pickup);
+
+
 
         textViewFrom.setOnClickListener(this);
         textViewTo.setOnClickListener(this);
@@ -69,7 +73,7 @@ public class NewOfferStage6Fragment extends Fragment implements View.OnClickList
         textViewPrice.setOnClickListener(this);
         textViewCar.setOnClickListener(this);
         textViewMsg.setOnClickListener(this);
-
+        textViewPickUpPoint.setOnClickListener(this);
 
         textViewFrom.setText(from);
         textViewTo.setText(to);
@@ -87,6 +91,7 @@ public class NewOfferStage6Fragment extends Fragment implements View.OnClickList
         textViewMsg.setText(msg);
 
 
+        textViewPickUpPoint.setText(pickUpPoint);
         return view;
 
 
@@ -107,6 +112,7 @@ public class NewOfferStage6Fragment extends Fragment implements View.OnClickList
     public int getRank() {
         return 7;
     }
+
 
 
     public void setTo(String to) {
@@ -195,4 +201,7 @@ public class NewOfferStage6Fragment extends Fragment implements View.OnClickList
     }
 
 
+    public void setPickUpPoint(String pickUpPoint) {
+        this.pickUpPoint = pickUpPoint;
+    }
 }

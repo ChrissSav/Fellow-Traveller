@@ -128,6 +128,9 @@ public class NewOfferActivity extends AppCompatActivity {
                     newOfferStage6Fragment.setCar(newOfferStage3Fragment.getCar());
                     newOfferStage6Fragment.setMsg(newOfferStage5Fragment.getMsg());
 
+
+                    newOfferStage6Fragment.setPickUpPoint(newOfferStagePickUpFragment.getDestPickUp());
+
                     fra = newOfferStage6Fragment;
                     textViewTitleStage6.setVisibility(View.VISIBLE);
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
@@ -172,6 +175,10 @@ public class NewOfferActivity extends AppCompatActivity {
             case "5":
                 progressBar.setProgress(num_num * newOfferStage5Fragment.getRank());
                 fra = newOfferStage5Fragment;
+                break;
+            case "6":
+                progressBar.setProgress(num_num * newOfferStagePickUpFragment.getRank());
+                fra = newOfferStagePickUpFragment;
                 break;
             default:
                 break;
