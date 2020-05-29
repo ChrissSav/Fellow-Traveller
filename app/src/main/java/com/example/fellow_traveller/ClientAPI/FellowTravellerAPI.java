@@ -61,6 +61,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.fellow_traveller.Util.SomeMethods.isInternetAvailable;
+
 public class FellowTravellerAPI {
     private static Retrofit retrofit;
     private static RetrofitAPIEndpoints retrofitAPIEndpoints;
@@ -85,6 +87,12 @@ public class FellowTravellerAPI {
     }
 
     public static void userLogin(UserLoginModel user, final UserAuthCallback userAuthCallback) {
+        if (!isInternetAvailable()) {
+            userAuthCallback.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
+
         retrofitAPIEndpoints.userAuthenticate(user).enqueue(new Callback<UserAuthModel>() {
             @Override
             public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
@@ -108,7 +116,14 @@ public class FellowTravellerAPI {
 
     }
 
-    public static void checkFieldIfExist(String item, String value, final StatusCallBack statusCallBack) {
+    public static void checkFieldIfExist(String item, String value,
+                                         final StatusCallBack statusCallBack) {
+        if (!isInternetAvailable()) {
+            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
+
         JsonObject json = new JsonObject();
         json.addProperty("item", item);
         json.addProperty("value", value);
@@ -134,6 +149,12 @@ public class FellowTravellerAPI {
 
 
     public static void userLogout(final UserLogoutCallBack userLogoutCallBack) {
+        if (!isInternetAvailable()) {
+            userLogoutCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
+
         // TODO change this method of logging out with sessionID cookie instead.
         retrofitAPIEndpoints.userLogout().enqueue(new Callback<StatusHandleModel>() {
             @Override
@@ -158,7 +179,14 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void userRegister(UserRegisterModel user, final UserRegisterCallback userRegisterCallback) {
+    public static void userRegister(UserRegisterModel user,
+                                    final UserRegisterCallback userRegisterCallback) {
+        if (!isInternetAvailable()) {
+            userRegisterCallback.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
+
         retrofitAPIEndpoints.userRegister(user).enqueue(new Callback<UserAuthModel>() {
             @Override
             public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
@@ -191,7 +219,13 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void userChangePassword(UserChangePasswordModel user, final StatusCallBack statusCallBack) {
+    public static void userChangePassword(UserChangePasswordModel user,
+                                          final StatusCallBack statusCallBack) {
+        if (!isInternetAvailable()) {
+            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
 
         retrofitAPIEndpoints.userChangePassword(user).enqueue(new Callback<StatusHandleModel>() {
             @Override
@@ -227,6 +261,12 @@ public class FellowTravellerAPI {
 
 
     public static void getUserInfo(final UserAuthCallback userAuthCallback) {
+        if (!isInternetAvailable()) {
+            userAuthCallback.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
+
         retrofitAPIEndpoints.userInfo().enqueue(new Callback<UserAuthModel>() {
             @Override
             public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
@@ -249,7 +289,13 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void getUserById(int userId, final UserInfoModelCallBack userInfoModelCallBack) {
+    public static void getUserById(int userId,
+                                   final UserInfoModelCallBack userInfoModelCallBack) {
+        if (!isInternetAvailable()) {
+            userInfoModelCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
         retrofitAPIEndpoints.userInfoById(userId).enqueue(new Callback<UserInfoModel>() {
             @Override
             public void onResponse(Call<UserInfoModel> call, Response<UserInfoModel> response) {
@@ -269,7 +315,14 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void updateUserInfo(UserUpdateModel user, final UserAuthCallback userAuthCallback) {
+    public static void updateUserInfo(UserUpdateModel user,
+                                      final UserAuthCallback userAuthCallback) {
+        if (!isInternetAvailable()) {
+            userAuthCallback.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
+
         retrofitAPIEndpoints.userUpdate(user).enqueue(new Callback<UserAuthModel>() {
             @Override
             public void onResponse(Call<UserAuthModel> call, Response<UserAuthModel> response) {
@@ -294,6 +347,11 @@ public class FellowTravellerAPI {
     }
 
     public static void updateUserUploadPhoto(String url, final StatusCallBack statusCallBack) {
+        if (!isInternetAvailable()) {
+            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
 
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("url", url);
@@ -318,6 +376,12 @@ public class FellowTravellerAPI {
     }
 
     public static void addCar(AddCarModel car, final CarRegisterCallBack carRegisterCallBack) {
+        if (!isInternetAvailable()) {
+            carRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
+
         retrofitAPIEndpoints.carRegister(car).enqueue(new Callback<CarModel>() {
             @Override
             public void onResponse(Call<CarModel> call, Response<CarModel> response) {
@@ -345,7 +409,14 @@ public class FellowTravellerAPI {
     }
 
 
-    public static void updateUserCar(UpdateCarModel car, final CarRegisterCallBack carRegisterCallBack) {
+    public static void updateUserCar(UpdateCarModel car,
+                                     final CarRegisterCallBack carRegisterCallBack) {
+        if (!isInternetAvailable()) {
+            carRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
+
         retrofitAPIEndpoints.updateCar(car).enqueue(new Callback<CarModel>() {
             @Override
             public void onResponse(Call<CarModel> call, Response<CarModel> response) {
@@ -372,6 +443,12 @@ public class FellowTravellerAPI {
     }
 
     public static void getCars(final UserCarsCallBack userCarsCallBack) {
+        if (!isInternetAvailable()) {
+            userCarsCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
+
         retrofitAPIEndpoints.userCars().enqueue(new Callback<ArrayList<CarModel>>() {
             @Override
             public void onResponse(Call<ArrayList<CarModel>> call, Response<ArrayList<CarModel>> response) {
@@ -393,6 +470,12 @@ public class FellowTravellerAPI {
     }
 
     public static void deleteCar(int car_id, final CarDeleteCallBack carDeleteCallBack) {
+        if (!isInternetAvailable()) {
+            carDeleteCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
+
         retrofitAPIEndpoints.deleteUserCar(car_id).enqueue(new Callback<StatusHandleModel>() {
             @Override
             public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
@@ -420,6 +503,10 @@ public class FellowTravellerAPI {
 
     public static void createTrip(CreateTripModel trip,
                                   final TripRegisterCallBack tripRegisterCallBack) {
+        if (!isInternetAvailable()) {
+            tripRegisterCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
         retrofitAPIEndpoints.tripRegister(trip).enqueue(new Callback<StatusHandleModel>() {
 
             @Override
@@ -453,9 +540,17 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void getTrips(SearchDestinationsModel destinations, Long timestampMin, Long timestampMax,
+    public static void getTrips(SearchDestinationsModel destinations, Long timestampMin, Long
+            timestampMax,
                                 Integer seatsMin, Integer seatsMax, Integer bagsMin, Integer bagsMax,
-                                Integer priceMin, Integer priceMax, Boolean hasPet, Integer range, final SearchTripsCallback searchTripsCallback) {
+                                Integer priceMin, Integer priceMax, Boolean hasPet, Integer range,
+                                final SearchTripsCallback searchTripsCallback) {
+
+        if (!isInternetAvailable()) {
+            searchTripsCallback.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
         retrofitAPIEndpoints.getTrips(destinations, timestampMin, timestampMax, seatsMin,
                 seatsMax, bagsMin, bagsMax, priceMin,
                 priceMax, hasPet, range).enqueue(new Callback<ArrayList<TripModel>>() {
@@ -476,9 +571,18 @@ public class FellowTravellerAPI {
     }
 
     // TODO set this as default method to search trips
-    public static void getTripsTest(float latitudeFrom, float longitudeFrom, float latitudeTo, float longitudeTo,
-                                    Long timestampMin, Long timestampMax, Integer seatsMin, Integer seatsMax, Integer bagsMin, Integer bagsMax,
-                                    Integer priceMin, Integer priceMax, Boolean hasPet, Integer rangeTo, Integer rangeFrom, final TripInvolvedCallBack tripInvolvedCallBack) {
+    public static void getTripsTest(float latitudeFrom, float longitudeFrom, float latitudeTo,
+                                    float longitudeTo,
+                                    Long timestampMin, Long timestampMax, Integer seatsMin, Integer seatsMax, Integer
+                                            bagsMin, Integer bagsMax,
+                                    Integer priceMin, Integer priceMax, Boolean hasPet, Integer rangeTo, Integer
+                                            rangeFrom, final TripInvolvedCallBack tripInvolvedCallBack) {
+
+        if (!isInternetAvailable()) {
+            tripInvolvedCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
         retrofitAPIEndpoints.getTripsTest(latitudeFrom, longitudeFrom, latitudeTo, longitudeTo, timestampMin, timestampMax, seatsMin,
                 seatsMax, bagsMin, bagsMax, priceMin,
                 priceMax, hasPet, rangeTo, rangeFrom).enqueue(new Callback<ArrayList<TripInvolvedModel>>() {
@@ -500,6 +604,11 @@ public class FellowTravellerAPI {
 
 
     public static void getTripsAsCreator(final SearchTripsCallback searchTripsCallback) {
+        if (!isInternetAvailable()) {
+            searchTripsCallback.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
         retrofitAPIEndpoints.tripsAsCreator().enqueue(new Callback<ArrayList<TripModel>>() {
             @Override
             public void onResponse(Call<ArrayList<TripModel>> call, Response<ArrayList<TripModel>> response) {
@@ -519,6 +628,12 @@ public class FellowTravellerAPI {
 
     // TODO Set this as the main method to get the trips  as creator
     public static void getTripsAsCreatorTest(final TripInvolvedCallBack tripInvolvedCallBack) {
+
+        if (!isInternetAvailable()) {
+            tripInvolvedCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
         retrofitAPIEndpoints.tripsAsCreatorTest().enqueue(new Callback<ArrayList<TripInvolvedModel>>() {
             @Override
             public void onResponse(Call<ArrayList<TripInvolvedModel>> call, Response<ArrayList<TripInvolvedModel>> response) {
@@ -538,6 +653,12 @@ public class FellowTravellerAPI {
 
     // TODO Set this as the main method to get the trips as passenger
     public static void getTripsAsPassengerTest(final TripInvolvedCallBack tripInvolvedCallBack) {
+
+        if (!isInternetAvailable()) {
+            tripInvolvedCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
         retrofitAPIEndpoints.tripsTakesPartTest().enqueue(new Callback<ArrayList<TripInvolvedModel>>() {
             @Override
             public void onResponse(Call<ArrayList<TripInvolvedModel>> call, Response<ArrayList<TripInvolvedModel>> response) {
@@ -556,6 +677,12 @@ public class FellowTravellerAPI {
     }
 
     public static void getTripsAsPassenger(final SearchTripsCallback searchTripsCallback) {
+
+        if (!isInternetAvailable()) {
+            searchTripsCallback.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
         retrofitAPIEndpoints.tripsTakesPart().enqueue(new Callback<ArrayList<TripModel>>() {
             @Override
             public void onResponse(Call<ArrayList<TripModel>> call, Response<ArrayList<TripModel>> response) {
@@ -573,7 +700,15 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void addPassengerToTrip(CreatePassengerModel passenger, final StatusCallBack statusCallBack) {
+    public static void addPassengerToTrip(CreatePassengerModel passenger,
+                                          final StatusCallBack statusCallBack) {
+
+        if (!isInternetAvailable()) {
+            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
+
         retrofitAPIEndpoints.addPassenger(passenger).enqueue(new Callback<StatusHandleModel>() {
             @Override
             public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
@@ -618,7 +753,14 @@ public class FellowTravellerAPI {
     //Review
 
 
-    public static void getUserReviews(int userId, final ReviewModelCallBack reviewModelCallBack) {
+    public static void getUserReviews(int userId,
+                                      final ReviewModelCallBack reviewModelCallBack) {
+
+        if (!isInternetAvailable()) {
+            reviewModelCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
         retrofitAPIEndpoints.userReviews(userId).enqueue(new Callback<ArrayList<ReviewModel>>() {
             @Override
             public void onResponse(Call<ArrayList<ReviewModel>> call, Response<ArrayList<ReviewModel>> response) {
@@ -640,7 +782,14 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void checkReviewIfAllReadeRegi(int userId, int tripId, final BooleanResponseModelCallBack booleanResponseModelCallBack) {
+    public static void checkReviewIfAllReadeRegi(int userId, int tripId,
+                                                 final BooleanResponseModelCallBack booleanResponseModelCallBack) {
+
+        if (!isInternetAvailable()) {
+            booleanResponseModelCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
         retrofitAPIEndpoints.checkReview(userId, tripId).enqueue(new Callback<BooleanResponseModel>() {
             @Override
             public void onResponse(Call<BooleanResponseModel> call, Response<BooleanResponseModel> response) {
@@ -660,7 +809,14 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void addUserReview(CreateReviewModel createReviewModel, final StatusCallBack statusCallBack) {
+    public static void addUserReview(CreateReviewModel createReviewModel,
+                                     final StatusCallBack statusCallBack) {
+
+        if (!isInternetAvailable()) {
+            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
         retrofitAPIEndpoints.addUserReview(createReviewModel).enqueue(new Callback<StatusHandleModel>() {
             @Override
             public void onResponse(Call<StatusHandleModel> call, Response<StatusHandleModel> response) {
@@ -698,6 +854,12 @@ public class FellowTravellerAPI {
 
 
     public static void getNotifications(final NotificationCallBack notificationCallBack) {
+
+        if (!isInternetAvailable()) {
+            notificationCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
         retrofitAPIEndpoints.userNotifications().enqueue(new Callback<ArrayList<NotificationModel>>() {
             @Override
             public void onResponse(Call<ArrayList<NotificationModel>> call, Response<ArrayList<NotificationModel>> response) {
@@ -716,7 +878,14 @@ public class FellowTravellerAPI {
     }
 
 
-    public static void getNotificationsById(int notificationId, final NotificationCallBack notificationCallBack) {
+    public static void getNotificationsById(int notificationId,
+                                            final NotificationCallBack notificationCallBack) {
+
+        if (!isInternetAvailable()) {
+            notificationCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
         retrofitAPIEndpoints.userNotifications(notificationId).enqueue(new Callback<ArrayList<NotificationModel>>() {
             @Override
             public void onResponse(Call<ArrayList<NotificationModel>> call, Response<ArrayList<NotificationModel>> response) {
@@ -734,7 +903,14 @@ public class FellowTravellerAPI {
         });
     }
 
-    public static void setNotificationsRead(int notificationId, final StatusCallBack statusCallBack) {
+    public static void setNotificationsRead(int notificationId,
+                                            final StatusCallBack statusCallBack) {
+
+        if (!isInternetAvailable()) {
+            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("id", notificationId);
         retrofitAPIEndpoints.updateNotifications(jsonObject).enqueue(new Callback<StatusHandleModel>() {
@@ -756,6 +932,13 @@ public class FellowTravellerAPI {
 
 
     public static void getTripQRCode(int tripId, final QRCodeModelCallBack qrCodeModelCallBack) {
+
+        if (!isInternetAvailable()) {
+            qrCodeModelCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
+
         retrofitAPIEndpoints.getQrCode(tripId).enqueue(new Callback<QRCodeModel>() {
             @Override
             public void onResponse(Call<QRCodeModel> call, Response<QRCodeModel> response) {
@@ -774,7 +957,15 @@ public class FellowTravellerAPI {
     }
 
 
-    public static void verifyTripQRCode(int tripId, String qrCode, final StatusCallBack statusCallBack) {
+    public static void verifyTripQRCode(int tripId, String qrCode,
+                                        final StatusCallBack statusCallBack) {
+
+        if (!isInternetAvailable()) {
+            statusCallBack.onFailure(context.getResources().getString(R.string.ERROR_INTERNET_CONNECTION));
+            return;
+        }
+
+
         QRCodeVerifyModel qrCodeVerifyModel = new QRCodeVerifyModel(tripId, qrCode);
 
         retrofitAPIEndpoints.qrCodeVerify(qrCodeVerifyModel).enqueue(new Callback<StatusHandleModel>() {

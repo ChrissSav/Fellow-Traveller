@@ -17,6 +17,8 @@ import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+
+
 public class HomeActivity extends AppCompatActivity {
 
     private GlobalClass globalClass;
@@ -36,7 +38,7 @@ public class HomeActivity extends AppCompatActivity {
         globalClass = (GlobalClass) getApplicationContext();
 
 
-        //scheduleJob();
+
 
         bottomNav = findViewById(R.id.HomeActivity_bottomNavigationView);
 
@@ -75,6 +77,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+
     @Override
     public void onBackPressed() {
         if (!(selectedFragment instanceof HomeFragment)) {
@@ -104,9 +107,4 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    public void cancelJob() {
-        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
-        scheduler.cancel(123);
-        Log.d(TAG, "Job cancelled");
-    }
 }
