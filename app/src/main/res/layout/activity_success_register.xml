@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/SuccessRegisterActivity_welcome_textView"
-        style="@style/paragraph1"
+        style="@style/paragraph3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Καλώς ορίσατε στο"
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fellow Traveller"
-        style="@style/header1"
+        style="@style/display"
         android:textSize="30dp"
         app:layout_constraintTop_toBottomOf="@id/SuccessRegisterActivity_welcome_textView"
         app:layout_constraintLeft_toLeftOf="parent"

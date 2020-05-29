@@ -23,7 +23,7 @@
         app:layout_constraintEnd_toEndOf="@id/passenger_image_item_image"
         android:text="Tyler"
         android:layout_marginTop="10dp"
-        style="@style/paragraph4"
+        style="@style/input"
 
         />
 

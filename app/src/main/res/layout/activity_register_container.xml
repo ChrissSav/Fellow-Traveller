@@ -43,6 +43,7 @@
     </FrameLayout>
 
 
+
     <Button
         android:id="@+id/RegisterActivity_button_next"
         android:layout_width="70dp"
@@ -63,6 +64,6 @@
         app:layout_constraintBottom_toBottomOf="@id/RegisterActivity_button_next"
         app:layout_constraintLeft_toLeftOf="@id/RegisterActivity_button_next"
         app:layout_constraintRight_toRightOf="@id/RegisterActivity_button_next"
-        app:layout_constraintTop_toTopOf="@id/RegisterActivity_button_next" />
+        app:layout_constraintTop_toTopOf="@id/RegisterActivity_button_next"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

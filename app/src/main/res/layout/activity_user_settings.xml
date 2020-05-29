@@ -40,11 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:fontFamily="@font/firasans_medium"
+            style="@style/header1"
             android:text="Fotios Pechlivanis"
-            android:textColor="@color/black_color"
-            android:textSize="20sp"
-            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/profile_picture_settings" />
@@ -54,11 +51,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:fontFamily="@font/firasans_light"
+            style="@style/paragraph3"
             android:text="@string/EMAIL_PLACEHOLDER"
-            android:textColor="@color/black_color"
-            android:textSize="14sp"
-            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/activity_user_settings_user_full_name_text_view" />
@@ -69,11 +63,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="40dp"
-            android:fontFamily="@font/firasans_medium"
+            style="@style/header2"
             android:text="@string/activity_user_settings_account_settings_text_label"
-            android:textColor="@color/black_color"
-            android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/activity_user_settings_user_email_address_text_view" />
 
@@ -163,12 +154,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="40dp"
-            android:background="@drawable/settings_button_item"
-            android:fontFamily="@font/firasans_medium"
+            style="@style/header2"
             android:text="Fellow Drivers"
-            android:textColor="@color/black_color"
-            android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/notifications" />
 

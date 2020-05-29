@@ -37,7 +37,7 @@
 
             <TextView
                 android:id="@+id/fragment_trip_layout_item_seats"
-                style="@style/paragraph4"
+                style="@style/input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -47,7 +47,7 @@
 
             <TextView
                 android:id="@+id/fragment_trip_layout_item_bags"
-                style="@style/paragraph4"
+                style="@style/input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -78,7 +78,7 @@
 
                 <TextView
                     android:id="@+id/fragment_trip_layout_item_date_textView"
-                    style="@style/paragraph4"
+                    style="@style/input"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="19 Νοε 2019"
@@ -115,7 +115,7 @@
 
                 <TextView
                     android:id="@+id/fragment_trip_layout_item_time_textView"
-                    style="@style/paragraph4"
+                    style="@style/input"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="16:00"
@@ -154,7 +154,7 @@
 
                 <TextView
                     android:id="@+id/fragment_trip_layout_item_price_textView"
-                    style="@style/paragraph4"
+                    style="@style/input"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10€"

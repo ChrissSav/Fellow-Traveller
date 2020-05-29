@@ -24,7 +24,7 @@
                 android:layout_marginTop="24dp"
                 android:background="@color/background"
                 android:text="Γεια σου Fotios,"
-                style="@style/header4"
+                style="@style/display"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:text="Αναζήτησε τον επόμενο προορισμό σου"
-                style="@style/header3"
+                style="@style/header1"
                 app:layout_constraintStart_toStartOf="@+id/FragmentHome_user_welcome_textView"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="20dp"
@@ -73,7 +73,7 @@
 
                 <TextView
                     android:id="@+id/FragmentHome_offer_label"
-                    style="@style/header3"
+                    style="@style/header1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"

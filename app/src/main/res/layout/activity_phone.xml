@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/ActivityPhone_label"
-        style="@style/header3"
+        style="@style/display"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="Αριθμός τηλεφώνου"
-        style="@style/header5"
+        style="@style/label"
         app:layout_constraintStart_toStartOf="@+id/ActivityPhone_label"
         app:layout_constraintTop_toBottomOf="@+id/ActivityPhone_label" />
 
@@ -120,7 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/register_fragment_six_digit_code_notice_description"
-        style="@style/paragraph4"
+        style="@style/paragraph1"
         app:layout_constraintEnd_toEndOf="@+id/ActivityPhone_label"
         app:layout_constraintStart_toStartOf="@+id/ActivityPhone_label"
         app:layout_constraintTop_toBottomOf="@+id/ActivityPhone_number_input_section" />
@@ -143,6 +143,7 @@
         android:layout_height="wrap_content"
         android:text="Έχεις ήδη λογαριασμό;"
         style="@style/paragraph3"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@id/ActivityPhone_label"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="40dp"/>

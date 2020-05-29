@@ -53,12 +53,9 @@
                 android:id="@+id/ActivitySearchDetails_trip_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/firasans_bold"
+                style="@style/display"
                 android:text="Ταξίδι"
-                android:textColor="@color/black_color"
-                android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_back_button"
                 app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_back_button" />
 
@@ -84,15 +81,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="@font/firasans_bold"
                     android:minWidth="0dp"
                     android:minHeight="0dp"
                     android:paddingTop="0dp"
                     android:paddingBottom="0dp"
                     android:text="Tyler Joseph"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black_color"
-                    android:textSize="16sp"
+                    style="@style/header2"
                     app:layout_constraintStart_toEndOf="@id/ActivitySearchDetails_user_image"
                     app:layout_constraintTop_toTopOf="@id/ActivitySearchDetails_user_image" />
 
@@ -107,10 +101,8 @@
                         android:id="@+id/ActivitySearchDetails_rating_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/firasans_light"
+                        style="@style/paragraph3"
                         android:text="4.5"
-                        android:textColor="@color/black_color"
-                        android:textSize="17sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -130,10 +122,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:fontFamily="@font/firasans_light"
+                        style="@style/paragraph3"
                         android:text="125"
-                        android:textColor="@color/black_color"
-                        android:textSize="17sp"
                         app:layout_constraintBottom_toBottomOf="@id/ActivitySearchDetails_rating_tv"
                         app:layout_constraintStart_toEndOf="@id/ActivitySearchDetails_rating_image"
                         app:layout_constraintTop_toTopOf="@id/ActivitySearchDetails_rating_tv" />
@@ -157,10 +147,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:fontFamily="@font/firasans_light"
+                style="@style/paragraph3"
                 android:text="Από"
-                android:textColor="@color/black_color"
-                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_trip_label"
                 app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_user_section" />
 
@@ -169,10 +157,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/firasans_bold"
+                style="@style/header1"
                 android:text="Αθήνα"
-                android:textColor="@color/black_color"
-                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_trip_label"
                 app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_from_label" />
 
@@ -181,10 +167,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:fontFamily="@font/firasans_light"
+                style="@style/paragraph3"
                 android:text="Προς"
-                android:textColor="@color/black_color"
-                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_trip_label"
                 app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_from_dest_tv" />
 
@@ -193,10 +177,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:fontFamily="@font/firasans_bold"
+                style="@style/header1"
                 android:text="Θεσσαλονίκη"
-                android:textColor="@color/black_color"
-                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_trip_label"
                 app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_to_label" />
 
@@ -205,11 +187,10 @@
                 style="@style/button_empty_with_left_drawable"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
                 android:drawableRight="@drawable/ic_map"
                 android:drawableTint="@null"
                 android:text="Άνοιγμα στους χάρτες"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_to_dest_tv" />
 
             <View
@@ -222,7 +203,7 @@
 
             <TextView
                 android:id="@+id/ActivitySearchDetails_trip_info_label"
-                style="@style/header5"
+                style="@style/header2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -235,10 +216,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/firasans_light"
+                style="@style/paragraph3"
                 android:text="Ημερομηνία"
-                android:textColor="@color/black_color"
-                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_trip_label"
                 app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_trip_info_label" />
 
@@ -247,10 +226,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/firasans_light"
+                style="@style/paragraph3"
                 android:text="Ώρα"
-                android:textColor="@color/black_color"
-                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_trip_label"
                 app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_date_label" />
 
@@ -259,10 +236,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/firasans_light"
                 android:text="Θέσεις"
-                android:textColor="@color/black_color"
-                android:textSize="16sp"
+                style="@style/paragraph3"
                 app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_trip_label"
                 app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_time_label" />
 
@@ -271,10 +246,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/firasans_light"
+                style="@style/paragraph3"
                 android:text="Αποσκευές"
-                android:textColor="@color/black_color"
-                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_trip_label"
                 app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_seats_label" />
 
@@ -283,10 +256,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/firasans_light"
+                style="@style/paragraph3"
                 android:text="Κατοικίδιο"
-                android:textColor="@color/black_color"
-                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_trip_label"
                 app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_bags_label" />
 
@@ -295,17 +266,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/firasans_light"
+                style="@style/paragraph3"
                 android:text="Αυτοκίνητο"
-                android:textColor="@color/black_color"
-                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_trip_label"
                 app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_pets_label" />
 
             <ImageView
                 android:id="@+id/ActivitySearchDetails_date_image"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/ic_calendar"
                 android:backgroundTint="@color/black_color"
@@ -315,8 +284,8 @@
 
             <ImageView
                 android:id="@+id/ActivitySearchDetails_time_image"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/ic_clock"
                 android:backgroundTint="@color/black_color"
@@ -326,8 +295,8 @@
 
             <ImageView
                 android:id="@+id/ActivitySearchDetails_seats_image"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/ic_seat"
                 android:backgroundTint="@color/black_color"
@@ -337,8 +306,8 @@
 
             <ImageView
                 android:id="@+id/ActivitySearchDetails_bags_image"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/ic_luggage"
                 android:backgroundTint="@color/black_color"
@@ -348,8 +317,8 @@
 
             <ImageView
                 android:id="@+id/ActivitySearchDetails_pets_image"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/ic_bone"
                 android:backgroundTint="@color/black_color"
@@ -359,8 +328,8 @@
 
             <ImageView
                 android:id="@+id/ActivitySearchDetails_car_image"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/ic_car"
                 android:backgroundTint="@color/black_color"
@@ -373,10 +342,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:fontFamily="@font/firasans_medium"
+                style="@style/paragraph2"
                 android:text="22 Δεκ. 2020"
-                android:textColor="@color/black_color"
-                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@id/ActivitySearchDetails_date_label"
                 app:layout_constraintEnd_toStartOf="@id/ActivitySearchDetails_date_image"
                 app:layout_constraintTop_toTopOf="@id/ActivitySearchDetails_date_label" />
@@ -386,10 +353,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:fontFamily="@font/firasans_medium"
+                style="@style/paragraph2"
                 android:text="18:00"
-                android:textColor="@color/black_color"
-                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@id/ActivitySearchDetails_time_label"
                 app:layout_constraintEnd_toStartOf="@id/ActivitySearchDetails_time_image"
                 app:layout_constraintTop_toTopOf="@id/ActivitySearchDetails_time_label" />
@@ -399,10 +364,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:fontFamily="@font/firasans_medium"
+                style="@style/paragraph2"
                 android:text="3/4"
-                android:textColor="@color/black_color"
-                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@id/ActivitySearchDetails_seats_label"
                 app:layout_constraintEnd_toStartOf="@id/ActivitySearchDetails_seats_image"
                 app:layout_constraintTop_toTopOf="@id/ActivitySearchDetails_seats_label" />
@@ -412,10 +375,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:fontFamily="@font/firasans_medium"
+                style="@style/paragraph2"
                 android:text="1/3"
-                android:textColor="@color/black_color"
-                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@id/ActivitySearchDetails_bags_label"
                 app:layout_constraintEnd_toStartOf="@id/ActivitySearchDetails_bags_image"
                 app:layout_constraintTop_toTopOf="@id/ActivitySearchDetails_bags_label" />
@@ -425,10 +386,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:fontFamily="@font/firasans_medium"
                 android:text="Επιτρέπεται"
-                android:textColor="@color/black_color"
-                android:textSize="18sp"
+                style="@style/paragraph2"
                 app:layout_constraintBottom_toBottomOf="@id/ActivitySearchDetails_pets_label"
                 app:layout_constraintEnd_toStartOf="@id/ActivitySearchDetails_pets_image"
                 app:layout_constraintTop_toTopOf="@id/ActivitySearchDetails_pets_label" />
@@ -438,10 +397,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:fontFamily="@font/firasans_medium"
+                style="@style/paragraph2"
                 android:text="Lamborghini"
-                android:textColor="@color/black_color"
-                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@id/ActivitySearchDetails_car_label"
                 app:layout_constraintEnd_toStartOf="@id/ActivitySearchDetails_car_image"
                 app:layout_constraintTop_toTopOf="@id/ActivitySearchDetails_car_label" />
@@ -456,7 +413,7 @@
 
             <TextView
                 android:id="@+id/ActivitySearchDetails_pick_up_point_label"
-                style="@style/header5"
+                style="@style/header2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -466,7 +423,7 @@
 
             <TextView
                 android:id="@+id/ActivitySearchDetails_pick_up_point_info"
-                style="@style/paragraph3"
+                style="@style/paragraph1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -510,10 +467,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:fontFamily="@font/firasans_bold"
+                style="@style/header2"
                 android:text="Επιβάτες"
-                android:textColor="@color/black_color"
-                android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_trip_label"
                 app:layout_constraintTop_toBottomOf="@+id/ActivitySearchDetails_map_underline" />
 
@@ -549,7 +504,7 @@
 
             <TextView
                 android:id="@+id/ActivitySearchDetails_driver_message_label"
-                style="@style/header3"
+                style="@style/header2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -565,10 +520,8 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="15dp"
-                android:fontFamily="@font/firasans_light"
                 android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                android:textColor="@color/black_color"
-                android:textSize="18sp"
+                style="@style/paragraph1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_trip_label"
                 app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_driver_message_label" />
@@ -583,7 +536,7 @@
 
             <TextView
                 android:id="@+id/ActivitySearchDetails_cancellation_policy_label"
-                style="@style/header3"
+                style="@style/header2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -599,10 +552,8 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="15dp"
-                android:fontFamily="@font/firasans_light"
+                style="@style/paragraph1"
                 android:text="Σε περίπτωηση ακύρωσης της κράτησης σας θα δεσμευθεί το 50% του ποσού σας για το ταξίδι. Για τον τρόπο πληρωμής με μετρητά, έπειτα από συνεχείς ακυρώσεις θα πέσει το σκορ σας και για την χρήση της εφαρμογής θα πρέπει να δηλώσετε μία κάρτα"
-                android:textColor="@color/black_color"
-                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_trip_label"
@@ -618,7 +569,10 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:elevation="5dp"
-        android:padding="15dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
@@ -626,7 +580,7 @@
         <Button
             android:id="@+id/ActivitySearchDetails_book_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:background="@drawable/main_activity_login_button"
             android:drawableRight="@drawable/ic_right_arrow"
             android:drawablePadding="5dp"
@@ -637,10 +591,7 @@
             android:paddingRight="15dp"
             android:paddingBottom="10dp"
             android:text="Κλείσε τώρα"
-            android:textAllCaps="false"
-            android:textColor="#fff"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            style="@style/button_filled_with_left_drawable_orange"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -649,27 +600,19 @@
             android:id="@+id/ActivitySearchDetails_price_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:fontFamily="@font/firasans_bold"
             android:text="10€"
-            android:textColor="@color/black_color"
-            android:textSize="28sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            style="@style/header1"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/ActivitySearchDetails_book_button" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/firasans_light"
-            android:text="/άτομο"
-            android:textColor="@color/black_color"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/ActivitySearchDetails_price_tv"
-            app:layout_constraintTop_toTopOf="parent" />
+            style="@style/paragraph3"
+            android:text="Ανά άτομο"
+            app:layout_constraintBottom_toBottomOf="@id/ActivitySearchDetails_book_button"
+            app:layout_constraintStart_toStartOf="@id/ActivitySearchDetails_price_tv"
+            app:layout_constraintTop_toBottomOf="@id/ActivitySearchDetails_price_tv" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
