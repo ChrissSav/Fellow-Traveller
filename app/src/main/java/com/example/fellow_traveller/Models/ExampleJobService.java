@@ -51,8 +51,12 @@ public class ExampleJobService extends JobService {
                     if (jobCancelled) {
                         return;
                     }
-                    if (globalClass.getCurrentUser() != null)
+                    try{
+                        String temp = globalClass.getCurrentUser().getSessionId();
                         CheckConnection();
+                    }catch (NullPointerException e){
+
+                    }
                     try {
                         Thread.sleep(25000);
                     } catch (InterruptedException e) {

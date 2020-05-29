@@ -34,7 +34,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class GlobalClass extends Application {
     public static final String CHANNEL_1_ID = "passenger_notification";
-    private static final String CHANNEL_NAME_1 = "This is Channel passenger_notification";
+    private static final String CHANNEL_NAME_1 = "Σε αυτο το κανάλι θα ερχονται οι ειδποιησεις για αξιολογηση και αν προστεθηκε νεος εππιβατης";
     private UserAuthModel currentUser;
     private OkHttpClient.Builder okHttpClient;
 
@@ -55,11 +55,6 @@ public class GlobalClass extends Application {
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
                 Request.Builder newRequest = request.newBuilder();
-                //Log.i("setSessionId", "getOkHttpClient if " + Objects.requireNonNull(currentUser.getSessionId()));
-//                if (currentUser != null) {
-//                  //  Log.i("setSessionId", "getOkHttpClient " + Objects.requireNonNull(currentUser.getSessionId()));
-//                    newRequest.header("Cookie", Objects.requireNonNull(currentUser.getSessionId()));
-//                }
                 try {
                     newRequest.header("Cookie", currentUser.getSessionId());
                 } catch (NullPointerException e) {
@@ -75,10 +70,9 @@ public class GlobalClass extends Application {
     @Override
     public void onCreate() {
         LoadClass();
-        if (currentUser != null) {
-            createNotificationChannels();
-            scheduleJob();
-        }
+        createNotificationChannels();
+        scheduleJob();
+
         super.onCreate();
     }
 
@@ -86,7 +80,7 @@ public class GlobalClass extends Application {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel1 = new NotificationChannel(
                     CHANNEL_1_ID,
-                    "Channel 1",
+                    "Κανάλι ειδοποιήσεων",
                     NotificationManager.IMPORTANCE_HIGH
             );
             channel1.setDescription(CHANNEL_NAME_1);
