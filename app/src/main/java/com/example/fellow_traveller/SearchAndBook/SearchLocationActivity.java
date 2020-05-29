@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.ClientAPI.Models.DestinationModel;
@@ -53,7 +54,7 @@ public class SearchLocationActivity extends AppCompatActivity implements View.On
     private ImageButton backButton, clearButton;
     private ProgressBar progressBar;
     private DestinationModel destinationModelToReturn;
-    private ConstraintLayout suggestSectionLayout;
+    private ScrollView suggestSectionLayout;
     private Button yourLocationButton, athensButton, thessalonikiButton, ioanninaButton, patraButton, larissaButton;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private static final int MY_FINE_LOCATION_REQUEST_CODE = 200;
