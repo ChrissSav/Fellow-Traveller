@@ -58,45 +58,7 @@
             app:layout_constraintTop_toTopOf="@id/PersonalSettingsActivity_button_close" />
 
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/ActivityProfile_user_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/null_icon"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_section" />
-
-    <ProgressBar
-        android:id="@+id/ActivityPersonalSettings_progress_bar"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:indeterminate="true"
-        android:indeterminateTint="@color/black_color"
-        android:indeterminateTintMode="src_atop"
-        android:progressDrawable="@drawable/component_progress_circle_bar"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/ActivityProfile_user_image"
-        app:layout_constraintLeft_toLeftOf="@id/ActivityProfile_user_image"
-        app:layout_constraintRight_toRightOf="@id/ActivityProfile_user_image"
-        app:layout_constraintTop_toTopOf="@id/ActivityProfile_user_image" />
-
-    <Button
-        android:id="@+id/change_image_button"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="ΑΛΛΑΓΗ ΕΙΚΟΝΑΣ"
-        android:textAllCaps="false"
-        android:textColor="@color/home_blue"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ActivityProfile_user_image" />
 
     <ScrollView
         android:layout_width="0dp"
@@ -105,7 +67,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/change_image_button">
+        app:layout_constraintTop_toBottomOf="@+id/header_section">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -113,6 +75,44 @@
             android:paddingBottom="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/change_image_button">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ActivityProfile_user_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/null_icon"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/ActivityPersonalSettings_progress_bar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/black_color"
+                android:indeterminateTintMode="src_atop"
+                android:progressDrawable="@drawable/component_progress_circle_bar"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/ActivityProfile_user_image"
+                app:layout_constraintLeft_toLeftOf="@id/ActivityProfile_user_image"
+                app:layout_constraintRight_toRightOf="@id/ActivityProfile_user_image"
+                app:layout_constraintTop_toTopOf="@id/ActivityProfile_user_image" />
+
+            <Button
+                android:id="@+id/change_image_button"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="ΑΛΛΑΓΗ ΕΙΚΟΝΑΣ"
+                android:textAllCaps="false"
+                android:textColor="@color/home_blue"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ActivityProfile_user_image" />
+
 
             <TextView
                 android:id="@+id/user_name_tv"
@@ -125,7 +125,7 @@
                 android:textColor="@color/grey"
                 android:textSize="17dp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/change_image_button" />
 
             <EditText
                 android:id="@+id/PersonalSettingsActivity_editText_first_name"

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class ChangeUserPasswordActivity extends AppCompatActivity {
     private boolean oldPasswordFlag = false, newPasswordFlag = false, confirmPasswordFlag = false;
     private boolean oldPasswordHidden = true, newPasswordHidden = true, confirmPasswordHidden = true;
     private ArrayList<TextView> passwordComplexityRequirementsTextViews;
+    private ProgressBar changePasswordProgressBar;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -56,6 +58,7 @@ public class ChangeUserPasswordActivity extends AppCompatActivity {
         oldPasswordShowButton = findViewById(R.id.ActivityChangePassword_old_password_button);
         newPasswordShowButton = findViewById(R.id.ActivityChangePassword_new_password_button);
         confirmPasswordShowButton = findViewById(R.id.ActivityChangePassword_new_password2_button);
+        changePasswordProgressBar = findViewById(R.id.ActivityChangePassword_progress_bar);
 
         passwordComplexityRequirementsTextViews = new ArrayList<>();
         passwordComplexityRequirementsTextViews.add((TextView) findViewById(R.id.activity_change_password_password_complexity_digit_TextView));
@@ -252,18 +255,23 @@ public class ChangeUserPasswordActivity extends AppCompatActivity {
 
                         if (!oldPassword.equals(newPassword)) {
                             // TODO check if user object is null before calling the client API, maybe try-catch
+
+                            changePasswordProgressBar.setVisibility(View.VISIBLE);
+
                             // Create user object from model
                             UserChangePasswordModel user = new UserChangePasswordModel(oldPassword, newPassword);
                             new FellowTravellerAPI(context).userChangePassword(Objects.requireNonNull(user), new StatusCallBack() {
                                 @Override
                                 public void onSuccess(String status) {
                                     // TODO password was changed successfully
-                                    Toast.makeText(v.getContext(), getResources().getString(R.string.PASSWORD_CHANGED_SUCCESSFULLY), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(v.getContext(), getResources().getString(R.string.PASSWORD_CHANGED_SUCCESSFULLY), Toast.LENGTH_LONG).show();
+                                    changePasswordProgressBar.setVisibility(View.GONE);
                                 }
 
                                 @Override
                                 public void onFailure(String errorMsg) {
                                     oldPasswordEditText.setError(getResources().getString(R.string.ERROR_PASSWORD_CHANGE_INVALID_CURRENT_PASSWORD));
+                                    changePasswordProgressBar.setVisibility(View.GONE);
                                 }
                             });
                         } else {

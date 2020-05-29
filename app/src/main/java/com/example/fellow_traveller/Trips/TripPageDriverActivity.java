@@ -139,10 +139,13 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
         textViewCar.setText(tripInvolvedModel.getCar().getBrand());
         textViewColor.setText(tripInvolvedModel.getCar().getColor());
         textViewPlate.setText(tripInvolvedModel.getCar().getPlate());
-        textViewCreator.setText(tripInvolvedModel.getCreatorUser().getFullName());
         textViewRating.setText(String.valueOf(tripInvolvedModel.getCreatorUser().getRate()));
         textViewReviews.setText(String.valueOf(tripInvolvedModel.getCreatorUser().getReviews()));
         pickUpPointTextView.setText(tripInvolvedModel.getPickUpPoint().getTitle());
+        if(isDriver)
+            textViewCreator.setText("(Εσείς) " + tripInvolvedModel.getCreatorUser().getFullName());
+        else
+            textViewCreator.setText(tripInvolvedModel.getCreatorUser().getFullName());
 
 
         if (tripInvolvedModel.getMessage().equals(""))

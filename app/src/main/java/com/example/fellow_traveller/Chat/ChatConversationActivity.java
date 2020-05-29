@@ -29,6 +29,7 @@ import com.example.fellow_traveller.MessagesNotification.Sender;
 import com.example.fellow_traveller.MessagesNotification.Token;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -66,7 +67,8 @@ public class ChatConversationActivity extends AppCompatActivity {
     private boolean updateStatus = false;
     private ValueEventListener seenListener, updateListener;
     private DatabaseReference reference, referenceStatus;
-    private ProgressBar progressBar;
+    private ProgressBar progressBar, sendProgressBar;
+    private long messagesCount = 10;
 
 
     @Override
@@ -80,6 +82,7 @@ public class ChatConversationActivity extends AppCompatActivity {
         sendButton = findViewById(R.id.send_chat);
         mRefreshLayout = findViewById(R.id.swipe_refresh_chat_conversation);
         progressBar = findViewById(R.id.ActivityChatConversation_progress_bar);
+        sendProgressBar = findViewById(R.id.ActivityChatConversation_send_progress_bar);
 
 
         //Retrieve current user's id
@@ -93,7 +96,7 @@ public class ChatConversationActivity extends AppCompatActivity {
 
         tripNameTextView.setText(tripName);
 
-
+        getMessagesCount();
 
         //Notification's ApiService
         apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
@@ -131,9 +134,14 @@ public class ChatConversationActivity extends AppCompatActivity {
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mCurrentPage++; //increase the number of loading messages when we swipe
-                itemPos = 0;
-                readMoreMessages();
+
+                if(mCurrentPage*TOTAL_ITEMS_TO_LOAD < messagesCount) {
+                    readMoreMessages();
+                    mCurrentPage++; //increase the number of loading messages when we swipe
+                    itemPos = 0;
+                }else{
+                    mRefreshLayout.setRefreshing(false);
+                }
             }
         });
 
@@ -142,7 +150,7 @@ public class ChatConversationActivity extends AppCompatActivity {
 
     private void sendMessage(int myId, int groupId, String message) {
         //We send message to the id which we putted extra from conversation list
-
+        sendProgressBar.setVisibility(View.VISIBLE);
         DatabaseReference referenceMessage = FirebaseDatabase.getInstance().getReference().child("Messages").child(Integer.toString(groupId));
 
         HashMap<String, Object> hashMap = new HashMap<>();
@@ -153,7 +161,12 @@ public class ChatConversationActivity extends AppCompatActivity {
         hashMap.put("senderName", globalClass.getCurrentUser().getName());
         //hashMap.put("senderImage", globalClass.getCurrentUser().getPicture());
 
-        referenceMessage.push().setValue(hashMap);
+        referenceMessage.push().setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                sendProgressBar.setVisibility(View.GONE);
+            }
+        });
 
         //To who we sent notification
         final String msg = message;
@@ -286,7 +299,11 @@ public class ChatConversationActivity extends AppCompatActivity {
                 }
 
                 mAdapter.notifyDataSetChanged();
-                mLayoutManager.scrollToPositionWithOffset(18,0);
+
+                if(mCurrentPage*TOTAL_ITEMS_TO_LOAD>messagesCount)
+                    mLayoutManager.scrollToPositionWithOffset(((int) messagesCount-(mCurrentPage-1)*TOTAL_ITEMS_TO_LOAD) + 2,0);
+                else
+                    mLayoutManager.scrollToPositionWithOffset(19,0);
 
                 mRefreshLayout.setRefreshing(false);
 
@@ -413,6 +430,22 @@ public class ChatConversationActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         reference.removeEventListener(seenListener);
+
+    }
+    public void getMessagesCount(){
+        DatabaseReference  messageRef = FirebaseDatabase.getInstance().getReference("Messages").child(Integer.toString(groupId));
+        messageRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               messagesCount = dataSnapshot.getChildrenCount();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 }
