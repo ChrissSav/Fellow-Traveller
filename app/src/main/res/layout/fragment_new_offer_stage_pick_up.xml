@@ -50,6 +50,7 @@
         android:drawableRight="@drawable/ic_pin"
         android:ellipsize="end"
         android:maxLines="1"
+        android:textColor="#9E9E9E"
         android:padding="15dp"
         android:singleLine="true"
         android:text="Διάλεξε τον προορισμό ..."

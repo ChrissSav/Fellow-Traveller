@@ -75,6 +75,7 @@
                 android:drawableStart="@drawable/ic_car"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
+                android:textColor="#9E9E9E"
                 android:text="Διάλεξε αυτοκίνητο ..."
                 android:drawableTint="@color/black_color"
                 app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_textView6"
