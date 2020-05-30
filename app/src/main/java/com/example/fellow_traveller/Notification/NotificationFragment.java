@@ -38,12 +38,11 @@ public class NotificationFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private NotificationAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<NotificationModel> notificationArrayList = new ArrayList<>();
     private GlobalClass globalClass;
     private int lastId = 0;
     private boolean connectToApi;
-    private ProgressBar progressBar;
+    private ProgressBar progressBar, progressBarLoadMore;
     private boolean bottom = false;
 
 
@@ -61,7 +60,7 @@ public class NotificationFragment extends Fragment {
 
 
         progressBar = view.findViewById(R.id.NotificationFragment_progressBar);
-
+        progressBarLoadMore = view.findViewById(R.id.notificationFragment_progressBar_load_more);
         swipeRefreshLayout = view.findViewById(R.id.NotificationFragment_SwipeRefreshLayout);
         mRecyclerView = view.findViewById(R.id.NotificationFragment_RecyclerView);
 
@@ -108,6 +107,7 @@ public class NotificationFragment extends Fragment {
                     Log.i("addOnScrollListener", "Last Last Last  bottom: " + bottom + "");
                     if (notificationArrayList.size() > 0) {
                         if (bottom) {
+                            progressBarLoadMore.setVisibility(View.VISIBLE);
                             lastId = notificationArrayList.get(notificationArrayList.size() - 1).getId();
                             LoadNotifications(lastId);
                             bottom = false;
@@ -124,8 +124,12 @@ public class NotificationFragment extends Fragment {
     }
 
     public void buildRecyclerView() {
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        mAdapter = new NotificationAdapter(notificationArrayList);
+        mRecyclerView.setAdapter(mAdapter);
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+       /* mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(view.getContext());
         mAdapter = new NotificationAdapter(notificationArrayList);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
@@ -203,7 +207,7 @@ public class NotificationFragment extends Fragment {
                     }
                 }
             }
-        });
+        });*/
     }
 
     public void LoadNotifications(final int id) {
@@ -223,6 +227,8 @@ public class NotificationFragment extends Fragment {
                     }
                     connectToApi = true;
                     progressBar.setVisibility(View.GONE);
+                    progressBarLoadMore.setVisibility(View.GONE);
+
                 }
 
                 @Override
@@ -230,6 +236,7 @@ public class NotificationFragment extends Fragment {
                     Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
                     connectToApi = true;
                     progressBar.setVisibility(View.GONE);
+                    progressBarLoadMore.setVisibility(View.GONE);
 
                 }
             });
