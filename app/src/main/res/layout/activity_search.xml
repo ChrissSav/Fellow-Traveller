@@ -120,7 +120,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:text="Η τοποθεσία σας"
-        style="@style/button_outline_with_left_drawable"
+        style="@style/button_outline_orange_with_left_drawable"
         android:drawableLeft="@drawable/ic_location"
         />
 
@@ -134,7 +134,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:text="Αθήνα"
-        style="@style/button_outline_with_left_drawable"
+        style="@style/button_outline_orange_with_left_drawable"
         android:drawableLeft="@drawable/ic_pin"
 
         />
@@ -148,7 +148,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:text="Θεσσαλονίκη"
-        style="@style/button_outline_with_left_drawable"
+        style="@style/button_outline_orange_with_left_drawable"
         android:drawableLeft="@drawable/ic_pin"
 
 
@@ -162,7 +162,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:text="Ιωάννινα"
-        style="@style/button_outline_with_left_drawable"
+        style="@style/button_outline_orange_with_left_drawable"
         android:drawableLeft="@drawable/ic_pin"
 
         />
@@ -175,7 +175,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:text="Πάτρα"
-        style="@style/button_outline_with_left_drawable"
+        style="@style/button_outline_orange_with_left_drawable"
         android:drawableLeft="@drawable/ic_pin"
 
 
@@ -189,7 +189,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:text="Λάρισα"
-        style="@style/button_outline_with_left_drawable"
+        style="@style/button_outline_orange_with_left_drawable"
         android:drawableLeft="@drawable/ic_pin"
 
         />

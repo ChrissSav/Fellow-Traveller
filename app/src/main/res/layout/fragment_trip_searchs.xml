@@ -301,9 +301,10 @@
                     android:id="@+id/FragmentTrip_searchs_all_activeTrips_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+5 ενεργά ταξίδια"
+                    android:text="Εμφάνιση όλων"
                     style="@style/button_orange_empty"
-                    app:layout_constraintTop_toBottomOf="@id/FragmentTrip_searchs_card_section"
+                    app:layout_constraintTop_toTopOf="@id/FragmentTrip_searchs_active_trips_textView"
+                    app:layout_constraintBottom_toBottomOf="@id/FragmentTrip_searchs_active_trips_textView"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="20dp"/>
 

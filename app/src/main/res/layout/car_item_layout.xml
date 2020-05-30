@@ -20,7 +20,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Lamborghini Hurracan, Matte White"
-        style="@style/paragraph3"
+        style="@style/paragraph2"
         android:textColor="@color/white_color"
         app:layout_constraintStart_toEndOf="@id/car_item_layout_imageView"
         android:layout_marginStart="10dp"

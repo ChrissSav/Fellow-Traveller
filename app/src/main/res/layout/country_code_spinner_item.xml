@@ -14,9 +14,7 @@
         android:text="+30"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:textColor="@color/black_color"
-        android:fontFamily="@font/firasans_light"
-        android:textSize="18sp"
+        style="@style/input"
         />
 
 

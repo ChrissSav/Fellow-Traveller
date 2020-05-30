@@ -7,18 +7,7 @@
     tools:context=".NewOffer.NewOfferStage3Fragment">
 
 
-    <TextView
-        android:id="@+id/NewOfferStage3Fragment_textView2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="16dp"
-        android:text="Καθόρισε τα στοιχεία του ταξιδιού"
-        style="@style/titleStyle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <ScrollView
         android:layout_width="0dp"
@@ -29,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_textView2"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,16 +31,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_textView2">
 
-
+            <TextView
+                android:id="@+id/NewOfferStage3Fragment_textView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:text="Καθόρισε τα στοιχεία του ταξιδιού"
+                style="@style/display"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
             <TextView
                 android:id="@+id/NewOfferStage3Fragment_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Αμάξι"
-                style="@style/labelStyle"
+                style="@style/header2"
+                android:layout_marginTop="30dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/NewOfferStage3Fragment_textView2" />
 
             <TextView
                 android:id="@+id/NewOfferStage3Fragment_textView6"
@@ -59,7 +60,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod"
+                style="@style/paragraph1"
+                android:text="Επιλέξτε αμάξι για το ταξίδι σας"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textView"
                 app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_textView" />
@@ -69,25 +71,23 @@
                 android:layout_width="0dp"
                 android:layout_height="55dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/button_background_select"
+                style="@style/button_outline_blue_with_left_drawable"
                 android:drawableStart="@drawable/ic_car"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:text="Διάλεξε αυτοκίνητο ..."
-                android:textAlignment="textEnd"
-                android:textAllCaps="false"
-                android:textColor="#9AA7B0"
+                android:drawableTint="@color/black_color"
                 app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_textView6"
                 app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textView6"
                 app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_textView6" />
 
             <TextView
                 android:id="@+id/NewOfferStage3Fragment_textView7"
-                style="@style/labelStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="53dp"
                 android:text="Θέσεις"
+                style="@style/header2"
                 app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textView6"
                 app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_button_car" />
 
@@ -96,18 +96,19 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod"
+                style="@style/paragraph1"
+                android:text="Εισάγετε τον αριθμό των ελεύθερων θέσεων που θέλετε να μοιραστείτε"
                 app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_seats_increase_section"
                 app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textView7"
                 app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_seats_increase_section" />
 
             <TextView
                 android:id="@+id/NewOfferStage3Fragment_textView10"
-                style="@style/labelStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="53dp"
                 android:text="Κατοικίδια"
+                style="@style/header2"
                 app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textView6v"
                 app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_textView6v" />
 
@@ -117,7 +118,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="24dp"
-                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod"
+                style="@style/paragraph1"
+                android:text="Επιτρέπεται κατοικίδια ή όχι;"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textView10"
                 app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_switch_pet" />
@@ -128,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="53dp"
                 android:text="Αποσκεύες"
-                style="@style/labelStyle"
+                style="@style/header2"
                 app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textView8"
                 app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_textView8" />
 
@@ -137,7 +139,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod"
+                style="@style/paragraph1"
+                android:text="Εισάγετε τον αριθμό για τις αποσκευές των επιβατών"
                 app:layout_constraintEnd_toEndOf="@+id/NewOfferStage3Fragment_bags_increase_section"
                 app:layout_constraintStart_toStartOf="@+id/NewOfferStage3Fragment_textView_2"
                 app:layout_constraintTop_toBottomOf="@+id/NewOfferStage3Fragment_bags_increase_section" />
@@ -159,8 +162,6 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:padding="5dp"
-                    android:scaleX="1.5"
-                    android:scaleY="1.5"
                     android:src="@drawable/ic_minus_1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -170,9 +171,8 @@
                     android:id="@+id/NewOfferStage3Fragment_seats_value_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/firasans_light"
+                    style="@style/input"
                     android:text="0"
-                    android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/NewOfferStage3Fragment_plus_button_seats"
                     app:layout_constraintStart_toStartOf="@id/NewOfferStage3Fragment_minus_button_seats"
@@ -184,8 +184,6 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:padding="5dp"
-                    android:scaleX="1.5"
-                    android:scaleY="1.5"
                     android:src="@drawable/ic_plus"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -211,8 +209,6 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:padding="5dp"
-                    android:scaleX="1.5"
-                    android:scaleY="1.5"
                     android:src="@drawable/ic_minus_1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -222,9 +218,8 @@
                     android:id="@+id/NewOfferStage3Fragment_bags_value_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/firasans_light"
+                    style="@style/input"
                     android:text="0"
-                    android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/NewOfferStage3Fragment_plus_button_bags"
                     app:layout_constraintStart_toStartOf="@id/NewOfferStage3Fragment_minus_button_bags"
@@ -236,8 +231,6 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:padding="5dp"
-                    android:scaleX="1.5"
-                    android:scaleY="1.5"
                     android:src="@drawable/ic_plus"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -255,8 +248,6 @@
                 android:checked="false"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:scaleX="1.1"
-                android:scaleY="1.1"
                 android:switchPadding="10dp"
                 android:text="Switch"
                 android:thumb="@drawable/switch_thumb_test"
