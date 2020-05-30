@@ -73,15 +73,16 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     @Override
     public ExampleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_item, parent, false);
-        this.context = v.getContext();
-        ExampleViewHolder evh = new ExampleViewHolder(v, mListener);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_item, parent, false);
+        this.context = view.getContext();
+        ExampleViewHolder evh = new ExampleViewHolder(view, mListener);
         return evh;
     }
 
     @Override
     public void onBindViewHolder(ExampleViewHolder holder, int position) {
         NotificationModel currentItem = mExampleList.get(position);
+        holder.setIsRecyclable(false);
 
         if(currentItem.getUser().getPicture() != null && currentItem.getUser().getPicture().length() > 1){
             Picasso.get().load(currentItem.getUser().getPicture()).into(holder.circleImageView);
@@ -129,5 +130,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         return mExampleList.size();
     }
 
+    public  void setNotifications(ArrayList<NotificationModel> notifications){
+        this.mExampleList = notifications;
+    }
 
 }
