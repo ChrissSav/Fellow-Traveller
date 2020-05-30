@@ -2,63 +2,63 @@
 <resources>
 
     <style name="display">
-        <item name="android:fontFamily">@font/firasans_bold</item>
+        <item name="android:fontFamily">@font/roboto_black</item>
         <item name="android:textColor">@color/black_color</item>
         <item name="android:textSize">24sp</item>
     </style>
     <style name="label">
-        <item name="android:fontFamily">@font/firasans_medium</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:textColor">@color/black_color</item>
         <item name="android:textSize">14sp</item>
     </style>
     <style name="name">
-        <item name="android:fontFamily">@font/firasans_medium</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:textColor">@color/black_color</item>
         <item name="android:textSize">18sp</item>
     </style>
     <style name="header1">
-        <item name="android:fontFamily">@font/firasans_bold</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
         <item name="android:textColor">@color/black_color</item>
         <item name="android:textSize">20sp</item>
     </style>
     <style name="header2">
-        <item name="android:fontFamily">@font/firasans_bold</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
         <item name="android:textColor">@color/black_color</item>
         <item name="android:textSize">18sp</item>
     </style>
     <style name="header3">
-        <item name="android:fontFamily">@font/firasans_regular</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textColor">@color/black_color</item>
         <item name="android:textSize">17sp</item>
     </style>
     <style name="header4">
-        <item name="android:fontFamily">@font/firasans_regular</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textColor">@color/black_color</item>
         <item name="android:textSize">17sp</item>
     </style>
     <style name="header5">
-        <item name="android:fontFamily">@font/firasans_regular</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textColor">@color/black_color</item>
         <item name="android:textSize">17sp</item>
     </style>
 
     <style name="paragraph1">
-        <item name="android:fontFamily">@font/firasans_regular</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textColor">@color/grey_color</item>
         <item name="android:textSize">16sp</item>
     </style>
     <style name="paragraph2">
-        <item name="android:fontFamily">@font/firasans_regular</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textColor">@color/black_color</item>
         <item name="android:textSize">16sp</item>
     </style>
     <style name="paragraph3">
-        <item name="android:fontFamily">@font/firasans_light</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
         <item name="android:textColor">@color/black_color</item>
         <item name="android:textSize">16sp</item>
     </style>
     <style name="input">
-        <item name="android:fontFamily">@font/firasans_regular</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textColor">@color/black_color</item>
         <item name="android:textSize">16sp</item>
     </style>

@@ -111,7 +111,7 @@ public class SearchDetailsActivity extends AppCompatActivity implements OnMapRea
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.ActivitySearchDetails_map_fragment);
         mapFragment.getMapAsync(this);
 
-        pickUpPoint = new MarkerOptions().position(new LatLng(tripInvolvedModel.getDestFrom().getLatitude(), tripInvolvedModel.getDestFrom().getLongitude())).title(tripInvolvedModel.getDestFrom().getTitle());
+        pickUpPoint = new MarkerOptions().position(new LatLng(tripInvolvedModel.getPickUpPoint().getLatitude(), tripInvolvedModel.getPickUpPoint().getLongitude())).title(tripInvolvedModel.getDestFrom().getTitle());
         zoomToThePoint = new LatLng(tripInvolvedModel.getPickUpPoint().getLatitude(), tripInvolvedModel.getPickUpPoint().getLongitude());
 
 //        UserBaseModel userBaseModel = new UserBaseModel(1, "Tyler",   "Joseph", 4.7, 34, "default" );
@@ -122,7 +122,7 @@ public class SearchDetailsActivity extends AppCompatActivity implements OnMapRea
 //        passengersList.add(passengerModel);
 
         try{
-            Log.i("passengersList",passengersList.size()+"  |   "+ tripInvolvedModel.getPassengers().size());
+            Log.i("passengersList",passengersList.size()+ "  |   " + tripInvolvedModel.getPassengers().size());
 
         }catch (Exception e ){
             Log.i("passengersList",e.toString());

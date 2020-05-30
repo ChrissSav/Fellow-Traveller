@@ -18,6 +18,7 @@ import com.example.fellow_traveller.SearchAndBook.SearchDestinationsActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -88,6 +89,8 @@ public class SearchsTabLayout extends Fragment {
                     if (activeTripsList.size() > 0) {
                         noActiveTripsSectionLayout.setVisibility(View.GONE);
                         activeTripsSectionLayout.setVisibility(View.VISIBLE);
+
+                        Collections.sort(activeTripsList, TripInvolvedModel.DateComparator);
 
                         //<------------Fill the cardview ------------>
                         destinationCardText.setText(activeTripsList.get(0).getDestFrom().getTitle() + " - " + activeTripsList.get(0).getDestTo().getTitle());
