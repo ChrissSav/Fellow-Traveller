@@ -253,7 +253,12 @@ public class OffersTabLayout extends Fragment {
         moreActiveTripsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent mainIntent = new Intent(getActivity().getApplicationContext(), ActiveTripsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList("activeTripsList", activeTripsList);
+                mainIntent.putExtra("isDriver", true);
+                mainIntent.putExtras(bundle);
+                startActivity(mainIntent);
             }
         });
 

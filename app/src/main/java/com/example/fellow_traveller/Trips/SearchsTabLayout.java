@@ -15,6 +15,7 @@ import com.example.fellow_traveller.ClientAPI.Models.TripInvolvedModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.SearchAndBook.SearchDestinationsActivity;
+import com.example.fellow_traveller.SearchAndBook.SearchPassengersActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -248,7 +249,12 @@ public class SearchsTabLayout extends Fragment {
         moreActiveTripsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent mainIntent = new Intent(getActivity().getApplicationContext(), ActiveTripsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList("activeTripsList", activeTripsList);
+                mainIntent.putExtra("isDriver", false);
+                mainIntent.putExtras(bundle);
+                startActivity(mainIntent);
             }
         });
         cardLayoutSection.setOnClickListener(new View.OnClickListener() {
