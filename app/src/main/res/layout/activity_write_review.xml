@@ -23,6 +23,17 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/write_review_rate_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                style="@style/display"
+                android:text="Αξιολογείστε"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
                 android:id="@+id/write_review_textView_title"
                 style="@style/paragraph1"
                 android:layout_width="0dp"
@@ -34,16 +45,7 @@
                 app:layout_constraintStart_toStartOf="@+id/write_review_rate_tv"
                 app:layout_constraintTop_toBottomOf="@+id/write_review_close_button" />
 
-            <TextView
-                android:id="@+id/write_review_rate_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                style="@style/display"
-                android:text="Αξιολογείστε"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+
 
             <ImageButton
                 android:id="@+id/write_review_close_button"

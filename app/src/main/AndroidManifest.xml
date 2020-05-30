@@ -26,7 +26,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SuccessRegisterActivity"></activity>
+        <activity android:name=".Trips.ActiveTripsActivity"></activity>
+        <activity android:name=".SuccessRegisterActivity" />
         <activity android:name=".PhoneActivity" />
         <activity android:name=".VerificationActivity" />
         <activity android:name=".Trips.ScanQRCodeActivity" />
@@ -54,8 +55,9 @@
 
         <activity android:name=".MapDirections.MapsRouteActivity" />
         <activity android:name=".SearchAndBook.SearchPassengersActivity" />
-        <activity android:name=".ProfileActivity"
-                  android:launchMode = "singleTop"/>
+        <activity
+            android:name=".ProfileActivity"
+            android:launchMode="singleTop" />
         <activity android:name=".CollapseTest" />
         <activity android:name=".SuccessActivity" />
         <activity android:name=".Reviews.WriteReviewActivity" />
@@ -64,32 +66,41 @@
         <activity android:name=".Settings.EditCarSettingsActivity" />
         <activity android:name=".Settings.AddCarSettingsActivity" />
         <activity android:name=".Settings.CarsSettingsActivity" />
-        <activity android:name=".SearchAndBook.BookActivity"
-                  android:launchMode = "singleTop"/>
-        <activity android:name=".SearchAndBook.SearchDetailsActivity"
-                  android:launchMode = "singleTop"/>
-        <activity android:name=".SearchAndBook.SearchResultsActivity"
-                  android:launchMode = "singleTop"/>
+        <activity
+            android:name=".SearchAndBook.BookActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".SearchAndBook.SearchDetailsActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".SearchAndBook.SearchResultsActivity"
+            android:launchMode="singleTop" />
         <activity android:name=".SearchAndBook.Search2Activity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Base.Theme.AppCompat" />
         <activity android:name=".SearchAndBook.SearchActivity" />
-        <activity android:name=".NewOffer.NewOfferActivity"
-                  android:launchMode = "singleTop"/>
-        <activity android:name=".SearchAndBook.FiltersActivity"
-                  android:launchMode = "singleTop"/>
+        <activity
+            android:name=".NewOffer.NewOfferActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".SearchAndBook.FiltersActivity"
+            android:launchMode="singleTop" />
         <activity android:name=".Settings.PersonalSettingsActivity" />
-        <activity android:name=".Chat.ChatConversationActivity"
-                  android:launchMode = "singleTop"/>
+        <activity
+            android:name=".Chat.ChatConversationActivity"
+            android:launchMode="singleTop" />
         <activity android:name=".Settings.UserSettingsActivity" />
-        <activity android:name=".Trips.TripPageDriverActivity"
-                  android:launchMode = "singleTop"/>
-        <activity android:name=".Register.RegisterContainerActivity"
-                  android:launchMode = "singleTop"/>
-        <activity android:name=".HomeFragments.HomeActivity"
-                  android:launchMode = "singleTop"/>
+        <activity
+            android:name=".Trips.TripPageDriverActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".Register.RegisterContainerActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".HomeFragments.HomeActivity"
+            android:launchMode="singleTop" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".Settings.ChangeUserPasswordActivity" />
         <activity android:name=".SplashActivity">
