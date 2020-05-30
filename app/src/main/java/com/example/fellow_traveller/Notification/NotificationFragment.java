@@ -79,7 +79,7 @@ public class NotificationFragment extends Fragment {
 
         }
 
-        swipeRefreshLayout.setEnabled(false);
+        //swipeRefreshLayout.setEnabled(false);
 
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -129,24 +129,9 @@ public class NotificationFragment extends Fragment {
         mAdapter = new NotificationAdapter(notificationArrayList);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-
         mAdapter.setOnItemClickListener(new NotificationAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(int position) {
-                Toast.makeText(getActivity(), position + "\n User " + notificationArrayList.get(position).getUser().getId() + "\n Trip :" + notificationArrayList.get(position).getTrip().getId()
-                        + "\n Read :" + notificationArrayList.get(position).getHasRead(), Toast.LENGTH_SHORT).show();
-
-            }
-        });
-    }
-
-
-    public void buildRecyclerView(boolean flag) {
-        /*mAdapter.setOnItemClickListener(new NotificationAdapter.OnItemClickListener() {
-            @Override
             public void onItemClick(final int position) {
-                //Toast.makeText(getActivity(), position + " " + notificationArrayList.get(position).getTypeOf(), Toast.LENGTH_SHORT).show();
-
                 if (notificationArrayList.get(position).getTypeOf().equals("passenger")) {
 
                     if (notificationArrayList.get(position).getHasRead()) {
@@ -218,9 +203,7 @@ public class NotificationFragment extends Fragment {
                     }
                 }
             }
-        });*/
-
-
+        });
     }
 
     public void LoadNotifications(final int id) {
