@@ -38,7 +38,7 @@ public class BookActivity extends AppCompatActivity {
     private Switch petsSwitch;
     private TextView destStartTextView, destEndTextView, dateTextView, timeTextView, seatsTextView, dateMonthTextView, timePmTextView, seatsDefinitionTextView, priceTextView;
     private TextView havePetWithMeTextView, bagsCurrentTextView;
-    private ImageButton increaseBagsButton, decreaseBagsButton;
+    private ImageButton increaseBagsButton, decreaseBagsButton, closeButton;
     private boolean havePet = false;
     private int currentBags = 0, maxAvailableBags;
     private TripInvolvedModel tripInvolvedModel;
@@ -69,6 +69,7 @@ public class BookActivity extends AppCompatActivity {
         timePmTextView = findViewById(R.id.ActivityBook_time_pm_textView);
         seatsDefinitionTextView = findViewById(R.id.ActivityBook_seats_definition_textView);
         priceTextView = findViewById(R.id.ActivityBook_price_textView);
+        closeButton = findViewById(R.id.ActivityBook_close_button);
 
 
         tripInvolvedModel = getIntent().getParcelableExtra("trip");
@@ -146,7 +147,12 @@ public class BookActivity extends AppCompatActivity {
             }
         });
 
-
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         nextButton.setOnClickListener(new View.OnClickListener() {
 
             @Override

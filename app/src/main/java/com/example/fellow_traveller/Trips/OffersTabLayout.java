@@ -43,7 +43,8 @@ public class OffersTabLayout extends Fragment {
     private ArrayList<TripInvolvedModel> activeTripsList = new ArrayList<>();
     private ArrayList<TripInvolvedModel> completedTripsList = new ArrayList<>();
     private TextView activeTripsTextview;
-    private Button createTripButton, moreActiveTripsButton;
+    private Button moreActiveTripsButton;
+    private ConstraintLayout createTripLayoutButton;
     private ConstraintLayout activeTripsSectionLayout, noActiveTripsSectionLayout, completedTripsSectionLayout, cardLayoutSection;
     private TextView destinationCardText, dateCardText, timeCardText, priceCardText, creatorNameCardText, creatorRateCardText, myBookCardText;
     private CircleImageView creatorCardImage;
@@ -59,7 +60,7 @@ public class OffersTabLayout extends Fragment {
         view = inflater.inflate(R.layout.fragment_trip_offers, container, false);
         globalClass = (GlobalClass) getActivity().getApplicationContext();
         activeTripsTextview = view.findViewById(R.id.FragmentTrip_offers_active_trips_textView);
-        createTripButton = view.findViewById(R.id.FragmentTrip_offers_button);
+        createTripLayoutButton = view.findViewById(R.id.FragmentTrip_offers_no_trips_section_button_layout);
         activeTripsSectionLayout = view.findViewById(R.id.FragmentTrip_offers_active_trips_section);
         noActiveTripsSectionLayout = view.findViewById(R.id.FragmentTrip_offers_no_trips_section);
         completedTripsSectionLayout = view.findViewById(R.id.FragmentTrip_offers_completed_trips_section);
@@ -242,7 +243,7 @@ public class OffersTabLayout extends Fragment {
 //            }
 //        });
 
-        createTripButton.setOnClickListener(new View.OnClickListener() {
+        createTripLayoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mainIntent = new Intent(getActivity().getApplicationContext(), NewOfferActivity.class);
