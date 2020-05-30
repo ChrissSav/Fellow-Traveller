@@ -56,8 +56,8 @@ public class AccountFragment extends Fragment {
     private View view;
 
 
-    public AccountFragment() {
-        // Required empty public constructor
+    public AccountFragment( GlobalClass globalClass) {
+        this.globalClass =  globalClass;
     }
 
 
@@ -178,7 +178,7 @@ public class AccountFragment extends Fragment {
                     haveCarsSectionLayout.setVisibility(View.VISIBLE);
                     mRecyclerView = view.findViewById(R.id.FragmentAccount_my_cars_recycler_view);
                     mRecyclerView.setHasFixedSize(true);
-                    mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+                    mLayoutManager = new LinearLayoutManager( globalClass.getApplicationContext());
                     mAdapter = new MyCarModelAdapter(myCarsList);
                     mRecyclerView.setLayoutManager(mLayoutManager);
                     mRecyclerView.setAdapter(mAdapter);

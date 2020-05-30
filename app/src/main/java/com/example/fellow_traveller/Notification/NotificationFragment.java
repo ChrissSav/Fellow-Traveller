@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -43,6 +44,7 @@ public class NotificationFragment extends Fragment {
     private int lastId = 0;
     private boolean connectToApi;
     private ProgressBar progressBar;
+    private boolean bottom = false;
 
 
     public NotificationFragment() {
@@ -63,22 +65,57 @@ public class NotificationFragment extends Fragment {
         swipeRefreshLayout = view.findViewById(R.id.NotificationFragment_SwipeRefreshLayout);
         mRecyclerView = view.findViewById(R.id.NotificationFragment_RecyclerView);
 
-        lastId = 0;
 
+        buildRecyclerView();
 
-        if (notificationArrayList.size() > 0) {
-            progressBar.setVisibility(View.GONE);
+        if (notificationArrayList.size() < 10 && notificationArrayList.size() > 0) {
             lastId = notificationArrayList.get(notificationArrayList.size() - 1).getId();
-            buildRecyclerView(false);
-        } else {
+            Log.i("notificatdionModels", " id: " + lastId + " size : " + notificationArrayList.size());
+            LoadNotifications(lastId);
+        } else if (notificationArrayList.size() < 1) {
             LoadNotifications(0);
+        } else {
+            progressBar.setVisibility(View.GONE);
+
         }
+
+        swipeRefreshLayout.setEnabled(false);
 
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                LoadNotifications(0);
+                notificationArrayList = new ArrayList<>();
+                ResetSet();
+            }
+        });
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                if (dy < 0)
+                    bottom = false;
+
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    Log.i("addOnScrollListener", "Last Last Last  bottom: " + bottom + "");
+                    if (notificationArrayList.size() > 0) {
+                        if (bottom) {
+                            lastId = notificationArrayList.get(notificationArrayList.size() - 1).getId();
+                            LoadNotifications(lastId);
+                            bottom = false;
+                        } else
+                            bottom = true;
+
+                    }
+                }
             }
         });
 
@@ -86,20 +123,29 @@ public class NotificationFragment extends Fragment {
         return view;
     }
 
-
-    public void buildRecyclerView(boolean flag) {
+    public void buildRecyclerView() {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mAdapter = new NotificationAdapter(notificationArrayList);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-        if (flag) {
-            mRecyclerView.smoothScrollToPosition(mAdapter.getItemCount());
-        }
+
         mAdapter.setOnItemClickListener(new NotificationAdapter.OnItemClickListener() {
             @Override
+            public void onItemClick(int position) {
+                Toast.makeText(getActivity(), position + "\n User " + notificationArrayList.get(position).getUser().getId() + "\n Trip :" + notificationArrayList.get(position).getTrip().getId()
+                        + "\n Read :" + notificationArrayList.get(position).getHasRead(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+
+    public void buildRecyclerView(boolean flag) {
+        /*mAdapter.setOnItemClickListener(new NotificationAdapter.OnItemClickListener() {
+            @Override
             public void onItemClick(final int position) {
-                //.makeText(getActivity(), position + " " + notificationArrayList.get(position).getTypeOf(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), position + " " + notificationArrayList.get(position).getTypeOf(), Toast.LENGTH_SHORT).show();
 
                 if (notificationArrayList.get(position).getTypeOf().equals("passenger")) {
 
@@ -156,7 +202,7 @@ public class NotificationFragment extends Fragment {
                                     intent.putExtra("trip", notificationArrayList.get(position).getTrip());
                                     intent.putExtra("user", notificationArrayList.get(position).getUser());
                                     startActivity(intent);
-                                }else{
+                                } else {
 
                                     Toast.makeText(getActivity(), getResources().getString(R.string.ERROR_REVIEW_CANT_REGISTER_THE_REVIEW), Toast.LENGTH_SHORT).show();
 
@@ -172,46 +218,28 @@ public class NotificationFragment extends Fragment {
                     }
                 }
             }
-        });
+        });*/
 
 
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                Log.i("dy", "onScrolled: " + dy);
-                if (dy > 0) {
-                    if (notificationArrayList.size() > 0) {
-                        lastId = notificationArrayList.get(notificationArrayList.size() - 1).getId();
-                        LoadNotifications(lastId);
-                    }
-                }
-            }
-        });
     }
 
     public void LoadNotifications(final int id) {
         if (connectToApi) {
             connectToApi = false;
+
             new FellowTravellerAPI(globalClass).getNotificationsById(id, new NotificationCallBack() {
                 @Override
                 public void onSuccess(ArrayList<NotificationModel> notificationModels) {
+                    Log.i("notificationModels", "onSuccess: " + notificationModels.size() + " id: " + id);
                     if (notificationModels.size() > 0) {
-                        if (id > 0) {
-                            int position = notificationArrayList.size();
-                            notificationArrayList.addAll(notificationModels);
-                            buildRecyclerView(true);
-
-
-                        } else {
-                            notificationArrayList = notificationModels;
-                            buildRecyclerView(false);
-
+                        for (int i = 0; i < notificationModels.size(); i++) {
+                            notificationArrayList.add(notificationModels.get(i));
+                            mAdapter.notifyItemInserted(notificationArrayList.size() - 1);
                         }
+
                     }
-                    swipeRefreshLayout.setRefreshing(false);
                     connectToApi = true;
                     progressBar.setVisibility(View.GONE);
-
                 }
 
                 @Override
@@ -222,8 +250,35 @@ public class NotificationFragment extends Fragment {
 
                 }
             });
-
         }
+
+    }
+
+
+    public void ResetSet() {
+        new FellowTravellerAPI(globalClass).getNotificationsById(0, new NotificationCallBack() {
+            @Override
+            public void onSuccess(ArrayList<NotificationModel> notificationModels) {
+                Log.i("notificationModels", "onSuccess: " + notificationModels.size() + " id: " + 0);
+                if (notificationModels.size() > 0) {
+                    notificationArrayList = notificationModels;
+                    buildRecyclerView();
+                }
+                swipeRefreshLayout.setRefreshing(false);
+                connectToApi = true;
+                progressBar.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+                connectToApi = true;
+                progressBar.setVisibility(View.GONE);
+                swipeRefreshLayout.setRefreshing(false);
+
+            }
+        });
     }
 
 }
