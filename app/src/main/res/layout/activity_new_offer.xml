@@ -70,7 +70,7 @@
         android:clickable="true"
         android:src="@drawable/ic_right_arrow"
         android:backgroundTint="@color/blue_color"
-        app:maxImageSize="40dp"
+        app:maxImageSize="35dp"
         app:fabCustomSize="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
