@@ -11,9 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fellow_traveller.ClientAPI.Models.TripInvolvedModel;
-import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.R;
-import com.example.fellow_traveller.SearchAndBook.SearchResultsAdapter;
 
 import java.util.ArrayList;
 
@@ -95,12 +93,12 @@ public class ActiveTripsAdapter extends RecyclerView.Adapter<ActiveTripsAdapter.
         public ActiveTripsViewHolder(@NonNull View itemView, final ActiveTripsAdapter.OnItemClickListener listener) {
             super(itemView);
 
-            destinations = itemView.findViewById(R.id.fragment_trip_layout_item_destination);
-            seats = itemView.findViewById(R.id.fragment_trip_layout_item_seats);
-            bags = itemView.findViewById(R.id.fragment_trip_layout_item_bags);
-            date = itemView.findViewById(R.id.fragment_trip_layout_item_date_textView);
-            time = itemView.findViewById(R.id.fragment_trip_layout_item_time_textView);
-            price = itemView.findViewById(R.id.fragment_trip_layout_item_price_textView);
+            destinations = itemView.findViewById(R.id.FragmentTrip_offers_destinations_TextView);
+//            seats = itemView.findViewById(R.id.fragment_trip_layout_item_seats);
+//            bags = itemView.findViewById(R.id.fragment_trip_layout_item_bags);
+            date = itemView.findViewById(R.id.FragmentTrip_offers_date_textView);
+            time = itemView.findViewById(R.id.FragmentTrip_offers_time_textView);
+            price = itemView.findViewById(R.id.FragmentTrip_offers_price_textView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

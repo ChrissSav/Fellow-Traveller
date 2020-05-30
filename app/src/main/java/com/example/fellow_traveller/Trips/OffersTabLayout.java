@@ -17,11 +17,13 @@ import com.example.fellow_traveller.ClientAPI.Models.TripModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.NewOffer.NewOfferActivity;
 import com.example.fellow_traveller.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,6 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class OffersTabLayout extends Fragment {
     View view;
@@ -40,10 +43,12 @@ public class OffersTabLayout extends Fragment {
     private ArrayList<TripInvolvedModel> activeTripsList = new ArrayList<>();
     private ArrayList<TripInvolvedModel> completedTripsList = new ArrayList<>();
     private TextView activeTripsTextview;
-    private Button createTripButton;
-    private ConstraintLayout activeTripsSectionLayout, noActiveTripsSectionLayout, completedTripsSectionLayout;
+    private Button createTripButton, moreActiveTripsButton;
+    private ConstraintLayout activeTripsSectionLayout, noActiveTripsSectionLayout, completedTripsSectionLayout, cardLayoutSection;
+    private TextView destinationCardText, dateCardText, timeCardText, priceCardText, creatorNameCardText, creatorRateCardText, myBookCardText;
+    private CircleImageView creatorCardImage;
 
-    private ViewPager2 activeTripsViewPager;
+//    private ViewPager2 activeTripsViewPager;
 
     public OffersTabLayout() {
     }
@@ -53,11 +58,23 @@ public class OffersTabLayout extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_trip_offers, container, false);
         globalClass = (GlobalClass) getActivity().getApplicationContext();
-        activeTripsTextview = view.findViewById(R.id.fragment_trip_offers_active_trips_textView);
-        createTripButton = view.findViewById(R.id.fragment_trip_offers_button);
+        activeTripsTextview = view.findViewById(R.id.FragmentTrip_offers_active_trips_textView);
+        createTripButton = view.findViewById(R.id.FragmentTrip_offers_button);
         activeTripsSectionLayout = view.findViewById(R.id.FragmentTrip_offers_active_trips_section);
         noActiveTripsSectionLayout = view.findViewById(R.id.FragmentTrip_offers_no_trips_section);
         completedTripsSectionLayout = view.findViewById(R.id.FragmentTrip_offers_completed_trips_section);
+
+        destinationCardText = view.findViewById(R.id.FragmentTrip_offers_destinations_TextView);
+        dateCardText = view.findViewById(R.id.FragmentTrip_offers_date_textView);
+        timeCardText = view.findViewById(R.id.FragmentTrip_offers_time_textView);
+        priceCardText = view.findViewById(R.id.FragmentTrip_offers_price_textView);
+        creatorNameCardText = view.findViewById(R.id.FragmentTrip_offers_creator_name);
+        creatorRateCardText = view.findViewById(R.id.FragmentTrip_offers_creator_rate_and_reviews);
+        myBookCardText = view.findViewById(R.id.FragmentTrip_offers_my_book_details_textView);
+        creatorCardImage = view.findViewById(R.id.FragmentTrip_offers_creator_image);
+        moreActiveTripsButton = view.findViewById(R.id.FragmentTrip_offers_all_activeTrips_button);
+        cardLayoutSection = view.findViewById(R.id.FragmentTrip_offers_card_section);
+
 
         new FellowTravellerAPI(globalClass).getTripsAsCreatorTest(new TripInvolvedCallBack() {
             @Override
@@ -66,7 +83,7 @@ public class OffersTabLayout extends Fragment {
                 if (trips.size() > 0) {
                     //Seperate trips to active and completed
                     for(int i = 0; i < trips.size(); i++){
-                        if(!isCompleted(trips.get(i)))
+                        if(trips.get(i).getActive())
                             activeTripsList.add(trips.get(i));
                         else
                             completedTripsList.add(trips.get(i));
@@ -74,56 +91,43 @@ public class OffersTabLayout extends Fragment {
                     //check if user has active trips
                     if (activeTripsList.size() > 0) {
 
-                        activeTripsViewPager = view.findViewById(R.id.fragment_trip_offers_recycler_view);
-                        mAdapterActive=new ActiveTripsAdapter( activeTripsList );
-                        activeTripsViewPager.setAdapter( mAdapterActive );
-
-                        activeTripsViewPager.setClipToPadding(false);
-                        activeTripsViewPager.setClipChildren( false );
-                        activeTripsViewPager.setOffscreenPageLimit( 3 );
-                        activeTripsViewPager.getChildAt( 0 ).setOverScrollMode( RecyclerView.OVER_SCROLL_NEVER );
-
-                        CompositePageTransformer compositePageTransformer=new CompositePageTransformer();
-                        compositePageTransformer.addTransformer( new MarginPageTransformer( 20 ) );
-                        compositePageTransformer.addTransformer( new ViewPager2.PageTransformer() {
-                            @Override
-                            public void transformPage(@NonNull View page, float position) {
-                                float r=1-Math.abs( position );
-                                page.setScaleY( 0.9f+r*0.10f );
-
-                            }
-                        } );
-
-                        activeTripsViewPager.setPageTransformer( compositePageTransformer );
-
-                        mAdapterActive.setOnItemClickListener(new ActiveTripsAdapter.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(int position) {
-                                Intent mainIntent = new Intent(getActivity().getApplicationContext(), TripPageDriverActivity.class);
-                                mainIntent.putExtra("isCompleted", false);
-                                mainIntent.putExtra("isDriver", true);
-                                mainIntent.putExtra("trip", activeTripsList.get(position));
-                                startActivity(mainIntent);
-                            }
-                        });
-
                         noActiveTripsSectionLayout.setVisibility(View.GONE);
                         activeTripsSectionLayout.setVisibility(View.VISIBLE);
+
+                        //<------------Fill the cardview ------------>
+                        destinationCardText.setText(activeTripsList.get(0).getDestFrom().getTitle() + " - " + activeTripsList.get(0).getDestTo().getTitle());
+                        dateCardText.setText(activeTripsList.get(0).getDate());
+                        timeCardText.setText(activeTripsList.get(0).getTime());
+                        if (Math.round(activeTripsList.get(0).getPrice()) == activeTripsList.get(0).getPrice())
+                            priceCardText.setText(Math.round(activeTripsList.get(0).getPrice()) + "€");
+                        else
+                            priceCardText.setText(activeTripsList.get(0).getPrice() + "€");
+
+                        creatorNameCardText.setText("(Εσείς) " + activeTripsList.get(0).getCreatorUser().getFullName());
+                        creatorRateCardText.setText(activeTripsList.get(0).getCreatorUser().getRate() + " (" + activeTripsList.get(0).getCreatorUser().getReviews() + ")");
+                        try {
+                            Picasso.get().load(activeTripsList.get(0).getCreatorUser().getPicture()).into(creatorCardImage);
+
+                        } catch (Exception e) {
+                            //  Block of code to handle errors
+                        }
                         if (activeTripsList.size() == 1)
                             activeTripsTextview.setText("Έχετε " + String.valueOf(activeTripsList.size()) + " ενεργό ταξίδι");
                         else
                             activeTripsTextview.setText("Έχετε " + String.valueOf(activeTripsList.size()) + " ενεργά ταξίδια");
+
+
                     }else{
                         activeTripsSectionLayout.setVisibility(View.GONE);
                         noActiveTripsSectionLayout.setVisibility(View.VISIBLE);
                     }
 
-                    //Chech if user has completed trips
+                    //Check if user has completed trips
                     if(completedTripsList.size() > 0){
 
                         completedTripsSectionLayout.setVisibility(View.VISIBLE);
 
-                        mRecyclerViewNotActive = view.findViewById(R.id.fragment_trip_offers_completed_recycler_view);
+                        mRecyclerViewNotActive = view.findViewById(R.id.FragmentTrip_offers_completed_recycler_view);
                         mRecyclerViewNotActive.setHasFixedSize(true);
                         mLayoutManagerNotActive = new LinearLayoutManager(getActivity());
                         mAdapterNotActive = new CompletedTripsAdapter(completedTripsList);
@@ -246,7 +250,25 @@ public class OffersTabLayout extends Fragment {
             }
         });
 
+        moreActiveTripsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        cardLayoutSection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mainIntent = new Intent(getActivity().getApplicationContext(), TripPageDriverActivity.class);
+                mainIntent.putExtra("isCompleted", false);
+                mainIntent.putExtra("isDriver", true);
+                mainIntent.putExtra("trip", activeTripsList.get(0));
+                startActivity(mainIntent);
+            }
+        });
         return view;
+
     }
 
     public boolean isCompleted(TripInvolvedModel tripModel){

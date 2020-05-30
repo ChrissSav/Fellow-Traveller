@@ -43,12 +43,12 @@ public class ActiveAdapter extends RecyclerView.Adapter<ActiveAdapter.ActiveView
 
         public ActiveViewHolder(@NonNull View itemView) {
             super( itemView );
-            this.destinations = itemView.findViewById( R.id.fragment_trip_layout_item_destination);
-            this.seats = itemView.findViewById(R.id.fragment_trip_layout_item_seats);
-            this.bags = itemView.findViewById(R.id.fragment_trip_layout_item_bags);
-            this.date = itemView.findViewById(R.id.fragment_trip_layout_item_date_textView);
-            this.time = itemView.findViewById(R.id.fragment_trip_layout_item_time_textView);
-            this.price = itemView.findViewById(R.id.fragment_trip_layout_item_price_textView);
+            this.destinations = itemView.findViewById( R.id.FragmentTrip_offers_destinations_TextView);
+//            this.seats = itemView.findViewById(R.id.fragment_trip_layout_item_seats);
+//            this.bags = itemView.findViewById(R.id.fragment_trip_layout_item_bags);
+            this.date = itemView.findViewById(R.id.FragmentTrip_offers_date_textView);
+            this.time = itemView.findViewById(R.id.FragmentTrip_offers_time_textView);
+            this.price = itemView.findViewById(R.id.FragmentTrip_offers_price_textView);
         }
 
         void setData(TripInvolvedModel currentItem){

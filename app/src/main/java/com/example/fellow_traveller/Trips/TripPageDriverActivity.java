@@ -122,7 +122,7 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.ActivityTripPageDriver_map_fragment);
         mapFragment.getMapAsync(this);
 
-        pickUpPoint = new MarkerOptions().position(new LatLng(tripInvolvedModel.getDestFrom().getLatitude(), tripInvolvedModel.getDestFrom().getLongitude())).title(tripInvolvedModel.getDestFrom().getTitle());
+        pickUpPoint = new MarkerOptions().position(new LatLng(tripInvolvedModel.getPickUpPoint().getLatitude(), tripInvolvedModel.getPickUpPoint().getLongitude())).title(tripInvolvedModel.getPickUpPoint().getTitle());
         zoomToThePoint = new LatLng(tripInvolvedModel.getDestFrom().getLatitude(), tripInvolvedModel.getDestFrom().getLongitude());
 
         //Set the values
