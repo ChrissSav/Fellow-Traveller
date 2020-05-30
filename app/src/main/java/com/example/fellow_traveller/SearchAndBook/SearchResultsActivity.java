@@ -80,8 +80,8 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         globalClass = (GlobalClass) getApplicationContext();
 
-        startDestTextView = findViewById(R.id.ActivitySearchResults_from_textView);
-        endDestTextView = findViewById(R.id.ActivitySearchResults_to_textView);
+//        startDestTextView = findViewById(R.id.ActivitySearchResults_from_textView);
+//        endDestTextView = findViewById(R.id.ActivitySearchResults_to_textView);
         filterHeaderOverView = findViewById(R.id.ActivitySearchResults_filters_textView);
         filterButton = findViewById(R.id.ActivitySearchResults_filter_button);
         swapButton = findViewById(R.id.ActivitySearchResults_swap_button);
@@ -105,8 +105,8 @@ public class SearchResultsActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         startDestinationModel = (DestinationModel) intent.getParcelableExtra("startDestination");
         endDestinationModel = (DestinationModel) intent.getParcelableExtra("endDestination");
-        startDestTextView.setText(startDestinationModel.getTitle());
-        endDestTextView.setText(endDestinationModel.getTitle());
+//        startDestTextView.setText(startDestinationModel.getTitle());
+//        endDestTextView.setText(endDestinationModel.getTitle());
 
         startDestButton.setText(startDestinationModel.getTitle());
         endDestButton.setText(endDestinationModel.getTitle());
