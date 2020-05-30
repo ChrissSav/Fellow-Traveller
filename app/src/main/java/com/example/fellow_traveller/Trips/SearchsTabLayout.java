@@ -15,6 +15,7 @@ import com.example.fellow_traveller.ClientAPI.Models.TripInvolvedModel;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.SearchAndBook.SearchDestinationsActivity;
+import com.example.fellow_traveller.SearchAndBook.SearchPassengersActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -38,7 +39,8 @@ public class SearchsTabLayout extends Fragment {
     private ArrayList<TripInvolvedModel> activeTripsList = new ArrayList<>();
     private ArrayList<TripInvolvedModel> completedTripsList = new ArrayList<>();
     private TextView activeTripsTextview;
-    private Button searchButton, moreActiveTripsButton;
+    private Button moreActiveTripsButton;
+    private ConstraintLayout searchLayoutButton;
     private ConstraintLayout activeTripsSectionLayout, noActiveTripsSectionLayout, completedTripsSectionLayout, cardLayoutSection;
     private TextView destinationCardText, dateCardText, timeCardText, priceCardText, creatorNameCardText, creatorRateCardText, myBookCardText;
     private CircleImageView creatorCardImage;
@@ -55,7 +57,7 @@ public class SearchsTabLayout extends Fragment {
         view = inflater.inflate(R.layout.fragment_trip_searchs, container, false);
         //myContext = container.getContext();
         globalClass = (GlobalClass) getActivity().getApplicationContext();
-        searchButton = view.findViewById(R.id.FragmentTrip_searchs_button);
+        searchLayoutButton = view.findViewById(R.id.FragmentTrip_searchs_no_trips_section_button_layout);
         activeTripsSectionLayout = view.findViewById(R.id.FragmentTrip_searchs_active_trips_section);
         noActiveTripsSectionLayout = view.findViewById(R.id.FragmentTrip_searchs_no_trips_section);
         completedTripsSectionLayout = view.findViewById(R.id.FragmentTrip_searchs_completed_trips_section);
@@ -237,7 +239,7 @@ public class SearchsTabLayout extends Fragment {
 //            }
 //        });
 //
-        searchButton.setOnClickListener(new View.OnClickListener() {
+        searchLayoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mainIntent = new Intent(getActivity().getApplicationContext(), SearchDestinationsActivity.class);
@@ -248,7 +250,12 @@ public class SearchsTabLayout extends Fragment {
         moreActiveTripsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent mainIntent = new Intent(getActivity().getApplicationContext(), ActiveTripsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList("activeTripsList", activeTripsList);
+                mainIntent.putExtra("isDriver", false);
+                mainIntent.putExtras(bundle);
+                startActivity(mainIntent);
             }
         });
         cardLayoutSection.setOnClickListener(new View.OnClickListener() {

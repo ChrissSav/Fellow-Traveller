@@ -9,9 +9,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import com.example.fellow_traveller.ClientAPI.Models.TripInvolvedModel;
 import com.example.fellow_traveller.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -31,7 +33,7 @@ public class ActiveTripsAdapter extends RecyclerView.Adapter<ActiveTripsAdapter.
     @NonNull
     @Override
     public ActiveTripsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_trip_layout_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.active_trip_item_layout, parent, false);
         ActiveTripsViewHolder evh = new ActiveTripsViewHolder(v, mListener);
         return evh;
     }
@@ -41,39 +43,25 @@ public class ActiveTripsAdapter extends RecyclerView.Adapter<ActiveTripsAdapter.
 
         TripInvolvedModel currentItem = activeTripsList.get(position);
 
-        //Destination description
-        holder.destinations.setText(currentItem.getDestFrom().getTitle() + " - " + currentItem.getDestTo().getTitle());
-        // TODO cast this to double
-        //Seats Availability
-        int seatsAvailable = currentItem.getMaxSeats() - currentItem.getCurrentSeats();
-        if(seatsAvailable == 0)
-            holder.seats.setText("Δεν υπάρχουν ελεύθερες θέσεις");
-        else if(seatsAvailable == 1)
-            holder.seats.setText("Υπάρχει 1 ελεύθερη θέση");
-        else
-            holder.seats.setText("Υπάρχουν " + String.valueOf(seatsAvailable) + " ελεύθερες θέσεις");
-
-        //Bags Availability
-        int bagsAvailable = currentItem.getMaxBags() - currentItem.getCurrentBags();
-        if(bagsAvailable == 0)
-            holder.bags.setText("Δεν υπάρχει άλλος χώρος για αποσκευές");
-        else if (bagsAvailable == 1)
-            holder.bags.setText("Υπάρχει χώρος για 1 αποσκευή ακόμα");
-        else
-            holder.bags.setText("Υπάρχει χώρος για " + String.valueOf(bagsAvailable) + " αποσκευές ακόμα");
-
-
-
-        //Date
+        holder.destination.setText(currentItem.getDestFrom().getTitle() + " - " + currentItem.getDestTo().getTitle());
         holder.date.setText(currentItem.getDate());
-        //Time
         holder.time.setText(currentItem.getTime());
-        //Price
-        //Delete the 0 decimals
-        if(currentItem.getPrice().intValue() == currentItem.getPrice())
-            holder.price.setText(currentItem.getPrice().intValue() + "€");
+        if((Math.round(currentItem.getPrice())) == currentItem.getPrice())
+            holder.price.setText(Math.round(currentItem.getPrice()) + "€");
         else
-            holder.price.setText(currentItem.getPrice()+ "€");
+            holder.price.setText(currentItem.getPrice() + "€");
+
+        holder.name.setText(currentItem.getCreatorUser().getFullName());
+        holder.rate.setText(currentItem.getCreatorUser().getRate() + " (" + currentItem.getCreatorUser().getReviews() + ")");
+
+        try {
+            Picasso.get().load(currentItem.getCreatorUser().getPicture()).into(holder.creatorImage);
+        } catch (Exception e) {
+            //  Block of code to handle errors
+        }
+
+        // TODO cast this to double
+
 
     }
 
@@ -87,18 +75,22 @@ public class ActiveTripsAdapter extends RecyclerView.Adapter<ActiveTripsAdapter.
     }
 
     public static class ActiveTripsViewHolder extends RecyclerView.ViewHolder {
-        public TextView destinations, seats, bags, date, time, price;
+        public TextView destination, name, rate, date, time, price, bookDetails;
+        public CircleImageView creatorImage;
 
 
         public ActiveTripsViewHolder(@NonNull View itemView, final ActiveTripsAdapter.OnItemClickListener listener) {
             super(itemView);
 
-            destinations = itemView.findViewById(R.id.FragmentTrip_offers_destinations_TextView);
-//            seats = itemView.findViewById(R.id.fragment_trip_layout_item_seats);
-//            bags = itemView.findViewById(R.id.fragment_trip_layout_item_bags);
-            date = itemView.findViewById(R.id.FragmentTrip_offers_date_textView);
-            time = itemView.findViewById(R.id.FragmentTrip_offers_time_textView);
-            price = itemView.findViewById(R.id.FragmentTrip_offers_price_textView);
+            destination = itemView.findViewById(R.id.Active_trip_layout_item_destinations_TextView);
+            name = itemView.findViewById(R.id.Active_trip_layout_item_creator_name);
+            rate = itemView.findViewById(R.id.Active_trip_layout_item_creator_rate_and_reviews);
+            date = itemView.findViewById(R.id.Active_trip_layout_item_date_textView);
+            time = itemView.findViewById(R.id.Active_trip_layout_item_time_textView);
+            price = itemView.findViewById(R.id.Active_trip_layout_item_price_textView);
+            bookDetails = itemView.findViewById(R.id.Active_trip_layout_item_my_book_details_textView);
+            creatorImage = itemView.findViewById(R.id.Active_trip_layout_item_creator_image);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
