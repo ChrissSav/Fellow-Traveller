@@ -26,6 +26,10 @@ import com.example.fellow_traveller.PlacesAPI.Models.ResultModel;
 import com.example.fellow_traveller.PlacesAPI.PlaceApiConnection;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.SuccessActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.nineoldandroids.animation.FloatEvaluator;
+
+import java.nio.FloatBuffer;
 
 import static com.example.fellow_traveller.Util.SomeMethods.createSnackBar;
 import static com.example.fellow_traveller.Util.SomeMethods.dateTimeToTimestamp;
@@ -33,7 +37,7 @@ import static com.example.fellow_traveller.Util.SomeMethods.dateTimeToTimestamp;
 
 public class NewOfferActivity extends AppCompatActivity {
     private final int stages = 7;
-    private Button buttonNext;
+    private FloatingActionButton floatingActionButtonNext;
     private ImageButton btnBack;
     private FragmentManager fragmentManager;
     private Fragment fra;
@@ -68,7 +72,7 @@ public class NewOfferActivity extends AppCompatActivity {
 
         textViewTitleStage6 = findViewById(R.id.NewOfferActivity_textView_stage_6);
         progressBar = findViewById(R.id.NewOfferActivity_progressBar);
-        buttonNext = findViewById(R.id.NewOfferActivity_button_next);
+        floatingActionButtonNext = findViewById(R.id.NewOfferActivity_floatingActionButton_next);
         btnBack = findViewById(R.id.NewOfferActivity_imageButton);
 
 
@@ -81,7 +85,7 @@ public class NewOfferActivity extends AppCompatActivity {
         fra = newOfferStage1Fragment;
         fragmentManager.beginTransaction().replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
-        buttonNext.setOnClickListener(new View.OnClickListener() {
+        floatingActionButtonNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (fra.toString().equals("NewOfferStage1Fragment") && newOfferStage1Fragment.validateFragment()) {
                     fra = newOfferStagePickUpFragment;
@@ -134,7 +138,10 @@ public class NewOfferActivity extends AppCompatActivity {
                     fra = newOfferStage6Fragment;
                     textViewTitleStage6.setVisibility(View.VISIBLE);
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
-                    buttonNext.setText("Καταχώρηση");
+                    //buttonNext.setText("Καταχώρηση");
+                    floatingActionButtonNext.setImageResource(R.drawable.ic_tick);
+
+
 
                 } else if (fra.toString().equals("NewOfferStage6Fragment")) {
                     getDestinationsModel(newOfferStage1Fragment.getDestFromModel().getPlaceId(),
@@ -154,7 +161,8 @@ public class NewOfferActivity extends AppCompatActivity {
 
     public void getDateFromFragment(String tag) {
         textViewTitleStage6.setVisibility(View.GONE);
-        buttonNext.setText("Επόμενο");
+       // buttonNext.setText("Επόμενο");
+        floatingActionButtonNext.setImageResource(R.drawable.ic_right_arrow);
         switch (tag) {
             case "1":
                 progressBar.setProgress(num_num * newOfferStage1Fragment.getRank());
@@ -193,7 +201,7 @@ public class NewOfferActivity extends AppCompatActivity {
         textViewTitleStage6.setVisibility(View.GONE);
         if (fra.toString().equals("NewOfferStage6Fragment")) {
             progressBar.setProgress(num_num * newOfferStage5Fragment.getRank());
-            buttonNext.setText("Επόμενο");
+            //buttonNext.setText("Επόμενο");
             fra = newOfferStage5Fragment;
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
