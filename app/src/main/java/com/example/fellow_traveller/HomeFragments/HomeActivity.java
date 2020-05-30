@@ -25,10 +25,7 @@ public class HomeActivity extends AppCompatActivity {
     private BottomNavigationView bottomNav;
     private static final String TAG = "ExampleJobService";
     private Fragment selectedFragment = null;
-    private HomeFragment homeFragment = new HomeFragment();
-    private AccountFragment accountFragment = new AccountFragment();
-    private MessengerFragment messengerFragment = new MessengerFragment();
-    private TripFragment tripFragment = new TripFragment();
+    private HomeFragment homeFragment ;
     private NotificationFragment notificationFragment = new NotificationFragment();
 
     @Override
@@ -36,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         globalClass = (GlobalClass) getApplicationContext();
-
+        homeFragment = new HomeFragment(globalClass);
 
 
 
@@ -50,9 +47,10 @@ public class HomeActivity extends AppCompatActivity {
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                globalClass = (GlobalClass) getApplicationContext();
                 switch (item.getItemId()) {
                     case R.id.bottom_nav_main:
-                        selectedFragment = homeFragment;
+                        selectedFragment = new HomeFragment(globalClass);
                         break;
                     case R.id.bottom_nav_trips:
                         selectedFragment = new TripFragment();
@@ -64,7 +62,7 @@ public class HomeActivity extends AppCompatActivity {
                         selectedFragment = notificationFragment;
                         break;
                     case R.id.bottom_nav_user_info:
-                        selectedFragment = accountFragment;
+                        selectedFragment = new AccountFragment(globalClass);
                         break;
                 }
 
@@ -82,28 +80,11 @@ public class HomeActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (!(selectedFragment instanceof HomeFragment)) {
             bottomNav.setSelectedItemId(R.id.bottom_nav_main);
-            selectedFragment = homeFragment;
+            selectedFragment = new HomeFragment(globalClass);
             getSupportFragmentManager().beginTransaction().replace(R.id.HomeActivity_frame_container,
                     selectedFragment).commit();
         } else {
             super.onBackPressed();
-        }
-    }
-
-    public void scheduleJob() {
-        ComponentName componentName = new ComponentName(this, ExampleJobService.class);
-        JobInfo info = new JobInfo.Builder(1232, componentName)
-                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED)
-                .setPersisted(true)
-                .setPeriodic(15 * 60 * 1000)
-                .build();
-
-        JobScheduler scheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
-        int resultCode = scheduler.schedule(info);
-        if (resultCode == JobScheduler.RESULT_SUCCESS) {
-            Log.d(TAG, "Job scheduled");
-        } else {
-            Log.d(TAG, "Job scheduling failed");
         }
     }
 
