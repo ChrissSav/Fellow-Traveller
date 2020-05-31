@@ -1011,7 +1011,7 @@ public class FellowTravellerAPI {
             JsonParser parser = new JsonParser();
             JsonElement mJson = parser.parse(mJsonString);
             errorResponseModel = gson.fromJson(mJson, ErrorResponseModel.class);
-        } catch (IOException e) {
+        } catch (Exception  e) {
             e.printStackTrace();
         }
         return errorResponseModel;
