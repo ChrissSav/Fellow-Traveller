@@ -13,25 +13,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.NewOffer.NewOfferActivity;
 import com.example.fellow_traveller.R;
 import com.example.fellow_traveller.SearchAndBook.SearchDestinationsActivity;
-import com.example.fellow_traveller.VerificationActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class HomeFragment extends Fragment {
-    private TextView searchForTrip, welcome_user;
-    private ConstraintLayout constraintLayout;
-    private ConstraintLayout constraintLayout2;
+    private TextView welcomeUser;
     private View view;
     private GlobalClass globalClass;
     private CircleImageView circleImageView;
-    private Button btnΝewΟffer, verifyButton;
+    private Button searchButton;
+    private ConstraintLayout offerLayoutButton;
 
 
     public HomeFragment() {
@@ -49,31 +46,13 @@ public class HomeFragment extends Fragment {
 
         globalClass = (GlobalClass) getActivity().getApplicationContext();
 
-
-        searchForTrip = view.findViewById(R.id.FragmentHome_search_button);
-        constraintLayout2 = view.findViewById(R.id.Layout3);
-        welcome_user = view.findViewById(R.id.FragmentHome_user_welcome_textView);
-        btnΝewΟffer = view.findViewById(R.id.FragmentHome_offer_button);
-
-//        Calendar time = Calendar.getInstance();
-//        time.add(Calendar.MILLISECOND, -time.getTimeZone().getOffset(time.getTimeInMillis()));
-//        Date date = time.getTime();
-//        Calendar cal = Calendar.getInstance();
-//        TimeZone tz = cal.getTimeZone();
-//        final Date currentTime = new Date();
-//
-//        final SimpleDateFormat sdf =
-//                new SimpleDateFormat("EEE, MMM d, yyyy hh:mm:ss a z");
-//        long unixTimestamp = Instant.now().getEpochSecond();
-//// Give it to me in GMT time.
-//        //sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-//        //System.out.println("GMT time: " + sdf.format(currentTime));
-//        ZonedDateTime currentDate = ZonedDateTime.now( ZoneOffset.UTC );
-//        Toast.makeText(getActivity(), "Σύστημα" + String.valueOf(System.currentTimeMillis())+ " " + unixTimestamp, Toast.LENGTH_SHORT).show();
+        welcomeUser = view.findViewById(R.id.FragmentHome_user_welcome_textView);
+        searchButton = view.findViewById(R.id.FragmentHome_search_button);
+        offerLayoutButton = view.findViewById(R.id.FragmentHome_offer_section);
 
 
-        welcome_user.setText("Γεια σου " + globalClass.getCurrentUser().getName() + ",");
-        searchForTrip.setOnClickListener(new View.OnClickListener() {
+        welcomeUser.setText(globalClass.getCurrentUser().getName() + ",");
+        searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -82,7 +61,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        btnΝewΟffer.setOnClickListener(new View.OnClickListener() {
+        offerLayoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mainIntent = new Intent(getActivity(), NewOfferActivity.class);

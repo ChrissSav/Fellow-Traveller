@@ -17,86 +17,122 @@
 
 
             <TextView
-                android:id="@+id/FragmentHome_user_welcome_textView"
+                android:id="@+id/FragmentHome_hello_textView"
+                style="@style/paragraph2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="24dp"
-                android:background="@color/background"
-                android:text="Γεια σου Fotios,"
-                style="@style/display"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="30dp"
+                android:text="Γεια σου"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/FragmentHome_search_label"
+                android:id="@+id/FragmentHome_user_welcome_textView"
+                style="@style/display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@color/background"
+                android:text="Lorem"
+                app:layout_constraintBottom_toBottomOf="@id/FragmentHome_hello_textView"
+                app:layout_constraintStart_toEndOf="@id/FragmentHome_hello_textView"
+                app:layout_constraintTop_toTopOf="@id/FragmentHome_hello_textView" />
+
+            <TextView
+                android:id="@+id/FragmentHome_search_header"
+                style="@style/header1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="Αναζήτησε τον επόμενο προορισμό σου"
-                style="@style/header1"
-                app:layout_constraintStart_toStartOf="@+id/FragmentHome_user_welcome_textView"
+                android:layout_marginEnd="16dp"
+                android:text="Ποιο είναι το επόμενο ταξίδι σου;"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintTop_toBottomOf="@+id/FragmentHome_user_welcome_textView" />
+                app:layout_constraintStart_toStartOf="@id/FragmentHome_hello_textView"
+                app:layout_constraintTop_toBottomOf="@id/FragmentHome_hello_textView" />
 
+            <TextView
+                android:id="@+id/FragmentHome_search_info_textView"
+                style="@style/paragraph3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="16dp"
+                android:text="Βρες το ιδανικό ταξίδι για τον επόμενο προορισμό σου"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/FragmentHome_search_header"
+                app:layout_constraintTop_toBottomOf="@id/FragmentHome_search_header" />
 
             <Button
                 android:id="@+id/FragmentHome_search_button"
+                style="@style/button_filled_with_left_drawable_orange"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                style="@style/button_filled_with_left_drawable_orange"
-                android:text="Αναζήτηση διαδρομής"
-                android:drawableLeft="@drawable/ic_search"
-                app:layout_constraintTop_toBottomOf="@id/FragmentHome_search_label"
-                app:layout_constraintStart_toStartOf="@id/FragmentHome_search_label"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="30dp"
-                android:layout_marginEnd="20dp"/>
-
-
-
-
-
-
-
+                android:layout_marginEnd="20dp"
+                android:drawableLeft="@drawable/ic_search"
+                android:text="Αναζήτηση διαδρομής"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/FragmentHome_search_info_textView"
+                app:layout_constraintTop_toBottomOf="@id/FragmentHome_search_info_textView" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/Layout3"
-                android:layout_width="match_parent"
+                android:id="@+id/FragmentHome_offer_section"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="72dp"
-                android:layout_marginBottom="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/component_dotted_shape_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/FragmentHome_search_button">
 
                 <TextView
-                    android:id="@+id/FragmentHome_offer_label"
+                    android:id="@+id/FragmentHome_offer_header"
                     style="@style/header1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
-                    android:text="Βρες την ιδανική παρέα για το επόμενο ταξίδι σου"
+                    android:text="Μοιράσου την επόμενη διαδρομή σου"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-
-                <Button
-                    android:id="@+id/FragmentHome_offer_button"
+                <TextView
+                    android:id="@+id/FragmentHome_offer_info_textView"
+                    style="@style/paragraph3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginBottom="20dp"
-                    style="@style/button_filled_with_left_drawable_blue"
-                    android:drawableLeft="@drawable/ic_search"
-                    android:text="Δημιουργία ταξιδιού"
-                    app:layout_constraintStart_toStartOf="@id/FragmentHome_offer_label"
-                    app:layout_constraintEnd_toEndOf="@id/FragmentHome_offer_label"
-                    app:layout_constraintTop_toBottomOf="@id/FragmentHome_offer_label"/>
+                    android:layout_marginEnd="10dp"
+                    android:text="Καταχώρησε το επόμενο σου ταξίδι και βρες τους συνταξιδιώτες σου"
+                    app:layout_constraintBottom_toBottomOf="@id/FragmentHome_create_circle_button"
+                    app:layout_constraintEnd_toStartOf="@id/FragmentHome_create_circle_button"
+                    app:layout_constraintStart_toStartOf="@id/FragmentHome_offer_header"
+                    app:layout_constraintTop_toTopOf="@id/FragmentHome_create_circle_button" />
 
+                <ImageButton
+                    android:id="@+id/FragmentHome_create_circle_button"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/circle_button_shape"
+                    android:backgroundTint="@color/blue_color"
+                    android:elevation="2dp"
+                    android:padding="15dp"
+                    android:rotation="180"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_back_button"
+                    android:tint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/FragmentHome_offer_header"
+                    app:layout_goneMarginBottom="20dp" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

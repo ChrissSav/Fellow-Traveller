@@ -17,7 +17,7 @@
 
         <TextView
             android:id="@+id/RegisterStage3Fragment_textView4"
-            style="@style/header3"
+            style="@style/display"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -39,7 +39,7 @@
 
         <TextView
             android:id="@+id/RegisterStage3Fragment_textView5"
-            style="@style/labelRegisterStyle"
+            style="@style/label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
@@ -55,7 +55,8 @@
             android:layout_marginEnd="20dp"
             android:hint="Το όνομα σας"
             android:background="@null"
-            style="@style/paragraph2"
+            android:paddingVertical="5dp"
+            style="@style/input"
             android:singleLine="true"
             android:maxLength="20"
             android:inputType="textCapWords"
@@ -88,7 +89,7 @@
 
         <TextView
             android:id="@+id/RegisterStage3Fragment_textView6"
-            style="@style/labelRegisterStyle"
+            style="@style/label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="39dp"
@@ -107,7 +108,8 @@
             android:singleLine="true"
             android:maxLength="20"
             android:inputType="textCapWords"
-            style="@style/paragraph2"
+            android:paddingVertical="5dp"
+            style="@style/input"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/RegisterStage3Fragment_textView5"
             app:layout_constraintTop_toBottomOf="@+id/RegisterStage3Fragment_textView6"

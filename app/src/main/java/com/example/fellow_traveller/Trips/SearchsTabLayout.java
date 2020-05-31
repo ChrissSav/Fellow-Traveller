@@ -74,6 +74,7 @@ public class SearchsTabLayout extends Fragment {
         cardLayoutSection = view.findViewById(R.id.FragmentTrip_searchs_card_section);
 
 
+
         new FellowTravellerAPI(globalClass).getTripsAsPassengerTest(new TripInvolvedCallBack() {
             @Override
             public void onSuccess(ArrayList<TripInvolvedModel> trips) {
@@ -81,7 +82,7 @@ public class SearchsTabLayout extends Fragment {
                 if (trips.size() > 0) {
                     //seperate them to active and completed
                     for (int i = 0; i < trips.size(); i++) {
-                        if (trips.get(0).getActive())
+                        if (trips.get(i).getActive())
                             activeTripsList.add(trips.get(i));
                         else
                             completedTripsList.add(trips.get(i));
@@ -89,6 +90,7 @@ public class SearchsTabLayout extends Fragment {
 
                     //check if user has active trips
                     if (activeTripsList.size() > 0) {
+                        Toast.makeText(getActivity(), "Έχω ενεργά ταξίδια", Toast.LENGTH_SHORT).show();
                         noActiveTripsSectionLayout.setVisibility(View.GONE);
                         activeTripsSectionLayout.setVisibility(View.VISIBLE);
 
@@ -118,6 +120,7 @@ public class SearchsTabLayout extends Fragment {
                         else
                             activeTripsTextview.setText("Έχετε " + String.valueOf(activeTripsList.size()) + " ενεργά ταξίδια");
                     } else {
+                        Toast.makeText(getActivity(), "Δεν έχω ενεργά ταξίδια", Toast.LENGTH_SHORT).show();
                         activeTripsSectionLayout.setVisibility(View.GONE);
                         noActiveTripsSectionLayout.setVisibility(View.VISIBLE);
                     }
@@ -132,6 +135,7 @@ public class SearchsTabLayout extends Fragment {
                         mRecyclerViewNotActive.setLayoutManager(mLayoutManagerNotActive);
                         mRecyclerViewNotActive.setAdapter(mAdapterNotActive);
                         completedTripsSectionLayout.setVisibility(View.VISIBLE);
+                        Toast.makeText(getActivity(), "Έχω ολοκληρωμένα ταξίδια", Toast.LENGTH_SHORT).show();
 
                         mAdapterNotActive.setOnItemClickListener(new CompletedTripsAdapter.OnItemClickListener() {
                             @Override
@@ -146,21 +150,22 @@ public class SearchsTabLayout extends Fragment {
 
                     } else {
                         completedTripsSectionLayout.setVisibility(View.GONE);
+                        Toast.makeText(getActivity(), "Δεν έχωολοκληρωμένα ταξίδια", Toast.LENGTH_SHORT).show();
                     }
-                } else
-                    Toast.makeText(getActivity(), "No trips", Toast.LENGTH_SHORT).show();
-                //activeTripsTextview.setText("Δεν έχετε κάποιο ενεργό ταξίδι αυτήν την στιγμή");
+                } else {
+                    Toast.makeText(getActivity(), "Δεν έχετε ταξίδι που συμμετέχετε ως επιβάτης", Toast.LENGTH_SHORT).show();
+                    //activeTripsTextview.setText("Δεν έχετε κάποιο ενεργό ταξίδι αυτήν την στιγμή");
 
-                activeTripsSectionLayout.setVisibility(View.GONE);
-                completedTripsSectionLayout.setVisibility(View.GONE);
-                noActiveTripsSectionLayout.setVisibility(View.VISIBLE);
+                    activeTripsSectionLayout.setVisibility(View.GONE);
+                    completedTripsSectionLayout.setVisibility(View.GONE);
+                    noActiveTripsSectionLayout.setVisibility(View.VISIBLE);
 
-
+                }
             }
 
             @Override
             public void onFailure(String errorMsg) {
-
+                Toast.makeText(getActivity(), errorMsg, Toast.LENGTH_SHORT).show();
             }
         });
 //        new FellowTravellerAPI(globalClass).getTripsAsPassenger( new SearchTripsCallback() {

@@ -20,7 +20,7 @@
 
         <TextView
             android:id="@+id/RegisterStage1Fragment_textView4"
-            style="@style/header3"
+            style="@style/display"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/register_fragment_stage_1_email_input_field_title"
-           style="@style/header5"
+           style="@style/label"
             app:layout_constraintStart_toStartOf="@+id/RegisterStage1Fragment_textView4"
             app:layout_constraintTop_toBottomOf="@+id/RegisterStage1Fragment_info_textView" />
 
@@ -59,7 +59,8 @@
             android:layout_marginEnd="16dp"
             android:hint="example@email.com"
             android:background="@null"
-            style="@style/paragraph2"
+            android:paddingVertical="5dp"
+            style="@style/input"
             android:singleLine="true"
             android:maxLength="30"
             android:inputType="textEmailAddress"

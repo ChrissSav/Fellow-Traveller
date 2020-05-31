@@ -20,7 +20,7 @@
 
         <TextView
             android:id="@+id/fragment_user_register_stage2_choose_password_title_TextView"
-            style="@style/header3"
+            style="@style/display"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -36,13 +36,13 @@
             app:layout_constraintTop_toBottomOf="@id/fragment_user_register_stage2_choose_password_title_TextView"
             app:layout_constraintStart_toStartOf="@id/fragment_user_register_stage2_choose_password_title_TextView"
             android:layout_marginTop="10dp"
-            style="@style/input"
+            style="@style/paragraph3"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="20dp"/>
 
         <TextView
             android:id="@+id/fragment_user_register_stage2_password_title_TextView"
-            style="@style/labelRegisterStyle"
+            style="@style/label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="55dp"
@@ -57,7 +57,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/fragment_user_register_stage2_choose_password_title_TextView"
             app:layout_constraintTop_toBottomOf="@+id/fragment_user_register_stage2_password_title_TextView"
-            style="@style/paragraph2"
+            style="@style/input"
+            android:paddingVertical="5dp"
             android:singleLine="true"
             android:layout_marginEnd="20dp"
             android:hint="Κωδικός πρόσβασης"
@@ -95,7 +96,7 @@
 
         <TextView
             android:id="@+id/RegisterStage2Fragment_textView6"
-            style="@style/labelRegisterStyle"
+            style="@style/label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -110,7 +111,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/fragment_user_register_stage2_choose_password_title_TextView"
             app:layout_constraintTop_toBottomOf="@+id/RegisterStage2Fragment_textView6"
-            style="@style/paragraph2"
+            android:padding="5dp"
+            style="@style/input"
             android:singleLine="true"
             android:layout_marginEnd="20dp"
             android:hint="Επιβεβαίωση κωδικού πρόσβασης"
