@@ -1004,15 +1004,15 @@ public class FellowTravellerAPI {
     public static ErrorResponseModel getModelFromResponseErrorBody(Response response) {
         Gson gson = new Gson();
         ErrorResponseModel errorResponseModel = new ErrorResponseModel();
-        DetailModel detailModel = new DetailModel(1000);
-        errorResponseModel.setDetail(detailModel);
         try {
             String mJsonString = response.errorBody().string();
             JsonParser parser = new JsonParser();
             JsonElement mJson = parser.parse(mJsonString);
             errorResponseModel = gson.fromJson(mJson, ErrorResponseModel.class);
-        } catch (Exception  e) {
-            e.printStackTrace();
+            Log.i("TAG", "getModelFromResponseErrorBody: " + errorResponseModel.getDetail().getStatusCode());
+        } catch (Exception e) {
+            DetailModel detailModel = new DetailModel(1000);
+            errorResponseModel.setDetail(detailModel);
         }
         return errorResponseModel;
     }
