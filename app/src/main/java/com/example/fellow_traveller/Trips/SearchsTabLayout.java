@@ -151,6 +151,10 @@ public class SearchsTabLayout extends Fragment {
                     Toast.makeText(getActivity(), "No trips", Toast.LENGTH_SHORT).show();
                 //activeTripsTextview.setText("Δεν έχετε κάποιο ενεργό ταξίδι αυτήν την στιγμή");
 
+                activeTripsSectionLayout.setVisibility(View.GONE);
+                completedTripsSectionLayout.setVisibility(View.GONE);
+                noActiveTripsSectionLayout.setVisibility(View.VISIBLE);
+
 
             }
 
