@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/NewOfferActivity_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/NewOfferActivity_layout"
     tools:context=".NewOffer.NewOfferActivity">
 
     <ProgressBar
@@ -19,15 +19,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
+        android:id="@+id/NewOfferActivity_ImageButton_exit"
+        style="@style/border_icon_button"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf="@+id/NewOfferActivity_imageButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/NewOfferActivity_imageButton" />
+
+    <ImageButton
         android:id="@+id/NewOfferActivity_imageButton"
         style="@style/border_icon_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        android:adjustViewBounds="true"
-        android:padding="12dp"
-        android:scaleType="fitCenter"
         android:src="@drawable/ic_back_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NewOfferActivity_progressBar" />
@@ -46,18 +54,16 @@
 
     <TextView
         android:id="@+id/NewOfferActivity_textView_stage_6"
+        style="@style/display"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:fontFamily="@font/firasans_light"
         android:text="Επισκοπηση"
-        android:textColor="@color/black_color"
-        android:textSize="30sp"
+        android:textAlignment="center"
         android:visibility="gone"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/NewOfferActivity_imageButton"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/NewOfferActivity_ImageButton_exit"
         app:layout_constraintStart_toEndOf="@+id/NewOfferActivity_imageButton"
         app:layout_constraintTop_toTopOf="@+id/NewOfferActivity_imageButton" />
 
@@ -67,13 +73,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:clickable="true"
-        android:src="@drawable/ic_right_arrow"
         android:backgroundTint="@color/blue_color"
-        app:maxImageSize="35dp"
+        android:clickable="true"
+        android:rotation="180"
+        android:src="@drawable/ic_back_button"
+        android:tint="@color/white"
         app:fabCustomSize="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="35dp"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

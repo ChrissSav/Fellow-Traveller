@@ -14,9 +14,8 @@ import com.example.fellow_traveller.R;
 
 public class SearchDestinationsActivity extends AppCompatActivity {
     private Button searchFromButton, searchToButton, searchButton;
-    private int witchFieldIsCLick = 0;
     private DestinationModel predictionsModelDestFrom, predictionsModelDestTo;
-    private boolean fromFlag = false, toFlag = false;
+    //private boolean fromFlag = false, toFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,38 +27,39 @@ public class SearchDestinationsActivity extends AppCompatActivity {
         searchButton = findViewById(R.id.ActivitySearchDestinations_search_button);
 
 
-
-
         searchFromButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mainIntent = new Intent(SearchDestinationsActivity.this, SearchLocationActivity.class);
-                witchFieldIsCLick = 1;
                 startActivityForResult(mainIntent, 1);
             }
         });
+
+
         searchToButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mainIntent = new Intent(SearchDestinationsActivity.this, SearchLocationActivity.class);
-                witchFieldIsCLick = 2;
-                startActivityForResult(mainIntent, 1);
+                startActivityForResult(mainIntent, 2);
             }
         });
+
+
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(fromFlag && toFlag) {
+                if (predictionsModelDestFrom != null && predictionsModelDestTo != null) {
                     Intent mainIntent = new Intent(SearchDestinationsActivity.this, SearchResultsActivity.class);
                     mainIntent.putExtra("startDestination", predictionsModelDestFrom);
                     mainIntent.putExtra("endDestination", predictionsModelDestTo);
                     startActivity(mainIntent);
-                }else
-                    Toast.makeText(SearchDestinationsActivity.this, "Πρέπει να συμπληρώσετε τα πeδία της αναζήτησης", Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(SearchDestinationsActivity.this, "Πρέπει να συμπληρώσετε τα πεδία της αναζήτησης", Toast.LENGTH_SHORT).show();
             }
         });
 
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -67,17 +67,26 @@ public class SearchDestinationsActivity extends AppCompatActivity {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 DestinationModel resultPredictionsModel = data.getParcelableExtra("resultPredictionsModel");
-                if (witchFieldIsCLick == 1) {
-                    predictionsModelDestFrom = resultPredictionsModel;
-                    searchFromButton.setText(resultPredictionsModel.getTitle());
-                    fromFlag = true;
+                predictionsModelDestFrom = resultPredictionsModel;
+                searchFromButton.setText(resultPredictionsModel.getTitle());
+                searchFromButton.setTextColor(getResources().getColor(R.color.black_color));
 
-                } else if (witchFieldIsCLick == 2) {
-                    predictionsModelDestTo = resultPredictionsModel;
-                    searchToButton.setText(resultPredictionsModel.getTitle());
-                    toFlag = true;
+               // fromFlag = true;
 
-                }
+            }
+            if (resultCode == RESULT_CANCELED) {
+                // mTextViewResult.setText("Nothing selected");
+            }
+        }
+
+        if (requestCode == 2) {
+            if (resultCode == RESULT_OK) {
+                DestinationModel resultPredictionsModel = data.getParcelableExtra("resultPredictionsModel");
+                predictionsModelDestTo = resultPredictionsModel;
+                searchToButton.setText(resultPredictionsModel.getTitle());
+                searchToButton.setTextColor(getResources().getColor(R.color.black_color));
+               // toFlag = true;
+
                 //Toast.makeText(getContext(),predictionsModelDestFrom.toString(), Toast.LENGTH_SHORT).show();
                 // Toast.makeText(getContext(),predictionsModelDestTo.toString(), Toast.LENGTH_SHORT).show();
 

@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/NewOfferStage4Fragment_textView1"
-        style="@style/titleStyle"
+        style="@style/display"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

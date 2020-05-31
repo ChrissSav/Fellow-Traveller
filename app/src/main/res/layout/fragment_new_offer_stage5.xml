@@ -14,7 +14,7 @@
         android:layout_marginTop="0dp"
         android:layout_marginEnd="16dp"
         android:text="Γράψε ένα μήνυμα στους συνταξιδιώτες σου"
-        style="@style/titleStyle"
+        style="@style/display"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
