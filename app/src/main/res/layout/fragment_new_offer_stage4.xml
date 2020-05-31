@@ -24,7 +24,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod"
+        style="@style/paragraph2"
+        android:text="Επιλέξτε το κόστο άνα άτομο που θα αναλογεί στον κάθε επιβάτης της διαδρομής"
         app:layout_constraintEnd_toEndOf="@+id/NewOfferStage4Fragment_textView1"
         app:layout_constraintStart_toStartOf="@+id/NewOfferStage4Fragment_textView1"
         app:layout_constraintTop_toBottomOf="@+id/NewOfferStage4Fragment_textView1" />
@@ -35,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:text="Τιμή ανα άτομο"
-        style="@style/labelStyle"
+        style="@style/label"
         app:layout_constraintStart_toStartOf="@+id/NewOfferStage4Fragment_textView"
         app:layout_constraintTop_toBottomOf="@+id/NewOfferStage4Fragment_textView" />
 
@@ -74,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="Συνολικό"
-        style="@style/labelStyle"
+        style="@style/header2"
         app:layout_constraintStart_toStartOf="@+id/NewOfferStage4Fragment_textView6"
         app:layout_constraintTop_toBottomOf="@+id/NewOfferStage4Fragment_textView7" />
 
@@ -83,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0 €"
-        android:textSize="20sp"
+        style="@style/header2"
         app:layout_constraintBottom_toBottomOf="@+id/NewOfferStage4Fragment_textView8"
         app:layout_constraintEnd_toEndOf="@+id/NewOfferStage4Fragment_textView"
         app:layout_constraintTop_toTopOf="@+id/NewOfferStage4Fragment_textView8" />

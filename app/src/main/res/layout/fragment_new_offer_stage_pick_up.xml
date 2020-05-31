@@ -21,11 +21,11 @@
 
     <TextView
         android:id="@+id/NewOfferStagePickUpFragment_textView"
-        style="@style/paragraph1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod"
+        style="@style/paragraph1"
+        android:text="Επέλεξε ένα σημείο συνάντησης που όπου θα είναι η αφετηρία του ταξιδιού. Το σημείο αυτό θα φαίνεται στους επιβάτες αφού κλείσουν το ταξίδι σας"
         app:layout_constraintEnd_toEndOf="@+id/NewOfferStagePickUpFragment_textView1"
         app:layout_constraintStart_toStartOf="@+id/NewOfferStagePickUpFragment_textView1"
         app:layout_constraintTop_toBottomOf="@+id/NewOfferStagePickUpFragment_textView1" />
