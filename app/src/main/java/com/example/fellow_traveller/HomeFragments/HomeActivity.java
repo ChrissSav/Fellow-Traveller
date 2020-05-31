@@ -18,30 +18,28 @@ import com.example.fellow_traveller.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
-
 public class HomeActivity extends AppCompatActivity {
 
     private GlobalClass globalClass;
     private BottomNavigationView bottomNav;
     private static final String TAG = "ExampleJobService";
     private Fragment selectedFragment = null;
-    private HomeFragment homeFragment ;
+    private HomeFragment homeFragment;
     private NotificationFragment notificationFragment = new NotificationFragment();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         globalClass = (GlobalClass) getApplicationContext();
         homeFragment = new HomeFragment();
 
 
-
         bottomNav = findViewById(R.id.HomeActivity_bottomNavigationView);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.HomeActivity_frame_container,
-                   homeFragment).commit();
+                    homeFragment).commit();
         }
 
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -50,19 +48,24 @@ public class HomeActivity extends AppCompatActivity {
                 globalClass = (GlobalClass) getApplicationContext();
                 switch (item.getItemId()) {
                     case R.id.bottom_nav_main:
-                        selectedFragment = new HomeFragment();
+                        if (!(selectedFragment instanceof HomeFragment))
+                            selectedFragment = new HomeFragment();
                         break;
                     case R.id.bottom_nav_trips:
-                        selectedFragment = new TripFragment();
+                        if (!(selectedFragment instanceof TripFragment))
+                            selectedFragment = new TripFragment();
                         break;
                     case R.id.bottom_nav_messages:
-                        selectedFragment = new MessengerFragment();
+                        if (!(selectedFragment instanceof MessengerFragment))
+                            selectedFragment = new MessengerFragment();
                         break;
                     case R.id.bottom_nav_notification:
-                        selectedFragment = notificationFragment;
+                        if (!(selectedFragment instanceof NotificationFragment))
+                            selectedFragment = notificationFragment;
                         break;
                     case R.id.bottom_nav_user_info:
-                        selectedFragment = new AccountFragment(globalClass);
+                        if (!(selectedFragment instanceof AccountFragment))
+                            selectedFragment = new AccountFragment(globalClass);
                         break;
                 }
 
