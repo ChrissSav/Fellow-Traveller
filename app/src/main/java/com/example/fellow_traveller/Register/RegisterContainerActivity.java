@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -33,8 +34,8 @@ import static com.example.fellow_traveller.Util.InputValidation.isValidEmail;
 public class RegisterContainerActivity extends AppCompatActivity {
 
     private final int stages = 3;
-    private Button buttonNext;
-    private ImageButton btnBack;
+   // private Button buttonNext;
+    private ImageButton btnBack,imageButtonNext;
     private FragmentManager fragmentManager;
     private Fragment fra;
     //private RegisterStagePhoneFragment registerStagePhoneFragment = new RegisterStagePhoneFragment();
@@ -45,6 +46,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
     private int num_num;
     private String userPhone = "";
     private GlobalClass globalClass;
+    //private ImageView imageViewButtonNextTop;
     private DatabaseReference userDatabase;
 
 
@@ -57,8 +59,10 @@ public class RegisterContainerActivity extends AppCompatActivity {
         userPhone = getIntent().getStringExtra("phoneNumber");
         num_num = 100 / stages;
 
+        //imageViewButtonNextTop =  findViewById(R.id.RegisterActivity_ImageView_button_top);
         progressBar = findViewById(R.id.RegisterActivity_progressBar);
-        buttonNext = findViewById(R.id.RegisterActivity_button_next);
+       // buttonNext = findViewById(R.id.RegisterActivity_button_next);
+        imageButtonNext =  findViewById(R.id.RegisterActivity_button_next);
         btnBack = findViewById(R.id.RegisterActivity_imageButton);
         
 
@@ -69,7 +73,7 @@ public class RegisterContainerActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().replace(R.id.RegisterActivity_frame_container, fra).commit();
 
 
-        buttonNext.setOnClickListener(new View.OnClickListener() {
+        imageButtonNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // if (fra.toString().equals("RegisterStagePhoneFragment")) {
                 //     validateRegisterStagePhone();
@@ -80,7 +84,11 @@ public class RegisterContainerActivity extends AppCompatActivity {
                     progressBar.setProgress(num_num * registerStage3Fragment.getRank());
                     fra = registerStage3Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.RegisterActivity_frame_container, fra).commit();
-                    buttonNext.setText("");
+                    //buttonNext.setText("");
+
+                    imageButtonNext.setImageResource(R.drawable.ic_tick);
+                    imageButtonNext.setRotation(0);
+
 
                 } else if (fra.toString().equals("RegisterStage3Fragment") && registerStage3Fragment.validateFragment()) {
                     newRegisterUser();
@@ -98,8 +106,9 @@ public class RegisterContainerActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
-        buttonNext.setText("");
+        imageButtonNext.setImageResource(R.drawable.ic_back_button);
+        imageButtonNext.setRotation(180);
+        //buttonNext.setText("");
         if (fra.toString().equals("RegisterStage3Fragment")) {
             progressBar.setProgress(num_num * registerStage2Fragment.getRank());
             fra = registerStage2Fragment;

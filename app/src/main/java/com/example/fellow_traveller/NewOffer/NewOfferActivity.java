@@ -1,10 +1,15 @@
 package com.example.fellow_traveller.NewOffer;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -20,11 +25,13 @@ import com.example.fellow_traveller.ClientAPI.FellowTravellerAPI;
 import com.example.fellow_traveller.ClientAPI.Models.CreateTripModel;
 import com.example.fellow_traveller.ClientAPI.Models.DestinationModel;
 import com.example.fellow_traveller.ClientAPI.Models.StatusHandleModel;
+import com.example.fellow_traveller.HomeFragments.HomeActivity;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.PlacesAPI.CallBack.PlaceApiResultCallBack;
 import com.example.fellow_traveller.PlacesAPI.Models.ResultModel;
 import com.example.fellow_traveller.PlacesAPI.PlaceApiConnection;
 import com.example.fellow_traveller.R;
+import com.example.fellow_traveller.SearchAndBook.SearchResultsActivity;
 import com.example.fellow_traveller.SuccessActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nineoldandroids.animation.FloatEvaluator;
@@ -38,7 +45,7 @@ import static com.example.fellow_traveller.Util.SomeMethods.dateTimeToTimestamp;
 public class NewOfferActivity extends AppCompatActivity {
     private final int stages = 7;
     private FloatingActionButton floatingActionButtonNext;
-    private ImageButton btnBack;
+    private ImageButton btnBack, btnExit;
     private FragmentManager fragmentManager;
     private Fragment fra;
     private NewOfferStage1Fragment newOfferStage1Fragment = new NewOfferStage1Fragment();
@@ -74,7 +81,7 @@ public class NewOfferActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.NewOfferActivity_progressBar);
         floatingActionButtonNext = findViewById(R.id.NewOfferActivity_floatingActionButton_next);
         btnBack = findViewById(R.id.NewOfferActivity_imageButton);
-
+        btnExit = findViewById(R.id.NewOfferActivity_ImageButton_exit);
 
         progressBar.setProgress(num_num * newOfferStage1Fragment.getRank());
 
@@ -91,12 +98,11 @@ public class NewOfferActivity extends AppCompatActivity {
                     fra = newOfferStagePickUpFragment;
                     progressBar.setProgress(num_num * newOfferStagePickUpFragment.getRank());
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
-                }else if (fra.toString().equals("NewOfferStagePickUpFragment") && newOfferStagePickUpFragment.validateFragment()) {
+                } else if (fra.toString().equals("NewOfferStagePickUpFragment") && newOfferStagePickUpFragment.validateFragment()) {
                     fra = newOfferStage2Fragment;
                     progressBar.setProgress(num_num * newOfferStage2Fragment.getRank());
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
-                }
-                else if (fra.toString().equals("NewOfferStage2Fragment") && newOfferStage2Fragment.validateFragment()) {
+                } else if (fra.toString().equals("NewOfferStage2Fragment") && newOfferStage2Fragment.validateFragment()) {
                     progressBar.setProgress(num_num * newOfferStage3Fragment.getRank());
                     fra = newOfferStage3Fragment;
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
@@ -140,15 +146,22 @@ public class NewOfferActivity extends AppCompatActivity {
                     fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).replace(R.id.NewOfferActivity_frame_container, fra).commit();
                     //buttonNext.setText("Καταχώρηση");
                     floatingActionButtonNext.setImageResource(R.drawable.ic_tick);
-
+                    floatingActionButtonNext.setRotation(0);
 
 
                 } else if (fra.toString().equals("NewOfferStage6Fragment")) {
                     getDestinationsModel(newOfferStage1Fragment.getDestFromModel().getPlaceId(),
-                            newOfferStage1Fragment.getDestToModel().getPlaceId(),newOfferStagePickUpFragment.getDestPickUpModel().getPlaceId());
+                            newOfferStage1Fragment.getDestToModel().getPlaceId(), newOfferStagePickUpFragment.getDestPickUpModel().getPlaceId());
                     // tripRegister();
                 }
 
+            }
+        });
+
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abortDialog();
             }
         });
 
@@ -159,10 +172,46 @@ public class NewOfferActivity extends AppCompatActivity {
         });
     }
 
+
+    public void abortDialog() {
+        final Dialog myDialog = new Dialog(NewOfferActivity.this, R.style.Theme_Dialog_Abort);
+        Window window = myDialog.getWindow();
+        window.requestFeature(Window.FEATURE_NO_TITLE);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.setContentView(R.layout.abort_dialog);
+        myDialog.setCancelable(true);
+        myDialog.setCanceledOnTouchOutside(true);
+
+
+        //get elements
+        TextView TextViewTitle = myDialog.findViewById(R.id.abort_dialog_label);
+        TextView TextViewLabel = myDialog.findViewById(R.id.abort_dialog_info_textView);
+        Button abortButton = myDialog.findViewById(R.id.abort_dialog_abort_button);
+        Button stayButton = myDialog.findViewById(R.id.abort_dialog_stay_button);
+
+        TextViewLabel.setText("Αν συνεχίσετε θα ακυρωθούν τα δεδομένα που καταχωρήσατε.");
+        TextViewTitle.setText("Απόρριψη της καταχώρησης ;");
+        abortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+                finish();
+
+            }
+        });
+        stayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+        myDialog.show();
+    }
+
     public void getDateFromFragment(String tag) {
         textViewTitleStage6.setVisibility(View.GONE);
-       // buttonNext.setText("Επόμενο");
-        floatingActionButtonNext.setImageResource(R.drawable.ic_right_arrow);
+        floatingActionButtonNext.setImageResource(R.drawable.ic_back_button);
+        floatingActionButtonNext.setRotation(180);
         switch (tag) {
             case "1":
                 progressBar.setProgress(num_num * newOfferStage1Fragment.getRank());
@@ -199,9 +248,11 @@ public class NewOfferActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         textViewTitleStage6.setVisibility(View.GONE);
+        floatingActionButtonNext.setImageResource(R.drawable.ic_back_button);
+        floatingActionButtonNext.setRotation(180);
+
         if (fra.toString().equals("NewOfferStage6Fragment")) {
             progressBar.setProgress(num_num * newOfferStage5Fragment.getRank());
-            //buttonNext.setText("Επόμενο");
             fra = newOfferStage5Fragment;
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
@@ -230,9 +281,8 @@ public class NewOfferActivity extends AppCompatActivity {
             fra = newOfferStage1Fragment;
             fragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).replace(R.id.NewOfferActivity_frame_container, fra).commit();
 
-        }
-        else {
-            super.onBackPressed();
+        } else {
+            abortDialog();
         }
 
     }
@@ -252,7 +302,7 @@ public class NewOfferActivity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(Boolean aVoid) {
-                Log.i("TAG", "onPostExecute: "+aVoid);
+                Log.i("TAG", "onPostExecute: " + aVoid);
                 if (aVoid) {
                     String date = newOfferStage2Fragment.getDate();
                     String time = newOfferStage2Fragment.getTime();
@@ -266,7 +316,7 @@ public class NewOfferActivity extends AppCompatActivity {
                     Float price = Float.parseFloat(newOfferStage4Fragment.getPrice());
                     String msg = newOfferStage5Fragment.getMsg();
 
-                    CreateTripModel trip = new CreateTripModel(destinationModelFrom, destinationModelTo, destinationModelPickUP,dateTimeToTimestamp(date, time),
+                    CreateTripModel trip = new CreateTripModel(destinationModelFrom, destinationModelTo, destinationModelPickUP, dateTimeToTimestamp(date, time),
                             pet, max_seats, max_bags,
                             msg, price, car_id);
 
@@ -281,7 +331,7 @@ public class NewOfferActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(String errorMsg) {
-                            createSnackBar(findViewById(R.id.NewOfferActivity_layout),errorMsg);
+                            createSnackBar(findViewById(R.id.NewOfferActivity_layout), errorMsg);
                             //Toast.makeText(NewOfferActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
 
                         }
@@ -297,7 +347,7 @@ public class NewOfferActivity extends AppCompatActivity {
 
     }
 
-    public void getDestinationsModel(final String placeIdFrom, final String placeIdTo,final String placeIdPickUp) {
+    public void getDestinationsModel(final String placeIdFrom, final String placeIdTo, final String placeIdPickUp) {
         new PlaceApiConnection(globalClass, true).getLatLonFromPlace(placeIdFrom, new PlaceApiResultCallBack() {
             @Override
             public void onSuccess(ResultModel resultModel) {
