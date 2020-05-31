@@ -83,8 +83,8 @@ public class OffersTabLayout extends Fragment {
                 //Check if user has any trips
                 if (trips.size() > 0) {
                     //Seperate trips to active and completed
-                    for(int i = 0; i < trips.size(); i++){
-                        if(trips.get(i).getActive())
+                    for (int i = 0; i < trips.size(); i++) {
+                        if (trips.get(i).getActive())
                             activeTripsList.add(trips.get(i));
                         else
                             completedTripsList.add(trips.get(i));
@@ -104,6 +104,13 @@ public class OffersTabLayout extends Fragment {
                         else
                             priceCardText.setText(activeTripsList.get(0).getPrice() + "€");
 
+                        if (activeTripsList.get(0).getPassengers().size() == 0)
+                            myBookCardText.setText("Δεν έχετε κάποιον επιβάτη ακόμα");
+                        else if (activeTripsList.get(0).getPassengers().size() == 1)
+                            myBookCardText.setText("Έχετε 1 επιβάτη");
+                        else
+                            myBookCardText.setText("Έχετε " + activeTripsList.get(0).getPassengers().size() + " επιβάτες");
+
                         creatorNameCardText.setText("(Εσείς) " + activeTripsList.get(0).getCreatorUser().getFullName());
                         creatorRateCardText.setText(activeTripsList.get(0).getCreatorUser().getRate() + " (" + activeTripsList.get(0).getCreatorUser().getReviews() + ")");
                         try {
@@ -118,13 +125,13 @@ public class OffersTabLayout extends Fragment {
                             activeTripsTextview.setText("Έχετε " + String.valueOf(activeTripsList.size()) + " ενεργά ταξίδια");
 
 
-                    }else{
+                    } else {
                         activeTripsSectionLayout.setVisibility(View.GONE);
                         noActiveTripsSectionLayout.setVisibility(View.VISIBLE);
                     }
 
                     //Check if user has completed trips
-                    if(completedTripsList.size() > 0){
+                    if (completedTripsList.size() > 0) {
 
                         completedTripsSectionLayout.setVisibility(View.VISIBLE);
 
@@ -144,13 +151,12 @@ public class OffersTabLayout extends Fragment {
                                 startActivity(mainIntent);
                             }
                         });
-                    }else{
+                    } else {
                         completedTripsSectionLayout.setVisibility(View.GONE);
                     }
 
-                }
-                else
-                    Toast.makeText(getActivity(),"No trips",Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(getActivity(), "No trips", Toast.LENGTH_SHORT).show();
                 //activeTripsTextview.setText("Δεν έχετε κάποιο ενεργό ταξίδι αυτήν την στιγμή");
 
 
@@ -277,11 +283,11 @@ public class OffersTabLayout extends Fragment {
 
     }
 
-    public boolean isCompleted(TripInvolvedModel tripModel){
-        if(tripModel.getTimestamp() < System.currentTimeMillis()/1000)
+    public boolean isCompleted(TripInvolvedModel tripModel) {
+        if (tripModel.getTimestamp() < System.currentTimeMillis() / 1000)
             return true;
         else
             return false;
     }
-    
 }
+

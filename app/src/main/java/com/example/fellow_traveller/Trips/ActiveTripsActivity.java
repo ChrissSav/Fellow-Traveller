@@ -38,7 +38,7 @@ public class ActiveTripsActivity extends AppCompatActivity {
         mRecyclerView= findViewById(R.id.ActivityActiveTrips_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new ActiveTripsAdapter(activeTripsList);
+        mAdapter = new ActiveTripsAdapter(activeTripsList, getApplicationContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 

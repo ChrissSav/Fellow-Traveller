@@ -112,6 +112,7 @@ public class SearchsTabLayout extends Fragment {
                             //  Block of code to handle errors
                         }
 
+                        fillMyBookDetails(activeTripsList.get(0), myBookCardText);
                         if (activeTripsList.size() == 1)
                             activeTripsTextview.setText("Έχετε " + String.valueOf(activeTripsList.size()) + " ενεργό ταξίδι");
                         else
@@ -278,4 +279,34 @@ public class SearchsTabLayout extends Fragment {
         else
             return false;
     }
+
+    public void fillMyBookDetails(TripInvolvedModel tripInvolvedModel, TextView myBooksDetails) {
+        //Find my book details within the passengers
+        for (int i = 0; i < tripInvolvedModel.getPassengers().size(); i++) {
+            if(globalClass.getCurrentUser().getId() == tripInvolvedModel.getPassengers().get(i).getUser().getId()){
+
+                //Check if have pet
+                if(tripInvolvedModel.getPassengers().get(i).getPet()){
+                    //Have pet
+                    if(tripInvolvedModel.getPassengers().get(i).getBags() == 0)
+                        myBooksDetails.setText("Κατοικίδιο");
+                    else if(tripInvolvedModel.getPassengers().get(i).getBags() == 1)
+                        myBooksDetails.setText("Κατοικίδιο και 1 αποσκευή");
+                    else
+                        myBooksDetails.setText("Κατοικίδιο και " + tripInvolvedModel.getPassengers().get(i).getBags() + " αποσκευές");
+
+                }else{
+                    //Don't have pet
+                    if(tripInvolvedModel.getPassengers().get(i).getBags() == 0)
+                        myBooksDetails.setText("Καμία επιλογή");
+                    else if(tripInvolvedModel.getPassengers().get(i).getBags() == 1)
+                        myBooksDetails.setText("Έχετε επιλέξει 1 αποσκευή");
+                    else
+                        myBooksDetails.setText("Έχετε επιλέξει " + tripInvolvedModel.getPassengers().get(i).getBags() + " αποσκευές");
+                }
+            }
+        }
+    }
+
+
 }

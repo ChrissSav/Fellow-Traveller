@@ -1,7 +1,8 @@
 package com.example.fellow_traveller.Trips;
 
 
-
+import android.content.Context;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import com.example.fellow_traveller.ClientAPI.Models.TripInvolvedModel;
+import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.squareup.picasso.Picasso;
 
@@ -20,9 +22,13 @@ import java.util.ArrayList;
 public class ActiveTripsAdapter extends RecyclerView.Adapter<ActiveTripsAdapter.ActiveTripsViewHolder> {
     private ArrayList<TripInvolvedModel> activeTripsList;
     private ActiveTripsAdapter.OnItemClickListener mListener;
+    private GlobalClass globalClass;
+    private Context myContext;
+    private int myId;
 
-    public ActiveTripsAdapter(ArrayList<TripInvolvedModel> tripsList) {
+    public ActiveTripsAdapter(ArrayList<TripInvolvedModel> tripsList, Context aContext) {
         activeTripsList = tripsList;
+        myContext = aContext;
 
     }
 
@@ -46,7 +52,7 @@ public class ActiveTripsAdapter extends RecyclerView.Adapter<ActiveTripsAdapter.
         holder.destination.setText(currentItem.getDestFrom().getTitle() + " - " + currentItem.getDestTo().getTitle());
         holder.date.setText(currentItem.getDate());
         holder.time.setText(currentItem.getTime());
-        if((Math.round(currentItem.getPrice())) == currentItem.getPrice())
+        if ((Math.round(currentItem.getPrice())) == currentItem.getPrice())
             holder.price.setText(Math.round(currentItem.getPrice()) + "€");
         else
             holder.price.setText(currentItem.getPrice() + "€");
@@ -60,6 +66,7 @@ public class ActiveTripsAdapter extends RecyclerView.Adapter<ActiveTripsAdapter.
             //  Block of code to handle errors
         }
 
+        fillMyBookDetails(currentItem, holder.bookDetails, holder.bookHeader);
         // TODO cast this to double
 
 
@@ -75,7 +82,7 @@ public class ActiveTripsAdapter extends RecyclerView.Adapter<ActiveTripsAdapter.
     }
 
     public static class ActiveTripsViewHolder extends RecyclerView.ViewHolder {
-        public TextView destination, name, rate, date, time, price, bookDetails;
+        public TextView destination, name, rate, date, time, price, bookDetails, bookHeader;
         public CircleImageView creatorImage;
 
 
@@ -90,6 +97,7 @@ public class ActiveTripsAdapter extends RecyclerView.Adapter<ActiveTripsAdapter.
             price = itemView.findViewById(R.id.Active_trip_layout_item_price_textView);
             bookDetails = itemView.findViewById(R.id.Active_trip_layout_item_my_book_details_textView);
             creatorImage = itemView.findViewById(R.id.Active_trip_layout_item_creator_image);
+            bookHeader =  itemView.findViewById(R.id.Active_trip_layout_item_my_book);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -104,5 +112,54 @@ public class ActiveTripsAdapter extends RecyclerView.Adapter<ActiveTripsAdapter.
             });
 
         }
+    }
+
+    private void fillMyBookDetails(TripInvolvedModel tripInvolvedModel, TextView myBookTextView, TextView bookHeader) {
+        //Get myId from Global Class
+        globalClass = (GlobalClass) myContext.getApplicationContext();
+        myId = globalClass.getCurrentUser().getId();
+
+        //Check if we are the creator
+        if (tripInvolvedModel.getCreatorUser().getId() == myId) {
+            bookHeader.setText("Το ταξίδι μου");
+
+            if (tripInvolvedModel.getPassengers().size() == 0)
+                myBookTextView.setText("Δεν έχετε κάποιον επιβάτη ακόμα");
+            else if (tripInvolvedModel.getPassengers().size() == 1)
+                myBookTextView.setText("Έχετε 1 επιβάτη");
+            else
+                myBookTextView.setText("Έχετε " + tripInvolvedModel.getPassengers().size() + " επιβάτες");
+
+         //Find my book details within the passengers
+        } else {
+            bookHeader.setText("Η κράτηση μου");
+
+            for (int i = 0; i < tripInvolvedModel.getPassengers().size(); i++) {
+                if (myId == tripInvolvedModel.getPassengers().get(i).getUser().getId()) {
+
+                    //Check if have pet
+                    if (tripInvolvedModel.getPassengers().get(i).getPet()) {
+                        //Have pet
+                        if (tripInvolvedModel.getPassengers().get(i).getBags() == 0)
+                            myBookTextView.setText("Κατοικίδιο");
+                        else if (tripInvolvedModel.getPassengers().get(i).getBags() == 1)
+                            myBookTextView.setText("Κατοικίδιο και 1 αποσκευή");
+                        else
+                            myBookTextView.setText("Κατοικίδιο και " + tripInvolvedModel.getPassengers().get(i).getBags() + " αποσκευές");
+
+                    } else {
+                        //Don't have pet
+                        if (tripInvolvedModel.getPassengers().get(i).getBags() == 0)
+                            myBookTextView.setText("Καμία επιλογή");
+                        else if (tripInvolvedModel.getPassengers().get(i).getBags() == 1)
+                            myBookTextView.setText("Έχετε επιλέξει 1 αποσκευή");
+                        else
+                            myBookTextView.setText("Έχετε επιλέξει " + tripInvolvedModel.getPassengers().get(i).getBags() + " αποσκευές");
+                    }
+                }
+            }
+
+        }
+
     }
 }
