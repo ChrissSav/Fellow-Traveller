@@ -33,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         globalClass = (GlobalClass) getApplicationContext();
-        homeFragment = new HomeFragment(globalClass);
+        homeFragment = new HomeFragment();
 
 
 
@@ -50,7 +50,7 @@ public class HomeActivity extends AppCompatActivity {
                 globalClass = (GlobalClass) getApplicationContext();
                 switch (item.getItemId()) {
                     case R.id.bottom_nav_main:
-                        selectedFragment = new HomeFragment(globalClass);
+                        selectedFragment = new HomeFragment();
                         break;
                     case R.id.bottom_nav_trips:
                         selectedFragment = new TripFragment();
@@ -80,7 +80,7 @@ public class HomeActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (!(selectedFragment instanceof HomeFragment)) {
             bottomNav.setSelectedItemId(R.id.bottom_nav_main);
-            selectedFragment = new HomeFragment(globalClass);
+            selectedFragment = new HomeFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.HomeActivity_frame_container,
                     selectedFragment).commit();
         } else {

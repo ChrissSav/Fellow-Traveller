@@ -34,8 +34,8 @@ public class HomeFragment extends Fragment {
     private Button btnΝewΟffer, verifyButton;
 
 
-    public HomeFragment(GlobalClass globalClass) {
-       this.globalClass = globalClass;
+    public HomeFragment() {
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -47,6 +47,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        globalClass = (GlobalClass) getActivity().getApplicationContext();
 
 
         searchForTrip = view.findViewById(R.id.FragmentHome_search_button);
