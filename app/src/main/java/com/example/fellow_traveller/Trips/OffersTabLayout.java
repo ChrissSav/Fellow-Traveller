@@ -156,7 +156,7 @@ public class OffersTabLayout extends Fragment {
                     }
 
                 } else {
-                    Toast.makeText(getActivity(), "Δεν έχετε ταξίδια που συμμετέχετε ως οδηγός", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), "Δεν έχετε ταξίδια που συμμετέχετε ως οδηγός", Toast.LENGTH_SHORT).show();
                     //activeTripsTextview.setText("Δεν έχετε κάποιο ενεργό ταξίδι αυτήν την στιγμή");
                     activeTripsSectionLayout.setVisibility(View.GONE);
                     completedTripsSectionLayout.setVisibility(View.GONE);

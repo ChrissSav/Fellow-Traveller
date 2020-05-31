@@ -33,7 +33,7 @@
                 style="@style/display"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="5dp"
                 android:background="@color/background"
                 android:text="Lorem"
                 app:layout_constraintBottom_toBottomOf="@id/FragmentHome_hello_textView"
