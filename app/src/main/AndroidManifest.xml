@@ -60,17 +60,23 @@
             android:launchMode="singleTop" />
         <activity android:name=".CollapseTest" />
         <activity android:name=".SuccessActivity" />
-        <activity android:name=".Reviews.WriteReviewActivity" />
+        <activity android:name=".Reviews.WriteReviewActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden|adjustPan"/>
         <activity android:name=".Reviews.ReviewsActivity" />
-        <activity android:name=".NewOffer.AddLocationActivity" />
-        <activity android:name=".Settings.EditCarSettingsActivity" />
-        <activity android:name=".Settings.AddCarSettingsActivity" />
-        <activity android:name=".Settings.CarsSettingsActivity" />
+        <activity android:name=".NewOffer.AddLocationActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden|adjustPan"/>
+        <activity android:name=".Settings.EditCarSettingsActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden|adjustPan"/>
+        <activity android:name=".Settings.AddCarSettingsActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden|adjustPan"/>
+        <activity android:name=".Settings.CarsSettingsActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden|adjustPan"/>
         <activity
             android:name=".SearchAndBook.BookActivity"
             android:launchMode="singleTop" />
         <activity
             android:name=".SearchAndBook.SearchDetailsActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden|adjustPan"
             android:launchMode="singleTop" />
         <activity
             android:name=".SearchAndBook.SearchResultsActivity"
@@ -83,6 +89,7 @@
         <activity android:name=".SearchAndBook.SearchActivity" />
         <activity
             android:name=".NewOffer.NewOfferActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden|adjustPan"
             android:launchMode="singleTop" />
         <activity
             android:name=".SearchAndBook.FiltersActivity"
@@ -90,6 +97,7 @@
         <activity android:name=".Settings.PersonalSettingsActivity" />
         <activity
             android:name=".Chat.ChatConversationActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden|adjustPan"
             android:launchMode="singleTop" />
         <activity android:name=".Settings.UserSettingsActivity" />
         <activity
@@ -97,6 +105,7 @@
             android:launchMode="singleTop" />
         <activity
             android:name=".Register.RegisterContainerActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden|adjustPan"
             android:launchMode="singleTop" />
         <activity
             android:name=".HomeFragments.HomeActivity"
