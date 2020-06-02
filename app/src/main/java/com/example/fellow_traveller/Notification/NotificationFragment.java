@@ -69,7 +69,7 @@ public class NotificationFragment extends Fragment {
 
         if (notificationArrayList.size() < 10 && notificationArrayList.size() > 0) {
             lastId = notificationArrayList.get(notificationArrayList.size() - 1).getId();
-            Log.i("notificatdionModels", " id: " + lastId + " size : " + notificationArrayList.size());
+            //Log.i("notificatdionModels", " id: " + lastId + " size : " + notificationArrayList.size());
             LoadNotifications(lastId);
         } else if (notificationArrayList.size() < 1) {
             LoadNotifications(0);
@@ -127,55 +127,61 @@ public class NotificationFragment extends Fragment {
         mAdapter = new NotificationAdapter(notificationArrayList);
         mRecyclerView.setAdapter(mAdapter);
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-       /* mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(view.getContext());
-        mAdapter = new NotificationAdapter(notificationArrayList);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         mAdapter.setOnItemClickListener(new NotificationAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(final int position) {
+                progressBar.setVisibility(View.VISIBLE);
+
                 if (notificationArrayList.get(position).getTypeOf().equals("passenger")) {
 
                     if (notificationArrayList.get(position).getHasRead()) {
 
                         Intent intent = new Intent(getActivity(), TripPageDriverActivity.class);
                         intent.putExtra("trip", notificationArrayList.get(position).getTrip());
+                        progressBar.setVisibility(View.GONE);
                         startActivity(intent);
                     } else {
                         new FellowTravellerAPI(globalClass).setNotificationsRead(notificationArrayList.get(position).getId(), new StatusCallBack() {
                             @Override
                             public void onSuccess(String notificationModels) {
                                 notificationArrayList.get(position).setHasRead(true);
-                                mAdapter.notifyItemChanged(position);
+                                mAdapter.notifyDataSetChanged();
                                 Intent intent = new Intent(getActivity(), TripPageDriverActivity.class);
                                 intent.putExtra("trip", notificationArrayList.get(position).getTrip());
+                                progressBar.setVisibility(View.GONE);
+
                                 startActivity(intent);
                             }
 
                             @Override
                             public void onFailure(String msg) {
+                                progressBar.setVisibility(View.GONE);
                                 Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
 
                             }
                         });
                     }
-                } else {
+                }
+                //Review Notification
+                else {
                     if (!notificationArrayList.get(position).getHasRead()) {
                         new FellowTravellerAPI(globalClass).setNotificationsRead(notificationArrayList.get(position).getId(), new StatusCallBack() {
                             @Override
                             public void onSuccess(String notificationModels) {
                                 notificationArrayList.get(position).setHasRead(true);
-                                mAdapter.notifyItemChanged(position);
+                                mAdapter.notifyDataSetChanged();
                                 Intent intent = new Intent(getActivity(), WriteReviewActivity.class);
                                 intent.putExtra("trip", notificationArrayList.get(position).getTrip());
                                 intent.putExtra("user", notificationArrayList.get(position).getUser());
+                                progressBar.setVisibility(View.GONE);
                                 startActivity(intent);
                             }
 
                             @Override
                             public void onFailure(String msg) {
+                                progressBar.setVisibility(View.GONE);
                                 Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
 
                             }
@@ -186,13 +192,14 @@ public class NotificationFragment extends Fragment {
                             public void onSuccess(BooleanResponseModel booleanResponseModel) {
                                 if (booleanResponseModel.getFlag()) {
                                     notificationArrayList.get(position).setHasRead(true);
-                                    mAdapter.notifyItemChanged(position);
+                                    mAdapter.notifyDataSetChanged();
                                     Intent intent = new Intent(getActivity(), WriteReviewActivity.class);
                                     intent.putExtra("trip", notificationArrayList.get(position).getTrip());
                                     intent.putExtra("user", notificationArrayList.get(position).getUser());
+                                    progressBar.setVisibility(View.GONE);
                                     startActivity(intent);
                                 } else {
-
+                                    progressBar.setVisibility(View.GONE);
                                     Toast.makeText(getActivity(), getResources().getString(R.string.ERROR_REVIEW_CANT_REGISTER_THE_REVIEW), Toast.LENGTH_SHORT).show();
 
                                 }
@@ -200,6 +207,7 @@ public class NotificationFragment extends Fragment {
 
                             @Override
                             public void onFailure(String msg) {
+                                progressBar.setVisibility(View.GONE);
                                 Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
 
                             }
@@ -207,7 +215,7 @@ public class NotificationFragment extends Fragment {
                     }
                 }
             }
-        });*/
+        });
     }
 
     public void LoadNotifications(final int id) {
