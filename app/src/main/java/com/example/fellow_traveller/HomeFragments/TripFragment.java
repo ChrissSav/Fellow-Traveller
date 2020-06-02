@@ -41,6 +41,8 @@ public class TripFragment extends Fragment {
 
             TripsViewPagerAdapter tripsViewPagerAdapter = new TripsViewPagerAdapter(getChildFragmentManager());
             //Attaching fragments to tabLayout
+
+
             tripsViewPagerAdapter.addFragment(new SearchsTabLayout(), "Αναζητήσεις");
             tripsViewPagerAdapter.addFragment(new OffersTabLayout(), "Προσφορές");
 

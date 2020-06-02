@@ -1,6 +1,7 @@
 package com.example.fellow_traveller.Trips;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,7 +78,7 @@ public class OffersTabLayout extends Fragment {
         cardLayoutSection = view.findViewById(R.id.FragmentTrip_offers_card_section);
 
 
-        new FellowTravellerAPI(globalClass).getTripsAsCreatorTest(new TripInvolvedCallBack() {
+       /* new FellowTravellerAPI(globalClass).getTripsAsCreatorTest(new TripInvolvedCallBack() {
             @Override
             public void onSuccess(ArrayList<TripInvolvedModel> trips) {
                 //Check if user has any trips
@@ -169,7 +170,107 @@ public class OffersTabLayout extends Fragment {
             public void onFailure(String errorMsg) {
 
             }
-        });
+        });*/
+
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                new FellowTravellerAPI(globalClass).getTripsAsCreatorTest(new TripInvolvedCallBack() {
+                    @Override
+                    public void onSuccess(ArrayList<TripInvolvedModel> trips) {
+                        //Check if user has any trips
+                        if (trips.size() > 0) {
+                            //Seperate trips to active and completed
+                            for (int i = 0; i < trips.size(); i++) {
+                                if (trips.get(i).getActive())
+                                    activeTripsList.add(trips.get(i));
+                                else
+                                    completedTripsList.add(trips.get(i));
+                            }
+                            //check if user has active trips
+                            if (activeTripsList.size() > 0) {
+
+                                noActiveTripsSectionLayout.setVisibility(View.GONE);
+                                activeTripsSectionLayout.setVisibility(View.VISIBLE);
+
+                                //<------------Fill the cardview ------------>
+                                destinationCardText.setText(activeTripsList.get(0).getDestFrom().getTitle() + " - " + activeTripsList.get(0).getDestTo().getTitle());
+                                dateCardText.setText(activeTripsList.get(0).getDate());
+                                timeCardText.setText(activeTripsList.get(0).getTime());
+                                if (Math.round(activeTripsList.get(0).getPrice()) == activeTripsList.get(0).getPrice())
+                                    priceCardText.setText(Math.round(activeTripsList.get(0).getPrice()) + "€");
+                                else
+                                    priceCardText.setText(activeTripsList.get(0).getPrice() + "€");
+
+                                if (activeTripsList.get(0).getPassengers().size() == 0)
+                                    myBookCardText.setText("Δεν έχετε κάποιον επιβάτη ακόμα");
+                                else if (activeTripsList.get(0).getPassengers().size() == 1)
+                                    myBookCardText.setText("Έχετε 1 επιβάτη");
+                                else
+                                    myBookCardText.setText("Έχετε " + activeTripsList.get(0).getPassengers().size() + " επιβάτες");
+
+                                creatorNameCardText.setText("(Εσείς) " + activeTripsList.get(0).getCreatorUser().getFullName());
+                                creatorRateCardText.setText(activeTripsList.get(0).getCreatorUser().getRate() + " (" + activeTripsList.get(0).getCreatorUser().getReviews() + ")");
+                                try {
+                                    Picasso.get().load(activeTripsList.get(0).getCreatorUser().getPicture()).into(creatorCardImage);
+
+                                } catch (Exception e) {
+                                    //  Block of code to handle errors
+                                }
+                                if (activeTripsList.size() == 1)
+                                    activeTripsTextview.setText("Έχετε " + String.valueOf(activeTripsList.size()) + " ενεργό ταξίδι");
+                                else
+                                    activeTripsTextview.setText("Έχετε " + String.valueOf(activeTripsList.size()) + " ενεργά ταξίδια");
+
+
+                            } else {
+                                activeTripsSectionLayout.setVisibility(View.GONE);
+                                noActiveTripsSectionLayout.setVisibility(View.VISIBLE);
+                            }
+
+                            //Check if user has completed trips
+                            if (completedTripsList.size() > 0) {
+
+                                completedTripsSectionLayout.setVisibility(View.VISIBLE);
+
+                                mRecyclerViewNotActive = view.findViewById(R.id.FragmentTrip_offers_completed_recycler_view);
+                                mRecyclerViewNotActive.setHasFixedSize(true);
+                                mLayoutManagerNotActive = new LinearLayoutManager(getActivity());
+                                mAdapterNotActive = new CompletedTripsAdapter(completedTripsList);
+                                mRecyclerViewNotActive.setLayoutManager(mLayoutManagerNotActive);
+                                mRecyclerViewNotActive.setAdapter(mAdapterNotActive);
+                                mAdapterNotActive.setOnItemClickListener(new CompletedTripsAdapter.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(int position) {
+                                        Intent mainIntent = new Intent(getActivity().getApplicationContext(), TripPageDriverActivity.class);
+                                        mainIntent.putExtra("isCompleted", true);
+                                        mainIntent.putExtra("isDriver", true);
+                                        mainIntent.putExtra("trip", completedTripsList.get(position));
+                                        startActivity(mainIntent);
+                                    }
+                                });
+                            } else {
+                                completedTripsSectionLayout.setVisibility(View.GONE);
+                            }
+
+                        } else {
+                            //Toast.makeText(getActivity(), "Δεν έχετε ταξίδια που συμμετέχετε ως οδηγός", Toast.LENGTH_SHORT).show();
+                            //activeTripsTextview.setText("Δεν έχετε κάποιο ενεργό ταξίδι αυτήν την στιγμή");
+                            activeTripsSectionLayout.setVisibility(View.GONE);
+                            completedTripsSectionLayout.setVisibility(View.GONE);
+                            noActiveTripsSectionLayout.setVisibility(View.VISIBLE);
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(String errorMsg) {
+
+                    }
+                });
+                return null;
+            }
+        }.execute();
 
 //        new FellowTravellerAPI(globalClass).getTripsAsCreator(new SearchTripsCallback() {
 //            @Override
