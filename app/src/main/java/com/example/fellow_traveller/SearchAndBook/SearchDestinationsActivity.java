@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.fellow_traveller.ClientAPI.Models.DestinationModel;
@@ -15,6 +16,7 @@ import com.example.fellow_traveller.R;
 public class SearchDestinationsActivity extends AppCompatActivity {
     private Button searchFromButton, searchToButton, searchButton;
     private DestinationModel predictionsModelDestFrom, predictionsModelDestTo;
+    private ImageButton backButton;
     //private boolean fromFlag = false, toFlag = false;
 
     @Override
@@ -25,8 +27,15 @@ public class SearchDestinationsActivity extends AppCompatActivity {
         searchFromButton = findViewById(R.id.ActivitySearchDestinations_destFrom_button);
         searchToButton = findViewById(R.id.ActivitySearchDestinations_destΤο_button);
         searchButton = findViewById(R.id.ActivitySearchDestinations_search_button);
+        backButton = findViewById(R.id.ActivitySearchDestinations_back_button);
 
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         searchFromButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

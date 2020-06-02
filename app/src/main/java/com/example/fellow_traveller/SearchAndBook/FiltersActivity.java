@@ -217,7 +217,13 @@ public class FiltersActivity extends AppCompatActivity {
         final Button allowedButton = myDialog.findViewById(R.id.ActivityFilters_pets_allowed_button);
         final Button notAllowedButton = myDialog.findViewById(R.id.ActivityFilters_pets_not_allowed_button);
 
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                finish();
+            }
+        });
         allButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
