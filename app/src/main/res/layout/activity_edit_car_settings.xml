@@ -26,11 +26,14 @@
                 android:id="@+id/add_car_settings_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:text="Επεξεργασία αυτοκινήτου"
+                app:layout_constraintEnd_toEndOf="@id/close_button_add_car_settings"
+                android:singleLine="true"
+                android:ellipsize="end"
                 style="@style/display"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton

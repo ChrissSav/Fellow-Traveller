@@ -94,7 +94,7 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
         textViewCreator = findViewById(R.id.ActivityTripPageDriver_user_name);
         textViewRating = findViewById(R.id.ActivityTripPageDriver_rating_tv);
         textViewReviews = findViewById(R.id.ActivityTripPageDriver_reviews_tv);
-        //textViewPrice = findViewById(R.id.ActivityTripPageDriver_price_tv);
+        textViewPrice = findViewById(R.id.ActivityTripPageDriver_price_tv);
         textViewDestFrom = findViewById(R.id.ActivityTripPageDriver_from_dest_tv);
         textViewDestTo = findViewById(R.id.ActivityTripPageDriver_to_dest_tv);
         textViewDate = findViewById(R.id.ActivityTripPageDriver_date_tv);
@@ -123,7 +123,7 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
         mapFragment.getMapAsync(this);
 
         pickUpPoint = new MarkerOptions().position(new LatLng(tripInvolvedModel.getPickUpPoint().getLatitude(), tripInvolvedModel.getPickUpPoint().getLongitude())).title(tripInvolvedModel.getPickUpPoint().getTitle());
-        zoomToThePoint = new LatLng(tripInvolvedModel.getDestFrom().getLatitude(), tripInvolvedModel.getDestFrom().getLongitude());
+        zoomToThePoint = new LatLng(tripInvolvedModel.getPickUpPoint().getLatitude(), tripInvolvedModel.getPickUpPoint().getLongitude());
 
         //Set the values
         if (tripInvolvedModel.getCreatorUser().getPicture() != null)
@@ -152,6 +152,11 @@ public class TripPageDriverActivity extends AppCompatActivity implements OnMapRe
             textViewMsg.setText("Ο οδηγός δεν έχει αναφέρει κάποιο συγκεκριμένο μήνυμα");
         else
             textViewMsg.setText(tripInvolvedModel.getMessage());
+
+        if(tripInvolvedModel.getPrice().intValue() == tripInvolvedModel.getPrice())
+            textViewPrice.setText(tripInvolvedModel.getPrice().intValue() + "€");
+        else
+            textViewPrice.setText(tripInvolvedModel.getPrice() + "€");
 
         passengersList = tripInvolvedModel.getPassengers();
 

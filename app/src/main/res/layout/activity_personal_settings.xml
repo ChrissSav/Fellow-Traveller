@@ -36,12 +36,15 @@
             android:id="@+id/info_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
             android:text="Στοιχεία Προφίλ"
             style="@style/display"
+            android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="@id/PersonalSettingsActivity_button_close"
             app:layout_constraintStart_toEndOf="@id/PersonalSettingsActivity_button_close"
-            app:layout_constraintTop_toTopOf="@id/PersonalSettingsActivity_button_close" />
+            app:layout_constraintEnd_toStartOf="@id/PersonalSettingsActivity_button_update"
+            app:layout_constraintTop_toTopOf="@id/PersonalSettingsActivity_button_close"
+            android:singleLine="true"
+            android:ellipsize="end"/>
 
         <ImageButton
             android:id="@+id/PersonalSettingsActivity_button_update"
@@ -61,7 +64,6 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
