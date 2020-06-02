@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import com.example.fellow_traveller.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,6 +51,7 @@ public class OffersTabLayout extends Fragment {
     private ConstraintLayout activeTripsSectionLayout, noActiveTripsSectionLayout, completedTripsSectionLayout, cardLayoutSection;
     private TextView destinationCardText, dateCardText, timeCardText, priceCardText, creatorNameCardText, creatorRateCardText, myBookCardText;
     private CircleImageView creatorCardImage;
+    private ProgressBar progressBar;
 
 //    private ViewPager2 activeTripsViewPager;
 
@@ -76,7 +79,7 @@ public class OffersTabLayout extends Fragment {
         creatorCardImage = view.findViewById(R.id.FragmentTrip_offers_creator_image);
         moreActiveTripsButton = view.findViewById(R.id.FragmentTrip_offers_all_activeTrips_button);
         cardLayoutSection = view.findViewById(R.id.FragmentTrip_offers_card_section);
-
+        progressBar = view.findViewById(R.id.FragmentTrip_offers_progress_bar);
 
        /* new FellowTravellerAPI(globalClass).getTripsAsCreatorTest(new TripInvolvedCallBack() {
             @Override
@@ -172,6 +175,8 @@ public class OffersTabLayout extends Fragment {
             }
         });*/
 
+       progressBar.setVisibility(View.VISIBLE);
+
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
@@ -192,6 +197,8 @@ public class OffersTabLayout extends Fragment {
 
                                 noActiveTripsSectionLayout.setVisibility(View.GONE);
                                 activeTripsSectionLayout.setVisibility(View.VISIBLE);
+
+                                Collections.sort(activeTripsList, TripInvolvedModel.DateComparator);
 
                                 //<------------Fill the cardview ------------>
                                 destinationCardText.setText(activeTripsList.get(0).getDestFrom().getTitle() + " - " + activeTripsList.get(0).getDestTo().getTitle());
@@ -260,12 +267,12 @@ public class OffersTabLayout extends Fragment {
                             completedTripsSectionLayout.setVisibility(View.GONE);
                             noActiveTripsSectionLayout.setVisibility(View.VISIBLE);
                         }
-
+                        progressBar.setVisibility(View.GONE);
                     }
 
                     @Override
                     public void onFailure(String errorMsg) {
-
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
                 return null;

@@ -7,6 +7,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <ProgressBar
+            android:id="@+id/FragmentTrip_offers_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="40dp"
+            android:indeterminateTint="@color/black_color"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:id="@+id/FragmentTrip_offers_top_section"

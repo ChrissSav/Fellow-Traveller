@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +46,7 @@ public class SearchsTabLayout extends Fragment {
     private ConstraintLayout activeTripsSectionLayout, noActiveTripsSectionLayout, completedTripsSectionLayout, cardLayoutSection;
     private TextView destinationCardText, dateCardText, timeCardText, priceCardText, creatorNameCardText, creatorRateCardText, myBookCardText;
     private CircleImageView creatorCardImage;
+    private ProgressBar progressBar;
 
     //private ViewPager2 activeTripsViewPager,completedTripsViewPager;
 
@@ -73,9 +75,9 @@ public class SearchsTabLayout extends Fragment {
         creatorCardImage = view.findViewById(R.id.FragmentTrip_searchs_creator_image);
         moreActiveTripsButton = view.findViewById(R.id.FragmentTrip_searchs_all_activeTrips_button);
         cardLayoutSection = view.findViewById(R.id.FragmentTrip_searchs_card_section);
+        progressBar = view.findViewById(R.id.FragmentTrip_searchs_progress_bar);
 
-
-
+        progressBar.setVisibility(View.VISIBLE);
 
 
         new AsyncTask<Void, Void, Void>() {
@@ -167,11 +169,13 @@ public class SearchsTabLayout extends Fragment {
                             noActiveTripsSectionLayout.setVisibility(View.VISIBLE);
 
                         }
+                        progressBar.setVisibility(View.GONE);
                     }
 
                     @Override
                     public void onFailure(String errorMsg) {
                         //Toast.makeText(getActivity(), errorMsg, Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
                 return null;
