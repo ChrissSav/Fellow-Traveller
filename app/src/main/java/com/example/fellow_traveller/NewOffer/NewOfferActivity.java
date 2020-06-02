@@ -332,12 +332,15 @@ public class NewOfferActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(String errorMsg) {
                             createSnackBar(findViewById(R.id.NewOfferActivity_layout), errorMsg);
+                            floatingActionButtonNext.setEnabled(true);
+
                             //Toast.makeText(NewOfferActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
 
                         }
                     });
                 } else {
                     Toast.makeText(NewOfferActivity.this, "Υπάρχει κάποιο πρόβλημα επικοινωνίας", Toast.LENGTH_SHORT).show();
+                    floatingActionButtonNext.setEnabled(true);
                 }
                 super.onPostExecute(aVoid);
             }
@@ -348,6 +351,7 @@ public class NewOfferActivity extends AppCompatActivity {
     }
 
     public void getDestinationsModel(final String placeIdFrom, final String placeIdTo, final String placeIdPickUp) {
+        floatingActionButtonNext.setEnabled(false);
         new PlaceApiConnection(globalClass, true).getLatLonFromPlace(placeIdFrom, new PlaceApiResultCallBack() {
             @Override
             public void onSuccess(ResultModel resultModel) {

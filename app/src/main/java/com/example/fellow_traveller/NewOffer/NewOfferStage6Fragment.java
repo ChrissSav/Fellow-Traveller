@@ -24,8 +24,8 @@ import java.time.format.TextStyle;
 public class NewOfferStage6Fragment extends Fragment implements View.OnClickListener {
     private View view;
     private TextView textViewFrom, textViewTo, textViewDate, textViewTime,
-            textViewSeats, textViewBags, textViewPets, textViewPrice, textViewCar, textViewMsg,textViewPickUpPoint;
-    private String from, to, date, time, seats, bags, pets, price, car, msg,pickUpPoint;
+            textViewSeats, textViewBags, textViewPets, textViewPrice, textViewCar, textViewMsg, textViewPickUpPoint;
+    private String from, to, date, time, seats, bags, pets, price, car, msg, pickUpPoint;
 
     public NewOfferStage6Fragment() {
         this.from = "";
@@ -62,7 +62,6 @@ public class NewOfferStage6Fragment extends Fragment implements View.OnClickList
         textViewPickUpPoint = view.findViewById(R.id.NewOfferStage6Fragment_textView_pickup);
 
 
-
         textViewFrom.setOnClickListener(this);
         textViewTo.setOnClickListener(this);
         textViewDate.setOnClickListener(this);
@@ -88,7 +87,10 @@ public class NewOfferStage6Fragment extends Fragment implements View.OnClickList
         textViewPrice.setText(price);
 
         textViewCar.setText(car);
-        textViewMsg.setText(msg);
+        if (msg.length() < 1)
+            textViewMsg.setText("Δεν υπάρχει κάποιο μήνυμα. ");
+        else
+            textViewMsg.setText(msg);
 
 
         textViewPickUpPoint.setText(pickUpPoint);
@@ -112,7 +114,6 @@ public class NewOfferStage6Fragment extends Fragment implements View.OnClickList
     public int getRank() {
         return 7;
     }
-
 
 
     public void setTo(String to) {

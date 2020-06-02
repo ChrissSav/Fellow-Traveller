@@ -270,7 +270,6 @@
 
 
     <integer name="anim_duration">250</integer>
-    <dimen name="space_between_lines">10dp</dimen>
     <string name="title_activity_maps">Map</string>
 
 
