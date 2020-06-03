@@ -74,7 +74,7 @@ public class BookActivity extends AppCompatActivity {
 
         tripInvolvedModel = getIntent().getParcelableExtra("trip");
 
-        maxAvailableBags = tripInvolvedModel.getMaxBags();
+        maxAvailableBags = tripInvolvedModel.getMaxBags() - tripInvolvedModel.getCurrentBags();
 
         getUserBags();
 
@@ -264,8 +264,8 @@ public class BookActivity extends AppCompatActivity {
     private void fillList() {
 
         paymentMethodsList = new ArrayList<>();
-        paymentMethodsList.add(new PaymentItem("Πιστωτική κάρτα", R.drawable.ic_card));
         paymentMethodsList.add(new PaymentItem("Μετρητά", R.drawable.ic_cash_filled));
+        paymentMethodsList.add(new PaymentItem("Πιστωτική κάρτα", R.drawable.ic_card));
         paymentMethodsList.add(new PaymentItem("PayPal", R.drawable.ic_paypal));
     }
 }

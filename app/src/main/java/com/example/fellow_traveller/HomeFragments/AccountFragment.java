@@ -165,7 +165,7 @@ public class AccountFragment extends Fragment {
             public void onSuccess(ArrayList<CarModel> carList) {
                 //myCarsList = carList;
                 if (carList.size() > 0) {
-
+                    myCarsList.clear();
                     if (carList.size() > 3) {
                         for (int i = 0; i < 3; i++) {
                             myCarsList.add(carList.get(i));

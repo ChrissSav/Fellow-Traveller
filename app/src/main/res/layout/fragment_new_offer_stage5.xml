@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         style="@style/paragraph3"
-        android:text="Με μία σχετική περιγραφή θα βοηθήσετε τα άτομα να κλείσουν πιο εύκολο το ταξίδι σας"
+        android:text="Με μία σχετική περιγραφή θα βοηθήσετε τα άτομα να κλείσουν πολύ πιο εύκολα το ταξίδι σας"
         app:layout_constraintEnd_toEndOf="@+id/NewOfferStage5Fragment_textView1"
         app:layout_constraintStart_toStartOf="@+id/NewOfferStage5Fragment_textView1"
         app:layout_constraintTop_toBottomOf="@+id/NewOfferStage5Fragment_textView1" />

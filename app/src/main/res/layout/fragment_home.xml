@@ -114,7 +114,7 @@
                     app:layout_constraintStart_toStartOf="@id/FragmentHome_offer_header"
                     app:layout_constraintTop_toTopOf="@id/FragmentHome_create_circle_button" />
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/FragmentHome_create_circle_button"
                     android:layout_width="55dp"
                     android:layout_height="55dp"

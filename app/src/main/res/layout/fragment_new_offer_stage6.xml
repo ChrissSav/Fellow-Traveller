@@ -374,7 +374,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     style="@style/paragraph3"
-                    android:text="Βαλίστες"
+                    android:text="Βαλίτσες"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

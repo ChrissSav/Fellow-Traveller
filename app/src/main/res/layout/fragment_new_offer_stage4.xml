@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         style="@style/paragraph2"
-        android:text="Επιλέξτε το κόστο άνα άτομο που θα αναλογεί στον κάθε επιβάτης της διαδρομής"
+        android:text="Επιλέξτε το κόστο ανά άτομο που θα αναλογεί στο κάθε επιβάτη της διαδρομής"
         app:layout_constraintEnd_toEndOf="@+id/NewOfferStage4Fragment_textView1"
         app:layout_constraintStart_toStartOf="@+id/NewOfferStage4Fragment_textView1"
         app:layout_constraintTop_toBottomOf="@+id/NewOfferStage4Fragment_textView1" />
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
-        android:text="Τιμή ανα άτομο"
+        android:text="Τιμή ανά άτομο"
         style="@style/label"
         app:layout_constraintStart_toStartOf="@+id/NewOfferStage4Fragment_textView"
         app:layout_constraintTop_toBottomOf="@+id/NewOfferStage4Fragment_textView" />

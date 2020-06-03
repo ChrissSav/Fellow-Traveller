@@ -94,7 +94,8 @@ public class ChatConversationActivity extends AppCompatActivity {
         groupId = intent.getIntExtra("groupId", 0);
         tripName = intent.getStringExtra("tripName");
 
-        tripNameTextView.setText(tripName);
+        //tripNameTextView.setText(tripName);
+        setTripToTitle();
 
         getMessagesCount();
 
@@ -446,6 +447,21 @@ public class ChatConversationActivity extends AppCompatActivity {
 
             }
         });
+    }
+    public void setTripToTitle(){
+        DatabaseReference  titleRef = FirebaseDatabase.getInstance().getReference("Trips").child(String.valueOf(globalClass.getCurrentUser().getId())).child(Integer.toString(groupId));
+        titleRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String title = dataSnapshot.child("tripName").getValue(String.class);
+                tripNameTextView.setText(title);
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }
