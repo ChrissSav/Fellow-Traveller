@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import android.os.Parcelable;
@@ -37,9 +38,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class AccountFragment extends Fragment {
     private ImageButton settingsButton;
     private Button newCarButton, reviewsButton, manageCarsButton;
@@ -56,8 +55,8 @@ public class AccountFragment extends Fragment {
     private View view;
 
 
-    public AccountFragment( GlobalClass globalClass) {
-        this.globalClass =  globalClass;
+    public AccountFragment() {
+
     }
 
 
@@ -178,7 +177,7 @@ public class AccountFragment extends Fragment {
                     haveCarsSectionLayout.setVisibility(View.VISIBLE);
                     mRecyclerView = view.findViewById(R.id.FragmentAccount_my_cars_recycler_view);
                     mRecyclerView.setHasFixedSize(true);
-                    mLayoutManager = new LinearLayoutManager( globalClass.getApplicationContext());
+                    mLayoutManager = new LinearLayoutManager(globalClass.getApplicationContext());
                     mAdapter = new MyCarModelAdapter(myCarsList);
                     mRecyclerView.setLayoutManager(mLayoutManager);
                     mRecyclerView.setAdapter(mAdapter);

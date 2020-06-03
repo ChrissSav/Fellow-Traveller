@@ -4,15 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.app.job.JobInfo;
-import android.app.job.JobScheduler;
-import android.content.ComponentName;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.fellow_traveller.Notification.NotificationFragment;
-import com.example.fellow_traveller.Models.ExampleJobService;
 import com.example.fellow_traveller.Models.GlobalClass;
 import com.example.fellow_traveller.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -20,7 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private GlobalClass globalClass;
+   // private GlobalClass globalClass;
     private BottomNavigationView bottomNav;
     private static final String TAG = "ExampleJobService";
     private Fragment selectedFragment = null;
@@ -31,7 +26,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        globalClass = (GlobalClass) getApplicationContext();
+        //globalClass = (GlobalClass) getApplicationContext();
         homeFragment = new HomeFragment();
 
 
@@ -45,7 +40,7 @@ public class HomeActivity extends AppCompatActivity {
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                globalClass = (GlobalClass) getApplicationContext();
+                //globalClass = (GlobalClass) getApplicationContext();
                 switch (item.getItemId()) {
                     case R.id.bottom_nav_main:
                         if (!(selectedFragment instanceof HomeFragment))
@@ -65,7 +60,7 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     case R.id.bottom_nav_user_info:
                         if (!(selectedFragment instanceof AccountFragment))
-                            selectedFragment = new AccountFragment(globalClass);
+                            selectedFragment = new AccountFragment();
                         break;
                 }
 
