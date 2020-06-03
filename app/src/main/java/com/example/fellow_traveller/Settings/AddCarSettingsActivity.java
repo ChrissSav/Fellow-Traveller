@@ -109,29 +109,6 @@ public class AddCarSettingsActivity extends AppCompatActivity {
                 new InputFilter.AllCaps(),
                 new InputFilter.LengthFilter(8)
         });
-        EditTextCarPlate.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (before == 2 && count == 3) {
-                    EditTextCarPlate.append("-");
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.length() >= 4) {
-                    EditTextCarPlate.setInputType(InputType.TYPE_CLASS_NUMBER);
-
-                } else {
-                    EditTextCarPlate.setInputType(InputType.TYPE_CLASS_TEXT);
-                }
-            }
-        });
     }
 
     public boolean checkBrand() {
