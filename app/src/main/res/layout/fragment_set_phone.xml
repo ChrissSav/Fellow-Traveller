@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.register.fragments.phone.SetPhoneFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#FFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/SetPhoneFragment_label"
+            style="@style/display"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/register_fragment_become_a_fellow_traveller"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/SetPhoneFragment_phone_number_label"
+            style="@style/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Αριθμός τηλεφώνου"
+            app:layout_constraintStart_toStartOf="@+id/SetPhoneFragment_label"
+            app:layout_constraintTop_toBottomOf="@+id/SetPhoneFragment_label" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/SetPhoneFragment_number_input_section"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="@+id/SetPhoneFragment_label"
+            app:layout_constraintStart_toStartOf="@+id/SetPhoneFragment_label"
+            app:layout_constraintTop_toBottomOf="@+id/SetPhoneFragment_phone_number_label">
+
+            <EditText
+                android:id="@+id/SetPhoneFragment_number_editText"
+                style="@style/inputStyle"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="69xxxxxxxx"
+                android:inputType="number"
+                android:maxLength="10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/SetPhoneFragment_split_line"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/SetPhoneFragment_erase_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_close"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/SetPhoneFragment_number_editText"
+                app:layout_constraintEnd_toEndOf="@id/SetPhoneFragment_number_editText"
+                app:layout_constraintTop_toTopOf="@id/SetPhoneFragment_number_editText" />
+
+            <Spinner
+                android:id="@+id/SetPhoneFragment_country_code_spinner"
+                style="@style/inputStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@null"
+                android:dropDownWidth="match_parent"
+                android:overlapAnchor="false"
+                android:prompt="@string/app_name"
+                android:spinnerMode="dropdown"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/SetPhoneFragment_split_line"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/SetPhoneFragment_split_line"
+                android:layout_width="2dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/softGrey_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/SetPhoneFragment_guideline"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/SetPhoneFragment_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="122dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/SetPhoneFragment_section_underline"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/component_edit_text_line"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SetPhoneFragment_number_input_section" />
+
+        <TextView
+            android:id="@+id/SetPhoneFragment_instructions_info"
+            style="@style/paragraph1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/register_fragment_six_digit_code_notice_description"
+            app:layout_constraintEnd_toEndOf="@+id/SetPhoneFragment_label"
+            app:layout_constraintStart_toStartOf="@+id/SetPhoneFragment_label"
+            app:layout_constraintTop_toBottomOf="@+id/SetPhoneFragment_number_input_section" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/SetPhoneFragment_button_next"
+        android:layout_width="@dimen/float_action_button_width"
+        android:layout_height="@dimen/float_action_button_height"
+        android:layout_marginEnd="@dimen/float_action_button_margin_right"
+        android:layout_marginBottom="@dimen/float_action_button_margin_bottom"
+        android:background="@drawable/circle_button_shape"
+        android:elevation="2dp"
+        android:padding="15dp"
+        android:rotation="180"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_back_button"
+        android:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

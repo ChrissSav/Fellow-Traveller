@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/setPhoneFragment">
+
+    <fragment
+        android:id="@+id/setPhoneFragment"
+        android:name="com.example.fellowtravellerbeta.ui.register.fragments.phone.SetPhoneFragment"
+        android:label="fragment_set_phone"
+        tools:layout="@layout/fragment_set_phone" >
+        <action
+            android:id="@+id/action_setPhoneFragment_to_setEmailFragment"
+            app:destination="@id/setEmailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountInfoFragment"
+        android:name="com.example.fellowtravellerbeta.ui.register.fragments.accountInfo.AccountInfoFragment"
+        android:label="fragment_account_info"
+        tools:layout="@layout/fragment_account_info" />
+    <fragment
+        android:id="@+id/setPasswordFragment"
+        android:name="com.example.fellowtravellerbeta.ui.register.fragments.SetPasswordFragment"
+        android:label="fragment_set_password"
+        tools:layout="@layout/fragment_set_password" >
+        <action
+            android:id="@+id/action_setPasswordFragment_to_accountInfoFragment"
+            app:destination="@id/accountInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/setEmailFragment"
+        android:name="com.example.fellowtravellerbeta.ui.register.fragments.SetEmailFragment"
+        android:label="fragment_set_email"
+        tools:layout="@layout/fragment_set_email" >
+        <action
+            android:id="@+id/action_setEmailFragment_to_setPasswordFragment"
+            app:destination="@id/setPasswordFragment" />
+    </fragment>
+</navigation>
