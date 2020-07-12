@@ -7,6 +7,8 @@ import retrofit2.Response
 interface ApiRepository {
 
     suspend fun checkUserPhone(phone: String): Response<StatusHandleResponse>
+    suspend fun checkUserEmail(phone: String): Response<StatusHandleResponse>
+
 }
 
 
@@ -18,6 +20,11 @@ class ApiRepositoryImpl(
 
     override suspend fun checkUserPhone(phone: String): Response<StatusHandleResponse> {
         val requestBody = AccountCheckRequest("phone", phone)
+        return service.checkIfAccountInfoExist(requestBody)
+    }
+
+    override suspend fun checkUserEmail(email: String): Response<StatusHandleResponse> {
+        val requestBody = AccountCheckRequest("email", email)
         return service.checkIfAccountInfoExist(requestBody)
     }
 

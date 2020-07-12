@@ -18,29 +18,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/RegisterActivity_imageButton"
-        style="@style/border_icon_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_back_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_progressBar" />
 
     <fragment
         android:id="@+id/RegisterActivity_nav_host"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:foregroundGravity="top"
+        app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:navGraph="@navigation/nav_graph"
-        app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_imageButton">
+        app:layout_constraintTop_toBottomOf="@+id/RegisterActivity_progressBar"
+        app:navGraph="@navigation/nav_graph">
 
     </fragment>
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.register.fragments.accountInfo.AccountInfoFragment">
+    tools:context=".ui.register.fragment.accountInfo.AccountInfoFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
@@ -15,16 +15,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
+        <ImageButton
+            android:id="@+id/imageButton_back"
+            style="@style/border_icon_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/image_button_layout_marginStart"
+            android:layout_marginTop="@dimen/image_button_layout_marginTop"
+            android:src="@drawable/ic_back_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/AccountInfoFragment_textView4"
             style="@style/display"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/margin_top_of_back_button"
+            android:layout_marginEnd="20dp"
             android:text="Πώς ονομάζεστε;"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/imageButton_back"
+            app:layout_constraintTop_toBottomOf="@+id/imageButton_back" />
 
         <TextView
             android:id="@+id/AccountInfoFragment_info_textView"
@@ -32,9 +45,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_marginEnd="20dp"
             android:text="Για καλύτερη εμπειρία είναι απαραίτητο να γνωρίζουμε ολόκληρο το όνομα σας"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/AccountInfoFragment_textView4"
             app:layout_constraintStart_toStartOf="@id/AccountInfoFragment_textView4"
             app:layout_constraintTop_toBottomOf="@id/AccountInfoFragment_textView4" />
 
@@ -55,14 +67,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
             android:background="@null"
             android:hint="Το όνομα σας"
             android:inputType="textCapWords"
             android:maxLength="20"
             android:paddingVertical="5dp"
             android:singleLine="true"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/AccountInfoFragment_info_textView"
             app:layout_constraintStart_toStartOf="@+id/AccountInfoFragment_textView5"
             app:layout_constraintTop_toBottomOf="@+id/AccountInfoFragment_textView5" />
 
@@ -104,14 +115,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
             android:background="@null"
             android:hint="Το επίθετο σας"
             android:inputType="textCapWords"
             android:maxLength="20"
             android:paddingVertical="5dp"
             android:singleLine="true"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/AccountInfoFragment_info_textView"
             app:layout_constraintStart_toStartOf="@+id/AccountInfoFragment_textView5"
             app:layout_constraintTop_toBottomOf="@+id/AccountInfoFragment_textView6" />
 

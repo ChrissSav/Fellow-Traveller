@@ -8,4 +8,10 @@
     <dimen name="float_action_button_width">65dp</dimen>
     <dimen name="float_action_button_height">65dp</dimen>
 
+
+<!--    imageButton back -->
+    <dimen name="image_button_layout_marginStart">20dp</dimen>
+    <dimen name="image_button_layout_marginTop">10dp</dimen>
+    <dimen name="margin_top_of_back_button">16dp</dimen>
+
 </resources>
