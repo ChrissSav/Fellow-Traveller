@@ -1,6 +1,8 @@
 package com.example.fellowtravellerbeta.ui.register.fragment.email
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +25,7 @@ class SetEmailFragment : Fragment() {
     private var navController: NavController? = null
 
     private lateinit var imageButtonBack: ImageButton
+    private lateinit var eraseButton: ImageButton
 
     private lateinit var imageButtonNext: ImageButton
     private lateinit var editTextEmail: EditText
@@ -43,15 +46,36 @@ class SetEmailFragment : Fragment() {
         navController = Navigation.findNavController(view)
 
 
-        editTextEmail = view.findViewById(R.id.FragmentRegisterStage1_email_editText)
+        editTextEmail = view.findViewById(R.id.SetEmailFragment_email_editText)
         imageButtonNext = view.findViewById(R.id.SetEmailFragment_button_next)
         imageButtonBack = view.findViewById(R.id.imageButton_back)
-
+        eraseButton = view.findViewById(R.id.SetEmailFragment_email_eraseButton)
 
         editTextEmail.setText(registerSharedViewModel.email.value)
 
         imageButtonBack.setOnClickListener {
             activity?.onBackPressed()
+        }
+
+        editTextEmail.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (s.toString().trim().isNotEmpty())
+                    eraseButton.visibility = View.VISIBLE
+                else
+                    eraseButton.visibility = View.INVISIBLE
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+        })
+
+        eraseButton.setOnClickListener {
+            editTextEmail.text = null
         }
 
         imageButtonNext.setOnClickListener {

@@ -1,10 +1,12 @@
 package com.example.fellowtravellerbeta.ui.register.fragment
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fellowtravellerbeta.data.network.ApiRepository
+import com.example.fellowtravellerbeta.utils.getModelFromResponseErrorBody
 import kotlinx.coroutines.launch
 
 class RegisterSharedViewModel(private val service: ApiRepository) : ViewModel() {
@@ -23,6 +25,12 @@ class RegisterSharedViewModel(private val service: ApiRepository) : ViewModel() 
 
     private val _userInfo = MutableLiveData<Pair<String, String>>()
     val userInfo: LiveData<Pair<String, String>> = _userInfo
+
+
+
+    private val _responseResult = MutableLiveData<Int>()
+    val responseResult: LiveData<Int> = _responseResult
+
 
 
     fun checkUserPhone(phone: String) {
@@ -59,13 +67,16 @@ class RegisterSharedViewModel(private val service: ApiRepository) : ViewModel() 
     }
 
     fun storePassword(password: String) {
-        _password.value = password
-
+        viewModelScope.launch {
+            _password.value = password
+        }
     }
 
 
     fun storeUserInfo(firstName: String, lastName: String) {
-        _userInfo.value = Pair(firstName, lastName)
+        viewModelScope.launch {
+            _userInfo.value = Pair(firstName, lastName)
+        }
 
     }
 
@@ -78,8 +89,27 @@ class RegisterSharedViewModel(private val service: ApiRepository) : ViewModel() 
     }
 
 
-    fun registerUser(){
-       // val res = service.
+    fun registerUserAccount() {
+        viewModelScope.launch {
+
+            if (userInfo.value?.first != null && userInfo.value?.second  != null && email.value != null && phone.value != null) {
+                val response = service.createAccount(
+                    userInfo.value!!.first,
+                    userInfo.value!!.second,
+                    email.value.toString(),
+                    password.value.toString(),
+                    phone.value.toString()
+                )
+                if(response.isSuccessful){
+                    _responseResult.value = 0
+                }else{
+                    val errorResponse = getModelFromResponseErrorBody(response)
+                    _responseResult.value = errorResponse.detail.statusCode
+                }
+            }
+        }
     }
+
+
 
 }

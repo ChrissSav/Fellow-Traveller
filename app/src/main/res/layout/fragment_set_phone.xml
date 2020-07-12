@@ -63,15 +63,16 @@
                 style="@style/inputStyle"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
                 android:background="@null"
                 android:ems="10"
+                android:paddingStart="10dp"
                 android:hint="69xxxxxxxx"
-                android:inputType="number"
+                android:inputType="phone"
                 android:maxLength="10"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/SetPhoneFragment_split_line"
+                app:layout_constraintEnd_toStartOf="@+id/SetPhoneFragment_erase_button"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
@@ -81,43 +82,9 @@
                 android:background="@drawable/ic_close"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@id/SetPhoneFragment_number_editText"
-                app:layout_constraintEnd_toEndOf="@id/SetPhoneFragment_number_editText"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/SetPhoneFragment_number_editText" />
 
-            <Spinner
-                android:id="@+id/SetPhoneFragment_country_code_spinner"
-                style="@style/inputStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:background="@null"
-                android:dropDownWidth="match_parent"
-                android:overlapAnchor="false"
-                android:prompt="@string/app_name"
-                android:spinnerMode="dropdown"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/SetPhoneFragment_split_line"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <TextView
-                android:id="@+id/SetPhoneFragment_split_line"
-                android:layout_width="2dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@color/softGrey_color"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/SetPhoneFragment_guideline"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/SetPhoneFragment_guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="122dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

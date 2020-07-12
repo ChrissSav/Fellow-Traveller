@@ -61,14 +61,15 @@
             app:layout_constraintTop_toBottomOf="@+id/SetEmailFragment_info_textView" />
 
         <EditText
-            android:id="@+id/FragmentRegisterStage1_email_editText"
+            android:id="@+id/SetEmailFragment_email_editText"
             style="@style/input"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:background="@null"
-            android:hint="example@email.com"
+            android:hint="example@email.come"
+            android:maxLines="1"
             android:inputType="textEmailAddress"
             android:maxLength="30"
             android:paddingVertical="5dp"
@@ -78,17 +79,17 @@
             app:layout_constraintTop_toBottomOf="@+id/SetEmailFragment_textView5" />
 
         <ImageButton
-            android:id="@+id/FragmentRegisterStage1_email_eraseButton"
+            android:id="@+id/SetEmailFragment_email_eraseButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/ic_close"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/FragmentRegisterStage1_email_editText"
-            app:layout_constraintEnd_toEndOf="@id/FragmentRegisterStage1_email_editText"
-            app:layout_constraintTop_toTopOf="@id/FragmentRegisterStage1_email_editText" />
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/SetEmailFragment_email_editText"
+            app:layout_constraintEnd_toEndOf="@+id/SetEmailFragment_email_underline"
+            app:layout_constraintTop_toTopOf="@id/SetEmailFragment_email_editText" />
 
         <View
-            android:id="@+id/FragmentRegisterStage1_email_underline"
+            android:id="@+id/SetEmailFragment_email_underline"
             android:layout_width="0dp"
             android:layout_height="2dp"
             android:layout_marginTop="15dp"
@@ -96,9 +97,9 @@
             android:background="@drawable/component_edit_text_line"
             android:focusable="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/FragmentRegisterStage1_email_editText"
-            app:layout_constraintStart_toStartOf="@+id/FragmentRegisterStage1_email_editText"
-            app:layout_constraintTop_toBottomOf="@+id/FragmentRegisterStage1_email_editText" />
+            app:layout_constraintEnd_toEndOf="@+id/SetEmailFragment_email_editText"
+            app:layout_constraintStart_toStartOf="@+id/SetEmailFragment_email_editText"
+            app:layout_constraintTop_toBottomOf="@+id/SetEmailFragment_email_editText" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

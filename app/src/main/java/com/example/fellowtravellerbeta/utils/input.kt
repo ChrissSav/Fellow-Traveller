@@ -1,9 +1,15 @@
 package com.example.fellowtravellerbeta.utils
 
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import com.example.fellowtravellerbeta.R
+import com.example.fellowtravellerbeta.data.network.response.DetailResponse
+import com.example.fellowtravellerbeta.data.network.response.ErrorResponseModel
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
+import com.google.gson.JsonParser
+import retrofit2.Response
 import java.io.IOException
 import java.sql.Date
 import java.text.ParseException
@@ -59,5 +65,22 @@ fun isValidPlate(plate: String): Boolean {
 }
 
 fun isValidEmail(email: String): Boolean {
-    return  Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+}
+
+fun getModelFromResponseErrorBody(response: Response<*>): ErrorResponseModel {
+    val gson = Gson()
+    val detail = DetailResponse(1000, "")
+    var errorResponseModel = ErrorResponseModel("", detail)
+    try {
+        val mJsonString = response.errorBody()?.string()
+        val parser = JsonParser()
+        val mJson = parser.parse(mJsonString)
+        errorResponseModel = gson.fromJson<ErrorResponseModel>(mJson, ErrorResponseModel::class.java)
+
+    } catch (e: Exception) {
+//        val detailModel = DetailModel(1000)
+//        errorResponseModel.setDetail(detailModel)
+    }
+    return errorResponseModel
 }
