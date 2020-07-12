@@ -27,10 +27,8 @@ class RegisterSharedViewModel(private val service: ApiRepository) : ViewModel() 
     val userInfo: LiveData<Pair<String, String>> = _userInfo
 
 
-
     private val _responseResult = MutableLiveData<Int>()
     val responseResult: LiveData<Int> = _responseResult
-
 
 
     fun checkUserPhone(phone: String) {
@@ -92,24 +90,21 @@ class RegisterSharedViewModel(private val service: ApiRepository) : ViewModel() 
     fun registerUserAccount() {
         viewModelScope.launch {
 
-            if (userInfo.value?.first != null && userInfo.value?.second  != null && email.value != null && phone.value != null) {
-                val response = service.createAccount(
-                    userInfo.value!!.first,
-                    userInfo.value!!.second,
-                    email.value.toString(),
-                    password.value.toString(),
-                    phone.value.toString()
-                )
-                if(response.isSuccessful){
-                    _responseResult.value = 0
-                }else{
-                    val errorResponse = getModelFromResponseErrorBody(response)
-                    _responseResult.value = errorResponse.detail.statusCode
-                }
+            val response = service.createAccount(
+                userInfo.value!!.first,
+                userInfo.value!!.second,
+                email.value.toString(),
+                password.value.toString(),
+                phone.value.toString()
+            )
+            if (response.isSuccessful) {
+                _responseResult.value = 0
+            } else {
+                val errorResponse = getModelFromResponseErrorBody(response)
+                _responseResult.value = errorResponse.detail.statusCode
             }
         }
     }
-
 
 
 }
