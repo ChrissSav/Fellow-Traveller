@@ -1,4 +1,4 @@
-package com.example.fellowtravellerbeta.ui.register.fragment
+package com.example.fellowtravellerbeta.ui.register
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

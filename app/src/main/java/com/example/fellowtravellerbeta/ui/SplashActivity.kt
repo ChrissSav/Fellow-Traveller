@@ -5,11 +5,12 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fellowtravellerbeta.R
+import com.example.fellowtravellerbeta.ui.newTrip.NewTripActivity
 import com.example.fellowtravellerbeta.ui.register.RegisterActivity
 
 class SplashActivity : AppCompatActivity() {
 
-    private val SPLASH_TIME = 2000
+    private val SPLASH_TIME = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +30,7 @@ class SplashActivity : AppCompatActivity() {
 
 
         Handler().postDelayed({
-            val mainIntent = Intent(this, RegisterActivity::class.java)
+            val mainIntent = Intent(this, NewTripActivity::class.java)
             startActivity(mainIntent)
             finish()
 

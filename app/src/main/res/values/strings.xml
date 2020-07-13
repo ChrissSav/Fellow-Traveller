@@ -276,4 +276,9 @@
     <string name="passenger_notification">Ο χρήστης % μόλις προστέθηκε στο ταξίδι σου.</string>
     <string name="rate_notification">Ήρθε η ώρα να αξιολόγησης τον χρήστη  %.</string>
     <string name="write_review_title">Ήρθε η ώρα να αξιολόγησης τον χρήστη <b>  user  </b> για το ταξίδι που έγινε από from - to στις date.</string>
+
+
+    <string name="set_date">Όρισε την ημερομηνία ... </string>
+    <string name="set_time">Όρισε την ώρα ... </string>
+
 </resources>

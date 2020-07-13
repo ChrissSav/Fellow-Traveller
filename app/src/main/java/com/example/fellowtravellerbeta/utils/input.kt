@@ -1,8 +1,8 @@
 package com.example.fellowtravellerbeta.utils
 
-import android.util.Log
 import android.util.Patterns
 import android.view.View
+import androidx.recyclerview.widget.AsyncListDiffer
 import com.example.fellowtravellerbeta.R
 import com.example.fellowtravellerbeta.data.network.response.DetailResponse
 import com.example.fellowtravellerbeta.data.network.response.ErrorResponseModel
@@ -11,9 +11,9 @@ import com.google.gson.Gson
 import com.google.gson.JsonParser
 import retrofit2.Response
 import java.io.IOException
-import java.sql.Date
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.util.*
 import java.util.regex.Pattern
 
 
@@ -42,7 +42,7 @@ fun dateTimeToTimestamp(date: String, time: String): Long {
 }
 
 
-fun currentTimeStamp(): Long? {
+fun currentTimeStamp(): Long {
     return System.currentTimeMillis() / 1000L
 }
 
@@ -76,7 +76,8 @@ fun getModelFromResponseErrorBody(response: Response<*>): ErrorResponseModel {
         val mJsonString = response.errorBody()?.string()
         val parser = JsonParser()
         val mJson = parser.parse(mJsonString)
-        errorResponseModel = gson.fromJson<ErrorResponseModel>(mJson, ErrorResponseModel::class.java)
+        errorResponseModel =
+            gson.fromJson<ErrorResponseModel>(mJson, ErrorResponseModel::class.java)
 
     } catch (e: Exception) {
 //        val detailModel = DetailModel(1000)
@@ -84,3 +85,13 @@ fun getModelFromResponseErrorBody(response: Response<*>): ErrorResponseModel {
     }
     return errorResponseModel
 }
+
+
+fun validateDateTimeDiffer(date: String, time: String, timeDiffer: Int): Boolean {
+    val timestamp = currentTimeStamp()
+    if ((dateTimeToTimestamp(date, time) - timestamp) >= timeDiffer) {
+        return true
+    }
+    return false
+}
+

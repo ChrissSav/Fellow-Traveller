@@ -9,12 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
-import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.fellowtravellerbeta.R
-import com.example.fellowtravellerbeta.ui.register.fragment.RegisterSharedViewModel
+import com.example.fellowtravellerbeta.ui.register.RegisterSharedViewModel
 import com.example.fellowtravellerbeta.utils.createSnackBar
 import com.example.fellowtravellerbeta.utils.isValidPhone
 import org.koin.android.ext.android.inject

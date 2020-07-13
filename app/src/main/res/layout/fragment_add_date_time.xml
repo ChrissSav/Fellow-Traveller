@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/AddDateTimeFragment_textView" />
 
     <Button
-        android:id="@+id/NewOfferStage1Fragment_button_date"
+        android:id="@+id/AddDateTimeFragment_button_date"
         style="@style/button_outline_blue_with_left_drawable"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -51,9 +51,9 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:singleLine="true"
-        android:text="Όρισε την ημερομηνία ... "
+        android:text="@string/set_date"
         android:textAlignment="textStart"
-        android:textColor="#9E9E9E"
+        android:textColor="@color/button_default_color"
         app:layout_constraintEnd_toEndOf="@+id/AddDateTimeFragment_textView"
         app:layout_constraintStart_toStartOf="@+id/AddDateTimeFragment_textView"
         app:layout_constraintTop_toBottomOf="@+id/AddDateTimeFragment_textView3" />
@@ -65,11 +65,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Ώρα"
-        app:layout_constraintStart_toStartOf="@+id/NewOfferStage1Fragment_button_date"
-        app:layout_constraintTop_toBottomOf="@+id/NewOfferStage1Fragment_button_date" />
+        app:layout_constraintStart_toStartOf="@+id/AddDateTimeFragment_button_date"
+        app:layout_constraintTop_toBottomOf="@+id/AddDateTimeFragment_button_date" />
 
     <Button
-        android:id="@+id/NewOfferStage1Fragment_button_time"
+        android:id="@+id/AddDateTimeFragment_button_time"
         style="@style/button_outline_blue_with_left_drawable"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -79,15 +79,15 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:singleLine="true"
-        android:text="Όρισε την ώρα ... "
+        android:text="@string/set_time"
         android:textAlignment="textStart"
-        android:textColor="#9E9E9E"
-        app:layout_constraintEnd_toEndOf="@+id/NewOfferStage1Fragment_button_date"
-        app:layout_constraintStart_toStartOf="@+id/NewOfferStage1Fragment_button_date"
+        android:textColor="@color/button_default_color"
+        app:layout_constraintEnd_toEndOf="@+id/AddDateTimeFragment_button_date"
+        app:layout_constraintStart_toStartOf="@+id/AddDateTimeFragment_button_date"
         app:layout_constraintTop_toBottomOf="@+id/AddDateTimeFragment_textView2" />
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <ImageButton
         android:id="@+id/AddDateTimeFragment_button_next"
         android:layout_width="@dimen/float_action_button_width"
         android:layout_height="@dimen/float_action_button_height"

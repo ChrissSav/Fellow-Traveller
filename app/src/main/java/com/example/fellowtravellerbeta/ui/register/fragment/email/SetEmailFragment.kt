@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.fellowtravellerbeta.R
-import com.example.fellowtravellerbeta.ui.register.fragment.RegisterSharedViewModel
+import com.example.fellowtravellerbeta.ui.register.RegisterSharedViewModel
 import com.example.fellowtravellerbeta.utils.createSnackBar
 import com.example.fellowtravellerbeta.utils.isValidEmail
 import org.koin.android.ext.android.inject

@@ -2,13 +2,10 @@ package com.example.fellowtravellerbeta.ui.register
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ProgressBar
-import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.fellowtravellerbeta.R
-import com.example.fellowtravellerbeta.ui.register.fragment.RegisterSharedViewModel
 import org.koin.android.ext.android.inject
 
 class RegisterActivity : AppCompatActivity() {
