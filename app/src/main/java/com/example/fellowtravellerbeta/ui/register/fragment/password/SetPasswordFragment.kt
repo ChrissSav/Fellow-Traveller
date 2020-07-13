@@ -32,8 +32,6 @@ class SetPasswordFragment : Fragment() {
     private lateinit var passwordShowButton: Button
     private lateinit var confirmPasswordShowButton: Button
 
-    private var access = false
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,11 +52,11 @@ class SetPasswordFragment : Fragment() {
         imageButtonNext = view.findViewById(R.id.SetPasswordFragment_button_next)
         imageButtonBack = view.findViewById(R.id.imageButton_back)
         passwordShowButton = view.findViewById(R.id.SetPasswordFragment_display_password_button)
-        confirmPasswordShowButton = view.findViewById(R.id.SetPasswordFragment_display_password2_button)
+        confirmPasswordShowButton =view.findViewById(R.id.SetPasswordFragment_display_password2_button)
 
-        
-        
-        
+
+
+
         editTextPassword.setText(viewModel.password.value)
         editTextPasswordConfirm.setText(viewModel.password.value)
 
@@ -68,9 +66,8 @@ class SetPasswordFragment : Fragment() {
 
         imageButtonNext.setOnClickListener {
 
-            if (editTextPassword.text.length >= 1) {
+            if (editTextPassword.text.length >= 8) {
                 if (editTextPassword.text.toString() == editTextPasswordConfirm.text.toString()) {
-                    access = true
                     viewModel.storePassword(editTextPassword.text.toString())
                 } else {
                     createSnackBar(view, resources.getString(R.string.ERROR_PASSWORD_DO_NOT_MATCH))
@@ -122,12 +119,12 @@ class SetPasswordFragment : Fragment() {
 
 
         confirmPasswordShowButton.setOnClickListener {
-            if(editTextPasswordConfirm.inputType != InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD){
+            if (editTextPasswordConfirm.inputType != InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
                 editTextPasswordConfirm.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
 
-            }
-            else{
-                editTextPasswordConfirm.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            } else {
+                editTextPasswordConfirm.inputType =
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
 
 
             }
@@ -136,11 +133,11 @@ class SetPasswordFragment : Fragment() {
         }
 
         passwordShowButton.setOnClickListener {
-            if(editTextPassword.inputType != InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD){
+            if (editTextPassword.inputType != InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
                 editTextPassword.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-            }
-            else{
-                editTextPassword.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            } else {
+                editTextPassword.inputType =
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
 
 
             }
@@ -153,13 +150,10 @@ class SetPasswordFragment : Fragment() {
 
         viewModel.password.observe(viewLifecycleOwner, Observer {
 
-
-            if (access) {
-                access = false
-                if (it != null) {
-                    navController?.navigate(R.id.action_setPasswordFragment_to_accountInfoFragment)
-                }
+            if (it != null) {
+                navController?.navigate(R.id.action_setPasswordFragment_to_accountInfoFragment)
             }
+
         })
 
     }

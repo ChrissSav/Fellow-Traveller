@@ -2,7 +2,6 @@ package com.example.fellowtravellerbeta.di
 
 import com.example.fellowtravellerbeta.BuildConfig
 import com.example.fellowtravellerbeta.data.network.ApiRepository
-import com.example.fellowtravellerbeta.data.network.ApiRepositoryImpl
 import com.example.fellowtravellerbeta.data.network.FellowTravellerApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -17,7 +16,7 @@ val networkModule = module {
     single { provideRetrofit<FellowTravellerApiService>(get()) }
     single { provideHttpLoggingInterceptor() }
     single { provideOkHttpClient(get()) }
-    single { ApiRepositoryImpl(get()) as ApiRepository }
+    single { ApiRepository(get()) }
 
 }
 

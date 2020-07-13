@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_new_trip"
+    app:startDestination="@id/addLocationsFragment">
+
+    <fragment
+        android:id="@+id/addLocationsFragment"
+        android:name="com.example.fellowtravellerbeta.ui.newTrip.fragments.AddLocationsFragment"
+        android:label="fragment_add_locations"
+        tools:layout="@layout/fragment_add_locations" >
+        <action
+            android:id="@+id/action_addLocationsFragment_to_addDateTimeFragment"
+            app:destination="@id/addDateTimeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addDateTimeFragment"
+        android:name="com.example.fellowtravellerbeta.ui.newTrip.fragments.AddDateTimeFragment"
+        android:label="fragment_add_date_time"
+        tools:layout="@layout/fragment_add_date_time" >
+        <action
+            android:id="@+id/action_addDateTimeFragment_to_addBaseInfoFragment"
+            app:destination="@id/addBaseInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addBaseInfoFragment"
+        android:name="com.example.fellowtravellerbeta.ui.newTrip.fragments.AddBaseInfoFragment"
+        android:label="fragment_add_base_info"
+        tools:layout="@layout/fragment_add_base_info" >
+        <action
+            android:id="@+id/action_addBaseInfoFragment_to_addPriceFragment"
+            app:destination="@id/addPriceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPriceFragment"
+        android:name="com.example.fellowtravellerbeta.ui.newTrip.fragments.AddPriceFragment"
+        android:label="fragment_add_price"
+        tools:layout="@layout/fragment_add_price" >
+        <action
+            android:id="@+id/action_addPriceFragment_to_addMessageFragment"
+            app:destination="@id/addMessageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addMessageFragment"
+        android:name="com.example.fellowtravellerbeta.ui.newTrip.fragments.AddMessageFragment"
+        android:label="fragment_add_message"
+        tools:layout="@layout/fragment_add_message" >
+        <action
+            android:id="@+id/action_addMessageFragment_to_tripSummaryFragment"
+            app:destination="@id/tripSummaryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tripSummaryFragment"
+        android:name="com.example.fellowtravellerbeta.ui.newTrip.fragments.TripSummaryFragment"
+        android:label="fragment_trip_summary"
+        tools:layout="@layout/fragment_trip_summary" />
+</navigation>

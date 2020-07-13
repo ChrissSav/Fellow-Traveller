@@ -2,6 +2,7 @@ package com.example.fellowtravellerbeta.data.network
 
 import com.example.fellowtravellerbeta.data.network.request.AccountCheckRequest
 import com.example.fellowtravellerbeta.data.network.request.AccountCreateRequest
+import com.example.fellowtravellerbeta.data.network.request.TripCreateRequest
 import com.example.fellowtravellerbeta.data.network.response.StatusHandleResponse
 import com.example.fellowtravellerbeta.data.network.response.UserInfoResponse
 import retrofit2.Call
@@ -23,5 +24,14 @@ interface FellowTravellerApiService {
     suspend fun registerUser(
         @Body request: AccountCreateRequest
     ): Response<UserInfoResponse>
+
+
+
+    @POST("users")
+    suspend fun tripRegister(
+        @Body request: TripCreateRequest
+    ): Response<StatusHandleResponse>
+
+
 
 }

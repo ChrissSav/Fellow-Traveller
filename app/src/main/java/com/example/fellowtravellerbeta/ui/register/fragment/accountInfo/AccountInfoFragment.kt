@@ -28,8 +28,6 @@ class AccountInfoFragment : Fragment() {
     private var navController: NavController? = null
     private lateinit var editTextFirstName: EditText
     private lateinit var editTextLastName: EditText
-    private var access = false
-    private var accessFinal = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -116,7 +114,6 @@ class AccountInfoFragment : Fragment() {
             val lastName = editTextLastName.text.toString()
 
             if (firstName.isNotEmpty() && lastName.isNotEmpty()) {
-                access = true
                 viewModel.storeUserInfo(firstName, lastName)
             } else {
                 createSnackBar(view, resources.getString(R.string.ERROR_FIELDS_REQUIRE))
@@ -124,34 +121,29 @@ class AccountInfoFragment : Fragment() {
 
         }
         viewModel.userInfo.observe(viewLifecycleOwner, Observer {
-            if (access) {
-                access = false
-                if (it != null) {
-                    accessFinal = true
-                    viewModel.registerUserAccount()
-                }
+
+            if (it != null) {
+                viewModel.registerUserAccount()
             }
+
         })
 
 
         viewModel.responseResult.observe(viewLifecycleOwner, Observer {
-            if (accessFinal) {
-                when (it) {
-                    200 -> createSnackBar(
-                        view,
-                        resources.getString(R.string.ERROR_PHONE_ALREADY_EXISTS)
-                    )
-                    201 -> createSnackBar(
-                        view,
-                        resources.getString(R.string.ERROR_EMAIL_ALREADY_EXISTS)
-                    )
-                    else -> createSnackBar(
-                        view,
-                        resources.getString(R.string.ERROR_API_UNREACHABLE)
-                    )
+            when (it) {
+                200 -> createSnackBar(
+                    view,
+                    resources.getString(R.string.ERROR_PHONE_ALREADY_EXISTS)
+                )
+                201 -> createSnackBar(
+                    view,
+                    resources.getString(R.string.ERROR_EMAIL_ALREADY_EXISTS)
+                )
+                else -> createSnackBar(
+                    view,
+                    resources.getString(R.string.ERROR_API_UNREACHABLE)
+                )
 
-                }
-                accessFinal = false
             }
 
 

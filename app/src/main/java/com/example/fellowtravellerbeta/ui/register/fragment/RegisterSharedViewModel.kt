@@ -1,33 +1,32 @@
 package com.example.fellowtravellerbeta.ui.register.fragment
 
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fellowtravellerbeta.data.network.ApiRepository
+import com.example.fellowtravellerbeta.utils.SingleLiveEvent
 import com.example.fellowtravellerbeta.utils.getModelFromResponseErrorBody
 import kotlinx.coroutines.launch
 
 class RegisterSharedViewModel(private val service: ApiRepository) : ViewModel() {
 
 
-    private val _phone = MutableLiveData<String>()
+    private val _phone = SingleLiveEvent<String>()
     val phone: LiveData<String> = _phone
 
-    private val _email = MutableLiveData<String>()
+    private val _email = SingleLiveEvent<String>()
     val email: LiveData<String> = _email
 
 
-    private val _password = MutableLiveData<String>()
+    private val _password = SingleLiveEvent<String>()
     val password: LiveData<String> = _password
 
 
-    private val _userInfo = MutableLiveData<Pair<String, String>>()
+    private val _userInfo = SingleLiveEvent<Pair<String, String>>()
     val userInfo: LiveData<Pair<String, String>> = _userInfo
 
 
-    private val _responseResult = MutableLiveData<Int>()
+    private val _responseResult = SingleLiveEvent<Int>()
     val responseResult: LiveData<Int> = _responseResult
 
 

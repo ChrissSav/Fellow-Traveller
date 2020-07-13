@@ -29,7 +29,6 @@ class SetEmailFragment : Fragment() {
 
     private lateinit var imageButtonNext: ImageButton
     private lateinit var editTextEmail: EditText
-    private var access = false
 
 
     override fun onCreateView(
@@ -80,7 +79,6 @@ class SetEmailFragment : Fragment() {
 
         imageButtonNext.setOnClickListener {
             if (isValidEmail(editTextEmail.text.toString())) {
-                access = true
 
                 registerSharedViewModel.checkUserEmail(editTextEmail.text.toString())
             } else {
@@ -91,16 +89,14 @@ class SetEmailFragment : Fragment() {
         registerSharedViewModel.email.observe(viewLifecycleOwner, Observer {
 
 
-            if (access) {
-                access = false
-                if (it != null) {
-                    navController?.navigate(R.id.action_setEmailFragment_to_setPasswordFragment)
+            if (it != null) {
+                navController?.navigate(R.id.action_setEmailFragment_to_setPasswordFragment)
 
-                } else {
-                    createSnackBar(view, resources.getString(R.string.ERROR_EMAIL_ALREADY_EXISTS))
-                }
-
+            } else {
+                createSnackBar(view, resources.getString(R.string.ERROR_EMAIL_ALREADY_EXISTS))
             }
+
+
         })
 
     }

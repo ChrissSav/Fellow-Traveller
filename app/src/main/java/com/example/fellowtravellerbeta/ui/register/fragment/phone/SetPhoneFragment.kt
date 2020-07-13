@@ -29,7 +29,6 @@ class SetPhoneFragment : Fragment() {
     private lateinit var eraseButton: ImageButton
     private lateinit var imageButtonNext: ImageButton
     private lateinit var editText: EditText
-    private var access = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,7 +79,6 @@ class SetPhoneFragment : Fragment() {
         imageButtonNext.setOnClickListener {
             if (isValidPhone(editText.text.toString())) {
                 registerSharedViewModel.checkUserPhone(editText.text.toString())
-                access = true
             } else {
                 createSnackBar(view, resources.getString(R.string.INVALID_PHONE_FORMAT))
             }
@@ -88,15 +86,13 @@ class SetPhoneFragment : Fragment() {
 
         registerSharedViewModel.phone.observe(viewLifecycleOwner, Observer {
 
-            if (access) {
-                access = false
-                if (it != null) {
-                    navController?.navigate(R.id.action_setPhoneFragment_to_setEmailFragment)
+            if (it != null) {
+                navController?.navigate(R.id.action_setPhoneFragment_to_setEmailFragment)
 
-                } else {
-                    createSnackBar(view, resources.getString(R.string.ERROR_PHONE_ALREADY_EXISTS))
-                }
+            } else {
+                createSnackBar(view, resources.getString(R.string.ERROR_PHONE_ALREADY_EXISTS))
             }
+
         })
     }
 }

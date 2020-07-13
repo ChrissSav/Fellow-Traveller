@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.newTrip.fragments.AddBaseInfoFragment">
+
+
+    <ImageButton
+        android:id="@+id/imageButton_back"
+        style="@style/border_icon_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/image_button_layout_marginStart"
+        android:layout_marginTop="@dimen/image_button_layout_marginTop"
+        android:src="@drawable/ic_back_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
+        android:layout_marginTop="@dimen/margin_top_of_back_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton_back"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:paddingBottom="45dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/AddBaseInfoFragment_textView2">
+
+            <TextView
+                android:id="@+id/AddBaseInfoFragment_textView2"
+                style="@style/display"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="Καθόρισε τα στοιχεία του ταξιδιού"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/AddBaseInfoFragment_textView"
+                style="@style/header2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="30dp"
+                android:text="Αμάξι"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/AddBaseInfoFragment_textView2" />
+
+            <TextView
+                android:id="@+id/AddBaseInfoFragment_textView6"
+                style="@style/paragraph1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="Επιλέξτε αμάξι για το ταξίδι σας"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/AddBaseInfoFragment_textView"
+                app:layout_constraintTop_toBottomOf="@+id/AddBaseInfoFragment_textView" />
+
+            <Button
+                android:id="@+id/AddBaseInfoFragment_button_car"
+                style="@style/button_outline_blue_with_left_drawable"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="16dp"
+                android:drawableStart="@drawable/ic_car"
+                android:drawableTint="@color/black_color"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="Διάλεξε αυτοκίνητο ..."
+                android:textColor="#9E9E9E"
+                app:layout_constraintEnd_toEndOf="@+id/AddBaseInfoFragment_textView6"
+                app:layout_constraintStart_toStartOf="@+id/AddBaseInfoFragment_textView6"
+                app:layout_constraintTop_toBottomOf="@+id/AddBaseInfoFragment_textView6" />
+
+            <TextView
+                android:id="@+id/AddBaseInfoFragment_textView7"
+                style="@style/header2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:text="Θέσεις"
+                app:layout_constraintStart_toStartOf="@+id/AddBaseInfoFragment_textView6"
+                app:layout_constraintTop_toBottomOf="@+id/AddBaseInfoFragment_button_car" />
+
+            <TextView
+                android:id="@+id/AddBaseInfoFragment_textView8"
+                style="@style/paragraph1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Εισάγετε τον αριθμό των ελεύθερων θέσεων που θέλετε να μοιραστείτε"
+                app:layout_constraintEnd_toEndOf="@+id/AddBaseInfoFragment_seats_increase_section"
+                app:layout_constraintStart_toStartOf="@+id/AddBaseInfoFragment_textView7"
+                app:layout_constraintTop_toBottomOf="@+id/AddBaseInfoFragment_seats_increase_section" />
+
+            <TextView
+                android:id="@+id/AddBaseInfoFragment_textView10"
+                style="@style/header2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:text="Κατοικίδια"
+                app:layout_constraintStart_toStartOf="@+id/AddBaseInfoFragment_textView6v"
+                app:layout_constraintTop_toBottomOf="@+id/AddBaseInfoFragment_textView6v" />
+
+            <TextView
+                android:id="@+id/AddBaseInfoFragment_textView11"
+                style="@style/paragraph1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:text="Επιτρέπεται κατοικίδια ή όχι;"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/AddBaseInfoFragment_textView10"
+                app:layout_constraintTop_toBottomOf="@+id/AddBaseInfoFragment_switch_pet" />
+
+            <TextView
+                android:id="@+id/AddBaseInfoFragment_textView_2"
+                style="@style/header2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:text="Αποσκεύες"
+                app:layout_constraintStart_toStartOf="@+id/AddBaseInfoFragment_textView8"
+                app:layout_constraintTop_toBottomOf="@+id/AddBaseInfoFragment_textView8" />
+
+            <TextView
+                android:id="@+id/AddBaseInfoFragment_textView6v"
+                style="@style/paragraph1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Εισάγετε τον αριθμό για τις αποσκευές των επιβατών"
+                app:layout_constraintEnd_toEndOf="@+id/AddBaseInfoFragment_bags_increase_section"
+                app:layout_constraintStart_toStartOf="@+id/AddBaseInfoFragment_textView_2"
+                app:layout_constraintTop_toBottomOf="@+id/AddBaseInfoFragment_bags_increase_section" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/AddBaseInfoFragment_seats_increase_section"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/increaser_border_stroke_shape_1"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/AddBaseInfoFragment_textView7"
+                app:layout_constraintEnd_toEndOf="@+id/AddBaseInfoFragment_button_car"
+                app:layout_constraintTop_toTopOf="@+id/AddBaseInfoFragment_textView7">
+
+                <ImageButton
+                    android:id="@+id/AddBaseInfoFragment_minus_button_seats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_minus_1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/AddBaseInfoFragment_seats_value_tv"
+                    style="@style/input"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/AddBaseInfoFragment_plus_button_seats"
+                    app:layout_constraintStart_toStartOf="@id/AddBaseInfoFragment_minus_button_seats"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/AddBaseInfoFragment_plus_button_seats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_plus"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/AddBaseInfoFragment_bags_increase_section"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/increaser_border_stroke_shape_1"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/AddBaseInfoFragment_textView_2"
+                app:layout_constraintEnd_toEndOf="@+id/AddBaseInfoFragment_button_car"
+                app:layout_constraintTop_toTopOf="@+id/AddBaseInfoFragment_textView_2">
+
+                <ImageButton
+                    android:id="@+id/AddBaseInfoFragment_minus_button_bags"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_minus_1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/AddBaseInfoFragment_bags_value_tv"
+                    style="@style/input"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/AddBaseInfoFragment_plus_button_bags"
+                    app:layout_constraintStart_toStartOf="@id/AddBaseInfoFragment_minus_button_bags"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/AddBaseInfoFragment_plus_button_bags"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_plus"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Switch
+                android:id="@+id/AddBaseInfoFragment_switch_pet"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginEnd="2dp"
+                android:background="@null"
+                android:checked="false"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:switchPadding="10dp"
+                android:text="Switch"
+                android:thumb="@drawable/switch_thumb_test"
+                android:track="@drawable/switch_tracker_blue"
+                app:layout_constraintBottom_toBottomOf="@+id/AddBaseInfoFragment_textView10"
+                app:layout_constraintEnd_toEndOf="@+id/AddBaseInfoFragment_bags_increase_section"
+                app:layout_constraintTop_toTopOf="@+id/AddBaseInfoFragment_textView10" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/AddBaseInfoFragment_button_next"
+        android:layout_width="@dimen/float_action_button_width"
+        android:layout_height="@dimen/float_action_button_height"
+        android:layout_marginEnd="@dimen/float_action_button_margin_right"
+        android:layout_marginBottom="@dimen/float_action_button_margin_bottom"
+        android:background="@drawable/circle_button_shape"
+        android:backgroundTint="@color/blue_color"
+        android:elevation="2dp"
+        android:padding="15dp"
+        android:rotation="180"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_back_button"
+        android:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
