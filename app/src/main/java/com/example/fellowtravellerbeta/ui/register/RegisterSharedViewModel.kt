@@ -3,7 +3,7 @@ package com.example.fellowtravellerbeta.ui.register
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.fellowtravellerbeta.data.network.ApiRepository
+import com.example.fellowtravellerbeta.data.network.fellow.ApiRepository
 import com.example.fellowtravellerbeta.utils.SingleLiveEvent
 import com.example.fellowtravellerbeta.utils.getModelFromResponseErrorBody
 import kotlinx.coroutines.launch

@@ -98,7 +98,7 @@
 
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <ImageButton
         android:id="@+id/AddLocationsFragment_button_next"
         android:layout_width="@dimen/float_action_button_width"
         android:layout_height="@dimen/float_action_button_height"

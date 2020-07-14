@@ -2,10 +2,9 @@ package com.example.fellowtravellerbeta.utils
 
 import android.util.Patterns
 import android.view.View
-import androidx.recyclerview.widget.AsyncListDiffer
 import com.example.fellowtravellerbeta.R
-import com.example.fellowtravellerbeta.data.network.response.DetailResponse
-import com.example.fellowtravellerbeta.data.network.response.ErrorResponseModel
+import com.example.fellowtravellerbeta.data.network.fellow.response.DetailResponse
+import com.example.fellowtravellerbeta.data.network.fellow.response.ErrorResponseModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.JsonParser

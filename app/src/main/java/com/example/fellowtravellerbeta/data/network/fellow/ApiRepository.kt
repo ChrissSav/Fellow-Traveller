@@ -1,29 +1,10 @@
-package com.example.fellowtravellerbeta.data.network
+package com.example.fellowtravellerbeta.data.network.fellow
 
-import com.example.fellowtravellerbeta.data.network.request.AccountCheckRequest
-import com.example.fellowtravellerbeta.data.network.request.AccountCreateRequest
-import com.example.fellowtravellerbeta.data.network.response.StatusHandleResponse
-import com.example.fellowtravellerbeta.data.network.response.UserInfoResponse
+import com.example.fellowtravellerbeta.data.network.fellow.request.AccountCheckRequest
+import com.example.fellowtravellerbeta.data.network.fellow.request.AccountCreateRequest
+import com.example.fellowtravellerbeta.data.network.fellow.response.StatusHandleResponse
+import com.example.fellowtravellerbeta.data.network.fellow.response.UserInfoResponse
 import retrofit2.Response
-
-//interface ApiRepository {
-//
-//    suspend fun checkUserPhone(phone: String): Response<StatusHandleResponse>
-//    suspend fun checkUserEmail(phone: String): Response<StatusHandleResponse>
-//    suspend fun createAccount(
-//        firstName: String,
-//        lastName: String,
-//        email: String,
-//        password: String,
-//        phone: String
-//    ): Response<UserInfoResponse>
-//
-//
-//    suspend fun cre(phone: String): Response<StatusHandleResponse>
-//
-//
-//}
-
 
 class ApiRepository(
     private val service: FellowTravellerApiService

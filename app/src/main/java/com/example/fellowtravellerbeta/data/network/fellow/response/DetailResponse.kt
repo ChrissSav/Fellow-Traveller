@@ -1,4 +1,4 @@
-package com.example.fellowtravellerbeta.data.network.response
+package com.example.fellowtravellerbeta.data.network.fellow.response
 
 import com.google.gson.annotations.SerializedName
 

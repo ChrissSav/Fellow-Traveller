@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_new_trip"
-    app:startDestination="@id/addDateTimeFragment">
+    app:startDestination="@id/addLocationsFragment">
 
     <fragment
         android:id="@+id/addLocationsFragment"
@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_add_locations" >
         <action
             android:id="@+id/action_addLocationsFragment_to_addDateTimeFragment"
-            app:destination="@id/addDateTimeFragment" />
+            app:destination="@id/addDateTimeFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/addDateTimeFragment"
@@ -21,7 +25,11 @@
         tools:layout="@layout/fragment_add_date_time" >
         <action
             android:id="@+id/action_addDateTimeFragment_to_addBaseInfoFragment"
-            app:destination="@id/addBaseInfoFragment" />
+            app:destination="@id/addBaseInfoFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/addBaseInfoFragment"
@@ -30,7 +38,11 @@
         tools:layout="@layout/fragment_add_base_info" >
         <action
             android:id="@+id/action_addBaseInfoFragment_to_addPriceFragment"
-            app:destination="@id/addPriceFragment" />
+            app:destination="@id/addPriceFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/addPriceFragment"
@@ -39,7 +51,11 @@
         tools:layout="@layout/fragment_add_price" >
         <action
             android:id="@+id/action_addPriceFragment_to_addMessageFragment"
-            app:destination="@id/addMessageFragment" />
+            app:destination="@id/addMessageFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/addMessageFragment"
@@ -48,7 +64,11 @@
         tools:layout="@layout/fragment_add_message" >
         <action
             android:id="@+id/action_addMessageFragment_to_tripSummaryFragment"
-            app:destination="@id/tripSummaryFragment" />
+            app:destination="@id/tripSummaryFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/tripSummaryFragment"

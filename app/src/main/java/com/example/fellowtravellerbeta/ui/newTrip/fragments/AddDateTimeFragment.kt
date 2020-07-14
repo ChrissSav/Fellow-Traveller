@@ -8,6 +8,8 @@ import android.widget.Button
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.example.fellowtravellerbeta.R
 import com.example.fellowtravellerbeta.ui.dialogs.DatePickerCustomDialog
 import com.example.fellowtravellerbeta.ui.dialogs.TimePickerCustomDialog
@@ -26,6 +28,7 @@ class AddDateTimeFragment : Fragment() {
     private lateinit var backButton: ImageButton
     private lateinit var dateDialog: DatePickerCustomDialog
     private lateinit var timeDialog: TimePickerCustomDialog
+    private lateinit var navController: NavController
 
     private val viewModel: NewTripViewModel by inject()
 
@@ -38,6 +41,7 @@ class AddDateTimeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
 
 
         dateButton = view.findViewById(R.id.AddDateTimeFragment_button_date)
@@ -47,11 +51,11 @@ class AddDateTimeFragment : Fragment() {
 
 
         if (viewModel.date.value != null) {
-            dateButton.text = viewModel.date.toString()
+            dateButton.text = viewModel.date.value.toString()
             dateButton.setTextColor(resources.getColor(R.color.button_fill_color))
         }
         if (viewModel.time.value != null) {
-            timeButton.text = viewModel.date.toString()
+            timeButton.text = viewModel.time.value.toString()
             timeButton.setTextColor(resources.getColor(R.color.button_fill_color))
         }
 
@@ -91,8 +95,8 @@ class AddDateTimeFragment : Fragment() {
         })
 
         nextButton.setOnClickListener {
-            if(validateDateTimeDiffer(dateButton.text.toString(), timeButton.text.toString(), resources.getInteger(R.integer.Time_difference))){
-
+            if(validateDateTimeDiffer( viewModel.date.value.toString(),  viewModel.time.value.toString(), resources.getInteger(R.integer.Time_difference))){
+                navController.navigate(R.id.action_addDateTimeFragment_to_addBaseInfoFragment)
             }else{
                 createSnackBar(view,resources.getString(R.string.ERROR_TRIP_TIMESTAMP))
             }
