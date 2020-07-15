@@ -7,6 +7,44 @@
     tools:context=".ui.newTrip.NewTripActivity">
 
 
+    <ImageButton
+        android:id="@+id/imageButton_back"
+        style="@style/border_icon_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:src="@drawable/ic_back_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton_exit"
+        style="@style/border_icon_button"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageButton_back" />
+
+
+    <TextView
+        android:id="@+id/NewTripActivity_textView_label"
+        style="@style/display"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Επισκοπηση"
+        android:textAlignment="center"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton_back"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton_exit"
+        app:layout_constraintStart_toEndOf="@+id/imageButton_back"
+        app:layout_constraintTop_toTopOf="@+id/imageButton_back" />
+
     <ProgressBar
         android:id="@+id/NewTripActivity_progressBar"
         style="@style/CustomProgressBar"
@@ -24,24 +62,14 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NewTripActivity_progressBar"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton_back"
         app:navGraph="@navigation/nav_graph_new_trip" />
 
-
-    <TextView
-        android:id="@+id/NewTripActivity_textView_stage_6"
-        style="@style/display"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Επισκοπηση"
-        android:textAlignment="center"
-        android:visibility="gone"
-        tools:layout_editor_absoluteX="343dp"
-        tools:layout_editor_absoluteY="43dp" />
 
 
 

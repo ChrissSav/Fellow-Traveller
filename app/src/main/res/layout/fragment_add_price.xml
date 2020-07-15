@@ -7,29 +7,17 @@
     tools:context=".ui.newTrip.fragments.AddPriceFragment">
 
 
-    <ImageButton
-        android:id="@+id/imageButton_back"
-        style="@style/border_icon_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/image_button_layout_marginStart"
-        android:layout_marginTop="@dimen/image_button_layout_marginTop"
-        android:src="@drawable/ic_back_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/AddPriceFragment_textView1"
         style="@style/display"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_top_of_back_button"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:text="Όρισε την τιμή"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton_back" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/AddPriceFragment_textView"
@@ -116,7 +104,7 @@
 
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <ImageButton
         android:id="@+id/AddPriceFragment_button_next"
         android:layout_width="@dimen/float_action_button_width"
         android:layout_height="@dimen/float_action_button_height"

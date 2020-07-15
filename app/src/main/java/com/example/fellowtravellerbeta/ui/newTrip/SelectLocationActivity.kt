@@ -25,6 +25,8 @@ class SelectLocationActivity : AppCompatActivity() {
     private var placesList: ArrayList<PredictionResponse> = ArrayList()
     private lateinit var editText: EditText
     private lateinit var buttonBack: ImageButton
+
+
     private val viewModel: NewTripViewModel by inject()
 
 
@@ -32,7 +34,7 @@ class SelectLocationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_location)
 
-
+        buttonBack = findViewById(R.id.SelectLocationActivity_back_button_search)
         mRecyclerView = findViewById(R.id.SelectLocationActivity_RecyclerView)
         editText = findViewById(R.id.SelectLocationActivity_EditText_search_place)
         editText.requestFocus();
@@ -61,6 +63,10 @@ class SelectLocationActivity : AppCompatActivity() {
             }
 
         })
+
+        buttonBack.setOnClickListener {
+            finish()
+        }
         initializeRecycle()
     }
 

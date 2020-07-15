@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.newTrip.fragments.AddMessageFragment">
 
-    <ImageButton
-        android:id="@+id/imageButton_back"
-        style="@style/border_icon_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/image_button_layout_marginStart"
-        android:layout_marginTop="@dimen/image_button_layout_marginTop"
-        android:src="@drawable/ic_back_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/AddMessageFragment_textView1"
@@ -24,12 +13,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="@dimen/margin_top_of_back_button"
         android:layout_marginEnd="16dp"
         android:text="Γράψε ένα μήνυμα στους συνταξιδιώτες σου"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton_back" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/AddMessageFragment_textView2"
@@ -90,7 +78,7 @@
         app:layout_constraintTop_toBottomOf="@+id/AddMessageFragment_editText" />
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <ImageButton
         android:id="@+id/AddMessageFragment_button_next"
         android:layout_width="@dimen/float_action_button_width"
         android:layout_height="@dimen/float_action_button_height"

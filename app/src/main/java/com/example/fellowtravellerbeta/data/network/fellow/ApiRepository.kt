@@ -4,6 +4,7 @@ import com.example.fellowtravellerbeta.data.network.fellow.request.AccountCheckR
 import com.example.fellowtravellerbeta.data.network.fellow.request.AccountCreateRequest
 import com.example.fellowtravellerbeta.data.network.fellow.response.StatusHandleResponse
 import com.example.fellowtravellerbeta.data.network.fellow.response.UserInfoResponse
+import com.example.fellowtravellerbeta.utils.performCall
 import retrofit2.Response
 
 class ApiRepository(
@@ -14,12 +15,16 @@ class ApiRepository(
 
     suspend fun checkUserPhone(phone: String): Response<StatusHandleResponse> {
         val requestBody = AccountCheckRequest("phone", phone)
-        return service.checkIfAccountInfoExist(requestBody)
+        return performCall {
+             service.checkIfAccountInfoExist(requestBody)
+        }
     }
 
     suspend fun checkUserEmail(email: String): Response<StatusHandleResponse> {
         val requestBody = AccountCheckRequest("email", email)
-        return service.checkIfAccountInfoExist(requestBody)
+        return performCall {
+         service.checkIfAccountInfoExist(requestBody)
+        }
     }
 
     suspend fun createAccount(
@@ -30,7 +35,10 @@ class ApiRepository(
         phone: String
     ): Response<UserInfoResponse> {
         val requestBody = AccountCreateRequest(firstName, lastName, email, password, phone)
-        return service.registerUser(requestBody)
+
+        return performCall {
+            service.registerUser(requestBody)
+        }
     }
 
 }

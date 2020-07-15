@@ -20,6 +20,7 @@ class RegisterActivity : AppCompatActivity() {
 
         registerSharedViewModel.clearAll()
         nav = Navigation.findNavController(this, R.id.RegisterActivity_nav_host)
+
         progressBar = findViewById(R.id.RegisterActivity_progressBar)
         nav.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {

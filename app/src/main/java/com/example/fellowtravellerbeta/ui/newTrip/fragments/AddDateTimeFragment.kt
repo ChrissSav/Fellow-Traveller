@@ -25,7 +25,6 @@ class AddDateTimeFragment : Fragment() {
     private lateinit var dateButton: Button
     private lateinit var timeButton: Button
     private lateinit var nextButton: ImageButton
-    private lateinit var backButton: ImageButton
     private lateinit var dateDialog: DatePickerCustomDialog
     private lateinit var timeDialog: TimePickerCustomDialog
     private lateinit var navController: NavController
@@ -47,7 +46,6 @@ class AddDateTimeFragment : Fragment() {
         dateButton = view.findViewById(R.id.AddDateTimeFragment_button_date)
         timeButton = view.findViewById(R.id.AddDateTimeFragment_button_time)
         nextButton = view.findViewById(R.id.AddDateTimeFragment_button_next)
-        backButton = view.findViewById(R.id.imageButton_back)
 
 
         if (viewModel.date.value != null) {
@@ -101,9 +99,7 @@ class AddDateTimeFragment : Fragment() {
                 createSnackBar(view,resources.getString(R.string.ERROR_TRIP_TIMESTAMP))
             }
         }
-        backButton.setOnClickListener {
-            activity?.onBackPressed()
-        }
+
     }
 
 
