@@ -1,5 +1,6 @@
 package com.example.fellowtravellerbeta.ui.newTrip.fragments
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,15 +16,15 @@ import com.example.fellowtravellerbeta.R
 import com.example.fellowtravellerbeta.ui.newTrip.NewTripViewModel
 import com.example.fellowtravellerbeta.ui.newTrip.SelectLocationActivity
 import com.example.fellowtravellerbeta.utils.createSnackBar
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
-class AddLocationsFragment : Fragment() {
+class LocationsFragment : Fragment() {
 
     private lateinit var buttonFrom: Button
     private lateinit var buttonTo: Button
     private lateinit var buttonNext: ImageButton
-    private val viewModel: NewTripViewModel by inject()
+    private val viewModel: NewTripViewModel by sharedViewModel()
     private lateinit var navController: NavController
 
 
@@ -53,16 +54,17 @@ class AddLocationsFragment : Fragment() {
             buttonTo.setTextColor(resources.getColor(R.color.button_fill_color))
         }
 
-        buttonTo.setOnClickListener {
-            val intent = Intent(activity, SelectLocationActivity::class.java)
-            intent.putExtra("destination","to")
-            startActivityForResult(intent, 1)
-        }
+
         buttonFrom.setOnClickListener {
             val intent = Intent(activity, SelectLocationActivity::class.java)
-            intent.putExtra("destination","from")
             startActivityForResult(intent, 1)
         }
+
+        buttonTo.setOnClickListener {
+            val intent = Intent(activity, SelectLocationActivity::class.java)
+            startActivityForResult(intent, 2)
+        }
+
 
 
         viewModel.destinationFrom.observe(viewLifecycleOwner, Observer {
@@ -79,13 +81,16 @@ class AddLocationsFragment : Fragment() {
 
         buttonNext.setOnClickListener {
 
-            if (viewModel.destinationFrom.value == null) {
-                createSnackBar(view, "Παρακαλώ επιλέξτε σημείο αφετηρίας")
-            }
-            else if (viewModel.destinationTo.value == null) {
-                createSnackBar(view, "Παρακαλώ επιλέξτε σημείο προορισμού")
-            }else{
-                navController.navigate(R.id.action_addLocationsFragment_to_addDateTimeFragment)
+            when {
+                viewModel.destinationFrom.value == null -> {
+                    createSnackBar(view, "Παρακαλώ επιλέξτε σημείο αφετηρίας")
+                }
+                viewModel.destinationTo.value == null -> {
+                    createSnackBar(view, "Παρακαλώ επιλέξτε σημείο προορισμού")
+                }
+                else -> {
+                    navController.navigate(R.id.action_addLocationsFragment_to_pickUpPointFragment)
+                }
             }
 
         }
@@ -93,5 +98,25 @@ class AddLocationsFragment : Fragment() {
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                val title = data?.getStringExtra("title").toString()
+                val id = data?.getStringExtra("id").toString()
+                viewModel.setDestinationFrom(id, title)
+            }
+
+        } else if (requestCode == 2) {
+            if (resultCode == Activity.RESULT_OK) {
+                val title = data?.getStringExtra("title").toString()
+                val id = data?.getStringExtra("id").toString()
+                viewModel.setDestinationTo(id, title)
+
+            }
+
+        }
+    }
 
 }

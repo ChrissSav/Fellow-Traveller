@@ -10,6 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.fellowtravellerbeta.R
 import com.example.fellowtravellerbeta.ui.dialogs.ExitCustomDialog
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogListener {
 
@@ -20,6 +21,7 @@ class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogLi
     private lateinit var progressBar: ProgressBar
     private lateinit var exampleDialog: ExitCustomDialog
 
+    private val viewModel: NewTripViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +33,9 @@ class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogLi
         labelSummary = findViewById(R.id.NewTripActivity_textView_label)
         progressBar = findViewById(R.id.NewTripActivity_progressBar)
 
-
+        backButton.setOnClickListener {
+            onBackPressed()
+        }
         nav = Navigation.findNavController(this, R.id.RegisterActivity_nav_host)
 
         exitButton.setOnClickListener {
@@ -40,16 +44,17 @@ class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogLi
 
         nav.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.addLocationsFragment -> progressBar.progress = 16
-                R.id.addDateTimeFragment -> progressBar.progress = 33
-                R.id.addBaseInfoFragment -> progressBar.progress = 48
-                R.id.addPriceFragment -> progressBar.progress = 64
+                R.id.addLocationsFragment -> progressBar.progress = 14
+                R.id.pickUpPointFragment -> progressBar.progress = 28
+                R.id.addDateTimeFragment -> progressBar.progress = 42
+                R.id.addBaseInfoFragment -> progressBar.progress = 56
+                R.id.addPriceFragment -> progressBar.progress = 70
                 R.id.addMessageFragment -> {
-                    progressBar.progress = 80
+                    progressBar.progress = 84
                     labelSummary.visibility = View.INVISIBLE
                 }
                 R.id.tripSummaryFragment -> {
-                    progressBar.progress = 96
+                    progressBar.progress = 95
                     labelSummary.visibility = View.VISIBLE
                 }
             }
@@ -64,7 +69,7 @@ class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogLi
 
     override fun exitFrom(exit: Boolean) {
         exampleDialog.dismiss()
-        if(exit)
+        if (exit)
             finish()
     }
 

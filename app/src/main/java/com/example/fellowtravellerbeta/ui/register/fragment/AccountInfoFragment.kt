@@ -1,4 +1,4 @@
-package com.example.fellowtravellerbeta.ui.register.fragment.accountInfo
+package com.example.fellowtravellerbeta.ui.register.fragment
 
 import android.os.Bundle
 import android.text.Editable
@@ -14,7 +14,7 @@ import androidx.navigation.NavController
 import com.example.fellowtravellerbeta.R
 import com.example.fellowtravellerbeta.ui.register.RegisterSharedViewModel
 import com.example.fellowtravellerbeta.utils.createSnackBar
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class AccountInfoFragment : Fragment() {
 
@@ -22,8 +22,7 @@ class AccountInfoFragment : Fragment() {
     private lateinit var imageButtonNext: ImageButton
     private lateinit var imageButtonEraseFirstName: ImageButton
     private lateinit var imageButtonEraseLastName: ImageButton
-
-    private val viewModel: RegisterSharedViewModel by inject()
+    private val viewModel: RegisterSharedViewModel by sharedViewModel()
     private var navController: NavController? = null
     private lateinit var editTextFirstName: EditText
     private lateinit var editTextLastName: EditText
@@ -114,18 +113,28 @@ class AccountInfoFragment : Fragment() {
 
             if (firstName.isNotEmpty() && lastName.isNotEmpty()) {
                 viewModel.storeUserInfo(firstName, lastName)
+
+
+
             } else {
                 createSnackBar(view, resources.getString(R.string.ERROR_FIELDS_REQUIRE))
             }
 
         }
+
+
         viewModel.userInfo.observe(viewLifecycleOwner, Observer {
+            val test = "Phone : ${ viewModel.phone.value.toString()} \nEmail : ${viewModel.email.value.toString()} \n Password: ${viewModel.password.value.toString()} \n F: ${viewModel.userInfo.value?.first.toString()} \nL : ${viewModel.userInfo.value?.second.toString()} \n"
+            createSnackBar(view,test)
+        })
+
+        /*viewModel.userInfo.observe(viewLifecycleOwner, Observer {
 
             if (it != null) {
                 viewModel.registerUserAccount()
             }
 
-        })
+        })*/
 
 
         viewModel.responseResult.observe(viewLifecycleOwner, Observer {

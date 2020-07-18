@@ -1,4 +1,4 @@
-package com.example.fellowtravellerbeta.ui.register.fragment.password
+package com.example.fellowtravellerbeta.ui.register.fragment
 
 import android.os.Bundle
 import android.text.Editable
@@ -17,7 +17,7 @@ import androidx.navigation.Navigation
 import com.example.fellowtravellerbeta.R
 import com.example.fellowtravellerbeta.ui.register.RegisterSharedViewModel
 import com.example.fellowtravellerbeta.utils.createSnackBar
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class SetPasswordFragment : Fragment() {
@@ -25,7 +25,7 @@ class SetPasswordFragment : Fragment() {
 
     private lateinit var imageButtonBack: ImageButton
     private lateinit var imageButtonNext: ImageButton
-    private val viewModel: RegisterSharedViewModel by inject()
+    private val viewModel: RegisterSharedViewModel by sharedViewModel()
     private var navController: NavController? = null
     private lateinit var editTextPassword: EditText
     private lateinit var editTextPasswordConfirm: EditText

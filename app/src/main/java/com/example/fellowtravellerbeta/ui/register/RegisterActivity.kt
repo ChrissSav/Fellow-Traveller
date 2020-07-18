@@ -7,18 +7,20 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.fellowtravellerbeta.R
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegisterActivity : AppCompatActivity() {
 
-    private val registerSharedViewModel: RegisterSharedViewModel by inject()
+    private val registerSharedViewModel: RegisterSharedViewModel by viewModel()
     private lateinit var nav: NavController
     private lateinit var progressBar: ProgressBar
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
 
-        registerSharedViewModel.clearAll()
         nav = Navigation.findNavController(this, R.id.RegisterActivity_nav_host)
 
         progressBar = findViewById(R.id.RegisterActivity_progressBar)

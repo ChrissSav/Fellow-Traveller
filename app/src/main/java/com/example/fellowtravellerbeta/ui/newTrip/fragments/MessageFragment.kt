@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.example.fellowtravellerbeta.R
 
 
-class AddMessageFragment : Fragment() {
+class MessageFragment : Fragment() {
 
 
     override fun onCreateView(

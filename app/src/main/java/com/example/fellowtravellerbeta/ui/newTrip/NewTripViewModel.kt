@@ -21,6 +21,9 @@ class NewTripViewModel(private val service: PlaceApiRepository) : ViewModel() {
     private val _destinationTo = SingleLiveEvent<DestinationModel>()
     val destinationTo: LiveData<DestinationModel> = _destinationTo
 
+    private val _destinationPickUp = SingleLiveEvent<DestinationModel>()
+    val destinationPickUp: LiveData<DestinationModel> = _destinationPickUp
+
     private val _date = SingleLiveEvent<String>()
     val date: LiveData<String> = _date
 
@@ -75,6 +78,13 @@ class NewTripViewModel(private val service: PlaceApiRepository) : ViewModel() {
     fun setDestinationTo(id: String, title: String) {
         viewModelScope.launch {
             _destinationTo.value = DestinationModel(id, title)
+
+        }
+    }
+
+    fun setDestinationPickUp(id: String, title: String) {
+        viewModelScope.launch {
+            _destinationPickUp.value = DestinationModel(id, title)
 
         }
     }

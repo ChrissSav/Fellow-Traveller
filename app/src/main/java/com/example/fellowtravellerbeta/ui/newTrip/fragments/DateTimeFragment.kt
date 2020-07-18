@@ -18,9 +18,10 @@ import com.example.fellowtravellerbeta.utils.createSnackBar
 import com.example.fellowtravellerbeta.utils.validateDateTimeDiffer
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
-class AddDateTimeFragment : Fragment() {
+class DateTimeFragment : Fragment() {
 
     private lateinit var dateButton: Button
     private lateinit var timeButton: Button
@@ -29,7 +30,7 @@ class AddDateTimeFragment : Fragment() {
     private lateinit var timeDialog: TimePickerCustomDialog
     private lateinit var navController: NavController
 
-    private val viewModel: NewTripViewModel by inject()
+    private val viewModel: NewTripViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

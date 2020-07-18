@@ -1,4 +1,4 @@
-package com.example.fellowtravellerbeta.ui.register.fragment.phone
+package com.example.fellowtravellerbeta.ui.register.fragment
 
 import android.os.Bundle
 import android.text.Editable
@@ -15,50 +15,49 @@ import androidx.navigation.Navigation
 import com.example.fellowtravellerbeta.R
 import com.example.fellowtravellerbeta.ui.register.RegisterSharedViewModel
 import com.example.fellowtravellerbeta.utils.createSnackBar
-import com.example.fellowtravellerbeta.utils.isValidPhone
-import org.koin.android.ext.android.inject
-
-class SetPhoneFragment : Fragment() {
-    private val registerSharedViewModel: RegisterSharedViewModel by inject()
+import com.example.fellowtravellerbeta.utils.isValidEmail
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
-    private var navController: NavController? = null
+class SetEmailFragment : Fragment() {
+
+    private val registerSharedViewModel: RegisterSharedViewModel by sharedViewModel()
+    private lateinit var navController: NavController
+
     private lateinit var imageButtonBack: ImageButton
-
     private lateinit var eraseButton: ImageButton
+
     private lateinit var imageButtonNext: ImageButton
-    private lateinit var editText: EditText
+    private lateinit var editTextEmail: EditText
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_set_phone, container, false)
+        return inflater.inflate(R.layout.fragment_set_email, container, false)
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         navController = Navigation.findNavController(view)
-        eraseButton = view.findViewById(R.id.SetPhoneFragment_erase_button)
 
-        editText = view.findViewById(R.id.SetPhoneFragment_number_editText)
-        imageButtonNext = view.findViewById(R.id.SetPhoneFragment_button_next)
+
+        editTextEmail = view.findViewById(R.id.SetEmailFragment_email_editText)
+        imageButtonNext = view.findViewById(R.id.SetEmailFragment_button_next)
         imageButtonBack = view.findViewById(R.id.imageButton_back)
+        eraseButton = view.findViewById(R.id.SetEmailFragment_email_eraseButton)
 
-        editText.setText(registerSharedViewModel.phone.value)
-
+        editTextEmail.setText(registerSharedViewModel.email.value)
 
         imageButtonBack.setOnClickListener {
             activity?.onBackPressed()
         }
-        eraseButton.setOnClickListener {
-            editText.text = null
-        }
 
-        editText.addTextChangedListener(object : TextWatcher {
+
+        editTextEmail.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 if (s.toString().trim().isNotEmpty())
                     eraseButton.visibility = View.VISIBLE
@@ -75,23 +74,33 @@ class SetPhoneFragment : Fragment() {
             }
         })
 
+        eraseButton.setOnClickListener {
+            editTextEmail.text = null
+        }
+
         imageButtonNext.setOnClickListener {
-            if (isValidPhone(editText.text.toString())) {
-                registerSharedViewModel.checkUserPhone(editText.text.toString())
+            if (isValidEmail(editTextEmail.text.toString())) {
+
+                registerSharedViewModel.checkUserEmail(editTextEmail.text.toString())
+
             } else {
-                createSnackBar(view, resources.getString(R.string.INVALID_PHONE_FORMAT))
+                createSnackBar(view, resources.getString(R.string.ERROR_INVALID_EMAIL_FORMAT))
             }
         }
 
-        registerSharedViewModel.phone.observe(viewLifecycleOwner, Observer {
+
+        registerSharedViewModel.email.observe(viewLifecycleOwner, Observer {
+
 
             if (it != null) {
-                navController?.navigate(R.id.action_setPhoneFragment_to_setEmailFragment)
+                navController?.navigate(R.id.action_setEmailFragment_to_setPasswordFragment)
 
             } else {
-                createSnackBar(view, resources.getString(R.string.ERROR_PHONE_ALREADY_EXISTS))
+                createSnackBar(view, resources.getString(R.string.ERROR_EMAIL_ALREADY_EXISTS))
             }
 
+
         })
+
     }
 }

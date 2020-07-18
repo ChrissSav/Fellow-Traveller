@@ -78,14 +78,6 @@ class RegisterSharedViewModel(private val service: ApiRepository) : ViewModel() 
     }
 
 
-    fun clearAll() {
-        _email.value = null
-        _phone.value = null
-        _password.value = null
-        _userInfo.value = null
-    }
-
-
     fun registerUserAccount() {
         viewModelScope.launch {
 

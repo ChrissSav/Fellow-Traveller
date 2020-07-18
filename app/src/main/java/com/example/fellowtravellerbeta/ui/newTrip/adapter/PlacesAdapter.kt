@@ -1,4 +1,4 @@
-package com.example.fellowtravellerbeta.ui.newTrip
+package com.example.fellowtravellerbeta.ui.newTrip.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +20,9 @@ class PlacesAdapter(private val placesList: List<PredictionResponse>) :
             R.layout.places_item,
             parent, false
         )
-        return ExampleViewHolder(itemView)
+        return ExampleViewHolder(
+            itemView
+        )
     }
 
     override fun onBindViewHolder(holder: ExampleViewHolder, position: Int) {

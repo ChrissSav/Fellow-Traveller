@@ -12,11 +12,11 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.fellowtravellerbeta.R
 import com.example.fellowtravellerbeta.ui.newTrip.NewTripViewModel
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
-class AddPriceFragment : Fragment() {
-    private val viewModel: NewTripViewModel by inject()
+class PriceFragment : Fragment() {
+    private val viewModel: NewTripViewModel by sharedViewModel()
     private lateinit var navController: NavController
     private lateinit var nextButton: ImageButton
     private lateinit var priceText: EditText
@@ -26,7 +26,7 @@ class AddPriceFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_price, container, false)
+        return inflater.inflate(R.layout.fragment_price, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

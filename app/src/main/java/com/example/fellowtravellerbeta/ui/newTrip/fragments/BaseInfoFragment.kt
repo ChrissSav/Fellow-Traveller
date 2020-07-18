@@ -5,14 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.fellowtravellerbeta.R
 
 
-class AddBaseInfoFragment : Fragment() {
+class BaseInfoFragment : Fragment() {
 
     private lateinit var navController: NavController
     private lateinit var nextButton: ImageButton
@@ -22,7 +21,7 @@ class AddBaseInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_base_info, container, false)
+        return inflater.inflate(R.layout.fragment_base_info, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

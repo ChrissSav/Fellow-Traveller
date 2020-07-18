@@ -1,4 +1,4 @@
-package com.example.fellowtravellerbeta.ui.newTrip;
+package com.example.fellowtravellerbeta.ui.newTrip.adapter;
 
 
 import android.view.LayoutInflater;

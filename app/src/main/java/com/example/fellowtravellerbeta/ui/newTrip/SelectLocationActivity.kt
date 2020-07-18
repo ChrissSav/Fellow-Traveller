@@ -9,13 +9,12 @@ import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fellowtravellerbeta.R
 import com.example.fellowtravellerbeta.data.network.google.response.PredictionResponse
+import com.example.fellowtravellerbeta.ui.newTrip.adapter.PlaceAdapter
 import org.koin.android.ext.android.inject
-import java.util.*
 import kotlin.collections.ArrayList
 
 class SelectLocationActivity : AppCompatActivity() {
@@ -73,20 +72,14 @@ class SelectLocationActivity : AppCompatActivity() {
 
     private fun initializeRecycle() {
         mLayoutManager = LinearLayoutManager(this)
-        mAdapter = PlaceAdapter(placesList)
+        mAdapter = PlaceAdapter(  placesList )
         mRecyclerView.layoutManager = mLayoutManager
         mRecyclerView.adapter = mAdapter
 
         mAdapter.setOnItemClickListener(PlaceAdapter.OnItemClickListener {
             val resultIntent = Intent()
-            val where = intent.getStringExtra("destination")
-
-            if(where.equals("from")){
-                viewModel.setDestinationFrom(placesList[it].placeId, placesList[it].description)
-            }else{
-                viewModel.setDestinationTo(placesList[it].placeId, placesList[it].description)
-
-            }
+            resultIntent.putExtra("id", placesList[it].placeId)
+            resultIntent.putExtra("title", placesList[it].description)
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
         })
