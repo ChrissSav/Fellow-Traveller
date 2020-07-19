@@ -1,4 +1,4 @@
-package com.example.fellowtravellerbeta.ui.newTrip
+package com.example.fellowtravellerbeta.ui.new_trip
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

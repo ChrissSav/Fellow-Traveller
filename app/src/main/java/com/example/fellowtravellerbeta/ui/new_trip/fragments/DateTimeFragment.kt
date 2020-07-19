@@ -1,4 +1,4 @@
-package com.example.fellowtravellerbeta.ui.newTrip.fragments
+package com.example.fellowtravellerbeta.ui.new_trip.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,11 +13,9 @@ import androidx.navigation.Navigation
 import com.example.fellowtravellerbeta.R
 import com.example.fellowtravellerbeta.ui.dialogs.DatePickerCustomDialog
 import com.example.fellowtravellerbeta.ui.dialogs.TimePickerCustomDialog
-import com.example.fellowtravellerbeta.ui.newTrip.NewTripViewModel
+import com.example.fellowtravellerbeta.ui.new_trip.NewTripViewModel
 import com.example.fellowtravellerbeta.utils.createSnackBar
 import com.example.fellowtravellerbeta.utils.validateDateTimeDiffer
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 

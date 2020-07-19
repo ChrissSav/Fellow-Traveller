@@ -3,11 +3,10 @@ package com.example.fellowtravellerbeta.ui.dialogs
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.widget.Button
 import android.widget.TimePicker
 import androidx.fragment.app.DialogFragment
 import com.example.fellowtravellerbeta.R
-import com.example.fellowtravellerbeta.ui.newTrip.NewTripViewModel
+import com.example.fellowtravellerbeta.ui.new_trip.NewTripViewModel
 import java.util.*
 
 class TimePickerCustomDialog(

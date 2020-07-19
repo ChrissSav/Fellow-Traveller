@@ -1,4 +1,4 @@
-package com.example.fellowtravellerbeta.ui.newTrip
+package com.example.fellowtravellerbeta.ui.new_trip
 
 import android.os.Bundle
 import android.view.View

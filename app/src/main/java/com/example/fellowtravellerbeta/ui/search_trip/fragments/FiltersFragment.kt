@@ -1,4 +1,4 @@
-package com.example.fellowtravellerbeta.ui.newTrip.fragments
+package com.example.fellowtravellerbeta.ui.search_trip.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.example.fellowtravellerbeta.R
 
 
-class MessageFragment : Fragment() {
+class FiltersFragment : Fragment() {
 
 
     override fun onCreateView(
@@ -16,7 +16,7 @@ class MessageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_message, container, false)
+        return inflater.inflate(R.layout.fragment_filters, container, false)
     }
 
 

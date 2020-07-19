@@ -1,4 +1,4 @@
-package com.example.fellowtravellerbeta.ui.newTrip
+package com.example.fellowtravellerbeta.ui.new_trip
 
 import android.app.Activity
 import android.content.Intent
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fellowtravellerbeta.R
 import com.example.fellowtravellerbeta.data.network.google.response.PredictionResponse
-import com.example.fellowtravellerbeta.ui.newTrip.adapter.PlaceAdapter
+import com.example.fellowtravellerbeta.ui.new_trip.adapter.PlaceAdapter
 import org.koin.android.ext.android.inject
 import kotlin.collections.ArrayList
 

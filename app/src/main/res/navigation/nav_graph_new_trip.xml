@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/addLocationsFragment"
-        android:name="com.example.fellowtravellerbeta.ui.newTrip.fragments.LocationsFragment"
+        android:name="com.example.fellowtravellerbeta.ui.new_trip.fragments.LocationsFragment"
         android:label="fragment_add_locations"
         tools:layout="@layout/fragment_add_locations" >
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/addDateTimeFragment"
-        android:name="com.example.fellowtravellerbeta.ui.newTrip.fragments.DateTimeFragment"
+        android:name="com.example.fellowtravellerbeta.ui.new_trip.fragments.DateTimeFragment"
         android:label="fragment_add_date_time"
         tools:layout="@layout/fragment_add_date_time" >
         <action
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/addBaseInfoFragment"
-        android:name="com.example.fellowtravellerbeta.ui.newTrip.fragments.BaseInfoFragment"
+        android:name="com.example.fellowtravellerbeta.ui.new_trip.fragments.BaseInfoFragment"
         android:label="fragment_add_base_info"
         tools:layout="@layout/fragment_base_info" >
         <action
@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/addPriceFragment"
-        android:name="com.example.fellowtravellerbeta.ui.newTrip.fragments.PriceFragment"
+        android:name="com.example.fellowtravellerbeta.ui.new_trip.fragments.PriceFragment"
         android:label="fragment_add_price"
         tools:layout="@layout/fragment_price" >
         <action
@@ -59,7 +59,7 @@
     </fragment>
     <fragment
         android:id="@+id/addMessageFragment"
-        android:name="com.example.fellowtravellerbeta.ui.newTrip.fragments.MessageFragment"
+        android:name="com.example.fellowtravellerbeta.ui.new_trip.fragments.MessageFragment"
         android:label="fragment_add_message"
         tools:layout="@layout/fragment_add_message" >
         <action
@@ -72,12 +72,12 @@
     </fragment>
     <fragment
         android:id="@+id/tripSummaryFragment"
-        android:name="com.example.fellowtravellerbeta.ui.newTrip.fragments.TripSummaryFragment"
+        android:name="com.example.fellowtravellerbeta.ui.new_trip.fragments.TripSummaryFragment"
         android:label="fragment_trip_summary"
         tools:layout="@layout/fragment_trip_summary" />
     <fragment
         android:id="@+id/pickUpPointFragment"
-        android:name="com.example.fellowtravellerbeta.ui.newTrip.fragments.PickUpPointFragment"
+        android:name="com.example.fellowtravellerbeta.ui.new_trip.fragments.PickUpPointFragment"
         android:label="fragment_pick_up_point"
         tools:layout="@layout/fragment_pick_up_point" >
         <action

@@ -1,4 +1,4 @@
-package com.example.fellowtravellerbeta.ui.newTrip.fragments
+package com.example.fellowtravellerbeta.ui.new_trip.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.fellowtravellerbeta.R
-import com.example.fellowtravellerbeta.ui.newTrip.NewTripViewModel
+import com.example.fellowtravellerbeta.ui.new_trip.NewTripViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 

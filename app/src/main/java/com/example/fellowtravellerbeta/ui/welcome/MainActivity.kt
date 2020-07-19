@@ -5,9 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import com.example.fellowtravellerbeta.R
-import com.example.fellowtravellerbeta.ui.newTrip.NewTripActivity
+import com.example.fellowtravellerbeta.ui.new_trip.NewTripActivity
 import com.example.fellowtravellerbeta.ui.register.RegisterActivity
-import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
 

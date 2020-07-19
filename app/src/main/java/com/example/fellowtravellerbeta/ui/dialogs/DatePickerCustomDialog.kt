@@ -3,12 +3,11 @@ package com.example.fellowtravellerbeta.ui.dialogs
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import com.example.fellowtravellerbeta.R
-import com.example.fellowtravellerbeta.ui.newTrip.NewTripViewModel
+import com.example.fellowtravellerbeta.ui.new_trip.NewTripViewModel
 import java.util.*
 
 class DatePickerCustomDialog(

@@ -1,4 +1,4 @@
-package com.example.fellowtravellerbeta.ui.newTrip.fragments
+package com.example.fellowtravellerbeta.ui.new_trip.fragments
 
 import android.app.Activity
 import android.content.Intent
@@ -13,8 +13,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.fellowtravellerbeta.R
-import com.example.fellowtravellerbeta.ui.newTrip.NewTripViewModel
-import com.example.fellowtravellerbeta.ui.newTrip.SelectLocationActivity
+import com.example.fellowtravellerbeta.ui.new_trip.NewTripViewModel
+import com.example.fellowtravellerbeta.ui.new_trip.SelectLocationActivity
 import com.example.fellowtravellerbeta.utils.createSnackBar
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 

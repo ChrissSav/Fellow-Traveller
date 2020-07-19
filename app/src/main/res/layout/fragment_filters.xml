@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.search_trip.fragments.FiltersFragment">
+
+
+    <TextView
+        android:id="@+id/FiltersFragment_filters_tv"
+        style="@style/display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Φίλτρα"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/FiltersFragment_close_button"
+        style="@style/border_icon_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf="@id/FiltersFragment_filters_tv"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/FiltersFragment_filters_tv" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="25dp"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toTopOf="@id/FiltersFragment_buttons_section"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/FiltersFragment_filters_tv">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="20dp"
+            android:paddingBottom="20dp">
+
+
+            <TextView
+                android:id="@+id/FiltersFragment_date_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Ημερομηνία"
+                style="@style/header2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/FiltersFragment_date_info_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                style="@style/paragraph1"
+                android:text="Επιλέξτε το εύρος των ημερομηνιών όπου εσείς θέλετε"
+                app:layout_constraintEnd_toEndOf="@id/FiltersFragment_date_button"
+                app:layout_constraintStart_toStartOf="@id/FiltersFragment_date_tv"
+                app:layout_constraintTop_toBottomOf="@id/FiltersFragment_date_tv" />
+
+            <Button
+                android:id="@+id/FiltersFragment_date_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="Όρισε ημ/νία"
+                style="@style/button_black_empty"
+                app:layout_constraintBottom_toBottomOf="@id/FiltersFragment_date_tv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/FiltersFragment_date_tv" />
+
+
+            <View
+                android:id="@+id/FiltersFragment_underline_date"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/softGrey_color"
+                app:layout_constraintEnd_toEndOf="@+id/FiltersFragment_date_button"
+                app:layout_constraintStart_toStartOf="@+id/FiltersFragment_date_tv"
+                app:layout_constraintTop_toBottomOf="@+id/FiltersFragment_date_info_tv" />
+
+            <TextView
+                android:id="@+id/FiltersFragment_km_range_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                style="@style/header2"
+                android:text="Αφετηρία"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/FiltersFragment_underline_pets" />
+
+            <TextView
+                android:id="@+id/FiltersFragment_km_range_radius_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                style="@style/header3"
+                android:text="Εμφάνιση όλων"
+                app:layout_constraintBottom_toBottomOf="@id/FiltersFragment_km_range_tv"
+                app:layout_constraintEnd_toStartOf="@id/FiltersFragment_km_range_image"
+                app:layout_constraintTop_toTopOf="@id/FiltersFragment_km_range_tv" />
+
+            <ImageView
+                android:id="@+id/FiltersFragment_km_range_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="22dp"
+                android:background="@drawable/ic_range"
+                app:layout_constraintBottom_toBottomOf="@id/FiltersFragment_km_range_tv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/FiltersFragment_km_range_tv" />
+
+
+            <com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar
+                android:id="@+id/FiltersFragment_km_range_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="20dp"
+                app:bar_color="@color/softGrey_color"
+                app:bar_highlight_color="@color/black_color"
+                app:data_type="_integer"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/FiltersFragment_km_range_tv"
+                app:left_thumb_color="@color/black_color"
+                app:left_thumb_color_pressed="@color/black_color"
+                app:max_value="200"
+                app:min_value="0" />
+
+            <TextView
+                android:id="@+id/FiltersFragment_km_range_info_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                style="@style/paragraph1"
+                android:maxLines="2"
+                android:text="Επιλέξτε ένα εύρος απόστασης όπου θέλετε να αναζητήσουμε"
+                app:layout_constraintEnd_toEndOf="@id/FiltersFragment_km_range_radius_tv"
+                app:layout_constraintStart_toStartOf="@id/FiltersFragment_km_range_tv"
+                app:layout_constraintTop_toBottomOf="@id/FiltersFragment_km_range_seekbar" />
+
+
+            <TextView
+                android:id="@+id/FiltersFragment_km_range_end_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                style="@style/header2"
+                android:text="Προορισμός"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/FiltersFragment_km_range_info_tv" />
+
+            <TextView
+                android:id="@+id/FiltersFragment_km_range_end_radius_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                style="@style/header3"
+                android:text="Εμφάνιση όλων"
+                app:layout_constraintBottom_toBottomOf="@id/FiltersFragment_km_range_end_tv"
+                app:layout_constraintEnd_toStartOf="@id/FiltersFragment_km_range_end_image"
+                app:layout_constraintTop_toTopOf="@id/FiltersFragment_km_range_end_tv" />
+
+            <ImageView
+                android:id="@+id/FiltersFragment_km_range_end_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="22dp"
+                android:background="@drawable/ic_range"
+                app:layout_constraintBottom_toBottomOf="@id/FiltersFragment_km_range_end_tv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/FiltersFragment_km_range_end_tv" />
+
+
+            <com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar
+                android:id="@+id/FiltersFragment_km_range_end_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="20dp"
+                app:bar_color="@color/softGrey_color"
+                app:bar_highlight_color="@color/black_color"
+                app:data_type="_integer"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/FiltersFragment_km_range_end_tv"
+                app:left_thumb_color="@color/black_color"
+                app:left_thumb_color_pressed="@color/black_color"
+                app:max_value="200"
+                app:min_value="0" />
+
+            <TextView
+                android:id="@+id/FiltersFragment_km_range_end_info_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:maxLines="2"
+                android:text="Επιλέξτε ένα εύρος απόστασης όπου θέλετε να αναζητήσουμε"
+                style="@style/paragraph1"
+                app:layout_constraintEnd_toEndOf="@id/FiltersFragment_km_range_end_radius_tv"
+                app:layout_constraintStart_toStartOf="@id/FiltersFragment_km_range_end_tv"
+                app:layout_constraintTop_toBottomOf="@id/FiltersFragment_km_range_end_seekbar" />
+
+            <View
+                android:id="@+id/FiltersFragment_underline_range"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/softGrey_color"
+                app:layout_constraintEnd_toEndOf="@+id/FiltersFragment_date_button"
+                app:layout_constraintStart_toStartOf="@+id/FiltersFragment_date_tv"
+                app:layout_constraintTop_toBottomOf="@+id/FiltersFragment_km_range_end_info_tv" />
+
+
+            <TextView
+                android:id="@+id/FiltersFragment_price_range_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                style="@style/header2"
+                android:text="Εύρος τιμής"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/FiltersFragment_underline_range" />
+
+            <TextView
+                android:id="@+id/FiltersFragment_price_range_radius_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="Εμφάνιση όλων"
+                style="@style/header3"
+                app:layout_constraintBottom_toBottomOf="@id/FiltersFragment_price_range_tv"
+                app:layout_constraintEnd_toStartOf="@id/FiltersFragment_price_range_image"
+                app:layout_constraintTop_toTopOf="@id/FiltersFragment_price_range_tv" />
+
+            <ImageView
+                android:id="@+id/FiltersFragment_price_range_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="22dp"
+                android:background="@drawable/ic_cash"
+                app:layout_constraintBottom_toBottomOf="@id/FiltersFragment_price_range_tv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/FiltersFragment_price_range_tv" />
+
+            <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                android:id="@+id/FiltersFragment_price_range_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="20dp"
+                app:bar_color="@color/softGrey_color"
+                app:bar_highlight_color="@color/black_color"
+                app:data_type="_integer"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/FiltersFragment_price_range_tv"
+                app:left_thumb_color="@color/black_color"
+                app:left_thumb_color_pressed="@color/black_color"
+                app:max_value="100"
+                app:min_value="0"
+                app:right_thumb_color="@color/black_color"
+                app:right_thumb_color_pressed="@color/black_color" />
+
+            <TextView
+                android:id="@+id/FiltersFragment_price_range_info_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:maxLines="2"
+                android:text="Η μέση τιμή για αυτό το ταξίδι είναι "
+                style="@style/paragraph1"
+                app:layout_constraintStart_toStartOf="@id/FiltersFragment_price_range_tv"
+                app:layout_constraintTop_toBottomOf="@id/FiltersFragment_price_range_seekbar" />
+
+            <TextView
+                android:id="@+id/FiltersFragment_price_range_info_value_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="5€"
+                android:textStyle="bold"
+                android:textColor="@color/orange_color"
+                style="@style/paragraph1"
+                app:layout_constraintBottom_toBottomOf="@id/FiltersFragment_price_range_info_tv"
+                app:layout_constraintEnd_toEndOf="@id/FiltersFragment_price_range_seekbar"
+                app:layout_constraintStart_toEndOf="@id/FiltersFragment_price_range_info_tv"
+                app:layout_constraintTop_toTopOf="@id/FiltersFragment_price_range_info_tv" />
+
+            <View
+                android:id="@+id/FiltersFragment_underline_pets"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/softGrey_color"
+                app:layout_constraintEnd_toEndOf="@+id/FiltersFragment_underline_date"
+                app:layout_constraintStart_toStartOf="@+id/FiltersFragment_underline_date"
+                app:layout_constraintTop_toBottomOf="@+id/FiltersFragment_pets_info_tv" />
+
+            <TextView
+                android:id="@+id/FiltersFragment_seats_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                style="@style/header2"
+                android:text="Θέσεις"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/FiltersFragment_underline_date" />
+
+            <TextView
+                android:id="@+id/FiltersFragment_seats_info_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                style="@style/paragraph1"
+                android:text="Επιλέξτε τον ελάχιστο αριθμό που εσείς θέλετε"
+                app:layout_constraintEnd_toEndOf="@id/ActivityBook_seats_increaser_section"
+                app:layout_constraintStart_toStartOf="@id/FiltersFragment_seats_tv"
+                app:layout_constraintTop_toBottomOf="@id/ActivityBook_seats_increaser_section" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ActivityBook_seats_increaser_section"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/increaser_border_stroke_shape"
+                android:drawablePadding="20dp"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/FiltersFragment_seats_tv"
+                app:layout_constraintEnd_toEndOf="@id/FiltersFragment_date_button"
+                app:layout_constraintTop_toTopOf="@id/FiltersFragment_seats_tv">
+
+                <ImageButton
+                    android:id="@+id/ActivityBook_seats_minus_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_minus"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/ActivityBook_seats_value_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    style="@style/input"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/ActivityBook_seats_plus_button"
+                    app:layout_constraintStart_toStartOf="@id/ActivityBook_seats_minus_button"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/ActivityBook_seats_plus_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_plus"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <TextView
+                android:id="@+id/FiltersFragment_bags_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                style="@style/header2"
+                android:text="Αποσκευές"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/FiltersFragment_seats_info_tv" />
+
+            <TextView
+                android:id="@+id/FiltersFragment_bags_info_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                style="@style/paragraph1"
+                android:text="Επιλέξτε τον ελάχιστο αριθμό αποσκευών που εσείς θέλετε"
+                app:layout_constraintEnd_toEndOf="@id/FiltersFragment_bags_increaser_section"
+                app:layout_constraintStart_toStartOf="@id/FiltersFragment_bags_tv"
+                app:layout_constraintTop_toBottomOf="@id/FiltersFragment_bags_increaser_section" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/FiltersFragment_bags_increaser_section"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/increaser_border_stroke_shape"
+                android:drawablePadding="20dp"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/FiltersFragment_bags_tv"
+                app:layout_constraintEnd_toEndOf="@id/FiltersFragment_date_button"
+                app:layout_constraintTop_toTopOf="@id/FiltersFragment_bags_tv">
+
+                <ImageButton
+                    android:id="@+id/FiltersFragment_bags_minus_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_minus"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/FiltersFragment_bags_value_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/input"
+                    android:text="0"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/FiltersFragment_bags_plus_button"
+                    app:layout_constraintStart_toEndOf="@id/FiltersFragment_bags_minus_button"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/FiltersFragment_bags_plus_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_plus"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/FiltersFragment_underline_bags"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/softGrey_color"
+                app:layout_constraintEnd_toEndOf="@+id/FiltersFragment_bags_increaser_section"
+                app:layout_constraintStart_toStartOf="@+id/FiltersFragment_bags_tv"
+                app:layout_constraintTop_toBottomOf="@+id/FiltersFragment_bags_info_tv" />
+
+            <TextView
+                android:id="@+id/FiltersFragment_pets_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:text="Κατοικίδια"
+                style="@style/header2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/FiltersFragment_underline_bags" />
+
+            <Button
+                android:id="@+id/FiltersFragment_pets_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="Όλα"
+                style="@style/button_black_empty"
+                app:layout_constraintBottom_toBottomOf="@id/FiltersFragment_pets_tv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/FiltersFragment_pets_tv"
+                />
+
+
+            <TextView
+                android:id="@+id/FiltersFragment_pets_info_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                style="@style/paragraph1"
+                android:text="Επιλέξτε διαδρομές που επιτρέπουν ή όχι κατοικίδια"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/FiltersFragment_pets_tv"
+                app:layout_constraintTop_toBottomOf="@id/FiltersFragment_pets_tv" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/FiltersFragment_buttons_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@color/white"
+        android:elevation="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/FiltersFragment_reset_button"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/firasans_medium"
+            android:text="Επαναφορά"
+            android:textAllCaps="false"
+            android:textColor="@color/black_color"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@id/FiltersFragment_apply_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/FiltersFragment_apply_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/black_button_shape"
+            android:paddingLeft="30dp"
+            android:paddingTop="15dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="15dp"
+            android:text="Εφαρμογή"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/FiltersFragment_reset_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/FiltersFragment_reset_button" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
