@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.fellowtravellerbeta.R
+import com.example.fellowtravellerbeta.ui.search_trip.SearchTripViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class ResultsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
+    private val viewModel: SearchTripViewModel by sharedViewModel()
+
 
 
     override fun onCreateView(

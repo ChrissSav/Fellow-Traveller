@@ -34,6 +34,9 @@ class NewTripViewModel(private val service: PlaceApiRepository) : ViewModel() {
     private val _price = SingleLiveEvent<String>()
     val price: LiveData<String> = _price
 
+
+
+
     fun applyDate(date: String) {
         viewModelScope.launch {
             _date.value = date

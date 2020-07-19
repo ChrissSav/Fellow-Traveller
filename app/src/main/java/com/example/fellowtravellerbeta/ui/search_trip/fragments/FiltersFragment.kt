@@ -6,9 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.fellowtravellerbeta.R
+import com.example.fellowtravellerbeta.ui.new_trip.NewTripViewModel
+import com.example.fellowtravellerbeta.ui.search_trip.SearchTripViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class FiltersFragment : Fragment() {
+    private val viewModel: SearchTripViewModel by sharedViewModel()
 
 
     override fun onCreateView(

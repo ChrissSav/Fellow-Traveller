@@ -60,7 +60,7 @@
         android:ellipsize="end"
         android:lines="1"
         android:text="Επιλέξτε αφετηρία"
-        android:textColor="#9E9E9E"
+        android:textColor="@color/button_default_color"
         app:layout_constraintEnd_toEndOf="@+id/SelectDestinationsFragment_info_label"
         app:layout_constraintStart_toStartOf="@id/SelectDestinationsFragment_back_button"
         app:layout_constraintTop_toBottomOf="@id/SelectDestinationsFragment_from_label" />
@@ -84,7 +84,7 @@
         android:ellipsize="end"
         android:lines="1"
         android:text="Επιλέξτε προορισμό"
-        android:textColor="#9E9E9E"
+        android:textColor="@color/button_default_color"
         app:layout_constraintEnd_toEndOf="@+id/SelectDestinationsFragment_destFrom_button"
         app:layout_constraintStart_toStartOf="@id/SelectDestinationsFragment_back_button"
         app:layout_constraintTop_toBottomOf="@id/SelectDestinationsFragment_το_label" />
