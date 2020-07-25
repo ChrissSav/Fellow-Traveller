@@ -4,9 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.new_trip.fragments.BaseInfoFragment">
-
-
+    tools:context=".ui.newTrip.fragments.BaseInfoFragment">
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -64,7 +62,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/AddBaseInfoFragment_textView" />
 
             <Button
-                android:id="@+id/AddBaseInfoFragment_button_car"
+                android:id="@+id/car_Button"
                 style="@style/button_outline_blue_with_left_drawable"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
@@ -87,7 +85,7 @@
                 android:layout_marginTop="45dp"
                 android:text="Θέσεις"
                 app:layout_constraintStart_toStartOf="@+id/AddBaseInfoFragment_textView6"
-                app:layout_constraintTop_toBottomOf="@+id/AddBaseInfoFragment_button_car" />
+                app:layout_constraintTop_toBottomOf="@+id/car_Button" />
 
             <TextView
                 android:id="@+id/AddBaseInfoFragment_textView8"
@@ -116,7 +114,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="35dp"
                 android:text="Επιτρέπεται κατοικίδια ή όχι;"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/AddBaseInfoFragment_textView10"
@@ -151,7 +149,7 @@
                 android:background="@drawable/increaser_border_stroke_shape_1"
                 android:padding="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/AddBaseInfoFragment_textView7"
-                app:layout_constraintEnd_toEndOf="@+id/AddBaseInfoFragment_button_car"
+                app:layout_constraintEnd_toEndOf="@+id/car_Button"
                 app:layout_constraintTop_toTopOf="@+id/AddBaseInfoFragment_textView7">
 
                 <ImageButton
@@ -198,7 +196,7 @@
                 android:background="@drawable/increaser_border_stroke_shape_1"
                 android:padding="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/AddBaseInfoFragment_textView_2"
-                app:layout_constraintEnd_toEndOf="@+id/AddBaseInfoFragment_button_car"
+                app:layout_constraintEnd_toEndOf="@+id/car_Button"
                 app:layout_constraintTop_toTopOf="@+id/AddBaseInfoFragment_textView_2">
 
                 <ImageButton
@@ -261,7 +259,7 @@
 
 
     <ImageButton
-        android:id="@+id/AddBaseInfoFragment_button_next"
+        android:id="@+id/ImageButton_next"
         android:layout_width="@dimen/float_action_button_width"
         android:layout_height="@dimen/float_action_button_height"
         android:layout_marginEnd="@dimen/float_action_button_margin_right"

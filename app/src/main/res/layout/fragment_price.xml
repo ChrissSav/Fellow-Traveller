@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.new_trip.fragments.PriceFragment">
-
+    tools:context=".ui.newTrip.fragments.PriceFragment">
 
     <TextView
         android:id="@+id/AddPriceFragment_textView1"
@@ -105,7 +104,7 @@
 
 
     <ImageButton
-        android:id="@+id/AddPriceFragment_button_next"
+        android:id="@+id/ImageButton_next"
         android:layout_width="@dimen/float_action_button_width"
         android:layout_height="@dimen/float_action_button_height"
         android:layout_marginEnd="@dimen/float_action_button_margin_right"

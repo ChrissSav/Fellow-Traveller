@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.newTrip.fragments.PickUpFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/PickUpPointFragment_textView1"
+            style="@style/display"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Σημείο αναχώρησης"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/PickUpPointFragment_textView"
+            style="@style/paragraph1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Επιλέξτε ένα σημείο συνάντησης που θα είναι η αφετηρία του ταξιδιού. Το σημείο αυτό θα φαίνεται στους επιβάτες αφού κλείσουν το ταξίδι σας"
+            app:layout_constraintEnd_toEndOf="@+id/PickUpPointFragment_textView1"
+            app:layout_constraintStart_toStartOf="@+id/PickUpPointFragment_textView1"
+            app:layout_constraintTop_toBottomOf="@+id/PickUpPointFragment_textView1" />
+
+        <TextView
+            android:id="@+id/textView5"
+            style="@style/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="46dp"
+            android:text="Σημείο αναχώρησης"
+            app:layout_constraintStart_toStartOf="@+id/PickUpPointFragment_textView"
+            app:layout_constraintTop_toBottomOf="@+id/PickUpPointFragment_textView" />
+
+        <Button
+            android:id="@+id/pickUpButton"
+            style="@style/button_outline_blue_with_left_drawable"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:drawableRight="@drawable/ic_pin"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:padding="15dp"
+            android:singleLine="true"
+            android:text="Διάλεξε τον προορισμό ..."
+            android:textAlignment="textStart"
+            android:textColor="@color/button_default_color"
+            app:layout_constraintEnd_toEndOf="@+id/PickUpPointFragment_textView"
+            app:layout_constraintStart_toStartOf="@+id/PickUpPointFragment_textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ImageButton
+        android:id="@+id/ImageButton_next"
+        android:layout_width="@dimen/float_action_button_width"
+        android:layout_height="@dimen/float_action_button_height"
+        android:layout_marginEnd="@dimen/float_action_button_margin_right"
+        android:layout_marginBottom="@dimen/float_action_button_margin_bottom"
+        android:background="@drawable/circle_button_shape"
+        android:backgroundTint="@color/blue_color"
+        android:elevation="2dp"
+        android:padding="15dp"
+        android:rotation="180"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_back_button"
+        android:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
