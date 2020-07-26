@@ -1,30 +1,27 @@
 package gr.fellow.fellow_traveller.ui.newTrip
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.databinding.ActivityNewBinding
-import gr.fellow.fellow_traveller.databinding.ActivityRegisterBinding
+import gr.fellow.fellow_traveller.databinding.ActivityNewTripBinding
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
-@AndroidEntryPoint
-class NewActivity : AppCompatActivity() {
+class NewTripActivity : AppCompatActivity() {
 
 
-    private lateinit var  binding: ActivityNewBinding
-    private val registerViewModel: RegisterViewModel by viewModels()
+    private lateinit var  binding: ActivityNewTripBinding
+    private val newTripViewModel: NewTripViewModel by viewModels()
     private lateinit var nav: NavController
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityNewBinding.inflate(layoutInflater)
+
+
+        binding = ActivityNewTripBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
@@ -42,7 +39,7 @@ class NewActivity : AppCompatActivity() {
         })
 
 
-        binding.ImageButtonBack.setOnClickListener {
+        binding.imageButtonBack.setOnClickListener {
             onBackPressed()
         }
     }

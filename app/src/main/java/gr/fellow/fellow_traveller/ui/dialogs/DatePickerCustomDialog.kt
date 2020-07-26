@@ -47,7 +47,7 @@ class DatePickerCustomDialog(
         val date =
             java.lang.String.format(Locale.getDefault(), "%02d/%02d/%04d", day, (month + 1), year)
 
-        viewModel.applyDate(date)
+        //viewModel.applyDate(date)
     }
 
 

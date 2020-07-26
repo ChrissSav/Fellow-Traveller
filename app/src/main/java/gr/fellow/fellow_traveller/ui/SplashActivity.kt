@@ -4,9 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import gr.fellow.fellow_traveller.MainActivity
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.ui.register.RegisterActivity
+import gr.fellow.fellow_traveller.ui.home.main.HomeActivity
 
 const val TIME = 1500
 
@@ -17,7 +16,7 @@ class SplashActivity : AppCompatActivity() {
 
 
         Handler().postDelayed({
-            val mainIntent = Intent(this, RegisterActivity::class.java)
+            val mainIntent = Intent(this, HomeActivity::class.java)
             startActivity(mainIntent)
             finish()
 

@@ -17,7 +17,7 @@ import gr.fellow.fellow_traveller.ui.newTrip.NewTripViewModel
 
 class PickUpFragment : Fragment() {
 
-    private val registerViewModel: NewTripViewModel by activityViewModels()
+    private val newTripViewModel: NewTripViewModel by activityViewModels()
     private lateinit var navController: NavController
 
     /**
@@ -41,7 +41,7 @@ class PickUpFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
-        registerViewModel.error.observe(viewLifecycleOwner, Observer {
+        newTripViewModel.error.observe(viewLifecycleOwner, Observer {
             createSnackBar(view,it)
         })
     }

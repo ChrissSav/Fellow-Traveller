@@ -40,7 +40,7 @@ class TimePickerCustomDialog(
         val time =
             java.lang.String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute)
 
-        viewModel.applyTime(time)
+        //viewModel.applyTime(time)
     }
 
 }

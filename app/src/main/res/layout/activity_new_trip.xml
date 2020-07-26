@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.newTrip.NewActivity">
-
+    tools:context=".ui.newTrip.NewTripActivity">
 
     <ImageButton
         android:id="@+id/imageButton_back"
@@ -69,6 +68,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton_back"
         app:navGraph="@navigation/register_nav_graph"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
