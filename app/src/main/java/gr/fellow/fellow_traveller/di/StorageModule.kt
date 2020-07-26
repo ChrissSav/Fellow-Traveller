@@ -3,17 +3,19 @@ package gr.fellow.fellow_traveller.di
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import dagger.hilt.android.qualifiers.ApplicationContext
 import gr.fellow.fellow_traveller.ConnectivityHelper
 import gr.fellow.fellow_traveller.data.FellowDataSourceImpl
 import gr.fellow.fellow_traveller.data.FellowRepository
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.framework.FellowRepositoryImpl
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
+import gr.fellow.fellow_traveller.room.FellowDatabase
+import gr.fellow.fellow_traveller.room.dao.UserAuthDao
 import javax.inject.Singleton
 
 @InstallIn(ApplicationComponent::class)
@@ -24,7 +26,7 @@ object StorageModule {
     @Provides
     fun provideRepository(
         service: FellowService, connectivityHelper: ConnectivityHelper, context: Context
-        ,sharedPreferences: SharedPreferences
+        , sharedPreferences: SharedPreferences
     ): FellowRepository {
         return FellowRepositoryImpl(context, service, connectivityHelper, sharedPreferences)
     }
@@ -40,5 +42,19 @@ object StorageModule {
     fun provideSharedPreferences(application: Application): SharedPreferences =
         application.getSharedPreferences("FELLOW_TRAVELLER", Context.MODE_PRIVATE)
 
+    @Singleton
+    @Provides
+    fun provideDatabase(application: Application) :FellowDatabase{
+        return Room.databaseBuilder(
+            application.applicationContext,
+            FellowDatabase::class.java,
+            "Fellow_traveller-db").build()
+    }
+
+    @Singleton
+    @Provides
+    fun providesProductDao(fellowDatabase: FellowDatabase): UserAuthDao {
+        return fellowDatabase.userAuthDao()
+    }
 
 }
