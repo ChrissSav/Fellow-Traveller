@@ -60,11 +60,11 @@ object NetworkModule {
         loggingInterceptor: HttpLoggingInterceptor,
         sharedPreferences: SharedPreferences
     ): OkHttpClient.Builder {
-        val okHttpClient = OkHttpClient.Builder().proxy(Proxy.NO_PROXY)
-        okHttpClient
+        return OkHttpClient.Builder().proxy(Proxy.NO_PROXY)
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
+            .addInterceptor(loggingInterceptor)
             .addInterceptor(object : Interceptor {
                 @Throws(IOException::class)
                 override fun intercept(chain: Interceptor.Chain): Response {
@@ -78,8 +78,6 @@ object NetworkModule {
                     return chain.proceed(newRequest.build())
                 }
             })
-        okHttpClient.addInterceptor(loggingInterceptor!!)
-        return okHttpClient
     }
 
 
@@ -107,14 +105,14 @@ object NetworkModule {
             .create(FellowService::class.java)
     }
 
-    @Singleton
-    @Provides
-    fun provideFellowGoogleService(retrofit: Retrofit.Builder): PlaceApiService {
-        return retrofit
-            .baseUrl("https://maps.googleapis.com/maps/api/place/autocomplete/")
-            .build()
-            .create(PlaceApiService::class.java)
-    }
+    /* @Singleton
+     @Provides
+     fun provideFellowGoogleService(retrofit: Retrofit.Builder): PlaceApiService {
+         return retrofit
+             .baseUrl("https://maps.googleapis.com/maps/api/place/autocomplete/")
+             .build()
+             .create(PlaceApiService::class.java)
+     }*/
 
 }
 

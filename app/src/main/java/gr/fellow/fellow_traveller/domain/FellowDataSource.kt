@@ -3,6 +3,7 @@ package gr.fellow.fellow_traveller.domain
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserInfoResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
 
 interface FellowDataSource {
     suspend fun checkUserPhone(phone: String): ResultWrapper<StatusHandleResponse>
@@ -18,5 +19,7 @@ interface FellowDataSource {
         phone: String
     ): ResultWrapper<UserInfoResponse>
 
+
+    suspend fun loginUser(username : String, password: String): ResultWrapper<UserLoginResponse>
 
 }

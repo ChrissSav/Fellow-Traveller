@@ -55,6 +55,7 @@ suspend fun <T : Any> performCall(
         try {
             call.invoke()
         } catch (exception: Exception) {
+            print(exception.message)
             ResultWrapper.Error(getModelFromResponseErrorBody())
         }
     }

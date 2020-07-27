@@ -25,10 +25,9 @@ object StorageModule {
     @Singleton
     @Provides
     fun provideRepository(
-        service: FellowService, connectivityHelper: ConnectivityHelper, context: Context
-        , sharedPreferences: SharedPreferences
+        service: FellowService, connectivityHelper: ConnectivityHelper,sharedPreferences: SharedPreferences
     ): FellowRepository {
-        return FellowRepositoryImpl(context, service, connectivityHelper, sharedPreferences)
+        return FellowRepositoryImpl(service, connectivityHelper, sharedPreferences)
     }
 
     @Singleton
