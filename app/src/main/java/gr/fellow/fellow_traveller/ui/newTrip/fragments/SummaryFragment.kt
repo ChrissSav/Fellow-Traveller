@@ -39,9 +39,7 @@ class SummaryFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
-        newTripViewModel.error.observe(viewLifecycleOwner, Observer {
-            createSnackBar(view, it)
-        })
+
     }
 
 

@@ -29,11 +29,15 @@ class HomeActivity : AppCompatActivity() {
     private fun setupBottomNavMenu(navController: NavController) {
         binding.HomeActivityBottomNavigationView.let {
             NavigationUI.setupWithNavController(it, navController)
+            it.setOnNavigationItemReselectedListener { item->
+                if (item.isChecked) {
+                    return@setOnNavigationItemReselectedListener
+                }
+            }
+
 
         }
     }
-
-
 
 
 }

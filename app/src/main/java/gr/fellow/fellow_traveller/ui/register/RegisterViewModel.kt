@@ -51,7 +51,7 @@ constructor(
                 is ResultWrapper.Success ->
                     _phone.value = phone
                 is ResultWrapper.Error ->
-                    _error.value = context.resources.getString(R.string.ERROR_PHONE_ALREADY_EXISTS)
+                    _error.value = response.error.msg
             }
         }
 
@@ -66,7 +66,7 @@ constructor(
                 is ResultWrapper.Success ->
                     _email.value = email
                 is ResultWrapper.Error ->
-                    _error.value = context.resources.getString(R.string.ERROR_EMAIL_ALREADY_EXISTS)
+                    _error.value = response.error.msg
             }
 
         }
@@ -87,7 +87,7 @@ constructor(
             if (userInfo.value?.first!!.isEmpty() && userInfo.value?.second!!.isEmpty())
                 _error.value = context.resources.getString(R.string.ERROR_FIELDS_REQUIRE)
             else {
-                when (val res = registerUserUseCase(
+                when (val response = registerUserUseCase(
                     userInfo.value!!.first,
                     userInfo.value!!.second,
                     email.value.toString(),
@@ -95,7 +95,7 @@ constructor(
                     phone.value.toString()
                 )) {
                     is ResultWrapper.Error ->
-                        _error.value = res.error.msg
+                        _error.value =  response.error.msg
                     is ResultWrapper.Success ->
                         _finish.value = true
                 }

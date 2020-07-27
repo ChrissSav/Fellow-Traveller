@@ -50,9 +50,6 @@ class EmailFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
-        registerViewModel.error.observe(viewLifecycleOwner, Observer {
-            createSnackBar(view,it)
-        })
 
 
         binding.ButtonClear.setOnClickListener {

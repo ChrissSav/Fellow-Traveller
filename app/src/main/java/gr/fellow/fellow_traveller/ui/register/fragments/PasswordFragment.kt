@@ -49,9 +49,6 @@ class PasswordFragment : Fragment() {
         binding.password.setText(registerViewModel.password.value)
         binding.passwordConfirm.setText(registerViewModel.password.value)
 
-        registerViewModel.error.observe(viewLifecycleOwner, Observer {
-            createSnackBar(view, it)
-        })
 
         registerViewModel.password.observe(viewLifecycleOwner, Observer {
             navController.navigate(R.id.next_fragment)

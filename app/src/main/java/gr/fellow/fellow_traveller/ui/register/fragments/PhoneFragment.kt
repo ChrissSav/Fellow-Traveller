@@ -48,10 +48,6 @@ class PhoneFragment : Fragment() {
         binding.EditTextPhone.setText(registerViewModel.phone.value)
 
 
-        registerViewModel.error.observe(viewLifecycleOwner, Observer {
-            createSnackBar(view, it)
-        })
-
         binding.ButtonClear.setOnClickListener {
             binding.EditTextPhone.text = null
         }

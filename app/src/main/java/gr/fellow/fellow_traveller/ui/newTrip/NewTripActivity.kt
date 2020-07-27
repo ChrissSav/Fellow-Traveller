@@ -4,10 +4,12 @@ import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.ActivityNewTripBinding
+import gr.fellow.fellow_traveller.ui.createSnackBar
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
 
 class NewTripActivity : AppCompatActivity() {
@@ -38,6 +40,10 @@ class NewTripActivity : AppCompatActivity() {
 
         })
 
+
+        newTripViewModel.error.observe(this, Observer {
+            createSnackBar(view, it)
+        })
 
         binding.imageButtonBack.setOnClickListener {
             onBackPressed()

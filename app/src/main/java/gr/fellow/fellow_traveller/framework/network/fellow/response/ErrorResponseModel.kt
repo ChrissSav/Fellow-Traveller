@@ -9,7 +9,7 @@ data class ErrorResponseModel (
 
 
 data class ErrorResponse (
-    var code: Int,
-    var msg : String?
+    var code: Int = 10000,
+    var msg : String
 )
 

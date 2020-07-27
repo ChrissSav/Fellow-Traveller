@@ -30,21 +30,11 @@ class FellowRepositoryImpl(
 
     override suspend fun registerUser(registerUserRequest: AccountCreateRequest): ResultWrapper<UserInfoResponse> =
         networkCall(connectivityHelper) {
-            val temp = service.registerUser(registerUserRequest)
-            val res = temp.handleToCorrectFormat()
-            if (res is ResultWrapper.Error)
-                when (res.error.code) {
-                    200 -> res.error.msg =
-                        context.resources.getString(R.string.ERROR_PHONE_ALREADY_EXISTS)
-                    201 -> res.error.msg =
-                        context.resources.getString(R.string.ERROR_EMAIL_ALREADY_EXISTS)
-                    else -> res.error.msg =
-                        context.resources.getString(R.string.ERROR_API_UNREACHABLE)
-                }
-            else{
-                sharedPrefs[PREFS_AUTH_TOKEN] = temp.headers()["Set-Cookie"]?.split(";".toRegex())?.toTypedArray()?.get(0)
-            }
-            res
+            val res = service.registerUser(registerUserRequest)
+            if (res.isSuccessful)
+                sharedPrefs[PREFS_AUTH_TOKEN] =
+                    res.headers()["Set-Cookie"]?.split(";".toRegex())?.toTypedArray()?.get(0)
+            res.handleToCorrectFormat()
         }
 
 }

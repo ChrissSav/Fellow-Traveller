@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.di
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,20 +19,20 @@ class UseCasesModule {
 
     @Singleton
     @Provides
-    fun provideCheckPhoneUseCase(dataSource: FellowDataSource): CheckUserPhoneUseCase {
-        return CheckUserPhoneUseCase(dataSource)
+    fun provideCheckPhoneUseCase(dataSource: FellowDataSource, context: Context): CheckUserPhoneUseCase {
+        return CheckUserPhoneUseCase(context,dataSource)
     }
 
 
     @Singleton
     @Provides
-    fun provideCheckEmailUseCase(dataSource: FellowDataSource): CheckUserEmailUseCase {
-        return CheckUserEmailUseCase(dataSource)
+    fun provideCheckEmailUseCase(dataSource: FellowDataSource,context: Context): CheckUserEmailUseCase {
+        return CheckUserEmailUseCase(context, dataSource)
     }
 
     @Singleton
     @Provides
-    fun provideRegisterUserUseCase(dataSource: FellowDataSource): RegisterUserUseCase {
-        return RegisterUserUseCase(dataSource)
+    fun provideRegisterUserUseCase(dataSource: FellowDataSource,context: Context): RegisterUserUseCase {
+        return RegisterUserUseCase(context, dataSource)
     }
 }

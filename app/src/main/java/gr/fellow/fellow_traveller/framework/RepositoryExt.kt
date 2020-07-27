@@ -7,6 +7,7 @@ import gr.fellow.fellow_traveller.getModelFromResponseErrorBody
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
+import java.io.IOException
 
 
 fun <T : Any> Response<T>.handleToCorrectFormat(): ResultWrapper<T> {
@@ -17,7 +18,6 @@ fun <T : Any> Response<T>.handleToCorrectFormat(): ResultWrapper<T> {
         ResultWrapper.Error(getModelFromResponseErrorBody(errorBody()))
     }
 }
-
 
 
 suspend fun <T : Any> networkCall(
@@ -35,9 +35,12 @@ suspend fun <T : Any> networkCall(
     function: suspend () -> ResultWrapper<T>
 ): ResultWrapper<T> {
     return withContext(Dispatchers.IO) {
-        performCall {
-            function.invoke()
-        }
+        if (isInternetAvailable())
+            performCall {
+                function.invoke()
+            }
+        else
+            throw BaseApiException(msg = "Δεν υπάρχει σύνδεση στο ίντερνετ")
     }
 }
 
@@ -47,7 +50,7 @@ suspend fun <T : Any> performCall(
     call: suspend () -> ResultWrapper<T>
 ): ResultWrapper<T> =
     if (!connectivityHelper.checkInternetConnection()) {
-        throw BaseApiException(500)
+        throw BaseApiException(msg = "Δεν υπάρχει σύνδεση στο ίντερνετ")
     } else {
         try {
             call.invoke()
@@ -56,6 +59,19 @@ suspend fun <T : Any> performCall(
         }
     }
 
+
+fun isInternetAvailable(): Boolean {
+    val command = "ping -c 1 google.com"
+    return try {
+        Runtime.getRuntime().exec(command).waitFor() == 0
+    } catch (e: InterruptedException) {
+        e.printStackTrace()
+        false
+    } catch (e: IOException) {
+        e.printStackTrace()
+        false
+    }
+}
 
 suspend fun <T : Any> performCallWithOut(
     function: suspend () -> T

@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.ui.register
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.databinding.ActivityRegisterBinding
@@ -18,7 +19,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class RegisterActivity : AppCompatActivity() {
 
 
-    private lateinit var  binding: ActivityRegisterBinding
+    private lateinit var binding: ActivityRegisterBinding
     private val registerViewModel: RegisterViewModel by viewModels()
     private lateinit var nav: NavController
 
@@ -42,6 +43,9 @@ class RegisterActivity : AppCompatActivity() {
 
         })
 
+        registerViewModel.error.observe(this, Observer {
+            createSnackBar(view, it)
+        })
 
         binding.ImageButtonBack.setOnClickListener {
             onBackPressed()
