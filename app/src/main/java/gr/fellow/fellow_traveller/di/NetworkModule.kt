@@ -16,6 +16,7 @@ import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import gr.fellow.fellow_traveller.ConnectivityHelper
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
+import gr.fellow.fellow_traveller.utils.PREFS_AUTH_TOKEN
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -64,20 +65,20 @@ object NetworkModule {
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
-            .addInterceptor(loggingInterceptor)
             .addInterceptor(object : Interceptor {
-                @Throws(IOException::class)
                 override fun intercept(chain: Interceptor.Chain): Response {
                     val request = chain.request()
                     val newRequest = request.newBuilder()
                     try {
-                        newRequest.header("Cookie", sharedPreferences.getString("Cookie", "")!!)
+                        newRequest.header("Cookie", sharedPreferences.getString(PREFS_AUTH_TOKEN, "")!!)
                     } catch (e: NullPointerException) {
                         // do something other
                     }
                     return chain.proceed(newRequest.build())
                 }
             })
+            .addInterceptor(loggingInterceptor)
+
     }
 
 

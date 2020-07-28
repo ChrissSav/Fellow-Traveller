@@ -8,6 +8,7 @@ import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.framework.network.fellow.response.ErrorResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserInfoResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
 
 class RegisterUserUseCase(
     private val context: Context,
@@ -20,7 +21,7 @@ class RegisterUserUseCase(
         email: String,
         password: String,
         phone: String
-    ): ResultWrapper<UserInfoResponse> {
+    ): ResultWrapper<UserLoginResponse> {
         return try {
             val res = dataSource.registerUser(firstName, lastName, email, password, phone)
             if (res is ResultWrapper.Error){

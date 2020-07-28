@@ -11,9 +11,9 @@ data class UserLoginResponse(
     val lastName: String,
     val reviews: Int,
     val rate: Float,
-    val picture: String,
+    val picture: String?,
     @SerializedName("about_me")
-    val aboutMe: String,
+    val aboutMe: String?,
     val phone: String,
     @SerializedName("email")
     val emailAddress: String

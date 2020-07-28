@@ -5,8 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
-@Entity(tableName = "users")
-data class UserEntity (
+@Entity(tableName = "passengers")
+data class PassengerEntity (
     @PrimaryKey(autoGenerate = false)
     val id : Int,
     @ColumnInfo(name = "first_name")
@@ -15,5 +15,5 @@ data class UserEntity (
     val lastName : String,
     val rate : Float,
     val reviews : Int,
-    val picture : String
+    val picture : String?
 )

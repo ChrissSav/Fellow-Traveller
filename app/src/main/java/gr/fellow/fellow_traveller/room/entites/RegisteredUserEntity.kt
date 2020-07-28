@@ -15,9 +15,9 @@ data class RegisteredUserEntity(
     val lastName : String,
     val rate : Float,
     val reviews : Int,
-    val picture : String,
+    val picture : String?,
     @ColumnInfo(name = "about_me")
-    val aboutMe : String,
+    val aboutMe : String?,
     val phone : String,
     val email : String
 

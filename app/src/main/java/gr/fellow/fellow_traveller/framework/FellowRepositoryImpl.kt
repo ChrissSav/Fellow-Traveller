@@ -29,7 +29,7 @@ class FellowRepositoryImpl(
         }
 
 
-    override suspend fun registerUser(registerUserRequest: AccountCreateRequest): ResultWrapper<UserInfoResponse> =
+    override suspend fun registerUser(registerUserRequest: AccountCreateRequest): ResultWrapper<UserLoginResponse> =
         networkCall(connectivityHelper) {
             val res = service.registerUser(registerUserRequest)
             if (res.isSuccessful)

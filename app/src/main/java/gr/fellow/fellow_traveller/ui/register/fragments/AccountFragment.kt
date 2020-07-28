@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.ui.register.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,6 +16,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentAccountBinding
 import gr.fellow.fellow_traveller.databinding.FragmentPhoneBinding
 import gr.fellow.fellow_traveller.ui.createSnackBar
+import gr.fellow.fellow_traveller.ui.home.main.HomeActivity
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
 
 
@@ -56,7 +58,10 @@ class AccountFragment : Fragment() {
                     binding.firstNameEraseButton.visibility = View.VISIBLE
                 else
                     binding.firstNameEraseButton.visibility = View.INVISIBLE
-                registerViewModel.storeUserInfo(binding.firstName.text.toString(),binding.lastName.text.toString())
+                registerViewModel.storeUserInfo(
+                    binding.firstName.text.toString(),
+                    binding.lastName.text.toString()
+                )
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -74,7 +79,10 @@ class AccountFragment : Fragment() {
                     binding.lastNameEraseButton.visibility = View.VISIBLE
                 else
                     binding.lastNameEraseButton.visibility = View.INVISIBLE
-                registerViewModel.storeUserInfo(binding.firstName.text.toString(),binding.lastName.text.toString())
+                registerViewModel.storeUserInfo(
+                    binding.firstName.text.toString(),
+                    binding.lastName.text.toString()
+                )
 
             }
 
@@ -106,13 +114,15 @@ class AccountFragment : Fragment() {
 
 
         registerViewModel.error.observe(viewLifecycleOwner, Observer {
-            createSnackBar(view,it)
+            createSnackBar(view, it)
         })
 
 
         registerViewModel.finish.observe(viewLifecycleOwner, Observer {
 
-           navController.navigate(R.id.next_fragment)
+            val intent = Intent(activity, HomeActivity::class.java)
+            intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            startActivity(intent)
 
         })
     }

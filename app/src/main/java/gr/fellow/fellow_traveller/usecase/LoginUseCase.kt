@@ -7,9 +7,6 @@ import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.framework.network.fellow.response.ErrorResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
-import gr.fellow.fellow_traveller.room.dao.UserAuthDao
-import gr.fellow.fellow_traveller.room.dao.UserDao
-import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 
 class LoginUseCase(
     private val context: Context,

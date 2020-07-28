@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -46,5 +47,11 @@ class UseCasesModule {
     @Provides
     fun provideRegisterUserLocal(dataSource: FellowDataSource): RegisterUserLocalUseCase {
         return RegisterUserLocalUseCase(dataSource)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCheckLoginUseCase(sharedPreferences: SharedPreferences): CheckIfUserIsLoginUseCase {
+        return CheckIfUserIsLoginUseCase(sharedPreferences)
     }
 }

@@ -12,7 +12,7 @@ interface FellowRepository {
 
     suspend fun checkField(accountCheckRequest: AccountCheckRequest): ResultWrapper<StatusHandleResponse>
 
-    suspend fun registerUser(registerUserRequest: AccountCreateRequest): ResultWrapper<UserInfoResponse>
+    suspend fun registerUser(registerUserRequest: AccountCreateRequest): ResultWrapper<UserLoginResponse>
 
     suspend fun loginUser(loginRequest: LoginRequest): ResultWrapper<UserLoginResponse>
 

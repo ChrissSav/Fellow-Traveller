@@ -9,10 +9,10 @@ import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginRes
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.Headers
 import retrofit2.http.POST
 
 interface FellowService {
-
     @POST("auth/check")
     suspend fun checkIfAccountInfoExist(
         @Body request: AccountCheckRequest
@@ -22,7 +22,7 @@ interface FellowService {
     @POST("users")
     suspend fun registerUser(
         @Body request: AccountCreateRequest
-    ): Response<UserInfoResponse>
+    ): Response<UserLoginResponse>
 
 
     @POST("auth/login")

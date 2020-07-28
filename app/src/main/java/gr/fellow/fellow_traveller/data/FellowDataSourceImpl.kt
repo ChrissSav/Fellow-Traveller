@@ -25,7 +25,7 @@ class FellowDataSourceImpl(
     }
 
     override suspend fun registerUser(firstName: String,lastName: String, email: String,password: String, phone: String
-    ): ResultWrapper<UserInfoResponse> {
+    ): ResultWrapper<UserLoginResponse> {
         return repository.registerUser(AccountCreateRequest(firstName,lastName,email, password, phone))
     }
 

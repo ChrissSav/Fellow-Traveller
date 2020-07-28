@@ -17,7 +17,6 @@ class LoginViewModel
 constructor(
     private val loginUseCase: LoginUseCase,
     private val registerUserLocalUseCase: RegisterUserLocalUseCase
-
 ) : BaseViewModel() {
 
 
@@ -29,7 +28,7 @@ constructor(
         viewModelScope.launch {
             when (val response = loginUseCase(userName, password)) {
                 is ResultWrapper.Success ->{
-                    registerUserLocalUseCase.invoke(response.data)
+                    registerUserLocalUseCase(response.data)
                     _result.value = true
 
                 }

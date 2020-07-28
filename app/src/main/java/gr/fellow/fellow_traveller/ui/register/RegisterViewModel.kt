@@ -10,6 +10,7 @@ import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.CheckUserEmailUseCase
 import gr.fellow.fellow_traveller.usecase.CheckUserPhoneUseCase
+import gr.fellow.fellow_traveller.usecase.RegisterUserLocalUseCase
 import gr.fellow.fellow_traveller.usecase.RegisterUserUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -21,7 +22,8 @@ constructor(
     private val context: Context,
     private val checkUserPhoneUseCase: CheckUserPhoneUseCase,
     private val checkUserEmailUseCase: CheckUserEmailUseCase,
-    private val registerUserUseCase: RegisterUserUseCase
+    private val registerUserUseCase: RegisterUserUseCase,
+    private val registerUserLocalUseCase: RegisterUserLocalUseCase
 
 
 ) : BaseViewModel() {
@@ -95,9 +97,12 @@ constructor(
                     phone.value.toString()
                 )) {
                     is ResultWrapper.Error ->
-                        _error.value =  response.error.msg
-                    is ResultWrapper.Success ->
+                        _error.value = response.error.msg
+                    is ResultWrapper.Success ->{
+                        registerUserLocalUseCase(response.data)
                         _finish.value = true
+
+                    }
                 }
             }
         }

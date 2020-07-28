@@ -50,12 +50,6 @@ class PasswordFragment : Fragment() {
         binding.passwordConfirm.setText(registerViewModel.password.value)
 
 
-        registerViewModel.password.observe(viewLifecycleOwner, Observer {
-            navController.navigate(R.id.next_fragment)
-
-        })
-
-
 
         binding.password.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(charSequence: Editable?) {
@@ -118,10 +112,26 @@ class PasswordFragment : Fragment() {
 
 
             }
-            binding.passwordConfirm.setSelection(binding.password.length())
+            binding.passwordConfirm.setSelection(binding.passwordConfirm.length())
 
         }
 
+        binding.ImageButtonNext.setOnClickListener {
+            if (binding.password.text.length >= 2) {
+                if (binding.password.text.toString() == binding.passwordConfirm.text.toString()) {
+                    registerViewModel.storePassword(binding.password.text.toString())
+                } else {
+                    createSnackBar(view, resources.getString(R.string.ERROR_PASSWORD_DO_NOT_MATCH))
+                }
+            } else {
+                createSnackBar(view, resources.getString(R.string.ERROR_PASSWORD_COMPLEXITY_LENGTH))
+
+            }
+        }
+
+        registerViewModel.password.observe(viewLifecycleOwner, Observer {
+            navController.navigate(R.id.next_fragment)
+        })
     }
 
 

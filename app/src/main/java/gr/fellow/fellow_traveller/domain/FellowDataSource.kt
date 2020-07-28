@@ -18,7 +18,7 @@ interface FellowDataSource {
         email: String,
         password: String,
         phone: String
-    ): ResultWrapper<UserInfoResponse>
+    ): ResultWrapper<UserLoginResponse>
 
 
     suspend fun loginUser(username : String, password: String): ResultWrapper<UserLoginResponse>
