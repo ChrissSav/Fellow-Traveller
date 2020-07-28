@@ -11,8 +11,10 @@ import dagger.hilt.android.components.ApplicationComponent
 import gr.fellow.fellow_traveller.ConnectivityHelper
 import gr.fellow.fellow_traveller.data.FellowDataSourceImpl
 import gr.fellow.fellow_traveller.data.FellowRepository
+import gr.fellow.fellow_traveller.data.LocalRepository
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.framework.FellowRepositoryImpl
+import gr.fellow.fellow_traveller.framework.LocalRepositoryImpl
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
 import gr.fellow.fellow_traveller.room.FellowDatabase
 import gr.fellow.fellow_traveller.room.dao.UserAuthDao
@@ -30,11 +32,21 @@ object StorageModule {
         return FellowRepositoryImpl(service, connectivityHelper, sharedPreferences)
     }
 
+
+
     @Singleton
     @Provides
-    fun provideDataSource(repository: FellowRepository): FellowDataSource {
-        return FellowDataSourceImpl(repository)
+    fun provideLocalRepositoryImpl( userAuthDao: UserAuthDao ): LocalRepository {
+        return LocalRepositoryImpl(userAuthDao)
     }
+
+    @Singleton
+    @Provides
+    fun provideDataSource(repository: FellowRepository,repositoryLocal: LocalRepository): FellowDataSource {
+        return FellowDataSourceImpl(repository,repositoryLocal)
+    }
+
+
 
     @Singleton
     @Provides

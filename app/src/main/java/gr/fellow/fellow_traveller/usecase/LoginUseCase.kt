@@ -13,8 +13,7 @@ import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 
 class LoginUseCase(
     private val context: Context,
-    private val dataSource: FellowDataSource,
-    private val userAuthDao: UserAuthDao
+    private val dataSource: FellowDataSource
 ) {
 
     suspend operator fun invoke(
@@ -24,9 +23,6 @@ class LoginUseCase(
         return try {
             return when (val response = dataSource.loginUser(username, password)) {
                 is ResultWrapper.Success -> {
-                    val user =  RegisteredUserEntity( response.data.id, response.data.firstName,response.data.lastName,
-                        response.data.rate,response.data.reviews,response.data.picture,response.data.aboutMe,response.data.phone,response.data.emailAddress)
-                    userAuthDao.insertUser(user)
                     response
                 }
                 is ResultWrapper.Error ->

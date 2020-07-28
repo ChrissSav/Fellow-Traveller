@@ -93,4 +93,10 @@ suspend fun <T : Any> performCall(
     }
 
 
+suspend fun <T : Any> roomCall(
+    function: suspend () -> T
+): T =
+    withContext(Dispatchers.IO) {
+        function.invoke()
+    }
 

@@ -7,10 +7,12 @@ import gr.fellow.fellow_traveller.framework.network.fellow.request.LoginRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserInfoResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
-import retrofit2.Response
+import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 
 class FellowDataSourceImpl(
-    private val repository: FellowRepository
+    private val repository: FellowRepository,
+    private val repositoryLocal: LocalRepository
+
 
 ) : FellowDataSource {
 
@@ -29,5 +31,9 @@ class FellowDataSourceImpl(
 
     override suspend fun loginUser( username: String,  password: String): ResultWrapper<UserLoginResponse> {
         return  repository.loginUser(LoginRequest(username,password))
+    }
+
+    override suspend fun registerUserAuth(userEntity: RegisteredUserEntity) {
+        repositoryLocal.registerUserAuth(userEntity)
     }
 }
