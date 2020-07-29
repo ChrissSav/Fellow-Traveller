@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.ui.newTrip.fragments
+package gr.fellow.fellow_traveller.ui.newtrip.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,17 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.databinding.FragmentDateTimeBinding
-import gr.fellow.fellow_traveller.ui.createSnackBar
-import gr.fellow.fellow_traveller.ui.newTrip.NewTripViewModel
+import gr.fellow.fellow_traveller.databinding.FragmentBaseInfoBinding
+import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 
 
-class DateTimeFragment : Fragment() {
-
+class BaseInfoFragment : Fragment() {
     private val newTripViewModel: NewTripViewModel by activityViewModels()
     private lateinit var navController: NavController
 
@@ -24,14 +21,14 @@ class DateTimeFragment : Fragment() {
      * This property is only valid between onCreateView and
      * onDestroyView.
      */
-    private var _binding: FragmentDateTimeBinding? = null
+    private var _binding: FragmentBaseInfoBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentDateTimeBinding.inflate(inflater, container, false)
+        _binding = FragmentBaseInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -42,6 +39,9 @@ class DateTimeFragment : Fragment() {
         navController = Navigation.findNavController(view)
 
 
+        binding.ImageButtonNext.setOnClickListener {
+            navController.navigate(R.id.next_fragment)
+        }
     }
 
 

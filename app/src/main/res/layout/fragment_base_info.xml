@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.newTrip.fragments.BaseInfoFragment">
+    tools:context=".ui.newtrip.fragments.BaseInfoFragment">
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"

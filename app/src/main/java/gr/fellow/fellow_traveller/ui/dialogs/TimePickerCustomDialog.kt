@@ -6,13 +6,13 @@ import android.os.Bundle
 import android.widget.TimePicker
 import androidx.fragment.app.DialogFragment
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.ui.newTrip.NewTripViewModel
+import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 import java.util.*
 
 class TimePickerCustomDialog(
     private val buttonText: String,
     private val defaultTitle: String,
-    private val viewModel: NewTripViewModel
+    private val listener: (String) -> Unit
 ) :
 
     DialogFragment(), TimePickerDialog.OnTimeSetListener {
@@ -40,7 +40,7 @@ class TimePickerCustomDialog(
         val time =
             java.lang.String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute)
 
-        //viewModel.applyTime(time)
+        listener(time)
     }
 
 }

@@ -6,14 +6,15 @@ import android.app.Dialog
 import android.os.Bundle
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
+import com.example.fellowtravellerbeta.data.network.google.response.PredictionResponse
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.ui.newTrip.NewTripViewModel
+import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 import java.util.*
 
 class DatePickerCustomDialog(
     private val buttonText: String,
     private val defaultTitle: String,
-    private val viewModel: NewTripViewModel
+    private val listener: (String) -> Unit
 ) :
 
     DialogFragment(), OnDateSetListener {
@@ -46,8 +47,7 @@ class DatePickerCustomDialog(
 
         val date =
             java.lang.String.format(Locale.getDefault(), "%02d/%02d/%04d", day, (month + 1), year)
-
-        //viewModel.applyDate(date)
+        listener(date)
     }
 
 

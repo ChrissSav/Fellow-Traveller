@@ -7,8 +7,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import gr.fellow.fellow_traveller.domain.FellowDataSource
-import gr.fellow.fellow_traveller.room.dao.UserAuthDao
 import gr.fellow.fellow_traveller.usecase.*
+import gr.fellow.fellow_traveller.usecase.newtrip.GetPlaceFromPlacesUseCase
+import gr.fellow.fellow_traveller.usecase.register.*
 import javax.inject.Singleton
 
 
@@ -20,20 +21,29 @@ class UseCasesModule {
     @Singleton
     @Provides
     fun provideCheckPhoneUseCase(dataSource: FellowDataSource, context: Context): CheckUserPhoneUseCase {
-        return CheckUserPhoneUseCase(context,dataSource)
+        return CheckUserPhoneUseCase(
+            context,
+            dataSource
+        )
     }
 
 
     @Singleton
     @Provides
     fun provideCheckEmailUseCase(dataSource: FellowDataSource,context: Context): CheckUserEmailUseCase {
-        return CheckUserEmailUseCase(context, dataSource)
+        return CheckUserEmailUseCase(
+            context,
+            dataSource
+        )
     }
 
     @Singleton
     @Provides
     fun provideRegisterUserUseCase(dataSource: FellowDataSource,context: Context): RegisterUserUseCase {
-        return RegisterUserUseCase(context, dataSource)
+        return RegisterUserUseCase(
+            context,
+            dataSource
+        )
     }
 
     @Singleton
@@ -42,16 +52,25 @@ class UseCasesModule {
         return LoginUseCase(context, dataSource)
     }
 
+    @Singleton
+    @Provides
+    fun provideGetPlaceFromPlacesUseCase(dataSource: FellowDataSource): GetPlaceFromPlacesUseCase {
+        return GetPlaceFromPlacesUseCase(dataSource)
+    }
 
     @Singleton
     @Provides
     fun provideRegisterUserLocal(dataSource: FellowDataSource): RegisterUserLocalUseCase {
-        return RegisterUserLocalUseCase(dataSource)
+        return RegisterUserLocalUseCase(
+            dataSource
+        )
     }
 
     @Singleton
     @Provides
     fun provideCheckLoginUseCase(sharedPreferences: SharedPreferences): CheckIfUserIsLoginUseCase {
-        return CheckIfUserIsLoginUseCase(sharedPreferences)
+        return CheckIfUserIsLoginUseCase(
+            sharedPreferences
+        )
     }
 }

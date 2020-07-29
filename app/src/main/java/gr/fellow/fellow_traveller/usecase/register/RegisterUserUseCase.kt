@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.usecase
+package gr.fellow.fellow_traveller.usecase.register
 
 import android.content.Context
 import gr.fellow.fellow_traveller.R

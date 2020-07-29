@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import gr.fellow.fellow_traveller.domain.sigleton.UserInfoSingle
 import gr.fellow.fellow_traveller.room.dao.UserAuthDao
 import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
-import gr.fellow.fellow_traveller.usecase.CheckIfUserIsLoginUseCase
+import gr.fellow.fellow_traveller.usecase.register.CheckIfUserIsLoginUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 

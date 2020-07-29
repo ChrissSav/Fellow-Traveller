@@ -5,8 +5,7 @@ import android.content.Context
 import android.content.Context.CONNECTIVITY_SERVICE
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
-import android.preference.PreferenceManager
-import com.example.fellowtravellerbeta.data.network.google.PlaceApiService
+import gr.fellow.fellow_traveller.framework.network.google.PlaceApiService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -23,10 +22,10 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
 import java.net.Proxy
 import javax.inject.Singleton
 import java.util.concurrent.TimeUnit
+import javax.inject.Qualifier
 
 
 @Module
@@ -55,6 +54,7 @@ object NetworkModule {
     }
 
 
+    @Fellow
     @Singleton
     @Provides
     fun provideOkHttpClient(
@@ -70,7 +70,10 @@ object NetworkModule {
                     val request = chain.request()
                     val newRequest = request.newBuilder()
                     try {
-                        newRequest.header("Cookie", sharedPreferences.getString(PREFS_AUTH_TOKEN, "")!!)
+                        newRequest.header(
+                            "Cookie",
+                            sharedPreferences.getString(PREFS_AUTH_TOKEN, "")!!
+                        )
                     } catch (e: NullPointerException) {
                         // do something other
                     }
@@ -91,9 +94,10 @@ object NetworkModule {
     }
 
 
+    @Fellow
     @Singleton
     @Provides
-    fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient.Builder): Retrofit.Builder {
+    fun provideRetrofit(gson: Gson, @Fellow okHttpClient: OkHttpClient.Builder): Retrofit.Builder {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(okHttpClient.build())
@@ -101,19 +105,56 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideFellowService(retrofit: Retrofit.Builder): FellowService {
+    fun provideFellowService(@Fellow retrofit: Retrofit.Builder): FellowService {
         return retrofit.baseUrl("https://api.fellowtraveller.gr/").build()
             .create(FellowService::class.java)
     }
 
-    /* @Singleton
-     @Provides
-     fun provideFellowGoogleService(retrofit: Retrofit.Builder): PlaceApiService {
-         return retrofit
-             .baseUrl("https://maps.googleapis.com/maps/api/place/autocomplete/")
-             .build()
-             .create(PlaceApiService::class.java)
-     }*/
+
+    /**
+     * Google Service
+     * */
+
+    @Google
+    @Singleton
+    @Provides
+    fun provideOkHttpClientGoogle(
+        loggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient.Builder {
+        return OkHttpClient.Builder().proxy(Proxy.NO_PROXY)
+            .connectTimeout(15, TimeUnit.SECONDS)
+            .readTimeout(15, TimeUnit.SECONDS)
+            .writeTimeout(15, TimeUnit.SECONDS)
+            .addInterceptor(loggingInterceptor)
+
+    }
+
+
+    @Google
+    @Singleton
+    @Provides
+    fun provideRetrofitGoogle(gson: Gson, @Google okHttpClient: OkHttpClient.Builder): Retrofit.Builder {
+        return Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .client(okHttpClient.build())
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideFellowGoogleService(@Google retrofit: Retrofit.Builder): PlaceApiService {
+        return retrofit
+            .baseUrl("https://maps.googleapis.com/maps/api/place/autocomplete/")
+            .build()
+            .create(PlaceApiService::class.java)
+    }
 
 }
 
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class Fellow
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class Google

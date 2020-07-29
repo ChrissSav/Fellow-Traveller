@@ -1,9 +1,8 @@
 package gr.fellow.fellow_traveller.framework
 
-import android.content.Context
 import android.content.SharedPreferences
+import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
 import gr.fellow.fellow_traveller.ConnectivityHelper
-import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.FellowRepository
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
@@ -11,13 +10,15 @@ import gr.fellow.fellow_traveller.framework.network.fellow.request.AccountCheckR
 import gr.fellow.fellow_traveller.framework.network.fellow.request.AccountCreateRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.request.LoginRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.UserInfoResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
+import gr.fellow.fellow_traveller.framework.network.google.PlaceApiService
 import gr.fellow.fellow_traveller.set
 import gr.fellow.fellow_traveller.utils.PREFS_AUTH_TOKEN
+import retrofit2.Response
 
 class FellowRepositoryImpl(
     private val service: FellowService,
+    private val servicePlace: PlaceApiService,
     private val connectivityHelper: ConnectivityHelper,
     private val sharedPrefs: SharedPreferences
 ) : FellowRepository {
@@ -47,5 +48,12 @@ class FellowRepositoryImpl(
                     res.headers()["Set-Cookie"]?.split(";".toRegex())?.toTypedArray()?.get(0)
             res.handleToCorrectFormat()
         }
+
+    override suspend fun getPlace(place: String): Response<PlaceApiResponse> =
+        networkCallWithOutWrap(connectivityHelper)
+        {
+            servicePlace.getPlaces(place)
+        }
+
 
 }

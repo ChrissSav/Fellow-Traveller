@@ -1,7 +1,6 @@
-package com.example.fellowtravellerbeta.data.network.google
+package gr.fellow.fellow_traveller.framework.network.google
 
-import com.example.fellowtravellerbeta.data.network.google.response.PlaceApiResponse
-import com.example.fellowtravellerbeta.data.network.google.response.PredictionResponse
+import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

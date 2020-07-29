@@ -7,7 +7,7 @@ import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.LoginUseCase
-import gr.fellow.fellow_traveller.usecase.RegisterUserLocalUseCase
+import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 

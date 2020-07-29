@@ -17,6 +17,7 @@ import gr.fellow.fellow_traveller.domain.sigleton.UserInfoSingle
 import gr.fellow.fellow_traveller.framework.FellowRepositoryImpl
 import gr.fellow.fellow_traveller.framework.LocalRepositoryImpl
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
+import gr.fellow.fellow_traveller.framework.network.google.PlaceApiService
 import gr.fellow.fellow_traveller.room.FellowDatabase
 import gr.fellow.fellow_traveller.room.dao.UserAuthDao
 import javax.inject.Singleton
@@ -30,9 +31,10 @@ object StorageModule {
     fun provideRepository(
         service: FellowService,
         connectivityHelper: ConnectivityHelper,
-        sharedPreferences: SharedPreferences
+        sharedPreferences: SharedPreferences,
+        servicePlace: PlaceApiService
     ): FellowRepository {
-        return FellowRepositoryImpl(service, connectivityHelper, sharedPreferences)
+        return FellowRepositoryImpl(service,servicePlace, connectivityHelper, sharedPreferences)
     }
 
 

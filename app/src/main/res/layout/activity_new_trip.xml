@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.newTrip.NewTripActivity">
+    tools:context=".ui.newtrip.NewTripActivity">
 
     <ImageButton
         android:id="@+id/imageButton_back"
@@ -30,7 +30,7 @@
 
 
     <TextView
-        android:id="@+id/NewTripActivity_textView_label"
+        android:id="@+id/labelSummary"
         style="@style/display"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -67,6 +67,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton_back"
-        app:navGraph="@navigation/register_nav_graph"/>
+        app:navGraph="@navigation/new_trip_nav_graph"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,10 +8,10 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
-import gr.fellow.fellow_traveller.usecase.CheckUserEmailUseCase
-import gr.fellow.fellow_traveller.usecase.CheckUserPhoneUseCase
-import gr.fellow.fellow_traveller.usecase.RegisterUserLocalUseCase
-import gr.fellow.fellow_traveller.usecase.RegisterUserUseCase
+import gr.fellow.fellow_traveller.usecase.register.CheckUserEmailUseCase
+import gr.fellow.fellow_traveller.usecase.register.CheckUserPhoneUseCase
+import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
+import gr.fellow.fellow_traveller.usecase.register.RegisterUserUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 

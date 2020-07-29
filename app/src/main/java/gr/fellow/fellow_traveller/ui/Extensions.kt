@@ -1,14 +1,14 @@
 package gr.fellow.fellow_traveller.ui
 
+import android.R.attr.data
+import android.content.Context
 import android.util.Patterns
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
-import com.google.gson.Gson
-import com.google.gson.JsonParser
 import gr.fellow.fellow_traveller.R
-import retrofit2.Response
 import java.io.IOException
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -20,6 +20,11 @@ fun createSnackBar(view: View, msg: String) {
     Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
         .setActionTextColor(view.context.resources.getColor(R.color.colorPrimary))
         .show()
+
+}
+
+fun createToast(context: Context, msg: String) {
+    Toast.makeText(context, msg,Toast.LENGTH_SHORT).show()
 
 }
 

@@ -19,6 +19,18 @@ fun <T : Any> Response<T>.handleToCorrectFormat(): ResultWrapper<T> {
     }
 }
 
+suspend fun <T : Any> networkCallWithOutWrap(
+    connectivityHelper: ConnectivityHelper,
+    function: suspend () -> T
+): T {
+    if (!connectivityHelper.checkInternetConnection()) {
+        throw BaseApiException(msg = "Δεν υπάρχει σύνδεση στο ίντερνετ")
+    }
+    return withContext(Dispatchers.IO) {
+        function.invoke()
+    }
+}
+
 
 suspend fun <T : Any> networkCall(
     connectivityHelper: ConnectivityHelper,

@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.ui.newTrip.fragments
+package gr.fellow.fellow_traveller.ui.newtrip.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,13 +9,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.databinding.FragmentBaseInfoBinding
-import gr.fellow.fellow_traveller.ui.createSnackBar
-import gr.fellow.fellow_traveller.ui.newTrip.NewTripViewModel
+import gr.fellow.fellow_traveller.databinding.FragmentPriceBinding
+import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 
 
-class BaseInfoFragment : Fragment() {
+class PriceFragment : Fragment() {
     private val newTripViewModel: NewTripViewModel by activityViewModels()
     private lateinit var navController: NavController
 
@@ -23,14 +23,14 @@ class BaseInfoFragment : Fragment() {
      * This property is only valid between onCreateView and
      * onDestroyView.
      */
-    private var _binding: FragmentBaseInfoBinding? = null
+    private var _binding: FragmentPriceBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentBaseInfoBinding.inflate(inflater, container, false)
+        _binding = FragmentPriceBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -40,6 +40,22 @@ class BaseInfoFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
+        if (newTripViewModel.price.value != null)
+            binding.AddPriceFragmentEditTextPrice.setText(newTripViewModel.price.value.toString())
+
+        newTripViewModel.price.observe(viewLifecycleOwner, Observer {
+            navController.navigate(R.id.next_fragment)
+        })
+
+        binding.ImageButtonNext.setOnClickListener {
+            if (binding.AddPriceFragmentEditTextPrice.text.isEmpty()) {
+                newTripViewModel.setPrice("0".toFloat())
+            } else {
+                newTripViewModel.setPrice(
+                    binding.AddPriceFragmentEditTextPrice.text.toString().toFloat()
+                )
+            }
+        }
 
     }
 

@@ -8,12 +8,9 @@ import androidx.navigation.ui.NavigationUI
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.ActivityHomeBinding
-import gr.fellow.fellow_traveller.domain.sigleton.UserInfoSingle
-import gr.fellow.fellow_traveller.usecase.CheckUserEmailUseCase
-import kotlinx.coroutines.Dispatchers
+import gr.fellow.fellow_traveller.usecase.register.CheckUserEmailUseCase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @AndroidEntryPoint
