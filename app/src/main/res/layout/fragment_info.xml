@@ -26,7 +26,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/FragmentAccount_user_image"
+                android:id="@+id/user_image"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_centerHorizontal="true"
@@ -38,7 +38,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/FragmentAccount_user_name"
+                android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -49,7 +49,7 @@
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/FragmentAccount_user_image" />
+                app:layout_constraintTop_toBottomOf="@id/user_image" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/FragmentAccount_verify_section"
@@ -58,7 +58,7 @@
                 android:layout_marginTop="15dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/FragmentAccount_user_name">
+                app:layout_constraintTop_toBottomOf="@+id/user_name">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/FragmentAccount_verify_icon"

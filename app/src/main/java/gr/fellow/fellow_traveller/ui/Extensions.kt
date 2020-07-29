@@ -2,6 +2,8 @@ package gr.fellow.fellow_traveller.ui
 
 import android.util.Patterns
 import android.view.View
+import android.widget.ImageView
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.JsonParser
@@ -12,8 +14,6 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
-
-
 
 
 fun createSnackBar(view: View, msg: String) {
@@ -64,7 +64,6 @@ fun isValidEmail(email: String): Boolean {
 }
 
 
-
 fun validateDateTimeDiffer(date: String, time: String, timeDiffer: Int): Boolean {
     val timestamp = currentTimeStamp()
     if ((dateTimeToTimestamp(date, time) - timestamp) >= timeDiffer) {
@@ -76,4 +75,12 @@ fun validateDateTimeDiffer(date: String, time: String, timeDiffer: Int): Boolean
 fun isValidPhone(phone: String): Boolean {
     val regexPattern = Pattern.compile("^[6][9][0-9]{8}$")
     return regexPattern.matcher(phone).matches()
+}
+
+
+fun ImageView.loadImage(url: String?) {
+    if (!url.isNullOrBlank())
+        Glide.with(this)
+            .load(url)
+            .into(this);
 }

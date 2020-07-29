@@ -12,10 +12,12 @@ import gr.fellow.fellow_traveller.ui.home.main.HomeActivity
 import gr.fellow.fellow_traveller.ui.main.MainActivity
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
+
     private val splashViewModel: SplashViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {

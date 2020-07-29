@@ -29,7 +29,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/FragmentHome_user_welcome_textView"
+                android:id="@+id/user_welcome_textView"
                 style="@style/display"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
