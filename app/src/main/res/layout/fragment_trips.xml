@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.main.fragments.TripsFragment">
+    tools:context=".ui.home.tabs.TripsFragment">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/ActivityReviews_main_coordinatorLayout"

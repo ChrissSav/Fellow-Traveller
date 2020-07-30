@@ -44,4 +44,8 @@ class FellowDataSourceImpl(
 
     override suspend fun getPlaces(place: String): Response<PlaceApiResponse> =
         repository.getPlace(place)
+
+    override suspend fun loadUsersInfo(): RegisteredUserEntity =
+        repositoryLocal.loadUserAuth()
+
 }

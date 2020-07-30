@@ -83,7 +83,7 @@ fun isValidPhone(phone: String): Boolean {
 }
 
 
-fun ImageView.loadImage(url: String?) {
+fun ImageView.loadImageFromUrl(url: String?) {
     if (!url.isNullOrBlank())
         Glide.with(this)
             .load(url)

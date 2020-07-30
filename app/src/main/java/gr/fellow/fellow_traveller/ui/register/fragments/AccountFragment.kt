@@ -12,11 +12,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentAccountBinding
 import gr.fellow.fellow_traveller.databinding.FragmentPhoneBinding
 import gr.fellow.fellow_traveller.ui.createSnackBar
-import gr.fellow.fellow_traveller.ui.home.main.HomeActivity
+import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
 
 

@@ -20,7 +20,10 @@ class UseCasesModule {
 
     @Singleton
     @Provides
-    fun provideCheckPhoneUseCase(dataSource: FellowDataSource, context: Context): CheckUserPhoneUseCase {
+    fun provideCheckPhoneUseCase(
+        dataSource: FellowDataSource,
+        context: Context
+    ): CheckUserPhoneUseCase {
         return CheckUserPhoneUseCase(
             context,
             dataSource
@@ -30,7 +33,10 @@ class UseCasesModule {
 
     @Singleton
     @Provides
-    fun provideCheckEmailUseCase(dataSource: FellowDataSource,context: Context): CheckUserEmailUseCase {
+    fun provideCheckEmailUseCase(
+        dataSource: FellowDataSource,
+        context: Context
+    ): CheckUserEmailUseCase {
         return CheckUserEmailUseCase(
             context,
             dataSource
@@ -39,7 +45,10 @@ class UseCasesModule {
 
     @Singleton
     @Provides
-    fun provideRegisterUserUseCase(dataSource: FellowDataSource,context: Context): RegisterUserUseCase {
+    fun provideRegisterUserUseCase(
+        dataSource: FellowDataSource,
+        context: Context
+    ): RegisterUserUseCase {
         return RegisterUserUseCase(
             context,
             dataSource
@@ -48,7 +57,7 @@ class UseCasesModule {
 
     @Singleton
     @Provides
-    fun provideLoginUseCase(dataSource: FellowDataSource,context: Context): LoginUseCase {
+    fun provideLoginUseCase(dataSource: FellowDataSource, context: Context): LoginUseCase {
         return LoginUseCase(context, dataSource)
     }
 
@@ -73,4 +82,12 @@ class UseCasesModule {
             sharedPreferences
         )
     }
+
+    @Singleton
+    @Provides
+    fun provideLoadUserInfoUseCase(dataSource: FellowDataSource): LoadUserInfoUseCase {
+        return LoadUserInfoUseCase(dataSource)
+    }
+
+
 }

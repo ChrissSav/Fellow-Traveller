@@ -21,8 +21,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.location.SelectLocationActivity"></activity>
         <activity android:name=".ui.base.BaseActivity" />
-        <activity android:name=".ui.home.setting.SettingsActivity" />
-        <activity android:name=".ui.home.main.HomeActivity" />
+        <activity android:name=".ui.home.settings.SettingsActivity" />
+        <activity android:name=".ui.home.HomeActivity" />
         <activity android:name=".ui.newtrip.NewTripActivity" />
         <activity android:name=".ui.register.RegisterActivity" />
         <activity android:name=".ui.splash.SplashActivity">

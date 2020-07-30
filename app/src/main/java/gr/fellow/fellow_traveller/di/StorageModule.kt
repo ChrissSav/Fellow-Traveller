@@ -75,12 +75,4 @@ object StorageModule {
         return fellowDatabase.userAuthDao()
     }
 
-    @Singleton
-    @Provides
-    fun providesUserInfoSingle(): UserInfoSingle {
-        return UserInfoSingle()
-    }
-
-
-
 }

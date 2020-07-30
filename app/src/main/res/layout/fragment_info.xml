@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.home.main.fragments.InfoFragment">
+    tools:context=".ui.home.tabs.InfoFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -41,9 +41,11 @@
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginRight="24dp"
                 android:fontFamily="@font/firasans_medium"
-                android:text="Fotios Pechlivanis"
+                android:text="Test Example"
                 android:textColor="@color/black_color"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -85,7 +87,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/FragmentAccount_rate_section"
+                android:id="@+id/rate_section"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
@@ -94,7 +96,7 @@
                 app:layout_constraintTop_toBottomOf="@id/FragmentAccount_verify_section">
 
                 <TextView
-                    android:id="@+id/FragmentAccount_rate"
+                    android:id="@+id/rate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/firasans_bold"
@@ -105,30 +107,30 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/FragmentAccount_rate_icon"
+                    android:id="@+id/rate_icon"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="18dp"
                     android:background="@drawable/ic_rating"
-                    app:layout_constraintBottom_toBottomOf="@id/FragmentAccount_rate"
-                    app:layout_constraintStart_toEndOf="@id/FragmentAccount_rate"
-                    app:layout_constraintTop_toTopOf="@id/FragmentAccount_rate" />
+                    app:layout_constraintBottom_toBottomOf="@id/rate"
+                    app:layout_constraintStart_toEndOf="@id/rate"
+                    app:layout_constraintTop_toTopOf="@id/rate" />
 
                 <View
-                    android:id="@+id/FragmentAccount_rate_split_line"
+                    android:id="@+id/rate_split_line"
                     android:layout_width="2dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="18dp"
                     android:background="@color/softGrey_color"
-                    app:layout_constraintBottom_toBottomOf="@id/FragmentAccount_rate"
-                    app:layout_constraintStart_toEndOf="@id/FragmentAccount_rate_icon"
-                    app:layout_constraintTop_toTopOf="@id/FragmentAccount_rate"
+                    app:layout_constraintBottom_toBottomOf="@id/rate"
+                    app:layout_constraintStart_toEndOf="@id/rate_icon"
+                    app:layout_constraintTop_toTopOf="@id/rate"
 
                     />
 
                 <TextView
-                    android:id="@+id/FragmentAccount_reviews"
+                    android:id="@+id/reviews"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
@@ -136,20 +138,20 @@
                     android:text="125"
                     android:textColor="@color/black_color"
                     android:textSize="32sp"
-                    app:layout_constraintBottom_toBottomOf="@id/FragmentAccount_rate"
-                    app:layout_constraintStart_toEndOf="@id/FragmentAccount_rate_split_line"
-                    app:layout_constraintTop_toTopOf="@id/FragmentAccount_rate" />
+                    app:layout_constraintBottom_toBottomOf="@id/rate"
+                    app:layout_constraintStart_toEndOf="@id/rate_split_line"
+                    app:layout_constraintTop_toTopOf="@id/rate" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/FragmentAccount_reviews_icon"
+                    android:id="@+id/reviews_icon"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="18dp"
                     android:background="@drawable/ic_review"
-                    app:layout_constraintBottom_toBottomOf="@id/FragmentAccount_rate"
-                    app:layout_constraintStart_toEndOf="@id/FragmentAccount_reviews"
-                    app:layout_constraintTop_toTopOf="@id/FragmentAccount_rate" />
+                    app:layout_constraintBottom_toBottomOf="@id/rate"
+                    app:layout_constraintStart_toEndOf="@id/reviews"
+                    app:layout_constraintTop_toTopOf="@id/rate" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -160,7 +162,7 @@
                 android:layout_marginTop="60dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/FragmentAccount_rate_section">
+                app:layout_constraintTop_toBottomOf="@id/rate_section">
 
                 <TextView
                     android:id="@+id/FragmentAccount_about_me_tv"
@@ -184,7 +186,7 @@
                     app:layout_constraintTop_toBottomOf="@id/FragmentAccount_about_me_tv" />
 
                 <TextView
-                    android:id="@+id/FragmentAccount_about_me_info"
+                    android:id="@+id/about_me_info"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"

@@ -1,23 +1,22 @@
-package gr.fellow.fellow_traveller.ui.home.main.fragments
+package gr.fellow.fellow_traveller.ui.home.tabs
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import dagger.hilt.android.AndroidEntryPoint
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentInfoBinding
-import gr.fellow.fellow_traveller.domain.sigleton.UserInfoSingle
-import gr.fellow.fellow_traveller.ui.loadImage
-import javax.inject.Inject
+import gr.fellow.fellow_traveller.ui.home.HomeViewModel
+import gr.fellow.fellow_traveller.ui.loadImageFromUrl
 
-@AndroidEntryPoint
 class InfoFragment : Fragment() {
 
 
-    @Inject
-    lateinit var userInfoSingle: UserInfoSingle
+    private val homeViewModel: HomeViewModel by activityViewModels()
 
     private var _binding: FragmentInfoBinding? = null
     private val binding get() = _binding!!
@@ -34,10 +33,25 @@ class InfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.userName.text = "${userInfoSingle.firstName} ${userInfoSingle.lastName}"
 
 
-        binding.userImage.loadImage(userInfoSingle.picture)
+        homeViewModel.user.observe(viewLifecycleOwner, Observer { user ->
+
+            with(binding) {
+                userName.text = "${user.firstName} ${user.lastName}"
+                userImage.loadImageFromUrl(user.picture)
+                reviews.text = user.reviews.toString()
+                rate.text = user.rate.toString()
+                aboutMeInfo.text= user.aboutMe
+            }
+
+
+        })
+
+        binding.settingsButton.setOnClickListener {
+            val nav = Navigation.findNavController(view)
+            nav.navigate(R.id.to_setting)
+        }
 
     }
 

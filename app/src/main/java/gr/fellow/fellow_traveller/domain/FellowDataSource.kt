@@ -31,4 +31,12 @@ interface FellowDataSource {
 
     suspend fun getPlaces(place: String): Response<PlaceApiResponse>
 
+
+
+    /**
+     * local DB
+     * */
+
+    suspend fun loadUsersInfo(): RegisteredUserEntity
+
 }

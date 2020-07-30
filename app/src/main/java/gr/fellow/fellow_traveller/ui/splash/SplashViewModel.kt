@@ -15,9 +15,7 @@ import kotlinx.coroutines.launch
 class SplashViewModel
 @ViewModelInject
 constructor(
-    private val checkIfUserIsLoginUseCase: CheckIfUserIsLoginUseCase,
-    private val userAuthDao: UserAuthDao,
-    private val userInfoSingle: UserInfoSingle
+    private val checkIfUserIsLoginUseCase: CheckIfUserIsLoginUseCase
 ) : ViewModel() {
 
     private val _result = SingleLiveEvent<Boolean>()
@@ -26,17 +24,7 @@ constructor(
 
     fun checkUserState() {
         viewModelScope.launch {
-            val res = checkIfUserIsLoginUseCase()
-            if (res) {
-                val temp = userAuthDao.getUserRegistered()
-                userInfoSingle.id = temp.id
-                userInfoSingle.firstName = temp.firstName
-                userInfoSingle.lastName = temp.lastName
-                userInfoSingle.picture = temp.picture
-
-            }
-
-            _result.value = res
+            _result.value = checkIfUserIsLoginUseCase()
         }
     }
 }

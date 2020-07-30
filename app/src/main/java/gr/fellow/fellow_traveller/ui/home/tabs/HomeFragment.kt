@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.ui.home.main.fragments
+package gr.fellow.fellow_traveller.ui.home.tabs
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,18 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import dagger.hilt.android.AndroidEntryPoint
-import gr.fellow.fellow_traveller.databinding.FragmentAccountBinding
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import gr.fellow.fellow_traveller.databinding.FragmentHomeBinding
-import gr.fellow.fellow_traveller.domain.sigleton.UserInfoSingle
+import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripActivity
-import javax.inject.Inject
 
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    @Inject
-    lateinit var userInfoSingle: UserInfoSingle
+
+    private val homeViewModel: HomeViewModel by activityViewModels()
 
 
     private var _binding: FragmentHomeBinding? = null
@@ -34,9 +33,13 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+       // binding.userWelcomeTextView.text = userInfoSingle.firstName
 
 
+        homeViewModel.user.observe(viewLifecycleOwner , Observer {
+            binding.userWelcomeTextView.text = it.firstName
 
+        })
 
         binding.FragmentHomeOfferSection.setOnClickListener {
             val intent = Intent(activity, NewTripActivity::class.java)
