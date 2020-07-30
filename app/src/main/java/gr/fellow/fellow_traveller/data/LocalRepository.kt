@@ -7,4 +7,7 @@ interface LocalRepository {
     suspend fun registerUserAuth(userEntity: RegisteredUserEntity)
 
     suspend fun loadUserAuth() : RegisteredUserEntity
+
+    suspend fun logoutUser()
+
 }

@@ -26,6 +26,7 @@ operator fun SharedPreferences.set(key: String, value: Any?) {
     }
 }
 
+
 inline operator fun <reified T : Any> SharedPreferences.get(key: String, defaultValue: T? = null): T? {
     return when (T::class) {
         String::class -> getString(key, defaultValue as? String) as T?

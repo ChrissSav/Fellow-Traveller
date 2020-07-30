@@ -5,14 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.databinding.FragmentAddCarBinding
+import gr.fellow.fellow_traveller.databinding.FragmentUserCarsBinding
 
 
-class AddCarFragment : Fragment() {
+class UserCarsFragment : Fragment() {
 
-
-    private var _binding: FragmentAddCarBinding? = null
+    private var _binding: FragmentUserCarsBinding? = null
     private val binding get() = _binding!!
 
 
@@ -20,25 +18,22 @@ class AddCarFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentAddCarBinding.inflate(inflater, container, false)
-
+        _binding = FragmentUserCarsBinding.inflate(inflater, container, false)
         return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.closeButtonAddCarSettings.setOnClickListener {
+        binding.backButtons.setOnClickListener {
             activity?.onBackPressed()
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 
 }

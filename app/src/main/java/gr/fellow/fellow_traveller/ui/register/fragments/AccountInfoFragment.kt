@@ -12,14 +12,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import gr.fellow.fellow_traveller.databinding.FragmentAccountBinding
-import gr.fellow.fellow_traveller.databinding.FragmentPhoneBinding
+import gr.fellow.fellow_traveller.databinding.FragmentAccountInfoBinding
 import gr.fellow.fellow_traveller.ui.createSnackBar
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
 
 
-class AccountFragment : Fragment() {
+class AccountInfoFragment : Fragment() {
 
     private val registerViewModel: RegisterViewModel by activityViewModels()
     private lateinit var navController: NavController
@@ -28,14 +27,14 @@ class AccountFragment : Fragment() {
      * This property is only valid between onCreateView and
      * onDestroyView.
      */
-    private var _binding: FragmentAccountBinding? = null
+    private var _binding: FragmentAccountInfoBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentAccountBinding.inflate(inflater, container, false)
+        _binding = FragmentAccountInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
 

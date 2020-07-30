@@ -20,5 +20,11 @@ class LocalRepositoryImpl(
             userAuthDao.getUserRegistered()
         }
 
+    override suspend fun logoutUser() {
+        roomCall {
+            userAuthDao.deleteUser()
+        }
+    }
+
 
 }

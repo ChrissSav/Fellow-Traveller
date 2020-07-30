@@ -89,5 +89,12 @@ class UseCasesModule {
         return LoadUserInfoUseCase(dataSource)
     }
 
-
+    @Singleton
+    @Provides
+    fun provideLoadLogoutUseCase(
+        dataSource: FellowDataSource,
+        sharedPreferences: SharedPreferences
+    ): LogoutUseCase {
+        return LogoutUseCase(dataSource, sharedPreferences)
+    }
 }

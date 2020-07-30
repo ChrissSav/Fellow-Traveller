@@ -12,11 +12,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.databinding.FragmentAccountBinding
 import gr.fellow.fellow_traveller.databinding.FragmentEmailBinding
 import gr.fellow.fellow_traveller.ui.createSnackBar
 import gr.fellow.fellow_traveller.ui.isValidEmail
-import gr.fellow.fellow_traveller.ui.isValidPhone
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
 
 
@@ -39,7 +37,6 @@ class EmailFragment : Fragment() {
         _binding = FragmentEmailBinding.inflate(inflater, container, false)
         return binding.root
     }
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,8 +73,8 @@ class EmailFragment : Fragment() {
         })
 
         binding.ImageButtonNext.setOnClickListener {
-            if (isValidEmail( binding.EditTextEmail.text.toString())) {
-                registerViewModel.checkUserEmail( binding.EditTextEmail.text.toString())
+            if (isValidEmail(binding.EditTextEmail.text.toString())) {
+                registerViewModel.checkUserEmail(binding.EditTextEmail.text.toString())
             } else {
                 createSnackBar(view, resources.getString(R.string.ERROR_INVALID_EMAIL_FORMAT))
             }

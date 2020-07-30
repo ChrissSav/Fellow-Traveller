@@ -75,7 +75,7 @@
             app:layout_constraintTop_toBottomOf="@+id/change_image_button">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/ActivityProfile_user_image"
+                android:id="@+id/user_image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="30dp"
@@ -93,10 +93,10 @@
                 android:indeterminateTintMode="src_atop"
                 android:progressDrawable="@drawable/component_progress_circle_bar"
                 android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@id/ActivityProfile_user_image"
-                app:layout_constraintLeft_toLeftOf="@id/ActivityProfile_user_image"
-                app:layout_constraintRight_toRightOf="@id/ActivityProfile_user_image"
-                app:layout_constraintTop_toTopOf="@id/ActivityProfile_user_image" />
+                app:layout_constraintBottom_toBottomOf="@id/user_image"
+                app:layout_constraintLeft_toLeftOf="@id/user_image"
+                app:layout_constraintRight_toRightOf="@id/user_image"
+                app:layout_constraintTop_toTopOf="@id/user_image" />
 
             <Button
                 android:id="@+id/change_image_button"
@@ -109,7 +109,7 @@
                 android:textColor="@color/blue_color"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ActivityProfile_user_image" />
+                app:layout_constraintTop_toBottomOf="@+id/user_image" />
 
 
             <TextView

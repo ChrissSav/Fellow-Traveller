@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.ui.home.settings
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,8 +12,10 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentBaseSettingsBinding
+import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.loadImageFromUrl
+import gr.fellow.fellow_traveller.ui.main.MainActivity
 
 
 class BaseSettingsFragment : Fragment() {
@@ -51,7 +54,11 @@ class BaseSettingsFragment : Fragment() {
         }
 
         binding.manageUserCarsButton.setOnClickListener {
+            navController.navigate(R.id.action_baseSettingsFragment_to_userCarsFragment)
+        }
 
+        binding.logoutButton.setOnClickListener {
+            homeViewModel.logOut()
         }
 
         homeViewModel.user.observe(viewLifecycleOwner, Observer {
@@ -60,6 +67,12 @@ class BaseSettingsFragment : Fragment() {
                 userFullNameTextView.text = "${it.firstName} ${it.lastName}"
                 profilePictureSettings.loadImageFromUrl(it.picture)
             }
+        })
+
+        homeViewModel.logout.observe(viewLifecycleOwner, Observer {
+            val intent = Intent(activity, MainActivity::class.java)
+            intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            startActivity(intent)
         })
 
     }

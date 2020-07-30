@@ -39,4 +39,6 @@ interface FellowDataSource {
 
     suspend fun loadUsersInfo(): RegisteredUserEntity
 
+
+    suspend fun logoutUser()
 }

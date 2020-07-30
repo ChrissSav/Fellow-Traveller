@@ -48,4 +48,8 @@ class FellowDataSourceImpl(
     override suspend fun loadUsersInfo(): RegisteredUserEntity =
         repositoryLocal.loadUserAuth()
 
+    override suspend fun logoutUser() {
+        repositoryLocal.logoutUser()
+    }
+
 }
