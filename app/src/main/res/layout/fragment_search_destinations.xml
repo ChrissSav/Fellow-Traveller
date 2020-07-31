@@ -7,7 +7,7 @@
     tools:context=".ui.search.fragments.SearchDestinationsFragment">
 
     <ImageButton
-        android:id="@+id/ActivitySearchDestinations_back_button"
+        android:id="@+id/back_button"
         style="@style/border_icon_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,37 +18,37 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/ActivitySearchDestinations_label"
+        android:id="@+id/SearchDestinations_label"
         style="@style/display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:text="Που θέλετε να πάτε;"
-        app:layout_constraintStart_toStartOf="@id/ActivitySearchDestinations_back_button"
-        app:layout_constraintTop_toBottomOf="@id/ActivitySearchDestinations_back_button" />
+        app:layout_constraintStart_toStartOf="@id/back_button"
+        app:layout_constraintTop_toBottomOf="@id/back_button" />
 
     <TextView
-        android:id="@+id/ActivitySearchDestinations_info_label"
+        android:id="@+id/SearchDestinations_info_label"
         style="@style/paragraph3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Αναζητήστε το επόμενο σας ταξίδι"
-        app:layout_constraintStart_toStartOf="@id/ActivitySearchDestinations_back_button"
-        app:layout_constraintTop_toBottomOf="@id/ActivitySearchDestinations_label" />
+        android:text="Αναζητήστε to επόμενο σας ταξίδι"
+        app:layout_constraintStart_toStartOf="@id/back_button"
+        app:layout_constraintTop_toBottomOf="@id/SearchDestinations_label" />
 
     <TextView
-        android:id="@+id/ActivitySearchDestinations_from_label"
+        android:id="@+id/SearchDestinations_from_label"
         style="@style/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="Από"
-        app:layout_constraintStart_toStartOf="@id/ActivitySearchDestinations_back_button"
-        app:layout_constraintTop_toBottomOf="@id/ActivitySearchDestinations_info_label" />
+        app:layout_constraintStart_toStartOf="@id/back_button"
+        app:layout_constraintTop_toBottomOf="@id/SearchDestinations_info_label" />
 
     <Button
-        android:id="@+id/ActivitySearchDestinations_destFrom_button"
+        android:id="@+id/destFrom_button"
         style="@style/button_outline_orange_with_left_drawable"
         android:layout_width="0dp"
         android:layout_height="58dp"
@@ -64,21 +64,21 @@
         android:textAlignment="textStart"
         android:textColor="@color/button_default_color"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/ActivitySearchDestinations_back_button"
-        app:layout_constraintTop_toBottomOf="@id/ActivitySearchDestinations_from_label" />
+        app:layout_constraintStart_toStartOf="@id/back_button"
+        app:layout_constraintTop_toBottomOf="@id/SearchDestinations_from_label" />
 
     <TextView
-        android:id="@+id/ActivitySearchDestinations_το_label"
+        android:id="@+id/SearchDestinations_to_label"
         style="@style/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Προς"
-        app:layout_constraintStart_toStartOf="@id/ActivitySearchDestinations_back_button"
-        app:layout_constraintTop_toBottomOf="@id/ActivitySearchDestinations_destFrom_button" />
+        app:layout_constraintStart_toStartOf="@id/back_button"
+        app:layout_constraintTop_toBottomOf="@id/destFrom_button" />
 
     <Button
-        android:id="@+id/ActivitySearchDestinations_destΤο_button"
+        android:id="@+id/destTo_button"
         style="@style/button_outline_orange_with_left_drawable"
         android:layout_width="0dp"
         android:layout_height="58dp"
@@ -94,11 +94,11 @@
         android:textAlignment="textStart"
         android:textColor="@color/button_default_color"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/ActivitySearchDestinations_back_button"
-        app:layout_constraintTop_toBottomOf="@id/ActivitySearchDestinations_το_label" />
+        app:layout_constraintStart_toStartOf="@id/back_button"
+        app:layout_constraintTop_toBottomOf="@id/SearchDestinations_to_label" />
 
     <Button
-        android:id="@+id/ActivitySearchDestinations_search_button"
+        android:id="@+id/search_button"
         style="@style/button_orange_filled"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
         android:text="Αναζήτηση"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/ActivitySearchDestinations_back_button" />
+        app:layout_constraintStart_toStartOf="@id/back_button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

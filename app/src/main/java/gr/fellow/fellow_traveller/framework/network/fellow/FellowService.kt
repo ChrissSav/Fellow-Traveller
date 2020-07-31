@@ -2,6 +2,7 @@ package gr.fellow.fellow_traveller.framework.network.fellow
 
 import gr.fellow.fellow_traveller.framework.network.fellow.request.AccountCheckRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.request.AccountCreateRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.request.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.request.LoginRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
@@ -34,6 +35,12 @@ interface FellowService {
     //Car
     @GET("cars")
     suspend fun userCars(): Response<ArrayList<CarResponse>>
+
+
+    @POST
+    suspend fun addCar(
+        @Body carRequest: CarRequest
+    ): Response<CarResponse>
 
 
 }

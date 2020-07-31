@@ -3,6 +3,7 @@ package gr.fellow.fellow_traveller.data
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.framework.network.fellow.request.AccountCheckRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.request.AccountCreateRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.request.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.request.LoginRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
@@ -50,13 +51,16 @@ class FellowDataSourceImpl(
     override suspend fun getCarsRemote(): ResultWrapper<ArrayList<CarResponse>> =
         repository.getCars()
 
+    override suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<CarResponse> =
+        repository.addCar(carRequest)
+
 
     override suspend fun loadUsersInfo(): RegisteredUserEntity =
         repositoryLocal.loadUserAuth()
 
-    override suspend fun logoutUser() {
+    override suspend fun logoutUser() =
         repositoryLocal.logoutUser()
-    }
+
 
     override suspend fun getAllCars(): MutableList<CarEntity> =
         repositoryLocal.getAllCars()

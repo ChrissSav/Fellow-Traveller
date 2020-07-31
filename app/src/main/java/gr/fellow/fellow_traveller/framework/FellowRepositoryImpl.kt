@@ -8,6 +8,7 @@ import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
 import gr.fellow.fellow_traveller.framework.network.fellow.request.AccountCheckRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.request.AccountCreateRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.request.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.request.LoginRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
@@ -54,6 +55,11 @@ class FellowRepositoryImpl(
         networkCallWithOutWrap(connectivityHelper)
         {
             servicePlace.getPlaces(place)
+        }
+
+    override suspend fun addCar(carRequest: CarRequest): ResultWrapper<CarResponse> =
+        networkCall {
+            service.addCar(carRequest).handleToCorrectFormat()
         }
 
     override suspend fun getCars(): ResultWrapper<ArrayList<CarResponse>> =

@@ -7,12 +7,14 @@ import android.util.DisplayMetrics
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.ActivityHomeBinding
+import gr.fellow.fellow_traveller.ui.createSnackBar
 import gr.fellow.fellow_traveller.usecase.register.CheckUserEmailUseCase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -58,11 +60,15 @@ class HomeActivity : AppCompatActivity() {
 
         }
 
+
+        homeViewModel.error.observe(this, Observer {
+            createSnackBar(binding.root, it)
+        })
         setupBottomNavMenu(navController)
 
         navController.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { _, destination, _ ->
             if (destination.id in homeLayout) {
-                showHideBottomNav( convertDpToPixel(55))
+                showHideBottomNav(convertDpToPixel(55))
             } else {
                 showHideBottomNav(0)
             }
@@ -71,15 +77,14 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
-
     private fun convertDpToPixel(dp: Int): Int {
         return (dp * (resources
             .displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).toInt()
     }
 
-    private fun showHideBottomNav(targetHeight: Int){
+    private fun showHideBottomNav(targetHeight: Int) {
         val slideAnimator = ValueAnimator
-            .ofInt( binding.HomeActivityBottomNavigationView.layoutParams.height, targetHeight)
+            .ofInt(binding.HomeActivityBottomNavigationView.layoutParams.height, targetHeight)
             .setDuration(200)
         slideAnimator.addUpdateListener { animation1: ValueAnimator ->
             val value = animation1.animatedValue as Int

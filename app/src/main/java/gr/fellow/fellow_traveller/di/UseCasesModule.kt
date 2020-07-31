@@ -8,6 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.usecase.*
+import gr.fellow.fellow_traveller.usecase.home.AddCarToRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.home.GetUserCarsLocalUseCase
 import gr.fellow.fellow_traveller.usecase.home.GetUserCarsRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.home.RegisterCarLocalUseCase
@@ -122,4 +123,13 @@ class UseCasesModule {
         return RegisterCarLocalUseCase(dataSource)
     }
 
+
+    @Singleton
+    @Provides
+    fun provideAddCarToRemoteUseCase(
+        dataSource: FellowDataSource,
+        context: Context
+    ): AddCarToRemoteUseCase {
+        return AddCarToRemoteUseCase(dataSource, context)
+    }
 }

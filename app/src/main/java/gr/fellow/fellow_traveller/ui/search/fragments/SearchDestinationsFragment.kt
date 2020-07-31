@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentSearchDestinationsBinding
 
 
@@ -31,7 +30,6 @@ class SearchDestinationsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         navController = Navigation.findNavController(view)
 
     }

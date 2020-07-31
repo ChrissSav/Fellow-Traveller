@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.domain
 
 import gr.fellow.fellow_traveller.data.ResultWrapper
+import gr.fellow.fellow_traveller.framework.network.fellow.request.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserInfoResponse
@@ -35,6 +36,8 @@ interface FellowDataSource {
 
 
     suspend fun getCarsRemote(): ResultWrapper<ArrayList<CarResponse>>
+
+    suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<CarResponse>
 
     /**
      * local DB

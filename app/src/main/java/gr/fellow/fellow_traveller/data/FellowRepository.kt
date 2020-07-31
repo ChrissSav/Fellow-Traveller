@@ -3,6 +3,7 @@ package gr.fellow.fellow_traveller.data
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.request.AccountCheckRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.request.AccountCreateRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.request.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.request.LoginRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
@@ -19,6 +20,12 @@ interface FellowRepository {
 
     suspend fun getPlace(place: String): Response<PlaceApiResponse>
 
+
+    /**
+     * Cars
+     * */
+
+    suspend fun addCar(carRequest: CarRequest): ResultWrapper<CarResponse>
 
     suspend fun getCars(): ResultWrapper<ArrayList<CarResponse>>
 }
