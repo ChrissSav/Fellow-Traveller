@@ -4,11 +4,13 @@ import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.framework.network.fellow.request.AccountCheckRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.request.AccountCreateRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.request.LoginRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserInfoResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
 import gr.fellow.fellow_traveller.framework.network.google.PlaceApiRepository
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
+import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 import retrofit2.Response
 
@@ -45,11 +47,23 @@ class FellowDataSourceImpl(
     override suspend fun getPlaces(place: String): Response<PlaceApiResponse> =
         repository.getPlace(place)
 
+    override suspend fun getCarsRemote(): ResultWrapper<ArrayList<CarResponse>> =
+        repository.getCars()
+
+
     override suspend fun loadUsersInfo(): RegisteredUserEntity =
         repositoryLocal.loadUserAuth()
 
     override suspend fun logoutUser() {
         repositoryLocal.logoutUser()
     }
+
+    override suspend fun getAllCars(): MutableList<CarEntity> =
+        repositoryLocal.getAllCars()
+
+
+    override suspend fun insertCar(carEntity: CarEntity) =
+        repositoryLocal.insertCar(carEntity)
+
 
 }

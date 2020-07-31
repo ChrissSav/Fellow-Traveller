@@ -8,6 +8,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.usecase.*
+import gr.fellow.fellow_traveller.usecase.home.GetUserCarsLocalUseCase
+import gr.fellow.fellow_traveller.usecase.home.GetUserCarsRemoteUseCase
+import gr.fellow.fellow_traveller.usecase.home.RegisterCarLocalUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.GetPlaceFromPlacesUseCase
 import gr.fellow.fellow_traveller.usecase.register.*
 import javax.inject.Singleton
@@ -97,4 +100,26 @@ class UseCasesModule {
     ): LogoutUseCase {
         return LogoutUseCase(dataSource, sharedPreferences)
     }
+
+
+    @Singleton
+    @Provides
+    fun provideGetUserCarsUseCase(dataSource: FellowDataSource): GetUserCarsLocalUseCase {
+        return GetUserCarsLocalUseCase(dataSource)
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideGetUserCarsRemoteUseCase(dataSource: FellowDataSource): GetUserCarsRemoteUseCase {
+        return GetUserCarsRemoteUseCase(dataSource)
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideRegisterCarLocalUseCase(dataSource: FellowDataSource): RegisterCarLocalUseCase {
+        return RegisterCarLocalUseCase(dataSource)
+    }
+
 }

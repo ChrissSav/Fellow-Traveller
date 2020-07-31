@@ -1,10 +1,12 @@
 package gr.fellow.fellow_traveller.domain
 
 import gr.fellow.fellow_traveller.data.ResultWrapper
+import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserInfoResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
+import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 import retrofit2.Response
 
@@ -32,6 +34,7 @@ interface FellowDataSource {
     suspend fun getPlaces(place: String): Response<PlaceApiResponse>
 
 
+    suspend fun getCarsRemote(): ResultWrapper<ArrayList<CarResponse>>
 
     /**
      * local DB
@@ -41,4 +44,10 @@ interface FellowDataSource {
 
 
     suspend fun logoutUser()
+
+
+    suspend fun getAllCars(): MutableList<CarEntity>
+
+
+    suspend fun insertCar(carEntity: CarEntity)
 }

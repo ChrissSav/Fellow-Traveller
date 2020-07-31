@@ -51,6 +51,8 @@ class HomeActivity : AppCompatActivity() {
 
         homeViewModel.loadUserInfo()
 
+        homeViewModel.loadCars()
+
         GlobalScope.launch {
             checkUseCase("fefefef")
 

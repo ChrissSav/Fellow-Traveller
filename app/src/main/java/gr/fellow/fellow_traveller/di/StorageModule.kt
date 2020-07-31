@@ -19,6 +19,7 @@ import gr.fellow.fellow_traveller.framework.LocalRepositoryImpl
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
 import gr.fellow.fellow_traveller.framework.network.google.PlaceApiService
 import gr.fellow.fellow_traveller.room.FellowDatabase
+import gr.fellow.fellow_traveller.room.dao.CarDao
 import gr.fellow.fellow_traveller.room.dao.UserAuthDao
 import javax.inject.Singleton
 
@@ -34,14 +35,14 @@ object StorageModule {
         sharedPreferences: SharedPreferences,
         servicePlace: PlaceApiService
     ): FellowRepository {
-        return FellowRepositoryImpl(service,servicePlace, connectivityHelper, sharedPreferences)
+        return FellowRepositoryImpl(service, servicePlace, connectivityHelper, sharedPreferences)
     }
 
 
     @Singleton
     @Provides
-    fun provideLocalRepositoryImpl(userAuthDao: UserAuthDao): LocalRepository {
-        return LocalRepositoryImpl(userAuthDao)
+    fun provideLocalRepositoryImpl(userAuthDao: UserAuthDao, carDao: CarDao): LocalRepository {
+        return LocalRepositoryImpl(userAuthDao, carDao)
     }
 
     @Singleton
@@ -73,6 +74,12 @@ object StorageModule {
     @Provides
     fun providesProductDao(fellowDatabase: FellowDatabase): UserAuthDao {
         return fellowDatabase.userAuthDao()
+    }
+
+    @Singleton
+    @Provides
+    fun providesCarDao(fellowDatabase: FellowDatabase): CarDao {
+        return fellowDatabase.carDao()
     }
 
 }
