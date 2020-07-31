@@ -88,6 +88,27 @@ class LoginFragment : Fragment() {
             }
         })
 
+        binding.eraseButton.setOnClickListener {
+            binding.emailEditText.text.clear()
+        }
+
+        binding.emailEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(charSequence: Editable?) {
+                if (charSequence.toString().trim().isNotEmpty())
+                    binding.eraseButton.visibility = View.VISIBLE
+                else
+                    binding.eraseButton.visibility = View.INVISIBLE
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+        })
+
         binding.displayPassword.setOnClickListener {
             if (binding.passwordEditText.inputType != InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
                 binding.passwordEditText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
