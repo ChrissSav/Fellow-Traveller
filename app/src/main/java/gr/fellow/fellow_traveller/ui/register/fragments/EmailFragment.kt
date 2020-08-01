@@ -14,8 +14,8 @@ import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentEmailBinding
 import gr.fellow.fellow_traveller.ui.createSnackBar
-import gr.fellow.fellow_traveller.ui.isValidEmail
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
+import gr.fellow.fellow_traveller.utils.isValidEmail
 
 
 class EmailFragment : Fragment() {

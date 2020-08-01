@@ -9,14 +9,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentDateTimeBinding
 import gr.fellow.fellow_traveller.ui.createSnackBar
 import gr.fellow.fellow_traveller.ui.dialogs.DatePickerCustomDialog
 import gr.fellow.fellow_traveller.ui.dialogs.TimePickerCustomDialog
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
-import gr.fellow.fellow_traveller.ui.validateDateTimeDiffer
+import gr.fellow.fellow_traveller.utils.validateDateTimeDiffer
 
 
 class DateTimeFragment : Fragment() {

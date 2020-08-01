@@ -23,9 +23,9 @@ interface FellowRepository {
 
     /**
      * Cars
-     * */
+     **/
 
-    suspend fun addCar(carRequest: CarRequest): ResultWrapper<CarResponse>
+    suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<CarResponse>
 
-    suspend fun getCars(): ResultWrapper<ArrayList<CarResponse>>
+    suspend fun getCarsRemote(): ResultWrapper<ArrayList<CarResponse>>
 }

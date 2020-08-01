@@ -1,9 +1,7 @@
-package gr.fellow.fellow_traveller.framework
+package gr.fellow.fellow_traveller.utils
 
-import gr.fellow.fellow_traveller.ConnectivityHelper
 import gr.fellow.fellow_traveller.data.BaseApiException
 import gr.fellow.fellow_traveller.data.ResultWrapper
-import gr.fellow.fellow_traveller.getModelFromResponseErrorBody
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
@@ -15,7 +13,11 @@ fun <T : Any> Response<T>.handleToCorrectFormat(): ResultWrapper<T> {
     return if (isSuccessful && body != null) {
         ResultWrapper.Success(body)
     } else {
-        ResultWrapper.Error(getModelFromResponseErrorBody(errorBody()))
+        ResultWrapper.Error(
+            getModelFromResponseErrorBody(
+                errorBody()
+            )
+        )
     }
 }
 

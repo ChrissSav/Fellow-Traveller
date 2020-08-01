@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller
+package gr.fellow.fellow_traveller.utils
 
 import android.content.SharedPreferences
 import android.net.ConnectivityManager

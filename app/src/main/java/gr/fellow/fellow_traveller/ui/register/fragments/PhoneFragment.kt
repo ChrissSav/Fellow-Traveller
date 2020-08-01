@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -15,8 +14,8 @@ import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentPhoneBinding
 import gr.fellow.fellow_traveller.ui.createSnackBar
-import gr.fellow.fellow_traveller.ui.isValidPhone
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
+import gr.fellow.fellow_traveller.utils.isValidPhone
 
 
 class PhoneFragment : Fragment() {

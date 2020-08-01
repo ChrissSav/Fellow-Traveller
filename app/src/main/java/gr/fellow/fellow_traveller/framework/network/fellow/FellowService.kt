@@ -37,7 +37,7 @@ interface FellowService {
     suspend fun userCars(): Response<ArrayList<CarResponse>>
 
 
-    @POST
+    @POST("cars")
     suspend fun addCar(
         @Body carRequest: CarRequest
     ): Response<CarResponse>

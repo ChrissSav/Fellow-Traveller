@@ -8,12 +8,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import gr.fellow.fellow_traveller.ConnectivityHelper
+import gr.fellow.fellow_traveller.utils.ConnectivityHelper
 import gr.fellow.fellow_traveller.data.FellowDataSourceImpl
 import gr.fellow.fellow_traveller.data.FellowRepository
 import gr.fellow.fellow_traveller.data.LocalRepository
 import gr.fellow.fellow_traveller.domain.FellowDataSource
-import gr.fellow.fellow_traveller.domain.sigleton.UserInfoSingle
 import gr.fellow.fellow_traveller.framework.FellowRepositoryImpl
 import gr.fellow.fellow_traveller.framework.LocalRepositoryImpl
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService

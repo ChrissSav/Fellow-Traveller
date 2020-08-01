@@ -13,7 +13,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import gr.fellow.fellow_traveller.ConnectivityHelper
+import gr.fellow.fellow_traveller.utils.ConnectivityHelper
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
 import gr.fellow.fellow_traveller.utils.PREFS_AUTH_TOKEN
 import okhttp3.Interceptor
@@ -90,7 +90,9 @@ object NetworkModule {
     fun provideConnectivityHelper(application: Application): ConnectivityHelper {
         val connectivityManager =
             application.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-        return ConnectivityHelper(connectivityManager)
+        return ConnectivityHelper(
+            connectivityManager
+        )
     }
 
 

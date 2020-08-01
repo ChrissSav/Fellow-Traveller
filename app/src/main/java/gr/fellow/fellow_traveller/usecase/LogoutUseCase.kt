@@ -2,8 +2,8 @@ package gr.fellow.fellow_traveller.usecase
 
 import android.content.SharedPreferences
 import gr.fellow.fellow_traveller.domain.FellowDataSource
-import gr.fellow.fellow_traveller.framework.roomCall
-import gr.fellow.fellow_traveller.set
+import gr.fellow.fellow_traveller.utils.roomCall
+import gr.fellow.fellow_traveller.utils.set
 import gr.fellow.fellow_traveller.utils.PREFS_AUTH_TOKEN
 
 class LogoutUseCase(

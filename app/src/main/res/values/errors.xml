@@ -29,7 +29,7 @@
     <string name="ERROR_OLD_PASSWORD_CANNOT_BE_SAME_AS_NEW_PASSWORD">Ο νέος κωδικός δεν μπορεί να είναι ίδιος με τον παλιό κωδικό.</string>
     <string name="INVALID_PHONE_FORMAT">Μη έγκυρος αριθμός τηλεφώνου.</string>
     <string name="CONFIRM_DELETION">Είσαι σίγουρος για την διαγραφή;</string>
-    <string name="ERROR_INVALID_PLATE_FORMAT">Πρέπει να είναι της μορφής ΧΥΖ-1234.</string>
+    <string name="ERROR_INVALID_PLATE_FORMAT">Πρέπει να είναι της μορφής ΧΥΖ-1234 με ελληνικούς χαρακτήρες.</string>
     <string name="ERROR_PLATE__ALREADY_EXISTS">Υπάρχει ήδη αυτοκίνητο με αυτό την πινακίδα.</string>
     <!--api status codes-->
 

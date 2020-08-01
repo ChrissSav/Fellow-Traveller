@@ -7,9 +7,7 @@ import gr.fellow.fellow_traveller.framework.network.fellow.request.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.request.LoginRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.UserInfoResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
-import gr.fellow.fellow_traveller.framework.network.google.PlaceApiRepository
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
 import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
@@ -49,10 +47,10 @@ class FellowDataSourceImpl(
         repository.getPlace(place)
 
     override suspend fun getCarsRemote(): ResultWrapper<ArrayList<CarResponse>> =
-        repository.getCars()
+        repository.getCarsRemote()
 
     override suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<CarResponse> =
-        repository.addCar(carRequest)
+        repository.addCarRemote(carRequest)
 
 
     override suspend fun loadUsersInfo(): RegisteredUserEntity =

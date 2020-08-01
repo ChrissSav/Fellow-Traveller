@@ -1,8 +1,6 @@
 package gr.fellow.fellow_traveller.ui
 
-import android.R.attr.data
 import android.content.Context
-import android.util.Patterns
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
@@ -13,7 +11,6 @@ import java.io.IOException
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.regex.Pattern
 
 
 fun createSnackBar(view: View, msg: String) {
@@ -59,28 +56,6 @@ fun isInternetAvailable(): Boolean {
     }
 }
 
-fun isValidPlate(plate: String): Boolean {
-    val regexPattern = Pattern.compile("^[ΑΒΕΖΗΙΚΜΝΟΡΤΥΧ]{3}-[0-9]{4}$")
-    return regexPattern.matcher(plate).matches()
-}
-
-fun isValidEmail(email: String): Boolean {
-    return Patterns.EMAIL_ADDRESS.matcher(email).matches()
-}
-
-
-fun validateDateTimeDiffer(date: String, time: String, timeDiffer: Int): Boolean {
-    val timestamp = currentTimeStamp()
-    if ((dateTimeToTimestamp(date, time) - timestamp) >= timeDiffer) {
-        return true
-    }
-    return false
-}
-
-fun isValidPhone(phone: String): Boolean {
-    val regexPattern = Pattern.compile("^[6][9][0-9]{8}$")
-    return regexPattern.matcher(phone).matches()
-}
 
 
 fun ImageView.loadImageFromUrl(url: String?) {
