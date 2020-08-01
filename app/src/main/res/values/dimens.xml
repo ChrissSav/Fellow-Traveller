@@ -19,4 +19,6 @@
     <dimen name="margin_section_car">55dp</dimen>
     <dimen name="margin_section_car_error">4dp</dimen>
 
+    <dimen name="margin_section_car_item">12dp</dimen>
+
 </resources>

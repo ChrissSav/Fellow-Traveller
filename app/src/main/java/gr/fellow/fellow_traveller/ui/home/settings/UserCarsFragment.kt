@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fellowtravellerbeta.data.network.google.response.PredictionResponse
@@ -80,7 +81,7 @@ class UserCarsFragment : Fragment() {
 
         }
         with(binding) {
-            myCarsRecycler.layoutManager = mLayoutManager
+            myCarsRecycler.layoutManager = GridLayoutManager(context, 2);
             myCarsRecycler.adapter = mAdapter
         }
 

@@ -3,6 +3,7 @@ package gr.fellow.fellow_traveller.ui.home.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import gr.fellow.fellow_traveller.R
@@ -16,7 +17,7 @@ class CarAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(
-            R.layout.car_item,
+            R.layout.car_item_second,
             parent, false
         )
         return ViewHolder(itemView)
@@ -28,15 +29,24 @@ class CarAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = cars[position]
-        holder.title.text = "${currentItem.brand}, ${currentItem.model}  ${currentItem.plate}"
+        holder.brand.text = currentItem.brand
+        holder.model.text = currentItem.model
+        holder.plate.text = currentItem.plate
+        holder.color.text = currentItem.color
 
-        holder.title.setOnClickListener {
+
+        holder.delete.setOnClickListener {
             listener(currentItem)
         }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val title: TextView = view.findViewById(R.id.car_speces_settings_adapter)
+        val brand: TextView = view.findViewById(R.id.textView_brand)
+        val model: TextView = view.findViewById(R.id.textView_model)
+        val plate: TextView = view.findViewById(R.id.textView_plate)
+        val color: TextView = view.findViewById(R.id.textView_color)
+
+        val delete: ImageView = view.findViewById(R.id.imageView_delete)
     }
 
 }
