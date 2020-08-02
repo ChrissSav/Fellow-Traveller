@@ -52,6 +52,10 @@ class FellowDataSourceImpl(
     override suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<CarResponse> =
         repository.addCarRemote(carRequest)
 
+    override suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse> =
+        repository.deleteCarRemote(carId)
+
+
 
     override suspend fun loadUsersInfo(): RegisteredUserEntity =
         repositoryLocal.loadUserAuth()
@@ -66,6 +70,10 @@ class FellowDataSourceImpl(
 
     override suspend fun insertCar(carEntity: CarEntity) =
         repositoryLocal.insertCar(carEntity)
+
+    override suspend fun deleteCar(carId: Int) =
+       repositoryLocal.deleteCarById(carId)
+
 
 
 }

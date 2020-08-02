@@ -64,7 +64,7 @@ class DateTimeFragment : Fragment() {
 
                 newTripViewModel.applyDate(it)
             }
-            fragmentManager?.let { it1 -> dateDialog.show(it1, "dateDialog") }
+                fragmentManager?.let { it1 -> dateDialog.show(it1, "dateDialog") }
 
         }
 

@@ -13,10 +13,7 @@ import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.LoadUserInfoUseCase
 import gr.fellow.fellow_traveller.usecase.LogoutUseCase
-import gr.fellow.fellow_traveller.usecase.home.AddCarToRemoteUseCase
-import gr.fellow.fellow_traveller.usecase.home.GetUserCarsLocalUseCase
-import gr.fellow.fellow_traveller.usecase.home.GetUserCarsRemoteUseCase
-import gr.fellow.fellow_traveller.usecase.home.RegisterCarLocalUseCase
+import gr.fellow.fellow_traveller.usecase.home.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
@@ -30,7 +27,8 @@ constructor(
     private val getUserCarsRemoteUseCase: GetUserCarsRemoteUseCase,
     private val getUserCarsLocalUseCase: GetUserCarsLocalUseCase,
     private val registerCarLocalUseCase: RegisterCarLocalUseCase,
-    private val addCarToRemoteUseCase: AddCarToRemoteUseCase
+    private val addCarToRemoteUseCase: AddCarToRemoteUseCase,
+    private val deleteCarUseCase: DeleteCarUseCase
 ) : BaseViewModel() {
 
 
@@ -46,6 +44,9 @@ constructor(
 
     private val _addCarResult = SingleLiveEvent<Boolean>()
     val addCarResult: LiveData<Boolean> = _addCarResult
+
+    private val _carDeletedId = SingleLiveEvent<CarEntity>()
+    val carDeletedId: LiveData<CarEntity> = _carDeletedId
 
     fun loadUserInfo() {
         viewModelScope.launch {
@@ -90,6 +91,24 @@ constructor(
                     is ResultWrapper.Success -> {
                         loadCars()
                         _addCarResult.value = true
+                    }
+                    is ResultWrapper.Error -> {
+                        _error.value = response.error.msg
+                    }
+
+                }
+            } catch (exception: BaseApiException) {
+                _error.value = exception.msg
+            }
+        }
+    }
+
+    fun deleteCar(car: CarEntity) {
+        viewModelScope.launch {
+            try {
+                when (val response = deleteCarUseCase(car.id)) {
+                    is ResultWrapper.Success -> {
+                        _carDeletedId.value = car
                     }
                     is ResultWrapper.Error -> {
                         _error.value = response.error.msg

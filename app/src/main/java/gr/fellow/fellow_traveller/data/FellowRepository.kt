@@ -28,4 +28,6 @@ interface FellowRepository {
     suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<CarResponse>
 
     suspend fun getCarsRemote(): ResultWrapper<ArrayList<CarResponse>>
+
+    suspend fun deleteCarRemote(carId :Int): ResultWrapper<StatusHandleResponse>
 }

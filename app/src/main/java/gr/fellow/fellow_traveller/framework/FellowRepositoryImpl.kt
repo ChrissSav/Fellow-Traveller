@@ -72,5 +72,11 @@ class FellowRepositoryImpl(
             service.userCars().handleToCorrectFormat()
         }
 
+    override suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse> =
+        networkCall {
+            service.deleteCar(carId).handleToCorrectFormat()
+        }
+
+
 
 }

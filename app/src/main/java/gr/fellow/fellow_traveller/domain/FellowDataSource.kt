@@ -39,6 +39,8 @@ interface FellowDataSource {
 
     suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<CarResponse>
 
+    suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse>
+
     /**
      * local DB
      * */
@@ -53,4 +55,7 @@ interface FellowDataSource {
 
 
     suspend fun insertCar(carEntity: CarEntity)
+
+
+    suspend fun deleteCar(carId: Int) : Int
 }

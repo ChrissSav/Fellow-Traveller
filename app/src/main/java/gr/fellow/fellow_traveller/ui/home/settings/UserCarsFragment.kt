@@ -1,7 +1,6 @@
 package gr.fellow.fellow_traveller.ui.home.settings
 
-import android.app.Activity
-import android.content.Intent
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,13 +13,13 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fellowtravellerbeta.data.network.google.response.PredictionResponse
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentUserCarsBinding
 import gr.fellow.fellow_traveller.room.entites.CarEntity
+import gr.fellow.fellow_traveller.ui.dialogs.DatePickerCustomDialog
+import gr.fellow.fellow_traveller.ui.dialogs.DeleteConfirmationDialog
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.CarAdapter
-import gr.fellow.fellow_traveller.ui.location.adapter.PlacesAdapter
 
 
 class UserCarsFragment : Fragment() {
@@ -32,6 +31,8 @@ class UserCarsFragment : Fragment() {
     private lateinit var mLayoutManager: RecyclerView.LayoutManager
     private var carsList: MutableList<CarEntity> = mutableListOf()
     private lateinit var navController: NavController
+    private lateinit var deleteDialog: DeleteConfirmationDialog
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,6 +67,12 @@ class UserCarsFragment : Fragment() {
         }
 
 
+        homeViewModel.carDeletedId.observe(viewLifecycleOwner, Observer {
+            val itemPosition = carsList.indexOf(it)
+            carsList.remove(it)
+            binding.myCarsRecycler.adapter?.notifyItemRemoved(itemPosition)
+        })
+
         binding.newCarButton.setOnClickListener {
             navController.navigate(R.id.action_userCarsFragment_to_addCarFragment)
         }
@@ -77,7 +84,15 @@ class UserCarsFragment : Fragment() {
     }
 
     private fun initializeRecycle() {
-        mAdapter = CarAdapter(carsList) {
+        mAdapter = CarAdapter(carsList) { car ->
+            activity?.let {
+                deleteDialog = DeleteConfirmationDialog(requireActivity(), car.plate) {
+                        deleteDialog.dismiss()
+                        if (it)
+                            homeViewModel.deleteCar(car)
+                }
+                fragmentManager?.let { it1 -> deleteDialog.show(it1, "dateDialog") }
+            }
 
         }
         with(binding) {

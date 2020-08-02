@@ -17,7 +17,7 @@ interface LocalRepository {
      **/
     suspend fun deleteCars()
 
-    suspend fun deleteCarById(id :Int)
+    suspend fun deleteCarById(id :Int) : Int
 
     suspend fun getAllCars() : MutableList<CarEntity>
 

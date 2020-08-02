@@ -10,8 +10,6 @@ import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginRes
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
-import java.util.*
-import kotlin.collections.ArrayList
 
 interface FellowService {
     @POST("auth/check")
@@ -42,19 +40,9 @@ interface FellowService {
         @Body carRequest: CarRequest
     ): Response<CarResponse>
 
+    @DELETE("/cars/{car_id}")
+    suspend fun deleteCar(
+        @Path("car_id") car_id: Int
+    ): Response<StatusHandleResponse>
 
 }
-//
-//    @GET("/cars")
-//    fun userCars(): Call<ArrayList<CarModel?>?>?
-//
-//    @DELETE("/cars/{car_id}")
-//    fun deleteUserCar(
-//        @Path("car_id") car_id: Int
-//    ): Call<StatusHandleModel?>?
-//
-//    @PUT("/cars")
-//    fun updateCar(
-//        @Body car: UpdateCarModel?
-//    ): Call<CarModel?>?
-//}

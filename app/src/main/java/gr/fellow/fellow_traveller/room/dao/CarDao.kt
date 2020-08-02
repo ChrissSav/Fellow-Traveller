@@ -17,7 +17,7 @@ interface CarDao {
     suspend fun deleteCars()
 
     @Query("DELETE FROM cars where id = :id")
-    suspend fun deleteCarById(id: Int)
+    suspend fun deleteCarById(id: Int) : Int
 
     @Query("SELECT * FROM cars")
     suspend fun getCars(): MutableList<CarEntity>
