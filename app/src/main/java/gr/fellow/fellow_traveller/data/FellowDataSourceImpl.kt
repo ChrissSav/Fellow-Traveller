@@ -1,12 +1,10 @@
 package gr.fellow.fellow_traveller.data
 
 import gr.fellow.fellow_traveller.domain.FellowDataSource
-import gr.fellow.fellow_traveller.framework.network.fellow.request.AccountCheckRequest
-import gr.fellow.fellow_traveller.framework.network.fellow.request.AccountCreateRequest
-import gr.fellow.fellow_traveller.framework.network.fellow.request.CarRequest
-import gr.fellow.fellow_traveller.framework.network.fellow.request.LoginRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.request.*
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
 import gr.fellow.fellow_traveller.room.entites.CarEntity
@@ -55,6 +53,8 @@ class FellowDataSourceImpl(
     override suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse> =
         repository.deleteCarRemote(carId)
 
+    override suspend fun addTripRemote(tripCreateRequest: TripCreateRequest): ResultWrapper<TripResponse> =
+        repository.addTrip(tripCreateRequest)
 
 
     override suspend fun loadUsersInfo(): RegisteredUserEntity =
@@ -64,16 +64,15 @@ class FellowDataSourceImpl(
         repositoryLocal.logoutUser()
 
 
-    override suspend fun getAllCars(): MutableList<CarEntity> =
+    override suspend fun getAllCarsLocal(): MutableList<CarEntity> =
         repositoryLocal.getAllCars()
 
 
-    override suspend fun insertCar(carEntity: CarEntity) =
+    override suspend fun insertCarLocal(carEntity: CarEntity) =
         repositoryLocal.insertCar(carEntity)
 
-    override suspend fun deleteCar(carId: Int) =
-       repositoryLocal.deleteCarById(carId)
-
+    override suspend fun deleteCarLocal(carId: Int) =
+        repositoryLocal.deleteCarById(carId)
 
 
 }

@@ -8,7 +8,7 @@ class GetUserCarsLocalUseCase  (
 ) {
 
     suspend operator fun invoke(): MutableList<CarEntity> =
-         dataSource.getAllCars()
+         dataSource.getAllCarsLocal()
 
 
 }

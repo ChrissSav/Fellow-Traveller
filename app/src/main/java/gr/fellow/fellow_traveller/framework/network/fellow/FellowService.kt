@@ -1,11 +1,9 @@
 package gr.fellow.fellow_traveller.framework.network.fellow
 
-import gr.fellow.fellow_traveller.framework.network.fellow.request.AccountCheckRequest
-import gr.fellow.fellow_traveller.framework.network.fellow.request.AccountCreateRequest
-import gr.fellow.fellow_traveller.framework.network.fellow.request.CarRequest
-import gr.fellow.fellow_traveller.framework.network.fellow.request.LoginRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.request.*
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
 import retrofit2.Call
 import retrofit2.Response
@@ -45,4 +43,10 @@ interface FellowService {
         @Path("car_id") car_id: Int
     ): Response<StatusHandleResponse>
 
+
+    //Trips
+    @POST("trips")
+    suspend fun addTrip(
+        @Body trip: TripCreateRequest
+    ): Response<TripResponse>
 }

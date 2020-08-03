@@ -11,7 +11,7 @@ class DeleteCarUseCase(
     suspend operator fun invoke(carId: Int): ResultWrapper<StatusHandleResponse> {
         val response = dataSource.deleteCarRemote(carId)
         if (response is ResultWrapper.Success) {
-            val res = dataSource.deleteCar(carId)
+            val res = dataSource.deleteCarLocal(carId)
         }
         return response
     }

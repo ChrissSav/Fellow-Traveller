@@ -6,12 +6,10 @@ import gr.fellow.fellow_traveller.utils.ConnectivityHelper
 import gr.fellow.fellow_traveller.data.FellowRepository
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
-import gr.fellow.fellow_traveller.framework.network.fellow.request.AccountCheckRequest
-import gr.fellow.fellow_traveller.framework.network.fellow.request.AccountCreateRequest
-import gr.fellow.fellow_traveller.framework.network.fellow.request.CarRequest
-import gr.fellow.fellow_traveller.framework.network.fellow.request.LoginRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.request.*
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
 import gr.fellow.fellow_traveller.framework.network.google.PlaceApiService
 import gr.fellow.fellow_traveller.utils.set
@@ -55,28 +53,28 @@ class FellowRepositoryImpl(
         }
 
     override suspend fun getPlace(place: String): Response<PlaceApiResponse> =
-        networkCallWithOutWrap(
-            connectivityHelper
-        )
-        {
+        networkCallWithOutWrap(connectivityHelper) {
             servicePlace.getPlaces(place)
         }
 
     override suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<CarResponse> =
-        networkCall {
+        networkCall(connectivityHelper) {
             service.addCar(carRequest).handleToCorrectFormat()
         }
 
     override suspend fun getCarsRemote(): ResultWrapper<ArrayList<CarResponse>> =
-        networkCall {
+        networkCall(connectivityHelper) {
             service.userCars().handleToCorrectFormat()
         }
 
     override suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse> =
-        networkCall {
+        networkCall(connectivityHelper) {
             service.deleteCar(carId).handleToCorrectFormat()
         }
 
-
+    override suspend fun addTrip(trip: TripCreateRequest): ResultWrapper<TripResponse> =
+        networkCall(connectivityHelper) {
+            service.addTrip(trip).handleToCorrectFormat()
+        }
 
 }

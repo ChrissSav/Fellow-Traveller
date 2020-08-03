@@ -2,10 +2,8 @@ package gr.fellow.fellow_traveller.domain
 
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.framework.network.fellow.request.CarRequest
-import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.UserInfoResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.request.TripCreateRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.response.*
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
 import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
@@ -34,16 +32,27 @@ interface FellowDataSource {
 
     suspend fun getPlaces(place: String): Response<PlaceApiResponse>
 
-
+    /**
+     * Cars
+     * */
     suspend fun getCarsRemote(): ResultWrapper<ArrayList<CarResponse>>
 
     suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<CarResponse>
 
     suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse>
 
+
+    /**
+     * Trips
+     *
+     */
+
+
+    suspend fun addTripRemote(tripCreateRequest: TripCreateRequest): ResultWrapper<TripResponse>
+
     /**
      * local DB
-     * */
+     */
 
     suspend fun loadUsersInfo(): RegisteredUserEntity
 
@@ -51,11 +60,15 @@ interface FellowDataSource {
     suspend fun logoutUser()
 
 
-    suspend fun getAllCars(): MutableList<CarEntity>
+    suspend fun getAllCarsLocal(): MutableList<CarEntity>
 
 
-    suspend fun insertCar(carEntity: CarEntity)
+    suspend fun insertCarLocal(carEntity: CarEntity)
 
 
-    suspend fun deleteCar(carId: Int) : Int
+    suspend fun deleteCarLocal(carId: Int): Int
+
+
+  //  suspend fun addTripLocal(tripCreateRequest: TripCreateRequest): ResultWrapper<TripResponse>
+
 }

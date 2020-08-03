@@ -1,12 +1,10 @@
 package gr.fellow.fellow_traveller.data
 
+import gr.fellow.fellow_traveller.framework.network.fellow.request.*
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.request.AccountCheckRequest
-import gr.fellow.fellow_traveller.framework.network.fellow.request.AccountCreateRequest
-import gr.fellow.fellow_traveller.framework.network.fellow.request.CarRequest
-import gr.fellow.fellow_traveller.framework.network.fellow.request.LoginRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
 import retrofit2.Response
 
@@ -30,4 +28,11 @@ interface FellowRepository {
     suspend fun getCarsRemote(): ResultWrapper<ArrayList<CarResponse>>
 
     suspend fun deleteCarRemote(carId :Int): ResultWrapper<StatusHandleResponse>
+
+
+    /**
+     * Trips
+     * */
+
+    suspend fun addTrip(trip: TripCreateRequest): ResultWrapper<TripResponse>
 }

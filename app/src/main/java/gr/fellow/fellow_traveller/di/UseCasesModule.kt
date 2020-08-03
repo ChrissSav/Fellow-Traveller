@@ -11,6 +11,7 @@ import gr.fellow.fellow_traveller.usecase.*
 import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.newtrip.GetPlaceFromPlacesUseCase
 import gr.fellow.fellow_traveller.usecase.register.*
+import gr.fellow.fellow_traveller.usecase.trips.RegisterTripRemoteUseCase
 import javax.inject.Singleton
 
 
@@ -131,12 +132,16 @@ class UseCasesModule {
     }
 
 
-
-
     @Singleton
     @Provides
     fun provideDeleteCarUseCase(dataSource: FellowDataSource): DeleteCarUseCase {
         return DeleteCarUseCase(dataSource)
+    }
+
+    @Singleton
+    @Provides
+    fun provideRegisterTripRemoteUseCase(dataSource: FellowDataSource): RegisterTripRemoteUseCase {
+        return RegisterTripRemoteUseCase(dataSource)
     }
 
 }
