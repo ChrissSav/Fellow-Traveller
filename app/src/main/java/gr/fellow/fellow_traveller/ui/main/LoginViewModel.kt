@@ -25,9 +25,10 @@ constructor(
 
 
     fun login(userName: String, password: String) {
-        viewModelScope.launch {
+
+        launch(true) {
             when (val response = loginUseCase(userName, password)) {
-                is ResultWrapper.Success ->{
+                is ResultWrapper.Success -> {
                     registerUserLocalUseCase(response.data)
                     _result.value = true
 

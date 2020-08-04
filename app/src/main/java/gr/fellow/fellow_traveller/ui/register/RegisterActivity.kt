@@ -2,6 +2,7 @@ package gr.fellow.fellow_traveller.ui.register
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.databinding.ActivityRegisterBinding
@@ -42,6 +43,15 @@ class RegisterActivity : AppCompatActivity() {
             }
 
         })
+
+        registerViewModel.load.observe(this, Observer {
+            if(it)
+                binding.progressLoad.visibility = View.VISIBLE
+            else
+                binding.progressLoad.visibility = View.INVISIBLE
+
+        })
+
 
         registerViewModel.error.observe(this, Observer {
             createSnackBar(view, it)

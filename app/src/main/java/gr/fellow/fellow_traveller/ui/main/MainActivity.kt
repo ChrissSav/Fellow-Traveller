@@ -1,14 +1,13 @@
 package gr.fellow.fellow_traveller.ui.main
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.databinding.ActivityMainBinding
 import gr.fellow.fellow_traveller.ui.createSnackBar
-import gr.fellow.fellow_traveller.ui.register.RegisterActivity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
@@ -25,6 +24,15 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        loginViewModel.load.observe(this, Observer {
+           if(it)
+               binding.progressLoad.visibility = View.VISIBLE
+            else
+               binding.progressLoad.visibility = View.INVISIBLE
+
+        })
+
 
 
         loginViewModel.error.observe(this, Observer {

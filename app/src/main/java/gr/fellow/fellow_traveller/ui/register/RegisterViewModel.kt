@@ -24,8 +24,6 @@ constructor(
     private val checkUserEmailUseCase: CheckUserEmailUseCase,
     private val registerUserUseCase: RegisterUserUseCase,
     private val registerUserLocalUseCase: RegisterUserLocalUseCase
-
-
 ) : BaseViewModel() {
     private val _phone = SingleLiveEvent<String>()
     val phone: LiveData<String> = _phone
@@ -47,7 +45,7 @@ constructor(
 
     fun checkUserPhone(phone: String) {
 
-        viewModelScope.launch {
+        launch(true) {
 
             when (val response = checkUserPhoneUseCase(phone)) {
                 is ResultWrapper.Success ->
@@ -63,7 +61,7 @@ constructor(
 
     fun checkUserEmail(email: String) {
 
-        viewModelScope.launch {
+        launch(true) {
             when (val response = checkUserEmailUseCase(email)) {
                 is ResultWrapper.Success ->
                     _email.value = email
@@ -77,14 +75,14 @@ constructor(
     }
 
     fun storePassword(password: String) {
-        viewModelScope.launch {
+        launch(true) {
             _password.value = password
         }
     }
 
 
     fun registerUser() {
-        viewModelScope.launch {
+        launch(true) {
 
             if (userInfo.value?.first!!.isEmpty() && userInfo.value?.second!!.isEmpty())
                 _error.value = context.resources.getString(R.string.ERROR_FIELDS_REQUIRE)
@@ -109,7 +107,7 @@ constructor(
     }
 
     fun storeUserInfo(firstName: String, lastName: String) {
-        viewModelScope.launch {
+        launch(true) {
             _userInfo.value = Pair(firstName, lastName)
         }
 
