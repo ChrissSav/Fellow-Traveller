@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.newtrip.fragments.DestinationsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/AddLocationsFragment_textView"
+            style="@style/display"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Εισάγεται την αφετηρία και τον προορισμό"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/AddLocationsFragment_textView3"
+            style="@style/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Από"
+            app:layout_constraintStart_toStartOf="@+id/AddLocationsFragment_textView"
+            app:layout_constraintTop_toBottomOf="@+id/AddLocationsFragment_textView" />
+
+        <TextView
+            android:id="@+id/AddLocationsFragment_textView2"
+            style="@style/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Προς"
+            app:layout_constraintStart_toStartOf="@+id/from_Button"
+            app:layout_constraintTop_toBottomOf="@+id/from_Button" />
+
+        <Button
+            android:id="@+id/from_Button"
+            style="@style/button_outline_blue_with_left_drawable"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawableRight="@drawable/ic_location"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:padding="15dp"
+            android:singleLine="true"
+            android:text="Διάλεξε την αφετηρία ..."
+            android:textAlignment="textStart"
+            android:textColor="@color/button_default_color"
+            app:layout_constraintEnd_toEndOf="@+id/AddLocationsFragment_textView"
+            app:layout_constraintStart_toStartOf="@+id/AddLocationsFragment_textView"
+            app:layout_constraintTop_toBottomOf="@+id/AddLocationsFragment_textView3" />
+
+        <Button
+            android:id="@+id/to_Button"
+            style="@style/button_outline_blue_with_left_drawable"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawableRight="@drawable/ic_pin"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:padding="15dp"
+            android:singleLine="true"
+            android:text="Διάλεξε τον προορισμό ..."
+            android:textAlignment="textStart"
+            android:textColor="@color/button_default_color"
+            app:layout_constraintEnd_toEndOf="@+id/AddLocationsFragment_textView"
+            app:layout_constraintStart_toStartOf="@+id/AddLocationsFragment_textView"
+            app:layout_constraintTop_toBottomOf="@+id/AddLocationsFragment_textView2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ImageButton
+        android:id="@+id/ImageButton_next"
+        android:layout_width="@dimen/float_action_button_width"
+        android:layout_height="@dimen/float_action_button_height"
+        android:layout_marginEnd="@dimen/float_action_button_margin_right"
+        android:layout_marginBottom="@dimen/float_action_button_margin_bottom"
+        android:background="@drawable/circle_button_shape"
+        android:backgroundTint="@color/blue_color"
+        android:elevation="2dp"
+        android:padding="15dp"
+        android:rotation="180"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_back_button"
+        android:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

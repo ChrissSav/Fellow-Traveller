@@ -38,4 +38,11 @@
     <color name="login_button_click">#205890</color>
 
     <color name="blue_offer">#3A9FEC</color>
+
+
+<!--    NEew offer button-->
+    <color name="button_default_color">#9E9E9E</color>
+    <color name="button_fill_color">@color/black</color>
+
+
 </resources>

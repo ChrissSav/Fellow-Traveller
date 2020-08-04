@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/destination_main"
+        android:icon="@drawable/ic_iconography"
+        android:title="Home" />
+    <item
+        android:id="@+id/destination_trips"
+        android:icon="@drawable/ic_car"
+        android:title="Trips" />
+    <item
+        android:id="@+id/destination_messages"
+        android:icon="@drawable/ic_messages"
+        android:title="Messages" />
+    <item
+        android:id="@+id/destination_notifications"
+        android:icon="@drawable/ic_notifications"
+        android:title="Notifications" />
+    <item
+        android:id="@+id/destination_info"
+        android:icon="@drawable/ic_person"
+        android:title="Info" />
+
+</menu>

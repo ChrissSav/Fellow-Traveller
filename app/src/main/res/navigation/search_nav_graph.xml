@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/search_nav_graph"
+    app:startDestination="@id/searchDestinationsFragment">
+
+    <fragment
+        android:id="@+id/searchDestinationsFragment"
+        android:name="gr.fellow.fellow_traveller.ui.search.fragments.SearchDestinationsFragment"
+        android:label="fragment_search_destinations"
+        tools:layout="@layout/fragment_search_destinations" >
+        <action
+            android:id="@+id/action_searchDestinationsFragment_to_searchResultsFragment"
+            app:destination="@id/searchResultsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFilterFragment"
+        android:name="gr.fellow.fellow_traveller.ui.search.fragments.SearchFilterFragment"
+        android:label="fragment_search_filter"
+        tools:layout="@layout/fragment_search_filter" />
+    <fragment
+        android:id="@+id/searchResultsFragment"
+        android:name="gr.fellow.fellow_traveller.ui.search.fragments.SearchResultsFragment"
+        android:label="fragment_search_results"
+        tools:layout="@layout/fragment_search_results" >
+        <action
+            android:id="@+id/action_searchResultsFragment_to_searchFilterFragment"
+            app:destination="@id/searchFilterFragment" />
+    </fragment>
+</navigation>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.register.fragments.PhoneFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#FFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/SetPhoneFragment_label"
+            style="@style/display"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/register_fragment_become_a_fellow_traveller"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/SetPhoneFragment_phone_number_label"
+            style="@style/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Αριθμός τηλεφώνου"
+            app:layout_constraintStart_toStartOf="@+id/SetPhoneFragment_label"
+            app:layout_constraintTop_toBottomOf="@+id/SetPhoneFragment_label" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/SetPhoneFragment_number_input_section"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="@+id/SetPhoneFragment_label"
+            app:layout_constraintStart_toStartOf="@+id/SetPhoneFragment_label"
+            app:layout_constraintTop_toBottomOf="@+id/SetPhoneFragment_phone_number_label">
+
+            <EditText
+                android:id="@+id/EditText_phone"
+                style="@style/inputStyle"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="8dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="69xxxxxxxx"
+                android:inputType="numberDecimal"
+                android:maxLength="10"
+                android:paddingStart="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/Button_clear"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/Button_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_close"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/EditText_phone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/EditText_phone" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/SetPhoneFragment_section_underline"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/component_edit_text_line"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SetPhoneFragment_number_input_section" />
+
+        <TextView
+            android:id="@+id/SetPhoneFragment_instructions_info"
+            style="@style/paragraph1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/register_fragment_six_digit_code_notice_description"
+            app:layout_constraintEnd_toEndOf="@+id/SetPhoneFragment_label"
+            app:layout_constraintStart_toStartOf="@+id/SetPhoneFragment_label"
+            app:layout_constraintTop_toBottomOf="@+id/SetPhoneFragment_number_input_section" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/ImageButton_next"
+        android:layout_width="@dimen/float_action_button_width"
+        android:layout_height="@dimen/float_action_button_height"
+        android:layout_marginEnd="@dimen/float_action_button_margin_right"
+        android:layout_marginBottom="@dimen/float_action_button_margin_bottom"
+        android:background="@drawable/circle_button_shape"
+        android:elevation="2dp"
+        android:padding="15dp"
+        android:rotation="180"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_back_button"
+        android:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

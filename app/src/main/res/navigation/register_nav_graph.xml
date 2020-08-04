@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/register_nav_graph"
+    app:startDestination="@id/phoneFragment">
+
+    <fragment
+        android:id="@+id/phoneFragment"
+        android:name="gr.fellow.fellow_traveller.ui.register.fragments.PhoneFragment"
+        android:label="fragment_phone"
+        tools:layout="@layout/fragment_phone">
+        <action
+            android:id="@+id/next_fragment"
+            app:destination="@id/emailFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/emailFragment"
+        android:name="gr.fellow.fellow_traveller.ui.register.fragments.EmailFragment"
+        android:label="fragment_email"
+        tools:layout="@layout/fragment_email">
+        <action
+            android:id="@+id/next_fragment"
+            app:destination="@id/passwordFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/passwordFragment"
+        android:name="gr.fellow.fellow_traveller.ui.register.fragments.PasswordFragment"
+        android:label="fragment_password"
+        tools:layout="@layout/fragment_password">
+        <action
+            android:id="@+id/next_fragment"
+            app:destination="@id/accountFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="gr.fellow.fellow_traveller.ui.register.fragments.AccountInfoFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account_info" />
+</navigation>

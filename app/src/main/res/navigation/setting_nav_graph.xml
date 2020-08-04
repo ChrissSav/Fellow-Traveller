@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setting_nav_graph"
+    app:startDestination="@id/baseSettingsFragment">
+
+    <fragment
+        android:id="@+id/accountSettingsFragment"
+        android:name="gr.fellow.fellow_traveller.ui.home.settings.AccountSettingsFragment"
+        android:label="fragment_account_settings"
+        tools:layout="@layout/fragment_account_settings" />
+    <fragment
+        android:id="@+id/baseSettingsFragment"
+        android:name="gr.fellow.fellow_traveller.ui.home.settings.BaseSettingsFragment"
+        android:label="fragment_base_settings"
+        tools:layout="@layout/fragment_base_settings">
+        <action
+            android:id="@+id/action_baseSettingsFragment_to_accountSettingsFragment"
+            app:destination="@id/accountSettingsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_baseSettingsFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_baseSettingsFragment_to_userCarsFragment"
+            app:destination="@id/userCarsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="gr.fellow.fellow_traveller.ui.home.settings.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/userCarsFragment"
+        android:name="gr.fellow.fellow_traveller.ui.home.settings.UserCarsFragment"
+        android:label="fragment_user_cars"
+        tools:layout="@layout/fragment_user_cars" >
+        <action
+            android:id="@+id/action_userCarsFragment_to_addCarFragment"
+            app:destination="@id/addCarFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/addCarFragment"
+        android:name="gr.fellow.fellow_traveller.ui.home.settings.AddCarFragment"
+        android:label="fragment_add_car"
+        tools:layout="@layout/fragment_add_car" />
+</navigation>

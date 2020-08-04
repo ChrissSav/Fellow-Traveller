@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/new_trip_nav_graph"
+    app:startDestination="@id/destinationsFragment">
+
+    <fragment
+        android:id="@+id/destinationsFragment"
+        android:name="gr.fellow.fellow_traveller.ui.newtrip.fragments.DestinationsFragment"
+        android:label="fragment_destinations"
+        tools:layout="@layout/fragment_destinations" >
+        <action
+            android:id="@+id/next_fragment"
+            app:destination="@id/pickUpFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/pickUpFragment"
+        android:name="gr.fellow.fellow_traveller.ui.newtrip.fragments.PickUpFragment"
+        android:label="fragment_pick_up"
+        tools:layout="@layout/fragment_pick_up" >
+        <action
+            android:id="@+id/next_fragment"
+            app:destination="@id/dateTimeFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/dateTimeFragment"
+        android:name="gr.fellow.fellow_traveller.ui.newtrip.fragments.DateTimeFragment"
+        android:label="fragment_date_time"
+        tools:layout="@layout/fragment_date_time" >
+        <action
+            android:id="@+id/next_fragment"
+            app:destination="@id/baseInfoFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/baseInfoFragment"
+        android:name="gr.fellow.fellow_traveller.ui.newtrip.fragments.BaseInfoFragment"
+        android:label="fragment_base_info"
+        tools:layout="@layout/fragment_base_info" >
+        <action
+            android:id="@+id/next_fragment"
+            app:destination="@id/priceFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/priceFragment"
+        android:name="gr.fellow.fellow_traveller.ui.newtrip.fragments.PriceFragment"
+        android:label="fragment_price"
+        tools:layout="@layout/fragment_price" >
+        <action
+            android:id="@+id/next_fragment"
+            app:destination="@id/messageFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/messageFragment"
+        android:name="gr.fellow.fellow_traveller.ui.newtrip.fragments.MessageFragment"
+        android:label="fragment_message"
+        tools:layout="@layout/fragment_message" >
+        <action
+            android:id="@+id/next_fragment"
+            app:destination="@id/summaryFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/summaryFragment"
+        android:name="gr.fellow.fellow_traveller.ui.newtrip.fragments.SummaryFragment"
+        android:label="fragment_summary"
+        tools:layout="@layout/fragment_summary" />
+</navigation>

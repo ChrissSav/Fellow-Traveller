@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.home.settings.AccountSettingsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="2dp"
+        android:padding="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/PersonalSettingsActivity_button_close"
+            style="@style/border_icon_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_close"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
+        <TextView
+            android:id="@+id/info_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Στοιχεία Προφίλ"
+            style="@style/display"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/PersonalSettingsActivity_button_close"
+            app:layout_constraintStart_toEndOf="@id/PersonalSettingsActivity_button_close"
+            app:layout_constraintEnd_toStartOf="@id/PersonalSettingsActivity_button_update"
+            app:layout_constraintTop_toTopOf="@id/PersonalSettingsActivity_button_close"
+            android:singleLine="true"
+            android:ellipsize="end"/>
+
+        <ImageButton
+            android:id="@+id/PersonalSettingsActivity_button_update"
+            style="@style/border_icon_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/ic_tick"
+            android:tint="@color/blue_color"
+            app:layout_constraintBottom_toBottomOf="@id/PersonalSettingsActivity_button_close"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/PersonalSettingsActivity_button_close" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header_section">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/change_image_button">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/null_icon"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/ActivityPersonalSettings_progress_bar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/black_color"
+                android:indeterminateTintMode="src_atop"
+                android:progressDrawable="@drawable/component_progress_circle_bar"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/user_image"
+                app:layout_constraintLeft_toLeftOf="@id/user_image"
+                app:layout_constraintRight_toRightOf="@id/user_image"
+                app:layout_constraintTop_toTopOf="@id/user_image" />
+
+            <Button
+                android:id="@+id/change_image_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="ΑΛΛΑΓΗ ΕΙΚΟΝΑΣ"
+                style="@style/button_blue_empty"
+                android:textAllCaps="false"
+                android:textColor="@color/blue_color"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/user_image" />
+
+
+            <TextView
+                android:id="@+id/user_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                style="@style/label"
+                android:text="Όνομα"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/change_image_button" />
+
+            <EditText
+                android:id="@+id/PersonalSettingsActivity_editText_first_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@null"
+                style="@style/input"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textCursorDrawable="@null"
+                android:windowSoftInputMode="adjustPan"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/user_name_tv"
+                app:layout_constraintTop_toBottomOf="@+id/user_name_tv" />
+
+            <View
+                android:id="@+id/underline_user_name"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/edit_text_color"
+                app:layout_constraintEnd_toEndOf="@+id/PersonalSettingsActivity_editText_first_name"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/PersonalSettingsActivity_editText_first_name"
+                app:layout_constraintTop_toBottomOf="@+id/PersonalSettingsActivity_editText_first_name" />
+
+
+            <TextView
+                android:id="@+id/user_last_name_tcv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                style="@style/label"
+                android:text="Επώνυμο"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/user_name_tv"
+                app:layout_constraintTop_toBottomOf="@+id/underline_user_name" />
+
+
+            <EditText
+                android:id="@+id/PersonalSettingsActivity_editText_last_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:background="@null"
+                style="@style/input"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textCursorDrawable="@null"
+                android:windowSoftInputMode="adjustPan"
+                app:layout_constraintEnd_toEndOf="@+id/PersonalSettingsActivity_editText_first_name"
+                app:layout_constraintStart_toStartOf="@+id/user_last_name_tcv"
+                app:layout_constraintTop_toBottomOf="@+id/user_last_name_tcv" />
+
+
+            <View
+                android:id="@+id/underline_last_name"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/edit_text_color"
+                app:layout_constraintEnd_toEndOf="@+id/PersonalSettingsActivity_editText_last_name"
+                app:layout_constraintStart_toStartOf="@+id/PersonalSettingsActivity_editText_last_name"
+                app:layout_constraintTop_toBottomOf="@+id/PersonalSettingsActivity_editText_last_name" />
+
+            <TextView
+                android:id="@+id/ActivityProfile_about_me_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                style="@style/label"
+                android:text="Σχετικά με εμένα"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/user_name_tv"
+                app:layout_constraintTop_toBottomOf="@+id/underline_last_name" />
+
+            <EditText
+                android:id="@+id/PersonalSettingsActivity_editText_about_me"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:textCursorDrawable="@null"
+                android:windowSoftInputMode="adjustPan"
+                style="@style/input"
+                app:layout_constraintEnd_toEndOf="@+id/PersonalSettingsActivity_editText_first_name"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/ActivityProfile_about_me_tv"
+                app:layout_constraintTop_toBottomOf="@+id/ActivityProfile_about_me_tv" />
+
+            <View
+                android:id="@+id/underline_about_me"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/edit_text_color"
+                app:layout_constraintEnd_toEndOf="@+id/PersonalSettingsActivity_editText_about_me"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/PersonalSettingsActivity_editText_about_me"
+                app:layout_constraintTop_toBottomOf="@+id/PersonalSettingsActivity_editText_about_me" />
+
+            <TextView
+                android:id="@+id/phone_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                style="@style/label"
+                android:text="Αριθμός τηλεφώνου"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/user_name_tv"
+                app:layout_constraintTop_toBottomOf="@+id/underline_about_me" />
+
+            <EditText
+                android:id="@+id/PersonalSettingsActivity_editText_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:inputType="number"
+                style="@style/input"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textCursorDrawable="@null"
+                android:windowSoftInputMode="adjustPan"
+                app:layout_constraintEnd_toEndOf="@+id/PersonalSettingsActivity_editText_first_name"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/phone_tv"
+                app:layout_constraintTop_toBottomOf="@+id/phone_tv" />
+
+            <View
+                android:id="@+id/underline_phone"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/edit_text_color"
+                app:layout_constraintEnd_toEndOf="@+id/PersonalSettingsActivity_editText_phone"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/PersonalSettingsActivity_editText_phone"
+                app:layout_constraintTop_toBottomOf="@+id/PersonalSettingsActivity_editText_phone" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
