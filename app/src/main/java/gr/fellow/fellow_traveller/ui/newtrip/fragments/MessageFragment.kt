@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import dagger.hilt.android.AndroidEntryPoint
+import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentBaseInfoBinding
 import gr.fellow.fellow_traveller.databinding.FragmentMessageBinding
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
@@ -38,11 +40,20 @@ class MessageFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
+        newTripViewModel.message.observe(viewLifecycleOwner, Observer {
+            binding.AddMessageFragmentEditText.setText(it)
+        })
+
+        binding.ImageButtonNext.setOnClickListener {
+            navController.navigate(R.id.next_fragment)
+        }
+
     }
 
 
     override fun onDestroyView() {
         super.onDestroyView()
+        newTripViewModel.setMessage(binding.AddMessageFragmentEditText.text.toString())
         _binding = null
     }
 }

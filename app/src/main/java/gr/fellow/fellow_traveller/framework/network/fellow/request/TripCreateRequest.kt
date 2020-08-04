@@ -18,7 +18,7 @@ data class TripCreateRequest(
     @SerializedName("max_bags")
     val maxBags: Int,
     @SerializedName("message")
-    val msg: String,
+    val msg: String?,
     @SerializedName("price")
     val price: Float,
     @SerializedName("car_id")

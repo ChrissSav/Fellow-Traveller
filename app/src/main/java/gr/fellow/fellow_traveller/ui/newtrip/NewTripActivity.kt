@@ -7,11 +7,15 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.ActivityNewTripBinding
 import gr.fellow.fellow_traveller.ui.createSnackBar
 import gr.fellow.fellow_traveller.ui.dialogs.ExitCustomDialog
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
+@AndroidEntryPoint
 class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogListener  {
 
 
@@ -51,8 +55,8 @@ class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogLi
             }
 
         })
-
-
+        newTripViewModel.setBags(0)
+        newTripViewModel.setSeats(1)
         newTripViewModel.error.observe(this, Observer {
             createSnackBar(view, it)
         })

@@ -168,7 +168,7 @@
                     style="@style/input"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
+                    android:text="1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/plus_button_seats"
                     app:layout_constraintStart_toStartOf="@id/minus_button_seats"

@@ -44,7 +44,7 @@ class DestinationsFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
-        if (newTripViewModel.destinationFrom.value != null) {
+     /*   if (newTripViewModel.destinationFrom.value != null) {
             binding.fromButton.text = newTripViewModel.destinationFrom.value?.title
             binding.fromButton.setTextColor(resources.getColor(R.color.button_fill_color))
         }
@@ -53,7 +53,7 @@ class DestinationsFragment : Fragment() {
             binding.toButton.setTextColor(resources.getColor(R.color.button_fill_color))
         }
 
-
+*/
 
 
         binding.fromButton.setOnClickListener {

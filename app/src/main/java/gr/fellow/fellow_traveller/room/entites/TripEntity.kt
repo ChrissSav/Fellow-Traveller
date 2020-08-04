@@ -18,7 +18,7 @@ data class TripEntity(
     val price: Float,
     val maxSeats: Int,
     val maxBags: Int,
-    val message: String,
+    val message: String?,
     val timestamp: Long,
     val currentSeats: Int,
     val currentBags: Int,

@@ -79,7 +79,7 @@
         app:layout_constraintTop_toBottomOf="@+id/AddPriceFragment_textView7" />
 
     <TextView
-        android:id="@+id/AddPriceFragment_textView_total_price"
+        android:id="@+id/total_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0 €"

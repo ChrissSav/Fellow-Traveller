@@ -41,7 +41,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/TripSummaryFragment_textView_from"
+                    android:id="@+id/from_textView"
                     style="@style/header1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                     android:maxLines="2"
                     android:tag="1"
                     android:text="Athens"
-                    app:layout_constraintEnd_toStartOf="@+id/TripSummaryFragment_textView_to"
+                    app:layout_constraintEnd_toStartOf="@+id/to_textView"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/TripSummaryFragment_textView"
                     app:layout_constraintTop_toBottomOf="@+id/TripSummaryFragment_textView" />
@@ -65,7 +65,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/TripSummaryFragment_textView_to"
+                    android:id="@+id/to_textView"
                     style="@style/header1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                     android:text="Thessaloniki"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline"
-                    app:layout_constraintTop_toTopOf="@+id/TripSummaryFragment_textView_from" />
+                    app:layout_constraintTop_toTopOf="@+id/from_textView" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline"
@@ -126,7 +126,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/TripSummaryFragment_textView_date"
+                        android:id="@+id/date"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -173,7 +173,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/TripSummaryFragment_textView_time"
+                        android:id="@+id/time"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -221,7 +221,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/TripSummaryFragment_textView_seats"
+                        android:id="@+id/seats"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -246,7 +246,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.521"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/TripSummaryFragment_textView_seats" />
+                        app:layout_constraintTop_toBottomOf="@+id/seats" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -271,7 +271,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/TripSummaryFragment_textView_pets"
+                    android:id="@+id/pets"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/firasans_medium"
@@ -282,8 +282,8 @@
                     android:textColor="@color/black_color"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="@+id/TripSummaryFragment_textView15"
-                    app:layout_constraintEnd_toEndOf="@+id/TripSummaryFragment_textView_car"
-                    app:layout_constraintStart_toStartOf="@+id/TripSummaryFragment_textView_car"
+                    app:layout_constraintEnd_toEndOf="@+id/car"
+                    app:layout_constraintStart_toStartOf="@+id/car"
                     app:layout_constraintTop_toTopOf="@+id/TripSummaryFragment_textView15" />
 
                 <ImageView
@@ -291,9 +291,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_bone"
-                    app:layout_constraintBottom_toBottomOf="@+id/TripSummaryFragment_textView_pets"
+                    app:layout_constraintBottom_toBottomOf="@+id/pets"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/TripSummaryFragment_textView_pets" />
+                    app:layout_constraintTop_toTopOf="@+id/pets" />
 
                 <TextView
                     android:id="@+id/TripSummaryFragment_textView5"
@@ -306,7 +306,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/TripSummaryFragment_textView15" />
 
                 <TextView
-                    android:id="@+id/TripSummaryFragment_textView_price"
+                    android:id="@+id/price"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/firasans_medium"
@@ -317,8 +317,8 @@
                     android:textColor="@color/black_color"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="@+id/TripSummaryFragment_textView5"
-                    app:layout_constraintEnd_toEndOf="@+id/TripSummaryFragment_textView_car"
-                    app:layout_constraintStart_toStartOf="@+id/TripSummaryFragment_textView_car"
+                    app:layout_constraintEnd_toEndOf="@+id/car"
+                    app:layout_constraintStart_toStartOf="@+id/car"
                     app:layout_constraintTop_toTopOf="@+id/TripSummaryFragment_textView5" />
 
                 <ImageView
@@ -326,9 +326,9 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:background="@drawable/ic_payment"
-                    app:layout_constraintBottom_toBottomOf="@+id/TripSummaryFragment_textView_price"
+                    app:layout_constraintBottom_toBottomOf="@+id/price"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/TripSummaryFragment_textView_price" />
+                    app:layout_constraintTop_toTopOf="@+id/price" />
 
                 <TextView
                     android:id="@+id/TripSummaryFragment_textView14"
@@ -341,7 +341,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/TripSummaryFragment_textView5" />
 
                 <TextView
-                    android:id="@+id/TripSummaryFragment_textView_car"
+                    android:id="@+id/car"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -363,9 +363,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_car"
-                    app:layout_constraintBottom_toBottomOf="@+id/TripSummaryFragment_textView_car"
+                    app:layout_constraintBottom_toBottomOf="@+id/car"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/TripSummaryFragment_textView_car" />
+                    app:layout_constraintTop_toTopOf="@+id/car" />
 
                 <TextView
                     android:id="@+id/TripSummaryFragment_textView_25"
@@ -378,7 +378,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/TripSummaryFragment_textView_bags"
+                    android:id="@+id/bags"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/firasans_medium"
@@ -389,8 +389,8 @@
                     android:textColor="@color/black_color"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="@+id/TripSummaryFragment_textView_25"
-                    app:layout_constraintEnd_toEndOf="@+id/TripSummaryFragment_textView_car"
-                    app:layout_constraintStart_toStartOf="@+id/TripSummaryFragment_textView_car"
+                    app:layout_constraintEnd_toEndOf="@+id/car"
+                    app:layout_constraintStart_toStartOf="@+id/car"
                     app:layout_constraintTop_toTopOf="@+id/TripSummaryFragment_textView_25" />
 
                 <ImageView
@@ -398,9 +398,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_luggage"
-                    app:layout_constraintBottom_toBottomOf="@+id/TripSummaryFragment_textView_bags"
+                    app:layout_constraintBottom_toBottomOf="@+id/bags"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/TripSummaryFragment_textView_bags" />
+                    app:layout_constraintTop_toTopOf="@+id/bags" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -412,10 +412,10 @@
                 android:text="Μήνυμα"
                 android:textAlignment="center"
                 app:layout_constraintStart_toStartOf="@+id/constraintLayout3"
-                app:layout_constraintTop_toBottomOf="@+id/TripSummaryFragment_textView_pickup" />
+                app:layout_constraintTop_toBottomOf="@+id/pickup" />
 
             <TextView
-                android:id="@+id/TripSummaryFragment_textView_msg"
+                android:id="@+id/msg"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="27dp"
@@ -443,7 +443,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
 
             <TextView
-                android:id="@+id/TripSummaryFragment_textView_pickup"
+                android:id="@+id/pickup"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -463,7 +463,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_pin"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout3"
-                app:layout_constraintTop_toTopOf="@+id/TripSummaryFragment_textView_pickup" />
+                app:layout_constraintTop_toTopOf="@+id/pickup" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
