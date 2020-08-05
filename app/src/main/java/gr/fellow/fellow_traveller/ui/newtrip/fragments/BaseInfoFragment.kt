@@ -14,6 +14,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentBaseInfoBinding
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
@@ -92,7 +94,45 @@ class BaseInfoFragment : Fragment() {
             }
 
 
+            carButton.setOnClickListener {
+                openDialogForCar()
+            }
+
         }
+    }
+
+
+    private fun openDialogForCar() {
+        val dialog = Dialog(requireActivity(), R.style.ThemeDialogNew)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.choose_car)
+        dialog.setCancelable(true)
+        val button = dialog.findViewById<Button>(R.id.choose_car_button_add_car)
+        //getCars(dialog)
+        dialog.show()
+        button.setOnClickListener {
+            /*dialog.dismiss()
+            val intent = Intent(activity, AddCarSettingsActivity::class.java)
+            startActivityForResult(intent, 1)*/
+        }
+    }
+
+
+    private fun buildRecyclerViewForCar(dialog: Dialog) {
+        val mRecyclerView = dialog.findViewById<RecyclerView>(R.id.choose_car_recyclerView)
+        mRecyclerView.setHasFixedSize(true)
+        val mLayoutManager = LinearLayoutManager(activity)
+        val mAdapter = CarAdapter(mExampleList)
+        mRecyclerView.setLayoutManager(mLayoutManager)
+        mRecyclerView.setAdapter(mAdapter)
+        mAdapter.setOnItemClickListener(object : OnItemClickListener() {
+            fun onItemClick(position: Int) {
+                buttonCar.setTextColor(Color.parseColor(CLICK_COLOR))
+                buttonCar.setText(mExampleList.get(position).getDescription())
+                currentCar = mExampleList.get(position)
+                dialog.dismiss()
+            }
+        })
     }
 
 
@@ -126,21 +166,6 @@ class BaseInfoFragment : Fragment() {
         if (currentNum > 0) {
             textView.text = (currentNum - 1).toString()
             newTripViewModel.setBags(currentNum - 1)
-        }
-    }
-
-    private fun openDialogForCar() {
-        val dialog = Dialog(activity!!, R.style.ThemeDialogNew)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.choose_car)
-        dialog.setCancelable(true)
-        val button = dialog.findViewById<Button>(R.id.choose_car_button_add_car)
-        //getCars(dialog)
-        dialog.show()
-        button.setOnClickListener {
-            /*dialog.dismiss()
-            val intent = Intent(activity, AddCarSettingsActivity::class.java)
-            startActivityForResult(intent, 1)*/
         }
     }
 

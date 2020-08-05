@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/new_trip_nav_graph"
-    app:startDestination="@id/destinationsFragment">
+    app:startDestination="@id/baseInfoFragment">
 
     <fragment
         android:id="@+id/destinationsFragment"
@@ -87,5 +87,18 @@
         android:id="@+id/summaryFragment"
         android:name="gr.fellow.fellow_traveller.ui.newtrip.fragments.SummaryFragment"
         android:label="fragment_summary"
-        tools:layout="@layout/fragment_summary" />
+        tools:layout="@layout/fragment_summary" >
+        <action
+            android:id="@+id/next_fragment"
+            app:destination="@id/successTripFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/successTripFragment"
+        android:name="gr.fellow.fellow_traveller.ui.newtrip.fragments.SuccessTripFragment"
+        android:label="fragment_success_trip"
+        tools:layout="@layout/fragment_success_trip" />
 </navigation>

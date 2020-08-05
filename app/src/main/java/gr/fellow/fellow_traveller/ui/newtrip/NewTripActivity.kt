@@ -16,10 +16,10 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogListener  {
+class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogListener {
 
 
-    private lateinit var  binding: ActivityNewTripBinding
+    private lateinit var binding: ActivityNewTripBinding
     private val newTripViewModel: NewTripViewModel by viewModels()
     private lateinit var nav: NavController
     private lateinit var exitCustomDialog: ExitCustomDialog
@@ -38,7 +38,7 @@ class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogLi
 
         nav.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.destinationsFragment -> binding.progressBar.progress  = 14
+                R.id.destinationsFragment -> binding.progressBar.progress = 14
                 R.id.pickUpFragment -> binding.progressBar.progress = 28
                 R.id.dateTimeFragment -> binding.progressBar.progress = 42
                 R.id.baseInfoFragment -> binding.progressBar.progress = 56
@@ -50,6 +50,9 @@ class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogLi
                 R.id.summaryFragment -> {
                     binding.progressBar.progress = 95
                     binding.labelSummary.visibility = View.VISIBLE
+                }
+                R.id.successTripFragment -> {
+                    binding.constraintLayout.visibility = View.GONE
                 }
 
             }

@@ -52,6 +52,10 @@ class SummaryFragment : Fragment() {
             price.text = newTripViewModel.price.value.toString()
             msg.text = newTripViewModel.message.value
             pets.text= if (newTripViewModel.pet.value!!) resources.getString(R.string.allowed) else resources.getString(R.string.not_allowed)
+
+            ImageButtonNext.setOnClickListener {
+                navController.navigate(R.id.next_fragment)
+            }
         }
 
     }

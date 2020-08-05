@@ -471,7 +471,7 @@
 
 
     <ImageButton
-        android:id="@+id/TripSummaryFragment_button_next"
+        android:id="@+id/ImageButton_next"
         android:layout_width="@dimen/float_action_button_width"
         android:layout_height="@dimen/float_action_button_height"
         android:layout_marginEnd="@dimen/float_action_button_margin_right"
