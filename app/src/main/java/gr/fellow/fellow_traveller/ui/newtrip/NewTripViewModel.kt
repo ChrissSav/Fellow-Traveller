@@ -8,7 +8,6 @@ import com.example.fellowtravellerbeta.data.network.google.model.DestinationMode
 import com.example.fellowtravellerbeta.data.network.google.response.PredictionResponse
 import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
-import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.home.GetUserCarsLocalUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -40,6 +39,9 @@ constructor(
 
     private val _car = MutableLiveData<CarEntity>()
     val car: LiveData<CarEntity> = _car
+
+    private val _carList = MutableLiveData<MutableList<CarEntity>>()
+    val carList: LiveData<MutableList<CarEntity>> = _carList
 
     private val _seats = MutableLiveData<Int>()
     val seats: LiveData<Int> = _seats
@@ -119,8 +121,20 @@ constructor(
     }
 
     fun setMessage(msg: String) {
+        _message.value = msg
+    }
+
+    fun setCar(carTemp: CarEntity) {
         viewModelScope.launch {
-            _message.value = msg
+            _car.value = carTemp
         }
     }
+
+    fun loadUserCars() {
+        viewModelScope.launch {
+            _carList.value = getUserCarsLocalUseCase()
+        }
+    }
+
+
 }

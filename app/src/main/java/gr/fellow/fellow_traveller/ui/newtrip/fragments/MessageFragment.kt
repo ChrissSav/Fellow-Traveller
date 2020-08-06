@@ -1,20 +1,21 @@
 package gr.fellow.fellow_traveller.ui.newtrip.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.databinding.FragmentBaseInfoBinding
 import gr.fellow.fellow_traveller.databinding.FragmentMessageBinding
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+
+@ExperimentalCoroutinesApi
 class MessageFragment : Fragment() {
     private val newTripViewModel: NewTripViewModel by activityViewModels()
     private lateinit var navController: NavController
@@ -45,7 +46,10 @@ class MessageFragment : Fragment() {
         })
 
         binding.ImageButtonNext.setOnClickListener {
-            navController.navigate(R.id.next_fragment)
+            newTripViewModel.setMessage(binding.AddMessageFragmentEditText.text.toString())
+
+            if (newTripViewModel.message.value != null)
+                navController.navigate(R.id.next_fragment)
         }
 
     }
@@ -53,7 +57,6 @@ class MessageFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        newTripViewModel.setMessage(binding.AddMessageFragmentEditText.text.toString())
         _binding = null
     }
 }

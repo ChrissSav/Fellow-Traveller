@@ -12,12 +12,7 @@ class AddCarToRemoteUseCase(
     private val context: Context
 ) {
 
-    suspend operator fun invoke(
-        brand: String,
-        model: String,
-        plate: String,
-        color: String
-    ): ResultWrapper<CarResponse> {
+    suspend operator fun invoke(brand: String, model: String, plate: String, color: String): ResultWrapper<CarResponse> {
         val response = dataSource.addCarRemote(CarRequest(brand, model, plate, color))
         if (response is ResultWrapper.Error) {
             when (response.error.code) {

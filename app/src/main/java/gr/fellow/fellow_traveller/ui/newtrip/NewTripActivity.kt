@@ -1,9 +1,9 @@
 package gr.fellow.fellow_traveller.ui.newtrip
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -38,11 +38,30 @@ class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogLi
 
         nav.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.destinationsFragment -> binding.progressBar.progress = 14
-                R.id.pickUpFragment -> binding.progressBar.progress = 28
-                R.id.dateTimeFragment -> binding.progressBar.progress = 42
-                R.id.baseInfoFragment -> binding.progressBar.progress = 56
-                R.id.priceFragment -> binding.progressBar.progress = 70
+                R.id.destinationsFragment -> {
+                    binding.progressBar.progress = 14
+                    binding.labelSummary.visibility = View.INVISIBLE
+
+                }
+                R.id.pickUpFragment -> {
+                    binding.progressBar.progress = 28
+                    binding.labelSummary.visibility = View.INVISIBLE
+
+                }
+                R.id.dateTimeFragment -> {
+                    binding.progressBar.progress = 42
+                    binding.labelSummary.visibility = View.INVISIBLE
+
+                }
+                R.id.baseInfoFragment -> {
+                    binding.progressBar.progress = 56
+                    binding.labelSummary.visibility = View.INVISIBLE
+
+                }
+                R.id.priceFragment -> {
+                    binding.progressBar.progress = 70
+                    binding.labelSummary.visibility = View.INVISIBLE
+                }
                 R.id.messageFragment -> {
                     binding.progressBar.progress = 84
                     binding.labelSummary.visibility = View.INVISIBLE
@@ -59,7 +78,10 @@ class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogLi
 
         })
         newTripViewModel.setBags(0)
+        newTripViewModel.setPet(false)
         newTripViewModel.setSeats(1)
+        newTripViewModel.loadUserCars()
+
         newTripViewModel.error.observe(this, Observer {
             createSnackBar(view, it)
         })
@@ -69,6 +91,15 @@ class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogLi
 
         binding.imageButtonBack.setOnClickListener {
             onBackPressed()
+        }
+    }
+
+
+    override fun onBackPressed() {
+        if (nav.currentDestination?.id == R.id.destinationsFragment) {
+            openDialog()
+        } else {
+            super.onBackPressed()
         }
     }
 

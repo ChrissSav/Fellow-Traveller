@@ -1,7 +1,6 @@
 package gr.fellow.fellow_traveller.ui.newtrip.fragments
 
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,16 +13,24 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentBaseInfoBinding
+import gr.fellow.fellow_traveller.room.entites.CarEntity
+import gr.fellow.fellow_traveller.ui.createSnackBar
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-
+@ExperimentalCoroutinesApi
 class BaseInfoFragment : Fragment() {
+
     private val newTripViewModel: NewTripViewModel by activityViewModels()
     private lateinit var navController: NavController
+    private var carList = mutableListOf<CarEntity>()
+    private lateinit var mAdapter: CarTripsAdapter
+    private lateinit var mRecyclerView: RecyclerView
+    private lateinit var dialog: Dialog
 
     /**
      * This property is only valid between onCreateView and
@@ -48,6 +55,8 @@ class BaseInfoFragment : Fragment() {
 
         with(newTripViewModel) {
             car.observe(viewLifecycleOwner, Observer {
+                binding.carButton.text = "${it.brand} ${it.model} | ${it.plate} | ${it.color}"
+                binding.carButton.setTextColor(resources.getColor(R.color.button_fill_color))
             })
 
             seats.observe(viewLifecycleOwner, Observer {
@@ -70,7 +79,12 @@ class BaseInfoFragment : Fragment() {
         with(binding) {
 
             ImageButtonNext.setOnClickListener {
-                navController.navigate(R.id.next_fragment)
+                if (newTripViewModel.car.value != null) {
+                    navController.navigate(R.id.next_fragment)
+                } else {
+                    createSnackBar(view, resources.getString(R.string.ERROR_SELECT_CAR))
+                }
+
             }
 
             plusButtonSeats.setOnClickListener {
@@ -80,6 +94,7 @@ class BaseInfoFragment : Fragment() {
             minusButtonSeats.setOnClickListener {
                 decreaseSeats(seatsValueTv)
             }
+
             plusButtonBags.setOnClickListener {
                 increaseBags(bagsValueTv)
 
@@ -103,36 +118,38 @@ class BaseInfoFragment : Fragment() {
 
 
     private fun openDialogForCar() {
-        val dialog = Dialog(requireActivity(), R.style.ThemeDialogNew)
+        dialog = Dialog(requireActivity(), R.style.ThemeDialogNew)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.choose_car)
         dialog.setCancelable(true)
         val button = dialog.findViewById<Button>(R.id.choose_car_button_add_car)
-        //getCars(dialog)
         dialog.show()
         button.setOnClickListener {
             /*dialog.dismiss()
             val intent = Intent(activity, AddCarSettingsActivity::class.java)
             startActivityForResult(intent, 1)*/
         }
+
+        buildRecyclerViewForCar(dialog)
     }
 
 
     private fun buildRecyclerViewForCar(dialog: Dialog) {
-        val mRecyclerView = dialog.findViewById<RecyclerView>(R.id.choose_car_recyclerView)
-        mRecyclerView.setHasFixedSize(true)
-        val mLayoutManager = LinearLayoutManager(activity)
-        val mAdapter = CarAdapter(mExampleList)
-        mRecyclerView.setLayoutManager(mLayoutManager)
-        mRecyclerView.setAdapter(mAdapter)
-        mAdapter.setOnItemClickListener(object : OnItemClickListener() {
-            fun onItemClick(position: Int) {
-                buttonCar.setTextColor(Color.parseColor(CLICK_COLOR))
-                buttonCar.setText(mExampleList.get(position).getDescription())
-                currentCar = mExampleList.get(position)
-                dialog.dismiss()
-            }
+        mRecyclerView = dialog.findViewById(R.id.choose_car_recyclerView)
+        mAdapter = CarTripsAdapter(carList) { car ->
+            newTripViewModel.setCar(car)
+            dialog.dismiss()
+        }
+        mRecyclerView.layoutManager = GridLayoutManager(context, 2);
+        mRecyclerView.adapter = mAdapter
+
+        newTripViewModel.carList.observe(viewLifecycleOwner, Observer {
+            carList.clear()
+            carList.addAll(it)
+            mRecyclerView.adapter?.notifyDataSetChanged()
         })
+
+
     }
 
 

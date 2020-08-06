@@ -5,140 +5,113 @@ import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.scopes.ActivityScoped
 import gr.fellow.fellow_traveller.domain.FellowDataSource
-import gr.fellow.fellow_traveller.usecase.*
+import gr.fellow.fellow_traveller.usecase.LoadUserInfoUseCase
+import gr.fellow.fellow_traveller.usecase.LoginUseCase
+import gr.fellow.fellow_traveller.usecase.LogoutUseCase
 import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.newtrip.GetPlaceFromPlacesUseCase
 import gr.fellow.fellow_traveller.usecase.register.*
 import gr.fellow.fellow_traveller.usecase.trips.RegisterTripRemoteUseCase
-import javax.inject.Singleton
 
 
-@InstallIn(ApplicationComponent::class)
+@InstallIn(ActivityComponent::class)
 @Module
 class UseCasesModule {
 
-
-    @Singleton
+    @ActivityScoped
     @Provides
-    fun provideCheckPhoneUseCase(
-        dataSource: FellowDataSource,
-        context: Context
-    ): CheckUserPhoneUseCase {
-        return CheckUserPhoneUseCase(
-            context,
-            dataSource
-        )
+    fun provideCheckPhoneUseCase(dataSource: FellowDataSource, context: Context): CheckUserPhoneUseCase {
+        return CheckUserPhoneUseCase(context, dataSource)
     }
 
 
-    @Singleton
+    @ActivityScoped
     @Provides
-    fun provideCheckEmailUseCase(
-        dataSource: FellowDataSource,
-        context: Context
-    ): CheckUserEmailUseCase {
-        return CheckUserEmailUseCase(
-            context,
-            dataSource
-        )
+    fun provideCheckEmailUseCase(dataSource: FellowDataSource, context: Context): CheckUserEmailUseCase {
+        return CheckUserEmailUseCase(context, dataSource)
     }
 
-    @Singleton
+    @ActivityScoped
     @Provides
-    fun provideRegisterUserUseCase(
-        dataSource: FellowDataSource,
-        context: Context
-    ): RegisterUserUseCase {
-        return RegisterUserUseCase(
-            context,
-            dataSource
-        )
+    fun provideRegisterUserUseCase(dataSource: FellowDataSource, context: Context): RegisterUserUseCase {
+        return RegisterUserUseCase(context, dataSource)
     }
 
-    @Singleton
+    @ActivityScoped
     @Provides
     fun provideLoginUseCase(dataSource: FellowDataSource, context: Context): LoginUseCase {
         return LoginUseCase(context, dataSource)
     }
 
-    @Singleton
+    @ActivityScoped
     @Provides
     fun provideGetPlaceFromPlacesUseCase(dataSource: FellowDataSource): GetPlaceFromPlacesUseCase {
         return GetPlaceFromPlacesUseCase(dataSource)
     }
 
-    @Singleton
+    @ActivityScoped
     @Provides
     fun provideRegisterUserLocal(dataSource: FellowDataSource): RegisterUserLocalUseCase {
-        return RegisterUserLocalUseCase(
-            dataSource
-        )
+        return RegisterUserLocalUseCase(dataSource)
     }
 
-    @Singleton
+    @ActivityScoped
     @Provides
     fun provideCheckLoginUseCase(sharedPreferences: SharedPreferences): CheckIfUserIsLoginUseCase {
-        return CheckIfUserIsLoginUseCase(
-            sharedPreferences
-        )
+        return CheckIfUserIsLoginUseCase(sharedPreferences)
     }
 
-    @Singleton
+    @ActivityScoped
     @Provides
     fun provideLoadUserInfoUseCase(dataSource: FellowDataSource): LoadUserInfoUseCase {
         return LoadUserInfoUseCase(dataSource)
     }
 
-    @Singleton
+    @ActivityScoped
     @Provides
-    fun provideLoadLogoutUseCase(
-        dataSource: FellowDataSource,
-        sharedPreferences: SharedPreferences
-    ): LogoutUseCase {
+    fun provideLoadLogoutUseCase(dataSource: FellowDataSource, sharedPreferences: SharedPreferences): LogoutUseCase {
         return LogoutUseCase(dataSource, sharedPreferences)
     }
 
 
-    @Singleton
+    @ActivityScoped
     @Provides
     fun provideGetUserCarsUseCase(dataSource: FellowDataSource): GetUserCarsLocalUseCase {
         return GetUserCarsLocalUseCase(dataSource)
     }
 
 
-    @Singleton
+    @ActivityScoped
     @Provides
     fun provideGetUserCarsRemoteUseCase(dataSource: FellowDataSource): GetUserCarsRemoteUseCase {
         return GetUserCarsRemoteUseCase(dataSource)
     }
 
 
-    @Singleton
+    @ActivityScoped
     @Provides
     fun provideRegisterCarLocalUseCase(dataSource: FellowDataSource): RegisterCarLocalUseCase {
         return RegisterCarLocalUseCase(dataSource)
     }
 
 
-    @Singleton
+    @ActivityScoped
     @Provides
-    fun provideAddCarToRemoteUseCase(
-        dataSource: FellowDataSource,
-        context: Context
-    ): AddCarToRemoteUseCase {
+    fun provideAddCarToRemoteUseCase(dataSource: FellowDataSource, context: Context): AddCarToRemoteUseCase {
         return AddCarToRemoteUseCase(dataSource, context)
     }
 
 
-    @Singleton
+    @ActivityScoped
     @Provides
     fun provideDeleteCarUseCase(dataSource: FellowDataSource): DeleteCarUseCase {
         return DeleteCarUseCase(dataSource)
     }
 
-    @Singleton
+    @ActivityScoped
     @Provides
     fun provideRegisterTripRemoteUseCase(dataSource: FellowDataSource): RegisterTripRemoteUseCase {
         return RegisterTripRemoteUseCase(dataSource)

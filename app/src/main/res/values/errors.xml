@@ -56,4 +56,7 @@
     <string name="ERROR_TRIP_QRCODE_WRONG">Το QRCode ειναι λάθος.</string>
 
 
+    <string name="ERROR_SELECT_CAR">Παρακαλώ επιλέξτε αυτοκίνητο.</string>
+
+
 </resources>

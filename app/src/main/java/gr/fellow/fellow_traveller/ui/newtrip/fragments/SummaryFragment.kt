@@ -11,7 +11,9 @@ import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentSummaryBinding
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 class SummaryFragment : Fragment() {
     private val newTripViewModel: NewTripViewModel by activityViewModels()
     private lateinit var navController: NavController
@@ -37,6 +39,31 @@ class SummaryFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
+        val clickListener = View.OnClickListener { view ->
+
+            when (view.tag) {
+                "1" -> {
+                    navController.navigate(R.id.action_summaryFragment_to_destinationsFragment)
+                }
+                "2" -> {
+                    navController.navigate(R.id.action_summaryFragment_to_dateTimeFragment)
+                }
+                "3" -> {
+                    navController.navigate(R.id.action_summaryFragment_to_baseInfoFragment)
+                }
+                "4" -> {
+                    navController.navigate(R.id.action_summaryFragment_to_priceFragment)
+                }
+                "5" -> {
+                    activity?.onBackPressed()
+                }
+                "6" -> {
+                    navController.navigate(R.id.action_summaryFragment_to_pickUpFragment)
+                }
+
+            }
+        }
+
 
         with(binding) {
             fromTextView.text = newTripViewModel.destinationFrom.value?.title
@@ -50,13 +77,27 @@ class SummaryFragment : Fragment() {
             seats.text = newTripViewModel.seats.value.toString()
             car.text = "${newTripViewModel.car.value?.brand} ${newTripViewModel.car.value?.model}"
             price.text = newTripViewModel.price.value.toString()
-            msg.text = newTripViewModel.message.value
-            pets.text= if (newTripViewModel.pet.value!!) resources.getString(R.string.allowed) else resources.getString(R.string.not_allowed)
+            msg.text = newTripViewModel.message.value.toString()
+            pets.text = if (newTripViewModel.pet.value!!) resources.getString(R.string.allowed) else resources.getString(R.string.not_allowed)
+            pets.setOnClickListener(clickListener)
 
             ImageButtonNext.setOnClickListener {
                 navController.navigate(R.id.next_fragment)
             }
+
+            TripSummaryFragmentConstraintLayoutFromTo.setOnClickListener(clickListener)
+            constraintLayoutDate.setOnClickListener(clickListener)
+            constraintLayoutTime.setOnClickListener(clickListener)
+            constraintLayoutSeats.setOnClickListener(clickListener)
+            bags.setOnClickListener(clickListener)
+            pets.setOnClickListener(clickListener)
+            price.setOnClickListener(clickListener)
+            car.setOnClickListener(clickListener)
+            pickup.setOnClickListener(clickListener)
+            msg.setOnClickListener(clickListener)
+
         }
+
 
     }
 
@@ -87,7 +128,7 @@ class SummaryFragment : Fragment() {
     }
 
 
-    private fun setTime(time: String):String {
+    private fun setTime(time: String): String {
         var time = time
         val hourOfDay = time.substring(0, 2).toInt()
         val minute = time.substring(3, 5).toInt()
