@@ -15,20 +15,15 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.ActivityHomeBinding
 import gr.fellow.fellow_traveller.ui.createSnackBar
-import gr.fellow.fellow_traveller.usecase.register.CheckUserEmailUseCase
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import javax.inject.Inject
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
 
     private val homeViewModel: HomeViewModel by viewModels()
-
-    @Inject
-    lateinit var checkUseCase: CheckUserEmailUseCase
     private lateinit var navController: NavController
     private lateinit var binding: ActivityHomeBinding
 
@@ -42,24 +37,16 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityHomeBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
 
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_container)
 
 
         homeViewModel.loadUserInfo()
-
         homeViewModel.loadCars()
-
-        GlobalScope.launch {
-            checkUseCase("fefefef")
-
-        }
-
+        //  homeViewModel.loadTripAsCreator()
 
         homeViewModel.error.observe(this, Observer {
             createSnackBar(binding.root, it)

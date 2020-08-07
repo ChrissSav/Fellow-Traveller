@@ -117,4 +117,10 @@ class UseCasesModule {
         return RegisterTripRemoteUseCase(dataSource)
     }
 
+
+    @ActivityScoped
+    @Provides
+    fun provideGetTripsAsCreatorRemoteUseCase(dataSource: FellowDataSource): GetTripsAsCreatorRemoteUseCase {
+        return GetTripsAsCreatorRemoteUseCase(dataSource)
+    }
 }

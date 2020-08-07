@@ -5,7 +5,6 @@ import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -49,4 +48,10 @@ interface FellowService {
     suspend fun addTrip(
         @Body trip: TripCreateRequest
     ): Response<TripResponse>
+
+
+    @GET("trips")
+    suspend fun getTripsAs(
+        @Query("type_as") type: String
+    ): Response<MutableList<TripResponse>>
 }

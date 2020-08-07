@@ -30,10 +30,7 @@ class FellowDataSourceImpl(
         repository.registerUser(AccountCreateRequest(firstName, lastName, email, password, phone))
 
 
-    override suspend fun loginUser(
-        username: String,
-        password: String
-    ): ResultWrapper<UserLoginResponse> =
+    override suspend fun loginUser(username: String, password: String): ResultWrapper<UserLoginResponse> =
         repository.loginUser(LoginRequest(username, password))
 
 
@@ -56,6 +53,8 @@ class FellowDataSourceImpl(
     override suspend fun addTripRemote(tripCreateRequest: TripCreateRequest): ResultWrapper<TripResponse> =
         repository.addTrip(tripCreateRequest)
 
+    override suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripResponse>> =
+        repository.getTipsAsCreator()
 
     override suspend fun loadUsersInfo(): RegisteredUserEntity =
         repositoryLocal.loadUserAuth()

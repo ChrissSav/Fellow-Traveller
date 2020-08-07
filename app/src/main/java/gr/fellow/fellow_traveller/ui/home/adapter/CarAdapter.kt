@@ -1,12 +1,9 @@
 package gr.fellow.fellow_traveller.ui.home.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.databinding.CarItemBinding
 import gr.fellow.fellow_traveller.room.entites.CarEntity
 
 class CarAdapter(
@@ -14,39 +11,31 @@ class CarAdapter(
     private val listener: (CarEntity) -> Unit
 ) : RecyclerView.Adapter<CarAdapter.ViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(
-            R.layout.car_item_second,
-            parent, false
-        )
-        return ViewHolder(itemView)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = CarItemBinding.inflate(inflater)
+        return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return cars.count()
-    }
+    override fun getItemCount(): Int = cars.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentItem = cars[position]
-        holder.brand.text = currentItem.brand
-        holder.model.text = currentItem.model
-        holder.plate.text = currentItem.plate
-        holder.color.text = currentItem.color
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(cars[position])
 
 
-        holder.delete.setOnClickListener {
-            listener(currentItem)
+    inner class ViewHolder(val binding: CarItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(currentItem: CarEntity) {
+
+            with(binding) {
+                textViewBrand.text = currentItem.brand
+                textViewModel.text = currentItem.model
+                textViewPlate.text = currentItem.plate
+                textViewColor.text = currentItem.color
+
+                imageViewDelete.setOnClickListener {
+                    listener(currentItem)
+                }
+            }
         }
+
     }
-
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val brand: TextView = view.findViewById(R.id.textView_brand)
-        val model: TextView = view.findViewById(R.id.textView_model)
-        val plate: TextView = view.findViewById(R.id.textView_plate)
-        val color: TextView = view.findViewById(R.id.textView_color)
-
-        val delete: ImageView = view.findViewById(R.id.imageView_delete)
-    }
-
 }

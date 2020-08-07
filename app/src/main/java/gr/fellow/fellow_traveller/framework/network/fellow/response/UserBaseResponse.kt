@@ -9,6 +9,8 @@ data class UserBaseResponse(
     @SerializedName("last_name")
     val LastName: String,
     val picture: String?,
-    val rate: Int,
-    val reviews: Float
-)
+    val rate: Float,
+    val reviews: Int
+) {
+    val fullName get() = "$FirstName $LastName"
+}

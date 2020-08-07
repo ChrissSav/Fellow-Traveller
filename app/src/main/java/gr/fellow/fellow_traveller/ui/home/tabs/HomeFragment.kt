@@ -2,17 +2,19 @@ package gr.fellow.fellow_traveller.ui.home.tabs
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import gr.fellow.fellow_traveller.databinding.FragmentHomeBinding
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripActivity
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 //@AndroidEntryPoint
+@ExperimentalCoroutinesApi
 class HomeFragment : Fragment() {
 
 

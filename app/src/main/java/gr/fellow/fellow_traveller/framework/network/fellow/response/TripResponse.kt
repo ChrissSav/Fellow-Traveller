@@ -1,6 +1,8 @@
 package gr.fellow.fellow_traveller.framework.network.fellow.response
 
 import com.google.gson.annotations.SerializedName
+import java.text.SimpleDateFormat
+import java.util.*
 
 data class TripResponse(
     @SerializedName("id")
@@ -33,4 +35,16 @@ data class TripResponse(
     val msg: String,
     @SerializedName("price")
     val price: Float
-)
+) {
+    fun getDate(): String? {
+        val dateFormat = SimpleDateFormat("d MMM yyyy")
+        val date = Date(timestamp * 1000)
+        return dateFormat.format(date)
+    }
+
+    fun getTime(): String? {
+        val dateFormat = SimpleDateFormat("HH:mm")
+        val date = Date(timestamp * 1000)
+        return dateFormat.format(date)
+    }
+}

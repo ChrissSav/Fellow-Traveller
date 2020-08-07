@@ -1,8 +1,6 @@
 package gr.fellow.fellow_traveller.framework
 
 import android.content.SharedPreferences
-import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
-import gr.fellow.fellow_traveller.utils.ConnectivityHelper
 import gr.fellow.fellow_traveller.data.FellowRepository
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
@@ -12,11 +10,13 @@ import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandle
 import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
 import gr.fellow.fellow_traveller.framework.network.google.PlaceApiService
-import gr.fellow.fellow_traveller.utils.set
+import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
+import gr.fellow.fellow_traveller.utils.ConnectivityHelper
 import gr.fellow.fellow_traveller.utils.PREFS_AUTH_TOKEN
 import gr.fellow.fellow_traveller.utils.handleToCorrectFormat
 import gr.fellow.fellow_traveller.utils.networkCall
 import gr.fellow.fellow_traveller.utils.networkCallWithOutWrap
+import gr.fellow.fellow_traveller.utils.set
 import retrofit2.Response
 
 class FellowRepositoryImpl(
@@ -76,5 +76,11 @@ class FellowRepositoryImpl(
         networkCall(connectivityHelper) {
             service.addTrip(trip).handleToCorrectFormat()
         }
+
+    override suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripResponse>> =
+        networkCall(connectivityHelper) {
+            service.getTripsAs("creator").handleToCorrectFormat()
+        }
+
 
 }

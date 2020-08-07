@@ -1,43 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="20dp"
-    android:paddingBottom="20dp"
     android:id="@+id/my_car_item_constraintLayout"
-    android:paddingLeft="20dp">
+    android:layout_width="200dp"
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/car_image_view_adapter_settings"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@drawable/ic_car"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:backgroundTint="@color/black_color"/>
-
-    <TextView
-        android:id="@+id/car_speces_settings_adapter"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/car_image_view_adapter_settings"
-        app:layout_constraintBottom_toBottomOf="@id/car_image_view_adapter_settings"
-        app:layout_constraintStart_toEndOf="@id/car_image_view_adapter_settings"
-        android:layout_marginStart="15dp"
-        android:text="Lamborghini, Huraccan 720LP - ΤΣΖ 3954"
-        android:fontFamily="@font/firasans_light"
-        android:textAllCaps="true"
-        android:textColor="@color/black_color"
-        android:textSize="15sp"/>
+        android:background="@drawable/component_cardview_shape"
+        android:elevation="1dp"
+        android:translationZ="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
+        <ImageView
+            android:id="@+id/car_image_view_adapter_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/ic_car"
+            android:backgroundTint="@color/blue_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_model"
+            style="@style/label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView_model"
+            app:layout_constraintEnd_toEndOf="@+id/textView_brand"
+            app:layout_constraintStart_toStartOf="@+id/textView_brand"
+            app:layout_constraintTop_toTopOf="@+id/imageView_model" />
+
+        <TextView
+            android:id="@+id/textView_plate"
+            style="@style/label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView_plate"
+            app:layout_constraintEnd_toEndOf="@+id/textView_brand"
+            app:layout_constraintStart_toStartOf="@+id/textView_model"
+            app:layout_constraintTop_toTopOf="@+id/imageView_plate" />
+
+        <TextView
+            android:id="@+id/textView_color"
+            style="@style/label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView_color"
+            app:layout_constraintEnd_toStartOf="@+id/imageView_delete"
+            app:layout_constraintStart_toStartOf="@+id/textView_model"
+            app:layout_constraintTop_toTopOf="@+id/imageView_color" />
+
+        <TextView
+            android:id="@+id/textView_brand"
+            style="@style/label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/car_image_view_adapter_settings"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/car_image_view_adapter_settings"
+            app:layout_constraintTop_toTopOf="@+id/car_image_view_adapter_settings" />
+
+        <ImageView
+            android:id="@+id/imageView_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ic_bin"
+            android:src="@drawable/ic_bin"
+            android:tint="@color/red_color"
+            app:layout_constraintBottom_toBottomOf="@+id/textView_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView_color" />
+
+        <ImageView
+            android:id="@+id/imageView_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_section_car_item"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/ic_color"
+            android:backgroundTint="@color/blue_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/car_image_view_adapter_settings"
+            app:layout_constraintTop_toBottomOf="@+id/imageView_plate" />
 
 
+        <ImageView
+            android:id="@+id/imageView_model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_section_car_item"
+            android:background="@drawable/ic_steer"
+            android:backgroundTint="@color/blue_color"
+            app:layout_constraintStart_toStartOf="@+id/car_image_view_adapter_settings"
+            app:layout_constraintTop_toBottomOf="@+id/car_image_view_adapter_settings" />
 
-
+        <ImageView
+            android:id="@+id/imageView_plate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_section_car_item"
+            android:background="@drawable/ic_license_plate"
+            android:backgroundTint="@color/blue_color"
+            app:layout_constraintStart_toStartOf="@+id/car_image_view_adapter_settings"
+            app:layout_constraintTop_toBottomOf="@+id/imageView_model" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
