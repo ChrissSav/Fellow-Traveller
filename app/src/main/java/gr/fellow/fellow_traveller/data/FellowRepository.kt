@@ -37,4 +37,6 @@ interface FellowRepository {
     suspend fun addTrip(trip: TripCreateRequest): ResultWrapper<TripResponse>
 
     suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripResponse>>
+
+    suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripResponse>>
 }

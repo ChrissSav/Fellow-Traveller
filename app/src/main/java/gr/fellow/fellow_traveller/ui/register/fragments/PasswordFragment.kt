@@ -4,21 +4,21 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.databinding.FragmentEmailBinding
 import gr.fellow.fellow_traveller.databinding.FragmentPasswordBinding
 import gr.fellow.fellow_traveller.ui.createSnackBar
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-
+@ExperimentalCoroutinesApi
 class PasswordFragment : Fragment() {
 
     private val registerViewModel: RegisterViewModel by activityViewModels()

@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentTripsOffersBinding
 import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
@@ -23,6 +26,7 @@ class TripsOffersFragment : Fragment() {
     private var _binding: FragmentTripsOffersBinding? = null
     private val binding get() = _binding!!
     private var tripsList = mutableListOf<TripResponse>()
+    private lateinit var navController: NavController
 
 
     override fun onCreateView(
@@ -35,6 +39,8 @@ class TripsOffersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        navController = Navigation.findNavController(view)
 
         homeViewModel.loadTripAsCreator()
         homeViewModel.tripsAsCreator.observe(viewLifecycleOwner, Observer { list ->
@@ -70,6 +76,10 @@ class TripsOffersFragment : Fragment() {
             numOfActiveTripsTextView.text = "${tripsList.size} ενεργά ταξίδια"
             progressBar.visibility = View.GONE
             activeTripsSection.visibility = View.VISIBLE
+
+            buttonAllActiveTrips.setOnClickListener {
+                navController.navigate(R.id.action_destination_trips_to_offersActiveTripsFragment)
+            }
         }
     }
 

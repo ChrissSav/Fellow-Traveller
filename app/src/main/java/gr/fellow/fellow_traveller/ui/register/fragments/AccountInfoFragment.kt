@@ -4,10 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -16,8 +16,9 @@ import gr.fellow.fellow_traveller.databinding.FragmentAccountInfoBinding
 import gr.fellow.fellow_traveller.ui.createSnackBar
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-
+@ExperimentalCoroutinesApi
 class AccountInfoFragment : Fragment() {
 
     private val registerViewModel: RegisterViewModel by activityViewModels()

@@ -56,6 +56,9 @@ class FellowDataSourceImpl(
     override suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripResponse>> =
         repository.getTipsAsCreator()
 
+    override suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripResponse>> =
+        repository.getTipsAsPassenger()
+
     override suspend fun loadUsersInfo(): RegisteredUserEntity =
         repositoryLocal.loadUserAuth()
 

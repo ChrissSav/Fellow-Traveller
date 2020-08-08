@@ -82,5 +82,10 @@ class FellowRepositoryImpl(
             service.getTripsAs("creator").handleToCorrectFormat()
         }
 
+    override suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripResponse>> =
+        networkCall(connectivityHelper) {
+            service.getTripsAs("passenger").handleToCorrectFormat()
+        }
+
 
 }

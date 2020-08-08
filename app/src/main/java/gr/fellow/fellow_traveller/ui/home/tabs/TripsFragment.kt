@@ -9,8 +9,9 @@ import gr.fellow.fellow_traveller.databinding.FragmentTripsBinding
 import gr.fellow.fellow_traveller.ui.home.adapter.TripsViewPagerAdapter
 import gr.fellow.fellow_traveller.ui.home.trips.TripsOffersFragment
 import gr.fellow.fellow_traveller.ui.home.trips.TripsTakesPartFragment
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-
+@ExperimentalCoroutinesApi
 class TripsFragment : Fragment() {
 
     private var _binding: FragmentTripsBinding? = null
@@ -38,8 +39,8 @@ class TripsFragment : Fragment() {
         with(binding) {
 
             //Attaching fragments to tabLayout
-            tripsViewPagerAdapter.addFragment(tripsOffersFragment, "Προσφορές")
-            tripsViewPagerAdapter.addFragment(tripsTakesPartFragment, "Αναζητήσεις")
+            tripsViewPagerAdapter.addFragment(tripsOffersFragment, "Προσφερόμενα")
+            tripsViewPagerAdapter.addFragment(tripsTakesPartFragment, "Εμπλεκόμενα")
 
             fragmentTripViewPager.adapter = tripsViewPagerAdapter
             fragmentTripTabLayout.setupWithViewPager(fragmentTripViewPager)

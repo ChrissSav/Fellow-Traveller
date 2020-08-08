@@ -3,10 +3,10 @@ package gr.fellow.fellow_traveller.ui.register.fragments
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -16,8 +16,9 @@ import gr.fellow.fellow_traveller.databinding.FragmentEmailBinding
 import gr.fellow.fellow_traveller.ui.createSnackBar
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
 import gr.fellow.fellow_traveller.utils.isValidEmail
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-
+@ExperimentalCoroutinesApi
 class EmailFragment : Fragment() {
 
     private val registerViewModel: RegisterViewModel by activityViewModels()

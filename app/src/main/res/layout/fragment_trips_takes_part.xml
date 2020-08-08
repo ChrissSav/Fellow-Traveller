@@ -45,16 +45,14 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/FragmentTrip_searchs_active_trips_textView"
+                    android:id="@+id/num_of_active_trips_textView"
                     style="@style/paragraph2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:text="2 ενεργά ταξίδια"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,7 +69,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/FragmentTrip_searchs_active_trips_textView">
+                    app:layout_constraintTop_toBottomOf="@+id/num_of_active_trips_textView">
 
                     <ImageView
                         android:id="@+id/FragmentTrip_searchs_map_image"
@@ -84,16 +82,31 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/FragmentTrip_searchs_destinations_TextView"
+                        android:id="@+id/destinations_from_TextView"
                         style="@style/header2"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
                         android:text="Αθήνα - Θεσσαλονίκη"
-                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/destinations_to_TextView"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/FragmentTrip_searchs_map_image" />
 
+
+                    <TextView
+                        android:id="@+id/destinations_to_TextView"
+                        style="@style/header2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="TextView"
+                        android:textAlignment="viewEnd"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/destinations_from_TextView" />
 
                     <LinearLayout
                         android:id="@+id/FragmentTrip_searchs_details_section"
@@ -104,8 +117,8 @@
                         android:orientation="horizontal"
                         android:weightSum="3"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@id/FragmentTrip_searchs_destinations_TextView"
-                        app:layout_constraintTop_toBottomOf="@+id/FragmentTrip_searchs_destinations_TextView">
+                        app:layout_constraintStart_toStartOf="@id/destinations_from_TextView"
+                        app:layout_constraintTop_toBottomOf="@+id/destinations_to_TextView">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/FragmentTrip_searchs_date_section"
@@ -116,7 +129,7 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <TextView
-                                android:id="@+id/FragmentTrip_searchs_date_textView"
+                                android:id="@+id/date"
                                 style="@style/paragraph2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -129,9 +142,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
                                 android:background="@drawable/ic_calendar"
-                                app:layout_constraintBottom_toBottomOf="@id/FragmentTrip_searchs_date_textView"
-                                app:layout_constraintStart_toEndOf="@id/FragmentTrip_searchs_date_textView"
-                                app:layout_constraintTop_toTopOf="@id/FragmentTrip_searchs_date_textView" />
+                                app:layout_constraintBottom_toBottomOf="@id/date"
+                                app:layout_constraintStart_toEndOf="@id/date"
+                                app:layout_constraintTop_toTopOf="@id/date" />
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -147,7 +160,7 @@
                             app:layout_constraintTop_toTopOf="@id/FragmentTrip_searchs_date_section">
 
                             <TextView
-                                android:id="@+id/FragmentTrip_searchs_time_textView"
+                                android:id="@+id/time"
                                 style="@style/paragraph2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -160,9 +173,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
                                 android:background="@drawable/ic_clock"
-                                app:layout_constraintBottom_toBottomOf="@id/FragmentTrip_searchs_time_textView"
-                                app:layout_constraintStart_toEndOf="@id/FragmentTrip_searchs_time_textView"
-                                app:layout_constraintTop_toTopOf="@id/FragmentTrip_searchs_time_textView" />
+                                app:layout_constraintBottom_toBottomOf="@id/time"
+                                app:layout_constraintStart_toEndOf="@id/time"
+                                app:layout_constraintTop_toTopOf="@id/time" />
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -179,7 +192,7 @@
                             app:layout_constraintTop_toTopOf="@id/FragmentTrip_searchs_date_section">
 
                             <TextView
-                                android:id="@+id/FragmentTrip_searchs_price_textView"
+                                android:id="@+id/price"
                                 style="@style/paragraph2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -192,9 +205,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
                                 android:background="@drawable/ic_cash"
-                                app:layout_constraintBottom_toBottomOf="@id/FragmentTrip_searchs_price_textView"
-                                app:layout_constraintStart_toEndOf="@id/FragmentTrip_searchs_price_textView"
-                                app:layout_constraintTop_toTopOf="@id/FragmentTrip_searchs_price_textView" />
+                                app:layout_constraintBottom_toBottomOf="@id/price"
+                                app:layout_constraintStart_toEndOf="@id/price"
+                                app:layout_constraintTop_toTopOf="@id/price" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </LinearLayout>
@@ -209,7 +222,7 @@
                         app:layout_constraintTop_toBottomOf="@id/FragmentTrip_searchs_details_section">
 
                         <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/FragmentTrip_searchs_creator_image"
+                            android:id="@+id/creator_image"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginLeft="20dp"
@@ -222,13 +235,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:layout_marginEnd="10dp"
-                            app:layout_constraintBottom_toBottomOf="@id/FragmentTrip_searchs_creator_image"
+                            app:layout_constraintBottom_toBottomOf="@id/creator_image"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/FragmentTrip_searchs_creator_image"
-                            app:layout_constraintTop_toTopOf="@id/FragmentTrip_searchs_creator_image">
+                            app:layout_constraintStart_toEndOf="@id/creator_image"
+                            app:layout_constraintTop_toTopOf="@id/creator_image">
 
                             <TextView
-                                android:id="@+id/FragmentTrip_searchs_creator_name"
+                                android:id="@+id/creator_name"
                                 style="@style/paragraph2"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -248,10 +261,10 @@
                                 android:layout_marginStart="8dp"
                                 android:background="@drawable/ic_rating"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/FragmentTrip_searchs_creator_name" />
+                                app:layout_constraintTop_toBottomOf="@id/creator_name" />
 
                             <TextView
-                                android:id="@+id/FragmentTrip_searchs_creator_rate_and_reviews"
+                                android:id="@+id/creator_rate_and_reviews"
                                 style="@style/paragraph1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -316,15 +329,15 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <Button
-                    android:id="@+id/FragmentTrip_searchs_all_activeTrips_button"
+                    android:id="@+id/button_all_activeTrips"
                     style="@style/button_orange_empty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
                     android:text="Εμφάνιση όλων"
-                    app:layout_constraintBottom_toBottomOf="@id/FragmentTrip_searchs_active_trips_textView"
+                    app:layout_constraintBottom_toBottomOf="@id/num_of_active_trips_textView"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/FragmentTrip_searchs_active_trips_textView" />
+                    app:layout_constraintTop_toTopOf="@id/num_of_active_trips_textView" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
