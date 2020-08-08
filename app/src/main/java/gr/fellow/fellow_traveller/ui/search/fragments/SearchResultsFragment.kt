@@ -1,10 +1,10 @@
 package gr.fellow.fellow_traveller.ui.search.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
@@ -34,6 +34,14 @@ class SearchResultsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         navController = Navigation.findNavController(view)
+
+        binding.filterButton.setOnClickListener {
+            navController.navigate(R.id.action_searchResultsFragment_to_searchFilterFragment)
+        }
+
+        binding.closeButton.setOnClickListener {
+            activity?.onBackPressed()
+        }
 
     }
 

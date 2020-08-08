@@ -9,10 +9,14 @@
         android:id="@+id/searchDestinationsFragment"
         android:name="gr.fellow.fellow_traveller.ui.search.fragments.SearchDestinationsFragment"
         android:label="fragment_search_destinations"
-        tools:layout="@layout/fragment_search_destinations" >
+        tools:layout="@layout/fragment_search_destinations">
         <action
-            android:id="@+id/action_searchDestinationsFragment_to_searchResultsFragment"
-            app:destination="@id/searchResultsFragment" />
+            android:id="@+id/next_fragment"
+            app:destination="@id/searchResultsFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@+id/search_nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/searchFilterFragment"
@@ -23,9 +27,38 @@
         android:id="@+id/searchResultsFragment"
         android:name="gr.fellow.fellow_traveller.ui.search.fragments.SearchResultsFragment"
         android:label="fragment_search_results"
-        tools:layout="@layout/fragment_search_results" >
+        tools:layout="@layout/fragment_search_results">
         <action
             android:id="@+id/action_searchResultsFragment_to_searchFilterFragment"
-            app:destination="@id/searchFilterFragment" />
+            app:destination="@id/searchFilterFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_searchResultsFragment_to_searchTripDetailsFragment"
+            app:destination="@id/searchTripDetailsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
     </fragment>
+    <fragment
+        android:id="@+id/searchTripDetailsFragment"
+        android:name="gr.fellow.fellow_traveller.ui.search.fragments.SearchTripDetailsFragment"
+        android:label="fragment_search_trip_details"
+        tools:layout="@layout/fragment_search_trip_details">
+        <action
+            android:id="@+id/action_searchTripDetailsFragment_to_bookTripFragment"
+            app:destination="@id/bookTripFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookTripFragment"
+        android:name="gr.fellow.fellow_traveller.ui.search.fragments.BookTripFragment"
+        android:label="fragment_book_trip"
+        tools:layout="@layout/fragment_book_trip" />
 </navigation>
