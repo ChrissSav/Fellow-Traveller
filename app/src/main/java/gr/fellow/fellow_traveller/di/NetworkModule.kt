@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Context.CONNECTIVITY_SERVICE
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
-import gr.fellow.fellow_traveller.framework.network.google.PlaceApiService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -13,8 +12,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import gr.fellow.fellow_traveller.utils.ConnectivityHelper
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
+import gr.fellow.fellow_traveller.framework.network.google.PlaceApiService
+import gr.fellow.fellow_traveller.utils.ConnectivityHelper
 import gr.fellow.fellow_traveller.utils.PREFS_AUTH_TOKEN
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -23,9 +23,9 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.Proxy
-import javax.inject.Singleton
 import java.util.concurrent.TimeUnit
 import javax.inject.Qualifier
+import javax.inject.Singleton
 
 
 @Module
@@ -34,10 +34,8 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideGsonBuilder(): Gson {
-        return GsonBuilder()
-            .create()
-    }
+    fun provideGsonBuilder(): Gson = GsonBuilder().create()
+
 
     @Singleton
     @Provides
@@ -49,18 +47,16 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideHttpLogger(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-            .setLevel(HttpLoggingInterceptor.Level.BODY)
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
+        val apply = httpLoggingInterceptor.apply { httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.HEADERS }
+        return apply.apply { apply.level = HttpLoggingInterceptor.Level.BODY }
     }
 
 
     @Fellow
     @Singleton
     @Provides
-    fun provideOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor,
-        sharedPreferences: SharedPreferences
-    ): OkHttpClient.Builder {
+    fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor, sharedPreferences: SharedPreferences): OkHttpClient.Builder {
         return OkHttpClient.Builder().proxy(Proxy.NO_PROXY)
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
@@ -69,13 +65,11 @@ object NetworkModule {
                 override fun intercept(chain: Interceptor.Chain): Response {
                     val request = chain.request()
                     val newRequest = request.newBuilder()
-                    try {
-                        newRequest.header(
-                            "Cookie",
-                            sharedPreferences.getString(PREFS_AUTH_TOKEN, "")!!
-                        )
-                    } catch (e: NullPointerException) {
-                        // do something other
+                    var session: String? = null
+                    session = sharedPreferences.getString(PREFS_AUTH_TOKEN, "")
+                    session = sharedPreferences.getString(PREFS_AUTH_TOKEN, "")
+                    session?.let {
+                        newRequest.header("Cookie", it)
                     }
                     return chain.proceed(newRequest.build())
                 }
@@ -88,11 +82,8 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideConnectivityHelper(application: Application): ConnectivityHelper {
-        val connectivityManager =
-            application.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-        return ConnectivityHelper(
-            connectivityManager
-        )
+        val connectivityManager = application.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+        return ConnectivityHelper(connectivityManager)
     }
 
 
@@ -117,12 +108,10 @@ object NetworkModule {
      * Google Service
      * */
 
-    @Google
+    @GoogleService
     @Singleton
     @Provides
-    fun provideOkHttpClientGoogle(
-        loggingInterceptor: HttpLoggingInterceptor
-    ): OkHttpClient.Builder {
+    fun provideOkHttpClientGoogle(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient.Builder {
         return OkHttpClient.Builder().proxy(Proxy.NO_PROXY)
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
@@ -132,10 +121,10 @@ object NetworkModule {
     }
 
 
-    @Google
+    @GoogleService
     @Singleton
     @Provides
-    fun provideRetrofitGoogle(gson: Gson, @Google okHttpClient: OkHttpClient.Builder): Retrofit.Builder {
+    fun provideRetrofitGoogle(gson: Gson, @GoogleService okHttpClient: OkHttpClient.Builder): Retrofit.Builder {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(okHttpClient.build())
@@ -144,9 +133,9 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideFellowGoogleService(@Google retrofit: Retrofit.Builder): PlaceApiService {
+    fun provideFellowGoogleService(@GoogleService retrofit: Retrofit.Builder): PlaceApiService {
         return retrofit
-            .baseUrl("https://maps.googleapis.com/maps/api/place/autocomplete/")
+            .baseUrl("https://maps.googleapis.com/maps/api/place/")
             .build()
             .create(PlaceApiService::class.java)
     }
@@ -159,4 +148,5 @@ annotation class Fellow
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class Google
+annotation class GoogleService
+

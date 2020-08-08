@@ -17,7 +17,7 @@
 
 
             <TextView
-                android:id="@+id/FragmentHome_hello_textView"
+                android:id="@+id/hello_textView"
                 style="@style/paragraph2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -36,12 +36,12 @@
                 android:layout_marginStart="5dp"
                 android:background="@color/background"
                 android:text="Lorem"
-                app:layout_constraintBottom_toBottomOf="@id/FragmentHome_hello_textView"
-                app:layout_constraintStart_toEndOf="@id/FragmentHome_hello_textView"
-                app:layout_constraintTop_toTopOf="@id/FragmentHome_hello_textView" />
+                app:layout_constraintBottom_toBottomOf="@id/hello_textView"
+                app:layout_constraintStart_toEndOf="@id/hello_textView"
+                app:layout_constraintTop_toTopOf="@id/hello_textView" />
 
             <TextView
-                android:id="@+id/FragmentHome_search_header"
+                android:id="@+id/search_header"
                 style="@style/header1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -49,11 +49,11 @@
                 android:layout_marginEnd="16dp"
                 android:text="Ποιο είναι το επόμενο ταξίδι σου;"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/FragmentHome_hello_textView"
-                app:layout_constraintTop_toBottomOf="@id/FragmentHome_hello_textView" />
+                app:layout_constraintStart_toStartOf="@id/hello_textView"
+                app:layout_constraintTop_toBottomOf="@id/hello_textView" />
 
             <TextView
-                android:id="@+id/FragmentHome_search_info_textView"
+                android:id="@+id/search_info_textView"
                 style="@style/paragraph3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -61,11 +61,11 @@
                 android:layout_marginEnd="16dp"
                 android:text="Βρες το ιδανικό ταξίδι για τον επόμενο προορισμό σου"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/FragmentHome_search_header"
-                app:layout_constraintTop_toBottomOf="@id/FragmentHome_search_header" />
+                app:layout_constraintStart_toStartOf="@id/search_header"
+                app:layout_constraintTop_toBottomOf="@id/search_header" />
 
             <Button
-                android:id="@+id/FragmentHome_search_button"
+                android:id="@+id/search_button"
                 style="@style/button_filled_with_left_drawable_orange"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -74,11 +74,11 @@
                 android:drawableLeft="@drawable/ic_search"
                 android:text="Αναζήτηση διαδρομής"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/FragmentHome_search_info_textView"
-                app:layout_constraintTop_toBottomOf="@id/FragmentHome_search_info_textView" />
+                app:layout_constraintStart_toStartOf="@id/search_info_textView"
+                app:layout_constraintTop_toBottomOf="@id/search_info_textView" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/FragmentHome_offer_section"
+                android:id="@+id/offer_section"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -87,10 +87,10 @@
                 android:background="@drawable/component_dotted_shape_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/FragmentHome_search_button">
+                app:layout_constraintTop_toBottomOf="@id/search_button">
 
                 <TextView
-                    android:id="@+id/FragmentHome_offer_header"
+                    android:id="@+id/offer_header"
                     style="@style/header1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -103,19 +103,19 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/FragmentHome_offer_info_textView"
+                    android:id="@+id/offer_info_textView"
                     style="@style/paragraph3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:text="Καταχώρησε το επόμενο σου ταξίδι και βρες τους συνταξιδιώτες σου"
-                    app:layout_constraintBottom_toBottomOf="@id/FragmentHome_create_circle_button"
-                    app:layout_constraintEnd_toStartOf="@id/FragmentHome_create_circle_button"
-                    app:layout_constraintStart_toStartOf="@id/FragmentHome_offer_header"
-                    app:layout_constraintTop_toTopOf="@id/FragmentHome_create_circle_button" />
+                    app:layout_constraintBottom_toBottomOf="@id/create_circle_button"
+                    app:layout_constraintEnd_toStartOf="@id/create_circle_button"
+                    app:layout_constraintStart_toStartOf="@id/offer_header"
+                    app:layout_constraintTop_toTopOf="@id/create_circle_button" />
 
                 <ImageView
-                    android:id="@+id/FragmentHome_create_circle_button"
+                    android:id="@+id/create_circle_button"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
                     android:layout_marginTop="20dp"
@@ -131,7 +131,7 @@
                     android:tint="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/FragmentHome_offer_header"
+                    app:layout_constraintTop_toBottomOf="@id/offer_header"
                     app:layout_goneMarginBottom="20dp" />
 
 

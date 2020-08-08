@@ -6,6 +6,7 @@ import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
+import gr.fellow.fellow_traveller.framework.network.google.response.DetailsResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
 import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
@@ -13,7 +14,8 @@ import retrofit2.Response
 
 class FellowDataSourceImpl(
     private val repository: FellowRepository,
-    private val repositoryLocal: LocalRepository
+    private val repositoryLocal: LocalRepository,
+    private val googleServiceRepository: GoogleServiceRepository
 ) : FellowDataSource {
 
     override suspend fun checkUserPhone(phone: String): ResultWrapper<StatusHandleResponse> =
@@ -38,8 +40,7 @@ class FellowDataSourceImpl(
         repositoryLocal.registerUserAuth(userEntity)
 
 
-    override suspend fun getPlaces(place: String): Response<PlaceApiResponse> =
-        repository.getPlace(place)
+
 
     override suspend fun getCarsRemote(): ResultWrapper<ArrayList<CarResponse>> =
         repository.getCarsRemote()
@@ -58,6 +59,22 @@ class FellowDataSourceImpl(
 
     override suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripResponse>> =
         repository.getTipsAsPassenger()
+
+
+    /**
+     * Google Service
+     * */
+
+    override suspend fun getPlaces(place: String): Response<PlaceApiResponse> =
+        googleServiceRepository.getPlaces(place)
+
+    override suspend fun getPlacesLanLon(placeId: String): Response<DetailsResponse> =
+        googleServiceRepository.getPlacesLanLon(placeId)
+
+    /**
+     * local DB
+     */
+
 
     override suspend fun loadUsersInfo(): RegisteredUserEntity =
         repositoryLocal.loadUserAuth()

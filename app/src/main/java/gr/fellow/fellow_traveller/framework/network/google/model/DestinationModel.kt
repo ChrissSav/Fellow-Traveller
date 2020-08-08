@@ -1,8 +1,14 @@
-package com.example.fellowtravellerbeta.data.network.google.model
+package gr.fellow.fellow_traveller.framework.network.google.model
 
-import com.google.gson.annotations.SerializedName
 
-data class DestinationModel (
+data class DestinationModel(
     val placeId: String,
     val title: String
+)
+
+data class PlaceModel(
+    val placeId: String,
+    val title: String,
+    val latitude: Float,
+    val longitude: Float
 )

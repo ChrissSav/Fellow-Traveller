@@ -9,19 +9,14 @@ import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
-import gr.fellow.fellow_traveller.framework.network.google.PlaceApiService
-import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
 import gr.fellow.fellow_traveller.utils.ConnectivityHelper
 import gr.fellow.fellow_traveller.utils.PREFS_AUTH_TOKEN
 import gr.fellow.fellow_traveller.utils.handleToCorrectFormat
 import gr.fellow.fellow_traveller.utils.networkCall
-import gr.fellow.fellow_traveller.utils.networkCallWithOutWrap
 import gr.fellow.fellow_traveller.utils.set
-import retrofit2.Response
 
 class FellowRepositoryImpl(
     private val service: FellowService,
-    private val servicePlace: PlaceApiService,
     private val connectivityHelper: ConnectivityHelper,
     private val sharedPrefs: SharedPreferences
 ) : FellowRepository {
@@ -43,8 +38,7 @@ class FellowRepositoryImpl(
         }
 
     override suspend fun loginUser(loginRequest: LoginRequest): ResultWrapper<UserLoginResponse> =
-        networkCall(connectivityHelper)
-        {
+        networkCall(connectivityHelper) {
             val res = service.userLogin(loginRequest)
             if (res.isSuccessful)
                 sharedPrefs[PREFS_AUTH_TOKEN] =
@@ -52,10 +46,6 @@ class FellowRepositoryImpl(
             res.handleToCorrectFormat()
         }
 
-    override suspend fun getPlace(place: String): Response<PlaceApiResponse> =
-        networkCallWithOutWrap(connectivityHelper) {
-            servicePlace.getPlaces(place)
-        }
 
     override suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<CarResponse> =
         networkCall(connectivityHelper) {

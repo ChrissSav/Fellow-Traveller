@@ -1,8 +1,8 @@
 package gr.fellow.fellow_traveller.ui.search
 
-import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.databinding.ActivitySearchTripBinding
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -12,12 +12,16 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class SearchTripActivity : AppCompatActivity() {
 
+    private val searchViewModel: SearchTripViewModel by viewModels()
+
     private lateinit var binding: ActivitySearchTripBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
+        super.onCreate(savedInstanceState)
         binding = ActivitySearchTripBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)    }
+        setContentView(binding.root)
+
+
+    }
 }

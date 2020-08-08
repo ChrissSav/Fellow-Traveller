@@ -7,27 +7,24 @@ import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
+import gr.fellow.fellow_traveller.framework.network.google.response.DetailsResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
 import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 import retrofit2.Response
 
 interface FellowDataSource {
+
     suspend fun checkUserPhone(phone: String): ResultWrapper<StatusHandleResponse>
 
     suspend fun checkUserEmail(email: String): ResultWrapper<StatusHandleResponse>
 
-
     suspend fun registerUser(firstName: String, lastName: String, email: String, password: String, phone: String): ResultWrapper<UserLoginResponse>
-
 
     suspend fun loginUser(username: String, password: String): ResultWrapper<UserLoginResponse>
 
-
     suspend fun registerUserAuth(userEntity: RegisteredUserEntity)
 
-
-    suspend fun getPlaces(place: String): Response<PlaceApiResponse>
 
 
     //Cars
@@ -48,24 +45,28 @@ interface FellowDataSource {
 
     suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripResponse>>
 
+
+    /**
+     * Google Service
+     */
+
+    suspend fun getPlaces(place: String): Response<PlaceApiResponse>
+
+    suspend fun getPlacesLanLon(placeId: String): Response<DetailsResponse>
+
     /**
      * local DB
      */
 
     suspend fun loadUsersInfo(): RegisteredUserEntity
 
-
     suspend fun logoutUser()
-
 
     suspend fun getAllCarsLocal(): MutableList<CarEntity>
 
-
     suspend fun insertCarLocal(carEntity: CarEntity)
 
-
     suspend fun deleteCarLocal(carId: Int): Int
-
 
     //  suspend fun addTripLocal(tripCreateRequest: TripCreateRequest): ResultWrapper<TripResponse>
 

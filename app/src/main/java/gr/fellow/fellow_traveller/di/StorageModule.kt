@@ -8,18 +8,20 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import gr.fellow.fellow_traveller.utils.ConnectivityHelper
 import gr.fellow.fellow_traveller.data.FellowDataSourceImpl
 import gr.fellow.fellow_traveller.data.FellowRepository
+import gr.fellow.fellow_traveller.data.GoogleServiceRepository
 import gr.fellow.fellow_traveller.data.LocalRepository
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.framework.FellowRepositoryImpl
+import gr.fellow.fellow_traveller.framework.GoogleServiceRepositoryImpl
 import gr.fellow.fellow_traveller.framework.LocalRepositoryImpl
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
 import gr.fellow.fellow_traveller.framework.network.google.PlaceApiService
 import gr.fellow.fellow_traveller.room.FellowDatabase
 import gr.fellow.fellow_traveller.room.dao.CarDao
 import gr.fellow.fellow_traveller.room.dao.UserAuthDao
+import gr.fellow.fellow_traveller.utils.ConnectivityHelper
 import javax.inject.Singleton
 
 @InstallIn(ApplicationComponent::class)
@@ -29,12 +31,16 @@ object StorageModule {
     @Singleton
     @Provides
     fun provideRepository(
-        service: FellowService,
-        connectivityHelper: ConnectivityHelper,
-        sharedPreferences: SharedPreferences,
-        servicePlace: PlaceApiService
+        service: FellowService, connectivityHelper: ConnectivityHelper, sharedPreferences: SharedPreferences
     ): FellowRepository {
-        return FellowRepositoryImpl(service, servicePlace, connectivityHelper, sharedPreferences)
+        return FellowRepositoryImpl(service, connectivityHelper, sharedPreferences)
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideGoogleServiceRepository(connectivityHelper: ConnectivityHelper, service: PlaceApiService): GoogleServiceRepository {
+        return GoogleServiceRepositoryImpl(connectivityHelper, service)
     }
 
 
@@ -44,13 +50,13 @@ object StorageModule {
         return LocalRepositoryImpl(userAuthDao, carDao)
     }
 
+
     @Singleton
     @Provides
     fun provideDataSource(
-        repository: FellowRepository,
-        repositoryLocal: LocalRepository
+        repository: FellowRepository, repositoryLocal: LocalRepository, googleServiceRepository: GoogleServiceRepository
     ): FellowDataSource {
-        return FellowDataSourceImpl(repository, repositoryLocal)
+        return FellowDataSourceImpl(repository, repositoryLocal, googleServiceRepository)
     }
 
 
@@ -61,13 +67,9 @@ object StorageModule {
 
     @Singleton
     @Provides
-    fun provideDatabase(application: Application): FellowDatabase {
-        return Room.databaseBuilder(
-            application.applicationContext,
-            FellowDatabase::class.java,
-            "Fellow_traveller-db"
-        ).build()
-    }
+    fun provideDatabase(application: Application): FellowDatabase =
+        Room.databaseBuilder(application.applicationContext, FellowDatabase::class.java, "Fellow_traveller-db").build()
+
 
     @Singleton
     @Provides

@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import gr.fellow.fellow_traveller.databinding.FragmentHomeBinding
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripActivity
+import gr.fellow.fellow_traveller.ui.search.SearchTripActivity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 //@AndroidEntryPoint
@@ -35,16 +36,20 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-       // binding.userWelcomeTextView.text = userInfoSingle.firstName
 
 
-        homeViewModel.user.observe(viewLifecycleOwner , Observer {
+        homeViewModel.user.observe(viewLifecycleOwner, Observer {
             binding.userWelcomeTextView.text = it.firstName
 
         })
 
-        binding.FragmentHomeOfferSection.setOnClickListener {
+        binding.offerSection.setOnClickListener {
             val intent = Intent(activity, NewTripActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.searchButton.setOnClickListener {
+            val intent = Intent(activity, SearchTripActivity::class.java)
             startActivity(intent)
         }
     }

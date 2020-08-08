@@ -2,7 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ActivitySearchResults_main_coordinator_layout"
+    android:id="@+id/main_coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white_color"
@@ -23,7 +23,7 @@
             app:layout_scrollFlags="exitUntilCollapsed|scroll">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ActivitySearchResults_cities_section"
+                android:id="@+id/cities_section"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -32,7 +32,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageButton
-                    android:id="@+id/ActivitySearchResults_close_button"
+                    android:id="@+id/close_button"
                     style="@style/border_icon_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
-                    android:id="@+id/ActivitySearchResults_filter_button"
+                    android:id="@+id/filter_button"
                     style="@style/border_icon_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -56,17 +56,17 @@
                     />
 
                 <ImageView
-                    android:id="@+id/ActivitySearchResults_my_location_imageView"
+                    android:id="@+id/my_location_imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:background="@drawable/ic_location"
                     android:backgroundTint="@color/orange_color"
-                    app:layout_constraintStart_toStartOf="@id/ActivitySearchResults_close_button"
-                    app:layout_constraintTop_toBottomOf="@id/ActivitySearchResults_close_button" />
+                    app:layout_constraintStart_toStartOf="@id/close_button"
+                    app:layout_constraintTop_toBottomOf="@id/close_button" />
 
                 <Button
-                    android:id="@+id/ActivitySearchResults_from_button"
+                    android:id="@+id/from_button"
                     style="@style/button_black_empty"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -77,34 +77,34 @@
                     android:maxLines="1"
                     android:singleLine="true"
                     android:text="Θεσσαλονίκης"
-                    app:layout_constraintBottom_toBottomOf="@id/ActivitySearchResults_my_location_imageView"
+                    app:layout_constraintBottom_toBottomOf="@id/my_location_imageView"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/ActivitySearchResults_my_location_imageView"
-                    app:layout_constraintTop_toTopOf="@id/ActivitySearchResults_my_location_imageView" />
+                    app:layout_constraintStart_toEndOf="@id/my_location_imageView"
+                    app:layout_constraintTop_toTopOf="@id/my_location_imageView" />
 
                 <View
-                    android:id="@+id/ActivitySearchResults_destinations_divider"
+                    android:id="@+id/destinations_divider"
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/softGrey_color"
-                    app:layout_constraintEnd_toEndOf="@id/ActivitySearchResults_filter_button"
-                    app:layout_constraintStart_toStartOf="@id/ActivitySearchResults_from_button"
-                    app:layout_constraintTop_toBottomOf="@id/ActivitySearchResults_from_button" />
+                    app:layout_constraintEnd_toEndOf="@id/filter_button"
+                    app:layout_constraintStart_toStartOf="@id/from_button"
+                    app:layout_constraintTop_toBottomOf="@id/from_button" />
 
                 <ImageView
-                    android:id="@+id/ActivitySearchResults_location_imageView"
+                    android:id="@+id/location_imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_pin"
                     android:backgroundTint="@color/orange_color"
-                    app:layout_constraintBottom_toBottomOf="@id/ActivitySearchResults_to_button"
-                    app:layout_constraintStart_toStartOf="@id/ActivitySearchResults_my_location_imageView"
-                    app:layout_constraintTop_toTopOf="@id/ActivitySearchResults_to_button" />
+                    app:layout_constraintBottom_toBottomOf="@id/to_button"
+                    app:layout_constraintStart_toStartOf="@id/my_location_imageView"
+                    app:layout_constraintTop_toTopOf="@id/to_button" />
 
 
                 <Button
-                    android:id="@+id/ActivitySearchResults_to_button"
+                    android:id="@+id/to_button"
                     style="@style/button_black_empty"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -117,17 +117,17 @@
                     android:singleLine="true"
                     android:text="Βόλος"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/ActivitySearchResults_location_imageView"
-                    app:layout_constraintTop_toBottomOf="@id/ActivitySearchResults_destinations_divider" />
+                    app:layout_constraintStart_toEndOf="@id/location_imageView"
+                    app:layout_constraintTop_toBottomOf="@id/destinations_divider" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintBottom_toTopOf="@id/ActivitySearchResults_location_imageView"
-                    app:layout_constraintEnd_toEndOf="@id/ActivitySearchResults_my_location_imageView"
-                    app:layout_constraintStart_toStartOf="@id/ActivitySearchResults_my_location_imageView"
-                    app:layout_constraintTop_toBottomOf="@id/ActivitySearchResults_my_location_imageView">
+                    app:layout_constraintBottom_toTopOf="@id/location_imageView"
+                    app:layout_constraintEnd_toEndOf="@id/my_location_imageView"
+                    app:layout_constraintStart_toStartOf="@id/my_location_imageView"
+                    app:layout_constraintTop_toBottomOf="@id/my_location_imageView">
 
                     <ImageView
                         android:layout_width="3dp"
@@ -158,7 +158,7 @@
                 </LinearLayout>
 
                 <ImageButton
-                    android:id="@+id/ActivitySearchResults_swap_button"
+                    android:id="@+id/swap_button"
                     style="@style/border_icon_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -166,28 +166,28 @@
                     android:src="@drawable/ic_swap_vertical"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ActivitySearchResults_to_button" />
+                    app:layout_constraintTop_toBottomOf="@id/to_button" />
 
                 <View
-                    android:id="@+id/ActivitySearchResults_top_underline"
+                    android:id="@+id/top_underline"
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_marginTop="30dp"
                     android:background="@color/softGrey_color"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ActivitySearchResults_swap_button" />
+                    app:layout_constraintTop_toBottomOf="@+id/swap_button" />
 
                 <HorizontalScrollView
-                    android:id="@+id/ActivitySearchResults_horizontal_scrollView"
+                    android:id="@+id/horizontal_scrollView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
-                    app:layout_constraintBottom_toTopOf="@id/ActivitySearchResults_bottom_underline"
-                    app:layout_constraintTop_toBottomOf="@id/ActivitySearchResults_top_underline">
+                    app:layout_constraintBottom_toTopOf="@id/bottom_underline"
+                    app:layout_constraintTop_toBottomOf="@id/top_underline">
 
                     <TextView
-                        android:id="@+id/ActivitySearchResults_filters_textView"
+                        android:id="@+id/filters_textView"
                         style="@style/paragraph3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -196,14 +196,14 @@
                 </HorizontalScrollView>
 
                 <View
-                    android:id="@+id/ActivitySearchResults_bottom_underline"
+                    android:id="@+id/bottom_underline"
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_marginTop="15dp"
                     android:background="@color/softGrey_color"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ActivitySearchResults_horizontal_scrollView" />
+                    app:layout_constraintTop_toBottomOf="@id/horizontal_scrollView" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -224,7 +224,7 @@
             android:layout_height="wrap_content">
 
             <ProgressBar
-                android:id="@+id/ActivitySearchResults_progress_bar"
+                android:id="@+id/progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
@@ -236,7 +236,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/ActivitySearchResults_results_label"
+                android:id="@+id/results_label"
                 style="@style/header1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -247,50 +247,51 @@
 
 
             <TextView
-                android:id="@+id/ActivitySearchResults_sort_TextView"
+                android:id="@+id/sort_TextView"
                 style="@style/paragraph3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="15dp"
                 android:text="Πιο σχετικά"
                 android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@id/ActivitySearchResults_sort_button"
-                app:layout_constraintEnd_toStartOf="@id/ActivitySearchResults_sort_button"
-                app:layout_constraintTop_toTopOf="@id/ActivitySearchResults_sort_button" />
+                app:layout_constraintBottom_toBottomOf="@id/sort_button"
+                app:layout_constraintEnd_toStartOf="@id/sort_button"
+                app:layout_constraintTop_toTopOf="@id/sort_button" />
 
             <ImageButton
-                android:id="@+id/ActivitySearchResults_sort_button"
+                android:id="@+id/sort_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/ic_sort"
                 android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@id/ActivitySearchResults_results_label"
+                app:layout_constraintBottom_toBottomOf="@id/results_label"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/ActivitySearchResults_results_label" />
+                app:layout_constraintTop_toTopOf="@id/results_label" />
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/ActivitySearchResults_recycler_view"
+                android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="10dp"
                 android:scrollbars="vertical"
+                android:visibility="gone"
                 tools:listitem="@layout/search_result_item"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ActivitySearchResults_results_label" />
+                app:layout_constraintTop_toBottomOf="@id/results_label" />
 
             <ImageView
-                android:id="@+id/ActivitySearchResults_not_found_image"
+                android:id="@+id/not_found_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_no_result"
                 android:visibility="gone"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ActivitySearchResults_results_label" />
+                app:layout_constraintTop_toBottomOf="@id/results_label" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

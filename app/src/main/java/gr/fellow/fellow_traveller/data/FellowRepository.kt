@@ -5,8 +5,6 @@ import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
-import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
-import retrofit2.Response
 
 interface FellowRepository {
 
@@ -16,7 +14,6 @@ interface FellowRepository {
 
     suspend fun loginUser(loginRequest: LoginRequest): ResultWrapper<UserLoginResponse>
 
-    suspend fun getPlace(place: String): Response<PlaceApiResponse>
 
 
     /**

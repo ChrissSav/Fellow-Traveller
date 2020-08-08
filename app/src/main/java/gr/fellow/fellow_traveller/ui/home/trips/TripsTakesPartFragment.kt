@@ -15,7 +15,7 @@ import gr.fellow.fellow_traveller.databinding.FragmentTripsTakesPartBinding
 import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.loadImageFromUrl
-import gr.fellow.fellow_traveller.ui.newtrip.NewTripActivity
+import gr.fellow.fellow_traveller.ui.search.SearchTripActivity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
@@ -56,7 +56,7 @@ class TripsTakesPartFragment : Fragment() {
         })
 
         binding.noTripsSectionButtonLayout.setOnClickListener {
-            val intent = Intent(activity, NewTripActivity::class.java)
+            val intent = Intent(activity, SearchTripActivity::class.java)
             startActivity(intent)
         }
     }
