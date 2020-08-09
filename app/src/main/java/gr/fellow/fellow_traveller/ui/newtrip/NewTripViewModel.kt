@@ -4,8 +4,8 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.fellowtravellerbeta.data.network.google.response.PredictionResponse
 import gr.fellow.fellow_traveller.framework.network.google.model.DestinationModel
+import gr.fellow.fellow_traveller.framework.network.google.response.PredictionResponse
 import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.usecase.home.GetUserCarsLocalUseCase

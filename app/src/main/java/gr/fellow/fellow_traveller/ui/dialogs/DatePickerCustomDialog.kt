@@ -6,9 +6,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
-import com.example.fellowtravellerbeta.data.network.google.response.PredictionResponse
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 import java.util.*
 
 class DatePickerCustomDialog(

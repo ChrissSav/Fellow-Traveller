@@ -2,31 +2,30 @@ package gr.fellow.fellow_traveller.ui.location
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fellowtravellerbeta.data.network.google.response.PredictionResponse
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.databinding.ActivitySelectLocationBinding
+import gr.fellow.fellow_traveller.framework.network.google.response.PredictionResponse
 import gr.fellow.fellow_traveller.ui.createToast
 import gr.fellow.fellow_traveller.ui.location.adapter.PlacesAdapter
-import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 
 @AndroidEntryPoint
 class SelectLocationActivity : AppCompatActivity() {
 
 
-    private val newTripViewModel: SelectLocationViewModel by viewModels()
+    private val selectLocationViewModel: SelectLocationViewModel by viewModels()
 
     private lateinit var binding: ActivitySelectLocationBinding
     private lateinit var mAdapter: PlacesAdapter
     private lateinit var mLayoutManager: RecyclerView.LayoutManager
-    private var placesList: ArrayList<PredictionResponse> = ArrayList()
+    private var placesList = mutableListOf<PredictionResponse>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +36,7 @@ class SelectLocationActivity : AppCompatActivity() {
 
         initializeRecycle()
 
-        newTripViewModel.destinations.observe(this, Observer {
+        selectLocationViewModel.destinations.observe(this, Observer {
             if (it.isNotEmpty()) {
                 placesList.clear()
                 placesList.addAll(it)
@@ -45,7 +44,7 @@ class SelectLocationActivity : AppCompatActivity() {
             }
 
         })
-        newTripViewModel.error.observe(this, Observer {
+        selectLocationViewModel.error.observe(this, Observer {
             createToast(this, it)
         })
 
@@ -56,7 +55,7 @@ class SelectLocationActivity : AppCompatActivity() {
         binding.SelectLocationActivityEditTextSearchPlace.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
                 //Log.i("addTextChangedListener", "afterTextChanged "+s);
-                newTripViewModel.getAllDestinations(s.toString())
+                selectLocationViewModel.getAllDestinations(s.toString())
                 //  GetPlaces(s.toString())
             }
 

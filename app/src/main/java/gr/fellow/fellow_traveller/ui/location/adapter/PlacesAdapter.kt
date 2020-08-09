@@ -5,11 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fellowtravellerbeta.data.network.google.response.PredictionResponse
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.framework.network.google.response.PredictionResponse
 
 class PlacesAdapter(
-    private val places: ArrayList<PredictionResponse>,
+    private val places: MutableList<PredictionResponse>,
     private val listener: (PredictionResponse) -> Unit
 ) : RecyclerView.Adapter<PlacesAdapter.ViewHolder>() {
 

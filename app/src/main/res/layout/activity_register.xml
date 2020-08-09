@@ -48,6 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#70ffffff"
+        android:elevation="4dp"
         android:visibility="invisible">
 
         <ProgressBar

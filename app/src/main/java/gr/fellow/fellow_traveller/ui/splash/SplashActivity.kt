@@ -3,8 +3,6 @@ package gr.fellow.fellow_traveller.ui.splash
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.view.Window
-import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -23,9 +21,6 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
         binding = ActivitySplashBinding.inflate(layoutInflater)
         val view = binding.root

@@ -12,6 +12,7 @@ import gr.fellow.fellow_traveller.usecase.LoadUserInfoUseCase
 import gr.fellow.fellow_traveller.usecase.LoginUseCase
 import gr.fellow.fellow_traveller.usecase.LogoutUseCase
 import gr.fellow.fellow_traveller.usecase.home.*
+import gr.fellow.fellow_traveller.usecase.newtrip.GetGeometryFormPlaceUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.GetPlaceFromPlacesUseCase
 import gr.fellow.fellow_traveller.usecase.register.*
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsCreatorRemoteUseCase
@@ -131,5 +132,11 @@ class UseCasesModule {
     @Provides
     fun provideGetTripsTakePartRemoteUseCase(dataSource: FellowDataSource): GetTripsAsPassengerRemoteUseCase {
         return GetTripsAsPassengerRemoteUseCase(dataSource)
+    }
+
+    @ActivityScoped
+    @Provides
+    fun provideGetGeometryFormPlaceUseCase(dataSource: FellowDataSource): GetGeometryFormPlaceUseCase {
+        return GetGeometryFormPlaceUseCase(dataSource)
     }
 }

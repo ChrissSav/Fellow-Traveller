@@ -6,270 +6,197 @@
     android:layout_height="match_parent"
     tools:context=".ui.search.locations.SelectDestinationActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ImageButton
+        android:id="@+id/back_button"
+        style="@style/border_icon_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_back_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/end_dest_label"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="2dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/firasans_bold"
+        android:text="Επιλέξτε τον προορισμό σας"
+        android:textColor="@color/black_color"
+        android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/no_internet">
+        app:layout_constraintStart_toStartOf="@id/back_button"
+        app:layout_constraintTop_toBottomOf="@id/back_button" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/end_dest_section"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/search_border"
+        android:elevation="1dp"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/end_dest_label"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/end_dest_label"
+        app:layout_constraintTop_toBottomOf="@id/end_dest_label">
+
+        <EditText
+            android:id="@+id/dest_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="50dp"
+            android:background="@android:color/transparent"
+            android:dropDownWidth="match_parent"
+            android:dropDownVerticalOffset="20dp"
+            android:hint="Επιλογή προορισμού..."
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:longClickable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/back_button"
+            android:id="@+id/erase_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="16dp"
-            android:background="@null"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:backgroundTint="@color/black_color"
+            android:padding="8dp"
+            android:src="@drawable/ic_erase"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/dest_editText"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/dest_editText" />
+
+        <ImageView
+            android:id="@+id/search_image"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/ic_search"
+            android:backgroundTint="@color/black_color"
             android:padding="10dp"
-            android:src="@drawable/ic_back_button"
+            android:rotation="90"
+            app:layout_constraintBottom_toBottomOf="@id/dest_editText"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/dest_editText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/protaseis"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/end_dest_section"
+        app:layout_constraintStart_toStartOf="@+id/end_dest_section"
+        app:layout_constraintTop_toBottomOf="@+id/end_dest_section">
+
+        <TextView
+            android:id="@+id/alternative_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/firasans_bold"
+            android:text="Εναλλακτικές προτάσεις"
+            android:textColor="@color/black_color"
+            android:textSize="20sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/edit_text"
-            style="@style/input"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="20dp"
-            android:background="@null"
-            android:ellipsize="end"
-            android:hint="Επιλέξτε τοποθεσία"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:singleLine="true"
-            app:layout_constraintBottom_toBottomOf="@id/back_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/back_button"
-            app:layout_constraintTop_toTopOf="@id/back_button" />
-
-        <View
-            android:id="@+id/underline"
+        <Button
+            android:id="@+id/your_location_button"
+            style="@style/button_outline_orange_with_left_drawable"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@color/softGrey_color"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/back_button" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:drawableLeft="@drawable/ic_location"
+            android:text="Η τοποθεσία σας"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/underline" />
+            app:layout_constraintTop_toBottomOf="@id/alternative_label" />
 
-
-        <ScrollView
-            android:id="@+id/suggest_section"
+        <Button
+            android:id="@+id/athens_button"
+            style="@style/button_outline_orange_with_left_drawable"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/underline">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-
-                android:id="@+id/protaseis"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="20dp"
-                android:visibility="visible"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent">
-
-                <TextView
-                    android:id="@+id/alternative_label"
-                    style="@style/header2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:fontFamily="@font/firasans_bold"
-                    android:text="Εναλλακτικές προτάσεις"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <Button
-                    android:id="@+id/your_location_button"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/settings_button_item"
-                    android:drawableStart="@drawable/ic_location"
-                    android:drawablePadding="10dp"
-                    android:drawableTint="@color/orange_color"
-                    android:fontFamily="@font/firasans_light"
-                    android:gravity="left|center_vertical"
-                    android:padding="10dp"
-                    android:text="Η τοποθεσία σας"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black_color"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/alternative_label" />
-
-                <Button
-                    android:id="@+id/athens_button"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/settings_button_item"
-                    android:drawableStart="@drawable/ic_pin"
-                    android:drawablePadding="10dp"
-                    android:drawableTint="@color/orange_color"
-                    android:fontFamily="@font/firasans_light"
-                    android:gravity="left|center_vertical"
-                    android:padding="10dp"
-                    android:text="Αθήνα"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black_color"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/your_location_button" />
-
-                <Button
-                    android:id="@+id/thessaloniki_button"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/settings_button_item"
-                    android:drawableStart="@drawable/ic_pin"
-                    android:drawablePadding="10dp"
-                    android:drawableTint="@color/orange_color"
-                    android:fontFamily="@font/firasans_light"
-                    android:gravity="left|center_vertical"
-                    android:padding="10dp"
-                    android:text="Θεσσαλονίκη"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black_color"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/athens_button" />
-
-                <Button
-                    android:id="@+id/ioannina_button"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/settings_button_item"
-                    android:drawableStart="@drawable/ic_pin"
-                    android:drawablePadding="10dp"
-                    android:drawableTint="@color/orange_color"
-                    android:fontFamily="@font/firasans_light"
-                    android:gravity="left|center_vertical"
-                    android:padding="10dp"
-                    android:text="Ιωάννινα"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black_color"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/thessaloniki_button" />
-
-                <Button
-                    android:id="@+id/patra_button"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/settings_button_item"
-                    android:drawableStart="@drawable/ic_pin"
-                    android:drawablePadding="10dp"
-                    android:drawableTint="@color/orange_color"
-                    android:fontFamily="@font/firasans_light"
-                    android:gravity="left|center_vertical"
-                    android:padding="10dp"
-                    android:text="Πάτρα"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black_color"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ioannina_button" />
-
-                <Button
-                    android:id="@+id/larisa_button"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/settings_button_item"
-                    android:drawableStart="@drawable/ic_pin"
-                    android:drawablePadding="10dp"
-                    android:drawableTint="@color/orange_color"
-                    android:fontFamily="@font/firasans_light"
-                    android:gravity="left|center_vertical"
-                    android:padding="10dp"
-                    android:text="Λάρισα"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black_color"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/patra_button" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </ScrollView>
-
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/black_color"
-            android:indeterminateTintMode="src_atop"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@drawable/ic_pin"
+            android:text="Αθήνα"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.43" />
+            app:layout_constraintTop_toBottomOf="@id/your_location_button" />
+
+        <Button
+            android:id="@+id/thessaloniki_button"
+            style="@style/button_outline_orange_with_left_drawable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@drawable/ic_pin"
+            android:text="Θεσσαλονίκη"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/athens_button" />
+
+        <Button
+            android:id="@+id/ioannina_button"
+            style="@style/button_outline_orange_with_left_drawable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@drawable/ic_pin"
+            android:text="Ιωάννινα"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/thessaloniki_button" />
+
+        <Button
+            android:id="@+id/patra_button"
+            style="@style/button_outline_orange_with_left_drawable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@drawable/ic_pin"
+            android:text="Πάτρα"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ioannina_button" />
+
+        <Button
+            android:id="@+id/larisa_button"
+            style="@style/button_outline_orange_with_left_drawable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@drawable/ic_pin"
+            android:text="Λάρισα"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/patra_button" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/no_internet"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_height="0dp"
         android:visibility="gone"
-        android:text="TextView"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/end_dest_section" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
