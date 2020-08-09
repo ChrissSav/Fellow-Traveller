@@ -59,6 +59,10 @@ class SelectDestinationActivity : AppCompatActivity(), View.OnClickListener {
 
         })
 
+        selectLocationViewModel.place.observe(this, Observer {
+            sendPlaceToParent(it)
+        })
+
 
         binding.destEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(charSequence: Editable?) {
@@ -87,11 +91,9 @@ class SelectDestinationActivity : AppCompatActivity(), View.OnClickListener {
         with(binding) {
             recyclerView.layoutManager = LinearLayoutManager(this@SelectDestinationActivity)
             recyclerView.adapter = PlacesAdapter(placesList) {
-                sendPlaceToParent(PlaceModel(it.placeId, it.description, 0.toFloat(), 0.toFloat()))
+                selectLocationViewModel.getLanLogForPlace(it.placeId, it.description)
             }
         }
-
-
     }
 
     private fun sendPlaceToParent(place: PlaceModel) {

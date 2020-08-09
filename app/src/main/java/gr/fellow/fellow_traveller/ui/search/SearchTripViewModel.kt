@@ -2,9 +2,9 @@ package gr.fellow.fellow_traveller.ui.search
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
-import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
@@ -14,10 +14,10 @@ class SearchTripViewModel
 constructor() : BaseViewModel() {
 
 
-    private val _destinationFrom = SingleLiveEvent<PlaceModel>()
+    private val _destinationFrom = MutableLiveData<PlaceModel>()
     val destinationFrom: LiveData<PlaceModel> = _destinationFrom
 
-    private val _destinationTo = SingleLiveEvent<PlaceModel>()
+    private val _destinationTo = MutableLiveData<PlaceModel>()
     val destinationTo: LiveData<PlaceModel> = _destinationTo
 
 

@@ -57,7 +57,10 @@ class SearchDestinationsFragment : Fragment() {
         }
 
         binding.searchButton.setOnClickListener {
-            navController.navigate(R.id.next_fragment)
+            if (searchTripViewModel.destinationFrom.value != null && searchTripViewModel.destinationTo.value != null)
+                navController.navigate(R.id.next_fragment)
+            else
+                createSnackBar(view, resources.getString(R.string.ERROR_FIELDS_REQUIRE))
         }
 
 
