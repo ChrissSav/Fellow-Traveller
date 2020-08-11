@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.ui
 
+import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.widget.ImageView
@@ -20,8 +21,16 @@ fun createSnackBar(view: View, msg: String) {
 
 }
 
+fun Activity.createSnackBar(msg: String) {
+    Snackbar.make(this.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG)
+        .setActionTextColor(this.resources.getColor(R.color.colorPrimary))
+        .show()
+
+}
+
+
 fun createToast(context: Context, msg: String) {
-    Toast.makeText(context, msg,Toast.LENGTH_SHORT).show()
+    Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
 
 }
 

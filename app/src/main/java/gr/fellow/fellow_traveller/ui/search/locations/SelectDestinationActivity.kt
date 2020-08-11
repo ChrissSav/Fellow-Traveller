@@ -16,10 +16,9 @@ import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.framework.network.google.response.PredictionResponse
 import gr.fellow.fellow_traveller.ui.location.SelectLocationViewModel
 import gr.fellow.fellow_traveller.ui.location.adapter.PlacesAdapter
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
-@ExperimentalCoroutinesApi
+
 class SelectDestinationActivity : AppCompatActivity(), View.OnClickListener {
 
     private val selectLocationViewModel: SelectLocationViewModel by viewModels()

@@ -16,9 +16,8 @@ import gr.fellow.fellow_traveller.ui.dialogs.DatePickerCustomDialog
 import gr.fellow.fellow_traveller.ui.dialogs.TimePickerCustomDialog
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 import gr.fellow.fellow_traveller.utils.validateDateTimeDiffer
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
+
 class DateTimeFragment : Fragment() {
 
     private val newTripViewModel: NewTripViewModel by activityViewModels()

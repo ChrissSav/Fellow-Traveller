@@ -3,12 +3,12 @@ package gr.fellow.fellow_traveller.ui.search
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.databinding.ActivitySearchTripBinding
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import gr.fellow.fellow_traveller.ui.createSnackBar
 
 
-@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class SearchTripActivity : AppCompatActivity() {
 
@@ -22,6 +22,9 @@ class SearchTripActivity : AppCompatActivity() {
         binding = ActivitySearchTripBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        searchViewModel.error.observe(this, Observer {
+            createSnackBar(it)
+        })
 
     }
 }

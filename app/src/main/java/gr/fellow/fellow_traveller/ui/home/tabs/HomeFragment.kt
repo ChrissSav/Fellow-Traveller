@@ -12,10 +12,9 @@ import gr.fellow.fellow_traveller.databinding.FragmentHomeBinding
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripActivity
 import gr.fellow.fellow_traveller.ui.search.SearchTripActivity
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 //@AndroidEntryPoint
-@ExperimentalCoroutinesApi
+
 class HomeFragment : Fragment() {
 
 
@@ -51,6 +50,8 @@ class HomeFragment : Fragment() {
         binding.searchButton.setOnClickListener {
             val intent = Intent(activity, SearchTripActivity::class.java)
             startActivity(intent)
+            activity?.finish()
+
         }
     }
     override fun onDestroyView() {

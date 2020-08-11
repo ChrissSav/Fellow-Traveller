@@ -54,4 +54,23 @@ interface FellowService {
     suspend fun getTripsAs(
         @Query("type_as") type: String
     ): Response<MutableList<TripResponse>>
+
+    @GET("trips/search")
+    suspend fun searchTrips(
+        @Query("latitude_from") latitudeFrom: Float,
+        @Query("longitude_from") longitudeFrom: Float,
+        @Query("latitude_to") latitudeTo: Float,
+        @Query("longitude_to") longitudeTo: Float,
+        @Query("range_from") rangeFrom: Int?,
+        @Query("range_to") rangeTo: Int?,
+        @Query("timestamp_min") timestampMin: Int?,
+        @Query("timestamp_max") timestampMax: Int?,
+        @Query("seats_min") seatsMin: Int?,
+        @Query("seats_max") seatsMax: Int?,
+        @Query("bags_min") bagsMin: Int?,
+        @Query("bags_max") bagsMax: Int?,
+        @Query("price_min") priceMin: Float?,
+        @Query("price_max") priceMax: Float?,
+        @Query("pet") pet: Boolean?
+    ): Response<MutableList<TripResponse>>
 }

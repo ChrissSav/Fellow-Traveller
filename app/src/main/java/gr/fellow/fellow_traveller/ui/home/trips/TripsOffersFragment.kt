@@ -16,9 +16,8 @@ import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripActivity
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
+
 class TripsOffersFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by activityViewModels()

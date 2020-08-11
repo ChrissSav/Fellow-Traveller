@@ -12,9 +12,8 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.ActivityNewTripBinding
 import gr.fellow.fellow_traveller.ui.createSnackBar
 import gr.fellow.fellow_traveller.ui.dialogs.ExitCustomDialog
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
+
 @AndroidEntryPoint
 class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogListener {
 

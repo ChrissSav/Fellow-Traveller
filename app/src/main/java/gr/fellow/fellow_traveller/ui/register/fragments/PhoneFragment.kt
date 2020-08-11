@@ -16,9 +16,8 @@ import gr.fellow.fellow_traveller.databinding.FragmentPhoneBinding
 import gr.fellow.fellow_traveller.ui.createSnackBar
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
 import gr.fellow.fellow_traveller.utils.isValidPhone
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
+
 class PhoneFragment : Fragment() {
 
     private val registerViewModel: RegisterViewModel by activityViewModels()

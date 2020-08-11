@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.data
 
+import gr.fellow.fellow_traveller.domain.SearchFilters
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
@@ -36,4 +37,6 @@ interface FellowRepository {
     suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripResponse>>
 
     suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripResponse>>
+
+    suspend fun searchTrips(query: SearchFilters): ResultWrapper<MutableList<TripResponse>>
 }

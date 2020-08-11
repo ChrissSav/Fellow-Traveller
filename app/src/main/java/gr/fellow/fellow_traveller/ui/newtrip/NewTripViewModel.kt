@@ -9,10 +9,9 @@ import gr.fellow.fellow_traveller.framework.network.google.response.PredictionRe
 import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.usecase.home.GetUserCarsLocalUseCase
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
-@ExperimentalCoroutinesApi
+
 class NewTripViewModel
 @ViewModelInject
 constructor(

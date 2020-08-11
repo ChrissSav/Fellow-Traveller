@@ -16,9 +16,8 @@ import gr.fellow.fellow_traveller.databinding.FragmentAccountInfoBinding
 import gr.fellow.fellow_traveller.ui.createSnackBar
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
+
 class AccountInfoFragment : Fragment() {
 
     private val registerViewModel: RegisterViewModel by activityViewModels()

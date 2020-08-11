@@ -1,21 +1,18 @@
 package gr.fellow.fellow_traveller.ui.register
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import dagger.hilt.android.AndroidEntryPoint
-import gr.fellow.fellow_traveller.databinding.ActivityRegisterBinding
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.databinding.ActivityRegisterBinding
 import gr.fellow.fellow_traveller.ui.createSnackBar
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
-@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {
 

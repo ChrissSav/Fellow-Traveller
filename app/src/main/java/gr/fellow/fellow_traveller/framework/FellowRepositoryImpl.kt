@@ -3,6 +3,7 @@ package gr.fellow.fellow_traveller.framework
 import android.content.SharedPreferences
 import gr.fellow.fellow_traveller.data.FellowRepository
 import gr.fellow.fellow_traveller.data.ResultWrapper
+import gr.fellow.fellow_traveller.domain.SearchFilters
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
@@ -75,6 +76,18 @@ class FellowRepositoryImpl(
     override suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripResponse>> =
         networkCall(connectivityHelper) {
             service.getTripsAs("passenger").handleToCorrectFormat()
+        }
+
+    override suspend fun searchTrips(query: SearchFilters): ResultWrapper<MutableList<TripResponse>> =
+        networkCall(connectivityHelper) {
+            with(query) {
+                service.searchTrips(
+                    latitudeFrom, longitudeFrom, latitudeTo, longitudeTo, rangeFrom,
+                    rangeTo, timestampMin, timestampMax, seatsMin, seatsMax,
+                    bagsMin, bagsMax, priceMin, priceMax, pet
+                ).handleToCorrectFormat()
+            }
+
         }
 
 

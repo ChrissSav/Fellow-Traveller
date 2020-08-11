@@ -12,10 +12,8 @@ import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentMessageBinding
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 
-@ExperimentalCoroutinesApi
 class MessageFragment : Fragment() {
     private val newTripViewModel: NewTripViewModel by activityViewModels()
     private lateinit var navController: NavController

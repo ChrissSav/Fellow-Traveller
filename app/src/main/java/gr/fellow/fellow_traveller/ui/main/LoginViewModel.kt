@@ -2,16 +2,13 @@ package gr.fellow.fellow_traveller.ui.main
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.LoginUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.launch
 
-@ExperimentalCoroutinesApi
+
 class LoginViewModel
 @ViewModelInject
 constructor(

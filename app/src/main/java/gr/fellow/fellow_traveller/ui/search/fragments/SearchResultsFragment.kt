@@ -9,12 +9,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentSearchResultsBinding
+import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import gr.fellow.fellow_traveller.ui.search.adapter.SearchResultsAdapter
 
-@ExperimentalCoroutinesApi
+@AndroidEntryPoint
 class SearchResultsFragment : Fragment() {
 
     private val searchTripViewModel: SearchTripViewModel by activityViewModels()
@@ -22,7 +25,7 @@ class SearchResultsFragment : Fragment() {
 
     private var _binding: FragmentSearchResultsBinding? = null
     private val binding get() = _binding!!
-
+    private var tripsList = mutableListOf<TripResponse>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +51,11 @@ class SearchResultsFragment : Fragment() {
         }
 
 
+        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.layoutManager = LinearLayoutManager(view.context)
+        binding.recyclerView.adapter = SearchResultsAdapter(tripsList) {
+
+        }
         with(searchTripViewModel) {
             destinationTo.observe(viewLifecycleOwner, Observer {
                 binding.toButton.text = it.title
@@ -57,6 +65,27 @@ class SearchResultsFragment : Fragment() {
             destinationFrom.observe(viewLifecycleOwner, Observer {
                 binding.fromButton.text = it.title
             })
+
+            if (filterFlag)
+                searchFilter.observe(viewLifecycleOwner, Observer {
+                    searchTripViewModel.getTrips()
+                })
+
+            resultTrips.observe(viewLifecycleOwner, Observer {
+                binding.progressBar.visibility = View.GONE
+
+                tripsList.clear()
+                binding.recyclerView.adapter?.notifyDataSetChanged()
+                if (it.isNotEmpty()) {
+                    tripsList.addAll(it)
+                    binding.recyclerView.adapter?.notifyDataSetChanged()
+                    binding.recyclerView.visibility = View.VISIBLE
+                } else {
+                    binding.recyclerView.visibility = View.GONE
+                    binding.notFoundImage.visibility = View.VISIBLE
+                }
+            })
+
         }
 
 

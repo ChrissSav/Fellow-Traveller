@@ -16,9 +16,8 @@ import gr.fellow.fellow_traveller.databinding.FragmentEmailBinding
 import gr.fellow.fellow_traveller.ui.createSnackBar
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
 import gr.fellow.fellow_traveller.utils.isValidEmail
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
+
 class EmailFragment : Fragment() {
 
     private val registerViewModel: RegisterViewModel by activityViewModels()

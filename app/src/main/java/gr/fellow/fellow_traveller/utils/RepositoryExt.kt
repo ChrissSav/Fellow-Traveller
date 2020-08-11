@@ -69,7 +69,7 @@ suspend fun <T : Any> performCall(
         try {
             call.invoke()
         } catch (exception: Exception) {
-            print(exception.message)
+            print("=============================================================================\n" + exception.message + "=============================================================================")
             ResultWrapper.Error(getModelFromResponseErrorBody())
         }
     }

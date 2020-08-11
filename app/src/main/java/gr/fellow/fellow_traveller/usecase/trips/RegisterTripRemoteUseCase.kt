@@ -10,30 +10,11 @@ class RegisterTripRemoteUseCase(
 ) {
 
     suspend operator fun invoke(
-        destFrom: String,
-        destTo: String,
-        pickupPoint: String,
-        timestamp: Long,
-        hasPet: Boolean,
-        maxSeats: Int,
-        maxBags: Int,
-        msg: String,
-        price: Float,
-        carId: Int
+        destFrom: String, destTo: String, pickupPoint: String, timestamp: Long,
+        hasPet: Boolean, maxSeats: Int, maxBags: Int, msg: String, price: Float, carId: Int
     ): ResultWrapper<TripResponse> {
         return dataSource.addTripRemote(
-            TripCreateRequest(
-                destFrom,
-                destTo,
-                pickupPoint,
-                timestamp,
-                hasPet,
-                maxSeats,
-                maxBags,
-                msg,
-                price,
-                carId
-            )
+            TripCreateRequest(destFrom, destTo, pickupPoint, timestamp, hasPet, maxSeats, maxBags, msg, price, carId)
         )
     }
 

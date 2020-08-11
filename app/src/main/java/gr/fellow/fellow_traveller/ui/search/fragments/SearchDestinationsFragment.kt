@@ -17,9 +17,8 @@ import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.ui.createSnackBar
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
 import gr.fellow.fellow_traveller.ui.search.locations.SelectDestinationActivity
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
+
 class SearchDestinationsFragment : Fragment() {
 
     private val searchTripViewModel: SearchTripViewModel by activityViewModels()
@@ -57,9 +56,10 @@ class SearchDestinationsFragment : Fragment() {
         }
 
         binding.searchButton.setOnClickListener {
-            if (searchTripViewModel.destinationFrom.value != null && searchTripViewModel.destinationTo.value != null)
+            if (searchTripViewModel.destinationFrom.value != null && searchTripViewModel.destinationTo.value != null) {
+                searchTripViewModel.updateFilter()
                 navController.navigate(R.id.next_fragment)
-            else
+            } else
                 createSnackBar(view, resources.getString(R.string.ERROR_FIELDS_REQUIRE))
         }
 
@@ -78,14 +78,7 @@ class SearchDestinationsFragment : Fragment() {
             })
 
 
-            load.observe(viewLifecycleOwner, Observer {
-                binding.progressLoad.visibility = View.VISIBLE
-            })
 
-            error.observe(viewLifecycleOwner, Observer {
-                binding.progressLoad.visibility = View.GONE
-                createSnackBar(view, it)
-            })
         }
     }
 
@@ -104,7 +97,6 @@ class SearchDestinationsFragment : Fragment() {
                 place?.let {
                     searchTripViewModel.setDestinationFrom(it)
                 }
-                // newTripViewModel.setDestinationFrom(id, title)
             }
 
         } else if (requestCode == 2) {

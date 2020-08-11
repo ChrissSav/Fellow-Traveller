@@ -45,6 +45,8 @@ interface FellowDataSource {
 
     suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripResponse>>
 
+    suspend fun searchTrips(query: SearchFilters): ResultWrapper<MutableList<TripResponse>>
+
 
     /**
      * Google Service

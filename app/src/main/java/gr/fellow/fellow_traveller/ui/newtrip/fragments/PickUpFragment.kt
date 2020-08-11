@@ -16,9 +16,8 @@ import gr.fellow.fellow_traveller.databinding.FragmentPickUpBinding
 import gr.fellow.fellow_traveller.ui.createSnackBar
 import gr.fellow.fellow_traveller.ui.location.SelectLocationActivity
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
+
 class PickUpFragment : Fragment() {
 
     private val newTripViewModel: NewTripViewModel by activityViewModels()

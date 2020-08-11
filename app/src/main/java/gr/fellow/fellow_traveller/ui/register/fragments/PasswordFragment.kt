@@ -16,9 +16,8 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentPasswordBinding
 import gr.fellow.fellow_traveller.ui.createSnackBar
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
+
 class PasswordFragment : Fragment() {
 
     private val registerViewModel: RegisterViewModel by activityViewModels()

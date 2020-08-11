@@ -1,6 +1,6 @@
 package gr.fellow.fellow_traveller.domain.mappers
 
-import gr.fellow.fellow_traveller.domain.Filter
+import gr.fellow.fellow_traveller.domain.SearchFilters
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
 import gr.fellow.fellow_traveller.room.entites.CarEntity
@@ -16,7 +16,7 @@ fun CarResponse.toCarEntity() = CarEntity(
 )
 
 
-fun Filter.toQuery(): String {
+fun SearchFilters.toQuery(): String {
     var query = "latitude_from=${latitudeFrom}&longitude_from=${longitudeFrom}&latitude_to=${latitudeTo}&longitude_to=${longitudeTo}"
     if (rangeFrom != null)
         query += "&range_from${rangeFrom}"
@@ -42,3 +42,5 @@ fun Filter.toQuery(): String {
         query += "&pet${pet}"
     return query
 }
+
+

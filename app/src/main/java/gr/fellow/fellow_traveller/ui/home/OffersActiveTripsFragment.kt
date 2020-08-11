@@ -11,9 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import gr.fellow.fellow_traveller.databinding.FragmentOffersActiveTripsBinding
 import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.ui.home.adapter.ActiveTripsAdapter
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
+
 class OffersActiveTripsFragment : Fragment() {
 
 
@@ -50,7 +49,7 @@ class OffersActiveTripsFragment : Fragment() {
         })
     }
 
-    fun init() {
+    private fun init() {
         with(binding) {
             recyclerView.layoutManager = LinearLayoutManager(activity)
             recyclerView.adapter = ActiveTripsAdapter(tripsList) {

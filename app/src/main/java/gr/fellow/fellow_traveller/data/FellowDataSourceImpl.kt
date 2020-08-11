@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.data
 
 import gr.fellow.fellow_traveller.domain.FellowDataSource
+import gr.fellow.fellow_traveller.domain.SearchFilters
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
@@ -21,10 +22,8 @@ class FellowDataSourceImpl(
     override suspend fun checkUserPhone(phone: String): ResultWrapper<StatusHandleResponse> =
         repository.checkField(AccountCheckRequest("phone", phone))
 
-
     override suspend fun checkUserEmail(email: String): ResultWrapper<StatusHandleResponse> =
         repository.checkField(AccountCheckRequest("email", email))
-
 
     override suspend fun registerUser(
         firstName: String, lastName: String, email: String, password: String, phone: String
@@ -35,12 +34,8 @@ class FellowDataSourceImpl(
     override suspend fun loginUser(username: String, password: String): ResultWrapper<UserLoginResponse> =
         repository.loginUser(LoginRequest(username, password))
 
-
     override suspend fun registerUserAuth(userEntity: RegisteredUserEntity) =
         repositoryLocal.registerUserAuth(userEntity)
-
-
-
 
     override suspend fun getCarsRemote(): ResultWrapper<ArrayList<CarResponse>> =
         repository.getCarsRemote()
@@ -60,6 +55,8 @@ class FellowDataSourceImpl(
     override suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripResponse>> =
         repository.getTipsAsPassenger()
 
+    override suspend fun searchTrips(query: SearchFilters): ResultWrapper<MutableList<TripResponse>> =
+        repository.searchTrips(query)
 
     /**
      * Google Service
@@ -82,10 +79,8 @@ class FellowDataSourceImpl(
     override suspend fun logoutUser() =
         repositoryLocal.logoutUser()
 
-
     override suspend fun getAllCarsLocal(): MutableList<CarEntity> =
         repositoryLocal.getAllCars()
-
 
     override suspend fun insertCarLocal(carEntity: CarEntity) =
         repositoryLocal.insertCar(carEntity)
