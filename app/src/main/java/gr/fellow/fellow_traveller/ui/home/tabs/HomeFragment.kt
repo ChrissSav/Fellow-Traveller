@@ -50,8 +50,6 @@ class HomeFragment : Fragment() {
         binding.searchButton.setOnClickListener {
             val intent = Intent(activity, SearchTripActivity::class.java)
             startActivity(intent)
-            activity?.finish()
-
         }
     }
     override fun onDestroyView() {

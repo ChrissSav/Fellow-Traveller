@@ -3,6 +3,7 @@ package gr.fellow.fellow_traveller.ui.help
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 open class BaseViewModel : ViewModel() {
@@ -23,6 +24,13 @@ open class BaseViewModel : ViewModel() {
 
     fun launch(function: suspend () -> Unit) {
         viewModelScope.launch {
+            function.invoke()
+        }
+    }
+
+    fun launch(delayTime: Int, function: suspend () -> Unit) {
+        viewModelScope.launch {
+            delay(delayTime.toLong())
             function.invoke()
         }
     }

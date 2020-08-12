@@ -51,7 +51,6 @@ class SearchResultsFragment : Fragment() {
         }
 
 
-        binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager = LinearLayoutManager(view.context)
         binding.recyclerView.adapter = SearchResultsAdapter(tripsList) {
 

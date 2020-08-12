@@ -34,10 +34,8 @@ constructor(
     var filterFlag: Boolean = false
 
     fun setDestinationFrom(place: PlaceModel) {
-
         launch {
             _destinationFrom.value = place
-
         }
     }
 
@@ -64,8 +62,7 @@ constructor(
 
 
     fun getTrips() {
-        launch {
-
+        launch(250) {
             _searchFilter.value?.let { searchFilters ->
                 try {
                     when (val response = searchTripsUseCase(searchFilters)) {
