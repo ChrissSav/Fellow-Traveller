@@ -32,19 +32,27 @@ data class TripResponse(
     @SerializedName("current_bags")
     val currentBags: Int,
     @SerializedName("message")
-    val msg: String,
+    val msg: String?,
     @SerializedName("price")
     val price: Float
 ) {
-    fun getDate(): String? {
+    fun getDate(): String {
         val dateFormat = SimpleDateFormat("d MMM yyyy")
         val date = Date(timestamp * 1000)
         return dateFormat.format(date)
     }
 
-    fun getTime(): String? {
+    fun getTime(): String {
         val dateFormat = SimpleDateFormat("HH:mm")
         val date = Date(timestamp * 1000)
         return dateFormat.format(date)
+    }
+
+    fun seatsState(): String {
+        return "$currentSeats/$maxSeats"
+    }
+
+    fun bagsState(): String {
+        return "$currentBags/$currentBags"
     }
 }

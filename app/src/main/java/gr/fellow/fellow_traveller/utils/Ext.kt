@@ -60,6 +60,3 @@ fun getModelFromResponseErrorBody(errorBody: ResponseBody?): ErrorResponse {
 
 }
 
-fun getModelFromResponseErrorBody(): ErrorResponse {
-    return ErrorResponse(code = 1000)
-}

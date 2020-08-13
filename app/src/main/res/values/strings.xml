@@ -34,11 +34,11 @@
 
     <integer name="anim_duration">250</integer>
     <string name="title_activity_maps">Map</string>
-
+    <string name="no_driver_message">Δεν υπάρχει μήνυμα από τον οδηγό.</string>
 
     <string name="passenger_notification">Ο χρήστης % μόλις προστέθηκε στο ταξίδι σου.</string>
-    <string name="rate_notification">Ήρθε η ώρα να αξιολόγησης τον χρήστη  %.</string>
-    <string name="write_review_title">Ήρθε η ώρα να αξιολόγησης τον χρήστη <b>  user  </b> για το ταξίδι που έγινε από from - to στις date.</string>
+    <string name="rate_notification">Ήρθε η ώρα να αξιολόγησης τον χρήστη  %s.</string>
+    <string name="write_review_title">Ήρθε η ώρα να αξιολόγησης τον χρήστη %s για το ταξίδι που έγινε από %d - to στις $s.</string>
 
 
     <string name="set_date">Όρισε την ημερομηνία ... </string>
@@ -47,5 +47,7 @@
 
     <string name="allowed">Επιτρέπονται</string>
     <string name="not_allowed">Δεν επιτρέπονται</string>
+
+    <string name="price">%s €</string>
 
 </resources>

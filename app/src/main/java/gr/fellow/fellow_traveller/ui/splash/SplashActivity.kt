@@ -28,7 +28,7 @@ class SplashActivity : AppCompatActivity() {
 
         Handler().postDelayed({
             splashViewModel.checkUserState()
-        }, 2000)
+        }, 750)
 
         splashViewModel.result.observe(this, Observer {
             val intent = if (it)

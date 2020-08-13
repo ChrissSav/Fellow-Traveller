@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentSearchResultsBinding
@@ -51,10 +51,13 @@ class SearchResultsFragment : Fragment() {
         }
 
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(view.context)
         binding.recyclerView.adapter = SearchResultsAdapter(tripsList) {
-
+            navController.navigate(
+                R.id.action_searchResultsFragment_to_searchTripDetailsFragment,
+                bundleOf("tripId" to it.id)
+            )
         }
+
         with(searchTripViewModel) {
             destinationTo.observe(viewLifecycleOwner, Observer {
                 binding.toButton.text = it.title

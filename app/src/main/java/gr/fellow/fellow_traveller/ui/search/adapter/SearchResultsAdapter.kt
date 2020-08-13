@@ -59,3 +59,44 @@ class SearchResultsAdapter(
         val reviews: TextView = itemView.review_search_item
     }
 }
+
+/*
+class SearchResultsAdapter(
+    private val tripsList: MutableList<TripResponse>,
+    private val listener: (TripResponse) -> Unit
+) :
+    RecyclerView.Adapter<SearchResultsAdapter.ViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        return ViewHolder( SearchResultItemBinding.inflate(inflater))
+
+    }
+
+
+    override fun getItemCount(): Int = tripsList.size
+
+    override fun onBindViewHolder(holder: SearchResultsAdapter.ViewHolder, position: Int) = holder.bind(tripsList[position])
+
+
+    inner class ViewHolder(val binding: SearchResultItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(currentItem: TripResponse) {
+
+            with(binding) {
+                fromSearchItem.text = currentItem.destFrom.title
+                toSearchItem.text = currentItem.destTo.title
+                nameSearchItem.text = currentItem.creatorUser.fullName
+                dateSearchItem.text = currentItem.getDate()
+                timeSearchItem.text = currentItem.getTime()
+                priceSearchItem.text = currentItem.price.toString()
+                profileSearchItem.loadImageFromUrl(currentItem.creatorUser.picture)
+                rateSearchItem.text = currentItem.creatorUser.rate.toString()
+                reviewSearchItem.text = currentItem.creatorUser.reviews.toString()
+
+                root.setOnClickListener {
+                    listener(currentItem)
+                }
+            }
+        }
+
+    }*/

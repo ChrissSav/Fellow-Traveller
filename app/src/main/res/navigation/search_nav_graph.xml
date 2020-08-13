@@ -55,10 +55,17 @@
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
+        <argument
+            android:name="tripId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/bookTripFragment"
         android:name="gr.fellow.fellow_traveller.ui.search.fragments.BookTripFragment"
         android:label="fragment_book_trip"
-        tools:layout="@layout/fragment_book_trip" />
+        tools:layout="@layout/fragment_book_trip">
+        <argument
+            android:name="indexTrip"
+            app:argType="integer" />
+    </fragment>
 </navigation>
