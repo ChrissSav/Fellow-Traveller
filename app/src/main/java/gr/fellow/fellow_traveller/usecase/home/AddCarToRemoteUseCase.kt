@@ -18,7 +18,7 @@ class AddCarToRemoteUseCase(
             when (response.error.code) {
                 300 ->
                     response.error.msg =
-                        context.resources.getString(R.string.ERROR_PLATE__ALREADY_EXISTS)
+                        context.resources.getString(R.string.ERROR_PLATE_ALREADY_EXISTS)
                 else ->
                     response.error.msg =
                         context.resources.getString(R.string.ERROR_API_UNREACHABLE)

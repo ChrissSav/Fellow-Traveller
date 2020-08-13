@@ -21,7 +21,7 @@ constructor(
     private val checkUserEmailUseCase: CheckUserEmailUseCase,
     private val registerUserUseCase: RegisterUserUseCase,
     private val registerUserLocalUseCase: RegisterUserLocalUseCase
-) : BaseViewModel() {
+) : BaseViewModel(context) {
     private val _phone = SingleLiveEvent<String>()
     val phone: LiveData<String> = _phone
 
@@ -48,7 +48,7 @@ constructor(
                 is ResultWrapper.Success ->
                     _phone.value = phone
                 is ResultWrapper.Error ->
-                    _error.value = response.error.msg
+                    _error.value = context.resources.getString(R.string.ERROR_PHONE_ALREADY_EXISTS)
             }
         }
 
@@ -63,7 +63,7 @@ constructor(
                 is ResultWrapper.Success ->
                     _email.value = email
                 is ResultWrapper.Error ->
-                    _error.value = response.error.msg
+                    _error.value = context.resources.getString(R.string.ERROR_EMAIL_ALREADY_EXISTS)
             }
 
         }
@@ -85,18 +85,20 @@ constructor(
                 _error.value = context.resources.getString(R.string.ERROR_FIELDS_REQUIRE)
             else {
                 when (val response = registerUserUseCase(
-                    userInfo.value!!.first,
-                    userInfo.value!!.second,
-                    email.value.toString(),
-                    password.value.toString(),
-                    phone.value.toString()
+                    userInfo.value!!.first, userInfo.value!!.second, email.value.toString(),
+                    password.value.toString(), phone.value.toString()
                 )) {
-                    is ResultWrapper.Error ->
-                        _error.value = response.error.msg
-                    is ResultWrapper.Success ->{
+                    is ResultWrapper.Success -> {
                         registerUserLocalUseCase(response.data)
                         _finish.value = true
-
+                    }
+                    is ResultWrapper.Error -> {
+                        when (response.error.code) {
+                            200 ->
+                                _error.value = context.resources.getString(R.string.ERROR_PHONE_ALREADY_EXISTS)
+                            201 ->
+                                _error.value = context.resources.getString(R.string.ERROR_EMAIL_ALREADY_EXISTS)
+                        }
                     }
                 }
             }

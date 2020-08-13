@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.ui.home
 
+import android.content.Context
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
@@ -23,6 +24,7 @@ import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsPassengerRemoteUseCase
 class HomeViewModel
 @ViewModelInject
 constructor(
+    private val context: Context,
     @Assisted private val savedStateHandle: SavedStateHandle,
     private val loadUserInfoUseCase: LoadUserInfoUseCase,
     private val logoutUseCase: LogoutUseCase,
@@ -34,7 +36,7 @@ constructor(
     private val getTripsAsCreatorRemoteUseCase: GetTripsAsCreatorRemoteUseCase,
     private val getTripsAsPassengerRemoteUseCase: GetTripsAsPassengerRemoteUseCase
 
-) : BaseViewModel() {
+) : BaseViewModel(context) {
 
 
     private val _user = MutableLiveData<RegisteredUserEntity>()
@@ -91,7 +93,7 @@ constructor(
                 }
             } catch (exception: BaseApiException) {
                 _cars.value = getUserCarsLocalUseCase()
-                _error.value = exception.msg
+                throw  exception
             }
 
         }
@@ -99,37 +101,28 @@ constructor(
 
     fun addCar(brand: String, model: String, plate: String, color: String) {
         launch {
-            try {
-                when (val response = addCarToRemoteUseCase(brand, model, plate, color)) {
-                    is ResultWrapper.Success -> {
-                        loadCars()
-                        _addCarResult.value = true
-                    }
-                    is ResultWrapper.Error -> {
-                        _error.value = response.error.msg
-                    }
-
+            when (val response = addCarToRemoteUseCase(brand, model, plate, color)) {
+                is ResultWrapper.Success -> {
+                    loadCars()
+                    _addCarResult.value = true
                 }
-            } catch (exception: BaseApiException) {
-                _error.value = exception.msg
+                is ResultWrapper.Error -> {
+                    _error.value = response.error.msg
+                }
             }
         }
     }
 
     fun deleteCar(car: CarEntity) {
         launch {
-            try {
-                when (val response = deleteCarUseCase(car.id)) {
-                    is ResultWrapper.Success -> {
-                        _carDeletedId.value = car
-                    }
-                    is ResultWrapper.Error -> {
-                        _error.value = response.error.msg
-                    }
-
+            when (val response = deleteCarUseCase(car.id)) {
+                is ResultWrapper.Success -> {
+                    _carDeletedId.value = car
                 }
-            } catch (exception: BaseApiException) {
-                _error.value = exception.msg
+                is ResultWrapper.Error -> {
+                    _error.value = response.error.msg
+                }
+
             }
         }
     }
@@ -146,20 +139,16 @@ constructor(
             if (_tripsAsCreator.value != null) {
                 return@launch
             }
-            try {
-                when (val response = getTripsAsCreatorRemoteUseCase()) {
-                    is ResultWrapper.Success -> {
-                        // savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
-                        _tripsAsCreator.value = response.data
-                    }
-                    is ResultWrapper.Error -> {
-                        _error.value = response.error.msg
-                    }
-
+            when (val response = getTripsAsCreatorRemoteUseCase()) {
+                is ResultWrapper.Success -> {
+                    // savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
+                    _tripsAsCreator.value = response.data
                 }
-            } catch (exception: BaseApiException) {
-                _error.value = exception.msg
+                is ResultWrapper.Error -> {
+                    _error.value = response.error.msg
+                }
             }
+
         }
     }
 
@@ -170,22 +159,18 @@ constructor(
             if (_tripsTakesPart.value != null) {
                 return@launch
             }
-            try {
-                when (val response = getTripsAsPassengerRemoteUseCase()) {
-                    is ResultWrapper.Success -> {
-                        // savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
-                        _tripsTakesPart.value = response.data
-                    }
-                    is ResultWrapper.Error -> {
-                        _error.value = response.error.msg
-                    }
 
+            when (val response = getTripsAsPassengerRemoteUseCase()) {
+                is ResultWrapper.Success -> {
+                    // savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
+                    _tripsTakesPart.value = response.data
                 }
-            } catch (exception: BaseApiException) {
-                _error.value = exception.msg
+                is ResultWrapper.Error -> {
+                    _error.value = response.error.msg
+                }
+
             }
         }
     }
 }
 
-//const val SAVED_STATE_LOCATIONS = "makis"

@@ -27,27 +27,27 @@ class UseCasesModule {
 
     @ActivityScoped
     @Provides
-    fun provideCheckPhoneUseCase(dataSource: FellowDataSource, context: Context): CheckUserPhoneUseCase {
-        return CheckUserPhoneUseCase(context, dataSource)
+    fun provideCheckPhoneUseCase(dataSource: FellowDataSource): CheckUserPhoneUseCase {
+        return CheckUserPhoneUseCase(dataSource)
     }
 
 
     @ActivityScoped
     @Provides
-    fun provideCheckEmailUseCase(dataSource: FellowDataSource, context: Context): CheckUserEmailUseCase {
-        return CheckUserEmailUseCase(context, dataSource)
+    fun provideCheckEmailUseCase(dataSource: FellowDataSource): CheckUserEmailUseCase {
+        return CheckUserEmailUseCase(dataSource)
     }
 
     @ActivityScoped
     @Provides
-    fun provideRegisterUserUseCase(dataSource: FellowDataSource, context: Context): RegisterUserUseCase {
-        return RegisterUserUseCase(context, dataSource)
+    fun provideRegisterUserUseCase(dataSource: FellowDataSource): RegisterUserUseCase {
+        return RegisterUserUseCase(dataSource)
     }
 
     @ActivityScoped
     @Provides
-    fun provideLoginUseCase(dataSource: FellowDataSource, context: Context): LoginUseCase {
-        return LoginUseCase(context, dataSource)
+    fun provideLoginUseCase(dataSource: FellowDataSource): LoginUseCase {
+        return LoginUseCase(dataSource)
     }
 
     @ActivityScoped

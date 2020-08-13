@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import com.google.gson.Gson
 import com.google.gson.JsonParser
-import gr.fellow.fellow_traveller.framework.network.fellow.response.DetailResponse
+import gr.fellow.fellow_traveller.data.BaseApiException
 import gr.fellow.fellow_traveller.framework.network.fellow.response.ErrorResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.ErrorResponseModel
 import okhttp3.ResponseBody
@@ -47,23 +47,19 @@ class ConnectivityHelper(private val connectivityManager: ConnectivityManager) {
 }
 
 fun getModelFromResponseErrorBody(errorBody: ResponseBody?): ErrorResponse {
-    val gson = Gson()
-    val detail = DetailResponse(1000, "")
-    var errorResponseModel = ErrorResponseModel("", detail)
-    try {
+    return try {
         val mJsonString = errorBody!!.string()
         val parser = JsonParser()
         val mJson = parser.parse(mJsonString)
-        errorResponseModel =
-            gson.fromJson<ErrorResponseModel>(mJson, ErrorResponseModel::class.java)
-
+        val errorResponseModel =
+            Gson().fromJson<ErrorResponseModel>(mJson, ErrorResponseModel::class.java)
+        ErrorResponse(errorResponseModel.detail.statusCode, errorResponseModel.detail.message)
     } catch (e: Exception) {
-//        val detailModel = DetailModel(1000)
-//        errorResponseModel.setDetail(detailModel)
+        throw BaseApiException(SOMETHING_WORNG)
     }
-    return ErrorResponse(errorResponseModel.detail.statusCode, errorResponseModel.detail.message)
+
 }
 
 fun getModelFromResponseErrorBody(): ErrorResponse {
-    return ErrorResponse(1000, "")
+    return ErrorResponse(code = 1000)
 }

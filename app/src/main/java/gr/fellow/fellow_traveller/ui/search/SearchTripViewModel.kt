@@ -1,9 +1,9 @@
 package gr.fellow.fellow_traveller.ui.search
 
+import android.content.Context
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import gr.fellow.fellow_traveller.data.BaseApiException
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.domain.SearchFilters
 import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
@@ -15,8 +15,9 @@ import gr.fellow.fellow_traveller.usecase.trips.SearchTripsUseCase
 class SearchTripViewModel
 @ViewModelInject
 constructor(
+    private val context: Context,
     private val searchTripsUseCase: SearchTripsUseCase
-) : BaseViewModel() {
+) : BaseViewModel(context) {
 
 
     private val _destinationFrom = MutableLiveData<PlaceModel>()
@@ -62,19 +63,15 @@ constructor(
 
 
     fun getTrips() {
-        launch(250) {
+        launch(450) {
             _searchFilter.value?.let { searchFilters ->
-                try {
-                    when (val response = searchTripsUseCase(searchFilters)) {
-                        is ResultWrapper.Success -> {
-                            _resultTrips.value = response.data.toMutableList()
-                        }
-                        is ResultWrapper.Error -> {
-                            _error.value = response.error.msg
-                        }
+                when (val response = searchTripsUseCase(searchFilters)) {
+                    is ResultWrapper.Success -> {
+                        _resultTrips.value = response.data.toMutableList()
                     }
-                } catch (e: BaseApiException) {
-                    _error.value = e.msg
+                    is ResultWrapper.Error -> {
+                        _error.value = response.error.msg
+                    }
                 }
                 filterFlag = false
             }

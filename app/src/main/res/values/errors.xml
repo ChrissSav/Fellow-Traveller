@@ -7,6 +7,7 @@
     <!--Unauthorized API access-->
     <string name="ERROR_API_UNAUTHORIZED">Μη εξουσιοδοτημένη ενέργεια.</string>
     <!--User registration-->
+    <string name="ERROR_SOMETHING_WRONG">Κάτι πήγε στραβά.</string>
 
     <string name="ERROR_FIELDS_REQUIRE">Υπάρχουν κενά πεδία.</string>
 
@@ -30,7 +31,7 @@
     <string name="INVALID_PHONE_FORMAT">Μη έγκυρος αριθμός τηλεφώνου.</string>
     <string name="CONFIRM_DELETION">Είσαι σίγουρος για την διαγραφή;</string>
     <string name="ERROR_INVALID_PLATE_FORMAT">Πρέπει να είναι της μορφής ΧΥΖ-1234 με ελληνικούς χαρακτήρες.</string>
-    <string name="ERROR_PLATE__ALREADY_EXISTS">Υπάρχει ήδη αυτοκίνητο με αυτό την πινακίδα.</string>
+    <string name="ERROR_PLATE_ALREADY_EXISTS">Υπάρχει ήδη αυτοκίνητο με αυτό την πινακίδα.</string>
     <!--api status codes-->
 
     <string name="ERROR_REQUIRED_FIELD">Υποχρεωτικό πεδίο.</string>

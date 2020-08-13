@@ -49,6 +49,7 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.error.observe(this, Observer {
             createSnackBar(binding.root, it)
         })
+
         setupBottomNavMenu(navController)
 
         navController.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { _, destination, _ ->

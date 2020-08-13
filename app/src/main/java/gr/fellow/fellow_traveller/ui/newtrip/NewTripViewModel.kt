@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.ui.newtrip
 
+import android.content.Context
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,8 +16,9 @@ import kotlinx.coroutines.launch
 class NewTripViewModel
 @ViewModelInject
 constructor(
+    private val context: Context,
     private val getUserCarsLocalUseCase: GetUserCarsLocalUseCase
-) : BaseViewModel() {
+) : BaseViewModel(context) {
 
     private val _destinations = MutableLiveData<MutableList<PredictionResponse>>()
     val destinations: LiveData<MutableList<PredictionResponse>> = _destinations
