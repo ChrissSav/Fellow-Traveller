@@ -60,9 +60,9 @@ interface FellowDataSource {
      * local DB
      */
 
-    suspend fun loadUsersInfo(): RegisteredUserEntity
+    suspend fun loadUsersInfoLocal(): RegisteredUserEntity
 
-    suspend fun logoutUser()
+    suspend fun logoutUserLocal()
 
     suspend fun getAllCarsLocal(): MutableList<CarEntity>
 

@@ -24,7 +24,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.Proxy
 import java.util.concurrent.TimeUnit
-import javax.inject.Qualifier
 import javax.inject.Singleton
 
 
@@ -65,8 +64,7 @@ object NetworkModule {
                 override fun intercept(chain: Interceptor.Chain): Response {
                     val request = chain.request()
                     val newRequest = request.newBuilder()
-                    var session: String? = null
-                    session = sharedPreferences.getString(PREFS_AUTH_TOKEN, "")
+                    var session: String? = sharedPreferences.getString(PREFS_AUTH_TOKEN, "")
                     session = sharedPreferences.getString(PREFS_AUTH_TOKEN, "")
                     session?.let {
                         newRequest.header("Cookie", it)
@@ -141,12 +139,4 @@ object NetworkModule {
     }
 
 }
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class Fellow
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class GoogleService
 

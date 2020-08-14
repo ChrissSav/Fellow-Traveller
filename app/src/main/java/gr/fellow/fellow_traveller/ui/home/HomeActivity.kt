@@ -44,7 +44,7 @@ class HomeActivity : AppCompatActivity() {
 
         homeViewModel.loadUserInfo()
         homeViewModel.loadCars()
-        //  homeViewModel.loadTripAsCreator()
+        homeViewModel.loadTripAsCreator()
 
         homeViewModel.error.observe(this, Observer {
             createSnackBar(binding.root, it)

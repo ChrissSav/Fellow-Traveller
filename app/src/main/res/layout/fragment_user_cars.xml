@@ -18,11 +18,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp"
             android:src="@drawable/ic_back_button"
+            app:layout_constraintBottom_toBottomOf="@+id/manage_cars_settings_tv"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="@+id/manage_cars_settings_tv" />
 
 
         <TextView
@@ -30,24 +29,24 @@
             style="@style/display"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_from_top"
             android:text="Διαχείριση αυτοκινήτων"
-            app:layout_constraintBottom_toBottomOf="@+id/back_buttons"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.33"
             app:layout_constraintStart_toEndOf="@+id/back_buttons"
-            app:layout_constraintTop_toTopOf="@+id/back_buttons" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/my_cars_recycler"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="4dp"
             android:layout_marginBottom="24dp"
+            android:layoutAnimation="@anim/layout_animation"
             app:layout_constraintBottom_toTopOf="@+id/new_car_button"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layoutAnimation="@anim/layout_animation"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/manage_cars_settings_tv"/>
+            app:layout_constraintTop_toBottomOf="@+id/back_buttons" />
 
         <Button
             android:id="@+id/new_car_button"

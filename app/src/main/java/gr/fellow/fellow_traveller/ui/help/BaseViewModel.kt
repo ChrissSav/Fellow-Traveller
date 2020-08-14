@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.BaseApiException
+import gr.fellow.fellow_traveller.utils.ACCESS_DENIED
 import gr.fellow.fellow_traveller.utils.INTERNET_ERROR
-import gr.fellow.fellow_traveller.utils.SOMETHING_WORNG
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -27,16 +27,23 @@ open class BaseViewModel(private val context: Context) : ViewModel() {
             try {
                 function.invoke()
             } catch (e: BaseApiException) {
-                when (e.code) {
-                    SOMETHING_WORNG -> {
-                        _error.value = context.resources.getString(R.string.ERROR_API_UNREACHABLE)
-                    }
-                    INTERNET_ERROR -> {
-                        _error.value = context.resources.getString(R.string.ERROR_INTERNET_CONNECTION)
-                    }
-                }
+                handleError(e)
             }
             _load.value = false
+        }
+    }
+
+    private fun handleError(e: BaseApiException) {
+        when (e.code) {
+            ACCESS_DENIED -> {
+                _error.value = context.resources.getString(R.string.ERROR_API_UNAUTHORIZED)
+            }
+            INTERNET_ERROR -> {
+                _error.value = context.resources.getString(R.string.ERROR_INTERNET_CONNECTION)
+            }
+            else -> {
+                _error.value = context.resources.getString(R.string.ERROR_API_UNREACHABLE)
+            }
         }
     }
 
@@ -46,14 +53,7 @@ open class BaseViewModel(private val context: Context) : ViewModel() {
             try {
                 function.invoke()
             } catch (e: BaseApiException) {
-                when (e.code) {
-                    SOMETHING_WORNG -> {
-                        _error.value = context.resources.getString(R.string.ERROR_API_UNREACHABLE)
-                    }
-                    INTERNET_ERROR -> {
-                        _error.value = context.resources.getString(R.string.ERROR_INTERNET_CONNECTION)
-                    }
-                }
+                handleError(e)
             }
         }
     }
@@ -64,14 +64,7 @@ open class BaseViewModel(private val context: Context) : ViewModel() {
             try {
                 function.invoke()
             } catch (e: BaseApiException) {
-                when (e.code) {
-                    SOMETHING_WORNG -> {
-                        _error.value = context.resources.getString(R.string.ERROR_API_UNREACHABLE)
-                    }
-                    INTERNET_ERROR -> {
-                        _error.value = context.resources.getString(R.string.ERROR_INTERNET_CONNECTION)
-                    }
-                }
+                handleError(e)
             }
         }
     }

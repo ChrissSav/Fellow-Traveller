@@ -73,10 +73,10 @@ class FellowDataSourceImpl(
      */
 
 
-    override suspend fun loadUsersInfo(): RegisteredUserEntity =
+    override suspend fun loadUsersInfoLocal(): RegisteredUserEntity =
         repositoryLocal.loadUserAuth()
 
-    override suspend fun logoutUser() =
+    override suspend fun logoutUserLocal() =
         repositoryLocal.logoutUser()
 
     override suspend fun getAllCarsLocal(): MutableList<CarEntity> =

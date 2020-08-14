@@ -8,7 +8,7 @@ class LoadUserInfoUseCase(
 ) {
 
     suspend operator fun invoke(): RegisteredUserEntity {
-        return dataSource.loadUsersInfo()
+        return dataSource.loadUsersInfoLocal()
     }
 
 }

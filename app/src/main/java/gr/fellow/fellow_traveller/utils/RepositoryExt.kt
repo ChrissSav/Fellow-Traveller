@@ -12,6 +12,8 @@ fun <T : Any> Response<T>.handleToCorrectFormat(): ResultWrapper<T> {
     return if (isSuccessful && body != null) {
         ResultWrapper.Success(body)
     } else {
+        if (code() == 401)
+            throw BaseApiException(ACCESS_DENIED)
         ResultWrapper.Error(getModelFromResponseErrorBody(errorBody()))
     }
 }
@@ -65,12 +67,9 @@ suspend fun <T : Any> performCall(
     } else {
         try {
             call.invoke()
+        } catch (exception: BaseApiException) {
+            throw exception
         } catch (exception: Exception) {
-            print(
-                "=============================================================================\n"
-                        + exception.message
-                        + "\n============================================================================="
-            )
             throw BaseApiException(SOMETHING_WORNG)
         }
     }
