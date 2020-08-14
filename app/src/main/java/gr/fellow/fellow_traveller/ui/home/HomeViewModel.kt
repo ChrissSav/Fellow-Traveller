@@ -88,7 +88,6 @@ constructor(
                     }
                     is ResultWrapper.Error -> {
                         _error.value = response.error.msg
-
                     }
                 }
             } catch (exception: BaseApiException) {

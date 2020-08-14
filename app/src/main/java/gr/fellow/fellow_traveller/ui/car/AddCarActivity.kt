@@ -1,41 +1,34 @@
-package gr.fellow.fellow_traveller.ui.home.settings
+package gr.fellow.fellow_traveller.ui.car
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.activityViewModels
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.databinding.FragmentAddCarBinding
-import gr.fellow.fellow_traveller.ui.home.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import gr.fellow.fellow_traveller.databinding.ActivityAddCarBinding
+import gr.fellow.fellow_traveller.ui.createSnackBar
 import gr.fellow.fellow_traveller.utils.isValidPlate
 
+@AndroidEntryPoint
+class AddCarActivity : AppCompatActivity() {
 
-class AddCarFragment : Fragment() {
-
-    private val homeViewModel: HomeViewModel by activityViewModels()
-
-    private var _binding: FragmentAddCarBinding? = null
-    private val binding get() = _binding!!
+    private val addCarViewModel: AddCarViewModel by viewModels()
+    private lateinit var binding: ActivityAddCarBinding
     private var textErrors = mutableListOf<TextView>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentAddCarBinding.inflate(inflater, container, false)
 
-        return binding.root
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        binding = ActivityAddCarBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
 
         textErrors.add(binding.textViewBrandError)
         textErrors.add(binding.textViewModelError)
@@ -44,7 +37,7 @@ class AddCarFragment : Fragment() {
         textErrors.add(binding.textViewPlateError)
 
         binding.closeButtonAddCarSettings.setOnClickListener {
-            activity?.onBackPressed()
+            finish()
         }
 
 
@@ -124,31 +117,36 @@ class AddCarFragment : Fragment() {
             val color = binding.EditTextColor.text.toString()
 
             if (checkErrors()) {
-                homeViewModel.addCar(brand, model, plate, color)
+                addCarViewModel.addCar(brand, model, plate, color)
             }
 
         }
 
+        addCarViewModel.error.observe(this, Observer {
+            createSnackBar(it)
+        })
 
-        homeViewModel.addCarResult.observe(viewLifecycleOwner, Observer {
-            activity?.onBackPressed()
+
+        addCarViewModel.saved.observe(this, Observer {
+            val brand = binding.EditTextBrand.text.toString()
+            val model = binding.EditTextModel.text.toString()
+            val plate = binding.EditTextPlate.text.toString()
+            val color = binding.EditTextColor.text.toString()
+
+            val intent = Intent()
+            intent.putExtra("brand", brand)
+            intent.putExtra("model", model)
+            intent.putExtra("plate", plate)
+            intent.putExtra("color", color)
+            setResult(RESULT_OK, intent)
+            finish()
         })
     }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 
     private fun checkErrors(): Boolean {
         for (error in textErrors)
             if (error.visibility == View.VISIBLE)
                 return false
         return true
-
-
     }
-
 }

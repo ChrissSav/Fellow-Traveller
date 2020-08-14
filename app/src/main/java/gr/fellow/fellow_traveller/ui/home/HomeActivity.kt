@@ -62,6 +62,11 @@ class HomeActivity : AppCompatActivity() {
         })
     }
 
+    override fun onRestart() {
+        homeViewModel.loadCars()
+        super.onRestart()
+    }
+
 
     private fun convertDpToPixel(dp: Int): Int {
         return (dp * (resources

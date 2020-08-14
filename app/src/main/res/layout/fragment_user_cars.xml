@@ -18,6 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
+            app:autoSizeTextType="uniform"
             android:src="@drawable/ic_back_button"
             app:layout_constraintBottom_toBottomOf="@+id/manage_cars_settings_tv"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -26,13 +27,15 @@
 
         <TextView
             android:id="@+id/manage_cars_settings_tv"
-            style="@style/display"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/display_test"
+            android:layout_width="260dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="@dimen/margin_from_top"
+            android:layout_marginEnd="15dp"
             android:text="Διαχείριση αυτοκινήτων"
+            app:autoSizeTextType="uniform"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.33"
             app:layout_constraintStart_toEndOf="@+id/back_buttons"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,10 +43,9 @@
             android:id="@+id/my_cars_recycler"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginTop="8dp"
             android:layoutAnimation="@anim/layout_animation"
-            app:layout_constraintBottom_toTopOf="@+id/new_car_button"
+            app:layout_constraintBottom_toTopOf="@+id/guideline8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/back_buttons" />
@@ -53,8 +55,9 @@
             style="@style/button_blue_outline"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="55dp"
+            android:layout_marginBottom="16dp"
             android:paddingLeft="28dp"
             android:paddingTop="10dp"
             android:paddingRight="28dp"
@@ -63,8 +66,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/back_buttons"
+            app:layout_constraintTop_toTopOf="@+id/guideline8"
+            app:layout_constraintVertical_bias="0.8" />
 
-            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.85" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

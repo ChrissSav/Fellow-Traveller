@@ -1,6 +1,8 @@
 package gr.fellow.fellow_traveller.ui.newtrip.fragments
 
+import android.app.Activity
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentBaseInfoBinding
 import gr.fellow.fellow_traveller.room.entites.CarEntity
+import gr.fellow.fellow_traveller.ui.car.AddCarActivity
 import gr.fellow.fellow_traveller.ui.createSnackBar
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 
@@ -51,6 +54,8 @@ class BaseInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         navController = Navigation.findNavController(view)
+        newTripViewModel.loadUserCars()
+
 
         with(newTripViewModel) {
             car.observe(viewLifecycleOwner, Observer {
@@ -121,12 +126,11 @@ class BaseInfoFragment : Fragment() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.choose_car)
         dialog.setCancelable(true)
-        val button = dialog.findViewById<Button>(R.id.choose_car_button_add_car)
+        val button = dialog.findViewById<Button>(R.id.add_car_button)
         dialog.show()
         button.setOnClickListener {
-            /*dialog.dismiss()
-            val intent = Intent(activity, AddCarSettingsActivity::class.java)
-            startActivityForResult(intent, 1)*/
+            val intent = Intent(activity, AddCarActivity::class.java)
+            startActivityForResult(intent, 1)
         }
 
         buildRecyclerViewForCar(dialog)
@@ -155,6 +159,16 @@ class BaseInfoFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                newTripViewModel.loadUserCars()
+            }
+        }
     }
 
     private fun increaseSeats(textView: TextView) {

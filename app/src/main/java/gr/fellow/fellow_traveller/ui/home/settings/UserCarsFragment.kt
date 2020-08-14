@@ -1,7 +1,9 @@
 package gr.fellow.fellow_traveller.ui.home.settings
 
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +13,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentUserCarsBinding
 import gr.fellow.fellow_traveller.room.entites.CarEntity
+import gr.fellow.fellow_traveller.ui.car.AddCarActivity
 import gr.fellow.fellow_traveller.ui.dialogs.DeleteConfirmationDialog
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.CarAdapter
@@ -50,17 +52,11 @@ class UserCarsFragment : Fragment() {
 
         initializeRecycle()
 
-        homeViewModel.cars.observe(viewLifecycleOwner, Observer {
-            carsList.clear()
-            carsList.addAll(it)
-            binding.myCarsRecycler.adapter?.notifyDataSetChanged()
-            binding.refresh.isRefreshing = false
-        })
+
 
         binding.refresh.setOnRefreshListener {
             homeViewModel.loadCars()
         }
-
 
         homeViewModel.carDeletedId.observe(viewLifecycleOwner, Observer {
             val itemPosition = carsList.indexOf(it)
@@ -69,8 +65,18 @@ class UserCarsFragment : Fragment() {
         })
 
         binding.newCarButton.setOnClickListener {
-            navController.navigate(R.id.action_userCarsFragment_to_addCarFragment)
+            val intent = Intent(activity, AddCarActivity::class.java)
+            startActivityForResult(intent, 1)
         }
+
+        Handler().postDelayed({
+            homeViewModel.cars.observe(viewLifecycleOwner, Observer {
+                carsList.clear()
+                carsList.addAll(it)
+                binding.myCarsRecycler.adapter?.notifyDataSetChanged()
+                binding.refresh.isRefreshing = false
+            })
+        }, 250)
     }
 
     override fun onDestroyView() {
@@ -82,9 +88,9 @@ class UserCarsFragment : Fragment() {
         mAdapter = CarAdapter(carsList) { car ->
             activity?.let {
                 deleteDialog = DeleteConfirmationDialog(requireActivity(), car.plate) {
-                        deleteDialog.dismiss()
-                        if (it)
-                            homeViewModel.deleteCar(car)
+                    deleteDialog.dismiss()
+                    if (it)
+                        homeViewModel.deleteCar(car)
                 }
                 fragmentManager?.let { it1 -> deleteDialog.show(it1, "dateDialog") }
             }
@@ -94,7 +100,7 @@ class UserCarsFragment : Fragment() {
             myCarsRecycler.layoutManager = GridLayoutManager(context, 2);
             myCarsRecycler.adapter = mAdapter
         }
-
-
     }
+
+
 }

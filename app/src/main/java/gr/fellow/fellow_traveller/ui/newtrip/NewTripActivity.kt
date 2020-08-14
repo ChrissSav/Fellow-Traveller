@@ -79,7 +79,6 @@ class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogLi
         newTripViewModel.setBags(0)
         newTripViewModel.setPet(false)
         newTripViewModel.setSeats(1)
-        newTripViewModel.loadUserCars()
 
         newTripViewModel.error.observe(this, Observer {
             createSnackBar(view, it)
@@ -94,13 +93,13 @@ class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogLi
     }
 
 
-    override fun onBackPressed() {
+    /*override fun onBackPressed() {
         if (nav.currentDestination?.id == R.id.destinationsFragment) {
             openDialog()
         } else {
             super.onBackPressed()
         }
-    }
+    }*/
 
     private fun openDialog() {
         exitCustomDialog = ExitCustomDialog(this)

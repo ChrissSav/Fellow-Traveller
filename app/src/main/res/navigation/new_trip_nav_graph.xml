@@ -56,9 +56,6 @@
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
-        <action
-            android:id="@+id/action_baseInfoFragment_to_addCarFragment2"
-            app:destination="@id/addCarFragment2" />
     </fragment>
     <fragment
         android:id="@+id/priceFragment"
@@ -149,9 +146,6 @@
         android:name="gr.fellow.fellow_traveller.ui.newtrip.fragments.SuccessTripFragment"
         android:label="fragment_success_trip"
         tools:layout="@layout/fragment_success_trip" />
-    <fragment
-        android:id="@+id/addCarFragment2"
-        android:name="gr.fellow.fellow_traveller.ui.home.settings.AddCarFragment"
-        android:label="fragment_add_car"
-        tools:layout="@layout/fragment_add_car" />
+
+
 </navigation>
