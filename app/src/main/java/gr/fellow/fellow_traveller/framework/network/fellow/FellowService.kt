@@ -69,8 +69,8 @@ interface FellowService {
         @Query("seats_max") seatsMax: Int?,
         @Query("bags_min") bagsMin: Int?,
         @Query("bags_max") bagsMax: Int?,
-        @Query("price_min") priceMin: Float?,
-        @Query("price_max") priceMax: Float?,
+        @Query("price_min") priceMin: Int?,
+        @Query("price_max") priceMax: Int?,
         @Query("pet") pet: Boolean?
     ): Response<MutableList<TripResponse>>
 }

@@ -7,7 +7,7 @@
     <!--Unauthorized API access-->
     <string name="ERROR_API_UNAUTHORIZED">Μη εξουσιοδοτημένη ενέργεια.</string>
     <!--User registration-->
-    <string name="ERROR_SOMETHING_WRONG">Κάτι πήγε στραβά.</string>
+    <string name="ERROR_SOMETHING_WRONG">Κάτι πήγε στραβά. *_*</string>
 
     <string name="ERROR_FIELDS_REQUIRE">Υπάρχουν κενά πεδία.</string>
 

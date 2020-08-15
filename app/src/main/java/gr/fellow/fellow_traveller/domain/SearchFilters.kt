@@ -13,7 +13,21 @@ data class SearchFilters(
     var seatsMax: Int? = null,
     var bagsMin: Int? = null,
     var bagsMax: Int? = null,
-    var priceMin: Float? = null,
-    var priceMax: Float? = null,
+    var priceMin: Int? = null,
+    var priceMax: Int? = null,
     var pet: Boolean? = null
-)
+) {
+    fun reset() {
+        rangeFrom = null
+        rangeTo = null
+        timestampMin = null
+        timestampMax = null
+        seatsMin = null
+        seatsMax = null
+        bagsMin = null
+        bagsMax = null
+        priceMin = null
+        priceMax = null
+        pet = null
+    }
+}

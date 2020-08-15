@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.domain.SearchFilters
 import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
@@ -57,20 +58,22 @@ constructor(
                 )
             filterFlag = true
         }
-
-
     }
 
+    fun updateFilter(filter: SearchFilters) {
+        _searchFilter.value = filter
+        filterFlag = true
+    }
 
     fun getTrips() {
-        launch(450) {
+        launch(300, true) {
             _searchFilter.value?.let { searchFilters ->
                 when (val response = searchTripsUseCase(searchFilters)) {
                     is ResultWrapper.Success -> {
                         _resultTrips.value = response.data.toMutableList()
                     }
                     is ResultWrapper.Error -> {
-                        _error.value = response.error.msg
+                        _error.value = context.resources.getString(R.string.ERROR_SOMETHING_WRONG)
                     }
                 }
                 filterFlag = false

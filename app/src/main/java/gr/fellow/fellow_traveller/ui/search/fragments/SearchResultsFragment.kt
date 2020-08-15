@@ -51,6 +51,7 @@ class SearchResultsFragment : Fragment() {
         }
 
 
+
         binding.recyclerView.adapter = SearchResultsAdapter(tripsList) {
             navController.navigate(
                 R.id.action_searchResultsFragment_to_searchTripDetailsFragment,
@@ -58,7 +59,45 @@ class SearchResultsFragment : Fragment() {
             )
         }
 
+
+
         with(searchTripViewModel) {
+
+
+            resultTrips.observe(viewLifecycleOwner, Observer {
+                tripsList.clear()
+                binding.recyclerView.adapter?.notifyDataSetChanged()
+                if (it.isNotEmpty()) {
+                    tripsList.addAll(it)
+                    binding.recyclerView.adapter?.notifyDataSetChanged()
+                    binding.recyclerView.visibility = View.VISIBLE
+                    binding.notFoundImage.visibility = View.GONE
+                } else {
+                    binding.recyclerView.visibility = View.GONE
+                    binding.notFoundImage.visibility = View.VISIBLE
+                }
+            })
+
+
+            loadTest.observe(viewLifecycleOwner, Observer {
+                if (it) {
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.GONE
+                    binding.notFoundImage.visibility = View.GONE
+                } else
+                    binding.progressBar.visibility = View.GONE
+            })
+
+
+
+
+
+            searchFilter.observe(viewLifecycleOwner, Observer {
+                if (filterFlag)
+                    searchTripViewModel.getTrips()
+            })
+
+
             destinationTo.observe(viewLifecycleOwner, Observer {
                 binding.toButton.text = it.title
             })
@@ -68,25 +107,6 @@ class SearchResultsFragment : Fragment() {
                 binding.fromButton.text = it.title
             })
 
-            if (filterFlag)
-                searchFilter.observe(viewLifecycleOwner, Observer {
-                    searchTripViewModel.getTrips()
-                })
-
-            resultTrips.observe(viewLifecycleOwner, Observer {
-                binding.progressBar.visibility = View.GONE
-
-                tripsList.clear()
-                binding.recyclerView.adapter?.notifyDataSetChanged()
-                if (it.isNotEmpty()) {
-                    tripsList.addAll(it)
-                    binding.recyclerView.adapter?.notifyDataSetChanged()
-                    binding.recyclerView.visibility = View.VISIBLE
-                } else {
-                    binding.recyclerView.visibility = View.GONE
-                    binding.notFoundImage.visibility = View.VISIBLE
-                }
-            })
 
         }
 
