@@ -3,4 +3,8 @@
     <integer name="Time_difference">900</integer>
     <dimen name="space_between_lines">6dp</dimen>
 
+    <integer name="seats_max">10</integer>
+    <integer name="bags_max">10</integer>
+    <integer name="price_max">100</integer>
+    <integer name="min_value_in_filters">0</integer>
 </resources>

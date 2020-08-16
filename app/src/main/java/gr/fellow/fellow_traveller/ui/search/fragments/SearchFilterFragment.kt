@@ -42,11 +42,18 @@ class SearchFilterFragment : Fragment() {
             searchFilters = it.copy()
         }
 
+        //resources.getInteger(R.integer.bags_max)
         with(searchFilters) {
-            binding.fromRangeKmSeekbar.setMinStartValue((rangeFrom ?: 0).toFloat()).apply()
-            binding.toRangeKmSeekbar.setMinStartValue((rangeTo ?: 0).toFloat()).apply()
-            binding.priceRangeSeekbar.setMinStartValue((priceMin ?: 0).toFloat()).apply()
-            binding.priceRangeSeekbar.setMaxStartValue((priceMax ?: 100).toFloat()).apply()
+            binding.seatsCrystalSeekBar.setMinStartValue((seatsMin ?: resources.getInteger(R.integer.min_value_in_filters)).toFloat()).apply()
+            binding.seatsCrystalSeekBar.setMaxStartValue((seatsMax ?: resources.getInteger(R.integer.seats_max)).toFloat()).apply()
+
+            binding.bagsCrystalSeekBar.setMinStartValue((bagsMin ?: resources.getInteger(R.integer.min_value_in_filters)).toFloat()).apply()
+            binding.bagsCrystalSeekBar.setMaxStartValue((bagsMax ?: resources.getInteger(R.integer.bags_max)).toFloat()).apply()
+
+            binding.fromRangeKmSeekbar.setMinStartValue((rangeFrom ?: resources.getInteger(R.integer.min_value_in_filters)).toFloat()).apply()
+            binding.toRangeKmSeekbar.setMinStartValue((rangeTo ?: resources.getInteger(R.integer.min_value_in_filters)).toFloat()).apply()
+            binding.priceRangeSeekbar.setMinStartValue((priceMin ?: resources.getInteger(R.integer.min_value_in_filters)).toFloat()).apply()
+            binding.priceRangeSeekbar.setMaxStartValue((priceMax ?: resources.getInteger(R.integer.price_max)).toFloat()).apply()
 
         }
 
@@ -93,7 +100,7 @@ class SearchFilterFragment : Fragment() {
 
 
         binding.priceRangeSeekbar.setOnRangeSeekbarChangeListener(OnRangeSeekbarChangeListener { minValue, maxValue ->
-            if (minValue.toInt() == 0 && maxValue.toInt() == 100) {
+            if (minValue.toInt() == resources.getInteger(R.integer.min_value_in_filters) && maxValue.toInt() == resources.getInteger(R.integer.price_max)) {
                 binding.priceRangeRadiusTv.text = getString(R.string.range_view_all)
                 searchFilters.priceMax = null
                 searchFilters.priceMin = null
@@ -107,6 +114,44 @@ class SearchFilterFragment : Fragment() {
                     searchFilters.priceMax = maxValue.toInt()
                 else
                     searchFilters.priceMax = null
+
+            }
+        })
+
+        binding.seatsCrystalSeekBar.setOnRangeSeekbarChangeListener(OnRangeSeekbarChangeListener { minValue, maxValue ->
+            if (minValue.toInt() == resources.getInteger(R.integer.min_value_in_filters) && maxValue.toInt() == resources.getInteger(R.integer.seats_max)) {
+                binding.seatsDescriptionTv.text = getString(R.string.range_view_all)
+                searchFilters.seatsMin = null
+                searchFilters.seatsMax = null
+            } else {
+                binding.seatsDescriptionTv.text = getString(R.string.range_text_in_filters, minValue.toString(), maxValue.toString())
+                if (minValue.toInt() != 0)
+                    searchFilters.seatsMin = minValue.toInt()
+                else
+                    searchFilters.seatsMin = null
+                if (maxValue.toInt() != 0)
+                    searchFilters.seatsMax = maxValue.toInt()
+                else
+                    searchFilters.seatsMax = null
+
+            }
+        })
+
+        binding.bagsCrystalSeekBar.setOnRangeSeekbarChangeListener(OnRangeSeekbarChangeListener { minValue, maxValue ->
+            if (minValue.toInt() == resources.getInteger(R.integer.min_value_in_filters) && maxValue.toInt() == resources.getInteger(R.integer.bags_max)) {
+                binding.bagsDescriptionTv.text = getString(R.string.range_view_all)
+                searchFilters.bagsMin = null
+                searchFilters.bagsMax = null
+            } else {
+                binding.bagsDescriptionTv.text = getString(R.string.range_text_in_filters, minValue.toString(), maxValue.toString())
+                if (minValue.toInt() != 0)
+                    searchFilters.bagsMin = minValue.toInt()
+                else
+                    searchFilters.bagsMin = null
+                if (maxValue.toInt() != 0)
+                    searchFilters.bagsMax = maxValue.toInt()
+                else
+                    searchFilters.bagsMax = null
 
             }
         })
