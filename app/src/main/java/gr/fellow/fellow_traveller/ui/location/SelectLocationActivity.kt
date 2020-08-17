@@ -55,7 +55,8 @@ class SelectLocationActivity : AppCompatActivity() {
         binding.SelectLocationActivityEditTextSearchPlace.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
                 //Log.i("addTextChangedListener", "afterTextChanged "+s);
-                selectLocationViewModel.getAllDestinations(s.toString())
+                if (s.toString().length > 2)
+                    selectLocationViewModel.getAllDestinations(s.toString())
                 //  GetPlaces(s.toString())
             }
 

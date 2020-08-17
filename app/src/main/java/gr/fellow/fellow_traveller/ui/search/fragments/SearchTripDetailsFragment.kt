@@ -56,7 +56,7 @@ class SearchTripDetailsFragment : Fragment() {
                 binding.toDestTv.text = destTo.title
                 binding.dateTv.text = getDate()
                 binding.timeTv.text = getTime()
-                binding.seatsTv.text = bagsState()
+                binding.bagsTv.text = bagsState()
                 binding.seatsTv.text = seatsState()
                 binding.petsTv.text = if (hasPet) resources.getString(R.string.allowed) else resources.getString(R.string.not_allowed)
                 binding.carTv.text = car.brand

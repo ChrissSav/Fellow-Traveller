@@ -53,6 +53,6 @@ data class TripResponse(
     }
 
     fun bagsState(): String {
-        return "$currentBags/$currentBags"
+        return "$currentBags/$maxBags"
     }
 }

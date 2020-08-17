@@ -8,12 +8,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.databinding.ActivitySplashBinding
+import gr.fellow.fellow_traveller.di.Fellow
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.main.MainActivity
+import okhttp3.OkHttpClient
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
+
+    @Fellow
+    @Inject
+    lateinit var okHttpClient: OkHttpClient.Builder
 
     private val splashViewModel: SplashViewModel by viewModels()
     private lateinit var binding: ActivitySplashBinding

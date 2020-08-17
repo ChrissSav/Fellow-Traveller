@@ -42,18 +42,26 @@ class SearchFilterFragment : Fragment() {
             searchFilters = it.copy()
         }
 
-        //resources.getInteger(R.integer.bags_max)
+        seatsHandle()
+        bagsHandle()
+
         with(searchFilters) {
-            binding.seatsCrystalSeekBar.setMinStartValue((seatsMin ?: resources.getInteger(R.integer.min_value_in_filters)).toFloat()).apply()
-            binding.seatsCrystalSeekBar.setMaxStartValue((seatsMax ?: resources.getInteger(R.integer.seats_max)).toFloat()).apply()
 
-            binding.bagsCrystalSeekBar.setMinStartValue((bagsMin ?: resources.getInteger(R.integer.min_value_in_filters)).toFloat()).apply()
-            binding.bagsCrystalSeekBar.setMaxStartValue((bagsMax ?: resources.getInteger(R.integer.bags_max)).toFloat()).apply()
-
+            binding.seatsValueTv.text = (seatsMin ?: resources.getInteger(R.integer.seats_min)).toString()
+            binding.bagsValueTv.text = (bagsMin ?: resources.getInteger(R.integer.bags_min)).toString()
             binding.fromRangeKmSeekbar.setMinStartValue((rangeFrom ?: resources.getInteger(R.integer.min_value_in_filters)).toFloat()).apply()
             binding.toRangeKmSeekbar.setMinStartValue((rangeTo ?: resources.getInteger(R.integer.min_value_in_filters)).toFloat()).apply()
-            binding.priceRangeSeekbar.setMinStartValue((priceMin ?: resources.getInteger(R.integer.min_value_in_filters)).toFloat()).apply()
             binding.priceRangeSeekbar.setMaxStartValue((priceMax ?: resources.getInteger(R.integer.price_max)).toFloat()).apply()
+
+            binding.priceRangeSeekbar.setMinStartValue(
+                if (priceMin != null)
+                    if (priceMin == resources.getInteger(R.integer.price_max))
+                        "99.9".toFloat()
+                    else
+                        priceMin!!.toFloat()
+                else
+                    resources.getInteger(R.integer.min_value_in_filters).toFloat()
+            ).apply()
 
         }
 
@@ -62,10 +70,11 @@ class SearchFilterFragment : Fragment() {
 
             resetButton.setOnClickListener {
                 searchFilters.reset()
-                fromRangeKmSeekbar.setMinStartValue(0f).apply()
-                toRangeKmSeekbar.setMinStartValue(0f).apply()
-                priceRangeSeekbar.setMinStartValue(0f).apply()
-                priceRangeSeekbar.setMaxStartValue(100f).apply()
+                searchTripViewModel.searchFilter.value?.let { filter ->
+                    if (filter != (searchFilters))
+                        searchTripViewModel.updateFilter(searchFilters)
+                }
+                activity?.onBackPressed()
             }
 
             applyButton.setOnClickListener {
@@ -118,44 +127,49 @@ class SearchFilterFragment : Fragment() {
             }
         })
 
-        binding.seatsCrystalSeekBar.setOnRangeSeekbarChangeListener(OnRangeSeekbarChangeListener { minValue, maxValue ->
-            if (minValue.toInt() == resources.getInteger(R.integer.min_value_in_filters) && maxValue.toInt() == resources.getInteger(R.integer.seats_max)) {
-                binding.seatsDescriptionTv.text = getString(R.string.range_view_all)
-                searchFilters.seatsMin = null
-                searchFilters.seatsMax = null
-            } else {
-                binding.seatsDescriptionTv.text = getString(R.string.range_text_in_filters, minValue.toString(), maxValue.toString())
-                if (minValue.toInt() != 0)
-                    searchFilters.seatsMin = minValue.toInt()
-                else
+
+    }
+
+    private fun seatsHandle() {
+
+        with(binding) {
+
+            minusButtonSeats.setOnClickListener {
+                if (seatsValueTv.text.toString().toInt() > resources.getInteger(R.integer.seats_min)) {
+                    searchFilters.seatsMin = seatsValueTv.text.toString().toInt() - 1
+                    seatsValueTv.text = searchFilters.seatsMin.toString()
+                } else {
                     searchFilters.seatsMin = null
-                if (maxValue.toInt() != 0)
-                    searchFilters.seatsMax = maxValue.toInt()
-                else
-                    searchFilters.seatsMax = null
-
+                }
             }
-        })
 
-        binding.bagsCrystalSeekBar.setOnRangeSeekbarChangeListener(OnRangeSeekbarChangeListener { minValue, maxValue ->
-            if (minValue.toInt() == resources.getInteger(R.integer.min_value_in_filters) && maxValue.toInt() == resources.getInteger(R.integer.bags_max)) {
-                binding.bagsDescriptionTv.text = getString(R.string.range_view_all)
-                searchFilters.bagsMin = null
-                searchFilters.bagsMax = null
-            } else {
-                binding.bagsDescriptionTv.text = getString(R.string.range_text_in_filters, minValue.toString(), maxValue.toString())
-                if (minValue.toInt() != 0)
-                    searchFilters.bagsMin = minValue.toInt()
-                else
+            plusButtonSeats.setOnClickListener {
+                searchFilters.seatsMin = seatsValueTv.text.toString().toInt() + 1
+                seatsValueTv.text = searchFilters.seatsMin.toString()
+            }
+
+        }
+    }
+
+    private fun bagsHandle() {
+
+        with(binding) {
+
+            minusButtonBags.setOnClickListener {
+                if (bagsValueTv.text.toString().toInt() > resources.getInteger(R.integer.bags_min)) {
+                    searchFilters.bagsMin = bagsValueTv.text.toString().toInt() - 1
+                    bagsValueTv.text = searchFilters.bagsMin.toString()
+                } else {
                     searchFilters.bagsMin = null
-                if (maxValue.toInt() != 0)
-                    searchFilters.bagsMax = maxValue.toInt()
-                else
-                    searchFilters.bagsMax = null
-
+                }
             }
-        })
 
+            plusButtonBags.setOnClickListener {
+                searchFilters.bagsMin = bagsValueTv.text.toString().toInt() + 1
+                bagsValueTv.text = searchFilters.bagsMin.toString()
+            }
+
+        }
     }
 
 
