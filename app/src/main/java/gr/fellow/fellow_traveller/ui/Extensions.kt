@@ -3,8 +3,10 @@ package gr.fellow.fellow_traveller.ui
 import android.app.Activity
 import android.content.Context
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import gr.fellow.fellow_traveller.R
@@ -28,6 +30,17 @@ fun Activity.createSnackBar(msg: String) {
 
 }
 
+
+fun Activity.hideKeyboard() {
+    val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
+}
+
+
+fun Fragment.hideKeyboard() {
+    val imm = this.activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(this.view?.rootView?.windowToken, 0)
+}
 
 fun createToast(context: Context, msg: String) {
     Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
@@ -64,7 +77,6 @@ fun isInternetAvailable(): Boolean {
         false
     }
 }
-
 
 
 fun ImageView.loadImageFromUrl(url: String?) {

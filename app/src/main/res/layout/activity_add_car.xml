@@ -1,298 +1,328 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:isScrollContainer="true"
     tools:context=".ui.car.AddCarActivity">
 
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:isScrollContainer="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/add_car_settings_tv"
+                style="@style/display_test"
+                android:layout_width="296dp"
+                android:layout_height="33dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="@dimen/margin_from_top"
+                android:layout_marginEnd="24dp"
+                android:text="Προσθήκη αυτοκινήτου"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintEnd_toStartOf="@+id/close_button_add_car_settings"
+                app:layout_constraintStart_toStartOf="@+id/car_label_car_settings"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/close_button_add_car_settings"
+                style="@style/border_icon_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_close"
+                app:layout_constraintBottom_toBottomOf="@id/add_car_settings_tv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/add_car_settings_tv" />
+
+            <TextView
+                android:id="@+id/car_label_car_settings"
+                style="@style/label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="50dp"
+                android:text="Μάρκα"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/add_car_settings_tv" />
+
+            <EditText
+                android:id="@+id/EditText_brand"
+                style="@style/input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                android:drawableStart="@drawable/ic_car"
+                android:drawablePadding="15dp"
+                android:hint="Συμπληρώστε την μάρκα"
+                android:inputType="textCapWords"
+                android:maxLines="1"
+                android:textCursorDrawable="@null"
+                android:windowSoftInputMode="adjustPan"
+                app:layout_constraintEnd_toEndOf="@+id/close_button_add_car_settings"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/car_label_car_settings"
+                app:layout_constraintTop_toBottomOf="@+id/car_label_car_settings" />
+
+            <View
+                android:id="@+id/car_underline_car_settings"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/edit_text_color"
+                app:layout_constraintEnd_toEndOf="@+id/EditText_brand"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/EditText_brand"
+                app:layout_constraintTop_toBottomOf="@+id/EditText_brand" />
+
+
+            <TextView
+                android:id="@+id/textView_brand_error"
+                style="@style/error_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_section_car_error"
+                android:text="@string/ERROR_REQUIRED_FIELD"
+                app:layout_constraintEnd_toEndOf="@+id/car_underline_car_settings"
+                app:layout_constraintStart_toStartOf="@+id/car_underline_car_settings"
+                app:layout_constraintTop_toBottomOf="@+id/car_underline_car_settings" />
+
+
+            <TextView
+                android:id="@+id/model_label_car_settings"
+                style="@style/label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_section_car"
+                android:text="Μοντέλο"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="@id/car_label_car_settings"
+                app:layout_constraintTop_toBottomOf="@id/car_underline_car_settings" />
+
+            <View
+                android:id="@+id/model_underline_car_settings"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/edit_text_color"
+                app:layout_constraintEnd_toEndOf="@+id/car_underline_car_settings"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/car_underline_car_settings"
+                app:layout_constraintTop_toBottomOf="@+id/EditText_model" />
+
+            <EditText
+                android:id="@+id/EditText_model"
+                style="@style/input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                android:drawableStart="@drawable/ic_steer"
+                android:drawablePadding="15dp"
+                android:hint="Συμπληρώστε το μοντέλο "
+                android:inputType="textCapWords"
+                android:maxLines="1"
+                android:textCursorDrawable="@null"
+                android:windowSoftInputMode="adjustPan"
+                app:layout_constraintEnd_toEndOf="@+id/EditText_brand"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/EditText_brand"
+                app:layout_constraintTop_toBottomOf="@+id/model_label_car_settings" />
+
+
+            <TextView
+                android:id="@+id/textView_model_error"
+                style="@style/error_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_section_car_error"
+                android:text="@string/ERROR_REQUIRED_FIELD"
+                app:layout_constraintEnd_toEndOf="@+id/car_underline_car_settings"
+                app:layout_constraintStart_toStartOf="@+id/car_underline_car_settings"
+                app:layout_constraintTop_toBottomOf="@+id/model_underline_car_settings" />
+
+
+            <TextView
+                android:id="@+id/plate_label_car_settings"
+                style="@style/label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_section_car"
+                android:text="Αρ. Κυκλοφορίας"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="@id/car_label_car_settings"
+                app:layout_constraintTop_toBottomOf="@id/model_underline_car_settings" />
+
+
+            <View
+                android:id="@+id/plate_underline_car_settings"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/edit_text_color"
+                app:layout_constraintEnd_toEndOf="@+id/model_underline_car_settings"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/model_underline_car_settings"
+                app:layout_constraintTop_toBottomOf="@+id/EditText_plate" />
+
+            <EditText
+                android:id="@+id/EditText_plate"
+                style="@style/input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                android:drawableStart="@drawable/ic_license_plate"
+                android:drawablePadding="15dp"
+                android:hint="Συμπληρώστε τον αριθμό κυκλοφορίας"
+                android:inputType="textCapCharacters"
+                android:maxLength="8"
+                android:maxLines="1"
+                android:textAllCaps="true"
+                android:textCursorDrawable="@null"
+                android:windowSoftInputMode="adjustPan"
+                app:layout_constraintEnd_toEndOf="@+id/EditText_brand"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/EditText_brand"
+                app:layout_constraintTop_toBottomOf="@+id/plate_label_car_settings" />
+
+
+            <TextView
+                android:id="@+id/textView_plate_error"
+                style="@style/error_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_section_car_error"
+                android:text="@string/ERROR_INVALID_PLATE_FORMAT"
+                app:layout_constraintEnd_toEndOf="@+id/car_underline_car_settings"
+                app:layout_constraintStart_toStartOf="@+id/car_underline_car_settings"
+                app:layout_constraintTop_toBottomOf="@+id/plate_underline_car_settings" />
+
+
+            <TextView
+                android:id="@+id/color_label_car_settings"
+                style="@style/label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_section_car"
+                android:text="Χρώμα"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="@id/car_label_car_settings"
+                app:layout_constraintTop_toBottomOf="@+id/EditText_plate" />
+
+
+            <View
+                android:id="@+id/color_underline_car_settings"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/edit_text_color"
+                app:layout_constraintEnd_toEndOf="@+id/plate_underline_car_settings"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/plate_underline_car_settings"
+                app:layout_constraintTop_toBottomOf="@+id/EditText_color" />
+
+            <EditText
+                android:id="@+id/EditText_color"
+                style="@style/input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                android:drawableStart="@drawable/ic_color"
+                android:drawablePadding="15dp"
+                android:hint="Συμπληρώστε το χρώμα"
+                android:inputType="textCapWords"
+                android:maxLines="1"
+                android:textCursorDrawable="@null"
+                android:windowSoftInputMode="adjustPan"
+                app:layout_constraintEnd_toEndOf="@+id/EditText_brand"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/EditText_brand"
+                app:layout_constraintTop_toBottomOf="@+id/color_label_car_settings" />
+
+            <TextView
+                android:id="@+id/textView_color_error"
+                style="@style/error_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_section_car_error"
+                android:text="@string/ERROR_REQUIRED_FIELD"
+                app:layout_constraintEnd_toEndOf="@+id/car_underline_car_settings"
+                app:layout_constraintStart_toStartOf="@+id/car_underline_car_settings"
+                app:layout_constraintTop_toBottomOf="@+id/color_underline_car_settings" />
+
+            <Button
+                android:id="@+id/button_add"
+                style="@style/button_blue_filled"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="16dp"
+                android:text="Προσθήκη Αυτοκινήτου"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline8"
+                app:layout_constraintVertical_bias="0.55" />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.8" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/progress_load"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/background_color_progress"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:visibility="invisible">
 
-        <TextView
-            android:id="@+id/add_car_settings_tv"
-            style="@style/display_test"
-            android:layout_width="296dp"
-            android:layout_height="33dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="@dimen/margin_from_top"
-            android:layout_marginEnd="24dp"
-            android:text="Προσθήκη αυτοκινήτου"
-            app:autoSizeTextType="uniform"
-            app:layout_constraintEnd_toStartOf="@+id/close_button_add_car_settings"
-            app:layout_constraintStart_toStartOf="@+id/car_label_car_settings"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/close_button_add_car_settings"
-            style="@style/border_icon_button"
+        <ProgressBar
+            style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/ic_close"
-            app:layout_constraintBottom_toBottomOf="@id/add_car_settings_tv"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/add_car_settings_tv" />
-
-        <TextView
-            android:id="@+id/car_label_car_settings"
-            style="@style/label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="50dp"
-            android:text="Μάρκα"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_car_settings_tv" />
-
-        <EditText
-            android:id="@+id/EditText_brand"
-            style="@style/input"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@null"
-            android:drawableStart="@drawable/ic_car"
-            android:drawablePadding="15dp"
-            android:hint="Συμπληρώστε την μάρκα"
-            android:inputType="textCapWords"
-            android:maxLines="1"
-            android:textCursorDrawable="@null"
-            android:windowSoftInputMode="adjustPan"
-            app:layout_constraintEnd_toEndOf="@+id/close_button_add_car_settings"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/car_label_car_settings"
-            app:layout_constraintTop_toBottomOf="@+id/car_label_car_settings" />
-
-        <View
-            android:id="@+id/car_underline_car_settings"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/edit_text_color"
-            app:layout_constraintEnd_toEndOf="@+id/EditText_brand"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/EditText_brand"
-            app:layout_constraintTop_toBottomOf="@+id/EditText_brand" />
-
-
-        <TextView
-            android:id="@+id/textView_brand_error"
-            style="@style/error_label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_section_car_error"
-            android:text="@string/ERROR_REQUIRED_FIELD"
-            app:layout_constraintEnd_toEndOf="@+id/car_underline_car_settings"
-            app:layout_constraintStart_toStartOf="@+id/car_underline_car_settings"
-            app:layout_constraintTop_toBottomOf="@+id/car_underline_car_settings" />
-
-
-        <TextView
-            android:id="@+id/model_label_car_settings"
-            style="@style/label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_section_car"
-            android:text="Μοντέλο"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintStart_toStartOf="@id/car_label_car_settings"
-            app:layout_constraintTop_toBottomOf="@id/car_underline_car_settings" />
-
-        <View
-            android:id="@+id/model_underline_car_settings"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/edit_text_color"
-            app:layout_constraintEnd_toEndOf="@+id/car_underline_car_settings"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/car_underline_car_settings"
-            app:layout_constraintTop_toBottomOf="@+id/EditText_model" />
-
-        <EditText
-            android:id="@+id/EditText_model"
-            style="@style/input"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@null"
-            android:drawableStart="@drawable/ic_steer"
-            android:drawablePadding="15dp"
-            android:hint="Συμπληρώστε το μοντέλο "
-            android:inputType="textCapWords"
-            android:maxLines="1"
-            android:textCursorDrawable="@null"
-            android:windowSoftInputMode="adjustPan"
-            app:layout_constraintEnd_toEndOf="@+id/EditText_brand"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/EditText_brand"
-            app:layout_constraintTop_toBottomOf="@+id/model_label_car_settings" />
-
-
-        <TextView
-            android:id="@+id/textView_model_error"
-            style="@style/error_label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_section_car_error"
-            android:text="@string/ERROR_REQUIRED_FIELD"
-            app:layout_constraintEnd_toEndOf="@+id/car_underline_car_settings"
-            app:layout_constraintStart_toStartOf="@+id/car_underline_car_settings"
-            app:layout_constraintTop_toBottomOf="@+id/model_underline_car_settings" />
-
-
-        <TextView
-            android:id="@+id/plate_label_car_settings"
-            style="@style/label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_section_car"
-            android:text="Αρ. Κυκλοφορίας"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintStart_toStartOf="@id/car_label_car_settings"
-            app:layout_constraintTop_toBottomOf="@id/model_underline_car_settings" />
-
-
-        <View
-            android:id="@+id/plate_underline_car_settings"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/edit_text_color"
-            app:layout_constraintEnd_toEndOf="@+id/model_underline_car_settings"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/model_underline_car_settings"
-            app:layout_constraintTop_toBottomOf="@+id/EditText_plate" />
-
-        <EditText
-            android:id="@+id/EditText_plate"
-            style="@style/input"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@null"
-            android:drawableStart="@drawable/ic_license_plate"
-            android:drawablePadding="15dp"
-            android:hint="Συμπληρώστε τον αριθμό κυκλοφορίας"
-            android:inputType="textCapCharacters"
-            android:maxLength="8"
-            android:maxLines="1"
-            android:textAllCaps="true"
-            android:textCursorDrawable="@null"
-            android:windowSoftInputMode="adjustPan"
-            app:layout_constraintEnd_toEndOf="@+id/EditText_brand"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/EditText_brand"
-            app:layout_constraintTop_toBottomOf="@+id/plate_label_car_settings" />
-
-
-        <TextView
-            android:id="@+id/textView_plate_error"
-            style="@style/error_label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_section_car_error"
-            android:text="@string/ERROR_INVALID_PLATE_FORMAT"
-            app:layout_constraintEnd_toEndOf="@+id/car_underline_car_settings"
-            app:layout_constraintStart_toStartOf="@+id/car_underline_car_settings"
-            app:layout_constraintTop_toBottomOf="@+id/plate_underline_car_settings" />
-
-
-        <TextView
-            android:id="@+id/color_label_car_settings"
-            style="@style/label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_section_car"
-            android:text="Χρώμα"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintStart_toStartOf="@id/car_label_car_settings"
-            app:layout_constraintTop_toBottomOf="@+id/EditText_plate" />
-
-
-        <View
-            android:id="@+id/color_underline_car_settings"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/edit_text_color"
-            app:layout_constraintEnd_toEndOf="@+id/plate_underline_car_settings"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/plate_underline_car_settings"
-            app:layout_constraintTop_toBottomOf="@+id/EditText_color" />
-
-        <EditText
-            android:id="@+id/EditText_color"
-            style="@style/input"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@null"
-            android:drawableStart="@drawable/ic_color"
-            android:drawablePadding="15dp"
-            android:hint="Συμπληρώστε το χρώμα"
-            android:inputType="textCapWords"
-            android:maxLines="1"
-            android:textCursorDrawable="@null"
-            android:windowSoftInputMode="adjustPan"
-            app:layout_constraintEnd_toEndOf="@+id/EditText_brand"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/EditText_brand"
-            app:layout_constraintTop_toBottomOf="@+id/color_label_car_settings" />
-
-        <TextView
-            android:id="@+id/textView_color_error"
-            style="@style/error_label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_section_car_error"
-            android:layout_marginBottom="106dp"
-            android:text="@string/ERROR_REQUIRED_FIELD"
-            app:layout_constraintBottom_toTopOf="@+id/button_add"
-            app:layout_constraintEnd_toEndOf="@+id/car_underline_car_settings"
-            app:layout_constraintStart_toStartOf="@+id/car_underline_car_settings"
-            app:layout_constraintTop_toBottomOf="@+id/color_underline_car_settings" />
-
-        <Button
-            android:id="@+id/button_add"
-            style="@style/button_blue_filled"
-            android:layout_width="0dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="16dp"
-            android:text="Προσθήκη Αυτοκινήτου"
+            android:indeterminate="true"
+            android:layout_gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline8"
-            app:layout_constraintVertical_bias="0.55" />
-
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.8" />
-
-
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

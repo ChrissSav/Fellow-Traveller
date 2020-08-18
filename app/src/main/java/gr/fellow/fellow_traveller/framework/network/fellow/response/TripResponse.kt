@@ -37,7 +37,7 @@ data class TripResponse(
     val price: Float
 ) {
     fun getDate(): String {
-        val dateFormat = SimpleDateFormat("d MMM yyyy")
+        val dateFormat = SimpleDateFormat("dd MM yyyy")
         val date = Date(timestamp * 1000)
         return dateFormat.format(date)
     }

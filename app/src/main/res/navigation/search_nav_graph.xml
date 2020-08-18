@@ -67,5 +67,8 @@
         <argument
             android:name="indexTrip"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_bookTripFragment_to_searchResultsFragment"
+            app:destination="@id/searchResultsFragment" />
     </fragment>
 </navigation>

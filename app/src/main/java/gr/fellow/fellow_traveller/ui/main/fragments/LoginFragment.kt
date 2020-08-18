@@ -1,7 +1,5 @@
 package gr.fellow.fellow_traveller.ui.main.fragments
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -10,7 +8,6 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -20,6 +17,7 @@ import dagger.hilt.android.WithFragmentBindings
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentLoginBinding
 import gr.fellow.fellow_traveller.ui.createSnackBar
+import gr.fellow.fellow_traveller.ui.hideKeyboard
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.main.LoginViewModel
 import gr.fellow.fellow_traveller.ui.register.RegisterActivity
@@ -54,7 +52,7 @@ class LoginFragment : Fragment() {
 
 
         binding.buttonLogin.setOnClickListener {
-            context?.let { it1 -> hideKeyboardFrom(it1, binding.root) }
+            hideKeyboard()
             if (binding.emailEditText.text.isEmpty() && binding.passwordEditText.text.isEmpty()) {
                 createSnackBar(view, resources.getString(R.string.ERROR_FIELDS_REQUIRE))
             } else {
@@ -126,13 +124,6 @@ class LoginFragment : Fragment() {
             val intent = Intent(activity, RegisterActivity::class.java)
             startActivity(intent)
         }
-    }
-
-
-    private  fun hideKeyboardFrom(context: Context, view: View) {
-        val imm =
-            context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
 
