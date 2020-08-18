@@ -8,19 +8,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.databinding.ActivitySplashBinding
-import gr.fellow.fellow_traveller.di.Fellow
+import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.main.MainActivity
-import okhttp3.OkHttpClient
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
 
-    @Fellow
     @Inject
-    lateinit var okHttpClient: OkHttpClient.Builder
+    lateinit var fellowService: FellowService
 
     private val splashViewModel: SplashViewModel by viewModels()
     private lateinit var binding: ActivitySplashBinding
@@ -31,6 +32,16 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+
+
+        GlobalScope.launch(Dispatchers.Default) {
+            try {
+                fellowService.userCars()
+            } catch (e: Exception) {
+
+            }
+        }
 
 
         Handler().postDelayed({

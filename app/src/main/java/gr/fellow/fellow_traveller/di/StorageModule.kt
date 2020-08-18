@@ -11,11 +11,9 @@ import dagger.hilt.android.components.ApplicationComponent
 import gr.fellow.fellow_traveller.data.FellowDataSourceImpl
 import gr.fellow.fellow_traveller.data.FellowRepository
 import gr.fellow.fellow_traveller.data.GoogleServiceRepository
-import gr.fellow.fellow_traveller.data.LocalRepository
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.framework.FellowRepositoryImpl
 import gr.fellow.fellow_traveller.framework.GoogleServiceRepositoryImpl
-import gr.fellow.fellow_traveller.framework.LocalRepositoryImpl
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
 import gr.fellow.fellow_traveller.framework.network.google.PlaceApiService
 import gr.fellow.fellow_traveller.room.FellowDatabase
@@ -31,9 +29,9 @@ object StorageModule {
     @Singleton
     @Provides
     fun provideRepository(
-        service: FellowService, connectivityHelper: ConnectivityHelper, sharedPreferences: SharedPreferences
+        service: FellowService, connectivityHelper: ConnectivityHelper, sharedPreferences: SharedPreferences, userAuthDao: UserAuthDao, carDao: CarDao
     ): FellowRepository {
-        return FellowRepositoryImpl(service, connectivityHelper, sharedPreferences)
+        return FellowRepositoryImpl(service, connectivityHelper, sharedPreferences, userAuthDao, carDao)
     }
 
 
@@ -46,17 +44,10 @@ object StorageModule {
 
     @Singleton
     @Provides
-    fun provideLocalRepositoryImpl(userAuthDao: UserAuthDao, carDao: CarDao): LocalRepository {
-        return LocalRepositoryImpl(userAuthDao, carDao)
-    }
-
-
-    @Singleton
-    @Provides
     fun provideDataSource(
-        repository: FellowRepository, repositoryLocal: LocalRepository, googleServiceRepository: GoogleServiceRepository
+        repository: FellowRepository, googleServiceRepository: GoogleServiceRepository
     ): FellowDataSource {
-        return FellowDataSourceImpl(repository, repositoryLocal, googleServiceRepository)
+        return FellowDataSourceImpl(repository, googleServiceRepository)
     }
 
 

@@ -6,20 +6,18 @@ import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
+import gr.fellow.fellow_traveller.room.entites.CarEntity
+import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 
 interface FellowRepository {
 
     suspend fun checkField(accountCheckRequest: AccountCheckRequest): ResultWrapper<StatusHandleResponse>
 
-    suspend fun registerUser(registerUserRequest: AccountCreateRequest): ResultWrapper<UserLoginResponse>
+    suspend fun registerUserRemote(registerUserRequest: AccountCreateRequest): ResultWrapper<UserLoginResponse>
 
-    suspend fun loginUser(loginRequest: LoginRequest): ResultWrapper<UserLoginResponse>
+    suspend fun loginUserRemote(loginRequest: LoginRequest): ResultWrapper<UserLoginResponse>
 
-
-
-    /**
-     * Cars
-     **/
+    // Cars
 
     suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<CarResponse>
 
@@ -27,10 +25,7 @@ interface FellowRepository {
 
     suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse>
 
-
-    /**
-     * Trips
-     * */
+    // Trips
 
     suspend fun addTrip(trip: TripCreateRequest): ResultWrapper<TripResponse>
 
@@ -39,4 +34,26 @@ interface FellowRepository {
     suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripResponse>>
 
     suspend fun searchTrips(query: SearchFilters): ResultWrapper<MutableList<TripResponse>>
+
+
+    /**
+     * Local
+     **/
+
+    suspend fun registerUserAuthLocal(userEntity: RegisteredUserEntity)
+
+    suspend fun loadUserAuthLocal(): RegisteredUserEntity
+
+    suspend fun logoutUserLocal()
+
+    // Cars
+
+    suspend fun deleteCarsLocal()
+
+    suspend fun deleteCarByIdLocal(id: Int): Int
+
+    suspend fun getAllCarsLocal(): MutableList<CarEntity>
+
+    suspend fun insertCarLocal(car: CarEntity)
+
 }

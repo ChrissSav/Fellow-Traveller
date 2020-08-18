@@ -10,16 +10,18 @@ import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
-import gr.fellow.fellow_traveller.utils.ConnectivityHelper
-import gr.fellow.fellow_traveller.utils.PREFS_AUTH_TOKEN
-import gr.fellow.fellow_traveller.utils.handleToCorrectFormat
-import gr.fellow.fellow_traveller.utils.networkCall
-import gr.fellow.fellow_traveller.utils.set
+import gr.fellow.fellow_traveller.room.dao.CarDao
+import gr.fellow.fellow_traveller.room.dao.UserAuthDao
+import gr.fellow.fellow_traveller.room.entites.CarEntity
+import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
+import gr.fellow.fellow_traveller.utils.*
 
 class FellowRepositoryImpl(
     private val service: FellowService,
     private val connectivityHelper: ConnectivityHelper,
-    private val sharedPrefs: SharedPreferences
+    private val sharedPrefs: SharedPreferences,
+    private val userAuthDao: UserAuthDao,
+    private val carDao: CarDao
 ) : FellowRepository {
 
 
@@ -29,7 +31,7 @@ class FellowRepositoryImpl(
         }
 
 
-    override suspend fun registerUser(registerUserRequest: AccountCreateRequest): ResultWrapper<UserLoginResponse> =
+    override suspend fun registerUserRemote(registerUserRequest: AccountCreateRequest): ResultWrapper<UserLoginResponse> =
         networkCall(connectivityHelper) {
             val res = service.registerUser(registerUserRequest)
             if (res.isSuccessful)
@@ -38,7 +40,7 @@ class FellowRepositoryImpl(
             res.handleToCorrectFormat()
         }
 
-    override suspend fun loginUser(loginRequest: LoginRequest): ResultWrapper<UserLoginResponse> =
+    override suspend fun loginUserRemote(loginRequest: LoginRequest): ResultWrapper<UserLoginResponse> =
         networkCall(connectivityHelper) {
             val res = service.userLogin(loginRequest)
             if (res.isSuccessful)
@@ -90,5 +92,41 @@ class FellowRepositoryImpl(
 
         }
 
+    override suspend fun registerUserAuthLocal(userEntity: RegisteredUserEntity) =
+        roomCall {
+            userAuthDao.insertUser(userEntity)
+        }
+
+
+    override suspend fun loadUserAuthLocal(): RegisteredUserEntity =
+        roomCall {
+            userAuthDao.getUserRegistered()
+        }
+
+
+    override suspend fun logoutUserLocal() =
+        roomCall {
+            userAuthDao.deleteUser()
+        }
+
+    override suspend fun deleteCarsLocal() =
+        roomCall {
+            carDao.deleteCars()
+        }
+
+    override suspend fun deleteCarByIdLocal(id: Int) =
+        roomCall {
+            carDao.deleteCarById(id)
+        }
+
+    override suspend fun getAllCarsLocal() =
+        roomCall {
+            carDao.getCars()
+        }
+
+    override suspend fun insertCarLocal(car: CarEntity) =
+        roomCall {
+            carDao.insertUser(car)
+        }
 
 }

@@ -15,7 +15,6 @@ import retrofit2.Response
 
 class FellowDataSourceImpl(
     private val repository: FellowRepository,
-    private val repositoryLocal: LocalRepository,
     private val googleServiceRepository: GoogleServiceRepository
 ) : FellowDataSource {
 
@@ -28,14 +27,14 @@ class FellowDataSourceImpl(
     override suspend fun registerUser(
         firstName: String, lastName: String, email: String, password: String, phone: String
     ): ResultWrapper<UserLoginResponse> =
-        repository.registerUser(AccountCreateRequest(firstName, lastName, email, password, phone))
+        repository.registerUserRemote(AccountCreateRequest(firstName, lastName, email, password, phone))
 
 
     override suspend fun loginUser(username: String, password: String): ResultWrapper<UserLoginResponse> =
-        repository.loginUser(LoginRequest(username, password))
+        repository.loginUserRemote(LoginRequest(username, password))
 
     override suspend fun registerUserAuth(userEntity: RegisteredUserEntity) =
-        repositoryLocal.registerUserAuth(userEntity)
+        repository.registerUserAuthLocal(userEntity)
 
     override suspend fun getCarsRemote(): ResultWrapper<ArrayList<CarResponse>> =
         repository.getCarsRemote()
@@ -74,19 +73,19 @@ class FellowDataSourceImpl(
 
 
     override suspend fun loadUsersInfoLocal(): RegisteredUserEntity =
-        repositoryLocal.loadUserAuth()
+        repository.loadUserAuthLocal()
 
     override suspend fun logoutUserLocal() =
-        repositoryLocal.logoutUser()
+        repository.logoutUserLocal()
 
     override suspend fun getAllCarsLocal(): MutableList<CarEntity> =
-        repositoryLocal.getAllCars()
+        repository.getAllCarsLocal()
 
     override suspend fun insertCarLocal(carEntity: CarEntity) =
-        repositoryLocal.insertCar(carEntity)
+        repository.insertCarLocal(carEntity)
 
     override suspend fun deleteCarLocal(carId: Int) =
-        repositoryLocal.deleteCarById(carId)
+        repository.deleteCarByIdLocal(carId)
 
 
 }
