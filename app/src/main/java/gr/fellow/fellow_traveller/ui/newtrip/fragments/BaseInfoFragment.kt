@@ -21,7 +21,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentBaseInfoBinding
 import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.ui.car.AddCarActivity
-import gr.fellow.fellow_traveller.ui.createSnackBar
+import gr.fellow.fellow_traveller.ui.createAlerter
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 
 
@@ -86,7 +86,7 @@ class BaseInfoFragment : Fragment() {
                 if (newTripViewModel.car.value != null) {
                     navController.navigate(R.id.next_fragment)
                 } else {
-                    createSnackBar(view, resources.getString(R.string.ERROR_SELECT_CAR))
+                    createAlerter(resources.getString(R.string.ERROR_SELECT_CAR))
                 }
 
             }

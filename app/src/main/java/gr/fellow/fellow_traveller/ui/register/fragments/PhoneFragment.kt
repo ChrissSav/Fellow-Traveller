@@ -13,7 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentPhoneBinding
-import gr.fellow.fellow_traveller.ui.createSnackBar
+import gr.fellow.fellow_traveller.ui.createAlerter
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
 import gr.fellow.fellow_traveller.utils.isValidPhone
 
@@ -74,7 +74,7 @@ class PhoneFragment : Fragment() {
             if (isValidPhone( binding.EditTextPhone.text.toString())) {
                 registerViewModel.checkUserPhone( binding.EditTextPhone.text.toString())
             } else {
-                createSnackBar(view, resources.getString(R.string.INVALID_PHONE_FORMAT))
+                createAlerter(resources.getString(R.string.INVALID_PHONE_FORMAT))
             }
         }
 

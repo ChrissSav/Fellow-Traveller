@@ -14,7 +14,7 @@ import androidx.navigation.ui.NavigationUI
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.ActivityHomeBinding
-import gr.fellow.fellow_traveller.ui.createSnackBar
+import gr.fellow.fellow_traveller.ui.createAlerter
 
 
 @AndroidEntryPoint
@@ -44,10 +44,11 @@ class HomeActivity : AppCompatActivity() {
 
         homeViewModel.loadUserInfo()
         homeViewModel.loadCars()
-        homeViewModel.loadTripAsCreator()
 
         homeViewModel.error.observe(this, Observer {
-            createSnackBar(binding.root, it)
+            createAlerter(getString(it))
+
+            // createAlerter(getString(it))
         })
 
         setupBottomNavMenu(navController)

@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.databinding.ActivitySearchTripBinding
-import gr.fellow.fellow_traveller.ui.createSnackBar
+import gr.fellow.fellow_traveller.ui.createAlerter
 
 
 @AndroidEntryPoint
@@ -23,7 +23,7 @@ class SearchTripActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         searchViewModel.error.observe(this, Observer {
-            createSnackBar(it)
+            createAlerter(getString(it))
         })
 
     }

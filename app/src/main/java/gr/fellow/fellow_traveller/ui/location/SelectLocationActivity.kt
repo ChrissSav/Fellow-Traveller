@@ -45,7 +45,7 @@ class SelectLocationActivity : AppCompatActivity() {
 
         })
         selectLocationViewModel.error.observe(this, Observer {
-            createToast(this, it)
+            createToast(this, getString(it))
         })
 
         binding.backButton.setOnClickListener {

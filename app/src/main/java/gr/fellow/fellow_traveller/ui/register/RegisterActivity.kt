@@ -10,7 +10,7 @@ import androidx.navigation.Navigation
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.ActivityRegisterBinding
-import gr.fellow.fellow_traveller.ui.createSnackBar
+import gr.fellow.fellow_traveller.ui.createAlerter
 
 
 @AndroidEntryPoint
@@ -43,15 +43,15 @@ class RegisterActivity : AppCompatActivity() {
 
         registerViewModel.load.observe(this, Observer {
             if(it)
-                binding.progressLoad.visibility = View.VISIBLE
+                binding.genericLoader.progressLoad.visibility = View.VISIBLE
             else
-                binding.progressLoad.visibility = View.INVISIBLE
+                binding.genericLoader.progressLoad.visibility = View.INVISIBLE
 
         })
 
 
         registerViewModel.error.observe(this, Observer {
-            createSnackBar(view, it)
+            createAlerter(getString(it))
         })
 
         binding.ImageButtonBack.setOnClickListener {

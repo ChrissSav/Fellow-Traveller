@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.ui.car
 
-import android.content.Context
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,10 +12,9 @@ import gr.fellow.fellow_traveller.usecase.home.RegisterCarLocalUseCase
 class AddCarViewModel
 @ViewModelInject
 constructor(
-    private val context: Context,
     private val registerCarLocalUseCase: RegisterCarLocalUseCase,
     private val addCarToRemoteUseCase: AddCarToRemoteUseCase
-) : BaseViewModel(context) {
+) : BaseViewModel() {
 
     private val _saved = MutableLiveData<Boolean>()
     val saved: LiveData<Boolean> = _saved

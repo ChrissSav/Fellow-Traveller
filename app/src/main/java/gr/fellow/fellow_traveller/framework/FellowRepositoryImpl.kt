@@ -18,7 +18,6 @@ import gr.fellow.fellow_traveller.utils.*
 
 class FellowRepositoryImpl(
     private val service: FellowService,
-    private val connectivityHelper: ConnectivityHelper,
     private val sharedPrefs: SharedPreferences,
     private val userAuthDao: UserAuthDao,
     private val carDao: CarDao
@@ -26,13 +25,13 @@ class FellowRepositoryImpl(
 
 
     override suspend fun checkField(accountCheckRequest: AccountCheckRequest): ResultWrapper<StatusHandleResponse> =
-        networkCall(connectivityHelper) {
+        networkCall {
             service.checkIfAccountInfoExist(accountCheckRequest).handleToCorrectFormat()
         }
 
 
     override suspend fun registerUserRemote(registerUserRequest: AccountCreateRequest): ResultWrapper<UserLoginResponse> =
-        networkCall(connectivityHelper) {
+        networkCall {
             val res = service.registerUser(registerUserRequest)
             if (res.isSuccessful)
                 sharedPrefs[PREFS_AUTH_TOKEN] =
@@ -41,7 +40,7 @@ class FellowRepositoryImpl(
         }
 
     override suspend fun loginUserRemote(loginRequest: LoginRequest): ResultWrapper<UserLoginResponse> =
-        networkCall(connectivityHelper) {
+        networkCall {
             val res = service.userLogin(loginRequest)
             if (res.isSuccessful)
                 sharedPrefs[PREFS_AUTH_TOKEN] =
@@ -51,37 +50,37 @@ class FellowRepositoryImpl(
 
 
     override suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<CarResponse> =
-        networkCall(connectivityHelper) {
+        networkCall {
             service.addCar(carRequest).handleToCorrectFormat()
         }
 
     override suspend fun getCarsRemote(): ResultWrapper<ArrayList<CarResponse>> =
-        networkCall(connectivityHelper) {
+        networkCall {
             service.userCars().handleToCorrectFormat()
         }
 
     override suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse> =
-        networkCall(connectivityHelper) {
+        networkCall {
             service.deleteCar(carId).handleToCorrectFormat()
         }
 
     override suspend fun addTrip(trip: TripCreateRequest): ResultWrapper<TripResponse> =
-        networkCall(connectivityHelper) {
+        networkCall {
             service.addTrip(trip).handleToCorrectFormat()
         }
 
     override suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripResponse>> =
-        networkCall(connectivityHelper) {
+        networkCall {
             service.getTripsAs("creator").handleToCorrectFormat()
         }
 
     override suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripResponse>> =
-        networkCall(connectivityHelper) {
+        networkCall {
             service.getTripsAs("passenger").handleToCorrectFormat()
         }
 
     override suspend fun searchTrips(query: SearchFilters): ResultWrapper<MutableList<TripResponse>> =
-        networkCall(connectivityHelper) {
+        networkCall {
             with(query) {
                 service.searchTrips(
                     latitudeFrom, longitudeFrom, latitudeTo, longitudeTo, rangeFrom,

@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.ui.main
 
-import android.content.Context
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import gr.fellow.fellow_traveller.R
@@ -14,10 +13,9 @@ import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
 class LoginViewModel
 @ViewModelInject
 constructor(
-    private val context: Context,
     private val loginUseCase: LoginUseCase,
     private val registerUserLocalUseCase: RegisterUserLocalUseCase
-) : BaseViewModel(context) {
+) : BaseViewModel() {
 
 
     private val _result = SingleLiveEvent<Boolean>()
@@ -33,7 +31,7 @@ constructor(
                     _result.value = true
                 }
                 is ResultWrapper.Error ->
-                    _error.value = context.resources.getString(R.string.ERROR_INVALID_CREDENTIALS)
+                    _error.value = R.string.ERROR_INVALID_CREDENTIALS
             }
         }
     }

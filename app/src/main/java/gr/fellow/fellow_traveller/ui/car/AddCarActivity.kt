@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.databinding.ActivityAddCarBinding
-import gr.fellow.fellow_traveller.ui.createSnackBar
+import gr.fellow.fellow_traveller.ui.createAlerter
 import gr.fellow.fellow_traveller.utils.isValidPlate
 
 @AndroidEntryPoint
@@ -123,7 +123,7 @@ class AddCarActivity : AppCompatActivity() {
         }
 
         addCarViewModel.error.observe(this, Observer {
-            createSnackBar(it)
+            createAlerter(getString(it))
         })
 
 

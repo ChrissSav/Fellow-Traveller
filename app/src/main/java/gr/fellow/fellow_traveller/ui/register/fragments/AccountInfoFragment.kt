@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.databinding.FragmentAccountInfoBinding
-import gr.fellow.fellow_traveller.ui.createSnackBar
+import gr.fellow.fellow_traveller.ui.createAlerter
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
 
@@ -112,7 +112,7 @@ class AccountInfoFragment : Fragment() {
 
 
         registerViewModel.error.observe(viewLifecycleOwner, Observer {
-            createSnackBar(view, it)
+            createAlerter(getString(it))
         })
 
 

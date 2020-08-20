@@ -19,60 +19,29 @@ fun <T : Any> Response<T>.handleToCorrectFormat(): ResultWrapper<T> {
 }
 
 suspend fun <T : Any> networkCallWithOutWrap(
-    connectivityHelper: ConnectivityHelper,
     function: suspend () -> T
 ): T {
-    if (!connectivityHelper.checkInternetConnection()) {
-        throw BaseApiException(INTERNET_ERROR)
-    }
     return withContext(Dispatchers.IO) {
-        function.invoke()
-    }
-}
-
-
-/*
-suspend fun <T : Any> networkCall(
-    function: suspend () -> ResultWrapper<T>
-): ResultWrapper<T> {
-    return withContext(Dispatchers.IO) {
-        if (isInternetAvailable())
-            performCall {
-                function.invoke()
-            }
-        else
-            throw BaseApiException(msg = "Δεν υπάρχει σύνδεση στο ίντερνετ")
-    }
-}
-*/
-
-suspend fun <T : Any> networkCall(
-    connectivityHelper: ConnectivityHelper,
-    function: suspend () -> ResultWrapper<T>
-): ResultWrapper<T> {
-    return withContext(Dispatchers.IO) {
-        performCall(connectivityHelper) {
-            function.invoke()
-        }
-    }
-}
-
-
-suspend fun <T : Any> performCall(
-    connectivityHelper: ConnectivityHelper,
-    call: suspend () -> ResultWrapper<T>
-): ResultWrapper<T> =
-    if (!connectivityHelper.checkInternetConnection()) {
-        throw BaseApiException(INTERNET_ERROR)
-    } else {
         try {
-            call.invoke()
-        } catch (exception: BaseApiException) {
-            throw exception
+            function.invoke()
         } catch (exception: Exception) {
             throw BaseApiException(SOMETHING_WORNG)
         }
     }
+}
+
+
+suspend fun <T : Any> networkCall(
+    function: suspend () -> ResultWrapper<T>
+): ResultWrapper<T> {
+    return withContext(Dispatchers.IO) {
+        try {
+            function.invoke()
+        } catch (exception: BaseApiException) {
+            throw exception
+        }
+    }
+}
 
 
 suspend fun <T : Any> roomCall(
@@ -82,40 +51,4 @@ suspend fun <T : Any> roomCall(
         function.invoke()
     }
 
-
-/*
-fun isInternetAvailable(): Boolean {
-    val command = "ping -c 1 google.com"
-    return try {
-        Runtime.getRuntime().exec(command).waitFor() == 0
-    } catch (e: InterruptedException) {
-        e.printStackTrace()
-        false
-    } catch (e: IOException) {
-        e.printStackTrace()
-        false
-    }
-}
-*/
-
-/*suspend fun <T : Any> performCallWithOut(
-    function: suspend () -> T
-): T {
-    return withContext(Dispatchers.IO) {
-        function.invoke()
-    }
-}*/
-
-/*
-
-suspend fun <T : Any> performCall(
-    call: suspend () -> ResultWrapper<T>
-): ResultWrapper<T> =
-    try {
-        call.invoke()
-    } catch (exception: Exception) {
-        ResultWrapper.Error(getModelFromResponseErrorBody())
-    }
-
-*/
 

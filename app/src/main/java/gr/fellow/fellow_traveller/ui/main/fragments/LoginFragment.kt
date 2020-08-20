@@ -16,7 +16,7 @@ import androidx.navigation.Navigation
 import dagger.hilt.android.WithFragmentBindings
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentLoginBinding
-import gr.fellow.fellow_traveller.ui.createSnackBar
+import gr.fellow.fellow_traveller.ui.createAlerter
 import gr.fellow.fellow_traveller.ui.hideKeyboard
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.main.LoginViewModel
@@ -54,7 +54,7 @@ class LoginFragment : Fragment() {
         binding.buttonLogin.setOnClickListener {
             hideKeyboard()
             if (binding.emailEditText.text.isEmpty() && binding.passwordEditText.text.isEmpty()) {
-                createSnackBar(view, resources.getString(R.string.ERROR_FIELDS_REQUIRE))
+                createAlerter(resources.getString(R.string.ERROR_FIELDS_REQUIRE))
             } else {
                 loginViewModel.login(
                     binding.emailEditText.text.toString(),

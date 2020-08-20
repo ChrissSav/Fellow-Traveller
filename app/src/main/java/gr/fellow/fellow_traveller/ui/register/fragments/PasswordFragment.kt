@@ -14,7 +14,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentPasswordBinding
-import gr.fellow.fellow_traveller.ui.createSnackBar
+import gr.fellow.fellow_traveller.ui.createAlerter
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
 
 
@@ -120,10 +120,10 @@ class PasswordFragment : Fragment() {
                 if (binding.password.text.toString() == binding.passwordConfirm.text.toString()) {
                     registerViewModel.storePassword(binding.password.text.toString())
                 } else {
-                    createSnackBar(view, resources.getString(R.string.ERROR_PASSWORD_DO_NOT_MATCH))
+                    createAlerter(resources.getString(R.string.ERROR_PASSWORD_DO_NOT_MATCH))
                 }
             } else {
-                createSnackBar(view, resources.getString(R.string.ERROR_PASSWORD_COMPLEXITY_LENGTH))
+                createAlerter(resources.getString(R.string.ERROR_PASSWORD_COMPLEXITY_LENGTH))
 
             }
         }

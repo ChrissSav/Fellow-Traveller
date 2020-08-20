@@ -19,7 +19,6 @@ import gr.fellow.fellow_traveller.framework.network.google.PlaceApiService
 import gr.fellow.fellow_traveller.room.FellowDatabase
 import gr.fellow.fellow_traveller.room.dao.CarDao
 import gr.fellow.fellow_traveller.room.dao.UserAuthDao
-import gr.fellow.fellow_traveller.utils.ConnectivityHelper
 import javax.inject.Singleton
 
 @InstallIn(ApplicationComponent::class)
@@ -28,33 +27,27 @@ object StorageModule {
 
     @Singleton
     @Provides
-    fun provideRepository(
-        service: FellowService, connectivityHelper: ConnectivityHelper, sharedPreferences: SharedPreferences, userAuthDao: UserAuthDao, carDao: CarDao
-    ): FellowRepository {
-        return FellowRepositoryImpl(service, connectivityHelper, sharedPreferences, userAuthDao, carDao)
-    }
+    fun provideRepository(service: FellowService, sharedPreferences: SharedPreferences, userAuthDao: UserAuthDao, carDao: CarDao): FellowRepository =
+        FellowRepositoryImpl(service, sharedPreferences, userAuthDao, carDao)
 
 
     @Singleton
     @Provides
-    fun provideGoogleServiceRepository(connectivityHelper: ConnectivityHelper, service: PlaceApiService): GoogleServiceRepository {
-        return GoogleServiceRepositoryImpl(connectivityHelper, service)
-    }
+    fun provideGoogleServiceRepository(service: PlaceApiService): GoogleServiceRepository =
+        GoogleServiceRepositoryImpl(service)
 
 
     @Singleton
     @Provides
-    fun provideDataSource(
-        repository: FellowRepository, googleServiceRepository: GoogleServiceRepository
-    ): FellowDataSource {
-        return FellowDataSourceImpl(repository, googleServiceRepository)
-    }
+    fun provideDataSource(repository: FellowRepository, googleServiceRepository: GoogleServiceRepository): FellowDataSource =
+        FellowDataSourceImpl(repository, googleServiceRepository)
 
 
     @Singleton
     @Provides
     fun provideSharedPreferences(application: Application): SharedPreferences =
         application.getSharedPreferences("FELLOW_TRAVELLER", Context.MODE_PRIVATE)
+
 
     @Singleton
     @Provides
@@ -64,14 +57,14 @@ object StorageModule {
 
     @Singleton
     @Provides
-    fun providesProductDao(fellowDatabase: FellowDatabase): UserAuthDao {
-        return fellowDatabase.userAuthDao()
-    }
+    fun providesProductDao(fellowDatabase: FellowDatabase): UserAuthDao =
+        fellowDatabase.userAuthDao()
+
 
     @Singleton
     @Provides
-    fun providesCarDao(fellowDatabase: FellowDatabase): CarDao {
-        return fellowDatabase.carDao()
-    }
+    fun providesCarDao(fellowDatabase: FellowDatabase): CarDao =
+        fellowDatabase.carDao()
+
 
 }

@@ -40,29 +40,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ImageButton_back"
-        app:navGraph="@navigation/register_nav_graph">
-    </fragment>
+        app:navGraph="@navigation/register_nav_graph" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/progress_load"
+
+    <include
+        android:id="@+id/generic_loader"
+        layout="@layout/generic_loader"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background_color_progress"
-        android:clickable="true"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:elevation="4dp"
-        android:visibility="invisible">
-
-        <ProgressBar
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,13 +2,12 @@ package gr.fellow.fellow_traveller.ui
 
 import android.app.Activity
 import android.content.Context
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
+import com.tapadoo.alerter.Alerter
 import gr.fellow.fellow_traveller.R
 import java.io.IOException
 import java.text.ParseException
@@ -16,20 +15,34 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-fun createSnackBar(view: View, msg: String) {
-    Snackbar.make(view, msg, Snackbar.LENGTH_LONG)
-        .setActionTextColor(view.context.resources.getColor(R.color.colorPrimary))
+fun Activity.createAlerter(msg: String) {
+    var icon = R.drawable.ic_exclamation_mark
+    if (this.resources.getString(R.string.ERROR_INTERNET_CONNECTION) == msg)
+        icon = R.drawable.ic_no_wifi
+    Alerter.create(this)
+        .setTitle("Προσοχή")
+        .setText(msg)
+        .setIcon(icon)
+        .setBackgroundColorRes(R.color.colorPrimary)
+        .setDuration(1800)
+        .enableSwipeToDismiss() //seems to not work well with OnClickListener
         .show()
-
 }
 
-fun Activity.createSnackBar(msg: String) {
-    Snackbar.make(this.findViewById(android.R.id.content), msg, Snackbar.LENGTH_LONG)
-        .setActionTextColor(this.resources.getColor(R.color.colorPrimary))
+
+fun Fragment.createAlerter(msg: String) {
+    var icon = R.drawable.ic_exclamation_mark
+    if (this.resources.getString(R.string.ERROR_INTERNET_CONNECTION) == msg)
+        icon = R.drawable.ic_no_wifi
+    Alerter.create(activity)
+        .setTitle("Προσοχή")
+        .setText(msg)
+        .setIcon(icon)
+        .setBackgroundColorRes(R.color.colorPrimary)
+        .setDuration(1800)
+        .enableSwipeToDismiss() //seems to not work well with OnClickListener
         .show()
-
 }
-
 
 fun Activity.hideKeyboard() {
     val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager

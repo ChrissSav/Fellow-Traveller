@@ -53,7 +53,7 @@ fun getModelFromResponseErrorBody(errorBody: ResponseBody?): ErrorResponse {
         val mJson = parser.parse(mJsonString)
         val errorResponseModel =
             Gson().fromJson<ErrorResponseModel>(mJson, ErrorResponseModel::class.java)
-        ErrorResponse(errorResponseModel.detail.statusCode, errorResponseModel.detail.message)
+        ErrorResponse(errorResponseModel.detail.statusCode)
     } catch (e: Exception) {
         throw BaseApiException(SOMETHING_WORNG)
     }

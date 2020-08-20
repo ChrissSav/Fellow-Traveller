@@ -1,11 +1,9 @@
 package gr.fellow.fellow_traveller.ui.home
 
-import android.content.Context
-import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
+import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.BaseApiException
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.domain.mappers.toCarEntity
@@ -24,8 +22,6 @@ import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsPassengerRemoteUseCase
 class HomeViewModel
 @ViewModelInject
 constructor(
-    private val context: Context,
-    @Assisted private val savedStateHandle: SavedStateHandle,
     private val loadUserInfoUseCase: LoadUserInfoUseCase,
     private val logoutUseCase: LogoutUseCase,
     private val getUserCarsRemoteUseCase: GetUserCarsRemoteUseCase,
@@ -35,8 +31,7 @@ constructor(
     private val deleteCarUseCase: DeleteCarUseCase,
     private val getTripsAsCreatorRemoteUseCase: GetTripsAsCreatorRemoteUseCase,
     private val getTripsAsPassengerRemoteUseCase: GetTripsAsPassengerRemoteUseCase
-
-) : BaseViewModel(context) {
+) : BaseViewModel() {
 
 
     private val _user = MutableLiveData<RegisteredUserEntity>()
@@ -98,19 +93,6 @@ constructor(
         }
     }
 
-    fun addCar(brand: String, model: String, plate: String, color: String) {
-        launch {
-            when (val response = addCarToRemoteUseCase(brand, model, plate, color)) {
-                is ResultWrapper.Success -> {
-                    loadCars()
-                    _addCarResult.value = true
-                }
-                is ResultWrapper.Error -> {
-                    _error.value = response.error.msg
-                }
-            }
-        }
-    }
 
     fun deleteCar(car: CarEntity) {
         launch {
@@ -119,9 +101,8 @@ constructor(
                     _carDeletedId.value = car
                 }
                 is ResultWrapper.Error -> {
-                    _error.value = response.error.msg
+                    _error.value = R.string.ERROR_CAR_NOT_BELONG_TO_USER
                 }
-
             }
         }
     }
@@ -129,12 +110,6 @@ constructor(
     fun loadTripAsCreator() {
 
         launch {
-
-            /* if (savedStateHandle.get<MutableList<TripResponse>>(SAVED_STATE_LOCATIONS)?.isNotEmpty() == true) {
-                 _tripsAsCreator.value = savedStateHandle.get<MutableList<TripResponse>>(SAVED_STATE_LOCATIONS)
-                 return@launch
-             }
- */
             if (_tripsAsCreator.value != null) {
                 return@launch
             }
@@ -167,7 +142,6 @@ constructor(
                 is ResultWrapper.Error -> {
                     _error.value = response.error.msg
                 }
-
             }
         }
     }

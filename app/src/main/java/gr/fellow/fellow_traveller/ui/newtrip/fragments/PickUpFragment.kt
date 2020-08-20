@@ -13,7 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentPickUpBinding
-import gr.fellow.fellow_traveller.ui.createSnackBar
+import gr.fellow.fellow_traveller.ui.createAlerter
 import gr.fellow.fellow_traveller.ui.location.SelectLocationActivity
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 
@@ -62,7 +62,7 @@ class PickUpFragment : Fragment() {
         binding.ImageButtonNext.setOnClickListener {
 
             if (newTripViewModel.destinationPickUp.value == null) {
-                createSnackBar(view, "Παρακαλώ επιλέξτε σημείο αφετηρίας")
+                createAlerter("Παρακαλώ επιλέξτε σημείο αφετηρίας")
             }
             else {
                 navController.navigate(R.id.next_fragment)

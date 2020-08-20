@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.di
 
-import android.content.Context
 import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
@@ -104,8 +103,8 @@ class UseCasesModule {
 
     @ActivityScoped
     @Provides
-    fun provideAddCarToRemoteUseCase(dataSource: FellowDataSource, context: Context): AddCarToRemoteUseCase {
-        return AddCarToRemoteUseCase(dataSource, context)
+    fun provideAddCarToRemoteUseCase(dataSource: FellowDataSource): AddCarToRemoteUseCase {
+        return AddCarToRemoteUseCase(dataSource)
     }
 
 

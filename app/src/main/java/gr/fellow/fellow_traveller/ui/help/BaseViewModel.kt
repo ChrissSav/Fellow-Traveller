@@ -1,34 +1,33 @@
 package gr.fellow.fellow_traveller.ui.help
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.BaseApiException
+import gr.fellow.fellow_traveller.data.NoInternetException
 import gr.fellow.fellow_traveller.utils.ACCESS_DENIED
-import gr.fellow.fellow_traveller.utils.INTERNET_ERROR
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-open class BaseViewModel(private val context: Context) : ViewModel() {
+open class BaseViewModel : ViewModel() {
 
-    protected val _error = SingleLiveEvent<String>()
-    val error: LiveData<String> = _error
+    protected val _error = SingleLiveEvent<Int>()
+    val error: LiveData<Int> = _error
 
     protected val _load = SingleLiveEvent<Boolean>()
     val load: LiveData<Boolean> = _load
 
     var loadTest = MutableLiveData<Boolean>()
 
-    fun launch(load: Boolean, function: suspend () -> Unit) {
+    fun launch(load: Boolean = false, function: suspend () -> Unit) {
         viewModelScope.launch {
             _load.value = load
 
             try {
                 function.invoke()
-            } catch (e: BaseApiException) {
+            } catch (e: Exception) {
                 handleError(e)
             }
             _load.value = false
@@ -36,37 +35,12 @@ open class BaseViewModel(private val context: Context) : ViewModel() {
     }
 
 
-    private fun handleError(e: BaseApiException) {
-        when (e.code) {
-            ACCESS_DENIED -> {
-                _error.value = context.resources.getString(R.string.ERROR_API_UNAUTHORIZED)
-            }
-            INTERNET_ERROR -> {
-                _error.value = context.resources.getString(R.string.ERROR_INTERNET_CONNECTION)
-            }
-            else -> {
-                _error.value = context.resources.getString(R.string.ERROR_API_UNREACHABLE)
-            }
-        }
-    }
-
-
-    fun launch(function: suspend () -> Unit) {
-        viewModelScope.launch {
-            try {
-                function.invoke()
-            } catch (e: BaseApiException) {
-                handleError(e)
-            }
-        }
-    }
-
     fun launch(delayTime: Int, function: suspend () -> Unit) {
         viewModelScope.launch {
             delay(delayTime.toLong())
             try {
                 function.invoke()
-            } catch (e: BaseApiException) {
+            } catch (e: Exception) {
                 handleError(e)
             }
         }
@@ -78,10 +52,26 @@ open class BaseViewModel(private val context: Context) : ViewModel() {
             delay(delayTime.toLong())
             try {
                 function.invoke()
-            } catch (e: BaseApiException) {
+            } catch (e: Exception) {
                 handleError(e)
             }
             loadTest.value = false
         }
+    }
+
+    private fun handleError(e: Exception) {
+        if (e is BaseApiException)
+            when (e.code) {
+                ACCESS_DENIED -> {
+                    _error.value = R.string.ERROR_API_UNAUTHORIZED
+                }
+                else -> {
+                    _error.value = R.string.ERROR_API_UNREACHABLE
+                }
+            }
+        else if (e is NoInternetException)
+            _error.value = R.string.ERROR_INTERNET_CONNECTION
+        else
+            _error.value = R.string.ERROR_SOMETHING_WRONG
     }
 }

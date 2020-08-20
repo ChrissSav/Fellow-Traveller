@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.ui.register
 
-import android.content.Context
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import gr.fellow.fellow_traveller.R
@@ -16,12 +15,12 @@ import gr.fellow.fellow_traveller.usecase.register.RegisterUserUseCase
 class RegisterViewModel
 @ViewModelInject
 constructor(
-    private val context: Context,
     private val checkUserPhoneUseCase: CheckUserPhoneUseCase,
     private val checkUserEmailUseCase: CheckUserEmailUseCase,
     private val registerUserUseCase: RegisterUserUseCase,
     private val registerUserLocalUseCase: RegisterUserLocalUseCase
-) : BaseViewModel(context) {
+) : BaseViewModel() {
+
     private val _phone = SingleLiveEvent<String>()
     val phone: LiveData<String> = _phone
 
@@ -48,7 +47,7 @@ constructor(
                 is ResultWrapper.Success ->
                     _phone.value = phone
                 is ResultWrapper.Error ->
-                    _error.value = context.resources.getString(R.string.ERROR_PHONE_ALREADY_EXISTS)
+                    _error.value = R.string.ERROR_PHONE_ALREADY_EXISTS
             }
         }
 
@@ -63,7 +62,7 @@ constructor(
                 is ResultWrapper.Success ->
                     _email.value = email
                 is ResultWrapper.Error ->
-                    _error.value = context.resources.getString(R.string.ERROR_EMAIL_ALREADY_EXISTS)
+                    _error.value = R.string.ERROR_EMAIL_ALREADY_EXISTS
             }
 
         }
@@ -82,7 +81,7 @@ constructor(
         launch(true) {
 
             if (userInfo.value?.first!!.isEmpty() && userInfo.value?.second!!.isEmpty())
-                _error.value = context.resources.getString(R.string.ERROR_FIELDS_REQUIRE)
+                _error.value = R.string.ERROR_FIELDS_REQUIRE
             else {
                 when (val response = registerUserUseCase(
                     userInfo.value!!.first, userInfo.value!!.second, email.value.toString(),
@@ -95,9 +94,9 @@ constructor(
                     is ResultWrapper.Error -> {
                         when (response.error.code) {
                             200 ->
-                                _error.value = context.resources.getString(R.string.ERROR_PHONE_ALREADY_EXISTS)
+                                _error.value = R.string.ERROR_PHONE_ALREADY_EXISTS
                             201 ->
-                                _error.value = context.resources.getString(R.string.ERROR_EMAIL_ALREADY_EXISTS)
+                                _error.value = R.string.ERROR_EMAIL_ALREADY_EXISTS
                         }
                     }
                 }

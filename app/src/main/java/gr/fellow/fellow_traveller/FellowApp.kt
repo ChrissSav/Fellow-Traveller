@@ -2,6 +2,7 @@ package gr.fellow.fellow_traveller
 
 import android.app.Application
 import android.content.SharedPreferences
+import android.util.Log
 import dagger.hilt.android.HiltAndroidApp
 import gr.fellow.fellow_traveller.utils.PREFS_AUTH_TOKEN
 import javax.inject.Inject
@@ -16,6 +17,8 @@ class FellowApp : Application() {
         super.onCreate()
 
         val test = sharedPreferences.getString(PREFS_AUTH_TOKEN, "") + " "
+
+        Log.i("rest", test)
         // createToast(this, test)
     }
 }

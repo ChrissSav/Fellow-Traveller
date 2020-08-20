@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.databinding.ActivityMainBinding
-import gr.fellow.fellow_traveller.ui.createSnackBar
+import gr.fellow.fellow_traveller.ui.createAlerter
 
 
 @AndroidEntryPoint
@@ -25,16 +25,16 @@ class MainActivity : AppCompatActivity() {
 
         loginViewModel.load.observe(this, Observer {
            if(it)
-               binding.progressLoad.visibility = View.VISIBLE
+               binding.genericLoader.progressLoad.visibility = View.VISIBLE
             else
-               binding.progressLoad.visibility = View.INVISIBLE
+               binding.genericLoader.progressLoad.visibility = View.INVISIBLE
 
         })
 
 
 
         loginViewModel.error.observe(this, Observer {
-            createSnackBar(binding.root, it)
+            createAlerter(getString(it))
         })
 
 

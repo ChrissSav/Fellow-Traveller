@@ -18,26 +18,10 @@
         app:navGraph="@navigation/main_nav_graph" />
 
 
-    <FrameLayout
-        android:id="@+id/progress_load"
+    <include
+        android:id="@+id/generic_loader"
+        layout="@layout/generic_loader"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background_color_progress"
-        android:clickable="true"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:visibility="invisible">
-
-        <ProgressBar
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:layout_gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </FrameLayout>
+        android:layout_height="match_parent" />
 
 </FrameLayout>

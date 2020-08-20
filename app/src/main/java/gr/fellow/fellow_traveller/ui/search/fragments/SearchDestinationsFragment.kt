@@ -14,7 +14,7 @@ import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentSearchDestinationsBinding
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
-import gr.fellow.fellow_traveller.ui.createSnackBar
+import gr.fellow.fellow_traveller.ui.createAlerter
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
 import gr.fellow.fellow_traveller.ui.search.locations.SelectDestinationActivity
 
@@ -60,7 +60,7 @@ class SearchDestinationsFragment : Fragment() {
                 searchTripViewModel.updateFilter()
                 navController.navigate(R.id.next_fragment)
             } else
-                createSnackBar(view, resources.getString(R.string.ERROR_FIELDS_REQUIRE))
+                createAlerter(resources.getString(R.string.ERROR_FIELDS_REQUIRE))
         }
 
 

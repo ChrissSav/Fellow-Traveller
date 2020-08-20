@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.ui.search
 
-import android.content.Context
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,9 +15,8 @@ import gr.fellow.fellow_traveller.usecase.trips.SearchTripsUseCase
 class SearchTripViewModel
 @ViewModelInject
 constructor(
-    private val context: Context,
     private val searchTripsUseCase: SearchTripsUseCase
-) : BaseViewModel(context) {
+) : BaseViewModel() {
 
 
     private val _destinationFrom = MutableLiveData<PlaceModel>()
@@ -73,7 +71,7 @@ constructor(
                         _resultTrips.value = response.data.toMutableList()
                     }
                     is ResultWrapper.Error -> {
-                        _error.value = context.resources.getString(R.string.ERROR_SOMETHING_WRONG)
+                        _error.value = R.string.ERROR_SOMETHING_WRONG
                     }
                 }
                 filterFlag = false

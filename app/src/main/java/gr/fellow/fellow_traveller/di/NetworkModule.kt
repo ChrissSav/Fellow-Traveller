@@ -12,6 +12,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import gr.fellow.fellow_traveller.framework.network.NetworkConnectionInterceptor
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
 import gr.fellow.fellow_traveller.framework.network.google.PlaceApiService
 import gr.fellow.fellow_traveller.utils.ConnectivityHelper
@@ -55,18 +56,19 @@ object NetworkModule {
     @Fellow
     @Singleton
     @Provides
-    fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor, sharedPreferences: SharedPreferences): OkHttpClient.Builder {
+    fun provideOkHttpClient(
+        loggingInterceptor: HttpLoggingInterceptor, connectivityHelper: ConnectivityHelper, sharedPreferences: SharedPreferences
+    ): OkHttpClient.Builder {
         return OkHttpClient.Builder().proxy(Proxy.NO_PROXY)
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
+            .addInterceptor(NetworkConnectionInterceptor(connectivityHelper))
             .addInterceptor(object : Interceptor {
                 override fun intercept(chain: Interceptor.Chain): Response {
                     val request = chain.request()
                     val newRequest = request.newBuilder()
-                    var session: String? = sharedPreferences.getString(PREFS_AUTH_TOKEN, "")
-                    session = sharedPreferences.getString(PREFS_AUTH_TOKEN, "")
-                    session?.let {
+                    sharedPreferences.getString(PREFS_AUTH_TOKEN, "")?.let {
                         newRequest.header("Cookie", it)
                     }
                     return chain.proceed(newRequest.build())
@@ -109,11 +111,12 @@ object NetworkModule {
     @GoogleService
     @Singleton
     @Provides
-    fun provideOkHttpClientGoogle(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient.Builder {
+    fun provideOkHttpClientGoogle(loggingInterceptor: HttpLoggingInterceptor, connectivityHelper: ConnectivityHelper): OkHttpClient.Builder {
         return OkHttpClient.Builder().proxy(Proxy.NO_PROXY)
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
+            .addInterceptor(NetworkConnectionInterceptor(connectivityHelper))
             .addInterceptor(loggingInterceptor)
 
     }

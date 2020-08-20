@@ -10,7 +10,7 @@ import androidx.navigation.Navigation
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.ActivityNewTripBinding
-import gr.fellow.fellow_traveller.ui.createSnackBar
+import gr.fellow.fellow_traveller.ui.createAlerter
 import gr.fellow.fellow_traveller.ui.dialogs.ExitCustomDialog
 
 
@@ -81,7 +81,7 @@ class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogLi
         newTripViewModel.setSeats(1)
 
         newTripViewModel.error.observe(this, Observer {
-            createSnackBar(view, it)
+            createAlerter(getString(it))
         })
         binding.imageButtonExit.setOnClickListener {
             openDialog()

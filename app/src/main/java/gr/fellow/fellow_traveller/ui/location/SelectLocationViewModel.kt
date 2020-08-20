@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.ui.location
 
-import android.content.Context
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
@@ -13,10 +12,9 @@ import gr.fellow.fellow_traveller.usecase.newtrip.GetPlaceFromPlacesUseCase
 class SelectLocationViewModel
 @ViewModelInject
 constructor(
-    private val context: Context,
     private val getPlacesUseCase: GetPlaceFromPlacesUseCase,
     private val getGeometryFormPlaceUseCase: GetGeometryFormPlaceUseCase
-) : BaseViewModel(context) {
+) : BaseViewModel() {
 
     private val _destinations = SingleLiveEvent<MutableList<PredictionResponse>>()
     val destinations: LiveData<MutableList<PredictionResponse>> = _destinations

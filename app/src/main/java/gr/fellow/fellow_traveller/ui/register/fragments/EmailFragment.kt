@@ -13,7 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentEmailBinding
-import gr.fellow.fellow_traveller.ui.createSnackBar
+import gr.fellow.fellow_traveller.ui.createAlerter
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
 import gr.fellow.fellow_traveller.utils.isValidEmail
 
@@ -76,7 +76,7 @@ class EmailFragment : Fragment() {
             if (isValidEmail(binding.EditTextEmail.text.toString())) {
                 registerViewModel.checkUserEmail(binding.EditTextEmail.text.toString())
             } else {
-                createSnackBar(view, resources.getString(R.string.ERROR_INVALID_EMAIL_FORMAT))
+                createAlerter(resources.getString(R.string.ERROR_INVALID_EMAIL_FORMAT))
             }
         }
 

@@ -13,7 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentDestinationsBinding
-import gr.fellow.fellow_traveller.ui.createSnackBar
+import gr.fellow.fellow_traveller.ui.createAlerter
 import gr.fellow.fellow_traveller.ui.location.SelectLocationActivity
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 
@@ -72,10 +72,10 @@ class DestinationsFragment : Fragment() {
 
             when {
                 newTripViewModel.destinationFrom.value == null -> {
-                    createSnackBar(view, "Παρακαλώ επιλέξτε σημείο αφετηρίας")
+                    createAlerter("Παρακαλώ επιλέξτε σημείο αφετηρίας")
                 }
                 newTripViewModel.destinationTo.value == null -> {
-                    createSnackBar(view, "Παρακαλώ επιλέξτε σημείο προορισμού")
+                    createAlerter("Παρακαλώ επιλέξτε σημείο προορισμού")
                 }
                 else -> {
                     navController.navigate(R.id.next_fragment)
