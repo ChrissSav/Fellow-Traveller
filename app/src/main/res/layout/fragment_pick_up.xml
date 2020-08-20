@@ -46,20 +46,14 @@
             app:layout_constraintStart_toStartOf="@+id/PickUpPointFragment_textView"
             app:layout_constraintTop_toBottomOf="@+id/PickUpPointFragment_textView" />
 
-        <Button
+        <EditText
             android:id="@+id/pickUpButton"
-            style="@style/button_outline_blue_with_left_drawable"
+            style="@style/editTex_outline_blue_with_left_drawable"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginTop="8dp"
-            android:drawableRight="@drawable/ic_pin"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:padding="15dp"
-            android:singleLine="true"
-            android:text="Διάλεξε τον προορισμό ..."
-            android:textAlignment="textStart"
-            android:textColor="@color/button_default_color"
+            android:drawableEnd="@drawable/ic_pin"
+            android:hint="Διάλεξε τον προορισμό ..."
             app:layout_constraintEnd_toEndOf="@+id/PickUpPointFragment_textView"
             app:layout_constraintStart_toStartOf="@+id/PickUpPointFragment_textView"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />

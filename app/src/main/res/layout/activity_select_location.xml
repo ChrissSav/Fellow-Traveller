@@ -7,7 +7,6 @@
     tools:context=".ui.location.SelectLocationActivity">
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/SelectLocationActivity_search_section"
         android:layout_width="match_parent"
@@ -21,7 +20,7 @@
         android:paddingBottom="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/imageView_internet">
 
         <ImageButton
             android:id="@+id/back_button"
@@ -53,8 +52,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/back_button"
-            app:layout_constraintTop_toTopOf="parent" >
-            <requestFocus/>
+            app:layout_constraintTop_toTopOf="parent">
+
+            <requestFocus />
         </EditText>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -79,4 +79,20 @@
         tools:listitem="@layout/place_item"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SelectLocationActivity_textView6" />
+
+    <TextView
+        android:id="@+id/imageView_internet"
+        style="@style/header1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:text="@string/ERROR_INTERNET_CONNECTION"
+        android:textColor="@color/red_color"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

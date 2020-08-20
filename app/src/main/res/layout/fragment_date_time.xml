@@ -28,19 +28,15 @@
         app:layout_constraintStart_toStartOf="@+id/AddDateTimeFragment_textView"
         app:layout_constraintTop_toBottomOf="@+id/AddDateTimeFragment_textView" />
 
-    <Button
+    <EditText
         android:id="@+id/date_Button"
-        style="@style/button_outline_blue_with_left_drawable"
+        style="@style/editTex_outline_blue_with_left_drawable"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:drawableRight="@drawable/ic_calendar"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:text="@string/set_date"
-        android:textAlignment="textStart"
-        android:textColor="@color/button_default_color"
+        android:drawableTint="@color/blue_offer"
+        android:drawableEnd="@drawable/ic_calendar"
+        android:hint="@string/set_date"
         app:layout_constraintEnd_toEndOf="@+id/AddDateTimeFragment_textView"
         app:layout_constraintStart_toStartOf="@+id/AddDateTimeFragment_textView"
         app:layout_constraintTop_toBottomOf="@+id/AddDateTimeFragment_textView3" />
@@ -55,20 +51,15 @@
         app:layout_constraintStart_toStartOf="@+id/date_Button"
         app:layout_constraintTop_toBottomOf="@+id/date_Button" />
 
-    <Button
+    <EditText
         android:id="@+id/time_Button"
-        style="@style/button_outline_blue_with_left_drawable"
+        style="@style/editTex_outline_blue_with_left_drawable"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:drawableRight="@drawable/ic_clock"
+        android:drawableEnd="@drawable/ic_clock"
         android:drawableTint="@color/blue_offer"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:text="@string/set_time"
-        android:textAlignment="textStart"
-        android:textColor="@color/button_default_color"
+        android:hint="@string/set_time"
         app:layout_constraintEnd_toEndOf="@+id/date_Button"
         app:layout_constraintStart_toStartOf="@+id/date_Button"
         app:layout_constraintTop_toBottomOf="@+id/AddDateTimeFragment_textView2" />

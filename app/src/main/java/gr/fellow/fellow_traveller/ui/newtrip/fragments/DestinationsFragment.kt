@@ -57,15 +57,11 @@ class DestinationsFragment : Fragment() {
 
 
         newTripViewModel.destinationFrom.observe(viewLifecycleOwner, Observer {
-            binding.fromButton.text = it.title
-            binding.fromButton.setTextColor(resources.getColor(R.color.button_fill_color))
-
+            binding.fromButton.setText(it.title)
         })
 
         newTripViewModel.destinationTo.observe(viewLifecycleOwner, Observer {
-            binding.toButton.text = it.title
-            binding.toButton.setTextColor(resources.getColor(R.color.button_fill_color))
-
+            binding.toButton.setText(it.title)
         })
 
         binding.ImageButtonNext.setOnClickListener {

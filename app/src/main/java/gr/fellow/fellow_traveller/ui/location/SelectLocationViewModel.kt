@@ -34,7 +34,6 @@ constructor(
                         _destinations.value = res
                     }
 
-
                 }
             }
         }

@@ -1,19 +1,23 @@
 package gr.fellow.fellow_traveller.ui.location
 
+import android.animation.AnimatorSet
+import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
+import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.ActivitySelectLocationBinding
 import gr.fellow.fellow_traveller.framework.network.google.response.PredictionResponse
-import gr.fellow.fellow_traveller.ui.createToast
+import gr.fellow.fellow_traveller.ui.createAlerter
 import gr.fellow.fellow_traveller.ui.location.adapter.PlacesAdapter
 
 @AndroidEntryPoint
@@ -37,15 +41,20 @@ class SelectLocationActivity : AppCompatActivity() {
         initializeRecycle()
 
         selectLocationViewModel.destinations.observe(this, Observer {
-            if (it.isNotEmpty()) {
-                placesList.clear()
-                placesList.addAll(it)
-                binding.RecyclerView.adapter?.notifyDataSetChanged()
+            showHideBottomNav(0)
+            placesList.clear()
+            placesList.addAll(it)
+            binding.RecyclerView.adapter?.notifyDataSetChanged()
+        })
+
+        selectLocationViewModel.error.observe(this, Observer {
+            if (it == R.string.ERROR_INTERNET_CONNECTION) {
+                showHideBottomNav(100)
+            } else {
+                createAlerter(getString(it))
             }
 
-        })
-        selectLocationViewModel.error.observe(this, Observer {
-            createToast(this, getString(it))
+
         })
 
         binding.backButton.setOnClickListener {
@@ -55,8 +64,7 @@ class SelectLocationActivity : AppCompatActivity() {
         binding.SelectLocationActivityEditTextSearchPlace.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
                 //Log.i("addTextChangedListener", "afterTextChanged "+s);
-                if (s.toString().length > 2)
-                    selectLocationViewModel.getAllDestinations(s.toString())
+                selectLocationViewModel.getAllDestinations(s.toString())
                 //  GetPlaces(s.toString())
             }
 
@@ -69,6 +77,21 @@ class SelectLocationActivity : AppCompatActivity() {
             }
         })
 
+    }
+
+    private fun showHideBottomNav(targetHeight: Int) {
+        val slideAnimator = ValueAnimator
+            .ofInt(binding.imageViewInternet.layoutParams.height, targetHeight)
+            .setDuration(200)
+        slideAnimator.addUpdateListener { animation1: ValueAnimator ->
+            val value = animation1.animatedValue as Int
+            binding.imageViewInternet.layoutParams.height = value
+            binding.imageViewInternet.requestLayout()
+        }
+        val animationSet = AnimatorSet()
+        animationSet.interpolator = AccelerateDecelerateInterpolator()
+        animationSet.play(slideAnimator)
+        animationSet.start()
     }
 
 

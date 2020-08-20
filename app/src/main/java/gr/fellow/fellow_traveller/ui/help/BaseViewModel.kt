@@ -60,8 +60,8 @@ open class BaseViewModel : ViewModel() {
     }
 
     private fun handleError(e: Exception) {
-        if (e is BaseApiException)
-            when (e.code) {
+        when (e) {
+            is BaseApiException -> when (e.code) {
                 ACCESS_DENIED -> {
                     _error.value = R.string.ERROR_API_UNAUTHORIZED
                 }
@@ -69,9 +69,8 @@ open class BaseViewModel : ViewModel() {
                     _error.value = R.string.ERROR_API_UNREACHABLE
                 }
             }
-        else if (e is NoInternetException)
-            _error.value = R.string.ERROR_INTERNET_CONNECTION
-        else
-            _error.value = R.string.ERROR_SOMETHING_WRONG
+            is NoInternetException -> _error.value = R.string.ERROR_INTERNET_CONNECTION
+            else -> _error.value = R.string.ERROR_SOMETHING_WRONG
+        }
     }
 }

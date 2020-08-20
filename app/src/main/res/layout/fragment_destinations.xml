@@ -44,38 +44,28 @@
             app:layout_constraintStart_toStartOf="@+id/from_Button"
             app:layout_constraintTop_toBottomOf="@+id/from_Button" />
 
-        <Button
+        <EditText
             android:id="@+id/from_Button"
-            style="@style/button_outline_blue_with_left_drawable"
+            style="@style/editTex_outline_blue_with_left_drawable"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:drawableRight="@drawable/ic_location"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:padding="15dp"
-            android:singleLine="true"
-            android:text="Διάλεξε την αφετηρία ..."
-            android:textAlignment="textStart"
-            android:textColor="@color/button_default_color"
+            android:drawableEnd="@drawable/ic_location"
+            android:drawableTint="@color/blue_color"
+            android:hint="Διάλεξε τον προορισμό ..."
             app:layout_constraintEnd_toEndOf="@+id/AddLocationsFragment_textView"
             app:layout_constraintStart_toStartOf="@+id/AddLocationsFragment_textView"
             app:layout_constraintTop_toBottomOf="@+id/AddLocationsFragment_textView3" />
 
-        <Button
+        <EditText
             android:id="@+id/to_Button"
-            style="@style/button_outline_blue_with_left_drawable"
+            style="@style/editTex_outline_blue_with_left_drawable"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:drawableRight="@drawable/ic_pin"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:padding="15dp"
-            android:singleLine="true"
-            android:text="Διάλεξε τον προορισμό ..."
-            android:textAlignment="textStart"
-            android:textColor="@color/button_default_color"
+            android:drawableEnd="@drawable/ic_pin"
+            android:drawableTint="@color/blue_color"
+            android:hint="Διάλεξε τον προορισμό ..."
             app:layout_constraintEnd_toEndOf="@+id/AddLocationsFragment_textView"
             app:layout_constraintStart_toStartOf="@+id/AddLocationsFragment_textView"
             app:layout_constraintTop_toBottomOf="@+id/AddLocationsFragment_textView2" />

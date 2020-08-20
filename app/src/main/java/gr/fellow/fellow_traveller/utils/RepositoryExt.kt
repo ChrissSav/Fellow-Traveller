@@ -24,8 +24,8 @@ suspend fun <T : Any> networkCallWithOutWrap(
     return withContext(Dispatchers.IO) {
         try {
             function.invoke()
-        } catch (exception: Exception) {
-            throw BaseApiException(SOMETHING_WORNG)
+        } catch (exception: BaseApiException) {
+            throw exception
         }
     }
 }

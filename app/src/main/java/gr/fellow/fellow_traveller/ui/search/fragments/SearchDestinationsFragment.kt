@@ -68,15 +68,12 @@ class SearchDestinationsFragment : Fragment() {
 
         with(searchTripViewModel) {
             destinationFrom.observe(viewLifecycleOwner, Observer {
-                binding.destFromButton.text = it.title
-                binding.destFromButton.setTextColor(resources.getColor(R.color.button_fill_color))
+                binding.destFromButton.setText(it.title)
             })
 
             destinationTo.observe(viewLifecycleOwner, Observer {
-                binding.destToButton.text = it.title
-                binding.destToButton.setTextColor(resources.getColor(R.color.button_fill_color))
+                binding.destToButton.setText(it.title)
             })
-
 
 
         }

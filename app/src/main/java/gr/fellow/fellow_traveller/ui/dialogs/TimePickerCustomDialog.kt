@@ -6,12 +6,10 @@ import android.os.Bundle
 import android.widget.TimePicker
 import androidx.fragment.app.DialogFragment
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 import java.util.*
 
 class TimePickerCustomDialog(
     private val buttonText: String,
-    private val defaultTitle: String,
     private val listener: (String) -> Unit
 ) :
 
@@ -23,7 +21,7 @@ class TimePickerCustomDialog(
 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        if (buttonText == defaultTitle) {
+        if (buttonText.isNullOrBlank()) {
             hour = 12
             min = 0
         } else {

@@ -47,31 +47,28 @@ class DateTimeFragment : Fragment() {
         navController = Navigation.findNavController(view)
 
 
-        if (newTripViewModel.date.value != null) {
-            binding.dateButton.text = newTripViewModel.date.value.toString()
-            binding.dateButton.setTextColor(resources.getColor(R.color.button_fill_color))
-        }
-        if (newTripViewModel.time.value != null) {
-            binding.timeButton.text = newTripViewModel.time.value.toString()
-            binding.timeButton.setTextColor(resources.getColor(R.color.button_fill_color))
-        }
+        newTripViewModel.date.observe(viewLifecycleOwner, Observer {
+            binding.dateButton.setText(it)
+        })
+
+        newTripViewModel.time.observe(viewLifecycleOwner, Observer {
+            binding.timeButton.setText(it)
+        })
 
         binding.dateButton.setOnClickListener {
             dateDialog = DatePickerCustomDialog(
-                binding.dateButton.text.toString(),
-                resources.getString(R.string.set_date)
+                binding.dateButton.text.toString()
             ) {
 
                 newTripViewModel.applyDate(it)
             }
-                fragmentManager?.let { it1 -> dateDialog.show(it1, "dateDialog") }
+            fragmentManager?.let { it1 -> dateDialog.show(it1, "dateDialog") }
 
         }
 
         binding.timeButton.setOnClickListener {
             timeDialog = TimePickerCustomDialog(
-                binding.timeButton.text.toString(),
-                resources.getString(R.string.set_time)
+                binding.timeButton.text.toString()
             ) {
                 newTripViewModel.applyTime(it)
             }
@@ -79,23 +76,10 @@ class DateTimeFragment : Fragment() {
 
         }
 
-        newTripViewModel.date.observe(viewLifecycleOwner, Observer {
-            binding.dateButton.text = it
-            binding.dateButton.setTextColor(resources.getColor(R.color.button_fill_color))
-
-        })
-
-        newTripViewModel.time.observe(viewLifecycleOwner, Observer {
-            binding.timeButton.text = it
-            binding.timeButton.setTextColor(resources.getColor(R.color.button_fill_color))
-
-        })
 
         binding.ImageButtonNext.setOnClickListener {
             if (validateDateTimeDiffer(
-                    newTripViewModel.date.value.toString(),
-                    newTripViewModel.time.value.toString(),
-                    resources.getInteger(R.integer.Time_difference)
+                    newTripViewModel.date.value.toString(), newTripViewModel.time.value.toString(), resources.getInteger(R.integer.Time_difference)
                 )
             ) {
                 navController.navigate(R.id.next_fragment)

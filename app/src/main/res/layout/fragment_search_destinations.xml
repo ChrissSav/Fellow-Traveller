@@ -47,22 +47,16 @@
         app:layout_constraintStart_toStartOf="@id/back_button"
         app:layout_constraintTop_toBottomOf="@id/info_label" />
 
-    <Button
+    <EditText
         android:id="@+id/destFrom_button"
-        style="@style/button_outline_orange_with_left_drawable"
+        style="@style/editTex_outline_blue_with_left_drawable"
         android:layout_width="0dp"
         android:layout_height="58dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="20dp"
-        android:drawableRight="@drawable/ic_location"
-        android:ellipsize="end"
-        android:lines="1"
-        android:maxLines="1"
-        android:padding="15dp"
-        android:singleLine="true"
-        android:text="Επέλεξε την αφετηρία"
-        android:textAlignment="textStart"
-        android:textColor="@color/button_default_color"
+        android:drawableEnd="@drawable/ic_location"
+        android:drawableTint="@color/orange_color"
+        android:hint="Επέλεξε την αφετηρία"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/back_button"
         app:layout_constraintTop_toBottomOf="@id/from_label" />
@@ -77,22 +71,16 @@
         app:layout_constraintStart_toStartOf="@id/back_button"
         app:layout_constraintTop_toBottomOf="@id/destFrom_button" />
 
-    <Button
+    <EditText
         android:id="@+id/destTo_button"
-        style="@style/button_outline_orange_with_left_drawable"
+        style="@style/editTex_outline_blue_with_left_drawable"
         android:layout_width="0dp"
         android:layout_height="58dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="20dp"
-        android:drawableRight="@drawable/ic_pin"
-        android:ellipsize="end"
-        android:lines="1"
-        android:maxLines="1"
-        android:padding="15dp"
-        android:singleLine="true"
-        android:text="Επέλεξε προορισμό"
-        android:textAlignment="textStart"
-        android:textColor="@color/button_default_color"
+        android:drawableEnd="@drawable/ic_pin"
+        android:drawableTint="@color/orange_color"
+        android:hint="Επέλεξε προορισμό"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/back_button"
         app:layout_constraintTop_toBottomOf="@id/to_label" />

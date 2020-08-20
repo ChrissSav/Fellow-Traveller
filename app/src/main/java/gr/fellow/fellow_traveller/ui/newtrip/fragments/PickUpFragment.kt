@@ -49,14 +49,9 @@ class PickUpFragment : Fragment() {
             startActivityForResult(intent, 1)
         }
 
-        if (newTripViewModel.destinationPickUp.value != null) {
-            binding.pickUpButton.text = newTripViewModel.destinationPickUp.value?.title
-            binding.pickUpButton.setTextColor(resources.getColor(R.color.button_fill_color))
-        }
 
         newTripViewModel.destinationPickUp.observe(viewLifecycleOwner, Observer {
-            binding.pickUpButton.text = it.title
-            binding.pickUpButton.setTextColor(resources.getColor(R.color.button_fill_color))
+            binding.pickUpButton.setText(it.title)
         })
 
         binding.ImageButtonNext.setOnClickListener {

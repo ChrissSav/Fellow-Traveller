@@ -11,7 +11,6 @@ import java.util.*
 
 class DatePickerCustomDialog(
     private val buttonText: String,
-    private val defaultTitle: String,
     private val listener: (String) -> Unit
 ) :
 
@@ -24,7 +23,7 @@ class DatePickerCustomDialog(
 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        if (buttonText == defaultTitle) {
+        if (buttonText.isNullOrBlank()) {
             calendar = Calendar.getInstance()
             year = calendar.get(Calendar.YEAR)
             month = calendar.get(Calendar.MONTH)
