@@ -155,6 +155,14 @@ class PickNumberButton : ConstraintLayout {
         pickMinusImg.isEnabled = currentNum != minValue
         pickPlusImg.isEnabled = currentNum != maxValue
     }
+
+    fun setUpperLimit(limit: Int) {
+        maxValue = limit
+    }
+
+    fun setLowerLimit(limit: Int) {
+        minValue = limit
+    }
 }
 
 interface PickButtonActionListener {

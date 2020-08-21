@@ -52,7 +52,18 @@ class BookTripFragment : Fragment() {
                 binding.petsSwitch.isEnabled = hasPet
                 binding.priceTextView.text = getString(R.string.price, price.toString())
 
-                bagsHandle(maxBags - currentBags)
+                binding.bagsIncreaseSection.setUpperLimit(maxBags - currentBags)
+
+
+                /*binding.bagsIncreaseSection.pickButtonActionListener = object : PickButtonActionListener {
+                    override fun onPickAction(value: Int) {
+                        if (value > resources.getInteger(R.integer.seats_min)) {
+                            searchFilters.seatsMin = value
+                        } else {
+                            searchFilters.seatsMin = null
+                        }
+                    }
+                }*/
             }
         }
 
@@ -63,24 +74,6 @@ class BookTripFragment : Fragment() {
 
     }
 
-    private fun bagsHandle(bagsMax: Int) {
-
-        with(binding) {
-
-            bagsMinusButton.setOnClickListener {
-                if (bagsValueTv.text.toString().toInt() > 0) {
-                    bagsValueTv.text = (bagsValueTv.text.toString().toInt() - 1).toString()
-                }
-            }
-
-            bagsPlusButton.setOnClickListener {
-                if (bagsValueTv.text.toString().toInt() < bagsMax) {
-                    bagsValueTv.text = (bagsValueTv.text.toString().toInt() + 1).toString()
-                }
-            }
-
-        }
-    }
 
 
     override fun onDestroyView() {

@@ -4,7 +4,6 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.data.BaseApiException
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.domain.mappers.toCarEntity
 import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
@@ -85,7 +84,7 @@ constructor(
                         _error.value = response.error.msg
                     }
                 }
-            } catch (exception: BaseApiException) {
+            } catch (exception: Exception) {
                 _cars.value = getUserCarsLocalUseCase()
                 throw  exception
             }
@@ -133,7 +132,6 @@ constructor(
             if (_tripsTakesPart.value != null) {
                 return@launch
             }
-
             when (val response = getTripsAsPassengerRemoteUseCase()) {
                 is ResultWrapper.Success -> {
                     // savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)

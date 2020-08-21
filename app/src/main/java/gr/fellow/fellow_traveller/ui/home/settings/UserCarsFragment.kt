@@ -32,10 +32,7 @@ class UserCarsFragment : Fragment() {
     private lateinit var deleteDialog: DeleteConfirmationDialog
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentUserCarsBinding.inflate(inflater, container, false)
         return binding.root
     }
