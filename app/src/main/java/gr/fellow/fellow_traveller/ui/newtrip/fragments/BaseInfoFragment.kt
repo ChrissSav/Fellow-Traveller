@@ -23,6 +23,7 @@ import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.ui.car.AddCarActivity
 import gr.fellow.fellow_traveller.ui.createAlerter
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
+import gr.fellow.fellow_traveller.ui.views.PickButtonActionListener
 
 
 class BaseInfoFragment : Fragment() {
@@ -41,10 +42,7 @@ class BaseInfoFragment : Fragment() {
     private var _binding: FragmentBaseInfoBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentBaseInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -64,13 +62,13 @@ class BaseInfoFragment : Fragment() {
             })
 
             seats.observe(viewLifecycleOwner, Observer {
-                binding.seatsValueTv.text = it.toString()
+                binding.seatsPickButton.currentNum = it
+
 
             })
 
             bags.observe(viewLifecycleOwner, Observer {
-                binding.bagsValueTv.text = it.toString()
-
+                binding.bagsPickButton.currentNum = it
             })
 
 
@@ -91,21 +89,16 @@ class BaseInfoFragment : Fragment() {
 
             }
 
-            plusButtonSeats.setOnClickListener {
-                increaseSeats(seatsValueTv)
+            bagsPickButton.pickButtonActionListener = object : PickButtonActionListener {
+                override fun onPickAction(value: Int) {
+                    newTripViewModel.setBags(value)
+                }
             }
 
-            minusButtonSeats.setOnClickListener {
-                decreaseSeats(seatsValueTv)
-            }
-
-            plusButtonBags.setOnClickListener {
-                increaseBags(bagsValueTv)
-
-            }
-
-            minusButtonBags.setOnClickListener {
-                decreaseBags(bagsValueTv)
+            seatsPickButton.pickButtonActionListener = object : PickButtonActionListener {
+                override fun onPickAction(value: Int) {
+                    newTripViewModel.setSeats(value)
+                }
             }
 
             switchPet.setOnCheckedChangeListener { _, b ->

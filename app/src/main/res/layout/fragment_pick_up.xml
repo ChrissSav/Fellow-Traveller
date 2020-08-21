@@ -53,6 +53,7 @@
             android:layout_height="60dp"
             android:layout_marginTop="8dp"
             android:drawableEnd="@drawable/ic_pin"
+            android:drawableTint="@color/blue_color"
             android:hint="Διάλεξε τον προορισμό ..."
             app:layout_constraintEnd_toEndOf="@+id/PickUpPointFragment_textView"
             app:layout_constraintStart_toStartOf="@+id/PickUpPointFragment_textView"

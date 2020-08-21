@@ -70,8 +70,7 @@ class HomeActivity : AppCompatActivity() {
 
 
     private fun convertDpToPixel(dp: Int): Int {
-        return (dp * (resources
-            .displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).toInt()
+        return (dp * (resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).toInt()
     }
 
     private fun showHideBottomNav(targetHeight: Int) {

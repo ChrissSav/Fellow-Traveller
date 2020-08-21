@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="PickNumberButton">
+        <attr name="mv_minusBtnDrawable" format="integer" />
+        <attr name="mv_plusBtnDrawable" format="integer" />
+        <attr name="mv_pickTxtColor" format="color" />
+        <attr name="mv_pickTxtBackground" format="integer" />
+        <attr name="minValue" format="integer" />
+        <attr name="maxValue" format="integer" />
+        <attr name="minus_src" format="reference|color" />
+        <attr name="plus_src" format="reference|color" />
+    </declare-styleable>
+</resources>

@@ -14,6 +14,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentSearchFilterBinding
 import gr.fellow.fellow_traveller.domain.SearchFilters
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
+import gr.fellow.fellow_traveller.ui.views.PickButtonActionListener
 
 class SearchFilterFragment : Fragment() {
 
@@ -25,10 +26,7 @@ class SearchFilterFragment : Fragment() {
     private val binding get() = _binding!!
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentSearchFilterBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -42,13 +40,12 @@ class SearchFilterFragment : Fragment() {
             searchFilters = it.copy()
         }
 
-        seatsHandle()
-        bagsHandle()
+
 
         with(searchFilters) {
 
-            binding.seatsValueTv.text = (seatsMin ?: resources.getInteger(R.integer.seats_min)).toString()
-            binding.bagsValueTv.text = (bagsMin ?: resources.getInteger(R.integer.bags_min)).toString()
+            binding.seatsPickButton.currentNum = seatsMin ?: resources.getInteger(R.integer.seats_min)
+            binding.bagsPickButton.currentNum = bagsMin ?: resources.getInteger(R.integer.bags_min)
             binding.fromRangeKmSeekbar.setMinStartValue((rangeFrom ?: resources.getInteger(R.integer.min_value_in_filters)).toFloat()).apply()
             binding.toRangeKmSeekbar.setMinStartValue((rangeTo ?: resources.getInteger(R.integer.min_value_in_filters)).toFloat()).apply()
             binding.priceRangeSeekbar.setMaxStartValue((priceMax ?: resources.getInteger(R.integer.price_max)).toFloat()).apply()
@@ -66,6 +63,27 @@ class SearchFilterFragment : Fragment() {
         }
 
         with(binding) {
+
+            seatsPickButton.pickButtonActionListener = object : PickButtonActionListener {
+                override fun onPickAction(value: Int) {
+                    if (value > resources.getInteger(R.integer.seats_min)) {
+                        searchFilters.seatsMin = value
+                    } else {
+                        searchFilters.seatsMin = null
+                    }
+                }
+            }
+
+            bagsPickButton.pickButtonActionListener = object : PickButtonActionListener {
+                override fun onPickAction(value: Int) {
+                    if (value > resources.getInteger(R.integer.bags_min)) {
+                        searchFilters.bagsMin = value
+                    } else {
+                        searchFilters.bagsMin = null
+                    }
+                }
+            }
+
 
 
             resetButton.setOnClickListener {
@@ -128,48 +146,6 @@ class SearchFilterFragment : Fragment() {
         })
 
 
-    }
-
-    private fun seatsHandle() {
-
-        with(binding) {
-
-            minusButtonSeats.setOnClickListener {
-                if (seatsValueTv.text.toString().toInt() > resources.getInteger(R.integer.seats_min)) {
-                    searchFilters.seatsMin = seatsValueTv.text.toString().toInt() - 1
-                    seatsValueTv.text = searchFilters.seatsMin.toString()
-                } else {
-                    searchFilters.seatsMin = null
-                }
-            }
-
-            plusButtonSeats.setOnClickListener {
-                searchFilters.seatsMin = seatsValueTv.text.toString().toInt() + 1
-                seatsValueTv.text = searchFilters.seatsMin.toString()
-            }
-
-        }
-    }
-
-    private fun bagsHandle() {
-
-        with(binding) {
-
-            minusButtonBags.setOnClickListener {
-                if (bagsValueTv.text.toString().toInt() > resources.getInteger(R.integer.bags_min)) {
-                    searchFilters.bagsMin = bagsValueTv.text.toString().toInt() - 1
-                    bagsValueTv.text = searchFilters.bagsMin.toString()
-                } else {
-                    searchFilters.bagsMin = null
-                }
-            }
-
-            plusButtonBags.setOnClickListener {
-                searchFilters.bagsMin = bagsValueTv.text.toString().toInt() + 1
-                bagsValueTv.text = searchFilters.bagsMin.toString()
-            }
-
-        }
     }
 
 

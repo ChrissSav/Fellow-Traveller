@@ -31,7 +31,6 @@ class SplashActivity : AppCompatActivity() {
         setContentView(view)
 
 
-
         Handler().postDelayed({
             val intent = if (sharedPreferences.getString(PREFS_AUTH_TOKEN, "").toString().length > 10) {
                 Intent(this, HomeActivity::class.java)
