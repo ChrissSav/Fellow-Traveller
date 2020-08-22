@@ -12,4 +12,16 @@
         <attr name="minus_src" format="reference|color" />
         <attr name="plus_src" format="reference|color" />
     </declare-styleable>
+
+    <declare-styleable name="FellowEditText">
+        <attr name="drawable_right" format="reference|color" />
+        <attr name="bottom_line_color" format="color" />
+        <attr name="bottom_line_top_margin" format="dimension" />
+        <attr name="drawable_padding" format="dimension" />
+        <attr name="padding_end" format="dimension" />
+        <attr name="padding_start" format="dimension" />
+        <attr name="style" format="integer" />
+        <attr name="input_type" format="string" />
+        <attr name="hint_text" format="string" />
+    </declare-styleable>
 </resources>

@@ -1,7 +1,7 @@
 package gr.fellow.fellow_traveller.ui
 
 import android.app.Activity
-import android.content.Context
+import android.content.res.Resources
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
@@ -30,6 +30,15 @@ fun Activity.createAlerter(msg: String) {
 }
 
 
+fun Activity.createToast(msg: String) {
+    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+}
+
+fun Fragment.createToast(msg: String) {
+    Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show()
+}
+
+
 fun Fragment.createAlerter(msg: String) {
     var icon = R.drawable.ic_exclamation_mark
     if (this.resources.getString(R.string.ERROR_INTERNET_CONNECTION) == msg)
@@ -54,12 +63,6 @@ fun Fragment.hideKeyboard() {
     val imm = this.activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(this.view?.rootView?.windowToken, 0)
 }
-
-fun createToast(context: Context, msg: String) {
-    Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-
-}
-
 
 fun dateTimeToTimestamp(date: String, time: String): Long {
     val p = "0".toLong()
@@ -98,3 +101,23 @@ fun ImageView.loadImageFromUrl(url: String?) {
             .load(url)
             .into(this);
 }
+
+val Int.toPx: Int
+    get() = (this * Resources.getSystem().displayMetrics.density).toInt()
+
+val Int.toDp: Int
+    get() = (this / Resources.getSystem().displayMetrics.density).toInt()
+
+val Float.toDp: Int
+    get() = (this / Resources.getSystem().displayMetrics.density).toInt()
+
+val Float.toPx: Int
+    get() = (this / Resources.getSystem().displayMetrics.density).toInt()
+
+val Double.toDp: Int
+    get() = (this / Resources.getSystem().displayMetrics.density).toInt()
+
+val Double.toPx: Int
+    get() = (this / Resources.getSystem().displayMetrics.density).toInt()
+
+

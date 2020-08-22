@@ -27,41 +27,17 @@
         app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header"
         app:layout_constraintTop_toBottomOf="@+id/LoginActivity_textView_header" />
 
-    <EditText
+    <gr.fellow.fellow_traveller.ui.views.FellowEditText
         android:id="@+id/email_editText"
-        style="@style/input"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:hint="example@email.com"
         android:layout_marginEnd="20dp"
-        android:background="@null"
-        android:inputType="textWebEmailAddress"
-        android:maxLength="80"
-        android:singleLine="true"
+        app:hint_text="example@email.com"
+        app:input_type="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView2"
         app:layout_constraintTop_toBottomOf="@+id/LoginActivity_textView2" />
-
-    <ImageButton
-        android:id="@+id/erase_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_close"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/email_editText"
-        app:layout_constraintEnd_toEndOf="@id/email_editText"
-        app:layout_constraintTop_toTopOf="@id/email_editText" />
-
-    <View
-        android:id="@+id/LoginActivity_email_underline"
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        android:background="@drawable/component_edit_text_line"
-        android:focusable="true"
-        app:layout_constraintEnd_toEndOf="@+id/email_editText"
-        app:layout_constraintStart_toStartOf="@+id/email_editText"
-        app:layout_constraintTop_toBottomOf="@+id/email_editText" />
 
 
     <TextView
@@ -69,10 +45,10 @@
         style="@style/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="36dp"
         android:text="Κωδικός"
-        app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header"
-        app:layout_constraintTop_toBottomOf="@+id/LoginActivity_email_underline" />
+        app:layout_constraintStart_toStartOf="@+id/email_editText"
+        app:layout_constraintTop_toBottomOf="@+id/email_editText" />
 
     <EditText
         android:id="@+id/password_editText"
@@ -82,11 +58,11 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:background="@null"
+        android:hint="Κωδικός"
         android:inputType="textPassword"
         android:maxLength="20"
         android:paddingEnd="5dp"
         android:singleLine="true"
-        android:hint="Κωδικός"
         android:text="aD@ffff1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header"

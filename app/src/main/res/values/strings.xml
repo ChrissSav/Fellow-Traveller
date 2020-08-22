@@ -38,7 +38,7 @@
 
     <string name="passenger_notification">Ο χρήστης % μόλις προστέθηκε στο ταξίδι σου.</string>
     <string name="rate_notification">Ήρθε η ώρα να αξιολόγησης τον χρήστη  %s.</string>
-    <string name="write_review_title">Ήρθε η ώρα να αξιολόγησης τον χρήστη %s για το ταξίδι που έγινε από %d - to στις $s.</string>
+    <string name="write_review_title" formatted="false">Ήρθε η ώρα να αξιολόγησης τον χρήστη %s για το ταξίδι που έγινε από %d - to στις $s.</string>
 
 
     <string name="set_date">Όρισε την ημερομηνία ... </string>
@@ -52,7 +52,7 @@
 
     <!-- Filter Fragment -->
     <string name="range_text">Εύρος %s χμλ</string>
-    <string name="range_text_price">%s ~ %s €</string>
-    <string name="range_text_in_filters">%s ~ %s </string>
+    <string name="range_text_price" formatted="false">%s ~ %s €</string>
+    <string name="range_text_in_filters" formatted="false">%s ~ %s </string>
     <string name="range_view_all">Εμφάνιση όλων</string>
 </resources>

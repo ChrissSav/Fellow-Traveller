@@ -24,7 +24,7 @@ class PickNumberButton : ConstraintLayout {
     private var minValue: Int = 0
     private var pickTxtColor: Int = Color.WHITE
     private var pickTxtBackgroundTint: Drawable? = null
-    private val pickConstraintSet = ConstraintSet()
+    private val pickNumberConstraintSet = ConstraintSet()
     private val textView = TextView(context).apply { id = View.generateViewId() }
     private val pickMinusImg = ImageView(context).apply { id = View.generateViewId() }
     private val pickPlusImg = ImageView(context).apply { id = View.generateViewId() }
@@ -55,7 +55,6 @@ class PickNumberButton : ConstraintLayout {
         setupAttributes(attrs)
         setupViews()
         setupListeners()
-
     }
 
     private fun addViews() {
@@ -68,8 +67,8 @@ class PickNumberButton : ConstraintLayout {
 
         background = ContextCompat.getDrawable(context, R.drawable.increaser_border_stroke_shape_1)
         setPadding(35, 0, 35, 0)
-        pickConstraintSet.clone(this)
-        pickConstraintSet.apply {
+        pickNumberConstraintSet.clone(this)
+        pickNumberConstraintSet.apply {
 
 
             connect(pickMinusImg.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
@@ -123,7 +122,7 @@ class PickNumberButton : ConstraintLayout {
     }
 
     private fun setupViews() {
-        pickConstraintSet.applyTo(this)
+        pickNumberConstraintSet.applyTo(this)
         pickMinusImg.setImageResource(minusButtonSrc)
         pickPlusImg.setImageResource(plusButtonSrc)
         textView.setTextAppearance(this.context, R.style.input)
