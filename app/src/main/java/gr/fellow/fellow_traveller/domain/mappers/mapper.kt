@@ -1,8 +1,10 @@
 package gr.fellow.fellow_traveller.domain.mappers
 
-import gr.fellow.fellow_traveller.domain.SearchFilters
-import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
+import gr.fellow.fellow_traveller.data.models.Car
+import gr.fellow.fellow_traveller.data.models.Passenger
+import gr.fellow.fellow_traveller.data.models.Trip
+import gr.fellow.fellow_traveller.data.models.UserBase
+import gr.fellow.fellow_traveller.framework.network.fellow.response.*
 import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 
@@ -15,32 +17,36 @@ fun CarResponse.toCarEntity() = CarEntity(
     id, brand, model, plate, color
 )
 
+fun CarResponse.toCar() = Car(
+    brand, model
+)
 
-fun SearchFilters.toQuery(): String {
-    var query = "latitude_from=${latitudeFrom}&longitude_from=${longitudeFrom}&latitude_to=${latitudeTo}&longitude_to=${longitudeTo}"
-    if (rangeFrom != null)
-        query += "&range_from${rangeFrom}"
-    if (rangeTo != null)
-        query += "&range_to${rangeTo}"
-    if (timestampMin != null)
-        query += "&timestamp_min${timestampMin}"
-    if (timestampMax != null)
-        query += "&timestamp_max${timestampMax}"
-    if (seatsMin != null)
-        query += "&seats_min${seatsMin}"
-    if (seatsMax != null)
-        query += "&seats_max${seatsMax}"
-    if (bagsMin != null)
-        query += "&bags_min${bagsMin}"
-    if (bagsMax != null)
-        query += "&bags_max${bagsMax}"
-    if (priceMin != null)
-        query += "&price_mix${priceMin}"
-    if (priceMax != null)
-        query += "&price_max${priceMax}"
-    if (pet != null)
-        query += "&pet${pet}"
-    return query
+fun UserBaseResponse.toUserBase() = UserBase(
+    id, FirstName, LastName, picture, rate, reviews
+)
+
+fun PassengerResponse.toPassenger() = Passenger(
+    user.toUserBase(), bags, pet
+)
+
+
+fun TripResponse.toTrip(): Trip {
+    val passengersTemp = mutableListOf<Passenger>()
+    //if (passengers.isNotEmpty())
+    //    this.passengers.forEach { passengersTemp.add(it.toPassenger()) }
+
+    return Trip(
+        this.id, this.destFrom, this.destTo, this.pickupPoint,
+        this.creatorUser.toUserBase(), this.car.toCar(), passengersTemp,
+        this.timestamp, this.hasPet, this.maxSeats, this.currentSeats,
+        this.maxBags, this.currentBags, this.msg, this.price
+    )
+
 }
 
-
+fun MutableList<TripResponse>.toTrips(): MutableList<Trip> {
+    val trips = mutableListOf<Trip>()
+    if (isNotEmpty())
+        forEach { trips.add(it.toTrip()) }
+    return trips
+}

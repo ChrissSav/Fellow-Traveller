@@ -1,13 +1,13 @@
 package gr.fellow.fellow_traveller.usecase.trips
 
 import gr.fellow.fellow_traveller.data.ResultWrapper
+import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.domain.FellowDataSource
-import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 
 class GetTripsAsPassengerRemoteUseCase(
     private val dataSource: FellowDataSource
 ) {
 
-    suspend operator fun invoke(): ResultWrapper<MutableList<TripResponse>> =
+    suspend operator fun invoke(): ResultWrapper<MutableList<Trip>> =
         dataSource.getTipsAsPassenger()
 }

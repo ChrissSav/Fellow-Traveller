@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.databinding.FragmentOffersActiveTripsBinding
-import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.ui.home.adapter.ActiveTripsAdapter
 
 
@@ -17,7 +17,7 @@ class OffersActiveTripsFragment : Fragment() {
 
 
     private val homeViewModel: HomeViewModel by activityViewModels()
-    private val tripsList = mutableListOf<TripResponse>()
+    private val tripsList = mutableListOf<Trip>()
     private var _binding: FragmentOffersActiveTripsBinding? = null
     private val binding get() = _binding!!
 
@@ -50,7 +50,7 @@ class OffersActiveTripsFragment : Fragment() {
         }, 250)
     }
 
-    private fun onTripClick(trip: TripResponse) {
+    private fun onTripClick(trip: Trip) {
 
     }
 

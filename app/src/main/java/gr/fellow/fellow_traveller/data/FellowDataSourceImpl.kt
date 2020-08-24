@@ -1,7 +1,9 @@
 package gr.fellow.fellow_traveller.data
 
+import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.domain.SearchFilters
+import gr.fellow.fellow_traveller.domain.mappers.toTrips
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
@@ -48,14 +50,32 @@ class FellowDataSourceImpl(
     override suspend fun addTripRemote(tripCreateRequest: TripCreateRequest): ResultWrapper<TripResponse> =
         repository.addTrip(tripCreateRequest)
 
-    override suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripResponse>> =
-        repository.getTipsAsCreator()
+    override suspend fun getTipsAsCreator(): ResultWrapper<MutableList<Trip>> {
+        val response = repository.getTipsAsCreator()
+        if (response is ResultWrapper.Success) {
+            return ResultWrapper.Success(response.data.toTrips())
+        }
+        return ResultWrapper.Success(mutableListOf())
+    }
 
-    override suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripResponse>> =
-        repository.getTipsAsPassenger()
+    override suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<Trip>> {
+        val response = repository.getTipsAsPassenger()
+        if (response is ResultWrapper.Success) {
+            return ResultWrapper.Success(response.data.toTrips())
+        }
+        return ResultWrapper.Success(mutableListOf())
+    }
 
-    override suspend fun searchTrips(query: SearchFilters): ResultWrapper<MutableList<TripResponse>> =
-        repository.searchTrips(query)
+
+    override suspend fun searchTrips(query: SearchFilters): ResultWrapper<MutableList<Trip>> {
+        return when (val response = repository.searchTrips(query)) {
+            is ResultWrapper.Success ->
+                ResultWrapper.Success(response.data.toTrips())
+            is ResultWrapper.Error ->
+                ResultWrapper.Error(response.error)
+        }
+
+    }
 
     /**
      * Google Service

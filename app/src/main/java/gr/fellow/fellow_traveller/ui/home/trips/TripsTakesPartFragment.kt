@@ -11,8 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.databinding.FragmentTripsTakesPartBinding
-import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.search.SearchTripActivity
@@ -24,7 +24,7 @@ class TripsTakesPartFragment : Fragment() {
 
     private var _binding: FragmentTripsTakesPartBinding? = null
     private val binding get() = _binding!!
-    private var tripsList = mutableListOf<TripResponse>()
+    private var tripsList = mutableListOf<Trip>()
     private lateinit var navController: NavController
 
     override fun onCreateView(
@@ -66,8 +66,8 @@ class TripsTakesPartFragment : Fragment() {
             destinationsFromTextView.text = trip.destFrom.title
             destinationsToTextView.text = trip.destTo.title
             creatorName.text = trip.creatorUser.fullName
-            date.text = trip.getDate()
-            time.text = trip.getTime()
+            date.text = trip.date
+            time.text = trip.time
             price.text = trip.price.toString()
             creatorImage.loadImageFromUrl(trip.creatorUser.picture)
             creatorRateAndReviews.text = "${trip.creatorUser.rate} (${trip.creatorUser.reviews})"

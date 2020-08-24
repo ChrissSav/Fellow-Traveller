@@ -12,8 +12,8 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.databinding.FragmentSearchResultsBinding
-import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
 import gr.fellow.fellow_traveller.ui.search.adapter.SearchResultsAdapter
 
@@ -25,12 +25,9 @@ class SearchResultsFragment : Fragment() {
 
     private var _binding: FragmentSearchResultsBinding? = null
     private val binding get() = _binding!!
-    private var tripsList = mutableListOf<TripResponse>()
+    private var tripsList = mutableListOf<Trip>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         _binding = FragmentSearchResultsBinding.inflate(inflater, container, false)
         return binding.root
@@ -54,8 +51,7 @@ class SearchResultsFragment : Fragment() {
 
         binding.recyclerView.adapter = SearchResultsAdapter(tripsList) {
             navController.navigate(
-                R.id.action_searchResultsFragment_to_searchTripDetailsFragment,
-                bundleOf("tripId" to it.id)
+                R.id.action_searchResultsFragment_to_searchTripDetailsFragment, bundleOf("tripId" to it.id)
             )
         }
 

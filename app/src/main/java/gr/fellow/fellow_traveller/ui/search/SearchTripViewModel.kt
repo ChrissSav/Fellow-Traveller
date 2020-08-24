@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.ResultWrapper
+import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.domain.SearchFilters
-import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.usecase.trips.SearchTripsUseCase
@@ -28,8 +28,8 @@ constructor(
     private val _searchFilter = MutableLiveData<SearchFilters>()
     val searchFilter: LiveData<SearchFilters> = _searchFilter
 
-    private val _resultTrips = MutableLiveData<MutableList<TripResponse>>()
-    val resultTrips: LiveData<MutableList<TripResponse>> = _resultTrips
+    private val _resultTrips = MutableLiveData<MutableList<Trip>>()
+    val resultTrips: LiveData<MutableList<Trip>> = _resultTrips
 
     var filterFlag: Boolean = false
 

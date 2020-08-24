@@ -46,8 +46,8 @@ class BookTripFragment : Fragment() {
             with(it) {
                 binding.startTextView.text = destFrom.title
                 binding.endTextView.text = destTo.title
-                binding.date.text = setDate(getDate())
-                binding.time.text = setTime(getTime())
+                binding.date.text = getDateFormat()
+                binding.time.text = getTimeFormat()
                 binding.seatsTextView.text = (maxBags - currentBags).toString()
                 binding.petsSwitch.isEnabled = hasPet
                 binding.priceTextView.text = getString(R.string.price, price.toString())
@@ -75,44 +75,10 @@ class BookTripFragment : Fragment() {
     }
 
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-
-    private fun setDate(date: String): String {
-        val month = date.substring(3, 5).toInt()
-        var month_str = ""
-        when (month) {
-            1 -> month_str = "Ιαν"
-            2 -> month_str = "Φεβ"
-            3 -> month_str = "Μαρ"
-            4 -> month_str = "Απρ"
-            5 -> month_str = "Μαΐ"
-            6 -> month_str = "Ιουν"
-            7 -> month_str = "Ιουλ"
-            8 -> month_str = "Αυγ"
-            9 -> month_str = "Σεπ"
-            10 -> month_str = "Οκτ"
-            11 -> month_str = "Νοε"
-            12 -> month_str = "Δεκ"
-        }
-        return "${date.substring(0, 2)}\n$month_str"
-    }
-
-
-    private fun setTime(time: String): String {
-        var time = time
-        val hourOfDay = time.substring(0, 2).toInt()
-        val minute = time.substring(3, 5).toInt()
-        time =
-            """
-            ${if (hourOfDay > 12) hourOfDay % 12 else hourOfDay}:${if (minute < 10) "0$minute" else minute}
-            ${if (hourOfDay >= 12) "ΜΜ" else "ΠΜ"}
-            """.trimIndent()
-        return time
-    }
 
 }

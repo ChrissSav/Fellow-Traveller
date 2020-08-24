@@ -7,13 +7,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
+import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.ui.loadImageFromUrl
 import kotlinx.android.synthetic.main.search_result_item.view.*
 
 class SearchResultsAdapter(
-    private val tripsList: MutableList<TripResponse>,
-    private val listener: (TripResponse) -> Unit
+    private val tripsList: MutableList<Trip>,
+    private val listener: (Trip) -> Unit
 ) :
     RecyclerView.Adapter<SearchResultsAdapter.ExampleViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExampleViewHolder {
@@ -31,8 +31,8 @@ class SearchResultsAdapter(
             destinationsFromTextView.text = trip.destFrom.title
             destinationsToTextView.text = trip.destTo.title
             creatorName.text = trip.creatorUser.fullName
-            date.text = trip.getDate()
-            time.text = trip.getTime()
+            date.text = trip.date
+            time.text = trip.time
             price.text = trip.price.toString()
             creatorImage.loadImageFromUrl(trip.creatorUser.picture)
             rate.text = trip.creatorUser.rate.toString()

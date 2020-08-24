@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.ResultWrapper
+import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.domain.mappers.toCarEntity
-import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
@@ -36,7 +36,6 @@ constructor(
     private val _user = MutableLiveData<RegisteredUserEntity>()
     val user: LiveData<RegisteredUserEntity> = _user
 
-
     private val _logout = SingleLiveEvent<Boolean>()
     val logout: LiveData<Boolean> = _logout
 
@@ -49,11 +48,11 @@ constructor(
     private val _carDeletedId = SingleLiveEvent<CarEntity>()
     val carDeletedId: LiveData<CarEntity> = _carDeletedId
 
-    private val _tripsAsCreator = MutableLiveData<MutableList<TripResponse>>()
-    val tripsAsCreator: LiveData<MutableList<TripResponse>> = _tripsAsCreator
+    private val _tripsAsCreator = MutableLiveData<MutableList<Trip>>()
+    val tripsAsCreator: LiveData<MutableList<Trip>> = _tripsAsCreator
 
-    private val _tripsTakesPart = MutableLiveData<MutableList<TripResponse>>()
-    val tripsTakesPart: LiveData<MutableList<TripResponse>> = _tripsTakesPart
+    private val _tripsTakesPart = MutableLiveData<MutableList<Trip>>()
+    val tripsTakesPart: LiveData<MutableList<Trip>> = _tripsTakesPart
 
     /*****************************************************************************************************/
 

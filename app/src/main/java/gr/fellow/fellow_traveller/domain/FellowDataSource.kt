@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.domain
 
 import gr.fellow.fellow_traveller.data.ResultWrapper
+import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.framework.network.fellow.request.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.request.TripCreateRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
@@ -41,11 +42,11 @@ interface FellowDataSource {
 
     suspend fun addTripRemote(tripCreateRequest: TripCreateRequest): ResultWrapper<TripResponse>
 
-    suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripResponse>>
+    suspend fun getTipsAsCreator(): ResultWrapper<MutableList<Trip>>
 
-    suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripResponse>>
+    suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<Trip>>
 
-    suspend fun searchTrips(query: SearchFilters): ResultWrapper<MutableList<TripResponse>>
+    suspend fun searchTrips(query: SearchFilters): ResultWrapper<MutableList<Trip>>
 
 
     /**
