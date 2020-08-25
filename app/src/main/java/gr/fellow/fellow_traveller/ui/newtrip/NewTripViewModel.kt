@@ -3,23 +3,30 @@ package gr.fellow.fellow_traveller.ui.newtrip
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.ResultWrapper
+import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.framework.network.google.model.DestinationModel
-import gr.fellow.fellow_traveller.framework.network.google.response.PredictionResponse
 import gr.fellow.fellow_traveller.room.entites.CarEntity
+import gr.fellow.fellow_traveller.ui.dateTimeToTimestamp
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.usecase.home.GetUserCarsLocalUseCase
-import kotlinx.coroutines.launch
+import gr.fellow.fellow_traveller.usecase.newtrip.RegisterTripRemoteUseCase
 
 
 class NewTripViewModel
 @ViewModelInject
 constructor(
-    private val getUserCarsLocalUseCase: GetUserCarsLocalUseCase
+    private val getUserCarsLocalUseCase: GetUserCarsLocalUseCase,
+    private val registerTripRemoteUseCase: RegisterTripRemoteUseCase
 ) : BaseViewModel() {
 
-    private val _destinations = MutableLiveData<MutableList<PredictionResponse>>()
-    val destinations: LiveData<MutableList<PredictionResponse>> = _destinations
+    val finish = MutableLiveData<Boolean>()
+
+
+    private val _success = MutableLiveData<Trip>()
+    val success: LiveData<Trip> = _success
+
 
     private val _destinationFrom = MutableLiveData<DestinationModel>()
     val destinationFrom: LiveData<DestinationModel> = _destinationFrom
@@ -59,14 +66,14 @@ constructor(
 
 
     fun applyDate(date: String) {
-        viewModelScope.launch {
+        launch {
             _date.value = date
         }
 
     }
 
     fun applyTime(time: String) {
-        viewModelScope.launch {
+        launch {
             _time.value = time
         }
 
@@ -74,47 +81,47 @@ constructor(
 
 
     fun setDestinationFrom(id: String, title: String) {
-        viewModelScope.launch {
+        launch {
             _destinationFrom.value = DestinationModel(id, title)
 
         }
     }
 
     fun setDestinationTo(id: String, title: String) {
-        viewModelScope.launch {
+        launch {
             _destinationTo.value = DestinationModel(id, title)
 
         }
     }
 
     fun setDestinationPickUp(id: String, title: String) {
-        viewModelScope.launch {
+        launch {
             _destinationPickUp.value = DestinationModel(id, title)
 
         }
     }
 
     fun setPrice(priceCurrent: Float) {
-        viewModelScope.launch {
+        launch {
             _price.value = priceCurrent
 
         }
     }
 
     fun setSeats(seatCurrent: Int) {
-        viewModelScope.launch {
+        launch {
             _seats.value = seatCurrent
         }
     }
 
     fun setBags(bagsCurrent: Int) {
-        viewModelScope.launch {
+        launch {
             _bags.value = bagsCurrent
         }
     }
 
     fun setPet(pet: Boolean) {
-        viewModelScope.launch {
+        launch {
             _pet.value = pet
         }
     }
@@ -124,16 +131,47 @@ constructor(
     }
 
     fun setCar(carTemp: CarEntity) {
-        viewModelScope.launch {
+        launch {
             _car.value = carTemp
         }
     }
 
     fun loadUserCars() {
-        viewModelScope.launch {
+        launch {
             _carList.value = getUserCarsLocalUseCase()
         }
     }
 
+
+    fun registerTrip() {
+        launch(true) {
+            when (val response = registerTripRemoteUseCase(
+                destinationFrom.value?.placeId.toString(), destinationTo.value?.placeId.toString(),
+                destinationPickUp.value?.placeId.toString(), dateTimeToTimestamp(date.value.toString(), time.value.toString()),
+                pet.value!!, bags.value!!, seats.value!!, message.value.toString(), price.value!!, car.value?.id!!
+            )
+                ) {
+                is ResultWrapper.Success -> {
+                    _success.value = response.data
+                }
+
+                is ResultWrapper.Error -> {
+                    _error.value = when (response.error.code) {
+                        609 -> R.string.ERROR_TRIP_TIMESTAMP
+                        610 -> R.string.ERROR_TRIP_PICKUP_POINT
+                        else -> R.string.ERROR_SOMETHING_WRONG
+                    }
+                }
+            }
+
+        }
+    }
+
+
+    fun finish() {
+        launch {
+            finish.value = true
+        }
+    }
 
 }

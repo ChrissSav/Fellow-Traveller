@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
@@ -24,10 +25,7 @@ class SummaryFragment : Fragment() {
     private var _binding: FragmentSummaryBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentSummaryBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -81,8 +79,11 @@ class SummaryFragment : Fragment() {
             pets.setOnClickListener(clickListener)
 
             ImageButtonNext.setOnClickListener {
-                navController.navigate(R.id.next_fragment)
+                newTripViewModel.registerTrip()
+
             }
+
+
 
             TripSummaryFragmentConstraintLayoutFromTo.setOnClickListener(clickListener)
             constraintLayoutDate.setOnClickListener(clickListener)
@@ -96,6 +97,10 @@ class SummaryFragment : Fragment() {
             msg.setOnClickListener(clickListener)
 
         }
+
+        newTripViewModel.success.observe(viewLifecycleOwner, Observer {
+            navController.navigate(R.id.next_fragment)
+        })
 
 
     }

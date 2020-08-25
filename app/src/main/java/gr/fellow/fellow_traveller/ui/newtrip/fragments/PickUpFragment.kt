@@ -13,7 +13,6 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentPickUpBinding
-import gr.fellow.fellow_traveller.ui.createAlerter
 import gr.fellow.fellow_traveller.ui.location.SelectLocationActivity
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 
@@ -30,10 +29,7 @@ class PickUpFragment : Fragment() {
     private var _binding: FragmentPickUpBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentPickUpBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -57,9 +53,8 @@ class PickUpFragment : Fragment() {
         binding.ImageButtonNext.setOnClickListener {
 
             if (newTripViewModel.destinationPickUp.value == null) {
-                createAlerter("Παρακαλώ επιλέξτε σημείο αφετηρίας")
-            }
-            else {
+                newTripViewModel.setError(R.string.ERROR_SELECT_DEST_PICK_UP)
+            } else {
                 navController.navigate(R.id.next_fragment)
             }
 

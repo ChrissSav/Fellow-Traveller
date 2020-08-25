@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -21,7 +20,6 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentBaseInfoBinding
 import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.ui.car.AddCarActivity
-import gr.fellow.fellow_traveller.ui.createAlerter
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 import gr.fellow.fellow_traveller.ui.views.PickButtonActionListener
 
@@ -84,7 +82,7 @@ class BaseInfoFragment : Fragment() {
                 if (newTripViewModel.car.value != null) {
                     navController.navigate(R.id.next_fragment)
                 } else {
-                    createAlerter(resources.getString(R.string.ERROR_SELECT_CAR))
+                    newTripViewModel.setError(R.string.ERROR_SELECT_CAR)
                 }
 
             }
@@ -161,34 +159,6 @@ class BaseInfoFragment : Fragment() {
             if (resultCode == Activity.RESULT_OK) {
                 newTripViewModel.loadUserCars()
             }
-        }
-    }
-
-    private fun increaseSeats(textView: TextView) {
-        val currentNum = textView.text.toString().toInt()
-        textView.text = (currentNum + 1).toString()
-        newTripViewModel.setSeats(currentNum + 1)
-    }
-
-    private fun decreaseSeats(textView: TextView) {
-        val currentNum = textView.text.toString().toInt()
-        if (currentNum > 1) {
-            textView.text = (currentNum - 1).toString()
-            newTripViewModel.setSeats(currentNum - 1)
-        }
-    }
-
-    private fun increaseBags(textView: TextView) {
-        val currentNum = textView.text.toString().toInt()
-        textView.text = (currentNum + 1).toString()
-        newTripViewModel.setBags(currentNum + 1)
-    }
-
-    private fun decreaseBags(textView: TextView) {
-        val currentNum = textView.text.toString().toInt()
-        if (currentNum > 0) {
-            textView.text = (currentNum - 1).toString()
-            newTripViewModel.setBags(currentNum - 1)
         }
     }
 

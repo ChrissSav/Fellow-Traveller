@@ -13,7 +13,6 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentDestinationsBinding
-import gr.fellow.fellow_traveller.ui.createAlerter
 import gr.fellow.fellow_traveller.ui.location.SelectLocationActivity
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 
@@ -30,10 +29,7 @@ class DestinationsFragment : Fragment() {
     private var _binding: FragmentDestinationsBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentDestinationsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -68,10 +64,10 @@ class DestinationsFragment : Fragment() {
 
             when {
                 newTripViewModel.destinationFrom.value == null -> {
-                    createAlerter("Παρακαλώ επιλέξτε σημείο αφετηρίας")
+                    newTripViewModel.setError(R.string.ERROR_SELECT_DEST_FROM)
                 }
                 newTripViewModel.destinationTo.value == null -> {
-                    createAlerter("Παρακαλώ επιλέξτε σημείο προορισμού")
+                    newTripViewModel.setError(R.string.ERROR_SELECT_DEST_TO)
                 }
                 else -> {
                     navController.navigate(R.id.next_fragment)

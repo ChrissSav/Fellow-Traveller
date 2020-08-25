@@ -1,10 +1,11 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
     <color name="white_opaque">#FFFFFFFF</color>
     <color name="pitch_black">#FF000000</color>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
         <item name="android:windowDisablePreview">true</item>
         <item name="colorPrimary">@color/black_color</item>
         <item name="colorPrimaryDark">@color/orange_color</item>

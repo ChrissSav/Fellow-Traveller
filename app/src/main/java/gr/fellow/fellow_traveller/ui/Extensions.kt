@@ -30,6 +30,21 @@ fun Activity.createAlerter(msg: String) {
 }
 
 
+fun Activity.createAlerter(msg: String, color: Int) {
+    var icon = R.drawable.ic_exclamation_mark
+    if (this.resources.getString(R.string.ERROR_INTERNET_CONNECTION) == msg)
+        icon = R.drawable.ic_no_wifi
+    Alerter.create(this)
+        .setTitle("Προσοχή")
+        .setText(msg)
+        .setIcon(icon)
+        .setBackgroundColorRes(color)
+        .setDuration(1800)
+        .enableSwipeToDismiss() //seems to not work well with OnClickListener
+        .show()
+}
+
+
 fun Activity.createToast(msg: String) {
     Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 }

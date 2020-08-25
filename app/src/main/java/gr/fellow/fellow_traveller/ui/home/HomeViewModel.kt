@@ -142,5 +142,17 @@ constructor(
             }
         }
     }
+
+
+    fun addTripCreate(trip: Trip) {
+        launch {
+            tripsAsCreator.value?.let {
+                val tempTrip = it
+                tempTrip.add(trip)
+                _tripsAsCreator.value = tempTrip
+            }
+
+        }
+    }
 }
 

@@ -1,27 +1,24 @@
 package gr.fellow.fellow_traveller.ui.newtrip.fragments
 
 import android.animation.Animator
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import gr.fellow.fellow_traveller.databinding.FragmentSuccessTripBinding
-import kotlinx.android.synthetic.main.fragment_change_password.*
+import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 
 
 class SuccessTripFragment : Fragment() {
-
+    private val newTripViewModel: NewTripViewModel by activityViewModels()
     private var _binding: FragmentSuccessTripBinding? = null
     private val binding get() = _binding!!
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentSuccessTripBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -31,8 +28,8 @@ class SuccessTripFragment : Fragment() {
 
         val handler = Handler()
         handler.postDelayed({
-            binding.SuccessActivityTextViewHover .animate()
-                .translationX( binding.SuccessActivityTextViewHover.width.toFloat())
+            binding.SuccessActivityTextViewHover.animate()
+                .translationX(binding.SuccessActivityTextViewHover.width.toFloat())
                 .alpha(1.0f)
                 .setListener(object : Animator.AnimatorListener {
                     override fun onAnimationStart(animation: Animator) {}
@@ -42,7 +39,8 @@ class SuccessTripFragment : Fragment() {
                         } catch (e: InterruptedException) {
                             e.printStackTrace()
                         }
-                        activity?.finish()
+                        newTripViewModel.finish()
+
                     }
 
                     override fun onAnimationCancel(animation: Animator) {}
@@ -50,7 +48,6 @@ class SuccessTripFragment : Fragment() {
                 })
         }, 500.toLong())
     }
-
 
 
     override fun onDestroyView() {

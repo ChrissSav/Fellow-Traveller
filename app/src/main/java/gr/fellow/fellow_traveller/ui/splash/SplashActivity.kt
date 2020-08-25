@@ -39,7 +39,7 @@ class SplashActivity : AppCompatActivity() {
             }
             startActivity(intent)
             finish()
-        }, 750)
+        }, 500)
 
         /*splashViewModel.result.observe(this, Observer {
             val intent = if (it)

@@ -3,11 +3,11 @@ package gr.fellow.fellow_traveller.data
 import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.domain.SearchFilters
+import gr.fellow.fellow_traveller.domain.mappers.toTrip
 import gr.fellow.fellow_traveller.domain.mappers.toTrips
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.DetailsResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
@@ -47,23 +47,31 @@ class FellowDataSourceImpl(
     override suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse> =
         repository.deleteCarRemote(carId)
 
-    override suspend fun addTripRemote(tripCreateRequest: TripCreateRequest): ResultWrapper<TripResponse> =
-        repository.addTrip(tripCreateRequest)
+    override suspend fun addTripRemote(tripCreateRequest: TripCreateRequest): ResultWrapper<Trip> {
+        return when (val response = repository.addTrip(tripCreateRequest)) {
+            is ResultWrapper.Success ->
+                ResultWrapper.Success(response.data.toTrip())
+            is ResultWrapper.Error ->
+                ResultWrapper.Error(response.error)
+        }
+    }
 
     override suspend fun getTipsAsCreator(): ResultWrapper<MutableList<Trip>> {
-        val response = repository.getTipsAsCreator()
-        if (response is ResultWrapper.Success) {
-            return ResultWrapper.Success(response.data.toTrips())
+        return when (val response = repository.getTipsAsCreator()) {
+            is ResultWrapper.Success ->
+                ResultWrapper.Success(response.data.toTrips())
+            is ResultWrapper.Error ->
+                ResultWrapper.Error(response.error)
         }
-        return ResultWrapper.Success(mutableListOf())
     }
 
     override suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<Trip>> {
-        val response = repository.getTipsAsPassenger()
-        if (response is ResultWrapper.Success) {
-            return ResultWrapper.Success(response.data.toTrips())
+        return when (val response = repository.getTipsAsPassenger()) {
+            is ResultWrapper.Success ->
+                ResultWrapper.Success(response.data.toTrips())
+            is ResultWrapper.Error ->
+                ResultWrapper.Error(response.error)
         }
-        return ResultWrapper.Success(mutableListOf())
     }
 
 

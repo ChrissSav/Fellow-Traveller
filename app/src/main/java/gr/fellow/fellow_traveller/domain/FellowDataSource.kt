@@ -6,7 +6,6 @@ import gr.fellow.fellow_traveller.framework.network.fellow.request.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.request.TripCreateRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.DetailsResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
@@ -40,7 +39,7 @@ interface FellowDataSource {
     //Trips
 
 
-    suspend fun addTripRemote(tripCreateRequest: TripCreateRequest): ResultWrapper<TripResponse>
+    suspend fun addTripRemote(tripCreateRequest: TripCreateRequest): ResultWrapper<Trip>
 
     suspend fun getTipsAsCreator(): ResultWrapper<MutableList<Trip>>
 

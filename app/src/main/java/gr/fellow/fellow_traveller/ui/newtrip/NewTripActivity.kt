@@ -1,5 +1,7 @@
 package gr.fellow.fellow_traveller.ui.newtrip
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -81,7 +83,26 @@ class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogLi
         newTripViewModel.setSeats(1)
 
         newTripViewModel.error.observe(this, Observer {
-            createAlerter(getString(it))
+            createAlerter(getString(it), R.color.blue_color)
+        })
+
+        newTripViewModel.load.observe(this, Observer {
+            if (it)
+                binding.progressLoad.visibility = View.VISIBLE
+            else
+                binding.progressLoad.visibility = View.GONE
+
+        })
+
+        newTripViewModel.finish.observe(this, Observer {
+            val trip = newTripViewModel.success.value
+            trip?.let {
+                val resultIntent = Intent()
+                resultIntent.putExtra("trip", it)
+                setResult(Activity.RESULT_OK, resultIntent)
+                finish()
+            }
+
         })
         binding.imageButtonExit.setOnClickListener {
             openDialog()
@@ -90,16 +111,15 @@ class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogLi
         binding.imageButtonBack.setOnClickListener {
             onBackPressed()
         }
+
     }
 
 
-    /*override fun onBackPressed() {
-        if (nav.currentDestination?.id == R.id.destinationsFragment) {
-            openDialog()
-        } else {
+    override fun onBackPressed() {
+        if (nav.currentDestination?.id != R.id.successTripFragment) {
             super.onBackPressed()
         }
-    }*/
+    }
 
     private fun openDialog() {
         exitCustomDialog = ExitCustomDialog(this)

@@ -13,10 +13,10 @@ import gr.fellow.fellow_traveller.usecase.LogoutUseCase
 import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.newtrip.GetGeometryFormPlaceUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.GetPlaceFromPlacesUseCase
+import gr.fellow.fellow_traveller.usecase.newtrip.RegisterTripRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.register.*
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsCreatorRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsPassengerRemoteUseCase
-import gr.fellow.fellow_traveller.usecase.trips.RegisterTripRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.trips.SearchTripsUseCase
 
 
