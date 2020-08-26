@@ -9,15 +9,22 @@ import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.domain.SearchFilters
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
+import gr.fellow.fellow_traveller.usecase.trips.BookTripUseCase
 import gr.fellow.fellow_traveller.usecase.trips.SearchTripsUseCase
 
 
 class SearchTripViewModel
 @ViewModelInject
 constructor(
-    private val searchTripsUseCase: SearchTripsUseCase
+    private val searchTripsUseCase: SearchTripsUseCase,
+    private val bookTripUseCase: BookTripUseCase
 ) : BaseViewModel() {
 
+    val finish = MutableLiveData<Boolean>()
+
+
+    private val _tripBook = MutableLiveData<Trip>()
+    val tripBook: LiveData<Trip> = _tripBook
 
     private val _destinationFrom = MutableLiveData<PlaceModel>()
     val destinationFrom: LiveData<PlaceModel> = _destinationFrom
@@ -76,6 +83,36 @@ constructor(
                 }
                 filterFlag = false
             }
+        }
+    }
+
+
+    fun bookTrip(tripId: Int, bags: Int, pet: Boolean) {
+        launch(true) {
+            when (val response = bookTripUseCase(tripId, bags, pet)) {
+                is ResultWrapper.Success -> {
+                    _tripBook.value = response.data
+                }
+                is ResultWrapper.Error -> {
+                    _error.value =
+                        when (response.error.code) {
+                            606 ->
+                                R.string.ERROR_TRIP_NOT_AVAILABLE_LUGGAGE
+                            607 ->
+                                R.string.ERROR_TRIP_CHECK_PET_ACCEPTS
+                            else ->
+                                R.string.ERROR_SOMETHING_WRONG
+                        }
+                }
+            }
+        }
+
+    }
+
+
+    fun finish() {
+        launch {
+            finish.value = true
         }
     }
 

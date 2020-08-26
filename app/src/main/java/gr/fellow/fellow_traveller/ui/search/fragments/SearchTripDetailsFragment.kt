@@ -4,15 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.models.UserBase
 import gr.fellow.fellow_traveller.databinding.FragmentSearchTripDetailsBinding
 import gr.fellow.fellow_traveller.ui.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
+import gr.fellow.fellow_traveller.ui.search.adapter.PassengerAdapter
 
 
 class SearchTripDetailsFragment : Fragment() {
@@ -30,11 +33,7 @@ class SearchTripDetailsFragment : Fragment() {
         tripId = requireArguments().getInt("tripId")
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentSearchTripDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -71,6 +70,11 @@ class SearchTripDetailsFragment : Fragment() {
                         bundleOf("indexTrip" to index)
                     )
                 }
+
+                if (!passengers.isNullOrEmpty()) {
+                    binding.passengerRecyclerView.adapter = PassengerAdapter(passengers, this@SearchTripDetailsFragment::onPassengerListener)
+                }
+
             }
         }
 
@@ -78,6 +82,11 @@ class SearchTripDetailsFragment : Fragment() {
             activity?.onBackPressed()
         }
 
+
+    }
+
+    private fun onPassengerListener(user: UserBase) {
+        Toast.makeText(this.context, user.id.toString().trim(), Toast.LENGTH_SHORT).show()
 
     }
 

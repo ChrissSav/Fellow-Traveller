@@ -91,6 +91,11 @@ class FellowRepositoryImpl(
 
         }
 
+    override suspend fun bookTrip(request: BookTripRequest): ResultWrapper<TripResponse> =
+        networkCall {
+            service.bookTrip(request).handleToCorrectFormat()
+        }
+
     override suspend fun registerUserAuthLocal(userEntity: RegisteredUserEntity) =
         roomCall {
             userAuthDao.insertUser(userEntity)

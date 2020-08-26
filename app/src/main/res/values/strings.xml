@@ -55,4 +55,8 @@
     <string name="range_text_price" formatted="false">%s ~ %s €</string>
     <string name="range_text_in_filters" formatted="false">%s ~ %s </string>
     <string name="range_view_all">Εμφάνιση όλων</string>
+
+    <string name="have_pet">Έχω κατικοίδιο</string>
+    <string name="have_not_pet">Δεν έχω κατικοίδιο</string>
+
 </resources>

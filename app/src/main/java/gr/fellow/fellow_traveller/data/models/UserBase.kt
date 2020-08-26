@@ -14,4 +14,5 @@ data class UserBase(
     val reviews: Int
 ) : Parcelable {
     val fullName get() = "$firstName $lastName"
+    val fullNameNewLine get() = "$firstName\n$lastName"
 }

@@ -85,6 +85,15 @@ class FellowDataSourceImpl(
 
     }
 
+    override suspend fun bookTrip(request: BookTripRequest): ResultWrapper<Trip> {
+        return when (val response = repository.bookTrip(request)) {
+            is ResultWrapper.Success ->
+                ResultWrapper.Success(response.data.toTrip())
+            is ResultWrapper.Error ->
+                ResultWrapper.Error(response.error)
+        }
+    }
+
     /**
      * Google Service
      * */

@@ -73,4 +73,10 @@ interface FellowService {
         @Query("price_max") priceMax: Int?,
         @Query("pet") pet: Boolean?
     ): Response<MutableList<TripResponse>>
+
+
+    @POST("/passengers")
+    suspend fun bookTrip(
+        @Body request: BookTripRequest
+    ): Response<TripResponse>
 }

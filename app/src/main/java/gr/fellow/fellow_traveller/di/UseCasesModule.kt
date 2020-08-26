@@ -15,6 +15,7 @@ import gr.fellow.fellow_traveller.usecase.newtrip.GetGeometryFormPlaceUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.GetPlaceFromPlacesUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.RegisterTripRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.register.*
+import gr.fellow.fellow_traveller.usecase.trips.BookTripUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsCreatorRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsPassengerRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.trips.SearchTripsUseCase
@@ -145,5 +146,11 @@ class UseCasesModule {
     @Provides
     fun provideSearchTripsUseCase(dataSource: FellowDataSource): SearchTripsUseCase {
         return SearchTripsUseCase(dataSource)
+    }
+
+    @ActivityScoped
+    @Provides
+    fun provideBookTripUseCase(dataSource: FellowDataSource): BookTripUseCase {
+        return BookTripUseCase(dataSource)
     }
 }

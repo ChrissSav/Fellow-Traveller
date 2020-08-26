@@ -32,8 +32,13 @@ fun PassengerResponse.toPassenger() = Passenger(
 
 fun TripResponse.toTrip(): Trip {
     val passengersTemp = mutableListOf<Passenger>()
-    //if (passengers.isNotEmpty())
-    //    this.passengers.forEach { passengersTemp.add(it.toPassenger()) }
+    try {
+        if (!passengers.isNullOrEmpty())
+            this.passengers.forEach { passengersTemp.add(it.toPassenger()) }
+    } catch (e: Exception) {
+
+    }
+
 
     return Trip(
         this.id, this.destFrom, this.destTo, this.pickupPoint,

@@ -154,5 +154,16 @@ constructor(
 
         }
     }
+
+    fun addTripPassenger(trip: Trip) {
+        launch {
+            tripsTakesPart.value?.let {
+                val tempTrip = it
+                tempTrip.add(trip)
+                _tripsTakesPart.value = tempTrip
+            }
+
+        }
+    }
 }
 

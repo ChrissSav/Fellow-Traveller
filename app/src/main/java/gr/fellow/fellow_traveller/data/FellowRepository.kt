@@ -35,6 +35,8 @@ interface FellowRepository {
 
     suspend fun searchTrips(query: SearchFilters): ResultWrapper<MutableList<TripResponse>>
 
+    suspend fun bookTrip(request: BookTripRequest): ResultWrapper<TripResponse>
+
 
     /**
      * Local

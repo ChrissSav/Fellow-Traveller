@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
 
         binding.searchButton.setOnClickListener {
             val intent = Intent(activity, SearchTripActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, 2)
         }
     }
 
@@ -68,6 +68,16 @@ class HomeFragment : Fragment() {
                 val trip = data?.getParcelableExtra<Trip>("trip")
                 trip?.let {
                     homeViewModel.addTripCreate(it)
+                }
+            }
+
+        }
+
+        if (requestCode == 2) {
+            if (resultCode == Activity.RESULT_OK) {
+                val trip = data?.getParcelableExtra<Trip>("trip")
+                trip?.let {
+                    homeViewModel.addTripPassenger(it)
                 }
             }
 

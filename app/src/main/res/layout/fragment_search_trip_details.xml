@@ -18,35 +18,29 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageButton
                 android:id="@+id/back_button"
                 style="@style/border_icon_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/ic_back_button"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-
-
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/more_button"
                 style="@style/border_icon_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:src="@drawable/ic_vertical_dots"
                 app:layout_constraintBottom_toBottomOf="@id/back_button"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/back_button"
-
-
-                />
+                app:layout_constraintTop_toTopOf="@id/back_button" />
 
             <TextView
                 android:id="@+id/trip_label"
@@ -188,7 +182,7 @@
                 style="@style/button_empty_with_left_drawable"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableRight="@drawable/ic_map"
+                android:drawableEnd="@drawable/ic_map"
                 android:drawableTint="@null"
                 android:text="Άνοιγμα στους χάρτες"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -276,7 +270,7 @@
                 android:id="@+id/date_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/ic_calendar"
                 android:backgroundTint="@color/black_color"
                 app:layout_constraintBottom_toBottomOf="@id/date_label"
@@ -287,7 +281,7 @@
                 android:id="@+id/time_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/ic_clock"
                 android:backgroundTint="@color/black_color"
                 app:layout_constraintBottom_toBottomOf="@id/time_label"
@@ -298,7 +292,7 @@
                 android:id="@+id/seats_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/ic_seat"
                 android:backgroundTint="@color/black_color"
                 app:layout_constraintBottom_toBottomOf="@id/seats_label"
@@ -309,7 +303,7 @@
                 android:id="@+id/bags_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/ic_luggage"
                 android:backgroundTint="@color/black_color"
                 app:layout_constraintBottom_toBottomOf="@id/bags_label"
@@ -320,7 +314,7 @@
                 android:id="@+id/pets_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/ic_bone"
                 android:backgroundTint="@color/black_color"
                 app:layout_constraintBottom_toBottomOf="@id/pets_label"
@@ -331,7 +325,7 @@
                 android:id="@+id/car_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/ic_car"
                 android:backgroundTint="@color/black_color"
                 app:layout_constraintBottom_toBottomOf="@id/car_label"
@@ -436,7 +430,7 @@
                 android:id="@+id/pick_up_point_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:background="@drawable/ic_help"
                 app:layout_constraintBottom_toBottomOf="@id/pick_up_point_label"
                 app:layout_constraintRight_toRightOf="parent"
@@ -474,27 +468,17 @@
                 app:layout_constraintStart_toStartOf="@id/trip_label"
                 app:layout_constraintTop_toBottomOf="@+id/map_underline" />
 
-            <Button
-                android:id="@+id/more_passengers_button"
-                style="@style/button_orange_empty"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Εμφάνιση όλων"
-                app:layout_constraintBottom_toBottomOf="@id/passengers_label"
-                app:layout_constraintEnd_toEndOf="@id/more_button"
-                app:layout_constraintTop_toTopOf="@id/passengers_label" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/passenger_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="20dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:nestedScrollingEnabled="false"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/passengers_label"
-                app:layout_constraintTop_toBottomOf="@id/passengers_label" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/passengers_label"
+                tools:listitem="@layout/passenger_image_item" />
 
             <View
                 android:id="@+id/passengers_underline"
@@ -509,7 +493,7 @@
                 style="@style/header2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="40dp"
                 android:text="Μήνυμα από τον οδηγό"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -541,7 +525,7 @@
                 style="@style/header2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="40dp"
                 android:text="Πολιτική ακύρωσης"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -585,15 +569,16 @@
             android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:background="@drawable/main_activity_login_button"
-            android:drawableRight="@drawable/ic_right_arrow"
+            android:drawableEnd="@drawable/ic_right_arrow"
             android:drawablePadding="5dp"
             android:drawableTint="@color/white"
-            android:gravity="center_horizontal|top"
+            android:gravity="center"
             android:paddingLeft="15dp"
             android:paddingTop="10dp"
             android:paddingRight="15dp"
             android:paddingBottom="10dp"
             android:text="Κλείσε τώρα"
+            android:layout_centerHorizontal="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
