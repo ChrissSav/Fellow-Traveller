@@ -40,7 +40,9 @@ class SearchFilterFragment : Fragment() {
             searchFilters = it.copy()
         }
 
-
+        binding.closeButton.setOnClickListener {
+            activity?.onBackPressed()
+        }
 
         with(searchFilters) {
 

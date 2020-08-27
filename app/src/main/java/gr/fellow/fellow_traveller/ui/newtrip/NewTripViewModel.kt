@@ -169,9 +169,7 @@ constructor(
 
 
     fun finish() {
-        launch {
-            finish.value = true
-        }
+        finish.value = true
     }
 
 }

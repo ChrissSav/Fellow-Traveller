@@ -9,7 +9,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,32 +17,32 @@
 
 
         <ImageView
-            android:id="@+id/SuccessActivity_imageView"
+            android:id="@+id/imageView"
             android:layout_width="99dp"
             android:layout_height="99dp"
             android:layout_marginTop="24dp"
             android:padding="0dp"
             android:src="@drawable/ic_tick"
-            android:tint="@color/blue_offer"
+            android:tint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SuccessActivity_textView_title" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_title" />
 
         <TextView
-            android:id="@+id/SuccessActivity_textView_hover"
+            android:id="@+id/textView_hover"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="#fff"
-            app:layout_constraintBottom_toBottomOf="@+id/SuccessActivity_imageView"
-            app:layout_constraintEnd_toEndOf="@+id/SuccessActivity_imageView"
-            app:layout_constraintStart_toStartOf="@+id/SuccessActivity_imageView"
-            app:layout_constraintTop_toTopOf="@+id/SuccessActivity_imageView">
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="@+id/imageView">
 
         </TextView>
 
         <TextView
-            android:id="@+id/SuccessActivity_textView_title"
+            android:id="@+id/textView_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="30dp"

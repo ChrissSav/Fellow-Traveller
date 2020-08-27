@@ -9,6 +9,7 @@ import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.domain.SearchFilters
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
+import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.trips.BookTripUseCase
 import gr.fellow.fellow_traveller.usecase.trips.SearchTripsUseCase
 
@@ -23,7 +24,7 @@ constructor(
     val finish = MutableLiveData<Boolean>()
 
 
-    private val _tripBook = MutableLiveData<Trip>()
+    private val _tripBook = SingleLiveEvent<Trip>()
     val tripBook: LiveData<Trip> = _tripBook
 
     private val _destinationFrom = MutableLiveData<PlaceModel>()
@@ -110,10 +111,26 @@ constructor(
     }
 
 
-    fun finish() {
+    fun swapDestinations() {
         launch {
-            finish.value = true
+            val temp = _searchFilter.value?.copy()
+            temp?.let {
+                val tempDestination = _destinationTo.value!!.copy()
+                _destinationTo.value = _destinationFrom.value!!.copy()
+                _destinationFrom.value = tempDestination
+
+                it.latitudeFrom = _destinationFrom.value?.latitude!!
+                it.longitudeFrom = _destinationFrom.value?.longitude!!
+                it.latitudeTo = _destinationTo.value?.latitude!!
+                it.longitudeTo = _destinationTo.value?.longitude!!
+                _searchFilter.value = it
+                getTrips()
+            }
         }
+    }
+
+    fun finish() {
+        finish.value = true
     }
 
 }

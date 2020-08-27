@@ -48,6 +48,10 @@ class SearchResultsFragment : Fragment() {
         }
 
 
+        binding.swapButton.setOnClickListener {
+
+            searchTripViewModel.swapDestinations()
+        }
 
         binding.recyclerView.adapter = SearchResultsAdapter(tripsList) {
             navController.navigate(
@@ -68,9 +72,12 @@ class SearchResultsFragment : Fragment() {
                     binding.recyclerView.adapter?.notifyDataSetChanged()
                     binding.recyclerView.visibility = View.VISIBLE
                     binding.notFoundImage.visibility = View.GONE
+                    binding.resultsLabel.text = getString(R.string.trip_found, it.size.toString())
+                    binding.resultsLabel.visibility = View.VISIBLE
                 } else {
                     binding.recyclerView.visibility = View.GONE
                     binding.notFoundImage.visibility = View.VISIBLE
+                    binding.resultsLabel.visibility = View.INVISIBLE
                 }
             })
 

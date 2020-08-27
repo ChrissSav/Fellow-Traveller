@@ -59,4 +59,6 @@
     <string name="have_pet">Έχω κατικοίδιο</string>
     <string name="have_not_pet">Δεν έχω κατικοίδιο</string>
 
+    <string name="not_selected_filters">Δεν έχετε ορίσει κάποιο φίλτρο</string>
+    <string name="trip_found">Βρέθηκαν %s ταξίδια</string>
 </resources>
