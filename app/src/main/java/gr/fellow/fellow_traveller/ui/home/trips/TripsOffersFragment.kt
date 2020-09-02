@@ -43,8 +43,8 @@ class TripsOffersFragment : Fragment() {
 
         homeViewModel.loadTripAsCreator()
         homeViewModel.tripsAsCreator.observe(viewLifecycleOwner, Observer { list ->
-
-            tripsList = list.sortedWith(compareBy { it.timestamp }).toMutableList()
+            tripsList.clear()
+            tripsList.addAll(list)
 
             if (tripsList.isNotEmpty()) {
                 setTripInfo()

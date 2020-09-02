@@ -27,10 +27,7 @@ class TripsTakesPartFragment : Fragment() {
     private var tripsList = mutableListOf<Trip>()
     private lateinit var navController: NavController
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentTripsTakesPartBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -42,8 +39,8 @@ class TripsTakesPartFragment : Fragment() {
         navController = Navigation.findNavController(view)
         homeViewModel.loadTripTakesPart()
         homeViewModel.tripsTakesPart.observe(viewLifecycleOwner, Observer { list ->
-
-            tripsList = list.sortedWith(compareBy { it.timestamp }).toMutableList()
+            tripsList.clear()
+            tripsList.addAll(list)
 
             if (tripsList.isNotEmpty()) {
                 setTripInfo()

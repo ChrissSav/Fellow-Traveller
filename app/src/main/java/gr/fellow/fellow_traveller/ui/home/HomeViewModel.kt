@@ -114,7 +114,7 @@ constructor(
             when (val response = getTripsAsCreatorRemoteUseCase()) {
                 is ResultWrapper.Success -> {
                     // savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
-                    _tripsAsCreator.value = response.data
+                    _tripsAsCreator.value = response.data.sortedWith(compareBy { it.timestamp }).toMutableList()
                 }
                 is ResultWrapper.Error -> {
                     _error.value = response.error.msg
@@ -134,7 +134,7 @@ constructor(
             when (val response = getTripsAsPassengerRemoteUseCase()) {
                 is ResultWrapper.Success -> {
                     // savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
-                    _tripsTakesPart.value = response.data
+                    _tripsTakesPart.value = response.data.sortedWith(compareBy { it.timestamp }).toMutableList()
                 }
                 is ResultWrapper.Error -> {
                     _error.value = response.error.msg
