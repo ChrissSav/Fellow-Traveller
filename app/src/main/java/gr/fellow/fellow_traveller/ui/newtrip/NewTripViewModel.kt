@@ -148,7 +148,7 @@ constructor(
             when (val response = registerTripRemoteUseCase(
                 destinationFrom.value?.placeId.toString(), destinationTo.value?.placeId.toString(),
                 destinationPickUp.value?.placeId.toString(), dateTimeToTimestamp(date.value.toString(), time.value.toString()),
-                pet.value!!, bags.value!!, seats.value!!, message.value.toString(), price.value!!, car.value?.id!!
+                pet.value!!, seats.value!!, bags.value!!, message.value.toString(), price.value!!, car.value?.id!!
             )
                 ) {
                 is ResultWrapper.Success -> {
