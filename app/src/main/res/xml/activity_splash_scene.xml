@@ -64,6 +64,8 @@
             android:id="@+id/textView"
             motion:layout_constraintStart_toEndOf="@+id/ImageView"
             android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp" />
+            android:layout_marginStart="20dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="0.0" />
     </ConstraintSet>
 </MotionScene>

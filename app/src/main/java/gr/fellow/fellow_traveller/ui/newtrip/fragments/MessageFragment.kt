@@ -41,7 +41,7 @@ class MessageFragment : Fragment() {
         })
 
         binding.ImageButtonNext.setOnClickListener {
-            newTripViewModel.setMessage(binding.AddMessageFragmentEditText.text.toString())
+            newTripViewModel.setMessage(binding.AddMessageFragmentEditText.text.toString().trim())
 
             if (newTripViewModel.message.value != null)
                 navController.navigate(R.id.next_fragment)
