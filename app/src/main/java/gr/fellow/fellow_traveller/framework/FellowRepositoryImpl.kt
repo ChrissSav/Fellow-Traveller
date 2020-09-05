@@ -34,8 +34,7 @@ class FellowRepositoryImpl(
         networkCall {
             val res = service.registerUser(registerUserRequest)
             if (res.isSuccessful)
-                sharedPrefs[PREFS_AUTH_TOKEN] =
-                    res.headers()["Set-Cookie"]?.split(";".toRegex())?.toTypedArray()?.get(0)
+                sharedPrefs[PREFS_AUTH_TOKEN] = res.headers()["Set-Cookie"]?.split(";".toRegex())?.toTypedArray()?.get(0)
             res.handleToCorrectFormat()
         }
 
@@ -43,8 +42,7 @@ class FellowRepositoryImpl(
         networkCall {
             val res = service.userLogin(loginRequest)
             if (res.isSuccessful)
-                sharedPrefs[PREFS_AUTH_TOKEN] =
-                    res.headers()["Set-Cookie"]?.split(";".toRegex())?.toTypedArray()?.get(0)
+                sharedPrefs[PREFS_AUTH_TOKEN] = res.headers()["Set-Cookie"]?.split(";".toRegex())?.toTypedArray()?.get(0)
             res.handleToCorrectFormat()
         }
 
@@ -111,6 +109,7 @@ class FellowRepositoryImpl(
     override suspend fun logoutUserLocal() =
         roomCall {
             userAuthDao.deleteUser()
+            carDao.deleteCars()
         }
 
     override suspend fun deleteCarsLocal() =
