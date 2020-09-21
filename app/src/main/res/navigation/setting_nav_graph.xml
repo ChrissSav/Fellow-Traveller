@@ -23,13 +23,6 @@
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
         <action
-            android:id="@+id/action_baseSettingsFragment_to_changePasswordFragment"
-            app:destination="@id/changePasswordFragment"
-            app:enterAnim="@anim/enter_from_right"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
-        <action
             android:id="@+id/action_baseSettingsFragment_to_userCarsFragment"
             app:destination="@id/userCarsFragment"
             app:enterAnim="@anim/enter_from_right"
@@ -37,11 +30,6 @@
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
     </fragment>
-    <fragment
-        android:id="@+id/changePasswordFragment"
-        android:name="gr.fellow.fellow_traveller.ui.home.settings.ChangePasswordFragment"
-        android:label="fragment_change_password"
-        tools:layout="@layout/fragment_change_password" />
     <fragment
         android:id="@+id/userCarsFragment"
         android:name="gr.fellow.fellow_traveller.ui.home.settings.UserCarsFragment"

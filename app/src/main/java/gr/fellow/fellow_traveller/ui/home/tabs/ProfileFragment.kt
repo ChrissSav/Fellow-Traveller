@@ -1,10 +1,12 @@
 package gr.fellow.fellow_traveller.ui.home.tabs
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -13,7 +15,8 @@ import gr.fellow.fellow_traveller.databinding.FragmentInfoBinding
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.loadImageFromUrl
 
-class InfoFragment : Fragment() {
+
+class ProfileFragment : Fragment() {
 
 
     private val homeViewModel: HomeViewModel by activityViewModels()
@@ -51,6 +54,13 @@ class InfoFragment : Fragment() {
         binding.settingsButton.setOnClickListener {
             val nav = Navigation.findNavController(view)
             nav.navigate(R.id.to_setting)
+
+        }
+
+        binding.messengerLink.setOnClickListener {
+            val uriUrl: Uri = Uri.parse(getString(R.string.messenger_link, "regino29"))
+            val launchBrowser = Intent(Intent.ACTION_VIEW, uriUrl)
+            startActivity(launchBrowser)
         }
 
     }

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.home.tabs.InfoFragment">
+    tools:context=".ui.home.tabs.ProfileFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -54,7 +54,7 @@
                 app:layout_constraintTop_toBottomOf="@id/user_image" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/FragmentAccount_verify_section"
+                android:id="@+id/messenger_link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -64,26 +64,27 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/FragmentAccount_verify_icon"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/ic_verified"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/ic_send"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView3"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="@+id/textView3" />
 
                 <TextView
+                    android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20dp"
                     android:fontFamily="@font/firasans_light"
-                    android:text="Έμπιστος οδηγός"
+                    android:text="Στείλε ένα μήνυμα"
                     android:textColor="@color/black_color"
                     android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="@id/FragmentAccount_verify_icon"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintStart_toEndOf="@id/FragmentAccount_verify_icon"
-                    app:layout_constraintTop_toTopOf="@id/FragmentAccount_verify_icon" />
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -93,7 +94,7 @@
                 android:layout_marginTop="50dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/FragmentAccount_verify_section">
+                app:layout_constraintTop_toBottomOf="@id/messenger_link">
 
                 <TextView
                     android:id="@+id/rate"

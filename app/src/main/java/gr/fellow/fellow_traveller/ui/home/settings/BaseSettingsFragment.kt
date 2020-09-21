@@ -2,17 +2,16 @@ package gr.fellow.fellow_traveller.ui.home.settings
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentBaseSettingsBinding
-import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.main.MainActivity
@@ -47,10 +46,6 @@ class BaseSettingsFragment : Fragment() {
         binding.personalUserInfoButton.setOnClickListener {
             navController.navigate(R.id.action_baseSettingsFragment_to_accountSettingsFragment)
 
-        }
-
-        binding.changeUserPasswordButton.setOnClickListener {
-            navController.navigate(R.id.action_baseSettingsFragment_to_changePasswordFragment)
         }
 
         binding.manageUserCarsButton.setOnClickListener {

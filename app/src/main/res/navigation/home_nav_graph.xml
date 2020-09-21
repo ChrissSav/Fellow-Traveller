@@ -44,7 +44,7 @@
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/destination_info"
-        android:name="gr.fellow.fellow_traveller.ui.home.tabs.InfoFragment"
+        android:name="gr.fellow.fellow_traveller.ui.home.tabs.ProfileFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_info">
         <action
