@@ -1,10 +1,11 @@
-package gr.fellow.fellow_traveller.ui.home.trips
+package gr.fellow.fellow_traveller.ui.home.tabs
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -12,27 +13,26 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.models.Trip
-import gr.fellow.fellow_traveller.databinding.FragmentTripsOffersBinding
+import gr.fellow.fellow_traveller.databinding.FragmentTakesPartTabBinding
+import gr.fellow.fellow_traveller.domain.TripType
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.loadImageFromUrl
-import gr.fellow.fellow_traveller.ui.newtrip.NewTripActivity
+import gr.fellow.fellow_traveller.ui.search.SearchTripActivity
 
 
-class TripsOffersFragment : Fragment() {
+class TripsTakePartTabFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by activityViewModels()
 
-    private var _binding: FragmentTripsOffersBinding? = null
-    private val binding get() = _binding!!
     private var tripsList = mutableListOf<Trip>()
     private lateinit var navController: NavController
 
+    private var _binding: FragmentTakesPartTabBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentTripsOffersBinding.inflate(inflater, container, false)
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = FragmentTakesPartTabBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -40,9 +40,8 @@ class TripsOffersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         navController = Navigation.findNavController(view)
-
-        homeViewModel.loadTripAsCreator()
-        homeViewModel.tripsAsCreator.observe(viewLifecycleOwner, Observer { list ->
+        homeViewModel.loadTripTakesPart()
+        homeViewModel.tripsTakesPart.observe(viewLifecycleOwner, Observer { list ->
             tripsList.clear()
             tripsList.addAll(list)
 
@@ -55,7 +54,7 @@ class TripsOffersFragment : Fragment() {
         })
 
         binding.noTripsSectionButtonLayout.setOnClickListener {
-            val intent = Intent(activity, NewTripActivity::class.java)
+            val intent = Intent(activity, SearchTripActivity::class.java)
             startActivity(intent)
         }
     }
@@ -77,7 +76,10 @@ class TripsOffersFragment : Fragment() {
             activeTripsSection.visibility = View.VISIBLE
 
             buttonAllActiveTrips.setOnClickListener {
-                navController.navigate(R.id.action_destination_trips_to_offersActiveTripsFragment)
+                navController.navigate(
+                    R.id.action_destination_trips_takes_part_to_offersActiveTripsFragment,
+                    bundleOf("type" to TripType.TakesPart.name)
+                )
             }
         }
     }
@@ -86,5 +88,6 @@ class TripsOffersFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 
 }

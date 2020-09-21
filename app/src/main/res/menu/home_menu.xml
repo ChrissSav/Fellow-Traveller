@@ -6,13 +6,13 @@
         android:icon="@drawable/ic_iconography"
         android:title="Home" />
     <item
-        android:id="@+id/destination_trips"
+        android:id="@+id/destination_trips_offers"
         android:icon="@drawable/ic_car"
-        android:title="Trips" />
+        android:title="TripsOffer" />
     <item
-        android:id="@+id/destination_messages"
-        android:icon="@drawable/ic_messages"
-        android:title="Messages" />
+        android:id="@+id/destination_trips_takes_part"
+        android:icon="@drawable/ic_luggage"
+        android:title="TripsTakePart" />
     <item
         android:id="@+id/destination_notifications"
         android:icon="@drawable/ic_notifications"
