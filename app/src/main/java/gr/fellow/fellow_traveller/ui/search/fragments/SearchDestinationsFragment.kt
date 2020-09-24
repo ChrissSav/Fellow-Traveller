@@ -44,11 +44,14 @@ class SearchDestinationsFragment : Fragment() {
         binding.destFromButton.setOnClickListener {
             val intent = Intent(activity, SelectDestinationActivity::class.java)
             startActivityForResult(intent, 1)
+            activity?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+
         }
         binding.destToButton.setOnClickListener {
             val intent = Intent(activity, SelectDestinationActivity::class.java)
             intent.putExtra("info", "to")
             startActivityForResult(intent, 2)
+            activity?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }
 
         binding.backButton.setOnClickListener {

@@ -39,25 +39,32 @@ class SearchResultsFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
-        binding.filterButton.setOnClickListener {
-            navController.navigate(R.id.action_searchResultsFragment_to_searchFilterFragment)
+        with(binding) {
+            ImageButtonScrollToTop.setOnClickListener {
+                appBarLayout.setExpanded(true, true)
+            }
+            filterButton.setOnClickListener {
+                navController.navigate(R.id.action_searchResultsFragment_to_searchFilterFragment)
+            }
+
+            closeButton.setOnClickListener {
+                activity?.onBackPressed()
+            }
+
+
+            swapButton.setOnClickListener {
+
+                searchTripViewModel.swapDestinations()
+            }
+
+            recyclerView.adapter = SearchResultsAdapter(tripsList) {
+                navController.navigate(
+                    R.id.action_searchResultsFragment_to_searchTripDetailsFragment, bundleOf("tripId" to it.id)
+                )
+            }
         }
 
-        binding.closeButton.setOnClickListener {
-            activity?.onBackPressed()
-        }
 
-
-        binding.swapButton.setOnClickListener {
-
-            searchTripViewModel.swapDestinations()
-        }
-
-        binding.recyclerView.adapter = SearchResultsAdapter(tripsList) {
-            navController.navigate(
-                R.id.action_searchResultsFragment_to_searchTripDetailsFragment, bundleOf("tripId" to it.id)
-            )
-        }
 
 
 

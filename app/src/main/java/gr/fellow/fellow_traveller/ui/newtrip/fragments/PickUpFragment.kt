@@ -15,6 +15,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentPickUpBinding
 import gr.fellow.fellow_traveller.ui.location.SelectLocationActivity
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
+import gr.fellow.fellow_traveller.ui.startActivityForResultWithFade
 
 
 class PickUpFragment : Fragment() {
@@ -41,8 +42,7 @@ class PickUpFragment : Fragment() {
         navController = Navigation.findNavController(view)
 
         binding.pickUpButton.setOnClickListener {
-            val intent = Intent(activity, SelectLocationActivity::class.java)
-            startActivityForResult(intent, 1)
+            startActivityForResultWithFade(SelectLocationActivity::class, 1)
         }
 
 

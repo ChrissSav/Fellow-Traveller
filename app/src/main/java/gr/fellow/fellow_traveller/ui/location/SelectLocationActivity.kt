@@ -41,7 +41,7 @@ class SelectLocationActivity : AppCompatActivity() {
         initializeRecycle()
 
         selectLocationViewModel.destinations.observe(this, Observer {
-            showHideBottomNav(0)
+            showHideInternetMessage(0)
             placesList.clear()
             placesList.addAll(it)
             binding.RecyclerView.adapter?.notifyDataSetChanged()
@@ -49,7 +49,7 @@ class SelectLocationActivity : AppCompatActivity() {
 
         selectLocationViewModel.error.observe(this, Observer {
             if (it == R.string.ERROR_INTERNET_CONNECTION) {
-                showHideBottomNav(100)
+                showHideInternetMessage(100)
             } else {
                 createAlerter(getString(it))
             }
@@ -62,9 +62,10 @@ class SelectLocationActivity : AppCompatActivity() {
         }
 
         binding.SelectLocationActivityEditTextSearchPlace.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {
+            override fun afterTextChanged(charSequence: Editable) {
+                if (charSequence.toString().trim().length > 2)
                 //Log.i("addTextChangedListener", "afterTextChanged "+s);
-                selectLocationViewModel.getAllDestinations(s.toString())
+                    selectLocationViewModel.getAllDestinations(charSequence.toString().trim())
                 //  GetPlaces(s.toString())
             }
 
@@ -79,7 +80,13 @@ class SelectLocationActivity : AppCompatActivity() {
 
     }
 
-    private fun showHideBottomNav(targetHeight: Int) {
+
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+    }
+
+    private fun showHideInternetMessage(targetHeight: Int) {
         val slideAnimator = ValueAnimator
             .ofInt(binding.imageViewInternet.layoutParams.height, targetHeight)
             .setDuration(200)

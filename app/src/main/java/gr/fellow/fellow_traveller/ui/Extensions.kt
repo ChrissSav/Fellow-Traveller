@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.ui
 
 import android.app.Activity
+import android.content.Intent
 import android.content.res.Resources
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -13,6 +14,7 @@ import java.io.IOException
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.reflect.KClass
 
 
 fun Activity.createAlerter(msg: String) {
@@ -44,6 +46,37 @@ fun Activity.createAlerter(msg: String, color: Int) {
         .show()
 }
 
+fun Activity.openActivityWithFade(activity: Activity) {
+    val intent = Intent(this, activity::class.java)
+    startActivity(intent)
+    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+    finish()
+}
+
+fun Activity.openActivityWithFade(intent: Intent) {
+    startActivity(intent)
+    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+    finish()
+}
+
+fun Activity.openActivityForResultWithFade(activity: Activity, code: Int) {
+    val intent = Intent(this, activity::class.java)
+    startActivity(intent)
+    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+}
+
+fun Activity.startActivityForResultWithFade(activity: KClass<out Activity>, code: Int) {
+    val intent = Intent(this, activity.java)
+    startActivityForResult(intent, code)
+    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+}
+
+
+fun Fragment.startActivityForResultWithFade(activity: KClass<out Activity>, code: Int) {
+    val intent = Intent(this.context, activity.java)
+    startActivityForResult(intent, code)
+    this.activity?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+}
 
 fun Activity.createToast(msg: String) {
     Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()

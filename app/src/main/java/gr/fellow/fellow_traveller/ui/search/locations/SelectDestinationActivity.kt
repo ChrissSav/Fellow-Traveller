@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.ActivitySelectDestinationBinding
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.framework.network.google.response.PredictionResponse
@@ -65,10 +66,10 @@ class SelectDestinationActivity : AppCompatActivity(), View.OnClickListener {
 
         binding.destEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(charSequence: Editable?) {
-                if (charSequence.toString().trim().isNotEmpty()) {
+                if (charSequence.toString().trim().length > 2) {
                     binding.protaseis.visibility = View.GONE
                     binding.recyclerView.visibility = View.VISIBLE
-                    selectLocationViewModel.getAllDestinations(charSequence.toString())
+                    selectLocationViewModel.getAllDestinations(charSequence.toString().trim())
                 } else {
                     binding.recyclerView.visibility = View.GONE
                     binding.protaseis.visibility = View.VISIBLE
@@ -100,6 +101,12 @@ class SelectDestinationActivity : AppCompatActivity(), View.OnClickListener {
         resultIntent.putExtra("place", place)
         setResult(Activity.RESULT_OK, resultIntent)
         finish()
+    }
+
+
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
 
     override fun onClick(view: View) {
