@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.newtrip.fragments.DateTimeFragment">
 
     <TextView
@@ -18,27 +18,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/date_Button"
-        style="@style/editText_input"
+    <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+        android:id="@+id/fellowTextInput_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/new_trip_margin_from_top"
-        android:hint="@string/select_day"
+        app:hint_fellow="@string/select_day"
         app:layout_constraintEnd_toEndOf="@+id/AddDateTimeFragment_textView"
         app:layout_constraintStart_toStartOf="@+id/AddDateTimeFragment_textView"
         app:layout_constraintTop_toBottomOf="@+id/AddDateTimeFragment_textView" />
 
-    <EditText
-        android:id="@+id/time_Button"
-        style="@style/editText_input"
+
+    <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+        android:id="@+id/fellowTextInput_time"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/select_time"
         android:layout_marginTop="@dimen/new_trip_margin_from_top_between_editTexts"
-        app:layout_constraintEnd_toEndOf="@+id/date_Button"
-        app:layout_constraintStart_toStartOf="@+id/date_Button"
-        app:layout_constraintTop_toBottomOf="@+id/date_Button" />
+        app:hint_fellow="@string/select_time"
+        app:layout_constraintEnd_toEndOf="@+id/fellowTextInput_date"
+        app:layout_constraintStart_toStartOf="@+id/fellowTextInput_date"
+        app:layout_constraintTop_toBottomOf="@+id/fellowTextInput_date" />
 
 
     <ImageButton

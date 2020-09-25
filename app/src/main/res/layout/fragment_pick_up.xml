@@ -1,44 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.newtrip.fragments.PickUpFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+
+    <TextView
+        android:id="@+id/PickUpPointFragment_textView1"
+        style="@style/title_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_global_left"
+        android:layout_marginEnd="@dimen/margin_global_right"
+        android:text="@string/fragment_pick_up_header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/PickUpPointFragment_textView1"
-            style="@style/title_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_global_left"
-            android:layout_marginEnd="@dimen/margin_global_right"
-            android:text="@string/fragment_pick_up_header"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/pickUpButton"
-            style="@style/editText_input"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:hint="@string/select_destination_pick_up"
-            android:inputType="text"
-            android:layout_marginTop="@dimen/new_trip_margin_from_top"
-            app:layout_constraintEnd_toEndOf="@+id/PickUpPointFragment_textView1"
-            app:layout_constraintStart_toStartOf="@+id/PickUpPointFragment_textView1"
-            app:layout_constraintTop_toBottomOf="@+id/PickUpPointFragment_textView1" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+        android:id="@+id/pickUpButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/new_trip_margin_from_top"
+        app:hint_fellow="@string/select_destination_pick_up"
+        app:layout_constraintEnd_toEndOf="@+id/PickUpPointFragment_textView1"
+        app:layout_constraintStart_toStartOf="@+id/PickUpPointFragment_textView1"
+        app:layout_constraintTop_toBottomOf="@+id/PickUpPointFragment_textView1" />
 
     <ImageButton
         android:id="@+id/ImageButton_next"

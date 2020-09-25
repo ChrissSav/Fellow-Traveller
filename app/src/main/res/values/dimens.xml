@@ -35,7 +35,7 @@
 
 
     <!--New Trip-->
-    <dimen name="new_trip_margin_from_top">85dp</dimen>
+    <dimen name="new_trip_margin_from_top">80dp</dimen>
 
     <dimen name="new_trip_margin_from_top_between_editTexts">50dp</dimen>
 

@@ -41,13 +41,13 @@ class PickUpFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
-        binding.pickUpButton.setOnClickListener {
+        binding.pickUpButton.onClickListener {
             startActivityForResultWithFade(SelectLocationActivity::class, 1)
         }
 
 
         newTripViewModel.destinationPickUp.observe(viewLifecycleOwner, Observer {
-            binding.pickUpButton.setText(it.title)
+            binding.pickUpButton.text = it.title
         })
 
         binding.ImageButtonNext.setOnClickListener {

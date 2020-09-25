@@ -44,16 +44,16 @@ class DateTimeFragment : Fragment() {
 
 
         newTripViewModel.date.observe(viewLifecycleOwner, Observer {
-            binding.dateButton.setText(it)
+            binding.fellowTextInputDate.text = it
         })
 
         newTripViewModel.time.observe(viewLifecycleOwner, Observer {
-            binding.timeButton.setText(it)
+            binding.fellowTextInputTime.text = it
         })
 
-        binding.dateButton.setOnClickListener {
+        binding.fellowTextInputDate.onClickListener {
             dateDialog = DatePickerCustomDialog(
-                binding.dateButton.text.toString()
+                binding.fellowTextInputDate.text.toString()
             ) {
 
                 newTripViewModel.applyDate(it)
@@ -62,9 +62,9 @@ class DateTimeFragment : Fragment() {
 
         }
 
-        binding.timeButton.setOnClickListener {
+        binding.fellowTextInputTime.onClickListener {
             timeDialog = TimePickerCustomDialog(
-                binding.timeButton.text.toString()
+                binding.fellowTextInputTime.text.toString()
             ) {
                 newTripViewModel.applyTime(it)
             }

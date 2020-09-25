@@ -7,54 +7,43 @@
     tools:context=".ui.newtrip.fragments.DestinationsFragment">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="-16dp">
-
-        <TextView
-            android:id="@+id/AddLocationsFragment_textView"
-            style="@style/title_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_global_left"
-            android:layout_marginEnd="@dimen/margin_global_right"
-            android:text="@string/fragment_destinations_header"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/editText_from"
-            style="@style/editText_input"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/new_trip_margin_from_top"
-            android:hint="@string/select_destination_from"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="@+id/AddLocationsFragment_textView"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/AddLocationsFragment_textView"
-            app:layout_constraintTop_toBottomOf="@+id/AddLocationsFragment_textView" />
+    <TextView
+        android:id="@+id/AddLocationsFragment_textView"
+        style="@style/title_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_global_left"
+        android:layout_marginEnd="@dimen/margin_global_right"
+        android:text="@string/fragment_destinations_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-        <EditText
-            android:id="@+id/editText_to"
-            style="@style/editText_input"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/new_trip_margin_from_top_between_editTexts"
-            android:hint="@string/select_destination_to"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="@+id/AddLocationsFragment_textView"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/AddLocationsFragment_textView"
-            app:layout_constraintTop_toBottomOf="@+id/editText_from" />
+    <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+        android:id="@+id/editText_from"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/new_trip_margin_from_top"
+        app:hint_fellow="@string/select_destination_from"
+        app:layout_constraintEnd_toEndOf="@+id/AddLocationsFragment_textView"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/AddLocationsFragment_textView"
+        app:layout_constraintTop_toBottomOf="@+id/AddLocationsFragment_textView" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+        android:id="@+id/editText_to"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/new_trip_margin_from_top_between_editTexts"
+        app:hint_fellow="@string/select_destination_to"
+        app:layout_constraintEnd_toEndOf="@+id/AddLocationsFragment_textView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/AddLocationsFragment_textView"
+        app:layout_constraintTop_toBottomOf="@+id/editText_from" />
+
 
     <ImageButton
         android:id="@+id/ImageButton_next"
