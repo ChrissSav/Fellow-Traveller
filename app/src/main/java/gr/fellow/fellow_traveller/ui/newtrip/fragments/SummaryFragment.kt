@@ -78,10 +78,10 @@ class SummaryFragment : Fragment() {
             pets.text = if (newTripViewModel.pet.value!!) resources.getString(R.string.allowed) else resources.getString(R.string.not_allowed)
             pets.setOnClickListener(clickListener)
 
-            ImageButtonNext.setOnClickListener {
-                newTripViewModel.registerTrip()
+             ImageButtonNext.root.setOnClickListener {
+                 newTripViewModel.registerTrip()
 
-            }
+             }
 
 
 

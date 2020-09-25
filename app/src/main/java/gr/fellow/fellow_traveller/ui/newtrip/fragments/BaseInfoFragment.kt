@@ -55,8 +55,7 @@ class BaseInfoFragment : Fragment() {
 
         with(newTripViewModel) {
             car.observe(viewLifecycleOwner, Observer {
-                binding.carButton.text = "${it.brand} ${it.model} | ${it.plate} | ${it.color}"
-                binding.carButton.setTextColor(resources.getColor(R.color.button_fill_color))
+                binding.carButton.setText("${it.brand} ${it.model} | ${it.plate} | ${it.color}")
             })
 
             seats.observe(viewLifecycleOwner, Observer {
@@ -78,7 +77,7 @@ class BaseInfoFragment : Fragment() {
 
         with(binding) {
 
-            ImageButtonNext.setOnClickListener {
+            ImageButtonNext.root.setOnClickListener {
                 if (newTripViewModel.car.value != null) {
                     navController.navigate(R.id.next_fragment)
                 } else {

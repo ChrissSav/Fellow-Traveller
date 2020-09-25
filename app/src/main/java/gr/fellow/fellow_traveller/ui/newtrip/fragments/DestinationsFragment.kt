@@ -59,7 +59,7 @@ class DestinationsFragment : Fragment() {
             binding.editTextTo.text = it.title
         })
 
-        binding.ImageButtonNext.setOnClickListener {
+        binding.ImageButtonNext.root.setOnClickListener {
 
             when {
                 newTripViewModel.destinationFrom.value == null -> {

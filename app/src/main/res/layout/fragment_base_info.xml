@@ -33,8 +33,8 @@
                 style="@style/title_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/margin_global_left"
+                android:layout_marginEnd="@dimen/margin_global_right"
                 android:text="@string/fragment_base_info_header"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -42,11 +42,11 @@
 
             <TextView
                 android:id="@+id/textView"
-                style="@style/header2"
+                style="@style/header_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="@dimen/new_trip_margin_from_top"
                 android:text="Αμάξι"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textView2" />
@@ -58,36 +58,34 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:visibility="invisible"
                 android:text="Επιλέξτε αμάξι για το ταξίδι σας"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-            <Button
+            <EditText
                 android:id="@+id/car_Button"
-                style="@style/button_outline_blue_with_left_drawable"
+                style="@style/editText_not_editable"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/button_number_layout_height"
-                android:layout_marginTop="16dp"
-                android:drawableStart="@drawable/ic_car"
-                android:drawableTint="@color/black_color"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:text="@string/select_car"
-                android:textColor="#9E9E9E"
+                android:layout_height="0dp"
+                android:layout_marginStart="32dp"
+                android:hint="@string/select_car"
+                android:textAlignment="viewEnd"
+                app:layout_constraintBottom_toBottomOf="@+id/textView"
                 app:layout_constraintEnd_toEndOf="@+id/textView6"
-                app:layout_constraintStart_toStartOf="@+id/textView6"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintTop_toTopOf="@+id/textView" />
 
             <TextView
                 android:id="@+id/textView7"
-                style="@style/header2"
+                style="@style/header_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="45dp"
                 android:text="Θέσεις"
                 app:layout_constraintStart_toStartOf="@+id/textView6"
-                app:layout_constraintTop_toBottomOf="@+id/car_Button" />
+                app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -95,6 +93,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:visibility="invisible"
+
                 android:text="Εισάγετε τον αριθμό των ελεύθερων θέσεων που θέλετε να μοιραστείτε"
                 app:layout_constraintEnd_toEndOf="@+id/seats_pick_button"
                 app:layout_constraintStart_toStartOf="@+id/textView7"
@@ -102,7 +102,7 @@
 
             <TextView
                 android:id="@+id/textView10"
-                style="@style/header2"
+                style="@style/header_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="45dp"
@@ -118,13 +118,14 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="32dp"
                 android:text="Επιτρέπεται κατοικίδια ή όχι;"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView10"
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
             <TextView
                 android:id="@+id/textView_2"
-                style="@style/header2"
+                style="@style/header_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="45dp"
@@ -138,6 +139,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:visibility="invisible"
                 android:text="Εισάγετε τον αριθμό για τις αποσκευές των επιβατών"
                 app:layout_constraintEnd_toEndOf="@+id/bags_pick_button"
                 app:layout_constraintStart_toStartOf="@+id/textView_2"
@@ -167,7 +169,6 @@
                 android:id="@+id/switch_pet"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
-                android:layout_marginEnd="2dp"
                 android:background="@null"
                 android:checked="false"
                 android:paddingStart="10dp"
@@ -185,21 +186,13 @@
 
     </ScrollView>
 
-
-    <ImageButton
+    <include
         android:id="@+id/ImageButton_next"
-        android:layout_width="@dimen/new_trip_float_action_button_width"
-        android:layout_height="@dimen/new_trip_float_action_button_height"
+        layout="@layout/float_action_button_new_trip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/new_trip_float_action_button_margin_right"
         android:layout_marginBottom="@dimen/new_trip_float_action_button_margin_bottom"
-        android:background="@drawable/circle_button_shape"
-        android:backgroundTint="@color/blue_color"
-        android:elevation="2dp"
-        android:padding="15dp"
-        android:rotation="180"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_back_button"
-        android:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

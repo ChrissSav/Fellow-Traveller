@@ -50,7 +50,7 @@ class PickUpFragment : Fragment() {
             binding.pickUpButton.text = it.title
         })
 
-        binding.ImageButtonNext.setOnClickListener {
+        binding.ImageButtonNext.root.setOnClickListener {
 
             if (newTripViewModel.destinationPickUp.value == null) {
                 newTripViewModel.setError(R.string.ERROR_SELECT_DEST_PICK_UP)

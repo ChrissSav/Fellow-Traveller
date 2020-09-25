@@ -40,7 +40,7 @@ class MessageFragment : Fragment() {
             binding.AddMessageFragmentEditText.setText(it)
         })
 
-        binding.ImageButtonNext.setOnClickListener {
+        binding.ImageButtonNext.root.setOnClickListener {
             newTripViewModel.setMessage(binding.AddMessageFragmentEditText.text.toString().trim())
 
             if (newTripViewModel.message.value != null)

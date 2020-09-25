@@ -4,14 +4,15 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.content.ContextCompat
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.ui.toPx
 
 class PickNumberButton : ConstraintLayout {
 
@@ -65,8 +66,8 @@ class PickNumberButton : ConstraintLayout {
 
     private fun createConstraintSet() {
 
-        background = ContextCompat.getDrawable(context, R.drawable.increaser_border_stroke_shape_1)
-        setPadding(35, 0, 35, 0)
+//        background = ContextCompat.getDrawable(context, R.drawable.increaser_border_stroke_shape_1)
+        setPadding(25, 0, 25, 0)
         pickNumberConstraintSet.clone(this)
         pickNumberConstraintSet.apply {
 
@@ -82,8 +83,8 @@ class PickNumberButton : ConstraintLayout {
             connect(textView.id, ConstraintSet.END, pickPlusImg.id, ConstraintSet.END)
             connect(textView.id, ConstraintSet.START, pickMinusImg.id, ConstraintSet.START)
             connect(textView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
-            constrainWidth(textView.id, ViewGroup.LayoutParams.WRAP_CONTENT)
-            constrainHeight(textView.id, ViewGroup.LayoutParams.WRAP_CONTENT)
+            constrainWidth(textView.id, 35.toPx)
+            constrainHeight(textView.id, 35.toPx)
 
 
             connect(pickPlusImg.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
@@ -125,8 +126,10 @@ class PickNumberButton : ConstraintLayout {
         pickNumberConstraintSet.applyTo(this)
         pickMinusImg.setImageResource(minusButtonSrc)
         pickPlusImg.setImageResource(plusButtonSrc)
-        textView.setTextAppearance(this.context, R.style.input)
+        textView.setTextAppearance(this.context, R.style.input_number_picker)
         textView.text = minValue.toString()
+        textView.gravity = Gravity.CENTER
+        textView.setBackgroundResource(R.drawable.background_black_round)
     }
 
     private fun setupListeners() {

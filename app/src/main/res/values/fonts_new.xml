@@ -7,5 +7,11 @@
         <item name="android:textSize">23sp</item>
     </style>
 
+    <style name="header_2">
+        <item name="android:fontFamily">@font/alegreyasans_regular</item>
+        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 
 </resources>

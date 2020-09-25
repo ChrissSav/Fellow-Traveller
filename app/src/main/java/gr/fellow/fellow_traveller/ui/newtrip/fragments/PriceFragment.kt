@@ -45,7 +45,7 @@ class PriceFragment : Fragment() {
             updateTotal(it)
         })
 
-        binding.ImageButtonNext.setOnClickListener {
+        binding.ImageButtonNext.root.setOnClickListener {
             navController.navigate(R.id.next_fragment)
         }
 

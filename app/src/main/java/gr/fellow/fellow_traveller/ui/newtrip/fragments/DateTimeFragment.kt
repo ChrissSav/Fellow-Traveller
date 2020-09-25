@@ -73,7 +73,7 @@ class DateTimeFragment : Fragment() {
         }
 
 
-        binding.ImageButtonNext.setOnClickListener {
+        binding.ImageButtonNext.root.setOnClickListener {
             if (validateDateTimeDiffer(
                     newTripViewModel.date.value.toString(), newTripViewModel.time.value.toString(), resources.getInteger(R.integer.Time_difference)
                 )

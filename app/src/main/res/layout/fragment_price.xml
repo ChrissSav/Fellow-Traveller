@@ -8,13 +8,14 @@
 
     <TextView
         android:id="@+id/AddPriceFragment_textView1"
-        style="@style/display"
+        style="@style/title_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="@dimen/margin_global_left"
+        android:layout_marginEnd="@dimen/margin_global_right"
         android:text="Όρισε την τιμή"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,7 +24,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        style="@style/paragraph2"
+        style="@style/header_2"
+        android:visibility="invisible"
         android:text="Επιλέξτε το κόστο ανά άτομο που θα αναλογεί στο κάθε επιβάτη της διαδρομής"
         app:layout_constraintEnd_toEndOf="@+id/AddPriceFragment_textView1"
         app:layout_constraintStart_toStartOf="@+id/AddPriceFragment_textView1"
@@ -35,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:text="Τιμή ανά άτομο"
-        style="@style/label"
+        style="@style/header_2"
         app:layout_constraintStart_toStartOf="@+id/AddPriceFragment_textView"
         app:layout_constraintTop_toBottomOf="@+id/AddPriceFragment_textView" />
 
@@ -47,7 +49,7 @@
         android:layout_marginTop="64dp"
         android:background="@android:color/transparent"
         android:ems="10"
-        android:fontFamily="@font/firasans_medium"
+        android:fontFamily="@font/roboto_regular"
         android:gravity="right"
         android:hint="0.00"
         android:inputType="numberDecimal"
@@ -74,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="Συνολικό"
-        style="@style/header2"
+        style="@style/header_2"
         app:layout_constraintStart_toStartOf="@+id/AddPriceFragment_textView6"
         app:layout_constraintTop_toBottomOf="@+id/AddPriceFragment_textView7" />
 
@@ -83,7 +85,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0 €"
-        style="@style/header2"
+        style="@style/header_2"
         app:layout_constraintBottom_toBottomOf="@+id/AddPriceFragment_textView8"
         app:layout_constraintEnd_toEndOf="@+id/AddPriceFragment_textView"
         app:layout_constraintTop_toTopOf="@+id/AddPriceFragment_textView8" />
@@ -93,7 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
-        android:fontFamily="@font/firasans_medium"
+        android:fontFamily="@font/roboto_regular"
         android:text="@string/euro_symbol"
         android:textAlignment="center"
         android:textColor="@color/black_color"
@@ -102,21 +104,13 @@
         app:layout_constraintStart_toEndOf="@+id/AddPriceFragment_editText_price" />
 
 
-
-    <ImageButton
+    <include
         android:id="@+id/ImageButton_next"
-        android:layout_width="@dimen/new_trip_float_action_button_width"
-        android:layout_height="@dimen/new_trip_float_action_button_height"
+        layout="@layout/float_action_button_new_trip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/new_trip_float_action_button_margin_right"
         android:layout_marginBottom="@dimen/new_trip_float_action_button_margin_bottom"
-        android:background="@drawable/circle_button_shape"
-        android:backgroundTint="@color/blue_color"
-        android:elevation="2dp"
-        android:padding="15dp"
-        android:rotation="180"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_back_button"
-        android:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
