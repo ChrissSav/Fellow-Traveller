@@ -41,35 +41,28 @@ class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogLi
             when (destination.id) {
                 R.id.destinationsFragment -> {
                     binding.progressBar.progress = 14
-                    binding.labelSummary.visibility = View.INVISIBLE
 
                 }
                 R.id.pickUpFragment -> {
                     binding.progressBar.progress = 28
-                    binding.labelSummary.visibility = View.INVISIBLE
 
                 }
                 R.id.dateTimeFragment -> {
                     binding.progressBar.progress = 42
-                    binding.labelSummary.visibility = View.INVISIBLE
 
                 }
                 R.id.baseInfoFragment -> {
                     binding.progressBar.progress = 56
-                    binding.labelSummary.visibility = View.INVISIBLE
 
                 }
                 R.id.priceFragment -> {
                     binding.progressBar.progress = 70
-                    binding.labelSummary.visibility = View.INVISIBLE
                 }
                 R.id.messageFragment -> {
                     binding.progressBar.progress = 84
-                    binding.labelSummary.visibility = View.INVISIBLE
                 }
                 R.id.summaryFragment -> {
                     binding.progressBar.progress = 95
-                    binding.labelSummary.visibility = View.VISIBLE
                 }
                 R.id.successTripFragment -> {
                     binding.constraintLayout.visibility = View.GONE

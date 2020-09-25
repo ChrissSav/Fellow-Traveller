@@ -6,10 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentSummaryBinding
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 
@@ -34,7 +31,7 @@ class SummaryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController = Navigation.findNavController(view)
+        /*navController = Navigation.findNavController(view)
 
         val clickListener = View.OnClickListener { view ->
 
@@ -102,7 +99,7 @@ class SummaryFragment : Fragment() {
             navController.navigate(R.id.next_fragment)
         })
 
-
+*/
     }
 
 

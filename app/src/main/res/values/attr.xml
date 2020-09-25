@@ -30,4 +30,8 @@
         <attr name="hint_fellow" format="string" />
 
     </declare-styleable>
+
+    <declare-styleable name="LabelTextComponent">
+        <attr name="label_text" format="string" />
+    </declare-styleable>
 </resources>
