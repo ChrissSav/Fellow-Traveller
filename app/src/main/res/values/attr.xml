@@ -24,4 +24,15 @@
         <attr name="input_type" format="string" />
         <attr name="hint_text" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="FellowEditTextSecond">
+        <attr name="drawable_right_second" format="reference|color" />
+        <attr name="bottom_line_color_second" format="color" />
+        <attr name="bottom_line_top_margin_second" format="dimension" />
+        <attr name="drawable_padding_second" format="dimension" />
+        <attr name="padding_end_second" format="dimension" />
+        <attr name="padding_start_second" format="dimension" />
+        <attr name="input_type_second" format="string" />
+        <attr name="hint_text_second" format="string" />
+    </declare-styleable>
 </resources>

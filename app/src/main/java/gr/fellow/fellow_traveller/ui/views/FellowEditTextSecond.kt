@@ -2,6 +2,7 @@ package gr.fellow.fellow_traveller.ui.views
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.text.Editable
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
@@ -21,7 +22,7 @@ import gr.fellow.fellow_traveller.ui.toDp
 import gr.fellow.fellow_traveller.ui.toPx
 
 
-class FellowEditText : ConstraintLayout {
+class FellowEditTextSecond : ConstraintLayout {
 
     val DRAWABLE_RIGHT = 2
     private val inputTypes = mutableListOf<Pair<String, Int>>()
@@ -98,19 +99,20 @@ class FellowEditText : ConstraintLayout {
 
     private fun setupAttributes(attrs: AttributeSet?) {
         attrs?.let {
-            val typedArray = context.obtainStyledAttributes(attrs, R.styleable.FellowEditText)
+            val typedArray = context.obtainStyledAttributes(attrs, R.styleable.FellowEditTextSecond)
 
             try {
 
-                drawableRight = typedArray.getResourceId(R.styleable.FellowEditText_drawable_right, R.drawable.ic_close)
-                bottomLineColor = typedArray.getColor(R.styleable.FellowEditText_bottom_line_color, getColor(this.context, R.color.softGrey_color))
-                bottomLineTopMargin = typedArray.getDimension(R.styleable.FellowEditText_bottom_line_top_margin, 2.toPx.toFloat())
-                drawablePadding = typedArray.getDimension(R.styleable.FellowEditText_drawable_padding, 0F)
-                padding_start = typedArray.getDimension(R.styleable.FellowEditText_padding_start, 0F)
-                padding_end = typedArray.getDimension(R.styleable.FellowEditText_padding_end, 0F)
-                style = typedArray.getResourceId(R.styleable.FellowEditText_style, R.style.input)
-                hintTextString = typedArray.getString(R.styleable.FellowEditText_hint_text)
-                inputType = typedArray.getString(R.styleable.FellowEditText_input_type)
+                drawableRight = typedArray.getResourceId(R.styleable.FellowEditTextSecond_drawable_right_second, R.drawable.ic_close)
+                bottomLineColor =
+                    typedArray.getColor(R.styleable.FellowEditTextSecond_bottom_line_color_second, getColor(this.context, R.color.softGrey_color))
+                bottomLineTopMargin = typedArray.getDimension(R.styleable.FellowEditTextSecond_bottom_line_top_margin_second, 2.toPx.toFloat())
+                drawablePadding = typedArray.getDimension(R.styleable.FellowEditTextSecond_drawable_padding_second, 0F)
+                padding_start = typedArray.getDimension(R.styleable.FellowEditTextSecond_padding_start_second, 0F)
+                padding_end = typedArray.getDimension(R.styleable.FellowEditTextSecond_padding_end_second, 0F)
+                //style = typedArray.getResourceId(R.styleable.FellowEditTextSecond_style, R.style.input)
+                hintTextString = typedArray.getString(R.styleable.FellowEditTextSecond_hint_text_second)
+                inputType = typedArray.getString(R.styleable.FellowEditTextSecond_input_type_second)
 
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -125,7 +127,8 @@ class FellowEditText : ConstraintLayout {
     private fun setupViews() {
         ediTextConstraintSet.applyTo(this)
         editText.hint = hintTextString ?: ""
-        editText.setTextAppearance(this.context, style)
+        editText.setHintTextColor(Color.parseColor("#B1B1B1"))
+        //editText.setTextAppearance(this.context, style)
         editText.isSingleLine = true
         editText.background = null
         try {

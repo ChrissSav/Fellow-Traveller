@@ -41,11 +41,11 @@ class DestinationsFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
-        binding.fromButton.setOnClickListener {
+        binding.editTextFrom.setOnClickListener {
             startActivityForResultWithFade(SelectLocationActivity::class, 1)
         }
 
-        binding.toButton.setOnClickListener {
+        binding.editTextTo.setOnClickListener {
             startActivityForResultWithFade(SelectLocationActivity::class, 2)
 
         }
@@ -53,11 +53,11 @@ class DestinationsFragment : Fragment() {
 
 
         newTripViewModel.destinationFrom.observe(viewLifecycleOwner, Observer {
-            binding.fromButton.setText(it.title)
+            binding.editTextFrom.setText(it.title)
         })
 
         newTripViewModel.destinationTo.observe(viewLifecycleOwner, Observer {
-            binding.toButton.setText(it.title)
+            binding.editTextTo.setText(it.title)
         })
 
         binding.ImageButtonNext.setOnClickListener {

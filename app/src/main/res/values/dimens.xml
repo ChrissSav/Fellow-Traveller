@@ -3,13 +3,8 @@
 
     <!--Global-->
     <dimen name="margin_from_top">30dp</dimen>
-
-
-    <!--    float_action_button-->
-    <dimen name="float_action_button_margin_right">30dp</dimen>
-    <dimen name="float_action_button_margin_bottom">30dp</dimen>
-    <dimen name="float_action_button_width">65dp</dimen>
-    <dimen name="float_action_button_height">65dp</dimen>
+    <dimen name="margin_global_left">16dp</dimen>
+    <dimen name="margin_global_right">16dp</dimen>
 
 
     <!--    imageButton back -->
@@ -37,4 +32,18 @@
     <dimen name="filters_text_label_margin_top">45dp</dimen>
     <dimen name="filters_view_margin_top">20dp</dimen>
     <dimen name="filters_margin_left_from_image">8dp</dimen>
+
+
+    <!--New Trip-->
+    <dimen name="new_trip_margin_from_top">85dp</dimen>
+
+    <dimen name="new_trip_margin_from_top_between_editTexts">50dp</dimen>
+
+    <!--    float_action_button-->
+    <dimen name="new_trip_float_action_button_margin_right">30dp</dimen>
+    <dimen name="new_trip_float_action_button_margin_bottom">30dp</dimen>
+    <dimen name="new_trip_float_action_button_width">65dp</dimen>
+    <dimen name="new_trip_float_action_button_height">65dp</dimen>
+
+
 </resources>

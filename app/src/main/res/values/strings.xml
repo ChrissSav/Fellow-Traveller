@@ -64,4 +64,33 @@
 
 
     <string name="messenger_link">https://m.me/%s</string>
+
+
+    <!--New Trip-->
+
+
+    <!--Fragment destinations-->
+
+    <string name="fragment_destinations_header">Εισάγεται την αφετηρία και τον προορισμό</string>
+    <string name="select_destination_from">Αφετηρία</string>
+    <string name="select_destination_to">Προορισμός</string>
+
+
+    <!--Fragment PickUp point-->
+
+    <string name="fragment_pick_up_header">Ποιό είναι το σημείο αναχώρησης;</string>
+    <string name="select_destination_pick_up">Σημείο αναχώρησης</string>
+
+    <!--Fragment PickUp point-->
+
+    <string name="fragment_date_time_header">Πότε θα πραγματοποιηθεί το ταξίδι;</string>
+    <string name="select_day">Ημερομηνία</string>
+    <string name="select_time">Ώρα</string>
+
+    <!--Fragment fragment_base_info -->
+
+    <string name="fragment_base_info_header">Καθόρισε τα στοιχεία του ταξιδιού</string>
+    <!-- <string name="select_day">Ημερομηνία</string>
+     <string name="select_time">Ώρα</string>-->
+
 </resources>
