@@ -40,10 +40,10 @@
     <dimen name="new_trip_margin_from_top_between_editTexts">50dp</dimen>
 
     <!--    float_action_button-->
-    <dimen name="new_trip_float_action_button_margin_right">30dp</dimen>
-    <dimen name="new_trip_float_action_button_margin_bottom">30dp</dimen>
-    <dimen name="new_trip_float_action_button_width">65dp</dimen>
-    <dimen name="new_trip_float_action_button_height">65dp</dimen>
-
+    <dimen name="new_trip_float_action_button_margin_right">32dp</dimen>
+    <dimen name="new_trip_float_action_button_margin_bottom">32dp</dimen>
+    <dimen name="new_trip_float_action_button_width">53dp</dimen>
+    <dimen name="new_trip_float_action_button_height">53dp</dimen>
+    <dimen name="new_trip_float_action_button_width_height">62dp</dimen>
 
 </resources>

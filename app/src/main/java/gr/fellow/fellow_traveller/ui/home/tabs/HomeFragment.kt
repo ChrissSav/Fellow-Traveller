@@ -41,7 +41,6 @@ class HomeFragment : Fragment() {
 
         homeViewModel.user.observe(viewLifecycleOwner, Observer {
             binding.userWelcomeTextView.text = it.firstName
-
         })
 
         binding.offerSection.setOnClickListener {

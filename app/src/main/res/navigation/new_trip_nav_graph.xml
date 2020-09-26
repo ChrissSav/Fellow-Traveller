@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/new_trip_nav_graph"
-    app:startDestination="@id/summaryFragment">
+    app:startDestination="@id/destinationsFragment">
 
     <fragment
         android:id="@+id/destinationsFragment"
@@ -85,9 +85,9 @@
     </fragment>
     <fragment
         android:id="@+id/summaryFragment"
-        android:name="gr.fellow.fellow_traveller.ui.newtrip.fragments.SummaryFragment"
+        android:name="gr.fellow.fellow_traveller.ui.newtrip.fragments.OverviewFragment"
         android:label="fragment_summary"
-        tools:layout="@layout/fragment_summary">
+        tools:layout="@layout/fragment_overview">
         <action
             android:id="@+id/next_fragment"
             app:destination="@id/successTripFragment"
@@ -96,7 +96,7 @@
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
         <action
-            android:id="@+id/action_summaryFragment_to_priceFragment"
+            android:id="@+id/action_fragment_overview_to_priceFragment"
             app:destination="@id/priceFragment"
             app:enterAnim="@anim/enter_from_left"
             app:exitAnim="@anim/exit_to_right"
@@ -105,7 +105,7 @@
             app:popUpTo="@+id/new_trip_nav_graph"
             app:popUpToInclusive="false" />
         <action
-            android:id="@+id/action_summaryFragment_to_baseInfoFragment"
+            android:id="@+id/action_fragment_overview_to_baseInfoFragment"
             app:destination="@id/baseInfoFragment"
             app:enterAnim="@anim/enter_from_left"
             app:exitAnim="@anim/exit_to_right"
@@ -114,7 +114,7 @@
             app:popUpTo="@+id/new_trip_nav_graph"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_summaryFragment_to_dateTimeFragment"
+            android:id="@+id/action_fragment_overview_to_dateTimeFragment"
             app:destination="@id/dateTimeFragment"
             app:enterAnim="@anim/enter_from_left"
             app:exitAnim="@anim/exit_to_right"
@@ -123,7 +123,7 @@
             app:popUpTo="@+id/new_trip_nav_graph"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_summaryFragment_to_pickUpFragment"
+            android:id="@+id/action_fragment_overview_to_pickUpFragment"
             app:destination="@id/pickUpFragment"
             app:enterAnim="@anim/enter_from_left"
             app:exitAnim="@anim/exit_to_right"
@@ -132,7 +132,7 @@
             app:popUpTo="@+id/new_trip_nav_graph"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_summaryFragment_to_destinationsFragment"
+            android:id="@+id/action_fragment_overview_to_destinationsFragment"
             app:destination="@id/destinationsFragment"
             app:enterAnim="@anim/enter_from_left"
             app:exitAnim="@anim/exit_to_right"

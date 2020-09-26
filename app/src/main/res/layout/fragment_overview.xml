@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.newtrip.fragments.SummaryFragment">
+    tools:context=".ui.newtrip.fragments.OverviewFragment">
 
 
     <ScrollView
@@ -51,7 +51,8 @@
                 style="@style/display_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="53dp"
+                android:layout_marginTop="44dp"
+                android:tag="1"
                 android:text="Θεσσαλονίκη"
                 app:layout_constraintEnd_toEndOf="@+id/textView5"
                 app:layout_constraintStart_toStartOf="@+id/textView5"
@@ -63,69 +64,87 @@
                 style="@style/display_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="16dp"
+                android:tag="1"
                 android:text="Αθήνα"
                 app:layout_constraintEnd_toEndOf="@+id/textView_from"
                 app:layout_constraintStart_toStartOf="@+id/textView_from"
                 app:layout_constraintTop_toBottomOf="@+id/textView_from" />
 
             <TextView
-                android:id="@+id/textView_time"
+                android:id="@+id/time"
                 style="@style/paragraph_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="16dp"
+                android:tag="2"
                 android:text="07:00 AM"
                 app:layout_constraintStart_toStartOf="@+id/textView_to"
                 app:layout_constraintTop_toBottomOf="@+id/textView_to" />
 
             <TextView
-                android:id="@+id/textView_day"
+                android:id="@+id/day"
                 style="@style/paragraph_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
+                android:tag="2"
                 android:text="Δευ, 13 Μαρ"
-                app:layout_constraintBottom_toBottomOf="@+id/textView_time"
-                app:layout_constraintStart_toEndOf="@+id/textView_time"
-                app:layout_constraintTop_toTopOf="@+id/textView_time" />
+                app:layout_constraintBottom_toBottomOf="@+id/time"
+                app:layout_constraintStart_toEndOf="@+id/time"
+                app:layout_constraintTop_toTopOf="@+id/time" />
 
 
             <TextView
-                android:id="@+id/textView91"
-                style="@style/header_2"
+                android:id="@+id/username"
+                style="@style/header_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:text="Μήνυμα"
-                app:layout_constraintStart_toStartOf="@+id/textView_time"
-                app:layout_constraintTop_toBottomOf="@+id/textView_time" />
+                android:layout_marginStart="8dp"
+                android:text="Πατριάρχης Φώτιος"
+                app:layout_constraintBottom_toBottomOf="@+id/user_image"
+                app:layout_constraintStart_toEndOf="@+id/user_image"
+                app:layout_constraintTop_toTopOf="@+id/user_image" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_image"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/ic_boy"
+                android:elevation="1dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/time" />
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/message"
                 style="@style/paragraph_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:tag="5"
                 android:text="Παρα πολυ καλο παιδι αλλα θελει δουλεια.. Τουλαχιστον ακουγε sugar boy"
                 app:layout_constraintEnd_toEndOf="@+id/textView_to"
-                app:layout_constraintStart_toStartOf="@+id/textView_time"
-                app:layout_constraintTop_toBottomOf="@+id/textView91" />
+                app:layout_constraintStart_toStartOf="@+id/time"
+                app:layout_constraintTop_toBottomOf="@+id/username" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="56dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView12">
+                app:layout_constraintTop_toBottomOf="@+id/message">
 
 
                 <gr.fellow.fellow_traveller.ui.views.LabelTextComponent
                     android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:tag="4"
                     app:label_text="Τιμή"
                     app:layout_constraintEnd_toStartOf="@+id/seats"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -136,6 +155,7 @@
                     android:id="@+id/seats"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:tag="3"
                     app:label_text="Θέσεις"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/bags"
@@ -147,6 +167,7 @@
                     android:id="@+id/bags"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:tag="3"
                     app:label_text="Αποσκευές"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/pet"
@@ -158,6 +179,7 @@
                     android:id="@+id/pet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:tag="3"
                     app:label_text="Κατοικίδια"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -174,7 +196,7 @@
                 style="@style/header_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="74dp"
+                android:layout_marginTop="71dp"
                 android:text="Σημείο αναχώρησης"
                 app:layout_constraintStart_toStartOf="@+id/car"
                 app:layout_constraintTop_toBottomOf="@+id/car" />
@@ -184,9 +206,9 @@
                 style="@style/header_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="74dp"
+                android:layout_marginTop="71dp"
                 android:text="Όχημα"
-                app:layout_constraintStart_toStartOf="@+id/textView12"
+                app:layout_constraintStart_toStartOf="@+id/message"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
             <TextView
@@ -194,22 +216,24 @@
                 style="@style/paragraph_1"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="16dp"
                 android:drawableEnd="@drawable/ic_car"
                 android:gravity="center_vertical"
+                android:tag="3"
                 android:text="Όχημα"
-                app:layout_constraintEnd_toEndOf="@+id/textView12"
+                app:layout_constraintEnd_toEndOf="@+id/message"
                 app:layout_constraintStart_toStartOf="@+id/textView9"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
             <TextView
-                android:id="@+id/pick_up_point"
+                android:id="@+id/textView_pick_up_point"
                 style="@style/paragraph_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:gravity="center_vertical"
                 android:minHeight="30dp"
+                android:tag="6"
                 android:text="Διεύθυνση"
                 app:layout_constraintEnd_toEndOf="@+id/car"
                 app:layout_constraintStart_toStartOf="@+id/textView93"
@@ -224,8 +248,8 @@
     <include
         android:id="@+id/ImageButton_next"
         layout="@layout/float_action_button_new_trip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/new_trip_float_action_button_width_height"
+        android:layout_height="@dimen/new_trip_float_action_button_width_height"
         android:layout_marginEnd="@dimen/new_trip_float_action_button_margin_right"
         android:layout_marginBottom="@dimen/new_trip_float_action_button_margin_bottom"
         app:layout_constraintBottom_toBottomOf="parent"

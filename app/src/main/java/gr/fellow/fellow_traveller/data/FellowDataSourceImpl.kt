@@ -2,7 +2,9 @@ package gr.fellow.fellow_traveller.data
 
 import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.domain.FellowDataSource
+import gr.fellow.fellow_traveller.domain.LocalUser
 import gr.fellow.fellow_traveller.domain.SearchFilters
+import gr.fellow.fellow_traveller.domain.mappers.mapToLocalUser
 import gr.fellow.fellow_traveller.domain.mappers.toTrip
 import gr.fellow.fellow_traveller.domain.mappers.toTrips
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
@@ -109,8 +111,8 @@ class FellowDataSourceImpl(
      */
 
 
-    override suspend fun loadUsersInfoLocal(): RegisteredUserEntity =
-        repository.loadUserAuthLocal()
+    override suspend fun loadUsersInfoLocal(): LocalUser =
+        repository.loadUserAuthLocal().mapToLocalUser()
 
     override suspend fun logoutUserLocal() =
         repository.logoutUserLocal()

@@ -63,7 +63,7 @@ interface FellowDataSource {
      * local DB
      */
 
-    suspend fun loadUsersInfoLocal(): RegisteredUserEntity
+    suspend fun loadUsersInfoLocal(): LocalUser
 
     suspend fun logoutUserLocal()
 

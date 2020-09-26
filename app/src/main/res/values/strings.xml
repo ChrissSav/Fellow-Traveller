@@ -48,6 +48,9 @@
     <string name="allowed">Επιτρέπονται</string>
     <string name="not_allowed">Δεν επιτρέπονται</string>
 
+    <string name="yes">Ναί</string>
+    <string name="no">Όχι</string>
+
     <string name="price">%s €</string>
 
     <!-- Filter Fragment -->

@@ -18,6 +18,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.ActivitySelectLocationBinding
 import gr.fellow.fellow_traveller.framework.network.google.response.PredictionResponse
 import gr.fellow.fellow_traveller.ui.createAlerter
+import gr.fellow.fellow_traveller.ui.hideKeyboard
 import gr.fellow.fellow_traveller.ui.location.adapter.PlacesAdapter
 
 @AndroidEntryPoint
@@ -83,6 +84,7 @@ class SelectLocationActivity : AppCompatActivity() {
 
     override fun finish() {
         super.finish()
+        hideKeyboard()
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
 

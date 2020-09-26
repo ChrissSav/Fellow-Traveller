@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/new_trip_float_action_button_width"
-    android:layout_height="@dimen/new_trip_float_action_button_height"
+    android:layout_width="@dimen/new_trip_float_action_button_width_height"
+    android:layout_height="@dimen/new_trip_float_action_button_width_height"
     android:background="@drawable/circle_button_shape"
     android:backgroundTint="@color/blue_color"
     android:elevation="8dp"

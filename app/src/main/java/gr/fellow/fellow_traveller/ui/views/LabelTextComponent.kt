@@ -9,9 +9,9 @@ import gr.fellow.fellow_traveller.databinding.LabelTextComponentBinding
 
 class LabelTextComponent(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
-    private var binding: LabelTextComponentBinding
+    private var binding: LabelTextComponentBinding = LabelTextComponentBinding.inflate(LayoutInflater.from(context), this, true)
 
-    var value: String = ""
+    var text: String = ""
         get() = binding.value.text.toString()
         set(value) {
             field = value
@@ -26,8 +26,6 @@ class LabelTextComponent(context: Context, attrs: AttributeSet) : ConstraintLayo
         }
 
     init {
-
-        binding = LabelTextComponentBinding.inflate(LayoutInflater.from(context), this, true)
 
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.LabelTextComponent)
         try {

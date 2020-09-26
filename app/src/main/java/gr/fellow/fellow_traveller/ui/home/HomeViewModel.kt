@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.models.Trip
+import gr.fellow.fellow_traveller.domain.LocalUser
 import gr.fellow.fellow_traveller.domain.mappers.toCarEntity
 import gr.fellow.fellow_traveller.room.entites.CarEntity
-import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.LoadUserInfoUseCase
@@ -33,8 +33,8 @@ constructor(
 ) : BaseViewModel() {
 
 
-    private val _user = MutableLiveData<RegisteredUserEntity>()
-    val user: LiveData<RegisteredUserEntity> = _user
+    private val _user = MutableLiveData<LocalUser>()
+    val user: LiveData<LocalUser> = _user
 
     private val _logout = SingleLiveEvent<Boolean>()
     val logout: LiveData<Boolean> = _logout

@@ -6,10 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.models.Trip
+import gr.fellow.fellow_traveller.domain.LocalUser
 import gr.fellow.fellow_traveller.framework.network.google.model.DestinationModel
 import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.ui.dateTimeToTimestamp
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
+import gr.fellow.fellow_traveller.usecase.LoadUserInfoUseCase
 import gr.fellow.fellow_traveller.usecase.home.GetUserCarsLocalUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.RegisterTripRemoteUseCase
 
@@ -17,6 +19,7 @@ import gr.fellow.fellow_traveller.usecase.newtrip.RegisterTripRemoteUseCase
 class NewTripViewModel
 @ViewModelInject
 constructor(
+    private val loadUserInfoUseCase: LoadUserInfoUseCase,
     private val getUserCarsLocalUseCase: GetUserCarsLocalUseCase,
     private val registerTripRemoteUseCase: RegisterTripRemoteUseCase
 ) : BaseViewModel() {
@@ -64,6 +67,9 @@ constructor(
     private val _message = MutableLiveData<String>()
     val message: LiveData<String> = _message
 
+    private val _userInfo = MutableLiveData<LocalUser>()
+    val userInfo: LiveData<LocalUser> = _userInfo
+
 
     fun applyDate(date: String) {
         launch {
@@ -83,28 +89,25 @@ constructor(
     fun setDestinationFrom(id: String, title: String) {
         launch {
             _destinationFrom.value = DestinationModel(id, title)
-
         }
     }
 
     fun setDestinationTo(id: String, title: String) {
         launch {
+            _userInfo.value = loadUserInfoUseCase()
             _destinationTo.value = DestinationModel(id, title)
-
         }
     }
 
     fun setDestinationPickUp(id: String, title: String) {
         launch {
             _destinationPickUp.value = DestinationModel(id, title)
-
         }
     }
 
     fun setPrice(priceCurrent: Float) {
         launch {
             _price.value = priceCurrent
-
         }
     }
 
@@ -127,7 +130,7 @@ constructor(
     }
 
     fun setMessage(msg: String) {
-        _message.value = msg
+        _message.value = msg.trim()
     }
 
     fun setCar(carTemp: CarEntity) {
@@ -172,4 +175,8 @@ constructor(
         finish.value = true
     }
 
+
+    fun getTimestamp(): Long {
+        return dateTimeToTimestamp(date.value.toString(), time.value.toString())
+    }
 }
