@@ -9,10 +9,10 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:fillViewport="true"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:fillViewport="true"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,7 +30,7 @@
 
             <TextView
                 android:id="@+id/textView2"
-                style="@style/title_1"
+                style="@style/display_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_global_left"
@@ -58,8 +58,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:visibility="invisible"
                 android:text="Επιλέξτε αμάξι για το ταξίδι σας"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -93,9 +93,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:visibility="invisible"
-
                 android:text="Εισάγετε τον αριθμό των ελεύθερων θέσεων που θέλετε να μοιραστείτε"
+
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="@+id/seats_pick_button"
                 app:layout_constraintStart_toStartOf="@+id/textView7"
                 app:layout_constraintTop_toBottomOf="@+id/seats_pick_button" />
@@ -121,7 +121,8 @@
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView10"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                app:layout_constraintTop_toBottomOf="@+id/textView10"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/textView_2"
@@ -139,8 +140,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:visibility="invisible"
                 android:text="Εισάγετε τον αριθμό για τις αποσκευές των επιβατών"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="@+id/bags_pick_button"
                 app:layout_constraintStart_toStartOf="@+id/textView_2"
                 app:layout_constraintTop_toBottomOf="@+id/bags_pick_button" />
@@ -150,34 +151,31 @@
                 android:id="@+id/seats_pick_button"
                 android:layout_width="@dimen/button_number_layout_width"
                 android:layout_height="@dimen/button_number_layout_height"
-                app:minValue="1"
                 app:layout_constraintBottom_toBottomOf="@+id/textView7"
                 app:layout_constraintEnd_toEndOf="@+id/car_Button"
-                app:layout_constraintTop_toTopOf="@+id/textView7" />
+                app:layout_constraintTop_toTopOf="@+id/textView7"
+                app:minValue="1" />
 
 
             <gr.fellow.fellow_traveller.ui.views.PickNumberButton
                 android:id="@+id/bags_pick_button"
                 android:layout_width="@dimen/button_number_layout_width"
                 android:layout_height="@dimen/button_number_layout_height"
-                app:minValue="0"
                 app:layout_constraintBottom_toBottomOf="@+id/textView_2"
                 app:layout_constraintEnd_toEndOf="@+id/car_Button"
-                app:layout_constraintTop_toTopOf="@+id/textView_2" />
+                app:layout_constraintTop_toTopOf="@+id/textView_2"
+                app:minValue="0" />
 
-            <Switch
-                android:id="@+id/switch_pet"
+            <TextView
+                android:id="@+id/pet"
+                style="@style/paragraph_1"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
-                android:background="@null"
-                android:checked="false"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:switchPadding="10dp"
-                android:thumb="@drawable/switch_thumb_test"
-                android:track="@drawable/switch_tracker_blue"
+                android:gravity="center|end"
+                android:minWidth="130dp"
+                android:text="@string/allowed"
                 app:layout_constraintBottom_toBottomOf="@+id/textView10"
-                app:layout_constraintEnd_toEndOf="@+id/bags_pick_button"
+                app:layout_constraintEnd_toEndOf="@+id/textView6v"
                 app:layout_constraintTop_toTopOf="@+id/textView10" />
 
 

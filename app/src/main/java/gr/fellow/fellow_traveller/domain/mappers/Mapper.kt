@@ -4,7 +4,6 @@ import gr.fellow.fellow_traveller.data.models.Car
 import gr.fellow.fellow_traveller.data.models.Passenger
 import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.data.models.UserBase
-import gr.fellow.fellow_traveller.domain.LocalUser
 import gr.fellow.fellow_traveller.framework.network.fellow.response.*
 import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
@@ -57,7 +56,4 @@ fun MutableList<TripResponse>.toTrips(): MutableList<Trip> {
     return trips
 }
 
-fun RegisteredUserEntity.mapToLocalUser(): LocalUser {
-    return LocalUser(id, firstName, lastName, rate, reviews, picture, aboutMe, phone, email)
-}
 

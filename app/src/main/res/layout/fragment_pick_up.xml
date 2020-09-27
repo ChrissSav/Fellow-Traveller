@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/PickUpPointFragment_textView1"
-        style="@style/title_1"
+        style="@style/display_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_global_left"

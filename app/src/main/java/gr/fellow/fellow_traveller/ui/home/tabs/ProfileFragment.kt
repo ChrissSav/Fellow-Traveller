@@ -11,7 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.databinding.FragmentInfoBinding
+import gr.fellow.fellow_traveller.databinding.FragmentProfileBinding
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.loadImageFromUrl
 
@@ -21,7 +21,7 @@ class ProfileFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by activityViewModels()
 
-    private var _binding: FragmentInfoBinding? = null
+    private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
 
@@ -30,7 +30,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentInfoBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
 

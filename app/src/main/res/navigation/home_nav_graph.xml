@@ -46,7 +46,7 @@
         android:id="@+id/destination_info"
         android:name="gr.fellow.fellow_traveller.ui.home.tabs.ProfileFragment"
         android:label="fragment_info"
-        tools:layout="@layout/fragment_info">
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/to_setting"
             app:destination="@id/setting_nav_graph"

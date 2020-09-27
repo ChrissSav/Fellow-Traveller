@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.ui.newtrip.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -39,11 +40,15 @@ class PriceFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
+        updateTotal(newTripViewModel.price.value ?: 0.toFloat())
+
 
         newTripViewModel.price.observe(viewLifecycleOwner, Observer {
             binding.AddPriceFragmentEditTextPrice.setText(it.toString())
             updateTotal(it)
         })
+
+
 
         binding.ImageButtonNext.root.setOnClickListener {
             navController.navigate(R.id.next_fragment)
@@ -69,17 +74,17 @@ class PriceFragment : Fragment() {
 
     }
 
+    @SuppressLint("StringFormatMatches")
     private fun updateTotal(price: Float) {
-        binding.totalPrice.text = (price * newTripViewModel.seats.value!!).toString()
+        binding.priceTotal.text = getString(R.string.price, (price * newTripViewModel.seats.value!!).toString())
+        binding.priceAnalytically.text = getString(R.string.fragment_price_overview, newTripViewModel.seats.value.toString(), price.toString())
     }
 
 
     override fun onDestroyView() {
         super.onDestroyView()
         if (binding.AddPriceFragmentEditTextPrice.text.toString().trim().isNotEmpty())
-            newTripViewModel.setPrice(
-                binding.AddPriceFragmentEditTextPrice.text.toString().toFloat()
-            )
+            newTripViewModel.setPrice(binding.AddPriceFragmentEditTextPrice.text.toString().toFloat())
         _binding = null
     }
 }

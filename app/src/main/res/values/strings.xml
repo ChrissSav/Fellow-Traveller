@@ -96,4 +96,7 @@
     <!-- <string name="select_day">Ημερομηνία</string>
      <string name="select_time">Ώρα</string>-->
 
+    <!--Fragment fragment_price -->
+    <string name="fragment_price_overview">%s x %s €</string>
+
 </resources>

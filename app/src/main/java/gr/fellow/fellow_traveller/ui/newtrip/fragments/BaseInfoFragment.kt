@@ -18,8 +18,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentBaseInfoBinding
+import gr.fellow.fellow_traveller.domain.PetAnswerType
 import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.ui.car.AddCarActivity
+import gr.fellow.fellow_traveller.ui.dialogs.PetBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 import gr.fellow.fellow_traveller.ui.views.PickButtonActionListener
 
@@ -32,6 +34,7 @@ class BaseInfoFragment : Fragment() {
     private lateinit var mAdapter: CarTripsAdapter
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var dialog: Dialog
+    private lateinit var petBottomSheetDialog: PetBottomSheetDialog
 
     /**
      * This property is only valid between onCreateView and
@@ -70,7 +73,7 @@ class BaseInfoFragment : Fragment() {
 
 
             pet.observe(viewLifecycleOwner, Observer {
-                binding.switchPet.isChecked = it
+                binding.pet.text = if (it) getString(R.string.allowed) else getString(R.string.not_allowed)
             })
 
         }
@@ -98,8 +101,17 @@ class BaseInfoFragment : Fragment() {
                 }
             }
 
-            switchPet.setOnCheckedChangeListener { _, b ->
-                newTripViewModel.setPet(b)
+            pet.setOnClickListener {
+                petBottomSheetDialog = PetBottomSheetDialog {
+                    if (it == PetAnswerType.Yes) {
+                        newTripViewModel.setPet(true)
+
+                    } else {
+                        newTripViewModel.setPet(false)
+                    }
+                }
+                petBottomSheetDialog.show(childFragmentManager, "petBottomSheetDialog");
+
             }
 
 

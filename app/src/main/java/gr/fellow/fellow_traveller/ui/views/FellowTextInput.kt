@@ -10,7 +10,7 @@ import gr.fellow.fellow_traveller.databinding.FellowEdittextBinding
 class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
     private var hint = ""
-    private var binding: FellowEdittextBinding
+    private var binding: FellowEdittextBinding = FellowEdittextBinding.inflate(LayoutInflater.from(context), this, true)
 
     private lateinit var function: () -> Unit
 
@@ -29,8 +29,6 @@ class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(
         }
 
     init {
-
-        binding = FellowEdittextBinding.inflate(LayoutInflater.from(context), this, true)
 
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.FellowTextInput)
         try {

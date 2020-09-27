@@ -17,7 +17,7 @@
 
             <TextView
                 android:id="@+id/AddMessageFragment_textView1"
-                style="@style/title_1"
+                style="@style/display_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -29,43 +29,31 @@
 
             <TextView
                 android:id="@+id/AddMessageFragment_textView2"
-                style="@style/label"
+                style="@style/paragraph_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="71dp"
                 android:text="Μήνυμα (προαιρετικό)"
                 app:layout_constraintStart_toStartOf="@+id/AddMessageFragment_textView1"
-                app:layout_constraintTop_toBottomOf="@+id/AddMessageFragment_textView" />
+                app:layout_constraintTop_toBottomOf="@+id/AddMessageFragment_textView1" />
 
             <EditText
                 android:id="@+id/AddMessageFragment_editText"
-                style="@style/input"
+                style="@style/input_1"
                 android:layout_width="0dp"
-                android:layout_height="210dp"
+                android:layout_height="0dp"
                 android:layout_marginTop="24dp"
+                android:layout_marginBottom="170dp"
                 android:background="@null"
                 android:ems="10"
                 android:gravity="top|left"
                 android:hint="Γράψε κάτι ... "
                 android:inputType="textCapSentences|textMultiLine"
                 android:singleLine="false"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/AddMessageFragment_textView1"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/AddMessageFragment_textView1"
                 app:layout_constraintTop_toBottomOf="@+id/AddMessageFragment_textView2" />
-
-            <TextView
-                android:id="@+id/AddMessageFragment_textView"
-                style="@style/paragraph3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Με μία σχετική περιγραφή θα βοηθήσετε τα άτομα να κλείσουν πολύ πιο εύκολα το ταξίδι σας"
-                app:layout_constraintEnd_toEndOf="@+id/AddMessageFragment_textView1"
-                app:layout_constraintStart_toStartOf="@+id/AddMessageFragment_textView1"
-                app:layout_constraintTop_toBottomOf="@+id/AddMessageFragment_textView1" />
-
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

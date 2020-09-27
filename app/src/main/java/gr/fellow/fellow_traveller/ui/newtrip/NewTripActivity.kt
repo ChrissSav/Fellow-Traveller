@@ -14,6 +14,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.ActivityNewTripBinding
 import gr.fellow.fellow_traveller.ui.createAlerter
 import gr.fellow.fellow_traveller.ui.dialogs.ExitCustomDialog
+import gr.fellow.fellow_traveller.ui.hideKeyboard
 
 
 @AndroidEntryPoint
@@ -38,6 +39,7 @@ class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogLi
         nav = Navigation.findNavController(this, R.id.RegisterActivity_nav_host)
 
         nav.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { _, destination, _ ->
+            hideKeyboard()
             when (destination.id) {
                 R.id.destinationsFragment -> {
                     binding.progressBar.progress = 14
