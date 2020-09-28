@@ -97,6 +97,7 @@ constructor(
         launch {
             when (val response = deleteCarUseCase(car.id)) {
                 is ResultWrapper.Success -> {
+                    _cars.value = getUserCarsLocalUseCase()
                     _carDeletedId.value = car
                 }
                 is ResultWrapper.Error -> {

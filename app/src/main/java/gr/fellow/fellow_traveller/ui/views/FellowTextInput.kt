@@ -12,6 +12,7 @@ class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(
     private var hint = ""
     private var binding: FellowEdittextBinding = FellowEdittextBinding.inflate(LayoutInflater.from(context), this, true)
 
+    private var isEditable = false
     private lateinit var function: () -> Unit
 
     var text: String? = null
@@ -33,20 +34,45 @@ class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.FellowTextInput)
         try {
             hint = attributes.getString(R.styleable.FellowTextInput_hint_fellow).toString()
+            isEditable = attributes.getBoolean(R.styleable.FellowTextInput_editable, false)
         } catch (e: Exception) {
             e.printStackTrace()
         }
         binding.fellowEditTextTextInputLayout.hint = hint
-        attributes.recycle()
 
+        if (!isEditable) {
+            binding.fellowEditTextTextInputEditText.keyListener = null
+            binding.fellowEditTextTextInputEditText.isClickable = false
+            binding.fellowEditTextTextInputEditText.isFocusable = false
+            binding.fellowEditTextTextInputEditText.isLongClickable = false
+            binding.fellowEditTextTextInputEditText.isFocusableInTouchMode = false
+            binding.fellowEditTextTextInputEditText.isCursorVisible = false
+
+            binding.fellowEditTextTextInputLayout.isClickable = false
+            binding.fellowEditTextTextInputLayout.isFocusable = false
+            binding.fellowEditTextTextInputLayout.isLongClickable = false
+            binding.fellowEditTextTextInputLayout.isFocusableInTouchMode = false
+
+        }
 
         binding.fellowEditTextTextInputLayout.setOnClickListener {
-            function.invoke()
+            try {
+                function.invoke()
+            } catch (e: java.lang.Exception) {
+
+            }
         }
 
         binding.fellowEditTextTextInputEditText.setOnClickListener {
-            function.invoke()
+            try {
+                function.invoke()
+            } catch (e: java.lang.Exception) {
+
+            }
         }
+
+        attributes.recycle()
+
     }
 
     fun onClickListener(function: () -> Unit) {

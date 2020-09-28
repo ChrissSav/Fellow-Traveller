@@ -52,7 +52,6 @@ class SelectLocationActivity : AppCompatActivity() {
                 createAlerter(getString(it))
             }
 
-
         })
 
         binding.backButton.setOnClickListener {

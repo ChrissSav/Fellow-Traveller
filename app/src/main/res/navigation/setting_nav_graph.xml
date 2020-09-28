@@ -34,5 +34,22 @@
         android:id="@+id/userCarsFragment"
         android:name="gr.fellow.fellow_traveller.ui.home.settings.UserCarsFragment"
         android:label="fragment_user_cars"
-        tools:layout="@layout/fragment_user_cars" />
+        tools:layout="@layout/fragment_user_cars">
+        <action
+            android:id="@+id/action_userCarsFragment_to_carDetailsFragment"
+            app:destination="@id/carDetailsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/carDetailsFragment"
+        android:name="gr.fellow.fellow_traveller.ui.home.settings.CarDetailsFragment"
+        android:label="fragment_car_details"
+        tools:layout="@layout/fragment_car_details">
+        <argument
+            android:name="car"
+            app:argType="gr.fellow.fellow_traveller.domain.Car" />
+    </fragment>
 </navigation>

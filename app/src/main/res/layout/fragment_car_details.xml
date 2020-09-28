@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.home.settings.CarDetailsFragment">
+
+    <ImageButton
+        android:id="@+id/back_buttons"
+        style="@style/border_icon_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_back_button"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/manage_cars_settings_tv"
+        style="@style/display_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:text="Λεπτομέριες οχήματος"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/back_buttons"
+        app:layout_constraintTop_toBottomOf="@+id/back_buttons" />
+
+
+    <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+        android:id="@+id/brand"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        app:hint_fellow="@string/brand"
+        app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
+        app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
+        app:layout_constraintTop_toBottomOf="@+id/manage_cars_settings_tv" />
+
+
+    <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+        android:id="@+id/model"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fragment_car_details_margin_inputs"
+        app:hint_fellow="@string/brand"
+        app:editable="false"
+        app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
+        app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
+        app:layout_constraintTop_toBottomOf="@+id/brand" />
+
+
+    <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+        android:id="@+id/plate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:editable="false"
+        android:layout_marginTop="@dimen/fragment_car_details_margin_inputs"
+        app:hint_fellow="@string/plate"
+        app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
+        app:layout_constraintTop_toBottomOf="@+id/model" />
+
+
+    <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+        android:id="@+id/color"
+        android:layout_width="0dp"
+        app:editable="false"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fragment_car_details_margin_inputs"
+        app:hint_fellow="@string/color"
+        app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
+        app:layout_constraintTop_toBottomOf="@+id/plate" />
+
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:textAllCaps="false"
+        android:text="Διαγραφή"
+        style="@style/header_3"
+        android:drawableTint="@color/red_color"
+        android:gravity="center"
+        android:textColor="@color/red_color"
+        android:drawableStart="@drawable/ic_bin"
+        android:drawablePadding="16dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:layout_marginEnd="@dimen/car_trip_float_action_button_margin_right"
+        android:layout_marginBottom="@dimen/car_trip_float_action_button_margin_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

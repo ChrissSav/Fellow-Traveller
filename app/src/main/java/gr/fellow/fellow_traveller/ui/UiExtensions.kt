@@ -74,6 +74,10 @@ fun Fragment.startActivityForResultWithFade(activity: KClass<out Activity>, code
     this.activity?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
 }
 
+fun Fragment.onBackPressed() {
+    activity?.onBackPressed()
+}
+
 fun Activity.createToast(msg: String) {
     Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 }

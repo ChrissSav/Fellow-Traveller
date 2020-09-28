@@ -99,4 +99,12 @@
     <!--Fragment fragment_price -->
     <string name="fragment_price_overview">%s x %s €</string>
 
+
+    <!--Car -->
+    <string name="brand">Μάρκα</string>
+    <string name="model">Μοντέλο</string>
+    <string name="plate">Αριθμός Κυκλοφορίας</string>
+    <string name="color">Χρώμα</string>
+
+
 </resources>
