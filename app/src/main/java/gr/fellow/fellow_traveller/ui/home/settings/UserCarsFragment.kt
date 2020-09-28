@@ -14,7 +14,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import gr.fellow.fellow_traveller.databinding.FragmentUserCarsBinding
-import gr.fellow.fellow_traveller.room.entites.CarEntity
+import gr.fellow.fellow_traveller.domain.Car
 import gr.fellow.fellow_traveller.ui.car.AddCarActivity
 import gr.fellow.fellow_traveller.ui.dialogs.DeleteConfirmationDialog
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
@@ -27,7 +27,7 @@ class UserCarsFragment : Fragment() {
     private val binding get() = _binding!!
     private val homeViewModel: HomeViewModel by activityViewModels()
     private lateinit var mAdapter: CarAdapter
-    private var carsList: MutableList<CarEntity> = mutableListOf()
+    private var carsList = mutableListOf<Car>()
     private lateinit var navController: NavController
     private lateinit var deleteDialog: DeleteConfirmationDialog
 

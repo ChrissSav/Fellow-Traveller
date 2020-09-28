@@ -5,12 +5,10 @@ import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.framework.network.fellow.request.BookTripRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.request.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.request.TripCreateRequest
-import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.DetailsResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
-import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 import retrofit2.Response
 
@@ -30,9 +28,9 @@ interface FellowDataSource {
 
     //Cars
 
-    suspend fun getCarsRemote(): ResultWrapper<ArrayList<CarResponse>>
+    suspend fun getCarsRemote(): ResultWrapper<MutableList<Car>>
 
-    suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<CarResponse>
+    suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<Car>
 
     suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse>
 
@@ -67,9 +65,9 @@ interface FellowDataSource {
 
     suspend fun logoutUserLocal()
 
-    suspend fun getAllCarsLocal(): MutableList<CarEntity>
+    suspend fun getAllCarsLocal(): MutableList<Car>
 
-    suspend fun insertCarLocal(carEntity: CarEntity)
+    suspend fun insertCarLocal(car: Car)
 
     suspend fun deleteCarLocal(carId: Int): Int
 

@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.models.Trip
+import gr.fellow.fellow_traveller.domain.Car
 import gr.fellow.fellow_traveller.domain.LocalUser
 import gr.fellow.fellow_traveller.framework.network.google.model.DestinationModel
-import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.ui.dateTimeToTimestamp
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.usecase.LoadUserInfoUseCase
@@ -46,11 +46,11 @@ constructor(
     private val _time = MutableLiveData<String>()
     val time: LiveData<String> = _time
 
-    private val _car = MutableLiveData<CarEntity>()
-    val car: LiveData<CarEntity> = _car
+    private val _car = MutableLiveData<Car>()
+    val car: LiveData<Car> = _car
 
-    private val _carList = MutableLiveData<MutableList<CarEntity>>()
-    val carList: LiveData<MutableList<CarEntity>> = _carList
+    private val _carList = MutableLiveData<MutableList<Car>>()
+    val carList: LiveData<MutableList<Car>> = _carList
 
     private val _seats = MutableLiveData<Int>()
     val seats: LiveData<Int> = _seats
@@ -133,7 +133,7 @@ constructor(
         _message.value = msg.trim()
     }
 
-    fun setCar(carTemp: CarEntity) {
+    fun setCar(carTemp: Car) {
         launch {
             _car.value = carTemp
         }

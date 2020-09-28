@@ -6,14 +6,16 @@ import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.models.Trip
+import gr.fellow.fellow_traveller.domain.Car
 import gr.fellow.fellow_traveller.domain.LocalUser
-import gr.fellow.fellow_traveller.domain.mappers.toCarEntity
-import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.LoadUserInfoUseCase
 import gr.fellow.fellow_traveller.usecase.LogoutUseCase
-import gr.fellow.fellow_traveller.usecase.home.*
+import gr.fellow.fellow_traveller.usecase.home.DeleteCarUseCase
+import gr.fellow.fellow_traveller.usecase.home.GetUserCarsLocalUseCase
+import gr.fellow.fellow_traveller.usecase.home.GetUserCarsRemoteUseCase
+import gr.fellow.fellow_traveller.usecase.home.RegisterCarLocalUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsCreatorRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsPassengerRemoteUseCase
 
@@ -26,7 +28,6 @@ constructor(
     private val getUserCarsRemoteUseCase: GetUserCarsRemoteUseCase,
     private val getUserCarsLocalUseCase: GetUserCarsLocalUseCase,
     private val registerCarLocalUseCase: RegisterCarLocalUseCase,
-    private val addCarToRemoteUseCase: AddCarToRemoteUseCase,
     private val deleteCarUseCase: DeleteCarUseCase,
     private val getTripsAsCreatorRemoteUseCase: GetTripsAsCreatorRemoteUseCase,
     private val getTripsAsPassengerRemoteUseCase: GetTripsAsPassengerRemoteUseCase
@@ -39,14 +40,14 @@ constructor(
     private val _logout = SingleLiveEvent<Boolean>()
     val logout: LiveData<Boolean> = _logout
 
-    private val _cars = MutableLiveData<MutableList<CarEntity>>()
-    val cars: LiveData<MutableList<CarEntity>> = _cars
+    private val _cars = MutableLiveData<MutableList<Car>>()
+    val cars: LiveData<MutableList<Car>> = _cars
 
     private val _addCarResult = SingleLiveEvent<Boolean>()
     val addCarResult: LiveData<Boolean> = _addCarResult
 
-    private val _carDeletedId = SingleLiveEvent<CarEntity>()
-    val carDeletedId: LiveData<CarEntity> = _carDeletedId
+    private val _carDeletedId = SingleLiveEvent<Car>()
+    val carDeletedId: LiveData<Car> = _carDeletedId
 
     private val _tripsAsCreator = MutableLiveData<MutableList<Trip>>()
     val tripsAsCreator: LiveData<MutableList<Trip>> = _tripsAsCreator
@@ -75,7 +76,7 @@ constructor(
                 when (val response = getUserCarsRemoteUseCase()) {
                     is ResultWrapper.Success -> {
                         for (item in response.data) {
-                            registerCarLocalUseCase(item.toCarEntity())
+                            registerCarLocalUseCase(item)
                         }
                         _cars.value = getUserCarsLocalUseCase()
                     }
@@ -92,7 +93,7 @@ constructor(
     }
 
 
-    fun deleteCar(car: CarEntity) {
+    fun deleteCar(car: Car) {
         launch {
             when (val response = deleteCarUseCase(car.id)) {
                 is ResultWrapper.Success -> {

@@ -6,4 +6,11 @@ data class Car(
     val model: String,
     val plate: String,
     val color: String
-)
+) {
+    val baseInfo: String
+        get() = "$brand $model"
+
+    val fullInfo: String
+        get() = "$brand $model | $plate | $color"
+
+}

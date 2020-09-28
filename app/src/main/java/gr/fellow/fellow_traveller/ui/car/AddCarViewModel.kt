@@ -4,7 +4,6 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.data.ResultWrapper
-import gr.fellow.fellow_traveller.domain.mappers.toCarEntity
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.usecase.home.AddCarToRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.home.RegisterCarLocalUseCase
@@ -23,7 +22,7 @@ constructor(
         launch {
             when (val response = addCarToRemoteUseCase(brand, model, plate, color)) {
                 is ResultWrapper.Success -> {
-                    registerCarLocalUseCase(response.data.toCarEntity())
+                    registerCarLocalUseCase(response.data)
                     _saved.value = true
                 }
                 is ResultWrapper.Error -> {

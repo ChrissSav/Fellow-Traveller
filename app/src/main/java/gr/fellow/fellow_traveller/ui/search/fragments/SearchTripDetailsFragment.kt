@@ -58,7 +58,7 @@ class SearchTripDetailsFragment : Fragment() {
                 binding.bagsTv.text = bagsState
                 binding.seatsTv.text = seatsState
                 binding.petsTv.text = if (hasPet) resources.getString(R.string.allowed) else resources.getString(R.string.not_allowed)
-                binding.carTv.text = "${car.brand} ,${car.model}"
+                binding.carTv.text = "${carBase.brand} ,${carBase.model}"
                 binding.pickUpPointInfo.text = pickupPoint.title
                 binding.priceTv.text = getString(R.string.price, price.toString())
                 binding.driverMessageTv.text = msg ?: resources.getString(R.string.no_driver_message)

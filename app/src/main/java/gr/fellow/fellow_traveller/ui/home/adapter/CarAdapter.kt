@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import gr.fellow.fellow_traveller.databinding.CarItemBinding
-import gr.fellow.fellow_traveller.room.entites.CarEntity
+import gr.fellow.fellow_traveller.domain.Car
 
 class CarAdapter(
-    private val cars: MutableList<CarEntity>,
-    private val listener: (CarEntity) -> Unit
+    private val cars: MutableList<Car>,
+    private val listener: (Car) -> Unit
 ) : RecyclerView.Adapter<CarAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,7 +23,7 @@ class CarAdapter(
 
 
     inner class ViewHolder(val binding: CarItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(currentItem: CarEntity) {
+        fun bind(currentItem: Car) {
 
             with(binding) {
                 textViewBrand.text = currentItem.brand

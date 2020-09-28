@@ -52,7 +52,7 @@ class FellowRepositoryImpl(
             service.addCar(carRequest).handleToCorrectFormat()
         }
 
-    override suspend fun getCarsRemote(): ResultWrapper<ArrayList<CarResponse>> =
+    override suspend fun getCarsRemote(): ResultWrapper<MutableList<CarResponse>> =
         networkCall {
             service.userCars().handleToCorrectFormat()
         }

@@ -1,19 +1,16 @@
 package gr.fellow.fellow_traveller.data
 
 import gr.fellow.fellow_traveller.data.models.Trip
+import gr.fellow.fellow_traveller.domain.Car
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.domain.LocalUser
 import gr.fellow.fellow_traveller.domain.SearchFilters
-import gr.fellow.fellow_traveller.domain.mappers.mapToLocalUser
-import gr.fellow.fellow_traveller.domain.mappers.toTrip
-import gr.fellow.fellow_traveller.domain.mappers.toTrips
+import gr.fellow.fellow_traveller.domain.mappers.*
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
-import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.DetailsResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
-import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 import retrofit2.Response
 
@@ -40,11 +37,31 @@ class FellowDataSourceImpl(
     override suspend fun registerUserAuth(userEntity: RegisteredUserEntity) =
         repository.registerUserAuthLocal(userEntity)
 
-    override suspend fun getCarsRemote(): ResultWrapper<ArrayList<CarResponse>> =
-        repository.getCarsRemote()
+    override suspend fun getCarsRemote(): ResultWrapper<MutableList<Car>> {
+        return when (val response = repository.getCarsRemote()) {
+            is ResultWrapper.Success -> {
+                ResultWrapper.Success(response.data.map {
+                    it.mapToCar()
+                }.toMutableList())
+            }
+            is ResultWrapper.Error -> {
+                ResultWrapper.Error(response.error)
+            }
+        }
+    }
 
-    override suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<CarResponse> =
-        repository.addCarRemote(carRequest)
+
+    override suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<Car> {
+        return when (val response = repository.addCarRemote(carRequest)) {
+            is ResultWrapper.Success -> {
+                ResultWrapper.Success(response.data.mapToCar())
+            }
+            is ResultWrapper.Error -> {
+                ResultWrapper.Error(response.error)
+            }
+        }
+    }
+
 
     override suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse> =
         repository.deleteCarRemote(carId)
@@ -117,11 +134,11 @@ class FellowDataSourceImpl(
     override suspend fun logoutUserLocal() =
         repository.logoutUserLocal()
 
-    override suspend fun getAllCarsLocal(): MutableList<CarEntity> =
-        repository.getAllCarsLocal()
+    override suspend fun getAllCarsLocal(): MutableList<Car> =
+        repository.getAllCarsLocal().map { it.mapToCar() }.toMutableList()
 
-    override suspend fun insertCarLocal(carEntity: CarEntity) =
-        repository.insertCarLocal(carEntity)
+    override suspend fun insertCarLocal(car: Car) =
+        repository.insertCarLocal(car.mapToCarEntity())
 
     override suspend fun deleteCarLocal(carId: Int) =
         repository.deleteCarByIdLocal(carId)

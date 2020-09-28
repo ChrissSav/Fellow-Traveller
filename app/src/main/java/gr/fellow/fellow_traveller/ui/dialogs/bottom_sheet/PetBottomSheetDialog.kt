@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.ui.dialogs
+package gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet
 
 import android.os.Bundle
 import android.view.LayoutInflater

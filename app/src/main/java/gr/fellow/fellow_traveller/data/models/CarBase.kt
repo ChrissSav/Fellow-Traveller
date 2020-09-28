@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Car(
+data class CarBase(
     // val id : Int,
     val brand: String,
     val model: String

@@ -13,7 +13,7 @@ data class Trip(
     val destTo: DestinationResponse,
     val pickupPoint: DestinationResponse,
     val creatorUser: UserBase,
-    val car: Car,
+    val carBase: CarBase,
     val passengers: MutableList<Passenger>,
     val timestamp: Long,
     val hasPet: Boolean,
