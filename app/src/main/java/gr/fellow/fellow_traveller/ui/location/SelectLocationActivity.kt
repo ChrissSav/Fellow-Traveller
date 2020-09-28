@@ -11,8 +11,6 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.ActivitySelectLocationBinding
@@ -29,7 +27,6 @@ class SelectLocationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySelectLocationBinding
     private lateinit var mAdapter: PlacesAdapter
-    private lateinit var mLayoutManager: RecyclerView.LayoutManager
     private var placesList = mutableListOf<PredictionResponse>()
 
 
@@ -105,7 +102,6 @@ class SelectLocationActivity : AppCompatActivity() {
 
 
     private fun initializeRecycle() {
-        mLayoutManager = LinearLayoutManager(this)
         mAdapter = PlacesAdapter(placesList) {
             val resultIntent = Intent()
             resultIntent.putExtra("id", it.placeId)
@@ -114,10 +110,8 @@ class SelectLocationActivity : AppCompatActivity() {
             finish()
         }
         with(binding) {
-            RecyclerView.layoutManager = mLayoutManager
             RecyclerView.adapter = mAdapter
         }
-
 
     }
 

@@ -11,12 +11,9 @@
         android:id="@+id/SelectLocationActivity_search_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="16dp"
         android:background="@android:color/transparent"
         android:elevation="1dp"
-        android:paddingTop="10dp"
         android:paddingBottom="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -24,14 +21,15 @@
 
         <ImageButton
             android:id="@+id/back_button"
-            android:layout_width="40dp"
+            android:layout_width="0dp"
             android:layout_height="40dp"
+            android:layout_marginStart="4dp"
             android:adjustViewBounds="true"
             android:background="?android:selectableItemBackgroundBorderless"
             android:padding="5dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_back_button"
-            app:layout_constraintBottom_toBottomOf="@+id/SelectLocationActivity_EditText_search_place"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/SelectLocationActivity_EditText_search_place" />
 
@@ -39,14 +37,14 @@
         <EditText
             android:id="@+id/SelectLocationActivity_EditText_search_place"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:background="@android:color/transparent"
+            android:drawableEnd="@drawable/ic_magnifier"
             android:hint="Επιλογή τοποθεσίας..."
             android:imeOptions="actionSearch"
             android:inputType="text"
-
             android:longClickable="false"
             android:singleLine="true"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -72,6 +70,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecyclerView"
         android:layout_width="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
