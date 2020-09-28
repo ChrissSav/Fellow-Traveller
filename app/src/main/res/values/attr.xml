@@ -29,7 +29,7 @@
     <declare-styleable name="FellowTextInput">
         <attr name="hint_fellow" format="string" />
         <attr name="editable" format="boolean" />
-
+        <attr name="imeOptions" format="string" />
     </declare-styleable>
 
     <declare-styleable name="LabelTextComponent">

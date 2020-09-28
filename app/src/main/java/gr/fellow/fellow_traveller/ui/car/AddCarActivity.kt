@@ -1,18 +1,12 @@
 package gr.fellow.fellow_traveller.ui.car
 
-import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.databinding.ActivityAddCarBinding
-import gr.fellow.fellow_traveller.ui.createAlerter
-import gr.fellow.fellow_traveller.utils.isValidPlate
 
 @AndroidEntryPoint
 class AddCarActivity : AppCompatActivity() {
@@ -30,7 +24,7 @@ class AddCarActivity : AppCompatActivity() {
         setContentView(view)
 
 
-        textErrors.add(binding.textViewBrandError)
+        /*textErrors.add(binding.textViewBrandError)
         textErrors.add(binding.textViewModelError)
         textErrors.add(binding.textViewBrandError)
         textErrors.add(binding.textViewColorError)
@@ -140,7 +134,7 @@ class AddCarActivity : AppCompatActivity() {
             intent.putExtra("color", color)
             setResult(RESULT_OK, intent)
             finish()
-        })
+        })*/
     }
 
     private fun checkErrors(): Boolean {

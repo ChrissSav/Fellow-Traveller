@@ -3,6 +3,7 @@ package gr.fellow.fellow_traveller.ui.views
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.inputmethod.EditorInfo
 import androidx.constraintlayout.widget.ConstraintLayout
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FellowEdittextBinding
@@ -14,6 +15,7 @@ class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(
 
     private var isEditable = false
     private lateinit var function: () -> Unit
+    private var imeOptions: String? = null
 
     var text: String? = null
         get() = binding.fellowEditTextTextInputEditText.text.toString()
@@ -35,6 +37,7 @@ class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(
         try {
             hint = attributes.getString(R.styleable.FellowTextInput_hint_fellow).toString()
             isEditable = attributes.getBoolean(R.styleable.FellowTextInput_editable, false)
+            imeOptions = attributes.getString(R.styleable.FellowTextInput_imeOptions)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -53,6 +56,9 @@ class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(
             binding.fellowEditTextTextInputLayout.isLongClickable = false
             binding.fellowEditTextTextInputLayout.isFocusableInTouchMode = false
 
+        }
+        imeOptions?.let {
+            binding.fellowEditTextTextInputEditText.imeOptions = EditorInfo.IME_ACTION_NEXT
         }
 
         binding.fellowEditTextTextInputLayout.setOnClickListener {
