@@ -1,13 +1,10 @@
 package gr.fellow.fellow_traveller.ui.home.settings
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentCarDetailsBinding
 import gr.fellow.fellow_traveller.domain.AnswerType
 import gr.fellow.fellow_traveller.domain.Car
@@ -15,30 +12,25 @@ import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.ConfirmBottomSheetDial
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.onBackPressed
 
-class CarDetailsFragment : Fragment() {
+@AndroidEntryPoint
+class CarDetailsFragment : BaseFragment<FragmentCarDetailsBinding>() {
 
-    private var _binding: FragmentCarDetailsBinding? = null
-    private val binding get() = _binding!!
+    private val viewModel: HomeViewModel by activityViewModels()
     private var car: Car? = null
-    private val homeViewModel: HomeViewModel by activityViewModels()
     private lateinit var confirmBottomSheetDialog: ConfirmBottomSheetDialog
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        car = requireArguments().getParcelable("car")
+    override fun getViewBinding(): FragmentCarDetailsBinding =
+        FragmentCarDetailsBinding.inflate(layoutInflater)
 
+
+    override fun setUpObservers() {
+        viewModel.carDeletedId.observe(viewLifecycleOwner, Observer {
+            onBackPressed()
+        })
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentCarDetailsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun setUpViews() {
         car?.let {
             binding.brand.text = it.brand
             binding.model.text = it.model
@@ -50,28 +42,25 @@ class CarDetailsFragment : Fragment() {
             onBackPressed()
         }
 
-        homeViewModel.carDeletedId.observe(viewLifecycleOwner, Observer {
-            onBackPressed()
-        })
-
         binding.delete.setOnClickListener {
             confirmBottomSheetDialog = ConfirmBottomSheetDialog(
                 getString(R.string.car_delete_confirmation_message, car?.plate),
                 this@CarDetailsFragment::onItemClickListener
             )
-            confirmBottomSheetDialog.show(childFragmentManager, "confirmBottomSheetDialog");
+            confirmBottomSheetDialog.show(childFragmentManager, "confirmBottomSheetDialog")
         }
     }
 
+
     private fun onItemClickListener(answerType: AnswerType) {
         if (answerType == AnswerType.Yes)
-            car?.let { car -> homeViewModel.deleteCar(car) }
+            car?.let { car -> viewModel.deleteCar(car) }
     }
 
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    @Override
+    override fun handleIntent() {
+        car = requireArguments().getParcelable("car")
     }
 
 }

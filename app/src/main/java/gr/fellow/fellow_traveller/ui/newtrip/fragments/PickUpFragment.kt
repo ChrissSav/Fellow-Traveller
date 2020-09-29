@@ -2,71 +2,48 @@ package gr.fellow.fellow_traveller.ui.newtrip.fragments
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentPickUpBinding
+import gr.fellow.fellow_traveller.ui.findNavController
 import gr.fellow.fellow_traveller.ui.location.SelectLocationActivity
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 import gr.fellow.fellow_traveller.ui.startActivityForResultWithFade
 
 
-class PickUpFragment : Fragment() {
+@AndroidEntryPoint
+class PickUpFragment : BaseFragment<FragmentPickUpBinding>() {
 
-    private val newTripViewModel: NewTripViewModel by activityViewModels()
-    private lateinit var navController: NavController
+    private val viewModel: NewTripViewModel by activityViewModels()
 
-    /**
-     * This property is only valid between onCreateView and
-     * onDestroyView.
-     */
-    private var _binding: FragmentPickUpBinding? = null
-    private val binding get() = _binding!!
+    override fun getViewBinding(): FragmentPickUpBinding =
+        FragmentPickUpBinding.inflate(layoutInflater)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentPickUpBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun setUpObservers() {
+        viewModel.destinationPickUp.observe(viewLifecycleOwner, Observer {
+            binding.pickUpButton.text = it.title
+        })
     }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        navController = Navigation.findNavController(view)
-
+    override fun setUpViews() {
         binding.pickUpButton.onClickListener {
             startActivityForResultWithFade(SelectLocationActivity::class, 1)
         }
 
-
-        newTripViewModel.destinationPickUp.observe(viewLifecycleOwner, Observer {
-            binding.pickUpButton.text = it.title
-        })
-
         binding.ImageButtonNext.root.setOnClickListener {
-
-            if (newTripViewModel.destinationPickUp.value == null) {
-                newTripViewModel.setError(R.string.ERROR_SELECT_DEST_PICK_UP)
+            if (viewModel.destinationPickUp.value == null) {
+                viewModel.setError(R.string.ERROR_SELECT_DEST_PICK_UP)
             } else {
-                navController.navigate(R.id.next_fragment)
+                findNavController()?.navigate(R.id.next_fragment)
             }
-
         }
-
     }
 
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -75,8 +52,9 @@ class PickUpFragment : Fragment() {
             if (resultCode == Activity.RESULT_OK) {
                 val title = data?.getStringExtra("title").toString()
                 val id = data?.getStringExtra("id").toString()
-                newTripViewModel.setDestinationPickUp(id, title)
+                viewModel.setDestinationPickUp(id, title)
             }
         }
     }
+
 }

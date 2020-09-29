@@ -1,62 +1,48 @@
 package gr.fellow.fellow_traveller.ui.newtrip.fragments
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentDateTimeBinding
 import gr.fellow.fellow_traveller.ui.dialogs.DatePickerCustomDialog
 import gr.fellow.fellow_traveller.ui.dialogs.TimePickerCustomDialog
+import gr.fellow.fellow_traveller.ui.findNavController
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 import gr.fellow.fellow_traveller.utils.validateDateTimeDiffer
 
 
-class DateTimeFragment : Fragment() {
+@AndroidEntryPoint
+class DateTimeFragment : BaseFragment<FragmentDateTimeBinding>() {
 
-    private val newTripViewModel: NewTripViewModel by activityViewModels()
-    private lateinit var navController: NavController
+    private val viewModel: NewTripViewModel by activityViewModels()
     private lateinit var dateDialog: DatePickerCustomDialog
     private lateinit var timeDialog: TimePickerCustomDialog
 
-    /**
-     * This property is only valid between onCreateView and
-     * onDestroyView.
-     */
-    private var _binding: FragmentDateTimeBinding? = null
-    private val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentDateTimeBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun getViewBinding(): FragmentDateTimeBinding =
+        FragmentDateTimeBinding.inflate(layoutInflater)
 
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        navController = Navigation.findNavController(view)
-
-
-        newTripViewModel.date.observe(viewLifecycleOwner, Observer {
+    override fun setUpObservers() {
+        viewModel.date.observe(viewLifecycleOwner, Observer {
             binding.fellowTextInputDate.text = it
         })
 
-        newTripViewModel.time.observe(viewLifecycleOwner, Observer {
+        viewModel.time.observe(viewLifecycleOwner, Observer {
             binding.fellowTextInputTime.text = it
         })
 
+    }
+
+    override fun setUpViews() {
         binding.fellowTextInputDate.onClickListener {
             dateDialog = DatePickerCustomDialog(
                 binding.fellowTextInputDate.text.toString()
             ) {
 
-                newTripViewModel.applyDate(it)
+                viewModel.applyDate(it)
             }
             dateDialog.show(childFragmentManager, "dateDialog")
 
@@ -66,7 +52,7 @@ class DateTimeFragment : Fragment() {
             timeDialog = TimePickerCustomDialog(
                 binding.fellowTextInputTime.text.toString()
             ) {
-                newTripViewModel.applyTime(it)
+                viewModel.applyTime(it)
             }
             timeDialog.show(childFragmentManager, "dateDialog")
 
@@ -75,19 +61,14 @@ class DateTimeFragment : Fragment() {
 
         binding.ImageButtonNext.root.setOnClickListener {
             if (validateDateTimeDiffer(
-                    newTripViewModel.date.value.toString(), newTripViewModel.time.value.toString(), resources.getInteger(R.integer.Time_difference)
+                    viewModel.date.value.toString(), viewModel.time.value.toString(), resources.getInteger(R.integer.Time_difference)
                 )
             ) {
-                navController.navigate(R.id.next_fragment)
+                findNavController()?.navigate(R.id.next_fragment)
             } else {
-                newTripViewModel.setError(R.string.ERROR_TRIP_TIMESTAMP)
+                viewModel.setError(R.string.ERROR_TRIP_TIMESTAMP)
             }
         }
     }
 
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

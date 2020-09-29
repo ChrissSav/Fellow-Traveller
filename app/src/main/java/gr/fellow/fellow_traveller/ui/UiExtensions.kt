@@ -7,6 +7,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.tapadoo.alerter.Alerter
 import gr.fellow.fellow_traveller.R
@@ -68,6 +70,13 @@ fun Activity.startActivityForResultWithFade(activity: KClass<out Activity>, code
 }
 
 
+fun Fragment.findNavController(): NavController? {
+    view?.let {
+        return Navigation.findNavController(it)
+    }
+    return null
+}
+
 fun Fragment.startActivityForResult(activity: KClass<out Activity>, code: Int) {
     val intent = Intent(this.context, activity.java)
     startActivityForResult(intent, code)
@@ -80,7 +89,7 @@ fun Fragment.startActivityForResultWithFade(activity: KClass<out Activity>, code
 }
 
 fun Fragment.onBackPressed() {
-    activity?.onBackPressed()
+    onBackPressed()
 }
 
 fun Activity.createToast(msg: String) {
@@ -122,7 +131,7 @@ fun ImageView.loadImageFromUrl(url: String?) {
     if (!url.isNullOrBlank())
         Glide.with(this)
             .load(url)
-            .into(this);
+            .into(this)
 }
 
 

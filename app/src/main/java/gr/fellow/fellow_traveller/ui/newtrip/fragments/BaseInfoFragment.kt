@@ -1,62 +1,37 @@
 package gr.fellow.fellow_traveller.ui.newtrip.fragments
 
 import android.app.Activity
-import android.app.Dialog
 import android.content.Intent
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.recyclerview.widget.RecyclerView
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentBaseInfoBinding
 import gr.fellow.fellow_traveller.domain.Car
 import gr.fellow.fellow_traveller.domain.PetAnswerType
 import gr.fellow.fellow_traveller.ui.car.AddCarActivity
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.CarPickBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.PetBottomSheetDialog
+import gr.fellow.fellow_traveller.ui.findNavController
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 import gr.fellow.fellow_traveller.ui.startActivityForResultWithFade
 import gr.fellow.fellow_traveller.ui.views.PickButtonActionListener
 
 
-class BaseInfoFragment : Fragment() {
+class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
 
-    private val newTripViewModel: NewTripViewModel by activityViewModels()
-    private lateinit var navController: NavController
+    private val viewModel: NewTripViewModel by activityViewModels()
     private var carList = mutableListOf<Car>()
-    private lateinit var mAdapter: CarTripsAdapter
-    private lateinit var mRecyclerView: RecyclerView
-    private lateinit var dialog: Dialog
+
     private lateinit var petBottomSheetDialog: PetBottomSheetDialog
     private lateinit var carPickBottomSheetDialog: CarPickBottomSheetDialog
 
-    /**
-     * This property is only valid between onCreateView and
-     * onDestroyView.
-     */
-    private var _binding: FragmentBaseInfoBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentBaseInfoBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun getViewBinding(): FragmentBaseInfoBinding =
+        FragmentBaseInfoBinding.inflate(layoutInflater)
 
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        navController = Navigation.findNavController(view)
-        newTripViewModel.loadUserCars()
-
-
-        with(newTripViewModel) {
+    override fun setUpObservers() {
+        with(viewModel) {
             car.observe(viewLifecycleOwner, Observer {
                 binding.carButton.setText(it.fullInfo)
             })
@@ -79,58 +54,63 @@ class BaseInfoFragment : Fragment() {
             })
 
         }
+    }
+
+    override fun setUpViews() {
+        viewModel.loadUserCars()
 
         with(binding) {
 
             ImageButtonNext.root.setOnClickListener {
-                if (newTripViewModel.car.value != null) {
-                    navController.navigate(R.id.next_fragment)
+                if (viewModel.car.value != null) {
+                    findNavController()?.navigate(R.id.next_fragment)
                 } else {
-                    newTripViewModel.setError(R.string.ERROR_SELECT_CAR)
+                    viewModel.setError(R.string.ERROR_SELECT_CAR)
                 }
 
             }
 
             bagsPickButton.pickButtonActionListener = object : PickButtonActionListener {
                 override fun onPickAction(value: Int) {
-                    newTripViewModel.setBags(value)
+                    viewModel.setBags(value)
                 }
             }
 
             seatsPickButton.pickButtonActionListener = object : PickButtonActionListener {
                 override fun onPickAction(value: Int) {
-                    newTripViewModel.setSeats(value)
+                    viewModel.setSeats(value)
                 }
             }
 
             pet.setOnClickListener {
                 petBottomSheetDialog = PetBottomSheetDialog(this@BaseInfoFragment::onItemClickListener)
-                petBottomSheetDialog.show(childFragmentManager, "petBottomSheetDialog");
+                petBottomSheetDialog.show(childFragmentManager, "petBottomSheetDialog")
 
             }
 
 
             carButton.setOnClickListener {
                 carPickBottomSheetDialog = CarPickBottomSheetDialog(carList, this@BaseInfoFragment::onCarItemClickListener)
-                carPickBottomSheetDialog.show(childFragmentManager, "carPickBottomSheetDialog");
+                carPickBottomSheetDialog.show(childFragmentManager, "carPickBottomSheetDialog")
             }
 
         }
     }
 
+
     private fun onItemClickListener(petAnswerType: PetAnswerType) {
         if (petAnswerType == PetAnswerType.Yes) {
-            newTripViewModel.setPet(true)
+            viewModel.setPet(true)
 
         } else {
-            newTripViewModel.setPet(false)
+            viewModel.setPet(false)
         }
     }
 
 
     private fun onCarItemClickListener(car: Car?) {
         if (car != null) {
-            newTripViewModel.setCar(car)
+            viewModel.setCar(car)
             carPickBottomSheetDialog.dismiss()
         } else {
             carPickBottomSheetDialog.dismiss()
@@ -140,19 +120,15 @@ class BaseInfoFragment : Fragment() {
 
 
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
-                newTripViewModel.loadUserCars()
+                viewModel.loadUserCars()
             }
         }
     }
+
 
 }

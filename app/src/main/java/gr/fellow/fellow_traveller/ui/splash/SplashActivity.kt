@@ -2,10 +2,9 @@ package gr.fellow.fellow_traveller.ui.splash
 
 import android.content.Intent
 import android.content.SharedPreferences
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import dagger.hilt.android.AndroidEntryPoint
+import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivitySplashBinding
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.main.MainActivity
@@ -15,21 +14,28 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
-    //  private val splashViewModel: SplashViewModel by viewModels()
-    private lateinit var binding: ActivitySplashBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun provideViewBinding(): ActivitySplashBinding =
+        ActivitySplashBinding.inflate(layoutInflater)
 
-        binding = ActivitySplashBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+    override fun setUpObservers() {
+        /*splashViewModel.result.observe(this, Observer {
+             val intent = if (it)
+                 Intent(this, HomeActivity::class.java)
+             else
+                 Intent(this, MainActivity::class.java)
 
+             startActivity(intent)
+             finish()
+         })*/
+    }
+
+    override fun setUpViews() {
         val intent = if (sharedPreferences.getString(PREFS_AUTH_TOKEN, "").toString().isNotEmpty()) {
             Intent(this@SplashActivity, HomeActivity::class.java)
         } else {
@@ -51,15 +57,7 @@ class SplashActivity : AppCompatActivity() {
             override fun onTransitionChange(motionLayout: MotionLayout?, startId: Int, endId: Int, progress: Float) {
             }
         })
-
-        /*splashViewModel.result.observe(this, Observer {
-            val intent = if (it)
-                Intent(this, HomeActivity::class.java)
-            else
-                Intent(this, MainActivity::class.java)
-
-            startActivity(intent)
-            finish()
-        })*/
     }
+
+
 }

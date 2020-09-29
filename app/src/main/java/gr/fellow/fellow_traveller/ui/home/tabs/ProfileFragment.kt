@@ -2,43 +2,31 @@ package gr.fellow.fellow_traveller.ui.home.tabs
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
+import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentProfileBinding
+import gr.fellow.fellow_traveller.ui.findNavController
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.loadImageFromUrl
 
 
-class ProfileFragment : Fragment() {
+@AndroidEntryPoint
+class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
 
-    private val homeViewModel: HomeViewModel by activityViewModels()
-
-    private var _binding: FragmentProfileBinding? = null
-    private val binding get() = _binding!!
+    private val viewModel: HomeViewModel by activityViewModels()
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun getViewBinding(): FragmentProfileBinding =
+        FragmentProfileBinding.inflate(layoutInflater)
 
 
-        homeViewModel.user.observe(viewLifecycleOwner, Observer { user ->
+    override fun setUpObservers() {
+
+        viewModel.user.observe(viewLifecycleOwner, Observer { user ->
 
             with(binding) {
                 userName.text = "${user.firstName} ${user.lastName}"
@@ -47,16 +35,15 @@ class ProfileFragment : Fragment() {
                 rate.text = user.rate.toString()
                 searches.text = "20"
                 offers.text = "13"
-                // aboutMeInfo.text= user.aboutMe
+                if (!user.aboutMe.isNullOrEmpty())
+                    aboutMe.text = user.aboutMe
             }
-
-
         })
+    }
 
+    override fun setUpViews() {
         binding.settingsButton.setOnClickListener {
-            val nav = Navigation.findNavController(view)
-            nav.navigate(R.id.to_setting)
-
+            findNavController()?.navigate(R.id.to_setting)
         }
 
         binding.messengerLink.setOnClickListener {
@@ -64,12 +51,6 @@ class ProfileFragment : Fragment() {
             val launchBrowser = Intent(Intent.ACTION_VIEW, uriUrl)
             startActivity(launchBrowser)
         }
-
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 }

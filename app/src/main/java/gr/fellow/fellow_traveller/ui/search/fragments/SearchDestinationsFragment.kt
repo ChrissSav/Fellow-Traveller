@@ -15,6 +15,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentSearchDestinationsBinding
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.ui.createAlerter
+import gr.fellow.fellow_traveller.ui.onBackPressed
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
 import gr.fellow.fellow_traveller.ui.search.locations.SelectDestinationActivity
 
@@ -55,7 +56,7 @@ class SearchDestinationsFragment : Fragment() {
         }
 
         binding.backButton.setOnClickListener {
-            activity?.onBackPressed()
+            onBackPressed()
         }
 
         binding.searchButton.setOnClickListener {

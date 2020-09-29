@@ -1,57 +1,39 @@
 package gr.fellow.fellow_traveller.ui.newtrip.fragments
 
 import android.annotation.SuppressLint
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentPriceBinding
+import gr.fellow.fellow_traveller.ui.findNavController
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 
-
-class PriceFragment : Fragment() {
-    private val newTripViewModel: NewTripViewModel by activityViewModels()
-    private lateinit var navController: NavController
-
-
-    /**
-     * This property is only valid between onCreateView and
-     * onDestroyView.
-     */
-    private var _binding: FragmentPriceBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentPriceBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+@AndroidEntryPoint
+class PriceFragment : BaseFragment<FragmentPriceBinding>() {
+    private val viewModel: NewTripViewModel by activityViewModels()
 
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        navController = Navigation.findNavController(view)
-
-        updateTotal(newTripViewModel.price.value ?: 0.toFloat())
+    override fun getViewBinding(): FragmentPriceBinding =
+        FragmentPriceBinding.inflate(layoutInflater)
 
 
-        newTripViewModel.price.observe(viewLifecycleOwner, Observer {
+    override fun setUpObservers() {
+
+        viewModel.price.observe(viewLifecycleOwner, Observer {
             binding.AddPriceFragmentEditTextPrice.setText(it.toString())
             updateTotal(it)
         })
 
+        updateTotal(viewModel.price.value ?: 0.toFloat())
+    }
 
-
+    override fun setUpViews() {
         binding.ImageButtonNext.root.setOnClickListener {
-            navController.navigate(R.id.next_fragment)
+            findNavController()?.navigate(R.id.next_fragment)
         }
 
 
@@ -71,20 +53,19 @@ class PriceFragment : Fragment() {
 
             }
         })
-
     }
 
     @SuppressLint("StringFormatMatches")
     private fun updateTotal(price: Float) {
-        binding.priceTotal.text = getString(R.string.price, (price * newTripViewModel.seats.value!!).toString())
-        binding.priceAnalytically.text = getString(R.string.fragment_price_overview, newTripViewModel.seats.value.toString(), price.toString())
+        binding.priceTotal.text = getString(R.string.price, (price * viewModel.seats.value!!).toString())
+        binding.priceAnalytically.text = getString(R.string.fragment_price_overview, viewModel.seats.value.toString(), price.toString())
     }
 
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
         if (binding.AddPriceFragmentEditTextPrice.text.toString().trim().isNotEmpty())
-            newTripViewModel.setPrice(binding.AddPriceFragmentEditTextPrice.text.toString().toFloat())
-        _binding = null
+            viewModel.setPrice(binding.AddPriceFragmentEditTextPrice.text.toString().toFloat())
     }
+
 }

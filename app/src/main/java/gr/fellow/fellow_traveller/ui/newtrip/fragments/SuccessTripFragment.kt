@@ -1,33 +1,28 @@
 package gr.fellow.fellow_traveller.ui.newtrip.fragments
 
 import android.animation.Animator
-import android.os.Bundle
 import android.os.Handler
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import dagger.hilt.android.AndroidEntryPoint
+import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentSuccessTripBinding
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 
 
-class SuccessTripFragment : Fragment() {
-    private val newTripViewModel: NewTripViewModel by activityViewModels()
-    private var _binding: FragmentSuccessTripBinding? = null
-    private val binding get() = _binding!!
+@AndroidEntryPoint
+class SuccessTripFragment : BaseFragment<FragmentSuccessTripBinding>() {
+    private val viewModel: NewTripViewModel by activityViewModels()
+
+    override fun getViewBinding(): FragmentSuccessTripBinding =
+        FragmentSuccessTripBinding.inflate(layoutInflater)
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentSuccessTripBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun setUpObservers() {
+
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val handler = Handler()
-        handler.postDelayed({
+    override fun setUpViews() {
+        Handler().postDelayed({
             binding.SuccessActivityTextViewHover.animate()
                 .translationX(binding.SuccessActivityTextViewHover.width.toFloat())
                 .alpha(1.0f)
@@ -39,7 +34,7 @@ class SuccessTripFragment : Fragment() {
                         } catch (e: InterruptedException) {
                             e.printStackTrace()
                         }
-                        newTripViewModel.finish()
+                        viewModel.finish()
 
                     }
 
@@ -50,8 +45,4 @@ class SuccessTripFragment : Fragment() {
     }
 
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

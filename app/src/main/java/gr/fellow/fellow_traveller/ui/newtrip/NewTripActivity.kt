@@ -2,15 +2,14 @@ package gr.fellow.fellow_traveller.ui.newtrip
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivityNewTripBinding
 import gr.fellow.fellow_traveller.ui.createAlerter
 import gr.fellow.fellow_traveller.ui.dialogs.ExitCustomDialog
@@ -18,24 +17,48 @@ import gr.fellow.fellow_traveller.ui.hideKeyboard
 
 
 @AndroidEntryPoint
-class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogListener {
+class NewTripActivity : BaseActivity<ActivityNewTripBinding>(), ExitCustomDialog.ExitCustomDialogListener {
 
 
-    private lateinit var binding: ActivityNewTripBinding
-    private val newTripViewModel: NewTripViewModel by viewModels()
+    private val viewModel: NewTripViewModel by viewModels()
     private lateinit var nav: NavController
     private lateinit var exitCustomDialog: ExitCustomDialog
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-        binding = ActivityNewTripBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+    override fun provideViewBinding(): ActivityNewTripBinding =
+        ActivityNewTripBinding.inflate(layoutInflater)
 
 
+    override fun setUpObservers() {
+        viewModel.setBags(0)
+        viewModel.setPet(false)
+        viewModel.setSeats(1)
+
+        viewModel.error.observe(this, Observer {
+            createAlerter(getString(it), R.color.blue_color)
+        })
+
+        viewModel.load.observe(this, Observer {
+            if (it)
+                binding.progressLoad.visibility = View.VISIBLE
+            else
+                binding.progressLoad.visibility = View.GONE
+
+        })
+
+        viewModel.finish.observe(this, Observer {
+            val trip = viewModel.success.value
+            trip?.let {
+                val resultIntent = Intent()
+                resultIntent.putExtra("trip", it)
+                setResult(Activity.RESULT_OK, resultIntent)
+                finish()
+            }
+
+        })
+
+    }
+
+    override fun setUpViews() {
         nav = Navigation.findNavController(this, R.id.RegisterActivity_nav_host)
 
         nav.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { _, destination, _ ->
@@ -73,32 +96,8 @@ class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogLi
             }
 
         })
-        newTripViewModel.setBags(0)
-        newTripViewModel.setPet(false)
-        newTripViewModel.setSeats(1)
 
-        newTripViewModel.error.observe(this, Observer {
-            createAlerter(getString(it), R.color.blue_color)
-        })
 
-        newTripViewModel.load.observe(this, Observer {
-            if (it)
-                binding.progressLoad.visibility = View.VISIBLE
-            else
-                binding.progressLoad.visibility = View.GONE
-
-        })
-
-        newTripViewModel.finish.observe(this, Observer {
-            val trip = newTripViewModel.success.value
-            trip?.let {
-                val resultIntent = Intent()
-                resultIntent.putExtra("trip", it)
-                setResult(Activity.RESULT_OK, resultIntent)
-                finish()
-            }
-
-        })
         binding.imageButtonExit.setOnClickListener {
             openDialog()
         }
@@ -106,8 +105,8 @@ class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogLi
         binding.imageButtonBack.setOnClickListener {
             onBackPressed()
         }
-
     }
+
 
 
     override fun onBackPressed() {
@@ -126,4 +125,6 @@ class NewTripActivity : AppCompatActivity(), ExitCustomDialog.ExitCustomDialogLi
         if (exit)
             finish()
     }
+
+
 }

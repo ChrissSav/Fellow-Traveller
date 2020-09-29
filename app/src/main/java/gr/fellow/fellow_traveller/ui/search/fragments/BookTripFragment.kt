@@ -12,6 +12,7 @@ import androidx.navigation.Navigation
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentBookTripBinding
 import gr.fellow.fellow_traveller.ui.dialogs.TripBookConfirmDialog
+import gr.fellow.fellow_traveller.ui.onBackPressed
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
 
 
@@ -68,7 +69,7 @@ class BookTripFragment : Fragment() {
 
         with(binding) {
             closeButton.setOnClickListener {
-                activity?.onBackPressed()
+                onBackPressed()
             }
 
             bookButton.setOnClickListener {

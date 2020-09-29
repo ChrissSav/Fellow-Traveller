@@ -2,28 +2,27 @@ package gr.fellow.fellow_traveller.ui.home
 
 import android.animation.AnimatorSet
 import android.animation.ValueAnimator
-import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivityHomeBinding
 import gr.fellow.fellow_traveller.ui.createAlerter
 
 
 @AndroidEntryPoint
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
 
-    private val homeViewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by viewModels()
     private lateinit var navController: NavController
-    private lateinit var binding: ActivityHomeBinding
+
 
     private val homeLayout = listOf(
         R.id.destination_main,
@@ -33,23 +32,29 @@ class HomeActivity : AppCompatActivity() {
         R.id.destination_info
     )
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+
+    override fun onRestart() {
+        viewModel.loadCars()
+        super.onRestart()
+    }
 
 
+    override fun provideViewBinding(): ActivityHomeBinding =
+        ActivityHomeBinding.inflate(layoutInflater)
+
+
+    override fun setUpObservers() {
+        viewModel.loadUserInfo()
+        viewModel.loadCars()
+
+        viewModel.error.observe(this, Observer {
+            createAlerter(getString(it))
+        })
+    }
+
+    override fun setUpViews() {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_container)
 
-
-        homeViewModel.loadUserInfo()
-        homeViewModel.loadCars()
-
-        homeViewModel.error.observe(this, Observer {
-            createAlerter(getString(it))
-
-            // createAlerter(getString(it))
-        })
 
         setupBottomNavMenu(navController)
 
@@ -61,11 +66,6 @@ class HomeActivity : AppCompatActivity() {
             }
 
         })
-    }
-
-    override fun onRestart() {
-        homeViewModel.loadCars()
-        super.onRestart()
     }
 
 

@@ -12,6 +12,7 @@ import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.databinding.FragmentOffersActiveTripsBinding
 import gr.fellow.fellow_traveller.domain.TripType
 import gr.fellow.fellow_traveller.ui.home.adapter.ActiveTripsAdapter
+import gr.fellow.fellow_traveller.ui.onBackPressed
 
 
 class OffersActiveTripsFragment : Fragment() {
@@ -39,7 +40,7 @@ class OffersActiveTripsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.closeButton.setOnClickListener {
-            activity?.onBackPressed()
+            onBackPressed()
         }
 
         binding.recyclerView.adapter = ActiveTripsAdapter(tripsList, this::onTripClick)

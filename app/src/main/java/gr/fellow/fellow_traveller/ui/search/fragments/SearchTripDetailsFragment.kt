@@ -14,6 +14,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.models.UserBase
 import gr.fellow.fellow_traveller.databinding.FragmentSearchTripDetailsBinding
 import gr.fellow.fellow_traveller.ui.loadImageFromUrl
+import gr.fellow.fellow_traveller.ui.onBackPressed
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
 import gr.fellow.fellow_traveller.ui.search.adapter.PassengerAdapter
 
@@ -79,7 +80,7 @@ class SearchTripDetailsFragment : Fragment() {
         }
 
         binding.backButton.setOnClickListener {
-            activity?.onBackPressed()
+            onBackPressed()
         }
 
 

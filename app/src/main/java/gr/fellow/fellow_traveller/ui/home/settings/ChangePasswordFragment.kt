@@ -1,12 +1,12 @@
 package gr.fellow.fellow_traveller.ui.home.settings
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import gr.fellow.fellow_traveller.R
+import androidx.fragment.app.Fragment
 import gr.fellow.fellow_traveller.databinding.FragmentChangePasswordBinding
+import gr.fellow.fellow_traveller.ui.onBackPressed
 
 
 class ChangePasswordFragment : Fragment() {
@@ -30,7 +30,7 @@ class ChangePasswordFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.ActivityChangePasswordBackButton.setOnClickListener {
-            activity?.onBackPressed()
+            onBackPressed()
         }
     }
 

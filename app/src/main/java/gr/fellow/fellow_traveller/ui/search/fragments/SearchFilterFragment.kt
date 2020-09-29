@@ -13,6 +13,7 @@ import com.crystal.crystalrangeseekbar.interfaces.OnSeekbarChangeListener
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentSearchFilterBinding
 import gr.fellow.fellow_traveller.domain.SearchFilters
+import gr.fellow.fellow_traveller.ui.onBackPressed
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
 import gr.fellow.fellow_traveller.ui.views.PickButtonActionListener
 
@@ -41,7 +42,7 @@ class SearchFilterFragment : Fragment() {
         }
 
         binding.closeButton.setOnClickListener {
-            activity?.onBackPressed()
+            onBackPressed()
         }
 
         with(searchFilters) {
@@ -94,7 +95,7 @@ class SearchFilterFragment : Fragment() {
                     if (filter != (searchFilters))
                         searchTripViewModel.updateFilter(searchFilters)
                 }
-                activity?.onBackPressed()
+                onBackPressed()
             }
 
             applyButton.setOnClickListener {
@@ -102,7 +103,7 @@ class SearchFilterFragment : Fragment() {
                     if (filter != (searchFilters))
                         searchTripViewModel.updateFilter(searchFilters)
                 }
-                activity?.onBackPressed()
+                onBackPressed()
             }
         }
 
