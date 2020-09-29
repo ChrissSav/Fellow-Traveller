@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.ui.home.settings
 
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -20,6 +21,7 @@ import gr.fellow.fellow_traveller.ui.car.AddCarActivity
 import gr.fellow.fellow_traveller.ui.car.CarAdapterSecond
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.onBackPressed
+import gr.fellow.fellow_traveller.ui.startActivityForResult
 
 
 class UserCarsFragment : Fragment() {
@@ -46,21 +48,12 @@ class UserCarsFragment : Fragment() {
             onBackPressed()
         }
 
-
-
         binding.refresh.setOnRefreshListener {
             homeViewModel.loadCars()
         }
 
-        /*homeViewModel.carDeletedId.observe(viewLifecycleOwner, Observer {
-            val itemPosition = carsList.indexOf(it)
-            carsList.remove(it)
-            binding.myCarsRecycler.adapter?.notifyItemRemoved(itemPosition)
-        })*/
-
         binding.newCarButton.setOnClickListener {
-            val intent = Intent(activity, AddCarActivity::class.java)
-            startActivityForResult(intent, 1)
+            startActivityForResult(AddCarActivity::class, 1)
         }
 
         Handler().postDelayed({
@@ -73,7 +66,6 @@ class UserCarsFragment : Fragment() {
         }, 250)
 
 
-
         with(binding) {
             myCarsRecycler.adapter = CarAdapterSecond(carsList) {
                 navController.navigate(R.id.action_userCarsFragment_to_carDetailsFragment, bundleOf("car" to it))
@@ -81,10 +73,21 @@ class UserCarsFragment : Fragment() {
         }
     }
 
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                homeViewModel.loadCarsLocal()
+            }
+        }
+    }
 
 }

@@ -92,6 +92,13 @@ constructor(
         }
     }
 
+    fun loadCarsLocal() {
+        launch {
+            _cars.value = getUserCarsLocalUseCase()
+
+        }
+    }
+
 
     fun deleteCar(car: Car) {
         launch {

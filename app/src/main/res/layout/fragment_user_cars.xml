@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
-            android:text="Διαχείριση αυτοκινήτων"
+            android:text="Διαχείριση οχημάτων"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/back_buttons"
             app:layout_constraintTop_toBottomOf="@+id/back_buttons" />

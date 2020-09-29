@@ -9,3 +9,7 @@ enum class PetAnswerType {
     Yes, No
 }
 
+
+enum class AnswerType {
+    Yes, No
+}

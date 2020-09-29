@@ -68,6 +68,11 @@ fun Activity.startActivityForResultWithFade(activity: KClass<out Activity>, code
 }
 
 
+fun Fragment.startActivityForResult(activity: KClass<out Activity>, code: Int) {
+    val intent = Intent(this.context, activity.java)
+    startActivityForResult(intent, code)
+}
+
 fun Fragment.startActivityForResultWithFade(activity: KClass<out Activity>, code: Int) {
     val intent = Intent(this.context, activity.java)
     startActivityForResult(intent, code)

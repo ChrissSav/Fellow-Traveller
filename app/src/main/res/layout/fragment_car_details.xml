@@ -48,7 +48,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/fragment_car_details_margin_inputs"
-        app:hint_fellow="@string/brand"
+        app:hint_fellow="@string/model"
         app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
         app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
         app:layout_constraintTop_toBottomOf="@+id/brand" />

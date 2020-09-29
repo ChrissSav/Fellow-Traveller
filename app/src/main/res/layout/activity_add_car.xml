@@ -21,7 +21,7 @@
             android:layout_height="match_parent">
 
             <ImageButton
-                android:id="@+id/back_buttons"
+                android:id="@+id/back"
                 style="@style/border_icon_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,8 +42,8 @@
                 android:layout_marginEnd="16dp"
                 android:text="Προσθήκη οχήματος"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/back_buttons"
-                app:layout_constraintTop_toBottomOf="@+id/back_buttons" />
+                app:layout_constraintStart_toStartOf="@+id/back"
+                app:layout_constraintTop_toBottomOf="@+id/back" />
 
 
             <gr.fellow.fellow_traveller.ui.views.FellowTextInput
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 app:imeOptions="next"
                 android:layout_marginTop="@dimen/fragment_car_details_margin_inputs"
-                app:hint_fellow="@string/brand"
+                app:hint_fellow="@string/model"
                 app:editable="true"
                 app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
                 app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
@@ -98,7 +98,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/plate" />
 
             <Button
-                android:id="@+id/new_car_button"
+                android:id="@+id/add_car"
                 style="@style/header_3"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/car_float_action_button_height"

@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FragmentCarDetailsBinding
+import gr.fellow.fellow_traveller.domain.AnswerType
 import gr.fellow.fellow_traveller.domain.Car
+import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.ConfirmBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.onBackPressed
 
@@ -18,6 +21,7 @@ class CarDetailsFragment : Fragment() {
     private val binding get() = _binding!!
     private var car: Car? = null
     private val homeViewModel: HomeViewModel by activityViewModels()
+    private lateinit var confirmBottomSheetDialog: ConfirmBottomSheetDialog
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,8 +55,17 @@ class CarDetailsFragment : Fragment() {
         })
 
         binding.delete.setOnClickListener {
-            car?.let { car -> homeViewModel.deleteCar(car) }
+            confirmBottomSheetDialog = ConfirmBottomSheetDialog(
+                getString(R.string.car_delete_confirmation_message, car?.plate),
+                this@CarDetailsFragment::onItemClickListener
+            )
+            confirmBottomSheetDialog.show(childFragmentManager, "confirmBottomSheetDialog");
         }
+    }
+
+    private fun onItemClickListener(answerType: AnswerType) {
+        if (answerType == AnswerType.Yes)
+            car?.let { car -> homeViewModel.deleteCar(car) }
     }
 
 
