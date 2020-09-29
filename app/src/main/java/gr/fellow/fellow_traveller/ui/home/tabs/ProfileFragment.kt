@@ -45,7 +45,9 @@ class ProfileFragment : Fragment() {
                 userImage.loadImageFromUrl(user.picture)
                 reviews.text = user.reviews.toString()
                 rate.text = user.rate.toString()
-                aboutMeInfo.text= user.aboutMe
+                searches.text = "20"
+                offers.text = "13"
+                // aboutMeInfo.text= user.aboutMe
             }
 
 

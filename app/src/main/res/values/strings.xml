@@ -14,7 +14,6 @@
     <string name="register_fragment_stage_2_confirm_password_input_field_title">Επιβεβαίωση κωδικού</string>
     <string name="password_complexity_requirements_description">Ο κωδικός σας πρέπει να είναι τουλάχιστον 8 χαρακτήρες και να περιλαμβάνει τουλάχιστον έναν αριθμό, ένα κεφαλαίο, ένα μικρό γράμμα και έναν ειδικό χαρακτήρα.</string>
     <string name="register_fragment_stage_1_add_email_title">Προσθήκη e-Mail</string>
-    <string name="temp_spyros_email_address">spurakos98@gmail.com</string>
     <string name="register_fragment_stage_1_email_input_field_title">Διεύθυνση e-mail</string>
     <string name="register_fragment_become_a_fellow_traveller">Γίνε κι εσύ ένας Fellow \nTraveller</string>
     <string name="register_fragment_six_digit_code_notice_description">*Θα λάβετε έναν 6-ψήφιο κωδικό για την επιβεβαίωση του λογαριασμού.</string>
@@ -105,6 +104,6 @@
     <string name="model">Μοντέλο</string>
     <string name="plate">Αριθμός Κυκλοφορίας</string>
     <string name="color">Χρώμα</string>
-    <string name="car_delete_confirmation_message">Διαγραφή του οχήματος με αριθμό πινακίδας « %s » ;</string>
+    <string name="car_delete_confirmation_message">Διαγραφή του οχήματος με αριθμό πινακίδας « %s »;</string>
 
 </resources>
