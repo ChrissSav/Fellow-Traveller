@@ -2,16 +2,15 @@ package gr.fellow.fellow_traveller.ui.search.locations
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivitySelectDestinationBinding
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.framework.network.google.response.PredictionResponse
@@ -19,18 +18,31 @@ import gr.fellow.fellow_traveller.ui.location.SelectLocationViewModel
 import gr.fellow.fellow_traveller.ui.location.adapter.PlacesAdapter
 
 @AndroidEntryPoint
+class SelectDestinationActivity : BaseActivity<ActivitySelectDestinationBinding>(), View.OnClickListener {
 
-class SelectDestinationActivity : AppCompatActivity(), View.OnClickListener {
-
-    private val selectLocationViewModel: SelectLocationViewModel by viewModels()
-    private lateinit var binding: ActivitySelectDestinationBinding
+    private val viewModel: SelectLocationViewModel by viewModels()
     private var placesList = mutableListOf<PredictionResponse>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivitySelectDestinationBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun provideViewBinding(): ActivitySelectDestinationBinding =
+        ActivitySelectDestinationBinding.inflate(layoutInflater)
 
+    override fun setUpObservers() {
+        viewModel.destinations.observe(this, Observer {
+            if (it.isNotEmpty()) {
+                placesList.clear()
+                placesList.addAll(it)
+                binding.recyclerView.adapter?.notifyDataSetChanged()
+            }
+
+        })
+
+        viewModel.place.observe(this, Observer {
+            sendPlaceToParent(it)
+        })
+
+    }
+
+    override fun setUpViews() {
 
         if ("to" == intent.getStringExtra("info"))
             binding.endDestLabel.text = "Επιλέξτε τον προορισμό σας"
@@ -48,28 +60,13 @@ class SelectDestinationActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
 
-        initializeRecycle()
-
-        selectLocationViewModel.destinations.observe(this, Observer {
-            if (it.isNotEmpty()) {
-                placesList.clear()
-                placesList.addAll(it)
-                binding.recyclerView.adapter?.notifyDataSetChanged()
-            }
-
-        })
-
-        selectLocationViewModel.place.observe(this, Observer {
-            sendPlaceToParent(it)
-        })
-
 
         binding.destEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(charSequence: Editable?) {
                 if (charSequence.toString().trim().length > 2) {
                     binding.protaseis.visibility = View.GONE
                     binding.recyclerView.visibility = View.VISIBLE
-                    selectLocationViewModel.getAllDestinations(charSequence.toString().trim())
+                    viewModel.getAllDestinations(charSequence.toString().trim())
                 } else {
                     binding.recyclerView.visibility = View.GONE
                     binding.protaseis.visibility = View.VISIBLE
@@ -85,16 +82,20 @@ class SelectDestinationActivity : AppCompatActivity(), View.OnClickListener {
             }
         })
 
+
+        initializeRecycle()
     }
+
 
     private fun initializeRecycle() {
         with(binding) {
             recyclerView.layoutManager = LinearLayoutManager(this@SelectDestinationActivity)
             recyclerView.adapter = PlacesAdapter(placesList) {
-                selectLocationViewModel.getLanLogForPlace(it.placeId, it.description)
+                viewModel.getLanLogForPlace(it.placeId, it.description)
             }
         }
     }
+
 
     private fun sendPlaceToParent(place: PlaceModel) {
         val resultIntent = Intent()
@@ -108,6 +109,7 @@ class SelectDestinationActivity : AppCompatActivity(), View.OnClickListener {
         super.finish()
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
     }
+
 
     override fun onClick(view: View) {
         lateinit var place: PlaceModel

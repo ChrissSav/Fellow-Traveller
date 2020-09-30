@@ -2,28 +2,24 @@ package gr.fellow.fellow_traveller.ui.search
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
+import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivitySearchTripBinding
 import gr.fellow.fellow_traveller.ui.createAlerter
 
 
 @AndroidEntryPoint
-class SearchTripActivity : AppCompatActivity() {
+class SearchTripActivity : BaseActivity<ActivitySearchTripBinding>() {
 
     private val searchViewModel: SearchTripViewModel by viewModels()
 
-    private lateinit var binding: ActivitySearchTripBinding
+    override fun provideViewBinding(): ActivitySearchTripBinding =
+        ActivitySearchTripBinding.inflate(layoutInflater)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
 
-        super.onCreate(savedInstanceState)
-        binding = ActivitySearchTripBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+    override fun setUpObservers() {
         searchViewModel.error.observe(this, Observer {
             createAlerter(getString(it))
         })
@@ -39,6 +35,7 @@ class SearchTripActivity : AppCompatActivity() {
             }
 
         })
-
     }
+
+    override fun setUpViews() {}
 }

@@ -2,76 +2,32 @@ package gr.fellow.fellow_traveller.ui.search.fragments
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentSearchDestinationsBinding
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.ui.createAlerter
+import gr.fellow.fellow_traveller.ui.findNavController
 import gr.fellow.fellow_traveller.ui.onBackPressed
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
 import gr.fellow.fellow_traveller.ui.search.locations.SelectDestinationActivity
 
 
-class SearchDestinationsFragment : Fragment() {
+@AndroidEntryPoint
+class SearchDestinationsFragment : BaseFragment<FragmentSearchDestinationsBinding>() {
 
-    private val searchTripViewModel: SearchTripViewModel by activityViewModels()
-    private lateinit var navController: NavController
-
-    private var _binding: FragmentSearchDestinationsBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-
-        _binding = FragmentSearchDestinationsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(view)
-
-        binding.destFromButton.setOnClickListener {
-            val intent = Intent(activity, SelectDestinationActivity::class.java)
-            startActivityForResult(intent, 1)
-            activity?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-
-        }
-        binding.destToButton.setOnClickListener {
-            val intent = Intent(activity, SelectDestinationActivity::class.java)
-            intent.putExtra("info", "to")
-            startActivityForResult(intent, 2)
-            activity?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-        }
-
-        binding.backButton.setOnClickListener {
-            onBackPressed()
-        }
-
-        binding.searchButton.setOnClickListener {
-            if (searchTripViewModel.destinationFrom.value != null && searchTripViewModel.destinationTo.value != null) {
-                searchTripViewModel.updateFilter()
-                navController.navigate(R.id.next_fragment)
-            } else {
-                createAlerter(resources.getString(R.string.ERROR_FIELDS_REQUIRE))
-            }
-        }
+    private val viewModel: SearchTripViewModel by activityViewModels()
 
 
+    override fun getViewBinding(): FragmentSearchDestinationsBinding =
+        FragmentSearchDestinationsBinding.inflate(layoutInflater)
 
 
-        with(searchTripViewModel) {
+    override fun setUpObservers() {
+        with(viewModel) {
             destinationFrom.observe(viewLifecycleOwner, Observer {
                 binding.destFromButton.setText(it.title)
             })
@@ -79,16 +35,40 @@ class SearchDestinationsFragment : Fragment() {
             destinationTo.observe(viewLifecycleOwner, Observer {
                 binding.destToButton.setText(it.title)
             })
+        }
+    }
 
+    override fun setUpViews() {
+        with(binding) {
+            destFromButton.setOnClickListener {
+                val intent = Intent(activity, SelectDestinationActivity::class.java)
+                startActivityForResult(intent, 1)
+                activity?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+
+            }
+            destToButton.setOnClickListener {
+                val intent = Intent(activity, SelectDestinationActivity::class.java)
+                intent.putExtra("info", "to")
+                startActivityForResult(intent, 2)
+                activity?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            }
+
+            backButton.setOnClickListener {
+                onBackPressed()
+            }
+
+            searchButton.setOnClickListener {
+                if (viewModel.destinationFrom.value != null && viewModel.destinationTo.value != null) {
+                    viewModel.updateFilter()
+                    findNavController()?.navigate(R.id.next_fragment)
+                } else {
+                    createAlerter(resources.getString(R.string.ERROR_FIELDS_REQUIRE))
+                }
+            }
 
         }
     }
 
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -97,7 +77,7 @@ class SearchDestinationsFragment : Fragment() {
             if (resultCode == Activity.RESULT_OK) {
                 val place = data?.getParcelableExtra<PlaceModel>("place")
                 place?.let {
-                    searchTripViewModel.setDestinationFrom(it)
+                    viewModel.setDestinationFrom(it)
                 }
             }
 
@@ -105,7 +85,7 @@ class SearchDestinationsFragment : Fragment() {
             if (resultCode == Activity.RESULT_OK) {
                 val place = data?.getParcelableExtra<PlaceModel>("place")
                 place?.let {
-                    searchTripViewModel.setDestinationTo(it)
+                    viewModel.setDestinationTo(it)
                 }
 
             }

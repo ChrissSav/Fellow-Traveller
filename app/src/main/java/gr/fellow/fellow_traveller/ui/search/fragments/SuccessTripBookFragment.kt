@@ -1,33 +1,26 @@
 package gr.fellow.fellow_traveller.ui.search.fragments
 
 import android.animation.Animator
-import android.os.Bundle
 import android.os.Handler
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import dagger.hilt.android.AndroidEntryPoint
+import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentSuccessTripBookBinding
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
 
+@AndroidEntryPoint
+class SuccessTripBookFragment : BaseFragment<FragmentSuccessTripBookBinding>() {
 
-class SuccessTripBookFragment : Fragment() {
-
-    private val searchTripViewModel: SearchTripViewModel by activityViewModels()
-    private var _binding: FragmentSuccessTripBookBinding? = null
-    private val binding get() = _binding!!
+    private val viewModel: SearchTripViewModel by activityViewModels()
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentSuccessTripBookBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun getViewBinding(): FragmentSuccessTripBookBinding =
+        FragmentSuccessTripBookBinding.inflate(layoutInflater)
 
 
+    override fun setUpObservers() {}
+
+    override fun setUpViews() {
         Handler().postDelayed({
             binding.textViewHover.animate()
                 .translationX(binding.textViewHover.width.toFloat())
@@ -40,7 +33,7 @@ class SuccessTripBookFragment : Fragment() {
                         } catch (e: InterruptedException) {
                             e.printStackTrace()
                         }
-                        searchTripViewModel.finish()
+                        viewModel.finish()
 
                     }
 
@@ -48,12 +41,6 @@ class SuccessTripBookFragment : Fragment() {
                     override fun onAnimationRepeat(animation: Animator) {}
                 })
         }, 500.toLong())
-    }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 }

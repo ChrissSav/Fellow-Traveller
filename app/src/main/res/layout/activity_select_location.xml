@@ -30,11 +30,11 @@
             android:src="@drawable/ic_back_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/SelectLocationActivity_EditText_search_place" />
+            app:layout_constraintTop_toTopOf="@id/selectLocationActivity_EditText_search_place" />
 
 
         <EditText
-            android:id="@+id/SelectLocationActivity_EditText_search_place"
+            android:id="@+id/selectLocationActivity_EditText_search_place"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"

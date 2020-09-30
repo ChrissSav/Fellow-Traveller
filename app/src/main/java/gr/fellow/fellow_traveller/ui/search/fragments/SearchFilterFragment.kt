@@ -1,46 +1,31 @@
 package gr.fellow.fellow_traveller.ui.search.fragments
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener
-import com.crystal.crystalrangeseekbar.interfaces.OnSeekbarChangeListener
+import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentSearchFilterBinding
 import gr.fellow.fellow_traveller.domain.SearchFilters
 import gr.fellow.fellow_traveller.ui.onBackPressed
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
 import gr.fellow.fellow_traveller.ui.views.PickButtonActionListener
 
-class SearchFilterFragment : Fragment() {
+@AndroidEntryPoint
+class SearchFilterFragment : BaseFragment<FragmentSearchFilterBinding>() {
 
-    private lateinit var navController: NavController
-    private val searchTripViewModel: SearchTripViewModel by activityViewModels()
+    private val viewModel: SearchTripViewModel by activityViewModels()
     private lateinit var searchFilters: SearchFilters
 
-    private var _binding: FragmentSearchFilterBinding? = null
-    private val binding get() = _binding!!
+    override fun getViewBinding(): FragmentSearchFilterBinding =
+        FragmentSearchFilterBinding.inflate(layoutInflater)
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentSearchFilterBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        navController = Navigation.findNavController(view)
-        searchTripViewModel.searchFilter.value?.let {
+    override fun setUpObservers() {
+        viewModel.searchFilter.value?.let {
             searchFilters = it.copy()
         }
+    }
 
+    override fun setUpViews() {
         binding.closeButton.setOnClickListener {
             onBackPressed()
         }
@@ -91,71 +76,63 @@ class SearchFilterFragment : Fragment() {
 
             resetButton.setOnClickListener {
                 searchFilters.reset()
-                searchTripViewModel.searchFilter.value?.let { filter ->
+                viewModel.searchFilter.value?.let { filter ->
                     if (filter != (searchFilters))
-                        searchTripViewModel.updateFilter(searchFilters)
+                        viewModel.updateFilter(searchFilters)
                 }
                 onBackPressed()
             }
 
             applyButton.setOnClickListener {
-                searchTripViewModel.searchFilter.value?.let { filter ->
+                viewModel.searchFilter.value?.let { filter ->
                     if (filter != (searchFilters))
-                        searchTripViewModel.updateFilter(searchFilters)
+                        viewModel.updateFilter(searchFilters)
                 }
                 onBackPressed()
             }
-        }
 
-        binding.fromRangeKmSeekbar.setOnSeekbarChangeListener(OnSeekbarChangeListener { value ->
-            if (value.toInt() == 0) {
-                binding.fromRangeRadiusTv.text = getString(R.string.range_view_all)
-                searchFilters.rangeFrom = null
-            } else {
-                binding.fromRangeRadiusTv.text = getString(R.string.range_text, value.toString())
-                searchFilters.rangeFrom = value.toInt()
+
+            fromRangeKmSeekbar.setOnSeekbarChangeListener { value ->
+                if (value.toInt() == 0) {
+                    binding.fromRangeRadiusTv.text = getString(R.string.range_view_all)
+                    searchFilters.rangeFrom = null
+                } else {
+                    binding.fromRangeRadiusTv.text = getString(R.string.range_text, value.toString())
+                    searchFilters.rangeFrom = value.toInt()
+                }
             }
-        })
 
-        binding.toRangeKmSeekbar.setOnSeekbarChangeListener(OnSeekbarChangeListener { value ->
-            if (value.toInt() == 0) {
-                binding.toRangeKmSeekbarTv.text = getString(R.string.range_view_all)
-                searchFilters.rangeTo = null
-            } else {
-                binding.toRangeKmSeekbarTv.text = getString(R.string.range_text, value.toString())
-                searchFilters.rangeTo = value.toInt()
+            toRangeKmSeekbar.setOnSeekbarChangeListener { value ->
+                if (value.toInt() == 0) {
+                    binding.toRangeKmSeekbarTv.text = getString(R.string.range_view_all)
+                    searchFilters.rangeTo = null
+                } else {
+                    binding.toRangeKmSeekbarTv.text = getString(R.string.range_text, value.toString())
+                    searchFilters.rangeTo = value.toInt()
+                }
             }
-        })
 
 
 
-        binding.priceRangeSeekbar.setOnRangeSeekbarChangeListener(OnRangeSeekbarChangeListener { minValue, maxValue ->
-            if (minValue.toInt() == resources.getInteger(R.integer.min_value_in_filters) && maxValue.toInt() == resources.getInteger(R.integer.price_max)) {
-                binding.priceRangeRadiusTv.text = getString(R.string.range_view_all)
-                searchFilters.priceMax = null
-                searchFilters.priceMin = null
-            } else {
-                binding.priceRangeRadiusTv.text = getString(R.string.range_text_price, minValue.toString(), maxValue.toString())
-                if (minValue.toInt() != 0)
-                    searchFilters.priceMin = minValue.toInt()
-                else
-                    searchFilters.priceMin = null
-                if (maxValue.toInt() != 0)
-                    searchFilters.priceMax = maxValue.toInt()
-                else
+            priceRangeSeekbar.setOnRangeSeekbarChangeListener { minValue, maxValue ->
+                if (minValue.toInt() == resources.getInteger(R.integer.min_value_in_filters) && maxValue.toInt() == resources.getInteger(R.integer.price_max)) {
+                    binding.priceRangeRadiusTv.text = getString(R.string.range_view_all)
                     searchFilters.priceMax = null
+                    searchFilters.priceMin = null
+                } else {
+                    binding.priceRangeRadiusTv.text = getString(R.string.range_text_price, minValue.toString(), maxValue.toString())
+                    if (minValue.toInt() != 0)
+                        searchFilters.priceMin = minValue.toInt()
+                    else
+                        searchFilters.priceMin = null
+                    if (maxValue.toInt() != 0)
+                        searchFilters.priceMax = maxValue.toInt()
+                    else
+                        searchFilters.priceMax = null
 
+                }
             }
-        })
-
-
+        }
     }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 
 }

@@ -4,15 +4,14 @@ import android.animation.AnimatorSet
 import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Intent
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivitySelectLocationBinding
 import gr.fellow.fellow_traveller.framework.network.google.response.PredictionResponse
 import gr.fellow.fellow_traveller.ui.createAlerter
@@ -20,32 +19,25 @@ import gr.fellow.fellow_traveller.ui.hideKeyboard
 import gr.fellow.fellow_traveller.ui.location.adapter.PlacesAdapter
 
 @AndroidEntryPoint
-class SelectLocationActivity : AppCompatActivity() {
+class SelectLocationActivity : BaseActivity<ActivitySelectLocationBinding>() {
 
-
-    private val selectLocationViewModel: SelectLocationViewModel by viewModels()
-
-    private lateinit var binding: ActivitySelectLocationBinding
-    private lateinit var mAdapter: PlacesAdapter
+    private val viewModel: SelectLocationViewModel by viewModels()
     private var placesList = mutableListOf<PredictionResponse>()
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivitySelectLocationBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+    override fun provideViewBinding(): ActivitySelectLocationBinding =
+        ActivitySelectLocationBinding.inflate(layoutInflater)
 
-        initializeRecycle()
 
-        selectLocationViewModel.destinations.observe(this, Observer {
+    override fun setUpObservers() {
+        viewModel.destinations.observe(this, Observer {
             showHideInternetMessage(0)
             placesList.clear()
             placesList.addAll(it)
             binding.RecyclerView.adapter?.notifyDataSetChanged()
         })
 
-        selectLocationViewModel.error.observe(this, Observer {
+        viewModel.error.observe(this, Observer {
             if (it == R.string.ERROR_INTERNET_CONNECTION) {
                 showHideInternetMessage(100)
             } else {
@@ -53,28 +45,40 @@ class SelectLocationActivity : AppCompatActivity() {
             }
 
         })
+    }
 
-        binding.backButton.setOnClickListener {
-            finish()
+    override fun setUpViews() {
+        with(binding) {
+            RecyclerView.adapter = PlacesAdapter(placesList) {
+                val resultIntent = Intent()
+                resultIntent.putExtra("id", it.placeId)
+                resultIntent.putExtra("title", it.description)
+                setResult(Activity.RESULT_OK, resultIntent)
+                finish()
+            }
+
+            backButton.setOnClickListener {
+                finish()
+            }
+
+
+            selectLocationActivityEditTextSearchPlace.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(charSequence: Editable) {
+                    if (charSequence.toString().trim().length > 2)
+                    //Log.i("addTextChangedListener", "afterTextChanged "+s);
+                        viewModel.getAllDestinations(charSequence.toString().trim())
+                    //  GetPlaces(s.toString())
+                }
+
+                override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                    //Log.i("addTextChangedListener", "beforeTextChanged");
+                }
+
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                    //Log.i("addTextChangedListener", "onTextChanged");
+                }
+            })
         }
-
-        binding.SelectLocationActivityEditTextSearchPlace.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(charSequence: Editable) {
-                if (charSequence.toString().trim().length > 2)
-                //Log.i("addTextChangedListener", "afterTextChanged "+s);
-                    selectLocationViewModel.getAllDestinations(charSequence.toString().trim())
-                //  GetPlaces(s.toString())
-            }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-                //Log.i("addTextChangedListener", "beforeTextChanged");
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                //Log.i("addTextChangedListener", "onTextChanged");
-            }
-        })
-
     }
 
 
@@ -99,19 +103,5 @@ class SelectLocationActivity : AppCompatActivity() {
         animationSet.start()
     }
 
-
-    private fun initializeRecycle() {
-        mAdapter = PlacesAdapter(placesList) {
-            val resultIntent = Intent()
-            resultIntent.putExtra("id", it.placeId)
-            resultIntent.putExtra("title", it.description)
-            setResult(Activity.RESULT_OK, resultIntent)
-            finish()
-        }
-        with(binding) {
-            RecyclerView.adapter = mAdapter
-        }
-
-    }
 
 }

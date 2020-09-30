@@ -1,75 +1,33 @@
 package gr.fellow.fellow_traveller.ui.search.fragments
 
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.databinding.FragmentSearchResultsBinding
+import gr.fellow.fellow_traveller.ui.findNavController
 import gr.fellow.fellow_traveller.ui.onBackPressed
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
 import gr.fellow.fellow_traveller.ui.search.adapter.SearchResultsAdapter
 
 @AndroidEntryPoint
-class SearchResultsFragment : Fragment() {
+class SearchResultsFragment : BaseFragment<FragmentSearchResultsBinding>() {
 
-    private val searchTripViewModel: SearchTripViewModel by activityViewModels()
-    private lateinit var navController: NavController
-
-    private var _binding: FragmentSearchResultsBinding? = null
-    private val binding get() = _binding!!
+    private val viewModel: SearchTripViewModel by activityViewModels()
     private var tripsList = mutableListOf<Trip>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        _binding = FragmentSearchResultsBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun getViewBinding(): FragmentSearchResultsBinding =
+        FragmentSearchResultsBinding.inflate(layoutInflater)
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        navController = Navigation.findNavController(view)
-
-        with(binding) {
-            ImageButtonScrollToTop.setOnClickListener {
-                appBarLayout.setExpanded(true, true)
-            }
-            filterButton.setOnClickListener {
-                navController.navigate(R.id.action_searchResultsFragment_to_searchFilterFragment)
-            }
-
-            closeButton.setOnClickListener {
-                onBackPressed()
-            }
+    override fun setUpObservers() {
 
 
-            swapButton.setOnClickListener {
-
-                searchTripViewModel.swapDestinations()
-            }
-
-            recyclerView.adapter = SearchResultsAdapter(tripsList) {
-                navController.navigate(
-                    R.id.action_searchResultsFragment_to_searchTripDetailsFragment, bundleOf("tripId" to it.id)
-                )
-            }
-        }
-
-
-
-
-
-        with(searchTripViewModel) {
+        with(viewModel) {
 
 
             resultTrips.observe(viewLifecycleOwner, Observer {
@@ -105,7 +63,7 @@ class SearchResultsFragment : Fragment() {
 
             searchFilter.observe(viewLifecycleOwner, Observer {
                 if (filterFlag)
-                    searchTripViewModel.getTrips()
+                    viewModel.getTrips()
             })
 
 
@@ -120,15 +78,33 @@ class SearchResultsFragment : Fragment() {
 
 
         }
-
-
     }
 
+    override fun setUpViews() {
+        with(binding) {
+            ImageButtonScrollToTop.setOnClickListener {
+                appBarLayout.setExpanded(true, true)
+            }
+            filterButton.setOnClickListener {
+                findNavController()?.navigate(R.id.action_searchResultsFragment_to_searchFilterFragment)
+            }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+            closeButton.setOnClickListener {
+                onBackPressed()
+            }
+
+
+            swapButton.setOnClickListener {
+
+                viewModel.swapDestinations()
+            }
+
+            recyclerView.adapter = SearchResultsAdapter(tripsList) {
+                findNavController()?.navigate(
+                    R.id.action_searchResultsFragment_to_searchTripDetailsFragment, bundleOf("tripId" to it.id)
+                )
+            }
+        }
     }
-
 
 }

@@ -120,9 +120,9 @@ class NewTripActivity : BaseActivity<ActivityNewTripBinding>(), ExitCustomDialog
         exitCustomDialog.show(supportFragmentManager, "example dialog")
     }
 
-    override fun exitFrom(exit: Boolean) {
+    override fun exitFrom(result: Boolean) {
         exitCustomDialog.dismiss()
-        if (exit)
+        if (result)
             finish()
     }
 
