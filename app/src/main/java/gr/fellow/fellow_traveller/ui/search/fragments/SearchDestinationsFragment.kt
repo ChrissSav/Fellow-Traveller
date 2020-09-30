@@ -63,8 +63,9 @@ class SearchDestinationsFragment : Fragment() {
             if (searchTripViewModel.destinationFrom.value != null && searchTripViewModel.destinationTo.value != null) {
                 searchTripViewModel.updateFilter()
                 navController.navigate(R.id.next_fragment)
-            } else
+            } else {
                 createAlerter(resources.getString(R.string.ERROR_FIELDS_REQUIRE))
+            }
         }
 
 

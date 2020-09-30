@@ -89,7 +89,7 @@ fun Fragment.startActivityForResultWithFade(activity: KClass<out Activity>, code
 }
 
 fun Fragment.onBackPressed() {
-    onBackPressed()
+    activity?.onBackPressed()
 }
 
 fun Activity.createToast(msg: String) {

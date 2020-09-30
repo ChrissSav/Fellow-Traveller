@@ -57,4 +57,7 @@
     <dimen name="fragment_car_details_margin_inputs">51dp</dimen>
 
 
+    <!--fragment_profile -->
+    <dimen name="fragment_profile_text_margin_top">16dp</dimen>
+
 </resources>

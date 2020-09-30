@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true"
     tools:context=".ui.home.settings.BaseSettingsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".Settings.UserSettingsActivity">
+        android:layout_height="match_parent">
 
         <ImageButton
             android:id="@+id/back_button"
             style="@style/border_icon_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="20dp"
             android:src="@drawable/ic_back_button"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -28,7 +28,7 @@
             android:layout_height="80dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp"
-            android:background="@drawable/null_icon"
+            android:background="@drawable/ic_boy"
             android:elevation="1dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -36,10 +36,10 @@
 
         <TextView
             android:id="@+id/user_full_name_text_view"
+            style="@style/display_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            style="@style/header1"
             android:text="Fotios Pechlivanis"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -47,215 +47,188 @@
 
         <TextView
             android:id="@+id/user_email_address_text_view"
+            style="@style/paragraph_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            style="@style/paragraph3"
             android:text="@string/EMAIL_PLACEHOLDER"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/user_full_name_text_view" />
 
-        <TextView
-            android:id="@+id/account_settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="40dp"
-            style="@style/header2"
-            android:text="@string/activity_user_settings_account_settings_text_label"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/user_email_address_text_view" />
 
-        <Button
-            android:id="@+id/personal_user_info_button"
-            style="?android:attr/borderlessButtonStyle"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/settings_button_item"
-            android:drawableRight="@drawable/ic_person"
-            android:fontFamily="@font/firasans_light"
-            android:gravity="left|center_vertical"
-            android:padding="10dp"
-            android:text="Στοιχεία λογαριασμού"
-            android:textAllCaps="false"
-            android:textColor="@color/black_color"
-            android:textSize="18sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/account_settings" />
+            android:layout_marginTop="62dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_email_address_text_view">
 
 
-        <Button
-            android:id="@+id/payments"
-            style="?android:attr/borderlessButtonStyle"
+            <TextView
+                android:id="@+id/personal_info"
+                style="@style/paragraph_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center|left"
+                android:minHeight="40dp"
+                android:text="Προσωπικές πληροφορίες"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/password"
+                style="@style/paragraph_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center|left"
+                android:minHeight="40dp"
+                android:text="Κωδικός Πρόσβασης"
+                app:layout_constraintEnd_toEndOf="@+id/personal_info"
+                app:layout_constraintStart_toStartOf="@+id/personal_info"
+                app:layout_constraintTop_toBottomOf="@+id/personal_info" />
+
+            <TextView
+                android:id="@+id/notifications"
+                style="@style/paragraph_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center|left"
+                android:minHeight="40dp"
+                android:text="Ειδοποιήσεις"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/personal_info"
+                app:layout_constraintTop_toBottomOf="@+id/password" />
+
+            <TextView
+                android:id="@+id/my_cars"
+                style="@style/paragraph_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center|left"
+                android:minHeight="40dp"
+                android:text="Τα οχήματά μου"
+                app:layout_constraintEnd_toEndOf="@+id/notifications"
+                app:layout_constraintStart_toStartOf="@+id/personal_info"
+                app:layout_constraintTop_toBottomOf="@+id/notifications" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+            <TextView
+                android:id="@+id/write_review"
+                style="@style/paragraph_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center|left"
+                android:minHeight="40dp"
+                android:text="Γράψε μία κριτική"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/help"
+                style="@style/paragraph_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center|left"
+                android:minHeight="40dp"
+                android:text="Βοήθεια"
+                app:layout_constraintEnd_toEndOf="@+id/write_review"
+                app:layout_constraintStart_toStartOf="@+id/write_review"
+                app:layout_constraintTop_toBottomOf="@+id/write_review" />
+
+            <TextView
+                android:id="@+id/terms_of_use"
+                style="@style/paragraph_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center|left"
+                android:minHeight="40dp"
+                android:text="Όροι χρήσης"
+                app:layout_constraintEnd_toEndOf="@+id/help"
+                app:layout_constraintStart_toStartOf="@+id/help"
+                app:layout_constraintTop_toBottomOf="@+id/help" />
+
+            <TextView
+                android:id="@+id/privacy_Policy"
+                style="@style/paragraph_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center|left"
+                android:minHeight="40dp"
+                android:text="Πολιτική Προστασίας Προσωπικών Δεδομένων"
+                app:layout_constraintEnd_toEndOf="@+id/terms_of_use"
+                app:layout_constraintStart_toStartOf="@+id/terms_of_use"
+                app:layout_constraintTop_toBottomOf="@+id/terms_of_use" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/logout"
+            style="@style/paragraph_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/settings_button_item"
-            android:drawableRight="@drawable/ic_card"
-            android:fontFamily="@font/firasans_light"
-            android:gravity="left|center_vertical"
-            android:padding="10dp"
-            android:text="Πληρωμές"
-            android:textAllCaps="false"
-            android:textColor="@color/black_color"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/personal_user_info_button"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/personal_user_info_button"
-            app:layout_constraintTop_toBottomOf="@+id/personal_user_info_button" />
-
-        <Button
-            android:id="@+id/notifications"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/settings_button_item"
-            android:drawableRight="@drawable/ic_notifications"
-            android:fontFamily="@font/firasans_light"
-            android:gravity="left|center_vertical"
-            android:padding="10dp"
-            android:text="Ειδοποιήσεις"
-            android:textAllCaps="false"
-            android:textColor="@color/black_color"
-            android:textSize="18sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/payments" />
-
-        <TextView
-            android:id="@+id/fellow_drivers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="40dp"
-            style="@style/header2"
-            android:text="Fellow Drivers"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/notifications" />
-
-        <Button
-            android:id="@+id/become_driver"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/settings_button_item"
-
-            android:fontFamily="@font/firasans_light"
-            android:gravity="left|center_vertical"
-            android:padding="10dp"
-            android:text="Γίνε fellow οδηγός"
-            android:textAllCaps="false"
-            android:textColor="@color/home_blue"
-            android:textSize="18sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fellow_drivers" />
-
-        <Button
-            android:id="@+id/manage_user_cars_button"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/settings_button_item"
-            android:drawableRight="@drawable/ic_car"
-            android:fontFamily="@font/firasans_light"
-            android:gravity="left|center_vertical"
-            android:padding="10dp"
-            android:text="Διαχείριση αυτοκινήτου"
-            android:textAllCaps="false"
-            android:textColor="@color/black_color"
-            android:textSize="18sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/become_driver" />
-
-        <Button
-            android:id="@+id/feedback"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/settings_button_item"
-
-            android:fontFamily="@font/firasans_light"
-            android:gravity="left|center_vertical"
-            android:padding="10dp"
-            android:text="Αξιολόγησε μας"
-            android:textAllCaps="false"
-            android:textColor="@color/black_color"
-            android:textSize="18sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/manage_user_cars_button" />
-
-        <Button
-            android:id="@+id/support"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/settings_button_item"
-
-            android:fontFamily="@font/firasans_light"
-            android:gravity="left|center_vertical"
-            android:padding="10dp"
-            android:text="Υποστήριξη"
-            android:textAllCaps="false"
-            android:textColor="@color/black_color"
-            android:textSize="18sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/feedback" />
-
-        <Button
-            android:id="@+id/terms"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/settings_button_item"
-            android:fontFamily="@font/firasans_light"
-            android:gravity="left|center_vertical"
-            android:padding="10dp"
-            android:text="Όροι και προϋποθέσεις"
-            android:textAllCaps="false"
-            android:textColor="@color/black_color"
-            android:textSize="18sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/support" />
-
-        <Button
-            android:id="@+id/logout_button"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/settings_button_item"
-            android:fontFamily="@font/firasans_light"
-            android:gravity="left|center_vertical"
-            android:padding="10dp"
+            android:layout_marginEnd="16dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center|left"
+            android:minHeight="40dp"
             android:text="Αποσύνδεση"
-            android:textAllCaps="false"
-            android:textColor="@color/orange_color"
-            android:textSize="18sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/terms" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </ScrollView>

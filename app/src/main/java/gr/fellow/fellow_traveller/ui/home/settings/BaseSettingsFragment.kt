@@ -44,16 +44,16 @@ class BaseSettingsFragment : BaseFragment<FragmentBaseSettingsBinding>() {
             onBackPressed()
         }
 
-        binding.personalUserInfoButton.setOnClickListener {
+        binding.personalInfo.setOnClickListener {
             findNavController()?.navigate(R.id.action_baseSettingsFragment_to_accountSettingsFragment)
 
         }
 
-        binding.manageUserCarsButton.setOnClickListener {
+        binding.myCars.setOnClickListener {
             findNavController()?.navigate(R.id.action_baseSettingsFragment_to_userCarsFragment)
         }
 
-        binding.logoutButton.setOnClickListener {
+        binding.logout.setOnClickListener {
             viewModel.logOut()
         }
     }
