@@ -16,6 +16,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/fellow_editText_TextInputEditText"
             style="@style/editText_input"
+            android:imeOptions="normal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"

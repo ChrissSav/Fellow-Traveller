@@ -1,57 +1,41 @@
 package gr.fellow.fellow_traveller.ui.register.fragments
 
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentPhoneBinding
 import gr.fellow.fellow_traveller.ui.createAlerter
+import gr.fellow.fellow_traveller.ui.findNavController
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
 import gr.fellow.fellow_traveller.utils.isValidPhone
 
+@AndroidEntryPoint
+class PhoneFragment : BaseFragment<FragmentPhoneBinding>() {
 
-class PhoneFragment : Fragment() {
+    private val viewModel: RegisterViewModel by activityViewModels()
 
-    private val registerViewModel: RegisterViewModel by activityViewModels()
-    private lateinit var navController: NavController
 
-    /**
-     * This property is only valid between onCreateView and
-     * onDestroyView.
-     */
-    private var _binding: FragmentPhoneBinding? = null
-    private val binding get() = _binding!!
+    override fun getViewBinding(): FragmentPhoneBinding =
+        FragmentPhoneBinding.inflate(layoutInflater)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentPhoneBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun setUpObservers() {
+        viewModel.phone.observe(viewLifecycleOwner, Observer {
+            findNavController()?.navigate(R.id.next_fragment)
+        })
     }
 
+    override fun setUpViews() {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(view)
-
-
-        binding.EditTextPhone.setText(registerViewModel.phone.value)
-
+        binding.EditTextPhone.setText(viewModel.phone.value)
 
         binding.ButtonClear.setOnClickListener {
             binding.EditTextPhone.text = null
         }
-
-
 
         binding.EditTextPhone.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -71,23 +55,11 @@ class PhoneFragment : Fragment() {
         })
 
         binding.ImageButtonNext.setOnClickListener {
-            if (isValidPhone( binding.EditTextPhone.text.toString())) {
-                registerViewModel.checkUserPhone( binding.EditTextPhone.text.toString())
+            if (isValidPhone(binding.EditTextPhone.text.toString())) {
+                viewModel.checkUserPhone(binding.EditTextPhone.text.toString())
             } else {
                 createAlerter(resources.getString(R.string.INVALID_PHONE_FORMAT))
             }
         }
-
-        registerViewModel.phone.observe(viewLifecycleOwner, Observer {
-            navController.navigate(R.id.next_fragment)
-        })
     }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-
 }

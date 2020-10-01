@@ -64,35 +64,14 @@ class NewTripActivity : BaseActivity<ActivityNewTripBinding>(), ExitCustomDialog
         nav.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { _, destination, _ ->
             hideKeyboard()
             when (destination.id) {
-                R.id.destinationsFragment -> {
-                    binding.progressBar.progress = 14
-
-                }
-                R.id.pickUpFragment -> {
-                    binding.progressBar.progress = 28
-
-                }
-                R.id.dateTimeFragment -> {
-                    binding.progressBar.progress = 42
-
-                }
-                R.id.baseInfoFragment -> {
-                    binding.progressBar.progress = 56
-
-                }
-                R.id.priceFragment -> {
-                    binding.progressBar.progress = 70
-                }
-                R.id.messageFragment -> {
-                    binding.progressBar.progress = 84
-                }
-                R.id.summaryFragment -> {
-                    binding.progressBar.progress = 95
-                }
-                R.id.successTripFragment -> {
-                    binding.constraintLayout.visibility = View.GONE
-                }
-
+                R.id.destinationsFragment -> binding.progressBar.progress = 14
+                R.id.pickUpFragment -> binding.progressBar.progress = 28
+                R.id.dateTimeFragment -> binding.progressBar.progress = 42
+                R.id.baseInfoFragment -> binding.progressBar.progress = 56
+                R.id.priceFragment -> binding.progressBar.progress = 70
+                R.id.messageFragment -> binding.progressBar.progress = 84
+                R.id.summaryFragment -> binding.progressBar.progress = 95
+                R.id.successTripFragment -> binding.constraintLayout.visibility = View.GONE
             }
 
         })
@@ -106,7 +85,6 @@ class NewTripActivity : BaseActivity<ActivityNewTripBinding>(), ExitCustomDialog
             onBackPressed()
         }
     }
-
 
 
     override fun onBackPressed() {

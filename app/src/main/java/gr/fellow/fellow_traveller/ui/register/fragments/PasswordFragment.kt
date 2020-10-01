@@ -1,124 +1,43 @@
 package gr.fellow.fellow_traveller.ui.register.fragments
 
-import android.os.Bundle
-import android.text.Editable
-import android.text.InputType
-import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentPasswordBinding
 import gr.fellow.fellow_traveller.ui.createAlerter
+import gr.fellow.fellow_traveller.ui.findNavController
+import gr.fellow.fellow_traveller.ui.hideKeyboard
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
 
+@AndroidEntryPoint
+class PasswordFragment : BaseFragment<FragmentPasswordBinding>() {
 
-class PasswordFragment : Fragment() {
+    private val viewModel: RegisterViewModel by activityViewModels()
 
-    private val registerViewModel: RegisterViewModel by activityViewModels()
-    private lateinit var navController: NavController
 
-    /**
-     * This property is only valid between onCreateView and
-     * onDestroyView.
-     */
-    private var _binding: FragmentPasswordBinding? = null
-    private val binding get() = _binding!!
+    override fun getViewBinding(): FragmentPasswordBinding =
+        FragmentPasswordBinding.inflate(layoutInflater)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentPasswordBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun setUpObservers() {
+        viewModel.password.observe(viewLifecycleOwner, Observer {
+            findNavController()?.navigate(R.id.next_fragment)
+        })
     }
 
+    override fun setUpViews() {
+        binding.password.text = viewModel.password.value
+        binding.passwordConfirm.text = viewModel.password.value
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        navController = Navigation.findNavController(view)
-
-
-        binding.password.setText(registerViewModel.password.value)
-        binding.passwordConfirm.setText(registerViewModel.password.value)
-
-
-
-        binding.password.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(charSequence: Editable?) {
-                if (charSequence.toString().trim().isNotEmpty())
-                    binding.displayPassword.visibility = View.VISIBLE
-                else
-                    binding.displayPassword.visibility = View.INVISIBLE
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-            }
-        })
-
-        binding.passwordConfirm.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(charSequence: Editable?) {
-                if (charSequence.toString().trim().isNotEmpty())
-                    binding.displayPasswordConfitm.visibility = View.VISIBLE
-                else
-                    binding.displayPasswordConfitm.visibility = View.INVISIBLE
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-            }
-        })
-
-
-
-
-        binding.displayPassword.setOnClickListener {
-            if (binding.password.inputType != InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
-                binding.password.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-            } else {
-                binding.password.inputType =
-                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-
-
-            }
-            binding.password.setSelection(binding.password.length())
-
-        }
-
-
-
-        binding.displayPasswordConfitm.setOnClickListener {
-            if (binding.passwordConfirm.inputType != InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
-                binding.passwordConfirm.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-            } else {
-                binding.passwordConfirm.inputType =
-                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-
-
-            }
-            binding.passwordConfirm.setSelection(binding.passwordConfirm.length())
-
-        }
 
         binding.ImageButtonNext.setOnClickListener {
-            if (binding.password.text.length >= 2) {
-                if (binding.password.text.toString() == binding.passwordConfirm.text.toString()) {
-                    registerViewModel.storePassword(binding.password.text.toString())
+            val pass = binding.password.text.toString()
+            val passConfirm = binding.passwordConfirm.text.toString()
+            hideKeyboard()
+            if (pass.length >= 2) {
+                if (pass == passConfirm) {
+                    viewModel.storePassword(pass)
                 } else {
                     createAlerter(resources.getString(R.string.ERROR_PASSWORD_DO_NOT_MATCH))
                 }
@@ -128,16 +47,6 @@ class PasswordFragment : Fragment() {
             }
         }
 
-        registerViewModel.password.observe(viewLifecycleOwner, Observer {
-            navController.navigate(R.id.next_fragment)
-        })
     }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 
 }

@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.ui.views
 
 import android.content.Context
+import android.text.InputType
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.inputmethod.EditorInfo
@@ -12,10 +13,10 @@ class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(
 
     private var hint = ""
     private var binding: FellowEdittextBinding = FellowEdittextBinding.inflate(LayoutInflater.from(context), this, true)
-
     private var isEditable = false
     private lateinit var function: () -> Unit
-    private var imeOptions: String? = null
+    private var imeOptions = 0
+    private var inputType = 0
 
     var text: String? = null
         get() = binding.fellowEditTextTextInputEditText.text.toString()
@@ -37,10 +38,15 @@ class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(
         try {
             hint = attributes.getString(R.styleable.FellowTextInput_hint_fellow).toString()
             isEditable = attributes.getBoolean(R.styleable.FellowTextInput_editable, false)
-            imeOptions = attributes.getString(R.styleable.FellowTextInput_imeOptions)
+            inputType =
+                attributes.getInteger(R.styleable.FellowTextInput_text_type, InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_NORMAL)
+            imeOptions = attributes.getInteger(R.styleable.FellowTextInput_imeOptions, EditorInfo.IME_ACTION_NEXT)
         } catch (e: Exception) {
             e.printStackTrace()
         }
+
+        binding.fellowEditTextTextInputEditText.inputType = inputType
+
         binding.fellowEditTextTextInputLayout.hint = hint
 
         if (!isEditable) {
@@ -57,9 +63,7 @@ class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(
             binding.fellowEditTextTextInputLayout.isFocusableInTouchMode = false
 
         }
-        imeOptions?.let {
-            binding.fellowEditTextTextInputEditText.imeOptions = EditorInfo.IME_ACTION_NEXT
-        }
+        binding.fellowEditTextTextInputEditText.imeOptions = imeOptions
 
         binding.fellowEditTextTextInputLayout.setOnClickListener {
             try {
@@ -84,6 +88,8 @@ class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(
     fun onClickListener(function: () -> Unit) {
         this.function = function
     }
+
+
 }
 
 

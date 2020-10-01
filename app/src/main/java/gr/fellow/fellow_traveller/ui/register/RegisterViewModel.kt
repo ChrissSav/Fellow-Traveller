@@ -105,10 +105,7 @@ constructor(
     }
 
     fun storeUserInfo(firstName: String, lastName: String) {
-        launch(true) {
-            _userInfo.value = Pair(firstName, lastName)
-        }
-
+        _userInfo.value = Pair(firstName, lastName)
     }
 
 }

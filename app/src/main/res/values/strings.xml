@@ -13,7 +13,7 @@
     <string name="register_fragment_stage_2_password_input_field_title">Κωδικός πρόσβασης</string>
     <string name="register_fragment_stage_2_confirm_password_input_field_title">Επιβεβαίωση κωδικού</string>
     <string name="password_complexity_requirements_description">Ο κωδικός σας πρέπει να είναι τουλάχιστον 8 χαρακτήρες και να περιλαμβάνει τουλάχιστον έναν αριθμό, ένα κεφαλαίο, ένα μικρό γράμμα και έναν ειδικό χαρακτήρα.</string>
-    <string name="register_fragment_stage_1_add_email_title">Προσθήκη e-Mail</string>
+    <string name="register_fragment_stage_1_add_email_title">Ποιό είναι το email σας;</string>
     <string name="register_fragment_stage_1_email_input_field_title">Διεύθυνση e-mail</string>
     <string name="register_fragment_become_a_fellow_traveller">Γίνε κι εσύ ένας Fellow \nTraveller</string>
     <string name="register_fragment_six_digit_code_notice_description">*Θα λάβετε έναν 6-ψήφιο κωδικό για την επιβεβαίωση του λογαριασμού.</string>

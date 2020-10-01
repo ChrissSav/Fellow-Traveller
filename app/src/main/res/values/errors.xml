@@ -15,7 +15,7 @@
     <string name="ERROR_PASSWORD_COMPLEXITY_INVALID">Μη έγκυρος κωδικός πρόσβασης.</string>
     <string name="ERROR_PASSWORD_DOES_NOT_MEET_COMPLEXITY_REQUIREMENTS">Ο κωδικός δεν πληρεί τους κανόνες πολυπλοκότητας.</string>
     <string name="ERROR_PASSWORD_COMPLEXITY_SHOULD_CONTAIN">Ο κωδικός πρέπει να έχει:</string>
-    <string name="ERROR_PASSWORD_COMPLEXITY_LENGTH">\u2022 μήκος τουλάχιστον 8 χαρακτήρων</string>
+    <string name="ERROR_PASSWORD_COMPLEXITY_LENGTH">Μήκος τουλάχιστον 8 χαρακτήρων</string>
     <string name="ERROR_PASSWORD_COMPLEXITY_LOWERCASE_LETTER">\u2022 ένα πεζό γράμμα</string>
     <string name="ERROR_PASSWORD_COMPLEXITY_UPPERCASE_LETTER">\u2022 ένα κεφαλαίο γράμμα</string>
     <string name="ERROR_PASSWORD_COMPLEXITY_DIGIT">\u2022 ένα ψηφίο</string>

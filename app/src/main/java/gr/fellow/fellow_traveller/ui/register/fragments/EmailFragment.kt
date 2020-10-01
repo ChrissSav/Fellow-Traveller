@@ -1,96 +1,45 @@
 package gr.fellow.fellow_traveller.ui.register.fragments
 
-import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentEmailBinding
 import gr.fellow.fellow_traveller.ui.createAlerter
+import gr.fellow.fellow_traveller.ui.findNavController
+import gr.fellow.fellow_traveller.ui.hideKeyboard
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
 import gr.fellow.fellow_traveller.utils.isValidEmail
 
+@AndroidEntryPoint
+class EmailFragment : BaseFragment<FragmentEmailBinding>() {
 
-class EmailFragment : Fragment() {
+    private val viewModel: RegisterViewModel by activityViewModels()
 
-    private val registerViewModel: RegisterViewModel by activityViewModels()
-    private lateinit var navController: NavController
+    override fun getViewBinding(): FragmentEmailBinding =
+        FragmentEmailBinding.inflate(layoutInflater)
 
-    /**
-     * This property is only valid between onCreateView and
-     * onDestroyView.
-     */
-    private var _binding: FragmentEmailBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentEmailBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun setUpObservers() {
+        viewModel.email.observe(viewLifecycleOwner, Observer {
+            findNavController()?.navigate(R.id.next_fragment)
+        })
     }
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.EditTextEmail.setText(registerViewModel.email.value)
+    override fun setUpViews() {
+        binding.email.text = viewModel.email.value
 
 
-        navController = Navigation.findNavController(view)
-
-
-
-        binding.ButtonClear.setOnClickListener {
-            binding.EditTextEmail.text = null
-        }
-
-
-
-        binding.EditTextEmail.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                if (s.toString().trim().isNotEmpty())
-                    binding.ButtonClear.visibility = View.VISIBLE
-                else
-                    binding.ButtonClear.visibility = View.INVISIBLE
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-            }
-        })
 
         binding.ImageButtonNext.setOnClickListener {
-            if (isValidEmail(binding.EditTextEmail.text.toString())) {
-                registerViewModel.checkUserEmail(binding.EditTextEmail.text.toString())
+            hideKeyboard()
+            val email = binding.email.text.toString().trim()
+            if (isValidEmail(email)) {
+                viewModel.checkUserEmail(email)
             } else {
                 createAlerter(resources.getString(R.string.ERROR_INVALID_EMAIL_FORMAT))
             }
         }
-
-        registerViewModel.email.observe(viewLifecycleOwner, Observer {
-            navController.navigate(R.id.next_fragment)
-        })
-
-
-    }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 }
