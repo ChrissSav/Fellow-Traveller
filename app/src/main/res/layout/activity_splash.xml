@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/motion"
+    android:background="#1488a7"
     app:layoutDescription="@xml/activity_splash_scene"
     tools:context=".ui.splash.SplashActivity">
 
@@ -14,22 +15,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:alpha="0"
-        android:fontFamily="@font/firasans_bold"
         android:scaleX="0"
+        style="@style/display_1"
         android:scaleY="0"
-        android:text="Fellow\nTraveller"
-        android:textColor="@color/black"
-        android:textSize="40sp"
+        android:text="fellow."
+        android:textColor="@color/white"
+        android:textSize="39sp"
         app:layout_constraintBottom_toBottomOf="@+id/ImageView"
         app:layout_constraintTop_toTopOf="@+id/ImageView"
         tools:layout_editor_absoluteX="97dp" />
 
     <ImageView
         android:id="@+id/ImageView"
-        android:layout_width="110dp"
-        android:layout_height="140dp"
-        android:src="@drawable/ic_logo_png"
-        android:alpha="0"
+        android:layout_width="70dp"
+        android:layout_height="80dp"
+        android:alpha="1"
+        android:src="@drawable/ic_logo_asset_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
