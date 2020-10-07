@@ -60,4 +60,8 @@
     <!--fragment_profile -->
     <dimen name="fragment_profile_text_margin_top">8dp</dimen>
 
+    <!--fragment_account_settings-->
+    <dimen name="fragment_settings_text_margin_top">42dp</dimen>
+
+
 </resources>

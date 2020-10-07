@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Context.CONNECTIVITY_SERVICE
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
+import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -12,6 +13,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import gr.fellow.fellow_traveller.BuildConfig
 import gr.fellow.fellow_traveller.framework.network.NetworkConnectionInterceptor
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
 import gr.fellow.fellow_traveller.framework.network.google.PlaceApiService
@@ -57,9 +59,10 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor, connectivityHelper: ConnectivityHelper, sharedPreferences: SharedPreferences
+        loggingInterceptor: HttpLoggingInterceptor, connectivityHelper: ConnectivityHelper, sharedPreferences: SharedPreferences,
+        context: Context
     ): OkHttpClient.Builder {
-        return OkHttpClient.Builder().proxy(Proxy.NO_PROXY)
+        val client = OkHttpClient.Builder().proxy(Proxy.NO_PROXY)
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
@@ -68,13 +71,19 @@ object NetworkModule {
                 override fun intercept(chain: Interceptor.Chain): Response {
                     val request = chain.request()
                     val newRequest = request.newBuilder()
-                    sharedPreferences.getString(PREFS_AUTH_TOKEN, "")?.let {
-                        newRequest.header("Cookie", it)
+                    val session = sharedPreferences.getString(PREFS_AUTH_TOKEN, "").toString()
+                    if (session.length > 10) {
+                        newRequest.header("Cookie", session)
+                    } else {
+                        Toast.makeText(context, "Session not added", Toast.LENGTH_SHORT).show()
                     }
                     return chain.proceed(newRequest.build())
                 }
             })
-            .addInterceptor(loggingInterceptor)
+        if (BuildConfig.DEBUG) {
+            client.addInterceptor(loggingInterceptor)
+        }
+        return client
 
     }
 
