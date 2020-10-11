@@ -41,7 +41,7 @@ interface FellowDataSource {
     //Trips
 
 
-    suspend fun addTripRemote(tripCreateRequest: TripCreateRequest): ResultWrapper<Trip>
+    suspend fun addTripRemote(tripCreateRequest: TripCreateRequest): ResultWrapper<TripInvolved>
 
     suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripInvolved>>
 

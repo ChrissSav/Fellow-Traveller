@@ -1,6 +1,8 @@
 package gr.fellow.fellow_traveller.ui.newtrip.fragments
 
 import android.animation.Animator
+import android.app.Activity
+import android.content.Intent
 import android.os.Handler
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,9 +19,7 @@ class SuccessTripFragment : BaseFragment<FragmentSuccessTripBinding>() {
         FragmentSuccessTripBinding.inflate(layoutInflater)
 
 
-    override fun setUpObservers() {
-
-    }
+    override fun setUpObservers() {}
 
     override fun setUpViews() {
         Handler().postDelayed({
@@ -34,7 +34,13 @@ class SuccessTripFragment : BaseFragment<FragmentSuccessTripBinding>() {
                         } catch (e: InterruptedException) {
                             e.printStackTrace()
                         }
-                        viewModel.finish()
+                        val trip = viewModel.success.value
+                        trip?.let {
+                            val resultIntent = Intent()
+                            resultIntent.putExtra("trip", it)
+                            activity?.setResult(Activity.RESULT_OK, resultIntent)
+                            activity?.finish()
+                        }
 
                     }
 

@@ -23,7 +23,7 @@ fun TripResponse.toTrip(): Trip {
 
     return Trip(
         this.id, this.destFrom, this.destTo, this.pickupPoint,
-        this.creatorUser.toUserBase(), this.car.toCar(), passengersTemp,
+        this.creatorUser.toUserBase(), this.car.mapToBaseCar(), passengersTemp,
         this.timestamp, this.hasPet, this.maxSeats, this.currentSeats,
         this.maxBags, this.currentBags, this.msg, this.price
     )

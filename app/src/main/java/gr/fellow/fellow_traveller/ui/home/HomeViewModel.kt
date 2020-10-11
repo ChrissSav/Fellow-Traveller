@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.ResultWrapper
-import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
@@ -154,25 +153,24 @@ constructor(
     }
 
 
-    fun addTripCreate(trip: Trip) {
+    fun addTripCreate(trip: TripInvolved) {
         launch {
-            /*   tripsAsCreator.value?.let {
-                   val tempTrip = it
-                   tempTrip.add(trip)
-                   _tripsAsCreator.value = tempTrip
-               }*/
+            tripsAsCreator.value?.let {
+                val tempTrip = it
+                tempTrip.add(trip)
+                _tripsAsCreator.value = tempTrip
+            }
 
         }
     }
 
-    fun addTripPassenger(trip: Trip) {
+    fun addTripPassenger(trip: TripInvolved) {
         launch {
-            /*tripsTakesPart.value?.let {
+            tripsTakesPart.value?.let {
                 val tempTrip = it
                 tempTrip.add(trip)
                 _tripsTakesPart.value = tempTrip
-            }*/
-
+            }
         }
     }
 }

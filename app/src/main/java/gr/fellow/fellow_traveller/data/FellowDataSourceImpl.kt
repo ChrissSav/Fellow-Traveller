@@ -67,10 +67,10 @@ class FellowDataSourceImpl(
     override suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse> =
         repository.deleteCarRemote(carId)
 
-    override suspend fun addTripRemote(tripCreateRequest: TripCreateRequest): ResultWrapper<Trip> {
+    override suspend fun addTripRemote(tripCreateRequest: TripCreateRequest): ResultWrapper<TripInvolved> {
         return when (val response = repository.addTrip(tripCreateRequest)) {
             is ResultWrapper.Success ->
-                ResultWrapper.Success(response.data.toTrip())
+                ResultWrapper.Success(response.data.mapTripInvolved())
             is ResultWrapper.Error ->
                 ResultWrapper.Error(response.error)
         }
@@ -116,7 +116,7 @@ class FellowDataSourceImpl(
 
     /**
      * Google Service
-     * */
+     **/
 
     override suspend fun getPlaces(place: String): Response<PlaceApiResponse> =
         googleServiceRepository.getPlaces(place)
@@ -126,7 +126,7 @@ class FellowDataSourceImpl(
 
     /**
      * local DB
-     */
+     **/
 
 
     override suspend fun loadUsersInfoLocal(): LocalUser =

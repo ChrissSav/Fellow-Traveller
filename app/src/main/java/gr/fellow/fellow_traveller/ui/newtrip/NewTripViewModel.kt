@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.ResultWrapper
-import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.domain.car.Car
+import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.framework.network.google.model.DestinationModel
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
@@ -24,12 +24,9 @@ constructor(
     private val registerTripRemoteUseCase: RegisterTripRemoteUseCase
 ) : BaseViewModel() {
 
-    val finish = MutableLiveData<Boolean>()
 
-
-    private val _success = MutableLiveData<Trip>()
-    val success: LiveData<Trip> = _success
-
+    private val _success = MutableLiveData<TripInvolved>()
+    val success: LiveData<TripInvolved> = _success
 
     private val _destinationFrom = MutableLiveData<DestinationModel>()
     val destinationFrom: LiveData<DestinationModel> = _destinationFrom
@@ -172,9 +169,6 @@ constructor(
     }
 
 
-    fun finish() {
-        finish.value = true
-    }
 
 
     fun getTimestamp(): Long {

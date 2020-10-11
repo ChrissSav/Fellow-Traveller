@@ -6,8 +6,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseFragment
-import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.databinding.FragmentHomeBinding
+import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripActivity
 import gr.fellow.fellow_traveller.ui.search.SearchTripActivity
@@ -46,7 +46,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
-                val trip = data?.getParcelableExtra<Trip>("trip")
+                val trip = data?.getParcelableExtra<TripInvolved>("trip")
                 trip?.let {
                     viewModel.addTripCreate(it)
                 }
@@ -56,7 +56,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         if (requestCode == 2) {
             if (resultCode == Activity.RESULT_OK) {
-                val trip = data?.getParcelableExtra<Trip>("trip")
+                val trip = data?.getParcelableExtra<TripInvolved>("trip")
                 trip?.let {
                     viewModel.addTripPassenger(it)
                 }

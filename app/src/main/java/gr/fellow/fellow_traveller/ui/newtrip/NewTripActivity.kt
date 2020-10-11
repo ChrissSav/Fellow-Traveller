@@ -1,7 +1,5 @@
 package gr.fellow.fellow_traveller.ui.newtrip
 
-import android.app.Activity
-import android.content.Intent
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
@@ -45,16 +43,6 @@ class NewTripActivity : BaseActivity<ActivityNewTripBinding>(), ExitCustomDialog
 
         })
 
-        viewModel.finish.observe(this, Observer {
-            val trip = viewModel.success.value
-            trip?.let {
-                val resultIntent = Intent()
-                resultIntent.putExtra("trip", it)
-                setResult(Activity.RESULT_OK, resultIntent)
-                finish()
-            }
-
-        })
 
     }
 
