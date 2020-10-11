@@ -48,7 +48,7 @@ class SearchResultsFragment : BaseFragment<FragmentSearchResultsBinding>() {
             })
 
 
-            loadTest.observe(viewLifecycleOwner, Observer {
+            load.observe(viewLifecycleOwner, Observer {
                 if (it) {
                     binding.progressBar.visibility = View.VISIBLE
                     binding.recyclerView.visibility = View.GONE

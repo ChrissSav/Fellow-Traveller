@@ -159,7 +159,7 @@ constructor(
                 }
 
                 is ResultWrapper.Error -> {
-                    _error.value = when (response.error.code) {
+                    error.value = when (response.error.code) {
                         609 -> R.string.ERROR_TRIP_TIMESTAMP
                         610 -> R.string.ERROR_TRIP_PICKUP_POINT
                         else -> R.string.ERROR_SOMETHING_WRONG

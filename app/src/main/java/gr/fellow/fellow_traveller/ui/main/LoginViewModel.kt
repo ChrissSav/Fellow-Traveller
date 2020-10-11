@@ -31,7 +31,7 @@ constructor(
                     _result.value = true
                 }
                 is ResultWrapper.Error ->
-                    _error.value = R.string.ERROR_INVALID_CREDENTIALS
+                    error.value = R.string.ERROR_INVALID_CREDENTIALS
             }
         }
     }

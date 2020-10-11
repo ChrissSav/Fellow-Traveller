@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.ui.home.settings
 
-import android.content.Intent
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
@@ -12,6 +11,7 @@ import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.main.MainActivity
 import gr.fellow.fellow_traveller.ui.onBackPressed
+import gr.fellow.fellow_traveller.ui.startActivityClearStack
 
 @AndroidEntryPoint
 class BaseSettingsFragment : BaseFragment<FragmentBaseSettingsBinding>() {
@@ -33,9 +33,7 @@ class BaseSettingsFragment : BaseFragment<FragmentBaseSettingsBinding>() {
         })
 
         viewModel.logout.observe(viewLifecycleOwner, Observer {
-            val intent = Intent(activity, MainActivity::class.java)
-            intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            startActivity(intent)
+            startActivityClearStack(MainActivity::class)
         })
     }
 

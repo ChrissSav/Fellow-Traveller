@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.ui.help
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,24 +12,19 @@ import kotlinx.coroutines.launch
 
 open class BaseViewModel : ViewModel() {
 
-    protected val _error = SingleLiveEvent<Int>()
-    val error: LiveData<Int> = _error
+    val error = SingleLiveEvent<Int>()
+    val load = MutableLiveData<Boolean>()
 
-    protected val _load = SingleLiveEvent<Boolean>()
-    val load: LiveData<Boolean> = _load
 
-    var loadTest = MutableLiveData<Boolean>()
-
-    fun launch(load: Boolean = false, function: suspend () -> Unit) {
+    fun launch(shouldLoad: Boolean = false, function: suspend () -> Unit) {
         viewModelScope.launch {
-            _load.value = load
-
+            load.value = shouldLoad
             try {
                 function.invoke()
             } catch (e: Exception) {
                 handleError(e)
             }
-            _load.value = false
+            load.value = false
         }
     }
 
@@ -46,35 +40,35 @@ open class BaseViewModel : ViewModel() {
         }
     }
 
-    fun launch(delayTime: Int, load: Boolean, function: suspend () -> Unit) {
+    fun launch(delayTime: Int, shouldLoad: Boolean, function: suspend () -> Unit) {
         viewModelScope.launch {
-            loadTest.value = load
+            load.value = shouldLoad
             delay(delayTime.toLong())
             try {
                 function.invoke()
             } catch (e: Exception) {
                 handleError(e)
             }
-            loadTest.value = false
+            load.value = false
         }
     }
 
     fun setError(errorMsg: Int) {
-        _error.value = errorMsg
+        error.value = errorMsg
     }
 
     private fun handleError(e: Exception) {
         when (e) {
             is BaseApiException -> when (e.code) {
                 ACCESS_DENIED -> {
-                    _error.value = R.string.ERROR_API_UNAUTHORIZED
+                    error.value = R.string.ERROR_API_UNAUTHORIZED
                 }
                 else -> {
-                    _error.value = R.string.ERROR_API_UNREACHABLE
+                    error.value = R.string.ERROR_API_UNREACHABLE
                 }
             }
-            is NoInternetException -> _error.value = R.string.ERROR_INTERNET_CONNECTION
-            else -> _error.value = R.string.ERROR_SOMETHING_WRONG
+            is NoInternetException -> error.value = R.string.ERROR_INTERNET_CONNECTION
+            else -> error.value = R.string.ERROR_SOMETHING_WRONG
         }
     }
 }

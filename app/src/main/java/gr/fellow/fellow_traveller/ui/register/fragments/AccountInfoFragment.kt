@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.ui.register.fragments
 
-import android.content.Intent
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
@@ -8,6 +7,7 @@ import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentAccountInfoBinding
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
+import gr.fellow.fellow_traveller.ui.startActivityClearStack
 
 @AndroidEntryPoint
 class AccountInfoFragment : BaseFragment<FragmentAccountInfoBinding>() {
@@ -20,9 +20,7 @@ class AccountInfoFragment : BaseFragment<FragmentAccountInfoBinding>() {
 
     override fun setUpObservers() {
         viewModel.finish.observe(viewLifecycleOwner, Observer {
-            val intent = Intent(activity, HomeActivity::class.java)
-            intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            startActivity(intent)
+            startActivityClearStack(HomeActivity::class)
         })
     }
 

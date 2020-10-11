@@ -81,7 +81,7 @@ constructor(
                         _cars.value = getUserCarsLocalUseCase()
                     }
                     is ResultWrapper.Error -> {
-                        _error.value = response.error.msg
+                        error.value = response.error.msg
                     }
                 }
             } catch (exception: Exception) {
@@ -108,7 +108,7 @@ constructor(
                     _carDeletedId.value = car
                 }
                 is ResultWrapper.Error -> {
-                    _error.value = R.string.ERROR_CAR_NOT_BELONG_TO_USER
+                    error.value = R.string.ERROR_CAR_NOT_BELONG_TO_USER
                 }
             }
         }
@@ -126,7 +126,7 @@ constructor(
                     _tripsAsCreator.value = response.data.sortedWith(compareBy { it.timestamp }).toMutableList()
                 }
                 is ResultWrapper.Error -> {
-                    _error.value = response.error.msg
+                    error.value = response.error.msg
                 }
             }
 
@@ -146,7 +146,7 @@ constructor(
                     _tripsTakesPart.value = response.data.sortedWith(compareBy { it.timestamp }).toMutableList()
                 }
                 is ResultWrapper.Error -> {
-                    _error.value = response.error.msg
+                    error.value = response.error.msg
                 }
             }
         }

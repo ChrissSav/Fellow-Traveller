@@ -14,6 +14,7 @@ import gr.fellow.fellow_traveller.ui.findNavController
 import gr.fellow.fellow_traveller.ui.onBackPressed
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
 import gr.fellow.fellow_traveller.ui.search.locations.SelectDestinationActivity
+import gr.fellow.fellow_traveller.ui.startActivityForResultWithFade
 
 
 @AndroidEntryPoint
@@ -41,16 +42,13 @@ class SearchDestinationsFragment : BaseFragment<FragmentSearchDestinationsBindin
     override fun setUpViews() {
         with(binding) {
             destFromButton.setOnClickListener {
-                val intent = Intent(activity, SelectDestinationActivity::class.java)
-                startActivityForResult(intent, 1)
-                activity?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                startActivityForResultWithFade(SelectDestinationActivity::class, 1)
 
             }
             destToButton.setOnClickListener {
                 val intent = Intent(activity, SelectDestinationActivity::class.java)
                 intent.putExtra("info", "to")
-                startActivityForResult(intent, 2)
-                activity?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                startActivityForResultWithFade(intent, 2)
             }
 
             backButton.setOnClickListener {

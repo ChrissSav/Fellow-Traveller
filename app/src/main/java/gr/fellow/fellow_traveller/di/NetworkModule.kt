@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Context.CONNECTIVITY_SERVICE
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
-import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -59,8 +58,7 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor, connectivityHelper: ConnectivityHelper, sharedPreferences: SharedPreferences,
-        context: Context
+        loggingInterceptor: HttpLoggingInterceptor, connectivityHelper: ConnectivityHelper, sharedPreferences: SharedPreferences
     ): OkHttpClient.Builder {
         val client = OkHttpClient.Builder().proxy(Proxy.NO_PROXY)
             .connectTimeout(15, TimeUnit.SECONDS)
@@ -74,8 +72,6 @@ object NetworkModule {
                     val session = sharedPreferences.getString(PREFS_AUTH_TOKEN, "").toString()
                     if (session.length > 10) {
                         newRequest.header("Cookie", session)
-                    } else {
-                        Toast.makeText(context, "Session not added", Toast.LENGTH_SHORT).show()
                     }
                     return chain.proceed(newRequest.build())
                 }
