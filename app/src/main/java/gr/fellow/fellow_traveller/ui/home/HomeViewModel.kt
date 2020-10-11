@@ -6,8 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.models.Trip
-import gr.fellow.fellow_traveller.domain.Car
-import gr.fellow.fellow_traveller.domain.LocalUser
+import gr.fellow.fellow_traveller.domain.car.Car
+import gr.fellow.fellow_traveller.domain.trip.TripInvolved
+import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.LoadUserInfoUseCase
@@ -49,11 +50,11 @@ constructor(
     private val _carDeletedId = SingleLiveEvent<Car>()
     val carDeletedId: LiveData<Car> = _carDeletedId
 
-    private val _tripsAsCreator = MutableLiveData<MutableList<Trip>>()
-    val tripsAsCreator: LiveData<MutableList<Trip>> = _tripsAsCreator
+    private val _tripsAsCreator = MutableLiveData<MutableList<TripInvolved>>()
+    val tripsAsCreator: LiveData<MutableList<TripInvolved>> = _tripsAsCreator
 
-    private val _tripsTakesPart = MutableLiveData<MutableList<Trip>>()
-    val tripsTakesPart: LiveData<MutableList<Trip>> = _tripsTakesPart
+    private val _tripsTakesPart = MutableLiveData<MutableList<TripInvolved>>()
+    val tripsTakesPart: LiveData<MutableList<TripInvolved>> = _tripsTakesPart
 
     /*****************************************************************************************************/
 
@@ -155,22 +156,22 @@ constructor(
 
     fun addTripCreate(trip: Trip) {
         launch {
-            tripsAsCreator.value?.let {
-                val tempTrip = it
-                tempTrip.add(trip)
-                _tripsAsCreator.value = tempTrip
-            }
+            /*   tripsAsCreator.value?.let {
+                   val tempTrip = it
+                   tempTrip.add(trip)
+                   _tripsAsCreator.value = tempTrip
+               }*/
 
         }
     }
 
     fun addTripPassenger(trip: Trip) {
         launch {
-            tripsTakesPart.value?.let {
+            /*tripsTakesPart.value?.let {
                 val tempTrip = it
                 tempTrip.add(trip)
                 _tripsTakesPart.value = tempTrip
-            }
+            }*/
 
         }
     }

@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.domain
+package gr.fellow.fellow_traveller.domain.user
 
 
 data class LocalUser(

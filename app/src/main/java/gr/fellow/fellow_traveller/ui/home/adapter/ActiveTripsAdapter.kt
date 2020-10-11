@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.data.models.Trip
+import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.ui.loadImageFromUrl
 import kotlinx.android.synthetic.main.active_trip_item_layout.view.*
 
@@ -51,8 +51,8 @@ import kotlinx.android.synthetic.main.active_trip_item_layout.view.*
 }*/
 
 class ActiveTripsAdapter(
-    private val tripsList: MutableList<Trip>,
-    private val listener: (Trip) -> Unit
+    private val tripsList: MutableList<TripInvolved>,
+    private val listener: (TripInvolved) -> Unit
 ) :
     RecyclerView.Adapter<ActiveTripsAdapter.ExampleViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExampleViewHolder {

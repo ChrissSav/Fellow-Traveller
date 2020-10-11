@@ -1,8 +1,8 @@
 package gr.fellow.fellow_traveller.usecase.home
 
 import gr.fellow.fellow_traveller.data.ResultWrapper
-import gr.fellow.fellow_traveller.domain.Car
 import gr.fellow.fellow_traveller.domain.FellowDataSource
+import gr.fellow.fellow_traveller.domain.car.Car
 
 class GetUserCarsRemoteUseCase (
     private val dataSource: FellowDataSource

@@ -48,7 +48,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                     binding.passwordEditText.text.toString()
                 )
             }
-            navController?.navigate(R.id.destination_trips_takes_part)
 
         }
 

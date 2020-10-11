@@ -6,8 +6,8 @@ import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
-import gr.fellow.fellow_traveller.data.models.UserBase
 import gr.fellow.fellow_traveller.databinding.FragmentSearchTripDetailsBinding
+import gr.fellow.fellow_traveller.domain.user.UserBase
 import gr.fellow.fellow_traveller.ui.findNavController
 import gr.fellow.fellow_traveller.ui.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.onBackPressed

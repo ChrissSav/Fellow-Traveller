@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.ui
+package gr.fellow.fellow_traveller.utils
 
 import android.text.format.DateFormat
 import java.text.ParseException
@@ -24,7 +24,7 @@ fun currentTimeStamp(): Long {
 }
 
 
-fun getDayFromTimestamp(timestamp: Long): String {
+fun getDateFromTimestamp(timestamp: Long): String {
     val calendar = Calendar.getInstance(Locale.ENGLISH)
     calendar.timeInMillis = timestamp * 1000L
     return DateFormat.format("EEE, d MMM", calendar).toString()

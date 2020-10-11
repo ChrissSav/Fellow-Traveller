@@ -2,7 +2,6 @@ package gr.fellow.fellow_traveller.ui.home
 
 import android.animation.AnimatorSet
 import android.animation.ValueAnimator
-import android.util.DisplayMetrics
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
@@ -14,6 +13,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivityHomeBinding
 import gr.fellow.fellow_traveller.ui.createAlerter
+import gr.fellow.fellow_traveller.ui.toPx
 
 
 @AndroidEntryPoint
@@ -60,7 +60,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
         navController.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { _, destination, _ ->
             if (destination.id in homeLayout) {
-                showHideBottomNav(convertDpToPixel(55))
+                showHideBottomNav(55.toPx)
             } else {
                 showHideBottomNav(0)
             }
@@ -68,10 +68,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         })
     }
 
-
-    private fun convertDpToPixel(dp: Int): Int {
-        return (dp * (resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).toInt()
-    }
 
     private fun showHideBottomNav(targetHeight: Int) {
         val slideAnimator = ValueAnimator

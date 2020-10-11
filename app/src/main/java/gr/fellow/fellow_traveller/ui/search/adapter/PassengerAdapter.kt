@@ -7,8 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.data.models.Passenger
-import gr.fellow.fellow_traveller.data.models.UserBase
+import gr.fellow.fellow_traveller.domain.user.Passenger
+import gr.fellow.fellow_traveller.domain.user.UserBase
 import gr.fellow.fellow_traveller.ui.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.toPx
 import kotlinx.android.synthetic.main.passenger_image_item.view.*

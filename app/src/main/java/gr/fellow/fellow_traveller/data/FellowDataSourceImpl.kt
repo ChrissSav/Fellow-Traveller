@@ -1,11 +1,12 @@
 package gr.fellow.fellow_traveller.data
 
 import gr.fellow.fellow_traveller.data.models.Trip
-import gr.fellow.fellow_traveller.domain.Car
 import gr.fellow.fellow_traveller.domain.FellowDataSource
-import gr.fellow.fellow_traveller.domain.LocalUser
 import gr.fellow.fellow_traveller.domain.SearchFilters
+import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.mappers.*
+import gr.fellow.fellow_traveller.domain.trip.TripInvolved
+import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
@@ -75,19 +76,19 @@ class FellowDataSourceImpl(
         }
     }
 
-    override suspend fun getTipsAsCreator(): ResultWrapper<MutableList<Trip>> {
+    override suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripInvolved>> {
         return when (val response = repository.getTipsAsCreator()) {
             is ResultWrapper.Success ->
-                ResultWrapper.Success(response.data.toTrips())
+                ResultWrapper.Success(response.data.map { it.mapTripInvolved() }.toMutableList())
             is ResultWrapper.Error ->
                 ResultWrapper.Error(response.error)
         }
     }
 
-    override suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<Trip>> {
+    override suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripInvolved>> {
         return when (val response = repository.getTipsAsPassenger()) {
             is ResultWrapper.Success ->
-                ResultWrapper.Success(response.data.toTrips())
+                ResultWrapper.Success(response.data.map { it.mapTripInvolved() }.toMutableList())
             is ResultWrapper.Error ->
                 ResultWrapper.Error(response.error)
         }

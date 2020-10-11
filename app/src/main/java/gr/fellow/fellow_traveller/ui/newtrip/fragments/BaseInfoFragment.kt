@@ -7,8 +7,8 @@ import androidx.lifecycle.Observer
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentBaseInfoBinding
-import gr.fellow.fellow_traveller.domain.Car
 import gr.fellow.fellow_traveller.domain.PetAnswerType
+import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.ui.car.AddCarActivity
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.CarPickBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.PetBottomSheetDialog

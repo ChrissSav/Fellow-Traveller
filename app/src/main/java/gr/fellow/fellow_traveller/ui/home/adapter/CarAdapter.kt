@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import gr.fellow.fellow_traveller.databinding.CarItemBinding
-import gr.fellow.fellow_traveller.domain.Car
+import gr.fellow.fellow_traveller.domain.car.Car
 
 class CarAdapter(
     private val cars: MutableList<Car>,

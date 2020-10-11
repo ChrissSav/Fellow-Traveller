@@ -6,14 +6,14 @@ import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.models.Trip
-import gr.fellow.fellow_traveller.domain.Car
-import gr.fellow.fellow_traveller.domain.LocalUser
+import gr.fellow.fellow_traveller.domain.car.Car
+import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.framework.network.google.model.DestinationModel
-import gr.fellow.fellow_traveller.ui.dateTimeToTimestamp
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.usecase.LoadUserInfoUseCase
 import gr.fellow.fellow_traveller.usecase.home.GetUserCarsLocalUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.RegisterTripRemoteUseCase
+import gr.fellow.fellow_traveller.utils.dateTimeToTimestamp
 
 
 class NewTripViewModel
@@ -150,7 +150,8 @@ constructor(
         launch(true) {
             when (val response = registerTripRemoteUseCase(
                 destinationFrom.value?.placeId.toString(), destinationTo.value?.placeId.toString(),
-                destinationPickUp.value?.placeId.toString(), dateTimeToTimestamp(date.value.toString(), time.value.toString()),
+                destinationPickUp.value?.placeId.toString(),
+                dateTimeToTimestamp(date.value.toString(), time.value.toString()),
                 pet.value!!, seats.value!!, bags.value!!, message.value.toString(), price.value!!, car.value?.id!!
             )
                 ) {

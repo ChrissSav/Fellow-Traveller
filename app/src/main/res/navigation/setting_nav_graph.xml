@@ -50,6 +50,6 @@
         tools:layout="@layout/fragment_car_details">
         <argument
             android:name="car"
-            app:argType="gr.fellow.fellow_traveller.domain.Car" />
+            app:argType="gr.fellow.fellow_traveller.domain.car.Car" />
     </fragment>
 </navigation>

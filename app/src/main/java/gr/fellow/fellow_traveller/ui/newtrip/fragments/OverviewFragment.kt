@@ -7,8 +7,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentOverviewBinding
-import gr.fellow.fellow_traveller.ui.*
+import gr.fellow.fellow_traveller.ui.findNavController
+import gr.fellow.fellow_traveller.ui.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
+import gr.fellow.fellow_traveller.ui.onBackPressed
+import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
+import gr.fellow.fellow_traveller.utils.getTimeFromTimestamp
 
 
 @AndroidEntryPoint
@@ -32,7 +36,7 @@ class OverviewFragment : BaseFragment<FragmentOverviewBinding>(), View.OnClickLi
             textViewFrom.text = viewModel.destinationFrom.value?.title
             textViewTo.text = viewModel.destinationTo.value?.title
             textViewPickUpPoint.text = viewModel.destinationPickUp.value?.title
-            day.text = getDayFromTimestamp(viewModel.getTimestamp())
+            day.text = getDateFromTimestamp(viewModel.getTimestamp())
             time.text = getTimeFromTimestamp(viewModel.getTimestamp())
             price.text = getString(R.string.price, viewModel.price.value.toString())
             seats.text = viewModel.seats.value.toString()
