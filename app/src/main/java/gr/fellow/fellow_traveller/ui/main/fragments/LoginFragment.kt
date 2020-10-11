@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.ui.main.fragments
 
-import android.content.Intent
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
@@ -88,7 +87,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         }
 
         binding.registerButton.setOnClickListener {
-            val intent = Intent(activity, RegisterActivity::class.java)
             startActivity(RegisterActivity::class)
         }
     }
