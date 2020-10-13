@@ -74,8 +74,6 @@ object NetworkModule {
                     val session = sharedPreferences.getString(PREFS_AUTH_TOKEN, "").toString()
                     if (session.length > 10) {
                         newRequest.header("Cookie", session)
-                    } else {
-                        Toast.makeText(context, "Session not added", Toast.LENGTH_SHORT).show()
                     }
                     return chain.proceed(newRequest.build())
                 }

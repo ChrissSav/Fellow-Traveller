@@ -60,10 +60,11 @@
         <TextView
             android:id="@+id/rate_name"
             style="@style/header2"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="Tyler Joseph"
+            app:layout_constraintEnd_toEndOf="@id/rate_header"
             app:layout_constraintBottom_toBottomOf="@id/rate_image"
             app:layout_constraintStart_toEndOf="@id/rate_image"
             app:layout_constraintTop_toTopOf="@id/rate_image" />
@@ -83,7 +84,7 @@
             app:text_type="textCapSentences" />
 
         <com.willy.ratingbar.ScaleRatingBar
-            android:id="@+id/write_review_simpleRatingBar"
+            android:id="@+id/rate_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="38dp"
