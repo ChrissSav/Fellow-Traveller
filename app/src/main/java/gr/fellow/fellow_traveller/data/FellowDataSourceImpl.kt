@@ -20,16 +20,12 @@ class FellowDataSourceImpl(
     private val googleServiceRepository: GoogleServiceRepository
 ) : FellowDataSource {
 
-    override suspend fun checkUserPhone(phone: String): ResultWrapper<StatusHandleResponse> =
-        repository.checkField(AccountCheckRequest("phone", phone))
 
-    override suspend fun checkUserEmail(email: String): ResultWrapper<StatusHandleResponse> =
-        repository.checkField(AccountCheckRequest("email", email))
+    override suspend fun checkUserEmail(email: String): ResultWrapperSecond<String> =
+        repository.checkField(CheckEmailRequest(email))
 
-    override suspend fun registerUser(
-        firstName: String, lastName: String, email: String, password: String, phone: String
-    ): ResultWrapper<UserLoginResponse> =
-        repository.registerUserRemote(AccountCreateRequest(firstName, lastName, email, password, phone))
+    override suspend fun registerUser(firstName: String, lastName: String, email: String, password: String): ResultWrapperSecond<String> =
+        repository.registerUserRemote(AccountCreateRequest(firstName, lastName, email, password))
 
 
     override suspend fun loginUser(username: String, password: String): ResultWrapper<UserLoginResponse> =

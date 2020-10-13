@@ -3,21 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/register_nav_graph"
-    app:startDestination="@id/phoneFragment">
+    app:startDestination="@id/emailFragment">
 
-    <fragment
-        android:id="@+id/phoneFragment"
-        android:name="gr.fellow.fellow_traveller.ui.register.fragments.PhoneFragment"
-        android:label="fragment_phone"
-        tools:layout="@layout/fragment_phone">
-        <action
-            android:id="@+id/next_fragment"
-            app:destination="@id/emailFragment"
-            app:enterAnim="@anim/enter_from_right"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
-    </fragment>
     <fragment
         android:id="@+id/emailFragment"
         android:name="gr.fellow.fellow_traveller.ui.register.fragments.EmailFragment"
@@ -48,5 +35,13 @@
         android:id="@+id/accountFragment"
         android:name="gr.fellow.fellow_traveller.ui.register.fragments.AccountInfoFragment"
         android:label="fragment_account"
-        tools:layout="@layout/fragment_account_info" />
+        tools:layout="@layout/fragment_account_info">
+        <action
+            android:id="@+id/action_accountFragment_to_successRegistrationFragment"
+            app:destination="@id/successRegistrationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/successRegistrationFragment"
+        android:name="gr.fellow.fellow_traveller.ui.register.fragments.SuccessRegistrationFragment"
+        android:label="SuccessRegistrationFragment" />
 </navigation>

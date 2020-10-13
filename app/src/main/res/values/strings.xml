@@ -67,6 +67,9 @@
 
     <string name="messenger_link">https://m.me/%s</string>
 
+    <string name="show_password">Εμφάνιση</string>
+    <string name="hide_password">Απόκρυψη</string>
+
 
     <!--New Trip-->
 

@@ -3,6 +3,7 @@ package gr.fellow.fellow_traveller.framework
 import android.content.SharedPreferences
 import gr.fellow.fellow_traveller.data.FellowRepository
 import gr.fellow.fellow_traveller.data.ResultWrapper
+import gr.fellow.fellow_traveller.data.ResultWrapperSecond
 import gr.fellow.fellow_traveller.domain.SearchFilters
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
@@ -24,18 +25,15 @@ class FellowRepositoryImpl(
 ) : FellowRepository {
 
 
-    override suspend fun checkField(accountCheckRequest: AccountCheckRequest): ResultWrapper<StatusHandleResponse> =
-        networkCall {
-            service.checkIfAccountInfoExist(accountCheckRequest).handleToCorrectFormat()
+    override suspend fun checkField(checkEmailRequest: CheckEmailRequest): ResultWrapperSecond<String> =
+        networkCallSecond {
+            service.checkIfAccountInfoExist(checkEmailRequest).handleApiFormat()
         }
 
 
-    override suspend fun registerUserRemote(registerUserRequest: AccountCreateRequest): ResultWrapper<UserLoginResponse> =
-        networkCall {
-            val res = service.registerUser(registerUserRequest)
-            if (res.isSuccessful)
-                sharedPrefs[PREFS_AUTH_TOKEN] = res.headers()["Set-Cookie"]?.split(";".toRegex())?.toTypedArray()?.get(0)
-            res.handleToCorrectFormat()
+    override suspend fun registerUserRemote(registerUserRequest: AccountCreateRequest): ResultWrapperSecond<String> =
+        networkCallSecond {
+            service.registerUser(registerUserRequest).handleApiFormat()
         }
 
     override suspend fun loginUserRemote(loginRequest: LoginRequest): ResultWrapper<UserLoginResponse> =

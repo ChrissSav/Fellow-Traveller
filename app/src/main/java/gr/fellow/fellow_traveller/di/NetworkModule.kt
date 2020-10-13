@@ -104,7 +104,7 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideFellowService(@Fellow retrofit: Retrofit.Builder): FellowService {
-        return retrofit.baseUrl("https://api.fellowtraveller.gr/").build()
+        return retrofit.baseUrl("https://api.fellowtraveller.gr/v1/").build()
             .create(FellowService::class.java)
     }
 

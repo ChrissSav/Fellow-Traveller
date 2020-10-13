@@ -35,6 +35,14 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
         viewModel.error.observe(this, Observer {
             createAlerter(getString(it))
         })
+
+        viewModel.errorSecond.observe(this, Observer {
+            if (it.internal)
+                createAlerter(getString(it.messageId))
+            else
+                createAlerter(it.message)
+
+        })
     }
 
     override fun setUpViews() {
@@ -43,9 +51,8 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
         nav.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { _, destination, _ ->
             hideKeyboard()
             when (destination.id) {
-                R.id.phoneFragment -> binding.progressBar.progress = 25
-                R.id.emailFragment -> binding.progressBar.progress = 50
-                R.id.passwordFragment -> binding.progressBar.progress = 75
+                R.id.emailFragment -> binding.progressBar.progress = 25
+                R.id.passwordFragment -> binding.progressBar.progress = 50
                 R.id.accountFragment -> binding.progressBar.progress = 90
             }
 

@@ -13,6 +13,6 @@ sealed class ResultWrapperSecond<out T : Any> {
 
 data class BaseResponse<T>(
     val status: String,
-    val payload: T,
+    val data: T,
     val error: String
 )

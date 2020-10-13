@@ -2,27 +2,23 @@ package gr.fellow.fellow_traveller.ui.register
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.data.ResultWrapper
+import gr.fellow.fellow_traveller.data.ResultWrapperSecond
+import gr.fellow.fellow_traveller.domain.externalError
+import gr.fellow.fellow_traveller.domain.internalError
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.register.CheckUserEmailUseCase
-import gr.fellow.fellow_traveller.usecase.register.CheckUserPhoneUseCase
-import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserUseCase
 
 
 class RegisterViewModel
 @ViewModelInject
 constructor(
-    private val checkUserPhoneUseCase: CheckUserPhoneUseCase,
     private val checkUserEmailUseCase: CheckUserEmailUseCase,
-    private val registerUserUseCase: RegisterUserUseCase,
-    private val registerUserLocalUseCase: RegisterUserLocalUseCase
+    private val registerUserUseCase: RegisterUserUseCase
 ) : BaseViewModel() {
-
-    private val _phone = SingleLiveEvent<String>()
-    val phone: LiveData<String> = _phone
 
     private val _email = SingleLiveEvent<String>()
     val email: LiveData<String> = _email
@@ -32,39 +28,23 @@ constructor(
     val password: LiveData<String> = _password
 
 
-    private val _userInfo = SingleLiveEvent<Pair<String, String>>()
-    val userInfo: LiveData<Pair<String, String>> = _userInfo
+    private val _userInfo = MutableLiveData<Pair<String, String>>()
+    val userInfo: MutableLiveData<Pair<String, String>> = _userInfo
 
 
     private val _finish = SingleLiveEvent<Boolean>()
     val finish: LiveData<Boolean> = _finish
 
-    fun checkUserPhone(phone: String) {
-
-        launch(true) {
-
-            when (val response = checkUserPhoneUseCase(phone)) {
-                is ResultWrapper.Success ->
-                    _phone.value = phone
-                is ResultWrapper.Error ->
-                    error.value = R.string.ERROR_PHONE_ALREADY_EXISTS
-            }
-        }
-
-
-    }
-
 
     fun checkUserEmail(email: String) {
 
         launch(true) {
-            when (val response = checkUserEmailUseCase(email)) {
-                is ResultWrapper.Success ->
+            when (checkUserEmailUseCase(email)) {
+                is ResultWrapperSecond.Success ->
                     _email.value = email
-                is ResultWrapper.Error ->
-                    error.value = R.string.ERROR_EMAIL_ALREADY_EXISTS
+                is ResultWrapperSecond.Error ->
+                    errorSecond.value = internalError(R.string.ERROR_EMAIL_ALREADY_EXISTS)
             }
-
         }
 
 
@@ -80,27 +60,20 @@ constructor(
     fun registerUser() {
         launch(true) {
 
-            if (userInfo.value?.first!!.isEmpty() && userInfo.value?.second!!.isEmpty())
-                error.value = R.string.ERROR_FIELDS_REQUIRE
-            else {
-                when (val response = registerUserUseCase(
-                    userInfo.value!!.first, userInfo.value!!.second, email.value.toString(),
-                    password.value.toString(), phone.value.toString()
-                )) {
-                    is ResultWrapper.Success -> {
-                        registerUserLocalUseCase(response.data)
-                        _finish.value = true
-                    }
-                    is ResultWrapper.Error -> {
-                        when (response.error.code) {
-                            200 ->
-                                error.value = R.string.ERROR_PHONE_ALREADY_EXISTS
-                            201 ->
-                                error.value = R.string.ERROR_EMAIL_ALREADY_EXISTS
-                        }
-                    }
+            val firstName = userInfo.value?.first.toString()
+            val lastName = userInfo.value?.second.toString()
+
+            when (val response = registerUserUseCase(
+                firstName, lastName, email.value.toString(), password.value.toString()
+            )) {
+                is ResultWrapperSecond.Success -> {
+                    _finish.value = true
+                }
+                is ResultWrapperSecond.Error -> {
+                    errorSecond.value = externalError(response.error)
                 }
             }
+
         }
     }
 

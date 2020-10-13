@@ -57,7 +57,7 @@ suspend fun <T : Any> roomCall(
 /*** From the new api format */
 
 
-suspend fun <T : Any> networkCal(
+suspend fun <T : Any> networkCallSecond(
     function: suspend () -> ResultWrapperSecond<T>
 ): ResultWrapperSecond<T> {
     return withContext(Dispatchers.IO) {
@@ -73,7 +73,10 @@ suspend fun <T : Any> networkCal(
 fun <T : Any> Response<BaseResponse<T>>.handleApiFormat(): ResultWrapperSecond<T> {
     val body = body()
     return if (isSuccessful && body != null) {
-        ResultWrapperSecond.Success(body.payload)
+        if (body.status == "success")
+            ResultWrapperSecond.Success(body.data)
+        else
+            ResultWrapperSecond.Error(body.error)
     } else {
         if (code() == 401)
             throw BaseApiException(ACCESS_DENIED)

@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.domain
 
 import gr.fellow.fellow_traveller.data.ResultWrapper
+import gr.fellow.fellow_traveller.data.ResultWrapperSecond
 import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
@@ -17,11 +18,10 @@ import retrofit2.Response
 
 interface FellowDataSource {
 
-    suspend fun checkUserPhone(phone: String): ResultWrapper<StatusHandleResponse>
 
-    suspend fun checkUserEmail(email: String): ResultWrapper<StatusHandleResponse>
+    suspend fun checkUserEmail(email: String): ResultWrapperSecond<String>
 
-    suspend fun registerUser(firstName: String, lastName: String, email: String, password: String, phone: String): ResultWrapper<UserLoginResponse>
+    suspend fun registerUser(firstName: String, lastName: String, email: String, password: String): ResultWrapperSecond<String>
 
     suspend fun loginUser(username: String, password: String): ResultWrapper<UserLoginResponse>
 

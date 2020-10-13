@@ -11,9 +11,9 @@ import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 
 interface FellowRepository {
 
-    suspend fun checkField(accountCheckRequest: AccountCheckRequest): ResultWrapper<StatusHandleResponse>
+    suspend fun checkField(checkEmailRequest: CheckEmailRequest): ResultWrapperSecond<String>
 
-    suspend fun registerUserRemote(registerUserRequest: AccountCreateRequest): ResultWrapper<UserLoginResponse>
+    suspend fun registerUserRemote(registerUserRequest: AccountCreateRequest): ResultWrapperSecond<String>
 
     suspend fun loginUserRemote(loginRequest: LoginRequest): ResultWrapper<UserLoginResponse>
 
