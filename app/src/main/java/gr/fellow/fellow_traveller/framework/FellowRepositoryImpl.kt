@@ -36,6 +36,11 @@ class FellowRepositoryImpl(
             service.registerUser(registerUserRequest).handleApiFormat()
         }
 
+    override suspend fun verifyAccount(token: String): ResultWrapperSecond<String> =
+        networkCallSecond {
+            service.verifyAccount(token).handleApiFormat()
+        }
+
     override suspend fun loginUserRemote(loginRequest: LoginRequest): ResultWrapper<UserLoginResponse> =
         networkCall {
             val res = service.userLogin(loginRequest)

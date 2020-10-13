@@ -6,7 +6,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
-import gr.fellow.fellow_traveller.usecase.LoginUseCase
+import gr.fellow.fellow_traveller.usecase.auth.LoginUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
 
 

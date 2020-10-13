@@ -15,6 +15,9 @@ interface FellowRepository {
 
     suspend fun registerUserRemote(registerUserRequest: AccountCreateRequest): ResultWrapperSecond<String>
 
+    suspend fun verifyAccount(token: String): ResultWrapperSecond<String>
+
+
     suspend fun loginUserRemote(loginRequest: LoginRequest): ResultWrapper<UserLoginResponse>
 
     // Cars

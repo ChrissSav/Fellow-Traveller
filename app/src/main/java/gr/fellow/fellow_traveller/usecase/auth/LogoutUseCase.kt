@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.usecase
+package gr.fellow.fellow_traveller.usecase.auth
 
 import android.content.SharedPreferences
 import gr.fellow.fellow_traveller.domain.FellowDataSource

@@ -23,10 +23,12 @@ interface FellowDataSource {
 
     suspend fun registerUser(firstName: String, lastName: String, email: String, password: String): ResultWrapperSecond<String>
 
+    suspend fun verifyAccount(token: String): ResultWrapperSecond<String>
+
+
     suspend fun loginUser(username: String, password: String): ResultWrapper<UserLoginResponse>
 
     suspend fun registerUserAuth(userEntity: RegisteredUserEntity)
-
 
 
     //Cars

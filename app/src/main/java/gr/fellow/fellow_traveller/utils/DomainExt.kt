@@ -68,7 +68,7 @@ fun getErrorResponseErrorBody(errorBody: ResponseBody?): String {
         val mJsonString = errorBody!!.string()
         val parser = JsonParser()
         val mJson = parser.parse(mJsonString)
-        val errorResponseModel = Gson().fromJson<BaseResponse<Nothing>>(mJson, ErrorResponseModel::class.java)
+        val errorResponseModel = Gson().fromJson(mJson, BaseResponse::class.java)
         errorResponseModel.error
     } catch (e: Exception) {
         throw BaseApiException(SOMETHING_WORNG)

@@ -11,7 +11,7 @@ import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.LoadUserInfoUseCase
-import gr.fellow.fellow_traveller.usecase.LogoutUseCase
+import gr.fellow.fellow_traveller.usecase.auth.LogoutUseCase
 import gr.fellow.fellow_traveller.usecase.home.DeleteCarUseCase
 import gr.fellow.fellow_traveller.usecase.home.GetUserCarsLocalUseCase
 import gr.fellow.fellow_traveller.usecase.home.GetUserCarsRemoteUseCase

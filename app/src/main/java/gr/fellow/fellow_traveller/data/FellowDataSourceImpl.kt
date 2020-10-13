@@ -27,6 +27,8 @@ class FellowDataSourceImpl(
     override suspend fun registerUser(firstName: String, lastName: String, email: String, password: String): ResultWrapperSecond<String> =
         repository.registerUserRemote(AccountCreateRequest(firstName, lastName, email, password))
 
+    override suspend fun verifyAccount(token: String): ResultWrapperSecond<String> =
+        repository.verifyAccount(token)
 
     override suspend fun loginUser(username: String, password: String): ResultWrapper<UserLoginResponse> =
         repository.loginUserRemote(LoginRequest(username, password))
