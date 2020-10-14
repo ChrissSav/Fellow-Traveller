@@ -16,7 +16,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     override fun setUpViews() {
         binding.buttonLogin.setOnClickListener {
-            navController?.navigate(R.id.next_fragment)
+            navController?.navigate(R.id.action_mainFragment_to_loginFragment)
         }
 
         binding.buttonRegister.setOnClickListener {

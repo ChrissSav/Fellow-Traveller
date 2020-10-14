@@ -10,8 +10,9 @@
         android:name="gr.fellow.fellow_traveller.ui.main.fragments.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
+
         <action
-            android:id="@+id/next_fragment"
+            android:id="@+id/action_mainFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"

@@ -6,157 +6,79 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.fragments.LoginFragment">
 
+
     <TextView
         android:id="@+id/LoginActivity_textView_header"
-        style="@style/display"
-        android:layout_width="wrap_content"
+        style="@style/display_1"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Είσοδος"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:text="Σύνδεση"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/LoginActivity_textView2"
-        style="@style/label"
-        android:layout_width="wrap_content"
+    <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+        android:id="@+id/email"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Email"
+        android:layout_marginTop="88dp"
+        app:editable="true"
+        app:hint_fellow="Email"
+        app:text_type="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/LoginActivity_textView_header"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header"
         app:layout_constraintTop_toBottomOf="@+id/LoginActivity_textView_header" />
 
-    <gr.fellow.fellow_traveller.ui.views.FellowEditText
-        android:id="@+id/email_editText"
+    <gr.fellow.fellow_traveller.ui.views.FellowPassword
+        android:id="@+id/password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        app:hint_text="example@email.com"
-        app:input_type="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView2"
-        app:layout_constraintTop_toBottomOf="@+id/LoginActivity_textView2" />
-
-
-    <TextView
-        android:id="@+id/LoginActivity_textView3"
-        style="@style/label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Κωδικός"
-        app:layout_constraintStart_toStartOf="@+id/email_editText"
-        app:layout_constraintTop_toBottomOf="@+id/email_editText" />
-
-    <EditText
-        android:id="@+id/password_editText"
-        style="@style/input"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:background="@null"
-        android:hint="Κωδικός"
-        android:inputType="textPassword"
-        android:maxLength="20"
-        android:paddingEnd="5dp"
-        android:singleLine="true"
-        android:text="aD@ffff1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header"
-        app:layout_constraintTop_toBottomOf="@+id/LoginActivity_textView3"
-        app:layout_goneMarginEnd="20dp" />
+        app:imeOptions_Password="actionDone"
+        android:layout_marginTop="64dp"
+        app:hint_Password="Κωδικός πρόσβασης"
+        app:layout_constraintEnd_toEndOf="@+id/email"
+        app:layout_constraintStart_toStartOf="@+id/email"
+        app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <Button
-        android:id="@+id/display_password"
-        style="@style/button_black_empty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Εμφάνιση"
-        android:textSize="15sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/password_editText"
-        app:layout_constraintEnd_toStartOf="@+id/LoginActivity_display_password_button"
-        app:layout_constraintTop_toTopOf="@+id/password_editText" />
-
-    <View
-        android:id="@+id/LoginActivity_password_underline"
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        android:background="@drawable/component_edit_text_line"
-        android:focusable="true"
-        app:layout_constraintEnd_toEndOf="@+id/password_editText"
-        app:layout_constraintStart_toStartOf="@+id/password_editText"
-        app:layout_constraintTop_toBottomOf="@+id/password_editText" />
-
-    <Button
-        android:id="@+id/LoginActivity_display_password_button"
-        style="@style/button_black_empty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Εμφάνιση"
-        android:textSize="15sp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/password_editText"
-        app:layout_constraintEnd_toEndOf="@id/password_editText"
-        app:layout_constraintTop_toTopOf="@id/password_editText" />
-
-
-    <Button
-        android:id="@+id/button_login"
-        style="@style/button_orange_filled"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="Είσοδος"
-        app:layout_constraintEnd_toEndOf="@+id/email_editText"
-        app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header"
-        app:layout_constraintTop_toBottomOf="@+id/LoginActivity_password_underline" />
-
-    <Button
-        android:id="@+id/LoginActivity_forgot_password_button"
-        style="@style/button_black_empty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center|bottom"
-        android:text="Ξέχασα τον κωδικό μου"
-        app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header"
-        app:layout_constraintTop_toBottomOf="@+id/button_login" />
-
-    <View
-        android:id="@+id/LoginActivity_forgot_password_underline"
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        android:background="@color/black_color"
-        android:focusable="true"
-        app:layout_constraintEnd_toEndOf="@+id/LoginActivity_forgot_password_button"
-        app:layout_constraintStart_toStartOf="@+id/LoginActivity_forgot_password_button"
-        app:layout_constraintTop_toBottomOf="@+id/LoginActivity_forgot_password_button" />
-
-
-    <TextView
-        android:id="@+id/LoginActivity_textView8"
-        style="@style/paragraph3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:text="Δεν έχεις λογαρισμό;"
-        android:textSize="15sp"
+        android:id="@+id/buttonLogin"
+        style="@style/header_3"
+        android:layout_width="125dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="@dimen/new_trip_float_action_button_margin_right"
+        android:layout_marginBottom="@dimen/new_trip_float_action_button_margin_bottom"
+        android:background="@drawable/fab_background_aqua"
+        android:backgroundTint="@color/colorPrimary"
+        android:drawableStart="@drawable/ic_right_arrow"
+        android:drawableTint="@color/white"
+        android:elevation="16dp"
+        android:gravity="center|end"
+        android:minWidth="155dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="20dp"
+        android:text="Συνέχεια"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="RtlSymmetry" />
 
-    <Button
-        android:id="@+id/register_Button"
-        style="@style/button_black_empty"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/forgot_password"
+        style="@style/paragraph_3"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="Become a Fellow"
-        app:layout_constraintBottom_toBottomOf="@+id/LoginActivity_textView8"
-        app:layout_constraintStart_toEndOf="@+id/LoginActivity_textView8"
-        app:layout_constraintTop_toTopOf="@+id/LoginActivity_textView8" />
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="16dp"
+        android:text="Ξέχασα τον κωδικό πρόσβασης"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/password"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.ui.auth
 
+import android.content.Intent
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
@@ -9,13 +10,11 @@ import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivityVerifyAccountBinding
 import gr.fellow.fellow_traveller.ui.createAlerter
 import gr.fellow.fellow_traveller.ui.main.MainActivity
-import gr.fellow.fellow_traveller.ui.startActivityClearStack
 
 @AndroidEntryPoint
 class VerifyAccountActivity : BaseActivity<ActivityVerifyAccountBinding>() {
 
     private val viewModel: VerifyAccountViewModel by viewModels()
-
     private var token: String? = null
 
     override fun provideViewBinding(): ActivityVerifyAccountBinding =
@@ -51,13 +50,15 @@ class VerifyAccountActivity : BaseActivity<ActivityVerifyAccountBinding>() {
         })
 
         viewModel.success.observe(this, Observer {
-            startActivityClearStack(MainActivity::class)
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("login", true)
+            startActivity(intent)
+            finishAffinity()
         })
 
     }
 
     override fun setUpViews() {
-
         viewModel.verify(token.toString())
     }
 
