@@ -2,8 +2,8 @@ package gr.fellow.fellow_traveller.ui.main
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
-import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.data.ResultWrapper
+import gr.fellow.fellow_traveller.data.ResultWrapperSecond
+import gr.fellow.fellow_traveller.domain.externalError
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.auth.LoginUseCase
@@ -26,12 +26,12 @@ constructor(
 
         launch(true) {
             when (val response = loginUseCase(userName, password)) {
-                is ResultWrapper.Success -> {
+                is ResultWrapperSecond.Success -> {
                     registerUserLocalUseCase(response.data)
                     _result.value = true
                 }
-                is ResultWrapper.Error ->
-                    error.value = R.string.ERROR_INVALID_CREDENTIALS
+                is ResultWrapperSecond.Error ->
+                    errorSecond.value = externalError(response.error)
             }
         }
     }

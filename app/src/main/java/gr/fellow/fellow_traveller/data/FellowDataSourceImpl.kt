@@ -9,7 +9,7 @@ import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.UserAuthResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.DetailsResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
 import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
@@ -30,8 +30,11 @@ class FellowDataSourceImpl(
     override suspend fun verifyAccount(token: String): ResultWrapperSecond<String> =
         repository.verifyAccount(token)
 
-    override suspend fun loginUser(username: String, password: String): ResultWrapper<UserLoginResponse> =
+    override suspend fun loginUser(username: String, password: String): ResultWrapperSecond<UserAuthResponse> =
         repository.loginUserRemote(LoginRequest(username, password))
+
+    override suspend fun logoutRemote(): ResultWrapperSecond<String> =
+        repository.logout()
 
     override suspend fun registerUserAuth(userEntity: RegisteredUserEntity) =
         repository.registerUserAuthLocal(userEntity)

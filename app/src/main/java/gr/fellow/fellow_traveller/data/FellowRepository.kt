@@ -5,7 +5,7 @@ import gr.fellow.fellow_traveller.framework.network.fellow.request.*
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.UserAuthResponse
 import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 
@@ -17,8 +17,9 @@ interface FellowRepository {
 
     suspend fun verifyAccount(token: String): ResultWrapperSecond<String>
 
+    suspend fun loginUserRemote(loginRequest: LoginRequest): ResultWrapperSecond<UserAuthResponse>
 
-    suspend fun loginUserRemote(loginRequest: LoginRequest): ResultWrapper<UserLoginResponse>
+    suspend fun logout(): ResultWrapperSecond<String>
 
     // Cars
 

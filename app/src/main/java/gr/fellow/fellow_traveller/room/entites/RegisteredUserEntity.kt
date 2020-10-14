@@ -8,22 +8,22 @@ import androidx.room.PrimaryKey
 data class RegisteredUserEntity(
 
     @PrimaryKey(autoGenerate = false)
-    val id : Int,
+    val id: String,
     @ColumnInfo(name = "first_name")
-    val firstName : String,
+    val firstName: String,
     @ColumnInfo(name = "last_name")
-    val lastName : String,
-    val rate : Float,
-    val reviews : Int,
-    val picture : String?,
+    val lastName: String,
+    val rate: Float,
+    val reviews: Int,
+    val picture: String?,
     @ColumnInfo(name = "about_me")
-    val aboutMe : String?,
-    val phone : String,
-    val email : String
+    val aboutMe: String?,
+    val email: String,
+    val messengerLink: String?
 
 
 ) {
     override fun toString(): String {
-        return "RegisteredUserEntity(id=$id, firstName='$firstName', lastName='$lastName', rate=$rate, reviews=$reviews, picture='$picture', aboutMe='$aboutMe', phone='$phone', email='$email')"
+        return "RegisteredUserEntity(id=$id, firstName='$firstName', lastName='$lastName', rate=$rate, reviews=$reviews, picture='$picture', aboutMe='$aboutMe', messengerLink='$messengerLink', email='$email')"
     }
 }

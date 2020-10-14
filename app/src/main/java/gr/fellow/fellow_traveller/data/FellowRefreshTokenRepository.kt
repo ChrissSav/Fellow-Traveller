@@ -4,5 +4,5 @@ import gr.fellow.fellow_traveller.framework.network.fellow.request.AccessRefresh
 import retrofit2.Response
 
 interface FellowRefreshTokenRepository {
-    suspend fun refreshToken(token: String): Response<AccessRefreshTokenResponse>
+    suspend fun refreshToken(token: String): Response<BaseResponse<AccessRefreshTokenResponse>>
 }

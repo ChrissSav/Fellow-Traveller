@@ -80,8 +80,8 @@ class UseCasesModule {
 
     @ActivityScoped
     @Provides
-    fun provideLoadLogoutUseCase(dataSource: FellowDataSource, sharedPreferences: SharedPreferences): LogoutUseCase {
-        return LogoutUseCase(dataSource, sharedPreferences)
+    fun provideLoadLogoutUseCase(dataSource: FellowDataSource): LogoutUseCase {
+        return LogoutUseCase(dataSource)
     }
 
 

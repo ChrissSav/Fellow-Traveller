@@ -3,6 +3,7 @@ package gr.fellow.fellow_traveller.ui.home
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.domain.car.Car
@@ -18,6 +19,7 @@ import gr.fellow.fellow_traveller.usecase.home.GetUserCarsRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.home.RegisterCarLocalUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsCreatorRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsPassengerRemoteUseCase
+import kotlinx.coroutines.launch
 
 
 class HomeViewModel
@@ -64,8 +66,12 @@ constructor(
     }
 
     fun logOut() {
-        launch {
-            logoutUseCase()
+        viewModelScope.launch {
+            try {
+                val response = logoutUseCase()
+            } catch (e: java.lang.Exception) {
+
+            }
             _logout.value = true
         }
     }

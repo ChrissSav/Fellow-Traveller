@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.framework
 
+import gr.fellow.fellow_traveller.data.BaseResponse
 import gr.fellow.fellow_traveller.data.FellowRefreshTokenRepository
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowTokenService
 import gr.fellow.fellow_traveller.framework.network.fellow.request.AccessRefreshTokenResponse
@@ -11,7 +12,7 @@ constructor(
     private val fellowTokenService: FellowTokenService
 ) : FellowRefreshTokenRepository {
 
-    override suspend fun refreshToken(token: String): Response<AccessRefreshTokenResponse> {
+    override suspend fun refreshToken(token: String): Response<BaseResponse<AccessRefreshTokenResponse>> {
         return fellowTokenService.refreshToken(RefreshTokenRequest(token))
     }
 

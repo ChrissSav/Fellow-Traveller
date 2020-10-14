@@ -2,17 +2,17 @@ package gr.fellow.fellow_traveller.framework.network.fellow
 
 import gr.fellow.fellow_traveller.data.BaseResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
+import gr.fellow.fellow_traveller.framework.network.fellow.response.AuthenticationResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
 import retrofit2.Response
 import retrofit2.http.*
 
 interface FellowService {
     /**  AUTH  **/
 
-    @POST("auth/check_email")
+    @POST("car")
     suspend fun checkIfAccountInfoExist(
         @Body emailRequest: CheckEmailRequest
     ): Response<BaseResponse<String>>
@@ -29,10 +29,16 @@ interface FellowService {
     ): Response<BaseResponse<String>>
 
 
-    @POST("auth/login")
+    @POST("auth/signin")
     suspend fun userLogin(
         @Body user: LoginRequest
-    ): Response<UserLoginResponse>
+    ): Response<BaseResponse<AuthenticationResponse>>
+
+
+    @POST("auth/logout")
+    suspend fun logout(
+        @Body logoutRequest: LogoutRequest
+    ): Response<BaseResponse<String>>
 
 
     //Car

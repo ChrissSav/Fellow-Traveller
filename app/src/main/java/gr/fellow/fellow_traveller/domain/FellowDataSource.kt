@@ -10,7 +10,7 @@ import gr.fellow.fellow_traveller.framework.network.fellow.request.BookTripReque
 import gr.fellow.fellow_traveller.framework.network.fellow.request.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.request.TripCreateRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.UserAuthResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.DetailsResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
 import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
@@ -26,7 +26,10 @@ interface FellowDataSource {
     suspend fun verifyAccount(token: String): ResultWrapperSecond<String>
 
 
-    suspend fun loginUser(username: String, password: String): ResultWrapper<UserLoginResponse>
+    suspend fun loginUser(username: String, password: String): ResultWrapperSecond<UserAuthResponse>
+
+    suspend fun logoutRemote(): ResultWrapperSecond<String>
+
 
     suspend fun registerUserAuth(userEntity: RegisteredUserEntity)
 

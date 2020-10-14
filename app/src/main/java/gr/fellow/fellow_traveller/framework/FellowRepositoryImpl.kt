@@ -10,7 +10,7 @@ import gr.fellow.fellow_traveller.framework.network.fellow.request.*
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.UserAuthResponse
 import gr.fellow.fellow_traveller.room.dao.CarDao
 import gr.fellow.fellow_traveller.room.dao.UserAuthDao
 import gr.fellow.fellow_traveller.room.entites.CarEntity
@@ -41,12 +41,27 @@ class FellowRepositoryImpl(
             service.verifyAccount(token).handleApiFormat()
         }
 
-    override suspend fun loginUserRemote(loginRequest: LoginRequest): ResultWrapper<UserLoginResponse> =
-        networkCall {
-            val res = service.userLogin(loginRequest)
-            if (res.isSuccessful)
-                sharedPrefs[PREFS_AUTH_TOKEN] = res.headers()["Set-Cookie"]?.split(";".toRegex())?.toTypedArray()?.get(0)
-            res.handleToCorrectFormat()
+    override suspend fun loginUserRemote(loginRequest: LoginRequest): ResultWrapperSecond<UserAuthResponse> =
+        networkCallSecond {
+            when (val response = service.userLogin(loginRequest).handleApiFormat()) {
+                is ResultWrapperSecond.Success -> {
+                    sharedPrefs[PREFS_AUTH_ACCESS_TOKEN] = response.data.authenticationToken
+                    sharedPrefs[PREFS_AUTH_REFRESH_TOKEN] = response.data.refreshToken
+                    ResultWrapperSecond.Success(response.data.accountInfo)
+                }
+                is ResultWrapperSecond.Error -> {
+                    ResultWrapperSecond.Error(response.error)
+                }
+            }
+        }
+
+    override suspend fun logout(): ResultWrapperSecond<String> =
+        networkCallSecond {
+            val refreshToken = sharedPrefs.getString(PREFS_AUTH_REFRESH_TOKEN, "").toString()
+            val response = service.logout(LogoutRequest(refreshToken)).handleApiFormat()
+            sharedPrefs[PREFS_AUTH_ACCESS_TOKEN] = null
+            sharedPrefs[PREFS_AUTH_REFRESH_TOKEN] = null
+            response
         }
 
 

@@ -13,6 +13,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import gr.fellow.fellow_traveller.BuildConfig
+import gr.fellow.fellow_traveller.data.FellowRefreshTokenRepository
 import gr.fellow.fellow_traveller.framework.TokenInterceptor
 import gr.fellow.fellow_traveller.framework.network.NetworkConnectionInterceptor
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
@@ -52,20 +53,25 @@ object NetworkModule {
         return apply.apply { apply.level = HttpLoggingInterceptor.Level.BODY }
     }
 
+    @Singleton
+    @Provides
+    fun provideTokenInterceptor(sharedPreferences: SharedPreferences, fellowRefreshTokenRepository: FellowRefreshTokenRepository): TokenInterceptor {
+        return TokenInterceptor(sharedPreferences, fellowRefreshTokenRepository)
+    }
+
 
     @Fellow
     @Singleton
     @Provides
     fun provideOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor, connectivityHelper: ConnectivityHelper, sharedPreferences: SharedPreferences,
-        fellowTokenService: FellowTokenService
+        loggingInterceptor: HttpLoggingInterceptor, connectivityHelper: ConnectivityHelper, tokenInterceptor: TokenInterceptor
     ): OkHttpClient.Builder {
         val client = OkHttpClient.Builder().proxy(Proxy.NO_PROXY)
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
             .addInterceptor(NetworkConnectionInterceptor(connectivityHelper))
-            .addInterceptor(TokenInterceptor(sharedPreferences, fellowTokenService))
+            .addInterceptor(tokenInterceptor)
         if (BuildConfig.DEBUG) {
             client.addInterceptor(loggingInterceptor)
         }

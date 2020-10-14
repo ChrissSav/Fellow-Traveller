@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.BaseApiException
 import gr.fellow.fellow_traveller.data.NoInternetException
+import gr.fellow.fellow_traveller.data.UnauthorizedException
 import gr.fellow.fellow_traveller.domain.ErrorMessage
 import gr.fellow.fellow_traveller.domain.internalError
 import gr.fellow.fellow_traveller.utils.ACCESS_DENIED
@@ -61,6 +62,7 @@ open class BaseViewModel : ViewModel() {
                 }
             }
             is NoInternetException -> error.value = R.string.ERROR_INTERNET_CONNECTION
+            is UnauthorizedException -> error.value = R.string.ERROR_API_UNAUTHORIZED
             else -> error.value = R.string.ERROR_SOMETHING_WRONG
         }
     }
@@ -80,6 +82,10 @@ open class BaseViewModel : ViewModel() {
             is NoInternetException -> {
                 errorSecond.value = internalError(R.string.ERROR_INTERNET_CONNECTION)
             }
+            is UnauthorizedException -> {
+                errorSecond.value = internalError(R.string.ERROR_API_UNAUTHORIZED)
+            }
+
 
             else -> {
                 errorSecond.value = internalError(R.string.ERROR_SOMETHING_WRONG)
