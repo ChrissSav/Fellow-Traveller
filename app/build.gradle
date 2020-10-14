@@ -52,15 +52,12 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.firebase:firebase-storage:19.1.1'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.tick_animated.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.tick_animated.espresso:espresso-core:3.2.0'
+
 
 
     implementation 'androidx.navigation:navigation-fragment:2.3.0'
     implementation 'androidx.navigation:navigation-ui:2.3.0'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.tick_animated:runner:1.2.0'
-    androidTestImplementation 'androidx.tick_animated.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.material:material:1.1.0'
     //Circle Image For Profile
     implementation 'de.hdodenhof:circleimageview:3.1.0'
