@@ -57,25 +57,42 @@ fun Activity.openActivityWithFade(intent: Intent) {
     finish()
 }
 
-fun Activity.openActivityForResultWithFade(activity: Activity, code: Int) {
-    val intent = Intent(this, activity::class.java)
-    startActivity(intent)
-    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+fun Activity.createToast(msg: String) {
+    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 }
 
-fun Activity.startActivityForResultWithFade(activity: KClass<out Activity>, code: Int) {
+
+fun Activity.hideKeyboard() {
+    val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
+}
+
+
+fun Activity.startActivity(activity: KClass<out Activity>) {
     val intent = Intent(this, activity.java)
-    startActivityForResult(intent, code)
-    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+    startActivity(intent)
+}
+
+fun Activity.startActivityClearStack(activity: KClass<out Activity>) {
+    val intent = Intent(this, activity.java)
+    intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+    startActivity(intent)
 }
 
 
-fun Fragment.findNavController(): NavController? {
-    view?.let {
-        return Navigation.findNavController(it)
-    }
-    return null
+/** ____________FRAGMENTS_____________________________ */
+
+fun Fragment.startActivity(activity: KClass<out Activity>) {
+    val intent = Intent(this.context, activity.java)
+    startActivity(intent)
 }
+
+fun Fragment.startActivityClearStack(activity: KClass<out Activity>) {
+    val intent = Intent(this.context, activity.java)
+    intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+    startActivity(intent)
+}
+
 
 fun Fragment.startActivityForResult(activity: KClass<out Activity>, code: Int) {
     val intent = Intent(this.context, activity.java)
@@ -88,16 +105,29 @@ fun Fragment.startActivityForResultWithFade(activity: KClass<out Activity>, code
     this.activity?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
 }
 
+fun Fragment.startActivityForResultWithFade(intent: Intent, code: Int) {
+    startActivityForResult(intent, code)
+    this.activity?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+}
+
 fun Fragment.onBackPressed() {
     activity?.onBackPressed()
 }
 
-fun Activity.createToast(msg: String) {
-    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-}
-
 fun Fragment.createToast(msg: String) {
     Toast.makeText(activity, msg, Toast.LENGTH_SHORT).show()
+}
+
+fun Fragment.findNavController(): NavController? {
+    view?.let {
+        return Navigation.findNavController(it)
+    }
+    return null
+}
+
+fun Fragment.hideKeyboard() {
+    val imm = this.activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(this.view?.rootView?.windowToken, 0)
 }
 
 
@@ -115,16 +145,8 @@ fun Fragment.createAlerter(msg: String) {
         .show()
 }
 
-fun Activity.hideKeyboard() {
-    val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
-}
 
-
-fun Fragment.hideKeyboard() {
-    val imm = this.activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.hideSoftInputFromWindow(this.view?.rootView?.windowToken, 0)
-}
+/** ____________OTHERS_____________________________ */
 
 
 fun ImageView.loadImageFromUrl(url: String?) {
@@ -133,6 +155,7 @@ fun ImageView.loadImageFromUrl(url: String?) {
             .load(url)
             .into(this)
 }
+
 
 
 val Int.toPx: Int

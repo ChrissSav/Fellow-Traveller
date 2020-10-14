@@ -1,45 +1,33 @@
 package gr.fellow.fellow_traveller.ui.home.tabs
 
-import android.content.Intent
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.data.models.Trip
+import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentTakesPartTabBinding
 import gr.fellow.fellow_traveller.domain.TripType
+import gr.fellow.fellow_traveller.domain.trip.TripInvolved
+import gr.fellow.fellow_traveller.ui.findNavController
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.search.SearchTripActivity
+import gr.fellow.fellow_traveller.ui.startActivity
 
-
-class TripsTakePartTabFragment : Fragment() {
+@AndroidEntryPoint
+class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
 
     private val homeViewModel: HomeViewModel by activityViewModels()
-
-    private var tripsList = mutableListOf<Trip>()
-    private lateinit var navController: NavController
-
-    private var _binding: FragmentTakesPartTabBinding? = null
-    private val binding get() = _binding!!
+    private var tripsList = mutableListOf<TripInvolved>()
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentTakesPartTabBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun getViewBinding(): FragmentTakesPartTabBinding =
+        FragmentTakesPartTabBinding.inflate(layoutInflater)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        navController = Navigation.findNavController(view)
+    override fun setUpObservers() {
         homeViewModel.loadTripTakesPart()
         homeViewModel.tripsTakesPart.observe(viewLifecycleOwner, Observer { list ->
             tripsList.clear()
@@ -52,12 +40,14 @@ class TripsTakePartTabFragment : Fragment() {
                 binding.noTripsSection.visibility = View.VISIBLE
             }
         })
+    }
 
+    override fun setUpViews() {
         binding.noTripsSectionButtonLayout.setOnClickListener {
-            val intent = Intent(activity, SearchTripActivity::class.java)
-            startActivity(intent)
+            startActivity(SearchTripActivity::class)
         }
     }
+
 
     private fun setTripInfo() {
 
@@ -76,17 +66,12 @@ class TripsTakePartTabFragment : Fragment() {
             activeTripsSection.visibility = View.VISIBLE
 
             buttonAllActiveTrips.setOnClickListener {
-                navController.navigate(
+                findNavController()?.navigate(
                     R.id.action_destination_trips_takes_part_to_offersActiveTripsFragment,
                     bundleOf("type" to TripType.TakesPart.name)
                 )
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 

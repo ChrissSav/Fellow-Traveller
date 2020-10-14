@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Context.CONNECTIVITY_SERVICE
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
-import android.widget.Toast
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -59,8 +58,7 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor, connectivityHelper: ConnectivityHelper, sharedPreferences: SharedPreferences,
-        context: Context
+        loggingInterceptor: HttpLoggingInterceptor, connectivityHelper: ConnectivityHelper, sharedPreferences: SharedPreferences
     ): OkHttpClient.Builder {
         val client = OkHttpClient.Builder().proxy(Proxy.NO_PROXY)
             .connectTimeout(15, TimeUnit.SECONDS)
@@ -106,7 +104,7 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideFellowService(@Fellow retrofit: Retrofit.Builder): FellowService {
-        return retrofit.baseUrl("https://api.fellowtraveller.gr/").build()
+        return retrofit.baseUrl("https://api.fellowtraveller.gr/v1/").build()
             .create(FellowService::class.java)
     }
 

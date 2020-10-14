@@ -5,15 +5,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.ResultWrapper
-import gr.fellow.fellow_traveller.data.models.Trip
-import gr.fellow.fellow_traveller.domain.Car
-import gr.fellow.fellow_traveller.domain.LocalUser
+import gr.fellow.fellow_traveller.domain.car.Car
+import gr.fellow.fellow_traveller.domain.trip.TripInvolved
+import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.framework.network.google.model.DestinationModel
-import gr.fellow.fellow_traveller.ui.dateTimeToTimestamp
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.usecase.LoadUserInfoUseCase
 import gr.fellow.fellow_traveller.usecase.home.GetUserCarsLocalUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.RegisterTripRemoteUseCase
+import gr.fellow.fellow_traveller.utils.dateTimeToTimestamp
 
 
 class NewTripViewModel
@@ -24,12 +24,9 @@ constructor(
     private val registerTripRemoteUseCase: RegisterTripRemoteUseCase
 ) : BaseViewModel() {
 
-    val finish = MutableLiveData<Boolean>()
 
-
-    private val _success = MutableLiveData<Trip>()
-    val success: LiveData<Trip> = _success
-
+    private val _success = MutableLiveData<TripInvolved>()
+    val success: LiveData<TripInvolved> = _success
 
     private val _destinationFrom = MutableLiveData<DestinationModel>()
     val destinationFrom: LiveData<DestinationModel> = _destinationFrom
@@ -150,7 +147,8 @@ constructor(
         launch(true) {
             when (val response = registerTripRemoteUseCase(
                 destinationFrom.value?.placeId.toString(), destinationTo.value?.placeId.toString(),
-                destinationPickUp.value?.placeId.toString(), dateTimeToTimestamp(date.value.toString(), time.value.toString()),
+                destinationPickUp.value?.placeId.toString(),
+                dateTimeToTimestamp(date.value.toString(), time.value.toString()),
                 pet.value!!, seats.value!!, bags.value!!, message.value.toString(), price.value!!, car.value?.id!!
             )
                 ) {
@@ -159,7 +157,7 @@ constructor(
                 }
 
                 is ResultWrapper.Error -> {
-                    _error.value = when (response.error.code) {
+                    error.value = when (response.error.code) {
                         609 -> R.string.ERROR_TRIP_TIMESTAMP
                         610 -> R.string.ERROR_TRIP_PICKUP_POINT
                         else -> R.string.ERROR_SOMETHING_WRONG
@@ -171,9 +169,6 @@ constructor(
     }
 
 
-    fun finish() {
-        finish.value = true
-    }
 
 
     fun getTimestamp(): Long {

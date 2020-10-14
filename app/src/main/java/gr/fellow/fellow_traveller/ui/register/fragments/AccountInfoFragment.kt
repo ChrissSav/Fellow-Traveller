@@ -1,12 +1,12 @@
 package gr.fellow.fellow_traveller.ui.register.fragments
 
-import android.content.Intent
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
+import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentAccountInfoBinding
-import gr.fellow.fellow_traveller.ui.home.HomeActivity
+import gr.fellow.fellow_traveller.ui.findNavController
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
 
 @AndroidEntryPoint
@@ -20,10 +20,17 @@ class AccountInfoFragment : BaseFragment<FragmentAccountInfoBinding>() {
 
     override fun setUpObservers() {
         viewModel.finish.observe(viewLifecycleOwner, Observer {
-            val intent = Intent(activity, HomeActivity::class.java)
-            intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            startActivity(intent)
+            findNavController()?.navigate(R.id.action_accountFragment_to_successRegistrationFragment)
         })
+        viewModel.userInfo.observe(viewLifecycleOwner, Observer {
+            binding.firstName.text = it.first
+            binding.lastName.text = it.second
+        })
+    }
+
+    override fun onDestroyView() {
+        viewModel.storeUserInfo(binding.firstName.text.toString(), binding.lastName.text.toString())
+        super.onDestroyView()
     }
 
     override fun setUpViews() {

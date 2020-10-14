@@ -16,7 +16,6 @@ import gr.fellow.fellow_traveller.ui.loadImageFromUrl
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
-
     private val viewModel: HomeViewModel by activityViewModels()
 
 

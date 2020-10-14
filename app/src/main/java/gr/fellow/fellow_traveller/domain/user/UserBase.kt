@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.data.models
+package gr.fellow.fellow_traveller.domain.user
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
@@ -13,6 +13,11 @@ data class UserBase(
     val rate: Float,
     val reviews: Int
 ) : Parcelable {
-    val fullName get() = "$firstName $lastName"
-    val fullNameNewLine get() = "$firstName\n$lastName"
+
+    val fullName
+        get() = "$firstName $lastName"
+
+    val fullNameNewLine
+        get() = "$firstName\n$lastName"
+
 }

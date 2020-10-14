@@ -26,7 +26,7 @@ constructor(
                     _saved.value = true
                 }
                 is ResultWrapper.Error -> {
-                    _error.value = response.error.msg
+                    error.value = response.error.msg
                 }
             }
         }

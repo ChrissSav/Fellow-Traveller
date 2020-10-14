@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.CarPickBottomSheetDialogBinding
-import gr.fellow.fellow_traveller.domain.Car
+import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.ui.car.CarAdapterSecond
 
 class CarPickBottomSheetDialog(

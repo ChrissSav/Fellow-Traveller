@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.domain
+package gr.fellow.fellow_traveller.domain.car
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import gr.fellow.fellow_traveller.data.BaseApiException
+import gr.fellow.fellow_traveller.data.BaseResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.ErrorResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.ErrorResponseModel
 import okhttp3.ResponseBody
@@ -54,6 +55,21 @@ fun getModelFromResponseErrorBody(errorBody: ResponseBody?): ErrorResponse {
         val errorResponseModel =
             Gson().fromJson<ErrorResponseModel>(mJson, ErrorResponseModel::class.java)
         ErrorResponse(errorResponseModel.detail.statusCode)
+    } catch (e: Exception) {
+        throw BaseApiException(SOMETHING_WORNG)
+    }
+
+}
+
+/*** From the new api format */
+
+fun getErrorResponseErrorBody(errorBody: ResponseBody?): String {
+    return try {
+        val mJsonString = errorBody!!.string()
+        val parser = JsonParser()
+        val mJson = parser.parse(mJsonString)
+        val errorResponseModel = Gson().fromJson(mJson, BaseResponse::class.java)
+        errorResponseModel.error
     } catch (e: Exception) {
         throw BaseApiException(SOMETHING_WORNG)
     }

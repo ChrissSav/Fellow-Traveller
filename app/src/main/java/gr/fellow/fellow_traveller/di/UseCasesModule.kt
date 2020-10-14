@@ -8,13 +8,17 @@ import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.scopes.ActivityScoped
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.usecase.LoadUserInfoUseCase
-import gr.fellow.fellow_traveller.usecase.LoginUseCase
-import gr.fellow.fellow_traveller.usecase.LogoutUseCase
+import gr.fellow.fellow_traveller.usecase.auth.LoginUseCase
+import gr.fellow.fellow_traveller.usecase.auth.LogoutUseCase
+import gr.fellow.fellow_traveller.usecase.auth.VerifyAccountUseCase
 import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.newtrip.GetGeometryFormPlaceUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.GetPlaceFromPlacesUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.RegisterTripRemoteUseCase
-import gr.fellow.fellow_traveller.usecase.register.*
+import gr.fellow.fellow_traveller.usecase.register.CheckIfUserIsLoginUseCase
+import gr.fellow.fellow_traveller.usecase.register.CheckUserEmailUseCase
+import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
+import gr.fellow.fellow_traveller.usecase.register.RegisterUserUseCase
 import gr.fellow.fellow_traveller.usecase.trips.BookTripUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsCreatorRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsPassengerRemoteUseCase
@@ -25,12 +29,12 @@ import gr.fellow.fellow_traveller.usecase.trips.SearchTripsUseCase
 @Module
 class UseCasesModule {
 
+
     @ActivityScoped
     @Provides
-    fun provideCheckPhoneUseCase(dataSource: FellowDataSource): CheckUserPhoneUseCase {
-        return CheckUserPhoneUseCase(dataSource)
+    fun provideVerifyAccountUseCase(dataSource: FellowDataSource): VerifyAccountUseCase {
+        return VerifyAccountUseCase(dataSource)
     }
-
 
     @ActivityScoped
     @Provides

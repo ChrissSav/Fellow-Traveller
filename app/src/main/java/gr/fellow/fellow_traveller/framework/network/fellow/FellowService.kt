@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.framework.network.fellow
 
+import gr.fellow.fellow_traveller.data.BaseResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
@@ -9,16 +10,23 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface FellowService {
-    @POST("auth/check")
+    /**  AUTH  **/
+
+    @POST("auth/check_email")
     suspend fun checkIfAccountInfoExist(
-        @Body request: AccountCheckRequest
-    ): Response<StatusHandleResponse>
+        @Body emailRequest: CheckEmailRequest
+    ): Response<BaseResponse<String>>
 
 
-    @POST("users")
+    @POST("auth/signup")
     suspend fun registerUser(
         @Body request: AccountCreateRequest
-    ): Response<UserLoginResponse>
+    ): Response<BaseResponse<String>>
+
+    @GET("auth/verify_account")
+    suspend fun verifyAccount(
+        @Query("token") token: String
+    ): Response<BaseResponse<String>>
 
 
     @POST("auth/login")

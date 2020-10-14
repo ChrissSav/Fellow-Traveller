@@ -79,7 +79,7 @@ constructor(
                         _resultTrips.value = response.data.toMutableList()
                     }
                     is ResultWrapper.Error -> {
-                        _error.value = R.string.ERROR_SOMETHING_WRONG
+                        error.value = R.string.ERROR_SOMETHING_WRONG
                     }
                 }
                 filterFlag = false
@@ -95,7 +95,7 @@ constructor(
                     _tripBook.value = response.data
                 }
                 is ResultWrapper.Error -> {
-                    _error.value =
+                    error.value =
                         when (response.error.code) {
                             606 ->
                                 R.string.ERROR_TRIP_NOT_AVAILABLE_LUGGAGE

@@ -5,13 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.ResultWrapper
-import gr.fellow.fellow_traveller.data.models.Trip
-import gr.fellow.fellow_traveller.domain.Car
-import gr.fellow.fellow_traveller.domain.LocalUser
+import gr.fellow.fellow_traveller.domain.car.Car
+import gr.fellow.fellow_traveller.domain.trip.TripInvolved
+import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.LoadUserInfoUseCase
-import gr.fellow.fellow_traveller.usecase.LogoutUseCase
+import gr.fellow.fellow_traveller.usecase.auth.LogoutUseCase
 import gr.fellow.fellow_traveller.usecase.home.DeleteCarUseCase
 import gr.fellow.fellow_traveller.usecase.home.GetUserCarsLocalUseCase
 import gr.fellow.fellow_traveller.usecase.home.GetUserCarsRemoteUseCase
@@ -49,11 +49,11 @@ constructor(
     private val _carDeletedId = SingleLiveEvent<Car>()
     val carDeletedId: LiveData<Car> = _carDeletedId
 
-    private val _tripsAsCreator = MutableLiveData<MutableList<Trip>>()
-    val tripsAsCreator: LiveData<MutableList<Trip>> = _tripsAsCreator
+    private val _tripsAsCreator = MutableLiveData<MutableList<TripInvolved>>()
+    val tripsAsCreator: LiveData<MutableList<TripInvolved>> = _tripsAsCreator
 
-    private val _tripsTakesPart = MutableLiveData<MutableList<Trip>>()
-    val tripsTakesPart: LiveData<MutableList<Trip>> = _tripsTakesPart
+    private val _tripsTakesPart = MutableLiveData<MutableList<TripInvolved>>()
+    val tripsTakesPart: LiveData<MutableList<TripInvolved>> = _tripsTakesPart
 
     /*****************************************************************************************************/
 
@@ -81,7 +81,7 @@ constructor(
                         _cars.value = getUserCarsLocalUseCase()
                     }
                     is ResultWrapper.Error -> {
-                        _error.value = response.error.msg
+                        error.value = response.error.msg
                     }
                 }
             } catch (exception: Exception) {
@@ -108,7 +108,7 @@ constructor(
                     _carDeletedId.value = car
                 }
                 is ResultWrapper.Error -> {
-                    _error.value = R.string.ERROR_CAR_NOT_BELONG_TO_USER
+                    error.value = R.string.ERROR_CAR_NOT_BELONG_TO_USER
                 }
             }
         }
@@ -126,7 +126,7 @@ constructor(
                     _tripsAsCreator.value = response.data.sortedWith(compareBy { it.timestamp }).toMutableList()
                 }
                 is ResultWrapper.Error -> {
-                    _error.value = response.error.msg
+                    error.value = response.error.msg
                 }
             }
 
@@ -146,14 +146,14 @@ constructor(
                     _tripsTakesPart.value = response.data.sortedWith(compareBy { it.timestamp }).toMutableList()
                 }
                 is ResultWrapper.Error -> {
-                    _error.value = response.error.msg
+                    error.value = response.error.msg
                 }
             }
         }
     }
 
 
-    fun addTripCreate(trip: Trip) {
+    fun addTripCreate(trip: TripInvolved) {
         launch {
             tripsAsCreator.value?.let {
                 val tempTrip = it
@@ -164,14 +164,13 @@ constructor(
         }
     }
 
-    fun addTripPassenger(trip: Trip) {
+    fun addTripPassenger(trip: TripInvolved) {
         launch {
             tripsTakesPart.value?.let {
                 val tempTrip = it
                 tempTrip.add(trip)
                 _tripsTakesPart.value = tempTrip
             }
-
         }
     }
 }

@@ -1,8 +1,6 @@
 package gr.fellow.fellow_traveller.utils
 
 import android.util.Patterns
-import gr.fellow.fellow_traveller.ui.currentTimeStamp
-import gr.fellow.fellow_traveller.ui.dateTimeToTimestamp
 import java.util.regex.Pattern
 
 fun isValidEmail(email: String): Boolean {

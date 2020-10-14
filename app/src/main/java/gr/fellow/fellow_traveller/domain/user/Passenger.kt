@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.data.models
+package gr.fellow.fellow_traveller.domain.user
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

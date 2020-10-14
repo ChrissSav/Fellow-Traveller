@@ -7,7 +7,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentCarDetailsBinding
 import gr.fellow.fellow_traveller.domain.AnswerType
-import gr.fellow.fellow_traveller.domain.Car
+import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.ConfirmBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.onBackPressed

@@ -1,11 +1,12 @@
 package gr.fellow.fellow_traveller.data
 
 import gr.fellow.fellow_traveller.data.models.Trip
-import gr.fellow.fellow_traveller.domain.Car
 import gr.fellow.fellow_traveller.domain.FellowDataSource
-import gr.fellow.fellow_traveller.domain.LocalUser
 import gr.fellow.fellow_traveller.domain.SearchFilters
+import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.mappers.*
+import gr.fellow.fellow_traveller.domain.trip.TripInvolved
+import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserLoginResponse
@@ -19,17 +20,15 @@ class FellowDataSourceImpl(
     private val googleServiceRepository: GoogleServiceRepository
 ) : FellowDataSource {
 
-    override suspend fun checkUserPhone(phone: String): ResultWrapper<StatusHandleResponse> =
-        repository.checkField(AccountCheckRequest("phone", phone))
 
-    override suspend fun checkUserEmail(email: String): ResultWrapper<StatusHandleResponse> =
-        repository.checkField(AccountCheckRequest("email", email))
+    override suspend fun checkUserEmail(email: String): ResultWrapperSecond<String> =
+        repository.checkField(CheckEmailRequest(email))
 
-    override suspend fun registerUser(
-        firstName: String, lastName: String, email: String, password: String, phone: String
-    ): ResultWrapper<UserLoginResponse> =
-        repository.registerUserRemote(AccountCreateRequest(firstName, lastName, email, password, phone))
+    override suspend fun registerUser(firstName: String, lastName: String, email: String, password: String): ResultWrapperSecond<String> =
+        repository.registerUserRemote(AccountCreateRequest(firstName, lastName, email, password))
 
+    override suspend fun verifyAccount(token: String): ResultWrapperSecond<String> =
+        repository.verifyAccount(token)
 
     override suspend fun loginUser(username: String, password: String): ResultWrapper<UserLoginResponse> =
         repository.loginUserRemote(LoginRequest(username, password))
@@ -66,28 +65,28 @@ class FellowDataSourceImpl(
     override suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse> =
         repository.deleteCarRemote(carId)
 
-    override suspend fun addTripRemote(tripCreateRequest: TripCreateRequest): ResultWrapper<Trip> {
+    override suspend fun addTripRemote(tripCreateRequest: TripCreateRequest): ResultWrapper<TripInvolved> {
         return when (val response = repository.addTrip(tripCreateRequest)) {
             is ResultWrapper.Success ->
-                ResultWrapper.Success(response.data.toTrip())
+                ResultWrapper.Success(response.data.mapTripInvolved())
             is ResultWrapper.Error ->
                 ResultWrapper.Error(response.error)
         }
     }
 
-    override suspend fun getTipsAsCreator(): ResultWrapper<MutableList<Trip>> {
+    override suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripInvolved>> {
         return when (val response = repository.getTipsAsCreator()) {
             is ResultWrapper.Success ->
-                ResultWrapper.Success(response.data.toTrips())
+                ResultWrapper.Success(response.data.map { it.mapTripInvolved() }.toMutableList())
             is ResultWrapper.Error ->
                 ResultWrapper.Error(response.error)
         }
     }
 
-    override suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<Trip>> {
+    override suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripInvolved>> {
         return when (val response = repository.getTipsAsPassenger()) {
             is ResultWrapper.Success ->
-                ResultWrapper.Success(response.data.toTrips())
+                ResultWrapper.Success(response.data.map { it.mapTripInvolved() }.toMutableList())
             is ResultWrapper.Error ->
                 ResultWrapper.Error(response.error)
         }
@@ -115,7 +114,7 @@ class FellowDataSourceImpl(
 
     /**
      * Google Service
-     * */
+     **/
 
     override suspend fun getPlaces(place: String): Response<PlaceApiResponse> =
         googleServiceRepository.getPlaces(place)
@@ -125,7 +124,7 @@ class FellowDataSourceImpl(
 
     /**
      * local DB
-     */
+     **/
 
 
     override suspend fun loadUsersInfoLocal(): LocalUser =

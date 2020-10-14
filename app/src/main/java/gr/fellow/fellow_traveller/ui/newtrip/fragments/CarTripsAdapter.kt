@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.domain.Car
+import gr.fellow.fellow_traveller.domain.car.Car
 
 class CarTripsAdapter(
     private val cars: MutableList<Car>,

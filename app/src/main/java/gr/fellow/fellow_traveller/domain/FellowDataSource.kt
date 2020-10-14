@@ -1,7 +1,11 @@
 package gr.fellow.fellow_traveller.domain
 
 import gr.fellow.fellow_traveller.data.ResultWrapper
+import gr.fellow.fellow_traveller.data.ResultWrapperSecond
 import gr.fellow.fellow_traveller.data.models.Trip
+import gr.fellow.fellow_traveller.domain.car.Car
+import gr.fellow.fellow_traveller.domain.trip.TripInvolved
+import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.framework.network.fellow.request.BookTripRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.request.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.request.TripCreateRequest
@@ -14,16 +18,17 @@ import retrofit2.Response
 
 interface FellowDataSource {
 
-    suspend fun checkUserPhone(phone: String): ResultWrapper<StatusHandleResponse>
 
-    suspend fun checkUserEmail(email: String): ResultWrapper<StatusHandleResponse>
+    suspend fun checkUserEmail(email: String): ResultWrapperSecond<String>
 
-    suspend fun registerUser(firstName: String, lastName: String, email: String, password: String, phone: String): ResultWrapper<UserLoginResponse>
+    suspend fun registerUser(firstName: String, lastName: String, email: String, password: String): ResultWrapperSecond<String>
+
+    suspend fun verifyAccount(token: String): ResultWrapperSecond<String>
+
 
     suspend fun loginUser(username: String, password: String): ResultWrapper<UserLoginResponse>
 
     suspend fun registerUserAuth(userEntity: RegisteredUserEntity)
-
 
 
     //Cars
@@ -38,11 +43,11 @@ interface FellowDataSource {
     //Trips
 
 
-    suspend fun addTripRemote(tripCreateRequest: TripCreateRequest): ResultWrapper<Trip>
+    suspend fun addTripRemote(tripCreateRequest: TripCreateRequest): ResultWrapper<TripInvolved>
 
-    suspend fun getTipsAsCreator(): ResultWrapper<MutableList<Trip>>
+    suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripInvolved>>
 
-    suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<Trip>>
+    suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripInvolved>>
 
     suspend fun searchTrips(query: SearchFilters): ResultWrapper<MutableList<Trip>>
 

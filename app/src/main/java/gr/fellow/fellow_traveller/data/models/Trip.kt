@@ -1,6 +1,8 @@
 package gr.fellow.fellow_traveller.data.models
 
 import android.os.Parcelable
+import gr.fellow.fellow_traveller.domain.user.Passenger
+import gr.fellow.fellow_traveller.domain.user.UserBase
 import gr.fellow.fellow_traveller.framework.network.fellow.response.DestinationResponse
 import kotlinx.android.parcel.Parcelize
 import java.text.SimpleDateFormat
