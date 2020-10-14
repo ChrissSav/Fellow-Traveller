@@ -13,14 +13,13 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import gr.fellow.fellow_traveller.BuildConfig
+import gr.fellow.fellow_traveller.framework.TokenInterceptor
 import gr.fellow.fellow_traveller.framework.network.NetworkConnectionInterceptor
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
+import gr.fellow.fellow_traveller.framework.network.fellow.FellowTokenService
 import gr.fellow.fellow_traveller.framework.network.google.PlaceApiService
 import gr.fellow.fellow_traveller.utils.ConnectivityHelper
-import gr.fellow.fellow_traveller.utils.PREFS_AUTH_TOKEN
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -58,24 +57,15 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor, connectivityHelper: ConnectivityHelper, sharedPreferences: SharedPreferences
+        loggingInterceptor: HttpLoggingInterceptor, connectivityHelper: ConnectivityHelper, sharedPreferences: SharedPreferences,
+        fellowTokenService: FellowTokenService
     ): OkHttpClient.Builder {
         val client = OkHttpClient.Builder().proxy(Proxy.NO_PROXY)
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
             .addInterceptor(NetworkConnectionInterceptor(connectivityHelper))
-            .addInterceptor(object : Interceptor {
-                override fun intercept(chain: Interceptor.Chain): Response {
-                    val request = chain.request()
-                    val newRequest = request.newBuilder()
-                    val session = sharedPreferences.getString(PREFS_AUTH_TOKEN, "").toString()
-                    if (session.length > 10) {
-                        newRequest.header("Cookie", session)
-                    }
-                    return chain.proceed(newRequest.build())
-                }
-            })
+            .addInterceptor(TokenInterceptor(sharedPreferences, fellowTokenService))
         if (BuildConfig.DEBUG) {
             client.addInterceptor(loggingInterceptor)
         }
@@ -108,6 +98,13 @@ object NetworkModule {
             .create(FellowService::class.java)
     }
 
+    @Singleton
+    @Provides
+    fun provideFellowTokenService(@GoogleService retrofit: Retrofit.Builder): FellowTokenService {
+        return retrofit.baseUrl("https://api.fellowtraveller.gr/v1/").build()
+            .create(FellowTokenService::class.java)
+    }
+
 
     /**
      * Google Service
@@ -121,9 +118,8 @@ object NetworkModule {
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
-            .addInterceptor(NetworkConnectionInterceptor(connectivityHelper))
+            //  .addInterceptor(NetworkConnectionInterceptor(connectivityHelper))
             .addInterceptor(loggingInterceptor)
-
     }
 
 

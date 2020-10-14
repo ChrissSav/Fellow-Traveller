@@ -9,12 +9,15 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import gr.fellow.fellow_traveller.data.FellowDataSourceImpl
+import gr.fellow.fellow_traveller.data.FellowRefreshTokenRepository
 import gr.fellow.fellow_traveller.data.FellowRepository
 import gr.fellow.fellow_traveller.data.GoogleServiceRepository
 import gr.fellow.fellow_traveller.domain.FellowDataSource
+import gr.fellow.fellow_traveller.framework.FellowRefreshTokenRepositoryImpl
 import gr.fellow.fellow_traveller.framework.FellowRepositoryImpl
 import gr.fellow.fellow_traveller.framework.GoogleServiceRepositoryImpl
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
+import gr.fellow.fellow_traveller.framework.network.fellow.FellowTokenService
 import gr.fellow.fellow_traveller.framework.network.google.PlaceApiService
 import gr.fellow.fellow_traveller.room.FellowDatabase
 import gr.fellow.fellow_traveller.room.dao.CarDao
@@ -35,6 +38,12 @@ object StorageModule {
     @Provides
     fun provideGoogleServiceRepository(service: PlaceApiService): GoogleServiceRepository =
         GoogleServiceRepositoryImpl(service)
+
+
+    @Singleton
+    @Provides
+    fun provideFellowRefreshTokenRepository(service: FellowTokenService): FellowRefreshTokenRepository =
+        FellowRefreshTokenRepositoryImpl(service)
 
 
     @Singleton

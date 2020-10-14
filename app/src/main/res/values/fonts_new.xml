@@ -53,6 +53,12 @@
         <item name="android:textSize">13sp</item>
     </style>
 
+    <style name="paragraph_3">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
     <style name="paragraph_4">
         <item name="android:fontFamily">@font/roboto_light</item>
         <item name="android:textColor">@color/black_color</item>

@@ -73,6 +73,7 @@
 
     <!--New Trip-->
 
+    <string name="email_verify" formatted="false">Σας έχουμε αποστείλει ένα email επιβεβαίωσης στο \n&lt;b&gt;%s&lt;/b></string>
 
     <!--Fragment destinations-->
 

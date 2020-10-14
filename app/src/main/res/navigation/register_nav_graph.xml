@@ -38,10 +38,17 @@
         tools:layout="@layout/fragment_account_info">
         <action
             android:id="@+id/action_accountFragment_to_successRegistrationFragment"
-            app:destination="@id/successRegistrationFragment" />
+            app:destination="@id/successRegistrationFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"
+            app:popUpTo="@+id/register_nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/successRegistrationFragment"
         android:name="gr.fellow.fellow_traveller.ui.register.fragments.SuccessRegistrationFragment"
-        android:label="SuccessRegistrationFragment" />
+        android:label="fragment_success_registration"
+        tools:layout="@layout/fragment_success_registration" />
 </navigation>

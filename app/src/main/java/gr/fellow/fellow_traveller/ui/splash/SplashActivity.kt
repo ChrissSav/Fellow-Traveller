@@ -7,8 +7,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivitySplashBinding
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
-import gr.fellow.fellow_traveller.ui.main.MainActivity
 import gr.fellow.fellow_traveller.ui.openActivityWithFade
+import gr.fellow.fellow_traveller.ui.register.RegisterActivity
 import gr.fellow.fellow_traveller.utils.PREFS_AUTH_TOKEN
 import javax.inject.Inject
 
@@ -39,7 +39,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         val intent = if (sharedPreferences.getString(PREFS_AUTH_TOKEN, "").toString().isNotEmpty()) {
             Intent(this@SplashActivity, HomeActivity::class.java)
         } else {
-            Intent(this@SplashActivity, MainActivity::class.java)
+            Intent(this@SplashActivity, RegisterActivity::class.java)
         }
 
 

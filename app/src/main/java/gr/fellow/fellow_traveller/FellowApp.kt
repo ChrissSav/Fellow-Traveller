@@ -19,6 +19,6 @@ class FellowApp : Application() {
         val test = sharedPreferences.getString(PREFS_AUTH_TOKEN, "") + " "
 
         Log.i("rest", test)
-        // createToast(this, test)
+        // createToast(this, tick_animated)
     }
 }
