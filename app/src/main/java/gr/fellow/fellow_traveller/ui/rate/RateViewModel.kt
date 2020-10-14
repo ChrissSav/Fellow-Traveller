@@ -4,10 +4,6 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
-import gr.fellow.fellow_traveller.usecase.register.CheckUserEmailUseCase
-import gr.fellow.fellow_traveller.usecase.register.CheckUserPhoneUseCase
-import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
-import gr.fellow.fellow_traveller.usecase.register.RegisterUserUseCase
 
 class RateViewModel
 @ViewModelInject
