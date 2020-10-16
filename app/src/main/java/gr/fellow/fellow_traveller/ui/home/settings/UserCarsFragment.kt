@@ -3,7 +3,6 @@ package gr.fellow.fellow_traveller.ui.home.settings
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Handler
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -17,6 +16,7 @@ import gr.fellow.fellow_traveller.ui.car.CarAdapterSecond
 import gr.fellow.fellow_traveller.ui.findNavController
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.onBackPressed
+import gr.fellow.fellow_traveller.ui.postDelay
 import gr.fellow.fellow_traveller.ui.startActivityForResult
 
 
@@ -33,14 +33,14 @@ class UserCarsFragment : BaseFragment<FragmentUserCarsBinding>() {
 
 
     override fun setUpObservers() {
-        Handler().postDelayed({
+        postDelay(250) {
             viewModel.cars.observe(viewLifecycleOwner, Observer {
                 carsList.clear()
                 carsList.addAll(it)
                 binding.myCarsRecycler.adapter?.notifyDataSetChanged()
                 binding.refresh.isRefreshing = false
             })
-        }, 250)
+        }
     }
 
     override fun setUpViews() {

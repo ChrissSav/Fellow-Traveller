@@ -38,12 +38,15 @@ class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(
         try {
             hint = attributes.getString(R.styleable.FellowTextInput_hint_fellow).toString()
             isEditable = attributes.getBoolean(R.styleable.FellowTextInput_editable, false)
-            inputType =
-                attributes.getInteger(R.styleable.FellowTextInput_text_type, InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_NORMAL)
+            inputType = attributes.getInteger(R.styleable.FellowTextInput_text_type, InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_NORMAL)
             imeOptions = attributes.getInteger(R.styleable.FellowTextInput_imeOptions, EditorInfo.IME_ACTION_NEXT)
         } catch (e: Exception) {
             e.printStackTrace()
         }
+        attributes.recycle()
+
+
+        binding.fellowEditTextTextInputEditText.imeOptions = imeOptions
 
         binding.fellowEditTextTextInputEditText.inputType = inputType
 
@@ -63,7 +66,7 @@ class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(
             binding.fellowEditTextTextInputLayout.isFocusableInTouchMode = false
 
         }
-        binding.fellowEditTextTextInputEditText.imeOptions = imeOptions
+
 
         binding.fellowEditTextTextInputLayout.setOnClickListener {
             try {
@@ -81,7 +84,6 @@ class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(
             }
         }
 
-        attributes.recycle()
 
     }
 

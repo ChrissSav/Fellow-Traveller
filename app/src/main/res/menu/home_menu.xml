@@ -4,22 +4,22 @@
     <item
         android:id="@+id/destination_main"
         android:icon="@drawable/ic_iconography"
-        android:title="Home" />
+        android:title="Αρχική" />
     <item
         android:id="@+id/destination_trips_offers"
         android:icon="@drawable/ic_car"
-        android:title="TripsOffer" />
+        android:title="Προσφερρόμενα" />
     <item
         android:id="@+id/destination_trips_takes_part"
         android:icon="@drawable/ic_luggage"
-        android:title="TripsTakePart" />
+        android:title="Εμπλεκόμενα" />
     <item
         android:id="@+id/destination_notifications"
         android:icon="@drawable/ic_notifications"
-        android:title="Notifications" />
+        android:title="Ειδοποιήσεις" />
     <item
         android:id="@+id/destination_info"
         android:icon="@drawable/ic_person"
-        android:title="Info" />
+        android:title="Προφίλ" />
 
 </menu>

@@ -8,6 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentHomeBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
+import gr.fellow.fellow_traveller.ui.createAlerter
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripActivity
 import gr.fellow.fellow_traveller.ui.search.SearchTripActivity
@@ -18,7 +19,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
 
     private val viewModel: HomeViewModel by activityViewModels()
-
+    private var accountCorrect = false
 
     override fun getViewBinding(): FragmentHomeBinding =
         FragmentHomeBinding.inflate(layoutInflater)
@@ -27,17 +28,27 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun setUpObservers() {
         viewModel.user.observe(viewLifecycleOwner, Observer {
             binding.userWelcomeTextView.text = it.firstName
+            accountCorrect = it.messengerLink != null
         })
     }
 
     override fun setUpViews() {
         binding.offerSection.setOnClickListener {
-            startActivityForResult(NewTripActivity::class, 1)
+            if (accountCorrect)
+                startActivityForResult(NewTripActivity::class, 1)
+            else
+                createAlerter("Πρέπει να ολοκληρώσετε το προφίλ σας πρώτα !")
         }
 
         binding.searchButton.setOnClickListener {
-            startActivityForResult(SearchTripActivity::class, 2)
+            if (accountCorrect)
+                startActivityForResult(SearchTripActivity::class, 2)
+            else
+                createAlerter("Πρέπει να ολοκληρώσετε το προφίλ σας πρώτα !")
+
         }
+
+
     }
 
 

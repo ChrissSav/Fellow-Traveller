@@ -14,16 +14,15 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.iceteck.silicompressorr.FileUtils
 import com.iceteck.silicompressorr.SiliCompressor
-import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
 import dagger.hilt.android.AndroidEntryPoint
-import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentAccountSettingsBinding
 import gr.fellow.fellow_traveller.ui.createToast
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.onBackPressed
+import gr.fellow.fellow_traveller.ui.postDelay
 import java.io.File
 
 
@@ -42,18 +41,29 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
 
     override fun setUpObservers() {
         viewModel.user.observe(viewLifecycleOwner, Observer {
-            with(binding) {
-                picture.loadImageFromUrl(it.picture)
-                firstName.text = it.firstName
-                lastName.text = it.lastName
-                email.text = it.email
-                messengerLink.text = getString(R.string.messenger_link, "regino29")
-
-                backButton.setOnClickListener {
-                    onBackPressed()
+            postDelay(150) {
+                with(binding) {
+                    picture.loadImageFromUrl(it.picture)
+                    firstName.text = it.firstName
+                    lastName.text = it.lastName
+                    email.text = it.email
+                    it.messengerLink?.let { m ->
+                        messengerLink.text = m
+                    }
+                    // messengerLink.text = getString(R.string.messenger_link, "regino29")
                 }
             }
         })
+
+
+    }
+
+
+    override fun setUpViews() {
+
+        binding.backButton.setOnClickListener {
+            onBackPressed()
+        }
 
         mStorageRef = FirebaseStorage.getInstance().getReference("profile_images");
 
@@ -61,12 +71,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
     }
 
 
-
-    override fun setUpViews() {
-
-    }
-
-    fun onChooseFile(v: View?) {
+    private fun onChooseFile(v: View?) {
         //CropImage.activity().start()
         val intent = CropImage.activity()
             .setAspectRatio(1, 1)
@@ -102,7 +107,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
         }
     }
 
-    fun compressUriImage() {
+    private fun compressUriImage() {
         if (mImageUri != null) {
             tempImagefile = File(
                 SiliCompressor.with(this.context)
@@ -158,7 +163,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
         }
     }
 
-    fun loadImageToImageView() {
+    private fun loadImageToImageView() {
         try {
             binding.picture.loadImageFromUrl(newImage)
             binding.progressBar.visibility = View.GONE

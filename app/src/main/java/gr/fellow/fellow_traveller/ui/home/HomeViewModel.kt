@@ -61,6 +61,9 @@ constructor(
 
     fun loadUserInfo() {
         launch {
+            if (_user.value != null) {
+                return@launch
+            }
             _user.value = loadUserInfoUseCase()
         }
     }

@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.di
 
-import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +14,6 @@ import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.newtrip.GetGeometryFormPlaceUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.GetPlaceFromPlacesUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.RegisterTripRemoteUseCase
-import gr.fellow.fellow_traveller.usecase.register.CheckIfUserIsLoginUseCase
 import gr.fellow.fellow_traveller.usecase.register.CheckUserEmailUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserUseCase
@@ -64,12 +62,6 @@ class UseCasesModule {
     @Provides
     fun provideRegisterUserLocal(dataSource: FellowDataSource): RegisterUserLocalUseCase {
         return RegisterUserLocalUseCase(dataSource)
-    }
-
-    @ActivityScoped
-    @Provides
-    fun provideCheckLoginUseCase(sharedPreferences: SharedPreferences): CheckIfUserIsLoginUseCase {
-        return CheckIfUserIsLoginUseCase(sharedPreferences)
     }
 
     @ActivityScoped

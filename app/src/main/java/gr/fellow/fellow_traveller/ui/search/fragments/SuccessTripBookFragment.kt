@@ -1,11 +1,11 @@
 package gr.fellow.fellow_traveller.ui.search.fragments
 
 import android.animation.Animator
-import android.os.Handler
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentSuccessTripBookBinding
+import gr.fellow.fellow_traveller.ui.postDelay
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
 
 @AndroidEntryPoint
@@ -21,7 +21,7 @@ class SuccessTripBookFragment : BaseFragment<FragmentSuccessTripBookBinding>() {
     override fun setUpObservers() {}
 
     override fun setUpViews() {
-        Handler().postDelayed({
+        postDelay(500) {
             binding.textViewHover.animate()
                 .translationX(binding.textViewHover.width.toFloat())
                 .alpha(1.0f)
@@ -40,7 +40,7 @@ class SuccessTripBookFragment : BaseFragment<FragmentSuccessTripBookBinding>() {
                     override fun onAnimationCancel(animation: Animator) {}
                     override fun onAnimationRepeat(animation: Animator) {}
                 })
-        }, 500.toLong())
+        }
     }
 
 }

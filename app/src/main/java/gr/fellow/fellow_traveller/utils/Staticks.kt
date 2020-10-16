@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.utils
 
-const val PREFS_AUTH_TOKEN = "SESSION"
 const val PREFS_AUTH_ACCESS_TOKEN = "PREFS_AUTH_ACCESS_TOKEN"
 const val PREFS_AUTH_REFRESH_TOKEN = "PREFS_AUTH_REFRESH_TOKEN"
 

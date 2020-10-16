@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.ui.home
 
-import android.os.Handler
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -11,6 +10,7 @@ import gr.fellow.fellow_traveller.domain.TripType
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.ui.home.adapter.ActiveTripsAdapter
 import gr.fellow.fellow_traveller.ui.onBackPressed
+import gr.fellow.fellow_traveller.ui.postDelay
 
 
 @AndroidEntryPoint
@@ -29,7 +29,7 @@ class OffersActiveTripsFragment : BaseFragment<FragmentOffersActiveTripsBinding>
     }
 
     override fun setUpObservers() {
-        Handler().postDelayed({
+        postDelay(250) {
             if (type == TripType.Offer.name)
                 viewModel.tripsAsCreator.observe(viewLifecycleOwner, Observer {
                     with(binding) {
@@ -50,7 +50,7 @@ class OffersActiveTripsFragment : BaseFragment<FragmentOffersActiveTripsBinding>
                         recyclerView.visibility = View.VISIBLE
                     }
                 })
-        }, 250)
+        }
     }
 
     override fun setUpViews() {

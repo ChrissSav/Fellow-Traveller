@@ -2,6 +2,7 @@ package gr.fellow.fellow_traveller.ui.home
 
 import android.animation.AnimatorSet
 import android.animation.ValueAnimator
+import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
@@ -13,6 +14,8 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivityHomeBinding
 import gr.fellow.fellow_traveller.ui.createAlerter
+import gr.fellow.fellow_traveller.ui.hideKeyboard
+import gr.fellow.fellow_traveller.ui.navigateWithFade
 import gr.fellow.fellow_traveller.ui.toPx
 
 
@@ -44,8 +47,15 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
 
     override fun setUpObservers() {
-        viewModel.loadUserInfo()
-        viewModel.loadCars()
+
+        viewModel.user.observe(this, Observer {
+            if (it.messengerLink == null) {
+                binding.constraintLayoutMessenger.visibility = View.VISIBLE
+            } else {
+                binding.constraintLayoutMessenger.visibility = View.GONE
+
+            }
+        })
 
         viewModel.error.observe(this, Observer {
             createAlerter(getString(it))
@@ -53,6 +63,11 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     }
 
     override fun setUpViews() {
+
+
+        viewModel.loadUserInfo()
+        //  viewModel.loadCars()
+
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_container)
 
 
@@ -65,7 +80,16 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
                 showHideBottomNav(0)
             }
 
+            if (destination.id == R.id.accountSettingsFragment)
+                binding.constraintLayoutMessenger.visibility = View.GONE
+            else if (viewModel.user.value?.messengerLink == null)
+                binding.constraintLayoutMessenger.visibility = View.VISIBLE
+
         })
+
+        binding.toAccountInfo.setOnClickListener {
+            navController.navigateWithFade(R.id.accountSettingsFragment)
+        }
     }
 
 
@@ -96,5 +120,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         }
     }
 
+
+    override fun onBackPressed() {
+        hideKeyboard()
+        super.onBackPressed()
+    }
 
 }

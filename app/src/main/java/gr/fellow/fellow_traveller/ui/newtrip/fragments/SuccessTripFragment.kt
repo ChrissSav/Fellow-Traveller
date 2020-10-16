@@ -3,12 +3,12 @@ package gr.fellow.fellow_traveller.ui.newtrip.fragments
 import android.animation.Animator
 import android.app.Activity
 import android.content.Intent
-import android.os.Handler
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentSuccessTripBinding
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
+import gr.fellow.fellow_traveller.ui.postDelay
 
 
 @AndroidEntryPoint
@@ -22,7 +22,7 @@ class SuccessTripFragment : BaseFragment<FragmentSuccessTripBinding>() {
     override fun setUpObservers() {}
 
     override fun setUpViews() {
-        Handler().postDelayed({
+        postDelay(500) {
             binding.SuccessActivityTextViewHover.animate()
                 .translationX(binding.SuccessActivityTextViewHover.width.toFloat())
                 .alpha(1.0f)
@@ -47,7 +47,7 @@ class SuccessTripFragment : BaseFragment<FragmentSuccessTripBinding>() {
                     override fun onAnimationCancel(animation: Animator) {}
                     override fun onAnimationRepeat(animation: Animator) {}
                 })
-        }, 500.toLong())
+        }
     }
 
 

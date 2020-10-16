@@ -4,13 +4,17 @@ import android.app.Activity
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.drawable.AnimatedVectorDrawable
+import android.os.Bundle
+import android.os.Handler
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.bumptech.glide.Glide
@@ -67,8 +71,14 @@ fun Activity.createToast(msg: String) {
 
 
 fun Activity.hideKeyboard() {
+    val focus = this.currentFocus
+    if (focus is EditText) {
+        focus.clearFocus()
+    }
     val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
+
+
 }
 
 
@@ -153,6 +163,29 @@ fun Fragment.createAlerter(msg: String) {
 }
 
 
+/***  NAV GRAPH***/
+
+fun NavController.navigateWithFade(actionId: Int) {
+
+    val navBuilder = NavOptions.Builder()
+    navBuilder.setEnterAnim(R.anim.fade_in)
+    navBuilder.setExitAnim(R.anim.fade_out)
+    navBuilder.setPopEnterAnim(R.anim.fade_in)
+    navBuilder.setPopExitAnim(R.anim.fade_out)
+    this.navigate(actionId, null, navBuilder.build())
+}
+
+fun NavController.navigateWithAnimation(actionId: Int, bundle: Bundle? = null) {
+
+    val navBuilder = NavOptions.Builder()
+
+    navBuilder.setEnterAnim(R.anim.enter_from_right)
+    navBuilder.setExitAnim(R.anim.exit_to_left)
+    navBuilder.setPopEnterAnim(R.anim.enter_from_left)
+    navBuilder.setPopExitAnim(R.anim.exit_to_right)
+    this.navigate(actionId, bundle, navBuilder.build())
+}
+
 /** ____________OTHERS_____________________________ */
 
 
@@ -170,6 +203,18 @@ fun ImageView.startAnimation() {
     } else if (drawable is AnimatedVectorDrawable) {
         (drawable as AnimatedVectorDrawable).start()
     }
+}
+
+
+fun postDelay(time: Long, function: () -> Unit) {
+    /*Timer().schedule(object : TimerTask() {
+        override fun run() {
+            function.invoke()
+        }
+    }, time)*/
+
+    val handler = Handler()
+    handler.postDelayed({ function.invoke() }, time)
 }
 
 
