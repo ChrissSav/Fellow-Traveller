@@ -9,6 +9,7 @@ class LogoutUseCase(
     suspend operator fun invoke(): Boolean {
         return roomCall {
             dataSource.logoutRemote()
+            dataSource.deleteAllCars()
             dataSource.logoutUserLocal()
             true
         }

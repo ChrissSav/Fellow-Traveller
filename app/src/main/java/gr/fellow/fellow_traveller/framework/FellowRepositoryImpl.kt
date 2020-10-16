@@ -65,14 +65,14 @@ class FellowRepositoryImpl(
         }
 
 
-    override suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<CarResponse> =
-        networkCall {
-            service.addCar(carRequest).handleToCorrectFormat()
+    override suspend fun addCarRemote(carRequest: CarRequest): ResultWrapperSecond<CarResponse> =
+        networkCallSecond {
+            service.addCar(carRequest).handleApiFormat()
         }
 
-    override suspend fun getCarsRemote(): ResultWrapper<MutableList<CarResponse>> =
-        networkCall {
-            service.userCars().handleToCorrectFormat()
+    override suspend fun getCarsRemote(): ResultWrapperSecond<MutableList<CarResponse>> =
+        networkCallSecond {
+            service.userCars().handleApiFormat()
         }
 
     override suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse> =
@@ -127,7 +127,6 @@ class FellowRepositoryImpl(
     override suspend fun logoutUserLocal() =
         roomCall {
             userAuthDao.deleteUser()
-            carDao.deleteCars()
         }
 
     override suspend fun deleteCarsLocal() =
@@ -137,7 +136,7 @@ class FellowRepositoryImpl(
 
     override suspend fun deleteCarByIdLocal(id: Int) =
         roomCall {
-            carDao.deleteCarById(id)
+            carDao.deleteCarById(id.toString())
         }
 
     override suspend fun getAllCarsLocal() =

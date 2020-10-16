@@ -5,12 +5,13 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Car(
-    val id: Int,
+    val id: String,
     val brand: String,
     val model: String,
     val plate: String,
     val color: String
 ) : Parcelable {
+
     val baseInfo: String
         get() = "$brand $model"
 

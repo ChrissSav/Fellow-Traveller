@@ -13,13 +13,13 @@ interface CarDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(carEntity: CarEntity)
 
-    @Query("DELETE FROM cars")
-    suspend fun deleteCars()
+    @Query("DELETE FROM car")
+    suspend fun deleteCars(): Int
 
-    @Query("DELETE FROM cars where id = :id")
-    suspend fun deleteCarById(id: Int) : Int
+    @Query("DELETE FROM car where id = :id")
+    suspend fun deleteCarById(id: String): Int
 
-    @Query("SELECT * FROM cars")
+    @Query("SELECT * FROM car")
     suspend fun getCars(): MutableList<CarEntity>
 
 }

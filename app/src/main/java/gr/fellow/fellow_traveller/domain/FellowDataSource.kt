@@ -36,9 +36,9 @@ interface FellowDataSource {
 
     //Cars
 
-    suspend fun getCarsRemote(): ResultWrapper<MutableList<Car>>
+    suspend fun getCarsRemote(): ResultWrapperSecond<MutableList<Car>>
 
-    suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<Car>
+    suspend fun addCarRemote(carRequest: CarRequest): ResultWrapperSecond<Car>
 
     suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse>
 
@@ -78,6 +78,8 @@ interface FellowDataSource {
     suspend fun insertCarLocal(car: Car)
 
     suspend fun deleteCarLocal(carId: Int): Int
+
+    suspend fun deleteAllCars(): Int
 
     //  suspend fun addTripLocal(tripCreateRequest: TripCreateRequest): ResultWrapper<TripResponse>
 

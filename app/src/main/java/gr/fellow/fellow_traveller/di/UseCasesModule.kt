@@ -34,6 +34,14 @@ class UseCasesModule {
         return VerifyAccountUseCase(dataSource)
     }
 
+
+    @ActivityScoped
+    @Provides
+    fun provideVDeleteUserCars(dataSource: FellowDataSource): DeleteUserCars {
+        return DeleteUserCars(dataSource)
+    }
+
+
     @ActivityScoped
     @Provides
     fun provideCheckEmailUseCase(dataSource: FellowDataSource): CheckUserEmailUseCase {

@@ -36,11 +36,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     )
 
 
-    override fun onRestart() {
-        viewModel.loadCars()
-        super.onRestart()
-    }
-
 
     override fun provideViewBinding(): ActivityHomeBinding =
         ActivityHomeBinding.inflate(layoutInflater)
@@ -57,6 +52,13 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
             }
         })
 
+
+        viewModel.errorSecond.observe(this, Observer {
+            if (it.internal)
+                createAlerter(getString(it.messageId))
+            else
+                createAlerter(it.message)
+        })
         viewModel.error.observe(this, Observer {
             createAlerter(getString(it))
         })
@@ -66,7 +68,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
 
         viewModel.loadUserInfo()
-        //  viewModel.loadCars()
+        viewModel.loadCars()
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_container)
 

@@ -4,19 +4,17 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.ResultWrapper
+import gr.fellow.fellow_traveller.data.ResultWrapperSecond
 import gr.fellow.fellow_traveller.domain.car.Car
+import gr.fellow.fellow_traveller.domain.externalError
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.LoadUserInfoUseCase
 import gr.fellow.fellow_traveller.usecase.auth.LogoutUseCase
-import gr.fellow.fellow_traveller.usecase.home.DeleteCarUseCase
-import gr.fellow.fellow_traveller.usecase.home.GetUserCarsLocalUseCase
-import gr.fellow.fellow_traveller.usecase.home.GetUserCarsRemoteUseCase
-import gr.fellow.fellow_traveller.usecase.home.RegisterCarLocalUseCase
+import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsCreatorRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsPassengerRemoteUseCase
 import kotlinx.coroutines.launch
@@ -31,6 +29,7 @@ constructor(
     private val getUserCarsLocalUseCase: GetUserCarsLocalUseCase,
     private val registerCarLocalUseCase: RegisterCarLocalUseCase,
     private val deleteCarUseCase: DeleteCarUseCase,
+    private val deleteUserCars: DeleteUserCars,
     private val getTripsAsCreatorRemoteUseCase: GetTripsAsCreatorRemoteUseCase,
     private val getTripsAsPassengerRemoteUseCase: GetTripsAsPassengerRemoteUseCase
 ) : BaseViewModel() {
@@ -80,17 +79,18 @@ constructor(
     }
 
     fun loadCars() {
-        launch {
+        launchSecond {
             try {
+                val temp = deleteUserCars()
                 when (val response = getUserCarsRemoteUseCase()) {
-                    is ResultWrapper.Success -> {
+                    is ResultWrapperSecond.Success -> {
                         for (item in response.data) {
                             registerCarLocalUseCase(item)
                         }
                         _cars.value = getUserCarsLocalUseCase()
                     }
-                    is ResultWrapper.Error -> {
-                        error.value = response.error.msg
+                    is ResultWrapperSecond.Error -> {
+                        errorSecond.value = externalError(response.error)
                     }
                 }
             } catch (exception: Exception) {
@@ -102,24 +102,23 @@ constructor(
     }
 
     fun loadCarsLocal() {
-        launch {
+        launchSecond {
             _cars.value = getUserCarsLocalUseCase()
-
         }
     }
 
 
     fun deleteCar(car: Car) {
         launch {
-            when (val response = deleteCarUseCase(car.id)) {
-                is ResultWrapper.Success -> {
-                    _cars.value = getUserCarsLocalUseCase()
-                    _carDeletedId.value = car
-                }
-                is ResultWrapper.Error -> {
-                    error.value = R.string.ERROR_CAR_NOT_BELONG_TO_USER
-                }
-            }
+            /* when (val response = deleteCarUseCase(car.id)) {
+                 is ResultWrapper.Success -> {
+                     _cars.value = getUserCarsLocalUseCase()
+                     _carDeletedId.value = car
+                 }
+                 is ResultWrapper.Error -> {
+                     error.value = R.string.ERROR_CAR_NOT_BELONG_TO_USER
+                 }
+             }*/
         }
     }
 

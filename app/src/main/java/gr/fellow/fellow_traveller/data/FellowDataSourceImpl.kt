@@ -39,27 +39,27 @@ class FellowDataSourceImpl(
     override suspend fun registerUserAuth(userEntity: RegisteredUserEntity) =
         repository.registerUserAuthLocal(userEntity)
 
-    override suspend fun getCarsRemote(): ResultWrapper<MutableList<Car>> {
+    override suspend fun getCarsRemote(): ResultWrapperSecond<MutableList<Car>> {
         return when (val response = repository.getCarsRemote()) {
-            is ResultWrapper.Success -> {
-                ResultWrapper.Success(response.data.map {
+            is ResultWrapperSecond.Success -> {
+                ResultWrapperSecond.Success(response.data.map {
                     it.mapToCar()
                 }.toMutableList())
             }
-            is ResultWrapper.Error -> {
-                ResultWrapper.Error(response.error)
+            is ResultWrapperSecond.Error -> {
+                ResultWrapperSecond.Error(response.error)
             }
         }
     }
 
 
-    override suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<Car> {
+    override suspend fun addCarRemote(carRequest: CarRequest): ResultWrapperSecond<Car> {
         return when (val response = repository.addCarRemote(carRequest)) {
-            is ResultWrapper.Success -> {
-                ResultWrapper.Success(response.data.mapToCar())
+            is ResultWrapperSecond.Success -> {
+                ResultWrapperSecond.Success(response.data.mapToCar())
             }
-            is ResultWrapper.Error -> {
-                ResultWrapper.Error(response.error)
+            is ResultWrapperSecond.Error -> {
+                ResultWrapperSecond.Error(response.error)
             }
         }
     }
@@ -144,6 +144,9 @@ class FellowDataSourceImpl(
 
     override suspend fun deleteCarLocal(carId: Int) =
         repository.deleteCarByIdLocal(carId)
+
+    override suspend fun deleteAllCars() =
+        repository.deleteCarsLocal()
 
 
 }

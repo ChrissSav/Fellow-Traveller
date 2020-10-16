@@ -40,16 +40,18 @@ interface FellowService {
         @Body logoutRequest: LogoutRequest
     ): Response<BaseResponse<String>>
 
+    /** CAR **/
 
-    //Car
-    @GET("cars")
-    suspend fun userCars(): Response<ArrayList<CarResponse>>
+    @GET("car")
+    suspend fun userCars():
+            Response<BaseResponse<MutableList<CarResponse>>>
 
 
-    @POST("cars")
+    @POST("car")
     suspend fun addCar(
         @Body carRequest: CarRequest
-    ): Response<CarResponse>
+    ): Response<BaseResponse<CarResponse>>
+
 
     @DELETE("/cars/{car_id}")
     suspend fun deleteCar(

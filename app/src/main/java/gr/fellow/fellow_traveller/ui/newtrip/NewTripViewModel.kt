@@ -149,7 +149,7 @@ constructor(
                 destinationFrom.value?.placeId.toString(), destinationTo.value?.placeId.toString(),
                 destinationPickUp.value?.placeId.toString(),
                 dateTimeToTimestamp(date.value.toString(), time.value.toString()),
-                pet.value!!, seats.value!!, bags.value!!, message.value.toString(), price.value!!, car.value?.id!!
+                pet.value!!, seats.value!!, bags.value!!, message.value.toString(), price.value!!, car.value?.id!!.toInt()
             )
                 ) {
                 is ResultWrapper.Success -> {

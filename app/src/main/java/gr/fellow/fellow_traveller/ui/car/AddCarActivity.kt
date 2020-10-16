@@ -20,8 +20,11 @@ class AddCarActivity : BaseActivity<ActivityAddCarBinding>() {
 
 
     override fun setUpObservers() {
-        viewModel.error.observe(this, Observer {
-            createAlerter(getString(it), R.color.aqua)
+        viewModel.errorSecond.observe(this, Observer {
+            if (it.internal)
+                createAlerter(getString(it.messageId), R.color.aqua)
+            else
+                createAlerter(it.message, R.color.aqua)
         })
 
         viewModel.saved.observe(this, Observer {

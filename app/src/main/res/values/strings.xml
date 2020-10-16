@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">fellow.</string>
-    <string name="API_BASE_URL">https://api.fellowtraveller.gr/</string>
     <string name="PLACE_URL">https://maps.googleapis.com/maps/api/place/autocomplete/</string>
     <string name="PLACE_DETAIL_URL">https://maps.googleapis.com/maps/api/place/details/</string>
     <string name="PLACE_KEY">AIzaSyBJ8UG-fR3GSjfbfAcatZezGZi2Y8FDzqA</string>

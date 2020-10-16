@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.framework
 
 import android.content.SharedPreferences
+import android.util.Log
 import gr.fellow.fellow_traveller.data.FellowRefreshTokenRepository
 import gr.fellow.fellow_traveller.data.UnauthorizedException
 import gr.fellow.fellow_traveller.utils.*
@@ -31,11 +32,16 @@ constructor(
 
             var token = sharedPreferences.getString(PREFS_AUTH_ACCESS_TOKEN, "").toString()
             newRequest.addHeader("Authorization", "Bearer $token")
+            Log.i("TokenInterceptor", "first")
+
             val response = chain.proceed(newRequest.build())
 
             if (response.code == 401) {
                 handleForbiddenResponse()
+                Log.i("TokenInterceptor", "re try")
+
                 token = sharedPreferences.getString(PREFS_AUTH_ACCESS_TOKEN, "").toString()
+                newRequest.removeHeader("Authorization")
                 newRequest.addHeader("Authorization", "Bearer $token")
                 chain.proceed(firstRequest.build())
             }
@@ -44,12 +50,15 @@ constructor(
     }
 
     private fun handleForbiddenResponse() {
+        Log.i("TokenInterceptor", "handleForbiddenResponse")
         runBlocking {
             val refreshToken = sharedPreferences.getString(PREFS_AUTH_REFRESH_TOKEN, "").toString()
             val response = fellowRefreshTokenRepository.refreshToken(refreshToken)
             if (response.isSuccessful) {
                 sharedPreferences[PREFS_AUTH_ACCESS_TOKEN] = response.body()?.data?.accessToken.toString()
                 sharedPreferences[PREFS_AUTH_REFRESH_TOKEN] = response.body()?.data?.refreshToken.toString()
+                Log.i("TokenInterceptor", "save new")
+
             } else {
                 throw UnauthorizedException()
             }

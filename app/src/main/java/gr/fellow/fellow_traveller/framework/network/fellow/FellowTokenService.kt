@@ -9,7 +9,7 @@ import retrofit2.http.POST
 
 interface FellowTokenService {
 
-    @POST("auth/makis")
+    @POST("auth/refresh_token")
     suspend fun refreshToken(
         @Body refreshToken: RefreshTokenRequest
     ): Response<BaseResponse<AccessRefreshTokenResponse>>

@@ -23,9 +23,9 @@ interface FellowRepository {
 
     // Cars
 
-    suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<CarResponse>
+    suspend fun addCarRemote(carRequest: CarRequest): ResultWrapperSecond<CarResponse>
 
-    suspend fun getCarsRemote(): ResultWrapper<MutableList<CarResponse>>
+    suspend fun getCarsRemote(): ResultWrapperSecond<MutableList<CarResponse>>
 
     suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse>
 
@@ -54,7 +54,7 @@ interface FellowRepository {
 
     // Cars
 
-    suspend fun deleteCarsLocal()
+    suspend fun deleteCarsLocal(): Int
 
     suspend fun deleteCarByIdLocal(id: Int): Int
 

@@ -37,7 +37,6 @@
         android:visibility="gone"
         android:background="@drawable/bottom_sheet_dialog_shape"
         android:backgroundTint="#FFDCBB"
-        android:elevation="16dp"
         app:layout_constraintBottom_toTopOf="@+id/HomeActivity_bottomNavigationView">
 
         <TextView
@@ -87,7 +86,6 @@
         android:layout_height="55dp"
         android:background="@drawable/top_line_bottom_nav"
         android:outlineProvider="none"
-        android:elevation="16dp"
         app:itemIconSize="30dp"
         app:itemIconTint="@drawable/bottom_nav_color"
         app:itemTextColor="@drawable/bottom_nav_color"
