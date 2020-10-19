@@ -2,11 +2,10 @@ package gr.fellow.fellow_traveller.usecase.home
 
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 
-class DeleteUserCars(
+class DeleteUserLocalCars(
     private val dataSource: FellowDataSource
 ) {
 
-    suspend operator fun invoke(): Int =
-        dataSource.deleteAllCars()
-
+    suspend operator fun invoke() =
+        dataSource.deleteAllLocaleCars()
 }

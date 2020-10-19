@@ -8,9 +8,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentSuccessRegistrationBinding
+import gr.fellow.fellow_traveller.ui.extensions.setTextHtml
+import gr.fellow.fellow_traveller.ui.extensions.startAnimation
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
-import gr.fellow.fellow_traveller.ui.setTextHtml
-import gr.fellow.fellow_traveller.ui.startAnimation
 
 
 @AndroidEntryPoint

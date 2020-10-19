@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.ui
+package gr.fellow.fellow_traveller.ui.extensions
 
 import android.app.Activity
 import android.content.Intent

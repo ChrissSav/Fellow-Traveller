@@ -10,11 +10,11 @@ import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentTripsOffersBinding
 import gr.fellow.fellow_traveller.domain.TripType
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
-import gr.fellow.fellow_traveller.ui.findNavController
+import gr.fellow.fellow_traveller.ui.extensions.findNavController
+import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
+import gr.fellow.fellow_traveller.ui.extensions.startActivity
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
-import gr.fellow.fellow_traveller.ui.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripActivity
-import gr.fellow.fellow_traveller.ui.startActivity
 
 
 @AndroidEntryPoint
@@ -29,7 +29,7 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
         FragmentTripsOffersBinding.inflate(layoutInflater)
 
     override fun setUpObservers() {
-        viewModel.loadTripAsCreator()
+        //viewModel.loadTripAsCreator()
 
         viewModel.tripsAsCreator.observe(viewLifecycleOwner, Observer { list ->
             tripsList.clear()

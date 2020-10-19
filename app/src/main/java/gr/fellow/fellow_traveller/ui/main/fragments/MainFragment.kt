@@ -3,8 +3,8 @@ package gr.fellow.fellow_traveller.ui.main.fragments
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentMainBinding
+import gr.fellow.fellow_traveller.ui.extensions.startActivity
 import gr.fellow.fellow_traveller.ui.register.RegisterActivity
-import gr.fellow.fellow_traveller.ui.startActivity
 
 
 class MainFragment : BaseFragment<FragmentMainBinding>() {

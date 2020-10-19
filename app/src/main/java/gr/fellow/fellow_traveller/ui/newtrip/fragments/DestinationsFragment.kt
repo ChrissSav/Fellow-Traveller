@@ -8,10 +8,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentDestinationsBinding
-import gr.fellow.fellow_traveller.ui.findNavController
+import gr.fellow.fellow_traveller.ui.extensions.findNavController
+import gr.fellow.fellow_traveller.ui.extensions.startActivityForResultWithFade
 import gr.fellow.fellow_traveller.ui.location.SelectLocationActivity
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
-import gr.fellow.fellow_traveller.ui.startActivityForResultWithFade
 
 
 @AndroidEntryPoint

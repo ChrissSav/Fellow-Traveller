@@ -5,7 +5,7 @@ import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentSuccessTripBookBinding
-import gr.fellow.fellow_traveller.ui.postDelay
+import gr.fellow.fellow_traveller.ui.extensions.postDelay
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
 
 @AndroidEntryPoint

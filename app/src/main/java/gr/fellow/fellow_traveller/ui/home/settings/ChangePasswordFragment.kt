@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import gr.fellow.fellow_traveller.databinding.FragmentChangePasswordBinding
-import gr.fellow.fellow_traveller.ui.onBackPressed
+import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
 
 
 class ChangePasswordFragment : Fragment() {

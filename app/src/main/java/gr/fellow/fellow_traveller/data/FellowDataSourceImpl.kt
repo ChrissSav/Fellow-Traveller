@@ -145,7 +145,7 @@ class FellowDataSourceImpl(
     override suspend fun deleteCarLocal(carId: Int) =
         repository.deleteCarByIdLocal(carId)
 
-    override suspend fun deleteAllCars() =
+    override suspend fun deleteAllLocaleCars() =
         repository.deleteCarsLocal()
 
 

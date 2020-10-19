@@ -17,8 +17,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat.getColor
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.ui.toDp
-import gr.fellow.fellow_traveller.ui.toPx
+import gr.fellow.fellow_traveller.ui.extensions.toDp
+import gr.fellow.fellow_traveller.ui.extensions.toPx
 
 
 class FellowEditText : ConstraintLayout {

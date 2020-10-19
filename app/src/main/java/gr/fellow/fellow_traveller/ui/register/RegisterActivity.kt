@@ -9,8 +9,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivityRegisterBinding
-import gr.fellow.fellow_traveller.ui.createAlerter
-import gr.fellow.fellow_traveller.ui.hideKeyboard
+import gr.fellow.fellow_traveller.ui.extensions.createAlerter
+import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
 
 
 @AndroidEntryPoint

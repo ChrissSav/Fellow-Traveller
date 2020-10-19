@@ -1,17 +1,14 @@
 package gr.fellow.fellow_traveller.ui.rate
 
-import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.willy.ratingbar.BaseRatingBar.OnRatingChangeListener
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivityRateBinding
-import gr.fellow.fellow_traveller.ui.createAlerter
-import gr.fellow.fellow_traveller.ui.createToast
-import gr.fellow.fellow_traveller.ui.loadImageFromUrl
-import kotlin.math.roundToInt
+import gr.fellow.fellow_traveller.ui.extensions.createAlerter
+import gr.fellow.fellow_traveller.ui.extensions.createToast
+import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 
 @AndroidEntryPoint
 class RateActivity : BaseActivity<ActivityRateBinding>() {

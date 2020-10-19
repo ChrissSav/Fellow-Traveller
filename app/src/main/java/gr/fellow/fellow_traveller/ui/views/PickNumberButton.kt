@@ -12,7 +12,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.ui.toPx
+import gr.fellow.fellow_traveller.ui.extensions.toPx
 
 class PickNumberButton : ConstraintLayout {
 

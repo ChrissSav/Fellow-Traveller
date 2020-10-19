@@ -14,8 +14,8 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivitySelectLocationBinding
 import gr.fellow.fellow_traveller.framework.network.google.response.PredictionResponse
-import gr.fellow.fellow_traveller.ui.createAlerter
-import gr.fellow.fellow_traveller.ui.hideKeyboard
+import gr.fellow.fellow_traveller.ui.extensions.createAlerter
+import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
 import gr.fellow.fellow_traveller.ui.location.adapter.PlacesAdapter
 
 @AndroidEntryPoint

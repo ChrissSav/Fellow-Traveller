@@ -6,9 +6,9 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivitySplashBinding
+import gr.fellow.fellow_traveller.ui.extensions.openActivityWithFade
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.main.MainActivity
-import gr.fellow.fellow_traveller.ui.openActivityWithFade
 import gr.fellow.fellow_traveller.utils.PREFS_AUTH_ACCESS_TOKEN
 import javax.inject.Inject
 

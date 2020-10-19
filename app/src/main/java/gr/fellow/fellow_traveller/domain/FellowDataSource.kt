@@ -79,7 +79,7 @@ interface FellowDataSource {
 
     suspend fun deleteCarLocal(carId: Int): Int
 
-    suspend fun deleteAllCars(): Int
+    suspend fun deleteAllLocaleCars(): Int
 
     //  suspend fun addTripLocal(tripCreateRequest: TripCreateRequest): ResultWrapper<TripResponse>
 

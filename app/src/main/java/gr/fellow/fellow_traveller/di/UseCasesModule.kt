@@ -37,8 +37,8 @@ class UseCasesModule {
 
     @ActivityScoped
     @Provides
-    fun provideVDeleteUserCars(dataSource: FellowDataSource): DeleteUserCars {
-        return DeleteUserCars(dataSource)
+    fun provideVDeleteUserCars(dataSource: FellowDataSource): DeleteCarUseCase {
+        return DeleteCarUseCase(dataSource)
     }
 
 
@@ -115,8 +115,8 @@ class UseCasesModule {
 
     @ActivityScoped
     @Provides
-    fun provideDeleteCarUseCase(dataSource: FellowDataSource): DeleteCarUseCase {
-        return DeleteCarUseCase(dataSource)
+    fun provideDeleteCarUseCase(dataSource: FellowDataSource): DeleteUserLocalCars {
+        return DeleteUserLocalCars(dataSource)
     }
 
     @ActivityScoped

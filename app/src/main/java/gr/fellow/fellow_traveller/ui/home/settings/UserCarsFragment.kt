@@ -12,12 +12,12 @@ import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentUserCarsBinding
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.ui.car.AddCarActivity
-import gr.fellow.fellow_traveller.ui.car.CarAdapterSecond
-import gr.fellow.fellow_traveller.ui.findNavController
+import gr.fellow.fellow_traveller.ui.car.CarAdapter
+import gr.fellow.fellow_traveller.ui.extensions.findNavController
+import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
+import gr.fellow.fellow_traveller.ui.extensions.postDelay
+import gr.fellow.fellow_traveller.ui.extensions.startActivityForResult
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
-import gr.fellow.fellow_traveller.ui.onBackPressed
-import gr.fellow.fellow_traveller.ui.postDelay
-import gr.fellow.fellow_traveller.ui.startActivityForResult
 
 
 @AndroidEntryPoint
@@ -35,9 +35,7 @@ class UserCarsFragment : BaseFragment<FragmentUserCarsBinding>() {
     override fun setUpObservers() {
         postDelay(250) {
             viewModel.cars.observe(viewLifecycleOwner, Observer {
-                carsList.clear()
-                carsList.addAll(it)
-                binding.myCarsRecycler.adapter?.notifyDataSetChanged()
+                (binding.myCarsRecycler.adapter as CarAdapter).submitList(it)
                 binding.refresh.isRefreshing = false
             })
         }
@@ -45,7 +43,7 @@ class UserCarsFragment : BaseFragment<FragmentUserCarsBinding>() {
 
     override fun setUpViews() {
         with(binding) {
-            myCarsRecycler.adapter = CarAdapterSecond(carsList) {
+            myCarsRecycler.adapter = CarAdapter {
                 findNavController()?.navigate(R.id.action_userCarsFragment_to_carDetailsFragment, bundleOf("car" to it))
             }
 

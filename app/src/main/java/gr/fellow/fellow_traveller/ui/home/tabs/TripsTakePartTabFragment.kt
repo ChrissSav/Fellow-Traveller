@@ -10,11 +10,11 @@ import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentTakesPartTabBinding
 import gr.fellow.fellow_traveller.domain.TripType
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
-import gr.fellow.fellow_traveller.ui.findNavController
+import gr.fellow.fellow_traveller.ui.extensions.findNavController
+import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
+import gr.fellow.fellow_traveller.ui.extensions.startActivity
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
-import gr.fellow.fellow_traveller.ui.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.search.SearchTripActivity
-import gr.fellow.fellow_traveller.ui.startActivity
 
 @AndroidEntryPoint
 class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
@@ -28,7 +28,7 @@ class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
 
 
     override fun setUpObservers() {
-        homeViewModel.loadTripTakesPart()
+        //homeViewModel.loadTripTakesPart()
         homeViewModel.tripsTakesPart.observe(viewLifecycleOwner, Observer { list ->
             tripsList.clear()
             tripsList.addAll(list)

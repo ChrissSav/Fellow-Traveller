@@ -29,7 +29,7 @@ constructor(
     private val getUserCarsLocalUseCase: GetUserCarsLocalUseCase,
     private val registerCarLocalUseCase: RegisterCarLocalUseCase,
     private val deleteCarUseCase: DeleteCarUseCase,
-    private val deleteUserCars: DeleteUserCars,
+    private val deleteUserLocalCars: DeleteUserLocalCars,
     private val getTripsAsCreatorRemoteUseCase: GetTripsAsCreatorRemoteUseCase,
     private val getTripsAsPassengerRemoteUseCase: GetTripsAsPassengerRemoteUseCase
 ) : BaseViewModel() {
@@ -81,9 +81,9 @@ constructor(
     fun loadCars() {
         launchSecond {
             try {
-                val temp = deleteUserCars()
                 when (val response = getUserCarsRemoteUseCase()) {
                     is ResultWrapperSecond.Success -> {
+                        deleteUserLocalCars()
                         for (item in response.data) {
                             registerCarLocalUseCase(item)
                         }

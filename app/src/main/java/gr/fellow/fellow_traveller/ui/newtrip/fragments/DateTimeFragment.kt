@@ -8,7 +8,7 @@ import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentDateTimeBinding
 import gr.fellow.fellow_traveller.ui.dialogs.DatePickerCustomDialog
 import gr.fellow.fellow_traveller.ui.dialogs.TimePickerCustomDialog
-import gr.fellow.fellow_traveller.ui.findNavController
+import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 import gr.fellow.fellow_traveller.utils.validateDateTimeDiffer
 

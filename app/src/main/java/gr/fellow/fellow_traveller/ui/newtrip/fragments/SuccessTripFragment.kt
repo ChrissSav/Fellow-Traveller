@@ -7,8 +7,8 @@ import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentSuccessTripBinding
+import gr.fellow.fellow_traveller.ui.extensions.postDelay
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
-import gr.fellow.fellow_traveller.ui.postDelay
 
 
 @AndroidEntryPoint

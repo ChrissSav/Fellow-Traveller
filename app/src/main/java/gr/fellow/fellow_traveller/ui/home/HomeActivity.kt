@@ -13,10 +13,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivityHomeBinding
-import gr.fellow.fellow_traveller.ui.createAlerter
-import gr.fellow.fellow_traveller.ui.hideKeyboard
-import gr.fellow.fellow_traveller.ui.navigateWithFade
-import gr.fellow.fellow_traveller.ui.toPx
+import gr.fellow.fellow_traveller.ui.extensions.createAlerter
+import gr.fellow.fellow_traveller.ui.extensions.navigateWithFade
+import gr.fellow.fellow_traveller.ui.extensions.toPx
 
 
 @AndroidEntryPoint
@@ -120,12 +119,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
                 }
             }
         }
-    }
-
-
-    override fun onBackPressed() {
-        hideKeyboard()
-        super.onBackPressed()
     }
 
 }

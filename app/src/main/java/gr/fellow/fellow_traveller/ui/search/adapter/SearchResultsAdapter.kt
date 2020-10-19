@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.models.Trip
-import gr.fellow.fellow_traveller.ui.loadImageFromUrl
+import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import kotlinx.android.synthetic.main.search_result_item.view.*
 
 class SearchResultsAdapter(

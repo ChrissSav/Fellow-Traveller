@@ -6,11 +6,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentLoginBinding
-import gr.fellow.fellow_traveller.ui.createAlerter
-import gr.fellow.fellow_traveller.ui.hideKeyboard
+import gr.fellow.fellow_traveller.ui.extensions.createAlerter
+import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
+import gr.fellow.fellow_traveller.ui.extensions.startActivityClearStack
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.main.LoginViewModel
-import gr.fellow.fellow_traveller.ui.startActivityClearStack
 
 
 @AndroidEntryPoint

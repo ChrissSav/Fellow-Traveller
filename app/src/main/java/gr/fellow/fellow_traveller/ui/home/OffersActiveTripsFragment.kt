@@ -8,9 +8,9 @@ import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentOffersActiveTripsBinding
 import gr.fellow.fellow_traveller.domain.TripType
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
+import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
+import gr.fellow.fellow_traveller.ui.extensions.postDelay
 import gr.fellow.fellow_traveller.ui.home.adapter.ActiveTripsAdapter
-import gr.fellow.fellow_traveller.ui.onBackPressed
-import gr.fellow.fellow_traveller.ui.postDelay
 
 
 @AndroidEntryPoint
