@@ -31,7 +31,8 @@ constructor(
         ) {
 
             var token = sharedPreferences.getString(PREFS_AUTH_ACCESS_TOKEN, "").toString()
-            newRequest.addHeader("Authorization", "Bearer $token")
+            if (token.length > 10)
+                newRequest.addHeader("Authorization", "Bearer $token")
             Log.i("TokenInterceptor", "first")
 
             val response = chain.proceed(newRequest.build())
@@ -42,7 +43,8 @@ constructor(
 
                 token = sharedPreferences.getString(PREFS_AUTH_ACCESS_TOKEN, "").toString()
                 newRequest.removeHeader("Authorization")
-                newRequest.addHeader("Authorization", "Bearer $token")
+                if (token.length > 10)
+                    newRequest.addHeader("Authorization", "Bearer $token")
                 chain.proceed(firstRequest.build())
             }
         }

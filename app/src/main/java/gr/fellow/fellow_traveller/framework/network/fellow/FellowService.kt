@@ -12,7 +12,7 @@ import retrofit2.http.*
 interface FellowService {
     /**  AUTH  **/
 
-    @POST("car")
+    @POST("auth/check_email")
     suspend fun checkIfAccountInfoExist(
         @Body emailRequest: CheckEmailRequest
     ): Response<BaseResponse<String>>
