@@ -51,11 +51,11 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
         nav.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { _, destination, _ ->
             hideKeyboard()
             when (destination.id) {
-                R.id.emailFragment -> binding.progressBar.progress = 25
-                R.id.passwordFragment -> binding.progressBar.progress = 50
-                R.id.accountFragment -> binding.progressBar.progress = 75
+                R.id.emailFragment -> binding.progressBar.progress = 30
+                R.id.passwordFragment -> binding.progressBar.progress = 60
+                R.id.accountFragment -> binding.progressBar.progress = 80
                 R.id.successRegistrationFragment -> {
-                    binding.progressBar.progress = 100
+                    binding.progressBar.visibility = View.GONE
                     binding.ImageButtonBack.visibility = View.GONE
                 }
             }

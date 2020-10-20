@@ -25,7 +25,7 @@ class SuccessRegistrationFragment : BaseFragment<FragmentSuccessRegistrationBind
 
     override fun setUpViews() {
 
-        binding.email.setTextHtml(getString(R.string.email_verify, viewModel.email.toString()))
+        binding.email.setTextHtml(getString(R.string.email_verify, viewModel.email.value.toString()))
 
 
         Handler().postDelayed({
