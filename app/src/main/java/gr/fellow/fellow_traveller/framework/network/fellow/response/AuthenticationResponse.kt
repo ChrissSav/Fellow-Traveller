@@ -13,6 +13,9 @@ data class UserAuthResponse(
     val firstName: String,
     val lastName: String,
     val email: String,
+    val rate: Float,
+    val reviews: Int,
     val picture: String?,
-    val messengerLink: String?
+    val messengerLink: String?,
+    val aboutMe: String?
 )

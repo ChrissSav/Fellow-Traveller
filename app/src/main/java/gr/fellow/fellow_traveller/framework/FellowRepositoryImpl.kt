@@ -64,6 +64,22 @@ class FellowRepositoryImpl(
             response
         }
 
+    override suspend fun forgotPassword(forgotPasswordRequest: ForgotPasswordRequest): ResultWrapperSecond<String> =
+        networkCallSecond {
+            service.forgotPassword(forgotPasswordRequest).handleApiFormat()
+        }
+
+
+    override suspend fun resetPassword(resetPasswordRequest: ResetPasswordRequest): ResultWrapperSecond<String> =
+        networkCallSecond {
+            service.resetPassword(resetPasswordRequest).handleApiFormat()
+        }
+
+    override suspend fun updateAccountInfo(updateAccountRequest: UpdateAccountRequest): ResultWrapperSecond<UserAuthResponse> =
+        networkCallSecond {
+            service.updateAccount(updateAccountRequest).handleApiFormat()
+        }
+
 
     override suspend fun addCarRemote(carRequest: CarRequest): ResultWrapperSecond<CarResponse> =
         networkCallSecond {

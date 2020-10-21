@@ -6,18 +6,17 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentLoginBinding
-import gr.fellow.fellow_traveller.ui.extensions.createAlerter
-import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
-import gr.fellow.fellow_traveller.ui.extensions.startActivityClearStack
+import gr.fellow.fellow_traveller.ui.extensions.*
+import gr.fellow.fellow_traveller.ui.forgotPassword.ForgotPasswordActivity
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
-import gr.fellow.fellow_traveller.ui.main.LoginViewModel
+import gr.fellow.fellow_traveller.ui.main.MainViewModel
 
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
 
-    private val viewModel: LoginViewModel by activityViewModels()
+    private val viewModel: MainViewModel by activityViewModels()
 
 
     override fun getViewBinding(): FragmentLoginBinding =
@@ -25,7 +24,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
 
     override fun setUpObservers() {
-        viewModel.result.observe(viewLifecycleOwner, Observer {
+        viewModel.loginResult.observe(viewLifecycleOwner, Observer {
             startActivityClearStack(HomeActivity::class)
         })
     }
@@ -34,23 +33,22 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
         binding.buttonLogin.setOnClickListener {
             hideKeyboard()
-            if (binding.email.text.toString().isEmpty() && binding.password.text.toString()
-                    .isEmpty()
-            ) {
+            if (binding.email.text.toString().isEmpty() && binding.password.text.toString().isEmpty()) {
                 createAlerter(resources.getString(R.string.ERROR_FIELDS_REQUIRE))
             } else {
-                viewModel.login(
-                    binding.email.text.toString(),
-                    binding.password.text.toString()
-                )
+                viewModel.login(binding.email.text.toString(), binding.password.text.toString())
             }
 
         }
 
+        binding.forgotPassword.setOnClickListener {
+            startActivity(ForgotPasswordActivity::class)
+        }
 
-        /* binding.registerButton.setOnClickListener {
-             startActivity(RegisterActivity::class)
-         }*/
+
+        binding.ImageButtonBack.setOnClickListener {
+            onBackPressed()
+        }
     }
 
 

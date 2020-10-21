@@ -2,14 +2,12 @@ package gr.fellow.fellow_traveller.framework.network.fellow
 
 import gr.fellow.fellow_traveller.data.BaseResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
-import gr.fellow.fellow_traveller.framework.network.fellow.response.AuthenticationResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.*
 import retrofit2.Response
 import retrofit2.http.*
 
 interface FellowService {
+
     /**  AUTH  **/
 
     @POST("auth/check_email")
@@ -40,11 +38,30 @@ interface FellowService {
         @Body logoutRequest: LogoutRequest
     ): Response<BaseResponse<String>>
 
+
+    @POST("auth/forgot_password")
+    suspend fun forgotPassword(
+        @Body forgotPasswordRequest: ForgotPasswordRequest
+    ): Response<BaseResponse<String>>
+
+
+    @POST("auth/reset_password")
+    suspend fun resetPassword(
+        @Body resetPasswordRequest: ResetPasswordRequest
+    ): Response<BaseResponse<String>>
+
+
+    /** User **/
+
+    @POST("user")
+    suspend fun updateAccount(
+        @Body updateAccountRequest: UpdateAccountRequest
+    ): Response<BaseResponse<UserAuthResponse>>
+
     /** CAR **/
 
     @GET("car")
-    suspend fun userCars():
-            Response<BaseResponse<MutableList<CarResponse>>>
+    suspend fun userCars(): Response<BaseResponse<MutableList<CarResponse>>>
 
 
     @POST("car")

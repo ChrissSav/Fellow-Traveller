@@ -15,7 +15,7 @@ class FellowPassword(context: Context, attrs: AttributeSet) : ConstraintLayout(c
     private var hint = ""
     private var binding = FellowPasswordBinding.inflate(LayoutInflater.from(context), this, true)
     private var imeOptions = 0
-    private var passwordIsHide = true
+    private var passwordIsHide = false
 
     var text: String? = null
         get() = binding.fellowEditTextTextInputEditText.text.toString()

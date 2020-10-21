@@ -7,9 +7,7 @@ import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.scopes.ActivityScoped
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.usecase.LoadUserInfoUseCase
-import gr.fellow.fellow_traveller.usecase.auth.LoginUseCase
-import gr.fellow.fellow_traveller.usecase.auth.LogoutUseCase
-import gr.fellow.fellow_traveller.usecase.auth.VerifyAccountUseCase
+import gr.fellow.fellow_traveller.usecase.auth.*
 import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.newtrip.GetGeometryFormPlaceUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.GetPlaceFromPlacesUseCase
@@ -30,8 +28,32 @@ class UseCasesModule {
 
     @ActivityScoped
     @Provides
+    fun provideUpdateAccountInfoUseCase(dataSource: FellowDataSource): UpdateAccountInfoUseCase {
+        return UpdateAccountInfoUseCase(dataSource)
+    }
+
+    @ActivityScoped
+    @Provides
+    fun provideLogoutRemoteUseCase(dataSource: FellowDataSource): LogoutRemoteUseCase {
+        return LogoutRemoteUseCase(dataSource)
+    }
+
+    @ActivityScoped
+    @Provides
     fun provideVerifyAccountUseCase(dataSource: FellowDataSource): VerifyAccountUseCase {
         return VerifyAccountUseCase(dataSource)
+    }
+
+    @ActivityScoped
+    @Provides
+    fun provideResetPasswordUserCase(dataSource: FellowDataSource): ResetPasswordUserCase {
+        return ResetPasswordUserCase(dataSource)
+    }
+
+    @ActivityScoped
+    @Provides
+    fun provideForgotPasswordUserCase(dataSource: FellowDataSource): ForgotPasswordUserCase {
+        return ForgotPasswordUserCase(dataSource)
     }
 
 
@@ -80,8 +102,8 @@ class UseCasesModule {
 
     @ActivityScoped
     @Provides
-    fun provideLoadLogoutUseCase(dataSource: FellowDataSource): LogoutUseCase {
-        return LogoutUseCase(dataSource)
+    fun provideLoadLogoutUseCase(dataSource: FellowDataSource): DeleteUserAuthLocalUseCase {
+        return DeleteUserAuthLocalUseCase(dataSource)
     }
 
 

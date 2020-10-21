@@ -28,6 +28,8 @@ constructor(
             && !(request.url.encodedPath.contains("/check_email") && request.method == "POST")
             && !(request.url.encodedPath.contains("/verify_account") && request.method == "GET")
             && !(request.url.encodedPath.contains("/refresh_token") && request.method == "POST")
+            && !(request.url.encodedPath.contains("/forgot_password") && request.method == "POST")
+            && !(request.url.encodedPath.contains("/reset_password") && request.method == "POST")
         ) {
 
             var token = sharedPreferences.getString(PREFS_AUTH_ACCESS_TOKEN, "").toString()

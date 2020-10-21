@@ -11,6 +11,8 @@ import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 
 interface FellowRepository {
 
+    // Auth
+
     suspend fun checkField(checkEmailRequest: CheckEmailRequest): ResultWrapperSecond<String>
 
     suspend fun registerUserRemote(registerUserRequest: AccountCreateRequest): ResultWrapperSecond<String>
@@ -20,6 +22,14 @@ interface FellowRepository {
     suspend fun loginUserRemote(loginRequest: LoginRequest): ResultWrapperSecond<UserAuthResponse>
 
     suspend fun logout(): ResultWrapperSecond<String>
+
+    suspend fun forgotPassword(forgotPasswordRequest: ForgotPasswordRequest): ResultWrapperSecond<String>
+
+    suspend fun resetPassword(resetPasswordRequest: ResetPasswordRequest): ResultWrapperSecond<String>
+
+    // User
+
+    suspend fun updateAccountInfo(updateAccountRequest: UpdateAccountRequest): ResultWrapperSecond<UserAuthResponse>
 
     // Cars
 
@@ -50,7 +60,7 @@ interface FellowRepository {
 
     suspend fun loadUserAuthLocal(): RegisteredUserEntity
 
-    suspend fun logoutUserLocal()
+    suspend fun logoutUserLocal(): Int
 
     // Cars
 

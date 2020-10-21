@@ -15,7 +15,7 @@ interface UserAuthDao {
     suspend fun insertUser(userEntity: RegisteredUserEntity)
 
     @Query("DELETE FROM user_auth")
-    suspend fun deleteUser()
+    suspend fun deleteUser(): Int
 
     @Query("SELECT * FROM user_auth")
     suspend fun getUserRegistered(): RegisteredUserEntity

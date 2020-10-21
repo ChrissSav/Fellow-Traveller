@@ -18,6 +18,7 @@ import retrofit2.Response
 
 interface FellowDataSource {
 
+    //Auth
 
     suspend fun checkUserEmail(email: String): ResultWrapperSecond<String>
 
@@ -25,16 +26,25 @@ interface FellowDataSource {
 
     suspend fun verifyAccount(token: String): ResultWrapperSecond<String>
 
-
     suspend fun loginUser(username: String, password: String): ResultWrapperSecond<UserAuthResponse>
 
     suspend fun logoutRemote(): ResultWrapperSecond<String>
 
-
     suspend fun registerUserAuth(userEntity: RegisteredUserEntity)
 
+    suspend fun forgotPassword(email: String): ResultWrapperSecond<String>
 
-    //Cars
+    suspend fun resetPassword(code: String, password: String): ResultWrapperSecond<String>
+
+    // User
+
+    suspend fun updateAccount(
+        firstName: String, lastName: String, picture: String?,
+        messengerLink: String?, aboutMe: String?
+    ): ResultWrapperSecond<UserAuthResponse>
+
+
+    // Cars
 
     suspend fun getCarsRemote(): ResultWrapperSecond<MutableList<Car>>
 
@@ -43,7 +53,7 @@ interface FellowDataSource {
     suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse>
 
 
-    //Trips
+    // Trips
 
 
     suspend fun addTripRemote(tripCreateRequest: TripCreateRequest): ResultWrapper<TripInvolved>
@@ -71,7 +81,7 @@ interface FellowDataSource {
 
     suspend fun loadUsersInfoLocal(): LocalUser
 
-    suspend fun logoutUserLocal()
+    suspend fun logoutUserLocal(): Int
 
     suspend fun getAllCarsLocal(): MutableList<Car>
 

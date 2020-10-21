@@ -15,7 +15,7 @@ import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-    private val viewModel: LoginViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
     private var goToLogin = false
     private lateinit var nav: NavController
 

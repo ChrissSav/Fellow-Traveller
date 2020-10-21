@@ -13,7 +13,7 @@ import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.LoadUserInfoUseCase
-import gr.fellow.fellow_traveller.usecase.auth.LogoutUseCase
+import gr.fellow.fellow_traveller.usecase.auth.DeleteUserAuthLocalUseCase
 import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsCreatorRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsPassengerRemoteUseCase
@@ -24,7 +24,8 @@ class HomeViewModel
 @ViewModelInject
 constructor(
     private val loadUserInfoUseCase: LoadUserInfoUseCase,
-    private val logoutUseCase: LogoutUseCase,
+    private val deleteUserAuthLocalUseCase: DeleteUserAuthLocalUseCase,
+    private val logoutRemoteUseCase: LogoutRemoteUseCase,
     private val getUserCarsRemoteUseCase: GetUserCarsRemoteUseCase,
     private val getUserCarsLocalUseCase: GetUserCarsLocalUseCase,
     private val registerCarLocalUseCase: RegisterCarLocalUseCase,
@@ -69,11 +70,15 @@ constructor(
 
     fun logOut() {
         viewModelScope.launch {
+            load.value = true
             try {
-                val response = logoutUseCase()
+                val res = logoutRemoteUseCase()
+                val res2 = deleteUserAuthLocalUseCase()
+                val res1 = deleteUserLocalCars()
             } catch (e: java.lang.Exception) {
 
             }
+            load.value = false
             _logout.value = true
         }
     }

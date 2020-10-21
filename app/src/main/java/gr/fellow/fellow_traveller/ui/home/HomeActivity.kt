@@ -51,6 +51,13 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
             }
         })
 
+        viewModel.load.observe(this, Observer {
+            if (it)
+                binding.genericLoader.progressLoad.visibility = View.VISIBLE
+            else
+                binding.genericLoader.progressLoad.visibility = View.INVISIBLE
+        })
+
 
         viewModel.errorSecond.observe(this, Observer {
             if (it.internal)

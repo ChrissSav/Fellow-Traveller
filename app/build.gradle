@@ -54,7 +54,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
 
-
     implementation 'androidx.navigation:navigation-fragment:2.3.0'
     implementation 'androidx.navigation:navigation-ui:2.3.0'
     testImplementation 'junit:junit:4.12'
@@ -132,6 +131,9 @@ dependencies {
 
     //Alerter
     implementation 'com.tapadoo.android:alerter:6.1.0'
+
+    //Pinview
+    implementation 'com.github.GoodieBag:Pinview:v1.4'
 
 
     /* // ViewModel

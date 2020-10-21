@@ -6,7 +6,7 @@ import gr.fellow.fellow_traveller.framework.network.fellow.response.UserBaseResp
 import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 
 fun UserAuthResponse.mapToRegisteredUserEntity() = RegisteredUserEntity(
-    id, firstName, lastName, 0f, 10, picture, "aboutMe", email, messengerLink
+    id, firstName, lastName, rate, reviews, picture, aboutMe, email, messengerLink
 )
 
 

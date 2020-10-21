@@ -9,6 +9,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivityVerifyAccountBinding
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
+import gr.fellow.fellow_traveller.ui.extensions.startAnimation
 import gr.fellow.fellow_traveller.ui.main.MainActivity
 
 @AndroidEntryPoint
@@ -50,11 +51,19 @@ class VerifyAccountActivity : BaseActivity<ActivityVerifyAccountBinding>() {
         })
 
         viewModel.success.observe(this, Observer {
+            binding.view3.startAnimation()
+            binding.buttonLogin.visibility = View.VISIBLE
+
+        })
+
+
+        binding.buttonLogin.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             intent.putExtra("login", true)
             startActivity(intent)
             finishAffinity()
-        })
+        }
 
     }
 
