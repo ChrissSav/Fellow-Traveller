@@ -20,7 +20,7 @@ constructor(
     val saved: LiveData<Boolean> = _saved
 
     fun addCar(brand: String, model: String, plate: String, color: String) {
-        launch {
+        launchSecond(true) {
             when (val response = addCarToRemoteUseCase(brand, model, plate, color)) {
                 is ResultWrapperSecond.Success -> {
                     registerCarLocalUseCase(response.data)

@@ -51,6 +51,10 @@ open class BaseViewModel : ViewModel() {
         error.value = errorMsg
     }
 
+    fun setSecondError(errorMsg: Int) {
+        errorSecond.value = internalError(errorMsg)
+    }
+
     private fun handleError(e: Exception) {
         when (e) {
             is BaseApiException -> when (e.code) {

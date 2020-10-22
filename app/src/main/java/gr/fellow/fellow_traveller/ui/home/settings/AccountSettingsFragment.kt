@@ -18,10 +18,7 @@ import com.theartofdev.edmodo.cropper.CropImage
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentAccountSettingsBinding
-import gr.fellow.fellow_traveller.ui.extensions.createToast
-import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
-import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
-import gr.fellow.fellow_traveller.ui.extensions.postDelay
+import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import java.io.File
 
@@ -50,11 +47,15 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                     it.messengerLink?.let { m ->
                         messengerLink.text = m
                     }
+                    aboutMe.text = it.aboutMe
                     // messengerLink.text = getString(R.string.messenger_link, "regino29")
                 }
             }
         })
 
+        viewModel.successUpdateInfo.observe(viewLifecycleOwner, Observer {
+            onBackPressed()
+        })
 
     }
 
@@ -67,7 +68,33 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
 
         mStorageRef = FirebaseStorage.getInstance().getReference("profile_images");
 
-        binding.uploadImage.setOnClickListener(View.OnClickListener { onChooseFile(view); })
+        binding.uploadImage.setOnClickListener {
+            onChooseFile(view);
+        }
+
+
+        binding.saveButton.setOnClickListener {
+
+
+            if (checkFields()) {
+                val firstName = binding.firstName.text.toString()
+                val lastName = binding.lastName.text.toString()
+                viewModel.updateAccountInfo(firstName, lastName, binding.messengerLink.text, binding.aboutMe.text)
+            }
+        }
+    }
+
+    private fun checkFields(): Boolean {
+        if (binding.firstName.text.toString().length < 3) {
+            createAlerter("Ελεγξε το πεδιο του ονόματος")
+            return false
+        }
+
+        if (binding.lastName.text.toString().length < 3) {
+            createAlerter("Ελεγξε το πεδιο του επωνύμου")
+            return false
+        }
+        return true
     }
 
 

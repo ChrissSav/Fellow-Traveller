@@ -1,6 +1,8 @@
 package gr.fellow.fellow_traveller.ui.views
 
 import android.content.Context
+import android.text.InputFilter
+import android.text.InputFilter.LengthFilter
 import android.text.InputType
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -8,6 +10,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.constraintlayout.widget.ConstraintLayout
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FellowEdittextBinding
+
 
 class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
@@ -17,6 +20,8 @@ class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(
     private lateinit var function: () -> Unit
     private var imeOptions = 0
     private var inputType = 0
+    private var maxLength = 100
+    private var textAllCaps = true
 
     var text: String? = null
         get() = binding.fellowEditTextTextInputEditText.text.toString()
@@ -40,6 +45,9 @@ class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(
             isEditable = attributes.getBoolean(R.styleable.FellowTextInput_editable, false)
             inputType = attributes.getInteger(R.styleable.FellowTextInput_text_type, InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_NORMAL)
             imeOptions = attributes.getInteger(R.styleable.FellowTextInput_imeOptions, EditorInfo.IME_ACTION_NEXT)
+            maxLength = attributes.getInteger(R.styleable.FellowTextInput_max_length, 100)
+            textAllCaps = attributes.getBoolean(R.styleable.FellowTextInput_all_caps, false)
+
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -51,6 +59,12 @@ class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(
         binding.fellowEditTextTextInputEditText.inputType = inputType
 
         binding.fellowEditTextTextInputLayout.hint = hint
+
+        if (textAllCaps)
+            binding.fellowEditTextTextInputEditText.inputType = InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS
+
+        binding.fellowEditTextTextInputEditText.filters = arrayOf<InputFilter>(LengthFilter(maxLength))
+
 
         if (!isEditable) {
             binding.fellowEditTextTextInputEditText.keyListener = null

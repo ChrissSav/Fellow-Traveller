@@ -15,6 +15,7 @@ import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.LoadUserInfoUseCase
 import gr.fellow.fellow_traveller.usecase.auth.DeleteUserAuthLocalUseCase
 import gr.fellow.fellow_traveller.usecase.home.*
+import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsCreatorRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsPassengerRemoteUseCase
 import kotlinx.coroutines.launch
@@ -30,7 +31,9 @@ constructor(
     private val getUserCarsLocalUseCase: GetUserCarsLocalUseCase,
     private val registerCarLocalUseCase: RegisterCarLocalUseCase,
     private val deleteCarUseCase: DeleteCarUseCase,
+    private val updateAccountInfoUseCase: UpdateAccountInfoUseCase,
     private val deleteUserLocalCars: DeleteUserLocalCars,
+    private val registerUserLocalUseCase: RegisterUserLocalUseCase,
     private val getTripsAsCreatorRemoteUseCase: GetTripsAsCreatorRemoteUseCase,
     private val getTripsAsPassengerRemoteUseCase: GetTripsAsPassengerRemoteUseCase
 ) : BaseViewModel() {
@@ -56,6 +59,10 @@ constructor(
 
     private val _tripsTakesPart = MutableLiveData<MutableList<TripInvolved>>()
     val tripsTakesPart: LiveData<MutableList<TripInvolved>> = _tripsTakesPart
+
+
+    private val _successUpdateInfo = SingleLiveEvent<Boolean>()
+    val successUpdateInfo: LiveData<Boolean> = _successUpdateInfo
 
     /*****************************************************************************************************/
 
@@ -185,6 +192,24 @@ constructor(
                 _tripsTakesPart.value = tempTrip
             }
         }
+    }
+
+
+    fun updateAccountInfo(firstName: String, lastName: String, messengerLink: String?, aboutMe: String?) {
+        launchSecond(true) {
+            when (val response = updateAccountInfoUseCase(firstName, lastName, null, messengerLink, aboutMe)) {
+                is ResultWrapperSecond.Success -> {
+                    // savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
+                    registerUserLocalUseCase(response.data)
+                    _user.value = loadUserInfoUseCase()
+                    _successUpdateInfo.value = true
+                }
+                is ResultWrapperSecond.Error -> {
+                    errorSecond.value = externalError(response.error)
+                }
+            }
+        }
+
     }
 }
 

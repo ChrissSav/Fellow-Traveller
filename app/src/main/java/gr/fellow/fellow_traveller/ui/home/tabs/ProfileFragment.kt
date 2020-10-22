@@ -17,6 +17,7 @@ import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     private val viewModel: HomeViewModel by activityViewModels()
+    private var messengerLink: String? = null
 
 
     override fun getViewBinding(): FragmentProfileBinding =
@@ -34,8 +35,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 rate.text = user.rate.toString()
                 searches.text = "20"
                 offers.text = "13"
+                this@ProfileFragment.messengerLink = user.messengerLink
                 if (!user.aboutMe.isNullOrEmpty())
-                    aboutMe.text = user.aboutMe
+                    aboutMe.setText(user.aboutMe)
             }
         })
     }
@@ -46,9 +48,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         }
 
         binding.messengerLink.setOnClickListener {
-            val uriUrl: Uri = Uri.parse(getString(R.string.messenger_link, "regino29"))
-            val launchBrowser = Intent(Intent.ACTION_VIEW, uriUrl)
-            startActivity(launchBrowser)
+            messengerLink?.let {
+                val uriUrl: Uri = Uri.parse(getString(R.string.messenger_link, it))
+                val launchBrowser = Intent(Intent.ACTION_VIEW, uriUrl)
+                startActivity(launchBrowser)
+            }
+
         }
     }
 

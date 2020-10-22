@@ -75,6 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/fragment_settings_text_margin_top"
             app:hint_fellow="Όνομα"
+            app:editable="true"
             app:layout_constraintEnd_toEndOf="@+id/user_full_name_text_view"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/picture"
@@ -86,6 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/fragment_settings_text_margin_top"
             app:hint_fellow="Επίθετο"
+            app:editable="true"
             app:layout_constraintEnd_toEndOf="@+id/user_full_name_text_view"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/picture"
@@ -109,17 +111,31 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/fragment_settings_text_margin_top"
-            app:hint_fellow="Messenger Link"
+            app:hint_fellow="Όνομα στο messenger"
+            app:editable="true"
             app:layout_constraintEnd_toEndOf="@+id/user_full_name_text_view"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/picture"
             app:layout_constraintTop_toBottomOf="@+id/email" />
 
 
+        <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+            android:id="@+id/about_me"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fragment_settings_text_margin_top"
+            app:editable="true"
+            app:hint_fellow="Σχετικά με εμένα"
+            app:layout_constraintEnd_toEndOf="@+id/user_full_name_text_view"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/picture"
+            app:layout_constraintTop_toBottomOf="@+id/messenger_link" />
+
         <ImageButton
             android:id="@+id/save_button"
             android:layout_width="@dimen/new_trip_float_action_button_width_height"
             android:layout_height="@dimen/new_trip_float_action_button_width_height"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="@dimen/new_trip_float_action_button_margin_right"
             android:layout_marginBottom="@dimen/new_trip_float_action_button_margin_bottom"
             android:background="@drawable/circle_button_shape"
@@ -128,7 +144,8 @@
             android:scaleType="fitXY"
             android:src="@drawable/ic_save"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/about_me" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

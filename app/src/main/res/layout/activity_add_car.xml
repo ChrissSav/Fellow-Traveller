@@ -52,8 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="64dp"
                 app:editable="true"
-                app:imeOptions="actionNext"
                 app:hint_fellow="@string/brand"
+                app:imeOptions="actionNext"
                 app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
                 app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
                 app:layout_constraintTop_toBottomOf="@+id/manage_cars_settings_tv" />
@@ -63,10 +63,10 @@
                 android:id="@+id/model"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:imeOptions="actionNext"
                 android:layout_marginTop="@dimen/fragment_car_details_margin_inputs"
-                app:hint_fellow="@string/model"
                 app:editable="true"
+                app:hint_fellow="@string/model"
+                app:imeOptions="actionNext"
                 app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
                 app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
                 app:layout_constraintTop_toBottomOf="@+id/brand" />
@@ -77,12 +77,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_car_details_margin_inputs"
-                app:hint_fellow="@string/plate"
+                app:all_caps="true"
                 app:editable="true"
+                app:hint_fellow="@string/plate"
                 app:imeOptions="actionNext"
                 app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
                 app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
-                app:layout_constraintTop_toBottomOf="@+id/model" />
+                app:layout_constraintTop_toBottomOf="@+id/model"
+                app:max_length="8" />
 
 
             <gr.fellow.fellow_traveller.ui.views.FellowTextInput
@@ -90,8 +92,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_car_details_margin_inputs"
-                app:hint_fellow="@string/color"
                 app:editable="true"
+                app:hint_fellow="@string/color"
                 app:imeOptions="actionDone"
                 app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
                 app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
@@ -102,7 +104,7 @@
                 style="@style/header_3"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/car_float_action_button_height"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="62dp"
                 android:layout_marginEnd="@dimen/car_trip_float_action_button_margin_right"
                 android:layout_marginBottom="@dimen/car_trip_float_action_button_margin_bottom"
                 android:background="@drawable/fab_background_aqua"
@@ -125,6 +127,12 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
+    <include
+        android:id="@+id/generic_loader"
+        layout="@layout/generic_loader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

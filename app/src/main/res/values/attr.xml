@@ -29,6 +29,8 @@
     <declare-styleable name="FellowTextInput">
         <attr name="hint_fellow" format="string" />
         <attr name="editable" format="boolean" />
+        <attr name="all_caps" format="boolean" />
+        <attr name="max_length" format="integer" />
         <attr name="imeOptions">
             <!-- There are no special semantics associated with this editor. -->
             <flag name="normal" value="0x00000000" />

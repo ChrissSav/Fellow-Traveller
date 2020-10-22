@@ -38,12 +38,16 @@
         <TextView
             android:id="@+id/user_name"
             style="@style/display_1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="20dp"
+            android:gravity="center"
             android:layout_marginRight="24dp"
-            android:text="Πατριάρχης Φώτιος"
+            android:ellipsize="end"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:singleLine="true"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/user_image" />
@@ -130,7 +134,7 @@
             app:layout_constraintStart_toStartOf="@+id/about_me"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
-        <TextView
+        <EditText
             android:id="@+id/about_me"
             style="@style/paragraph_1"
             android:layout_width="0dp"
@@ -138,10 +142,17 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="Ένα μικρό κείμενο περιγραφής"
+            android:layout_marginBottom="64dp"
+            android:background="@null"
+            android:focusable="false"
+            android:longClickable="false"
+            android:hint="Ένα μικρό κείμενο περιγραφής"
+            android:textColorHint="@color/greyBlack_transparent_color"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            app:layout_constraintVertical_bias="0.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
