@@ -163,6 +163,18 @@ fun Fragment.createAlerter(msg: String) {
 }
 
 
+fun Fragment.createAlerterInfo(msg: String, color: Int) {
+    Alerter.create(activity)
+        .setTitle("Ενημέρωση")
+        .setText(msg)
+        .setIcon(R.drawable.ic_lock)
+        .setBackgroundColorRes(color)
+        .setDuration(1800)
+        .enableSwipeToDismiss() //seems to not work well with OnClickListener
+        .show()
+}
+
+
 /***  NAV GRAPH***/
 
 fun NavController.navigateWithFade(actionId: Int) {

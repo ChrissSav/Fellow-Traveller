@@ -10,7 +10,7 @@ import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.framework.network.google.model.DestinationModel
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
-import gr.fellow.fellow_traveller.usecase.LoadUserInfoUseCase
+import gr.fellow.fellow_traveller.usecase.LoadUserLocalInfoUseCase
 import gr.fellow.fellow_traveller.usecase.home.GetUserCarsLocalUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.RegisterTripRemoteUseCase
 import gr.fellow.fellow_traveller.utils.dateTimeToTimestamp
@@ -19,7 +19,7 @@ import gr.fellow.fellow_traveller.utils.dateTimeToTimestamp
 class NewTripViewModel
 @ViewModelInject
 constructor(
-    private val loadUserInfoUseCase: LoadUserInfoUseCase,
+    private val loadUserLocalInfoUseCase: LoadUserLocalInfoUseCase,
     private val getUserCarsLocalUseCase: GetUserCarsLocalUseCase,
     private val registerTripRemoteUseCase: RegisterTripRemoteUseCase
 ) : BaseViewModel() {
@@ -91,7 +91,7 @@ constructor(
 
     fun setDestinationTo(id: String, title: String) {
         launch {
-            _userInfo.value = loadUserInfoUseCase()
+            _userInfo.value = loadUserLocalInfoUseCase()
             _destinationTo.value = DestinationModel(id, title)
         }
     }

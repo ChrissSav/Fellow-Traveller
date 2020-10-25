@@ -24,7 +24,11 @@ class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(
     private var textAllCaps = true
 
     var text: String? = null
-        get() = binding.fellowEditTextTextInputEditText.text.toString()
+        get() = run {
+            if (binding.fellowEditTextTextInputEditText.text.toString().isEmpty())
+                return@run null
+            return binding.fellowEditTextTextInputEditText.text.toString()
+        }
         set(value) {
             field = value
             binding.fellowEditTextTextInputEditText.setText(value)

@@ -6,8 +6,8 @@ class ResetPasswordUserCase(
     private val dataSource: FellowDataSource
 ) {
 
-    suspend operator fun invoke(code: String, password: String) =
-        dataSource.resetPassword(code, password)
+    suspend operator fun invoke(email: String, code: String, password: String) =
+        dataSource.resetPassword(email, code, password)
 
 
 }

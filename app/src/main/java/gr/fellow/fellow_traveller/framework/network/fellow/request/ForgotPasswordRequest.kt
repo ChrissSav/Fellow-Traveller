@@ -5,6 +5,7 @@ data class ForgotPasswordRequest(
 )
 
 data class ResetPasswordRequest(
+    val email: String,
     val token: String,
     val password: String,
     val repeatPassword: String

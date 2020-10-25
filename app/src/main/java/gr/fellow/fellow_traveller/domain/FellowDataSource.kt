@@ -34,14 +34,13 @@ interface FellowDataSource {
 
     suspend fun forgotPassword(email: String): ResultWrapperSecond<String>
 
-    suspend fun resetPassword(code: String, password: String): ResultWrapperSecond<String>
+    suspend fun resetPassword(email: String, code: String, password: String): ResultWrapperSecond<String>
 
     // User
 
-    suspend fun updateAccount(
-        firstName: String, lastName: String, picture: String?,
-        messengerLink: String?, aboutMe: String?
-    ): ResultWrapperSecond<UserAuthResponse>
+    suspend fun updateAccount(firstName: String, lastName: String, messengerLink: String?, aboutMe: String?): ResultWrapperSecond<UserAuthResponse>
+
+    suspend fun updatePicture(picture: String?): ResultWrapperSecond<UserAuthResponse>
 
 
     // Cars

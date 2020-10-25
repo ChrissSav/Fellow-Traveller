@@ -6,6 +6,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentAccountInfoBinding
+import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
 
@@ -34,14 +35,27 @@ class AccountInfoFragment : BaseFragment<FragmentAccountInfoBinding>() {
     }
 
     override fun setUpViews() {
-        binding.firstName.text = viewModel.userInfo.value?.first
-        binding.lastName.text = viewModel.userInfo.value?.second
-
 
         binding.ImageButtonNext.setOnClickListener {
-            viewModel.storeUserInfo(binding.firstName.text.toString(), binding.lastName.text.toString())
-            viewModel.registerUser()
+            if (checkFields()) {
+                viewModel.storeUserInfo(binding.firstName.text.toString(), binding.lastName.text.toString())
+                viewModel.registerUser()
+            }
         }
     }
+
+    private fun checkFields(): Boolean {
+        if (binding.firstName.text.toString().length < 3) {
+            createAlerter("Ελεγξε το πεδιο του ονόματος")
+            return false
+        }
+
+        if (binding.lastName.text.toString().length < 3) {
+            createAlerter("Ελεγξε το πεδιο του επωνύμου")
+            return false
+        }
+        return true
+    }
+
 
 }

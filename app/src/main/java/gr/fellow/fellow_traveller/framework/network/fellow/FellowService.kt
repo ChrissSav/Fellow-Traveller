@@ -53,9 +53,15 @@ interface FellowService {
 
     /** User **/
 
-    @POST("user")
+    @PUT("user")
     suspend fun updateAccount(
         @Body updateAccountRequest: UpdateAccountRequest
+    ): Response<BaseResponse<UserAuthResponse>>
+
+
+    @PUT("user/me/picture")
+    suspend fun updateUserPicture(
+        @Body updatePictureRequest: UpdatePictureRequest
     ): Response<BaseResponse<UserAuthResponse>>
 
     /** CAR **/

@@ -42,13 +42,14 @@ class FellowDataSourceImpl(
     override suspend fun forgotPassword(email: String): ResultWrapperSecond<String> =
         repository.forgotPassword(ForgotPasswordRequest(email))
 
+    override suspend fun resetPassword(email: String, code: String, password: String): ResultWrapperSecond<String> =
+        repository.resetPassword(ResetPasswordRequest(email, code, password, password))
 
-    override suspend fun resetPassword(code: String, password: String): ResultWrapperSecond<String> =
-        repository.resetPassword(ResetPasswordRequest(code, password, password))
+    override suspend fun updateAccount(firstName: String, lastName: String, messengerLink: String?, aboutMe: String?): ResultWrapperSecond<UserAuthResponse> =
+        repository.updateAccountInfo(UpdateAccountRequest(firstName, lastName, messengerLink, aboutMe))
 
-    override suspend fun updateAccount(firstName: String, lastName: String, picture: String?, messengerLink: String?, aboutMe: String?): ResultWrapperSecond<UserAuthResponse> =
-        repository.updateAccountInfo(UpdateAccountRequest(firstName, lastName, picture, messengerLink, aboutMe))
-
+    override suspend fun updatePicture(picture: String?): ResultWrapperSecond<UserAuthResponse> =
+        repository.updateUserPicture(UpdatePictureRequest(picture))
 
     override suspend fun getCarsRemote(): ResultWrapperSecond<MutableList<Car>> {
         return when (val response = repository.getCarsRemote()) {

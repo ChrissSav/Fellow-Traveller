@@ -16,6 +16,7 @@ import com.iceteck.silicompressorr.FileUtils
 import com.iceteck.silicompressorr.SiliCompressor
 import com.theartofdev.edmodo.cropper.CropImage
 import dagger.hilt.android.AndroidEntryPoint
+import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentAccountSettingsBinding
 import gr.fellow.fellow_traveller.ui.extensions.*
@@ -54,6 +55,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
         })
 
         viewModel.successUpdateInfo.observe(viewLifecycleOwner, Observer {
+            createAlerterInfo("Επιτυχής αποθήκευση", R.color.blue_color)
             onBackPressed()
         })
 

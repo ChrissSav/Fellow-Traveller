@@ -52,7 +52,7 @@ constructor(
 
     fun resetPassword(code: String) {
         launchSecond(true) {
-            when (val response = resetPasswordUserCase(code, _password.value.toString())) {
+            when (val response = resetPasswordUserCase(email, code, _password.value.toString())) {
                 is ResultWrapperSecond.Success -> {
                     _successResetPassword.value = true
                 }

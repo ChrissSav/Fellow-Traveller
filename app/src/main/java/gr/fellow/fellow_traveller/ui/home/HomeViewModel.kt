@@ -12,7 +12,7 @@ import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.ui.help.BaseViewModel
 import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
-import gr.fellow.fellow_traveller.usecase.LoadUserInfoUseCase
+import gr.fellow.fellow_traveller.usecase.LoadUserLocalInfoUseCase
 import gr.fellow.fellow_traveller.usecase.auth.DeleteUserAuthLocalUseCase
 import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 class HomeViewModel
 @ViewModelInject
 constructor(
-    private val loadUserInfoUseCase: LoadUserInfoUseCase,
+    private val loadUserLocalInfoUseCase: LoadUserLocalInfoUseCase,
     private val deleteUserAuthLocalUseCase: DeleteUserAuthLocalUseCase,
     private val logoutRemoteUseCase: LogoutRemoteUseCase,
     private val getUserCarsRemoteUseCase: GetUserCarsRemoteUseCase,
@@ -71,7 +71,7 @@ constructor(
             if (_user.value != null) {
                 return@launch
             }
-            _user.value = loadUserInfoUseCase()
+            _user.value = loadUserLocalInfoUseCase()
         }
     }
 
@@ -197,11 +197,10 @@ constructor(
 
     fun updateAccountInfo(firstName: String, lastName: String, messengerLink: String?, aboutMe: String?) {
         launchSecond(true) {
-            when (val response = updateAccountInfoUseCase(firstName, lastName, null, messengerLink, aboutMe)) {
+            when (val response = updateAccountInfoUseCase(firstName, lastName, messengerLink, aboutMe)) {
                 is ResultWrapperSecond.Success -> {
-                    // savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
                     registerUserLocalUseCase(response.data)
-                    _user.value = loadUserInfoUseCase()
+                    _user.value = loadUserLocalInfoUseCase()
                     _successUpdateInfo.value = true
                 }
                 is ResultWrapperSecond.Error -> {

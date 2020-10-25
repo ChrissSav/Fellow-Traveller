@@ -80,6 +80,11 @@ class FellowRepositoryImpl(
             service.updateAccount(updateAccountRequest).handleApiFormat()
         }
 
+    override suspend fun updateUserPicture(updatePictureRequest: UpdatePictureRequest): ResultWrapperSecond<UserAuthResponse> =
+        networkCallSecond {
+            service.updateUserPicture(updatePictureRequest).handleApiFormat()
+        }
+
 
     override suspend fun addCarRemote(carRequest: CarRequest): ResultWrapperSecond<CarResponse> =
         networkCallSecond {

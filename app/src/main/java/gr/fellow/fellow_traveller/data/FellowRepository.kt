@@ -31,6 +31,9 @@ interface FellowRepository {
 
     suspend fun updateAccountInfo(updateAccountRequest: UpdateAccountRequest): ResultWrapperSecond<UserAuthResponse>
 
+    suspend fun updateUserPicture(updatePictureRequest: UpdatePictureRequest): ResultWrapperSecond<UserAuthResponse>
+
+
     // Cars
 
     suspend fun addCarRemote(carRequest: CarRequest): ResultWrapperSecond<CarResponse>

@@ -6,7 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.scopes.ActivityScoped
 import gr.fellow.fellow_traveller.domain.FellowDataSource
-import gr.fellow.fellow_traveller.usecase.LoadUserInfoUseCase
+import gr.fellow.fellow_traveller.usecase.LoadUserLocalInfoUseCase
 import gr.fellow.fellow_traveller.usecase.auth.*
 import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.newtrip.GetGeometryFormPlaceUseCase
@@ -24,6 +24,13 @@ import gr.fellow.fellow_traveller.usecase.trips.SearchTripsUseCase
 @InstallIn(ActivityComponent::class)
 @Module
 class UseCasesModule {
+
+
+    @ActivityScoped
+    @Provides
+    fun provideUpdateUserPictureUseCase(dataSource: FellowDataSource): UpdateUserPictureUseCase {
+        return UpdateUserPictureUseCase(dataSource)
+    }
 
 
     @ActivityScoped
@@ -96,8 +103,8 @@ class UseCasesModule {
 
     @ActivityScoped
     @Provides
-    fun provideLoadUserInfoUseCase(dataSource: FellowDataSource): LoadUserInfoUseCase {
-        return LoadUserInfoUseCase(dataSource)
+    fun provideLoadUserInfoUseCase(dataSource: FellowDataSource): LoadUserLocalInfoUseCase {
+        return LoadUserLocalInfoUseCase(dataSource)
     }
 
     @ActivityScoped
