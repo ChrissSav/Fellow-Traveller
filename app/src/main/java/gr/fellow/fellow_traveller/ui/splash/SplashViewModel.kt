@@ -1,0 +1,35 @@
+package gr.fellow.fellow_traveller.ui.splash
+
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
+import gr.fellow.fellow_traveller.data.ResultWrapperSecond
+import gr.fellow.fellow_traveller.data.base.BaseViewModel
+import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
+import gr.fellow.fellow_traveller.usecase.home.GetUserInfoRemoteUseCase
+import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
+
+class SplashViewModel
+@ViewModelInject
+constructor(
+    private val getUserInfoRemoteUseCase: GetUserInfoRemoteUseCase,
+    private val registerUserLocalUseCase: RegisterUserLocalUseCase
+) : BaseViewModel() {
+
+    private val _userInfo = SingleLiveEvent<Boolean>()
+    val userInfo: LiveData<Boolean> = _userInfo
+
+
+    fun getUserInfo() {
+        launchSecond {
+            when (val response = getUserInfoRemoteUseCase()) {
+                is ResultWrapperSecond.Success -> {
+                    registerUserLocalUseCase(response.data)
+                    _userInfo.value = true
+                }
+                is ResultWrapperSecond.Error -> {
+                    _userInfo.value = false
+                }
+            }
+        }
+    }
+}

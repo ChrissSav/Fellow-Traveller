@@ -51,6 +51,9 @@ class FellowDataSourceImpl(
     override suspend fun updatePicture(picture: String?): ResultWrapperSecond<UserAuthResponse> =
         repository.updateUserPicture(UpdatePictureRequest(picture))
 
+    override suspend fun getUserInfoRemote(): ResultWrapperSecond<UserAuthResponse> =
+        repository.getUserInfo()
+
     override suspend fun getCarsRemote(): ResultWrapperSecond<MutableList<Car>> {
         return when (val response = repository.getCarsRemote()) {
             is ResultWrapperSecond.Success -> {

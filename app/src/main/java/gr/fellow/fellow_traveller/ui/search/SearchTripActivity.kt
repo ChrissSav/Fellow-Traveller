@@ -13,20 +13,20 @@ import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 @AndroidEntryPoint
 class SearchTripActivity : BaseActivity<ActivitySearchTripBinding>() {
 
-    private val searchViewModel: SearchTripViewModel by viewModels()
+    private val viewModel: SearchTripViewModel by viewModels()
 
     override fun provideViewBinding(): ActivitySearchTripBinding =
         ActivitySearchTripBinding.inflate(layoutInflater)
 
 
     override fun setUpObservers() {
-        searchViewModel.error.observe(this, Observer {
+        viewModel.error.observe(this, Observer {
             createAlerter(getString(it))
         })
 
 
-        searchViewModel.finish.observe(this, Observer {
-            val trip = searchViewModel.tripBook.value
+        viewModel.finish.observe(this, Observer {
+            val trip = viewModel.tripBook.value
             trip?.let {
                 val resultIntent = Intent()
                 resultIntent.putExtra("trip", it)

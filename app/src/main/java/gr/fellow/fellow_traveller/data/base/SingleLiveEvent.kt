@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.ui.help
+package gr.fellow.fellow_traveller.data.base
 
 
 import androidx.annotation.MainThread

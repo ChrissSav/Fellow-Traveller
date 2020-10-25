@@ -33,6 +33,8 @@ interface FellowRepository {
 
     suspend fun updateUserPicture(updatePictureRequest: UpdatePictureRequest): ResultWrapperSecond<UserAuthResponse>
 
+    suspend fun getUserInfo(): ResultWrapperSecond<UserAuthResponse>
+
 
     // Cars
 

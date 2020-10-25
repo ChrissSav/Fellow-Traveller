@@ -28,6 +28,12 @@ class UseCasesModule {
 
     @ActivityScoped
     @Provides
+    fun provideGetUserInfoRemoteUseCase(dataSource: FellowDataSource): GetUserInfoRemoteUseCase {
+        return GetUserInfoRemoteUseCase(dataSource)
+    }
+
+    @ActivityScoped
+    @Provides
     fun provideUpdateUserPictureUseCase(dataSource: FellowDataSource): UpdateUserPictureUseCase {
         return UpdateUserPictureUseCase(dataSource)
     }

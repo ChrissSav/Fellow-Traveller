@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.ui.help
+package gr.fellow.fellow_traveller.data.base
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -74,6 +74,7 @@ open class BaseViewModel : ViewModel() {
 
     /*** SECONDS ****/
     private fun handleErrorSecond(e: Exception) {
+        e.printStackTrace()
         when (e) {
             is BaseApiException -> when (e.code) {
                 ACCESS_DENIED -> {

@@ -42,6 +42,8 @@ interface FellowDataSource {
 
     suspend fun updatePicture(picture: String?): ResultWrapperSecond<UserAuthResponse>
 
+    suspend fun getUserInfoRemote(): ResultWrapperSecond<UserAuthResponse>
+
 
     // Cars
 

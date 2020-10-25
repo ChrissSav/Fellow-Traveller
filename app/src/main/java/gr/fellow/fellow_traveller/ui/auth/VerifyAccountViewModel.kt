@@ -3,9 +3,9 @@ package gr.fellow.fellow_traveller.ui.auth
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import gr.fellow.fellow_traveller.data.ResultWrapperSecond
+import gr.fellow.fellow_traveller.data.base.BaseViewModel
+import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.domain.externalError
-import gr.fellow.fellow_traveller.ui.help.BaseViewModel
-import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.auth.VerifyAccountUseCase
 import kotlinx.coroutines.delay
 

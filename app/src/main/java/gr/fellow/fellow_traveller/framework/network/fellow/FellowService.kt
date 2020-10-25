@@ -58,6 +58,10 @@ interface FellowService {
         @Body updateAccountRequest: UpdateAccountRequest
     ): Response<BaseResponse<UserAuthResponse>>
 
+    @GET("user/me")
+    suspend fun getUserInfo(
+    ): Response<BaseResponse<UserAuthResponse>>
+
 
     @PUT("user/me/picture")
     suspend fun updateUserPicture(
