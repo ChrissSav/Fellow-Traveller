@@ -86,11 +86,12 @@ interface FellowService {
     ): Response<StatusHandleResponse>
 
 
-    //Trips
-    @POST("trips")
-    suspend fun addTrip(
+    /** TRIP **/
+
+    @POST("trip")
+    suspend fun registerTrip(
         @Body trip: TripCreateRequest
-    ): Response<TripResponse>
+    ): Response<BaseResponse<TripResponse>>
 
 
     @GET("trips")

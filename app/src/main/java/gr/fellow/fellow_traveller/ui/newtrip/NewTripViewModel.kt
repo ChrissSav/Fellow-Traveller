@@ -3,10 +3,11 @@ package gr.fellow.fellow_traveller.ui.newtrip
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.data.ResultWrapper
+import gr.fellow.fellow_traveller.data.ResultWrapperSecond
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
+import gr.fellow.fellow_traveller.domain.BagsStatusType
 import gr.fellow.fellow_traveller.domain.car.Car
+import gr.fellow.fellow_traveller.domain.externalError
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.framework.network.google.model.DestinationModel
@@ -34,9 +35,6 @@ constructor(
     private val _destinationTo = MutableLiveData<DestinationModel>()
     val destinationTo: LiveData<DestinationModel> = _destinationTo
 
-    private val _destinationPickUp = MutableLiveData<DestinationModel>()
-    val destinationPickUp: LiveData<DestinationModel> = _destinationPickUp
-
     private val _date = MutableLiveData<String>()
     val date: LiveData<String> = _date
 
@@ -52,8 +50,8 @@ constructor(
     private val _seats = MutableLiveData<Int>()
     val seats: LiveData<Int> = _seats
 
-    private val _bags = MutableLiveData<Int>()
-    val bags: LiveData<Int> = _bags
+    private val _bags = MutableLiveData<BagsStatusType>()
+    val bags: LiveData<BagsStatusType> = _bags
 
     private val _pet = MutableLiveData<Boolean>()
     val pet: LiveData<Boolean> = _pet
@@ -69,14 +67,14 @@ constructor(
 
 
     fun applyDate(date: String) {
-        launch {
+        launchSecond {
             _date.value = date
         }
 
     }
 
     fun applyTime(time: String) {
-        launch {
+        launchSecond {
             _time.value = time
         }
 
@@ -84,91 +82,78 @@ constructor(
 
 
     fun setDestinationFrom(id: String, title: String) {
-        launch {
+        launchSecond {
             _destinationFrom.value = DestinationModel(id, title)
         }
     }
 
     fun setDestinationTo(id: String, title: String) {
-        launch {
+        launchSecond {
             _userInfo.value = loadUserLocalInfoUseCase()
             _destinationTo.value = DestinationModel(id, title)
         }
     }
 
-    fun setDestinationPickUp(id: String, title: String) {
-        launch {
-            _destinationPickUp.value = DestinationModel(id, title)
-        }
-    }
 
     fun setPrice(priceCurrent: Float) {
-        launch {
+        launchSecond {
             _price.value = priceCurrent
         }
     }
 
     fun setSeats(seatCurrent: Int) {
-        launch {
+        launchSecond {
             _seats.value = seatCurrent
         }
     }
 
-    fun setBags(bagsCurrent: Int) {
-        launch {
+    fun setBags(bagsCurrent: BagsStatusType) {
+        launchSecond {
             _bags.value = bagsCurrent
         }
     }
 
     fun setPet(pet: Boolean) {
-        launch {
+        launchSecond {
             _pet.value = pet
         }
     }
 
-    fun setMessage(msg: String) {
-        _message.value = msg.trim()
+    fun setMessage(msg: String?) {
+        _message.value = msg?.trim()
     }
 
     fun setCar(carTemp: Car) {
-        launch {
+        launchSecond {
             _car.value = carTemp
         }
     }
 
     fun loadUserCars() {
-        launch {
+        launchSecond {
             _carList.value = getUserCarsLocalUseCase()
         }
     }
 
 
     fun registerTrip() {
-        launch(true) {
+        launchSecond(true) {
             when (val response = registerTripRemoteUseCase(
-                destinationFrom.value?.placeId.toString(), destinationTo.value?.placeId.toString(),
-                destinationPickUp.value?.placeId.toString(),
-                dateTimeToTimestamp(date.value.toString(), time.value.toString()),
-                pet.value!!, seats.value!!, bags.value!!, message.value.toString(), price.value!!, car.value?.id!!.toInt()
+                destinationFrom.value?.placeId.toString(), destinationTo.value?.placeId.toString(), car.value?.id.toString(),
+                pet.value!!, seats.value!!, bags.value!!.value, message.value!!, price.value!!, getTimestamp()
             )
                 ) {
-                is ResultWrapper.Success -> {
+                is ResultWrapperSecond.Success -> {
                     _success.value = response.data
                 }
 
-                is ResultWrapper.Error -> {
-                    error.value = when (response.error.code) {
-                        609 -> R.string.ERROR_TRIP_TIMESTAMP
-                        610 -> R.string.ERROR_TRIP_PICKUP_POINT
-                        else -> R.string.ERROR_SOMETHING_WRONG
-                    }
+                is ResultWrapperSecond.Error -> {
+                    errorSecond.value = externalError(response.error)
                 }
             }
 
         }
     }
-
-
 
 
     fun getTimestamp(): Long {

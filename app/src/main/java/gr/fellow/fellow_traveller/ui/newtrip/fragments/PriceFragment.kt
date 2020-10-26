@@ -61,11 +61,13 @@ class PriceFragment : BaseFragment<FragmentPriceBinding>() {
         binding.priceAnalytically.text = getString(R.string.fragment_price_overview, viewModel.seats.value.toString(), price.toString())
     }
 
-
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
         if (binding.AddPriceFragmentEditTextPrice.text.toString().trim().isNotEmpty())
             viewModel.setPrice(binding.AddPriceFragmentEditTextPrice.text.toString().toFloat())
+        else
+            viewModel.setPrice(0f)
+        super.onDestroyView()
     }
+
 
 }

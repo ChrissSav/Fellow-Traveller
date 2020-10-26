@@ -157,14 +157,16 @@
                 app:minValue="1" />
 
 
-            <gr.fellow.fellow_traveller.ui.views.PickNumberButton
+            <EditText
                 android:id="@+id/bags_pick_button"
-                android:layout_width="@dimen/button_number_layout_width"
+                style="@style/editText_not_editable"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/button_number_layout_height"
+                android:gravity="center|end"
+                android:hint="Επέλεξε χωρητικοτητα"
                 app:layout_constraintBottom_toBottomOf="@+id/textView_2"
                 app:layout_constraintEnd_toEndOf="@+id/car_Button"
-                app:layout_constraintTop_toTopOf="@+id/textView_2"
-                app:minValue="0" />
+                app:layout_constraintTop_toTopOf="@+id/textView_2" />
 
             <TextView
                 android:id="@+id/pet"

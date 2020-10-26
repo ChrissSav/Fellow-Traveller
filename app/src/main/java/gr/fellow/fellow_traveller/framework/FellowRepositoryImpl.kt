@@ -106,9 +106,9 @@ class FellowRepositoryImpl(
             service.deleteCar(carId).handleToCorrectFormat()
         }
 
-    override suspend fun addTrip(trip: TripCreateRequest): ResultWrapper<TripResponse> =
-        networkCall {
-            service.addTrip(trip).handleToCorrectFormat()
+    override suspend fun registerTripRemote(trip: TripCreateRequest): ResultWrapperSecond<TripResponse> =
+        networkCallSecond {
+            service.registerTrip(trip).handleApiFormat()
         }
 
     override suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripResponse>> =

@@ -6,7 +6,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class DestinationResponse(
-    val id: String,
     val title: String,
     val latitude: Float,
     val longitude: Float

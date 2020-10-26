@@ -7,9 +7,11 @@ import androidx.lifecycle.Observer
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentBaseInfoBinding
+import gr.fellow.fellow_traveller.domain.BagsStatusType
 import gr.fellow.fellow_traveller.domain.PetAnswerType
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.ui.car.AddCarActivity
+import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.BagsStatusPickBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.CarPickBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.PetBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
@@ -25,6 +27,7 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
 
     private lateinit var petBottomSheetDialog: PetBottomSheetDialog
     private lateinit var carPickBottomSheetDialog: CarPickBottomSheetDialog
+    private lateinit var bagsStatusPickBottomSheetDialog: BagsStatusPickBottomSheetDialog
 
     override fun getViewBinding(): FragmentBaseInfoBinding =
         FragmentBaseInfoBinding.inflate(layoutInflater)
@@ -41,7 +44,7 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
             })
 
             bags.observe(viewLifecycleOwner, Observer {
-                binding.bagsPickButton.currentNum = it
+                binding.bagsPickButton.setText(it.value)
             })
 
             pet.observe(viewLifecycleOwner, Observer {
@@ -70,11 +73,11 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
 
             }
 
-            bagsPickButton.pickButtonActionListener = object : PickButtonActionListener {
-                override fun onPickAction(value: Int) {
-                    viewModel.setBags(value)
-                }
+            bagsPickButton.setOnClickListener {
+                bagsStatusPickBottomSheetDialog = BagsStatusPickBottomSheetDialog(this@BaseInfoFragment::onBagsItemClickListener)
+                bagsStatusPickBottomSheetDialog.show(childFragmentManager, "bagsStatusPickBottomSheetDialog")
             }
+
 
             seatsPickButton.pickButtonActionListener = object : PickButtonActionListener {
                 override fun onPickAction(value: Int) {
@@ -98,6 +101,10 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
     }
 
 
+    private fun onBagsItemClickListener(bagsStatusType: BagsStatusType) {
+        viewModel.setBags(bagsStatusType)
+    }
+
     private fun onItemClickListener(petAnswerType: PetAnswerType) {
         if (petAnswerType == PetAnswerType.Yes) {
             viewModel.setPet(true)
@@ -117,8 +124,6 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
             startActivityForResultWithFade(AddCarActivity::class, 1)
         }
     }
-
-
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

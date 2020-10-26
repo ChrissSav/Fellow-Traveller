@@ -13,3 +13,10 @@ enum class PetAnswerType {
 enum class AnswerType {
     Yes, No
 }
+
+
+enum class BagsStatusType(val value: String) {
+    NONE("Καθόλου"),
+    LIMITED("Περιορισμένη"),
+    LARGE("Μεγάλη")
+}

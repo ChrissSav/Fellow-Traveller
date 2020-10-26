@@ -254,3 +254,7 @@ val Double.toPx: Int
     get() = (this / Resources.getSystem().displayMetrics.density).toInt()
 
 
+val String.tofloat: Float
+    get() = if (this.isNullOrEmpty()) 0f else toFloat()
+
+

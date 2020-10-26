@@ -1,8 +1,6 @@
 package gr.fellow.fellow_traveller.data
 
-import gr.fellow.fellow_traveller.data.models.Trip
 import gr.fellow.fellow_traveller.domain.FellowDataSource
-import gr.fellow.fellow_traveller.domain.SearchFilters
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.mappers.*
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
@@ -12,7 +10,6 @@ import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandle
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserAuthResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.DetailsResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
-import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 import retrofit2.Response
 
 class FellowDataSourceImpl(
@@ -36,8 +33,8 @@ class FellowDataSourceImpl(
     override suspend fun logoutRemote(): ResultWrapperSecond<String> =
         repository.logout()
 
-    override suspend fun registerUserAuth(userEntity: RegisteredUserEntity) =
-        repository.registerUserAuthLocal(userEntity)
+    override suspend fun registerUserAuth(userAuthResponse: UserAuthResponse) =
+        repository.registerUserAuthLocal(userAuthResponse.mapToRegisteredUserEntity())
 
     override suspend fun forgotPassword(email: String): ResultWrapperSecond<String> =
         repository.forgotPassword(ForgotPasswordRequest(email))
@@ -83,52 +80,56 @@ class FellowDataSourceImpl(
     override suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse> =
         repository.deleteCarRemote(carId)
 
-    override suspend fun addTripRemote(tripCreateRequest: TripCreateRequest): ResultWrapper<TripInvolved> {
-        return when (val response = repository.addTrip(tripCreateRequest)) {
-            is ResultWrapper.Success ->
-                ResultWrapper.Success(response.data.mapTripInvolved())
-            is ResultWrapper.Error ->
-                ResultWrapper.Error(response.error)
+    override suspend fun addTripRemote(
+        destFrom: String, destTo: String, carId: String,
+        hasPet: Boolean, seats: Int, bags: String, msg: String?, price: Float, timestamp: Long
+    ): ResultWrapperSecond<TripInvolved> {
+        val tripCreateRequest = TripCreateRequest(destFrom, destTo, carId, hasPet, seats, bags, msg, price, timestamp)
+        return when (val response = repository.registerTripRemote(tripCreateRequest)) {
+            is ResultWrapperSecond.Success ->
+                ResultWrapperSecond.Success(response.data.mapTripInvolved())
+            is ResultWrapperSecond.Error ->
+                ResultWrapperSecond.Error(response.error)
         }
     }
 
-    override suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripInvolved>> {
-        return when (val response = repository.getTipsAsCreator()) {
-            is ResultWrapper.Success ->
-                ResultWrapper.Success(response.data.map { it.mapTripInvolved() }.toMutableList())
-            is ResultWrapper.Error ->
-                ResultWrapper.Error(response.error)
-        }
-    }
+    /* override suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripInvolved>> {
+         return when (val response = repository.getTipsAsCreator()) {
+             is ResultWrapper.Success ->
+                 ResultWrapper.Success(response.data.map { it.mapTripInvolved() }.toMutableList())
+             is ResultWrapper.Error ->
+                 ResultWrapper.Error(response.error)
+         }
+     }
 
-    override suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripInvolved>> {
-        return when (val response = repository.getTipsAsPassenger()) {
-            is ResultWrapper.Success ->
-                ResultWrapper.Success(response.data.map { it.mapTripInvolved() }.toMutableList())
-            is ResultWrapper.Error ->
-                ResultWrapper.Error(response.error)
-        }
-    }
+     override suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripInvolved>> {
+         return when (val response = repository.getTipsAsPassenger()) {
+             is ResultWrapper.Success ->
+                 ResultWrapper.Success(response.data.map { it.mapTripInvolved() }.toMutableList())
+             is ResultWrapper.Error ->
+                 ResultWrapper.Error(response.error)
+         }
+     }
 
 
-    override suspend fun searchTrips(query: SearchFilters): ResultWrapper<MutableList<Trip>> {
-        return when (val response = repository.searchTrips(query)) {
-            is ResultWrapper.Success ->
-                ResultWrapper.Success(response.data.toTrips())
-            is ResultWrapper.Error ->
-                ResultWrapper.Error(response.error)
-        }
+     override suspend fun searchTrips(query: SearchFilters): ResultWrapper<MutableList<Trip>> {
+         return when (val response = repository.searchTrips(query)) {
+             is ResultWrapper.Success ->
+                 ResultWrapper.Success(response.data.toTrips())
+             is ResultWrapper.Error ->
+                 ResultWrapper.Error(response.error)
+         }
 
-    }
+     }
 
-    override suspend fun bookTrip(request: BookTripRequest): ResultWrapper<Trip> {
-        return when (val response = repository.bookTrip(request)) {
-            is ResultWrapper.Success ->
-                ResultWrapper.Success(response.data.toTrip())
-            is ResultWrapper.Error ->
-                ResultWrapper.Error(response.error)
-        }
-    }
+     override suspend fun bookTrip(request: BookTripRequest): ResultWrapper<Trip> {
+         return when (val response = repository.bookTrip(request)) {
+             is ResultWrapper.Success ->
+                 ResultWrapper.Success(response.data.toTrip())
+             is ResultWrapper.Error ->
+                 ResultWrapper.Error(response.error)
+         }
+     }*/
 
     /**
      * Google Service

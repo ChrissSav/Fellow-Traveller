@@ -19,6 +19,7 @@ constructor(
 
     override fun intercept(chain: Interceptor.Chain): Response {
 
+        var response: Response? = null
         val request = chain.request()
         val firstRequest = request.newBuilder()
         val newRequest = request.newBuilder()
@@ -37,7 +38,7 @@ constructor(
                 newRequest.addHeader("Authorization", "Bearer $token")
             Log.i("TokenInterceptor", "first")
 
-            val response = chain.proceed(newRequest.build())
+            response = chain.proceed(newRequest.build())
 
             if (response.code == 401) {
                 handleForbiddenResponse()
@@ -47,10 +48,10 @@ constructor(
                 newRequest.removeHeader("Authorization")
                 if (token.length > 10)
                     newRequest.addHeader("Authorization", "Bearer $token")
-                chain.proceed(firstRequest.build())
+                response = chain.proceed(firstRequest.build())
             }
         }
-        return chain.proceed(newRequest.build())
+        return response!!
     }
 
     private fun handleForbiddenResponse() {

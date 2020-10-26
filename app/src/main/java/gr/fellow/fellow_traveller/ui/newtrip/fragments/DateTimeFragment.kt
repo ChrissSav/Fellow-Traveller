@@ -39,7 +39,7 @@ class DateTimeFragment : BaseFragment<FragmentDateTimeBinding>() {
     override fun setUpViews() {
         binding.fellowTextInputDate.onClickListener {
             dateDialog = DatePickerCustomDialog(
-                binding.fellowTextInputDate.text.toString()
+                binding.fellowTextInputDate.text
             ) {
 
                 viewModel.applyDate(it)
@@ -50,7 +50,7 @@ class DateTimeFragment : BaseFragment<FragmentDateTimeBinding>() {
 
         binding.fellowTextInputTime.onClickListener {
             timeDialog = TimePickerCustomDialog(
-                binding.fellowTextInputTime.text.toString()
+                binding.fellowTextInputTime.text
             ) {
                 viewModel.applyTime(it)
             }

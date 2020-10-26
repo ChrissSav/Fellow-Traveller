@@ -35,14 +35,13 @@ class OverviewFragment : BaseFragment<FragmentOverviewBinding>(), View.OnClickLi
 
             textViewFrom.text = viewModel.destinationFrom.value?.title
             textViewTo.text = viewModel.destinationTo.value?.title
-            textViewPickUpPoint.text = viewModel.destinationPickUp.value?.title
             day.text = getDateFromTimestamp(viewModel.getTimestamp())
             time.text = getTimeFromTimestamp(viewModel.getTimestamp())
             price.text = getString(R.string.price, viewModel.price.value.toString())
             seats.text = viewModel.seats.value.toString()
-            bags.text = viewModel.bags.value.toString()
+            bags.text = viewModel.bags.value?.value.toString()
             pet.text = if (viewModel.pet.value!!) resources.getString(R.string.yes) else resources.getString(R.string.no)
-            car.text = "${viewModel.car.value?.brand} ${viewModel.car.value?.model}"
+            car.text = viewModel.car.value?.fullInfo
             userImage.loadImageFromUrl(viewModel.userInfo.value?.picture.toString())
             username.text = viewModel.userInfo.value?.fullName
             message.text = if (viewModel.message.value.toString().isNotEmpty())
@@ -54,14 +53,11 @@ class OverviewFragment : BaseFragment<FragmentOverviewBinding>(), View.OnClickLi
 
             ImageButtonNext.root.setOnClickListener {
                 viewModel.registerTrip()
-
             }
-
 
 
             textViewFrom.setOnClickListener(this@OverviewFragment)
             textViewTo.setOnClickListener(this@OverviewFragment)
-            textViewPickUpPoint.setOnClickListener(this@OverviewFragment)
             day.setOnClickListener(this@OverviewFragment)
             time.setOnClickListener(this@OverviewFragment)
             price.setOnClickListener(this@OverviewFragment)
@@ -92,10 +88,6 @@ class OverviewFragment : BaseFragment<FragmentOverviewBinding>(), View.OnClickLi
             "5" -> {
                 onBackPressed()
             }
-            "6" -> {
-                findNavController()?.navigate(R.id.action_fragment_overview_to_pickUpFragment)
-            }
-
         }
 
     }

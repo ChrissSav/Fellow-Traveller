@@ -46,7 +46,7 @@ interface FellowRepository {
 
     // Trips
 
-    suspend fun addTrip(trip: TripCreateRequest): ResultWrapper<TripResponse>
+    suspend fun registerTripRemote(trip: TripCreateRequest): ResultWrapperSecond<TripResponse>
 
     suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripResponse>>
 

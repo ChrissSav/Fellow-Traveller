@@ -47,13 +47,13 @@ class DestinationsFragment : BaseFragment<FragmentDestinationsBinding>() {
 
             when {
                 viewModel.destinationFrom.value == null -> {
-                    viewModel.setError(R.string.ERROR_SELECT_DEST_FROM)
+                    viewModel.setSecondError(R.string.ERROR_SELECT_DEST_FROM)
                 }
                 viewModel.destinationTo.value == null -> {
-                    viewModel.setError(R.string.ERROR_SELECT_DEST_TO)
+                    viewModel.setSecondError(R.string.ERROR_SELECT_DEST_TO)
                 }
                 else -> {
-                    findNavController()?.navigate(R.id.next_fragment)
+                    findNavController()?.navigate(R.id.action_destinationsFragment_to_dateTimeFragment)
                 }
             }
 
