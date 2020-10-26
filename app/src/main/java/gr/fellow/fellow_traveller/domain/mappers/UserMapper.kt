@@ -11,5 +11,5 @@ fun UserAuthResponse.mapToRegisteredUserEntity() = RegisteredUserEntity(
 
 
 fun UserBaseResponse.toUserBase() = UserBase(
-    id, FirstName, LastName, picture, rate, reviews
+    id, firstName, lastName, picture, rate, reviews
 )

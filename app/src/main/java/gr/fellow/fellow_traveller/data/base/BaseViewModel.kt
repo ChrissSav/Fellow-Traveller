@@ -88,6 +88,7 @@ open class BaseViewModel : ViewModel() {
                 errorSecond.value = internalError(R.string.ERROR_INTERNET_CONNECTION)
             }
             is UnauthorizedException -> {
+
                 errorSecond.value = internalError(R.string.ERROR_API_UNAUTHORIZED)
             }
 

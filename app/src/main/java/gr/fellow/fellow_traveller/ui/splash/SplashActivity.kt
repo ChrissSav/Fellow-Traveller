@@ -1,15 +1,18 @@
 package gr.fellow.fellow_traveller.ui.splash
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.activity.viewModels
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
+import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivitySplashBinding
 import gr.fellow.fellow_traveller.ui.extensions.openActivityWithFade
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.main.MainActivity
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -19,6 +22,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     private var intentOpen: Intent? = null
 
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun provideViewBinding(): ActivitySplashBinding =
         ActivitySplashBinding.inflate(layoutInflater)
@@ -32,10 +37,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         })
 
         viewModel.errorSecond.observe(this, Observer {
-            intentOpen = if (it.internal)
-                Intent(this, HomeActivity::class.java)
-            else
+
+            intentOpen = if (it.internal && it.messageId == R.string.ERROR_API_UNAUTHORIZED)
                 Intent(this, MainActivity::class.java)
+            else
+                Intent(this, HomeActivity::class.java)
         })
 
     }
@@ -46,7 +52,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                 while (intentOpen == null) {
                 }
-                openActivityWithFade(intentOpen!!)
+                openActivityWithFade(intent)
             }
 
             override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
