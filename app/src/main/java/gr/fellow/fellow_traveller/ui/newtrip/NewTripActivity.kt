@@ -28,7 +28,6 @@ class NewTripActivity : BaseActivity<ActivityNewTripBinding>(), ExitCustomDialog
 
 
     override fun setUpObservers() {
-        viewModel.setPet(false)
         viewModel.setSeats(1)
 
         viewModel.errorSecond.observe(this, Observer {

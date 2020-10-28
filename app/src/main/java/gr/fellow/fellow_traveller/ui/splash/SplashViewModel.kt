@@ -18,6 +18,9 @@ constructor(
     private val _userInfo = SingleLiveEvent<Boolean>()
     val userInfo: LiveData<Boolean> = _userInfo
 
+    private val _finish = SingleLiveEvent<Pair<Boolean, Boolean>>()
+    val finish: LiveData<Pair<Boolean, Boolean>> = _finish
+
 
     fun getUserInfo() {
         launchSecond {
@@ -32,4 +35,16 @@ constructor(
             }
         }
     }
+
+    fun setFist(first: Boolean) {
+        val temp = _finish.value?.second ?: false
+        _finish.value = Pair(first, temp)
+    }
+
+    fun setSecond(second: Boolean) {
+        val temp = _finish.value?.first ?: false
+        _finish.value = Pair(temp, second)
+    }
+
+
 }

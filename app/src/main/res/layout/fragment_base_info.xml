@@ -65,7 +65,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <EditText
-                android:id="@+id/car_Button"
+                android:id="@+id/car_ediText"
                 style="@style/editText_not_editable"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -152,7 +152,7 @@
                 android:layout_width="@dimen/button_number_layout_width"
                 android:layout_height="@dimen/button_number_layout_height"
                 app:layout_constraintBottom_toBottomOf="@+id/textView7"
-                app:layout_constraintEnd_toEndOf="@+id/car_Button"
+                app:layout_constraintEnd_toEndOf="@+id/car_ediText"
                 app:layout_constraintTop_toTopOf="@+id/textView7"
                 app:minValue="1" />
 
@@ -163,19 +163,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/button_number_layout_height"
                 android:gravity="center|end"
-                android:hint="Επέλεξε χωρητικοτητα"
+                android:hint="Καθορίστε"
+                android:padding="@dimen/calendar_margin_16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView_2"
-                app:layout_constraintEnd_toEndOf="@+id/car_Button"
+                app:layout_constraintEnd_toEndOf="@+id/car_ediText"
                 app:layout_constraintTop_toTopOf="@+id/textView_2" />
 
-            <TextView
+            <EditText
                 android:id="@+id/pet"
-                style="@style/paragraph_1"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
                 android:gravity="center|end"
-                android:minWidth="130dp"
-                android:text="@string/allowed"
+                style="@style/editText_not_editable"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_number_layout_height"
+                android:padding="@dimen/calendar_margin_16dp"
+                android:hint="Καθορίστε"
                 app:layout_constraintBottom_toBottomOf="@+id/textView10"
                 app:layout_constraintEnd_toEndOf="@+id/textView6v"
                 app:layout_constraintTop_toTopOf="@+id/textView10" />

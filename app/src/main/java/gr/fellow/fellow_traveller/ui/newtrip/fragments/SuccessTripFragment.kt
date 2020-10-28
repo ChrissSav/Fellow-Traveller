@@ -23,8 +23,9 @@ class SuccessTripFragment : BaseFragment<FragmentSuccessTripBinding>() {
 
     override fun setUpViews() {
 
-        postDelay(350) {
-            binding.view3.startAnimation()
+        binding.view3.startAnimation()
+
+        postDelay(500) {
             val trip = viewModel.success.value
             trip?.let {
                 val resultIntent = Intent()

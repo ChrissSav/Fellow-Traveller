@@ -22,7 +22,6 @@ constructor(
         var response: Response?
         val request = chain.request()
         val firstRequest = request.newBuilder()
-        val newRequest = request.newBuilder()
 
         if (!(request.url.encodedPath.contains("/signup") && request.method == "POST")
             && !(request.url.encodedPath.contains("/signin") && request.method == "POST")
@@ -35,19 +34,19 @@ constructor(
 
             var token = sharedPreferences.getString(PREFS_AUTH_ACCESS_TOKEN, "").toString()
             if (token.length > 10)
-                newRequest.addHeader("Authorization", "Bearer $token")
+                firstRequest.addHeader("Authorization", "Bearer $token")
             Log.i("TokenInterceptor", "first")
 
-            response = chain.proceed(newRequest.build())
+            response = chain.proceed(firstRequest.build())
 
             if (response.code == 401) {
                 handleForbiddenResponse()
                 Log.i("TokenInterceptor", "re try")
 
                 token = sharedPreferences.getString(PREFS_AUTH_ACCESS_TOKEN, "").toString()
-                newRequest.removeHeader("Authorization")
+                firstRequest.removeHeader("Authorization")
                 if (token.length > 10)
-                    newRequest.addHeader("Authorization", "Bearer $token")
+                    firstRequest.addHeader("Authorization", "Bearer $token")
                 response = chain.proceed(firstRequest.build())
             }
         } else

@@ -42,7 +42,7 @@ class OverviewFragment : BaseFragment<FragmentOverviewBinding>(), View.OnClickLi
             bags.text = viewModel.bags.value?.value.toString()
             pet.text = if (viewModel.pet.value!!) resources.getString(R.string.yes) else resources.getString(R.string.no)
             car.text = viewModel.car.value?.fullInfo
-            userImage.loadImageFromUrl(viewModel.userInfo.value?.picture.toString())
+            userImage.loadImageFromUrl(viewModel.userInfo.value?.picture)
             username.text = viewModel.userInfo.value?.fullName
             message.text = if (viewModel.message.value.toString().isNotEmpty())
                 viewModel.message.value.toString()
@@ -51,7 +51,7 @@ class OverviewFragment : BaseFragment<FragmentOverviewBinding>(), View.OnClickLi
 
 
 
-            ImageButtonNext.root.setOnClickListener {
+            ImageButtonNext.setOnClickListener {
                 viewModel.registerTrip()
             }
 

@@ -10,6 +10,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivitySplashBinding
 import gr.fellow.fellow_traveller.ui.extensions.openActivityWithFade
+import gr.fellow.fellow_traveller.ui.extensions.postDelay
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.main.MainActivity
 import javax.inject.Inject
@@ -34,6 +35,12 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                 Intent(this, HomeActivity::class.java)
             else
                 Intent(this, MainActivity::class.java)
+            viewModel.setFist(true)
+        })
+
+        viewModel.finish.observe(this, Observer {
+            if (it.first && it.second)
+                openActivityWithFade(intentOpen!!)
         })
 
         viewModel.errorSecond.observe(this, Observer {
@@ -42,24 +49,27 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                 Intent(this, MainActivity::class.java)
             else
                 Intent(this, HomeActivity::class.java)
+            viewModel.setFist(true)
         })
 
     }
 
     override fun setUpViews() {
+        postDelay(2000) {
+            viewModel.getUserInfo()
+
+        }
+
 
         binding.motion.setTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
-                while (intentOpen == null) {
-                }
-                openActivityWithFade(intent)
+                viewModel.setSecond(true)
             }
 
             override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
             }
 
             override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
-                viewModel.getUserInfo()
 
             }
 

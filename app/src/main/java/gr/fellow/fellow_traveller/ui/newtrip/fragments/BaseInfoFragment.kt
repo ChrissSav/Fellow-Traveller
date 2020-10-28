@@ -36,7 +36,7 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
     override fun setUpObservers() {
         with(viewModel) {
             car.observe(viewLifecycleOwner, Observer {
-                binding.carButton.setText(it.fullInfo)
+                binding.carEdiText.setText(it.fullInfo)
             })
 
             seats.observe(viewLifecycleOwner, Observer {
@@ -48,7 +48,7 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
             })
 
             pet.observe(viewLifecycleOwner, Observer {
-                binding.pet.text = if (it) getString(R.string.allowed) else getString(R.string.not_allowed)
+                binding.pet.setText(if (it) getString(R.string.allowed) else getString(R.string.not_allowed))
             })
 
             carList.observe(viewLifecycleOwner, Observer {
@@ -65,12 +65,9 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
         with(binding) {
 
             ImageButtonNext.root.setOnClickListener {
-                if (viewModel.car.value != null) {
+                if (checkFields()) {
                     findNavController()?.navigate(R.id.next_fragment)
-                } else {
-                    viewModel.setError(R.string.ERROR_SELECT_CAR)
                 }
-
             }
 
             bagsPickButton.setOnClickListener {
@@ -92,12 +89,31 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
             }
 
 
-            carButton.setOnClickListener {
+            carEdiText.setOnClickListener {
                 carPickBottomSheetDialog = CarPickBottomSheetDialog(carList, this@BaseInfoFragment::onCarItemClickListener)
                 carPickBottomSheetDialog.show(childFragmentManager, "carPickBottomSheetDialog")
             }
 
         }
+    }
+
+    private fun checkFields(): Boolean {
+        if (binding.carEdiText.text.isNullOrEmpty()) {
+            viewModel.setError(R.string.ERROR_SELECT_CAR)
+            return false
+        }
+
+        if (binding.bagsPickButton.text.isNullOrEmpty()) {
+            viewModel.setError(R.string.ERROR_SELECT_SEAT)
+            return false
+        }
+
+        if (binding.pet.text.isNullOrEmpty()) {
+            viewModel.setError(R.string.ERROR_SELECT_PET)
+            return false
+        }
+
+        return true
     }
 
 

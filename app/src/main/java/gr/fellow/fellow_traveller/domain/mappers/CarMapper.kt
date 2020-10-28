@@ -2,6 +2,7 @@ package gr.fellow.fellow_traveller.domain.mappers
 
 import gr.fellow.fellow_traveller.data.models.CarBase
 import gr.fellow.fellow_traveller.domain.car.Car
+import gr.fellow.fellow_traveller.domain.car.CarInfoBase
 import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.room.entites.CarEntity
 
@@ -20,3 +21,6 @@ fun Car.mapToCarEntity(): CarEntity =
 
 fun CarResponse.mapToBaseCar(): CarBase =
     CarBase(brand, model)
+
+fun CarResponse.mapToCarInfoBase(): CarInfoBase =
+    CarInfoBase(brand, model, plate, color)

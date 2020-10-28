@@ -6,6 +6,6 @@ import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 
 
 fun TripResponse.mapTripInvolved() = TripInvolved(
-    id, destFrom, destTo, creatorUser.toUserBase(), car.mapToCar(), hasPet, seats, bags, msg, price, timestamp,
+    id, destFrom, destTo, creatorUser.toUserBase(), car.mapToCarInfoBase(), hasPet, seats, bags, msg, price, timestamp,
     passengers.mapToPassenger()
 )
