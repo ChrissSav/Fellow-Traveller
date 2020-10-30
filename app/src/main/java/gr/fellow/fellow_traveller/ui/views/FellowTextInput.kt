@@ -89,16 +89,18 @@ class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(
         binding.fellowEditTextTextInputLayout.setOnClickListener {
             try {
                 function.invoke()
-            } catch (e: java.lang.Exception) {
-
+            } catch (e: Exception) {
+                println("fellowEditTextTextInputLayout Exception")
+                e.printStackTrace()
             }
         }
 
         binding.fellowEditTextTextInputEditText.setOnClickListener {
             try {
                 function.invoke()
-            } catch (e: java.lang.Exception) {
-
+            } catch (e: Exception) {
+                println("fellowEditTextTextInputEditText Exception")
+                e.printStackTrace()
             }
         }
 

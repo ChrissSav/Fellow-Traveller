@@ -7,13 +7,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.data.models.Trip
+import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import kotlinx.android.synthetic.main.search_result_item.view.*
 
 class SearchResultsAdapter(
-    private val tripsList: MutableList<Trip>,
-    private val listener: (Trip) -> Unit
+    private val tripsList: MutableList<TripSearch>,
+    private val listener: (TripSearch) -> Unit
 ) :
     RecyclerView.Adapter<SearchResultsAdapter.ExampleViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExampleViewHolder {

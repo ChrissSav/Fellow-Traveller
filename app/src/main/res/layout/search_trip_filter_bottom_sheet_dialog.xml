@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bottom_sheet_dialog_shape">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/filters_tv"
+                style="@style/display_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:text="Φίλτρα"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/clear"
+                style="@style/header_3"
+                android:layout_width="115dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="16dp"
+                android:width="55dp"
+                android:height="55dp"
+                android:background="@drawable/component_border_icon_button_shape"
+                android:gravity="center"
+                android:padding="14dp"
+                android:text="Καθαρισμός"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="@+id/filters_tv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/filters_tv" />
+
+
+            <TextView
+                android:id="@+id/textView7"
+                style="@style/header_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="84dp"
+                android:text="Ελεύθερες Θέσεις"
+                app:layout_constraintStart_toStartOf="@+id/filters_tv"
+                app:layout_constraintTop_toBottomOf="@+id/filters_tv" />
+
+            <TextView
+                android:id="@+id/textView10"
+                style="@style/header_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/filters_view_margin_top_second"
+                android:text="Συνοδεία Κατοικιδίου"
+                app:layout_constraintStart_toStartOf="@+id/textView_2"
+                app:layout_constraintTop_toBottomOf="@+id/textView_2" />
+
+
+            <TextView
+                android:id="@+id/textView_2"
+                style="@style/header_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/filters_view_margin_top_second"
+                android:text="Χωρητικότητα"
+                app:layout_constraintStart_toStartOf="@+id/textView7"
+                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+            <gr.fellow.fellow_traveller.ui.views.PickNumberButton
+                android:id="@+id/seats_pick_button"
+                android:layout_width="@dimen/button_number_layout_width"
+                android:layout_height="@dimen/button_number_layout_height"
+                app:layout_constraintBottom_toBottomOf="@+id/textView7"
+                app:layout_constraintEnd_toEndOf="@+id/clear"
+                app:layout_constraintTop_toTopOf="@+id/textView7"
+                app:minValue="1" />
+
+
+            <EditText
+                android:id="@+id/bags_pick_button"
+                style="@style/editText_not_editable"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_number_layout_height"
+                android:gravity="center|end"
+                android:hint="Ότιδήποτε"
+                android:padding="@dimen/calendar_margin_16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_2"
+                app:layout_constraintEnd_toEndOf="@+id/seats_pick_button"
+                app:layout_constraintTop_toTopOf="@+id/textView_2" />
+
+            <EditText
+                android:id="@+id/pet"
+                style="@style/editText_not_editable"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_number_layout_height"
+                android:gravity="center|end"
+                android:hint="Ότιδήποτε"
+                android:padding="@dimen/calendar_margin_16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView10"
+                app:layout_constraintEnd_toEndOf="@+id/bags_pick_button"
+                app:layout_constraintTop_toTopOf="@+id/textView10" />
+
+
+            <TextView
+                android:id="@+id/price_range_tv"
+                style="@style/header_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/filters_view_margin_top_second"
+                android:text="Εύρος τιμής"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView10"
+                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+            <EditText
+                android:id="@+id/price_tv"
+                style="@style/editText_not_editable"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_number_layout_height"
+                android:gravity="center|end"
+                android:hint="Εμφάνιση όλων"
+                android:padding="@dimen/calendar_margin_16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/price_range_tv"
+                app:layout_constraintEnd_toEndOf="@+id/pet"
+                app:layout_constraintTop_toTopOf="@+id/price_range_tv" />
+
+
+            <com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar
+                android:id="@+id/price_range_seekbar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/filters_seekBar_margin_top"
+                app:bar_color="@color/softGrey_color"
+                app:bar_highlight_color="@color/colorPrimary"
+                app:corner_radius="6"
+                app:data_type="_integer"
+                app:layout_constraintEnd_toEndOf="@+id/from_range_radius_tv"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/price_range_tv"
+                app:layout_constraintTop_toBottomOf="@+id/price_range_tv"
+                app:left_thumb_color="@color/colorPrimary"
+                app:left_thumb_color_pressed="@color/colorPrimary"
+                app:max_value="200"
+                app:min_value="@integer/min_value_in_filters" />
+
+
+            <TextView
+                android:id="@+id/range_from"
+                style="@style/header_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/filters_view_margin_top_second"
+                android:text="Εύρος αφετηρίας"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView10"
+                app:layout_constraintTop_toBottomOf="@+id/price_range_seekbar" />
+
+            <EditText
+                android:id="@+id/from_range_radius_tv"
+                style="@style/editText_not_editable"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_number_layout_height"
+                android:gravity="center|end"
+                android:hint="Εμφάνιση όλων"
+                android:padding="@dimen/calendar_margin_16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/range_from"
+                app:layout_constraintEnd_toEndOf="@+id/pet"
+                app:layout_constraintTop_toTopOf="@+id/range_from" />
+
+
+            <com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar
+                android:id="@+id/from_range_seekbar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/filters_seekBar_margin_top"
+                app:bar_color="@color/softGrey_color"
+                app:bar_highlight_color="@color/colorPrimary"
+                app:corner_radius="6"
+                app:data_type="_integer"
+                app:layout_constraintEnd_toEndOf="@+id/from_range_radius_tv"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/range_from"
+                app:layout_constraintTop_toBottomOf="@+id/range_from"
+                app:left_thumb_color="@color/colorPrimary"
+                app:left_thumb_color_pressed="@color/colorPrimary"
+                app:max_value="200"
+                app:min_value="@integer/min_value_in_filters" />
+
+
+            <TextView
+                android:id="@+id/range_to"
+                style="@style/header_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/filters_view_margin_top_second"
+                android:text="Εύρος προορισμού"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView10"
+                app:layout_constraintTop_toBottomOf="@+id/from_range_seekbar" />
+
+
+            <EditText
+                android:id="@+id/to_range_radius_tv"
+                style="@style/editText_not_editable"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_number_layout_height"
+                android:gravity="center|end"
+                android:hint="Εμφάνιση όλων"
+                android:padding="@dimen/calendar_margin_16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/range_to"
+                app:layout_constraintEnd_toEndOf="@+id/pet"
+                app:layout_constraintTop_toTopOf="@+id/range_to" />
+
+
+            <com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar
+                android:id="@+id/to_range_seekbar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/filters_seekBar_margin_top"
+                app:bar_color="@color/softGrey_color"
+                app:bar_highlight_color="@color/colorPrimary"
+                app:corner_radius="6"
+                app:data_type="_integer"
+                app:layout_constraintEnd_toEndOf="@+id/from_range_radius_tv"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/range_to"
+                app:layout_constraintTop_toBottomOf="@+id/range_to"
+                app:left_thumb_color="@color/colorPrimary"
+                app:left_thumb_color_pressed="@color/colorPrimary"
+                app:max_value="200"
+                app:min_value="@integer/min_value_in_filters" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/add_car"
+        style="@style/header_3"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/car_float_action_button_height"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="@dimen/car_trip_float_action_button_margin_right"
+        android:layout_marginBottom="@dimen/car_trip_float_action_button_margin_bottom"
+        android:background="@drawable/fab_background_aqua"
+        android:backgroundTint="@color/colorPrimary"
+        android:drawableStart="@drawable/ic_tick"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/white"
+        android:elevation="16dp"
+        android:gravity="center|end"
+        android:paddingStart="22dp"
+        android:paddingEnd="20dp"
+        android:text="Εφαρμογή"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/color"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="RtlSymmetry" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

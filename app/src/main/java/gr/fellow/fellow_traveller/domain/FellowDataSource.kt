@@ -4,6 +4,7 @@ import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.ResultWrapperSecond
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
+import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.framework.network.fellow.request.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
@@ -58,11 +59,14 @@ interface FellowDataSource {
         hasPet: Boolean, seats: Int, bags: String, msg: String?, price: Float, timestamp: Long
     ): ResultWrapperSecond<TripInvolved>
 
+
+    suspend fun searchTrips(query: SearchFilters): ResultWrapperSecond<MutableList<TripSearch>>
+
     /*suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripInvolved>>
 
     suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripInvolved>>
 
-    suspend fun searchTrips(query: SearchFilters): ResultWrapper<MutableList<Trip>>
+
 
     suspend fun bookTrip(request: BookTripRequest): ResultWrapper<Trip>*/
 

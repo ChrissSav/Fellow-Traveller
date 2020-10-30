@@ -1,17 +1,17 @@
-package gr.fellow.fellow_traveller.framework.network.fellow.response
+package gr.fellow.fellow_traveller.framework.network.fellow.response.trip
 
 import com.google.gson.annotations.SerializedName
+import gr.fellow.fellow_traveller.framework.network.fellow.response.UserBaseResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.car.CarInfoResponse
 
-data class TripResponse(
+data class TripInvolvedResponse(
     val id: String,
     @SerializedName("destinationFrom")
     val destFrom: DestinationResponse,
     @SerializedName("destinationTo")
     val destTo: DestinationResponse,
-    @SerializedName("creator")
-    val creatorUser: UserBaseResponse,
-    @SerializedName("car")
-    val car: CarResponse,
+    val creator: UserBaseResponse,
+    val car: CarInfoResponse,
     @SerializedName("pet")
     val hasPet: Boolean,
     val seats: Int,
@@ -20,7 +20,6 @@ data class TripResponse(
     val msg: String?,
     @SerializedName("price")
     val price: Float,
-    @SerializedName("timestamp")
     val timestamp: Long,
     val passengers: MutableList<PassengerResponse>
 )

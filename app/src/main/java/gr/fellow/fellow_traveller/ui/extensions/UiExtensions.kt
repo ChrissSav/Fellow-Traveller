@@ -103,6 +103,13 @@ fun Fragment.startActivity(activity: KClass<out Activity>) {
     startActivity(intent)
 }
 
+fun Fragment.startActivityToLeft(activity: KClass<out Activity>) {
+    val intent = Intent(this.context, activity.java)
+    startActivity(intent)
+    this.activity?.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
+
+}
+
 fun Fragment.startActivityClearStack(activityTemp: KClass<out Activity>) {
     val intent = Intent(this.context, activityTemp.java)
     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

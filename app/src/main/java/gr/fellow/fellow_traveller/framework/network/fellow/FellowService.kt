@@ -2,7 +2,12 @@ package gr.fellow.fellow_traveller.framework.network.fellow
 
 import gr.fellow.fellow_traveller.data.BaseResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
-import gr.fellow.fellow_traveller.framework.network.fellow.response.*
+import gr.fellow.fellow_traveller.framework.network.fellow.response.AuthenticationResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.UserAuthResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.car.CarInfoResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.TripInvolvedResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.TripSearchResponse
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -71,13 +76,13 @@ interface FellowService {
     /** CAR **/
 
     @GET("car")
-    suspend fun userCars(): Response<BaseResponse<MutableList<CarResponse>>>
+    suspend fun userCars(): Response<BaseResponse<MutableList<CarInfoResponse>>>
 
 
     @POST("car")
     suspend fun addCar(
         @Body carRequest: CarRequest
-    ): Response<BaseResponse<CarResponse>>
+    ): Response<BaseResponse<CarInfoResponse>>
 
 
     @DELETE("/cars/{car_id}")
@@ -91,15 +96,15 @@ interface FellowService {
     @POST("trip")
     suspend fun registerTrip(
         @Body trip: TripCreateRequest
-    ): Response<BaseResponse<TripResponse>>
+    ): Response<BaseResponse<TripInvolvedResponse>>
 
 
-    @GET("trips")
+    @GET("trip")
     suspend fun getTripsAs(
         @Query("type_as") type: String
-    ): Response<MutableList<TripResponse>>
+    ): Response<MutableList<TripInvolvedResponse>>
 
-    @GET("trips/search")
+    @GET("trip/search")
     suspend fun searchTrips(
         @Query("latitude_from") latitudeFrom: Float,
         @Query("longitude_from") longitudeFrom: Float,
@@ -111,16 +116,14 @@ interface FellowService {
         @Query("timestamp_max") timestampMax: Int?,
         @Query("seats_min") seatsMin: Int?,
         @Query("seats_max") seatsMax: Int?,
-        @Query("bags_min") bagsMin: Int?,
-        @Query("bags_max") bagsMax: Int?,
         @Query("price_min") priceMin: Int?,
         @Query("price_max") priceMax: Int?,
         @Query("pet") pet: Boolean?
-    ): Response<MutableList<TripResponse>>
+    ): Response<BaseResponse<MutableList<TripSearchResponse>>>
 
 
-    @POST("/passengers")
+    @POST("trip/passenger")
     suspend fun bookTrip(
         @Body request: BookTripRequest
-    ): Response<TripResponse>
+    ): Response<TripInvolvedResponse>
 }

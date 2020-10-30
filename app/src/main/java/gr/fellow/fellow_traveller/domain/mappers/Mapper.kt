@@ -1,7 +1,7 @@
 package gr.fellow.fellow_traveller.domain.mappers
 
 import gr.fellow.fellow_traveller.domain.user.Passenger
-import gr.fellow.fellow_traveller.framework.network.fellow.response.PassengerResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.PassengerResponse
 
 
 fun PassengerResponse.toPassenger() = Passenger(

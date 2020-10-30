@@ -1,7 +1,7 @@
-package gr.fellow.fellow_traveller.framework.network.fellow.response
+package gr.fellow.fellow_traveller.framework.network.fellow.response.car
 
 
-data class CarResponse(
+data class CarInfoResponse(
     val id: String,
     val brand: String,
     val model: String,

@@ -1,9 +1,11 @@
 package gr.fellow.fellow_traveller.data
 
 import gr.fellow.fellow_traveller.domain.FellowDataSource
+import gr.fellow.fellow_traveller.domain.SearchFilters
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.mappers.*
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
+import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
@@ -93,6 +95,19 @@ class FellowDataSourceImpl(
         }
     }
 
+
+    override suspend fun searchTrips(query: SearchFilters): ResultWrapperSecond<MutableList<TripSearch>> {
+        return when (val response = repository.searchTrips(query)) {
+            is ResultWrapperSecond.Success ->
+                ResultWrapperSecond.Success(response.data.map {
+                    it.mapTripSearch()
+                }.toMutableList())
+            is ResultWrapperSecond.Error ->
+                ResultWrapperSecond.Error(response.error)
+        }
+
+    }
+
     /* override suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripInvolved>> {
          return when (val response = repository.getTipsAsCreator()) {
              is ResultWrapper.Success ->
@@ -112,15 +127,7 @@ class FellowDataSourceImpl(
      }
 
 
-     override suspend fun searchTrips(query: SearchFilters): ResultWrapper<MutableList<Trip>> {
-         return when (val response = repository.searchTrips(query)) {
-             is ResultWrapper.Success ->
-                 ResultWrapper.Success(response.data.toTrips())
-             is ResultWrapper.Error ->
-                 ResultWrapper.Error(response.error)
-         }
 
-     }
 
      override suspend fun bookTrip(request: BookTripRequest): ResultWrapper<Trip> {
          return when (val response = repository.bookTrip(request)) {
