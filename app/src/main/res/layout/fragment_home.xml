@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.home.tabs.HomeFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -31,26 +31,19 @@
             <TextView
                 android:id="@+id/user_welcome_textView"
                 style="@style/display"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
+                android:layout_marginEnd="16dp"
                 android:background="@color/background"
-                android:text="Lorem"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="Loremσσσσσσσσσσσσσσσσσσσσσσσσσσ"
                 app:layout_constraintBottom_toBottomOf="@id/hello_textView"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/hello_textView"
                 app:layout_constraintTop_toTopOf="@id/hello_textView" />
 
-            <TextView
-                android:id="@+id/search_header"
-                style="@style/header1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_marginEnd="16dp"
-                android:text="Ποιο είναι το επόμενο ταξίδι σου;"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/hello_textView"
-                app:layout_constraintTop_toBottomOf="@id/hello_textView" />
 
             <TextView
                 android:id="@+id/search_info_textView"
@@ -61,33 +54,82 @@
                 android:layout_marginEnd="16dp"
                 android:text="Βρες το ιδανικό ταξίδι για τον επόμενο προορισμό σου"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/search_header"
-                app:layout_constraintTop_toBottomOf="@id/search_header" />
+                app:layout_constraintStart_toStartOf="@id/hello_textView"
+                app:layout_constraintTop_toBottomOf="@id/hello_textView" />
 
-            <Button
-                android:id="@+id/search_button"
-                style="@style/button_filled_with_left_drawable_orange"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/search_section"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="20dp"
-                android:drawableLeft="@drawable/ic_search"
-                android:text="Αναζήτηση διαδρομής"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/component_cardview_shape"
+                android:elevation="2dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/search_info_textView"
-                app:layout_constraintTop_toBottomOf="@id/search_info_textView" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/search_info_textView">
+
+
+                <TextView
+                    android:id="@+id/search_info"
+                    style="@style/paragraph3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Αναζήτηση διαδρομής"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/search_button"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/search_button"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/buttons_background_blue"
+                    android:backgroundTint="@color/black_color"
+                    android:elevation="2dp"
+                    android:padding="10dp"
+                    android:rotation="180"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_back_button"
+                    android:tint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_goneMarginBottom="20dp" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/passenger_image_item"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/search_section" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/offer_section"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/component_dotted_shape_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/search_button">
+                app:layout_constraintTop_toBottomOf="@id/recycler_view">
 
                 <TextView
                     android:id="@+id/offer_header"
@@ -98,6 +140,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
                     android:text="Μοιράσου την επόμενη διαδρομή σου"
+                    android:textColor="@color/white_color"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -109,6 +152,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:text="Καταχώρησε το επόμενο σου ταξίδι και βρες τους συνταξιδιώτες σου"
+                    android:textColor="@color/white_color"
                     app:layout_constraintBottom_toBottomOf="@id/create_circle_button"
                     app:layout_constraintEnd_toStartOf="@id/create_circle_button"
                     app:layout_constraintStart_toStartOf="@id/offer_header"
@@ -121,8 +165,8 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="24dp"
-                    android:background="@drawable/circle_button_shape"
-                    android:backgroundTint="@color/blue_color"
+                    android:background="@drawable/component_dotted_shape_blue"
+                    android:backgroundTint="@color/black_color_pressed"
                     android:elevation="2dp"
                     android:padding="15dp"
                     android:rotation="180"
