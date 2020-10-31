@@ -103,7 +103,6 @@
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:background="@color/blue_color"
-        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_button">
 
@@ -114,6 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:indeterminate="true"
+            android:visibility="gone"
             android:indeterminateTint="@color/black_color"
             android:indeterminateTintMode="src_atop"
             app:layout_constraintEnd_toEndOf="parent"
@@ -122,13 +122,13 @@
 
         <TextView
             android:id="@+id/results_label"
-            style="@style/header1"
+            style="@style/header_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:text="@string/trip_found"
-            android:visibility="invisible"
+            android:visibility="visible"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -152,7 +152,7 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="32dp"
             android:scrollbars="vertical"
             android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

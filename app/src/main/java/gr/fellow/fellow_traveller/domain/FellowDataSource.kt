@@ -60,7 +60,7 @@ interface FellowDataSource {
     ): ResultWrapperSecond<TripInvolved>
 
 
-    suspend fun searchTrips(query: SearchFilters): ResultWrapperSecond<MutableList<TripSearch>>
+    suspend fun searchTrips(query: SearchTripFilter): ResultWrapperSecond<MutableList<TripSearch>>
 
     /*suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripInvolved>>
 

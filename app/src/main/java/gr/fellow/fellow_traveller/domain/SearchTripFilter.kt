@@ -1,6 +1,11 @@
 package gr.fellow.fellow_traveller.domain
 
-data class SearchFilters(
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+
+@Parcelize
+data class SearchTripFilter(
     var latitudeFrom: Float,
     var longitudeFrom: Float,
     var latitudeTo: Float,
@@ -11,12 +16,10 @@ data class SearchFilters(
     var timestampMax: Int? = null,
     var seatsMin: Int? = null,
     var seatsMax: Int? = null,
-    var bagsMin: Int? = null,
-    var bagsMax: Int? = null,
     var priceMin: Int? = null,
     var priceMax: Int? = null,
     var pet: Boolean? = null
-) {
+) : Parcelable {
     fun reset() {
         rangeFrom = null
         rangeTo = null
@@ -24,8 +27,6 @@ data class SearchFilters(
         timestampMax = null
         seatsMin = null
         seatsMax = null
-        bagsMin = null
-        bagsMax = null
         priceMin = null
         priceMax = null
         pet = null

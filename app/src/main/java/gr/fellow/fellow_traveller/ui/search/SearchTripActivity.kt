@@ -1,7 +1,5 @@
 package gr.fellow.fellow_traveller.ui.search
 
-import android.app.Activity
-import android.content.Intent
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +23,7 @@ class SearchTripActivity : BaseActivity<ActivitySearchTripBinding>() {
         })
 
 
-        viewModel.finish.observe(this, Observer {
+        /*viewModel.finish.observe(this, Observer {
             val trip = viewModel.tripBook.value
             trip?.let {
                 val resultIntent = Intent()
@@ -34,7 +32,7 @@ class SearchTripActivity : BaseActivity<ActivitySearchTripBinding>() {
                 finish()
             }
 
-        })
+        })*/
     }
 
     override fun setUpViews() {}

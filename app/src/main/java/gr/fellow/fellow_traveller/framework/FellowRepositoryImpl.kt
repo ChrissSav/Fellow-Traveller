@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import gr.fellow.fellow_traveller.data.FellowRepository
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.ResultWrapperSecond
-import gr.fellow.fellow_traveller.domain.SearchFilters
+import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
@@ -122,7 +122,7 @@ class FellowRepositoryImpl(
             service.getTripsAs("passenger").handleToCorrectFormat()
         }
 
-    override suspend fun searchTrips(query: SearchFilters): ResultWrapperSecond<MutableList<TripSearchResponse>> =
+    override suspend fun searchTrips(query: SearchTripFilter): ResultWrapperSecond<MutableList<TripSearchResponse>> =
         networkCallSecond {
             with(query) {
                 service.searchTrips(

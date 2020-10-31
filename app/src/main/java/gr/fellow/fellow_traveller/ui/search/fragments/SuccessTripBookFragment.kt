@@ -33,7 +33,7 @@ class SuccessTripBookFragment : BaseFragment<FragmentSuccessTripBookBinding>() {
                         } catch (e: InterruptedException) {
                             e.printStackTrace()
                         }
-                        viewModel.finish()
+                        //viewModel.finish()
 
                     }
 

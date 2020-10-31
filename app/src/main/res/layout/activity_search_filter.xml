@@ -31,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/back_button" />
 
     <TextView
-        android:id="@+id/clear"
+        android:id="@+id/reset_button"
         style="@style/header_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -100,8 +100,8 @@
                 android:hint="Ότιδήποτε"
                 android:padding="@dimen/calendar_margin_16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView10"
-                app:layout_constraintTop_toTopOf="@+id/textView10"
-                tools:layout_editor_absoluteX="304dp" />
+                app:layout_constraintEnd_toEndOf="@+id/seats_pick_button"
+                app:layout_constraintTop_toTopOf="@+id/textView10" />
 
 
             <TextView
@@ -145,12 +145,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/price_range_tv"
                 app:left_thumb_color="@color/colorPrimary"
                 app:left_thumb_color_pressed="@color/colorPrimary"
-                app:max_value="200"
+                app:max_value="100"
                 app:min_value="@integer/min_value_in_filters" />
 
 
             <TextView
-                android:id="@+id/range_from"
+                android:id="@+id/range_from_tv"
                 style="@style/header_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -168,9 +168,9 @@
                 android:gravity="center|end"
                 android:hint="Εμφάνιση όλων"
                 android:padding="@dimen/calendar_margin_16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/range_from"
+                app:layout_constraintBottom_toBottomOf="@+id/range_from_tv"
                 app:layout_constraintEnd_toEndOf="@+id/pet"
-                app:layout_constraintTop_toTopOf="@+id/range_from" />
+                app:layout_constraintTop_toTopOf="@+id/range_from_tv" />
 
 
             <com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar
@@ -186,16 +186,16 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/range_from"
-                app:layout_constraintTop_toBottomOf="@+id/range_from"
+                app:layout_constraintStart_toStartOf="@+id/range_from_tv"
+                app:layout_constraintTop_toBottomOf="@+id/range_from_tv"
                 app:left_thumb_color="@color/colorPrimary"
                 app:left_thumb_color_pressed="@color/colorPrimary"
-                app:max_value="200"
+                app:max_value="300"
                 app:min_value="@integer/min_value_in_filters" />
 
 
             <TextView
-                android:id="@+id/range_to"
+                android:id="@+id/range_to_tv"
                 style="@style/header_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -214,9 +214,9 @@
                 android:gravity="center|end"
                 android:hint="Εμφάνιση όλων"
                 android:padding="@dimen/calendar_margin_16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/range_to"
+                app:layout_constraintBottom_toBottomOf="@+id/range_to_tv"
                 app:layout_constraintEnd_toEndOf="@+id/pet"
-                app:layout_constraintTop_toTopOf="@+id/range_to" />
+                app:layout_constraintTop_toTopOf="@+id/range_to_tv" />
 
 
             <com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar
@@ -234,11 +234,11 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/range_to"
-                app:layout_constraintTop_toBottomOf="@+id/range_to"
+                app:layout_constraintStart_toStartOf="@+id/range_to_tv"
+                app:layout_constraintTop_toBottomOf="@+id/range_to_tv"
                 app:left_thumb_color="@color/colorPrimary"
                 app:left_thumb_color_pressed="@color/colorPrimary"
-                app:max_value="200"
+                app:max_value="300"
                 app:min_value="@integer/min_value_in_filters" />
 
 
@@ -248,7 +248,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/add_car"
+        android:id="@+id/apply_button"
         style="@style/header_3"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/car_float_action_button_height"

@@ -9,15 +9,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentSearchDestinationsBinding
+import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
-import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.SearchTripFilterPickBottomSheetDialog
-import gr.fellow.fellow_traveller.ui.extensions.createAlerter
-import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
-import gr.fellow.fellow_traveller.ui.extensions.startActivityForResultWithFade
-import gr.fellow.fellow_traveller.ui.extensions.startActivityToLeft
+import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.search.SearchFilterActivity
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
+import gr.fellow.fellow_traveller.ui.search.adapter.SearchResultsAdapter
 import gr.fellow.fellow_traveller.ui.search.locations.SelectDestinationActivity
 
 
@@ -26,7 +24,6 @@ class SearchDestinationsFragment : BaseFragment<FragmentSearchDestinationsBindin
 
     private val viewModel: SearchTripViewModel by activityViewModels()
     private var tripsList = mutableListOf<TripSearch>()
-    private lateinit var searchTripFilterPickBottomSheetDialog: SearchTripFilterPickBottomSheetDialog
 
     override fun getViewBinding(): FragmentSearchDestinationsBinding =
         FragmentSearchDestinationsBinding.inflate(layoutInflater)
@@ -34,36 +31,55 @@ class SearchDestinationsFragment : BaseFragment<FragmentSearchDestinationsBindin
 
     override fun setUpObservers() {
         with(viewModel) {
-            destinationFrom.observe(viewLifecycleOwner, Observer {
-                binding.destFromButton.text = it.title
+
+            destinations.observe(viewLifecycleOwner, Observer {
+                binding.destFromButton.text = it.first?.title
+                binding.destToButton.text = it.second?.title
             })
 
-            destinationTo.observe(viewLifecycleOwner, Observer {
-                binding.destToButton.text = it.title
+            errorSecond.observe(viewLifecycleOwner, Observer {
+                if (it.internal)
+                    createAlerter(getString(it.messageId))
+                else
+                    createAlerter(it.message)
             })
 
             load.observe(viewLifecycleOwner, Observer {
-                binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+                if (it) {
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.GONE
+                    binding.notFoundImage.visibility = View.GONE
+                } else
+                    binding.progressBar.visibility = View.GONE
             })
+            binding.recyclerView.adapter = SearchResultsAdapter(tripsList, this@SearchDestinationsFragment::onTripClicked)
 
             resultTrips.observe(viewLifecycleOwner, Observer {
                 tripsList.clear()
+                tripsList.addAll(it)
                 binding.recyclerView.adapter?.notifyDataSetChanged()
+                binding.resultsLabel.text = getString(R.string.trip_found, it.size.toString())
                 if (it.isNotEmpty()) {
-                    tripsList.addAll(it)
-                    binding.recyclerView.adapter?.notifyDataSetChanged()
                     binding.recyclerView.visibility = View.VISIBLE
                     binding.notFoundImage.visibility = View.GONE
-                    binding.resultsLabel.text = getString(R.string.trip_found, it.size.toString())
-                    binding.resultsLabel.visibility = View.VISIBLE
                 } else {
                     binding.recyclerView.visibility = View.GONE
                     binding.notFoundImage.visibility = View.VISIBLE
-                    binding.resultsLabel.visibility = View.INVISIBLE
                 }
+            })
+
+            searchFilter.observe(viewLifecycleOwner, Observer {
+                binding.filterButton.visibility = View.VISIBLE
+                viewModel.getTrips()
             })
         }
     }
+
+
+    private fun onTripClicked(item: TripSearch) {
+
+    }
+
 
     override fun setUpViews() {
         with(binding) {
@@ -81,9 +97,8 @@ class SearchDestinationsFragment : BaseFragment<FragmentSearchDestinationsBindin
             }
 
             searchButton.setOnClickListener {
-                if (viewModel.destinationFrom.value != null && viewModel.destinationTo.value != null) {
+                if (viewModel.destinations.value?.first != null && viewModel.destinations.value?.second != null) {
                     viewModel.updateFilter()
-                    viewModel.getTrips()
                     motion.transitionToEnd()
                 } else {
                     createAlerter(resources.getString(R.string.ERROR_FIELDS_REQUIRE))
@@ -91,9 +106,13 @@ class SearchDestinationsFragment : BaseFragment<FragmentSearchDestinationsBindin
             }
 
             filterButton.setOnClickListener {
-                startActivityToLeft(SearchFilterActivity::class)
-            }
+                viewModel.searchFilter.value?.let {
+                    val intent = Intent(activity, SearchFilterActivity::class.java)
+                    intent.putExtra("filter", it)
+                    startActivityToLeft(intent, 3)
+                }
 
+            }
         }
     }
 
@@ -114,6 +133,17 @@ class SearchDestinationsFragment : BaseFragment<FragmentSearchDestinationsBindin
                 val place = data?.getParcelableExtra<PlaceModel>("place")
                 place?.let {
                     viewModel.setDestinationTo(it)
+                }
+
+            }
+
+        } else if (requestCode == 3) {
+            if (resultCode == Activity.RESULT_OK) {
+                val filter = data?.getParcelableExtra<SearchTripFilter>("filter")
+
+                filter?.let {
+                    createToast(it.toString())
+                    viewModel.updateFilter(it)
                 }
 
             }

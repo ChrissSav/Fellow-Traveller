@@ -5,12 +5,11 @@
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="1000">
+        motion:duration="500">
         <OnSwipe
             motion:dragDirection="dragUp"
             motion:onTouchUp="autoComplete"
             motion:touchRegionId="@+id/constraintLayout_search_results" />
-
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
@@ -46,10 +45,13 @@
             motion:layout_constraintStart_toStartOf="@id/back_button"
             motion:layout_constraintTop_toBottomOf="@+id/label" />
         <Constraint
-            android:id="@+id/constraintLayout_search_results"
-            android:layout_width="match_parent"
+            android:id="@+id/filter_button"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="54dp"
             android:layout_height="0dp"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintTop_toBottomOf="@+id/search_button" />
+            motion:layout_constraintBottom_toBottomOf="@+id/back_button"
+            android:visibility="visible"
+            android:layout_marginEnd="16dp"
+            motion:layout_constraintTop_toTopOf="@+id/back_button" />
     </ConstraintSet>
 </MotionScene>

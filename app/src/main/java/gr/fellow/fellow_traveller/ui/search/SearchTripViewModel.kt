@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.data.ResultWrapperSecond
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
-import gr.fellow.fellow_traveller.domain.SearchFilters
+import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.domain.externalError
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
@@ -21,54 +21,44 @@ constructor(
     private val bookTripUseCase: BookTripUseCase
 ) : BaseViewModel() {
 
-    val finish = MutableLiveData<Boolean>()
-
 
     private val _tripBook = SingleLiveEvent<TripSearch>()
     val tripBook: LiveData<TripSearch> = _tripBook
 
-    private val _destinationFrom = MutableLiveData<PlaceModel>()
-    val destinationFrom: LiveData<PlaceModel> = _destinationFrom
+    private val _destinations = MutableLiveData<Pair<PlaceModel?, PlaceModel?>>()
+    val destinations: LiveData<Pair<PlaceModel?, PlaceModel?>> = _destinations
 
-    private val _destinationTo = MutableLiveData<PlaceModel>()
-    val destinationTo: LiveData<PlaceModel> = _destinationTo
 
-    private val _searchFilter = MutableLiveData<SearchFilters>()
-    val searchFilter: LiveData<SearchFilters> = _searchFilter
+    private val _searchFilter = SingleLiveEvent<SearchTripFilter>()
+    val searchFilter: LiveData<SearchTripFilter> = _searchFilter
 
-    private val _resultTrips = MutableLiveData<MutableList<TripSearch>>()
+    private val _resultTrips = SingleLiveEvent<MutableList<TripSearch>>()
     val resultTrips: LiveData<MutableList<TripSearch>> = _resultTrips
 
-    var filterFlag: Boolean = false
 
     fun setDestinationFrom(place: PlaceModel) {
-        launch {
-            _destinationFrom.value = place
-        }
+        val temp = _destinations.value?.second
+        _destinations.value = Pair(place, temp)
     }
 
     fun setDestinationTo(place: PlaceModel) {
-        launch {
-            _destinationTo.value = place
-        }
+        val temp = _destinations.value?.first
+        _destinations.value = Pair(temp, place)
+    }
+
+    fun updateFilter(filter: SearchTripFilter) {
+        if (filter != _searchFilter.value)
+            _searchFilter.value = filter
     }
 
     fun updateFilter() {
-        launch {
-            _searchFilter.value =
-                SearchFilters(
-                    latitudeFrom = _destinationFrom.value!!.latitude,
-                    longitudeFrom = _destinationFrom.value!!.longitude,
-                    latitudeTo = _destinationTo.value!!.latitude,
-                    longitudeTo = _destinationTo.value!!.longitude
-                )
-            filterFlag = true
-        }
-    }
+        _searchFilter.value = SearchTripFilter(
+            _destinations.value?.first?.latitude!!.toFloat(),
+            _destinations.value?.first?.longitude!!.toFloat(),
+            _destinations.value?.second?.latitude!!.toFloat(),
+            _destinations.value?.second?.longitude!!.toFloat()
+        )
 
-    fun updateFilter(filter: SearchFilters) {
-        _searchFilter.value = filter
-        filterFlag = true
     }
 
     fun getTrips() {
@@ -82,7 +72,6 @@ constructor(
                         errorSecond.value = externalError(response.error)
                     }
                 }
-                filterFlag = false
             }
         }
     }
@@ -111,8 +100,8 @@ constructor(
      }
  */
 
-    fun swapDestinations() {
-        launch {
+    /*fun swapDestinations() {
+        launchSecond {
             val temp = _searchFilter.value?.copy()
             temp?.let {
                 val tempDestination = _destinationTo.value!!.copy()
@@ -124,13 +113,9 @@ constructor(
                 it.latitudeTo = _destinationTo.value?.latitude!!
                 it.longitudeTo = _destinationTo.value?.longitude!!
                 _searchFilter.value = it
-                getTrips()
             }
         }
-    }
+    }*/
 
-    fun finish() {
-        finish.value = true
-    }
 
 }

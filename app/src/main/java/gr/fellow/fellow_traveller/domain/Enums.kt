@@ -6,7 +6,7 @@ enum class TripType {
 
 
 enum class PetAnswerType {
-    Yes, No
+    Yes, No, Anything
 }
 
 

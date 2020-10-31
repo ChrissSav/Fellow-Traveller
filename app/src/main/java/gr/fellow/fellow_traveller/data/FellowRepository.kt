@@ -1,6 +1,6 @@
 package gr.fellow.fellow_traveller.data
 
-import gr.fellow.fellow_traveller.domain.SearchFilters
+import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserAuthResponse
@@ -53,7 +53,7 @@ interface FellowRepository {
 
     suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripInvolvedResponse>>
 
-    suspend fun searchTrips(query: SearchFilters): ResultWrapperSecond<MutableList<TripSearchResponse>>
+    suspend fun searchTrips(query: SearchTripFilter): ResultWrapperSecond<MutableList<TripSearchResponse>>
 
     suspend fun bookTrip(request: BookTripRequest): ResultWrapper<TripInvolvedResponse>
 

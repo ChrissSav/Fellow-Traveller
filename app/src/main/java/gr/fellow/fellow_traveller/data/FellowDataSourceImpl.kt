@@ -1,7 +1,7 @@
 package gr.fellow.fellow_traveller.data
 
 import gr.fellow.fellow_traveller.domain.FellowDataSource
-import gr.fellow.fellow_traveller.domain.SearchFilters
+import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.mappers.*
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
@@ -96,7 +96,7 @@ class FellowDataSourceImpl(
     }
 
 
-    override suspend fun searchTrips(query: SearchFilters): ResultWrapperSecond<MutableList<TripSearch>> {
+    override suspend fun searchTrips(query: SearchTripFilter): ResultWrapperSecond<MutableList<TripSearch>> {
         return when (val response = repository.searchTrips(query)) {
             is ResultWrapperSecond.Success ->
                 ResultWrapperSecond.Success(response.data.map {
