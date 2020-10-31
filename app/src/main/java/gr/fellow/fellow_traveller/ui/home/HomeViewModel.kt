@@ -35,7 +35,8 @@ constructor(
     private val deleteUserLocalCars: DeleteUserLocalCars,
     private val registerUserLocalUseCase: RegisterUserLocalUseCase,
     private val getTripsAsCreatorRemoteUseCase: GetTripsAsCreatorRemoteUseCase,
-    private val getTripsAsPassengerRemoteUseCase: GetTripsAsPassengerRemoteUseCase
+    private val getTripsAsPassengerRemoteUseCase: GetTripsAsPassengerRemoteUseCase,
+    private val updateUserPictureUseCase: UpdateUserPictureUseCase
 ) : BaseViewModel() {
 
 
@@ -209,6 +210,21 @@ constructor(
             }
         }
 
+    }
+
+    fun updateUserImage(picture: String?){
+        launchSecond(true) {
+            when (val response = updateUserPictureUseCase(picture)) {
+                is ResultWrapperSecond.Success -> {
+                    registerUserLocalUseCase(response.data)
+                    _user.value = loadUserLocalInfoUseCase()
+
+                }
+                is ResultWrapperSecond.Error -> {
+                    errorSecond.value = externalError(response.error)
+                }
+            }
+        }
     }
 }
 

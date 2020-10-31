@@ -19,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentAccountSettingsBinding
+import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.UserImagePickBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import java.io.File
@@ -32,6 +33,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
     private var mStorageRef: StorageReference? = null
     private var tempImagefile: File? = null
     private var newImage = ""
+    private lateinit var userImagePickBottomSheetDialog: UserImagePickBottomSheetDialog
 
     override fun getViewBinding(): FragmentAccountSettingsBinding =
         FragmentAccountSettingsBinding.inflate(layoutInflater)
@@ -71,7 +73,9 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
         mStorageRef = FirebaseStorage.getInstance().getReference("profile_images");
 
         binding.uploadImage.setOnClickListener {
-            onChooseFile(view);
+            userImagePickBottomSheetDialog = UserImagePickBottomSheetDialog (this@AccountSettingsFragment::onImageSelect)
+            userImagePickBottomSheetDialog.show(childFragmentManager, "userImagePickBottomSheetDialog")
+
         }
 
 
@@ -163,9 +167,13 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
             fileReference.putFile(imageUri).addOnSuccessListener { taskSnapshot ->
                 fileReference.downloadUrl.addOnSuccessListener { uri ->
                     newImage = uri.toString()
-                    Log.i("ImageInside", uri.toString())
-                    loadImageToImageView()
                     tempImagefile!!.delete()
+
+                    viewModel.updateUserImage(newImage)
+                    Log.i("ImageInside", newImage)
+                    binding.progressBar.visibility = View.GONE
+                    //loadImageToImageView()
+
                     //updateUserImageOnFirebase(uri.toString())
                     //updateUserPicture(uri.toString())
                     createToast("Η φωτογραφία ανέβηκε επιτυχώς")
@@ -192,12 +200,18 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
         }
     }
 
-    private fun loadImageToImageView() {
-        try {
-            binding.picture.loadImageFromUrl(newImage)
-            binding.progressBar.visibility = View.GONE
-        } catch (e: Exception) {
-            //  Block of code to handle errors
-        }
+//    private fun loadImageToImageView() {
+//        try {
+//            binding.picture.loadImageFromUrl(newImage)
+//            binding.progressBar.visibility = View.GONE
+//        } catch (e: Exception) {
+//            //  Block of code to handle errors
+//        }
+//    }
+    private fun onImageSelect(value: Boolean){
+        if (value)
+            onChooseFile(view)
+        else
+            viewModel.updateUserImage(null)
     }
 }
