@@ -51,6 +51,10 @@ open class BaseViewModel : ViewModel() {
         error.value = errorMsg
     }
 
+    fun setLoad(shouldLoad: Boolean) {
+        load.value = shouldLoad
+    }
+
     fun setSecondError(errorMsg: Int) {
         errorSecond.value = internalError(errorMsg)
     }

@@ -3,46 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/search_nav_graph"
-    app:startDestination="@id/searchDestinationsFragment">
+    app:startDestination="@id/searchTripsFragment">
 
     <fragment
-        android:id="@+id/searchDestinationsFragment"
+        android:id="@+id/searchTripsFragment"
         android:name="gr.fellow.fellow_traveller.ui.search.fragments.SearchTripsFragment"
-        android:label="fragment_search_destinations"
+        android:label="fragment_search_trips"
         tools:layout="@layout/fragment_search_trips">
         <action
-            android:id="@+id/next_fragment"
-            app:destination="@id/searchResultsFragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popUpTo="@+id/search_nav_graph"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
-        android:id="@+id/searchFilterFragment"
-        android:name="gr.fellow.fellow_traveller.ui.search.fragments.SearchFilterFragment"
-        android:label="fragment_search_filter"
-        tools:layout="@layout/fragment_search_filter" />
-    <fragment
-        android:id="@+id/searchResultsFragment"
-        android:name="gr.fellow.fellow_traveller.ui.search.fragments.SearchResultsFragment"
-        android:label="fragment_search_results"
-        tools:layout="@layout/fragment_search_results">
-        <action
-            android:id="@+id/action_searchResultsFragment_to_searchFilterFragment"
-            app:destination="@id/searchFilterFragment"
-            app:enterAnim="@anim/enter_from_right"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
-        <action
-            android:id="@+id/action_searchResultsFragment_to_searchTripDetailsFragment"
+            android:id="@+id/action_searchTripsFragment_to_searchTripDetailsFragment"
             app:destination="@id/searchTripDetailsFragment"
             app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
     </fragment>
+
     <fragment
         android:id="@+id/searchTripDetailsFragment"
         android:name="gr.fellow.fellow_traveller.ui.search.fragments.SearchTripDetailsFragment"
@@ -57,7 +33,8 @@
             app:popExitAnim="@anim/exit_to_right" />
         <argument
             android:name="tripId"
-            app:argType="integer" />
+            app:argType="string" />
+
     </fragment>
     <fragment
         android:id="@+id/bookTripFragment"
@@ -68,9 +45,6 @@
             android:name="indexTrip"
             app:argType="integer" />
         <action
-            android:id="@+id/action_bookTripFragment_to_searchResultsFragment"
-            app:destination="@id/searchResultsFragment" />
-        <action
             android:id="@+id/action_bookTripFragment_to_successTripBookFragment"
             app:destination="@id/successTripBookFragment" />
     </fragment>
@@ -79,4 +53,5 @@
         android:name="gr.fellow.fellow_traveller.ui.search.fragments.SuccessTripBookFragment"
         android:label="fragment_success_trip_book"
         tools:layout="@layout/fragment_success_trip_book" />
+
 </navigation>

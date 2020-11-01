@@ -10,7 +10,7 @@ import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 
 class SearchResultsAdapter(
     private val tripsList: MutableList<TripSearch>,
-    private val listener: (TripSearch) -> Unit
+    private val onTripClickListener: (TripSearch) -> Unit
 ) : RecyclerView.Adapter<SearchResultsAdapter.ViewHolder>() {
 
 
@@ -23,20 +23,19 @@ class SearchResultsAdapter(
 
         val currentTrip = tripsList[position]
 
-        with(holder.binding) {
+        with(holder) {
+            binding.from.text = currentTrip.destFrom.title
+            binding.to.text = currentTrip.destTo.title
+            binding.name.text = currentTrip.creatorUser.fullName
+            binding.date.text = currentTrip.date
+            binding.time.text = currentTrip.time
+            binding.price.text = binding.price.context.getString(R.string.price, currentTrip.price.toString())
+            binding.picture.loadImageFromUrl(currentTrip.creatorUser.picture)
+            binding.rate.text = currentTrip.creatorUser.rate.toString()
+            binding.review.text = currentTrip.creatorUser.reviews.toString()
 
-            from.text = currentTrip.destFrom.title
-            to.text = currentTrip.destTo.title
-            name.text = currentTrip.creatorUser.fullName
-            date.text = currentTrip.date
-            time.text = currentTrip.time
-            price.text = price.context.getString(R.string.price, currentTrip.price.toString())
-            picture.loadImageFromUrl(currentTrip.creatorUser.picture)
-            rate.text = currentTrip.creatorUser.rate.toString()
-            review.text = currentTrip.creatorUser.reviews.toString()
-
-            this.root.setOnClickListener {
-                listener(currentTrip)
+            binding.root.setOnClickListener {
+                onTripClickListener.invoke(currentTrip)
             }
         }
     }
@@ -44,5 +43,6 @@ class SearchResultsAdapter(
     class ViewHolder(val binding: SearchResultItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun getItemCount() = tripsList.size
+
 
 }

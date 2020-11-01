@@ -16,7 +16,6 @@ import com.iceteck.silicompressorr.FileUtils
 import com.iceteck.silicompressorr.SiliCompressor
 import com.theartofdev.edmodo.cropper.CropImage
 import dagger.hilt.android.AndroidEntryPoint
-import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentAccountSettingsBinding
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.UserImagePickBottomSheetDialog
@@ -51,14 +50,12 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                         messengerLink.text = m
                     }
                     aboutMe.text = it.aboutMe
-                    // messengerLink.text = getString(R.string.messenger_link, "regino29")
                 }
             }
         })
 
         viewModel.successUpdateInfo.observe(viewLifecycleOwner, Observer {
-            createAlerterInfo("Επιτυχής αποθήκευση", R.color.blue_color)
-            onBackPressed()
+            createToast("Επιτυχής αποθήκευση")
         })
 
     }
@@ -73,7 +70,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
         mStorageRef = FirebaseStorage.getInstance().getReference("profile_images");
 
         binding.uploadImage.setOnClickListener {
-            userImagePickBottomSheetDialog = UserImagePickBottomSheetDialog (this@AccountSettingsFragment::onImageSelect)
+            userImagePickBottomSheetDialog = UserImagePickBottomSheetDialog(this@AccountSettingsFragment::onImageSelect)
             userImagePickBottomSheetDialog.show(childFragmentManager, "userImagePickBottomSheetDialog")
 
         }
@@ -104,7 +101,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
     }
 
 
-    private fun onChooseFile(v: View?) {
+    private fun onChooseFile() {
         //CropImage.activity().start()
         val intent = CropImage.activity()
             .setAspectRatio(1, 1)
@@ -154,6 +151,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
             val compressedUri = Uri.fromFile(tempImagefile)
             Log.i("Compress", "fhfjxffghdk")
             uploadImage(compressedUri)
+            viewModel.setLoad(true)
         }
     }
 
@@ -181,21 +179,17 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                 //Log.i("Image", taskSnapshot.uploadSessionUri.toString())
             }.addOnFailureListener { e ->
                 tempImagefile!!.delete()
-                Toast.makeText(
-                    this.context,
-                    e.localizedMessage,
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+                viewModel.setLoad(false)
+                Toast.makeText(this.context, e.localizedMessage, Toast.LENGTH_SHORT).show()
                 binding.progressBar.visibility = View.GONE
             }
                 .addOnProgressListener { taskSnapshot -> //We get progress from uploading the image file
-                    val progress =
-                        100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount
-                    //TODO add progress bar
+                    val progress = 100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount
+                    // TODO add progress bar
                     //imageProgressBar.setProgress(progress.toInt())
                 }
         } else {
+            viewModel.setLoad(false)
             createToast("Η φωτογραφία που επιλέξατε δεν είναι έγκυρη")
         }
     }
@@ -208,9 +202,10 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
 //            //  Block of code to handle errors
 //        }
 //    }
-    private fun onImageSelect(value: Boolean){
+
+    private fun onImageSelect(value: Boolean) {
         if (value)
-            onChooseFile(view)
+            onChooseFile()
         else
             viewModel.updateUserImage(null)
     }

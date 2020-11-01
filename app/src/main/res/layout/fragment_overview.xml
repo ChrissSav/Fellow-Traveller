@@ -98,12 +98,29 @@
             <TextView
                 android:id="@+id/username"
                 style="@style/header_3"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
                 android:text="Πατριάρχης Φώτιος"
                 app:layout_constraintBottom_toBottomOf="@+id/user_image"
+                app:layout_constraintEnd_toStartOf="@+id/textView12"
                 app:layout_constraintStart_toEndOf="@+id/user_image"
+                app:layout_constraintTop_toTopOf="@+id/user_image" />
+
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="40dp"
+                android:layout_height="0dp"
+                android:background="@drawable/background_black_round"
+                android:gravity="center"
+                android:text="4.6"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/user_image"
+                app:layout_constraintEnd_toEndOf="@+id/textView_to"
                 app:layout_constraintTop_toTopOf="@+id/user_image" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -168,7 +185,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:tag="3"
-                    app:label_text="Αποσκευές"
+                    app:label_text="Χωρητικότητα"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/pet"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -189,7 +206,6 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
             <TextView
@@ -217,17 +233,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
 
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="40dp"
-                android:layout_height="0dp"
-                android:text="4.6"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:background="@drawable/background_black_round"
-                app:layout_constraintBottom_toBottomOf="@+id/user_image"
-                app:layout_constraintEnd_toEndOf="@+id/textView_to"
-                app:layout_constraintTop_toTopOf="@+id/user_image" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -239,9 +244,9 @@
         android:id="@+id/ImageButton_next"
         android:layout_width="@dimen/new_trip_float_action_button_width_height"
         android:layout_height="@dimen/new_trip_float_action_button_width_height"
-        android:background="@drawable/circle_button_shape"
         android:layout_marginEnd="@dimen/new_trip_float_action_button_margin_right"
         android:layout_marginBottom="@dimen/new_trip_float_action_button_margin_bottom"
+        android:background="@drawable/circle_button_shape"
         android:backgroundTint="@color/blue_color"
         android:elevation="8dp"
         android:padding="15dp"

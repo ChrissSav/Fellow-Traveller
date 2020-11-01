@@ -3,6 +3,7 @@ package gr.fellow.fellow_traveller.ui.search.fragments
 import android.app.Activity
 import android.content.Intent
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,6 +18,7 @@ import gr.fellow.fellow_traveller.ui.search.SearchFilterActivity
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
 import gr.fellow.fellow_traveller.ui.search.adapter.SearchResultsAdapter
 import gr.fellow.fellow_traveller.ui.search.locations.SelectDestinationActivity
+import gr.fellow.fellow_traveller.utils.currentTimeStamp
 
 
 @AndroidEntryPoint
@@ -24,6 +26,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
     private val viewModel: SearchTripViewModel by activityViewModels()
     private var tripsList = mutableListOf<TripSearch>()
+    private var clickTime = "0".toLong()
 
     override fun getViewBinding(): FragmentSearchTripsBinding =
         FragmentSearchTripsBinding.inflate(layoutInflater)
@@ -32,7 +35,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
     override fun setUpObservers() {
         with(viewModel) {
 
-            binding.recyclerView.adapter = SearchResultsAdapter(tripsList, this@SearchTripsFragment::onTripClicked)
+
 
 
             destinations.observe(viewLifecycleOwner, Observer {
@@ -83,14 +86,25 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
     }
 
 
+    /** Because is detect twice click **/
     private fun onTripClicked(item: TripSearch) {
 
+
+        if (currentTimeStamp() - clickTime > 1) {
+            clickTime = currentTimeStamp()
+            findNavController()?.navigate(R.id.action_searchTripsFragment_to_searchTripDetailsFragment, bundleOf("tripId" to "ff8081817579063001757e5d9f140003"))
+        }
     }
 
 
     override fun setUpViews() {
+
         with(binding) {
 
+
+            recyclerView.adapter = SearchResultsAdapter(tripsList, this@SearchTripsFragment::onTripClicked)
+            if (tripsList.isNotEmpty())
+                binding.recyclerView.visibility = View.VISIBLE
             label.setOnClickListener {
                 binding.motion.transitionToStart()
             }
@@ -124,6 +138,13 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
                     startActivityToLeft(intent, 3)
                 }
 
+            }
+
+            swap.setOnClickListener {
+                if (!destFromButton.text.isNullOrEmpty() && !destToButton.text.isNullOrEmpty()) {
+                    viewModel.swapDestinations()
+                    motion.transitionToEnd()
+                }
             }
         }
     }

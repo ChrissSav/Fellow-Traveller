@@ -77,6 +77,17 @@ constructor(
     }
 
 
+    fun swapDestinations() {
+        _destinations.value = Pair(_destinations.value?.second, _destinations.value?.first)
+        _searchFilter.value = SearchTripFilter(
+            _destinations.value?.first?.latitude!!.toFloat(),
+            _destinations.value?.first?.longitude!!.toFloat(),
+            _destinations.value?.second?.latitude!!.toFloat(),
+            _destinations.value?.second?.longitude!!.toFloat()
+        )
+    }
+
+
     /* fun bookTrip(tripId: Int, bags: Int, pet: Boolean) {
          launch(true) {
              when (val response = bookTripUseCase(tripId, bags, pet)) {
