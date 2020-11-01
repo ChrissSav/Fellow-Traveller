@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/searchDestinationsFragment"
-        android:name="gr.fellow.fellow_traveller.ui.search.fragments.SearchDestinationsFragment"
+        android:name="gr.fellow.fellow_traveller.ui.search.fragments.SearchTripsFragment"
         android:label="fragment_search_destinations"
-        tools:layout="@layout/fragment_search_destinations">
+        tools:layout="@layout/fragment_search_trips">
         <action
             android:id="@+id/next_fragment"
             app:destination="@id/searchResultsFragment"

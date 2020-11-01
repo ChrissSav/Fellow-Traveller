@@ -218,6 +218,8 @@ fun ImageView.loadImageFromUrl(url: String?) {
         Glide.with(this)
             .load(url)
             .into(this)
+    else
+        setImageDrawable(null)
 }
 
 

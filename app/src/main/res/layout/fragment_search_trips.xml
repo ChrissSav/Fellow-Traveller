@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@id/motion"
     app:layoutDescription="@xml/fragment_search_destinations_scene"
-    tools:context=".ui.search.fragments.SearchDestinationsFragment">
+    tools:context=".ui.search.fragments.SearchTripsFragment">
 
 
     <ImageButton
@@ -87,7 +87,7 @@
         android:layout_width="0dp"
         android:layout_height="54dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="42dp"
         android:background="@drawable/button_background_radius_16"
         android:text="Αναζήτηση"
         android:textAllCaps="false"
@@ -95,14 +95,18 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/back_button" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout_search_results"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:alpha="0"
         android:layout_marginTop="8dp"
-        android:background="@color/blue_color"
+        android:background="@drawable/bottom_sheet_dialog_shape"
+        android:backgroundTint="#FFD8BB"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_button">
 
@@ -125,10 +129,10 @@
             style="@style/header_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
             android:text="@string/trip_found"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -142,7 +146,7 @@
             android:drawablePadding="10dp"
             android:gravity="center"
             android:text="Πιο σχετικά"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/results_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/results_label" />

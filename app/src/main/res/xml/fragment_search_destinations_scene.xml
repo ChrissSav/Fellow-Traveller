@@ -14,15 +14,13 @@
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
-            android:id="@+id/search_button"
-            android:layout_width="0dp"
-            android:layout_height="54dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="68dp"
+            android:id="@+id/constraintLayout_search_results"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:alpha="0"
             motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintHorizontal_bias="0.0"
-            motion:layout_constraintStart_toStartOf="@id/back_button" />
+            motion:layout_constraintTop_toBottomOf="@+id/search_button" />
 
     </ConstraintSet>
 
@@ -31,27 +29,37 @@
             android:id="@+id/label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             motion:layout_constraintBottom_toBottomOf="@+id/back_button"
             motion:layout_constraintEnd_toStartOf="@+id/filter_button"
             motion:layout_constraintStart_toEndOf="@+id/back_button"
             motion:layout_constraintTop_toTopOf="@+id/back_button" />
+        <Constraint
+            android:id="@+id/filter_button"
+            android:layout_width="54dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/back_button"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="@+id/back_button" />
+        <Constraint
+            android:id="@+id/constraintLayout_search_results"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            android:alpha="1"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/search_button" />
         <Constraint
             android:id="@+id/search_button"
             android:layout_width="0dp"
             android:layout_height="54dp"
             android:layout_marginEnd="20dp"
             android:alpha="0"
+            android:visibility="gone"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="@id/back_button"
             motion:layout_constraintTop_toBottomOf="@+id/label" />
-        <Constraint
-            android:id="@+id/filter_button"
-            motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="54dp"
-            android:layout_height="0dp"
-            motion:layout_constraintBottom_toBottomOf="@+id/back_button"
-            android:visibility="visible"
-            android:layout_marginEnd="16dp"
-            motion:layout_constraintTop_toTopOf="@+id/back_button" />
     </ConstraintSet>
 </MotionScene>

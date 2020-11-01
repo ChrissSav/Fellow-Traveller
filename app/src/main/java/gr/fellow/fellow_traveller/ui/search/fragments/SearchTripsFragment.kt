@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
-import gr.fellow.fellow_traveller.databinding.FragmentSearchDestinationsBinding
+import gr.fellow.fellow_traveller.databinding.FragmentSearchTripsBinding
 import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
@@ -20,17 +20,20 @@ import gr.fellow.fellow_traveller.ui.search.locations.SelectDestinationActivity
 
 
 @AndroidEntryPoint
-class SearchDestinationsFragment : BaseFragment<FragmentSearchDestinationsBinding>() {
+class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
     private val viewModel: SearchTripViewModel by activityViewModels()
     private var tripsList = mutableListOf<TripSearch>()
 
-    override fun getViewBinding(): FragmentSearchDestinationsBinding =
-        FragmentSearchDestinationsBinding.inflate(layoutInflater)
+    override fun getViewBinding(): FragmentSearchTripsBinding =
+        FragmentSearchTripsBinding.inflate(layoutInflater)
 
 
     override fun setUpObservers() {
         with(viewModel) {
+
+            binding.recyclerView.adapter = SearchResultsAdapter(tripsList, this@SearchTripsFragment::onTripClicked)
+
 
             destinations.observe(viewLifecycleOwner, Observer {
                 binding.destFromButton.text = it.first?.title
@@ -52,9 +55,12 @@ class SearchDestinationsFragment : BaseFragment<FragmentSearchDestinationsBindin
                 } else
                     binding.progressBar.visibility = View.GONE
             })
-            binding.recyclerView.adapter = SearchResultsAdapter(tripsList, this@SearchDestinationsFragment::onTripClicked)
 
             resultTrips.observe(viewLifecycleOwner, Observer {
+
+                binding.resultsLabel.visibility = View.VISIBLE
+                binding.sortButton.visibility = View.VISIBLE
+
                 tripsList.clear()
                 tripsList.addAll(it)
                 binding.recyclerView.adapter?.notifyDataSetChanged()
@@ -72,6 +78,7 @@ class SearchDestinationsFragment : BaseFragment<FragmentSearchDestinationsBindin
                 binding.filterButton.visibility = View.VISIBLE
                 viewModel.getTrips()
             })
+
         }
     }
 
@@ -83,6 +90,11 @@ class SearchDestinationsFragment : BaseFragment<FragmentSearchDestinationsBindin
 
     override fun setUpViews() {
         with(binding) {
+
+            label.setOnClickListener {
+                binding.motion.transitionToStart()
+            }
+
             destFromButton.onClickListener {
                 startActivityForResultWithFade(SelectDestinationActivity::class, 1)
             }
