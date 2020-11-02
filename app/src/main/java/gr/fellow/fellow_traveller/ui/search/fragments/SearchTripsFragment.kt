@@ -26,7 +26,9 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
     private val viewModel: SearchTripViewModel by activityViewModels()
     private var tripsList = mutableListOf<TripSearch>()
-    private var clickTime = "0".toLong()
+    private var clickTime = 0L
+    private var bundle = bundleOf()
+
 
     override fun getViewBinding(): FragmentSearchTripsBinding =
         FragmentSearchTripsBinding.inflate(layoutInflater)
@@ -34,8 +36,6 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
     override fun setUpObservers() {
         with(viewModel) {
-
-
 
 
             destinations.observe(viewLifecycleOwner, Observer {
@@ -86,23 +86,13 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
     }
 
 
-    /** Because is detect twice click **/
-    private fun onTripClicked(item: TripSearch) {
-
-
-        if (currentTimeStamp() - clickTime > 1) {
-            clickTime = currentTimeStamp()
-            findNavController()?.navigate(R.id.action_searchTripsFragment_to_searchTripDetailsFragment, bundleOf("tripId" to "ff8081817579063001757e5d9f140003"))
-        }
-    }
-
-
     override fun setUpViews() {
 
         with(binding) {
 
-
             recyclerView.adapter = SearchResultsAdapter(tripsList, this@SearchTripsFragment::onTripClicked)
+
+
             if (tripsList.isNotEmpty())
                 binding.recyclerView.visibility = View.VISIBLE
             label.setOnClickListener {
@@ -149,6 +139,29 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
         }
     }
 
+
+    /** Because is detect twice click **/
+    private fun onTripClicked(item: TripSearch) {
+        if (currentTimeStamp() - clickTime > 1) {
+            clickTime = currentTimeStamp()
+            findNavController()?.navigate(R.id.action_searchTripsFragment_to_searchTripDetailsFragment, bundleOf("tripId" to item.id))
+        }
+    }
+
+
+    override fun onStop() {
+        super.onStop()
+        bundle.putFloat("motionCurrentState", binding.motion.progress)
+        bundle.putInt("resultsLabelVisibility", binding.resultsLabel.visibility)
+        bundle.putInt("sortButtonVisibility", binding.sortButton.visibility)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.motion.progress = bundle.getFloat("motionCurrentState", 0f)
+        binding.resultsLabel.visibility = bundle.getInt("resultsLabelVisibility", View.GONE)
+        binding.sortButton.visibility = bundle.getInt("sortButtonVisibility", View.GONE)
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

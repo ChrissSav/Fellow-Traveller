@@ -7,7 +7,7 @@ import java.util.*
 
 
 fun dateTimeToTimestamp(date: String, time: String): Long {
-    val p = "0".toLong()
+    val p = 0L
     try {
         val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm")
         val parsedDate = dateFormat.parse("$date $time") as Date
