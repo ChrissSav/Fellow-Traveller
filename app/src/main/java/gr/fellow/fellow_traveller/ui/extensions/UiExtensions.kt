@@ -7,10 +7,7 @@ import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -224,6 +221,14 @@ fun ImageView.loadImageFromUrl(url: String?) {
 
 
 fun ImageView.startAnimation() {
+    if (drawable is AnimatedVectorDrawableCompat) {
+        (drawable as AnimatedVectorDrawableCompat).start()
+    } else if (drawable is AnimatedVectorDrawable) {
+        (drawable as AnimatedVectorDrawable).start()
+    }
+}
+
+fun ImageButton.startAnimation() {
     if (drawable is AnimatedVectorDrawableCompat) {
         (drawable as AnimatedVectorDrawableCompat).start()
     } else if (drawable is AnimatedVectorDrawable) {

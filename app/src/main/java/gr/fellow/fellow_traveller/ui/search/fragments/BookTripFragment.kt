@@ -6,7 +6,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentBookTripBinding
-import gr.fellow.fellow_traveller.ui.dialogs.TripBookConfirmDialog
+import gr.fellow.fellow_traveller.domain.PetAnswerType
+import gr.fellow.fellow_traveller.domain.trip.TripSearch
+import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.PetBottomSheetDialog
+import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
@@ -16,30 +19,29 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
 
     private val viewModel: SearchTripViewModel by activityViewModels()
     private var index: Int = 0
-    private var tripId = "0"
-    private lateinit var tripBookConfirmDialog: TripBookConfirmDialog
-
+    private lateinit var currentTrip: TripSearch
+    private lateinit var petBottomSheetDialog: PetBottomSheetDialog
+    private var petAllow = false
 
     override fun getViewBinding(): FragmentBookTripBinding =
         FragmentBookTripBinding.inflate(layoutInflater)
 
+    override fun handleIntent() {
+        index = requireArguments().getInt("index")
+    }
+
 
     override fun setUpObservers() {
-        viewModel.resultTrips.value?.get(index)?.let {
-            with(it) {
-                tripId = it.id
-                binding.startTextView.text = destFrom.title
-                binding.endTextView.text = destTo.title
-                /*binding.date.text = getDateFormat()
-                binding.time.text = getTimeFormat()
-                binding.seatsTextView.text = (maxBags - currentBags).toString()
-                binding.petsSwitch.isEnabled = hasPet
-                binding.priceTextView.text = getString(R.string.price, price.toString())
-                binding.bagsIncreaseSection.setUpperLimit(maxBags - currentBags)*/
 
+        viewModel.errorSecond.observe(this, Observer {
+            if (it.internal)
+                createAlerter(getString(it.messageId))
+            else {
+                createAlerter(it.message)
+                findNavController()?.popBackStack(R.id.searchTripsFragment, true)
             }
-        }
 
+        })
 
         viewModel.tripBook.observe(viewLifecycleOwner, Observer {
             findNavController()?.navigate(R.id.action_bookTripFragment_to_successTripBookFragment)
@@ -47,42 +49,50 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
     }
 
     override fun setUpViews() {
+
+        viewModel.resultTrips.value?.get(index)?.let { tripSearch ->
+            currentTrip = tripSearch
+            with(binding) {
+                from.text = currentTrip.destTo.title
+                to.text = currentTrip.destFrom.title
+                time.text = currentTrip.time
+                day.text = currentTrip.date
+                seats.setUpperLimit(currentTrip.vacancies)
+                price.text = getString(R.string.price, currentTrip.price.toString())
+                petAllow = currentTrip.hasPet
+                if (!currentTrip.hasPet)
+                    pet.setText(getString(R.string.no))
+            }
+        }
         with(binding) {
-            closeButton.setOnClickListener {
+
+            backButton.setOnClickListener {
                 onBackPressed()
             }
 
-            bookButton.setOnClickListener {
-                // openDialog()
-
+            book.setOnClickListener {
+                if (pet.text.isNullOrEmpty()) {
+                    createAlerter("Παρακαλώ επιλέξτε συνοδεία κατοικιδίου")
+                } else {
+                    viewModel.bookTrip(currentTrip.id, binding.seats.currentNum, binding.pet.text.equals(getString(R.string.yes)))
+                }
             }
-        }
 
-        binding.petsSwitch.setOnCheckedChangeListener { _, b ->
-            if (b) {
-                binding.havePetTextView.text = resources.getString(R.string.have_pet)
-            } else {
-                binding.havePetTextView.text = resources.getString(R.string.have_not_pet)
+            pet.setOnClickListener {
+                if (petAllow) {
+                    petBottomSheetDialog = PetBottomSheetDialog(this@BookTripFragment::onPetItemClickListener)
+                    petBottomSheetDialog.show(childFragmentManager, "petBottomSheetDialog")
+                }
             }
         }
     }
 
-    override fun handleIntent() {
-        index = requireArguments().getInt("indexTrip")
-    }
-
-
-    /*private fun openDialog() {
-        activity?.supportFragmentManager?.let {
-            tripBookConfirmDialog = TripBookConfirmDialog(requireActivity()) { result ->
-                if (result)
-                    viewModel.bookTrip(tripId, binding.bagsIncreaseSection.currentNum, binding.petsSwitch.isChecked)
-
-                tripBookConfirmDialog.dismiss()
-            }
-            tripBookConfirmDialog.show(it, "example dialog")
+    private fun onPetItemClickListener(petAnswerType: PetAnswerType) {
+        if (petAnswerType == PetAnswerType.Yes) {
+            binding.pet.setText(getString(R.string.yes))
+        } else {
+            binding.pet.setText(getString(R.string.no))
         }
-
-    }*/
+    }
 
 }

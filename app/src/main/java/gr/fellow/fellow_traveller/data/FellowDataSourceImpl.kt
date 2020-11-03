@@ -108,6 +108,15 @@ class FellowDataSourceImpl(
 
     }
 
+    override suspend fun bookTrip(tripId: String, seats: Int, pet: Boolean): ResultWrapperSecond<TripInvolved> {
+        return when (val response = repository.bookTrip(BookTripRequest(tripId, seats, pet))) {
+            is ResultWrapperSecond.Success ->
+                ResultWrapperSecond.Success(response.data.mapTripInvolved())
+            is ResultWrapperSecond.Error ->
+                ResultWrapperSecond.Error(response.error)
+        }
+    }
+
     /* override suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripInvolved>> {
          return when (val response = repository.getTipsAsCreator()) {
              is ResultWrapper.Success ->
@@ -129,14 +138,7 @@ class FellowDataSourceImpl(
 
 
 
-     override suspend fun bookTrip(request: BookTripRequest): ResultWrapper<Trip> {
-         return when (val response = repository.bookTrip(request)) {
-             is ResultWrapper.Success ->
-                 ResultWrapper.Success(response.data.toTrip())
-             is ResultWrapper.Error ->
-                 ResultWrapper.Error(response.error)
-         }
-     }*/
+   */
 
     /**
      * Google Service

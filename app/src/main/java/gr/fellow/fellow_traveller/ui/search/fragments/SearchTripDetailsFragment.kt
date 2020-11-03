@@ -1,12 +1,14 @@
 package gr.fellow.fellow_traveller.ui.search.fragments
 
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentSearchTripDetailsBinding
 import gr.fellow.fellow_traveller.domain.user.UserBase
+import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
@@ -48,10 +50,10 @@ class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>
 
 
                     bookTrip.setOnClickListener {
-                        /*findNavController()?.navigate(
+                        findNavController()?.navigate(
                             R.id.action_searchTripDetailsFragment_to_bookTripFragment,
-                            bundleOf("indexTrip" to index)
-                        )*/
+                            bundleOf("index" to index)
+                        )
 
 
                     }

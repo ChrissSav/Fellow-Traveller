@@ -1,11 +1,11 @@
 package gr.fellow.fellow_traveller.ui.search
 
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivitySearchTripBinding
-import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 
 
 @AndroidEntryPoint
@@ -18,22 +18,14 @@ class SearchTripActivity : BaseActivity<ActivitySearchTripBinding>() {
 
 
     override fun setUpObservers() {
-        viewModel.error.observe(this, Observer {
-            createAlerter(getString(it))
+        viewModel.load.observe(this, Observer {
+            if (it)
+                binding.genericLoader.progressLoad.visibility = View.VISIBLE
+            else
+                binding.genericLoader.progressLoad.visibility = View.INVISIBLE
         })
-
-
-        /*viewModel.finish.observe(this, Observer {
-            val trip = viewModel.tripBook.value
-            trip?.let {
-                val resultIntent = Intent()
-                resultIntent.putExtra("trip", it)
-                setResult(Activity.RESULT_OK, resultIntent)
-                finish()
-            }
-
-        })*/
     }
+
 
     override fun setUpViews() {}
 }

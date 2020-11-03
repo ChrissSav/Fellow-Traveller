@@ -34,4 +34,7 @@ data class TripSearch(
 
     val seatsStatus
         get() = "${passengers.size}/${seats}"
+
+    val vacancies
+        get() = seats - passengers.size
 }

@@ -4,6 +4,6 @@ import gr.fellow.fellow_traveller.framework.network.fellow.response.UserBaseResp
 
 data class PassengerResponse(
     val user: UserBaseResponse,
-    val bags: String,
+    val seats: String,
     val pet: Boolean
 )

@@ -133,9 +133,9 @@ class FellowRepositoryImpl(
 
         }
 
-    override suspend fun bookTrip(request: BookTripRequest): ResultWrapper<TripInvolvedResponse> =
-        networkCall {
-            service.bookTrip(request).handleToCorrectFormat()
+    override suspend fun bookTrip(request: BookTripRequest): ResultWrapperSecond<TripInvolvedResponse> =
+        networkCallSecond {
+            service.bookTrip(request).handleApiFormat()
         }
 
     override suspend fun registerUserAuthLocal(userEntity: RegisteredUserEntity) =

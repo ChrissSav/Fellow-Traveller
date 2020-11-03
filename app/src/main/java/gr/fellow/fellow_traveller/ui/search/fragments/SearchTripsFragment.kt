@@ -44,13 +44,14 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
             })
 
             errorSecond.observe(viewLifecycleOwner, Observer {
+                binding.progressBar.visibility = View.GONE
                 if (it.internal)
                     createAlerter(getString(it.messageId))
                 else
                     createAlerter(it.message)
             })
 
-            load.observe(viewLifecycleOwner, Observer {
+            loadResults.observe(viewLifecycleOwner, Observer {
                 if (it) {
                     binding.progressBar.visibility = View.VISIBLE
                     binding.recyclerView.visibility = View.GONE
@@ -63,7 +64,6 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
                 binding.resultsLabel.visibility = View.VISIBLE
                 binding.sortButton.visibility = View.VISIBLE
-
                 tripsList.clear()
                 tripsList.addAll(it)
                 binding.recyclerView.adapter?.notifyDataSetChanged()
@@ -137,6 +137,10 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
                 }
             }
         }
+
+        viewModel.deleteTripId?.let {
+            viewModel.handleErrorBook(it)
+        }
     }
 
 
@@ -150,17 +154,19 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
 
     override fun onStop() {
-        super.onStop()
         bundle.putFloat("motionCurrentState", binding.motion.progress)
         bundle.putInt("resultsLabelVisibility", binding.resultsLabel.visibility)
         bundle.putInt("sortButtonVisibility", binding.sortButton.visibility)
+        super.onStop()
+
     }
 
     override fun onResume() {
-        super.onResume()
         binding.motion.progress = bundle.getFloat("motionCurrentState", 0f)
         binding.resultsLabel.visibility = bundle.getInt("resultsLabelVisibility", View.GONE)
         binding.sortButton.visibility = bundle.getInt("sortButtonVisibility", View.GONE)
+        super.onResume()
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

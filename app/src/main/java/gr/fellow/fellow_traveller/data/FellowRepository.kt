@@ -55,7 +55,7 @@ interface FellowRepository {
 
     suspend fun searchTrips(query: SearchTripFilter): ResultWrapperSecond<MutableList<TripSearchResponse>>
 
-    suspend fun bookTrip(request: BookTripRequest): ResultWrapper<TripInvolvedResponse>
+    suspend fun bookTrip(request: BookTripRequest): ResultWrapperSecond<TripInvolvedResponse>
 
 
     /**
