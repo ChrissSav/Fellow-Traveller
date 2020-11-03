@@ -103,6 +103,18 @@ fun Fragment.startActivity(activity: KClass<out Activity>) {
     startActivity(intent)
 }
 
+fun Fragment.startActivityToLeft(intent: Intent, code: Int) {
+    startActivityForResult(intent, code)
+    this.activity?.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
+}
+
+fun Fragment.startActivityToLeft(activity: KClass<out Activity>) {
+    val intent = Intent(this.context, activity.java)
+    startActivity(intent)
+    this.activity?.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
+
+}
+
 fun Fragment.startActivityClearStack(activityTemp: KClass<out Activity>) {
     val intent = Intent(this.context, activityTemp.java)
     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -163,6 +175,18 @@ fun Fragment.createAlerter(msg: String) {
 }
 
 
+fun Fragment.createAlerterInfo(msg: String, color: Int) {
+    Alerter.create(activity)
+        .setTitle("Ενημέρωση")
+        .setText(msg)
+        .setIcon(R.drawable.ic_lock)
+        .setBackgroundColorRes(color)
+        .setDuration(1800)
+        .enableSwipeToDismiss() //seems to not work well with OnClickListener
+        .show()
+}
+
+
 /***  NAV GRAPH***/
 
 fun NavController.navigateWithFade(actionId: Int) {
@@ -194,6 +218,8 @@ fun ImageView.loadImageFromUrl(url: String?) {
         Glide.with(this)
             .load(url)
             .into(this)
+    else
+        setImageDrawable(null)
 }
 
 
@@ -240,5 +266,9 @@ val Double.toDp: Int
 
 val Double.toPx: Int
     get() = (this / Resources.getSystem().displayMetrics.density).toInt()
+
+
+val String.tofloat: Float
+    get() = if (this.isNullOrEmpty()) 0f else toFloat()
 
 

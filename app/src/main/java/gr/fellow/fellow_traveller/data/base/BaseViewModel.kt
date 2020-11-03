@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.ui.help
+package gr.fellow.fellow_traveller.data.base
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -51,6 +51,14 @@ open class BaseViewModel : ViewModel() {
         error.value = errorMsg
     }
 
+    fun setLoad(shouldLoad: Boolean) {
+        load.value = shouldLoad
+    }
+
+    fun setSecondError(errorMsg: Int) {
+        errorSecond.value = internalError(errorMsg)
+    }
+
     private fun handleError(e: Exception) {
         when (e) {
             is BaseApiException -> when (e.code) {
@@ -70,6 +78,7 @@ open class BaseViewModel : ViewModel() {
 
     /*** SECONDS ****/
     private fun handleErrorSecond(e: Exception) {
+        e.printStackTrace()
         when (e) {
             is BaseApiException -> when (e.code) {
                 ACCESS_DENIED -> {
@@ -83,6 +92,7 @@ open class BaseViewModel : ViewModel() {
                 errorSecond.value = internalError(R.string.ERROR_INTERNET_CONNECTION)
             }
             is UnauthorizedException -> {
+
                 errorSecond.value = internalError(R.string.ERROR_API_UNAUTHORIZED)
             }
 

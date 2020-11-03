@@ -10,7 +10,7 @@ import gr.fellow.fellow_traveller.R
 import java.util.*
 
 class DatePickerCustomDialog(
-    private val buttonText: String,
+    private val buttonText: String?,
     private val listener: (String) -> Unit
 ) :
 

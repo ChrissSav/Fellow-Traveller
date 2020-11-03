@@ -1,10 +1,18 @@
 package gr.fellow.fellow_traveller.domain.mappers
 
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
-import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
+import gr.fellow.fellow_traveller.domain.trip.TripSearch
+import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.TripInvolvedResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.TripSearchResponse
 
 
-fun TripResponse.mapTripInvolved() = TripInvolved(
-    id, destFrom, destTo, pickupPoint, creatorUser.toUserBase(), car.mapToCar(),
-    passengers.mapToPassenger(), timestamp, hasPet, maxSeats, currentSeats, maxBags, currentBags, msg, price
+fun TripInvolvedResponse.mapTripInvolved() = TripInvolved(
+    id, destFrom, destTo, creator.toUserBase(), car.mapToCarInfoBase(), hasPet, seats, bags, msg, price, timestamp,
+    passengers.mapToPassenger()
+)
+
+
+fun TripSearchResponse.mapTripSearch() = TripSearch(
+    id, destFrom, destTo, creator.toUserBase(), car.mapToCarBase(), hasPet, seats, bags, msg, price, timestamp,
+    passengers.mapToPassenger()
 )

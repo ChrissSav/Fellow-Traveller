@@ -1,10 +1,10 @@
 package gr.fellow.fellow_traveller.domain.trip
 
 import android.os.Parcelable
-import gr.fellow.fellow_traveller.domain.car.Car
+import gr.fellow.fellow_traveller.domain.car.CarInfoBase
 import gr.fellow.fellow_traveller.domain.user.Passenger
 import gr.fellow.fellow_traveller.domain.user.UserBase
-import gr.fellow.fellow_traveller.framework.network.fellow.response.DestinationResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.DestinationResponse
 import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
 import gr.fellow.fellow_traveller.utils.getTimeFromTimestamp
 import kotlinx.android.parcel.Parcelize
@@ -12,21 +12,18 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class TripInvolved(
-    val id: Int,
+    val id: String,
     val destFrom: DestinationResponse,
     val destTo: DestinationResponse,
-    val pickupPoint: DestinationResponse,
     val creatorUser: UserBase,
-    val carBase: Car,
-    val passengers: MutableList<Passenger>,
-    val timestamp: Long,
+    val car: CarInfoBase,
     val hasPet: Boolean,
-    val maxSeats: Int,
-    val currentSeats: Int,
-    val maxBags: Int,
-    val currentBags: Int,
+    val seats: Int,
+    val bags: String,
     val msg: String?,
-    val price: Float
+    val price: Float,
+    val timestamp: Long,
+    val passengers: MutableList<Passenger>
 ) : Parcelable {
 
 
@@ -36,5 +33,9 @@ data class TripInvolved(
 
     val time
         get() = getTimeFromTimestamp(timestamp)
+
+
+    val seatsStatus
+        get() = "${passengers.size}/${seats}"
 
 }

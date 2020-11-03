@@ -6,15 +6,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.ResultWrapperSecond
+import gr.fellow.fellow_traveller.data.base.BaseViewModel
+import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.externalError
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
-import gr.fellow.fellow_traveller.ui.help.BaseViewModel
-import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
-import gr.fellow.fellow_traveller.usecase.LoadUserInfoUseCase
+import gr.fellow.fellow_traveller.usecase.LoadUserLocalInfoUseCase
 import gr.fellow.fellow_traveller.usecase.auth.DeleteUserAuthLocalUseCase
 import gr.fellow.fellow_traveller.usecase.home.*
+import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsCreatorRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsPassengerRemoteUseCase
 import kotlinx.coroutines.launch
@@ -23,16 +24,19 @@ import kotlinx.coroutines.launch
 class HomeViewModel
 @ViewModelInject
 constructor(
-    private val loadUserInfoUseCase: LoadUserInfoUseCase,
+    private val loadUserLocalInfoUseCase: LoadUserLocalInfoUseCase,
     private val deleteUserAuthLocalUseCase: DeleteUserAuthLocalUseCase,
     private val logoutRemoteUseCase: LogoutRemoteUseCase,
     private val getUserCarsRemoteUseCase: GetUserCarsRemoteUseCase,
     private val getUserCarsLocalUseCase: GetUserCarsLocalUseCase,
     private val registerCarLocalUseCase: RegisterCarLocalUseCase,
     private val deleteCarUseCase: DeleteCarUseCase,
+    private val updateAccountInfoUseCase: UpdateAccountInfoUseCase,
     private val deleteUserLocalCars: DeleteUserLocalCars,
+    private val registerUserLocalUseCase: RegisterUserLocalUseCase,
     private val getTripsAsCreatorRemoteUseCase: GetTripsAsCreatorRemoteUseCase,
-    private val getTripsAsPassengerRemoteUseCase: GetTripsAsPassengerRemoteUseCase
+    private val getTripsAsPassengerRemoteUseCase: GetTripsAsPassengerRemoteUseCase,
+    private val updateUserPictureUseCase: UpdateUserPictureUseCase
 ) : BaseViewModel() {
 
 
@@ -57,6 +61,10 @@ constructor(
     private val _tripsTakesPart = MutableLiveData<MutableList<TripInvolved>>()
     val tripsTakesPart: LiveData<MutableList<TripInvolved>> = _tripsTakesPart
 
+
+    private val _successUpdateInfo = SingleLiveEvent<Boolean>()
+    val successUpdateInfo: LiveData<Boolean> = _successUpdateInfo
+
     /*****************************************************************************************************/
 
     fun loadUserInfo() {
@@ -64,7 +72,7 @@ constructor(
             if (_user.value != null) {
                 return@launch
             }
-            _user.value = loadUserInfoUseCase()
+            _user.value = loadUserLocalInfoUseCase()
         }
     }
 
@@ -183,6 +191,38 @@ constructor(
                 val tempTrip = it
                 tempTrip.add(trip)
                 _tripsTakesPart.value = tempTrip
+            }
+        }
+    }
+
+
+    fun updateAccountInfo(firstName: String, lastName: String, messengerLink: String?, aboutMe: String?) {
+        launchSecond(true) {
+            when (val response = updateAccountInfoUseCase(firstName, lastName, messengerLink, aboutMe)) {
+                is ResultWrapperSecond.Success -> {
+                    registerUserLocalUseCase(response.data)
+                    _user.value = loadUserLocalInfoUseCase()
+                    _successUpdateInfo.value = true
+                }
+                is ResultWrapperSecond.Error -> {
+                    errorSecond.value = externalError(response.error)
+                }
+            }
+        }
+
+    }
+
+    fun updateUserImage(picture: String?){
+        launchSecond(true) {
+            when (val response = updateUserPictureUseCase(picture)) {
+                is ResultWrapperSecond.Success -> {
+                    registerUserLocalUseCase(response.data)
+                    _user.value = loadUserLocalInfoUseCase()
+
+                }
+                is ResultWrapperSecond.Error -> {
+                    errorSecond.value = externalError(response.error)
+                }
             }
         }
     }

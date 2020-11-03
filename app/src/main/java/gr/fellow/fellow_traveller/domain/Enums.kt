@@ -6,10 +6,17 @@ enum class TripType {
 
 
 enum class PetAnswerType {
-    Yes, No
+    Yes, No, Anything
 }
 
 
 enum class AnswerType {
     Yes, No
+}
+
+
+enum class BagsStatusType(val value: String) {
+    NONE("Καθόλου"),
+    LIMITED("Περιορισμένη"),
+    LARGE("Μεγάλη")
 }

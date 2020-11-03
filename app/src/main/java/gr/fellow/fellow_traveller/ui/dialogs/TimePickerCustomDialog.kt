@@ -9,7 +9,7 @@ import gr.fellow.fellow_traveller.R
 import java.util.*
 
 class TimePickerCustomDialog(
-    private val buttonText: String,
+    private val buttonText: String?,
     private val listener: (String) -> Unit
 ) :
 

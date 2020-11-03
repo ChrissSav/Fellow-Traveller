@@ -16,7 +16,7 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
 
     private val viewModel: SearchTripViewModel by activityViewModels()
     private var index: Int = 0
-    private var tripId = 0
+    private var tripId = "0"
     private lateinit var tripBookConfirmDialog: TripBookConfirmDialog
 
 
@@ -30,12 +30,12 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
                 tripId = it.id
                 binding.startTextView.text = destFrom.title
                 binding.endTextView.text = destTo.title
-                binding.date.text = getDateFormat()
+                /*binding.date.text = getDateFormat()
                 binding.time.text = getTimeFormat()
                 binding.seatsTextView.text = (maxBags - currentBags).toString()
                 binding.petsSwitch.isEnabled = hasPet
                 binding.priceTextView.text = getString(R.string.price, price.toString())
-                binding.bagsIncreaseSection.setUpperLimit(maxBags - currentBags)
+                binding.bagsIncreaseSection.setUpperLimit(maxBags - currentBags)*/
 
             }
         }
@@ -53,7 +53,7 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
             }
 
             bookButton.setOnClickListener {
-                openDialog()
+                // openDialog()
 
             }
         }
@@ -72,7 +72,7 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
     }
 
 
-    private fun openDialog() {
+    /*private fun openDialog() {
         activity?.supportFragmentManager?.let {
             tripBookConfirmDialog = TripBookConfirmDialog(requireActivity()) { result ->
                 if (result)
@@ -83,6 +83,6 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
             tripBookConfirmDialog.show(it, "example dialog")
         }
 
-    }
+    }*/
 
 }

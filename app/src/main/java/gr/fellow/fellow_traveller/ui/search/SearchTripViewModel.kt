@@ -3,13 +3,13 @@ package gr.fellow.fellow_traveller.ui.search
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.data.ResultWrapper
-import gr.fellow.fellow_traveller.data.models.Trip
-import gr.fellow.fellow_traveller.domain.SearchFilters
+import gr.fellow.fellow_traveller.data.ResultWrapperSecond
+import gr.fellow.fellow_traveller.data.base.BaseViewModel
+import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
+import gr.fellow.fellow_traveller.domain.SearchTripFilter
+import gr.fellow.fellow_traveller.domain.externalError
+import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
-import gr.fellow.fellow_traveller.ui.help.BaseViewModel
-import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.trips.BookTripUseCase
 import gr.fellow.fellow_traveller.usecase.trips.SearchTripsUseCase
 
@@ -21,98 +21,98 @@ constructor(
     private val bookTripUseCase: BookTripUseCase
 ) : BaseViewModel() {
 
-    val finish = MutableLiveData<Boolean>()
+
+    private val _tripBook = SingleLiveEvent<TripSearch>()
+    val tripBook: LiveData<TripSearch> = _tripBook
+
+    private val _destinations = MutableLiveData<Pair<PlaceModel?, PlaceModel?>>()
+    val destinations: LiveData<Pair<PlaceModel?, PlaceModel?>> = _destinations
 
 
-    private val _tripBook = SingleLiveEvent<Trip>()
-    val tripBook: LiveData<Trip> = _tripBook
+    private val _searchFilter = SingleLiveEvent<SearchTripFilter>()
+    val searchFilter: LiveData<SearchTripFilter> = _searchFilter
 
-    private val _destinationFrom = MutableLiveData<PlaceModel>()
-    val destinationFrom: LiveData<PlaceModel> = _destinationFrom
+    private val _resultTrips = SingleLiveEvent<MutableList<TripSearch>>()
+    val resultTrips: LiveData<MutableList<TripSearch>> = _resultTrips
 
-    private val _destinationTo = MutableLiveData<PlaceModel>()
-    val destinationTo: LiveData<PlaceModel> = _destinationTo
-
-    private val _searchFilter = MutableLiveData<SearchFilters>()
-    val searchFilter: LiveData<SearchFilters> = _searchFilter
-
-    private val _resultTrips = MutableLiveData<MutableList<Trip>>()
-    val resultTrips: LiveData<MutableList<Trip>> = _resultTrips
-
-    var filterFlag: Boolean = false
 
     fun setDestinationFrom(place: PlaceModel) {
-        launch {
-            _destinationFrom.value = place
-        }
+        val temp = _destinations.value?.second
+        _destinations.value = Pair(place, temp)
     }
 
     fun setDestinationTo(place: PlaceModel) {
-        launch {
-            _destinationTo.value = place
-        }
+        val temp = _destinations.value?.first
+        _destinations.value = Pair(temp, place)
+    }
+
+    fun updateFilter(filter: SearchTripFilter) {
+        if (filter != _searchFilter.value)
+            _searchFilter.value = filter
     }
 
     fun updateFilter() {
-        launch {
-            _searchFilter.value =
-                SearchFilters(
-                    latitudeFrom = _destinationFrom.value!!.latitude,
-                    longitudeFrom = _destinationFrom.value!!.longitude,
-                    latitudeTo = _destinationTo.value!!.latitude,
-                    longitudeTo = _destinationTo.value!!.longitude
-                )
-            filterFlag = true
-        }
-    }
+        _searchFilter.value = SearchTripFilter(
+            _destinations.value?.first?.latitude!!.toFloat(),
+            _destinations.value?.first?.longitude!!.toFloat(),
+            _destinations.value?.second?.latitude!!.toFloat(),
+            _destinations.value?.second?.longitude!!.toFloat()
+        )
 
-    fun updateFilter(filter: SearchFilters) {
-        _searchFilter.value = filter
-        filterFlag = true
     }
 
     fun getTrips() {
-        launch(300, true) {
+        launchSecond(true) {
             _searchFilter.value?.let { searchFilters ->
                 when (val response = searchTripsUseCase(searchFilters)) {
-                    is ResultWrapper.Success -> {
-                        _resultTrips.value = response.data.toMutableList()
+                    is ResultWrapperSecond.Success -> {
+                        _resultTrips.value = response.data
                     }
-                    is ResultWrapper.Error -> {
-                        error.value = R.string.ERROR_SOMETHING_WRONG
+                    is ResultWrapperSecond.Error -> {
+                        errorSecond.value = externalError(response.error)
                     }
-                }
-                filterFlag = false
-            }
-        }
-    }
-
-
-    fun bookTrip(tripId: Int, bags: Int, pet: Boolean) {
-        launch(true) {
-            when (val response = bookTripUseCase(tripId, bags, pet)) {
-                is ResultWrapper.Success -> {
-                    _tripBook.value = response.data
-                }
-                is ResultWrapper.Error -> {
-                    error.value =
-                        when (response.error.code) {
-                            606 ->
-                                R.string.ERROR_TRIP_NOT_AVAILABLE_LUGGAGE
-                            607 ->
-                                R.string.ERROR_TRIP_CHECK_PET_ACCEPTS
-                            else ->
-                                R.string.ERROR_SOMETHING_WRONG
-                        }
                 }
             }
         }
-
     }
 
 
     fun swapDestinations() {
-        launch {
+        _destinations.value = Pair(_destinations.value?.second, _destinations.value?.first)
+        _searchFilter.value = SearchTripFilter(
+            _destinations.value?.first?.latitude!!.toFloat(),
+            _destinations.value?.first?.longitude!!.toFloat(),
+            _destinations.value?.second?.latitude!!.toFloat(),
+            _destinations.value?.second?.longitude!!.toFloat()
+        )
+    }
+
+
+    /* fun bookTrip(tripId: Int, bags: Int, pet: Boolean) {
+         launch(true) {
+             when (val response = bookTripUseCase(tripId, bags, pet)) {
+                 is ResultWrapper.Success -> {
+                     _tripBook.value = response.data
+                 }
+                 is ResultWrapper.Error -> {
+                     error.value =
+                         when (response.error.code) {
+                             606 ->
+                                 R.string.ERROR_TRIP_NOT_AVAILABLE_LUGGAGE
+                             607 ->
+                                 R.string.ERROR_TRIP_CHECK_PET_ACCEPTS
+                             else ->
+                                 R.string.ERROR_SOMETHING_WRONG
+                         }
+                 }
+             }
+         }
+
+     }
+ */
+
+    /*fun swapDestinations() {
+        launchSecond {
             val temp = _searchFilter.value?.copy()
             temp?.let {
                 val tempDestination = _destinationTo.value!!.copy()
@@ -124,13 +124,9 @@ constructor(
                 it.latitudeTo = _destinationTo.value?.latitude!!
                 it.longitudeTo = _destinationTo.value?.longitude!!
                 _searchFilter.value = it
-                getTrips()
             }
         }
-    }
+    }*/
 
-    fun finish() {
-        finish.value = true
-    }
 
 }

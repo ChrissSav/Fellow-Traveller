@@ -1,11 +1,12 @@
 package gr.fellow.fellow_traveller.data
 
-import gr.fellow.fellow_traveller.domain.SearchFilters
+import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
-import gr.fellow.fellow_traveller.framework.network.fellow.response.CarResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.TripResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserAuthResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.car.CarInfoResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.TripInvolvedResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.TripSearchResponse
 import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 
@@ -31,25 +32,30 @@ interface FellowRepository {
 
     suspend fun updateAccountInfo(updateAccountRequest: UpdateAccountRequest): ResultWrapperSecond<UserAuthResponse>
 
+    suspend fun updateUserPicture(updatePictureRequest: UpdatePictureRequest): ResultWrapperSecond<UserAuthResponse>
+
+    suspend fun getUserInfo(): ResultWrapperSecond<UserAuthResponse>
+
+
     // Cars
 
-    suspend fun addCarRemote(carRequest: CarRequest): ResultWrapperSecond<CarResponse>
+    suspend fun addCarRemote(carRequest: CarRequest): ResultWrapperSecond<CarInfoResponse>
 
-    suspend fun getCarsRemote(): ResultWrapperSecond<MutableList<CarResponse>>
+    suspend fun getCarsRemote(): ResultWrapperSecond<MutableList<CarInfoResponse>>
 
     suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse>
 
     // Trips
 
-    suspend fun addTrip(trip: TripCreateRequest): ResultWrapper<TripResponse>
+    suspend fun registerTripRemote(trip: TripCreateRequest): ResultWrapperSecond<TripInvolvedResponse>
 
-    suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripResponse>>
+    suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripInvolvedResponse>>
 
-    suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripResponse>>
+    suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripInvolvedResponse>>
 
-    suspend fun searchTrips(query: SearchFilters): ResultWrapper<MutableList<TripResponse>>
+    suspend fun searchTrips(query: SearchTripFilter): ResultWrapperSecond<MutableList<TripSearchResponse>>
 
-    suspend fun bookTrip(request: BookTripRequest): ResultWrapper<TripResponse>
+    suspend fun bookTrip(request: BookTripRequest): ResultWrapper<TripInvolvedResponse>
 
 
     /**

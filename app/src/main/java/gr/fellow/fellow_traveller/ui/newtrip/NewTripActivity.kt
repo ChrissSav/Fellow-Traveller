@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.ui.newtrip
 
+import android.annotation.SuppressLint
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
@@ -27,12 +28,13 @@ class NewTripActivity : BaseActivity<ActivityNewTripBinding>(), ExitCustomDialog
 
 
     override fun setUpObservers() {
-        viewModel.setBags(0)
-        viewModel.setPet(false)
         viewModel.setSeats(1)
 
-        viewModel.error.observe(this, Observer {
-            createAlerter(getString(it), R.color.blue_color)
+        viewModel.errorSecond.observe(this, Observer {
+            if (it.internal)
+                createAlerter(getString(it.messageId), R.color.blue_color)
+            else
+                createAlerter(it.message, R.color.blue_color)
         })
 
         viewModel.load.observe(this, Observer {
@@ -52,8 +54,7 @@ class NewTripActivity : BaseActivity<ActivityNewTripBinding>(), ExitCustomDialog
         nav.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { _, destination, _ ->
             hideKeyboard()
             when (destination.id) {
-                R.id.destinationsFragment -> binding.progressBar.progress = 14
-                R.id.pickUpFragment -> binding.progressBar.progress = 28
+                R.id.destinationsFragment -> binding.progressBar.progress = 30
                 R.id.dateTimeFragment -> binding.progressBar.progress = 42
                 R.id.baseInfoFragment -> binding.progressBar.progress = 56
                 R.id.priceFragment -> binding.progressBar.progress = 70
@@ -75,10 +76,16 @@ class NewTripActivity : BaseActivity<ActivityNewTripBinding>(), ExitCustomDialog
     }
 
 
+    @SuppressLint("RestrictedApi")
     override fun onBackPressed() {
-        if (nav.currentDestination?.id != R.id.successTripFragment) {
+
+        if (nav.backStack.size == 2) {
+            openDialog()
+        } else if (nav.currentDestination?.id != R.id.successTripFragment) {
             super.onBackPressed()
         }
+
+
     }
 
     private fun openDialog() {

@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.ui.car
 
 import android.content.Intent
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +33,14 @@ class AddCarActivity : BaseActivity<ActivityAddCarBinding>() {
             setResult(RESULT_OK, intent)
             finish()
         })
+
+        viewModel.load.observe(this, Observer {
+            if (it)
+                binding.genericLoader.progressLoad.visibility = View.VISIBLE
+            else
+                binding.genericLoader.progressLoad.visibility = View.INVISIBLE
+
+        })
     }
 
     override fun setUpViews() {
@@ -57,11 +66,11 @@ class AddCarActivity : BaseActivity<ActivityAddCarBinding>() {
 
     private fun checkErrors(): Boolean {
         if (binding.brand.text.toString().length < 2 || binding.model.text.toString().length < 2 || binding.color.text.toString().length < 2) {
-            viewModel.setError(R.string.ERROR_FIELDS_REQUIRE)
+            viewModel.setSecondError(R.string.ERROR_FIELDS_REQUIRE)
             return false
         }
         if (!isValidPlate(binding.plate.text.toString())) {
-            viewModel.setError(R.string.ERROR_INVALID_PLATE_FORMAT)
+            viewModel.setSecondError(R.string.ERROR_INVALID_PLATE_FORMAT)
             return false
         }
         return true

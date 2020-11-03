@@ -11,20 +11,7 @@
         android:label="fragment_destinations"
         tools:layout="@layout/fragment_destinations">
         <action
-            android:id="@+id/next_fragment"
-            app:destination="@id/pickUpFragment"
-            app:enterAnim="@anim/enter_from_right"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
-    </fragment>
-    <fragment
-        android:id="@+id/pickUpFragment"
-        android:name="gr.fellow.fellow_traveller.ui.newtrip.fragments.PickUpFragment"
-        android:label="fragment_pick_up"
-        tools:layout="@layout/fragment_pick_up">
-        <action
-            android:id="@+id/next_fragment"
+            android:id="@+id/action_destinationsFragment_to_dateTimeFragment"
             app:destination="@id/dateTimeFragment"
             app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"
@@ -103,7 +90,7 @@
             app:popEnterAnim="@anim/enter_from_right"
             app:popExitAnim="@anim/exit_to_left"
             app:popUpTo="@+id/new_trip_nav_graph"
-            app:popUpToInclusive="false" />
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_fragment_overview_to_baseInfoFragment"
             app:destination="@id/baseInfoFragment"
@@ -116,15 +103,6 @@
         <action
             android:id="@+id/action_fragment_overview_to_dateTimeFragment"
             app:destination="@id/dateTimeFragment"
-            app:enterAnim="@anim/enter_from_left"
-            app:exitAnim="@anim/exit_to_right"
-            app:popEnterAnim="@anim/enter_from_right"
-            app:popExitAnim="@anim/exit_to_left"
-            app:popUpTo="@+id/new_trip_nav_graph"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_fragment_overview_to_pickUpFragment"
-            app:destination="@id/pickUpFragment"
             app:enterAnim="@anim/enter_from_left"
             app:exitAnim="@anim/exit_to_right"
             app:popEnterAnim="@anim/enter_from_right"

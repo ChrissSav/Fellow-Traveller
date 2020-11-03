@@ -7,9 +7,11 @@ import androidx.lifecycle.Observer
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentBaseInfoBinding
+import gr.fellow.fellow_traveller.domain.BagsStatusType
 import gr.fellow.fellow_traveller.domain.PetAnswerType
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.ui.car.AddCarActivity
+import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.BagsStatusPickBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.CarPickBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.PetBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
@@ -25,6 +27,7 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
 
     private lateinit var petBottomSheetDialog: PetBottomSheetDialog
     private lateinit var carPickBottomSheetDialog: CarPickBottomSheetDialog
+    private lateinit var bagsStatusPickBottomSheetDialog: BagsStatusPickBottomSheetDialog
 
     override fun getViewBinding(): FragmentBaseInfoBinding =
         FragmentBaseInfoBinding.inflate(layoutInflater)
@@ -33,7 +36,7 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
     override fun setUpObservers() {
         with(viewModel) {
             car.observe(viewLifecycleOwner, Observer {
-                binding.carButton.setText(it.fullInfo)
+                binding.carEdiText.setText(it.fullInfo)
             })
 
             seats.observe(viewLifecycleOwner, Observer {
@@ -41,11 +44,11 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
             })
 
             bags.observe(viewLifecycleOwner, Observer {
-                binding.bagsPickButton.currentNum = it
+                binding.bagsPickButton.setText(it.value)
             })
 
             pet.observe(viewLifecycleOwner, Observer {
-                binding.pet.text = if (it) getString(R.string.allowed) else getString(R.string.not_allowed)
+                binding.pet.setText(if (it) getString(R.string.allowed) else getString(R.string.not_allowed))
             })
 
             carList.observe(viewLifecycleOwner, Observer {
@@ -62,19 +65,16 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
         with(binding) {
 
             ImageButtonNext.root.setOnClickListener {
-                if (viewModel.car.value != null) {
+                if (checkFields()) {
                     findNavController()?.navigate(R.id.next_fragment)
-                } else {
-                    viewModel.setError(R.string.ERROR_SELECT_CAR)
-                }
-
-            }
-
-            bagsPickButton.pickButtonActionListener = object : PickButtonActionListener {
-                override fun onPickAction(value: Int) {
-                    viewModel.setBags(value)
                 }
             }
+
+            bagsPickButton.setOnClickListener {
+                bagsStatusPickBottomSheetDialog = BagsStatusPickBottomSheetDialog(this@BaseInfoFragment::onBagsItemClickListener)
+                bagsStatusPickBottomSheetDialog.show(childFragmentManager, "bagsStatusPickBottomSheetDialog")
+            }
+
 
             seatsPickButton.pickButtonActionListener = object : PickButtonActionListener {
                 override fun onPickAction(value: Int) {
@@ -89,7 +89,7 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
             }
 
 
-            carButton.setOnClickListener {
+            carEdiText.setOnClickListener {
                 carPickBottomSheetDialog = CarPickBottomSheetDialog(carList, this@BaseInfoFragment::onCarItemClickListener)
                 carPickBottomSheetDialog.show(childFragmentManager, "carPickBottomSheetDialog")
             }
@@ -97,6 +97,29 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
         }
     }
 
+    private fun checkFields(): Boolean {
+        if (binding.carEdiText.text.isNullOrEmpty()) {
+            viewModel.setError(R.string.ERROR_SELECT_CAR)
+            return false
+        }
+
+        if (binding.bagsPickButton.text.isNullOrEmpty()) {
+            viewModel.setError(R.string.ERROR_SELECT_SEAT)
+            return false
+        }
+
+        if (binding.pet.text.isNullOrEmpty()) {
+            viewModel.setError(R.string.ERROR_SELECT_PET)
+            return false
+        }
+
+        return true
+    }
+
+
+    private fun onBagsItemClickListener(bagsStatusType: BagsStatusType) {
+        viewModel.setBags(bagsStatusType)
+    }
 
     private fun onItemClickListener(petAnswerType: PetAnswerType) {
         if (petAnswerType == PetAnswerType.Yes) {
@@ -117,8 +140,6 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
             startActivityForResultWithFade(AddCarActivity::class, 1)
         }
     }
-
-
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

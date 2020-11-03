@@ -53,7 +53,7 @@
 
     <!-- Filter Fragment -->
     <string name="range_text">Εύρος %s χμλ</string>
-    <string name="range_text_price" formatted="false">%s ~ %s €</string>
+    <string name="range_text_price" formatted="false">Εώς %s €</string>
     <string name="range_text_in_filters" formatted="false">%s ~ %s </string>
     <string name="range_view_all">Εμφάνιση όλων</string>
 
@@ -61,7 +61,7 @@
     <string name="have_not_pet">Δεν έχω κατικοίδιο</string>
 
     <string name="not_selected_filters">Δεν έχετε ορίσει κάποιο φίλτρο</string>
-    <string name="trip_found">Βρέθηκαν %s ταξίδια</string>
+    <string name="trip_found">%s Αποτελέσματα</string>
 
 
     <string name="messenger_link">https://m.me/%s</string>

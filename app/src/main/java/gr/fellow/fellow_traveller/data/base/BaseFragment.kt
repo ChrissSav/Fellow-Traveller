@@ -16,6 +16,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     protected val binding get() = _binding!!
     protected var navController: NavController? = null
 
+
     abstract fun getViewBinding(): VB
 
     abstract fun setUpObservers()

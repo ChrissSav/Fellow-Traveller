@@ -60,6 +60,7 @@
     <string name="ERROR_SELECT_CAR">Παρακαλώ επιλέξτε αυτοκίνητο.</string>
     <string name="ERROR_SELECT_DEST_FROM">Παρακαλώ επιλέξτε σημείο αφετηρίας.</string>
     <string name="ERROR_SELECT_DEST_TO">Παρακαλώ επιλέξτε σημείο προορισμού.</string>
-    <string name="ERROR_SELECT_DEST_PICK_UP">Παρακαλώ επιλέξτε σημείο αναχώρησης.</string>
+    <string name="ERROR_SELECT_PET">Παρακαλώ καθορίστε αν το ταξίδι δέχεται κατοικίδια.</string>
+    <string name="ERROR_SELECT_SEAT">Παρακαλώ καθορίστε την κατάσταση των αποσκεύων.</string>
 
 </resources>

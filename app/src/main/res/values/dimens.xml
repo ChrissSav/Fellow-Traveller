@@ -31,6 +31,8 @@
     <dimen name="filters_text_description_margin_top">20dp</dimen>
     <dimen name="filters_text_label_margin_top">45dp</dimen>
     <dimen name="filters_view_margin_top">20dp</dimen>
+    <dimen name="filters_view_margin_top_second">75dp</dimen>
+
     <dimen name="filters_margin_left_from_image">8dp</dimen>
 
 

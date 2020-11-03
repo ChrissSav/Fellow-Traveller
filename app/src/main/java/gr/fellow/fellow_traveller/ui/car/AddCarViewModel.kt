@@ -3,9 +3,9 @@ package gr.fellow.fellow_traveller.ui.car
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import gr.fellow.fellow_traveller.data.ResultWrapperSecond
+import gr.fellow.fellow_traveller.data.base.BaseViewModel
+import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.domain.externalError
-import gr.fellow.fellow_traveller.ui.help.BaseViewModel
-import gr.fellow.fellow_traveller.ui.help.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.home.AddCarToRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.home.RegisterCarLocalUseCase
 
@@ -20,7 +20,7 @@ constructor(
     val saved: LiveData<Boolean> = _saved
 
     fun addCar(brand: String, model: String, plate: String, color: String) {
-        launch {
+        launchSecond(true) {
             when (val response = addCarToRemoteUseCase(brand, model, plate, color)) {
                 is ResultWrapperSecond.Success -> {
                     registerCarLocalUseCase(response.data)
