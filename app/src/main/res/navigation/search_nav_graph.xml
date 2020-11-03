@@ -17,10 +17,6 @@
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
-
-        <argument
-            android:name="tripId"
-            app:argType="string" />
     </fragment>
 
     <fragment
@@ -48,17 +44,11 @@
         <argument
             android:name="index"
             app:argType="integer" />
+
+
         <action
             android:id="@+id/action_bookTripFragment_to_successTripBookFragment"
             app:destination="@id/successTripBookFragment"
-            app:enterAnim="@anim/enter_from_right"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
-
-        <action
-            android:id="@+id/action_successTripBookFragment_to_searchTripsFragment"
-            app:destination="@id/searchTripsFragment"
             app:enterAnim="@anim/enter_from_left"
             app:exitAnim="@anim/exit_to_right"
             app:popEnterAnim="@anim/enter_from_right"

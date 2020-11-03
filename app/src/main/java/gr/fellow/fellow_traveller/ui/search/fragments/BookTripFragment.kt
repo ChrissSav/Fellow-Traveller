@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.ui.search.fragments
 
-import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,7 +38,7 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
                 createAlerter(getString(it.messageId))
             else {
                 createAlerter(it.message)
-                findNavController()?.navigate(R.id.action_successTripBookFragment_to_searchTripsFragment, bundleOf("tripId" to currentTrip.id))
+                findNavController()?.popBackStack(R.id.searchTripsFragment, true)
             }
 
         })

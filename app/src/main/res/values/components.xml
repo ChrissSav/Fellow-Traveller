@@ -226,10 +226,8 @@
         </item>
     </style>
 
-    <style name="button_outline_orange_with_left_drawable">
+    <style name="button_outline_orange_with_left_drawable" parent="paragraph_1">
         <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">@color/black_color</item>
-        <item name="android:textSize">15sp</item>
         <item name="android:fontFamily">@font/firasans_medium</item>
         <item name="android:padding">15dp</item>
         <item name="android:drawablePadding">15dp</item>

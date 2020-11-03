@@ -13,6 +13,7 @@ import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.usecase.trips.BookTripUseCase
 import gr.fellow.fellow_traveller.usecase.trips.SearchTripsUseCase
+import kotlinx.coroutines.delay
 
 
 class SearchTripViewModel
@@ -38,6 +39,7 @@ constructor(
     private val _resultTrips = SingleLiveEvent<MutableList<TripSearch>>()
     val resultTrips: LiveData<MutableList<TripSearch>> = _resultTrips
 
+    var deleteTripId: String? = null
 
     fun setDestinationFrom(place: PlaceModel) {
         val temp = _destinations.value?.second
@@ -100,6 +102,7 @@ constructor(
                     _tripBook.value = response.data
                 }
                 is ResultWrapperSecond.Error -> {
+                    deleteTripId = tripId
                     errorSecond.value = externalError(response.error)
                 }
             }
@@ -109,12 +112,18 @@ constructor(
 
 
     fun handleErrorBook(tripId: String) {
-        val tempTrips = _resultTrips.value?.toMutableList()
-        tempTrips?.let {
+        launchSecond {
+            delay(200)
+            val tempTrips = mutableListOf<TripSearch>()
+            tempTrips.addAll(_resultTrips.value ?: emptyList())
             val index = tempTrips.indexOfFirst { it.id == tripId }
-            tempTrips.removeAt(index)
-            _resultTrips.value = tempTrips
+            if (index != -1) {
+                tempTrips.removeAt(index)
+                _resultTrips.value = mutableListOf()
+            }
+
         }
+
     }
 
 }
