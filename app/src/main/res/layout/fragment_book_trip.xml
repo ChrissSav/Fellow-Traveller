@@ -7,463 +7,233 @@
     tools:context=".ui.search.fragments.BookTripFragment">
 
 
-    <TextView
-        android:id="@+id/book_trip_label"
-        style="@style/display"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="16dp"
-        android:text="Κλείσιμο της θέσης"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageButton
-        android:id="@+id/close_button"
+        android:id="@+id/back_button"
         style="@style/border_icon_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:src="@drawable/ic_close"
-        app:layout_constraintBottom_toBottomOf="@+id/book_trip_label"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/book_trip_label" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_back_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textView21"
+        style="@style/display_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Κράτηση θέσης"
+        app:layout_constraintStart_toStartOf="@+id/back_button"
+        app:layout_constraintTop_toBottomOf="@+id/back_button" />
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/book_button"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/close_button">
+        app:layout_constraintTop_toBottomOf="@+id/textView21"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="40dp">
+            android:layout_height="wrap_content">
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/destinations_section"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@+id/info__section"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/info__section"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/start_label"
-                    style="@style/paragraph3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:text="Από"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline6"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/start_textView"
-                    style="@style/header1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Αθήνα"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline6"
-                    app:layout_constraintStart_toStartOf="@id/start_label"
-                    app:layout_constraintTop_toBottomOf="@id/start_label" />
-
-                <TextView
-                    android:id="@+id/end_label"
-                    style="@style/paragraph3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:text="Προς"
-                    app:layout_constraintBottom_toBottomOf="@id/start_label"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guideline6"
-                    app:layout_constraintTop_toTopOf="@id/start_label"
-                    app:layout_constraintVertical_bias="0.53999996" />
-
-                <TextView
-                    android:id="@+id/end_textView"
-                    style="@style/header1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:paddingEnd="20dp"
-                    android:text="Θεσσαλονίκη"
-
-                    app:layout_constraintEnd_toEndOf="@+id/end_label"
-                    app:layout_constraintStart_toStartOf="@id/end_label"
-                    app:layout_constraintTop_toBottomOf="@id/end_label" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.5" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/info__section"
+            <TextView
+                android:id="@+id/textView15"
+                style="@style/paragraph_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:text="Από"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView19"
+                style="@style/paragraph_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Πρός"
+                app:layout_constraintStart_toStartOf="@+id/from"
+                app:layout_constraintTop_toBottomOf="@+id/from" />
+
+
+            <TextView
+                android:id="@+id/from"
+                style="@style/header_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:text="Θεσσαλονίκη"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/destinations_section">
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/date_section"
-                    android:layout_width="91dp"
-                    android:layout_height="0dp"
-                    android:layout_marginEnd="30dp"
-                    android:background="@drawable/book_search_border"
-                    android:tag="2"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/constraintLayout_time"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:id="@+id/TripSummaryFragment_textView10"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="10dp"
-                        android:fontFamily="@font/firasans_light"
-                        android:tag="2"
-                        android:text="Ημ/νία"
-                        android:textColor="@color/black_color"
-                        android:textSize="15sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/date"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:fontFamily="@font/firasans_bold"
-                        android:lineSpacingExtra="@dimen/space_between_lines"
-                        android:maxLines="2"
-                        android:tag="2"
-                        android:text="20\nΙαν"
-                        android:textAlignment="center"
-                        android:textColor="@color/black_color"
-                        android:textSize="20sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/TripSummaryFragment_textView10" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/seats_section"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/book_search_border"
-                    android:padding="15dp"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:id="@+id/seats_label"
-                        style="@style/paragraph3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Αποσκ..."
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/seats_textView"
-                        style="@style/header1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="1"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-
-                        app:layout_constraintTop_toBottomOf="@id/seats_label" />
-
-                    <TextView
-                        android:id="@+id/seats_definition_textView"
-                        style="@style/header2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5sp"
-                        android:background="@drawable/ic_luggage"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/seats_textView" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/time_section"
-                    android:layout_width="90dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginEnd="30dp"
-                    android:background="@drawable/book_search_border"
-                    android:padding="15dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/seats_section"
-                    app:layout_constraintStart_toEndOf="@id/date_section"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:id="@+id/time_label"
-                        style="@style/paragraph3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Ώρα"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/time"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:fontFamily="@font/firasans_bold"
-                        android:lineSpacingExtra="@dimen/space_between_lines"
-                        android:maxLines="2"
-                        android:tag="2"
-                        android:text="08:00\nΠΜ"
-                        android:textAlignment="center"
-                        android:textColor="@color/black_color"
-                        android:textSize="20sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/time_label" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/bags_label"
-                style="@style/header2"
+                android:id="@+id/to"
+                style="@style/header_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="4dp"
-                android:paddingRight="20dp"
-                android:text="Πόσες αποσκευές θα έχετε;"
-                app:layout_constraintEnd_toStartOf="@id/bags_increase_section"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/info__section" />
+                android:layout_marginTop="4dp"
+                android:text="Αθήνα"
+                app:layout_constraintEnd_toEndOf="@+id/from"
+                app:layout_constraintStart_toStartOf="@+id/from"
+                app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
 
             <TextView
-                android:id="@+id/bags_info_textView"
-                style="@style/paragraph1"
-                android:layout_width="0dp"
+                android:id="@+id/time"
+                style="@style/paragraph_1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Μπορείτε να έχετε μαζί σας μέχρι 2 αποσκευές"
-                app:layout_constraintEnd_toEndOf="@+id/bags_increase_section"
-                app:layout_constraintStart_toStartOf="@id/bags_label"
-                app:layout_constraintTop_toBottomOf="@id/bags_label" />
+                android:layout_marginTop="16dp"
+                android:tag="2"
+                android:text="07:00 AM"
+                app:layout_constraintStart_toStartOf="@+id/to"
+                app:layout_constraintTop_toBottomOf="@+id/to" />
+
+            <TextView
+                android:id="@+id/day"
+                style="@style/paragraph_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:tag="2"
+                android:text="Δευ, 13 Μαρ"
+                app:layout_constraintBottom_toBottomOf="@+id/time"
+                app:layout_constraintStart_toEndOf="@+id/time"
+                app:layout_constraintTop_toTopOf="@+id/time" />
+
+
+            <TextView
+                android:id="@+id/textView22"
+                style="@style/header_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="Θέσεις"
+                app:layout_constraintStart_toStartOf="@+id/to"
+                app:layout_constraintTop_toBottomOf="@+id/time" />
+
+            <TextView
+                android:id="@+id/textView23"
+                style="@style/paragraph_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Μία πρόταση"
+                app:layout_constraintStart_toStartOf="@+id/textView22"
+                app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
             <gr.fellow.fellow_traveller.ui.views.PickNumberButton
-                android:id="@+id/bags_increase_section"
+                android:id="@+id/seats"
                 android:layout_width="@dimen/button_number_layout_width"
                 android:layout_height="@dimen/button_number_layout_height"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintBottom_toBottomOf="@id/bags_label"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/bags_label"
-                app:minValue="0" />
-
+                app:layout_constraintBottom_toBottomOf="@+id/textView7"
+                app:layout_constraintEnd_toEndOf="@+id/to"
+                app:layout_constraintTop_toTopOf="@+id/textView22"
+                app:minValue="1" />
 
             <TextView
-                android:id="@+id/pets_label"
-                style="@style/header2"
-                android:layout_width="138dp"
-                android:layout_height="44dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="4dp"
-                android:paddingEnd="20dp"
-                android:text="Έχετε κάποιο κατοικίδιο;"
-                app:layout_constraintEnd_toStartOf="@id/have_pet_textView"
-                app:layout_constraintStart_toStartOf="@id/bags_label"
-                app:layout_constraintTop_toBottomOf="@id/bags_info_textView" />
-
-            <TextView
-                android:id="@+id/pets_info_textView"
-                style="@style/paragraph1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Ο οδηγός επιτρέπει μόνο ένα μικρόσωμο ζώο μέσα σε κλουβί"
-                app:layout_constraintEnd_toEndOf="@id/pets_switch"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintStart_toStartOf="@id/pets_label"
-                app:layout_constraintTop_toBottomOf="@id/pets_label" />
-
-            <Switch
-                android:id="@+id/pets_switch"
+                android:id="@+id/textView24"
+                style="@style/header_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@null"
-                android:checked="false"
-                android:scaleX="1.1"
-                android:scaleY="1.1"
-                android:thumb="@drawable/switch_thumb"
-                android:track="@drawable/switch_tracker"
-                app:layout_constraintBottom_toBottomOf="@id/pets_label"
-                app:layout_constraintEnd_toEndOf="@+id/bags_increase_section"
-                app:layout_constraintTop_toTopOf="@id/pets_label" />
+                android:layout_marginTop="50dp"
+                android:text="Συνοδεία Κατοικιδίου"
+
+                app:layout_constraintStart_toStartOf="@+id/textView23"
+                app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
             <TextView
-                android:id="@+id/have_pet_textView"
-                style="@style/input"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="20dp"
-                android:text="@string/have_not_pet"
-                app:layout_constraintBottom_toBottomOf="@id/pets_label"
-                app:layout_constraintEnd_toStartOf="@id/pets_switch"
-                app:layout_constraintStart_toEndOf="@+id/pets_label"
-                app:layout_constraintTop_toTopOf="@id/pets_label" />
-
-
-            <TextView
-                android:id="@+id/payments_method_label"
-                style="@style/header2"
+                android:id="@+id/textView25"
+                style="@style/paragraph_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:text="Τρόποι Πληρωμής"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/pets_info_textView"
-                app:layout_constraintTop_toBottomOf="@id/pets_info_textView" />
+                android:layout_marginTop="16dp"
+                android:text="Μία πρόταση"
+                app:layout_constraintStart_toStartOf="@+id/textView24"
+                app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/spinner_section"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/payment_method_border"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="5dp"
-                app:layout_constraintEnd_toEndOf="@+id/pets_info_textView"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/payments_method_label"
-                app:layout_constraintTop_toBottomOf="@id/payments_method_label">
-
-                <Spinner
-                    android:id="@+id/payment_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:dropDownWidth="match_parent"
-                    android:overlapAnchor="false"
-                    android:spinnerMode="dropdown"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/ic_down_arrow"
-                    android:backgroundTint="@color/black_color"
-                    app:layout_constraintBottom_toBottomOf="@+id/payment_spinner"
-                    app:layout_constraintEnd_toEndOf="@+id/payment_spinner"
-                    app:layout_constraintTop_toTopOf="@+id/payment_spinner" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <View
-                android:id="@+id/underline_book"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/softGrey_color"
-                app:layout_constraintEnd_toEndOf="@+id/spinner_section"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/spinner_section"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_section" />
+            <EditText
+                android:id="@+id/pet"
+                style="@style/editText_not_editable"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_number_layout_height"
+                android:gravity="center|end"
+                android:hint="Επιλέξτε"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView24"
+                app:layout_constraintEnd_toEndOf="@+id/seats"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
-                android:id="@+id/price_book_textView"
-                style="@style/header2"
+                android:id="@+id/textView27"
+                style="@style/header_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="50dp"
                 android:text="Τιμή"
-                app:layout_constraintStart_toStartOf="@id/pets_label"
-                app:layout_constraintTop_toBottomOf="@id/underline_book" />
+                app:layout_constraintStart_toStartOf="@+id/textView25"
+                app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
 
             <TextView
-                android:id="@+id/price_description_textView"
-                style="@style/paragraph1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:paddingEnd="20dp"
-                android:text="Η τιμή περιέχει τους φόρους"
-                app:layout_constraintEnd_toStartOf="@id/price_textView"
-                app:layout_constraintStart_toStartOf="@id/pets_label"
-                app:layout_constraintTop_toBottomOf="@id/price_book_textView" />
-
-            <TextView
-                android:id="@+id/price_textView"
-                style="@style/input"
+                android:id="@+id/price"
+                style="@style/paragraph_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10€"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@id/price_book_textView"
-                app:layout_constraintEnd_toEndOf="@+id/spinner_section"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/price_book_textView" />
-
+                android:layout_marginBottom="120dp"
+                android:gravity="end"
+                android:text="10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/pet"
+                app:layout_constraintTop_toTopOf="@+id/textView27"
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
     <Button
-        android:id="@+id/book_button"
-        style="@style/button_orange_filled"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="25dp"
-        android:text="Ολοκλήρωση"
+        android:id="@+id/book"
+        style="@style/header_3"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/car_float_action_button_height"
+        android:layout_marginTop="62dp"
+        android:layout_marginEnd="@dimen/car_trip_float_action_button_margin_right"
+        android:layout_marginBottom="@dimen/car_trip_float_action_button_margin_bottom"
+        android:background="@drawable/fab_background_aqua"
+        android:backgroundTint="@color/colorPrimary"
+        android:drawableStart="@drawable/ic_tick"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/white"
+        android:elevation="16dp"
+        android:gravity="center|end"
+        android:paddingStart="22dp"
+        android:paddingEnd="20dp"
+        android:text="Κράτηση"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/color"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="RtlSymmetry" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

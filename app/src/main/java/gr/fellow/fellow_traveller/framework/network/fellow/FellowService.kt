@@ -122,8 +122,8 @@ interface FellowService {
     ): Response<BaseResponse<MutableList<TripSearchResponse>>>
 
 
-    @POST("trip/passenger")
+    @PUT("trip/passenger")
     suspend fun bookTrip(
         @Body request: BookTripRequest
-    ): Response<TripInvolvedResponse>
+    ): Response<BaseResponse<TripInvolvedResponse>>
 }

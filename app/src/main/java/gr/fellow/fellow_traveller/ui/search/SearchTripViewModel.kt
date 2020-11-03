@@ -8,6 +8,7 @@ import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.domain.externalError
+import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.usecase.trips.BookTripUseCase
@@ -21,9 +22,11 @@ constructor(
     private val bookTripUseCase: BookTripUseCase
 ) : BaseViewModel() {
 
+    val loadResults = MutableLiveData<Boolean>()
 
-    private val _tripBook = SingleLiveEvent<TripSearch>()
-    val tripBook: LiveData<TripSearch> = _tripBook
+
+    private val _tripBook = SingleLiveEvent<TripInvolved>()
+    val tripBook: LiveData<TripInvolved> = _tripBook
 
     private val _destinations = MutableLiveData<Pair<PlaceModel?, PlaceModel?>>()
     val destinations: LiveData<Pair<PlaceModel?, PlaceModel?>> = _destinations
@@ -62,7 +65,8 @@ constructor(
     }
 
     fun getTrips() {
-        launchSecond(true) {
+        launchSecond {
+            loadResults.value = true
             _searchFilter.value?.let { searchFilters ->
                 when (val response = searchTripsUseCase(searchFilters)) {
                     is ResultWrapperSecond.Success -> {
@@ -73,6 +77,7 @@ constructor(
                     }
                 }
             }
+            loadResults.value = false
         }
     }
 
@@ -88,45 +93,28 @@ constructor(
     }
 
 
-    /* fun bookTrip(tripId: Int, bags: Int, pet: Boolean) {
-         launch(true) {
-             when (val response = bookTripUseCase(tripId, bags, pet)) {
-                 is ResultWrapper.Success -> {
-                     _tripBook.value = response.data
-                 }
-                 is ResultWrapper.Error -> {
-                     error.value =
-                         when (response.error.code) {
-                             606 ->
-                                 R.string.ERROR_TRIP_NOT_AVAILABLE_LUGGAGE
-                             607 ->
-                                 R.string.ERROR_TRIP_CHECK_PET_ACCEPTS
-                             else ->
-                                 R.string.ERROR_SOMETHING_WRONG
-                         }
-                 }
-             }
-         }
-
-     }
- */
-
-    /*fun swapDestinations() {
-        launchSecond {
-            val temp = _searchFilter.value?.copy()
-            temp?.let {
-                val tempDestination = _destinationTo.value!!.copy()
-                _destinationTo.value = _destinationFrom.value!!.copy()
-                _destinationFrom.value = tempDestination
-
-                it.latitudeFrom = _destinationFrom.value?.latitude!!
-                it.longitudeFrom = _destinationFrom.value?.longitude!!
-                it.latitudeTo = _destinationTo.value?.latitude!!
-                it.longitudeTo = _destinationTo.value?.longitude!!
-                _searchFilter.value = it
+    fun bookTrip(tripId: String, seats: Int, pet: Boolean) {
+        launchSecond(true) {
+            when (val response = bookTripUseCase(tripId, seats, pet)) {
+                is ResultWrapperSecond.Success -> {
+                    _tripBook.value = response.data
+                }
+                is ResultWrapperSecond.Error -> {
+                    errorSecond.value = externalError(response.error)
+                }
             }
         }
-    }*/
 
+    }
+
+
+    fun handleErrorBook(tripId: String) {
+        val tempTrips = _resultTrips.value?.toMutableList()
+        tempTrips?.let {
+            val index = tempTrips.indexOfFirst { it.id == tripId }
+            tempTrips.removeAt(index)
+            _resultTrips.value = tempTrips
+        }
+    }
 
 }

@@ -4,7 +4,7 @@ import gr.fellow.fellow_traveller.domain.user.Passenger
 import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.PassengerResponse
 
 fun PassengerResponse.mapToPassenger() = Passenger(
-    user.toUserBase(), bags, pet
+    user.toUserBase(), seats, pet
 )
 
 fun MutableList<PassengerResponse>.mapToPassenger(): MutableList<Passenger> {

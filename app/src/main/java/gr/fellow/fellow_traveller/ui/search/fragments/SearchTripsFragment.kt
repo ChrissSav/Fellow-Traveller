@@ -34,6 +34,13 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
         FragmentSearchTripsBinding.inflate(layoutInflater)
 
 
+    override fun handleIntent() {
+        requireArguments().getString("tripId")?.let {
+            viewModel.handleErrorBook(it)
+        }
+    }
+
+
     override fun setUpObservers() {
         with(viewModel) {
 
@@ -44,13 +51,14 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
             })
 
             errorSecond.observe(viewLifecycleOwner, Observer {
+                binding.progressBar.visibility = View.GONE
                 if (it.internal)
                     createAlerter(getString(it.messageId))
                 else
                     createAlerter(it.message)
             })
 
-            load.observe(viewLifecycleOwner, Observer {
+            loadResults.observe(viewLifecycleOwner, Observer {
                 if (it) {
                     binding.progressBar.visibility = View.VISIBLE
                     binding.recyclerView.visibility = View.GONE

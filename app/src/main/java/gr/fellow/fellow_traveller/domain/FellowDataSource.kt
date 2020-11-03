@@ -62,13 +62,15 @@ interface FellowDataSource {
 
     suspend fun searchTrips(query: SearchTripFilter): ResultWrapperSecond<MutableList<TripSearch>>
 
+    suspend fun bookTrip(tripId: String, seats: Int, pet: Boolean): ResultWrapperSecond<TripInvolved>
+
     /*suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripInvolved>>
 
     suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripInvolved>>
 
 
 
-    suspend fun bookTrip(request: BookTripRequest): ResultWrapper<Trip>*/
+    */
 
 
     /**
