@@ -38,7 +38,7 @@
                 android:background="@color/background"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:text="Loremσσσσσσσσσσσσσσσσσσσσσσσσσσ"
+                android:text="Tyler Joseph"
                 app:layout_constraintBottom_toBottomOf="@id/hello_textView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/hello_textView"
@@ -107,17 +107,29 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:id="@+id/search_popular_trips"
+                style="@style/header_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:text="Δημοφιλείς Ταξίδια"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/hello_textView"
+                app:layout_constraintTop_toBottomOf="@id/search_section"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/passenger_image_item"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/search_section" />
+                app:layout_constraintTop_toBottomOf="@id/search_popular_trips"
+                tools:listitem="@layout/passenger_image_item" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/offer_section"
@@ -180,6 +192,60 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/search_guide"
+                style="@style/header_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:text="Οδηγοί βοήθειας"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/hello_textView"
+                app:layout_constraintTop_toBottomOf="@id/offer_section"/>
+
+            <Button
+                android:id="@+id/search_guide_how"
+                style="@style/button_orange_empty"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center|left"
+                android:paddingLeft="16dp"
+                android:text="Πώς λειτουργεί το fellow;"
+                android:fontFamily="@font/alegreyasans_medium"
+                android:textColor="@color/black_color"
+                android:layout_marginTop="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/search_guide" />
+            <Button
+                android:id="@+id/search_guide_what"
+                style="@style/button_orange_empty"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center|left"
+                android:paddingLeft="16dp"
+                android:text="Τι μπορείς να κάνεις στο fellow;"
+                android:fontFamily="@font/alegreyasans_medium"
+                android:textColor="@color/black_color"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/search_guide_how"/>
+
+            <Button
+                android:id="@+id/search_guide_search_offer"
+                style="@style/button_orange_empty"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center|left"
+                android:paddingLeft="16dp"
+                android:text="Αναζήτηση και κράτηση θέσης"
+                android:fontFamily="@font/alegreyasans_medium"
+                android:textColor="@color/black_color"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/search_guide_what"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
