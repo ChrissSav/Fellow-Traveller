@@ -15,7 +15,9 @@ import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivityHomeBinding
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 import gr.fellow.fellow_traveller.ui.extensions.navigateWithFade
+import gr.fellow.fellow_traveller.ui.extensions.startActivityClearStack
 import gr.fellow.fellow_traveller.ui.extensions.toPx
+import gr.fellow.fellow_traveller.ui.main.MainActivity
 
 
 @AndroidEntryPoint
@@ -32,7 +34,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         R.id.destination_notifications,
         R.id.destination_info
     )
-
 
 
     override fun provideViewBinding(): ActivityHomeBinding =
@@ -57,15 +58,22 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
                 binding.genericLoader.progressLoad.visibility = View.INVISIBLE
         })
 
-
         viewModel.errorSecond.observe(this, Observer {
-            if (it.internal)
+            if (it.internal) {
+                if (it.messageId == R.string.ERROR_API_UNAUTHORIZED) {
+                    viewModel.logOutUnauthorized()
+                }
                 createAlerter(getString(it.messageId))
-            else
+            } else
                 createAlerter(it.message)
         })
+
         viewModel.error.observe(this, Observer {
             createAlerter(getString(it))
+        })
+
+        viewModel.logout.observe(this, Observer {
+            startActivityClearStack(MainActivity::class)
         })
     }
 

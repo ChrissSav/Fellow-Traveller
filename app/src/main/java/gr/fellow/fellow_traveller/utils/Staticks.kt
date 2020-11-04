@@ -8,5 +8,4 @@ const val language = "el"
 const val components = "country:gr"
 
 const val ACCESS_DENIED = 50
-const val SOMETHING_WORNG = 60
-const val INTERNET_ERROR = -10
+const val SOMETHING_WRONG = 60

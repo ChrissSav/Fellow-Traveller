@@ -56,7 +56,7 @@ fun getModelFromResponseErrorBody(errorBody: ResponseBody?): ErrorResponse {
             Gson().fromJson<ErrorResponseModel>(mJson, ErrorResponseModel::class.java)
         ErrorResponse(errorResponseModel.detail.statusCode)
     } catch (e: Exception) {
-        throw BaseApiException(SOMETHING_WORNG)
+        throw BaseApiException(SOMETHING_WRONG)
     }
 
 }
@@ -71,7 +71,7 @@ fun getErrorResponseErrorBody(errorBody: ResponseBody?): String {
         val errorResponseModel = Gson().fromJson(mJson, BaseResponse::class.java)
         errorResponseModel.error
     } catch (e: Exception) {
-        throw BaseApiException(SOMETHING_WORNG)
+        throw BaseApiException(SOMETHING_WRONG)
     }
 
 }

@@ -90,6 +90,18 @@ constructor(
         }
     }
 
+    fun logOutUnauthorized() {
+        viewModelScope.launch {
+            try {
+                val res2 = deleteUserAuthLocalUseCase()
+                val res1 = deleteUserLocalCars()
+            } catch (e: java.lang.Exception) {
+
+            }
+            _logout.value = true
+        }
+    }
+
     fun loadCars() {
         launchSecond {
             try {
