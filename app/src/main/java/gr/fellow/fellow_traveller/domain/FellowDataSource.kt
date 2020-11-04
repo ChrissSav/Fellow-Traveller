@@ -1,13 +1,11 @@
 package gr.fellow.fellow_traveller.domain
 
-import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.ResultWrapperSecond
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.framework.network.fellow.request.CarRequest
-import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserAuthResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.DetailsResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
@@ -48,7 +46,7 @@ interface FellowDataSource {
 
     suspend fun addCarRemote(carRequest: CarRequest): ResultWrapperSecond<Car>
 
-    suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse>
+    suspend fun deleteCarRemote(carId: String): ResultWrapperSecond<String>
 
 
     // Trips
@@ -64,13 +62,9 @@ interface FellowDataSource {
 
     suspend fun bookTrip(tripId: String, seats: Int, pet: Boolean): ResultWrapperSecond<TripInvolved>
 
-    /*suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripInvolved>>
+    suspend fun getTipsAsCreator(): ResultWrapperSecond<MutableList<TripInvolved>>
 
-    suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripInvolved>>
-
-
-
-    */
+    suspend fun getTipsAsPassenger(): ResultWrapperSecond<MutableList<TripInvolved>>
 
 
     /**
@@ -93,7 +87,7 @@ interface FellowDataSource {
 
     suspend fun insertCarLocal(car: Car)
 
-    suspend fun deleteCarLocal(carId: Int): Int
+    suspend fun deleteCarLocal(carId: String): Int
 
     suspend fun deleteAllLocaleCars(): Int
 

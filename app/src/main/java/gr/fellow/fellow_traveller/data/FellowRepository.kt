@@ -2,7 +2,6 @@ package gr.fellow.fellow_traveller.data
 
 import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
-import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserAuthResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.car.CarInfoResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.TripInvolvedResponse
@@ -43,15 +42,15 @@ interface FellowRepository {
 
     suspend fun getCarsRemote(): ResultWrapperSecond<MutableList<CarInfoResponse>>
 
-    suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse>
+    suspend fun deleteCarRemote(carId: String): ResultWrapperSecond<String>
 
     // Trips
 
     suspend fun registerTripRemote(trip: TripCreateRequest): ResultWrapperSecond<TripInvolvedResponse>
 
-    suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripInvolvedResponse>>
+    suspend fun getTipsAsCreator(): ResultWrapperSecond<MutableList<TripInvolvedResponse>>
 
-    suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripInvolvedResponse>>
+    suspend fun getTipsAsPassenger(): ResultWrapperSecond<MutableList<TripInvolvedResponse>>
 
     suspend fun searchTrips(query: SearchTripFilter): ResultWrapperSecond<MutableList<TripSearchResponse>>
 
@@ -72,7 +71,7 @@ interface FellowRepository {
 
     suspend fun deleteCarsLocal(): Int
 
-    suspend fun deleteCarByIdLocal(id: Int): Int
+    suspend fun deleteCarByIdLocal(id: String): Int
 
     suspend fun getAllCarsLocal(): MutableList<CarEntity>
 

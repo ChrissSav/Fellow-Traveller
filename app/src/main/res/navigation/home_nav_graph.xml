@@ -5,64 +5,37 @@
     android:id="@+id/home_nav_graph"
     app:startDestination="@id/destination_main">
 
-    <fragment
-        android:id="@+id/destination_main"
-        android:name="gr.fellow.fellow_traveller.ui.home.tabs.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
-    <fragment
-        android:id="@+id/destination_trips_offers"
-        android:name="gr.fellow.fellow_traveller.ui.home.tabs.TripsOffersTabFragment"
-        android:label="fragment_trips"
-        tools:layout="@layout/fragment_trips_offers">
+        <fragment
+            android:id="@+id/destination_main"
+            android:name="gr.fellow.fellow_traveller.ui.home.tabs.HomeFragment"
+            android:label="fragment_home"
+            tools:layout="@layout/fragment_home" />
+        <fragment
+            android:id="@+id/destination_notifications"
+            android:name="gr.fellow.fellow_traveller.ui.home.tabs.NotificationsFragment"
+            android:label="fragment_notifications"
+            tools:layout="@layout/fragment_notifications" />
 
-        <action
-            android:id="@+id/action_destination_trips_to_offersActiveTripsFragment"
-            app:destination="@id/offersActiveTripsFragment"
-            app:enterAnim="@anim/enter_from_right"
+
+        <fragment
+            android:id="@+id/destination_trips"
+            android:name="gr.fellow.fellow_traveller.ui.home.tabs.HomeTripsFragment"
+            android:label="fragment_home_trips"
+            tools:layout="@layout/fragment_home_trips" />
+
+
+        <fragment
+            android:id="@+id/destination_info"
+            android:name="gr.fellow.fellow_traveller.ui.home.tabs.ProfileFragment"
+            android:label="fragment_info"
+            tools:layout="@layout/fragment_profile">
+            <action
+                android:id="@+id/to_setting"
+                app:destination="@id/baseSettingsFragment"
+                app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
-    </fragment>
-    <fragment
-        android:id="@+id/destination_trips_takes_part"
-        android:name="gr.fellow.fellow_traveller.ui.home.tabs.TripsTakePartTabFragment"
-        android:label="fragment_messages"
-        tools:layout="@layout/fragment_takes_part_tab">
-        <action
-            android:id="@+id/action_destination_trips_takes_part_to_offersActiveTripsFragment"
-            app:destination="@id/offersActiveTripsFragment"
-            app:enterAnim="@anim/enter_from_right"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
-    </fragment>
-    <fragment
-        android:id="@+id/destination_notifications"
-        android:name="gr.fellow.fellow_traveller.ui.home.tabs.NotificationsFragment"
-        android:label="fragment_notifications"
-        tools:layout="@layout/fragment_notifications" />
-    <fragment
-        android:id="@+id/destination_info"
-        android:name="gr.fellow.fellow_traveller.ui.home.tabs.ProfileFragment"
-        android:label="fragment_info"
-        tools:layout="@layout/fragment_profile">
-        <action
-            android:id="@+id/to_setting"
-            app:destination="@id/baseSettingsFragment"
-            app:enterAnim="@anim/enter_from_right"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
-    </fragment>
-    <fragment
-        android:id="@+id/offersActiveTripsFragment"
-        android:name="gr.fellow.fellow_traveller.ui.home.OffersActiveTripsFragment"
-        android:label="fragment_offers_active_trips"
-        tools:layout="@layout/fragment_offers_active_trips">
-        <argument
-            android:name="type"
-            app:argType="string" />
     </fragment>
 
 
@@ -115,4 +88,4 @@
     </fragment>
 
 
-</navigation>
+    </navigation>

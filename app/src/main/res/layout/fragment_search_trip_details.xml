@@ -261,7 +261,7 @@
 
             <TextView
                 android:id="@+id/passengers_label"
-                style="@style/header2"
+                style="@style/header_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"

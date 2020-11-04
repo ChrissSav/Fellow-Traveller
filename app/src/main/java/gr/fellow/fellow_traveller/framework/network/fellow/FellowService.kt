@@ -3,7 +3,6 @@ package gr.fellow.fellow_traveller.framework.network.fellow
 import gr.fellow.fellow_traveller.data.BaseResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
 import gr.fellow.fellow_traveller.framework.network.fellow.response.AuthenticationResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserAuthResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.car.CarInfoResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.TripInvolvedResponse
@@ -85,10 +84,10 @@ interface FellowService {
     ): Response<BaseResponse<CarInfoResponse>>
 
 
-    @DELETE("/cars/{car_id}")
+    @DELETE("/car/{car_id}")
     suspend fun deleteCar(
-        @Path("car_id") car_id: Int
-    ): Response<StatusHandleResponse>
+        @Path("car_id") car_id: String
+    ): Response<BaseResponse<String>>
 
 
     /** TRIP **/
@@ -101,8 +100,8 @@ interface FellowService {
 
     @GET("trip")
     suspend fun getTripsAs(
-        @Query("type_as") type: String
-    ): Response<MutableList<TripInvolvedResponse>>
+        @Query("type") type: String
+    ): Response<BaseResponse<MutableList<TripInvolvedResponse>>>
 
     @GET("trip/search")
     suspend fun searchTrips(

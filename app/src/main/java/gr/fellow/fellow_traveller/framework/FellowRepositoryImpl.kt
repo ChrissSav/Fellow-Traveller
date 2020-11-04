@@ -2,12 +2,10 @@ package gr.fellow.fellow_traveller.framework
 
 import android.content.SharedPreferences
 import gr.fellow.fellow_traveller.data.FellowRepository
-import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.ResultWrapperSecond
 import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
-import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserAuthResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.car.CarInfoResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.TripInvolvedResponse
@@ -102,9 +100,9 @@ class FellowRepositoryImpl(
             service.userCars().handleApiFormat()
         }
 
-    override suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse> =
-        networkCall {
-            service.deleteCar(carId).handleToCorrectFormat()
+    override suspend fun deleteCarRemote(carId: String): ResultWrapperSecond<String> =
+        networkCallSecond {
+            service.deleteCar(carId).handleApiFormat()
         }
 
     override suspend fun registerTripRemote(trip: TripCreateRequest): ResultWrapperSecond<TripInvolvedResponse> =
@@ -112,14 +110,14 @@ class FellowRepositoryImpl(
             service.registerTrip(trip).handleApiFormat()
         }
 
-    override suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripInvolvedResponse>> =
-        networkCall {
-            service.getTripsAs("creator").handleToCorrectFormat()
+    override suspend fun getTipsAsCreator(): ResultWrapperSecond<MutableList<TripInvolvedResponse>> =
+        networkCallSecond {
+            service.getTripsAs("creator").handleApiFormat()
         }
 
-    override suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripInvolvedResponse>> =
-        networkCall {
-            service.getTripsAs("passenger").handleToCorrectFormat()
+    override suspend fun getTipsAsPassenger(): ResultWrapperSecond<MutableList<TripInvolvedResponse>> =
+        networkCallSecond {
+            service.getTripsAs("passenger").handleApiFormat()
         }
 
     override suspend fun searchTrips(query: SearchTripFilter): ResultWrapperSecond<MutableList<TripSearchResponse>> =
@@ -160,9 +158,9 @@ class FellowRepositoryImpl(
             carDao.deleteCars()
         }
 
-    override suspend fun deleteCarByIdLocal(id: Int) =
+    override suspend fun deleteCarByIdLocal(id: String) =
         roomCall {
-            carDao.deleteCarById(id.toString())
+            carDao.deleteCarById(id)
         }
 
     override suspend fun getAllCarsLocal() =

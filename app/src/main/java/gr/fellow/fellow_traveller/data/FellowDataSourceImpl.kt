@@ -8,7 +8,6 @@ import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
-import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.UserAuthResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.DetailsResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
@@ -79,7 +78,7 @@ class FellowDataSourceImpl(
     }
 
 
-    override suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse> =
+    override suspend fun deleteCarRemote(carId: String): ResultWrapperSecond<String> =
         repository.deleteCarRemote(carId)
 
     override suspend fun addTripRemote(
@@ -117,28 +116,28 @@ class FellowDataSourceImpl(
         }
     }
 
-    /* override suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripInvolved>> {
-         return when (val response = repository.getTipsAsCreator()) {
-             is ResultWrapper.Success ->
-                 ResultWrapper.Success(response.data.map { it.mapTripInvolved() }.toMutableList())
-             is ResultWrapper.Error ->
-                 ResultWrapper.Error(response.error)
-         }
-     }
+    override suspend fun getTipsAsCreator(): ResultWrapperSecond<MutableList<TripInvolved>> {
+        return when (val response = repository.getTipsAsCreator()) {
+            is ResultWrapperSecond.Success ->
+                ResultWrapperSecond.Success(response.data.map { it.mapTripInvolved() }.toMutableList())
+            is ResultWrapperSecond.Error ->
+                ResultWrapperSecond.Error(response.error)
+        }
+    }
 
-     override suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripInvolved>> {
-         return when (val response = repository.getTipsAsPassenger()) {
-             is ResultWrapper.Success ->
-                 ResultWrapper.Success(response.data.map { it.mapTripInvolved() }.toMutableList())
-             is ResultWrapper.Error ->
-                 ResultWrapper.Error(response.error)
-         }
-     }
-
-
+    override suspend fun getTipsAsPassenger(): ResultWrapperSecond<MutableList<TripInvolved>> {
+        return when (val response = repository.getTipsAsPassenger()) {
+            is ResultWrapperSecond.Success ->
+                ResultWrapperSecond.Success(response.data.map { it.mapTripInvolved() }.toMutableList())
+            is ResultWrapperSecond.Error ->
+                ResultWrapperSecond.Error(response.error)
+        }
+    }
 
 
-   */
+
+
+
 
     /**
      * Google Service
@@ -167,7 +166,7 @@ class FellowDataSourceImpl(
     override suspend fun insertCarLocal(car: Car) =
         repository.insertCarLocal(car.mapToCarEntity())
 
-    override suspend fun deleteCarLocal(carId: Int) =
+    override suspend fun deleteCarLocal(carId: String) =
         repository.deleteCarByIdLocal(carId)
 
     override suspend fun deleteAllLocaleCars() =

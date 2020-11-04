@@ -4,7 +4,6 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.ResultWrapperSecond
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
@@ -58,8 +57,8 @@ constructor(
     private val _tripsAsCreator = MutableLiveData<MutableList<TripInvolved>>()
     val tripsAsCreator: LiveData<MutableList<TripInvolved>> = _tripsAsCreator
 
-    private val _tripsTakesPart = MutableLiveData<MutableList<TripInvolved>>()
-    val tripsTakesPart: LiveData<MutableList<TripInvolved>> = _tripsTakesPart
+    private val _tripsAsPassenger = MutableLiveData<MutableList<TripInvolved>>()
+    val tripsAsPassenger: LiveData<MutableList<TripInvolved>> = _tripsAsPassenger
 
 
     private val _successUpdateInfo = SingleLiveEvent<Boolean>()
@@ -68,9 +67,9 @@ constructor(
     /*****************************************************************************************************/
 
     fun loadUserInfo() {
-        launch {
+        launchSecond {
             if (_user.value != null) {
-                return@launch
+                return@launchSecond
             }
             _user.value = loadUserLocalInfoUseCase()
         }
@@ -122,52 +121,52 @@ constructor(
 
 
     fun deleteCar(car: Car) {
-        launch {
-            /* when (val response = deleteCarUseCase(car.id)) {
-                 is ResultWrapper.Success -> {
-                     _cars.value = getUserCarsLocalUseCase()
-                     _carDeletedId.value = car
-                 }
-                 is ResultWrapper.Error -> {
-                     error.value = R.string.ERROR_CAR_NOT_BELONG_TO_USER
-                 }
-             }*/
+        launchSecond(true) {
+            when (val response = deleteCarUseCase(car.id)) {
+                is ResultWrapperSecond.Success -> {
+                    _cars.value = getUserCarsLocalUseCase()
+                    _carDeletedId.value = car
+                }
+                is ResultWrapperSecond.Error -> {
+                    errorSecond.value = externalError(response.error)
+                }
+            }
         }
     }
 
-    fun loadTripAsCreator() {
+    fun loadTripsAsCreator() {
 
-        launch {
+        launchSecond {
             if (_tripsAsCreator.value != null) {
-                return@launch
+                return@launchSecond
             }
             when (val response = getTripsAsCreatorRemoteUseCase()) {
-                is ResultWrapper.Success -> {
+                is ResultWrapperSecond.Success -> {
                     // savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
                     _tripsAsCreator.value = response.data.sortedWith(compareBy { it.timestamp }).toMutableList()
                 }
-                is ResultWrapper.Error -> {
-                    error.value = response.error.msg
+                is ResultWrapperSecond.Error -> {
+                    errorSecond.value = externalError(response.error)
                 }
             }
 
         }
     }
 
-    fun loadTripTakesPart() {
+    fun loadTripsAsPassenger() {
 
-        launch {
-
-            if (_tripsTakesPart.value != null) {
-                return@launch
+        launchSecond {
+            if (_tripsAsPassenger.value != null) {
+                return@launchSecond
             }
+
             when (val response = getTripsAsPassengerRemoteUseCase()) {
-                is ResultWrapper.Success -> {
-                    // savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
-                    _tripsTakesPart.value = response.data.sortedWith(compareBy { it.timestamp }).toMutableList()
+                is ResultWrapperSecond.Success -> {
+                    //savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
+                    _tripsAsPassenger.value = response.data.sortedWith(compareBy { it.timestamp }).toMutableList()
                 }
-                is ResultWrapper.Error -> {
-                    error.value = response.error.msg
+                is ResultWrapperSecond.Error -> {
+                    errorSecond.value = externalError(response.error)
                 }
             }
         }
@@ -175,7 +174,7 @@ constructor(
 
 
     fun addTripCreate(trip: TripInvolved) {
-        launch {
+        launchSecond {
             tripsAsCreator.value?.let {
                 val tempTrip = it
                 tempTrip.add(trip)
@@ -186,11 +185,11 @@ constructor(
     }
 
     fun addTripPassenger(trip: TripInvolved) {
-        launch {
-            tripsTakesPart.value?.let {
+        launchSecond {
+            _tripsAsPassenger.value?.let {
                 val tempTrip = it
                 tempTrip.add(trip)
-                _tripsTakesPart.value = tempTrip
+                _tripsAsPassenger.value = tempTrip
             }
         }
     }

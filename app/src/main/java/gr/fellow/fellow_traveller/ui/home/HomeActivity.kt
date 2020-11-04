@@ -28,8 +28,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
     private val homeLayout = listOf(
         R.id.destination_main,
-        R.id.destination_trips_offers,
-        R.id.destination_trips_takes_part,
+        R.id.destination_trips,
         R.id.destination_notifications,
         R.id.destination_info
     )

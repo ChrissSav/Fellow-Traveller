@@ -6,13 +6,10 @@
         android:icon="@drawable/ic_iconography"
         android:title="Αρχική" />
     <item
-        android:id="@+id/destination_trips_offers"
-        android:icon="@drawable/ic_car"
-        android:title="Προσφερρόμενα" />
-    <item
-        android:id="@+id/destination_trips_takes_part"
+        android:id="@+id/destination_trips"
         android:icon="@drawable/ic_luggage"
-        android:title="Εμπλεκόμενα" />
+        android:title="Ταξίδια" />
+
     <item
         android:id="@+id/destination_notifications"
         android:icon="@drawable/ic_notifications"
