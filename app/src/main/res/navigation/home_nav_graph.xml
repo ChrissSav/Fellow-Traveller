@@ -1,38 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_nav_graph"
     app:startDestination="@id/destination_main">
 
-        <fragment
-            android:id="@+id/destination_main"
-            android:name="gr.fellow.fellow_traveller.ui.home.tabs.HomeFragment"
-            android:label="fragment_home"
-            tools:layout="@layout/fragment_home" />
-        <fragment
-            android:id="@+id/destination_notifications"
-            android:name="gr.fellow.fellow_traveller.ui.home.tabs.NotificationsFragment"
-            android:label="fragment_notifications"
-            tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/destination_main"
+        android:name="gr.fellow.fellow_traveller.ui.home.tabs.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/destination_notifications"
+        android:name="gr.fellow.fellow_traveller.ui.home.tabs.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" />
 
 
-        <fragment
-            android:id="@+id/destination_trips"
-            android:name="gr.fellow.fellow_traveller.ui.home.tabs.HomeTripsFragment"
-            android:label="fragment_home_trips"
-            tools:layout="@layout/fragment_home_trips" />
+    <fragment
+        android:id="@+id/destination_trips"
+        android:name="gr.fellow.fellow_traveller.ui.home.tabs.HomeTripsFragment"
+        android:label="fragment_home_trips"
+        tools:layout="@layout/fragment_home_trips">
+        <action
+            android:id="@+id/action_destination_trips_to_tripInvolvedDetailsFragment"
+            app:destination="@id/tripInvolvedDetailsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
 
 
-        <fragment
-            android:id="@+id/destination_info"
-            android:name="gr.fellow.fellow_traveller.ui.home.tabs.ProfileFragment"
-            android:label="fragment_info"
-            tools:layout="@layout/fragment_profile">
-            <action
-                android:id="@+id/to_setting"
-                app:destination="@id/baseSettingsFragment"
-                app:enterAnim="@anim/enter_from_right"
+    <fragment
+        android:id="@+id/destination_info"
+        android:name="gr.fellow.fellow_traveller.ui.home.tabs.ProfileFragment"
+        android:label="fragment_info"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/to_setting"
+            app:destination="@id/baseSettingsFragment"
+            app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
@@ -86,6 +94,40 @@
             android:name="car"
             app:argType="gr.fellow.fellow_traveller.domain.car.Car" />
     </fragment>
+    <fragment
+        android:id="@+id/tripInvolvedDetailsFragment"
+        android:name="gr.fellow.fellow_traveller.ui.home.trip.TripInvolvedDetailsFragment"
+        android:label="fragment_trip_involved_details"
+        tools:layout="@layout/fragment_trip_involved_details">
+        <argument
+            android:name="trip"
+            app:argType="gr.fellow.fellow_traveller.domain.trip.TripInvolved" />
+
+        <argument
+            android:name="creator"
+            android:defaultValue="false"
+            app:argType="boolean" />
+
+        <action
+            android:id="@+id/action_tripInvolvedDetailsFragment_to_tripInvolvedPassengerDetailsFragment"
+            app:destination="@id/tripInvolvedPassengerDetailsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/tripInvolvedPassengerDetailsFragment"
+        android:name="gr.fellow.fellow_traveller.ui.home.trip.TripInvolvedPassengerDetailsFragment"
+        android:label="fragment_trip_involved_passenger_details"
+        tools:layout="@layout/fragment_trip_involved_passenger_details">
 
 
-    </navigation>
+        <argument
+            android:name="passengerList"
+            app:argType="gr.fellow.fellow_traveller.domain.user.Passenger[]" />
+    </fragment>
+
+
+</navigation>

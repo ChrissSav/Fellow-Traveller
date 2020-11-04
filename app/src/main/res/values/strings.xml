@@ -46,6 +46,9 @@
     <string name="allowed">Επιτρέπονται</string>
     <string name="not_allowed">Δεν επιτρέπονται</string>
 
+    <string name="with_pet">Με κατοικίδιο</string>
+    <string name="without_pet">Χωρίς κατοικίδιο</string>
+
     <string name="yes">Ναί</string>
     <string name="no">Όχι</string>
 

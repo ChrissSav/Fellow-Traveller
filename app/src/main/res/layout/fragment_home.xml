@@ -129,7 +129,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/search_popular_trips"
-                tools:listitem="@layout/passenger_image_item" />
+                tools:listitem="@layout/passenger_base_info_item" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/offer_section"

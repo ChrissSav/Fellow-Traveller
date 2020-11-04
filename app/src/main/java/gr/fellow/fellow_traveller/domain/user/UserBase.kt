@@ -17,7 +17,5 @@ data class UserBase(
     val fullName
         get() = "$firstName $lastName"
 
-    val fullNameNewLine
-        get() = "$firstName\n$lastName"
 
 }

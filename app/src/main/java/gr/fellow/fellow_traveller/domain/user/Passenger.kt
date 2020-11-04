@@ -7,6 +7,6 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Passenger(
     val user: UserBase,
-    val seats: String,
+    val seats: Int,
     val pet: Boolean
 ) : Parcelable

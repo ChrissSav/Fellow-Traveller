@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 
 android {
@@ -58,6 +59,11 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.3.0'
     testImplementation 'junit:junit:4.12'
     implementation 'com.google.android.material:material:1.1.0'
+
+    //NavArgs
+    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0"
+
+
     //Circle Image For Profile
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     //noinspection GradleCompatible
