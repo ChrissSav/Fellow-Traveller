@@ -13,10 +13,7 @@ import gr.fellow.fellow_traveller.databinding.FragmentTripInvolvedDetailsBinding
 import gr.fellow.fellow_traveller.domain.AnswerType
 import gr.fellow.fellow_traveller.domain.user.UserBase
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.ConfirmBottomSheetDialog
-import gr.fellow.fellow_traveller.ui.extensions.findNavController
-import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
-import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
-import gr.fellow.fellow_traveller.ui.extensions.startActivityWithBundle
+import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.search.adapter.PassengerAdapter
 import gr.fellow.fellow_traveller.ui.user.UserInfoDetailsActivity
@@ -33,6 +30,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
     override fun setUpObservers() {
         viewModel.successDeletion.observe(viewLifecycleOwner, Observer {
+            createToast(it)
             onBackPressed()
         })
     }

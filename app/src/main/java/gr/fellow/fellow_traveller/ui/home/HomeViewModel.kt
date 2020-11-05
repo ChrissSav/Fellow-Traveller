@@ -67,8 +67,8 @@ constructor(
     private val _successUpdateInfo = SingleLiveEvent<Boolean>()
     val successUpdateInfo: LiveData<Boolean> = _successUpdateInfo
 
-    private val _successDeletion = SingleLiveEvent<Boolean>()
-    val successDeletion: LiveData<Boolean> = _successDeletion
+    private val _successDeletion = SingleLiveEvent<String>()
+    val successDeletion: LiveData<String> = _successDeletion
 
     /*****************************************************************************************************/
 
@@ -250,7 +250,7 @@ constructor(
             when (val response = deleteTripUseCase(tripId)) {
                 is ResultWrapper.Success -> {
                     _tripsAsCreator.value = deleteTripWithId(tripId, _tripsAsCreator.value)
-                    _successDeletion.value = true
+                    _successDeletion.value = "Επιτυχής διαγραφή ταξιδιού"
                 }
                 is ResultWrapper.Error -> {
                     error.value = externalError(response.error)
@@ -261,10 +261,10 @@ constructor(
 
     fun exitFromTrip(tripId: String) {
         launch(true) {
-            when (val response = deleteTripUseCase(tripId)) {
+            when (val response = exitFromTripUseCase(tripId)) {
                 is ResultWrapper.Success -> {
                     _tripsAsPassenger.value = deleteTripWithId(tripId, _tripsAsPassenger.value)
-                    _successDeletion.value = true
+                    _successDeletion.value = "Επιτυχής αποχώρηση απο το ταξίδι"
                 }
                 is ResultWrapper.Error -> {
                     error.value = externalError(response.error)
