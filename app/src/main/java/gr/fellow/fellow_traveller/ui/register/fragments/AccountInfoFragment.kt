@@ -15,7 +15,6 @@ class AccountInfoFragment : BaseFragment<FragmentAccountInfoBinding>() {
 
     private val viewModel: RegisterViewModel by activityViewModels()
 
-
     override fun getViewBinding(): FragmentAccountInfoBinding =
         FragmentAccountInfoBinding.inflate(layoutInflater)
 
@@ -30,7 +29,7 @@ class AccountInfoFragment : BaseFragment<FragmentAccountInfoBinding>() {
     }
 
     override fun onDestroyView() {
-        viewModel.storeUserInfo(binding.firstName.text.toString(), binding.lastName.text.toString())
+        viewModel.storeUserInfo(binding.firstName.text, binding.lastName.text)
         super.onDestroyView()
     }
 

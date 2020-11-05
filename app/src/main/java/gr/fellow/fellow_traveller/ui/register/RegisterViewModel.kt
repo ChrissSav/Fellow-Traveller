@@ -28,8 +28,8 @@ constructor(
     val password: LiveData<String> = _password
 
 
-    private val _userInfo = MutableLiveData<Pair<String, String>>()
-    val userInfo: MutableLiveData<Pair<String, String>> = _userInfo
+    private val _userInfo = MutableLiveData<Pair<String?, String?>>()
+    val userInfo: MutableLiveData<Pair<String?, String?>> = _userInfo
 
 
     private val _finish = SingleLiveEvent<Boolean>()
@@ -77,7 +77,7 @@ constructor(
         }
     }
 
-    fun storeUserInfo(firstName: String, lastName: String) {
+    fun storeUserInfo(firstName: String?, lastName: String?) {
         _userInfo.value = Pair(firstName, lastName)
     }
 
