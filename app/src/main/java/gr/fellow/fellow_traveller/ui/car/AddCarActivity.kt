@@ -21,7 +21,7 @@ class AddCarActivity : BaseActivity<ActivityAddCarBinding>() {
 
 
     override fun setUpObservers() {
-        viewModel.errorSecond.observe(this, Observer {
+        viewModel.error.observe(this, Observer {
             if (it.internal)
                 createAlerter(getString(it.messageId), R.color.aqua)
             else
@@ -66,11 +66,11 @@ class AddCarActivity : BaseActivity<ActivityAddCarBinding>() {
 
     private fun checkErrors(): Boolean {
         if (binding.brand.text.toString().length < 2 || binding.model.text.toString().length < 2 || binding.color.text.toString().length < 2) {
-            viewModel.setSecondError(R.string.ERROR_FIELDS_REQUIRE)
+            viewModel.setErrorMessage(R.string.ERROR_FIELDS_REQUIRE)
             return false
         }
         if (!isValidPlate(binding.plate.text.toString())) {
-            viewModel.setSecondError(R.string.ERROR_INVALID_PLATE_FORMAT)
+            viewModel.setErrorMessage(R.string.ERROR_INVALID_PLATE_FORMAT)
             return false
         }
         return true

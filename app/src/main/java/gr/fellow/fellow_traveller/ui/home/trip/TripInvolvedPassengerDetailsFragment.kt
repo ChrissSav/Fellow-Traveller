@@ -1,12 +1,14 @@
 package gr.fellow.fellow_traveller.ui.home.trip
 
-import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.navArgs
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentTripInvolvedPassengerDetailsBinding
 import gr.fellow.fellow_traveller.domain.user.UserBase
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
+import gr.fellow.fellow_traveller.ui.extensions.startActivityWithBundle
 import gr.fellow.fellow_traveller.ui.home.adapter.PassengerFullInfoAdapter
+import gr.fellow.fellow_traveller.ui.user.UserInfoDetailsActivity
 
 
 class TripInvolvedPassengerDetailsFragment : BaseFragment<FragmentTripInvolvedPassengerDetailsBinding>() {
@@ -30,7 +32,7 @@ class TripInvolvedPassengerDetailsFragment : BaseFragment<FragmentTripInvolvedPa
     }
 
     private fun onPassengerListener(user: UserBase) {
-        Toast.makeText(this.context, user.id.trim(), Toast.LENGTH_SHORT).show()
+        activity?.startActivityWithBundle(UserInfoDetailsActivity::class, bundleOf("userId" to user.id))
     }
 
 

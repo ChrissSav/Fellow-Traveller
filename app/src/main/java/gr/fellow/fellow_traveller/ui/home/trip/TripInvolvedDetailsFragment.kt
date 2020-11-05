@@ -2,7 +2,6 @@ package gr.fellow.fellow_traveller.ui.home.trip
 
 import android.annotation.SuppressLint
 import android.view.View
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.navArgs
 import gr.fellow.fellow_traveller.R
@@ -12,7 +11,9 @@ import gr.fellow.fellow_traveller.domain.user.UserBase
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
+import gr.fellow.fellow_traveller.ui.extensions.startActivityWithBundle
 import gr.fellow.fellow_traveller.ui.search.adapter.PassengerAdapter
+import gr.fellow.fellow_traveller.ui.user.UserInfoDetailsActivity
 
 
 class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBinding>() {
@@ -63,10 +64,15 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
         binding.backButton.setOnClickListener {
             onBackPressed()
         }
+
+
+        binding.userImage.setOnClickListener {
+            activity?.startActivityWithBundle(UserInfoDetailsActivity::class, bundleOf("userId" to args.trip.creatorUser.id))
+        }
     }
 
     private fun onPassengerListener(user: UserBase) {
-        Toast.makeText(this.context, user.id.trim(), Toast.LENGTH_SHORT).show()
+        activity?.startActivityWithBundle(UserInfoDetailsActivity::class, bundleOf("userId" to user.id))
     }
 
 

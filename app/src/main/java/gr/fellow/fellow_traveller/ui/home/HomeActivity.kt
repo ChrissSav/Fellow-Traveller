@@ -58,7 +58,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
                 binding.genericLoader.progressLoad.visibility = View.INVISIBLE
         })
 
-        viewModel.errorSecond.observe(this, Observer {
+        viewModel.error.observe(this, Observer {
             if (it.internal) {
                 if (it.messageId == R.string.ERROR_API_UNAUTHORIZED) {
                     viewModel.logOutUnauthorized()
@@ -68,9 +68,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
                 createAlerter(it.message)
         })
 
-        viewModel.error.observe(this, Observer {
-            createAlerter(getString(it))
-        })
 
         viewModel.logout.observe(this, Observer {
             startActivityClearStack(MainActivity::class)

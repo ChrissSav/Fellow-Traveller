@@ -90,10 +90,13 @@ class SelectDestinationActivity : BaseActivity<ActivitySelectDestinationBinding>
     private fun initializeRecycle() {
         with(binding) {
             recyclerView.layoutManager = LinearLayoutManager(this@SelectDestinationActivity)
-            recyclerView.adapter = PlacesAdapter(placesList) {
-                viewModel.getLanLogForPlace(it.placeId, it.description)
-            }
+            recyclerView.adapter = PlacesAdapter(placesList, this@SelectDestinationActivity::onPredictionItemSelected)
         }
+    }
+
+
+    private fun onPredictionItemSelected(predictionResponse: PredictionResponse) {
+        viewModel.getLanLogForPlace(predictionResponse.placeId, predictionResponse.description)
     }
 
 

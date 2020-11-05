@@ -4,19 +4,19 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import gr.fellow.fellow_traveller.data.ResultWrapperSecond
+import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.externalError
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
-import gr.fellow.fellow_traveller.usecase.LoadUserLocalInfoUseCase
 import gr.fellow.fellow_traveller.usecase.auth.DeleteUserAuthLocalUseCase
 import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsCreatorRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsPassengerRemoteUseCase
+import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
 import kotlinx.coroutines.launch
 
 
@@ -67,9 +67,9 @@ constructor(
     /*****************************************************************************************************/
 
     fun loadUserInfo() {
-        launchSecond {
+        launch {
             if (_user.value != null) {
-                return@launchSecond
+                return@launch
             }
             _user.value = loadUserLocalInfoUseCase()
         }
@@ -103,18 +103,18 @@ constructor(
     }
 
     fun loadCars() {
-        launchSecond {
+        launch {
             try {
                 when (val response = getUserCarsRemoteUseCase()) {
-                    is ResultWrapperSecond.Success -> {
+                    is ResultWrapper.Success -> {
                         deleteUserLocalCars()
                         for (item in response.data) {
                             registerCarLocalUseCase(item)
                         }
                         _cars.value = getUserCarsLocalUseCase()
                     }
-                    is ResultWrapperSecond.Error -> {
-                        errorSecond.value = externalError(response.error)
+                    is ResultWrapper.Error -> {
+                        error.value = externalError(response.error)
                     }
                 }
             } catch (exception: Exception) {
@@ -126,21 +126,21 @@ constructor(
     }
 
     fun loadCarsLocal() {
-        launchSecond {
+        launch {
             _cars.value = getUserCarsLocalUseCase()
         }
     }
 
 
     fun deleteCar(car: Car) {
-        launchSecond(true) {
+        launch(true) {
             when (val response = deleteCarUseCase(car.id)) {
-                is ResultWrapperSecond.Success -> {
+                is ResultWrapper.Success -> {
                     _cars.value = getUserCarsLocalUseCase()
                     _carDeletedId.value = car
                 }
-                is ResultWrapperSecond.Error -> {
-                    errorSecond.value = externalError(response.error)
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
                 }
             }
         }
@@ -148,17 +148,17 @@ constructor(
 
     fun loadTripsAsCreator() {
 
-        launchSecond {
+        launch {
             if (_tripsAsCreator.value != null) {
-                return@launchSecond
+                return@launch
             }
             when (val response = getTripsAsCreatorRemoteUseCase()) {
-                is ResultWrapperSecond.Success -> {
+                is ResultWrapper.Success -> {
                     // savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
                     _tripsAsCreator.value = response.data.sortedWith(compareBy { it.timestamp }).toMutableList()
                 }
-                is ResultWrapperSecond.Error -> {
-                    errorSecond.value = externalError(response.error)
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
                 }
             }
 
@@ -167,18 +167,18 @@ constructor(
 
     fun loadTripsAsPassenger() {
 
-        launchSecond {
+        launch {
             if (_tripsAsPassenger.value != null) {
-                return@launchSecond
+                return@launch
             }
 
             when (val response = getTripsAsPassengerRemoteUseCase()) {
-                is ResultWrapperSecond.Success -> {
+                is ResultWrapper.Success -> {
                     //savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
                     _tripsAsPassenger.value = response.data.sortedWith(compareBy { it.timestamp }).toMutableList()
                 }
-                is ResultWrapperSecond.Error -> {
-                    errorSecond.value = externalError(response.error)
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
                 }
             }
         }
@@ -186,7 +186,7 @@ constructor(
 
 
     fun addTripCreate(trip: TripInvolved) {
-        launchSecond {
+        launch {
             tripsAsCreator.value?.let {
                 val tempTrip = it
                 tempTrip.add(trip)
@@ -197,7 +197,7 @@ constructor(
     }
 
     fun addTripPassenger(trip: TripInvolved) {
-        launchSecond {
+        launch {
             _tripsAsPassenger.value?.let {
                 val tempTrip = it
                 tempTrip.add(trip)
@@ -208,15 +208,15 @@ constructor(
 
 
     fun updateAccountInfo(firstName: String, lastName: String, messengerLink: String?, aboutMe: String?) {
-        launchSecond(true) {
+        launch(true) {
             when (val response = updateAccountInfoUseCase(firstName, lastName, messengerLink, aboutMe)) {
-                is ResultWrapperSecond.Success -> {
+                is ResultWrapper.Success -> {
                     registerUserLocalUseCase(response.data)
                     _user.value = loadUserLocalInfoUseCase()
                     _successUpdateInfo.value = true
                 }
-                is ResultWrapperSecond.Error -> {
-                    errorSecond.value = externalError(response.error)
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
                 }
             }
         }
@@ -224,15 +224,15 @@ constructor(
     }
 
     fun updateUserImage(picture: String?){
-        launchSecond(true) {
+        launch(true) {
             when (val response = updateUserPictureUseCase(picture)) {
-                is ResultWrapperSecond.Success -> {
+                is ResultWrapper.Success -> {
                     registerUserLocalUseCase(response.data)
                     _user.value = loadUserLocalInfoUseCase()
 
                 }
-                is ResultWrapperSecond.Error -> {
-                    errorSecond.value = externalError(response.error)
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
                 }
             }
         }

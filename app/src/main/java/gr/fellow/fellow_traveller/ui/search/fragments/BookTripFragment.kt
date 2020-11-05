@@ -33,7 +33,7 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
 
     override fun setUpObservers() {
 
-        viewModel.errorSecond.observe(this, Observer {
+        viewModel.error.observe(this, Observer {
             if (it.internal)
                 createAlerter(getString(it.messageId))
             else {

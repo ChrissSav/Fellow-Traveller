@@ -14,7 +14,6 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivitySelectLocationBinding
 import gr.fellow.fellow_traveller.framework.network.google.response.PredictionResponse
-import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
 import gr.fellow.fellow_traveller.ui.location.adapter.PlacesAdapter
 
@@ -37,30 +36,15 @@ class SelectLocationActivity : BaseActivity<ActivitySelectLocationBinding>() {
             binding.RecyclerView.adapter?.notifyDataSetChanged()
         })
 
-        viewModel.error.observe(this, Observer {
-            if (it == R.string.ERROR_INTERNET_CONNECTION) {
-                showHideInternetMessage(100)
-            } else {
-                createAlerter(getString(it))
-            }
-
-        })
     }
 
     override fun setUpViews() {
         with(binding) {
-            RecyclerView.adapter = PlacesAdapter(placesList) {
-                val resultIntent = Intent()
-                resultIntent.putExtra("id", it.placeId)
-                resultIntent.putExtra("title", it.description)
-                setResult(Activity.RESULT_OK, resultIntent)
-                finish()
-            }
+            RecyclerView.adapter = PlacesAdapter(placesList, this@SelectLocationActivity::onPredictionItemSelected)
 
             backButton.setOnClickListener {
                 finish()
             }
-
 
             selectLocationActivityEditTextSearchPlace.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(charSequence: Editable) {
@@ -79,6 +63,14 @@ class SelectLocationActivity : BaseActivity<ActivitySelectLocationBinding>() {
                 }
             })
         }
+    }
+
+    private fun onPredictionItemSelected(predictionResponse: PredictionResponse) {
+        val resultIntent = Intent()
+        resultIntent.putExtra("id", predictionResponse.placeId)
+        resultIntent.putExtra("title", predictionResponse.description)
+        setResult(Activity.RESULT_OK, resultIntent)
+        finish()
     }
 
 

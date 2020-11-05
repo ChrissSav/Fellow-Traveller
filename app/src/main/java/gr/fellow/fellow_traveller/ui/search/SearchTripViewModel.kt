@@ -3,7 +3,7 @@ package gr.fellow.fellow_traveller.ui.search
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import gr.fellow.fellow_traveller.data.ResultWrapperSecond
+import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.domain.SearchTripFilter
@@ -67,15 +67,15 @@ constructor(
     }
 
     fun getTrips() {
-        launchSecond {
+        launch {
             loadResults.value = true
             _searchFilter.value?.let { searchFilters ->
                 when (val response = searchTripsUseCase(searchFilters)) {
-                    is ResultWrapperSecond.Success -> {
+                    is ResultWrapper.Success -> {
                         _resultTrips.value = response.data
                     }
-                    is ResultWrapperSecond.Error -> {
-                        errorSecond.value = externalError(response.error)
+                    is ResultWrapper.Error -> {
+                        error.value = externalError(response.error)
                     }
                 }
             }
@@ -96,14 +96,14 @@ constructor(
 
 
     fun bookTrip(tripId: String, seats: Int, pet: Boolean) {
-        launchSecond(true) {
+        launch(true) {
             when (val response = bookTripUseCase(tripId, seats, pet)) {
-                is ResultWrapperSecond.Success -> {
+                is ResultWrapper.Success -> {
                     _tripBook.value = response.data
                 }
-                is ResultWrapperSecond.Error -> {
+                is ResultWrapper.Error -> {
                     deleteTripId = tripId
-                    errorSecond.value = externalError(response.error)
+                    error.value = externalError(response.error)
                 }
             }
         }
@@ -112,7 +112,7 @@ constructor(
 
 
     fun handleErrorBook(tripId: String) {
-        launchSecond {
+        launch {
             delay(200)
             val tempTrips = mutableListOf<TripSearch>()
             tempTrips.addAll(_resultTrips.value ?: emptyList())

@@ -2,11 +2,12 @@ package gr.fellow.fellow_traveller.framework.network.fellow
 
 import gr.fellow.fellow_traveller.data.BaseResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
-import gr.fellow.fellow_traveller.framework.network.fellow.response.AuthenticationResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.UserAuthResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.car.CarInfoResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.TripInvolvedResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.TripSearchResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.user.AuthenticationResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.user.UserAuthResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.user.UserInfoResponse
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -66,6 +67,11 @@ interface FellowService {
     suspend fun getUserInfo(
     ): Response<BaseResponse<UserAuthResponse>>
 
+    @GET("user/{user_id}")
+    suspend fun getUserInfo(
+        @Path("user_id") userId: String
+    ): Response<BaseResponse<UserInfoResponse>>
+
 
     @PUT("user/me/picture")
     suspend fun updateUserPicture(
@@ -86,7 +92,7 @@ interface FellowService {
 
     @DELETE("/car/{car_id}")
     suspend fun deleteCar(
-        @Path("car_id") car_id: String
+        @Path("car_id") carId: String
     ): Response<BaseResponse<String>>
 
 

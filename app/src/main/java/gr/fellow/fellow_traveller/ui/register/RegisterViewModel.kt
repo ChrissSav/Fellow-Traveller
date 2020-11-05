@@ -4,7 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.data.ResultWrapperSecond
+import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.domain.externalError
@@ -40,10 +40,10 @@ constructor(
 
         launch(true) {
             when (checkUserEmailUseCase(email)) {
-                is ResultWrapperSecond.Success ->
+                is ResultWrapper.Success ->
                     _email.value = email
-                is ResultWrapperSecond.Error ->
-                    errorSecond.value = internalError(R.string.ERROR_EMAIL_ALREADY_EXISTS)
+                is ResultWrapper.Error ->
+                    error.value = internalError(R.string.ERROR_EMAIL_ALREADY_EXISTS)
             }
         }
 
@@ -66,11 +66,11 @@ constructor(
             when (val response = registerUserUseCase(
                 firstName, lastName, email.value.toString(), password.value.toString()
             )) {
-                is ResultWrapperSecond.Success -> {
+                is ResultWrapper.Success -> {
                     _finish.value = true
                 }
-                is ResultWrapperSecond.Error -> {
-                    errorSecond.value = externalError(response.error)
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
                 }
             }
 

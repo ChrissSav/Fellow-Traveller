@@ -43,7 +43,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
                 binding.destToButton.text = it.second?.title
             })
 
-            errorSecond.observe(viewLifecycleOwner, Observer {
+            error.observe(viewLifecycleOwner, Observer {
                 binding.progressBar.visibility = View.GONE
                 if (it.internal)
                     createAlerter(getString(it.messageId))

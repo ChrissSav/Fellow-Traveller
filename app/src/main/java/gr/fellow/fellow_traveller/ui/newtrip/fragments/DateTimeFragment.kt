@@ -66,7 +66,7 @@ class DateTimeFragment : BaseFragment<FragmentDateTimeBinding>() {
             ) {
                 findNavController()?.navigate(R.id.next_fragment)
             } else {
-                viewModel.setError(R.string.ERROR_TRIP_TIMESTAMP)
+                viewModel.setErrorMessage(R.string.ERROR_TRIP_TIMESTAMP)
             }
         }
     }

@@ -43,7 +43,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                 openActivityWithFade(intentOpen!!)
         })
 
-        viewModel.errorSecond.observe(this, Observer {
+        viewModel.error.observe(this, Observer {
 
             intentOpen = if (it.internal && it.messageId == R.string.ERROR_API_UNAUTHORIZED)
                 Intent(this, MainActivity::class.java)

@@ -2,7 +2,7 @@ package gr.fellow.fellow_traveller.ui.splash
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
-import gr.fellow.fellow_traveller.data.ResultWrapperSecond
+import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.home.GetUserInfoRemoteUseCase
@@ -23,13 +23,13 @@ constructor(
 
 
     fun getUserInfo() {
-        launchSecond {
+        launch {
             when (val response = getUserInfoRemoteUseCase()) {
-                is ResultWrapperSecond.Success -> {
+                is ResultWrapper.Success -> {
                     registerUserLocalUseCase(response.data)
                     _userInfo.value = true
                 }
-                is ResultWrapperSecond.Error -> {
+                is ResultWrapper.Error -> {
                     _userInfo.value = false
                 }
             }

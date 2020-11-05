@@ -2,7 +2,7 @@ package gr.fellow.fellow_traveller.ui.auth
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
-import gr.fellow.fellow_traveller.data.ResultWrapperSecond
+import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.domain.externalError
@@ -21,13 +21,13 @@ constructor(
 
 
     fun verify(token: String) {
-        launchSecond(true) {
+        launch(true) {
             delay(500)
             when (val response = verifyAccountUseCase(token)) {
-                is ResultWrapperSecond.Success ->
+                is ResultWrapper.Success ->
                     _success.value = true
-                is ResultWrapperSecond.Error ->
-                    errorSecond.value = externalError(response.error)
+                is ResultWrapper.Error ->
+                    error.value = externalError(response.error)
             }
         }
     }

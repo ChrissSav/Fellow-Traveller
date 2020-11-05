@@ -1,6 +1,6 @@
 package gr.fellow.fellow_traveller.framework.network.fellow.response.trip
 
-import gr.fellow.fellow_traveller.framework.network.fellow.response.UserBaseResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.user.UserBaseResponse
 
 data class PassengerResponse(
     val user: UserBaseResponse,

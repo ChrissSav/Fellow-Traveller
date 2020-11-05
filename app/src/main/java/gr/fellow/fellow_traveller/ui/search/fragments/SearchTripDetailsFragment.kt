@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.ui.search.fragments
 
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -11,14 +10,17 @@ import gr.fellow.fellow_traveller.domain.user.UserBase
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
+import gr.fellow.fellow_traveller.ui.extensions.startActivityWithBundle
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
 import gr.fellow.fellow_traveller.ui.search.adapter.PassengerAdapter
+import gr.fellow.fellow_traveller.ui.user.UserInfoDetailsActivity
 
 @AndroidEntryPoint
 class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>() {
 
     private val viewModel: SearchTripViewModel by activityViewModels()
     private var tripId = "0"
+    private var userId: String? = null
 
 
     override fun handleIntent() {
@@ -34,6 +36,7 @@ class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>
         if (index != null) {
             viewModel.resultTrips.value?.get(index)?.let {
                 with(binding) {
+                    userId = it.creatorUser.id
                     from.text = it.destFrom.title
                     to.text = it.destTo.title
                     time.text = it.time
@@ -75,11 +78,17 @@ class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>
         binding.backButton.setOnClickListener {
             onBackPressed()
         }
+
+        binding.userImage.setOnClickListener {
+            userId?.let {
+                activity?.startActivityWithBundle(UserInfoDetailsActivity::class, bundleOf("userId" to it))
+            }
+        }
     }
 
 
     private fun onPassengerListener(user: UserBase) {
-        Toast.makeText(this.context, user.id.trim(), Toast.LENGTH_SHORT).show()
+        activity?.startActivityWithBundle(UserInfoDetailsActivity::class, bundleOf("userId" to user.id))
     }
 
 

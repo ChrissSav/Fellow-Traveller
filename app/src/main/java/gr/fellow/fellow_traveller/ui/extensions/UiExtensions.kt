@@ -79,8 +79,9 @@ fun Activity.hideKeyboard() {
 }
 
 
-fun Activity.startActivity(activity: KClass<out Activity>) {
+fun Activity.startActivityWithBundle(activity: KClass<out Activity>, bundle: Bundle) {
     val intent = Intent(this, activity.java)
+    intent.putExtras(bundle)
     startActivity(intent)
 }
 

@@ -10,16 +10,13 @@ import gr.fellow.fellow_traveller.data.UnauthorizedException
 import gr.fellow.fellow_traveller.domain.ErrorMessage
 import gr.fellow.fellow_traveller.domain.internalError
 import gr.fellow.fellow_traveller.utils.ACCESS_DENIED
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 open class BaseViewModel : ViewModel() {
 
-    val error = SingleLiveEvent<Int>()
+    val error = SingleLiveEvent<ErrorMessage>()
     val load = MutableLiveData<Boolean>()
 
-
-    val errorSecond = SingleLiveEvent<ErrorMessage>()
 
     fun launch(shouldLoad: Boolean = false, function: suspend () -> Unit) {
         viewModelScope.launch {
@@ -34,85 +31,35 @@ open class BaseViewModel : ViewModel() {
     }
 
 
-    fun launch(delayTime: Int, shouldLoad: Boolean, function: suspend () -> Unit) {
-        viewModelScope.launch {
-            load.value = shouldLoad
-            delay(delayTime.toLong())
-            try {
-                function.invoke()
-            } catch (e: Exception) {
-                handleError(e)
-            }
-            load.value = false
-        }
-    }
-
-    fun setError(errorMsg: Int) {
-        error.value = errorMsg
-    }
-
     fun setLoad(shouldLoad: Boolean) {
         load.value = shouldLoad
     }
 
-    fun setSecondError(errorMsg: Int) {
-        errorSecond.value = internalError(errorMsg)
+    fun setErrorMessage(errorMsg: Int) {
+        error.value = internalError(errorMsg)
     }
 
     private fun handleError(e: Exception) {
-        when (e) {
-            is BaseApiException -> when (e.code) {
-                ACCESS_DENIED -> {
-                    error.value = R.string.ERROR_API_UNAUTHORIZED
-                }
-                else -> {
-                    error.value = R.string.ERROR_API_UNREACHABLE
-                }
-            }
-            is NoInternetException -> error.value = R.string.ERROR_INTERNET_CONNECTION
-            is UnauthorizedException -> error.value = R.string.ERROR_API_UNAUTHORIZED
-            else -> error.value = R.string.ERROR_SOMETHING_WRONG
-        }
-    }
-
-
-    /*** SECONDS ****/
-    private fun handleErrorSecond(e: Exception) {
         e.printStackTrace()
         when (e) {
             is BaseApiException -> when (e.code) {
                 ACCESS_DENIED -> {
-                    errorSecond.value = internalError(R.string.ERROR_API_UNAUTHORIZED)
+                    error.value = internalError(R.string.ERROR_API_UNAUTHORIZED)
                 }
                 else -> {
-                    errorSecond.value = internalError(R.string.ERROR_API_UNREACHABLE)
+                    error.value = internalError(R.string.ERROR_API_UNREACHABLE)
                 }
             }
             is NoInternetException -> {
-                errorSecond.value = internalError(R.string.ERROR_INTERNET_CONNECTION)
+                error.value = internalError(R.string.ERROR_INTERNET_CONNECTION)
             }
             is UnauthorizedException -> {
-
-                errorSecond.value = internalError(R.string.ERROR_API_UNAUTHORIZED)
+                error.value = internalError(R.string.ERROR_API_UNAUTHORIZED)
             }
-
-
             else -> {
-                errorSecond.value = internalError(R.string.ERROR_SOMETHING_WRONG)
+                error.value = internalError(R.string.ERROR_SOMETHING_WRONG)
             }
         }
     }
 
-
-    fun launchSecond(shouldLoad: Boolean = false, function: suspend () -> Unit) {
-        viewModelScope.launch {
-            load.value = shouldLoad
-            try {
-                function.invoke()
-            } catch (e: Exception) {
-                handleErrorSecond(e)
-            }
-            load.value = false
-        }
-    }
 }

@@ -3,7 +3,7 @@ package gr.fellow.fellow_traveller.ui.forgotPassword
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import gr.fellow.fellow_traveller.data.ResultWrapperSecond
+import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.domain.externalError
@@ -35,15 +35,15 @@ constructor(
     }
 
     fun forgotPassword(email: String) {
-        launchSecond(true) {
+        launch(true) {
 
             when (val response = forgotPasswordUserCase(email)) {
-                is ResultWrapperSecond.Success -> {
+                is ResultWrapper.Success -> {
                     this.email = email
                     _successForgotRequest.value = true
                 }
-                is ResultWrapperSecond.Error -> {
-                    errorSecond.value = externalError(response.error)
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
                 }
             }
         }
@@ -51,26 +51,26 @@ constructor(
 
 
     fun resetPassword(code: String) {
-        launchSecond(true) {
+        launch(true) {
             when (val response = resetPasswordUserCase(email, code, _password.value.toString())) {
-                is ResultWrapperSecond.Success -> {
+                is ResultWrapper.Success -> {
                     _successResetPassword.value = true
                 }
-                is ResultWrapperSecond.Error -> {
-                    errorSecond.value = externalError(response.error)
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
                 }
             }
         }
     }
 
     fun forgotPassword() {
-        launchSecond(true) {
+        launch(true) {
             when (val response = forgotPasswordUserCase(email)) {
-                is ResultWrapperSecond.Success -> {
+                is ResultWrapper.Success -> {
                     _successForgotRequest.value = true
                 }
-                is ResultWrapperSecond.Error -> {
-                    errorSecond.value = externalError(response.error)
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
                 }
             }
         }
