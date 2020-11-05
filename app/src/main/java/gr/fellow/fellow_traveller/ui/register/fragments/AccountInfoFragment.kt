@@ -45,15 +45,15 @@ class AccountInfoFragment : BaseFragment<FragmentAccountInfoBinding>() {
     }
 
     private fun checkFields(): Boolean {
-        if (binding.firstName.text.toString().length < 3) {
+        if (binding.firstName.text.isNullOrEmpty() && binding.firstName.length < 3) {
+            createAlerter("Ελεγξε το πεδιο του ονόματος")
+            return false
+        }
+        if (binding.lastName.text.isNullOrEmpty() && binding.lastName.length < 3) {
             createAlerter("Ελεγξε το πεδιο του ονόματος")
             return false
         }
 
-        if (binding.lastName.text.toString().length < 3) {
-            createAlerter("Ελεγξε το πεδιο του επωνύμου")
-            return false
-        }
         return true
     }
 

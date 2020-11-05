@@ -14,10 +14,7 @@ import gr.fellow.fellow_traveller.usecase.newtrip.RegisterTripRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.register.CheckUserEmailUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserUseCase
-import gr.fellow.fellow_traveller.usecase.trips.BookTripUseCase
-import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsCreatorRemoteUseCase
-import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsPassengerRemoteUseCase
-import gr.fellow.fellow_traveller.usecase.trips.SearchTripsUseCase
+import gr.fellow.fellow_traveller.usecase.trips.*
 import gr.fellow.fellow_traveller.usecase.user.GetUserInfoByIdUseCase
 import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
 
@@ -25,6 +22,18 @@ import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
 @InstallIn(ActivityComponent::class)
 @Module
 class UseCasesModule {
+
+    @ActivityScoped
+    @Provides
+    fun provideExitFromTripUseCase(dataSource: FellowDataSource): ExitFromTripUseCase {
+        return ExitFromTripUseCase(dataSource)
+    }
+
+    @ActivityScoped
+    @Provides
+    fun provideDeleteTripUseCase(dataSource: FellowDataSource): DeleteTripUseCase {
+        return DeleteTripUseCase(dataSource)
+    }
 
 
     @ActivityScoped

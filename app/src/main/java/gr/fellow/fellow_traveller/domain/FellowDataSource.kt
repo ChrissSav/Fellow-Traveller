@@ -69,6 +69,10 @@ interface FellowDataSource {
 
     suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripInvolved>>
 
+    suspend fun exitFromTrip(tripId: String): ResultWrapper<String>
+
+    suspend fun deleteTrip(tripId: String): ResultWrapper<String>
+
 
     /**
      * Google Service

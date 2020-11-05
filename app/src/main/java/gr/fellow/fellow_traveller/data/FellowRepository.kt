@@ -59,6 +59,10 @@ interface FellowRepository {
 
     suspend fun bookTrip(request: BookTripRequest): ResultWrapper<TripInvolvedResponse>
 
+    suspend fun exitFromTrip(tripId: String): ResultWrapper<String>
+
+    suspend fun deleteTrip(tripId: String): ResultWrapper<String>
+
 
     /**
      * Local

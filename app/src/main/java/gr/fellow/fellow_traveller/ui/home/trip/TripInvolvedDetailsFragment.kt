@@ -3,27 +3,39 @@ package gr.fellow.fellow_traveller.ui.home.trip
 import android.annotation.SuppressLint
 import android.view.View
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentTripInvolvedDetailsBinding
+import gr.fellow.fellow_traveller.domain.AnswerType
 import gr.fellow.fellow_traveller.domain.user.UserBase
+import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.ConfirmBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
 import gr.fellow.fellow_traveller.ui.extensions.startActivityWithBundle
+import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.search.adapter.PassengerAdapter
 import gr.fellow.fellow_traveller.ui.user.UserInfoDetailsActivity
 
-
+@AndroidEntryPoint
 class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBinding>() {
 
     private val args: TripInvolvedDetailsFragmentArgs by navArgs()
+    private val viewModel: HomeViewModel by activityViewModels()
+    private lateinit var confirmBottomSheetDialog: ConfirmBottomSheetDialog
 
     override fun getViewBinding(): FragmentTripInvolvedDetailsBinding =
         FragmentTripInvolvedDetailsBinding.inflate(layoutInflater)
 
-    override fun setUpObservers() {}
+    override fun setUpObservers() {
+        viewModel.successDeletion.observe(viewLifecycleOwner, Observer {
+            onBackPressed()
+        })
+    }
 
     @SuppressLint("UseCompatLoadingForColorStateLists")
     override fun setUpViews() {
@@ -65,6 +77,14 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
             onBackPressed()
         }
 
+        binding.moreSettings.setOnClickListener {
+            confirmBottomSheetDialog = ConfirmBottomSheetDialog(
+                if (args.creator) "Θελείς να διαγράψεις την διαδρομή ;" else "Θέλεις να αποχωρήσεις απο την διαδρομή ;",
+                this@TripInvolvedDetailsFragment::onConfirmItemClickListener
+            )
+            confirmBottomSheetDialog.show(childFragmentManager, "confirmBottomSheetDialog")
+
+        }
 
         binding.userImage.setOnClickListener {
             activity?.startActivityWithBundle(UserInfoDetailsActivity::class, bundleOf("userId" to args.trip.creatorUser.id))
@@ -73,6 +93,16 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
     private fun onPassengerListener(user: UserBase) {
         activity?.startActivityWithBundle(UserInfoDetailsActivity::class, bundleOf("userId" to user.id))
+    }
+
+
+    private fun onConfirmItemClickListener(answerType: AnswerType) {
+        if (answerType == AnswerType.Yes) {
+            if (args.creator)
+                viewModel.deleteTrip(args.trip.id)
+            else
+                viewModel.exitFromTrip(args.trip.id)
+        }
     }
 
 

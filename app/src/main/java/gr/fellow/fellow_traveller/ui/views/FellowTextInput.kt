@@ -24,10 +24,25 @@ class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(
     private var textAllCaps = true
 
     var text: String? = null
-        get() = run {
-            if (binding.fellowEditTextTextInputEditText.text.toString().isEmpty())
-                return@run null
-            return binding.fellowEditTextTextInputEditText.text.toString()
+        get() {
+            return if (binding.fellowEditTextTextInputEditText.text.isNullOrEmpty()) {
+                null
+            } else {
+                binding.fellowEditTextTextInputEditText.text.toString()
+            }
+        }
+        set(value) {
+            field = value
+            binding.fellowEditTextTextInputEditText.setText(value)
+        }
+
+    var length: Int = 0
+        get() {
+            return if (binding.fellowEditTextTextInputEditText.text.isNullOrEmpty()) {
+                0
+            } else {
+                binding.fellowEditTextTextInputEditText.text.toString().length
+            }
         }
         set(value) {
             field = value

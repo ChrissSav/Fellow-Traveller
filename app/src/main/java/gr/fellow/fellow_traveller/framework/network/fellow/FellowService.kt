@@ -131,4 +131,15 @@ interface FellowService {
     suspend fun bookTrip(
         @Body request: BookTripRequest
     ): Response<BaseResponse<TripInvolvedResponse>>
+
+    @DELETE("trip/passenger/{trip_id}")
+    suspend fun exitFromTrip(
+        @Path("trip_id") tripId: String
+    ): Response<BaseResponse<String>>
+
+
+    @DELETE("trip/{trip_id}")
+    suspend fun deleteTrip(
+        @Path("trip_id") tripId: String
+    ): Response<BaseResponse<String>>
 }

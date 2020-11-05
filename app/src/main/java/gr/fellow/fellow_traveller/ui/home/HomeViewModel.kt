@@ -14,6 +14,8 @@ import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.usecase.auth.DeleteUserAuthLocalUseCase
 import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
+import gr.fellow.fellow_traveller.usecase.trips.DeleteTripUseCase
+import gr.fellow.fellow_traveller.usecase.trips.ExitFromTripUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsCreatorRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsPassengerRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
@@ -35,7 +37,9 @@ constructor(
     private val registerUserLocalUseCase: RegisterUserLocalUseCase,
     private val getTripsAsCreatorRemoteUseCase: GetTripsAsCreatorRemoteUseCase,
     private val getTripsAsPassengerRemoteUseCase: GetTripsAsPassengerRemoteUseCase,
-    private val updateUserPictureUseCase: UpdateUserPictureUseCase
+    private val updateUserPictureUseCase: UpdateUserPictureUseCase,
+    private val deleteTripUseCase: DeleteTripUseCase,
+    private val exitFromTripUseCase: ExitFromTripUseCase
 ) : BaseViewModel() {
 
 
@@ -60,9 +64,11 @@ constructor(
     private val _tripsAsPassenger = MutableLiveData<MutableList<TripInvolved>>()
     val tripsAsPassenger: LiveData<MutableList<TripInvolved>> = _tripsAsPassenger
 
-
     private val _successUpdateInfo = SingleLiveEvent<Boolean>()
     val successUpdateInfo: LiveData<Boolean> = _successUpdateInfo
+
+    private val _successDeletion = SingleLiveEvent<Boolean>()
+    val successDeletion: LiveData<Boolean> = _successDeletion
 
     /*****************************************************************************************************/
 
@@ -223,7 +229,7 @@ constructor(
 
     }
 
-    fun updateUserImage(picture: String?){
+    fun updateUserImage(picture: String?) {
         launch(true) {
             when (val response = updateUserPictureUseCase(picture)) {
                 is ResultWrapper.Success -> {
@@ -236,6 +242,47 @@ constructor(
                 }
             }
         }
+    }
+
+
+    fun deleteTrip(tripId: String) {
+        launch(true) {
+            when (val response = deleteTripUseCase(tripId)) {
+                is ResultWrapper.Success -> {
+                    _tripsAsCreator.value = deleteTripWithId(tripId, _tripsAsCreator.value)
+                    _successDeletion.value = true
+                }
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
+                }
+            }
+        }
+    }
+
+    fun exitFromTrip(tripId: String) {
+        launch(true) {
+            when (val response = deleteTripUseCase(tripId)) {
+                is ResultWrapper.Success -> {
+                    _tripsAsPassenger.value = deleteTripWithId(tripId, _tripsAsPassenger.value)
+                    _successDeletion.value = true
+                }
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
+                }
+            }
+        }
+    }
+
+
+    private fun deleteTripWithId(tripId: String, tripList: MutableList<TripInvolved>?): MutableList<TripInvolved> {
+        val tempList = mutableListOf<TripInvolved>()
+        if (tripList != null) {
+            for (item in tripList) {
+                if (item.id != tripId)
+                    tempList.add(item)
+            }
+        }
+        return tempList
     }
 }
 

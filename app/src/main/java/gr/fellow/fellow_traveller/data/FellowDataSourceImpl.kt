@@ -145,6 +145,12 @@ class FellowDataSourceImpl(
         }
     }
 
+    override suspend fun exitFromTrip(tripId: String): ResultWrapper<String> =
+        repository.exitFromTrip(tripId)
+
+    override suspend fun deleteTrip(tripId: String): ResultWrapper<String> =
+        repository.deleteTrip(tripId)
+
 
     /**
      * Google Service

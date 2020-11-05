@@ -142,6 +142,16 @@ class FellowRepositoryImpl(
             service.bookTrip(request).handleApiFormat()
         }
 
+    override suspend fun exitFromTrip(tripId: String): ResultWrapper<String> =
+        networkCall {
+            service.exitFromTrip(tripId).handleApiFormat()
+        }
+
+    override suspend fun deleteTrip(tripId: String): ResultWrapper<String> =
+        networkCall {
+            service.deleteTrip(tripId).handleApiFormat()
+        }
+
     override suspend fun registerUserAuthLocal(userEntity: RegisteredUserEntity) =
         roomCall {
             userAuthDao.insertUser(userEntity)

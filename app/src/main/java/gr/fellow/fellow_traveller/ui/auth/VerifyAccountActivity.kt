@@ -5,10 +5,9 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
-import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivityVerifyAccountBinding
-import gr.fellow.fellow_traveller.ui.extensions.createAlerter
+import gr.fellow.fellow_traveller.ui.extensions.createToast
 import gr.fellow.fellow_traveller.ui.extensions.startAnimation
 import gr.fellow.fellow_traveller.ui.main.MainActivity
 
@@ -44,10 +43,10 @@ class VerifyAccountActivity : BaseActivity<ActivityVerifyAccountBinding>() {
 
         viewModel.error.observe(this, Observer {
             if (it.internal)
-                createAlerter(getString(it.messageId), R.color.blue_color)
+                createToast(getString(it.messageId))
             else
-                createAlerter(it.message, R.color.blue_color)
-
+                createToast(it.message)
+            finish()
         })
 
         viewModel.success.observe(this, Observer {
