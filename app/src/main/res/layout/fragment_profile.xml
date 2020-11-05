@@ -94,13 +94,13 @@
                 android:layout_height="wrap_content"
                 app:label_text="Κριτικές"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/searches"
+                app:layout_constraintEnd_toStartOf="@+id/involved"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/rate"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <gr.fellow.fellow_traveller.ui.views.LabelTextComponent
-                android:id="@+id/searches"
+                android:id="@+id/involved"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:label_text="Αναζητήσεις"
@@ -118,7 +118,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/searches"
+                app:layout_constraintStart_toEndOf="@+id/involved"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
