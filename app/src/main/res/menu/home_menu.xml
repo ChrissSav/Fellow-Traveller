@@ -7,7 +7,7 @@
         android:title="Αρχική" />
     <item
         android:id="@+id/destination_trips"
-        android:icon="@drawable/ic_luggage"
+        android:icon="@drawable/ic_car"
         android:title="Ταξίδια" />
 
     <item

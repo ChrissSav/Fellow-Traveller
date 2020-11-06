@@ -90,7 +90,7 @@ interface FellowService {
     ): Response<BaseResponse<CarInfoResponse>>
 
 
-    @DELETE("/car/{car_id}")
+    @DELETE("car/{car_id}")
     suspend fun deleteCar(
         @Path("car_id") carId: String
     ): Response<BaseResponse<String>>

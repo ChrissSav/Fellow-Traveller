@@ -10,8 +10,8 @@
     <ImageButton
         android:id="@+id/back_button"
         style="@style/border_icon_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/back_button_width_height"
+        android:layout_height="@dimen/back_button_width_height"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/ic_back_button"
@@ -24,23 +24,21 @@
         style="@style/display_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
         android:text="Φίλτρα"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_button" />
-
-    <TextView
-        android:id="@+id/reset_button"
-        style="@style/header_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:gravity="center"
-        android:padding="14dp"
-        android:text="Καθαρισμός"
-        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="@+id/back_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/back_button" />
+
+
+    <ImageButton
+        android:id="@+id/reset_button"
+        style="@style/border_icon_button"
+        android:layout_width="@dimen/back_button_width_height"
+        android:layout_height="@dimen/back_button_width_height"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_reset"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/back_button" />
 
@@ -52,7 +50,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/filters_tv">
+        app:layout_constraintTop_toBottomOf="@+id/back_button">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -75,8 +73,8 @@
                 android:id="@+id/textView10"
                 style="@style/header_2"
                 android:layout_width="wrap_content"
-                android:layout_marginTop="@dimen/filters_view_margin_top_second"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/filters_view_margin_top_second"
                 android:text="Συνοδεία Κατοικιδίου"
                 app:layout_constraintStart_toStartOf="@+id/textView7"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -236,6 +234,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/range_to_tv"
                 app:layout_constraintTop_toBottomOf="@+id/range_to_tv"
+                app:layout_constraintVertical_bias="0.0"
                 app:left_thumb_color="@color/colorPrimary"
                 app:left_thumb_color_pressed="@color/colorPrimary"
                 app:max_value="300"
