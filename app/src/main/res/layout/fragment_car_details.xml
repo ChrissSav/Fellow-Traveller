@@ -9,8 +9,8 @@
     <ImageButton
         android:id="@+id/back_buttons"
         style="@style/border_icon_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/back_button_width_height"
+        android:layout_height="@dimen/back_button_width_height"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="24dp"
         android:src="@drawable/ic_back_button"

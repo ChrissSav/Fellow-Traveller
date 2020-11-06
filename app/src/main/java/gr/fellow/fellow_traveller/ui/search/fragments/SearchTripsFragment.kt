@@ -192,9 +192,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
         } else if (requestCode == 3) {
             if (resultCode == Activity.RESULT_OK) {
                 val filter = data?.getParcelableExtra<SearchTripFilter>("filter")
-
                 filter?.let {
-                    createToast(it.toString())
                     viewModel.updateFilter(it)
                 }
 

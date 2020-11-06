@@ -131,7 +131,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                 binding.progressBar.visibility = View.VISIBLE
                 compressUriImage()
             } else if (resultCode === CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                val e = result.error
+               // val e = result.error
                 createToast("Error")
             }
         }

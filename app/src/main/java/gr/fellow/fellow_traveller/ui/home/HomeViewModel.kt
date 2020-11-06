@@ -85,9 +85,9 @@ constructor(
         viewModelScope.launch {
             load.value = true
             try {
-                val res = logoutRemoteUseCase()
-                val res2 = deleteUserAuthLocalUseCase()
-                val res1 = deleteUserLocalCars()
+                logoutRemoteUseCase()
+                deleteUserAuthLocalUseCase()
+                deleteUserLocalCars()
             } catch (e: java.lang.Exception) {
 
             }
@@ -194,10 +194,10 @@ constructor(
     fun addTripCreate(trip: TripInvolved) {
         launch {
             tripsAsCreator.value?.let {
+                increaseUserTrips()
                 val tempTrip = it
                 tempTrip.add(trip)
                 _tripsAsCreator.value = tempTrip
-                increaseUserTrips()
             }
 
         }
@@ -206,10 +206,10 @@ constructor(
     fun addTripPassenger(trip: TripInvolved) {
         launch {
             _tripsAsPassenger.value?.let {
+                increaseUserTrips(false)
                 val tempTrip = it
                 tempTrip.add(trip)
                 _tripsAsPassenger.value = tempTrip
-                increaseUserTrips(false)
             }
         }
     }

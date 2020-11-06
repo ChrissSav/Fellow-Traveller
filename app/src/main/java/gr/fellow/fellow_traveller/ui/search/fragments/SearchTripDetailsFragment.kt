@@ -21,6 +21,7 @@ class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>
     private val viewModel: SearchTripViewModel by activityViewModels()
     private var tripId = "0"
     private var userId: String? = null
+    private var index: Int? = null
 
 
     override fun handleIntent() {
@@ -32,9 +33,9 @@ class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>
 
 
     override fun setUpObservers() {
-        val index = viewModel.resultTrips.value?.indexOfFirst { it.id == tripId }
+        index = viewModel.resultTrips.value?.indexOfFirst { it.id == tripId }
         if (index != null) {
-            viewModel.resultTrips.value?.get(index)?.let {
+            viewModel.resultTrips.value?.get(index!!)?.let {
                 with(binding) {
                     userId = it.creatorUser.id
                     from.text = it.destFrom.title
@@ -52,14 +53,7 @@ class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>
                     message.text = it.msg ?: resources.getString(R.string.no_driver_message)
 
 
-                    bookTrip.setOnClickListener {
-                        findNavController()?.navigate(
-                            R.id.action_searchTripDetailsFragment_to_bookTripFragment,
-                            bundleOf("index" to index)
-                        )
 
-
-                    }
 
                     description.text = "${price.text} ανά άτομο"
 
@@ -83,6 +77,14 @@ class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>
             userId?.let {
                 activity?.startActivityWithBundle(UserInfoDetailsActivity::class, bundleOf("userId" to it))
             }
+        }
+
+        binding.constraintLayoutMessenger.setOnClickListener {
+            findNavController()?.navigate(R.id.action_searchTripDetailsFragment_to_bookTripFragment, bundleOf("index" to index))
+        }
+
+        binding.bookTrip.setOnClickListener {
+            findNavController()?.navigate(R.id.action_searchTripDetailsFragment_to_bookTripFragment, bundleOf("index" to index))
         }
     }
 

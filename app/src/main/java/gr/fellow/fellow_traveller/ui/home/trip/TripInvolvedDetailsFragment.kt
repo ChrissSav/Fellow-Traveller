@@ -77,7 +77,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
         binding.moreSettings.setOnClickListener {
             confirmBottomSheetDialog = ConfirmBottomSheetDialog(
-                if (args.creator) "Θελείς να διαγράψεις την διαδρομή ;" else "Θέλεις να αποχωρήσεις απο την διαδρομή ;",
+                if (args.creator) "Θελείς να διαγράψεις το ταξίδι;" else "Θέλεις να αποχωρήσεις απο το ταξίδι;",
                 this@TripInvolvedDetailsFragment::onConfirmItemClickListener
             )
             confirmBottomSheetDialog.show(childFragmentManager, "confirmBottomSheetDialog")
