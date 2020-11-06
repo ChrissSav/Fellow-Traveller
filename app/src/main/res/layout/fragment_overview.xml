@@ -47,40 +47,64 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
             <TextView
-                android:id="@+id/textView_from"
-                style="@style/display_1"
-                android:layout_width="0dp"
+                android:id="@+id/textView15"
+                style="@style/paragraph_2"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="44dp"
-                android:tag="1"
-                android:text="Θεσσαλονίκη"
-                app:layout_constraintEnd_toEndOf="@+id/textView5"
-                app:layout_constraintStart_toStartOf="@+id/textView5"
+                android:layout_marginTop="32dp"
+                android:text="Από"
+                app:layout_constraintStart_toStartOf="@+id/from"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+            <TextView
+                android:id="@+id/textView19"
+                style="@style/paragraph_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Πρός"
+                app:layout_constraintStart_toStartOf="@+id/from"
+                app:layout_constraintTop_toBottomOf="@+id/from" />
 
 
             <TextView
-                android:id="@+id/textView_to"
+                android:id="@+id/from"
                 style="@style/display_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:tag="1"
+                android:text="Θεσσαλονίκη"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+
+            <TextView
+                android:id="@+id/to"
+                style="@style/display_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:tag="1"
                 android:text="Αθήνα"
-                app:layout_constraintEnd_toEndOf="@+id/textView_from"
-                app:layout_constraintStart_toStartOf="@+id/textView_from"
-                app:layout_constraintTop_toBottomOf="@+id/textView_from" />
+                app:layout_constraintEnd_toEndOf="@+id/from"
+                app:layout_constraintStart_toStartOf="@+id/from"
+                app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
 
             <TextView
                 android:id="@+id/time"
                 style="@style/paragraph_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:tag="2"
                 android:text="07:00 AM"
-                app:layout_constraintStart_toStartOf="@+id/textView_to"
-                app:layout_constraintTop_toBottomOf="@+id/textView_to" />
+                app:layout_constraintStart_toStartOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/to" />
 
             <TextView
                 android:id="@+id/day"
@@ -120,7 +144,7 @@
                 android:text="4.6"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/user_image"
-                app:layout_constraintEnd_toEndOf="@+id/textView_to"
+                app:layout_constraintEnd_toEndOf="@+id/textView4"
                 app:layout_constraintTop_toTopOf="@+id/user_image" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -143,7 +167,7 @@
                 android:layout_marginTop="16dp"
                 android:tag="5"
                 android:text="Παρα πολυ καλο παιδι αλλα θελει δουλεια.. Τουλαχιστον ακουγε sugar boy"
-                app:layout_constraintEnd_toEndOf="@+id/textView_to"
+                app:layout_constraintEnd_toEndOf="@+id/textView12"
                 app:layout_constraintStart_toStartOf="@+id/time"
                 app:layout_constraintTop_toBottomOf="@+id/user_image" />
 
@@ -224,10 +248,12 @@
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="102dp"
                 android:drawableEnd="@drawable/ic_car"
                 android:gravity="center_vertical"
                 android:tag="3"
                 android:text="Όχημα"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/message"
                 app:layout_constraintStart_toStartOf="@+id/textView9"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -247,7 +273,7 @@
         android:layout_marginEnd="@dimen/new_trip_float_action_button_margin_right"
         android:layout_marginBottom="@dimen/new_trip_float_action_button_margin_bottom"
         android:background="@drawable/circle_button_shape"
-        android:backgroundTint="@color/blue_color"
+        android:backgroundTint="@color/aqua"
         android:elevation="8dp"
         android:padding="15dp"
         android:scaleType="fitXY"

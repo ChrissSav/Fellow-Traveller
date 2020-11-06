@@ -12,7 +12,7 @@ data class LocalUser(
     val email: String,
     val messengerLink: String?,
     val tripsOffers: Int,
-    val tripsInvolved: Int?
+    val tripsInvolved: Int
 ) {
     val fullName get() = "$firstName $lastName"
 }

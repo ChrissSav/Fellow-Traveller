@@ -3,7 +3,7 @@
     android:layout_width="@dimen/new_trip_float_action_button_width_height"
     android:layout_height="@dimen/new_trip_float_action_button_width_height"
     android:background="@drawable/circle_button_shape"
-    android:backgroundTint="@color/blue_color"
+    android:backgroundTint="@color/aqua"
     android:elevation="8dp"
     android:padding="15dp"
     android:rotation="180"

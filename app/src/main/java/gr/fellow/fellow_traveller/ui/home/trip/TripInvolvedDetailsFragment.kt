@@ -40,7 +40,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
         if (args.creator) {
             binding.constraintLayoutInfo.backgroundTintList = resources.getColorStateList(R.color.aqua)
-            binding.label.text = "Είσαι ο οδηγός του ταξιδιού"
+            binding.labelDescription.text = "Είσαι ο οδηγός του ταξιδιού"
             binding.description.text = "Επεξεργάσου το ταξίδι"
         }
 
@@ -69,8 +69,8 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
         binding.viewAllPassengers.setOnClickListener {
             findNavController()?.navigate(R.id.action_tripInvolvedDetailsFragment_to_tripInvolvedPassengerDetailsFragment, bundleOf("passengerList" to args.trip.passengers.toTypedArray()))
-
         }
+
         binding.backButton.setOnClickListener {
             onBackPressed()
         }

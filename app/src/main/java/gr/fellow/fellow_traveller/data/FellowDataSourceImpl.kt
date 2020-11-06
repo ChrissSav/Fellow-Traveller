@@ -38,6 +38,9 @@ class FellowDataSourceImpl(
     override suspend fun registerUserAuth(userAuthResponse: UserAuthResponse) =
         repository.registerUserAuthLocal(userAuthResponse.mapToRegisteredUserEntity())
 
+    override suspend fun registerUserAuth(userLocal: LocalUser) =
+        repository.registerUserAuthLocal(userLocal.mapToRegisteredUserEntity())
+
     override suspend fun forgotPassword(email: String): ResultWrapper<String> =
         repository.forgotPassword(ForgotPasswordRequest(email))
 

@@ -28,6 +28,8 @@ interface FellowDataSource {
 
     suspend fun registerUserAuth(userAuthResponse: UserAuthResponse)
 
+    suspend fun registerUserAuth(userLocal: LocalUser)
+
     suspend fun forgotPassword(email: String): ResultWrapper<String>
 
     suspend fun resetPassword(email: String, code: String, password: String): ResultWrapper<String>

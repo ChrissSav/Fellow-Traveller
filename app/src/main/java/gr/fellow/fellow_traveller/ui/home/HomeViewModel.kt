@@ -197,6 +197,7 @@ constructor(
                 val tempTrip = it
                 tempTrip.add(trip)
                 _tripsAsCreator.value = tempTrip
+                increaseUserTrips()
             }
 
         }
@@ -208,6 +209,7 @@ constructor(
                 val tempTrip = it
                 tempTrip.add(trip)
                 _tripsAsPassenger.value = tempTrip
+                increaseUserTrips(false)
             }
         }
     }
@@ -235,7 +237,7 @@ constructor(
                 is ResultWrapper.Success -> {
                     registerUserLocalUseCase(response.data)
                     _user.value = loadUserLocalInfoUseCase()
-
+                    decreaseUserTrips()
                 }
                 is ResultWrapper.Error -> {
                     error.value = externalError(response.error)
@@ -244,12 +246,12 @@ constructor(
         }
     }
 
-
     fun deleteTrip(tripId: String) {
         launch(true) {
             when (val response = deleteTripUseCase(tripId)) {
                 is ResultWrapper.Success -> {
                     _tripsAsCreator.value = deleteTripWithId(tripId, _tripsAsCreator.value)
+                    decreaseUserTrips()
                     _successDeletion.value = "Επιτυχής διαγραφή ταξιδιού"
                 }
                 is ResultWrapper.Error -> {
@@ -259,11 +261,13 @@ constructor(
         }
     }
 
+
     fun exitFromTrip(tripId: String) {
         launch(true) {
             when (val response = exitFromTripUseCase(tripId)) {
                 is ResultWrapper.Success -> {
                     _tripsAsPassenger.value = deleteTripWithId(tripId, _tripsAsPassenger.value)
+                    decreaseUserTrips(false)
                     _successDeletion.value = "Επιτυχής αποχώρηση απο το ταξίδι"
                 }
                 is ResultWrapper.Error -> {
@@ -271,6 +275,90 @@ constructor(
                 }
             }
         }
+    }
+
+    private suspend fun increaseUserTrips(offers: Boolean = true) {
+        if (offers)
+            _user.value?.let { user ->
+                registerUserLocalUseCase(
+                    LocalUser(
+                        user.id,
+                        user.firstName,
+                        user.lastName,
+                        user.rate,
+                        user.reviews,
+                        user.picture,
+                        user.aboutMe,
+                        user.email,
+                        user.messengerLink,
+                        user.tripsOffers + 1,
+                        user.tripsInvolved
+
+                    )
+                )
+            }
+        else
+            _user.value?.let { user ->
+                registerUserLocalUseCase(
+                    LocalUser(
+                        user.id,
+                        user.firstName,
+                        user.lastName,
+                        user.rate,
+                        user.reviews,
+                        user.picture,
+                        user.aboutMe,
+                        user.email,
+                        user.messengerLink,
+                        user.tripsOffers,
+                        user.tripsInvolved + 1
+
+                    )
+                )
+            }
+        _user.value = loadUserLocalInfoUseCase()
+    }
+
+    private suspend fun decreaseUserTrips(offers: Boolean = true) {
+        if (offers)
+            _user.value?.let { user ->
+                registerUserLocalUseCase(
+                    LocalUser(
+                        user.id,
+                        user.firstName,
+                        user.lastName,
+                        user.rate,
+                        user.reviews,
+                        user.picture,
+                        user.aboutMe,
+                        user.email,
+                        user.messengerLink,
+                        user.tripsOffers - 1,
+                        user.tripsInvolved
+
+                    )
+                )
+            }
+        else
+            _user.value?.let { user ->
+                registerUserLocalUseCase(
+                    LocalUser(
+                        user.id,
+                        user.firstName,
+                        user.lastName,
+                        user.rate,
+                        user.reviews,
+                        user.picture,
+                        user.aboutMe,
+                        user.email,
+                        user.messengerLink,
+                        user.tripsOffers,
+                        user.tripsInvolved - 1
+
+                    )
+                )
+            }
+        _user.value = loadUserLocalInfoUseCase()
     }
 
 

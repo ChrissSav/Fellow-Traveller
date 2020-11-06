@@ -13,6 +13,10 @@ fun UserAuthResponse.mapToRegisteredUserEntity() = RegisteredUserEntity(
 )
 
 
+fun LocalUser.mapToRegisteredUserEntity() = RegisteredUserEntity(
+    id, firstName, lastName, rate, reviews, picture, aboutMe, email, messengerLink, tripsOffers, tripsInvolved
+)
+
 fun UserBaseResponse.toUserBase() = UserBase(
     id, firstName, lastName, picture, rate, reviews
 )
