@@ -30,7 +30,6 @@
     <string name="success_add_review">Η αξιολόγηση σας καταχωρήθηκε</string>
 
 
-    <integer name="anim_duration">250</integer>
     <string name="title_activity_maps">Map</string>
     <string name="no_driver_message">Δεν υπάρχει μήνυμα από τον οδηγό.</string>
 
@@ -49,7 +48,7 @@
     <string name="with_pet">Με κατοικίδιο</string>
     <string name="without_pet">Χωρίς κατοικίδιο</string>
 
-    <string name="yes">Ναί</string>
+    <string name="yes">Ναι</string>
     <string name="no">Όχι</string>
 
     <string name="price">%s €</string>

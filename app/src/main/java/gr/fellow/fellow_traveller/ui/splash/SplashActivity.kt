@@ -10,9 +10,9 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivitySplashBinding
 import gr.fellow.fellow_traveller.ui.extensions.openActivityWithFade
-import gr.fellow.fellow_traveller.ui.extensions.postDelay
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.main.MainActivity
+import gr.fellow.fellow_traveller.utils.PREFS_AUTH_REFRESH_TOKEN
 import javax.inject.Inject
 
 
@@ -44,8 +44,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         })
 
         viewModel.error.observe(this, Observer {
-
             intentOpen = if (it.internal && it.messageId == R.string.ERROR_API_UNAUTHORIZED)
+                Intent(this, MainActivity::class.java)
+            else if (sharedPreferences.getString(PREFS_AUTH_REFRESH_TOKEN, "").isNullOrEmpty())
                 Intent(this, MainActivity::class.java)
             else
                 Intent(this, HomeActivity::class.java)
@@ -55,11 +56,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     }
 
     override fun setUpViews() {
-        postDelay(2000) {
-            viewModel.getUserInfo()
 
-        }
-
+        viewModel.getUserInfo()
 
         binding.motion.setTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {

@@ -128,12 +128,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_settings_text_margin_top"
+                android:layout_marginBottom="63dp"
                 app:editable="true"
                 app:hint_fellow="Σχετικά με εμένα"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/user_full_name_text_view"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/picture"
-                app:layout_constraintTop_toBottomOf="@+id/messenger_link" />
+                app:layout_constraintTop_toBottomOf="@+id/messenger_link"
+                app:layout_constraintVertical_bias="0.0" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
