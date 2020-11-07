@@ -105,7 +105,7 @@
         android:alpha="0"
         android:layout_marginTop="8dp"
         android:background="@drawable/bottom_sheet_dialog_shape"
-        android:backgroundTint="#FFD8BB"
+        android:backgroundTint="@color/search_fragment_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_button">
 

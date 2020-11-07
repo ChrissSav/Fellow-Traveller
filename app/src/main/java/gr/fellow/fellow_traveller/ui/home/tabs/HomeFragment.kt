@@ -27,20 +27,26 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun setUpObservers() {
         viewModel.user.observe(viewLifecycleOwner, Observer {
-            binding.userWelcomeTextView.text = it.firstName
             accountCorrect = it.messengerLink != null
         })
     }
 
     override fun setUpViews() {
-        binding.offerSection.setOnClickListener {
+        binding.constraintLayoutNew.setOnClickListener {
             if (accountCorrect)
                 startActivityForResult(NewTripActivity::class, 1)
             else
                 createAlerter("Πρέπει να ολοκληρώσετε το προφίλ σας πρώτα !")
         }
 
-        binding.searchButton.setOnClickListener {
+        binding.newTrip.setOnClickListener {
+            if (accountCorrect)
+                startActivityForResult(NewTripActivity::class, 1)
+            else
+                createAlerter("Πρέπει να ολοκληρώσετε το προφίλ σας πρώτα !")
+        }
+
+        binding.constraintLayoutSearch.setOnClickListener {
             if (accountCorrect)
                 startActivityForResult(SearchTripActivity::class, 2)
             else
@@ -48,6 +54,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         }
 
+        binding.searchTrip.setOnClickListener {
+            if (accountCorrect)
+                startActivityForResult(SearchTripActivity::class, 2)
+            else
+                createAlerter("Πρέπει να ολοκληρώσετε το προφίλ σας πρώτα !")
+
+        }
 
     }
 

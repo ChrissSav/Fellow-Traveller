@@ -8,6 +8,10 @@
     <dimen name="back_button_width_height">45dp</dimen>
 
 
+    <!--fragment_home -->
+    <dimen name="box_height">175dp</dimen>
+    <dimen name="box_width">149dp</dimen>
+
     <!--    imageButton back -->
     <dimen name="image_button_layout_marginStart">20dp</dimen>
     <dimen name="image_button_layout_marginTop">10dp</dimen>
