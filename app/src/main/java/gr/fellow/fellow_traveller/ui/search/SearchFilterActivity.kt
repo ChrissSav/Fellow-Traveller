@@ -114,9 +114,9 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
 
     private fun initializePet() {
         if (searchTripFilter.pet == true) {
-            binding.pet.setText("Ναί")
+            binding.pet.setText(resources.getString(R.string.yes))
         } else if (searchTripFilter.pet == false) {
-            binding.pet.setText("Όχι")
+            binding.pet.setText(resources.getString(R.string.no))
         }
     }
 
@@ -125,11 +125,11 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
         when (petAnswerType) {
             PetAnswerType.Yes -> {
                 searchTripFilter.pet = true
-                binding.pet.setText("Ναί")
+                binding.pet.setText(resources.getString(R.string.yes))
             }
             PetAnswerType.No -> {
                 searchTripFilter.pet = false
-                binding.pet.setText("Όχι")
+                binding.pet.setText(resources.getString(R.string.no))
             }
             else -> {
                 searchTripFilter.pet = null

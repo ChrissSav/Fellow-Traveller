@@ -43,7 +43,7 @@
     <dimen name="new_trip_margin_from_top_between_editTexts">50dp</dimen>
 
     <!--    float_action_button-->
-    <dimen name="new_trip_float_action_button_margin_right">32dp</dimen>
+    <dimen name="new_trip_float_action_button_margin_right">16dp</dimen>
     <dimen name="new_trip_float_action_button_margin_bottom">32dp</dimen>
     <dimen name="new_trip_float_action_button_width">63dp</dimen>
     <dimen name="new_trip_float_action_button_height">63dp</dimen>
