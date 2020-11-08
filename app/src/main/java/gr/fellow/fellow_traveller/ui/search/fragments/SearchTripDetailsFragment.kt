@@ -9,6 +9,7 @@ import gr.fellow.fellow_traveller.databinding.FragmentSearchTripDetailsBinding
 import gr.fellow.fellow_traveller.domain.user.UserBase
 import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
+import gr.fellow.fellow_traveller.ui.search.adapter.PassengerAdapter
 import gr.fellow.fellow_traveller.ui.user.UserProfileDetailsActivity
 
 
