@@ -87,6 +87,10 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
         binding.userImage.setOnClickListener {
             activity?.startActivityWithBundle(UserInfoDetailsActivity::class, bundleOf("userId" to args.trip.creatorUser.id))
         }
+
+        binding.googleMaps.setOnClickListener {
+            activity?.openGoogleMaps(args.trip)
+        }
     }
 
     private fun onPassengerListener(user: UserBase) {

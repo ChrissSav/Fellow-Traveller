@@ -26,7 +26,6 @@ class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
     override fun setUpObservers() {
         viewModel.tripsAsPassenger.observe(viewLifecycleOwner, Observer { list ->
             binding.progressBar.visibility = View.GONE
-            tripsList.clear()
             tripsList.addAll(list)
             binding.recyclerView.adapter?.notifyDataSetChanged()
         })

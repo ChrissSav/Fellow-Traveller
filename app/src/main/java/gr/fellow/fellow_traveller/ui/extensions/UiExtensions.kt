@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.drawable.AnimatedVectorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.view.inputmethod.InputMethodManager
@@ -17,6 +18,8 @@ import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.bumptech.glide.Glide
 import com.tapadoo.alerter.Alerter
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.domain.trip.TripInvolved
+import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import kotlin.reflect.KClass
 
 
@@ -49,12 +52,7 @@ fun Activity.createAlerter(msg: String, color: Int) {
         .show()
 }
 
-fun Activity.openActivityWithFade(activity: Activity) {
-    val intent = Intent(this, activity::class.java)
-    startActivity(intent)
-    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-    finish()
-}
+
 
 fun Activity.openActivityWithFade(intent: Intent) {
     startActivity(intent)
@@ -74,8 +72,6 @@ fun Activity.hideKeyboard() {
     }
     val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
-
-
 }
 
 
@@ -91,6 +87,19 @@ fun Activity.startActivityClearStack(activity: KClass<out Activity>) {
     startActivity(intent)
     finishAffinity()
 
+}
+
+fun Activity.openGoogleMaps(trip: TripSearch) {
+    val uri = "http://maps.google.com/maps?f=d&hl=en&saddr=${trip.destFrom.latitude},${trip.destFrom.longitude}&daddr=${trip.destTo.latitude},${trip.destTo.longitude}&mode=d"
+    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+    startActivity(Intent.createChooser(intent, "Select an application"))
+
+}
+
+fun Activity.openGoogleMaps(trip: TripInvolved) {
+    val uri = "http://maps.google.com/maps?f=d&hl=en&saddr=${trip.destFrom.latitude},${trip.destFrom.longitude}&daddr=${trip.destTo.latitude},${trip.destTo.longitude}&mode=d"
+    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+    startActivity(Intent.createChooser(intent, "Select an application"))
 }
 
 
