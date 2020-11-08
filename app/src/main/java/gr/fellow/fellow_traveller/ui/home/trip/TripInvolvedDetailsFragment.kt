@@ -16,7 +16,7 @@ import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.ConfirmBottomSheetDial
 import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.search.adapter.PassengerAdapter
-import gr.fellow.fellow_traveller.ui.user.UserInfoDetailsActivity
+import gr.fellow.fellow_traveller.ui.user.UserProfileDetailsActivity
 
 @AndroidEntryPoint
 class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBinding>() {
@@ -85,7 +85,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
         }
 
         binding.userImage.setOnClickListener {
-            activity?.startActivityWithBundle(UserInfoDetailsActivity::class, bundleOf("userId" to args.trip.creatorUser.id))
+            activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to args.trip.creatorUser.id))
         }
 
         binding.googleMaps.setOnClickListener {
@@ -94,7 +94,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
     }
 
     private fun onPassengerListener(user: UserBase) {
-        activity?.startActivityWithBundle(UserInfoDetailsActivity::class, bundleOf("userId" to user.id))
+        activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to user.id))
     }
 
 

@@ -8,7 +8,7 @@ import gr.fellow.fellow_traveller.domain.user.UserBase
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
 import gr.fellow.fellow_traveller.ui.extensions.startActivityWithBundle
 import gr.fellow.fellow_traveller.ui.home.adapter.PassengerFullInfoAdapter
-import gr.fellow.fellow_traveller.ui.user.UserInfoDetailsActivity
+import gr.fellow.fellow_traveller.ui.user.UserProfileDetailsActivity
 
 
 class TripInvolvedPassengerDetailsFragment : BaseFragment<FragmentTripInvolvedPassengerDetailsBinding>() {
@@ -32,7 +32,7 @@ class TripInvolvedPassengerDetailsFragment : BaseFragment<FragmentTripInvolvedPa
     }
 
     private fun onPassengerListener(user: UserBase) {
-        activity?.startActivityWithBundle(UserInfoDetailsActivity::class, bundleOf("userId" to user.id))
+        activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to user.id))
     }
 
 

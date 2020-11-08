@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.user.UserInfoDetailsActivity">
+    tools:context=".ui.user.UserProfileDetailsActivity">
 
 
     <ImageButton
@@ -124,8 +124,8 @@
     <TextView
         android:id="@+id/textView3"
         style="@style/header_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/back_button_width_height"
+        android:layout_height="@dimen/back_button_width_height"
         android:layout_marginTop="51dp"
         android:text="Σχετικά με εμένα"
         app:layout_constraintStart_toStartOf="@+id/about_me"

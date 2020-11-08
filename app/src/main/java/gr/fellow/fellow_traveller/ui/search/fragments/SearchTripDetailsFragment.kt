@@ -9,8 +9,7 @@ import gr.fellow.fellow_traveller.databinding.FragmentSearchTripDetailsBinding
 import gr.fellow.fellow_traveller.domain.user.UserBase
 import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
-import gr.fellow.fellow_traveller.ui.search.adapter.PassengerAdapter
-import gr.fellow.fellow_traveller.ui.user.UserInfoDetailsActivity
+import gr.fellow.fellow_traveller.ui.user.UserProfileDetailsActivity
 
 
 @AndroidEntryPoint
@@ -55,7 +54,7 @@ class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>
                     }
 
                     userImage.setOnClickListener {
-                        activity?.startActivityWithBundle(UserInfoDetailsActivity::class, bundleOf("userId" to trip.creatorUser.id))
+                        activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to trip.creatorUser.id))
                     }
 
 
@@ -90,7 +89,7 @@ class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>
 
 
     private fun onPassengerListener(user: UserBase) {
-        activity?.startActivityWithBundle(UserInfoDetailsActivity::class, bundleOf("userId" to user.id))
+        activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to user.id))
     }
 
 

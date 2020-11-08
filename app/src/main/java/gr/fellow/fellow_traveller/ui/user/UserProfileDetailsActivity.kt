@@ -13,7 +13,7 @@ import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 
 @AndroidEntryPoint
-class UserInfoDetailsActivity : BaseActivity<ActivityUserInfoDetailsBinding>() {
+class UserProfileDetailsActivity : BaseActivity<ActivityUserInfoDetailsBinding>() {
 
     private val viewModel: UserInfoDetailsViewModel by viewModels()
     private var messengerLink: String? = null
@@ -40,7 +40,7 @@ class UserInfoDetailsActivity : BaseActivity<ActivityUserInfoDetailsBinding>() {
                 rate.text = user.rate.toString()
                 involved.text = user.tripsInvolved.toString()
                 offers.text = user.tripsOffers.toString()
-                this@UserInfoDetailsActivity.messengerLink = user.messengerLink
+                this@UserProfileDetailsActivity.messengerLink = user.messengerLink
                 if (!user.aboutMe.isNullOrEmpty())
                     aboutMe.setText(user.aboutMe)
             }
