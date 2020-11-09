@@ -116,14 +116,14 @@ class FellowRepositoryImpl(
             service.registerTrip(trip).handleApiFormat()
         }
 
-    override suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripInvolvedResponse>> =
+    override suspend fun getTipsAsCreator(status: String, page: Int): ResultWrapper<MutableList<TripInvolvedResponse>> =
         networkCall {
-            service.getTripsAs("creator").handleApiFormat()
+            service.getTripsAs("creator", status, page).handleApiFormat()
         }
 
-    override suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripInvolvedResponse>> =
+    override suspend fun getTipsAsPassenger(status: String, page: Int): ResultWrapper<MutableList<TripInvolvedResponse>> =
         networkCall {
-            service.getTripsAs("passenger").handleApiFormat()
+            service.getTripsAs("passenger", status, page).handleApiFormat()
         }
 
     override suspend fun searchTrips(query: SearchTripFilter): ResultWrapper<MutableList<TripSearchResponse>> =

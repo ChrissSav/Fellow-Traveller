@@ -13,31 +13,54 @@ import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.TripsAsPassengerAdapter
 
+
 @AndroidEntryPoint
 class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
 
     private val viewModel: HomeViewModel by activityViewModels()
     private var tripsList = mutableListOf<TripInvolved>()
 
+
     override fun getViewBinding(): FragmentTakesPartTabBinding =
         FragmentTakesPartTabBinding.inflate(layoutInflater)
 
 
     override fun setUpObservers() {
-        viewModel.tripsAsPassenger.observe(viewLifecycleOwner, Observer { list ->
-            binding.progressBar.visibility = View.GONE
+        viewModel.tripsAsPassengerActive.observe(viewLifecycleOwner, Observer { list ->
             tripsList.addAll(list)
             binding.recyclerView.adapter?.notifyDataSetChanged()
+
         })
+
+        viewModel.loadPassengerActive.observe(viewLifecycleOwner, Observer {
+            if (it)
+                binding.genericLoader.progressLoad.visibility = View.VISIBLE
+            else
+                binding.genericLoader.progressLoad.visibility = View.GONE
+        })
+
     }
 
     override fun setUpViews() {
         viewModel.loadTripsAsPassenger()
         binding.recyclerView.adapter = TripsAsPassengerAdapter(tripsList = tripsList, onTripClickListener = this@TripsTakePartTabFragment::onTripClick)
+
+
+        binding.nested.setOnScrollChangeListener { _, _, _, _, _ ->
+            if (!binding.nested.canScrollVertically(0) && binding.genericLoader.progressLoad.visibility == View.GONE)
+                viewModel.loadTripsAsPassenger(true)
+        }
+
     }
 
     private fun onTripClick(tripInvolved: TripInvolved) {
         findNavController()?.navigate(R.id.action_destination_trips_to_tripInvolvedDetailsFragment, bundleOf("trip" to tripInvolved, "creator" to false))
+    }
+
+    fun resetTrips() {
+        tripsList.clear()
+        binding.recyclerView.adapter?.notifyDataSetChanged()
+        viewModel.loadTripsAsPassengerClear()
     }
 
 

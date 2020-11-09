@@ -21,5 +21,6 @@ data class TripInvolvedResponse(
     @SerializedName("price")
     val price: Float,
     val timestamp: Long,
-    val passengers: MutableList<PassengerResponse>
+    val passengers: MutableList<PassengerResponse>,
+    val status: Int
 )

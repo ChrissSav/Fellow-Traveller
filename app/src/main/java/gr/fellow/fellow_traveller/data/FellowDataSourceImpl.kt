@@ -130,8 +130,8 @@ class FellowDataSourceImpl(
         }
     }
 
-    override suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripInvolved>> {
-        return when (val response = repository.getTipsAsCreator()) {
+    override suspend fun getTipsAsCreator(status: String, page: Int): ResultWrapper<MutableList<TripInvolved>> {
+        return when (val response = repository.getTipsAsCreator(status, page)) {
             is ResultWrapper.Success ->
                 ResultWrapper.Success(response.data.map { it.mapTripInvolved() }.toMutableList())
             is ResultWrapper.Error ->
@@ -139,8 +139,8 @@ class FellowDataSourceImpl(
         }
     }
 
-    override suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripInvolved>> {
-        return when (val response = repository.getTipsAsPassenger()) {
+    override suspend fun getTipsAsPassenger(status: String, page: Int): ResultWrapper<MutableList<TripInvolved>> {
+        return when (val response = repository.getTipsAsPassenger(status, page)) {
             is ResultWrapper.Success ->
                 ResultWrapper.Success(response.data.map { it.mapTripInvolved() }.toMutableList())
             is ResultWrapper.Error ->

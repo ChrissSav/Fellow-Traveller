@@ -11,8 +11,8 @@ import gr.fellow.fellow_traveller.ui.home.trip.TripsTakePartTabFragment
 @AndroidEntryPoint
 class HomeTripsFragment : BaseFragment<FragmentHomeTripsBinding>() {
 
-    private var tripsOffersFragment = TripsOffersTabFragment()
     private var tripsTakesPartFragment = TripsTakePartTabFragment()
+    private var tripsOffersFragment = TripsOffersTabFragment()
 
     override fun getViewBinding(): FragmentHomeTripsBinding =
         FragmentHomeTripsBinding.inflate(layoutInflater)
@@ -25,5 +25,12 @@ class HomeTripsFragment : BaseFragment<FragmentHomeTripsBinding>() {
         tripsViewPagerAdapter.addFragment(tripsOffersFragment, "Προσφορές")
         binding.fragmentTripViewPager.adapter = tripsViewPagerAdapter
         binding.fragmentTripTabLayout.setupWithViewPager(binding.fragmentTripViewPager)
+
+        binding.clearButton.setOnClickListener {
+            if (binding.fragmentTripTabLayout.selectedTabPosition == 0)
+                tripsTakesPartFragment.resetTrips()
+            else
+                tripsOffersFragment.resetTrips()
+        }
     }
 }

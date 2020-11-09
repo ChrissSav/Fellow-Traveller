@@ -102,6 +102,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         binding.constraintLayoutMessenger.setOnClickListener {
             navController.navigateWithFade(R.id.accountSettingsFragment)
         }
+
+        binding.toAccountInfo.setOnClickListener {
+            navController.navigateWithFade(R.id.accountSettingsFragment)
+        }
     }
 
 

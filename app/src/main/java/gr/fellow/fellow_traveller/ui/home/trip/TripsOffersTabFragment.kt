@@ -27,23 +27,39 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
     override fun setUpObservers() {
 
 
-        viewModel.tripsAsCreator.observe(viewLifecycleOwner, Observer { list ->
-            binding.progressBar.visibility = View.GONE
-            tripsList.clear()
+        viewModel.tripsAsCreatorActive.observe(viewLifecycleOwner, Observer { list ->
             tripsList.addAll(list)
+
             binding.recyclerView.adapter?.notifyDataSetChanged()
         })
 
+        viewModel.loadCreatorActive.observe(viewLifecycleOwner, Observer {
+            if (it)
+                binding.genericLoader.progressLoad.visibility = View.VISIBLE
+            else
+                binding.genericLoader.progressLoad.visibility = View.GONE
+        })
 
     }
 
     override fun setUpViews() {
         viewModel.loadTripsAsCreator()
         binding.recyclerView.adapter = TripsAsPassengerAdapter(R.color.LightAqua, tripsList, this@TripsOffersTabFragment::onTripClick)
+
+        binding.nested.setOnScrollChangeListener { _, _, _, _, _ ->
+            if (!binding.nested.canScrollVertically(0) && binding.genericLoader.progressLoad.visibility == View.GONE)
+                viewModel.loadTripsAsCreator(true)
+        }
     }
 
     private fun onTripClick(tripInvolved: TripInvolved) {
         findNavController()?.navigate(R.id.action_destination_trips_to_tripInvolvedDetailsFragment, bundleOf("trip" to tripInvolved, "creator" to true))
+    }
+
+    fun resetTrips() {
+        tripsList.clear()
+        binding.recyclerView.adapter?.notifyDataSetChanged()
+        viewModel.loadTripsAsCreatorClear()
     }
 
 

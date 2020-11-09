@@ -30,6 +30,18 @@ open class BaseViewModel : ViewModel() {
         }
     }
 
+    fun launchWithLiveData(shouldLoad: Boolean = false, liveData: MutableLiveData<Boolean>, function: suspend () -> Unit) {
+        viewModelScope.launch {
+            liveData.value = shouldLoad
+            try {
+                function.invoke()
+            } catch (e: Exception) {
+                handleError(e)
+            }
+            liveData.value = false
+        }
+    }
+
 
     fun setLoad(shouldLoad: Boolean) {
         load.value = shouldLoad
@@ -39,7 +51,7 @@ open class BaseViewModel : ViewModel() {
         error.value = internalError(errorMsg)
     }
 
-    private fun handleError(e: Exception) {
+    fun handleError(e: Exception) {
         e.printStackTrace()
         when (e) {
             is BaseApiException -> when (e.code) {

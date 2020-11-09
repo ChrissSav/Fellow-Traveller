@@ -19,6 +19,7 @@ import gr.fellow.fellow_traveller.usecase.trips.ExitFromTripUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsCreatorRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsPassengerRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -58,11 +59,26 @@ constructor(
     private val _carDeletedId = SingleLiveEvent<Car>()
     val carDeletedId: LiveData<Car> = _carDeletedId
 
-    private val _tripsAsCreator = MutableLiveData<MutableList<TripInvolved>>()
-    val tripsAsCreator: LiveData<MutableList<TripInvolved>> = _tripsAsCreator
 
-    private val _tripsAsPassenger = MutableLiveData<MutableList<TripInvolved>>()
-    val tripsAsPassenger: LiveData<MutableList<TripInvolved>> = _tripsAsPassenger
+    /**  AS PASSENGER **/
+
+    private var tripsAsCreatorActivePage = 0
+    private val _tripsAsPassengerActive = MutableLiveData<MutableList<TripInvolved>>()
+    val tripsAsPassengerActive: LiveData<MutableList<TripInvolved>> = _tripsAsPassengerActive
+    val loadPassengerActive = MutableLiveData<Boolean>()
+
+    private var tripsAsPassengerHistoryPage = 0
+    private val _tripsAsPassengerHistory = MutableLiveData<MutableList<TripInvolved>>()
+    val tripsAsPassengerHistory: LiveData<MutableList<TripInvolved>> = _tripsAsPassengerHistory
+
+
+    /**  AS CREATOR **/
+
+    private var tripsAsCreatorPage = 0
+    private val _tripsAsCreatorActive = MutableLiveData<MutableList<TripInvolved>>()
+    val tripsAsCreatorActive: LiveData<MutableList<TripInvolved>> = _tripsAsCreatorActive
+    val loadCreatorActive = MutableLiveData<Boolean>()
+
 
     private val _successUpdateInfo = SingleLiveEvent<Boolean>()
     val successUpdateInfo: LiveData<Boolean> = _successUpdateInfo
@@ -152,16 +168,25 @@ constructor(
         }
     }
 
-    fun loadTripsAsCreator() {
+    /** CREATOR ***/
 
-        launch {
-            if (_tripsAsCreator.value != null) {
-                return@launch
+    fun loadTripsAsCreator(more: Boolean = false) {
+
+        launchWithLiveData(true, loadCreatorActive) {
+            if (_tripsAsCreatorActive.value != null && !more) {
+                return@launchWithLiveData
             }
-            when (val response = getTripsAsCreatorRemoteUseCase()) {
+            delay(250)
+            when (val response = getTripsAsCreatorRemoteUseCase("active", tripsAsCreatorPage)) {
                 is ResultWrapper.Success -> {
                     // savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
-                    _tripsAsCreator.value = response.data.sortedWith(compareBy { it.timestamp }).toMutableList()
+                    if (response.data.isNotEmpty()) {
+                        tripsAsCreatorActivePage++
+                    }
+                    if (more)
+                        _tripsAsCreatorActive.value?.addAll(response.data)
+                    else
+                        _tripsAsCreatorActive.value = response.data
                 }
                 is ResultWrapper.Error -> {
                     error.value = externalError(response.error)
@@ -171,17 +196,66 @@ constructor(
         }
     }
 
-    fun loadTripsAsPassenger() {
+    fun loadTripsAsCreatorClear() {
+        launchWithLiveData(true, loadCreatorActive) {
+            tripsAsCreatorActivePage = 0
+            delay(250)
+            when (val response = getTripsAsCreatorRemoteUseCase("active", tripsAsCreatorPage)) {
+                is ResultWrapper.Success -> {
+                    // savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
+                    if (response.data.isNotEmpty()) {
+                        tripsAsCreatorActivePage++
+                    }
+                    _tripsAsCreatorActive.value = response.data
 
-        launch {
-            if (_tripsAsPassenger.value != null) {
-                return@launch
+                }
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
+                }
             }
+        }
+    }
 
-            when (val response = getTripsAsPassengerRemoteUseCase()) {
+
+    /** PASSENGER ***/
+
+    fun loadTripsAsPassenger(more: Boolean = false) {
+        launchWithLiveData(true, loadPassengerActive) {
+
+            if (_tripsAsPassengerActive.value != null && !more) {
+                return@launchWithLiveData
+            }
+            delay(250)
+            when (val response = getTripsAsPassengerRemoteUseCase("active", tripsAsCreatorActivePage)) {
                 is ResultWrapper.Success -> {
                     //savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
-                    _tripsAsPassenger.value = response.data.sortedWith(compareBy { it.timestamp }).toMutableList()
+                    if (response.data.isNotEmpty()) {
+                        tripsAsCreatorActivePage++
+                    }
+                    if (more)
+                        _tripsAsPassengerActive.value?.addAll(response.data)
+                    else
+                        _tripsAsPassengerActive.value = response.data
+                }
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
+                }
+            }
+        }
+
+    }
+
+    fun loadTripsAsPassengerClear() {
+        launchWithLiveData(true, loadPassengerActive) {
+            tripsAsCreatorActivePage = 0
+            delay(250)
+            when (val response = getTripsAsPassengerRemoteUseCase("active", tripsAsCreatorActivePage)) {
+                is ResultWrapper.Success -> {
+                    //savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
+                    if (response.data.isNotEmpty()) {
+                        tripsAsCreatorActivePage++
+                    }
+                    _tripsAsPassengerActive.value = response.data
                 }
                 is ResultWrapper.Error -> {
                     error.value = externalError(response.error)
@@ -191,29 +265,103 @@ constructor(
     }
 
 
-    fun addTripCreate(trip: TripInvolved) {
+    fun loadTripsAsPassengerHistory(more: Boolean = false) {
+
         launch {
-            tripsAsCreator.value?.let {
-                increaseUserTrips()
-                val tempTrip = it
-                tempTrip.add(trip)
-                _tripsAsCreator.value = tempTrip
+            if (_tripsAsPassengerHistory.value != null && !more) {
+                return@launch
             }
-
-        }
-    }
-
-    fun addTripPassenger(trip: TripInvolved) {
-        launch {
-            _tripsAsPassenger.value?.let {
-                increaseUserTrips(false)
-                val tempTrip = it
-                tempTrip.add(trip)
-                _tripsAsPassenger.value = tempTrip
+            when (val response = getTripsAsPassengerRemoteUseCase("inactive", tripsAsPassengerHistoryPage)) {
+                is ResultWrapper.Success -> {
+                    //savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
+                    if (response.data.isNotEmpty()) {
+                        tripsAsPassengerHistoryPage++
+                    }
+                    _tripsAsPassengerHistory.value = response.data
+                }
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
+                }
             }
         }
     }
 
+    fun loadTripsAsPassengerHistoryClear() {
+        launch {
+            tripsAsPassengerHistoryPage = 0
+            when (val response = getTripsAsPassengerRemoteUseCase("inactive", tripsAsPassengerHistoryPage)) {
+                is ResultWrapper.Success -> {
+                    if (response.data.isNotEmpty()) {
+                        tripsAsPassengerHistoryPage++
+                    }
+                    _tripsAsPassengerHistory.value = response.data
+
+                }
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
+                }
+            }
+        }
+    }
+
+
+    /* fun loadTripsAsCreatorHistory(more: Boolean = false) {
+
+         launch {
+             if (_tripsAsPassengerHistory.value != null && !more) {
+                 return@launch
+             }
+             when (val response = getTripsAsCreatorRemoteUseCase("inactive", tripsAsPassengerHistoryPage)) {
+                 is ResultWrapper.Success -> {
+                     //savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
+                     if (response.data.isNotEmpty()) {
+                         tripsAsCreatorHistoryPage++
+                     }
+                     if (more)
+                         _tripsAsCreatorHistory.value?.addAll(response.data)
+                     else
+                         _tripsAsCreatorHistory.value = response.data
+                 }
+                 is ResultWrapper.Error -> {
+                     error.value = externalError(response.error)
+                 }
+             }
+         }
+     }*/
+
+    /*  fun loadTripsAsCreatorHistoryClear() {
+          launch {
+              tripsAsCreatorHistoryPage = 0
+              when (val response = getTripsAsCreatorRemoteUseCase("inactive", tripsAsPassengerHistoryPage)) {
+                  is ResultWrapper.Success -> {
+                      if (response.data.isNotEmpty()) {
+                          tripsAsCreatorHistoryPage++
+                      }
+                      _tripsAsCreatorHistory.value = response.data
+
+                  }
+                  is ResultWrapper.Error -> {
+                      error.value = externalError(response.error)
+                  }
+              }
+          }
+      }*/
+
+
+    fun updateUserImage(picture: String?) {
+        launch(true) {
+            when (val response = updateUserPictureUseCase(picture)) {
+                is ResultWrapper.Success -> {
+                    registerUserLocalUseCase(response.data)
+                    _user.value = loadUserLocalInfoUseCase()
+                    decreaseUserTrips()
+                }
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
+                }
+            }
+        }
+    }
 
     fun updateAccountInfo(firstName: String, lastName: String, messengerLink: String?, aboutMe: String?) {
         launch(true) {
@@ -231,26 +379,12 @@ constructor(
 
     }
 
-    fun updateUserImage(picture: String?) {
-        launch(true) {
-            when (val response = updateUserPictureUseCase(picture)) {
-                is ResultWrapper.Success -> {
-                    registerUserLocalUseCase(response.data)
-                    _user.value = loadUserLocalInfoUseCase()
-                    decreaseUserTrips()
-                }
-                is ResultWrapper.Error -> {
-                    error.value = externalError(response.error)
-                }
-            }
-        }
-    }
 
     fun deleteTrip(tripId: String) {
         launch(true) {
             when (val response = deleteTripUseCase(tripId)) {
                 is ResultWrapper.Success -> {
-                    _tripsAsCreator.value = deleteTripWithId(tripId, _tripsAsCreator.value)
+                    _tripsAsCreatorActive.value = deleteTripWithId(tripId, _tripsAsCreatorActive.value)
                     decreaseUserTrips()
                     _successDeletion.value = "Επιτυχής διαγραφή ταξιδιού"
                 }
@@ -261,21 +395,6 @@ constructor(
         }
     }
 
-
-    fun exitFromTrip(tripId: String) {
-        launch(true) {
-            when (val response = exitFromTripUseCase(tripId)) {
-                is ResultWrapper.Success -> {
-                    _tripsAsPassenger.value = deleteTripWithId(tripId, _tripsAsPassenger.value)
-                    decreaseUserTrips(false)
-                    _successDeletion.value = "Επιτυχής αποχώρηση απο το ταξίδι"
-                }
-                is ResultWrapper.Error -> {
-                    error.value = externalError(response.error)
-                }
-            }
-        }
-    }
 
     private suspend fun increaseUserTrips(offers: Boolean = true) {
         if (offers)
@@ -362,6 +481,29 @@ constructor(
     }
 
 
+    fun addTripCreate(trip: TripInvolved) {
+        launch {
+            tripsAsCreatorActive.value?.let {
+                increaseUserTrips()
+                val tempTrip = it
+                tempTrip.add(trip)
+                _tripsAsCreatorActive.value = tempTrip
+            }
+
+        }
+    }
+
+    fun addTripPassenger(trip: TripInvolved) {
+        launch {
+            _tripsAsPassengerActive.value?.let {
+                increaseUserTrips(false)
+                val tempTrip = it
+                tempTrip.add(trip)
+                _tripsAsPassengerActive.value = tempTrip
+            }
+        }
+    }
+
     private fun deleteTripWithId(tripId: String, tripList: MutableList<TripInvolved>?): MutableList<TripInvolved> {
         val tempList = mutableListOf<TripInvolved>()
         if (tripList != null) {
@@ -372,5 +514,22 @@ constructor(
         }
         return tempList
     }
+
+
+    fun exitFromTrip(tripId: String) {
+        launch(true) {
+            when (val response = exitFromTripUseCase(tripId)) {
+                is ResultWrapper.Success -> {
+                    _tripsAsPassengerActive.value = deleteTripWithId(tripId, _tripsAsPassengerActive.value)
+                    decreaseUserTrips(false)
+                    _successDeletion.value = "Επιτυχής αποχώρηση απο το ταξίδι"
+                }
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
+                }
+            }
+        }
+    }
+
 }
 
