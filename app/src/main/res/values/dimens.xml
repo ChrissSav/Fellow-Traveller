@@ -61,7 +61,7 @@
 
 
     <!--Fragment details car -->
-    <dimen name="fragment_car_details_margin_inputs">51dp</dimen>
+    <dimen name="fragment_car_details_margin_inputs">42dp</dimen>
 
 
     <!--fragment_profile -->

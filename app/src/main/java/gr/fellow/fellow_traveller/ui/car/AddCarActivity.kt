@@ -9,7 +9,6 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivityAddCarBinding
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
-import gr.fellow.fellow_traveller.utils.isValidPlate
 
 @AndroidEntryPoint
 class AddCarActivity : BaseActivity<ActivityAddCarBinding>() {
@@ -51,30 +50,19 @@ class AddCarActivity : BaseActivity<ActivityAddCarBinding>() {
             }
 
             addCar.setOnClickListener {
-                val brand = binding.brand.text.toString()
-                val model = binding.model.text.toString()
-                val plate = binding.plate.text.toString()
-                val color = binding.color.text.toString()
+                val brandT = brand.text.toString()
+                val modelT = model.text.toString()
+                val plateT = plate.text.toString()
+                val colorT = color.text.toString()
 
-                if (checkErrors()) {
-                    viewModel.addCar(brand, model, plate, color)
+                if (brand.isCorrect() && model.isCorrect() && plate.isCorrect() && color.isCorrect()) {
+                    viewModel.addCar(brandT, modelT, plateT, colorT)
                 }
             }
         }
     }
 
 
-    private fun checkErrors(): Boolean {
-        if (binding.brand.text.toString().length < 2 || binding.model.text.toString().length < 2 || binding.color.text.toString().length < 2) {
-            viewModel.setErrorMessage(R.string.ERROR_FIELDS_REQUIRE)
-            return false
-        }
-        if (!isValidPlate(binding.plate.text.toString())) {
-            viewModel.setErrorMessage(R.string.ERROR_INVALID_PLATE_FORMAT)
-            return false
-        }
-        return true
-    }
 
 
 }

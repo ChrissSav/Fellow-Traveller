@@ -99,10 +99,10 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
                 binding.motion.transitionToStart()
             }
 
-            destFromButton.onClickListener {
+            destFromButton.addOnClickListener {
                 startActivityForResultWithFade(SelectDestinationActivity::class, 1)
             }
-            destToButton.onClickListener {
+            destToButton.addOnClickListener {
                 val intent = Intent(activity, SelectDestinationActivity::class.java)
                 intent.putExtra("info", "to")
                 startActivityForResultWithFade(intent, 2)

@@ -115,8 +115,8 @@ constructor(
     fun logOutUnauthorized() {
         viewModelScope.launch {
             try {
-                val res2 = deleteUserAuthLocalUseCase()
-                val res1 = deleteUserLocalCars()
+                deleteUserAuthLocalUseCase()
+                deleteUserLocalCars()
             } catch (e: java.lang.Exception) {
 
             }

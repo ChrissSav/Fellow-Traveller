@@ -18,7 +18,6 @@ import gr.fellow.fellow_traveller.ui.home.adapter.TripsAsPassengerAdapter
 class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
 
     private val viewModel: HomeViewModel by activityViewModels()
-    private var tripsList = mutableListOf<TripInvolved>()
 
 
     override fun getViewBinding(): FragmentTripsOffersBinding =
@@ -28,9 +27,7 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
 
 
         viewModel.tripsAsCreatorActive.observe(viewLifecycleOwner, Observer { list ->
-            tripsList.addAll(list)
-
-            binding.recyclerView.adapter?.notifyDataSetChanged()
+            (binding.recyclerView.adapter as TripsAsPassengerAdapter).submitList(list)
         })
 
         viewModel.loadCreatorActive.observe(viewLifecycleOwner, Observer {
@@ -44,7 +41,7 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
 
     override fun setUpViews() {
         viewModel.loadTripsAsCreator()
-        binding.recyclerView.adapter = TripsAsPassengerAdapter(R.color.LightAqua, tripsList, this@TripsOffersTabFragment::onTripClick)
+        binding.recyclerView.adapter = TripsAsPassengerAdapter(R.color.LightAqua, this@TripsOffersTabFragment::onTripClick)
 
         binding.nested.setOnScrollChangeListener { _, _, _, _, _ ->
             if (!binding.nested.canScrollVertically(0) && binding.genericLoader.progressLoad.visibility == View.GONE)
@@ -57,8 +54,7 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
     }
 
     fun resetTrips() {
-        tripsList.clear()
-        binding.recyclerView.adapter?.notifyDataSetChanged()
+        (binding.recyclerView.adapter as TripsAsPassengerAdapter).submitList(null)
         viewModel.loadTripsAsCreatorClear()
     }
 

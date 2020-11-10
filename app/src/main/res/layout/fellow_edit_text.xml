@@ -26,6 +26,8 @@
         android:inputType="textCapWords"
         android:maxLength="50"
         android:paddingTop="8dp"
+        android:singleLine="true"
+        android:ellipsize="end"
         android:textColorHint="#B1B1B1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

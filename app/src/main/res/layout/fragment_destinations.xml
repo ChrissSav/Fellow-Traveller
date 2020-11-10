@@ -21,24 +21,27 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+    <gr.fellow.fellow_traveller.ui.views.FellowEditText
         android:id="@+id/editText_from"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/new_trip_margin_from_top"
-        app:hint_fellow="@string/select_destination_from"
+        app:hint_f="@string/select_destination_from"
+        app:imeOptions_f="actionNext"
+        app:editable_f="false"
         app:layout_constraintEnd_toEndOf="@+id/AddLocationsFragment_textView"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/AddLocationsFragment_textView"
         app:layout_constraintTop_toBottomOf="@+id/AddLocationsFragment_textView" />
 
 
-    <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+    <gr.fellow.fellow_traveller.ui.views.FellowEditText
         android:id="@+id/editText_to"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/new_trip_margin_from_top_between_editTexts"
-        app:hint_fellow="@string/select_destination_to"
+        app:hint_f="@string/select_destination_to"
+        app:imeOptions_f="actionDone"
+        app:editable_f="false"
         app:layout_constraintEnd_toEndOf="@+id/AddLocationsFragment_textView"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/AddLocationsFragment_textView"

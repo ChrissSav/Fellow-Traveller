@@ -35,11 +35,11 @@ class DestinationsFragment : BaseFragment<FragmentDestinationsBinding>() {
     }
 
     override fun setUpViews() {
-        binding.editTextFrom.onClickListener {
+        binding.editTextFrom.addOnClickListener {
             startActivityForResultWithFade(SelectLocationActivity::class, 1)
         }
 
-        binding.editTextTo.onClickListener {
+        binding.editTextTo.addOnClickListener {
             startActivityForResultWithFade(SelectLocationActivity::class, 2)
         }
 

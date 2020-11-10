@@ -106,7 +106,7 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
     private fun applyChanges() {
         val resultIntent = Intent()
         if (binding.seatsPickButton.currentNum != 1)
-            searchTripFilter.seatsMin = binding.seatsPickButton.currentNum
+            searchTripFilter.seatsMin = 1
         resultIntent.putExtra("filter", searchTripFilter)
         setResult(Activity.RESULT_OK, resultIntent)
         finish()

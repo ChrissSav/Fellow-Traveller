@@ -18,23 +18,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+
+    <gr.fellow.fellow_traveller.ui.views.FellowEditText
         android:id="@+id/fellowTextInput_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/new_trip_margin_from_top"
-        app:hint_fellow="@string/select_day"
+        app:hint_f="@string/select_day"
+        app:imeOptions_f="actionNext"
+        app:editable_f="false"
         app:layout_constraintEnd_toEndOf="@+id/AddDateTimeFragment_textView"
         app:layout_constraintStart_toStartOf="@+id/AddDateTimeFragment_textView"
         app:layout_constraintTop_toBottomOf="@+id/AddDateTimeFragment_textView" />
 
 
-    <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+    <gr.fellow.fellow_traveller.ui.views.FellowEditText
         android:id="@+id/fellowTextInput_time"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/new_trip_margin_from_top_between_editTexts"
-        app:hint_fellow="@string/select_time"
+        app:hint_f="@string/select_time"
+        app:imeOptions_f="actionNext"
+        app:editable_f="false"
         app:layout_constraintEnd_toEndOf="@+id/fellowTextInput_date"
         app:layout_constraintStart_toStartOf="@+id/fellowTextInput_date"
         app:layout_constraintTop_toBottomOf="@+id/fellowTextInput_date" />

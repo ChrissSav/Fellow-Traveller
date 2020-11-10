@@ -48,6 +48,7 @@ class FellowEditText(context: Context, attrs: AttributeSet) : ConstraintLayout(c
             binding.editText.setText(value)
         }
 
+
     init {
 
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.FellowEditText)
@@ -58,7 +59,7 @@ class FellowEditText(context: Context, attrs: AttributeSet) : ConstraintLayout(c
             imeOptions = attributes.getInteger(R.styleable.FellowEditText_imeOptions_f, EditorInfo.IME_ACTION_NEXT)
             textAllCaps = attributes.getBoolean(R.styleable.FellowEditText_all_caps_f, false)
             maxLength = attributes.getInteger(R.styleable.FellowEditText_max_length_f, 50)
-            regex = attributes.getString(R.styleable.FellowEditText_regex_f) ?: "^.{50}\$"
+            regex = attributes.getString(R.styleable.FellowEditText_regex_f) ?: resources.getString(R.string.regex_accept_all)
             errorMessage = attributes.getString(R.styleable.FellowEditText_error_message_f) ?: resources.getString(R.string.check_field)
             label = attributes.getString(R.styleable.FellowEditText_label_f)
         } catch (e: Exception) {
@@ -105,25 +106,24 @@ class FellowEditText(context: Context, attrs: AttributeSet) : ConstraintLayout(c
 
             override fun afterTextChanged(p0: Editable?) {
                 val text = p0?.getString() ?: ""
-                if (text.length > 2)
-                    if (inputType == InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS) {
-                        if (!isValidEmail(text)) {
-                            Log.i("FellowEditText", "1")
-                            binding.error.text = errorMessage
-                            correct = false
-                        } else {
-                            correct = true
-                            binding.error.text = null
-
-                        }
-                    } else if (!isValidRegex(text, regex)) {
-                        Log.i("FellowEditText", "2")
+                if (inputType == InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS) {
+                    if (!isValidEmail(text)) {
+                        Log.i("FellowEditText", "1")
                         binding.error.text = errorMessage
                         correct = false
                     } else {
                         correct = true
                         binding.error.text = null
+
                     }
+                } else if (!isValidRegex(text, regex)) {
+                    Log.i("FellowEditText", "2")
+                    binding.error.text = errorMessage
+                    correct = false
+                } else {
+                    correct = true
+                    binding.error.text = null
+                }
             }
 
         })

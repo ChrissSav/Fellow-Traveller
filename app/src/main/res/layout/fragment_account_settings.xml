@@ -21,6 +21,7 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +65,7 @@
                 android:indeterminate="true"
                 android:indeterminateTint="@color/black_color"
                 android:progressDrawable="@drawable/component_progress_circle_bar"
-                android:visibility="gone"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@id/picture"
                 app:layout_constraintStart_toEndOf="@id/picture" />
 
@@ -79,68 +80,78 @@
                 app:layout_constraintTop_toTopOf="@+id/picture" />
 
 
-            <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+            <gr.fellow.fellow_traveller.ui.views.FellowEditText
                 android:id="@+id/first_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_settings_text_margin_top"
-                app:editable="true"
-                app:hint_fellow="Όνομα"
+                app:hint_f="Όνομα"
+                app:imeOptions_f="actionNext"
                 app:layout_constraintEnd_toEndOf="@+id/user_full_name_text_view"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/picture"
-                app:layout_constraintTop_toBottomOf="@+id/picture" />
+                app:layout_constraintTop_toBottomOf="@+id/picture"
+                app:regex_f="@string/regex_min_3_chars" />
 
-            <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+
+            <gr.fellow.fellow_traveller.ui.views.FellowEditText
                 android:id="@+id/last_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_settings_text_margin_top"
-                app:editable="true"
-                app:hint_fellow="Επίθετο"
+                app:hint_f="Επίθετο"
+                app:imeOptions_f="actionNext"
                 app:layout_constraintEnd_toEndOf="@+id/user_full_name_text_view"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/picture"
-                app:layout_constraintTop_toBottomOf="@+id/first_name" />
+                app:layout_constraintTop_toBottomOf="@+id/first_name"
+                app:regex_f="@string/regex_min_3_chars" />
 
 
-            <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+            <gr.fellow.fellow_traveller.ui.views.FellowEditText
                 android:id="@+id/email"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_settings_text_margin_top"
-                app:hint_fellow="Email"
+                app:editable_f="false"
+                app:error_message_f="@string/ERROR_INVALID_EMAIL_FORMAT"
+                app:hint_f="Email"
+                app:imeOptions_f="actionNext"
                 app:layout_constraintEnd_toEndOf="@+id/user_full_name_text_view"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/picture"
-                app:layout_constraintTop_toBottomOf="@+id/last_name" />
+                app:layout_constraintTop_toBottomOf="@+id/last_name"
+                app:text_type_f="textEmailAddress" />
 
 
-            <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+            <gr.fellow.fellow_traveller.ui.views.FellowEditText
                 android:id="@+id/messenger_link"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_settings_text_margin_top"
-                app:editable="true"
-                app:hint_fellow="Όνομα στο messenger"
+                app:hint_f="Όνομα στο messenger"
+                app:imeOptions_f="actionNext"
                 app:layout_constraintEnd_toEndOf="@+id/user_full_name_text_view"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/picture"
-                app:layout_constraintTop_toBottomOf="@+id/email" />
+                app:layout_constraintTop_toBottomOf="@+id/email"
+                app:regex_f="@string/regex_min_3_chars_english" />
 
 
-            <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+            <gr.fellow.fellow_traveller.ui.views.FellowEditText
                 android:id="@+id/about_me"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_settings_text_margin_top"
-                android:layout_marginBottom="71dp"
-                app:editable="true"
-                app:hint_fellow="Σχετικά με εμένα"
+                android:layout_marginBottom="32dp"
+                app:error_message_f=""
+                app:hint_f="Σχετικά με εμένα"
+                app:imeOptions_f="actionDone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/user_full_name_text_view"
                 app:layout_constraintStart_toStartOf="@+id/picture"
-                app:layout_constraintTop_toBottomOf="@+id/messenger_link" />
+                app:layout_constraintTop_toBottomOf="@+id/messenger_link"
+                app:layout_constraintVertical_bias="0.0"
+                app:regex_f="@string/regex_min_3_chars" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -111,6 +111,9 @@
     <string name="color">Χρώμα</string>
     <string name="car_delete_confirmation_message">Διαγραφή του οχήματος με αριθμό πινακίδας « %s »;</string>
 
-    <string name="regex_min_3_chars">^[a-zA-Z]{3,}$</string>
+    <string name="regex_min_3_chars_english">^[a-zA-Z0-9]{3,}$</string>
+    <string name="regex_min_3_chars">^.{3,}$</string>
+    <string name="regex_accept_all">^.{0,50}$</string>
+    <string name="regex_car_plate">"^[ΑΒΕΖΗΙΚΜΝΟΡΤΥΧ]{3}-[0-9]{4}$</string>
 
 </resources>
