@@ -9,13 +9,13 @@ import android.view.LayoutInflater
 import android.view.inputmethod.EditorInfo
 import androidx.constraintlayout.widget.ConstraintLayout
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.databinding.FellowEdittextBinding
+import gr.fellow.fellow_traveller.databinding.FellowTextInputBinding
 
 
 class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
     private var hint = ""
-    private var binding: FellowEdittextBinding = FellowEdittextBinding.inflate(LayoutInflater.from(context), this, true)
+    private var binding = FellowTextInputBinding.inflate(LayoutInflater.from(context), this, true)
     private var isEditable = false
     private lateinit var function: () -> Unit
     private var imeOptions = 0

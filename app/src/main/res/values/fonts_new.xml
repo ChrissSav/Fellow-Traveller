@@ -72,4 +72,9 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="input_2">
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

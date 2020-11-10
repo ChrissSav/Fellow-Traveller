@@ -7,6 +7,13 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="label_1">
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textSize">11.2sp</item>
+    </style>
+
+
     <style name="input">
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textColor">@color/black_color</item>

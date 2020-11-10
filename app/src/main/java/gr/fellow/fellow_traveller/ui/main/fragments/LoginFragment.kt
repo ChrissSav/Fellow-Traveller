@@ -33,7 +33,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
         binding.buttonLogin.setOnClickListener {
             hideKeyboard()
-            if (binding.email.text.toString().isEmpty() && binding.password.text.toString().isEmpty()) {
+            if (binding.email.isCorrect() && binding.password.text.toString().isEmpty()) {
                 createAlerter(resources.getString(R.string.ERROR_FIELDS_REQUIRE))
             } else {
                 viewModel.login(binding.email.text.toString(), binding.password.text.toString())

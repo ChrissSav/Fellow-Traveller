@@ -92,41 +92,42 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_car_details_margin_inputs"
+                android:layout_marginBottom="32dp"
                 app:editable="true"
                 app:hint_fellow="@string/color"
                 app:imeOptions="actionDone"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
                 app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
-                app:layout_constraintTop_toBottomOf="@+id/plate" />
+                app:layout_constraintTop_toBottomOf="@+id/plate"
+                app:layout_constraintVertical_bias="0.0" />
 
-            <Button
-                android:id="@+id/add_car"
-                style="@style/header_3"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/car_float_action_button_height"
-                android:layout_marginTop="62dp"
-                android:layout_marginEnd="@dimen/car_trip_float_action_button_margin_right"
-                android:layout_marginBottom="@dimen/car_trip_float_action_button_margin_bottom"
-                android:background="@drawable/fab_background_aqua"
-                android:drawableStart="@drawable/ic_tick"
-                android:drawableTint="@color/white"
-                android:elevation="16dp"
-                android:gravity="center|end"
-                android:minWidth="155dp"
-                android:paddingStart="22dp"
-                android:paddingEnd="20dp"
-                android:text="Καταχώρηση"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/color"
-                app:layout_constraintVertical_bias="1.0"
-                tools:ignore="RtlSymmetry" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
+    <Button
+        android:id="@+id/add_car"
+        style="@style/header_3"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/car_float_action_button_height"
+        android:layout_marginEnd="@dimen/car_trip_float_action_button_margin_right"
+        android:layout_marginBottom="@dimen/car_trip_float_action_button_margin_bottom"
+        android:background="@drawable/fab_background_aqua"
+        android:drawableStart="@drawable/ic_tick"
+        android:drawableTint="@color/white"
+        android:elevation="16dp"
+        android:gravity="center|end"
+        android:minWidth="155dp"
+        android:paddingStart="22dp"
+        android:paddingEnd="20dp"
+        android:text="Καταχώρηση"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="RtlSymmetry" />
 
     <include
         android:id="@+id/generic_loader"
