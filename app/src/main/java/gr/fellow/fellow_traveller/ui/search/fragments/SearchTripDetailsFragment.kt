@@ -1,22 +1,24 @@
 package gr.fellow.fellow_traveller.ui.search.fragments
 
-import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentSearchTripDetailsBinding
 import gr.fellow.fellow_traveller.domain.user.UserBase
-import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
-import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
+import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
 import gr.fellow.fellow_traveller.ui.search.adapter.PassengerAdapter
+import gr.fellow.fellow_traveller.ui.user.UserProfileDetailsActivity
+
 
 @AndroidEntryPoint
 class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>() {
 
     private val viewModel: SearchTripViewModel by activityViewModels()
     private var tripId = "0"
+    private var index: Int? = null
 
 
     override fun handleIntent() {
@@ -28,38 +30,39 @@ class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>
 
 
     override fun setUpObservers() {
-        val index = viewModel.resultTrips.value?.indexOfFirst { it.id == tripId }
+        index = viewModel.resultTrips.value?.indexOfFirst { it.id == tripId }
         if (index != null) {
-            viewModel.resultTrips.value?.get(index)?.let {
+            viewModel.resultTrips.value?.get(index!!)?.let { trip ->
                 with(binding) {
-                    from.text = it.destFrom.title
-                    to.text = it.destTo.title
-                    time.text = it.time
-                    day.text = it.date
-                    userImage.loadImageFromUrl(it.creatorUser.picture)
-                    username.text = it.creatorUser.fullName
-                    rate.text = it.creatorUser.rate.toString()
-                    price.text = resources.getString(R.string.price, it.price.toString())
-                    seats.text = it.seatsStatus
-                    bags.text = it.bags
-                    pet.text = if (it.hasPet) resources.getString(R.string.yes) else resources.getString(R.string.no)
-                    car.text = it.carBase.baseInfo
-                    message.text = it.msg ?: resources.getString(R.string.no_driver_message)
+                    from.text = trip.destFrom.title
+                    to.text = trip.destTo.title
+                    time.text = trip.time
+                    day.text = trip.date
+                    userImage.loadImageFromUrl(trip.creatorUser.picture)
+                    username.text = trip.creatorUser.fullName
+                    rate.text = trip.creatorUser.rate.toString()
+                    price.text = resources.getString(R.string.price, trip.price.toString())
+                    seats.text = trip.seatsStatus
+                    bags.text = trip.bags
+                    pet.text = if (trip.hasPet) resources.getString(R.string.yes) else resources.getString(R.string.no)
+                    car.text = trip.carBase.baseInfo
+                    message.text = trip.msg ?: resources.getString(R.string.no_driver_message)
 
 
-                    bookTrip.setOnClickListener {
-                        /*findNavController()?.navigate(
-                            R.id.action_searchTripDetailsFragment_to_bookTripFragment,
-                            bundleOf("indexTrip" to index)
-                        )*/
 
-
+                    googleMaps.setOnClickListener {
+                        activity?.openGoogleMaps(trip)
                     }
+
+                    userImage.setOnClickListener {
+                        activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to trip.creatorUser.id))
+                    }
+
 
                     description.text = "${price.text} ανά άτομο"
 
-                    if (!it.passengers.isNullOrEmpty()) {
-                        binding.passengerRecyclerView.adapter = PassengerAdapter(it.passengers, this@SearchTripDetailsFragment::onPassengerListener)
+                    if (!trip.passengers.isNullOrEmpty()) {
+                        binding.passengerRecyclerView.adapter = PassengerAdapter(trip.passengers, this@SearchTripDetailsFragment::onPassengerListener)
                     }
 
                 }
@@ -73,11 +76,21 @@ class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>
         binding.backButton.setOnClickListener {
             onBackPressed()
         }
+
+
+
+        binding.constraintLayoutMessenger.setOnClickListener {
+            findNavController()?.navigate(R.id.action_searchTripDetailsFragment_to_bookTripFragment, bundleOf("index" to index))
+        }
+
+        binding.bookTrip.setOnClickListener {
+            findNavController()?.navigate(R.id.action_searchTripDetailsFragment_to_bookTripFragment, bundleOf("index" to index))
+        }
     }
 
 
     private fun onPassengerListener(user: UserBase) {
-        Toast.makeText(this.context, user.id.trim(), Toast.LENGTH_SHORT).show()
+        activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to user.id))
     }
 
 

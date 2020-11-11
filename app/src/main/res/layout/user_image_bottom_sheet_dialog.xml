@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/title"
-        style="@style/header1"
+        style="@style/header_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"

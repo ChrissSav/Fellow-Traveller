@@ -6,25 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.settings.AccountSettingsFragment">
 
+
+    <ImageButton
+        android:id="@+id/back_button"
+        style="@style/border_icon_button"
+        android:layout_width="@dimen/back_button_width_height"
+        android:layout_height="@dimen/back_button_width_height"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_back_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_button">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <ImageButton
-                android:id="@+id/back_button"
-                style="@style/border_icon_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/ic_back_button"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
 
             <TextView
@@ -32,12 +38,13 @@
                 style="@style/display_1"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
                 android:text="Ο λογαριασμός μου"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/back_button"
-                app:layout_constraintTop_toBottomOf="@+id/back_button" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/picture"
@@ -48,7 +55,7 @@
                 android:background="@drawable/ic_boy"
                 android:elevation="1dp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/back_button"
+                app:layout_constraintStart_toStartOf="@+id/user_full_name_text_view"
                 app:layout_constraintTop_toBottomOf="@+id/user_full_name_text_view" />
 
             <ProgressBar
@@ -58,7 +65,7 @@
                 android:indeterminate="true"
                 android:indeterminateTint="@color/black_color"
                 android:progressDrawable="@drawable/component_progress_circle_bar"
-                android:visibility="gone"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@id/picture"
                 app:layout_constraintStart_toEndOf="@id/picture" />
 
@@ -73,67 +80,78 @@
                 app:layout_constraintTop_toTopOf="@+id/picture" />
 
 
-            <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+            <gr.fellow.fellow_traveller.ui.views.FellowEditText
                 android:id="@+id/first_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_settings_text_margin_top"
-                app:editable="true"
-                app:hint_fellow="Όνομα"
+                app:hint_f="Όνομα"
+                app:imeOptions_f="actionNext"
                 app:layout_constraintEnd_toEndOf="@+id/user_full_name_text_view"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/picture"
-                app:layout_constraintTop_toBottomOf="@+id/picture" />
+                app:layout_constraintTop_toBottomOf="@+id/picture"
+                app:regex_f="@string/regex_min_3_chars" />
 
-            <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+
+            <gr.fellow.fellow_traveller.ui.views.FellowEditText
                 android:id="@+id/last_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_settings_text_margin_top"
-                app:editable="true"
-                app:hint_fellow="Επίθετο"
+                app:hint_f="Επίθετο"
+                app:imeOptions_f="actionNext"
                 app:layout_constraintEnd_toEndOf="@+id/user_full_name_text_view"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/picture"
-                app:layout_constraintTop_toBottomOf="@+id/first_name" />
+                app:layout_constraintTop_toBottomOf="@+id/first_name"
+                app:regex_f="@string/regex_min_3_chars" />
 
 
-            <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+            <gr.fellow.fellow_traveller.ui.views.FellowEditText
                 android:id="@+id/email"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_settings_text_margin_top"
-                app:hint_fellow="Email"
+                app:editable_f="false"
+                app:error_message_f="@string/ERROR_INVALID_EMAIL_FORMAT"
+                app:hint_f="Email"
+                app:imeOptions_f="actionNext"
                 app:layout_constraintEnd_toEndOf="@+id/user_full_name_text_view"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/picture"
-                app:layout_constraintTop_toBottomOf="@+id/last_name" />
+                app:layout_constraintTop_toBottomOf="@+id/last_name"
+                app:text_type_f="textEmailAddress" />
 
 
-            <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+            <gr.fellow.fellow_traveller.ui.views.FellowEditText
                 android:id="@+id/messenger_link"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_settings_text_margin_top"
-                app:editable="true"
-                app:hint_fellow="Όνομα στο messenger"
+                app:hint_f="Όνομα στο messenger"
+                app:imeOptions_f="actionNext"
                 app:layout_constraintEnd_toEndOf="@+id/user_full_name_text_view"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/picture"
-                app:layout_constraintTop_toBottomOf="@+id/email" />
+                app:layout_constraintTop_toBottomOf="@+id/email"
+                app:regex_f="@string/regex_min_3_chars_english" />
 
 
-            <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+            <gr.fellow.fellow_traveller.ui.views.FellowEditText
                 android:id="@+id/about_me"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_settings_text_margin_top"
-                app:editable="true"
-                app:hint_fellow="Σχετικά με εμένα"
+                android:layout_marginBottom="32dp"
+                app:error_message_f=""
+                app:hint_f="Σχετικά με εμένα"
+                app:imeOptions_f="actionDone"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/user_full_name_text_view"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/picture"
-                app:layout_constraintTop_toBottomOf="@+id/messenger_link" />
+                app:layout_constraintTop_toBottomOf="@+id/messenger_link"
+                app:layout_constraintVertical_bias="0.0"
+                app:regex_f="@string/regex_min_3_chars" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -143,17 +161,14 @@
         android:id="@+id/save_button"
         android:layout_width="@dimen/new_trip_float_action_button_width_height"
         android:layout_height="@dimen/new_trip_float_action_button_width_height"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="@dimen/new_trip_float_action_button_margin_right"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="@dimen/new_trip_float_action_button_margin_bottom"
         android:background="@drawable/circle_button_shape"
-        android:elevation="8dp"
         android:padding="18dp"
         android:scaleType="fitXY"
         android:src="@drawable/ic_save"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/about_me" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,3 +26,8 @@ fun isValidPlate(plate: String): Boolean {
     val regexPattern = Pattern.compile("^[ΑΒΕΖΗΙΚΜΝΟΡΤΥΧ]{3}-[0-9]{4}$")
     return regexPattern.matcher(plate).matches()
 }
+
+fun isValidRegex(text: String, regex: String): Boolean {
+    val regexPattern = Pattern.compile(regex)
+    return regexPattern.matcher(text).matches()
+}

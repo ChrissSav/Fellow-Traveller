@@ -6,76 +6,112 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.home.settings.CarDetailsFragment">
 
-    <ImageButton
-        android:id="@+id/back_buttons"
-        style="@style/border_icon_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/ic_back_button"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/manage_cars_settings_tv"
-        style="@style/display_1"
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:text="Λεπτομέριες οχήματος"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:isScrollContainer="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/back_buttons"
-        app:layout_constraintTop_toBottomOf="@+id/back_buttons" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/back"
+                style="@style/border_icon_button"
+                android:layout_width="@dimen/back_button_width_height"
+                android:layout_height="@dimen/back_button_width_height"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="24dp"
+                android:src="@drawable/ic_back_button"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-    <gr.fellow.fellow_traveller.ui.views.FellowTextInput
-        android:id="@+id/brand"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        app:hint_fellow="@string/brand"
-        app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
-        app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
-        app:layout_constraintTop_toBottomOf="@+id/manage_cars_settings_tv" />
+            <TextView
+                android:id="@+id/manage_cars_settings_tv"
+                style="@style/display_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:text="Προσθήκη οχήματος"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/back"
+                app:layout_constraintTop_toBottomOf="@+id/back" />
 
 
-    <gr.fellow.fellow_traveller.ui.views.FellowTextInput
-        android:id="@+id/model"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/fragment_car_details_margin_inputs"
-        app:hint_fellow="@string/model"
-        app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
-        app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
-        app:layout_constraintTop_toBottomOf="@+id/brand" />
+            <gr.fellow.fellow_traveller.ui.views.FellowEditText
+                android:id="@+id/brand"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                app:hint_f="@string/brand"
+                app:imeOptions_f="actionNext"
+                app:editable_f="false"
+                app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
+                app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
+                app:layout_constraintTop_toBottomOf="@+id/manage_cars_settings_tv"
+                app:regex_f="@string/regex_min_3_chars_english" />
 
 
-    <gr.fellow.fellow_traveller.ui.views.FellowTextInput
-        android:id="@+id/plate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/fragment_car_details_margin_inputs"
-        app:hint_fellow="@string/plate"
-        app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
-        app:layout_constraintTop_toBottomOf="@+id/model" />
+            <gr.fellow.fellow_traveller.ui.views.FellowEditText
+                android:id="@+id/model"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_car_details_margin_inputs"
+                app:hint_f="@string/model"
+                app:imeOptions_f="actionNext"
+                app:editable_f="false"
+                app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
+                app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
+                app:layout_constraintTop_toBottomOf="@+id/brand"
+                app:regex_f="@string/regex_min_3_chars_english" />
+
+            <gr.fellow.fellow_traveller.ui.views.FellowEditText
+                android:id="@+id/plate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_car_details_margin_inputs"
+                app:all_caps_f="true"
+                app:error_message_f="@string/ERROR_INVALID_PLATE_FORMAT"
+                app:hint_f="@string/plate"
+                app:imeOptions_f="actionNext"
+                app:editable_f="false"
+                app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
+                app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
+                app:layout_constraintTop_toBottomOf="@+id/model"
+                app:max_length_f="8"
+                app:regex_f="@string/regex_car_plate" />
 
 
-    <gr.fellow.fellow_traveller.ui.views.FellowTextInput
-        android:id="@+id/color"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/fragment_car_details_margin_inputs"
-        app:hint_fellow="@string/color"
-        app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
-        app:layout_constraintTop_toBottomOf="@+id/plate" />
+            <gr.fellow.fellow_traveller.ui.views.FellowEditText
+                android:id="@+id/color"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_car_details_margin_inputs"
+                android:layout_marginBottom="32dp"
+                app:hint_f="@string/color"
+                app:imeOptions_f="actionNext"
+                app:editable_f="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
+                app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
+                app:layout_constraintTop_toBottomOf="@+id/plate"
+                app:layout_constraintVertical_bias="0.0"
+                app:max_length_f="8"
+                app:regex_f="@string/regex_min_3_chars" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
 
     <Button
         android:id="@+id/delete"

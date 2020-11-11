@@ -30,7 +30,7 @@ class NewTripActivity : BaseActivity<ActivityNewTripBinding>(), ExitCustomDialog
     override fun setUpObservers() {
         viewModel.setSeats(1)
 
-        viewModel.errorSecond.observe(this, Observer {
+        viewModel.error.observe(this, Observer {
             if (it.internal)
                 createAlerter(getString(it.messageId), R.color.blue_color)
             else

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#D36134</color>
+    <color name="colorPrimary">#FF7733</color>
     <color name="colorPrimaryDark">#205890</color>
     <color name="colorAccent">#D81B60</color>
     <!-- Custom colors for app-->
@@ -9,7 +9,7 @@
     <color name="orange_color_pressed">#ee7d3b</color>
     <color name="softOrange_color">#FBE8E0</color>
     <color name="white_color">#F8F8F8</color>
-    <color name="black_color">#262322</color>
+    <color name="black_color">#141616</color>
     <color name="black_color_pressed">#333130</color>
     <color name="greyBlack_color">#7c7b7a</color>
     <color name="greyBlack_transparent_color">#807c7b7a</color>
@@ -23,14 +23,14 @@
 
     <color name="hoverOrange">#E9B381</color>
     <color name="blue">#8297FF</color>
-    <color name="lightBlue">#F3F5FF</color>
+    <color name="LightAqua">#C3DFFA</color>
     <color name="orange">#FFAA5E</color>
     <color name="lightOrange">#FFF2E6</color>
     <color name="grey">#C9C9C9</color>
 
     <color name="black">#171717</color>
     <color name="home_blue">#3ca9cb</color>
-    <color name="aqua">#1488A7</color>
+    <color name="aqua">#1F98B9</color>
     <color name="white">#fff</color>
     <color name="background">#FFF</color>
     <color name="edit_text_color">#3C3939</color>
@@ -47,6 +47,8 @@
 
 
     <color name="background_color_progress">#70ffffff</color>
+
+    <color name="search_fragment_background">#FFD8BB</color>
 
 
 </resources>

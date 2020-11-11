@@ -1,474 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.tabs.TripsOffersTabFragment">
+    tools:context=".ui.home.trip.TripsOffersTabFragment">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/PickUpPointFragment_textView1"
-            style="@style/display"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="Προσφερόμενα ταξίδια"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/black_color"
-            android:indeterminateTintMode="src_atop"
-            android:visibility="visible"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/PickUpPointFragment_textView1" />
 
         <LinearLayout
-            android:id="@+id/FragmentTrip_offers_top_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/PickUpPointFragment_textView1">
+            android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/active_trips_section"
+
+            <Button
+                android:id="@+id/button"
+                style="@style/border_icon_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="30dp"
-                android:paddingBottom="20dp"
-                android:visibility="gone"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/num_of_active_trips_textView"
-                    style="@style/paragraph2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:text="2 ενεργά ταξίδια"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <Button
-                    android:id="@+id/button_all_activeTrips"
-                    style="@style/button_orange_empty"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:text="Εμφάνιση όλων"
-                    app:layout_constraintBottom_toBottomOf="@id/num_of_active_trips_textView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/num_of_active_trips_textView" />
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/FragmentTrip_offers_card_section"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/component_cardview_shape"
-                    android:elevation="1dp"
-                    android:translationZ="2dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/num_of_active_trips_textView">
-
-                    <ImageView
-                        android:id="@+id/FragmentTrip_offers_map_image"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:background="@drawable/ic_map_blue"
-                        app:layout_constraintDimensionRatio="h,2:1"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/destinations_from_TextView"
-                        style="@style/header2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
-                        android:text="Αθήνα - Θεσσαλονίκη"
-                        app:layout_constraintEnd_toEndOf="@+id/textView2"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/FragmentTrip_offers_map_image" />
-
-                    <TextView
-                        android:id="@+id/destinations_to_TextView"
-                        style="@style/header2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginEnd="20dp"
-                        android:text="TextView"
-                        android:textAlignment="viewEnd"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/destinations_from_TextView" />
-
-                    <LinearLayout
-                        android:id="@+id/FragmentTrip_offers_details_section"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:orientation="horizontal"
-                        android:weightSum="3"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@id/destinations_from_TextView"
-                        app:layout_constraintTop_toBottomOf="@+id/destinations_to_TextView">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/FragmentTrip_offers_date_section"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <TextView
-                                android:id="@+id/date"
-                                style="@style/paragraph2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="19 Νοε 2019"
-                                app:layout_constraintLeft_toLeftOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:background="@drawable/ic_calendar"
-                                app:layout_constraintBottom_toBottomOf="@id/date"
-                                app:layout_constraintStart_toEndOf="@id/date"
-                                app:layout_constraintTop_toTopOf="@id/date" />
-
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/FragmentTrip_offers_time_section"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_weight="1"
-                            app:layout_constraintBottom_toBottomOf="@id/FragmentTrip_offers_date_section"
-                            app:layout_constraintStart_toEndOf="@id/FragmentTrip_offers_date_section"
-                            app:layout_constraintTop_toTopOf="@id/FragmentTrip_offers_date_section">
-
-                            <TextView
-                                android:id="@+id/time"
-                                style="@style/paragraph2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="16:00"
-                                app:layout_constraintLeft_toLeftOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:background="@drawable/ic_clock"
-                                app:layout_constraintBottom_toBottomOf="@id/time"
-                                app:layout_constraintStart_toEndOf="@id/time"
-                                app:layout_constraintTop_toTopOf="@id/time" />
-
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/FragmentTrip_offers_price_section"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_weight="1"
-                            app:layout_constraintBottom_toBottomOf="@id/FragmentTrip_offers_date_section"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/FragmentTrip_offers_time_section"
-                            app:layout_constraintTop_toTopOf="@id/FragmentTrip_offers_date_section">
-
-                            <TextView
-                                android:id="@+id/price"
-                                style="@style/paragraph2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="10€"
-                                app:layout_constraintLeft_toLeftOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:background="@drawable/ic_cash"
-                                app:layout_constraintBottom_toBottomOf="@id/price"
-                                app:layout_constraintStart_toEndOf="@id/price"
-                                app:layout_constraintTop_toTopOf="@id/price" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                    </LinearLayout>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/FragmentTrip_offers_creator_section"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/FragmentTrip_offers_details_section">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/creator_image"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginLeft="20dp"
-                            android:background="@drawable/ic_boy"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            app:layout_constraintBottom_toBottomOf="@id/creator_image"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/creator_image"
-                            app:layout_constraintTop_toTopOf="@id/creator_image">
-
-                            <TextView
-                                android:id="@+id/creator_name"
-                                style="@style/paragraph2"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginEnd="20dp"
-                                android:ellipsize="end"
-                                android:singleLine="true"
-                                android:text="Tyler Joseph"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <ImageView
-                                android:id="@+id/FragmentTrip_offers_rate_image"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:background="@drawable/ic_rating"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/creator_name" />
-
-                            <TextView
-                                android:id="@+id/creator_rate_and_reviews"
-                                style="@style/paragraph1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:text="4.7 (125)"
-                                app:layout_constraintBottom_toBottomOf="@id/FragmentTrip_offers_rate_image"
-                                app:layout_constraintStart_toEndOf="@id/FragmentTrip_offers_rate_image"
-                                app:layout_constraintTop_toTopOf="@id/FragmentTrip_offers_rate_image" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <View
-                        android:id="@+id/FragmentTrip_offers_underline_creator_section"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="30dp"
-                        android:background="@color/softGrey_color"
-                        app:layout_constraintTop_toBottomOf="@id/FragmentTrip_offers_creator_section" />
-
-                    <TextView
-                        android:id="@+id/FragmentTrip_offers_my_book"
-                        style="@style/paragraph2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="15dp"
-                        android:text="Το ταξίδι μου"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/FragmentTrip_offers_underline_creator_section" />
-
-                    <TextView
-                        android:id="@+id/FragmentTrip_offers_my_book_details_textView"
-                        style="@style/paragraph3"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="20dp"
-                        android:ellipsize="end"
-                        android:singleLine="true"
-                        android:text="Δεν έχετε κάποιον επιβάτη ακόμα"
-                        android:textColor="@color/orange_color"
-                        android:textSize="15sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/FragmentTrip_offers_my_book_button"
-                        app:layout_constraintStart_toStartOf="@id/FragmentTrip_offers_my_book"
-                        app:layout_constraintTop_toBottomOf="@id/FragmentTrip_offers_my_book" />
-
-                    <ImageView
-                        android:id="@+id/FragmentTrip_offers_my_book_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="20dp"
-                        android:background="@drawable/ic_right_arrow"
-                        android:backgroundTint="@color/black_color"
-                        app:layout_constraintBottom_toBottomOf="@id/FragmentTrip_offers_my_book_details_textView"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/FragmentTrip_offers_my_book" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/no_trips_section"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/FragmentTrip_offers_no_active_trips_textView"
-                    style="@style/header5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Δεν έχετε κάποιο ενεργό ταξίδι"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/no_trips_section_button_layout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@drawable/component_dotted_shape_blue"
-                    android:paddingVertical="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/FragmentTrip_offers_no_active_trips_textView">
-
-                    <ImageView
-                        android:id="@+id/FragmentTrip_offers_no_trips_image"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="40dp"
-                        android:src="@drawable/ic_no_trip_blue"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <View
-                        android:id="@+id/FragmentTrip_offers_no_trips_underline"
-                        android:layout_width="0dp"
-                        android:layout_height="2dp"
-                        android:layout_marginTop="40dp"
-                        android:background="@drawable/component_dotted_line_blue"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/FragmentTrip_offers_no_trips_image" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:orientation="horizontal"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/FragmentTrip_offers_no_trips_underline">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/ic_add_car"
-                            android:backgroundTint="@color/blue_color" />
-
-                        <TextView
-                            style="@style/label"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:text="Δημιουργία Ταξιδιού"
-                            android:textColor="@color/blue_color" />
-                    </LinearLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/completed_trips_section"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:visibility="gone"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/FragmentTrip_offers_top_section">
-
-            <TextView
-                android:id="@+id/FragmentTrip_offers_completed_label"
-                style="@style/header2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="Ολοκληρωμένα"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:text="Ιστορικό προσφρορών"
+                android:textAllCaps="false"
+                android:textAppearance="@style/paragraph_1" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/FragmentTrip_offers_completed_recycler_view"
+                android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:nestedScrollingEnabled="true"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/FragmentTrip_offers_completed_label" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/trip_involved_item_layout" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <include
+        android:id="@+id/generic_loader"
+        layout="@layout/generic_loader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

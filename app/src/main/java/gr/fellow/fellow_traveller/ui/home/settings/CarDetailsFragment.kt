@@ -2,12 +2,12 @@ package gr.fellow.fellow_traveller.ui.home.settings
 
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentCarDetailsBinding
 import gr.fellow.fellow_traveller.domain.AnswerType
-import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.ConfirmBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
@@ -16,7 +16,7 @@ import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 class CarDetailsFragment : BaseFragment<FragmentCarDetailsBinding>() {
 
     private val viewModel: HomeViewModel by activityViewModels()
-    private var car: Car? = null
+    private val args: CarDetailsFragmentArgs by navArgs()
     private lateinit var confirmBottomSheetDialog: ConfirmBottomSheetDialog
 
 
@@ -31,20 +31,18 @@ class CarDetailsFragment : BaseFragment<FragmentCarDetailsBinding>() {
     }
 
     override fun setUpViews() {
-        car?.let {
-            binding.brand.text = it.brand
-            binding.model.text = it.model
-            binding.plate.text = it.plate
-            binding.color.text = it.color
-        }
+        binding.brand.text = args.car.brand
+        binding.model.text = args.car.model
+        binding.plate.text = args.car.plate
+        binding.color.text = args.car.color
 
-        binding.backButtons.setOnClickListener {
+        binding.back.setOnClickListener {
             onBackPressed()
         }
 
         binding.delete.setOnClickListener {
             confirmBottomSheetDialog = ConfirmBottomSheetDialog(
-                getString(R.string.car_delete_confirmation_message, car?.plate),
+                getString(R.string.car_delete_confirmation_message, args.car.plate),
                 this@CarDetailsFragment::onItemClickListener
             )
             confirmBottomSheetDialog.show(childFragmentManager, "confirmBottomSheetDialog")
@@ -54,13 +52,8 @@ class CarDetailsFragment : BaseFragment<FragmentCarDetailsBinding>() {
 
     private fun onItemClickListener(answerType: AnswerType) {
         if (answerType == AnswerType.Yes)
-            car?.let { car -> viewModel.deleteCar(car) }
+            viewModel.deleteCar(args.car)
     }
 
-
-    @Override
-    override fun handleIntent() {
-        car = requireArguments().getParcelable("car")
-    }
 
 }

@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.framework.network.fellow.response
+package gr.fellow.fellow_traveller.framework.network.fellow.response.user
 
 data class UserBaseResponse(
     val id: String,

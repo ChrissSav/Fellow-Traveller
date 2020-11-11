@@ -33,8 +33,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 userImage.loadImageFromUrl(user.picture)
                 reviews.text = user.reviews.toString()
                 rate.text = user.rate.toString()
-                searches.text = "20"
-                offers.text = "13"
+                involved.text = user.tripsInvolved.toString()
+                offers.text = user.tripsOffers.toString()
                 this@ProfileFragment.messengerLink = user.messengerLink
                 if (!user.aboutMe.isNullOrEmpty())
                     aboutMe.setText(user.aboutMe)

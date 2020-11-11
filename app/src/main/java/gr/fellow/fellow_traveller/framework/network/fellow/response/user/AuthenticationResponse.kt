@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.framework.network.fellow.response
+package gr.fellow.fellow_traveller.framework.network.fellow.response.user
 
 
 data class AuthenticationResponse(
@@ -17,5 +17,7 @@ data class UserAuthResponse(
     val reviews: Int,
     val picture: String?,
     val messengerLink: String?,
-    val aboutMe: String?
+    val aboutMe: String?,
+    val tripsOffers: Int,
+    val tripsInvolved: Int
 )

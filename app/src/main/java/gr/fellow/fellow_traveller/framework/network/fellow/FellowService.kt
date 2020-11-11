@@ -2,12 +2,12 @@ package gr.fellow.fellow_traveller.framework.network.fellow
 
 import gr.fellow.fellow_traveller.data.BaseResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
-import gr.fellow.fellow_traveller.framework.network.fellow.response.AuthenticationResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.UserAuthResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.car.CarInfoResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.TripInvolvedResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.TripSearchResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.user.AuthenticationResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.user.UserAuthResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.user.UserInfoResponse
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -67,11 +67,22 @@ interface FellowService {
     suspend fun getUserInfo(
     ): Response<BaseResponse<UserAuthResponse>>
 
+    @GET("user/{user_id}")
+    suspend fun getUserInfo(
+        @Path("user_id") userId: String
+    ): Response<BaseResponse<UserInfoResponse>>
+
 
     @PUT("user/me/picture")
     suspend fun updateUserPicture(
         @Body updatePictureRequest: UpdatePictureRequest
     ): Response<BaseResponse<UserAuthResponse>>
+
+
+    @PUT("user/me/password")
+    suspend fun updateUserPassword(
+        @Body updatePasswordRequest: UpdatePasswordRequest
+    ): Response<BaseResponse<String>>
 
     /** CAR **/
 
@@ -85,10 +96,10 @@ interface FellowService {
     ): Response<BaseResponse<CarInfoResponse>>
 
 
-    @DELETE("/cars/{car_id}")
+    @DELETE("car/{car_id}")
     suspend fun deleteCar(
-        @Path("car_id") car_id: Int
-    ): Response<StatusHandleResponse>
+        @Path("car_id") carId: String
+    ): Response<BaseResponse<String>>
 
 
     /** TRIP **/
@@ -101,8 +112,10 @@ interface FellowService {
 
     @GET("trip")
     suspend fun getTripsAs(
-        @Query("type_as") type: String
-    ): Response<MutableList<TripInvolvedResponse>>
+        @Query("type") type: String,
+        @Query("status") status: String,
+        @Query("page") page: Int
+    ): Response<BaseResponse<MutableList<TripInvolvedResponse>>>
 
     @GET("trip/search")
     suspend fun searchTrips(
@@ -122,8 +135,19 @@ interface FellowService {
     ): Response<BaseResponse<MutableList<TripSearchResponse>>>
 
 
-    @POST("trip/passenger")
+    @PUT("trip/passenger")
     suspend fun bookTrip(
         @Body request: BookTripRequest
-    ): Response<TripInvolvedResponse>
+    ): Response<BaseResponse<TripInvolvedResponse>>
+
+    @DELETE("trip/passenger/{trip_id}")
+    suspend fun exitFromTrip(
+        @Path("trip_id") tripId: String
+    ): Response<BaseResponse<String>>
+
+
+    @DELETE("trip/{trip_id}")
+    suspend fun deleteTrip(
+        @Path("trip_id") tripId: String
+    ): Response<BaseResponse<String>>
 }

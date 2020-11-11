@@ -3,10 +3,12 @@ package gr.fellow.fellow_traveller.ui.main.fragments
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
-import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentLoginBinding
-import gr.fellow.fellow_traveller.ui.extensions.*
+import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
+import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
+import gr.fellow.fellow_traveller.ui.extensions.startActivity
+import gr.fellow.fellow_traveller.ui.extensions.startActivityClearStack
 import gr.fellow.fellow_traveller.ui.forgotPassword.ForgotPasswordActivity
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.main.MainViewModel
@@ -33,9 +35,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
         binding.buttonLogin.setOnClickListener {
             hideKeyboard()
-            if (binding.email.text.toString().isEmpty() && binding.password.text.toString().isEmpty()) {
-                createAlerter(resources.getString(R.string.ERROR_FIELDS_REQUIRE))
-            } else {
+            if (binding.email.isCorrect() && binding.password.isCorrect()) {
                 viewModel.login(binding.email.text.toString(), binding.password.text.toString())
             }
 

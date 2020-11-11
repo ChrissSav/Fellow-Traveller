@@ -6,11 +6,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentEmailBinding
-import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
-import gr.fellow.fellow_traveller.utils.isValidEmail
 
 @AndroidEntryPoint
 class EmailFragment : BaseFragment<FragmentEmailBinding>() {
@@ -29,15 +27,11 @@ class EmailFragment : BaseFragment<FragmentEmailBinding>() {
     override fun setUpViews() {
         binding.email.text = viewModel.email.value
 
-
-
         binding.ImageButtonNext.setOnClickListener {
             hideKeyboard()
             val email = binding.email.text.toString().trim()
-            if (isValidEmail(email)) {
+            if (binding.email.isCorrect()) {
                 viewModel.checkUserEmail(email)
-            } else {
-                createAlerter(resources.getString(R.string.ERROR_INVALID_EMAIL_FORMAT))
             }
         }
     }

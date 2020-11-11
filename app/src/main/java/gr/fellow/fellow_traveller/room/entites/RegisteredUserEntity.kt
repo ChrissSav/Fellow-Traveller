@@ -19,7 +19,9 @@ data class RegisteredUserEntity(
     @ColumnInfo(name = "about_me")
     val aboutMe: String?,
     val email: String,
-    val messengerLink: String?
+    val messengerLink: String?,
+    val tripsOffers: Int,
+    val tripsInvolved: Int
 
 
 ) {

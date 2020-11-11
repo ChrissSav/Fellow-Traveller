@@ -99,17 +99,17 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
 
     private fun checkFields(): Boolean {
         if (binding.carEdiText.text.isNullOrEmpty()) {
-            viewModel.setError(R.string.ERROR_SELECT_CAR)
+            viewModel.setErrorMessage(R.string.ERROR_SELECT_CAR)
             return false
         }
 
         if (binding.bagsPickButton.text.isNullOrEmpty()) {
-            viewModel.setError(R.string.ERROR_SELECT_SEAT)
+            viewModel.setErrorMessage(R.string.ERROR_SELECT_SEAT)
             return false
         }
 
         if (binding.pet.text.isNullOrEmpty()) {
-            viewModel.setError(R.string.ERROR_SELECT_PET)
+            viewModel.setErrorMessage(R.string.ERROR_SELECT_PET)
             return false
         }
 

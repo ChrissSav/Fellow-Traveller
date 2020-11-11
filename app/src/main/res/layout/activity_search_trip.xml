@@ -20,4 +20,11 @@
         app:navGraph="@navigation/search_nav_graph" />
 
 
+    <include
+        android:id="@+id/generic_loader"
+        layout="@layout/generic_loader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

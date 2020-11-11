@@ -63,4 +63,7 @@
     <string name="ERROR_SELECT_PET">Παρακαλώ καθορίστε αν το ταξίδι δέχεται κατοικίδια.</string>
     <string name="ERROR_SELECT_SEAT">Παρακαλώ καθορίστε την κατάσταση των αποσκεύων.</string>
 
+
+    <string name="check_field">Παρακαλώ ελέγξε το πεδίο.</string>
+
 </resources>

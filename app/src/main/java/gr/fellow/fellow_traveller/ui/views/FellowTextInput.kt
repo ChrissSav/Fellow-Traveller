@@ -9,13 +9,13 @@ import android.view.LayoutInflater
 import android.view.inputmethod.EditorInfo
 import androidx.constraintlayout.widget.ConstraintLayout
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.databinding.FellowEdittextBinding
+import gr.fellow.fellow_traveller.databinding.FellowTextInputBinding
 
 
 class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
     private var hint = ""
-    private var binding: FellowEdittextBinding = FellowEdittextBinding.inflate(LayoutInflater.from(context), this, true)
+    private var binding = FellowTextInputBinding.inflate(LayoutInflater.from(context), this, true)
     private var isEditable = false
     private lateinit var function: () -> Unit
     private var imeOptions = 0
@@ -24,10 +24,25 @@ class FellowTextInput(context: Context, attrs: AttributeSet) : ConstraintLayout(
     private var textAllCaps = true
 
     var text: String? = null
-        get() = run {
-            if (binding.fellowEditTextTextInputEditText.text.toString().isEmpty())
-                return@run null
-            return binding.fellowEditTextTextInputEditText.text.toString()
+        get() {
+            return if (binding.fellowEditTextTextInputEditText.text.isNullOrEmpty()) {
+                null
+            } else {
+                binding.fellowEditTextTextInputEditText.text.toString()
+            }
+        }
+        set(value) {
+            field = value
+            binding.fellowEditTextTextInputEditText.setText(value)
+        }
+
+    var length: Int = 0
+        get() {
+            return if (binding.fellowEditTextTextInputEditText.text.isNullOrEmpty()) {
+                0
+            } else {
+                binding.fellowEditTextTextInputEditText.text.toString().length
+            }
         }
         set(value) {
             field = value

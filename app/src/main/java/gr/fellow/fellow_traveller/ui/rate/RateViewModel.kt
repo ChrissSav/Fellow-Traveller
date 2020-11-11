@@ -5,10 +5,7 @@ import androidx.lifecycle.LiveData
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 
-import gr.fellow.fellow_traveller.usecase.register.CheckUserEmailUseCase
 //import gr.fellow.fellow_traveller.usecase.register.CheckUserPhoneUseCase
-import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
-import gr.fellow.fellow_traveller.usecase.register.RegisterUserUseCase
 
 
 class RateViewModel

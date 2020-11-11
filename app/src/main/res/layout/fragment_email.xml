@@ -41,18 +41,18 @@
             app:layout_constraintTop_toBottomOf="@id/SetEmailFragment_textView4" />
 
 
-        <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+        <gr.fellow.fellow_traveller.ui.views.FellowEditText
             android:id="@+id/email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
-            app:editable="true"
-            app:hint_fellow="Email"
-            app:imeOptions="actionDone"
+            android:layout_marginTop="80dp"
+            app:error_message_f="@string/ERROR_INVALID_EMAIL_FORMAT"
+            app:hint_f="Email"
+            app:imeOptions_f="actionDone"
             app:layout_constraintEnd_toEndOf="@+id/SetEmailFragment_info_textView"
             app:layout_constraintStart_toStartOf="@+id/SetEmailFragment_textView4"
             app:layout_constraintTop_toBottomOf="@+id/SetEmailFragment_info_textView"
-            app:text_type="textEmailAddress" />
+            app:text_type_f="textEmailAddress" />
 
         <ImageButton
             android:id="@+id/ImageButton_next"

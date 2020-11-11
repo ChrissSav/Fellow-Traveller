@@ -3,15 +3,17 @@ package gr.fellow.fellow_traveller.ui.search
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import gr.fellow.fellow_traveller.data.ResultWrapperSecond
+import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.domain.externalError
+import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.usecase.trips.BookTripUseCase
 import gr.fellow.fellow_traveller.usecase.trips.SearchTripsUseCase
+import kotlinx.coroutines.delay
 
 
 class SearchTripViewModel
@@ -21,9 +23,11 @@ constructor(
     private val bookTripUseCase: BookTripUseCase
 ) : BaseViewModel() {
 
+    val loadResults = MutableLiveData<Boolean>()
 
-    private val _tripBook = SingleLiveEvent<TripSearch>()
-    val tripBook: LiveData<TripSearch> = _tripBook
+
+    private val _tripBook = SingleLiveEvent<TripInvolved>()
+    val tripBook: LiveData<TripInvolved> = _tripBook
 
     private val _destinations = MutableLiveData<Pair<PlaceModel?, PlaceModel?>>()
     val destinations: LiveData<Pair<PlaceModel?, PlaceModel?>> = _destinations
@@ -35,6 +39,7 @@ constructor(
     private val _resultTrips = SingleLiveEvent<MutableList<TripSearch>>()
     val resultTrips: LiveData<MutableList<TripSearch>> = _resultTrips
 
+    var deleteTripId: String? = null
 
     fun setDestinationFrom(place: PlaceModel) {
         val temp = _destinations.value?.second
@@ -62,17 +67,19 @@ constructor(
     }
 
     fun getTrips() {
-        launchSecond(true) {
+        launch {
+            loadResults.value = true
             _searchFilter.value?.let { searchFilters ->
                 when (val response = searchTripsUseCase(searchFilters)) {
-                    is ResultWrapperSecond.Success -> {
+                    is ResultWrapper.Success -> {
                         _resultTrips.value = response.data
                     }
-                    is ResultWrapperSecond.Error -> {
-                        errorSecond.value = externalError(response.error)
+                    is ResultWrapper.Error -> {
+                        error.value = externalError(response.error)
                     }
                 }
             }
+            loadResults.value = false
         }
     }
 
@@ -88,45 +95,35 @@ constructor(
     }
 
 
-    /* fun bookTrip(tripId: Int, bags: Int, pet: Boolean) {
-         launch(true) {
-             when (val response = bookTripUseCase(tripId, bags, pet)) {
-                 is ResultWrapper.Success -> {
-                     _tripBook.value = response.data
-                 }
-                 is ResultWrapper.Error -> {
-                     error.value =
-                         when (response.error.code) {
-                             606 ->
-                                 R.string.ERROR_TRIP_NOT_AVAILABLE_LUGGAGE
-                             607 ->
-                                 R.string.ERROR_TRIP_CHECK_PET_ACCEPTS
-                             else ->
-                                 R.string.ERROR_SOMETHING_WRONG
-                         }
-                 }
-             }
-         }
-
-     }
- */
-
-    /*fun swapDestinations() {
-        launchSecond {
-            val temp = _searchFilter.value?.copy()
-            temp?.let {
-                val tempDestination = _destinationTo.value!!.copy()
-                _destinationTo.value = _destinationFrom.value!!.copy()
-                _destinationFrom.value = tempDestination
-
-                it.latitudeFrom = _destinationFrom.value?.latitude!!
-                it.longitudeFrom = _destinationFrom.value?.longitude!!
-                it.latitudeTo = _destinationTo.value?.latitude!!
-                it.longitudeTo = _destinationTo.value?.longitude!!
-                _searchFilter.value = it
+    fun bookTrip(tripId: String, seats: Int, pet: Boolean) {
+        launch(true) {
+            when (val response = bookTripUseCase(tripId, seats, pet)) {
+                is ResultWrapper.Success -> {
+                    _tripBook.value = response.data
+                }
+                is ResultWrapper.Error -> {
+                    deleteTripId = tripId
+                    error.value = externalError(response.error)
+                }
             }
         }
-    }*/
 
+    }
+
+
+    fun handleErrorBook(tripId: String) {
+        launch {
+            delay(200)
+            val tempTrips = mutableListOf<TripSearch>()
+            tempTrips.addAll(_resultTrips.value ?: emptyList())
+            val index = tempTrips.indexOfFirst { it.id == tripId }
+            if (index != -1) {
+                tempTrips.removeAt(index)
+                _resultTrips.value = mutableListOf()
+            }
+
+        }
+
+    }
 
 }

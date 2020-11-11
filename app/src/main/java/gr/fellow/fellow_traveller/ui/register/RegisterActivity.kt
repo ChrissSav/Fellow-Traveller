@@ -32,11 +32,8 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
 
         })
 
-        viewModel.error.observe(this, Observer {
-            createAlerter(getString(it))
-        })
 
-        viewModel.errorSecond.observe(this, Observer {
+        viewModel.error.observe(this, Observer {
             if (it.internal)
                 createAlerter(getString(it.messageId))
             else

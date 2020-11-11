@@ -33,8 +33,8 @@ class OverviewFragment : BaseFragment<FragmentOverviewBinding>(), View.OnClickLi
     override fun setUpViews() {
         with(binding) {
 
-            textViewFrom.text = viewModel.destinationFrom.value?.title
-            textViewTo.text = viewModel.destinationTo.value?.title
+            from.text = viewModel.destinationFrom.value?.title
+            to.text = viewModel.destinationTo.value?.title
             day.text = getDateFromTimestamp(viewModel.getTimestamp())
             time.text = getTimeFromTimestamp(viewModel.getTimestamp())
             price.text = getString(R.string.price, viewModel.price.value.toString())
@@ -56,8 +56,8 @@ class OverviewFragment : BaseFragment<FragmentOverviewBinding>(), View.OnClickLi
             }
 
 
-            textViewFrom.setOnClickListener(this@OverviewFragment)
-            textViewTo.setOnClickListener(this@OverviewFragment)
+            from.setOnClickListener(this@OverviewFragment)
+            to.setOnClickListener(this@OverviewFragment)
             day.setOnClickListener(this@OverviewFragment)
             time.setOnClickListener(this@OverviewFragment)
             price.setOnClickListener(this@OverviewFragment)

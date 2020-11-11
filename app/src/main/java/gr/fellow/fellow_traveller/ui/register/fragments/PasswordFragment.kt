@@ -32,18 +32,16 @@ class PasswordFragment : BaseFragment<FragmentPasswordBinding>() {
 
 
         binding.ImageButtonNext.setOnClickListener {
-            val pass = binding.password.text.toString()
-            val passConfirm = binding.passwordConfirm.text.toString()
             hideKeyboard()
-            if (pass.length >= 2) {
+            if (binding.password.isCorrect() && binding.passwordConfirm.isCorrect()) {
+                val pass = binding.password.text.toString()
+                val passConfirm = binding.passwordConfirm.text.toString()
                 if (pass == passConfirm) {
                     viewModel.storePassword(pass)
+                    findNavController()?.navigate(R.id.action_resetChangePasswordFragment_to_forgotPasswordNumberFragment)
                 } else {
                     createAlerter(resources.getString(R.string.ERROR_PASSWORD_DO_NOT_MATCH))
                 }
-            } else {
-                createAlerter(resources.getString(R.string.ERROR_PASSWORD_COMPLEXITY_LENGTH))
-
             }
         }
 

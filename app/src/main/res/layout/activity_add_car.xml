@@ -23,8 +23,8 @@
             <ImageButton
                 android:id="@+id/back"
                 style="@style/border_icon_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/back_button_width_height"
+                android:layout_height="@dimen/back_button_width_height"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="24dp"
                 android:src="@drawable/ic_back_button"
@@ -46,87 +46,89 @@
                 app:layout_constraintTop_toBottomOf="@+id/back" />
 
 
-            <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+            <gr.fellow.fellow_traveller.ui.views.FellowEditText
                 android:id="@+id/brand"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="64dp"
-                app:editable="true"
-                app:hint_fellow="@string/brand"
-                app:imeOptions="actionNext"
+                app:hint_f="@string/brand"
+                app:imeOptions_f="actionNext"
                 app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
                 app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
-                app:layout_constraintTop_toBottomOf="@+id/manage_cars_settings_tv" />
+                app:layout_constraintTop_toBottomOf="@+id/manage_cars_settings_tv"
+                app:regex_f="@string/regex_min_3_chars_english" />
 
 
-            <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+            <gr.fellow.fellow_traveller.ui.views.FellowEditText
                 android:id="@+id/model"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_car_details_margin_inputs"
-                app:editable="true"
-                app:hint_fellow="@string/model"
-                app:imeOptions="actionNext"
+                app:hint_f="@string/model"
+                app:imeOptions_f="actionNext"
                 app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
                 app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
-                app:layout_constraintTop_toBottomOf="@+id/brand" />
+                app:layout_constraintTop_toBottomOf="@+id/brand"
+                app:regex_f="@string/regex_min_3_chars_english" />
 
-
-            <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+            <gr.fellow.fellow_traveller.ui.views.FellowEditText
                 android:id="@+id/plate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_car_details_margin_inputs"
-                app:all_caps="true"
-                app:editable="true"
-                app:hint_fellow="@string/plate"
-                app:imeOptions="actionNext"
+                app:all_caps_f="true"
+                app:error_message_f="@string/ERROR_INVALID_PLATE_FORMAT"
+                app:hint_f="@string/plate"
+                app:imeOptions_f="actionNext"
                 app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
                 app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
                 app:layout_constraintTop_toBottomOf="@+id/model"
-                app:max_length="8" />
+                app:max_length_f="8"
+                app:regex_f="@string/regex_car_plate" />
 
 
-            <gr.fellow.fellow_traveller.ui.views.FellowTextInput
+            <gr.fellow.fellow_traveller.ui.views.FellowEditText
                 android:id="@+id/color"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_car_details_margin_inputs"
-                app:editable="true"
-                app:hint_fellow="@string/color"
-                app:imeOptions="actionDone"
+                android:layout_marginBottom="32dp"
+                app:hint_f="@string/color"
+                app:imeOptions_f="actionNext"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
                 app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
-                app:layout_constraintTop_toBottomOf="@+id/plate" />
+                app:layout_constraintTop_toBottomOf="@+id/plate"
+                app:layout_constraintVertical_bias="0.0"
+                app:max_length_f="8"
+                app:regex_f="@string/regex_min_3_chars" />
 
-            <Button
-                android:id="@+id/add_car"
-                style="@style/header_3"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/car_float_action_button_height"
-                android:layout_marginTop="62dp"
-                android:layout_marginEnd="@dimen/car_trip_float_action_button_margin_right"
-                android:layout_marginBottom="@dimen/car_trip_float_action_button_margin_bottom"
-                android:background="@drawable/fab_background_aqua"
-                android:drawableStart="@drawable/ic_tick"
-                android:drawableTint="@color/white"
-                android:elevation="16dp"
-                android:gravity="center|end"
-                android:minWidth="155dp"
-                android:paddingStart="22dp"
-                android:paddingEnd="20dp"
-                android:text="Καταχώρηση"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/color"
-                app:layout_constraintVertical_bias="1.0"
-                tools:ignore="RtlSymmetry" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
+    <Button
+        android:id="@+id/add_car"
+        style="@style/header_3"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/car_float_action_button_height"
+        android:layout_marginEnd="@dimen/car_trip_float_action_button_margin_right"
+        android:layout_marginBottom="@dimen/car_trip_float_action_button_margin_bottom"
+        android:background="@drawable/fab_background_aqua"
+        android:drawableStart="@drawable/ic_tick"
+        android:drawableTint="@color/white"
+        android:elevation="16dp"
+        android:gravity="center|end"
+        android:minWidth="155dp"
+        android:paddingStart="22dp"
+        android:paddingEnd="20dp"
+        android:text="Καταχώρηση"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="RtlSymmetry" />
 
     <include
         android:id="@+id/generic_loader"

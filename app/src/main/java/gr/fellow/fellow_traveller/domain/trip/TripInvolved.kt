@@ -23,7 +23,8 @@ data class TripInvolved(
     val msg: String?,
     val price: Float,
     val timestamp: Long,
-    val passengers: MutableList<Passenger>
+    val passengers: MutableList<Passenger>,
+    val status: Int
 ) : Parcelable {
 
 

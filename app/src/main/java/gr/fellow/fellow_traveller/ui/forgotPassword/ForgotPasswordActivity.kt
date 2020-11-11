@@ -30,7 +30,7 @@ class ForgotPasswordActivity : BaseActivity<ActivityForgotPasswordBinding>() {
             })
 
 
-            errorSecond.observe(this@ForgotPasswordActivity, Observer {
+            error.observe(this@ForgotPasswordActivity, Observer {
                 if (it.internal)
                     createAlerter(getString(it.messageId))
                 else

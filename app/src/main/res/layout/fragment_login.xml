@@ -6,70 +6,106 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.fragments.LoginFragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-    <ImageButton
-        android:id="@+id/ImageButton_back"
-        style="@style/border_icon_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/ic_back_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/LoginActivity_textView_header"
-        style="@style/display_1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:text="Σύνδεση"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ImageButton_back" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <gr.fellow.fellow_traveller.ui.views.FellowTextInput
-        android:id="@+id/email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        app:editable="true"
-        app:hint_fellow="Email"
-        app:text_type="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/LoginActivity_textView_header"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header"
-        app:layout_constraintTop_toBottomOf="@+id/LoginActivity_textView_header" />
+            <ImageButton
+                android:id="@+id/ImageButton_back"
+                style="@style/border_icon_button"
+                android:layout_width="@dimen/back_button_width_height"
+                android:layout_height="@dimen/back_button_width_height"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:src="@drawable/ic_back_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <gr.fellow.fellow_traveller.ui.views.FellowPassword
-        android:id="@+id/password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:imeOptions_Password="actionDone"
-        android:layout_marginTop="64dp"
-        app:hint_Password="Κωδικός πρόσβασης"
-        app:layout_constraintEnd_toEndOf="@+id/email"
-        app:layout_constraintStart_toStartOf="@+id/email"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+            <TextView
+                android:id="@+id/LoginActivity_textView_header"
+                style="@style/display_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:text="Σύνδεση"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ImageButton_back" />
+
+
+            <gr.fellow.fellow_traveller.ui.views.FellowEditText
+                android:id="@+id/email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="51dp"
+                app:error_message_f="@string/ERROR_INVALID_EMAIL_FORMAT"
+                app:hint_f="Email"
+                app:imeOptions_f="actionNext"
+                app:layout_constraintEnd_toEndOf="@+id/LoginActivity_textView_header"
+                app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header"
+                app:layout_constraintTop_toBottomOf="@+id/LoginActivity_textView_header"
+                app:text_type_f="textEmailAddress" />
+
+
+            <gr.fellow.fellow_traveller.ui.views.FellowEditText
+                android:id="@+id/password"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="51dp"
+                app:hint_f="Κωδικός πρόσβασης"
+                app:imeOptions_f="actionDone"
+                app:layout_constraintEnd_toEndOf="@+id/email"
+                app:layout_constraintStart_toStartOf="@+id/email"
+                app:layout_constraintTop_toBottomOf="@+id/email"
+                app:regex_f="@string/regex_min_3_chars"
+                app:text_type_f="textPassword" />
+
+
+            <TextView
+                android:id="@+id/forgot_password"
+                style="@style/paragraph_3"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="100dp"
+                android:text="Ξέχασα τον κωδικό πρόσβασης"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/password"
+                app:layout_constraintTop_toBottomOf="@+id/password"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
 
     <Button
         android:id="@+id/buttonLogin"
         style="@style/header_3"
-        android:layout_width="125dp"
+        android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:layout_marginEnd="@dimen/new_trip_float_action_button_margin_right"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="@dimen/new_trip_float_action_button_margin_bottom"
         android:background="@drawable/fab_background_aqua"
         android:backgroundTint="@color/colorPrimary"
         android:drawableStart="@drawable/ic_right_arrow"
+        android:drawablePadding="8dp"
         android:drawableTint="@color/white"
         android:elevation="16dp"
         android:gravity="center|end"
-        android:minWidth="155dp"
         android:paddingStart="16dp"
         android:paddingEnd="20dp"
         android:text="Σύνδεση"
@@ -79,17 +115,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="RtlSymmetry" />
 
-    <TextView
-        android:id="@+id/forgot_password"
-        style="@style/paragraph_3"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="16dp"
-        android:text="Ξέχασα τον κωδικό πρόσβασης"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/password"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

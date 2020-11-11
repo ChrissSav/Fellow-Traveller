@@ -23,7 +23,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentAccountSettingsBinding
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.UserImagePickBottomSheetDialog
-import gr.fellow.fellow_traveller.ui.extensions.*
+import gr.fellow.fellow_traveller.ui.extensions.createToast
+import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
+import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import java.io.File
 
@@ -34,7 +36,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
     private val viewModel: HomeViewModel by activityViewModels()
     private var mImageUri: Uri? = null
     private var mStorageRef: StorageReference? = null
-    private var tempImagefile: File? = null
+    private var tempImageFile: File? = null
     private var newImage = ""
     private lateinit var userImagePickBottomSheetDialog: UserImagePickBottomSheetDialog
     //Connection Manager
@@ -48,18 +50,17 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
 
     override fun setUpObservers() {
         viewModel.user.observe(viewLifecycleOwner, Observer {
-            postDelay(150) {
-                with(binding) {
-                    picture.loadImageFromUrl(it.picture)
-                    firstName.text = it.firstName
-                    lastName.text = it.lastName
-                    email.text = it.email
-                    it.messengerLink?.let { m ->
-                        messengerLink.text = m
-                    }
-                    aboutMe.text = it.aboutMe
+            with(binding) {
+                picture.loadImageFromUrl(it.picture)
+                firstName.text = it.firstName
+                lastName.text = it.lastName
+                email.text = it.email
+                it.messengerLink?.let { m ->
+                    messengerLink.text = m
                 }
+                aboutMe.text = it.aboutMe
             }
+
         })
 
         viewModel.successUpdateInfo.observe(viewLifecycleOwner, Observer {
@@ -87,25 +88,14 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
         binding.saveButton.setOnClickListener {
 
 
-            if (checkFields()) {
+            if (binding.lastName.isCorrect() && binding.firstName.isCorrect() &&
+                binding.email.isCorrect() && binding.messengerLink.isCorrect()
+            ) {
                 val firstName = binding.firstName.text.toString()
                 val lastName = binding.lastName.text.toString()
                 viewModel.updateAccountInfo(firstName, lastName, binding.messengerLink.text, binding.aboutMe.text)
             }
         }
-    }
-
-    private fun checkFields(): Boolean {
-        if (binding.firstName.text.toString().length < 3) {
-            createAlerter("Ελεγξε το πεδιο του ονόματος")
-            return false
-        }
-
-        if (binding.lastName.text.toString().length < 3) {
-            createAlerter("Ελεγξε το πεδιο του επωνύμου")
-            return false
-        }
-        return true
     }
 
 
@@ -139,7 +129,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                 binding.progressBar.visibility = View.VISIBLE
                 compressUriImage()
             } else if (resultCode === CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                val e = result.error
+                // val e = result.error
                 createToast("Error")
             }
         }
@@ -147,7 +137,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
 
     private fun compressUriImage() {
         if (mImageUri != null) {
-            tempImagefile = File(
+            tempImageFile = File(
                 SiliCompressor.with(this.context)
                     .compress(
                         FileUtils.getPath(this.context, mImageUri), File(
@@ -156,7 +146,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                         )
                     )
             )
-            val compressedUri = Uri.fromFile(tempImagefile)
+            val compressedUri = Uri.fromFile(tempImageFile)
             Log.i("Compress", "fhfjxffghdk")
             uploadImage(compressedUri)
             viewModel.setLoad(true)
@@ -173,7 +163,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
             fileReference.putFile(imageUri).addOnSuccessListener { taskSnapshot ->
                 fileReference.downloadUrl.addOnSuccessListener { uri ->
                     newImage = uri.toString()
-                    tempImagefile!!.delete()
+                    tempImageFile!!.delete()
 
                     viewModel.updateUserImage(newImage)
                     Log.i("ImageInside", newImage)
@@ -186,7 +176,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                 }
                 //Log.i("Image", taskSnapshot.uploadSessionUri.toString())
             }.addOnFailureListener { e ->
-                tempImagefile!!.delete()
+                tempImageFile!!.delete()
                 viewModel.setLoad(false)
                 Toast.makeText(this.context, e.localizedMessage, Toast.LENGTH_SHORT).show()
                 binding.progressBar.visibility = View.GONE

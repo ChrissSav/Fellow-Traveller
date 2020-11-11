@@ -6,7 +6,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.scopes.ActivityScoped
 import gr.fellow.fellow_traveller.domain.FellowDataSource
-import gr.fellow.fellow_traveller.usecase.LoadUserLocalInfoUseCase
 import gr.fellow.fellow_traveller.usecase.auth.*
 import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.newtrip.GetGeometryFormPlaceUseCase
@@ -15,10 +14,9 @@ import gr.fellow.fellow_traveller.usecase.newtrip.RegisterTripRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.register.CheckUserEmailUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserUseCase
-import gr.fellow.fellow_traveller.usecase.trips.BookTripUseCase
-import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsCreatorRemoteUseCase
-import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsPassengerRemoteUseCase
-import gr.fellow.fellow_traveller.usecase.trips.SearchTripsUseCase
+import gr.fellow.fellow_traveller.usecase.trips.*
+import gr.fellow.fellow_traveller.usecase.user.GetUserInfoByIdUseCase
+import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
 
 
 @InstallIn(ActivityComponent::class)
@@ -28,9 +26,35 @@ class UseCasesModule {
 
     @ActivityScoped
     @Provides
+    fun provideChangePasswordUseCase(dataSource: FellowDataSource): ChangePasswordUseCase {
+        return ChangePasswordUseCase(dataSource)
+    }
+
+    @ActivityScoped
+    @Provides
+    fun provideExitFromTripUseCase(dataSource: FellowDataSource): ExitFromTripUseCase {
+        return ExitFromTripUseCase(dataSource)
+    }
+
+    @ActivityScoped
+    @Provides
+    fun provideDeleteTripUseCase(dataSource: FellowDataSource): DeleteTripUseCase {
+        return DeleteTripUseCase(dataSource)
+    }
+
+
+    @ActivityScoped
+    @Provides
     fun provideGetUserInfoRemoteUseCase(dataSource: FellowDataSource): GetUserInfoRemoteUseCase {
         return GetUserInfoRemoteUseCase(dataSource)
     }
+
+    @ActivityScoped
+    @Provides
+    fun provideGetUserInfoByIdUseCase(dataSource: FellowDataSource): GetUserInfoByIdUseCase {
+        return GetUserInfoByIdUseCase(dataSource)
+    }
+
 
     @ActivityScoped
     @Provides

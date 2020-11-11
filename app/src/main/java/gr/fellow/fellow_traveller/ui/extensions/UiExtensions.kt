@@ -4,13 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.drawable.AnimatedVectorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -20,6 +18,8 @@ import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.bumptech.glide.Glide
 import com.tapadoo.alerter.Alerter
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.domain.trip.TripInvolved
+import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import kotlin.reflect.KClass
 
 
@@ -52,12 +52,7 @@ fun Activity.createAlerter(msg: String, color: Int) {
         .show()
 }
 
-fun Activity.openActivityWithFade(activity: Activity) {
-    val intent = Intent(this, activity::class.java)
-    startActivity(intent)
-    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-    finish()
-}
+
 
 fun Activity.openActivityWithFade(intent: Intent) {
     startActivity(intent)
@@ -77,13 +72,12 @@ fun Activity.hideKeyboard() {
     }
     val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
-
-
 }
 
 
-fun Activity.startActivity(activity: KClass<out Activity>) {
+fun Activity.startActivityWithBundle(activity: KClass<out Activity>, bundle: Bundle) {
     val intent = Intent(this, activity.java)
+    intent.putExtras(bundle)
     startActivity(intent)
 }
 
@@ -93,6 +87,19 @@ fun Activity.startActivityClearStack(activity: KClass<out Activity>) {
     startActivity(intent)
     finishAffinity()
 
+}
+
+fun Activity.openGoogleMaps(trip: TripSearch) {
+    val uri = "http://maps.google.com/maps?f=d&hl=en&saddr=${trip.destFrom.latitude},${trip.destFrom.longitude}&daddr=${trip.destTo.latitude},${trip.destTo.longitude}&mode=d"
+    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+    startActivity(Intent.createChooser(intent, "Select an application"))
+
+}
+
+fun Activity.openGoogleMaps(trip: TripInvolved) {
+    val uri = "http://maps.google.com/maps?f=d&hl=en&saddr=${trip.destFrom.latitude},${trip.destFrom.longitude}&daddr=${trip.destTo.latitude},${trip.destTo.longitude}&mode=d"
+    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+    startActivity(Intent.createChooser(intent, "Select an application"))
 }
 
 
@@ -231,6 +238,14 @@ fun ImageView.startAnimation() {
     }
 }
 
+fun ImageButton.startAnimation() {
+    if (drawable is AnimatedVectorDrawableCompat) {
+        (drawable as AnimatedVectorDrawableCompat).start()
+    } else if (drawable is AnimatedVectorDrawable) {
+        (drawable as AnimatedVectorDrawable).start()
+    }
+}
+
 
 fun postDelay(time: Long, function: () -> Unit) {
     /*Timer().schedule(object : TimerTask() {
@@ -249,6 +264,14 @@ fun TextView.setTextHtml(text: String) {
 }
 
 
+fun CharSequence.getString(): String? {
+    return if (this.isEmpty()) null else this.toString().trim()
+}
+
+fun CharSequence.getLength(): Int {
+    return if (this.isEmpty()) 0 else this.toString().length
+}
+
 val Int.toPx: Int
     get() = (this * Resources.getSystem().displayMetrics.density).toInt()
 
@@ -266,9 +289,4 @@ val Double.toDp: Int
 
 val Double.toPx: Int
     get() = (this / Resources.getSystem().displayMetrics.density).toInt()
-
-
-val String.tofloat: Float
-    get() = if (this.isNullOrEmpty()) 0f else toFloat()
-
 

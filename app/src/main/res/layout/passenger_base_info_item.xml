@@ -6,7 +6,7 @@
    >
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/passenger_image"
+        android:id="@+id/picture"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
@@ -30,6 +30,6 @@
         android:text="@string/ERROR_INTERNET_CONNECTION"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passenger_image" />
+        app:layout_constraintTop_toBottomOf="@id/picture" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

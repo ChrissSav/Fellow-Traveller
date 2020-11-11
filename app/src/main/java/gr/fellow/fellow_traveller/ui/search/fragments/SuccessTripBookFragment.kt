@@ -1,11 +1,13 @@
 package gr.fellow.fellow_traveller.ui.search.fragments
 
-import android.animation.Animator
+import android.app.Activity
+import android.content.Intent
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentSuccessTripBookBinding
 import gr.fellow.fellow_traveller.ui.extensions.postDelay
+import gr.fellow.fellow_traveller.ui.extensions.startAnimation
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
 
 @AndroidEntryPoint
@@ -21,25 +23,17 @@ class SuccessTripBookFragment : BaseFragment<FragmentSuccessTripBookBinding>() {
     override fun setUpObservers() {}
 
     override fun setUpViews() {
-        postDelay(500) {
-            binding.textViewHover.animate()
-                .translationX(binding.textViewHover.width.toFloat())
-                .alpha(1.0f)
-                .setListener(object : Animator.AnimatorListener {
-                    override fun onAnimationStart(animation: Animator) {}
-                    override fun onAnimationEnd(animation: Animator) {
-                        try {
-                            Thread.sleep(1000)
-                        } catch (e: InterruptedException) {
-                            e.printStackTrace()
-                        }
-                        //viewModel.finish()
+        binding.view3.startAnimation()
 
-                    }
+        postDelay(1200) {
+            val trip = viewModel.tripBook.value
+            trip?.let {
+                val resultIntent = Intent()
+                resultIntent.putExtra("trip", it)
+                activity?.setResult(Activity.RESULT_OK, resultIntent)
+                activity?.finish()
+            }
 
-                    override fun onAnimationCancel(animation: Animator) {}
-                    override fun onAnimationRepeat(animation: Animator) {}
-                })
         }
     }
 

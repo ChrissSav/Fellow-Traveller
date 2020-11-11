@@ -3,7 +3,7 @@ package gr.fellow.fellow_traveller.ui.main
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import gr.fellow.fellow_traveller.data.ResultWrapperSecond
+import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.domain.externalError
@@ -28,14 +28,14 @@ constructor(
 
     fun login(userName: String, password: String) {
 
-        launchSecond(true) {
+        launch(true) {
             when (val response = loginUseCase(userName, password)) {
-                is ResultWrapperSecond.Success -> {
+                is ResultWrapper.Success -> {
                     registerUserLocalUseCase(response.data)
                     _loginResult.value = true
                 }
-                is ResultWrapperSecond.Error ->
-                    errorSecond.value = externalError(response.error)
+                is ResultWrapper.Error ->
+                    error.value = externalError(response.error)
             }
         }
     }

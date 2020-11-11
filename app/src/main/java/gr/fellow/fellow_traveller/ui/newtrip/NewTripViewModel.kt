@@ -3,7 +3,7 @@ package gr.fellow.fellow_traveller.ui.newtrip
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import gr.fellow.fellow_traveller.data.ResultWrapperSecond
+import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.domain.BagsStatusType
 import gr.fellow.fellow_traveller.domain.car.Car
@@ -11,9 +11,9 @@ import gr.fellow.fellow_traveller.domain.externalError
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.framework.network.google.model.DestinationModel
-import gr.fellow.fellow_traveller.usecase.LoadUserLocalInfoUseCase
 import gr.fellow.fellow_traveller.usecase.home.GetUserCarsLocalUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.RegisterTripRemoteUseCase
+import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
 import gr.fellow.fellow_traveller.utils.dateTimeToTimestamp
 
 
@@ -67,14 +67,14 @@ constructor(
 
 
     fun applyDate(date: String) {
-        launchSecond {
+        launch {
             _date.value = date
         }
 
     }
 
     fun applyTime(time: String) {
-        launchSecond {
+        launch {
             _time.value = time
         }
 
@@ -82,13 +82,13 @@ constructor(
 
 
     fun setDestinationFrom(id: String, title: String) {
-        launchSecond {
+        launch {
             _destinationFrom.value = DestinationModel(id, title)
         }
     }
 
     fun setDestinationTo(id: String, title: String) {
-        launchSecond {
+        launch {
             _userInfo.value = loadUserLocalInfoUseCase()
             _destinationTo.value = DestinationModel(id, title)
         }
@@ -96,25 +96,25 @@ constructor(
 
 
     fun setPrice(priceCurrent: Float) {
-        launchSecond {
+        launch {
             _price.value = priceCurrent
         }
     }
 
     fun setSeats(seatCurrent: Int) {
-        launchSecond {
+        launch {
             _seats.value = seatCurrent
         }
     }
 
     fun setBags(bagsCurrent: BagsStatusType) {
-        launchSecond {
+        launch {
             _bags.value = bagsCurrent
         }
     }
 
     fun setPet(pet: Boolean) {
-        launchSecond {
+        launch {
             _pet.value = pet
         }
     }
@@ -124,31 +124,31 @@ constructor(
     }
 
     fun setCar(carTemp: Car) {
-        launchSecond {
+        launch {
             _car.value = carTemp
         }
     }
 
     fun loadUserCars() {
-        launchSecond {
+        launch {
             _carList.value = getUserCarsLocalUseCase()
         }
     }
 
 
     fun registerTrip() {
-        launchSecond(true) {
+        launch(true) {
             when (val response = registerTripRemoteUseCase(
                 destinationFrom.value?.placeId.toString(), destinationTo.value?.placeId.toString(), car.value?.id.toString(),
                 pet.value!!, seats.value!!, bags.value!!.value, message.value!!, price.value!!, getTimestamp()
             )
                 ) {
-                is ResultWrapperSecond.Success -> {
+                is ResultWrapper.Success -> {
                     _success.value = response.data
                 }
 
-                is ResultWrapperSecond.Error -> {
-                    errorSecond.value = externalError(response.error)
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
                 }
             }
 

@@ -37,7 +37,7 @@ class DateTimeFragment : BaseFragment<FragmentDateTimeBinding>() {
     }
 
     override fun setUpViews() {
-        binding.fellowTextInputDate.onClickListener {
+        binding.fellowTextInputDate.addOnClickListener {
             dateDialog = DatePickerCustomDialog(
                 binding.fellowTextInputDate.text
             ) {
@@ -48,7 +48,7 @@ class DateTimeFragment : BaseFragment<FragmentDateTimeBinding>() {
 
         }
 
-        binding.fellowTextInputTime.onClickListener {
+        binding.fellowTextInputTime.addOnClickListener {
             timeDialog = TimePickerCustomDialog(
                 binding.fellowTextInputTime.text
             ) {
@@ -66,7 +66,7 @@ class DateTimeFragment : BaseFragment<FragmentDateTimeBinding>() {
             ) {
                 findNavController()?.navigate(R.id.next_fragment)
             } else {
-                viewModel.setError(R.string.ERROR_TRIP_TIMESTAMP)
+                viewModel.setErrorMessage(R.string.ERROR_TRIP_TIMESTAMP)
             }
         }
     }

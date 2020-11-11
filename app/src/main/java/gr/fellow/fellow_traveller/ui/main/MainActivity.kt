@@ -37,7 +37,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             })
 
 
-            errorSecond.observe(this@MainActivity, Observer {
+            error.observe(this@MainActivity, Observer {
                 if (it.internal)
                     createAlerter(getString(it.messageId))
                 else

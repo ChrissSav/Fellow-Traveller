@@ -30,7 +30,6 @@
     <string name="success_add_review">Η αξιολόγηση σας καταχωρήθηκε</string>
 
 
-    <integer name="anim_duration">250</integer>
     <string name="title_activity_maps">Map</string>
     <string name="no_driver_message">Δεν υπάρχει μήνυμα από τον οδηγό.</string>
 
@@ -46,8 +45,11 @@
     <string name="allowed">Επιτρέπονται</string>
     <string name="not_allowed">Δεν επιτρέπονται</string>
 
-    <string name="yes">Ναί</string>
-    <string name="no">Όχι</string>
+    <string name="with_pet">Με κατοικίδιο</string>
+    <string name="without_pet">Χωρίς κατοικίδιο</string>
+
+    <string name="yes">Ναι</string>
+    <string name="no">Οχι</string>
 
     <string name="price">%s €</string>
 
@@ -108,5 +110,10 @@
     <string name="plate">Αριθμός Κυκλοφορίας</string>
     <string name="color">Χρώμα</string>
     <string name="car_delete_confirmation_message">Διαγραφή του οχήματος με αριθμό πινακίδας « %s »;</string>
+
+    <string name="regex_min_3_chars_english">^[a-zA-Z0-9]{3,}$</string>
+    <string name="regex_min_3_chars">^.{3,}$</string>
+    <string name="regex_accept_all">^.{0,50}$</string>
+    <string name="regex_car_plate">"^[ΑΒΕΖΗΙΚΜΝΟΡΤΥΧ]{3}-[0-9]{4}$</string>
 
 </resources>

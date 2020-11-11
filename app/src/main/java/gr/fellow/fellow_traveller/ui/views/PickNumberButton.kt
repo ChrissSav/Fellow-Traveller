@@ -35,7 +35,7 @@ class PickNumberButton : ConstraintLayout {
     var currentNum: Int = 0
         set(value) {
             field = value
-            updateTextView()
+            updateTextView(value)
         }
 
     constructor(context: Context) : super(context) {
@@ -152,7 +152,7 @@ class PickNumberButton : ConstraintLayout {
         pickButtonActionListener?.onPickAction(currentNum)
     }
 
-    private fun updateTextView() {
+    private fun updateTextView(currentNum: Int) {
         textView.text = currentNum.toString()
         pickMinusImg.isEnabled = currentNum != minValue
         pickPlusImg.isEnabled = currentNum != maxValue

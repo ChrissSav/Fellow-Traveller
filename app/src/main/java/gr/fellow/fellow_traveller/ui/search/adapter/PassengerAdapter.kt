@@ -11,7 +11,7 @@ import gr.fellow.fellow_traveller.domain.user.Passenger
 import gr.fellow.fellow_traveller.domain.user.UserBase
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.extensions.toPx
-import kotlinx.android.synthetic.main.passenger_image_item.view.*
+import kotlinx.android.synthetic.main.passenger_base_info_item.view.*
 
 
 class PassengerAdapter(
@@ -21,7 +21,7 @@ class PassengerAdapter(
     RecyclerView.Adapter<PassengerAdapter.ExampleViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExampleViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(
-            R.layout.passenger_image_item,
+            R.layout.passenger_base_info_item,
             parent, false
         )
         return ExampleViewHolder(itemView)
@@ -46,7 +46,7 @@ class PassengerAdapter(
                 listener(passenger.user)
             }
             image.loadImageFromUrl(passenger.user.picture)
-            name.text = passenger.user.fullNameNewLine
+            name.text = passenger.user.fullName
         }
 
     }
@@ -55,7 +55,7 @@ class PassengerAdapter(
 
     class ExampleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.passenger_username
-        val image: ImageView = itemView.passenger_image
+        val image: ImageView = itemView.picture
 
     }
 }

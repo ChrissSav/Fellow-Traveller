@@ -6,7 +6,6 @@ import com.willy.ratingbar.BaseRatingBar.OnRatingChangeListener
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivityRateBinding
-import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 import gr.fellow.fellow_traveller.ui.extensions.createToast
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 
@@ -30,9 +29,6 @@ class RateActivity : BaseActivity<ActivityRateBinding>() {
             finish()
         })
 
-        viewModel.error.observe(this, Observer {
-            createAlerter(getString(it))
-        })
     }
 
     override fun setUpViews() {

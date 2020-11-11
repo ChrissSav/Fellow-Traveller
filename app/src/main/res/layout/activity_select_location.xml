@@ -79,7 +79,7 @@
 
     <TextView
         android:id="@+id/imageView_internet"
-        style="@style/header1"
+        style="@style/header_1"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"

@@ -35,11 +35,11 @@ class DestinationsFragment : BaseFragment<FragmentDestinationsBinding>() {
     }
 
     override fun setUpViews() {
-        binding.editTextFrom.onClickListener {
+        binding.editTextFrom.addOnClickListener {
             startActivityForResultWithFade(SelectLocationActivity::class, 1)
         }
 
-        binding.editTextTo.onClickListener {
+        binding.editTextTo.addOnClickListener {
             startActivityForResultWithFade(SelectLocationActivity::class, 2)
         }
 
@@ -47,10 +47,10 @@ class DestinationsFragment : BaseFragment<FragmentDestinationsBinding>() {
 
             when {
                 viewModel.destinationFrom.value == null -> {
-                    viewModel.setSecondError(R.string.ERROR_SELECT_DEST_FROM)
+                    viewModel.setErrorMessage(R.string.ERROR_SELECT_DEST_FROM)
                 }
                 viewModel.destinationTo.value == null -> {
-                    viewModel.setSecondError(R.string.ERROR_SELECT_DEST_TO)
+                    viewModel.setErrorMessage(R.string.ERROR_SELECT_DEST_TO)
                 }
                 else -> {
                     findNavController()?.navigate(R.id.action_destinationsFragment_to_dateTimeFragment)

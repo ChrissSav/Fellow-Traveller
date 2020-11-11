@@ -14,8 +14,8 @@
         <ImageButton
             android:id="@+id/back_button"
             style="@style/border_icon_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/back_button_width_height"
+            android:layout_height="@dimen/back_button_width_height"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="20dp"
             android:src="@drawable/ic_back_button"
@@ -54,10 +54,11 @@
         <TextView
             android:id="@+id/user_email_address_text_view"
             style="@style/paragraph_1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="5dp"
-            android:text="@string/EMAIL_PLACEHOLDER"
+            android:layout_marginRight="16dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/user_full_name_text_view" />
@@ -177,10 +178,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
+            android:layout_marginBottom="16dp"
             android:text="Αποσύνδεση"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
+            app:layout_constraintVertical_bias="0.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

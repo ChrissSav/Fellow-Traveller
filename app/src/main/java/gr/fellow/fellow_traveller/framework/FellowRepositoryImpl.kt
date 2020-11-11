@@ -3,15 +3,14 @@ package gr.fellow.fellow_traveller.framework
 import android.content.SharedPreferences
 import gr.fellow.fellow_traveller.data.FellowRepository
 import gr.fellow.fellow_traveller.data.ResultWrapper
-import gr.fellow.fellow_traveller.data.ResultWrapperSecond
 import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
 import gr.fellow.fellow_traveller.framework.network.fellow.request.*
-import gr.fellow.fellow_traveller.framework.network.fellow.response.StatusHandleResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.UserAuthResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.car.CarInfoResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.TripInvolvedResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.TripSearchResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.user.UserAuthResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.response.user.UserInfoResponse
 import gr.fellow.fellow_traveller.room.dao.CarDao
 import gr.fellow.fellow_traveller.room.dao.UserAuthDao
 import gr.fellow.fellow_traveller.room.entites.CarEntity
@@ -26,38 +25,38 @@ class FellowRepositoryImpl(
 ) : FellowRepository {
 
 
-    override suspend fun checkField(checkEmailRequest: CheckEmailRequest): ResultWrapperSecond<String> =
-        networkCallSecond {
+    override suspend fun checkField(checkEmailRequest: CheckEmailRequest): ResultWrapper<String> =
+        networkCall {
             service.checkIfAccountInfoExist(checkEmailRequest).handleApiFormat()
         }
 
 
-    override suspend fun registerUserRemote(registerUserRequest: AccountCreateRequest): ResultWrapperSecond<String> =
-        networkCallSecond {
+    override suspend fun registerUserRemote(registerUserRequest: AccountCreateRequest): ResultWrapper<String> =
+        networkCall {
             service.registerUser(registerUserRequest).handleApiFormat()
         }
 
-    override suspend fun verifyAccount(token: String): ResultWrapperSecond<String> =
-        networkCallSecond {
+    override suspend fun verifyAccount(token: String): ResultWrapper<String> =
+        networkCall {
             service.verifyAccount(token).handleApiFormat()
         }
 
-    override suspend fun loginUserRemote(loginRequest: LoginRequest): ResultWrapperSecond<UserAuthResponse> =
-        networkCallSecond {
+    override suspend fun loginUserRemote(loginRequest: LoginRequest): ResultWrapper<UserAuthResponse> =
+        networkCall {
             when (val response = service.userLogin(loginRequest).handleApiFormat()) {
-                is ResultWrapperSecond.Success -> {
+                is ResultWrapper.Success -> {
                     sharedPrefs[PREFS_AUTH_ACCESS_TOKEN] = response.data.authenticationToken
                     sharedPrefs[PREFS_AUTH_REFRESH_TOKEN] = response.data.refreshToken
-                    ResultWrapperSecond.Success(response.data.accountInfo)
+                    ResultWrapper.Success(response.data.accountInfo)
                 }
-                is ResultWrapperSecond.Error -> {
-                    ResultWrapperSecond.Error(response.error)
+                is ResultWrapper.Error -> {
+                    ResultWrapper.Error(response.error)
                 }
             }
         }
 
-    override suspend fun logout(): ResultWrapperSecond<String> =
-        networkCallSecond {
+    override suspend fun logout(): ResultWrapper<String> =
+        networkCall {
             val refreshToken = sharedPrefs.getString(PREFS_AUTH_REFRESH_TOKEN, "").toString()
             val response = service.logout(LogoutRequest(refreshToken)).handleApiFormat()
             sharedPrefs[PREFS_AUTH_ACCESS_TOKEN] = null
@@ -65,65 +64,75 @@ class FellowRepositoryImpl(
             response
         }
 
-    override suspend fun forgotPassword(forgotPasswordRequest: ForgotPasswordRequest): ResultWrapperSecond<String> =
-        networkCallSecond {
+    override suspend fun forgotPassword(forgotPasswordRequest: ForgotPasswordRequest): ResultWrapper<String> =
+        networkCall {
             service.forgotPassword(forgotPasswordRequest).handleApiFormat()
         }
 
 
-    override suspend fun resetPassword(resetPasswordRequest: ResetPasswordRequest): ResultWrapperSecond<String> =
-        networkCallSecond {
+    override suspend fun resetPassword(resetPasswordRequest: ResetPasswordRequest): ResultWrapper<String> =
+        networkCall {
             service.resetPassword(resetPasswordRequest).handleApiFormat()
         }
 
-    override suspend fun updateAccountInfo(updateAccountRequest: UpdateAccountRequest): ResultWrapperSecond<UserAuthResponse> =
-        networkCallSecond {
+    override suspend fun updateAccountInfo(updateAccountRequest: UpdateAccountRequest): ResultWrapper<UserAuthResponse> =
+        networkCall {
             service.updateAccount(updateAccountRequest).handleApiFormat()
         }
 
-    override suspend fun updateUserPicture(updatePictureRequest: UpdatePictureRequest): ResultWrapperSecond<UserAuthResponse> =
-        networkCallSecond {
+    override suspend fun updateUserPicture(updatePictureRequest: UpdatePictureRequest): ResultWrapper<UserAuthResponse> =
+        networkCall {
             service.updateUserPicture(updatePictureRequest).handleApiFormat()
         }
 
-    override suspend fun getUserInfo(): ResultWrapperSecond<UserAuthResponse> =
-        networkCallSecond {
+    override suspend fun getUserInfo(): ResultWrapper<UserAuthResponse> =
+        networkCall {
             service.getUserInfo().handleApiFormat()
         }
 
+    override suspend fun getUserInfoById(userId: String): ResultWrapper<UserInfoResponse> =
+        networkCall {
+            service.getUserInfo(userId).handleApiFormat()
+        }
 
-    override suspend fun addCarRemote(carRequest: CarRequest): ResultWrapperSecond<CarInfoResponse> =
-        networkCallSecond {
+    override suspend fun changePassword(updatePasswordRequest: UpdatePasswordRequest): ResultWrapper<String> =
+        networkCall {
+            service.updateUserPassword(updatePasswordRequest).handleApiFormat()
+        }
+
+
+    override suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<CarInfoResponse> =
+        networkCall {
             service.addCar(carRequest).handleApiFormat()
         }
 
-    override suspend fun getCarsRemote(): ResultWrapperSecond<MutableList<CarInfoResponse>> =
-        networkCallSecond {
+    override suspend fun getCarsRemote(): ResultWrapper<MutableList<CarInfoResponse>> =
+        networkCall {
             service.userCars().handleApiFormat()
         }
 
-    override suspend fun deleteCarRemote(carId: Int): ResultWrapper<StatusHandleResponse> =
+    override suspend fun deleteCarRemote(carId: String): ResultWrapper<String> =
         networkCall {
-            service.deleteCar(carId).handleToCorrectFormat()
+            service.deleteCar(carId).handleApiFormat()
         }
 
-    override suspend fun registerTripRemote(trip: TripCreateRequest): ResultWrapperSecond<TripInvolvedResponse> =
-        networkCallSecond {
+    override suspend fun registerTripRemote(trip: TripCreateRequest): ResultWrapper<TripInvolvedResponse> =
+        networkCall {
             service.registerTrip(trip).handleApiFormat()
         }
 
-    override suspend fun getTipsAsCreator(): ResultWrapper<MutableList<TripInvolvedResponse>> =
+    override suspend fun getTipsAsCreator(status: String, page: Int): ResultWrapper<MutableList<TripInvolvedResponse>> =
         networkCall {
-            service.getTripsAs("creator").handleToCorrectFormat()
+            service.getTripsAs("creator", status, page).handleApiFormat()
         }
 
-    override suspend fun getTipsAsPassenger(): ResultWrapper<MutableList<TripInvolvedResponse>> =
+    override suspend fun getTipsAsPassenger(status: String, page: Int): ResultWrapper<MutableList<TripInvolvedResponse>> =
         networkCall {
-            service.getTripsAs("passenger").handleToCorrectFormat()
+            service.getTripsAs("passenger", status, page).handleApiFormat()
         }
 
-    override suspend fun searchTrips(query: SearchTripFilter): ResultWrapperSecond<MutableList<TripSearchResponse>> =
-        networkCallSecond {
+    override suspend fun searchTrips(query: SearchTripFilter): ResultWrapper<MutableList<TripSearchResponse>> =
+        networkCall {
             with(query) {
                 service.searchTrips(
                     latitudeFrom, longitudeFrom, latitudeTo, longitudeTo, rangeFrom,
@@ -135,7 +144,17 @@ class FellowRepositoryImpl(
 
     override suspend fun bookTrip(request: BookTripRequest): ResultWrapper<TripInvolvedResponse> =
         networkCall {
-            service.bookTrip(request).handleToCorrectFormat()
+            service.bookTrip(request).handleApiFormat()
+        }
+
+    override suspend fun exitFromTrip(tripId: String): ResultWrapper<String> =
+        networkCall {
+            service.exitFromTrip(tripId).handleApiFormat()
+        }
+
+    override suspend fun deleteTrip(tripId: String): ResultWrapper<String> =
+        networkCall {
+            service.deleteTrip(tripId).handleApiFormat()
         }
 
     override suspend fun registerUserAuthLocal(userEntity: RegisteredUserEntity) =
@@ -160,9 +179,9 @@ class FellowRepositoryImpl(
             carDao.deleteCars()
         }
 
-    override suspend fun deleteCarByIdLocal(id: Int) =
+    override suspend fun deleteCarByIdLocal(id: String) =
         roomCall {
-            carDao.deleteCarById(id.toString())
+            carDao.deleteCarById(id)
         }
 
     override suspend fun getAllCarsLocal() =

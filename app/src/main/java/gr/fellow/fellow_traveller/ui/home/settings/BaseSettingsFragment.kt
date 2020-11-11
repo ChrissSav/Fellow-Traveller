@@ -6,9 +6,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentBaseSettingsBinding
-import gr.fellow.fellow_traveller.ui.extensions.*
+import gr.fellow.fellow_traveller.ui.extensions.findNavController
+import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
+import gr.fellow.fellow_traveller.ui.extensions.navigateWithAnimation
+import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
-import gr.fellow.fellow_traveller.ui.main.MainActivity
 
 @AndroidEntryPoint
 class BaseSettingsFragment : BaseFragment<FragmentBaseSettingsBinding>() {
@@ -29,9 +31,6 @@ class BaseSettingsFragment : BaseFragment<FragmentBaseSettingsBinding>() {
             }
         })
 
-        viewModel.logout.observe(viewLifecycleOwner, Observer {
-            startActivityClearStack(MainActivity::class)
-        })
     }
 
     override fun setUpViews() {
@@ -42,6 +41,10 @@ class BaseSettingsFragment : BaseFragment<FragmentBaseSettingsBinding>() {
         binding.personalInfo.setOnClickListener {
             findNavController()?.navigateWithAnimation(R.id.action_baseSettingsFragment_to_accountSettingsFragment)
 
+        }
+
+        binding.password.setOnClickListener {
+            findNavController()?.navigate(R.id.action_baseSettingsFragment_to_changePasswordFragment)
         }
 
         binding.myCars.setOnClickListener {

@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.usecase
+package gr.fellow.fellow_traveller.usecase.user
 
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.domain.user.LocalUser
