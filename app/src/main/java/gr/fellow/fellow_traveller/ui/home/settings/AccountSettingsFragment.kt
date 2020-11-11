@@ -1,13 +1,17 @@
 package gr.fellow.fellow_traveller.ui.home.settings
 
+import android.app.Activity.CONNECTIVITY_SERVICE
 import android.app.Activity.RESULT_OK
 import android.content.ContentResolver
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.webkit.MimeTypeMap
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.google.firebase.storage.FirebaseStorage
@@ -33,6 +37,10 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
     private var tempImagefile: File? = null
     private var newImage = ""
     private lateinit var userImagePickBottomSheetDialog: UserImagePickBottomSheetDialog
+    //Connection Manager
+    private val connectionManager: ConnectivityManager = activity?.getSystemService(CONNECTIVITY_SERVICE) as android.net.ConnectivityManager
+
+
 
     override fun getViewBinding(): FragmentAccountSettingsBinding =
         FragmentAccountSettingsBinding.inflate(layoutInflater)
@@ -205,8 +213,18 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
 
     private fun onImageSelect(value: Boolean) {
         if (value)
-            onChooseFile()
+            if (isConnected())
+                onChooseFile()
+            else
+                createToast("Ελέξτε την σύνδεση του δικτύου σας για το ανεβάσμα νέας φωτογραφίας")
         else
             viewModel.updateUserImage(null)
+    }
+
+    private fun isConnected(): Boolean{
+        val activeNetwork: NetworkInfo? = connectionManager.activeNetworkInfo
+        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting  == true
+
+        return isConnected
     }
 }
