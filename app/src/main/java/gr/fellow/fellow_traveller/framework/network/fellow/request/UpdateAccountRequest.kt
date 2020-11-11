@@ -10,3 +10,9 @@ data class UpdateAccountRequest(
 data class UpdatePictureRequest(
     val picture: String?
 )
+
+
+data class UpdatePasswordRequest(
+    val password: String,
+    val repeatPassword: String
+)

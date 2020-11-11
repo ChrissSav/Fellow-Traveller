@@ -11,6 +11,7 @@ import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.externalError
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
+import gr.fellow.fellow_traveller.usecase.auth.ChangePasswordUseCase
 import gr.fellow.fellow_traveller.usecase.auth.DeleteUserAuthLocalUseCase
 import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
@@ -40,6 +41,7 @@ constructor(
     private val getTripsAsPassengerRemoteUseCase: GetTripsAsPassengerRemoteUseCase,
     private val updateUserPictureUseCase: UpdateUserPictureUseCase,
     private val deleteTripUseCase: DeleteTripUseCase,
+    private val changePasswordUseCase: ChangePasswordUseCase,
     private val exitFromTripUseCase: ExitFromTripUseCase
 ) : BaseViewModel() {
 
@@ -58,6 +60,9 @@ constructor(
 
     private val _carDeletedId = SingleLiveEvent<Car>()
     val carDeletedId: LiveData<Car> = _carDeletedId
+
+    private val _changePassword = SingleLiveEvent<Boolean>()
+    val changePassword: LiveData<Boolean> = _changePassword
 
 
     /**  AS PASSENGER **/
@@ -123,6 +128,22 @@ constructor(
             _logout.value = true
         }
     }
+
+    fun changePassword(password: String) {
+        launch {
+            when (val response = changePasswordUseCase(password)) {
+                is ResultWrapper.Success -> {
+                    _changePassword.value = true
+                }
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
+                }
+            }
+        }
+    }
+
+    /** CARS ***/
+
 
     fun loadCars() {
         launch {

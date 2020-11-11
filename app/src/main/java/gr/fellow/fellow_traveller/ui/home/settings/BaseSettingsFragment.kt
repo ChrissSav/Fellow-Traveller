@@ -43,6 +43,10 @@ class BaseSettingsFragment : BaseFragment<FragmentBaseSettingsBinding>() {
 
         }
 
+        binding.password.setOnClickListener {
+            findNavController()?.navigate(R.id.action_baseSettingsFragment_to_changePasswordFragment)
+        }
+
         binding.myCars.setOnClickListener {
             findNavController()?.navigate(R.id.action_baseSettingsFragment_to_userCarsFragment)
         }

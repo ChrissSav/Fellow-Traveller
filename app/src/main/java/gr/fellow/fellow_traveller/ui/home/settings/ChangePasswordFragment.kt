@@ -1,43 +1,58 @@
 package gr.fellow.fellow_traveller.ui.home.settings
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import dagger.hilt.android.AndroidEntryPoint
+import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentChangePasswordBinding
+import gr.fellow.fellow_traveller.ui.extensions.createAlerter
+import gr.fellow.fellow_traveller.ui.extensions.createToast
+import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
+import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 
 
-class ChangePasswordFragment : Fragment() {
+@AndroidEntryPoint
+class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
 
-    private var _binding: FragmentChangePasswordBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentChangePasswordBinding.inflate(inflater, container, false)
-        return binding.root
+    private val viewModel: HomeViewModel by activityViewModels()
 
 
+    override fun getViewBinding(): FragmentChangePasswordBinding =
+        FragmentChangePasswordBinding.inflate(layoutInflater)
+
+
+    override fun setUpObservers() {
+
+        viewModel.changePassword.observe(viewLifecycleOwner, Observer {
+            createToast("Επιτυχής Αλλαγή κωδικού")
+            onBackPressed()
+        })
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun setUpViews() {
 
-        binding.ActivityChangePasswordBackButton.setOnClickListener {
+        binding.ImageButtonBack.setOnClickListener {
             onBackPressed()
         }
-    }
+
+        binding.buttonNext.setOnClickListener {
+
+            hideKeyboard()
+            if (binding.password.isCorrect() && binding.passwordConfirm.isCorrect()) {
+                val pass = binding.password.text.toString()
+                val passConfirm = binding.passwordConfirm.text.toString()
+                if (pass == passConfirm) {
+                    viewModel.changePassword(pass)
+                } else {
+                    createAlerter(resources.getString(R.string.ERROR_PASSWORD_DO_NOT_MATCH))
+                }
+            }
+        }
 
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 

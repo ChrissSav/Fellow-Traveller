@@ -7,6 +7,7 @@ import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.domain.user.UserInfo
 import gr.fellow.fellow_traveller.framework.network.fellow.request.CarRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.request.UpdatePasswordRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.response.user.UserAuthResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.DetailsResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
@@ -44,6 +45,7 @@ interface FellowDataSource {
 
     suspend fun getUserInfoById(userId: String): ResultWrapper<UserInfo>
 
+    suspend fun changePassword(updatePasswordRequest: UpdatePasswordRequest): ResultWrapper<String>
 
     // Cars
 

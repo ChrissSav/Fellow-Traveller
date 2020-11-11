@@ -55,16 +55,20 @@
                 app:layout_constraintTop_toBottomOf="@+id/LoginActivity_textView_header"
                 app:text_type_f="textEmailAddress" />
 
-            <gr.fellow.fellow_traveller.ui.views.FellowPassword
+
+            <gr.fellow.fellow_traveller.ui.views.FellowEditText
                 android:id="@+id/password"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                app:hint_Password="Κωδικός πρόσβασης"
-                app:imeOptions_Password="actionDone"
+                android:layout_marginTop="51dp"
+                app:hint_f="Κωδικός πρόσβασης"
+                app:imeOptions_f="actionDone"
                 app:layout_constraintEnd_toEndOf="@+id/email"
                 app:layout_constraintStart_toStartOf="@+id/email"
-                app:layout_constraintTop_toBottomOf="@+id/email" />
+                app:layout_constraintTop_toBottomOf="@+id/email"
+                app:regex_f="@string/regex_min_3_chars"
+                app:text_type_f="textPassword" />
+
 
             <TextView
                 android:id="@+id/forgot_password"
@@ -98,8 +102,8 @@
         android:background="@drawable/fab_background_aqua"
         android:backgroundTint="@color/colorPrimary"
         android:drawableStart="@drawable/ic_right_arrow"
-        android:drawableTint="@color/white"
         android:drawablePadding="8dp"
+        android:drawableTint="@color/white"
         android:elevation="16dp"
         android:gravity="center|end"
         android:paddingStart="16dp"

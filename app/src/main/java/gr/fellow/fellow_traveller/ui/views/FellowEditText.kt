@@ -1,14 +1,17 @@
 package gr.fellow.fellow_traveller.ui.views
 
 import android.content.Context
+import android.graphics.Typeface
 import android.text.Editable
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.text.InputType
 import android.text.TextWatcher
+import android.text.method.PasswordTransformationMethod
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.constraintlayout.widget.ConstraintLayout
 import gr.fellow.fellow_traveller.R
@@ -33,6 +36,7 @@ class FellowEditText(context: Context, attrs: AttributeSet) : ConstraintLayout(c
     private var label: String? = null
     private var errorMessage = ""
     private var correct = false
+    private var passwordIsHide = false
 
     var text: String? = null
         get() = binding.editText.text.getString()
@@ -71,6 +75,12 @@ class FellowEditText(context: Context, attrs: AttributeSet) : ConstraintLayout(c
         binding.editText.imeOptions = imeOptions
         binding.editText.inputType = inputType
         binding.editText.hint = hint
+
+        if (inputType == InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD) {
+            binding.showHide.visibility = View.VISIBLE
+            binding.editText.typeface = Typeface.DEFAULT
+            binding.editText.transformationMethod = PasswordTransformationMethod()
+        }
 
         if (textAllCaps)
             binding.editText.inputType = InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS
@@ -144,6 +154,21 @@ class FellowEditText(context: Context, attrs: AttributeSet) : ConstraintLayout(c
                 println("fellowEditTextTextInputEditText Exception")
                 e.printStackTrace()
             }
+        }
+
+        binding.showHide.setOnClickListener {
+            if (passwordIsHide) {
+                binding.editText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                binding.editText.transformationMethod = PasswordTransformationMethod()
+                binding.showHide.text = context.getString(R.string.show_password)
+            } else {
+                binding.editText.inputType = InputType.TYPE_CLASS_TEXT
+                binding.editText.transformationMethod = null
+                binding.showHide.text = context.getString(R.string.hide_password)
+
+            }
+            binding.editText.setSelection(binding.editText.text.length)
+            passwordIsHide = !passwordIsHide
         }
 
 

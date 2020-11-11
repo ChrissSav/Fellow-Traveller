@@ -23,6 +23,13 @@ import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
 @Module
 class UseCasesModule {
 
+
+    @ActivityScoped
+    @Provides
+    fun provideChangePasswordUseCase(dataSource: FellowDataSource): ChangePasswordUseCase {
+        return ChangePasswordUseCase(dataSource)
+    }
+
     @ActivityScoped
     @Provides
     fun provideExitFromTripUseCase(dataSource: FellowDataSource): ExitFromTripUseCase {

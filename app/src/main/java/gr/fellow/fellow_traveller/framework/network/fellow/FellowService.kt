@@ -78,6 +78,12 @@ interface FellowService {
         @Body updatePictureRequest: UpdatePictureRequest
     ): Response<BaseResponse<UserAuthResponse>>
 
+
+    @PUT("user/me/password")
+    suspend fun updateUserPassword(
+        @Body updatePasswordRequest: UpdatePasswordRequest
+    ): Response<BaseResponse<String>>
+
     /** CAR **/
 
     @GET("car")

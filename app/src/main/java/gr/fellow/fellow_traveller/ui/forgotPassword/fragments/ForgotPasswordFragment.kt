@@ -6,12 +6,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentForgotPasswordBinding
-import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
 import gr.fellow.fellow_traveller.ui.forgotPassword.ForgotPasswordViewModel
-import gr.fellow.fellow_traveller.utils.isValidEmail
 
 
 @AndroidEntryPoint
@@ -42,11 +40,9 @@ class ForgotPasswordFragment : BaseFragment<FragmentForgotPasswordBinding>() {
 
         binding.recovery.setOnClickListener {
             hideKeyboard()
-            val email = binding.email.text.toString().trim()
-            if (isValidEmail(email)) {
+            if (binding.email.isCorrect()) {
+                val email = binding.email.text.toString().trim()
                 viewModel.forgotPassword(email)
-            } else {
-                createAlerter(resources.getString(R.string.ERROR_INVALID_EMAIL_FORMAT))
             }
         }
 

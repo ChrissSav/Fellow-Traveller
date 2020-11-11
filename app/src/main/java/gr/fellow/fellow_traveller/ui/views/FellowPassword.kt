@@ -40,6 +40,7 @@ class FellowPassword(context: Context, attrs: AttributeSet) : ConstraintLayout(c
         } catch (e: Exception) {
             e.printStackTrace()
         }
+        attributes.recycle()
 
 
         binding.fellowEditTextTextInputLayout.hint = hint
@@ -47,7 +48,6 @@ class FellowPassword(context: Context, attrs: AttributeSet) : ConstraintLayout(c
         binding.fellowEditTextTextInputEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
         binding.fellowEditTextTextInputEditText.transformationMethod = PasswordTransformationMethod()
 
-        attributes.recycle()
 
 
         binding.showHide.setOnClickListener {

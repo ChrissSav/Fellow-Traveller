@@ -38,6 +38,8 @@ interface FellowRepository {
 
     suspend fun getUserInfoById(userId: String): ResultWrapper<UserInfoResponse>
 
+    suspend fun changePassword(updatePasswordRequest: UpdatePasswordRequest): ResultWrapper<String>
+
 
     // Cars
 

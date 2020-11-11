@@ -65,6 +65,9 @@ class FellowDataSourceImpl(
         }
     }
 
+    override suspend fun changePassword(updatePasswordRequest: UpdatePasswordRequest): ResultWrapper<String> =
+        repository.changePassword(updatePasswordRequest)
+
 
     override suspend fun getCarsRemote(): ResultWrapper<MutableList<Car>> {
         return when (val response = repository.getCarsRemote()) {

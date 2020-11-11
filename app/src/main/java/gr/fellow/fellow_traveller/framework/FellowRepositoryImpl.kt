@@ -95,6 +95,11 @@ class FellowRepositoryImpl(
             service.getUserInfo(userId).handleApiFormat()
         }
 
+    override suspend fun changePassword(updatePasswordRequest: UpdatePasswordRequest): ResultWrapper<String> =
+        networkCall {
+            service.updateUserPassword(updatePasswordRequest).handleApiFormat()
+        }
+
 
     override suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<CarInfoResponse> =
         networkCall {
