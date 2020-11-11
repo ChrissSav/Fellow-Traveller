@@ -3,6 +3,7 @@ package gr.fellow.fellow_traveller.ui.home.settings
 import android.app.Activity.CONNECTIVITY_SERVICE
 import android.app.Activity.RESULT_OK
 import android.content.ContentResolver
+import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
@@ -11,7 +12,6 @@ import android.util.Log
 import android.view.View
 import android.webkit.MimeTypeMap
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.google.firebase.storage.FirebaseStorage
@@ -39,8 +39,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
     private var tempImageFile: File? = null
     private var newImage = ""
     private lateinit var userImagePickBottomSheetDialog: UserImagePickBottomSheetDialog
-    //Connection Manager
-    private val connectionManager: ConnectivityManager = activity?.getSystemService(CONNECTIVITY_SERVICE) as android.net.ConnectivityManager
+
 
 
 
@@ -96,6 +95,8 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                 viewModel.updateAccountInfo(firstName, lastName, binding.messengerLink.text, binding.aboutMe.text)
             }
         }
+
+
     }
 
 
@@ -172,6 +173,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
 
                     //updateUserImageOnFirebase(uri.toString())
                     //updateUserPicture(uri.toString())
+
                     createToast("Η φωτογραφία ανέβηκε επιτυχώς")
                 }
                 //Log.i("Image", taskSnapshot.uploadSessionUri.toString())
@@ -185,6 +187,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                     val progress = 100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount
                     // TODO add progress bar
                     //imageProgressBar.setProgress(progress.toInt())
+
                 }
         } else {
             viewModel.setLoad(false)
@@ -206,15 +209,21 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
             if (isConnected())
                 onChooseFile()
             else
-                createToast("Ελέξτε την σύνδεση του δικτύου σας για το ανεβάσμα νέας φωτογραφίας")
+                createToast("Ελέγξτε την σύνδεση του δικτύου σας για το ανεβάσμα νέας φωτογραφίας")
         else
-            viewModel.updateUserImage(null)
+            if (isConnected())
+                viewModel.updateUserImage(null)
+            else
+                createToast("Ελέγξτε την σύνδεση του δικτύου σας για το ανεβάσμα νέας φωτογραφίας")
     }
 
-    private fun isConnected(): Boolean{
+    private fun isConnected(): Boolean {
+        //Connection Manager
+        val connectionManager: ConnectivityManager = activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork: NetworkInfo? = connectionManager.activeNetworkInfo
-        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting  == true
+        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
 
         return isConnected
     }
+
 }
