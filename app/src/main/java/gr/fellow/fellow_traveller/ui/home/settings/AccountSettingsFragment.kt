@@ -1,8 +1,12 @@
 package gr.fellow.fellow_traveller.ui.home.settings
 
+import android.app.Activity.CONNECTIVITY_SERVICE
 import android.app.Activity.RESULT_OK
 import android.content.ContentResolver
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.net.Uri
 import android.util.Log
 import android.view.View
@@ -35,6 +39,9 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
     private var tempImageFile: File? = null
     private var newImage = ""
     private lateinit var userImagePickBottomSheetDialog: UserImagePickBottomSheetDialog
+
+
+
 
     override fun getViewBinding(): FragmentAccountSettingsBinding =
         FragmentAccountSettingsBinding.inflate(layoutInflater)
@@ -88,6 +95,8 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                 viewModel.updateAccountInfo(firstName, lastName, binding.messengerLink.text, binding.aboutMe.text)
             }
         }
+
+
     }
 
 
@@ -164,6 +173,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
 
                     //updateUserImageOnFirebase(uri.toString())
                     //updateUserPicture(uri.toString())
+
                     createToast("Η φωτογραφία ανέβηκε επιτυχώς")
                 }
                 //Log.i("Image", taskSnapshot.uploadSessionUri.toString())
@@ -177,6 +187,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                     val progress = 100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount
                     // TODO add progress bar
                     //imageProgressBar.setProgress(progress.toInt())
+
                 }
         } else {
             viewModel.setLoad(false)
@@ -195,8 +206,24 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
 
     private fun onImageSelect(value: Boolean) {
         if (value)
-            onChooseFile()
+            if (isConnected())
+                onChooseFile()
+            else
+                createToast("Ελέγξτε την σύνδεση του δικτύου σας για το ανεβάσμα νέας φωτογραφίας")
         else
-            viewModel.updateUserImage(null)
+            if (isConnected())
+                viewModel.updateUserImage(null)
+            else
+                createToast("Ελέγξτε την σύνδεση του δικτύου σας για το ανεβάσμα νέας φωτογραφίας")
     }
+
+    private fun isConnected(): Boolean {
+        //Connection Manager
+        val connectionManager: ConnectivityManager = activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = connectionManager.activeNetworkInfo
+        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+
+        return isConnected
+    }
+
 }

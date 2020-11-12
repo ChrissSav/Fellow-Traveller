@@ -44,16 +44,24 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/filters_tv" />
 
-
+            <TextView
+                android:id="@+id/date_textView"
+                style="@style/header_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="84dp"
+                android:text="Ημερομηνία"
+                app:layout_constraintStart_toStartOf="@+id/filters_tv"
+                app:layout_constraintTop_toBottomOf="@+id/filters_tv" />
             <TextView
                 android:id="@+id/textView7"
                 style="@style/header_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="84dp"
+                android:layout_marginTop="@dimen/filters_view_margin_top_second"
                 android:text="Ελεύθερες Θέσεις"
-                app:layout_constraintStart_toStartOf="@+id/filters_tv"
-                app:layout_constraintTop_toBottomOf="@+id/filters_tv" />
+                app:layout_constraintStart_toStartOf="@+id/date_textView"
+                app:layout_constraintTop_toBottomOf="@+id/date_textView" />
 
             <TextView
                 android:id="@+id/textView10"
@@ -75,6 +83,18 @@
                 android:text="Χωρητικότητα"
                 app:layout_constraintStart_toStartOf="@+id/textView7"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+            <EditText
+                android:id="@+id/date"
+                style="@style/editText_not_editable"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_number_layout_height"
+                android:gravity="center|end"
+                android:hint="Εύρος ημ/νίας"
+                android:padding="@dimen/calendar_margin_16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/date_textView"
+                app:layout_constraintEnd_toEndOf="@+id/clear"
+                app:layout_constraintTop_toTopOf="@+id/date_textView"/>
 
             <gr.fellow.fellow_traveller.ui.views.PickNumberButton
                 android:id="@+id/seats_pick_button"
@@ -108,7 +128,7 @@
                 android:padding="@dimen/calendar_margin_16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView10"
                 app:layout_constraintEnd_toEndOf="@+id/bags_pick_button"
-                app:layout_constraintTop_toTopOf="@+id/textView10" />
+                app:layout_constraintTop_toTopOf="@+id/textView10"/>
 
 
             <TextView
