@@ -97,12 +97,13 @@
     <!--Fragment fragment_base_info -->
 
     <string name="fragment_base_info_header">Καθόρισε τα στοιχεία του ταξιδιού</string>
-    <!-- <string name="select_day">Ημερομηνία</string>
-     <string name="select_time">Ώρα</string>-->
 
     <!--Fragment fragment_price -->
     <string name="fragment_price_overview">%s x %s €</string>
 
+
+    <!--Fragment fragment trip involved details -->
+    <string name="trip_involved_description">Κατάσταση ταξιδιού:  &lt;b&gt;%s&lt;/b></string>
 
     <!--Car -->
     <string name="brand">Μάρκα</string>

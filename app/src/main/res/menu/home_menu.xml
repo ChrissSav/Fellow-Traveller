@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/destination_main"
-        android:icon="@drawable/ic_logo_asset_2"
+        android:icon="@drawable/ic_logo_black"
         android:title="Αρχική" />
     <item
         android:id="@+id/destination_trips"

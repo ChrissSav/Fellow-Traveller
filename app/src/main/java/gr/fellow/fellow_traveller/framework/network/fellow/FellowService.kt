@@ -150,4 +150,18 @@ interface FellowService {
     suspend fun deleteTrip(
         @Path("trip_id") tripId: String
     ): Response<BaseResponse<String>>
+
+
+    /** REVIEW **/
+    /*@POST("review")
+    suspend fun registerReview(
+        @Body("trip_id") tripId: String
+    ): Response<BaseResponse<String>>
+
+    /** REVIEW **/
+    @GET("review/{user_id}")
+    suspend fun getReview(
+        @Path("user_id") tripId: String,
+        @Query("page") page: Int
+    ): Response<BaseResponse<String>>*/
 }

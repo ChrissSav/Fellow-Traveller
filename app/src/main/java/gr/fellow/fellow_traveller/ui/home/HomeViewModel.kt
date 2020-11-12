@@ -130,7 +130,7 @@ constructor(
     }
 
     fun changePassword(password: String) {
-        launch {
+        launch(true) {
             when (val response = changePasswordUseCase(password)) {
                 is ResultWrapper.Success -> {
                     _changePassword.value = true

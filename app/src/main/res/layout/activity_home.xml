@@ -37,7 +37,7 @@
         android:visibility="gone"
         android:background="@drawable/bottom_sheet_dialog_shape"
         android:backgroundTint="#FFDCBB"
-        app:layout_constraintBottom_toTopOf="@+id/HomeActivity_bottomNavigationView">
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView">
 
         <TextView
             android:id="@+id/textView17"
@@ -81,7 +81,7 @@
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/HomeActivity_bottomNavigationView"
+        android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:background="@drawable/top_line_bottom_nav"

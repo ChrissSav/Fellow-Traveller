@@ -38,10 +38,11 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
     @SuppressLint("UseCompatLoadingForColorStateLists")
     override fun setUpViews() {
 
+        binding.description.setTextHtml(getString(R.string.trip_involved_description, getTripStatus(args.trip.status)))
+
         if (args.creator) {
             binding.constraintLayoutInfo.backgroundTintList = resources.getColorStateList(R.color.aqua)
             binding.labelDescription.text = "Είσαι ο οδηγός του ταξιδιού"
-            binding.description.text = "Επεξεργάσου το ταξίδι"
         }
 
         with(binding) {
@@ -107,5 +108,12 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
         }
     }
 
+
+    private fun getTripStatus(status: Int) =
+        when (status) {
+            0 -> "Ενεργό"
+            1 -> "Εκκρεμεί"
+            else -> "Ολοκληρωμένο"
+        }
 
 }

@@ -99,6 +99,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
         })
 
+        binding.bottomNavigationView.itemIconTintList = null
         binding.constraintLayoutMessenger.setOnClickListener {
             navController.navigateWithFade(R.id.accountSettingsFragment)
         }
@@ -111,12 +112,12 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
     private fun showHideBottomNav(targetHeight: Int) {
         val slideAnimator = ValueAnimator
-            .ofInt(binding.HomeActivityBottomNavigationView.layoutParams.height, targetHeight)
+            .ofInt(binding.bottomNavigationView.layoutParams.height, targetHeight)
             .setDuration(200)
         slideAnimator.addUpdateListener { animation1: ValueAnimator ->
             val value = animation1.animatedValue as Int
-            binding.HomeActivityBottomNavigationView.layoutParams.height = value
-            binding.HomeActivityBottomNavigationView.requestLayout()
+            binding.bottomNavigationView.layoutParams.height = value
+            binding.bottomNavigationView.requestLayout()
         }
         val animationSet = AnimatorSet()
         animationSet.interpolator = AccelerateDecelerateInterpolator()
@@ -126,7 +127,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
 
     private fun setupBottomNavMenu(navController: NavController) {
-        binding.HomeActivityBottomNavigationView.let {
+        binding.bottomNavigationView.let {
             NavigationUI.setupWithNavController(it, navController)
             it.setOnNavigationItemReselectedListener { item ->
                 if (item.isChecked) {
