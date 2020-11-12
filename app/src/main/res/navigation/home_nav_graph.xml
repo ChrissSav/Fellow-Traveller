@@ -29,6 +29,13 @@
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_destination_trips_to_tripInvolvedHistoryFragment"
+            app:destination="@id/tripInvolvedHistoryFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
     </fragment>
 
 
@@ -109,7 +116,6 @@
         <argument
             android:name="trip"
             app:argType="gr.fellow.fellow_traveller.domain.trip.TripInvolved" />
-
         <argument
             android:name="creator"
             android:defaultValue="false"
@@ -129,8 +135,6 @@
         android:name="gr.fellow.fellow_traveller.ui.home.trip.TripInvolvedPassengerDetailsFragment"
         android:label="fragment_trip_involved_passenger_details"
         tools:layout="@layout/fragment_trip_involved_passenger_details">
-
-
         <argument
             android:name="passengerList"
             app:argType="gr.fellow.fellow_traveller.domain.user.Passenger[]" />
@@ -140,6 +144,23 @@
         android:name="gr.fellow.fellow_traveller.ui.home.settings.ChangePasswordFragment"
         android:label="fragment_change_password"
         tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/tripInvolvedHistoryFragment"
+        android:name="gr.fellow.fellow_traveller.ui.home.trip.TripInvolvedHistoryFragment"
+        android:label="fragment_trip_involved_history"
+        tools:layout="@layout/fragment_trip_involved_history">
+        <argument
+            android:name="creator"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <action
+            android:id="@+id/action_tripInvolvedHistoryFragment_to_tripInvolvedDetailsFragment"
+            app:destination="@id/tripInvolvedDetailsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
 
 
 </navigation>

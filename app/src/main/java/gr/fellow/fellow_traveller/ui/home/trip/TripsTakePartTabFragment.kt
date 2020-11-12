@@ -48,6 +48,11 @@ class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
                 viewModel.loadTripsAsPassenger(true)
         }
 
+
+        binding.buttonHistory.setOnClickListener {
+            findNavController()?.navigate(R.id.action_destination_trips_to_tripInvolvedHistoryFragment, bundleOf("creator" to false))
+        }
+
     }
 
     private fun onTripClick(tripInvolved: TripInvolved) {

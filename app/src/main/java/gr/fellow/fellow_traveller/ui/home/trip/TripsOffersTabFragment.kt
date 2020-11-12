@@ -47,6 +47,12 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
             if (!binding.nested.canScrollVertically(0) && binding.genericLoader.progressLoad.visibility == View.GONE)
                 viewModel.loadTripsAsCreator(true)
         }
+
+
+        binding.buttonHistory.setOnClickListener {
+            findNavController()?.navigate(R.id.action_destination_trips_to_tripInvolvedHistoryFragment, bundleOf("creator" to true))
+        }
+
     }
 
     private fun onTripClick(tripInvolved: TripInvolved) {

@@ -85,6 +85,12 @@ constructor(
     val loadCreatorActive = MutableLiveData<Boolean>()
 
 
+    private var tripsAsCreatorHistoryPage = 0
+    private val _tripsAsCreatorHistory = MutableLiveData<MutableList<TripInvolved>>()
+    val tripsAsCreatorHistory: LiveData<MutableList<TripInvolved>> = _tripsAsCreatorHistory
+
+    val loadHistory = MutableLiveData<Boolean>()
+
     private val _successUpdateInfo = SingleLiveEvent<Boolean>()
     val successUpdateInfo: LiveData<Boolean> = _successUpdateInfo
 
@@ -238,6 +244,49 @@ constructor(
     }
 
 
+    fun loadTripsAsCreatorHistory(more: Boolean = false) {
+
+        launchWithLiveData(true, loadHistory) {
+            if (_tripsAsCreatorHistory.value != null && !more) {
+                return@launchWithLiveData
+            }
+            when (val response = getTripsAsCreatorRemoteUseCase("inactive", tripsAsCreatorHistoryPage)) {
+                is ResultWrapper.Success -> {
+                    //savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
+                    if (response.data.isNotEmpty()) {
+                        tripsAsCreatorHistoryPage++
+                    }
+                    if (more)
+                        _tripsAsCreatorHistory.value?.addAll(response.data)
+                    else
+                        _tripsAsCreatorHistory.value = response.data
+                }
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
+                }
+            }
+        }
+    }
+
+    fun loadTripsAsCreatorHistoryClear() {
+        launchWithLiveData(false, loadHistory) {
+            tripsAsCreatorHistoryPage = 0
+            when (val response = getTripsAsCreatorRemoteUseCase("inactive", tripsAsCreatorHistoryPage)) {
+                is ResultWrapper.Success -> {
+                    if (response.data.isNotEmpty()) {
+                        tripsAsCreatorHistoryPage++
+                    }
+                    _tripsAsCreatorHistory.value = response.data
+
+                }
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
+                }
+            }
+        }
+    }
+
+
     /** PASSENGER ***/
 
     fun loadTripsAsPassenger(more: Boolean = false) {
@@ -288,9 +337,9 @@ constructor(
 
     fun loadTripsAsPassengerHistory(more: Boolean = false) {
 
-        launch {
+        launchWithLiveData(true, loadHistory) {
             if (_tripsAsPassengerHistory.value != null && !more) {
-                return@launch
+                return@launchWithLiveData
             }
             when (val response = getTripsAsPassengerRemoteUseCase("inactive", tripsAsPassengerHistoryPage)) {
                 is ResultWrapper.Success -> {
@@ -298,7 +347,10 @@ constructor(
                     if (response.data.isNotEmpty()) {
                         tripsAsPassengerHistoryPage++
                     }
-                    _tripsAsPassengerHistory.value = response.data
+                    if (more)
+                        _tripsAsPassengerHistory.value?.addAll(response.data)
+                    else
+                        _tripsAsPassengerHistory.value = response.data
                 }
                 is ResultWrapper.Error -> {
                     error.value = externalError(response.error)
@@ -308,7 +360,7 @@ constructor(
     }
 
     fun loadTripsAsPassengerHistoryClear() {
-        launch {
+        launchWithLiveData(false, loadHistory) {
             tripsAsPassengerHistoryPage = 0
             when (val response = getTripsAsPassengerRemoteUseCase("inactive", tripsAsPassengerHistoryPage)) {
                 is ResultWrapper.Success -> {
@@ -325,48 +377,6 @@ constructor(
         }
     }
 
-
-    /* fun loadTripsAsCreatorHistory(more: Boolean = false) {
-
-         launch {
-             if (_tripsAsPassengerHistory.value != null && !more) {
-                 return@launch
-             }
-             when (val response = getTripsAsCreatorRemoteUseCase("inactive", tripsAsPassengerHistoryPage)) {
-                 is ResultWrapper.Success -> {
-                     //savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
-                     if (response.data.isNotEmpty()) {
-                         tripsAsCreatorHistoryPage++
-                     }
-                     if (more)
-                         _tripsAsCreatorHistory.value?.addAll(response.data)
-                     else
-                         _tripsAsCreatorHistory.value = response.data
-                 }
-                 is ResultWrapper.Error -> {
-                     error.value = externalError(response.error)
-                 }
-             }
-         }
-     }*/
-
-    /*  fun loadTripsAsCreatorHistoryClear() {
-          launch {
-              tripsAsCreatorHistoryPage = 0
-              when (val response = getTripsAsCreatorRemoteUseCase("inactive", tripsAsPassengerHistoryPage)) {
-                  is ResultWrapper.Success -> {
-                      if (response.data.isNotEmpty()) {
-                          tripsAsCreatorHistoryPage++
-                      }
-                      _tripsAsCreatorHistory.value = response.data
-
-                  }
-                  is ResultWrapper.Error -> {
-                      error.value = externalError(response.error)
-                  }
-              }
-          }
-      }*/
 
 
     fun updateUserImage(picture: String?) {
