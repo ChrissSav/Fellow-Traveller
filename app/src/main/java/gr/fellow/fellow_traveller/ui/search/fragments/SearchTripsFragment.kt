@@ -6,13 +6,19 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentSearchTripsBinding
+import gr.fellow.fellow_traveller.domain.PetAnswerType
 import gr.fellow.fellow_traveller.domain.SearchTripFilter
+import gr.fellow.fellow_traveller.domain.SortAnswerType
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
+import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.SearchTripPetBottomSheetDialog
+import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.SortSearchTripsBottomSheetDialog
+import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.UserImagePickBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.search.SearchFilterActivity
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
@@ -28,6 +34,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
     private var tripsList = mutableListOf<TripSearch>()
     private var clickTime = 0L
     private var bundle = bundleOf()
+    private lateinit var sortSearchTripsBottomSheetDialog: SortSearchTripsBottomSheetDialog
 
 
     override fun getViewBinding(): FragmentSearchTripsBinding =
@@ -35,6 +42,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
 
     override fun setUpObservers() {
+
         with(viewModel) {
 
 
@@ -60,6 +68,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
                     binding.progressBar.visibility = View.GONE
             })
 
+
             resultTrips.observe(viewLifecycleOwner, Observer {
 
                 binding.resultsLabel.visibility = View.VISIBLE
@@ -75,6 +84,8 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
                     binding.recyclerView.visibility = View.GONE
                     binding.notFoundImage.visibility = View.VISIBLE
                 }
+
+
             })
 
             searchFilter.observe(viewLifecycleOwner, Observer {
@@ -92,6 +103,11 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
             recyclerView.adapter = SearchResultsAdapter(tripsList, this@SearchTripsFragment::onTripClicked)
 
+            sortButton.setOnClickListener {
+                sortSearchTripsBottomSheetDialog = SortSearchTripsBottomSheetDialog(this@SearchTripsFragment::onSortItemClickListener)
+                sortSearchTripsBottomSheetDialog.show(childFragmentManager, "sortSearchTripsBottomSheetDialog")
+
+            }
 
             if (tripsList.isNotEmpty())
                 binding.recyclerView.visibility = View.VISIBLE
@@ -107,6 +123,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
                 intent.putExtra("info", "to")
                 startActivityForResultWithFade(intent, 2)
             }
+
 
             backButton.setOnClickListener {
                 onBackPressed()
@@ -200,6 +217,28 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
         }
     }
+
+    private fun onSortItemClickListener(sortAnswerType: SortAnswerType) {
+
+        when (sortAnswerType) {
+           SortAnswerType.Relevant -> {
+                createToast("Πιο σχετικά")
+                binding.sortButton.setText("Πιο σχετικά")
+                viewModel.sortByDate()
+            }
+            SortAnswerType.Rate -> {
+                createToast("Αξιολόγηση")
+                binding.sortButton.setText("Αξιολόγηση")
+                viewModel.sortByRate()
+            }
+            SortAnswerType.Price -> {
+                createToast("Τιμή")
+                binding.sortButton.setText("Τιμή")
+                viewModel.sortByPrice()
+            }
+        }
+    }
+
 
 
 }

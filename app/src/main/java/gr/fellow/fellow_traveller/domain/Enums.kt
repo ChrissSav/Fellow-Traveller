@@ -8,6 +8,10 @@ enum class PetAnswerType {
 }
 
 
+enum class SortAnswerType {
+    Price, Relevant, Rate
+}
+
 enum class AnswerType {
     Yes, No
 }

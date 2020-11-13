@@ -126,4 +126,23 @@ constructor(
 
     }
 
+    //Can merge these 3 fun to 1 TODO
+    fun sortByDate(){
+        var sortedList = _resultTrips.value?.sortedWith(compareBy({ it.timestamp }))
+        _resultTrips.value = sortedList as MutableList<TripSearch>?
+
+    }
+
+    fun sortByPrice(){
+        var sortedList = _resultTrips.value?.sortedWith(compareBy({ it.price }))
+        _resultTrips.value = sortedList as MutableList<TripSearch>?
+    }
+
+    fun sortByRate(){
+        var sortedList = _resultTrips.value?.sortedWith(compareBy({ it.creatorUser.rate }))
+        _resultTrips.value = sortedList as MutableList<TripSearch>?
+
+    }
+
+
 }

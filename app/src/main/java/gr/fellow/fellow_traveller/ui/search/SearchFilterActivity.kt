@@ -88,8 +88,8 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
             date.setOnClickListener {
                 picker.show(this@SearchFilterActivity?.supportFragmentManager!!, picker.toString())
 
-
             }
+
             pet.setOnClickListener {
                 petBottomSheetDialog = SearchTripPetBottomSheetDialog(this@SearchFilterActivity::onPetItemClickListener)
                 petBottomSheetDialog.show(supportFragmentManager, "petBottomSheetDialog")
