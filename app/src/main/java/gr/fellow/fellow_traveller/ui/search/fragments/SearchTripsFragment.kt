@@ -37,11 +37,13 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
     private lateinit var sortSearchTripsBottomSheetDialog: SortSearchTripsBottomSheetDialog
 
 
+
     override fun getViewBinding(): FragmentSearchTripsBinding =
         FragmentSearchTripsBinding.inflate(layoutInflater)
 
 
     override fun setUpObservers() {
+
 
         with(viewModel) {
 
@@ -103,7 +105,9 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
             recyclerView.adapter = SearchResultsAdapter(tripsList, this@SearchTripsFragment::onTripClicked)
 
-            sortButton.setOnClickListener {
+
+
+            binding.sortButton.setOnClickListener {
                 sortSearchTripsBottomSheetDialog = SortSearchTripsBottomSheetDialog(this@SearchTripsFragment::onSortItemClickListener)
                 sortSearchTripsBottomSheetDialog.show(childFragmentManager, "sortSearchTripsBottomSheetDialog")
 
@@ -133,6 +137,8 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
                 if (viewModel.destinations.value?.first != null && viewModel.destinations.value?.second != null) {
                     viewModel.updateFilter()
                     motion.transitionToEnd()
+                    //viewModel.setSortOption(sortOption)
+
                 } else {
                     createAlerter(resources.getString(R.string.ERROR_FIELDS_REQUIRE))
                 }
@@ -151,6 +157,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
                 if (!destFromButton.text.isNullOrEmpty() && !destToButton.text.isNullOrEmpty()) {
                     viewModel.swapDestinations()
                     motion.transitionToEnd()
+                    //viewModel.setSortOption(sortOption)
                 }
             }
         }
@@ -222,23 +229,37 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
         when (sortAnswerType) {
            SortAnswerType.Relevant -> {
-                createToast("Πιο σχετικά")
-                binding.sortButton.setText("Πιο σχετικά")
-                viewModel.sortByDate()
-            }
-            SortAnswerType.Rate -> {
-                createToast("Αξιολόγηση")
-                binding.sortButton.setText("Αξιολόγηση")
-                viewModel.sortByRate()
-            }
+               createToast("Πιο σχετικά")
+               binding.sortButton.setText("Πιο σχετικά")
+               viewModel.sortByDate()
+               //sortOption = SortAnswerType.Relevant
+           }
             SortAnswerType.Price -> {
                 createToast("Τιμή")
                 binding.sortButton.setText("Τιμή")
                 viewModel.sortByPrice()
+                //sortOption = SortAnswerType.Price
             }
+           SortAnswerType.Rate -> {
+               createToast("Αξιολόγηση")
+               binding.sortButton.setText("Αξιολόγηση")
+               viewModel.sortByRate()
+               //sortOption = SortAnswerType.Rate
+           }
+
         }
     }
+/*
+    //Set Up Sort Option, based on previous choice
+    private fun setSortOption(){
+        when (sortOption) {
+            SortAnswerType.Relevant -> viewModel.sortByDate()
+            SortAnswerType.Price -> viewModel.sortByPrice()
+            else -> viewModel.sortByRate()
+        }
 
+    }
+*/
 
 
 }

@@ -7,6 +7,7 @@ import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.domain.SearchTripFilter
+import gr.fellow.fellow_traveller.domain.SortAnswerType
 import gr.fellow.fellow_traveller.domain.externalError
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
@@ -21,7 +22,10 @@ class SearchTripViewModel
 constructor(
     private val searchTripsUseCase: SearchTripsUseCase,
     private val bookTripUseCase: BookTripUseCase
+
 ) : BaseViewModel() {
+
+    private var sortOption: SortAnswerType = SortAnswerType.Relevant
 
     val loadResults = MutableLiveData<Boolean>()
 
@@ -73,6 +77,7 @@ constructor(
                 when (val response = searchTripsUseCase(searchFilters)) {
                     is ResultWrapper.Success -> {
                         _resultTrips.value = response.data
+                        setSortOption(sortOption)
                     }
                     is ResultWrapper.Error -> {
                         error.value = externalError(response.error)
@@ -130,17 +135,28 @@ constructor(
     fun sortByDate(){
         var sortedList = _resultTrips.value?.sortedWith(compareBy({ it.timestamp }))
         _resultTrips.value = sortedList as MutableList<TripSearch>?
+        sortOption = SortAnswerType.Relevant
 
     }
 
     fun sortByPrice(){
         var sortedList = _resultTrips.value?.sortedWith(compareBy({ it.price }))
         _resultTrips.value = sortedList as MutableList<TripSearch>?
+        sortOption = SortAnswerType.Price
     }
 
     fun sortByRate(){
         var sortedList = _resultTrips.value?.sortedWith(compareBy({ it.creatorUser.rate }))
         _resultTrips.value = sortedList as MutableList<TripSearch>?
+        sortOption = SortAnswerType.Rate
+    }
+    //Set Up Sort Option, based on previous choice
+    fun setSortOption(sortOption: SortAnswerType){
+        when (sortOption) {
+            SortAnswerType.Relevant -> sortByDate()
+            SortAnswerType.Price -> sortByPrice()
+            else -> sortByRate()
+        }
 
     }
 
