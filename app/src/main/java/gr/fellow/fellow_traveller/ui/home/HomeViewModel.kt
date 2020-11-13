@@ -9,11 +9,14 @@ import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.externalError
+import gr.fellow.fellow_traveller.domain.notification.Notification
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.usecase.auth.ChangePasswordUseCase
 import gr.fellow.fellow_traveller.usecase.auth.DeleteUserAuthLocalUseCase
 import gr.fellow.fellow_traveller.usecase.home.*
+import gr.fellow.fellow_traveller.usecase.notification.GetNotificationsUseCase
+import gr.fellow.fellow_traveller.usecase.notification.UpdateNotificationsUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
 import gr.fellow.fellow_traveller.usecase.trips.DeleteTripUseCase
 import gr.fellow.fellow_traveller.usecase.trips.ExitFromTripUseCase
@@ -42,7 +45,9 @@ constructor(
     private val updateUserPictureUseCase: UpdateUserPictureUseCase,
     private val deleteTripUseCase: DeleteTripUseCase,
     private val changePasswordUseCase: ChangePasswordUseCase,
-    private val exitFromTripUseCase: ExitFromTripUseCase
+    private val exitFromTripUseCase: ExitFromTripUseCase,
+    private val getNotificationsUseCase: GetNotificationsUseCase,
+    private val updateNotificationsUseCase: UpdateNotificationsUseCase
 ) : BaseViewModel() {
 
 
@@ -90,6 +95,14 @@ constructor(
     val tripsAsCreatorHistory: LiveData<MutableList<TripInvolved>> = _tripsAsCreatorHistory
 
     val loadHistory = MutableLiveData<Boolean>()
+
+
+    /**  NOTIFICATIONS **/
+
+    private var notificationsPage = 0
+    private val _notifications = MutableLiveData<MutableList<Notification>>()
+    val notifications: LiveData<MutableList<Notification>> = _notifications
+    val loadNotifications = MutableLiveData<Boolean>()
 
     private val _successUpdateInfo = SingleLiveEvent<Boolean>()
     val successUpdateInfo: LiveData<Boolean> = _successUpdateInfo
@@ -377,6 +390,50 @@ constructor(
         }
     }
 
+
+    /** Notification ***/
+
+    fun loadNotifications(more: Boolean = false) {
+
+        launchWithLiveData(true, loadNotifications) {
+            if (_notifications.value != null && !more) {
+                return@launchWithLiveData
+            }
+            when (val response = getNotificationsUseCase(tripsAsPassengerHistoryPage)) {
+                is ResultWrapper.Success -> {
+                    //savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
+                    if (response.data.isNotEmpty()) {
+                        notificationsPage++
+                    }
+                    if (more)
+                        _notifications.value?.addAll(response.data)
+                    else
+                        _notifications.value = response.data
+                }
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
+                }
+            }
+        }
+    }
+
+    fun loadNotificationsClear() {
+        launchWithLiveData(false, loadNotifications) {
+            notificationsPage = 0
+            when (val response = getNotificationsUseCase(tripsAsPassengerHistoryPage)) {
+                is ResultWrapper.Success -> {
+                    if (response.data.isNotEmpty()) {
+                        notificationsPage++
+                    }
+                    _notifications.value = response.data
+
+                }
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
+                }
+            }
+        }
+    }
 
 
     fun updateUserImage(picture: String?) {

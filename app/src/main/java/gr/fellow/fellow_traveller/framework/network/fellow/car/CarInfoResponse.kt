@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.framework.network.fellow.response.car
+package gr.fellow.fellow_traveller.framework.network.fellow.car
 
 
 data class CarInfoResponse(

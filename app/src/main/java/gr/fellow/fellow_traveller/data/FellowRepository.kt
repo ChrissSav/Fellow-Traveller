@@ -1,12 +1,16 @@
 package gr.fellow.fellow_traveller.data
 
 import gr.fellow.fellow_traveller.domain.SearchTripFilter
-import gr.fellow.fellow_traveller.framework.network.fellow.request.*
-import gr.fellow.fellow_traveller.framework.network.fellow.response.car.CarInfoResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.TripInvolvedResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.TripSearchResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.user.UserAuthResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.user.UserInfoResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.auth.*
+import gr.fellow.fellow_traveller.framework.network.fellow.car.CarInfoResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.car.CarRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.notification.NotificationResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.notification.UpdateNotification
+import gr.fellow.fellow_traveller.framework.network.fellow.trip.BookTripRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripCreateRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripInvolvedResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripSearchResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.user.*
 import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 
@@ -65,6 +69,12 @@ interface FellowRepository {
 
     suspend fun deleteTrip(tripId: String): ResultWrapper<String>
 
+
+    // Notification
+
+    suspend fun getNotification(page: Int): ResultWrapper<MutableList<NotificationResponse>>
+
+    suspend fun setNotificationRead(updateNotification: UpdateNotification): ResultWrapper<String>
 
     /**
      * Local

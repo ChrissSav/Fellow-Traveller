@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.framework.network.fellow.response.user
+package gr.fellow.fellow_traveller.framework.network.fellow.user
 
 
 data class UserInfoResponse(

@@ -1,8 +1,8 @@
-package gr.fellow.fellow_traveller.framework.network.fellow.response.trip
+package gr.fellow.fellow_traveller.framework.network.fellow.trip
 
 import com.google.gson.annotations.SerializedName
-import gr.fellow.fellow_traveller.framework.network.fellow.response.car.CarBaseResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.user.UserBaseResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.car.CarBaseResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.user.UserBaseResponse
 
 data class TripSearchResponse(
     val id: String,

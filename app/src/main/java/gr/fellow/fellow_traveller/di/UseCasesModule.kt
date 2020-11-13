@@ -11,6 +11,8 @@ import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.newtrip.GetGeometryFormPlaceUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.GetPlaceFromPlacesUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.RegisterTripRemoteUseCase
+import gr.fellow.fellow_traveller.usecase.notification.GetNotificationsUseCase
+import gr.fellow.fellow_traveller.usecase.notification.UpdateNotificationsUseCase
 import gr.fellow.fellow_traveller.usecase.register.CheckUserEmailUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserUseCase
@@ -23,6 +25,17 @@ import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
 @Module
 class UseCasesModule {
 
+    @ActivityScoped
+    @Provides
+    fun provideGetNotificationsUseCase(dataSource: FellowDataSource): GetNotificationsUseCase {
+        return GetNotificationsUseCase(dataSource)
+    }
+
+    @ActivityScoped
+    @Provides
+    fun provideUpdateNotificationsUseCase(dataSource: FellowDataSource): UpdateNotificationsUseCase {
+        return UpdateNotificationsUseCase(dataSource)
+    }
 
     @ActivityScoped
     @Provides

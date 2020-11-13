@@ -1,13 +1,16 @@
 package gr.fellow.fellow_traveller.framework.network.fellow
 
 import gr.fellow.fellow_traveller.data.BaseResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.request.*
-import gr.fellow.fellow_traveller.framework.network.fellow.response.car.CarInfoResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.TripInvolvedResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.TripSearchResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.user.AuthenticationResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.user.UserAuthResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.user.UserInfoResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.auth.*
+import gr.fellow.fellow_traveller.framework.network.fellow.car.CarInfoResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.car.CarRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.notification.NotificationResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.notification.UpdateNotification
+import gr.fellow.fellow_traveller.framework.network.fellow.trip.BookTripRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripCreateRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripInvolvedResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripSearchResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.user.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -164,4 +167,16 @@ interface FellowService {
         @Path("user_id") tripId: String,
         @Query("page") page: Int
     ): Response<BaseResponse<String>>*/
+
+
+    /** NOTIFICATION **/
+    @GET("notification")
+    suspend fun getNotifications(
+        @Query("page") page: Int
+    ): Response<BaseResponse<MutableList<NotificationResponse>>>
+
+    @PUT("notification")
+    suspend fun setNotificationRead(
+        @Body updateNotification: UpdateNotification
+    ): Response<BaseResponse<String>>
 }

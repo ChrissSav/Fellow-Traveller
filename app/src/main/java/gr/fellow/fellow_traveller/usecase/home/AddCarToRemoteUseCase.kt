@@ -3,7 +3,7 @@ package gr.fellow.fellow_traveller.usecase.home
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.domain.car.Car
-import gr.fellow.fellow_traveller.framework.network.fellow.request.CarRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.car.CarRequest
 
 class AddCarToRemoteUseCase(
     private val dataSource: FellowDataSource

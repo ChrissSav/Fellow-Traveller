@@ -4,7 +4,7 @@ import android.os.Parcelable
 import gr.fellow.fellow_traveller.domain.car.CarInfoBase
 import gr.fellow.fellow_traveller.domain.user.Passenger
 import gr.fellow.fellow_traveller.domain.user.UserBase
-import gr.fellow.fellow_traveller.framework.network.fellow.response.trip.DestinationResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.trip.DestinationResponse
 import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
 import gr.fellow.fellow_traveller.utils.getTimeFromTimestamp
 import kotlinx.android.parcel.Parcelize

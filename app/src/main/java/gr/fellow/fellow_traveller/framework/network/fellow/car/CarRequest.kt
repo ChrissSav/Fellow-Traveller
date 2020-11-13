@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.framework.network.fellow.request
+package gr.fellow.fellow_traveller.framework.network.fellow.car
 
 data class CarRequest(
     val brand : String,

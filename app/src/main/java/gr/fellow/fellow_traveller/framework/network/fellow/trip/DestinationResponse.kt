@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.framework.network.fellow.response.trip
+package gr.fellow.fellow_traveller.framework.network.fellow.trip
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

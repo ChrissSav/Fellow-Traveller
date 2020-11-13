@@ -2,13 +2,15 @@ package gr.fellow.fellow_traveller.domain
 
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.domain.car.Car
+import gr.fellow.fellow_traveller.domain.notification.Notification
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.domain.user.UserInfo
-import gr.fellow.fellow_traveller.framework.network.fellow.request.CarRequest
-import gr.fellow.fellow_traveller.framework.network.fellow.request.UpdatePasswordRequest
-import gr.fellow.fellow_traveller.framework.network.fellow.response.user.UserAuthResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.car.CarRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.notification.UpdateNotification
+import gr.fellow.fellow_traveller.framework.network.fellow.user.UpdatePasswordRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.user.UserAuthResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.DetailsResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
 import retrofit2.Response
@@ -77,6 +79,12 @@ interface FellowDataSource {
 
     suspend fun deleteTrip(tripId: String): ResultWrapper<String>
 
+
+    // Notification
+
+    suspend fun getNotification(page: Int): ResultWrapper<MutableList<Notification>>
+
+    suspend fun setNotificationRead(updateNotification: UpdateNotification): ResultWrapper<String>
 
     /**
      * Google Service

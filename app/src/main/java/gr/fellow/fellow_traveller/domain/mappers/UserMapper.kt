@@ -3,9 +3,9 @@ package gr.fellow.fellow_traveller.domain.mappers
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.domain.user.UserBase
 import gr.fellow.fellow_traveller.domain.user.UserInfo
-import gr.fellow.fellow_traveller.framework.network.fellow.response.user.UserAuthResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.user.UserBaseResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.response.user.UserInfoResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.user.UserAuthResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.user.UserBaseResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.user.UserInfoResponse
 import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 
 fun UserAuthResponse.mapToRegisteredUserEntity() = RegisteredUserEntity(
@@ -17,7 +17,7 @@ fun LocalUser.mapToRegisteredUserEntity() = RegisteredUserEntity(
     id, firstName, lastName, rate, reviews, picture, aboutMe, email, messengerLink, tripsOffers, tripsInvolved
 )
 
-fun UserBaseResponse.toUserBase() = UserBase(
+fun UserBaseResponse.mapToUserBase() = UserBase(
     id, firstName, lastName, picture, rate, reviews
 )
 

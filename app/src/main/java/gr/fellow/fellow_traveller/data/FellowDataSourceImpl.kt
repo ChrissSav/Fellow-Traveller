@@ -1,15 +1,25 @@
 package gr.fellow.fellow_traveller.data
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.mappers.*
+import gr.fellow.fellow_traveller.domain.notification.Notification
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.domain.user.UserInfo
-import gr.fellow.fellow_traveller.framework.network.fellow.request.*
-import gr.fellow.fellow_traveller.framework.network.fellow.response.user.UserAuthResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.auth.*
+import gr.fellow.fellow_traveller.framework.network.fellow.car.CarRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.notification.UpdateNotification
+import gr.fellow.fellow_traveller.framework.network.fellow.trip.BookTripRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripCreateRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.user.UpdateAccountRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.user.UpdatePasswordRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.user.UpdatePictureRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.user.UserAuthResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.DetailsResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
 import retrofit2.Response
@@ -157,6 +167,22 @@ class FellowDataSourceImpl(
     override suspend fun deleteTrip(tripId: String): ResultWrapper<String> =
         repository.deleteTrip(tripId)
 
+    override suspend fun getNotification(page: Int): ResultWrapper<MutableList<Notification>> {
+        return when (val response = repository.getNotification(page)) {
+            is ResultWrapper.Success ->
+                ResultWrapper.Success(response.data.map { it.mapToNotification() }.toMutableList())
+            is ResultWrapper.Error ->
+                ResultWrapper.Error(response.error)
+        }
+    }
+
+    private var notificationsPage = 0
+    private val _notifications = MutableLiveData<List<Notification>>()
+    val notifications: LiveData<List<Notification>> = _notifications
+    val loadNotifications = MutableLiveData<Boolean>()
+
+    override suspend fun setNotificationRead(updateNotification: UpdateNotification): ResultWrapper<String> =
+        repository.setNotificationRead(updateNotification)
 
     /**
      * Google Service

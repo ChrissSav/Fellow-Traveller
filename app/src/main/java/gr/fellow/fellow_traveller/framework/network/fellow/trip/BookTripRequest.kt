@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.framework.network.fellow.request
+package gr.fellow.fellow_traveller.framework.network.fellow.trip
 
 
 data class BookTripRequest(

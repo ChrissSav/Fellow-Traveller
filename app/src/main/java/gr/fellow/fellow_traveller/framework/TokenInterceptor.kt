@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import gr.fellow.fellow_traveller.data.UnauthorizedException
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowTokenService
-import gr.fellow.fellow_traveller.framework.network.fellow.request.RefreshTokenRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.auth.RefreshTokenRequest
 import gr.fellow.fellow_traveller.utils.PREFS_AUTH_ACCESS_TOKEN
 import gr.fellow.fellow_traveller.utils.PREFS_AUTH_REFRESH_TOKEN
 import gr.fellow.fellow_traveller.utils.set
