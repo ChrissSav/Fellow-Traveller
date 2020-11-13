@@ -6,37 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeActivity">
 
-    <ScrollView
-        android:layout_width="0dp"
+
+    <fragment
+        android:id="@+id/nav_host_fragment_container"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:fillViewport="true"
+        app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayoutMessenger"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <fragment
-            android:id="@+id/nav_host_fragment_container"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:defaultNavHost="true"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayoutMessenger"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:navGraph="@navigation/home_nav_graph" />
-
-    </ScrollView>
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/home_nav_graph" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutMessenger"
         android:layout_width="match_parent"
         android:layout_height="90dp"
-        android:visibility="gone"
         android:background="@drawable/bottom_sheet_dialog_shape"
         android:backgroundTint="#FFDCBB"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView">
 
         <TextView
@@ -79,21 +69,17 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:background="@drawable/top_line_bottom_nav"
-        android:outlineProvider="none"
-        app:itemIconSize="30dp"
-        app:itemIconTint="@drawable/bottom_nav_color"
-        app:itemTextColor="@drawable/bottom_nav_color"
-        app:labelVisibilityMode="unlabeled"
+        android:layout_height="60dp"
+        app:cnb_iconSize="26dp"
+        app:cnb_menuResource="@menu/home_menu_2"
+        app:cnb_orientationMode="horizontal"
+        app:cnb_radius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/home_menu" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <include
         android:id="@+id/generic_loader"
