@@ -399,7 +399,7 @@ constructor(
             if (_notifications.value != null && !more) {
                 return@launchWithLiveData
             }
-            when (val response = getNotificationsUseCase(tripsAsPassengerHistoryPage)) {
+            when (val response = getNotificationsUseCase(notificationsPage)) {
                 is ResultWrapper.Success -> {
                     //savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
                     if (response.data.isNotEmpty()) {
@@ -420,7 +420,7 @@ constructor(
     fun loadNotificationsClear() {
         launchWithLiveData(false, loadNotifications) {
             notificationsPage = 0
-            when (val response = getNotificationsUseCase(tripsAsPassengerHistoryPage)) {
+            when (val response = getNotificationsUseCase(notificationsPage)) {
                 is ResultWrapper.Success -> {
                     if (response.data.isNotEmpty()) {
                         notificationsPage++

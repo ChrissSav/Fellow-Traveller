@@ -81,7 +81,7 @@
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/HomeActivity_bottomNavigationView"
+        android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:background="@drawable/top_line_bottom_nav"

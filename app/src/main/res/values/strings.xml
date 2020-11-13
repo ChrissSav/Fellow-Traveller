@@ -33,9 +33,6 @@
     <string name="title_activity_maps">Map</string>
     <string name="no_driver_message">Δεν υπάρχει μήνυμα από τον οδηγό.</string>
 
-    <string name="passenger_notification">Ο χρήστης % μόλις προστέθηκε στο ταξίδι σου.</string>
-    <string name="rate_notification">Ήρθε η ώρα να αξιολόγησης τον χρήστη  %s.</string>
-    <string name="write_review_title" formatted="false">Ήρθε η ώρα να αξιολόγησης τον χρήστη %s για το ταξίδι που έγινε από %d - to στις $s.</string>
 
 
     <string name="set_date">Όρισε την ημερομηνία ... </string>
@@ -115,6 +112,13 @@
     <string name="regex_min_3_chars_english">^[a-zA-Z0-9]{3,}$</string>
     <string name="regex_min_3_chars">^.{3,}$</string>
     <string name="regex_accept_all">^.{0,50}$</string>
-    <string name="regex_car_plate">"^[ΑΒΕΖΗΙΚΜΝΟΡΤΥΧ]{3}-[0-9]{4}$</string>
+    <string name="regex_car_plate">^[ΑΒΕΖΗΙΚΜΝΟΡΤΥΧ]{3}-[0-9]{4}$</string>
+
+    <!--Car -->
+
+    <string name="notification_to_rate">Ήρθε η ώρα να αξιολογήσετε το χρήστη &lt;b&gt;%s&lt;/b&gt;</string>
+    <string name="notification_delete_trip">Ο χρήστης &lt;b&gt;%s&lt;/b&gt; διέγραψε ένα ταξίδι στο οποίο είστε μέλος</string>
+    <string name="notification_passenger_enter">Ο χρήστης &lt;b&gt;%s&lt;/b&gt; έγινε μέλος του ταξιδιού σου</string>
+    <string name="notification_passenger_exit">Ο χρήστης &lt;b&gt;%s&lt;/b&gt; αποχώρησε απο το ταξίδι σου</string>
 
 </resources>

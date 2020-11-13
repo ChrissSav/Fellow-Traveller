@@ -17,13 +17,14 @@
 
     <TextView
         android:id="@+id/description"
-        style="@style/paragraph_2"
+        style="@style/paragraph_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:text="Ο χρήστης Όνομα διέγραψε ένα ταξίδι στο οποίο είστε μέλος"
-        app:layout_constraintEnd_toStartOf="@+id/view2"
+        app:layout_constraintEnd_toStartOf="@+id/read"
         app:layout_constraintStart_toEndOf="@+id/picture"
         app:layout_constraintTop_toTopOf="@+id/picture" />
 
@@ -52,7 +53,7 @@
 
 
     <View
-        android:id="@+id/view2"
+        android:id="@+id/read"
         android:layout_width="8dp"
         android:layout_height="8dp"
         android:layout_marginEnd="16dp"
