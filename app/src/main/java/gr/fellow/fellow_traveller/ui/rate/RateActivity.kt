@@ -1,11 +1,10 @@
 package gr.fellow.fellow_traveller.ui.rate
 
 import android.view.View
-import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.data.base.BaseActivity
+import gr.fellow.fellow_traveller.data.base.BaseActivityViewModel
 import gr.fellow.fellow_traveller.databinding.ActivityRateBinding
 import gr.fellow.fellow_traveller.domain.notification.Notification
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
@@ -13,10 +12,8 @@ import gr.fellow.fellow_traveller.ui.extensions.createToast
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 
 @AndroidEntryPoint
-class RateActivity : BaseActivity<ActivityRateBinding>() {
+class RateActivity : BaseActivityViewModel<ActivityRateBinding, RateViewModel>(RateViewModel::class.java) {
 
-    private val viewModel: RateViewModel by viewModels()
-    private var rating: Float = 0f
     private lateinit var notification: Notification
 
 

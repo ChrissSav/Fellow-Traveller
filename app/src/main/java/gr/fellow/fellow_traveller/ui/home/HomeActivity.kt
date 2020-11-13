@@ -4,14 +4,13 @@ import android.animation.AnimatorSet
 import android.animation.ValueAnimator
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
-import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.data.base.BaseActivity
+import gr.fellow.fellow_traveller.data.base.BaseActivityViewModel
 import gr.fellow.fellow_traveller.databinding.ActivityHomeBinding
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 import gr.fellow.fellow_traveller.ui.extensions.navigateWithFade
@@ -21,10 +20,9 @@ import gr.fellow.fellow_traveller.ui.main.MainActivity
 
 
 @AndroidEntryPoint
-class HomeActivity : BaseActivity<ActivityHomeBinding>() {
+class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(HomeViewModel::class.java) {
 
 
-    private val viewModel: HomeViewModel by viewModels()
     private lateinit var navController: NavController
 
 
@@ -60,9 +58,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
         viewModel.error.observe(this, Observer {
             if (it.internal) {
-                if (it.messageId == R.string.ERROR_API_UNAUTHORIZED) {
-                    viewModel.logOutUnauthorized()
-                }
                 createAlerter(getString(it.messageId))
             } else
                 createAlerter(it.message)

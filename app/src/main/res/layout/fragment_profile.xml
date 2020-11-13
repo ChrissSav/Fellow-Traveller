@@ -56,11 +56,14 @@
         <TextView
             android:id="@+id/messengerLink"
             style="@style/paragraph_1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
             android:drawableStart="@drawable/ic_messenger"
             android:drawablePadding="8dp"
+
             android:gravity="center"
             android:text="Στείλε μήνυμα"
             android:visibility="invisible"

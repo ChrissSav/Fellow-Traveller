@@ -3,19 +3,17 @@ package gr.fellow.fellow_traveller.ui.user
 import android.content.Intent
 import android.net.Uri
 import android.view.View
-import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.data.base.BaseActivity
+import gr.fellow.fellow_traveller.data.base.BaseActivityViewModel
 import gr.fellow.fellow_traveller.databinding.ActivityUserInfoDetailsBinding
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 
 @AndroidEntryPoint
-class UserProfileDetailsActivity : BaseActivity<ActivityUserInfoDetailsBinding>() {
+class UserProfileDetailsActivity : BaseActivityViewModel<ActivityUserInfoDetailsBinding, UserInfoDetailsViewModel>(UserInfoDetailsViewModel::class.java) {
 
-    private val viewModel: UserInfoDetailsViewModel by viewModels()
     private var messengerLink: String? = null
 
     private var userId: String? = null

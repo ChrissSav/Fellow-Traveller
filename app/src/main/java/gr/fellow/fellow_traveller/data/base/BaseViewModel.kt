@@ -16,6 +16,7 @@ open class BaseViewModel : ViewModel() {
 
     val error = SingleLiveEvent<ErrorMessage>()
     val load = MutableLiveData<Boolean>()
+    val forceLogOut = MutableLiveData<Boolean>()
 
 
     fun launch(shouldLoad: Boolean = false, function: suspend () -> Unit) {
@@ -51,7 +52,7 @@ open class BaseViewModel : ViewModel() {
         error.value = internalError(errorMsg)
     }
 
-    fun handleError(e: Exception) {
+    private fun handleError(e: Exception) {
         e.printStackTrace()
         when (e) {
             is BaseApiException -> when (e.code) {
@@ -66,6 +67,7 @@ open class BaseViewModel : ViewModel() {
                 error.value = internalError(R.string.ERROR_INTERNET_CONNECTION)
             }
             is UnauthorizedException -> {
+                forceLogOut.value = true
                 error.value = internalError(R.string.ERROR_API_UNAUTHORIZED)
             }
             else -> {

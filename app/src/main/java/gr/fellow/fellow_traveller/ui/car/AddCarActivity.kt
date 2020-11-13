@@ -2,18 +2,16 @@ package gr.fellow.fellow_traveller.ui.car
 
 import android.content.Intent
 import android.view.View
-import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.data.base.BaseActivity
+import gr.fellow.fellow_traveller.data.base.BaseActivityViewModel
 import gr.fellow.fellow_traveller.databinding.ActivityAddCarBinding
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 
 @AndroidEntryPoint
-class AddCarActivity : BaseActivity<ActivityAddCarBinding>() {
+class AddCarActivity : BaseActivityViewModel<ActivityAddCarBinding, AddCarViewModel>(AddCarViewModel::class.java) {
 
-    private val viewModel: AddCarViewModel by viewModels()
 
     override fun provideViewBinding(): ActivityAddCarBinding =
         ActivityAddCarBinding.inflate(layoutInflater)

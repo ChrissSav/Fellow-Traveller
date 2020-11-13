@@ -139,17 +139,6 @@ constructor(
         }
     }
 
-    fun logOutUnauthorized() {
-        viewModelScope.launch {
-            try {
-                deleteUserAuthLocalUseCase()
-                deleteUserLocalCars()
-            } catch (e: java.lang.Exception) {
-
-            }
-            _logout.value = true
-        }
-    }
 
     fun changePassword(password: String) {
         launch(true) {

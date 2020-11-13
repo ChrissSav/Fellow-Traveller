@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.framework
 
 import android.content.SharedPreferences
+import android.util.Log
 import gr.fellow.fellow_traveller.data.FellowRepository
 import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.domain.SearchTripFilter
@@ -197,6 +198,7 @@ class FellowRepositoryImpl(
 
     override suspend fun logoutUserLocal() =
         roomCall {
+            Log.i("rpjgpoirjgre", "regoireghreigr")
             userAuthDao.deleteUser()
         }
 
