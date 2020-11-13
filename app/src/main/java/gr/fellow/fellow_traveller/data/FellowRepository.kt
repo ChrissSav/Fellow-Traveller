@@ -6,6 +6,7 @@ import gr.fellow.fellow_traveller.framework.network.fellow.car.CarInfoResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.car.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.notification.NotificationResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.notification.UpdateNotification
+import gr.fellow.fellow_traveller.framework.network.fellow.review.RegisterReviewRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.BookTripRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripCreateRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripInvolvedResponse
@@ -75,6 +76,12 @@ interface FellowRepository {
     suspend fun getNotification(page: Int): ResultWrapper<MutableList<NotificationResponse>>
 
     suspend fun setNotificationRead(updateNotification: UpdateNotification): ResultWrapper<String>
+
+    // Review
+
+    suspend fun registerReview(registerReviewRequest: RegisterReviewRequest): ResultWrapper<String>
+
+    suspend fun checkReview(targetId: String): ResultWrapper<Boolean>
 
     /**
      * Local

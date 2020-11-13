@@ -53,7 +53,6 @@ fun Activity.createAlerter(msg: String, color: Int) {
 }
 
 
-
 fun Activity.openActivityWithFade(intent: Intent) {
     startActivity(intent)
     overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
@@ -79,6 +78,13 @@ fun Activity.startActivityWithBundle(activity: KClass<out Activity>, bundle: Bun
     val intent = Intent(this, activity.java)
     intent.putExtras(bundle)
     startActivity(intent)
+}
+
+fun Activity.startActivityWithFade(activity: KClass<out Activity>, bundle: Bundle) {
+    val intent = Intent(this, activity.java)
+    intent.putExtras(bundle)
+    startActivity(intent)
+    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
 }
 
 fun Activity.startActivityClearStack(activity: KClass<out Activity>) {
@@ -140,6 +146,7 @@ fun Fragment.startActivityForResultWithFade(activity: KClass<out Activity>, code
     startActivityForResult(intent, code)
     this.activity?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
 }
+
 
 fun Fragment.startActivityForResultWithFade(intent: Intent, code: Int) {
     startActivityForResult(intent, code)

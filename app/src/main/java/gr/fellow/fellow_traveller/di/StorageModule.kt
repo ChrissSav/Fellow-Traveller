@@ -37,11 +37,6 @@ object StorageModule {
         GoogleServiceRepositoryImpl(service)
 
 
-    /*@Singleton
-    @Provides
-    fun provideFellowRefreshTokenRepository(service: FellowTokenService): FellowRefreshTokenRepository =
-        FellowRefreshTokenRepositoryImpl(service)*/
-
 
     @Singleton
     @Provides

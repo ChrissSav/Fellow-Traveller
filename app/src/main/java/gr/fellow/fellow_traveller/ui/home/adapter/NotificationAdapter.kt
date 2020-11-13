@@ -12,6 +12,7 @@ import gr.fellow.fellow_traveller.domain.notification.Notification
 import gr.fellow.fellow_traveller.ui.extensions.NotificationDiffCallback
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.extensions.setTextHtml
+import gr.fellow.fellow_traveller.utils.currentTimeStamp
 
 
 class NotificationAdapter(
@@ -54,12 +55,47 @@ class NotificationAdapter(
                 binding.read.visibility = View.VISIBLE
 
 
+            binding.time.text = time(item.timestamp)
+
             binding.trip.text = "${item.trip.destinationFrom.split(",").last().trim()} - ${item.trip.destinationTo.split(",").last().trim()}"
 
             binding.root.setOnClickListener {
                 onItemClickListener.invoke(item)
             }
         }
+    }
+
+
+    fun readNotification(notification: Notification) {
+
+        val item = currentList.find { it.id == notification.id }
+        if (item != null) {
+            val index = currentList.indexOf(item)
+            currentList[index].isRead = true
+            notifyItemChanged(index)
+        }
+    }
+
+    private fun time(timestamp: Long): String {
+        var test = "πριν από "
+        val t = currentTimeStamp() - timestamp
+        if (t <= 3600) {
+            test += if ((t / 60).toInt() == 1)
+                "${(t / 60).toInt()} λεπτό"
+            else
+                "${(t / 60).toInt()} λεπτά"
+        } else if (t <= 3600 * 24)
+            test += if ((t / 3600).toInt() == 1)
+                "${(t / 3600).toInt()} ώρα"
+            else
+                "${(t / 3600).toInt()} ώρες"
+        else
+            test += if ((t / (3600 * 24)).toInt() == 1)
+                "${(t / (3600 * 24)).toInt()} μέρα"
+            else
+                "${(t / (3600 * 24)).toInt()} μέρες"
+
+        return test
     }
 
     class ViewHolder(val binding: NotificationItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)

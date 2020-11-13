@@ -16,6 +16,8 @@ import gr.fellow.fellow_traveller.usecase.notification.UpdateNotificationsUseCas
 import gr.fellow.fellow_traveller.usecase.register.CheckUserEmailUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserUseCase
+import gr.fellow.fellow_traveller.usecase.review.CheckReviewUseCase
+import gr.fellow.fellow_traveller.usecase.review.RegisterReviewUseCase
 import gr.fellow.fellow_traveller.usecase.trips.*
 import gr.fellow.fellow_traveller.usecase.user.GetUserInfoByIdUseCase
 import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
@@ -24,6 +26,18 @@ import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
 @InstallIn(ActivityComponent::class)
 @Module
 class UseCasesModule {
+
+    @ActivityScoped
+    @Provides
+    fun provideCheckReviewUseCase(dataSource: FellowDataSource): CheckReviewUseCase {
+        return CheckReviewUseCase(dataSource)
+    }
+
+    @ActivityScoped
+    @Provides
+    fun provideRegisterReviewUseCase(dataSource: FellowDataSource): RegisterReviewUseCase {
+        return RegisterReviewUseCase(dataSource)
+    }
 
     @ActivityScoped
     @Provides

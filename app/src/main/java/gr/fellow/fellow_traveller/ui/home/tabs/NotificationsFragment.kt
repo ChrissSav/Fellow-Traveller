@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.ui.home.tabs
 
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,8 +10,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentNotificationsBinding
 import gr.fellow.fellow_traveller.domain.notification.Notification
+import gr.fellow.fellow_traveller.ui.extensions.startActivityWithFade
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.NotificationAdapter
+import gr.fellow.fellow_traveller.ui.rate.RateActivity
 
 
 @AndroidEntryPoint
@@ -36,13 +39,32 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
                 binding.recyclerView.scrollToPosition((binding.recyclerView.adapter as NotificationAdapter).currentList.size - 1)
             } else
                 binding.progressBar2.visibility = View.GONE
+
+        })
+
+        viewModel.notification.observe(viewLifecycleOwner, Observer {
+            (binding.recyclerView.adapter as NotificationAdapter).readNotification(it)
+            when (it.type) {
+                0 -> {
+                    activity?.startActivityWithFade(RateActivity::class, bundleOf("notification" to it))
+                }
+                /*   1 -> {
+                       binding.description.setTextHtml(binding.description.context.getString(R.string.notification_passenger_exit, item.user.fullName))
+                   }
+                   2 -> {
+                        binding.description.setTextHtml(binding.description.context.getString(R.string.notification_passenger_enter, item.user.fullName))
+                    }
+                    else -> {
+                        binding.description.setTextHtml(binding.description.context.getString(R.string.notification_delete_trip, item.user.fullName))
+                    }*/
+            }
         })
 
     }
 
     override fun setUpViews() {
         viewModel.loadNotifications()
-        binding.recyclerView.adapter = NotificationAdapter(this@NotificationsFragment::onNotificationClick)
+        binding.recyclerView.adapter = NotificationAdapter(viewModel::readNotification)
 
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
@@ -64,8 +86,5 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
         }
     }
 
-
-    private fun onNotificationClick(notification: Notification) {
-    }
 
 }

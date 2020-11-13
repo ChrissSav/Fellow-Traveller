@@ -6,6 +6,7 @@ import gr.fellow.fellow_traveller.framework.network.fellow.car.CarInfoResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.car.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.notification.NotificationResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.notification.UpdateNotification
+import gr.fellow.fellow_traveller.framework.network.fellow.review.RegisterReviewRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.BookTripRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripCreateRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripInvolvedResponse
@@ -156,20 +157,19 @@ interface FellowService {
 
 
     /** REVIEW **/
-    /*@POST("review")
+
+    @POST("review")
     suspend fun registerReview(
-        @Body("trip_id") tripId: String
+        @Body registerReviewRequest: RegisterReviewRequest
     ): Response<BaseResponse<String>>
 
-    /** REVIEW **/
-    @GET("review/{user_id}")
-    suspend fun getReview(
-        @Path("user_id") tripId: String,
-        @Query("page") page: Int
-    ): Response<BaseResponse<String>>*/
-
+    @GET("review/{targetId}")
+    suspend fun checkReview(
+        @Path("targetId") targetId: String
+    ): Response<BaseResponse<Boolean>>
 
     /** NOTIFICATION **/
+
     @GET("notification")
     suspend fun getNotifications(
         @Query("page") page: Int

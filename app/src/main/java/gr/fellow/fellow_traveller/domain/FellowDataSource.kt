@@ -9,6 +9,7 @@ import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.domain.user.UserInfo
 import gr.fellow.fellow_traveller.framework.network.fellow.car.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.notification.UpdateNotification
+import gr.fellow.fellow_traveller.framework.network.fellow.review.RegisterReviewRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.user.UpdatePasswordRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.user.UserAuthResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.DetailsResponse
@@ -85,6 +86,13 @@ interface FellowDataSource {
     suspend fun getNotification(page: Int): ResultWrapper<MutableList<Notification>>
 
     suspend fun setNotificationRead(updateNotification: UpdateNotification): ResultWrapper<String>
+
+
+    // Review
+
+    suspend fun registerReview(registerReviewRequest: RegisterReviewRequest): ResultWrapper<String>
+
+    suspend fun checkReview(targetId: String): ResultWrapper<Boolean>
 
     /**
      * Google Service

@@ -1,7 +1,5 @@
 package gr.fellow.fellow_traveller.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.domain.car.Car
@@ -14,6 +12,7 @@ import gr.fellow.fellow_traveller.domain.user.UserInfo
 import gr.fellow.fellow_traveller.framework.network.fellow.auth.*
 import gr.fellow.fellow_traveller.framework.network.fellow.car.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.notification.UpdateNotification
+import gr.fellow.fellow_traveller.framework.network.fellow.review.RegisterReviewRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.BookTripRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripCreateRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.user.UpdateAccountRequest
@@ -176,13 +175,16 @@ class FellowDataSourceImpl(
         }
     }
 
-    private var notificationsPage = 0
-    private val _notifications = MutableLiveData<List<Notification>>()
-    val notifications: LiveData<List<Notification>> = _notifications
-    val loadNotifications = MutableLiveData<Boolean>()
 
     override suspend fun setNotificationRead(updateNotification: UpdateNotification): ResultWrapper<String> =
         repository.setNotificationRead(updateNotification)
+
+    override suspend fun registerReview(registerReviewRequest: RegisterReviewRequest): ResultWrapper<String> =
+        repository.registerReview(registerReviewRequest)
+
+    override suspend fun checkReview(targetId: String): ResultWrapper<Boolean> =
+        repository.checkReview(targetId)
+
 
     /**
      * Google Service

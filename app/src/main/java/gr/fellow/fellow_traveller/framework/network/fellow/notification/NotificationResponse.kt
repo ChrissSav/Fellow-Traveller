@@ -6,7 +6,7 @@ data class NotificationResponse(
     val id: Long,
     val user: UserBaseResponse,
     val type: Int,
-    val isRead: Boolean,
+    val read: Boolean,
     val trip: NotificationTripResponse,
     val timestamp: Long
 )

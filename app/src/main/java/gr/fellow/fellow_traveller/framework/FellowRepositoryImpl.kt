@@ -10,6 +10,7 @@ import gr.fellow.fellow_traveller.framework.network.fellow.car.CarInfoResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.car.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.notification.NotificationResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.notification.UpdateNotification
+import gr.fellow.fellow_traveller.framework.network.fellow.review.RegisterReviewRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.BookTripRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripCreateRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripInvolvedResponse
@@ -170,6 +171,17 @@ class FellowRepositoryImpl(
         networkCall {
             service.setNotificationRead(updateNotification).handleApiFormat()
         }
+
+    override suspend fun registerReview(registerReviewRequest: RegisterReviewRequest): ResultWrapper<String> =
+        networkCall {
+            service.registerReview(registerReviewRequest).handleApiFormat()
+        }
+
+    override suspend fun checkReview(targetId: String): ResultWrapper<Boolean> =
+        networkCall {
+            service.checkReview(targetId).handleApiFormat()
+        }
+
 
     override suspend fun registerUserAuthLocal(userEntity: RegisteredUserEntity) =
         roomCall {

@@ -1,132 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
     tools:context=".ui.rate.RateActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <ImageButton
+        android:id="@+id/back_button"
+        style="@style/border_icon_button"
+        android:layout_width="@dimen/back_button_width_height"
+        android:layout_height="@dimen/back_button_width_height"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_back_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/rate_header"
+        style="@style/display_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
+        android:text="Πως ήταν το ταξίδι σας;"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/back_button"
+        app:layout_constraintTop_toBottomOf="@+id/back_button" />
+
+    <TextView
+        android:id="@+id/rate_info"
+        style="@style/paragraph_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Αξιολογήστε την εμπειρία σας"
+        app:layout_constraintStart_toStartOf="@id/back_button"
+        app:layout_constraintTop_toBottomOf="@id/rate_header" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/rate_image"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/ic_boy"
+        android:elevation="1dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@id/back_button"
+        app:layout_constraintTop_toBottomOf="@id/rate_info" />
+
+    <TextView
+        android:id="@+id/rate_name"
+        style="@style/header_3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Tyler Joseph"
+        app:layout_constraintBottom_toBottomOf="@id/rate_image"
+        app:layout_constraintEnd_toEndOf="@id/rate_header"
+        app:layout_constraintStart_toEndOf="@id/rate_image"
+        app:layout_constraintTop_toTopOf="@id/rate_image" />
+
+    <com.willy.ratingbar.ScaleRatingBar
+        android:id="@+id/rate_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/back_button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srb_clearRatingEnabled="false"
+        app:srb_clickable="true"
+        app:srb_drawableEmpty="@drawable/ic_star"
+        app:srb_drawableFilled="@drawable/ic_rating"
+        app:srb_isIndicator="false"
+        app:srb_numStars="5"
+        app:srb_scrollable="true"
+        app:srb_starHeight="42dp"
+        app:srb_starPadding="8dp"
+        app:srb_starWidth="42dp"
+        app:srb_stepSize="1" />
+
+    <Button
+        android:id="@+id/rate"
+        style="@style/header_3"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/car_float_action_button_height"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="42dp"
+        android:background="@drawable/fab_background_orange"
+        android:drawableStart="@drawable/ic_tick"
+        android:drawablePadding="8dp"
+        android:drawableTint="@color/white"
+        android:elevation="16dp"
+        android:gravity="center|end"
+        android:minWidth="155dp"
+        android:paddingStart="23dp"
+        android:paddingEnd="37dp"
+        android:text="Καταχώρηση"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="RtlSymmetry" />
+
+
+    <include
+        android:id="@+id/generic_loader"
+        layout="@layout/generic_loader"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" />
 
 
-        <ImageButton
-            android:id="@+id/back_button"
-            style="@style/border_icon_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/ic_back_button"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/rate_header"
-            style="@style/display_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="16dp"
-            android:text="Πως ήταν το ταξίδι σας;"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/back_button"
-            app:layout_constraintTop_toBottomOf="@+id/back_button" />
-
-        <TextView
-            android:id="@+id/rate_info"
-            style="@style/header_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:text="Αξιολογήστε την εμπειρία σας"
-            app:layout_constraintStart_toStartOf="@id/back_button"
-            app:layout_constraintTop_toBottomOf="@id/rate_header" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/rate_image"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="36dp"
-            android:background="@drawable/ic_boy"
-            android:elevation="1dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="@id/back_button"
-            app:layout_constraintTop_toBottomOf="@id/rate_info" />
-
-        <TextView
-            android:id="@+id/rate_name"
-            style="@style/header_2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Tyler Joseph"
-            app:layout_constraintEnd_toEndOf="@id/rate_header"
-            app:layout_constraintBottom_toBottomOf="@id/rate_image"
-            app:layout_constraintStart_toEndOf="@id/rate_image"
-            app:layout_constraintTop_toTopOf="@id/rate_image" />
-
-        <gr.fellow.fellow_traveller.ui.views.FellowTextInput
-            android:id="@+id/rate_input"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="68dp"
-            android:layout_marginEnd="16dp"
-            app:editable="true"
-            app:hint_fellow="Γράψτε μία αξιολόγηση..."
-            app:imeOptions="actionDone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/back_button"
-            app:layout_constraintTop_toBottomOf="@id/rate_image"
-            app:text_type="textCapSentences" />
-
-        <com.willy.ratingbar.ScaleRatingBar
-            android:id="@+id/rate_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="38dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/back_button"
-            app:layout_constraintTop_toBottomOf="@id/rate_input"
-            app:srb_clearRatingEnabled="false"
-            app:srb_clickable="true"
-            app:srb_drawableEmpty="@drawable/ic_star"
-            app:srb_drawableFilled="@drawable/ic_rating"
-            app:srb_isIndicator="false"
-            app:srb_numStars="5"
-            app:srb_scrollable="true"
-            app:srb_starHeight="42dp"
-            app:srb_starPadding="8dp"
-            app:srb_starWidth="42dp"
-            app:srb_stepSize="1" />
-
-        <Button
-            android:id="@+id/rate_add_button"
-            style="@style/header_3"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/car_float_action_button_height"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="42dp"
-            android:background="@drawable/fab_background_orange"
-            android:drawableStart="@drawable/ic_tick"
-            android:drawableTint="@color/white"
-            android:elevation="16dp"
-            android:gravity="center|end"
-            android:minWidth="155dp"
-            android:paddingStart="23dp"
-            android:paddingEnd="37dp"
-            android:text="Καταχώρηση"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            tools:ignore="RtlSymmetry" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

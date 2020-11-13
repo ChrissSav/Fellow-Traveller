@@ -104,6 +104,9 @@ constructor(
     val notifications: LiveData<MutableList<Notification>> = _notifications
     val loadNotifications = MutableLiveData<Boolean>()
 
+    private val _notification = SingleLiveEvent<Notification>()
+    val notification: LiveData<Notification> = _notification
+
     private val _successUpdateInfo = SingleLiveEvent<Boolean>()
     val successUpdateInfo: LiveData<Boolean> = _successUpdateInfo
 
@@ -435,6 +438,19 @@ constructor(
         }
     }
 
+
+    fun readNotification(notification: Notification) {
+        launchWithLiveData(false, loadNotifications) {
+            when (val response = updateNotificationsUseCase(notification.id)) {
+                is ResultWrapper.Success -> {
+                    _notification.value = notification
+                }
+                is ResultWrapper.Error -> {
+                    error.value = externalError(response.error)
+                }
+            }
+        }
+    }
 
     fun updateUserImage(picture: String?) {
         launch(true) {
