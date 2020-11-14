@@ -6,6 +6,7 @@
     android:padding="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background_white_radius_28">
@@ -26,62 +27,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:singleLine="true"
+            android:ellipsize="end"
             android:text="Tyler Joseph"
+            app:layout_constraintBottom_toBottomOf="@+id/picture"
+            app:layout_constraintEnd_toStartOf="@+id/price"
             app:layout_constraintStart_toEndOf="@id/picture"
             app:layout_constraintTop_toTopOf="@id/picture" />
-
-        <TextView
-            android:id="@+id/rate"
-            style="@style/paragraph_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="4.5"
-            app:layout_constraintStart_toStartOf="@id/name"
-            app:layout_constraintTop_toBottomOf="@+id/name" />
-
-        <ImageView
-            android:id="@+id/rate_image_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:background="@drawable/ic_rating"
-            app:layout_constraintBottom_toBottomOf="@id/rate"
-            app:layout_constraintStart_toEndOf="@id/rate"
-            app:layout_constraintTop_toTopOf="@id/rate" />
-
-        <ImageView
-            android:id="@+id/dot_image_search"
-            android:layout_width="4dp"
-            android:layout_height="4dp"
-            android:layout_marginStart="5dp"
-            android:background="@drawable/null_icon"
-            android:backgroundTint="@color/black_color"
-            app:layout_constraintBottom_toBottomOf="@id/rate"
-            app:layout_constraintStart_toEndOf="@id/rate_image_search"
-            app:layout_constraintTop_toTopOf="@id/rate" />
-
-        <TextView
-            android:id="@+id/review"
-            style="@style/paragraph_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="125"
-            app:layout_constraintBottom_toBottomOf="@id/rate"
-            app:layout_constraintStart_toEndOf="@id/dot_image_search"
-            app:layout_constraintTop_toTopOf="@id/rate" />
-
-        <ImageView
-            android:id="@+id/review_image_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:background="@drawable/ic_review"
-            app:layout_constraintBottom_toBottomOf="@id/rate"
-            app:layout_constraintStart_toEndOf="@id/review"
-            app:layout_constraintTop_toTopOf="@id/rate" />
 
         <TextView
             android:id="@+id/price"
@@ -100,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="Από"
             app:layout_constraintStart_toStartOf="@id/picture"
             app:layout_constraintTop_toBottomOf="@id/picture" />
@@ -111,6 +64,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
             android:ellipsize="middle"
             android:singleLine="true"
             android:text="Αθήνα"
@@ -123,7 +77,7 @@
             style="@style/paragraph_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:text="Προς"
             app:layout_constraintStart_toStartOf="@+id/to"
             app:layout_constraintTop_toBottomOf="@+id/from" />
@@ -191,8 +145,8 @@
             style="@style/paragraph_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:drawableStart="@drawable/ic_seat"
             android:drawablePadding="10dp"
             android:gravity="center"
