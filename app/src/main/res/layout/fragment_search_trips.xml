@@ -155,7 +155,7 @@
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/results_label"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/results_label" />
+            app:layout_constraintTop_toTopOf="@id/results_label"/>
 
 
         <androidx.recyclerview.widget.RecyclerView

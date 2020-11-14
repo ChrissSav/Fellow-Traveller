@@ -2,17 +2,24 @@ package gr.fellow.fellow_traveller.ui.search.fragments
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentSearchTripsBinding
+import gr.fellow.fellow_traveller.domain.PetAnswerType
 import gr.fellow.fellow_traveller.domain.SearchTripFilter
+import gr.fellow.fellow_traveller.domain.SortAnswerType
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
+import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.SearchTripPetBottomSheetDialog
+import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.SortSearchTripsBottomSheetDialog
+import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.UserImagePickBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.search.SearchFilterActivity
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
@@ -27,7 +34,12 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
     private val viewModel: SearchTripViewModel by activityViewModels()
     private var tripsList = mutableListOf<TripSearch>()
     private var clickTime = 0L
+    private var clickTimeDialog = 0L
     private var bundle = bundleOf()
+    private lateinit var sortSearchTripsBottomSheetDialog: SortSearchTripsBottomSheetDialog
+    private var pickerFlag: Boolean = true
+
+
 
 
     override fun getViewBinding(): FragmentSearchTripsBinding =
@@ -35,6 +47,8 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
 
     override fun setUpObservers() {
+
+
         with(viewModel) {
 
 
@@ -60,6 +74,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
                     binding.progressBar.visibility = View.GONE
             })
 
+
             resultTrips.observe(viewLifecycleOwner, Observer {
 
                 binding.resultsLabel.visibility = View.VISIBLE
@@ -75,6 +90,8 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
                     binding.recyclerView.visibility = View.GONE
                     binding.notFoundImage.visibility = View.VISIBLE
                 }
+
+
             })
 
             searchFilter.observe(viewLifecycleOwner, Observer {
@@ -92,6 +109,16 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
             recyclerView.adapter = SearchResultsAdapter(tripsList, this@SearchTripsFragment::onTripClicked)
 
+            
+            binding.sortButton.setOnClickListener {
+                //Check because dialog open twice
+                if (currentTimeStamp() - clickTimeDialog > 1) {
+                    clickTimeDialog = currentTimeStamp()
+                    sortSearchTripsBottomSheetDialog = SortSearchTripsBottomSheetDialog(this@SearchTripsFragment::onSortItemClickListener)
+                    sortSearchTripsBottomSheetDialog.show(childFragmentManager, "sortSearchTripsBottomSheetDialog")
+                    Log.i("PICKER", "enter")
+                }
+            }
 
             if (tripsList.isNotEmpty())
                 binding.recyclerView.visibility = View.VISIBLE
@@ -108,6 +135,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
                 startActivityForResultWithFade(intent, 2)
             }
 
+
             backButton.setOnClickListener {
                 onBackPressed()
             }
@@ -116,6 +144,8 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
                 if (viewModel.destinations.value?.first != null && viewModel.destinations.value?.second != null) {
                     viewModel.updateFilter()
                     motion.transitionToEnd()
+                    //viewModel.setSortOption(sortOption)
+
                 } else {
                     createAlerter(resources.getString(R.string.ERROR_FIELDS_REQUIRE))
                 }
@@ -134,6 +164,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
                 if (!destFromButton.text.isNullOrEmpty() && !destToButton.text.isNullOrEmpty()) {
                     viewModel.swapDestinations()
                     motion.transitionToEnd()
+                    //viewModel.setSortOption(sortOption)
                 }
             }
         }
@@ -200,6 +231,42 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
         }
     }
+
+    private fun onSortItemClickListener(sortAnswerType: SortAnswerType) {
+
+        when (sortAnswerType) {
+           SortAnswerType.Relevant -> {
+               createToast("Πιο σχετικά")
+               binding.sortButton.setText("Πιο σχετικά")
+               viewModel.sortByDate()
+               //sortOption = SortAnswerType.Relevant
+           }
+            SortAnswerType.Price -> {
+                createToast("Τιμή")
+                binding.sortButton.setText("Τιμή")
+                viewModel.sortByPrice()
+                //sortOption = SortAnswerType.Price
+            }
+           SortAnswerType.Rate -> {
+               createToast("Αξιολόγηση")
+               binding.sortButton.setText("Αξιολόγηση")
+               viewModel.sortByRate()
+               //sortOption = SortAnswerType.Rate
+           }
+
+        }
+    }
+/*
+    //Set Up Sort Option, based on previous choice
+    private fun setSortOption(){
+        when (sortOption) {
+            SortAnswerType.Relevant -> viewModel.sortByDate()
+            SortAnswerType.Price -> viewModel.sortByPrice()
+            else -> viewModel.sortByRate()
+        }
+
+    }
+*/
 
 
 }
