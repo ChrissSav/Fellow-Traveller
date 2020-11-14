@@ -7,6 +7,7 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivityViewModel
@@ -23,8 +24,6 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
 
     private lateinit var navController: NavController
-
-    private var currentDest = R.id.destination_main
 
     private val homeLayout = listOf(
         R.id.destination_main,
@@ -82,7 +81,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
         navController.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { _, destination, _ ->
             if (destination.id in homeLayout) {
-                showHideBottomNav(60.toPx)
+                showHideBottomNav(55.toPx)
             } else {
                 showHideBottomNav(0)
             }
@@ -120,35 +119,14 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
 
     private fun setupBottomNavMenu(navController: NavController) {
-
-        binding.bottomNavigationView.setItemSelected(currentDest)
-
-        binding.bottomNavigationView.setOnItemSelectedListener {
-            currentDest = it
-            when (it) {
-                R.id.destination_main -> {
-                    navController.navigate(R.id.destination_main)
-
-                }
-                R.id.destination_trips -> {
-                    navController.navigate(R.id.destination_trips)
-                }
-                R.id.destination_notifications -> {
-                    navController.navigate(R.id.destination_notifications)
-                }
-                R.id.destination_info -> {
-                    navController.navigate(R.id.destination_info)
+        binding.bottomNavigationView.let {
+            NavigationUI.setupWithNavController(it, navController)
+            it.setOnNavigationItemReselectedListener { item ->
+                if (item.isChecked) {
+                    return@setOnNavigationItemReselectedListener
                 }
             }
         }
-        /* binding.bottomNavigationView.let {
-             NavigationUI.setupWithNavController(it, navController)
-             it.setOnNavigationItemReselectedListener { item ->
-                 if (item.isChecked) {
-                     return@setOnNavigationItemReselectedListener
-                 }
-             }
-         }*/
     }
 
 }

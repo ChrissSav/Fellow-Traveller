@@ -4,8 +4,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentHomeTripsBinding
 import gr.fellow.fellow_traveller.ui.home.adapter.TripsViewPagerAdapter
-import gr.fellow.fellow_traveller.ui.home.trip.TripsOffersTabFragment
-import gr.fellow.fellow_traveller.ui.home.trip.TripsTakePartTabFragment
+import gr.fellow.fellow_traveller.ui.home.trip_fragments.TripsOffersTabFragment
+import gr.fellow.fellow_traveller.ui.home.trip_fragments.TripsTakePartTabFragment
 
 
 @AndroidEntryPoint

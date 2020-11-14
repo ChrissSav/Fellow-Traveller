@@ -137,6 +137,11 @@ class FellowRepositoryImpl(
             service.getTripsAs("passenger", status, page).handleApiFormat()
         }
 
+    override suspend fun getTripById(tripId: String): ResultWrapper<TripInvolvedResponse> =
+        networkCall {
+            service.getTripById(tripId).handleApiFormat()
+        }
+
     override suspend fun searchTrips(query: SearchTripFilter): ResultWrapper<MutableList<TripSearchResponse>> =
         networkCall {
             with(query) {

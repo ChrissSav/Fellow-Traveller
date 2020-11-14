@@ -27,6 +27,14 @@ import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
 @Module
 class UseCasesModule {
 
+
+    @ActivityScoped
+    @Provides
+    fun provideGetTripByIdUseCase(dataSource: FellowDataSource): GetTripByIdUseCase {
+        return GetTripByIdUseCase(dataSource)
+    }
+
+
     @ActivityScoped
     @Provides
     fun provideCheckReviewUseCase(dataSource: FellowDataSource): CheckReviewUseCase {

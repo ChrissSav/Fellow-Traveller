@@ -37,8 +37,10 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
             if (it) {
                 binding.progressBar2.visibility = View.VISIBLE
                 binding.recyclerView.scrollToPosition((binding.recyclerView.adapter as NotificationAdapter).currentList.size - 1)
-            } else
+            } else {
+                binding.swipeRefreshLayout.isRefreshing = false
                 binding.progressBar2.visibility = View.GONE
+            }
 
         })
 

@@ -39,7 +39,6 @@ constructor(
     private val deleteCarUseCase: DeleteCarUseCase,
     private val updateAccountInfoUseCase: UpdateAccountInfoUseCase,
     private val deleteUserLocalCars: DeleteUserLocalCars,
-    private val registerUserLocalUseCase: RegisterUserLocalUseCase,
     private val getTripsAsCreatorRemoteUseCase: GetTripsAsCreatorRemoteUseCase,
     private val getTripsAsPassengerRemoteUseCase: GetTripsAsPassengerRemoteUseCase,
     private val updateUserPictureUseCase: UpdateUserPictureUseCase,
@@ -47,7 +46,11 @@ constructor(
     private val changePasswordUseCase: ChangePasswordUseCase,
     private val exitFromTripUseCase: ExitFromTripUseCase,
     private val getNotificationsUseCase: GetNotificationsUseCase,
-    private val updateNotificationsUseCase: UpdateNotificationsUseCase
+    private val updateNotificationsUseCase: UpdateNotificationsUseCase,
+    // UpdateInfo
+
+    private val getUserInfoRemoteUseCase: GetUserInfoRemoteUseCase,
+    private val registerUserLocalUseCase: RegisterUserLocalUseCase
 ) : BaseViewModel() {
 
 
@@ -60,8 +63,6 @@ constructor(
     private val _cars = MutableLiveData<MutableList<Car>>()
     val cars: LiveData<MutableList<Car>> = _cars
 
-    private val _addCarResult = SingleLiveEvent<Boolean>()
-    val addCarResult: LiveData<Boolean> = _addCarResult
 
     private val _carDeletedId = SingleLiveEvent<Car>()
     val carDeletedId: LiveData<Car> = _carDeletedId
@@ -140,6 +141,20 @@ constructor(
     }
 
 
+    private fun updateUserInfo() {
+        launch {
+            when (val response = getUserInfoRemoteUseCase()) {
+                is ResultWrapper.Success -> {
+                    registerUserLocalUseCase(response.data)
+                    _user.value = loadUserLocalInfoUseCase()
+                }
+                is ResultWrapper.Error -> {
+                }
+            }
+        }
+    }
+
+
     fun changePassword(password: String) {
         launch(true) {
             when (val response = changePasswordUseCase(password)) {
@@ -208,8 +223,7 @@ constructor(
             if (_tripsAsCreatorActive.value != null && !more) {
                 return@launchWithLiveData
             }
-            delay(250)
-            when (val response = getTripsAsCreatorRemoteUseCase("active", tripsAsCreatorPage)) {
+            when (val response = getTripsAsCreatorRemoteUseCase("active", tripsAsCreatorActivePage)) {
                 is ResultWrapper.Success -> {
                     // savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
                     if (response.data.isNotEmpty()) {
@@ -231,8 +245,7 @@ constructor(
     fun loadTripsAsCreatorClear() {
         launchWithLiveData(true, loadCreatorActive) {
             tripsAsCreatorActivePage = 0
-            delay(250)
-            when (val response = getTripsAsCreatorRemoteUseCase("active", tripsAsCreatorPage)) {
+            when (val response = getTripsAsCreatorRemoteUseCase("active", tripsAsCreatorActivePage)) {
                 is ResultWrapper.Success -> {
                     // savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
                     if (response.data.isNotEmpty()) {
@@ -300,7 +313,6 @@ constructor(
             if (_tripsAsPassengerActive.value != null && !more) {
                 return@launchWithLiveData
             }
-            delay(250)
             when (val response = getTripsAsPassengerRemoteUseCase("active", tripsAsCreatorActivePage)) {
                 is ResultWrapper.Success -> {
                     //savedStateHandle.set(SAVED_STATE_LOCATIONS, response.data)
@@ -447,7 +459,7 @@ constructor(
                 is ResultWrapper.Success -> {
                     registerUserLocalUseCase(response.data)
                     _user.value = loadUserLocalInfoUseCase()
-                    decreaseUserTrips()
+                    updateUserInfo()
                 }
                 is ResultWrapper.Error -> {
                     error.value = externalError(response.error)
@@ -478,8 +490,8 @@ constructor(
             when (val response = deleteTripUseCase(tripId)) {
                 is ResultWrapper.Success -> {
                     _tripsAsCreatorActive.value = deleteTripWithId(tripId, _tripsAsCreatorActive.value)
-                    decreaseUserTrips()
                     _successDeletion.value = "Επιτυχής διαγραφή ταξιδιού"
+                    updateUserInfo()
                 }
                 is ResultWrapper.Error -> {
                     error.value = externalError(response.error)
@@ -489,95 +501,10 @@ constructor(
     }
 
 
-    private suspend fun increaseUserTrips(offers: Boolean = true) {
-        if (offers)
-            _user.value?.let { user ->
-                registerUserLocalUseCase(
-                    LocalUser(
-                        user.id,
-                        user.firstName,
-                        user.lastName,
-                        user.rate,
-                        user.reviews,
-                        user.picture,
-                        user.aboutMe,
-                        user.email,
-                        user.messengerLink,
-                        user.tripsOffers + 1,
-                        user.tripsInvolved
-
-                    )
-                )
-            }
-        else
-            _user.value?.let { user ->
-                registerUserLocalUseCase(
-                    LocalUser(
-                        user.id,
-                        user.firstName,
-                        user.lastName,
-                        user.rate,
-                        user.reviews,
-                        user.picture,
-                        user.aboutMe,
-                        user.email,
-                        user.messengerLink,
-                        user.tripsOffers,
-                        user.tripsInvolved + 1
-
-                    )
-                )
-            }
-        _user.value = loadUserLocalInfoUseCase()
-    }
-
-    private suspend fun decreaseUserTrips(offers: Boolean = true) {
-        if (offers)
-            _user.value?.let { user ->
-                registerUserLocalUseCase(
-                    LocalUser(
-                        user.id,
-                        user.firstName,
-                        user.lastName,
-                        user.rate,
-                        user.reviews,
-                        user.picture,
-                        user.aboutMe,
-                        user.email,
-                        user.messengerLink,
-                        user.tripsOffers - 1,
-                        user.tripsInvolved
-
-                    )
-                )
-            }
-        else
-            _user.value?.let { user ->
-                registerUserLocalUseCase(
-                    LocalUser(
-                        user.id,
-                        user.firstName,
-                        user.lastName,
-                        user.rate,
-                        user.reviews,
-                        user.picture,
-                        user.aboutMe,
-                        user.email,
-                        user.messengerLink,
-                        user.tripsOffers,
-                        user.tripsInvolved - 1
-
-                    )
-                )
-            }
-        _user.value = loadUserLocalInfoUseCase()
-    }
-
-
     fun addTripCreate(trip: TripInvolved) {
         launch {
             tripsAsCreatorActive.value?.let {
-                increaseUserTrips()
+                updateUserInfo()
                 val tempTrip = it
                 tempTrip.add(trip)
                 _tripsAsCreatorActive.value = tempTrip
@@ -589,7 +516,7 @@ constructor(
     fun addTripPassenger(trip: TripInvolved) {
         launch {
             _tripsAsPassengerActive.value?.let {
-                increaseUserTrips(false)
+                updateUserInfo()
                 val tempTrip = it
                 tempTrip.add(trip)
                 _tripsAsPassengerActive.value = tempTrip
@@ -614,8 +541,8 @@ constructor(
             when (val response = exitFromTripUseCase(tripId)) {
                 is ResultWrapper.Success -> {
                     _tripsAsPassengerActive.value = deleteTripWithId(tripId, _tripsAsPassengerActive.value)
-                    decreaseUserTrips(false)
                     _successDeletion.value = "Επιτυχής αποχώρηση απο το ταξίδι"
+                    updateUserInfo()
                 }
                 is ResultWrapper.Error -> {
                     error.value = externalError(response.error)

@@ -69,17 +69,21 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        app:cnb_iconSize="26dp"
-        app:cnb_menuResource="@menu/home_menu_2"
-        app:cnb_orientationMode="horizontal"
-        app:cnb_radius="50dp"
+        android:layout_height="55dp"
+        android:background="@color/white"
+        android:outlineProvider="none"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@drawable/bottom_nav_color"
+        app:itemTextColor="@drawable/bottom_nav_color"
+        app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/home_menu" />
+
 
     <include
         android:id="@+id/generic_loader"

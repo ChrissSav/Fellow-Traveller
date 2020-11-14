@@ -113,6 +113,11 @@ interface FellowService {
         @Body trip: TripCreateRequest
     ): Response<BaseResponse<TripInvolvedResponse>>
 
+    @GET("trip/{trip_id}")
+    suspend fun getTripById(
+        @Path("trip_id") tripId: String
+    ): Response<BaseResponse<TripInvolvedResponse>>
+
 
     @GET("trip")
     suspend fun getTripsAs(
@@ -163,7 +168,7 @@ interface FellowService {
         @Body registerReviewRequest: RegisterReviewRequest
     ): Response<BaseResponse<String>>
 
-    @GET("review/{targetId}")
+    @GET("review/check/{targetId}")
     suspend fun checkReview(
         @Path("targetId") targetId: String
     ): Response<BaseResponse<Boolean>>

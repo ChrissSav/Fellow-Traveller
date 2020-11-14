@@ -76,6 +76,8 @@ interface FellowDataSource {
 
     suspend fun getTipsAsPassenger(status: String, page: Int): ResultWrapper<MutableList<TripInvolved>>
 
+    suspend fun getTripById(tripId: String): ResultWrapper<TripInvolved>
+
     suspend fun exitFromTrip(tripId: String): ResultWrapper<String>
 
     suspend fun deleteTrip(tripId: String): ResultWrapper<String>

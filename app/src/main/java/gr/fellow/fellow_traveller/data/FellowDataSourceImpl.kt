@@ -160,6 +160,15 @@ class FellowDataSourceImpl(
         }
     }
 
+    override suspend fun getTripById(tripId: String): ResultWrapper<TripInvolved> {
+        return when (val response = repository.getTripById(tripId)) {
+            is ResultWrapper.Success ->
+                ResultWrapper.Success(response.data.mapTripInvolved())
+            is ResultWrapper.Error ->
+                ResultWrapper.Error(response.error)
+        }
+    }
+
     override suspend fun exitFromTrip(tripId: String): ResultWrapper<String> =
         repository.exitFromTrip(tripId)
 

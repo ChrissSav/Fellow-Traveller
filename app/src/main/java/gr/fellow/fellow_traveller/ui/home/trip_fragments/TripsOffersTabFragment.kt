@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.ui.home.trip
+package gr.fellow.fellow_traveller.ui.home.trip_fragments
 
 import android.view.View
 import androidx.core.os.bundleOf

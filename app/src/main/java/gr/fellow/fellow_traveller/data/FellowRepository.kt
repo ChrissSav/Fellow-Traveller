@@ -62,6 +62,8 @@ interface FellowRepository {
 
     suspend fun getTipsAsPassenger(status: String, page: Int): ResultWrapper<MutableList<TripInvolvedResponse>>
 
+    suspend fun getTripById(tripId: String): ResultWrapper<TripInvolvedResponse>
+
     suspend fun searchTrips(query: SearchTripFilter): ResultWrapper<MutableList<TripSearchResponse>>
 
     suspend fun bookTrip(request: BookTripRequest): ResultWrapper<TripInvolvedResponse>

@@ -118,7 +118,7 @@
     </fragment>
     <fragment
         android:id="@+id/tripInvolvedDetailsFragment"
-        android:name="gr.fellow.fellow_traveller.ui.home.trip.TripInvolvedDetailsFragment"
+        android:name="gr.fellow.fellow_traveller.ui.home.trip_fragments.TripInvolvedDetailsFragment"
         android:label="fragment_trip_involved_details"
         tools:layout="@layout/fragment_trip_involved_details">
         <argument
@@ -140,7 +140,7 @@
     </fragment>
     <fragment
         android:id="@+id/tripInvolvedPassengerDetailsFragment"
-        android:name="gr.fellow.fellow_traveller.ui.home.trip.TripInvolvedPassengerDetailsFragment"
+        android:name="gr.fellow.fellow_traveller.ui.home.trip_fragments.TripInvolvedPassengerDetailsFragment"
         android:label="fragment_trip_involved_passenger_details"
         tools:layout="@layout/fragment_trip_involved_passenger_details">
         <argument
@@ -154,7 +154,7 @@
         tools:layout="@layout/fragment_change_password" />
     <fragment
         android:id="@+id/tripInvolvedHistoryFragment"
-        android:name="gr.fellow.fellow_traveller.ui.home.trip.TripInvolvedHistoryFragment"
+        android:name="gr.fellow.fellow_traveller.ui.home.trip_fragments.TripInvolvedHistoryFragment"
         android:label="fragment_trip_involved_history"
         tools:layout="@layout/fragment_trip_involved_history">
         <argument
