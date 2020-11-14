@@ -2,6 +2,7 @@ package gr.fellow.fellow_traveller.ui.search.fragments
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
@@ -33,8 +34,11 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
     private val viewModel: SearchTripViewModel by activityViewModels()
     private var tripsList = mutableListOf<TripSearch>()
     private var clickTime = 0L
+    private var clickTimeDialog = 0L
     private var bundle = bundleOf()
     private lateinit var sortSearchTripsBottomSheetDialog: SortSearchTripsBottomSheetDialog
+    private var pickerFlag: Boolean = true
+
 
 
 
@@ -105,12 +109,15 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
             recyclerView.adapter = SearchResultsAdapter(tripsList, this@SearchTripsFragment::onTripClicked)
 
-
-
+            
             binding.sortButton.setOnClickListener {
-                sortSearchTripsBottomSheetDialog = SortSearchTripsBottomSheetDialog(this@SearchTripsFragment::onSortItemClickListener)
-                sortSearchTripsBottomSheetDialog.show(childFragmentManager, "sortSearchTripsBottomSheetDialog")
-
+                //Check because dialog open twice
+                if (currentTimeStamp() - clickTimeDialog > 1) {
+                    clickTimeDialog = currentTimeStamp()
+                    sortSearchTripsBottomSheetDialog = SortSearchTripsBottomSheetDialog(this@SearchTripsFragment::onSortItemClickListener)
+                    sortSearchTripsBottomSheetDialog.show(childFragmentManager, "sortSearchTripsBottomSheetDialog")
+                    Log.i("PICKER", "enter")
+                }
             }
 
             if (tripsList.isNotEmpty())
