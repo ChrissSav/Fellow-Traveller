@@ -3,11 +3,9 @@ package gr.fellow.fellow_traveller.ui.newtrip
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.domain.BagsStatusType
 import gr.fellow.fellow_traveller.domain.car.Car
-import gr.fellow.fellow_traveller.domain.externalError
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.framework.network.google.model.DestinationModel
@@ -138,19 +136,13 @@ constructor(
 
     fun registerTrip() {
         launch(true) {
-            when (val response = registerTripRemoteUseCase(
+            val response = registerTripRemoteUseCase(
                 destinationFrom.value?.placeId.toString(), destinationTo.value?.placeId.toString(), car.value?.id.toString(),
                 pet.value!!, seats.value!!, bags.value!!.value, message.value!!, price.value!!, getTimestamp()
             )
-                ) {
-                is ResultWrapper.Success -> {
-                    _success.value = response.data
-                }
 
-                is ResultWrapper.Error -> {
-                    error.value = externalError(response.error)
-                }
-            }
+            _success.value = response
+
 
         }
     }

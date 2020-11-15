@@ -1,17 +1,15 @@
 package gr.fellow.fellow_traveller.usecase.home
 
-import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 
 class DeleteCarUseCase(
     private val dataSource: FellowDataSource
 ) {
 
-    suspend operator fun invoke(carId: String): ResultWrapper<String> {
+    suspend operator fun invoke(carId: String): String {
         val response = dataSource.deleteCarRemote(carId)
-        if (response is ResultWrapper.Success) {
-            dataSource.deleteCarLocal(carId)
-        }
+        dataSource.deleteCarLocal(carId)
+
         return response
     }
 }

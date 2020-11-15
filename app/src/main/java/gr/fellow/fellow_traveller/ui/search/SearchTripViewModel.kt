@@ -3,12 +3,10 @@ package gr.fellow.fellow_traveller.ui.search
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.domain.SortAnswerType
-import gr.fellow.fellow_traveller.domain.externalError
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
@@ -74,15 +72,9 @@ constructor(
         launch {
             loadResults.value = true
             _searchFilter.value?.let { searchFilters ->
-                when (val response = searchTripsUseCase(searchFilters)) {
-                    is ResultWrapper.Success -> {
-                        _resultTrips.value = response.data
-                        setSortOption(sortOption)
-                    }
-                    is ResultWrapper.Error -> {
-                        error.value = externalError(response.error)
-                    }
-                }
+                val response = searchTripsUseCase(searchFilters)
+                _resultTrips.value = response
+                setSortOption(sortOption)
             }
             loadResults.value = false
         }
@@ -102,15 +94,14 @@ constructor(
 
     fun bookTrip(tripId: String, seats: Int, pet: Boolean) {
         launch(true) {
-            when (val response = bookTripUseCase(tripId, seats, pet)) {
-                is ResultWrapper.Success -> {
-                    _tripBook.value = response.data
-                }
-                is ResultWrapper.Error -> {
-                    deleteTripId = tripId
-                    error.value = externalError(response.error)
-                }
+            try {
+                val response = bookTripUseCase(tripId, seats, pet)
+                _tripBook.value = response
+            } catch (e: Exception) {
+                deleteTripId = tripId
+                throw e
             }
+
         }
 
     }
@@ -132,26 +123,27 @@ constructor(
     }
 
     //Can merge these 3 fun to 1 TODO
-    fun sortByDate(){
-        var sortedList = _resultTrips.value?.sortedWith(compareBy({ it.timestamp }))
-        _resultTrips.value = sortedList as MutableList<TripSearch>?
+    fun sortByDate() {
+        val sortedList = _resultTrips.value?.sortedWith(compareBy { it.timestamp })?.toMutableList()
+        _resultTrips.value = sortedList
         sortOption = SortAnswerType.Relevant
 
     }
 
-    fun sortByPrice(){
-        var sortedList = _resultTrips.value?.sortedWith(compareBy({ it.price }))
-        _resultTrips.value = sortedList as MutableList<TripSearch>?
+    fun sortByPrice() {
+        val sortedList = _resultTrips.value?.sortedWith(compareBy { it.price })?.toMutableList()
+        _resultTrips.value = sortedList
         sortOption = SortAnswerType.Price
     }
 
-    fun sortByRate(){
-        var sortedList = _resultTrips.value?.sortedWith(compareBy({ it.creatorUser.rate }))
-        _resultTrips.value = sortedList as MutableList<TripSearch>?
+    fun sortByRate() {
+        val sortedList = _resultTrips.value?.sortedWith(compareBy { it.creatorUser.rate })?.toMutableList()
+        _resultTrips.value = sortedList
         sortOption = SortAnswerType.Rate
     }
+
     //Set Up Sort Option, based on previous choice
-    fun setSortOption(sortOption: SortAnswerType){
+    private fun setSortOption(sortOption: SortAnswerType) {
         when (sortOption) {
             SortAnswerType.Relevant -> sortByDate()
             SortAnswerType.Price -> sortByPrice()

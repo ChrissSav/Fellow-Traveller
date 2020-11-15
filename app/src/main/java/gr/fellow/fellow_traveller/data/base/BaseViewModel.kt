@@ -8,6 +8,7 @@ import gr.fellow.fellow_traveller.data.BaseApiException
 import gr.fellow.fellow_traveller.data.NoInternetException
 import gr.fellow.fellow_traveller.data.UnauthorizedException
 import gr.fellow.fellow_traveller.domain.ErrorMessage
+import gr.fellow.fellow_traveller.domain.externalError
 import gr.fellow.fellow_traveller.domain.internalError
 import gr.fellow.fellow_traveller.utils.ACCESS_DENIED
 import kotlinx.coroutines.launch
@@ -55,12 +56,18 @@ open class BaseViewModel : ViewModel() {
     private fun handleError(e: Exception) {
         e.printStackTrace()
         when (e) {
-            is BaseApiException -> when (e.code) {
-                ACCESS_DENIED -> {
-                    error.value = internalError(R.string.ERROR_API_UNAUTHORIZED)
+            is BaseApiException -> {
+                if (e.code == null) {
+                    error.value = externalError(e.text.toString())
+                    return
                 }
-                else -> {
-                    error.value = internalError(R.string.ERROR_API_UNREACHABLE)
+                when (e.code) {
+                    ACCESS_DENIED -> {
+                        error.value = internalError(R.string.ERROR_API_UNAUTHORIZED)
+                    }
+                    else -> {
+                        error.value = internalError(R.string.ERROR_API_UNREACHABLE)
+                    }
                 }
             }
             is NoInternetException -> {

@@ -3,10 +3,8 @@ package gr.fellow.fellow_traveller.ui.forgotPassword
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
-import gr.fellow.fellow_traveller.domain.externalError
 import gr.fellow.fellow_traveller.usecase.auth.ForgotPasswordUserCase
 import gr.fellow.fellow_traveller.usecase.auth.ResetPasswordUserCase
 
@@ -36,43 +34,24 @@ constructor(
 
     fun forgotPassword(email: String) {
         launch(true) {
-
-            when (val response = forgotPasswordUserCase(email)) {
-                is ResultWrapper.Success -> {
-                    this.email = email
-                    _successForgotRequest.value = true
-                }
-                is ResultWrapper.Error -> {
-                    error.value = externalError(response.error)
-                }
-            }
+            val response = forgotPasswordUserCase(email)
+            this.email = email
+            _successForgotRequest.value = true
         }
     }
 
 
     fun resetPassword(code: String) {
         launch(true) {
-            when (val response = resetPasswordUserCase(email, code, _password.value.toString())) {
-                is ResultWrapper.Success -> {
-                    _successResetPassword.value = true
-                }
-                is ResultWrapper.Error -> {
-                    error.value = externalError(response.error)
-                }
-            }
+            val response = resetPasswordUserCase(email, code, _password.value.toString())
+            _successResetPassword.value = true
         }
     }
 
     fun forgotPassword() {
         launch(true) {
-            when (val response = forgotPasswordUserCase(email)) {
-                is ResultWrapper.Success -> {
-                    _successForgotRequest.value = true
-                }
-                is ResultWrapper.Error -> {
-                    error.value = externalError(response.error)
-                }
-            }
+            val response = forgotPasswordUserCase(email)
+            _successForgotRequest.value = true
         }
     }
 

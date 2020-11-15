@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.domain
 
-import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.notification.Notification
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
@@ -20,43 +19,43 @@ interface FellowDataSource {
 
     //Auth
 
-    suspend fun checkUserEmail(email: String): ResultWrapper<String>
+    suspend fun checkUserEmail(email: String): String
 
-    suspend fun registerUser(firstName: String, lastName: String, email: String, password: String): ResultWrapper<String>
+    suspend fun registerUser(firstName: String, lastName: String, email: String, password: String): String
 
-    suspend fun verifyAccount(token: String): ResultWrapper<String>
+    suspend fun verifyAccount(token: String): String
 
-    suspend fun loginUser(username: String, password: String): ResultWrapper<UserAuthResponse>
+    suspend fun loginUser(username: String, password: String): UserAuthResponse
 
-    suspend fun logoutRemote(): ResultWrapper<String>
+    suspend fun logoutRemote(): String
 
     suspend fun registerUserAuth(userAuthResponse: UserAuthResponse)
 
     suspend fun registerUserAuth(userLocal: LocalUser)
 
-    suspend fun forgotPassword(email: String): ResultWrapper<String>
+    suspend fun forgotPassword(email: String): String
 
-    suspend fun resetPassword(email: String, code: String, password: String): ResultWrapper<String>
+    suspend fun resetPassword(email: String, code: String, password: String): String
 
     // User
 
-    suspend fun updateAccount(firstName: String, lastName: String, messengerLink: String?, aboutMe: String?): ResultWrapper<UserAuthResponse>
+    suspend fun updateAccount(firstName: String, lastName: String, messengerLink: String?, aboutMe: String?): UserAuthResponse
 
-    suspend fun updatePicture(picture: String?): ResultWrapper<UserAuthResponse>
+    suspend fun updatePicture(picture: String?): UserAuthResponse
 
-    suspend fun getUserInfoRemote(): ResultWrapper<UserAuthResponse>
+    suspend fun getUserInfoRemote(): UserAuthResponse
 
-    suspend fun getUserInfoById(userId: String): ResultWrapper<UserInfo>
+    suspend fun getUserInfoById(userId: String): UserInfo
 
-    suspend fun changePassword(updatePasswordRequest: UpdatePasswordRequest): ResultWrapper<String>
+    suspend fun changePassword(updatePasswordRequest: UpdatePasswordRequest): String
 
     // Cars
 
-    suspend fun getCarsRemote(): ResultWrapper<MutableList<Car>>
+    suspend fun getCarsRemote(): MutableList<Car>
 
-    suspend fun addCarRemote(carRequest: CarRequest): ResultWrapper<Car>
+    suspend fun addCarRemote(carRequest: CarRequest): Car
 
-    suspend fun deleteCarRemote(carId: String): ResultWrapper<String>
+    suspend fun deleteCarRemote(carId: String): String
 
 
     // Trips
@@ -65,36 +64,35 @@ interface FellowDataSource {
     suspend fun addTripRemote(
         destFrom: String, destTo: String, carId: String,
         hasPet: Boolean, seats: Int, bags: String, msg: String?, price: Float, timestamp: Long
-    ): ResultWrapper<TripInvolved>
+    ): TripInvolved
 
+    suspend fun searchTrips(query: SearchTripFilter): MutableList<TripSearch>
 
-    suspend fun searchTrips(query: SearchTripFilter): ResultWrapper<MutableList<TripSearch>>
+    suspend fun bookTrip(tripId: String, seats: Int, pet: Boolean): TripInvolved
 
-    suspend fun bookTrip(tripId: String, seats: Int, pet: Boolean): ResultWrapper<TripInvolved>
+    suspend fun getTipsAsCreator(status: String, page: Int): MutableList<TripInvolved>
 
-    suspend fun getTipsAsCreator(status: String, page: Int): ResultWrapper<MutableList<TripInvolved>>
+    suspend fun getTipsAsPassenger(status: String, page: Int): MutableList<TripInvolved>
 
-    suspend fun getTipsAsPassenger(status: String, page: Int): ResultWrapper<MutableList<TripInvolved>>
+    suspend fun getTripById(tripId: String): TripInvolved
 
-    suspend fun getTripById(tripId: String): ResultWrapper<TripInvolved>
+    suspend fun exitFromTrip(tripId: String): String
 
-    suspend fun exitFromTrip(tripId: String): ResultWrapper<String>
-
-    suspend fun deleteTrip(tripId: String): ResultWrapper<String>
+    suspend fun deleteTrip(tripId: String): String
 
 
     // Notification
 
-    suspend fun getNotification(page: Int): ResultWrapper<MutableList<Notification>>
+    suspend fun getNotification(page: Int): MutableList<Notification>
 
-    suspend fun setNotificationRead(updateNotification: UpdateNotification): ResultWrapper<String>
+    suspend fun setNotificationRead(updateNotification: UpdateNotification): String
 
 
     // Review
 
-    suspend fun registerReview(registerReviewRequest: RegisterReviewRequest): ResultWrapper<String>
+    suspend fun registerReview(registerReviewRequest: RegisterReviewRequest): String
 
-    suspend fun checkReview(targetId: String): ResultWrapper<Boolean>
+    suspend fun checkReview(targetId: String): Boolean
 
     /**
      * Google Service
@@ -120,6 +118,6 @@ interface FellowDataSource {
 
     suspend fun deleteAllLocaleCars(): Int
 
-    //  suspend fun addTripLocal(tripCreateRequest: TripCreateRequest): ResultWrapper<TripResponse>
+    //  suspend fun addTripLocal(tripCreateRequest: TripCreateRequest): TripResponse>
 
 }

@@ -3,12 +3,8 @@ package gr.fellow.fellow_traveller.ui.register
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.data.ResultWrapper
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
-import gr.fellow.fellow_traveller.domain.externalError
-import gr.fellow.fellow_traveller.domain.internalError
 import gr.fellow.fellow_traveller.usecase.register.CheckUserEmailUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserUseCase
 
@@ -37,16 +33,9 @@ constructor(
 
 
     fun checkUserEmail(email: String) {
-
         launch(true) {
-            when (checkUserEmailUseCase(email)) {
-                is ResultWrapper.Success ->
-                    _email.value = email
-                is ResultWrapper.Error ->
-                    error.value = internalError(R.string.ERROR_EMAIL_ALREADY_EXISTS)
-            }
+            _email.value = checkUserEmailUseCase(email)
         }
-
 
     }
 
@@ -63,16 +52,8 @@ constructor(
             val firstName = userInfo.value?.first.toString()
             val lastName = userInfo.value?.second.toString()
 
-            when (val response = registerUserUseCase(
-                firstName, lastName, email.value.toString(), password.value.toString()
-            )) {
-                is ResultWrapper.Success -> {
-                    _finish.value = true
-                }
-                is ResultWrapper.Error -> {
-                    error.value = externalError(response.error)
-                }
-            }
+            val response = registerUserUseCase(firstName, lastName, email.value.toString(), password.value.toString())
+            _finish.value = true
 
         }
     }
