@@ -20,7 +20,6 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
 
 
     private lateinit var nav: NavController
-    private lateinit var exitCustomDialog: ExitCustomDialog
 
     override fun provideViewBinding(): ActivityNewTripBinding =
         ActivityNewTripBinding.inflate(layoutInflater)
@@ -84,12 +83,10 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
             super.onBackPressed()
         }
 
-
     }
 
     private fun openDialog() {
-        exitCustomDialog = ExitCustomDialog(this, this::exitCustomDialogAnswerType, "Απόρριψη της αναζήτησης;", 2)
-        exitCustomDialog.show(supportFragmentManager, "exitCustomDialog")
+        ExitCustomDialog(this, this::exitCustomDialogAnswerType, "Απόρριψη της καταχώρησης ;", 2).show(supportFragmentManager, "exitCustomDialog")
     }
 
     private fun exitCustomDialogAnswerType(result: AnswerType) {

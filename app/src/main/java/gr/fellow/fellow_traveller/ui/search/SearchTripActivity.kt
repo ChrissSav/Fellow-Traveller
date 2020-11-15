@@ -2,14 +2,21 @@ package gr.fellow.fellow_traveller.ui.search
 
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import dagger.hilt.android.AndroidEntryPoint
+import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivityViewModel
 import gr.fellow.fellow_traveller.databinding.ActivitySearchTripBinding
+import gr.fellow.fellow_traveller.domain.AnswerType
+import gr.fellow.fellow_traveller.ui.dialogs.ExitCustomDialog
 
 
 @AndroidEntryPoint
 class SearchTripActivity : BaseActivityViewModel<ActivitySearchTripBinding, SearchTripViewModel>(SearchTripViewModel::class.java) {
 
+
+    private lateinit var nav: NavController
 
     override fun provideViewBinding(): ActivitySearchTripBinding =
         ActivitySearchTripBinding.inflate(layoutInflater)
@@ -25,5 +32,22 @@ class SearchTripActivity : BaseActivityViewModel<ActivitySearchTripBinding, Sear
     }
 
 
-    override fun setUpViews() {}
+    override fun setUpViews() {
+        nav = Navigation.findNavController(this, R.id.SearchTripActivity_nav_host)
+    }
+
+    override fun onBackPressed() {
+
+        if (nav.currentDestination?.id == R.id.searchTripsFragment) {
+            ExitCustomDialog(this, this::exitCustomDialogAnswerType, "Απόρριψη της αναζήτησης ;", 2).show(supportFragmentManager, "exitCustomDialog")
+        } else {
+            super.onBackPressed()
+        }
+
+    }
+
+    private fun exitCustomDialogAnswerType(result: AnswerType) {
+        if (result == AnswerType.Yes)
+            finish()
+    }
 }

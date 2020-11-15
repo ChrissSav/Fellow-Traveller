@@ -13,8 +13,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/picture"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/ic_boy"
@@ -26,10 +26,10 @@
             style="@style/header_3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
-            android:singleLine="true"
             android:ellipsize="end"
+            android:singleLine="true"
             android:text="Tyler Joseph"
             app:layout_constraintBottom_toBottomOf="@+id/picture"
             app:layout_constraintEnd_toStartOf="@+id/price"
