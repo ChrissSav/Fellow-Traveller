@@ -18,6 +18,21 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <TextView
+        android:id="@+id/user_full_name_text_view"
+        style="@style/display_1"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:gravity="center"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:text="Ο λογαριασμός μου"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -33,30 +48,17 @@
             android:layout_height="wrap_content">
 
 
-            <TextView
-                android:id="@+id/user_full_name_text_view"
-                style="@style/display_1"
-                android:layout_width="0dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
-                android:text="Ο λογαριασμός μου"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/picture"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_centerHorizontal="true"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="36dp"
                 android:background="@drawable/ic_boy"
                 android:elevation="1dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/user_full_name_text_view"
-                app:layout_constraintTop_toBottomOf="@+id/user_full_name_text_view" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ProgressBar
                 android:id="@+id/progress_bar"
@@ -85,10 +87,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_settings_text_margin_top"
+                android:layout_marginEnd="16dp"
                 app:hint_f="Όνομα"
                 app:imeOptions_f="actionNext"
-                app:layout_constraintEnd_toEndOf="@+id/user_full_name_text_view"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/picture"
                 app:layout_constraintTop_toBottomOf="@+id/picture"
                 app:regex_f="@string/regex_min_3_chars" />
@@ -101,9 +103,9 @@
                 android:layout_marginTop="@dimen/fragment_settings_text_margin_top"
                 app:hint_f="Επίθετο"
                 app:imeOptions_f="actionNext"
-                app:layout_constraintEnd_toEndOf="@+id/user_full_name_text_view"
+                app:layout_constraintEnd_toEndOf="@+id/first_name"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/picture"
+                app:layout_constraintStart_toStartOf="@+id/first_name"
                 app:layout_constraintTop_toBottomOf="@+id/first_name"
                 app:regex_f="@string/regex_min_3_chars" />
 
@@ -117,8 +119,8 @@
                 app:error_message_f="@string/ERROR_INVALID_EMAIL_FORMAT"
                 app:hint_f="Email"
                 app:imeOptions_f="actionNext"
-                app:layout_constraintEnd_toEndOf="@+id/user_full_name_text_view"
-                app:layout_constraintStart_toStartOf="@+id/picture"
+                app:layout_constraintEnd_toEndOf="@+id/first_name"
+                app:layout_constraintStart_toStartOf="@+id/last_name"
                 app:layout_constraintTop_toBottomOf="@+id/last_name"
                 app:text_type_f="textEmailAddress" />
 
@@ -130,9 +132,9 @@
                 android:layout_marginTop="@dimen/fragment_settings_text_margin_top"
                 app:hint_f="Όνομα στο messenger"
                 app:imeOptions_f="actionNext"
-                app:layout_constraintEnd_toEndOf="@+id/user_full_name_text_view"
+                app:layout_constraintEnd_toEndOf="@+id/first_name"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/picture"
+                app:layout_constraintStart_toStartOf="@+id/email"
                 app:layout_constraintTop_toBottomOf="@+id/email"
                 app:regex_f="@string/regex_min_3_chars_english" />
 
@@ -147,7 +149,7 @@
                 app:hint_f="Σχετικά με εμένα"
                 app:imeOptions_f="actionDone"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/user_full_name_text_view"
+                app:layout_constraintEnd_toEndOf="@+id/first_name"
                 app:layout_constraintStart_toStartOf="@+id/picture"
                 app:layout_constraintTop_toBottomOf="@+id/messenger_link"
                 app:layout_constraintVertical_bias="0.0"

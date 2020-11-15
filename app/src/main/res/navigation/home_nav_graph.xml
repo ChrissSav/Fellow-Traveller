@@ -124,10 +124,6 @@
         <argument
             android:name="trip"
             app:argType="gr.fellow.fellow_traveller.domain.trip.TripInvolved" />
-        <argument
-            android:name="creator"
-            android:defaultValue="false"
-            app:argType="boolean" />
 
         <action
             android:id="@+id/action_tripInvolvedDetailsFragment_to_tripInvolvedPassengerDetailsFragment"

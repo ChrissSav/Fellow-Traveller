@@ -43,11 +43,6 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
         viewModel.loadTripsAsCreator()
         binding.recyclerView.adapter = TripsAsPassengerAdapter(R.color.LightAqua, this@TripsOffersTabFragment::onTripClick)
 
-        binding.nested.setOnScrollChangeListener { _, _, _, _, _ ->
-            if (!binding.nested.canScrollVertically(0) && binding.genericLoader.progressLoad.visibility == View.GONE)
-                viewModel.loadTripsAsCreator(true)
-        }
-
 
         binding.buttonHistory.setOnClickListener {
             findNavController()?.navigate(R.id.action_destination_trips_to_tripInvolvedHistoryFragment, bundleOf("creator" to true))
@@ -61,7 +56,7 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
 
     fun resetTrips() {
         (binding.recyclerView.adapter as TripsAsPassengerAdapter).submitList(null)
-        viewModel.loadTripsAsCreatorClear()
+        viewModel.loadTripsAsCreator(true)
     }
 
 

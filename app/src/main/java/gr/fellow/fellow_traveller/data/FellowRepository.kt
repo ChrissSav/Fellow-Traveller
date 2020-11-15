@@ -58,9 +58,9 @@ interface FellowRepository {
 
     suspend fun registerTripRemote(trip: TripCreateRequest): TripInvolvedResponse
 
-    suspend fun getTipsAsCreator(status: String, page: Int): MutableList<TripInvolvedResponse>
+    suspend fun getTipsAsCreator(status: String): MutableList<TripInvolvedResponse>
 
-    suspend fun getTipsAsPassenger(status: String, page: Int): MutableList<TripInvolvedResponse>
+    suspend fun getTipsAsPassenger(status: String): MutableList<TripInvolvedResponse>
 
     suspend fun getTripById(tripId: String): TripInvolvedResponse
 

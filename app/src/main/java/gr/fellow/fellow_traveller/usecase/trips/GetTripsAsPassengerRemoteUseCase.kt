@@ -6,7 +6,7 @@ class GetTripsAsPassengerRemoteUseCase(
     private val dataSource: FellowDataSource
 ) {
 
-    suspend operator fun invoke(status: String, page: Int) =
-        dataSource.getTipsAsPassenger(status, page)
+    suspend operator fun invoke(status: String) =
+        dataSource.getTipsAsPassenger(status)
 
 }

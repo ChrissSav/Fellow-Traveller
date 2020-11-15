@@ -24,6 +24,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
     private val args: TripInvolvedDetailsFragmentArgs by navArgs()
     private val viewModel: HomeViewModel by activityViewModels()
     private lateinit var confirmBottomSheetDialog: ConfirmBottomSheetDialog
+    private var creator = false
 
     override fun getViewBinding(): FragmentTripInvolvedDetailsBinding =
         FragmentTripInvolvedDetailsBinding.inflate(layoutInflater)
@@ -40,7 +41,9 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
         binding.description.setTextHtml(getString(R.string.trip_involved_description, getTripStatus(args.trip.status)))
 
-        if (args.creator) {
+        creator = !args.trip.passengers.filter { it.user.id == viewModel.user.value?.id.toString() }.any()
+
+        if (creator) {
             binding.constraintLayoutInfo.backgroundTintList = resources.getColorStateList(R.color.aqua)
             binding.labelDescription.text = "Είσαι ο οδηγός του ταξιδιού"
         }
@@ -78,7 +81,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
         binding.moreSettings.setOnClickListener {
             confirmBottomSheetDialog = ConfirmBottomSheetDialog(
-                if (args.creator) "Θελείς να διαγράψεις το ταξίδι;" else "Θέλεις να αποχωρήσεις απο το ταξίδι;",
+                if (creator) "Θελείς να διαγράψεις το ταξίδι;" else "Θέλεις να αποχωρήσεις απο το ταξίδι;",
                 this@TripInvolvedDetailsFragment::onConfirmItemClickListener
             )
             confirmBottomSheetDialog.show(childFragmentManager, "confirmBottomSheetDialog")
@@ -101,7 +104,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
     private fun onConfirmItemClickListener(answerType: AnswerType) {
         if (answerType == AnswerType.Yes) {
-            if (args.creator)
+            if (creator)
                 viewModel.deleteTrip(args.trip.id)
             else
                 viewModel.exitFromTrip(args.trip.id)

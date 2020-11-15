@@ -43,11 +43,6 @@ class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
         binding.recyclerView.adapter = TripsAsPassengerAdapter(onTripClickListener = this@TripsTakePartTabFragment::onTripClick)
 
 
-        binding.nested.setOnScrollChangeListener { _, _, _, _, _ ->
-            if (!binding.nested.canScrollVertically(0) && binding.genericLoader.progressLoad.visibility == View.GONE)
-                viewModel.loadTripsAsPassenger(true)
-        }
-
 
         binding.buttonHistory.setOnClickListener {
             findNavController()?.navigate(R.id.action_destination_trips_to_tripInvolvedHistoryFragment, bundleOf("creator" to false))
@@ -61,7 +56,7 @@ class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
 
     fun resetTrips() {
         (binding.recyclerView.adapter as TripsAsPassengerAdapter).submitList(null)
-        viewModel.loadTripsAsPassengerClear()
+        viewModel.loadTripsAsPassenger(true)
     }
 
 

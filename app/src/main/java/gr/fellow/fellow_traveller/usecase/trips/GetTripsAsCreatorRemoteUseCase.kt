@@ -6,7 +6,7 @@ class GetTripsAsCreatorRemoteUseCase(
     private val dataSource: FellowDataSource
 ) {
 
-    suspend operator fun invoke(status: String, page: Int) =
-        dataSource.getTipsAsCreator(status, page)
+    suspend operator fun invoke(status: String) =
+        dataSource.getTipsAsCreator(status)
 
 }

@@ -18,6 +18,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/label"
+        style="@style/display_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Λεπτομέριες ταξιδιού"
+        app:layout_constraintBottom_toBottomOf="@+id/back_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/back_button" />
+
 
     <ScrollView
         android:layout_width="0dp"
@@ -112,11 +123,11 @@
                 style="@style/paragraph_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/component_border_icon_button_shape"
                 android:drawableEnd="@drawable/ic_google_maps"
                 android:drawablePadding="8dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
                 android:text="Google maps"
+                android:padding="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/day"
                 app:layout_constraintEnd_toEndOf="@+id/to"
                 app:layout_constraintTop_toTopOf="@+id/day" />
@@ -155,7 +166,7 @@
                 android:layout_height="40dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="50dp"
                 android:background="@drawable/ic_boy"
                 android:elevation="1dp"
                 app:layout_constraintLeft_toLeftOf="parent"

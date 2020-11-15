@@ -70,25 +70,20 @@ constructor(
 
     /**  AS PASSENGER **/
 
-    private var tripsAsCreatorActivePage = 0
     private val _tripsAsPassengerActive = MutableLiveData<MutableList<TripInvolved>>()
     val tripsAsPassengerActive: LiveData<MutableList<TripInvolved>> = _tripsAsPassengerActive
     val loadPassengerActive = MutableLiveData<Boolean>()
 
-    private var tripsAsPassengerHistoryPage = 0
     private val _tripsAsPassengerHistory = MutableLiveData<MutableList<TripInvolved>>()
     val tripsAsPassengerHistory: LiveData<MutableList<TripInvolved>> = _tripsAsPassengerHistory
 
 
     /**  AS CREATOR **/
 
-    private var tripsAsCreatorPage = 0
     private val _tripsAsCreatorActive = MutableLiveData<MutableList<TripInvolved>>()
     val tripsAsCreatorActive: LiveData<MutableList<TripInvolved>> = _tripsAsCreatorActive
     val loadCreatorActive = MutableLiveData<Boolean>()
 
-
-    private var tripsAsCreatorHistoryPage = 0
     private val _tripsAsCreatorHistory = MutableLiveData<MutableList<TripInvolved>>()
     val tripsAsCreatorHistory: LiveData<MutableList<TripInvolved>> = _tripsAsCreatorHistory
 
@@ -198,24 +193,7 @@ constructor(
             if (_tripsAsCreatorActive.value != null && !more) {
                 return@launchWithLiveData
             }
-            val response = getTripsAsCreatorRemoteUseCase("active", tripsAsCreatorActivePage)
-            if (response.isNotEmpty()) {
-                tripsAsCreatorActivePage++
-            }
-            if (more)
-                _tripsAsCreatorActive.value?.addAll(response)
-            else
-                _tripsAsCreatorActive.value = response
-        }
-    }
-
-    fun loadTripsAsCreatorClear() {
-        launchWithLiveData(true, loadCreatorActive) {
-            tripsAsCreatorActivePage = 0
-            val response = getTripsAsCreatorRemoteUseCase("active", tripsAsCreatorActivePage)
-            if (response.isNotEmpty()) {
-                tripsAsCreatorActivePage++
-            }
+            val response = getTripsAsCreatorRemoteUseCase("active")
             _tripsAsCreatorActive.value = response
         }
     }
@@ -227,24 +205,7 @@ constructor(
             if (_tripsAsCreatorHistory.value != null && !more) {
                 return@launchWithLiveData
             }
-            val response = getTripsAsCreatorRemoteUseCase("inactive", tripsAsCreatorHistoryPage)
-            if (response.isNotEmpty()) {
-                tripsAsCreatorHistoryPage++
-            }
-            if (more)
-                _tripsAsCreatorHistory.value?.addAll(response)
-            else
-                _tripsAsCreatorHistory.value = response
-        }
-    }
-
-    fun loadTripsAsCreatorHistoryClear() {
-        launchWithLiveData(false, loadHistory) {
-            tripsAsCreatorHistoryPage = 0
-            val response = getTripsAsCreatorRemoteUseCase("inactive", tripsAsCreatorHistoryPage)
-            if (response.isNotEmpty()) {
-                tripsAsCreatorHistoryPage++
-            }
+            val response = getTripsAsCreatorRemoteUseCase("inactive")
             _tripsAsCreatorHistory.value = response
         }
     }
@@ -258,55 +219,19 @@ constructor(
             if (_tripsAsPassengerActive.value != null && !more) {
                 return@launchWithLiveData
             }
-
-            val response = getTripsAsPassengerRemoteUseCase("active", tripsAsCreatorActivePage)
-            if (response.isNotEmpty()) {
-                tripsAsCreatorActivePage++
-            }
-            if (more)
-                _tripsAsPassengerActive.value?.addAll(response)
-            else
-                _tripsAsPassengerActive.value = response
-        }
-
-    }
-
-    fun loadTripsAsPassengerClear() {
-        launchWithLiveData(true, loadPassengerActive) {
-            tripsAsCreatorActivePage = 0
-            val response = getTripsAsPassengerRemoteUseCase("active", tripsAsCreatorActivePage)
-            if (response.isNotEmpty()) {
-                tripsAsCreatorActivePage++
-            }
+            val response = getTripsAsPassengerRemoteUseCase("active")
             _tripsAsPassengerActive.value = response
         }
+
     }
 
 
     fun loadTripsAsPassengerHistory(more: Boolean = false) {
-
         launchWithLiveData(true, loadHistory) {
             if (_tripsAsPassengerHistory.value != null && !more) {
                 return@launchWithLiveData
             }
-            val response = getTripsAsPassengerRemoteUseCase("inactive", tripsAsPassengerHistoryPage)
-            if (response.isNotEmpty()) {
-                tripsAsPassengerHistoryPage++
-            }
-            if (more)
-                _tripsAsPassengerHistory.value?.addAll(response)
-            else
-                _tripsAsPassengerHistory.value = response
-        }
-    }
-
-    fun loadTripsAsPassengerHistoryClear() {
-        launchWithLiveData(false, loadHistory) {
-            tripsAsPassengerHistoryPage = 0
-            val response = getTripsAsPassengerRemoteUseCase("inactive", tripsAsPassengerHistoryPage)
-            if (response.isNotEmpty()) {
-                tripsAsPassengerHistoryPage++
-            }
+            val response = getTripsAsPassengerRemoteUseCase("inactive")
             _tripsAsPassengerHistory.value = response
         }
     }

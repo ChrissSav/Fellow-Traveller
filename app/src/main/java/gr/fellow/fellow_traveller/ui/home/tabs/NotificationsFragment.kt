@@ -32,10 +32,10 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
             binding.swipeRefreshLayout.isRefreshing = false
             (binding.recyclerView.adapter as NotificationAdapter).submitList(list)
 
-            if (list.filter { (it.type == 1 || it.type == 2) && !it.isRead }.any())
+            /*if (list.filter { (it.type == 1 || it.type == 2) && !it.isRead }.any())
                 viewModel.loadTripsAsCreatorClear()
             if (list.filter { it.type == 3 && !it.isRead }.any())
-                viewModel.loadTripsAsPassengerClear()
+                viewModel.loadTripsAsPassengerClear()*/
         })
 
         viewModel.loadNotifications.observe(viewLifecycleOwner, Observer {

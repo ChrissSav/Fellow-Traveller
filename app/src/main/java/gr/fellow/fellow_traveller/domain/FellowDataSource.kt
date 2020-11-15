@@ -70,9 +70,9 @@ interface FellowDataSource {
 
     suspend fun bookTrip(tripId: String, seats: Int, pet: Boolean): TripInvolved
 
-    suspend fun getTipsAsCreator(status: String, page: Int): MutableList<TripInvolved>
+    suspend fun getTipsAsCreator(status: String): MutableList<TripInvolved>
 
-    suspend fun getTipsAsPassenger(status: String, page: Int): MutableList<TripInvolved>
+    suspend fun getTipsAsPassenger(status: String): MutableList<TripInvolved>
 
     suspend fun getTripById(tripId: String): TripInvolved
 

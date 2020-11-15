@@ -5,7 +5,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
@@ -47,6 +46,10 @@ class TripInvolvedHistoryFragment : BaseFragment<FragmentTripInvolvedHistoryBind
                 binding.progressBar2.visibility = View.GONE
         })
 
+        viewModel.error.observe(viewLifecycleOwner, Observer {
+            binding.swipeRefreshLayout.isRefreshing = false
+        })
+
 
     }
 
@@ -64,9 +67,9 @@ class TripInvolvedHistoryFragment : BaseFragment<FragmentTripInvolvedHistoryBind
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             if (args.creator)
-                viewModel.loadTripsAsCreatorHistoryClear()
+                viewModel.loadTripsAsCreatorHistory(true)
             else
-                viewModel.loadTripsAsPassengerHistoryClear()
+                viewModel.loadTripsAsPassengerHistory(true)
 
             (binding.recyclerView.adapter as TripsAsPassengerAdapter).submitList(null)
         }
@@ -75,26 +78,10 @@ class TripInvolvedHistoryFragment : BaseFragment<FragmentTripInvolvedHistoryBind
             onBackPressed()
         }
 
-        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-
-                if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    if (args.creator) {
-                        viewModel.loadTripsAsCreatorHistory(true)
-                    } else {
-                        viewModel.loadTripsAsPassengerHistory(true)
-                    }
-
-                }
-            }
-
-        })
     }
 
     private fun onTripClick(tripInvolved: TripInvolved) {
-        findNavController()?.navigate(R.id.action_tripInvolvedHistoryFragment_to_tripInvolvedDetailsFragment, bundleOf("trip" to tripInvolved, "creator" to args.creator))
+        findNavController()?.navigate(R.id.action_tripInvolvedHistoryFragment_to_tripInvolvedDetailsFragment, bundleOf("trip" to tripInvolved))
     }
 
 }

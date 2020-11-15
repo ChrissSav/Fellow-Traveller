@@ -27,10 +27,10 @@
             style="@style/header_3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:singleLine="true"
             android:ellipsize="end"
+            android:singleLine="true"
             android:text="Tyler Joseph"
             app:layout_constraintBottom_toBottomOf="@+id/picture"
             app:layout_constraintEnd_toStartOf="@+id/price"
@@ -89,9 +89,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:layout_marginBottom="24dp"
             android:ellipsize="middle"
             android:singleLine="true"
             android:text="Θεσσαλονίκη"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/from"
             app:layout_constraintStart_toStartOf="@+id/from"
             app:layout_constraintTop_toBottomOf="@+id/to_tv_search" />
@@ -140,53 +142,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.7" />
-
-        <TextView
-            android:id="@+id/seats"
-            style="@style/paragraph_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:drawableStart="@drawable/ic_seat"
-            android:drawablePadding="10dp"
-            android:gravity="center"
-            android:text="3/4"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/bags"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/to" />
-
-        <TextView
-            android:id="@+id/bags"
-            style="@style/paragraph_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_luggage"
-            android:drawablePadding="10dp"
-            android:gravity="center"
-            android:text="Μικρή"
-            app:layout_constraintBottom_toBottomOf="@+id/seats"
-            app:layout_constraintEnd_toStartOf="@+id/pet"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/seats"
-            app:layout_constraintTop_toTopOf="@+id/seats" />
-
-        <TextView
-            android:id="@+id/pet"
-            style="@style/paragraph_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_bone"
-            android:drawablePadding="10dp"
-            android:gravity="center"
-            android:text="Όχι Κατοικίδια"
-            app:layout_constraintBottom_toBottomOf="@+id/bags"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/bags"
-            app:layout_constraintTop_toTopOf="@+id/bags" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

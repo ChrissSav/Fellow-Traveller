@@ -46,7 +46,7 @@ class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>
                     bags.text = trip.bags
                     pet.text = if (trip.hasPet) resources.getString(R.string.yes) else resources.getString(R.string.no)
                     car.text = trip.carBase.baseInfo
-                    message.text = trip.msg ?: resources.getString(R.string.no_driver_message)
+                    message.text = if (trip.msg.isNullOrEmpty()) resources.getString(R.string.no_driver_message) else trip.msg
 
 
 

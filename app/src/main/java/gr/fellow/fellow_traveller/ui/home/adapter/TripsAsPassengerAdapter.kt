@@ -19,14 +19,13 @@ class TripsAsPassengerAdapter(
         val binding = TripInvolvedItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         with(holder) {
             val currentTrip = currentList[position]
             binding.background.backgroundTintList = binding.background.context.resources.getColorStateList(color)
-            binding.from.text = currentTrip.destFrom.title
-            binding.to.text = currentTrip.destTo.title
+            binding.from.text = currentTrip.destFrom.title.split(",").last().trim()
+            binding.to.text = currentTrip.destTo.title.split(",").last().trim()
             binding.name.text = currentTrip.creatorUser.fullName
             binding.date.text = currentTrip.date
             binding.time.text = currentTrip.time
@@ -34,9 +33,9 @@ class TripsAsPassengerAdapter(
             binding.picture.loadImageFromUrl(currentTrip.creatorUser.picture)
             //binding.rate.text = currentTrip.creatorUser.rate.toString()
             //binding.review.text = currentTrip.creatorUser.reviews.toString()
-            binding.seats.text = currentTrip.seatsStatus
-            binding.bags.text = currentTrip.bags
-            binding.pet.text = if (currentTrip.hasPet) binding.pet.resources.getString(R.string.allowed) else binding.pet.resources.getString(R.string.not_allowed)
+            /*  binding.seats.text = currentTrip.seatsStatus
+              binding.bags.text = currentTrip.bags
+              binding.pet.text = if (currentTrip.hasPet) binding.pet.resources.getString(R.string.allowed) else binding.pet.resources.getString(R.string.not_allowed)*/
             binding.root.setOnClickListener {
                 onTripClickListener.invoke(currentTrip)
             }

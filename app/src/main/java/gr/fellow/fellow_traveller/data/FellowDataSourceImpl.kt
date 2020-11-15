@@ -99,12 +99,12 @@ class FellowDataSourceImpl(
     override suspend fun bookTrip(tripId: String, seats: Int, pet: Boolean): TripInvolved =
         repository.bookTrip(BookTripRequest(tripId, seats, pet)).mapTripInvolved()
 
-    override suspend fun getTipsAsCreator(status: String, page: Int): MutableList<TripInvolved> =
-        repository.getTipsAsCreator(status, page).map { it.mapTripInvolved() }.toMutableList()
+    override suspend fun getTipsAsCreator(status: String): MutableList<TripInvolved> =
+        repository.getTipsAsCreator(status).map { it.mapTripInvolved() }.toMutableList()
 
 
-    override suspend fun getTipsAsPassenger(status: String, page: Int): MutableList<TripInvolved> =
-        repository.getTipsAsPassenger(status, page).map { it.mapTripInvolved() }.toMutableList()
+    override suspend fun getTipsAsPassenger(status: String): MutableList<TripInvolved> =
+        repository.getTipsAsPassenger(status).map { it.mapTripInvolved() }.toMutableList()
 
 
     override suspend fun getTripById(tripId: String): TripInvolved =

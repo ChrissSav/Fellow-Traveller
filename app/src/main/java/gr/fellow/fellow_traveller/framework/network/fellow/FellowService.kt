@@ -122,8 +122,8 @@ interface FellowService {
     @GET("trip")
     suspend fun getTripsAs(
         @Query("type") type: String,
-        @Query("status") status: String,
-        @Query("page") page: Int
+        @Query("status") status: String
+        // @Query("page") page: Int
     ): Response<BaseResponse<MutableList<TripInvolvedResponse>>>
 
     @GET("trip/search")
