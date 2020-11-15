@@ -9,13 +9,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivityViewModel
 import gr.fellow.fellow_traveller.databinding.ActivityNewTripBinding
+import gr.fellow.fellow_traveller.domain.AnswerType
 import gr.fellow.fellow_traveller.ui.dialogs.ExitCustomDialog
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
 
 
 @AndroidEntryPoint
-class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripViewModel>(NewTripViewModel::class.java), ExitCustomDialog.ExitCustomDialogListener {
+class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripViewModel>(NewTripViewModel::class.java) {
 
 
     private lateinit var nav: NavController
@@ -87,13 +88,12 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
     }
 
     private fun openDialog() {
-        exitCustomDialog = ExitCustomDialog(this)
-        exitCustomDialog.show(supportFragmentManager, "example dialog")
+        exitCustomDialog = ExitCustomDialog(this, this::exitCustomDialogAnswerType, "Απόρριψη της αναζήτησης;", 2)
+        exitCustomDialog.show(supportFragmentManager, "exitCustomDialog")
     }
 
-    override fun exitFrom(result: Boolean) {
-        exitCustomDialog.dismiss()
-        if (result)
+    private fun exitCustomDialogAnswerType(result: AnswerType) {
+        if (result == AnswerType.Yes)
             finish()
     }
 
