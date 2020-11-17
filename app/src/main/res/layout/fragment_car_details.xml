@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.home.settings.CarDetailsFragment">
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -151,19 +152,18 @@
     <Button
         android:id="@+id/delete"
         style="@style/header_3"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/car_trip_float_action_button_margin_right"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="@dimen/car_trip_float_action_button_margin_bottom"
-        android:background="?android:attr/selectableItemBackground"
-        android:drawableStart="@drawable/ic_bin"
-        android:drawablePadding="16dp"
+        android:background="@drawable/component_cardview_shape_16"
         android:drawableTint="@color/red_color"
         android:gravity="center"
-        android:padding="16dp"
         android:text="Διαγραφή"
         android:textAllCaps="false"
         android:textColor="@color/red_color"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
