@@ -23,7 +23,7 @@
                 android:id="@+id/collapsingToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/ActivitySearchResults_cities_section"
