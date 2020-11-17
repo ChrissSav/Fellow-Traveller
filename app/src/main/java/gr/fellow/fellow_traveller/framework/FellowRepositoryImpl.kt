@@ -84,6 +84,11 @@ class FellowRepositoryImpl(
             service.updateUserPicture(updatePictureRequest).handleApiFormat()
         }
 
+    override suspend fun updateUserMessenger(updateMessengerRequest: UpdateMessengerRequest): UserAuthResponse =
+        networkCall {
+            service.updateUserMessenger(updateMessengerRequest).handleApiFormat()
+        }
+
     override suspend fun getUserInfo(): UserAuthResponse =
         networkCall {
             service.getUserInfo().handleApiFormat()

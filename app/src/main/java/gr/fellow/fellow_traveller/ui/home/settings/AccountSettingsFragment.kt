@@ -41,8 +41,6 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
     private lateinit var userImagePickBottomSheetDialog: UserImagePickBottomSheetDialog
 
 
-
-
     override fun getViewBinding(): FragmentAccountSettingsBinding =
         FragmentAccountSettingsBinding.inflate(layoutInflater)
 
@@ -54,9 +52,6 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                 firstName.text = it.firstName
                 lastName.text = it.lastName
                 email.text = it.email
-                it.messengerLink?.let { m ->
-                    messengerLink.text = m
-                }
                 aboutMe.text = it.aboutMe
             }
 
@@ -87,12 +82,10 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
         binding.saveButton.setOnClickListener {
 
 
-            if (binding.lastName.isCorrect() && binding.firstName.isCorrect() &&
-                binding.email.isCorrect() && binding.messengerLink.isCorrect()
-            ) {
+            if (binding.lastName.isCorrect() && binding.firstName.isCorrect()) {
                 val firstName = binding.firstName.text.toString()
                 val lastName = binding.lastName.text.toString()
-                viewModel.updateAccountInfo(firstName, lastName, binding.messengerLink.text, binding.aboutMe.text)
+                viewModel.updateAccountInfo(firstName, lastName, binding.aboutMe.text)
             }
         }
 

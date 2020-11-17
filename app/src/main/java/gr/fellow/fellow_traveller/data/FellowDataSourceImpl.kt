@@ -15,10 +15,7 @@ import gr.fellow.fellow_traveller.framework.network.fellow.notification.UpdateNo
 import gr.fellow.fellow_traveller.framework.network.fellow.review.RegisterReviewRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.BookTripRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripCreateRequest
-import gr.fellow.fellow_traveller.framework.network.fellow.user.UpdateAccountRequest
-import gr.fellow.fellow_traveller.framework.network.fellow.user.UpdatePasswordRequest
-import gr.fellow.fellow_traveller.framework.network.fellow.user.UpdatePictureRequest
-import gr.fellow.fellow_traveller.framework.network.fellow.user.UserAuthResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.user.*
 import gr.fellow.fellow_traveller.framework.network.google.response.DetailsResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
 import retrofit2.Response
@@ -56,11 +53,14 @@ class FellowDataSourceImpl(
     override suspend fun resetPassword(email: String, code: String, password: String): String =
         repository.resetPassword(ResetPasswordRequest(email, code, password, password))
 
-    override suspend fun updateAccount(firstName: String, lastName: String, messengerLink: String?, aboutMe: String?): UserAuthResponse =
-        repository.updateAccountInfo(UpdateAccountRequest(firstName, lastName, messengerLink, aboutMe))
+    override suspend fun updateAccount(firstName: String, lastName: String, aboutMe: String?): UserAuthResponse =
+        repository.updateAccountInfo(UpdateAccountRequest(firstName, lastName, aboutMe))
 
     override suspend fun updatePicture(picture: String?): UserAuthResponse =
         repository.updateUserPicture(UpdatePictureRequest(picture))
+
+    override suspend fun updateUserMessenger(messenger: String): UserAuthResponse =
+        repository.updateUserMessenger(UpdateMessengerRequest(messenger))
 
     override suspend fun getUserInfoRemote(): UserAuthResponse =
         repository.getUserInfo()

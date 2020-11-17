@@ -286,9 +286,9 @@ constructor(
         }
     }
 
-    fun updateAccountInfo(firstName: String, lastName: String, messengerLink: String?, aboutMe: String?) {
+    fun updateAccountInfo(firstName: String, lastName: String, aboutMe: String?) {
         launch(true) {
-            val response = updateAccountInfoUseCase(firstName, lastName, messengerLink, aboutMe)
+            val response = updateAccountInfoUseCase(firstName, lastName, aboutMe)
             registerUserLocalUseCase(response)
             _user.value = loadUserLocalInfoUseCase()
             _successUpdateInfo.value = true

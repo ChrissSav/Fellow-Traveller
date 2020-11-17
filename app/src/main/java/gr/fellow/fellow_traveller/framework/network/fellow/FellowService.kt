@@ -83,6 +83,12 @@ interface FellowService {
     ): Response<BaseResponse<UserAuthResponse>>
 
 
+    @PUT("user/me/messenger")
+    suspend fun updateUserMessenger(
+        @Body updateMessengerRequest: UpdateMessengerRequest
+    ): Response<BaseResponse<UserAuthResponse>>
+
+
     @PUT("user/me/password")
     suspend fun updateUserPassword(
         @Body updatePasswordRequest: UpdatePasswordRequest

@@ -9,6 +9,7 @@ import gr.fellow.fellow_traveller.domain.user.UserInfo
 import gr.fellow.fellow_traveller.framework.network.fellow.car.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.notification.UpdateNotification
 import gr.fellow.fellow_traveller.framework.network.fellow.review.RegisterReviewRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.user.UpdateMessengerRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.user.UpdatePasswordRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.user.UserAuthResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.DetailsResponse
@@ -39,9 +40,11 @@ interface FellowDataSource {
 
     // User
 
-    suspend fun updateAccount(firstName: String, lastName: String, messengerLink: String?, aboutMe: String?): UserAuthResponse
+    suspend fun updateAccount(firstName: String, lastName: String, aboutMe: String?): UserAuthResponse
 
     suspend fun updatePicture(picture: String?): UserAuthResponse
+
+    suspend fun updateUserMessenger(messenger : String): UserAuthResponse
 
     suspend fun getUserInfoRemote(): UserAuthResponse
 

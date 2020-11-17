@@ -6,8 +6,7 @@ class UpdateAccountInfoUseCase(
     private val dataSource: FellowDataSource
 ) {
 
-    suspend operator fun invoke(firstName: String, lastName: String, messengerLink: String?, aboutMe: String?) =
-        dataSource.updateAccount(firstName, lastName, messengerLink, aboutMe)
-
+    suspend operator fun invoke(firstName: String, lastName: String, aboutMe: String?) =
+        dataSource.updateAccount(firstName, lastName, aboutMe)
 
 }

@@ -28,6 +28,13 @@ import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
 class UseCasesModule {
 
 
+
+    @ActivityScoped
+    @Provides
+    fun provideUpdateUserMessengerUseCase(dataSource: FellowDataSource): UpdateUserMessengerUseCase {
+        return UpdateUserMessengerUseCase(dataSource)
+    }
+
     @ActivityScoped
     @Provides
     fun provideGetTripByIdUseCase(dataSource: FellowDataSource): GetTripByIdUseCase {

@@ -126,20 +126,6 @@
 
 
             <gr.fellow.fellow_traveller.ui.views.FellowEditText
-                android:id="@+id/messenger_link"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/fragment_settings_text_margin_top"
-                app:hint_f="Όνομα στο messenger"
-                app:imeOptions_f="actionNext"
-                app:layout_constraintEnd_toEndOf="@+id/first_name"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/email"
-                app:layout_constraintTop_toBottomOf="@+id/email"
-                app:regex_f="@string/regex_min_3_chars_english" />
-
-
-            <gr.fellow.fellow_traveller.ui.views.FellowEditText
                 android:id="@+id/about_me"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -150,8 +136,8 @@
                 app:imeOptions_f="actionDone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/first_name"
-                app:layout_constraintStart_toStartOf="@+id/picture"
-                app:layout_constraintTop_toBottomOf="@+id/messenger_link"
+                app:layout_constraintStart_toStartOf="@+id/email"
+                app:layout_constraintTop_toBottomOf="@+id/email"
                 app:layout_constraintVertical_bias="0.0"
                 app:regex_f="@string/regex_min_3_chars" />
 

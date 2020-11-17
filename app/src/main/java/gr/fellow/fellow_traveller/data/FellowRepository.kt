@@ -39,11 +39,14 @@ interface FellowRepository {
 
     suspend fun updateUserPicture(updatePictureRequest: UpdatePictureRequest): UserAuthResponse
 
+    suspend fun updateUserMessenger(updateMessengerRequest: UpdateMessengerRequest): UserAuthResponse
+
     suspend fun getUserInfo(): UserAuthResponse
 
     suspend fun getUserInfoById(userId: String): UserInfoResponse
 
     suspend fun changePassword(updatePasswordRequest: UpdatePasswordRequest): String
+
 
 
     // Cars
