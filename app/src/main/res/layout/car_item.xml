@@ -2,123 +2,141 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/my_car_item_constraintLayout"
-    android:layout_width="200dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/component_cardview_shape"
-        android:elevation="1dp"
-        android:translationZ="3dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/component_border_icon_button_shape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
         <ImageView
-            android:id="@+id/car_image_view_adapter_settings"
+            android:id="@+id/imageView2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/car_item_background"
+            android:padding="16dp"
+            android:src="@drawable/ic_car"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/textView34"
+            style="@style/paragraph_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/ic_car"
-            android:backgroundTint="@color/blue_color"
-            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Μάρκα"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView_model"
-            style="@style/label"
+            android:id="@+id/brand"
+            style="@style/header_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView_model"
-            app:layout_constraintEnd_toEndOf="@+id/textView_brand"
-            app:layout_constraintStart_toStartOf="@+id/textView_brand"
-            app:layout_constraintTop_toTopOf="@+id/imageView_model" />
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Rolls-Royce"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView34"
+            app:layout_constraintTop_toBottomOf="@+id/textView34" />
 
         <TextView
-            android:id="@+id/textView_plate"
-            style="@style/label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView_plate"
-            app:layout_constraintEnd_toEndOf="@+id/textView_brand"
-            app:layout_constraintStart_toStartOf="@+id/textView_model"
-            app:layout_constraintTop_toTopOf="@+id/imageView_plate" />
-
-        <TextView
-            android:id="@+id/textView_color"
-            style="@style/label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="2dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView_color"
-            app:layout_constraintEnd_toStartOf="@+id/imageView_delete"
-            app:layout_constraintStart_toStartOf="@+id/textView_model"
-            app:layout_constraintTop_toTopOf="@+id/imageView_color" />
-
-        <TextView
-            android:id="@+id/textView_brand"
-            style="@style/label"
+            android:id="@+id/textView36"
+            style="@style/paragraph_4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="20dp"
-            app:layout_constraintBottom_toBottomOf="@+id/car_image_view_adapter_settings"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/car_image_view_adapter_settings"
-            app:layout_constraintTop_toTopOf="@+id/car_image_view_adapter_settings" />
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="Μοντέλο"
+            app:layout_constraintEnd_toStartOf="@+id/guideline5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-        <ImageView
-            android:id="@+id/imageView_delete"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/model"
+            style="@style/paragraph_1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/ic_bin"
-            android:src="@drawable/ic_bin"
-            android:tint="@color/red_color"
-            app:layout_constraintBottom_toBottomOf="@+id/textView_color"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView_color" />
-
-        <ImageView
-            android:id="@+id/imageView_color"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_section_car_item"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/ic_color"
-            android:backgroundTint="@color/blue_color"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="24dp"
+            android:text="Phanton"
+            android:maxLines="1"
+            android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/car_image_view_adapter_settings"
-            app:layout_constraintTop_toBottomOf="@+id/imageView_plate" />
+            app:layout_constraintEnd_toEndOf="@+id/textView36"
+            app:layout_constraintStart_toStartOf="@+id/textView36"
+            app:layout_constraintTop_toBottomOf="@+id/textView36" />
 
+        <TextView
+            android:id="@+id/textView38"
+            style="@style/paragraph_4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Χρώμα"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView36"
+            app:layout_constraintEnd_toStartOf="@+id/textView40"
+            app:layout_constraintStart_toStartOf="@+id/guideline5" />
 
-        <ImageView
-            android:id="@+id/imageView_model"
+        <TextView
+            android:id="@+id/color"
+            style="@style/paragraph_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Κόκκινο"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintBaseline_toBaselineOf="@+id/model"
+            app:layout_constraintEnd_toEndOf="@+id/textView38"
+            app:layout_constraintStart_toStartOf="@+id/textView38" />
+
+        <TextView
+            android:id="@+id/textView40"
+            style="@style/paragraph_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_section_car_item"
-            android:background="@drawable/ic_steer"
-            android:backgroundTint="@color/blue_color"
-            app:layout_constraintStart_toStartOf="@+id/car_image_view_adapter_settings"
-            app:layout_constraintTop_toBottomOf="@+id/car_image_view_adapter_settings" />
+            android:layout_marginEnd="16dp"
+            android:text="Αριθμός Κυκλοφορίας"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView38"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageView_plate"
+        <TextView
+            android:id="@+id/plate"
+            style="@style/paragraph_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="ΑΒΔ-1239"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintBaseline_toBaselineOf="@+id/model"
+            app:layout_constraintEnd_toEndOf="@+id/textView40"
+            app:layout_constraintStart_toStartOf="@+id/textView40" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_section_car_item"
-            android:background="@drawable/ic_license_plate"
-            android:backgroundTint="@color/blue_color"
-            app:layout_constraintStart_toStartOf="@+id/car_image_view_adapter_settings"
-            app:layout_constraintTop_toBottomOf="@+id/imageView_model" />
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.34" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

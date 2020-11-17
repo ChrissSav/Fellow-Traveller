@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import gr.fellow.fellow_traveller.databinding.CarItemSecondBinding
+import gr.fellow.fellow_traveller.databinding.CarItemBinding
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.ui.extensions.CarDiffCallback
 
@@ -14,7 +14,7 @@ class CarAdapter(
 ) : ListAdapter<Car, CarAdapter.ViewHolder>(CarDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = CarItemSecondBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = CarItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -22,13 +22,16 @@ class CarAdapter(
 
         with(holder) {
             val currentItem = currentList[position]
-            binding.car.text = currentItem.baseInfo
+            binding.brand.text = currentItem.brand
+            binding.model.text = currentItem.model
+            binding.plate.text = currentItem.plate
+            binding.color.text = currentItem.color
             binding.root.setOnClickListener {
                 onCarItemClickListener(currentItem)
             }
         }
     }
 
-    class ViewHolder(val binding: CarItemSecondBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: CarItemBinding) : RecyclerView.ViewHolder(binding.root)
 }
 

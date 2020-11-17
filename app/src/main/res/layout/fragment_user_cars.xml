@@ -47,7 +47,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/manage_cars_settings_tv"
-            tools:listitem="@layout/car_item_second" />
+            tools:listitem="@layout/car_item" />
 
 
         <Button
@@ -57,6 +57,7 @@
             android:layout_height="@dimen/car_float_action_button_height"
             android:layout_marginEnd="@dimen/car_trip_float_action_button_margin_right"
             android:layout_marginBottom="@dimen/car_trip_float_action_button_margin_bottom"
+            android:backgroundTint="@color/green"
             android:background="@drawable/fab_background_aqua"
             android:drawableStart="@drawable/ic_plus_new"
             android:elevation="16dp"

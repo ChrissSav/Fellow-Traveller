@@ -123,6 +123,7 @@
         android:minWidth="155dp"
         android:paddingStart="22dp"
         android:paddingEnd="20dp"
+        android:backgroundTint="@color/green"
         android:text="Καταχώρηση"
         android:textAllCaps="false"
         android:textColor="@color/white"
