@@ -1,76 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/refresh"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.home.settings.UserCarsFragment">
+    android:layout_height="match_parent">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/ActivityReviews_main_coordinatorLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.home.settings.CarDetailsFragment">
 
-        <ImageButton
-            android:id="@+id/back_buttons"
-            style="@style/border_icon_button"
-            android:layout_width="@dimen/back_button_width_height"
-            android:layout_height="@dimen/back_button_width_height"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="24dp"
-            android:src="@drawable/ic_back_button"
-            app:autoSizeTextType="uniform"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-            android:id="@+id/manage_cars_settings_tv"
-            style="@style/display_1"
-            android:layout_width="0dp"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:text="Διαχείριση οχημάτων"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/back_buttons"
-            app:layout_constraintTop_toBottomOf="@+id/back_buttons" />
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ActivitySearchResults_cities_section"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:layout_collapseMode="parallax"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+                    <ImageButton
+                        android:id="@+id/back_buttons"
+                        style="@style/border_icon_button"
+                        android:layout_width="@dimen/back_button_width_height"
+                        android:layout_height="@dimen/back_button_width_height"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="24dp"
+                        android:src="@drawable/ic_back_button"
+                        app:autoSizeTextType="uniform"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/my_cars_recycler"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/manage_cars_settings_tv"
-            tools:listitem="@layout/car_item" />
+
+                    <TextView
+                        android:id="@+id/manage_cars_settings_tv"
+                        style="@style/display_1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="Διαχείριση οχημάτων"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/back_buttons"
+                        app:layout_constraintTop_toBottomOf="@+id/back_buttons" />
 
 
-        <Button
-            android:id="@+id/new_car_button"
-            style="@style/header_3"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/car_float_action_button_height"
-            android:layout_marginEnd="@dimen/car_trip_float_action_button_margin_right"
-            android:layout_marginBottom="@dimen/car_trip_float_action_button_margin_bottom"
-            android:backgroundTint="@color/green"
-            android:background="@drawable/fab_background_aqua"
-            android:drawableStart="@drawable/ic_plus_new"
-            android:elevation="16dp"
-            android:gravity="center|end"
-            android:minWidth="140dp"
-            android:paddingStart="22dp"
-            android:paddingEnd="20dp"
-            android:text="Προσθήκη"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:ignore="RtlSymmetry" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/refresh"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:context=".ui.home.settings.UserCarsFragment"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/my_cars_recycler"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/car_item" />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <Button
+        android:id="@+id/new_car_button"
+        style="@style/header_3"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/car_float_action_button_height"
+        android:layout_marginEnd="@dimen/car_trip_float_action_button_margin_right"
+        android:layout_marginBottom="@dimen/car_trip_float_action_button_margin_bottom"
+        android:background="@drawable/fab_background_aqua"
+        android:backgroundTint="@color/green"
+        android:drawableStart="@drawable/ic_plus_new"
+        android:elevation="16dp"
+        android:gravity="center|end"
+        android:minWidth="140dp"
+        android:paddingStart="22dp"
+        android:paddingEnd="20dp"
+        android:text="Προσθήκη"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="RtlSymmetry" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
