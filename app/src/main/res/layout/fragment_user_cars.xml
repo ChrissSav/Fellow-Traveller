@@ -85,7 +85,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:listitem="@layout/car_item" />
+                    tools:listitem="@layout/car_item_second" />
 
 
 
@@ -100,7 +100,6 @@
         android:layout_marginEnd="@dimen/car_trip_float_action_button_margin_right"
         android:layout_marginBottom="@dimen/car_trip_float_action_button_margin_bottom"
         android:background="@drawable/fab_background_aqua"
-        android:backgroundTint="@color/green"
         android:drawableStart="@drawable/ic_plus_new"
         android:elevation="16dp"
         android:gravity="center|end"
