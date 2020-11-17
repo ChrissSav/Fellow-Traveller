@@ -11,7 +11,7 @@ import gr.fellow.fellow_traveller.databinding.FragmentTakesPartTabBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
-import gr.fellow.fellow_traveller.ui.home.adapter.TripsAsPassengerAdapter
+import gr.fellow.fellow_traveller.ui.home.adapter.TripsInvolvedHorizontalAdapter
 
 
 @AndroidEntryPoint
@@ -26,21 +26,32 @@ class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
 
     override fun setUpObservers() {
         viewModel.tripsAsPassengerActive.observe(viewLifecycleOwner, Observer { list ->
-            (binding.recyclerView.adapter as TripsAsPassengerAdapter).submitList(list)
+            (binding.recyclerView.adapter as TripsInvolvedHorizontalAdapter).submitList(list)
         })
 
         viewModel.loadPassengerActive.observe(viewLifecycleOwner, Observer {
             if (it)
                 binding.genericLoader.progressLoad.visibility = View.VISIBLE
-            else
+            else {
+                binding.swipeRefreshLayout.isRefreshing = false
                 binding.genericLoader.progressLoad.visibility = View.GONE
+            }
         })
+
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            (binding.recyclerView.adapter as TripsInvolvedHorizontalAdapter).submitList(null)
+            viewModel.loadTripsAsPassenger(true)
+        }
 
     }
 
     override fun setUpViews() {
         viewModel.loadTripsAsPassenger()
-        binding.recyclerView.adapter = TripsAsPassengerAdapter(onTripClickListener = this@TripsTakePartTabFragment::onTripClick)
+        binding.recyclerView.adapter = TripsInvolvedHorizontalAdapter(
+            R.drawable.background_stroke_radius_27_orange,
+            this@TripsTakePartTabFragment::onTripClick
+        )
 
 
 
@@ -52,11 +63,6 @@ class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
 
     private fun onTripClick(tripInvolved: TripInvolved) {
         findNavController()?.navigate(R.id.action_destination_trips_to_tripInvolvedDetailsFragment, bundleOf("trip" to tripInvolved, "creator" to false))
-    }
-
-    fun resetTrips() {
-        (binding.recyclerView.adapter as TripsAsPassengerAdapter).submitList(null)
-        viewModel.loadTripsAsPassenger(true)
     }
 
 

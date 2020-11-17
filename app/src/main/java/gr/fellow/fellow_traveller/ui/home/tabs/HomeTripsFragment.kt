@@ -26,11 +26,5 @@ class HomeTripsFragment : BaseFragment<FragmentHomeTripsBinding>() {
         binding.fragmentTripViewPager.adapter = tripsViewPagerAdapter
         binding.fragmentTripTabLayout.setupWithViewPager(binding.fragmentTripViewPager)
 
-        binding.clearButton.setOnClickListener {
-            if (binding.fragmentTripTabLayout.selectedTabPosition == 0)
-                tripsTakesPartFragment.resetTrips()
-            else
-                tripsOffersFragment.resetTrips()
-        }
     }
 }
