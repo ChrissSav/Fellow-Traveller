@@ -13,7 +13,7 @@ import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
-import gr.fellow.fellow_traveller.ui.home.adapter.TripsInvolvedHorizontalAdapter
+import gr.fellow.fellow_traveller.ui.home.adapter.TripsHistoryAdapter
 
 
 @AndroidEntryPoint
@@ -29,19 +29,19 @@ class TripInvolvedHistoryFragment : BaseFragment<FragmentTripInvolvedHistoryBind
         if (args.creator) {
             viewModel.tripsAsCreatorHistory.observe(viewLifecycleOwner, Observer { list ->
                 binding.swipeRefreshLayout.isRefreshing = false
-                (binding.recyclerView.adapter as TripsInvolvedHorizontalAdapter).submitList(list)
+                (binding.recyclerView.adapter as TripsHistoryAdapter).submitList(list)
             })
         } else {
             viewModel.tripsAsPassengerHistory.observe(viewLifecycleOwner, Observer { list ->
                 binding.swipeRefreshLayout.isRefreshing = false
-                (binding.recyclerView.adapter as TripsInvolvedHorizontalAdapter).submitList(list)
+                (binding.recyclerView.adapter as TripsHistoryAdapter).submitList(list)
             })
         }
 
         viewModel.loadHistory.observe(viewLifecycleOwner, Observer {
             if (it) {
                 binding.progressBar2.visibility = View.VISIBLE
-                binding.recyclerView.scrollToPosition((binding.recyclerView.adapter as TripsInvolvedHorizontalAdapter).currentList.size - 1)
+                binding.recyclerView.scrollToPosition((binding.recyclerView.adapter as TripsHistoryAdapter).currentList.size - 1)
             } else
                 binding.progressBar2.visibility = View.GONE
         })
@@ -56,11 +56,11 @@ class TripInvolvedHistoryFragment : BaseFragment<FragmentTripInvolvedHistoryBind
     override fun setUpViews() {
         if (args.creator) {
             viewModel.loadTripsAsCreatorHistory()
-            binding.recyclerView.adapter = TripsInvolvedHorizontalAdapter(R.color.LightAqua, this@TripInvolvedHistoryFragment::onTripClick)
+            binding.recyclerView.adapter = TripsHistoryAdapter(R.drawable.background_stroke_radius_27_green, this@TripInvolvedHistoryFragment::onTripClick)
             binding.label.text = "Ιστορικό προσφορών"
         } else {
             viewModel.loadTripsAsPassengerHistory()
-            binding.recyclerView.adapter = TripsInvolvedHorizontalAdapter(onTripClickListener = this@TripInvolvedHistoryFragment::onTripClick)
+            binding.recyclerView.adapter = TripsHistoryAdapter(R.drawable.background_stroke_radius_27_orange, this@TripInvolvedHistoryFragment::onTripClick)
             binding.label.text = "Ιστορικό αναζητήσεων"
         }
 
@@ -71,7 +71,7 @@ class TripInvolvedHistoryFragment : BaseFragment<FragmentTripInvolvedHistoryBind
             else
                 viewModel.loadTripsAsPassengerHistory(true)
 
-            (binding.recyclerView.adapter as TripsInvolvedHorizontalAdapter).submitList(null)
+            (binding.recyclerView.adapter as TripsHistoryAdapter).submitList(null)
         }
 
         binding.backButton.setOnClickListener {

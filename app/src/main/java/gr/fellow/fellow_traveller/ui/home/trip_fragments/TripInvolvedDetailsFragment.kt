@@ -3,6 +3,7 @@ package gr.fellow.fellow_traveller.ui.home.trip_fragments
 import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -72,12 +73,15 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
         loadTrip()
 
         currentTrip?.let { trip ->
+            if (trip.status != 0)
+                binding.delete.visibility = View.INVISIBLE
+
             binding.description.setTextHtml(getString(R.string.trip_involved_description, getTripStatus(trip.status)))
 
             creator = !trip.passengers.filter { it.user.id == viewModel.user.value?.id.toString() }.any()
 
             if (creator) {
-                binding.constraintLayoutInfo.backgroundTintList = resources.getColorStateList(R.color.aqua)
+                binding.constraintLayoutInfo.backgroundTintList = ContextCompat.getColorStateList(binding.constraintLayoutInfo.context, R.color.aqua)
                 binding.labelDescription.text = "Είσαι ο οδηγός του ταξιδιού"
             }
 
@@ -115,7 +119,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
                 onBackPressed()
             }
 
-            binding.moreSettings.setOnClickListener {
+            binding.delete.setOnClickListener {
                 confirmBottomSheetDialog = ConfirmBottomSheetDialog(
                     if (creator) "Θελείς να διαγράψεις το ταξίδι;" else "Θέλεις να αποχωρήσεις απο το ταξίδι;",
                     this@TripInvolvedDetailsFragment::onConfirmItemClickListener
