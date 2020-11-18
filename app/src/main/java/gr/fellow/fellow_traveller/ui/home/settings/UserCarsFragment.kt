@@ -56,7 +56,7 @@ class UserCarsFragment : BaseFragment<FragmentUserCarsBinding>() {
             }
 
             newCarButton.setOnClickListener {
-                startActivityForResult(AddCarActivity::class, 1)
+                startActivityForResult(AddCarActivity::class, 1, null)
             }
         }
     }

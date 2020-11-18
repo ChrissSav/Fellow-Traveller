@@ -52,7 +52,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
                 R.id.passwordFragment -> binding.progressBar.progress = 60
                 R.id.accountFragment -> binding.progressBar.progress = 80
                 R.id.successRegistrationFragment -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.progress = 100
                     binding.ImageButtonBack.visibility = View.GONE
                 }
             }

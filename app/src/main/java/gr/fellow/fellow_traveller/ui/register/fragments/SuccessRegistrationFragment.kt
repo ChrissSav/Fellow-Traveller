@@ -6,9 +6,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentSuccessRegistrationBinding
-import gr.fellow.fellow_traveller.ui.extensions.postDelay
 import gr.fellow.fellow_traveller.ui.extensions.setTextHtml
-import gr.fellow.fellow_traveller.ui.extensions.startAnimation
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
 
 
@@ -26,9 +24,6 @@ class SuccessRegistrationFragment : BaseFragment<FragmentSuccessRegistrationBind
 
         binding.email.setTextHtml(getString(R.string.email_verify, viewModel.email.value.toString()))
 
-        postDelay(300) {
-            binding.view3.startAnimation()
-        }
 
     }
 }

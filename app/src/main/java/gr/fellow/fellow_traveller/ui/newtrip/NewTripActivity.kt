@@ -20,10 +20,15 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
 
 
     private lateinit var nav: NavController
+    private var userRate: Float = 0f
 
     override fun provideViewBinding(): ActivityNewTripBinding =
         ActivityNewTripBinding.inflate(layoutInflater)
 
+
+    override fun handleIntent() {
+        userRate = intent.getFloatExtra("userRate", 0f)
+    }
 
     override fun setUpObservers() {
         viewModel.setSeats(1)
@@ -45,6 +50,7 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
 
 
     }
+
 
     override fun setUpViews() {
         nav = Navigation.findNavController(this, R.id.RegisterActivity_nav_host)
@@ -84,6 +90,9 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
         }
 
     }
+
+
+    fun getUserRate() = userRate
 
     private fun openDialog() {
         ExitCustomDialog(this, this::exitCustomDialogAnswerType, "Απόρριψη της καταχώρησης ;", 2).show(supportFragmentManager, "exitCustomDialog")

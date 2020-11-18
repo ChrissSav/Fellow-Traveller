@@ -10,6 +10,7 @@ import gr.fellow.fellow_traveller.databinding.FragmentOverviewBinding
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
+import gr.fellow.fellow_traveller.ui.newtrip.NewTripActivity
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
 import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
 import gr.fellow.fellow_traveller.utils.getTimeFromTimestamp
@@ -32,6 +33,8 @@ class OverviewFragment : BaseFragment<FragmentOverviewBinding>(), View.OnClickLi
 
     override fun setUpViews() {
         with(binding) {
+
+            rate.text = (activity as NewTripActivity).getUserRate().toString()
 
             from.text = viewModel.destinationFrom.value?.title
             to.text = viewModel.destinationTo.value?.title

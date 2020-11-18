@@ -121,12 +121,6 @@ fun Fragment.startActivityToLeft(intent: Intent, code: Int) {
     this.activity?.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
 }
 
-fun Fragment.startActivityToLeft(activity: KClass<out Activity>) {
-    val intent = Intent(this.context, activity.java)
-    startActivity(intent)
-    this.activity?.overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
-
-}
 
 fun Fragment.startActivityClearStack(activityTemp: KClass<out Activity>) {
     val intent = Intent(this.context, activityTemp.java)
@@ -136,10 +130,14 @@ fun Fragment.startActivityClearStack(activityTemp: KClass<out Activity>) {
 }
 
 
-fun Fragment.startActivityForResult(activity: KClass<out Activity>, code: Int) {
+fun Fragment.startActivityForResult(activity: KClass<out Activity>, code: Int, bundle: Bundle?) {
     val intent = Intent(this.context, activity.java)
+    bundle?.let {
+        intent.putExtras(it)
+    }
     startActivityForResult(intent, code)
 }
+
 
 fun Fragment.startActivityForResultWithFade(activity: KClass<out Activity>, code: Int) {
     val intent = Intent(this.context, activity.java)
