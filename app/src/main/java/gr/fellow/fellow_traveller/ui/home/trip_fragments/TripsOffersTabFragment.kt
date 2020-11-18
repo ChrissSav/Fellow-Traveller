@@ -58,7 +58,7 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
     }
 
     private fun onTripClick(tripInvolved: TripInvolved) {
-        findNavController()?.navigate(R.id.action_destination_trips_to_tripInvolvedDetailsFragment, bundleOf("trip" to tripInvolved, "creator" to true))
+        findNavController()?.navigate(R.id.action_destination_trips_to_tripInvolvedDetailsFragment, bundleOf("tripId" to tripInvolved.id))
     }
 
 

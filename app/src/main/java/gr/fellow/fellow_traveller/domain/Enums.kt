@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.domain
 
-
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
 
 enum class PetAnswerType {
@@ -14,6 +15,12 @@ enum class SortAnswerType {
 
 enum class AnswerType {
     Yes, No
+}
+
+
+@Parcelize
+enum class TripType : Parcelable {
+    CREATOR, PASSENGER
 }
 
 

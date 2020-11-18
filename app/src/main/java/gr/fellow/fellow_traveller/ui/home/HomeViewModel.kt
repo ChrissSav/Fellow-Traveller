@@ -73,6 +73,8 @@ constructor(
     private val _tripsAsPassengerActive = MutableLiveData<MutableList<TripInvolved>>()
     val tripsAsPassengerActive: LiveData<MutableList<TripInvolved>> = _tripsAsPassengerActive
     val loadPassengerActive = MutableLiveData<Boolean>()
+    private var loadMoreTripsAsPassenger = true
+
 
     private val _tripsAsPassengerHistory = MutableLiveData<MutableList<TripInvolved>>()
     val tripsAsPassengerHistory: LiveData<MutableList<TripInvolved>> = _tripsAsPassengerHistory
@@ -83,6 +85,8 @@ constructor(
     private val _tripsAsCreatorActive = MutableLiveData<MutableList<TripInvolved>>()
     val tripsAsCreatorActive: LiveData<MutableList<TripInvolved>> = _tripsAsCreatorActive
     val loadCreatorActive = MutableLiveData<Boolean>()
+    private var loadMoreTripsAsCreator = true
+
 
     private val _tripsAsCreatorHistory = MutableLiveData<MutableList<TripInvolved>>()
     val tripsAsCreatorHistory: LiveData<MutableList<TripInvolved>> = _tripsAsCreatorHistory
@@ -245,6 +249,8 @@ constructor(
             if (_notifications.value != null && !more) {
                 return@launchWithLiveData
             }
+            loadMoreTripsAsCreator = true
+            loadMoreTripsAsPassenger = true
             val response = getNotificationsUseCase(notificationsPage)
             if (response.isNotEmpty()) {
                 notificationsPage++
@@ -253,6 +259,16 @@ constructor(
                 _notifications.value?.addAll(response)
             else
                 _notifications.value = response
+
+            if (response.filter { (it.type == 1 || it.type == 2) && !it.isRead }.any() && loadMoreTripsAsCreator) {
+                loadTripsAsCreator(true)
+                loadMoreTripsAsCreator = false
+            }
+            if (response.filter { it.type == 3 && !it.isRead }.any() && loadMoreTripsAsPassenger) {
+                loadTripsAsPassenger(true)
+                loadMoreTripsAsPassenger = false
+            }
+
         }
     }
 

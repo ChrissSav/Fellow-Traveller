@@ -121,9 +121,6 @@
         android:name="gr.fellow.fellow_traveller.ui.home.trip_fragments.TripInvolvedDetailsFragment"
         android:label="fragment_trip_involved_details"
         tools:layout="@layout/fragment_trip_involved_details">
-        <argument
-            android:name="trip"
-            app:argType="gr.fellow.fellow_traveller.domain.trip.TripInvolved" />
 
         <action
             android:id="@+id/action_tripInvolvedDetailsFragment_to_tripInvolvedPassengerDetailsFragment"
@@ -132,6 +129,11 @@
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
+
+        <argument
+            android:name="tripId"
+            app:argType="string"
+            android:defaultValue="10" />
 
     </fragment>
     <fragment

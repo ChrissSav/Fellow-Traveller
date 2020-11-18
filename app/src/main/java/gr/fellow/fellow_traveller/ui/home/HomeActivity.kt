@@ -73,6 +73,8 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
         viewModel.loadUserInfo()
         viewModel.loadCars()
+        viewModel.loadTripsAsCreator()
+        viewModel.loadTripsAsPassenger()
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_container)
 

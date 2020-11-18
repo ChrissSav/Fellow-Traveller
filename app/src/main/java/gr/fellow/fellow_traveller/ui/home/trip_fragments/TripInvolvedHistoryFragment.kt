@@ -81,7 +81,7 @@ class TripInvolvedHistoryFragment : BaseFragment<FragmentTripInvolvedHistoryBind
     }
 
     private fun onTripClick(tripInvolved: TripInvolved) {
-        findNavController()?.navigate(R.id.action_tripInvolvedHistoryFragment_to_tripInvolvedDetailsFragment, bundleOf("trip" to tripInvolved))
+        findNavController()?.navigate(R.id.action_tripInvolvedHistoryFragment_to_tripInvolvedDetailsFragment, bundleOf("tripId" to tripInvolved.id))
     }
 
 }
