@@ -11,7 +11,7 @@ import gr.fellow.fellow_traveller.databinding.FragmentTakesPartTabBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
-import gr.fellow.fellow_traveller.ui.home.adapter.TripsInvolvedHorizontalAdapter
+import gr.fellow.fellow_traveller.ui.home.adapter.TripsInvolvedAdapter
 
 
 @AndroidEntryPoint
@@ -26,7 +26,7 @@ class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
 
     override fun setUpObservers() {
         viewModel.tripsAsPassengerActive.observe(viewLifecycleOwner, Observer { list ->
-            (binding.recyclerView.adapter as TripsInvolvedHorizontalAdapter).submitList(list)
+            (binding.recyclerView.adapter as TripsInvolvedAdapter).submitList(list)
         })
 
         viewModel.loadPassengerActive.observe(viewLifecycleOwner, Observer {
@@ -40,7 +40,7 @@ class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
 
 
         binding.swipeRefreshLayout.setOnRefreshListener {
-            (binding.recyclerView.adapter as TripsInvolvedHorizontalAdapter).submitList(null)
+            (binding.recyclerView.adapter as TripsInvolvedAdapter).submitList(null)
             viewModel.loadTripsAsPassenger(true)
         }
 
@@ -48,7 +48,7 @@ class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
 
     override fun setUpViews() {
         viewModel.loadTripsAsPassenger()
-        binding.recyclerView.adapter = TripsInvolvedHorizontalAdapter(
+        binding.recyclerView.adapter = TripsInvolvedAdapter(
             R.drawable.background_stroke_radius_27_orange,
             this@TripsTakePartTabFragment::onTripClick
         )

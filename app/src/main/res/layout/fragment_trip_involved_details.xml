@@ -7,57 +7,40 @@
     tools:context=".ui.home.trip_fragments.TripInvolvedDetailsFragment">
 
 
-    <ImageButton
-        android:id="@+id/back_button"
-        style="@style/border_icon_button"
-        android:layout_width="@dimen/back_button_width_height"
-        android:layout_height="@dimen/back_button_width_height"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/ic_back_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/text1"
-        style="@style/display_1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:gravity="center"
-        android:maxLines="1"
-        android:text="Λεπτομέριες ταξιδιού"
-        app:layout_constraintBottom_toBottomOf="@+id/back_button"
-        app:layout_constraintEnd_toStartOf="@+id/delete"
-        app:layout_constraintStart_toEndOf="@+id/back_button"
-        app:layout_constraintTop_toTopOf="@+id/back_button" />
-
-
-    <ImageButton
-        android:id="@+id/delete"
-        style="@style/border_icon_button"
-        android:layout_width="@dimen/back_button_width_height"
-        android:layout_height="@dimen/back_button_width_height"
-        android:layout_marginRight="16dp"
-        android:src="@drawable/ic_bin"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/back_button" />
-
-
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_button">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/back_button"
+                style="@style/border_icon_button"
+                android:layout_width="@dimen/back_button_width_height"
+                android:layout_height="@dimen/back_button_width_height"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:src="@drawable/ic_back_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageButton
+                android:id="@+id/delete"
+                style="@style/border_icon_button"
+                android:layout_width="@dimen/back_button_width_height"
+                android:layout_height="@dimen/back_button_width_height"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_bin"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/back_button" />
 
 
             <TextView
@@ -65,10 +48,10 @@
                 style="@style/paragraph_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:text="Από"
                 app:layout_constraintStart_toStartOf="@+id/from"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/back_button" />
 
             <TextView
                 android:id="@+id/textView19"
@@ -138,75 +121,89 @@
                 style="@style/paragraph_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/component_border_icon_button_shape"
-                android:drawableEnd="@drawable/ic_google_maps"
                 android:drawablePadding="8dp"
                 android:padding="10dp"
                 android:text="Google maps"
+                app:drawableEndCompat="@drawable/ic_google_maps"
                 app:layout_constraintBottom_toBottomOf="@+id/day"
                 app:layout_constraintEnd_toEndOf="@+id/to"
                 app:layout_constraintTop_toTopOf="@+id/day" />
 
-            <TextView
-                android:id="@+id/username"
-                style="@style/header_3"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:text="Πατριάρχης Φώτιος"
-                app:layout_constraintBottom_toBottomOf="@+id/user_image"
-                app:layout_constraintEnd_toStartOf="@+id/rate"
-                app:layout_constraintStart_toEndOf="@+id/user_image"
-                app:layout_constraintTop_toTopOf="@+id/user_image" />
-
-
-            <TextView
-                android:id="@+id/rate"
-                android:layout_width="40dp"
-                android:layout_height="0dp"
-                android:background="@drawable/background_black_round"
-                android:gravity="center"
-                android:text="4.6"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="@+id/user_image"
-                app:layout_constraintEnd_toEndOf="@+id/to"
-                app:layout_constraintTop_toTopOf="@+id/user_image" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/user_image"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/ic_boy"
-                android:elevation="1dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/time" />
-
-            <TextView
-                android:id="@+id/message"
-                style="@style/paragraph_1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:tag="5"
-                android:text="Παρα πολυ καλο παιδι αλλα θελει δουλεια.. Τουλαχιστον ακουγε sugar boy"
-                app:layout_constraintEnd_toEndOf="@+id/to"
+                android:layout_marginTop="60dp"
+                android:background="@drawable/background_stroke_radius_16_grey"
+                app:layout_constraintEnd_toEndOf="@+id/google_maps"
                 app:layout_constraintStart_toStartOf="@+id/time"
-                app:layout_constraintTop_toBottomOf="@+id/user_image" />
+                app:layout_constraintTop_toBottomOf="@+id/time">
+
+                <TextView
+                    android:id="@+id/message"
+                    style="@style/paragraph_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="32dp"
+                    android:tag="5"
+                    android:text="Παρα πολυ καλο παιδι αλλα θελει δουλεια.. Τουλαχιστον ακουγε sugar boy"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/user_image"
+                    app:layout_constraintTop_toBottomOf="@+id/rate"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/username"
+                    style="@style/header_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="Πατριάρχης Φώτιος"
+                    app:layout_constraintBottom_toBottomOf="@+id/user_image"
+                    app:layout_constraintEnd_toStartOf="@+id/rate"
+                    app:layout_constraintStart_toEndOf="@+id/user_image"
+                    app:layout_constraintTop_toTopOf="@+id/user_image" />
+
+                <TextView
+                    android:id="@+id/rate"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/background_rate_radius_16_black"
+                    android:gravity="center"
+                    android:text="4.6"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/user_image"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/ic_boy"
+                    android:elevation="1dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="56dp"
+                android:layout_marginTop="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/message">
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout6">
 
 
                 <gr.fellow.fellow_traveller.ui.views.LabelTextComponent
@@ -259,52 +256,89 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
             <TextView
                 android:id="@+id/textView9"
                 style="@style/header_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="71dp"
+                android:layout_marginTop="64dp"
                 android:text="Όχημα"
-                app:layout_constraintStart_toStartOf="@+id/message"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout6"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
-            <TextView
-                android:id="@+id/car"
-                style="@style/paragraph_1"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="16dp"
-                android:drawableEnd="@drawable/ic_car"
-                android:gravity="center_vertical"
-                android:tag="3"
-                android:text="Όχημα"
-                app:layout_constraintEnd_toEndOf="@+id/message"
-                app:layout_constraintStart_toStartOf="@+id/textView9"
-                app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/background_stroke_radius_16_grey"
+                app:layout_constraintEnd_toEndOf="@+id/google_maps"
+                app:layout_constraintStart_toStartOf="@+id/textView9"
+                app:layout_constraintTop_toBottomOf="@+id/textView9">
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="60dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/background_car_radius_27_orange"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_car"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.419"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView39"
+                    style="@style/paragraph_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Όχημα"
+                    app:layout_constraintStart_toEndOf="@+id/imageView4"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/car"
+                    style="@style/paragraph_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="TextView"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView39"
+                    app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/passengers_label"
                 style="@style/header_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="48dp"
                 android:text="Επιβάτες"
-                app:layout_constraintStart_toStartOf="@+id/car"
-                app:layout_constraintTop_toBottomOf="@+id/car" />
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout5"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/passenger_recycler_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="100dp"
+                android:layout_marginBottom="110dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.54"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/passengers_label"
                 app:layout_constraintVertical_bias="0.0"
@@ -315,16 +349,17 @@
                 style="@style/header_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="100dp"
-                android:drawableEnd="@drawable/ic_right_arrow"
-                android:drawableTint="@color/colorPrimary"
                 android:text="Όλοι οι επιβάτες"
                 android:textColor="@color/colorPrimary"
                 android:visibility="invisible"
+                app:drawableEndCompat="@drawable/ic_right_arrow"
+                app:drawableTint="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/car"
-                app:layout_constraintTop_toBottomOf="@+id/passenger_recycler_view" />
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout5"
+                app:layout_constraintTop_toBottomOf="@+id/passenger_recycler_view"
+                app:layout_constraintVertical_bias="0.0" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

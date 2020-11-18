@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.ui.home.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
@@ -11,10 +12,10 @@ import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.ui.extensions.TripInvolvedDiffCallback
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 
-class TripsInvolvedHorizontalAdapter(
+class TripsInvolvedAdapter(
     private val drawable: Int = R.drawable.background_stroke_radius_27_green,
     private val onTripClickListener: (TripInvolved) -> Unit
-) : ListAdapter<TripInvolved, TripsInvolvedHorizontalAdapter.ViewHolder>(TripInvolvedDiffCallback()) {
+) : ListAdapter<TripInvolved, TripsInvolvedAdapter.ViewHolder>(TripInvolvedDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = TripInvolvedItemLayoutSecondsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -34,6 +35,8 @@ class TripsInvolvedHorizontalAdapter(
             binding.time.text = currentTrip.time
             binding.price.text = binding.price.context.getString(R.string.price, currentTrip.price.toString())
             binding.picture.loadImageFromUrl(currentTrip.creatorUser.picture)
+            binding.pet.visibility = if (currentTrip.hasPet) View.VISIBLE else View.INVISIBLE
+
             //binding.rate.text = currentTrip.creatorUser.rate.toString()
             //binding.review.text = currentTrip.creatorUser.reviews.toString()
             /*  binding.seats.text = currentTrip.seatsStatus

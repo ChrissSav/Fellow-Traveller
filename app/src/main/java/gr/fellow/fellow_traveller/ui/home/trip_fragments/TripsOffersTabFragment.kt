@@ -11,7 +11,7 @@ import gr.fellow.fellow_traveller.databinding.FragmentTripsOffersBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
-import gr.fellow.fellow_traveller.ui.home.adapter.TripsInvolvedHorizontalAdapter
+import gr.fellow.fellow_traveller.ui.home.adapter.TripsInvolvedAdapter
 
 
 @AndroidEntryPoint
@@ -27,7 +27,7 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
 
 
         viewModel.tripsAsCreatorActive.observe(viewLifecycleOwner, Observer { list ->
-            (binding.recyclerView.adapter as TripsInvolvedHorizontalAdapter).submitList(list)
+            (binding.recyclerView.adapter as TripsInvolvedAdapter).submitList(list)
         })
 
         viewModel.loadCreatorActive.observe(viewLifecycleOwner, Observer {
@@ -43,7 +43,7 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
 
     override fun setUpViews() {
         viewModel.loadTripsAsCreator()
-        binding.recyclerView.adapter = TripsInvolvedHorizontalAdapter(R.drawable.background_stroke_radius_27_green, this@TripsOffersTabFragment::onTripClick)
+        binding.recyclerView.adapter = TripsInvolvedAdapter(R.drawable.background_stroke_radius_27_green, this@TripsOffersTabFragment::onTripClick)
 
 
         binding.buttonHistory.setOnClickListener {
@@ -52,7 +52,7 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
 
 
         binding.swipeRefreshLayout.setOnRefreshListener {
-            (binding.recyclerView.adapter as TripsInvolvedHorizontalAdapter).submitList(null)
+            (binding.recyclerView.adapter as TripsInvolvedAdapter).submitList(null)
             viewModel.loadTripsAsCreator(true)
         }
     }

@@ -98,7 +98,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
                 bags.text = trip.bags
                 pet.text = if (trip.hasPet) resources.getString(R.string.yes) else resources.getString(R.string.no)
                 car.text = trip.car.fullInfo
-                message.text = trip.msg
+                message.text = if (trip.msg.isNullOrEmpty()) resources.getString(R.string.no_driver_message) else trip.msg
 
 
                 if (!trip.passengers.isNullOrEmpty()) {
