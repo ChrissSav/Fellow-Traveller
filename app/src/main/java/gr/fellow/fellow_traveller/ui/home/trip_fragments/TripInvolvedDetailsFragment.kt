@@ -81,7 +81,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
             creator = !trip.passengers.filter { it.user.id == viewModel.user.value?.id.toString() }.any()
 
             if (creator) {
-                binding.constraintLayoutInfo.backgroundTintList = ContextCompat.getColorStateList(binding.constraintLayoutInfo.context, R.color.aqua)
+                binding.constraintLayoutInfo.backgroundTintList = ContextCompat.getColorStateList(binding.constraintLayoutInfo.context, R.color.green)
                 binding.labelDescription.text = "Είσαι ο οδηγός του ταξιδιού"
             }
 

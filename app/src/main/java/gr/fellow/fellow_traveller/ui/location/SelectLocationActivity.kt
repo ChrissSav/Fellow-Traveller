@@ -1,12 +1,9 @@
 package gr.fellow.fellow_traveller.ui.location
 
-import android.animation.AnimatorSet
-import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,7 +27,6 @@ class SelectLocationActivity : BaseActivity<ActivitySelectLocationBinding>() {
 
     override fun setUpObservers() {
         viewModel.destinations.observe(this, Observer {
-            showHideInternetMessage(0)
             placesList.clear()
             placesList.addAll(it)
             binding.RecyclerView.adapter?.notifyDataSetChanged()
@@ -78,21 +74,6 @@ class SelectLocationActivity : BaseActivity<ActivitySelectLocationBinding>() {
         super.finish()
         hideKeyboard()
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-    }
-
-    private fun showHideInternetMessage(targetHeight: Int) {
-        val slideAnimator = ValueAnimator
-            .ofInt(binding.imageViewInternet.layoutParams.height, targetHeight)
-            .setDuration(200)
-        slideAnimator.addUpdateListener { animation1: ValueAnimator ->
-            val value = animation1.animatedValue as Int
-            binding.imageViewInternet.layoutParams.height = value
-            binding.imageViewInternet.requestLayout()
-        }
-        val animationSet = AnimatorSet()
-        animationSet.interpolator = AccelerateDecelerateInterpolator()
-        animationSet.play(slideAnimator)
-        animationSet.start()
     }
 
 
