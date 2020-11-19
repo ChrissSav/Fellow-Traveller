@@ -23,8 +23,9 @@
         android:name="gr.fellow.fellow_traveller.ui.register.fragments.PasswordFragment"
         android:label="fragment_password"
         tools:layout="@layout/fragment_password">
+
         <action
-            android:id="@+id/next_fragment"
+            android:id="@+id/action_passwordFragment_to_accountFragment"
             app:destination="@id/accountFragment"
             app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"

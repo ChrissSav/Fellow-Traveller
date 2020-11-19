@@ -25,7 +25,7 @@
         style="@style/border_icon_button"
         android:layout_width="@dimen/back_button_width_height"
         android:layout_height="@dimen/back_button_width_height"
-        android:layout_marginStart="@dimen/image_button_layout_marginStart"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_back_button"
         app:layout_constraintStart_toStartOf="parent"
