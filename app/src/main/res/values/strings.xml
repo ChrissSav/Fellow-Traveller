@@ -50,8 +50,8 @@
     <string name="price">%s €</string>
 
     <!-- Filter Fragment -->
-    <string name="range_text">Εύρος %s χμλ</string>
-    <string name="range_text_price" formatted="false">Εώς %s €</string>
+    <string name="range_text">Εύρος %s χλμ</string>
+    <string name="range_text_price" formatted="false">Έως %s €</string>
     <string name="range_text_in_filters" formatted="false">%s ~ %s </string>
     <string name="range_view_all">Εμφάνιση όλων</string>
 

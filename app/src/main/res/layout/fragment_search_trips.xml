@@ -131,10 +131,10 @@
 
         <TextView
             android:id="@+id/results_label"
-            style="@style/header_1"
+            style="@style/display_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:freezesText="true"
             android:text="@string/trip_found"
@@ -147,15 +147,16 @@
             android:id="@+id/sort_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            style="@style/paragraph_2"
             android:layout_marginEnd="20dp"
-            android:drawableEnd="@drawable/ic_sort"
             android:drawablePadding="10dp"
             android:gravity="center"
             android:text="Πιο σχετικά"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/results_label"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/results_label"/>
+            app:layout_constraintTop_toTopOf="@id/results_label"
+            app:drawableEndCompat="@drawable/ic_sort" />
 
 
         <androidx.recyclerview.widget.RecyclerView
