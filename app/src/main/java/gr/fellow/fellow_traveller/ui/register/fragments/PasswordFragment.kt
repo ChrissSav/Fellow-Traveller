@@ -22,7 +22,7 @@ class PasswordFragment : BaseFragment<FragmentPasswordBinding>() {
 
     override fun setUpObservers() {
         viewModel.password.observe(viewLifecycleOwner, Observer {
-            findNavController()?.navigate(R.id.next_fragment)
+            findNavController()?.navigate(R.id.action_passwordFragment_to_accountFragment)
         })
     }
 
@@ -38,7 +38,6 @@ class PasswordFragment : BaseFragment<FragmentPasswordBinding>() {
                 val passConfirm = binding.passwordConfirm.text.toString()
                 if (pass == passConfirm) {
                     viewModel.storePassword(pass)
-                    findNavController()?.navigate(R.id.action_passwordFragment_to_accountFragment)
                 } else {
                     createAlerter(resources.getString(R.string.ERROR_PASSWORD_DO_NOT_MATCH))
                 }

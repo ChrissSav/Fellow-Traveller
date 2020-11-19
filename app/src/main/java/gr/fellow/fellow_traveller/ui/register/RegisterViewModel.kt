@@ -40,9 +40,7 @@ constructor(
     }
 
     fun storePassword(password: String) {
-        launch(true) {
-            _password.value = password
-        }
+        _password.value = password
     }
 
 
