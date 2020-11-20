@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13"
-        tools:listitem="@layout/car_item_second" />
+        tools:listitem="@layout/car_item_pick" />
 
 
     <Button
@@ -37,19 +37,14 @@
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="64dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="32dp"
-        android:layout_marginRight="64dp"
+        android:layout_marginRight="16dp"
         android:layout_marginBottom="32dp"
-        android:background="@drawable/dotted_button_border"
-        android:paddingLeft="28dp"
-        android:paddingTop="10dp"
-        android:paddingRight="28dp"
-        android:paddingBottom="10dp"
+        android:background="@drawable/component_border_icon_button_shape"
         android:text="Προσθήκη αυτοκινήτου"
         android:textAllCaps="false"
-        android:textColor="@color/home_blue"
-        android:textSize="18sp"
+        android:textAppearance="@style/paragraph_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

@@ -36,7 +36,7 @@
         style="@style/input_1"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="24dp"
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center"

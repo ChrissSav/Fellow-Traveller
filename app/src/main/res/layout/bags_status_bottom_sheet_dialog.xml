@@ -23,7 +23,7 @@
         style="@style/input_1"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="32dp"
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center"
         android:text="Καθόλου"
@@ -36,7 +36,6 @@
         style="@style/input_1"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center"
         android:text="Περιορισμένη"
@@ -50,8 +49,7 @@
         style="@style/input_1"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center"
         android:text="Μεγάλη"
@@ -59,8 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/limited"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/limited" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.CarPickBottomSheetDialogBinding
 import gr.fellow.fellow_traveller.domain.car.Car
-import gr.fellow.fellow_traveller.ui.car.CarAdapter
+import gr.fellow.fellow_traveller.ui.car.CarPickAdapter
 
 class CarPickBottomSheetDialog(
     private val carList: MutableList<Car>,
@@ -18,7 +18,7 @@ class CarPickBottomSheetDialog(
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = CarPickBottomSheetDialogBinding.inflate(LayoutInflater.from(context), container, false)
-        val carAdapter = CarAdapter(onItemClickListener)
+        val carAdapter = CarPickAdapter(onItemClickListener)
         binding.recyclerView.adapter = carAdapter
         carAdapter.submitList(carList)
         binding.addCar.setOnClickListener {
