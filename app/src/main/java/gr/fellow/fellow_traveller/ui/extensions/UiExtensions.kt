@@ -202,13 +202,27 @@ fun Fragment.createAlerterInfo(msg: String, color: Int) {
 /***  NAV GRAPH***/
 
 fun NavController.navigateWithFade(actionId: Int) {
-
     val navBuilder = NavOptions.Builder()
     navBuilder.setEnterAnim(R.anim.fade_in)
     navBuilder.setExitAnim(R.anim.fade_out)
     navBuilder.setPopEnterAnim(R.anim.fade_in)
     navBuilder.setPopExitAnim(R.anim.fade_out)
     this.navigate(actionId, null, navBuilder.build())
+}
+
+fun NavController.bottomNav(actionId: Int) {
+    try {
+        getBackStackEntry(actionId)
+        popBackStack(actionId, false)
+    } catch (e: Exception) {
+        val navBuilder = NavOptions.Builder()
+        navBuilder.setEnterAnim(R.anim.fade_in)
+        navBuilder.setExitAnim(R.anim.fade_out)
+        navBuilder.setPopEnterAnim(R.anim.fade_in)
+        navBuilder.setPopExitAnim(R.anim.fade_out)
+        this.navigate(actionId, null, navBuilder.build())
+    }
+
 }
 
 fun NavController.navigateWithAnimation(actionId: Int, bundle: Bundle? = null) {
