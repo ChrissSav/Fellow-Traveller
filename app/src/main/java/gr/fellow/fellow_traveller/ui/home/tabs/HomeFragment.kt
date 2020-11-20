@@ -2,6 +2,7 @@ package gr.fellow.fellow_traveller.ui.home.tabs
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -10,6 +11,7 @@ import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentHomeBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
+import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.extensions.startActivityForResult
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripActivity
@@ -52,7 +54,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 startActivityForResult(SearchTripActivity::class, 2, null)
             else
                 createAlerter("Πρέπει να ολοκληρώσετε το προφίλ σας πρώτα !")
-
         }
 
         binding.searchTrip.setOnClickListener {
@@ -60,9 +61,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 startActivityForResult(SearchTripActivity::class, 2, null)
             else
                 createAlerter("Πρέπει να ολοκληρώσετε το προφίλ σας πρώτα !")
-
         }
-
+        binding.help.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://fellowtraveller.gr"))
+            startActivity(browserIntent)
+        }
+        binding.guide.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://fellowtraveller.gr"))
+            startActivity(browserIntent)
+        }
+        binding.searchAndOffer.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://fellowtraveller.gr"))
+            startActivity(browserIntent)
+        }
+        binding.cityChoice1.loadImageFromUrl("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2FSKG-ATH.jpg?alt=media&token=ea8aac0d-b2af-4f09-af83-2db87e69dcf4")
+        binding.cityChoice2.loadImageFromUrl("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2FIOA-ATH.jpg?alt=media&token=e374487c-9715-49ea-b972-25384cb90e42")
+        binding.cityChoice3.loadImageFromUrl("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2FIOA-PAT.jpg?alt=media&token=0fb958e3-9027-4a10-9582-7262f7555a5c")
+        binding.cityChoice4.loadImageFromUrl("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2FKAV-SKG.jpg?alt=media&token=e08813a7-53a7-424e-9077-12d42e24f086")
     }
 
 

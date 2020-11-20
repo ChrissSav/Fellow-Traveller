@@ -63,8 +63,6 @@
     <style name="CustomThemeOverlay_MaterialCalendar_Fullscreen" parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar.Fullscreen">
         <item name="materialCalendarStyle">@style/Custom_MaterialCalendar.Fullscreen</item>
         <item name="android:overScrollMode">never</item>
-
-
     </style>
 
     <style name="Custom_MaterialCalendar.Fullscreen" parent="@style/Widget.MaterialComponents.MaterialCalendar.Fullscreen">
@@ -149,5 +147,10 @@
         <item name="cornerSizeTopLeft">16dp</item>
         <item name="cornerSizeBottomRight">0dp</item>
         <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <style name="RoundedSquare">
+        <item name="cornerSize">16%</item>
+
     </style>
 </resources>
