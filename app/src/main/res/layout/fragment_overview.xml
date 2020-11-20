@@ -273,6 +273,7 @@
                     android:layout_width="60dp"
                     android:layout_height="0dp"
                     android:background="@drawable/background_car_radius_27_orange"
+                    android:backgroundTint="@color/black_color"
                     android:padding="16dp"
                     android:src="@drawable/ic_car"
                     app:layout_constraintBottom_toBottomOf="parent"
