@@ -3,321 +3,359 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:fillViewport="true"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".ui.home.tabs.HomeFragment">
 
-   <androidx.constraintlayout.widget.ConstraintLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-      <ImageView
-          android:id="@+id/textView12"
-          android:layout_width="35dp"
-          android:layout_height="50dp"
-          android:layout_marginStart="16dp"
-          android:layout_marginTop="42dp"
-          android:scaleType="fitCenter"
-          android:src="@drawable/ic_logo_asset_2"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          app:tint="@color/black" />
+        <ImageView
+            android:id="@+id/textView12"
+            android:layout_width="35dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="42dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_logo_asset_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/black" />
 
-      <TextView
-          android:id="@+id/textView26"
-          style="@style/display_1"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="16dp"
-          android:layout_marginEnd="16dp"
-          android:text="Βρες συνταξιδιώτες\n στο λεπτό"
-          app:layout_constraintBottom_toBottomOf="@+id/textView12"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toEndOf="@+id/textView12"
-          app:layout_constraintTop_toTopOf="@+id/textView12" />
-
-
-      <androidx.constraintlayout.widget.ConstraintLayout
-          android:id="@+id/constraintLayout_search"
-          android:layout_width="0dp"
-          android:layout_height="135dp"
-          android:layout_marginTop="32dp"
-          android:background="@drawable/background_white_radius_28"
-          android:backgroundTint="@color/search_fragment_background"
-          app:layout_constraintEnd_toEndOf="@+id/textView26"
-          app:layout_constraintStart_toStartOf="@+id/textView12"
-          app:layout_constraintTop_toBottomOf="@+id/textView26">
+        <TextView
+            android:id="@+id/textView26"
+            style="@style/display_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Βρες συνταξιδιώτες\n στο λεπτό"
+            app:layout_constraintBottom_toBottomOf="@+id/textView12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView12"
+            app:layout_constraintTop_toTopOf="@+id/textView12" />
 
 
-         <TextView
-             android:id="@+id/textView28"
-             style="@style/header_1"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginStart="32dp"
-             android:layout_marginTop="24dp"
-             android:text="Αναζητήστε ένα ταξίδι"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toTopOf="parent" />
-
-         <TextView
-             android:id="@+id/textView29"
-             style="@style/paragraph_1"
-             android:layout_width="0dp"
-             android:layout_height="0dp"
-             android:layout_marginTop="16dp"
-             android:layout_marginEnd="32dp"
-             android:lineSpacingExtra="4dp"
-             android:layout_marginBottom="24dp"
-             android:text="Βρείτε τους ιδανικούς συνταξιδιώτες πολυ γρηγορα"
-             app:layout_constraintBottom_toBottomOf="parent"
-             app:layout_constraintEnd_toStartOf="@+id/search_trip"
-             app:layout_constraintStart_toStartOf="@+id/textView28"
-             app:layout_constraintTop_toBottomOf="@+id/textView28" />
-
-         <ImageButton
-             android:id="@+id/search_trip"
-             style="@style/border_icon_button"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginEnd="32dp"
-             android:rotation="180"
-             android:src="@drawable/ic_back_button"
-             app:layout_constraintBottom_toBottomOf="parent"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintTop_toTopOf="parent" />
-      </androidx.constraintlayout.widget.ConstraintLayout>
-
-      <androidx.constraintlayout.widget.ConstraintLayout
-          android:id="@+id/constraintLayout_new"
-          android:layout_width="0dp"
-          android:layout_height="135dp"
-          android:layout_marginTop="24dp"
-          android:background="@drawable/background_white_radius_28"
-          android:backgroundTint="@color/LightAqua"
-          app:layout_constraintEnd_toEndOf="@+id/textView26"
-          app:layout_constraintStart_toStartOf="@+id/textView12"
-          app:layout_constraintTop_toBottomOf="@+id/constraintLayout_search">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout_search"
+            android:layout_width="0dp"
+            android:layout_height="135dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/background_white_outline_radius_28"
+            android:backgroundTint="@color/light_orange_New"
+            app:layout_constraintEnd_toEndOf="@+id/textView26"
+            app:layout_constraintStart_toStartOf="@+id/textView12"
+            app:layout_constraintTop_toBottomOf="@+id/textView26">
 
 
-         <TextView
-             android:id="@+id/textView2"
-             style="@style/header_1"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginStart="32dp"
-             android:layout_marginTop="24dp"
-             android:text="Προσφέρετε ένα ταξίδι"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/textView28"
+                style="@style/header_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:text="Αναζητήστε ένα ταξίδι"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-         <TextView
-             android:id="@+id/textView9"
-             style="@style/paragraph_1"
-             android:layout_width="0dp"
-             android:layout_height="0dp"
-             android:layout_marginTop="16dp"
-             android:layout_marginEnd="32dp"
-             android:layout_marginBottom="24dp"
-             android:lineSpacingExtra="4dp"
-             android:text="Βρείτε τους ιδανικούς συνταξιδιώτες πολυ γρηγορα"
-             app:layout_constraintBottom_toBottomOf="parent"
-             app:layout_constraintEnd_toStartOf="@+id/new_trip"
-             app:layout_constraintStart_toStartOf="@+id/textView2"
-             app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            <TextView
+                android:id="@+id/textView29"
+                style="@style/paragraph_1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="24dp"
+                android:lineSpacingExtra="5dp"
+                android:text="Βρείτε τους ιδανικούς συνταξιδιώτες πολυ γρηγορα"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/search_trip"
+                app:layout_constraintStart_toStartOf="@+id/textView28"
+                app:layout_constraintTop_toBottomOf="@+id/textView28" />
 
-         <ImageButton
-             android:id="@+id/new_trip"
-             style="@style/border_icon_button"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginEnd="32dp"
-             android:rotation="180"
-             android:src="@drawable/ic_back_button"
-             app:layout_constraintBottom_toBottomOf="parent"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintTop_toTopOf="parent" />
-      </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageButton
+                android:id="@+id/search_trip"
+                style="@style/border_icon_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/background_white_radius_28"
+                android:backgroundTint="@color/light_orange_New"
+                android:rotation="180"
+                android:src="@drawable/ic_back_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-      <TextView
-          android:id="@+id/textView31"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="54dp"
-          style="@style/header_2"
-          android:text="Δημοφιλείς Ταξίδια"
-          app:layout_constraintStart_toStartOf="@+id/constraintLayout_new"
-          app:layout_constraintTop_toBottomOf="@+id/constraintLayout_new" />
-
-      <TextView
-          android:id="@+id/textView32"
-          style="@style/paragraph_1"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="16dp"
-          android:text="Δημοφιλείς Ταξίδια"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="@+id/textView31"
-          app:layout_constraintTop_toBottomOf="@+id/textView31" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout_new"
+            android:layout_width="0dp"
+            android:layout_height="135dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/background_white_outline_radius_28"
+            android:backgroundTint="@color/light_aqua_New"
+            app:layout_constraintEnd_toEndOf="@+id/textView26"
+            app:layout_constraintStart_toStartOf="@+id/textView12"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout_search">
 
 
-      <TextView
-          android:id="@+id/textView33"
-          style="@style/header_3"
-          android:layout_width="0dp"
-          android:layout_height="@dimen/box_height"
-          android:layout_marginStart="16dp"
-          android:layout_marginTop="44dp"
-          android:layout_marginEnd="16dp"
-          android:background="@drawable/background_white_radius_19"
-          android:backgroundTint="@color/receiverFill"
-          android:gravity="bottom|left"
-          android:lineSpacingExtra="7dp"
-          android:paddingStart="20dp"
-          android:paddingBottom="18dp"
-          android:text="Αθήνα\nΘεσσαλονίκη"
-          app:layout_constraintEnd_toStartOf="@+id/guideline4"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/textView32" />
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/header_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:text="Προσφέρετε ένα ταξίδι"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-      <TextView
-          android:id="@+id/textView3"
-          style="@style/header_3"
-          android:layout_width="0dp"
-          android:layout_height="@dimen/box_height"
-          android:layout_marginStart="16dp"
-          android:layout_marginTop="24dp"
-          android:layout_marginEnd="16dp"
-          android:background="@drawable/background_white_radius_19"
-          android:backgroundTint="@color/receiverFill"
-          android:gravity="bottom|left"
-          android:lineSpacingExtra="7dp"
-          android:paddingStart="20dp"
-          android:paddingBottom="18dp"
-          android:text="Ιωάννινα\nΘεσσαλονίκη"
-          app:layout_constraintEnd_toStartOf="@+id/guideline4"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/textView33" />
+            <TextView
+                android:id="@+id/textView9"
+                style="@style/paragraph_1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="24dp"
+                android:lineSpacingExtra="5dp"
+                android:text="Βρείτε τους ιδανικούς συνταξιδιώτες πολυ γρηγορα"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/new_trip"
+                app:layout_constraintStart_toStartOf="@+id/textView2"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-
-      <TextView
-          android:id="@+id/textView1"
-          style="@style/header_3"
-          android:layout_width="0dp"
-          android:layout_height="@dimen/box_height"
-          android:layout_marginStart="16dp"
-          android:layout_marginTop="24dp"
-          android:layout_marginEnd="16dp"
-          android:background="@drawable/background_white_radius_19"
-          android:backgroundTint="@color/receiverFill"
-          android:gravity="bottom|left"
-          android:lineSpacingExtra="7dp"
-          android:paddingStart="20dp"
-          android:paddingBottom="18dp"
-          android:text="Πάτρα\nΑθήνα"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHorizontal_bias="0.0"
-          app:layout_constraintStart_toStartOf="@+id/guideline4"
-          app:layout_constraintTop_toTopOf="@+id/textView33" />
-
-      <TextView
-          android:id="@+id/textView10"
-          style="@style/header_3"
-          android:layout_width="0dp"
-          android:layout_height="@dimen/box_height"
-          android:layout_marginStart="16dp"
-          android:layout_marginTop="24dp"
-          android:layout_marginEnd="16dp"
-          android:background="@drawable/background_white_radius_19"
-          android:backgroundTint="@color/receiverFill"
-          android:gravity="bottom|left"
-          android:lineSpacingExtra="7dp"
-          android:paddingStart="20dp"
-          android:paddingBottom="18dp"
-          android:text="Πάτρα\nΑθήνα"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="@+id/guideline4"
-          app:layout_constraintTop_toBottomOf="@+id/textView1" />
+            <ImageButton
+                android:id="@+id/new_trip"
+                style="@style/border_icon_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/background_white_radius_28"
+                android:backgroundTint="@color/light_aqua_New"
+                android:rotation="180"
+                android:src="@drawable/ic_back_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-      <TextView
-          android:id="@+id/textView30"
-          style="@style/header_2"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="80dp"
-          android:text="Οδηγοί βοηθείας"
-          app:layout_constraintStart_toStartOf="@+id/constraintLayout_new"
-          app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        <TextView
+            android:id="@+id/textView31"
+            style="@style/header_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="54dp"
+            android:text="Δημοφιλείς Ταξίδια"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout_new"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout_new" />
+
+        <TextView
+            android:id="@+id/textView32"
+            style="@style/paragraph_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Επέλεξε μία από τις πιο δημοφιλής διαδρομές"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView31"
+            app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
 
-      <androidx.constraintlayout.widget.ConstraintLayout
-          android:id="@+id/constraintLayout4"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="16dp"
-          android:layout_marginBottom="32dp"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/textView30"
-          app:layout_constraintVertical_bias="0.0">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/city_choice_1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/box_height"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/background_white_radius_19"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView32"
+            app:shapeAppearanceOverlay="@style/RoundedSquare" />
 
-         <TextView
-             android:id="@+id/write_review"
-             style="@style/settings_text_with_padding"
-             android:layout_width="0dp"
-             android:layout_height="wrap_content"
-             android:text="Πως λειτουργεί το fellow.;"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toTopOf="parent" />
-
-         <TextView
-             android:id="@+id/help"
-             style="@style/settings_text_with_padding"
-             android:layout_width="0dp"
-             android:layout_height="wrap_content"
-             android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
-             android:text="Τι μπορεις να κάνεις στο fellow.;"
-             app:layout_constraintEnd_toEndOf="@+id/write_review"
-             app:layout_constraintStart_toStartOf="@+id/write_review"
-             app:layout_constraintTop_toBottomOf="@+id/write_review" />
-
-         <TextView
-             android:id="@+id/terms_of_use"
-             style="@style/settings_text_with_padding"
-             android:layout_width="0dp"
-             android:layout_height="wrap_content"
-             android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
-             android:text="Αναζήτηση και κράτηση θέσης"
-             app:layout_constraintEnd_toEndOf="@+id/help"
-             app:layout_constraintStart_toStartOf="@+id/help"
-             app:layout_constraintTop_toBottomOf="@+id/help" />
-
-         <TextView
-             android:id="@+id/privacy_Policy"
-             style="@style/settings_text_with_padding"
-             android:layout_width="0dp"
-             android:layout_height="wrap_content"
-             android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
-             android:text="Αξιολόγηση και κριτική"
-             app:layout_constraintEnd_toEndOf="@+id/terms_of_use"
-             app:layout_constraintStart_toStartOf="@+id/terms_of_use"
-             app:layout_constraintTop_toBottomOf="@+id/terms_of_use" />
-
-      </androidx.constraintlayout.widget.ConstraintLayout>
-
-      <androidx.constraintlayout.widget.Guideline
-          android:id="@+id/guideline4"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:orientation="vertical"
-          app:layout_constraintGuide_percent="0.5067751" />
+        <TextView
+            android:id="@+id/city_name_1"
+            style="@style/paragraph_3"
+            android:layout_width="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="Θεσσαλονίκη - Αθήνα"
+            app:layout_constraintEnd_toEndOf="@id/guideline4"
+            app:layout_constraintStart_toStartOf="@id/city_choice_1"
+            app:layout_constraintTop_toBottomOf="@id/city_choice_1" />
 
 
-   </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/city_choice_2"
+            style="@style/header_3"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/box_height"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/background_white_radius_19"
+            android:backgroundTint="@color/receiverFill"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/city_name_1"
+            app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+        <TextView
+            android:id="@+id/city_name_2"
+            style="@style/paragraph_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="Ιωάννινα - Αθήνα"
+            app:layout_constraintEnd_toEndOf="@id/guideline4"
+            app:layout_constraintStart_toStartOf="@id/city_choice_2"
+            app:layout_constraintTop_toBottomOf="@id/city_choice_2" />
+
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/city_choice_3"
+            style="@style/header_3"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/box_height"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/background_white_radius_19"
+            android:backgroundTint="@color/receiverFill"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toTopOf="@+id/city_choice_1"
+            app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+        <TextView
+            android:id="@+id/city_name_3"
+            style="@style/paragraph_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="Ιωάννινα - Πάτρα"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/city_choice_3"
+            app:layout_constraintTop_toBottomOf="@id/city_choice_3" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/city_choice_4"
+            style="@style/header_3"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/box_height"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/background_white_radius_19"
+            android:backgroundTint="@color/receiverFill"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toBottomOf="@+id/city_name_3"
+            app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+        <TextView
+            android:id="@+id/city_name_4"
+            style="@style/paragraph_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="Καβάλα - Θεσσαλονίκη"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/city_choice_4"
+            app:layout_constraintTop_toBottomOf="@id/city_choice_4" />
+
+
+        <TextView
+            android:id="@+id/textView30"
+            style="@style/header_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:text="Οδηγοί βοηθείας"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout_new"
+            app:layout_constraintTop_toBottomOf="@+id/city_name_4" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView30"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/guide"
+                style="@style/settings_text_with_padding"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Πώς λειτουργεί το fellow.;"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/help"
+                style="@style/settings_text_with_padding"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
+                android:text="Τι μπορείς να κάνεις στο fellow;"
+                app:layout_constraintEnd_toEndOf="@id/guide"
+                app:layout_constraintStart_toStartOf="@+id/guide"
+                app:layout_constraintTop_toBottomOf="@+id/guide" />
+
+            <TextView
+                android:id="@+id/search_and_offer"
+                style="@style/settings_text_with_padding"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
+                android:text="Αναζήτηση και κράτηση θέσης"
+                app:layout_constraintEnd_toEndOf="@+id/help"
+                app:layout_constraintStart_toStartOf="@+id/help"
+                app:layout_constraintTop_toBottomOf="@+id/help" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5067751" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </ScrollView>
