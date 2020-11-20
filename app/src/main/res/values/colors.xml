@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FF7733</color>
+    <color name="colorPrimary">@color/orange_new</color>
     <color name="colorPrimaryDark">#205890</color>
     <color name="colorAccent">#D81B60</color>
     <!-- Custom colors for app-->
@@ -51,7 +51,14 @@
     <color name="search_fragment_background">#FFD8BB</color>
 
 
-    <color name="green">#427856</color>
+    <!--New Colors-->
 
+    <color name="green">#427856</color>
+    <color name="orange_new">#FF7733</color>
+    <color name="light_aqua_New">#B2E8BF</color>
+    <color name="light_orange_New">#F7E5CD</color>
+    <color name="light_gray_New">#F8F8F8</color>
+    <color name="gray_new">#E4E4E4</color>
+    <color name="dark_gray_new">#B1B1B1</color>
 
 </resources>

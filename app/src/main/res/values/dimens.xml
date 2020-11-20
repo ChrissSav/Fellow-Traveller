@@ -71,4 +71,8 @@
     <dimen name="fragment_settings_text_margin_top">16dp</dimen>
 
 
+    <!--New Register-->
+    <dimen name="register_margin_label_title">20dp</dimen>
+
+
 </resources>

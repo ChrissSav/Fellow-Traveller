@@ -27,7 +27,7 @@ class EmailFragment : BaseFragment<FragmentEmailBinding>() {
     override fun setUpViews() {
         binding.email.text = viewModel.email.value
 
-        binding.ImageButtonNext.setOnClickListener {
+        binding.ImageButtonNext.button.setOnClickListener {
             hideKeyboard()
             val email = binding.email.text.toString().trim()
             if (binding.email.isCorrect()) {

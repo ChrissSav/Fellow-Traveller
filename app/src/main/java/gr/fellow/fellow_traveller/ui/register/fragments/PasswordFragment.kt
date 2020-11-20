@@ -31,7 +31,7 @@ class PasswordFragment : BaseFragment<FragmentPasswordBinding>() {
         binding.passwordConfirm.text = viewModel.password.value
 
 
-        binding.ImageButtonNext.setOnClickListener {
+        binding.ImageButtonNext.button.setOnClickListener {
             hideKeyboard()
             if (binding.password.isCorrect() && binding.passwordConfirm.isCorrect()) {
                 val pass = binding.password.text.toString()

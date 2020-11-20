@@ -38,7 +38,7 @@
                 style="@style/paragraph_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="@dimen/register_margin_label_title"
                 android:text="Μας βοηθά για την καλύτερη εξυπηρέτησή σας"
                 app:layout_constraintEnd_toEndOf="@+id/AccountInfoFragment_textView4"
                 app:layout_constraintStart_toStartOf="@id/AccountInfoFragment_textView4"
@@ -65,14 +65,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="64dp"
+                android:layout_marginBottom="32dp"
                 app:error_message_f="Ελεγξε το πεδιο του επωνύμου"
                 app:hint_f="Επώνυμο"
-                app:regex_f="@string/regex_min_3_chars"
                 app:imeOptions_f="actionDone"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/AccountInfoFragment_info_textView"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/AccountInfoFragment_info_textView"
-                app:layout_constraintTop_toBottomOf="@+id/first_name" />
+                app:layout_constraintTop_toBottomOf="@+id/first_name"
+                app:layout_constraintVertical_bias="0.0"
+                app:regex_f="@string/regex_min_3_chars" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -81,18 +83,13 @@
     </ScrollView>
 
 
-    <ImageButton
+    <include
         android:id="@+id/ImageButton_next"
-        android:layout_width="@dimen/new_trip_float_action_button_width"
-        android:layout_height="@dimen/new_trip_float_action_button_height"
+        layout="@layout/register_float_action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/new_trip_float_action_button_margin_right"
         android:layout_marginBottom="@dimen/new_trip_float_action_button_margin_bottom"
-        android:background="@drawable/circle_button_shape"
-        android:elevation="2dp"
-        android:padding="15dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_tick"
-        android:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
