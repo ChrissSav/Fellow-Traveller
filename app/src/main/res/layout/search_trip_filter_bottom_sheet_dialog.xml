@@ -98,8 +98,8 @@
 
             <gr.fellow.fellow_traveller.ui.views.PickNumberButton
                 android:id="@+id/seats_pick_button"
-                android:layout_width="@dimen/button_number_layout_width"
-                android:layout_height="@dimen/button_number_layout_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@+id/textView7"
                 app:layout_constraintEnd_toEndOf="@+id/clear"
                 app:layout_constraintTop_toTopOf="@+id/textView7"

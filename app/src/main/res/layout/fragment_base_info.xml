@@ -149,8 +149,8 @@
 
             <gr.fellow.fellow_traveller.ui.views.PickNumberButton
                 android:id="@+id/seats_pick_button"
-                android:layout_width="@dimen/button_number_layout_width"
-                android:layout_height="@dimen/button_number_layout_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@+id/textView7"
                 app:layout_constraintEnd_toEndOf="@+id/car_ediText"
                 app:layout_constraintTop_toTopOf="@+id/textView7"
@@ -190,11 +190,10 @@
     <include
         android:id="@+id/ImageButton_next"
         layout="@layout/float_action_button_new_trip"
-        android:layout_width="@dimen/new_trip_float_action_button_width_height"
-        android:layout_height="@dimen/new_trip_float_action_button_width_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/new_trip_float_action_button_margin_right"
         android:layout_marginBottom="@dimen/new_trip_float_action_button_margin_bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,6 +13,7 @@
     <color name="black_color_pressed">#333130</color>
     <color name="greyBlack_color">#7c7b7a</color>
     <color name="greyBlack_transparent_color">#807c7b7a</color>
+
     <color name="blue_color">#5B9AD9</color>
     <color name="blue_color_pressed">#6AA1D8</color>
     <color name="softBlue_color">#E5F5FF</color>

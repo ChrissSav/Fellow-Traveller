@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.main.fragments.MainFragment">
 
     <ImageView
@@ -18,11 +18,11 @@
 
     <TextView
         android:id="@+id/MainActivity_textView"
+        style="@style/paragraph_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Καλώς όρισες στο"
-        style="@style/paragraph_1"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,12 +30,12 @@
 
     <TextView
         android:id="@+id/MainActivity_textView2"
+        style="@style/header_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:textSize="30sp"
         android:text="Fellow Traveller"
-        style="@style/header_1"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MainActivity_textView" />
@@ -44,26 +44,28 @@
     <Button
         android:id="@+id/button_login"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:text="Σύνδεση"
+        android:layout_height="55dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        style="@style/button_orange_filled"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/button_background_orange_16dp"
+        android:stateListAnimator="@null"
+        android:text="Σύνδεση"
+        android:textAppearance="@style/header_1"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/button_register"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button_register"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:text="Εγγραφή"
         style="@style/button_orange_outline"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
+        android:layout_marginBottom="50dp"
+        android:text="Εγγραφή"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

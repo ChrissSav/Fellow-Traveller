@@ -60,7 +60,7 @@ abstract class BaseActivityViewModel<VB : ViewBinding, VM : BaseViewModel>(clazz
                         sharedPrefs[PREFS_AUTH_REFRESH_TOKEN] = null
                         val f = deleteUserAuthLocalUseCase()
                         val df = deleteUserLocalCars()
-                        Log.i("rpjgpoirjgre", "makis")
+                        Log.i("rpjgpoirjgre", "register_fab")
                         startActivityClearStack(MainActivity::class)
                     }
                 }

@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/button"
-    android:layout_width="60dp"
-    android:layout_height="60dp"
-    android:background="@drawable/circle_button_shape"
-    android:padding="17dp"
-    android:rotation="180"
-    android:scaleType="fitXY"
-    android:src="@drawable/ic_back_button"
-    android:tint="@color/white" />
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@null"
+    android:src="@drawable/register_fab_ripple" />

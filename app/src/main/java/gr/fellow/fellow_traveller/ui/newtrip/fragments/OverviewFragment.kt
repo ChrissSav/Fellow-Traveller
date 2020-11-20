@@ -54,7 +54,7 @@ class OverviewFragment : BaseFragment<FragmentOverviewBinding>(), View.OnClickLi
 
 
 
-            ImageButtonNext.setOnClickListener {
+            ImageButtonNext.root.setOnClickListener {
                 viewModel.registerTrip()
             }
 

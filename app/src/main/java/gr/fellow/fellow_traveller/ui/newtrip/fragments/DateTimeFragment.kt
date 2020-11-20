@@ -59,7 +59,7 @@ class DateTimeFragment : BaseFragment<FragmentDateTimeBinding>() {
         }
 
 
-        binding.ImageButtonNext.root.setOnClickListener {
+        binding.ImageButtonNext.button.setOnClickListener {
             if (validateDateTimeDiffer(
                     viewModel.date.value.toString(), viewModel.time.value.toString(), resources.getInteger(R.integer.Time_difference)
                 )

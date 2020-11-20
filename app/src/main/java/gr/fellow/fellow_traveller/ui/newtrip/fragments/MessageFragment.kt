@@ -24,7 +24,7 @@ class MessageFragment : BaseFragment<FragmentMessageBinding>() {
     }
 
     override fun setUpViews() {
-        binding.ImageButtonNext.root.setOnClickListener {
+        binding.ImageButtonNext.button.setOnClickListener {
             viewModel.setMessage(binding.AddMessageFragmentEditText.text.toString().trim())
 
             if (viewModel.message.value != null)

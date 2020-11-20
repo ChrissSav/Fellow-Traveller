@@ -94,13 +94,13 @@
         android:layout_height="54dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="42dp"
-        android:background="@drawable/button_background_radius_16"
+        android:background="@drawable/button_background_orange_16dp"
         android:text="Αναζήτηση"
         android:textAllCaps="false"
+        android:stateListAnimator="@null"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/back_button" />
 
 

@@ -37,6 +37,7 @@ class FellowEditText(context: Context, attrs: AttributeSet) : ConstraintLayout(c
     private var errorMessage = ""
     private var correct = false
     private var passwordIsHide = false
+    private var checkText = false
 
     var text: String? = null
         get() = binding.editText.text.getString()
@@ -114,29 +115,14 @@ class FellowEditText(context: Context, attrs: AttributeSet) : ConstraintLayout(c
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
-            override fun afterTextChanged(p0: Editable?) {
-                val text = p0?.getString() ?: ""
-                if (inputType == InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS) {
-                    if (!isValidEmail(text)) {
-                        Log.i("FellowEditText", "1")
-                        binding.error.text = errorMessage
-                        correct = false
-                    } else {
-                        correct = true
-                        binding.error.text = null
-
-                    }
-                } else if (!isValidRegex(text, regex)) {
-                    Log.i("FellowEditText", "2")
-                    binding.error.text = errorMessage
-                    correct = false
-                } else {
-                    correct = true
-                    binding.error.text = null
-                }
+            override fun afterTextChanged(editable: Editable?) {
+                if (checkText)
+                    checkText()
             }
 
         })
+
+
 
         binding.editText.setOnClickListener {
             try {
@@ -174,11 +160,38 @@ class FellowEditText(context: Context, attrs: AttributeSet) : ConstraintLayout(c
 
     }
 
+    private fun checkText() {
+        val text = binding.editText.text.getString() ?: ""
+        if (checkText)
+            if (inputType == InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS) {
+                if (!isValidEmail(text)) {
+                    Log.i("FellowEditText", "1")
+                    binding.error.text = errorMessage
+                    correct = false
+                } else {
+                    correct = true
+                    binding.error.text = null
+
+                }
+            } else if (!isValidRegex(text, regex)) {
+                Log.i("FellowEditText", "2")
+                binding.error.text = errorMessage
+                correct = false
+            } else {
+                correct = true
+                binding.error.text = null
+            }
+    }
+
     fun addOnClickListener(function: () -> Unit) {
         this.function = function
     }
 
-    fun isCorrect() = correct
+    fun isCorrect(): Boolean {
+        checkText = true
+        checkText()
+        return correct
+    }
 
 
 }

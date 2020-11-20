@@ -12,12 +12,12 @@ import retrofit2.http.Query
 
 interface PlaceApiService {
 
-    @GET("autocomplete/json?components=$components&language=$language&key=$key")
+    @GET("autocomplete/json?components=$components&language=$language&key=$key&types=(cities)")
     suspend fun getPlaces(
         @Query("input") input: String
     ): Response<PlaceApiResponse>
 
-    @GET("details/json?components=$components&language=$language&key=$key")
+    @GET("details/json?components=$components&language=$language&key=$key&types=(cities)")
     suspend fun getPlacesLanLon(
         @Query("placeid") input: String
     ): Response<DetailsResponse>

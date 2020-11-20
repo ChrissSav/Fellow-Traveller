@@ -35,7 +35,7 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
 
         viewModel.error.observe(this, Observer {
             if (it.internal)
-                createAlerter(getString(it.messageId), R.color.blue_color)
+                createAlerter(getString(it.messageId), R.color.green)
             else
                 createAlerter(it.message, R.color.blue_color)
         })

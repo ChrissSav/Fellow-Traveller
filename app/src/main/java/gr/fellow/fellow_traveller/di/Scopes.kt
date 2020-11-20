@@ -10,8 +10,3 @@ annotation class Fellow
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class GoogleService
-
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class RefreshToken

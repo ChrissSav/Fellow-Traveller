@@ -64,7 +64,7 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
 
         with(binding) {
 
-            ImageButtonNext.root.setOnClickListener {
+            ImageButtonNext.button.setOnClickListener {
                 if (checkFields()) {
                     findNavController()?.navigate(R.id.next_fragment)
                 }
