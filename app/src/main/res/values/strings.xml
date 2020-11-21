@@ -34,9 +34,9 @@
     <string name="no_driver_message">Δεν υπάρχει μήνυμα από τον οδηγό.</string>
 
 
-    <string name="set_date">Όρισε την ημερομηνία ... </string>
-    <string name="set_time">Όρισε την ώρα ... </string>
-    <string name="select_car">Διάλεξε αυτοκίνητο ...</string>
+    <string name="set_date">Όρισε την ημερομηνία</string>
+    <string name="set_time">Όρισε την ώρα</string>
+    <string name="select_car">Διάλεξε αυτοκίνητο</string>
 
     <string name="allowed">Επιτρέπονται</string>
     <string name="not_allowed">Δεν επιτρέπονται</string>
@@ -45,7 +45,7 @@
     <string name="without_pet">Χωρίς κατοικίδιο</string>
 
     <string name="yes">Ναι</string>
-    <string name="no">Όχι</string>
+    <string name="no">Οχι</string>
 
     <string name="price">%s €</string>
 
