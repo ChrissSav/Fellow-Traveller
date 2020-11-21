@@ -11,7 +11,8 @@ import gr.fellow.fellow_traveller.domain.AnswerType
 
 class ConfirmBottomSheetDialog(
     private val title: String,
-    private val onItemClickListener: (AnswerType) -> Unit
+    private val listener: (AnswerType) -> Unit,
+    private val red: Int
 ) : BottomSheetDialogFragment() {
 
 
@@ -20,12 +21,23 @@ class ConfirmBottomSheetDialog(
 
         binding.title.text = title
 
+        if (red == 1)
+            context?.resources?.getColor(R.color.red_color)?.let {
+                binding.yes.setTextColor(it)
+            }
+        else
+            context?.resources?.getColor(R.color.red_color)?.let {
+                binding.no.setTextColor(it)
+            }
+
+
         binding.yes.setOnClickListener {
-            onItemClickListener(AnswerType.Yes)
+            listener(AnswerType.Yes)
             dismiss()
         }
+
         binding.no.setOnClickListener {
-            onItemClickListener(AnswerType.No)
+            listener(AnswerType.No)
             dismiss()
         }
         return binding.root.rootView

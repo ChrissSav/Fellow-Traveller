@@ -178,6 +178,7 @@
                     android:background="@drawable/background_rate_radius_16_black"
                     android:gravity="center"
                     android:text="4.6"
+                    style="@style/header_3"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -280,7 +281,7 @@
                 <ImageView
                     android:id="@+id/imageView4"
                     android:layout_width="60dp"
-                    android:layout_height="0dp"
+                    android:layout_height="62dp"
                     android:background="@drawable/background_car_radius_27_orange"
                     android:backgroundTint="@color/black_color"
                     android:padding="16dp"
@@ -291,30 +292,19 @@
                     app:layout_constraintVertical_bias="0.419"
                     app:tint="@color/white" />
 
-                <TextView
-                    android:id="@+id/textView39"
-                    style="@style/paragraph_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Όχημα"
-                    app:layout_constraintStart_toEndOf="@+id/imageView4"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/car"
                     style="@style/paragraph_1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
                     android:text="TextView"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView39"
-                    app:layout_constraintTop_toBottomOf="@+id/textView39" />
+                    app:layout_constraintStart_toEndOf="@+id/imageView4"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

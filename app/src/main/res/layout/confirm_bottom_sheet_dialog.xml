@@ -20,7 +20,7 @@
 
     <TextView
         android:id="@+id/yes"
-        style="@style/input_1"
+        style="@style/header_3"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="35dp"
@@ -33,7 +33,7 @@
 
     <TextView
         android:id="@+id/no"
-        style="@style/input_1"
+        style="@style/header_3"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"

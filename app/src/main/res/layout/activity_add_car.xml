@@ -131,7 +131,6 @@
                     app:layout_constraintStart_toStartOf="@+id/brand"
                     app:layout_constraintTop_toBottomOf="@+id/plate"
                     app:layout_constraintVertical_bias="0.0"
-                    app:max_length_f="8"
                     app:regex_f="@string/regex_min_3_chars" />
 
 

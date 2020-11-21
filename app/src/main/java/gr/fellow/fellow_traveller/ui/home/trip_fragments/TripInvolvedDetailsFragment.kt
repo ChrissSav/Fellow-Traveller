@@ -122,7 +122,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
             binding.delete.setOnClickListener {
                 confirmBottomSheetDialog = ConfirmBottomSheetDialog(
                     if (creator) "Θελείς να διαγράψεις το ταξίδι;" else "Θέλεις να αποχωρήσεις απο το ταξίδι;",
-                    this@TripInvolvedDetailsFragment::onConfirmItemClickListener
+                    this@TripInvolvedDetailsFragment::onConfirmItemClickListener, 1
                 )
                 confirmBottomSheetDialog.show(childFragmentManager, "confirmBottomSheetDialog")
 
