@@ -1,0 +1,169 @@
+<resources>
+    <string name="app_name">fellow.</string>
+    <string name="PLACE_URL">https://maps.googleapis.com/maps/api/place/autocomplete/</string>
+    <string name="PLACE_DETAIL_URL">https://maps.googleapis.com/maps/api/place/details/</string>
+    <string name="PLACE_KEY">AIzaSyBJ8UG-fR3GSjfbfAcatZezGZi2Y8FDzqA</string>
+    <string name="PLACE_LANGUAGE">el</string>
+    <string name="USER_INFO_FILE">user_info.txt</string>
+    <string name="USER_INFO">userAuth</string>
+    <string name="euro_symbol">€</string>
+    <string name="register_fragment_stage_2_choose_password_title">Enter a password</string>
+    <string name="register_fragment_stage_2_password_input_field_title">Password</string>
+    <string name="register_fragment_stage_2_confirm_password_input_field_title">Confirm Password</string>
+    <string name="password_complexity_requirements_description">Password should contain a digit, a lowercase and an uppercase letter, a special character and be at least 8 characters in length.</string>
+    <string name="register_fragment_stage_1_add_email_title">What\'s your e-mail address?</string>
+    <string name="register_fragment_stage_1_email_input_field_title">E-mail address</string>
+    <string name="register_fragment_become_a_fellow_traveller">Become a Fellow \nTraveller</string>
+    <string name="register_fragment_six_digit_code_notice_description">*A 6-digit verification code will be sent to your e-mail address.</string>
+    <string name="account_fragment_about_me">No description available.</string>
+    <string name="change_password_activity_change_password_button_text">Change Password</string>
+    <string name="change_password_activity_old_password_label">Old Password</string>
+    <string name="change_password_activity_new_password_label">New Password</string>
+    <string name="change_password_activity_confirm_new_password_label">Confirm Password</string>
+    <string name="change_password_activity_change_password_button_label">Change Password</string>
+    <string name="PASSWORD_CHANGED_SUCCESSFULLY">Password changed successfully!</string>
+    <string name="EMAIL_PLACEHOLDER">user@example.com</string>
+    <string name="activity_user_settings_account_settings_text_label">Account Settings</string>
+    <string name="success_add">Επιτυχής καταχώρηση!</string>
+    <string name="success_search">Congratulations! You\'re part of the trip.</string>
+    <string name="success_add_review">Your review was submitted!</string>
+
+
+    <string name="title_activity_maps">Map</string>
+    <string name="no_driver_message">The driver of this trip hasn\'t left a message.</string>
+
+
+    <string name="set_date">Departure date … </string>
+    <string name="set_time">Departure time … </string>
+    <string name="select_car">Choose a vehicle …</string>
+
+    <string name="allowed">Allowed</string>
+    <string name="not_allowed">Not Allowed</string>
+
+    <string name="with_pet">Pets</string>
+    <string name="without_pet">No Pets</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="price">%s €</string>
+
+    <!-- Filter Fragment -->
+    <string name="range_text">Range %s km</string>
+    <string name="range_text_price" formatted="false">Max %s €</string>
+    <string name="range_text_in_filters" formatted="false">%s ~ %s </string>
+    <string name="range_view_all">Show all</string>
+
+    <string name="have_pet">I have a pet</string>
+    <string name="have_not_pet">I don\'t have a pet</string>
+
+    <string name="not_selected_filters">You haven\'t selected any filter.</string>
+    <string name="trip_found">%s Αποτελέσματα</string>
+
+
+    <string name="messenger_link">https://m.me/%s</string>
+
+    <string name="show_password">Show</string>
+    <string name="hide_password">Hide</string>
+
+
+    <!--New Trip-->
+
+    <string name="email_verify" formatted="false">We sent you a verification e-mail at \n&lt;b&gt;%s&lt;/b></string>
+
+    <!--Fragment destinations-->
+
+    <string name="fragment_destinations_header">Enter starting point and destination</string>
+    <string name="select_destination_from">Starting point</string>
+    <string name="select_destination_to">Destination</string>
+
+
+    <!--Fragment PickUp point-->
+
+    <string name="fragment_pick_up_header">What is your departure point?</string>
+    <string name="select_destination_pick_up">Departure point</string>
+
+    <!--Fragment PickUp point-->
+
+    <string name="fragment_date_time_header">When will the trip take place?</string>
+    <string name="select_day">Date</string>
+    <string name="select_time">Time</string>
+
+    <!--Fragment fragment_base_info -->
+
+    <string name="fragment_base_info_header">Enter trip details</string>
+
+    <!--Fragment fragment_price -->
+    <string name="fragment_price_overview">%s x %s €</string>
+
+
+    <!--Fragment fragment trip involved details -->
+    <string name="trip_involved_description">Trip status:  &lt;b&gt;%s&lt;/b></string>
+
+    <!--Car -->
+    <string name="brand">Make</string>
+    <string name="model">Model</string>
+    <string name="plate">Number Plate</string>
+    <string name="color">Color</string>
+    <string name="car_delete_confirmation_message">Delete vehicle with number plate « %s »?</string>
+
+    <string name="regex_min_3_chars_english">^[a–zA–Z0–9]{3,}$</string>
+    <string name="regex_min_3_chars">^.{3,}$</string>
+    <string name="regex_accept_all">^.{0,50}$</string>
+    <string name="regex_car_plate">^[ΑΒΕΖΗΙΚΜΝΟΡΤΥΧ]{3}–[0–9]{4}$</string>
+
+    <!--Car -->
+
+    <string name="notification_to_rate">Leave a rating for user &lt;b&gt;%s&lt;/b&gt;</string>
+    <string name="notification_delete_trip">User &lt;b&gt;%s&lt;/b&gt; deleted a trip which you were part of.</string>
+    <string name="notification_passenger_enter">User &lt;b&gt;%s&lt;/b&gt; became part of your trip.</string>
+    <string name="notification_passenger_exit">User &lt;b&gt;%s&lt;/b&gt; left your trip.</string>
+    <string name="ERROR_API_UNREACHABLE">Unable to connect with the API.</string>
+    <string name="ERROR_API_UNAUTHORIZED">Unauthorized action.</string>
+    <string name="ERROR_SOMETHING_WRONG">Oops! An error occurred. *_*</string>
+    <string name="ERROR_FIELDS_REQUIRE">Empty fields.</string>
+    <string name="ERROR_INVALID_EMAIL_FORMAT">Invalid e-mail address.</string>
+    <string name="ERROR_PASSWORD_COMPLEXITY_INVALID">Invalid password.</string>
+    <string name="ERROR_PASSWORD_DOES_NOT_MEET_COMPLEXITY_REQUIREMENTS">Password doesn\'t meet complexity requirements.</string>
+    <string name="ERROR_PASSWORD_DO_NOT_MATCH">Passwords do not match.</string>
+    <string name="ERROR_EMAIL_ALREADY_EXISTS">An account with this e-mail already exists.</string>
+    <string name="ERROR_PHONE_ALREADY_EXISTS">An account with this phone number already exists.</string>
+    <string name="ERROR_INVALID_CREDENTIALS">Invalid e-mail / password.</string>
+    <string name="ERROR_PASSWORD_CHANGE_INVALID_CURRENT_PASSWORD">Invalid current password.</string>
+    <string name="ERROR_OLD_PASSWORD_CANNOT_BE_SAME_AS_NEW_PASSWORD">New password cannot be the same with old password.</string>
+    <string name="ERROR_PASSWORD_COMPLEXITY_SHOULD_CONTAIN">Password should have:</string>
+    <string name="ERROR_PASSWORD_COMPLEXITY_LENGTH">• a minimum length of at least 8 characters</string>
+    <string name="ERROR_PASSWORD_COMPLEXITY_LOWERCASE_LETTER">• a lowercase letter</string>
+    <string name="ERROR_PASSWORD_COMPLEXITY_UPPERCASE_LETTER">• an uppercase letter</string>
+    <string name="ERROR_PASSWORD_COMPLEXITY_DIGIT">• a digit</string>
+    <string name="ERROR_PASSWORD_COMPLEXITY_SPECIAL_CHARACTER">• a special character</string>
+    <string name="ERROR_INTERNET_CONNECTION">No Internet Connection</string>
+    <string name="INVALID_PHONE_FORMAT">Invalid phone number.</string>
+    <string name="CONFIRM_DELETION">Are you sure you want to delete?</string>
+    <string name="ERROR_INVALID_PLATE_FORMAT">The number plate should be of the format XYZ-1234 in Greek.</string>
+    <string name="ERROR_PLATE_ALREADY_EXISTS">A vehicle with this number plate already exists.</string>
+    <string name="ERROR_REQUIRED_FIELD">Required field.</string>
+    <string name="ERROR_TIME_DATE_VALIDATION">Invalid date.</string>
+    <string name="ERROR_CAR_NOT_BELONG_TO_USER">The selected vehicle doesn\'t belong to you.</string>
+    <string name="ERROR_TRIP_NOT_FOUND">Trip doesn\'t exist or is inactive.</string>
+    <string name="ERROR_TRIP_USER_ALREADY_PASSENGER">You\'re already a passenger on this trip.</string>
+    <string name="ERROR_TRIP_USER_IS_CREATOR">You are the creator of the trip.</string>
+    <string name="ERROR_TRIP_NOT_AVAILABLE_SEATS">No available seats.</string>
+    <string name="ERROR_TRIP_NOT_AVAILABLE_LUGGAGE">Luggage space not available.</string>
+    <string name="ERROR_TRIP_CHECK_PET_ACCEPTS">Check if the trip allows for pets.</string>
+    <string name="ERROR_TRIP_TIMESTAMP">The departure time should be at least 15 min. ahead of the present.</string>
+    <string name="ERROR_TRIP_PICKUP_POINT">The metting location should be in 5 km range of the departure point.</string>
+    <string name="ERROR_REVIEW_YOURSELF">You cannot rate yourself.</string>
+    <string name="ERROR_REVIEW_USER_TARGET_NOT_FOUND">User not found!</string>
+    <string name="ERROR_REVIEW_CANT_REGISTER_THE_REVIEW">You have already rated this user.</string>
+    <string name="ERROR_TRIP_USER_NOT_PASSENGER">You are not a part of this trip.</string>
+    <string name="ERROR_TRIP_QRCODE_EARLY">It is too early for scanning.</string>
+    <string name="ERROR_TRIP_QRCODE_WRONG">Invalid QR Code.</string>
+    <string name="ERROR_SELECT_CAR">Select a vehicle.</string>
+    <string name="ERROR_SELECT_DEST_FROM">Enter starting point.</string>
+    <string name="ERROR_SELECT_DEST_TO">Enter destination.</string>
+    <string name="ERROR_SELECT_PET">Choose wheter this trip allows pets.</string>
+    <string name="ERROR_SELECT_SEAT">"Provide the available luggage space. "</string>
+    <string name="check_field">Check the field.</string>
+
+</resources>
