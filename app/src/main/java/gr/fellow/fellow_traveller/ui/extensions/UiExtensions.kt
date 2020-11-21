@@ -80,9 +80,11 @@ fun Activity.startActivityWithBundle(activity: KClass<out Activity>, bundle: Bun
     startActivity(intent)
 }
 
-fun Activity.startActivityWithFade(activity: KClass<out Activity>, bundle: Bundle) {
+fun Activity.startActivityWithFade(activity: KClass<out Activity>, bundle: Bundle?) {
     val intent = Intent(this, activity.java)
-    intent.putExtras(bundle)
+    bundle?.let {
+        intent.putExtras(it)
+    }
     startActivity(intent)
     overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
 }

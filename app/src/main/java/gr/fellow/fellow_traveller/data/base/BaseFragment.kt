@@ -37,7 +37,11 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(view)
+        try {
+            navController = Navigation.findNavController(view)
+
+        } catch (e: Exception) {
+        }
         setUpViews()
         setUpObservers()
     }

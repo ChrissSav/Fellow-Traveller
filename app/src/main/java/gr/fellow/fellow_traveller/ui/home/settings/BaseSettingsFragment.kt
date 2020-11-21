@@ -6,11 +6,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentBaseSettingsBinding
-import gr.fellow.fellow_traveller.ui.extensions.findNavController
-import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
-import gr.fellow.fellow_traveller.ui.extensions.navigateWithAnimation
-import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
+import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
+import gr.fellow.fellow_traveller.ui.home.messenger.MessengerLinkActivity
 
 @AndroidEntryPoint
 class BaseSettingsFragment : BaseFragment<FragmentBaseSettingsBinding>() {
@@ -36,6 +34,10 @@ class BaseSettingsFragment : BaseFragment<FragmentBaseSettingsBinding>() {
     override fun setUpViews() {
         binding.backButton.setOnClickListener {
             onBackPressed()
+        }
+
+        binding.writeReview.setOnClickListener {
+            activity?.startActivityWithFade(MessengerLinkActivity::class, null)
         }
 
         binding.personalInfo.setOnClickListener {

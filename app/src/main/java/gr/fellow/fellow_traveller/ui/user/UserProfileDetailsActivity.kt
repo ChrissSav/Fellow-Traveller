@@ -40,8 +40,12 @@ class UserProfileDetailsActivity : BaseActivityViewModel<ActivityUserInfoDetails
                 offers.text = user.tripsOffers.toString()
                 this@UserProfileDetailsActivity.messengerLink = user.messengerLink
                 if (!user.aboutMe.isNullOrEmpty())
-                    aboutMe.setText(user.aboutMe)
+                    aboutMe.text = user.aboutMe
+                constraintLayout.visibility = View.VISIBLE
+                binding.error.visibility = View.INVISIBLE
             }
+
+
         })
 
         viewModel.load.observe(this, Observer {
@@ -53,6 +57,7 @@ class UserProfileDetailsActivity : BaseActivityViewModel<ActivityUserInfoDetails
         })
 
         viewModel.error.observe(this, Observer {
+            binding.error.visibility = View.VISIBLE
             if (it.internal)
                 createAlerter(getString(it.messageId))
             else

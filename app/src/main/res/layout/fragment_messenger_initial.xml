@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.messenger.fragments.MessengerInitialFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="@dimen/messenger_percent"
+        android:orientation="horizontal" />
+
+
+    <View
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/messenger_view_height"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/orange_new"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline6" />
+
+    <TextView
+        android:id="@+id/textView33"
+        style="@style/display_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="@dimen/messenger_title_top_margin"
+        android:layout_marginEnd="16dp"
+        android:text="Ανοίξτε την εφαργμογή του messenger"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline6" />
+
+    <TextView
+        android:id="@+id/textView41"
+        style="@style/paragraph_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/messenger_des_top_margin"
+        android:text="Το messenger είναι το μέσο με το οποίο θα μπορέσεις να λυσεις και να εκφρασεις τυχον αποριες σου."
+        app:layout_constraintEnd_toEndOf="@+id/textView33"
+        app:layout_constraintStart_toStartOf="@+id/textView33"
+        app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
