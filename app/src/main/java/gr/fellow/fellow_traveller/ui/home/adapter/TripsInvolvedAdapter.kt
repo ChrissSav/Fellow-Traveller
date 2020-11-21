@@ -28,8 +28,8 @@ class TripsInvolvedAdapter(
             val currentTrip = currentList[position]
             binding.background.background = ContextCompat.getDrawable(binding.background.context, drawable)
             //= binding.background.context.resources.getColorStateList(color)
-            binding.from.text = currentTrip.destFrom.title.split(",").last().trim()
-            binding.to.text = currentTrip.destTo.title.split(",").last().trim()
+            binding.from.text = currentTrip.destFrom.title
+            binding.to.text = currentTrip.destTo.title
             binding.name.text = currentTrip.creatorUser.fullName
             binding.date.text = currentTrip.date
             binding.time.text = currentTrip.time

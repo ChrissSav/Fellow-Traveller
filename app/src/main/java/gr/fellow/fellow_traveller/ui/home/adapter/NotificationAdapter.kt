@@ -57,7 +57,7 @@ class NotificationAdapter(
 
             binding.time.text = time(item.timestamp)
 
-            binding.trip.text = "${item.trip.destinationFrom.split(",").last().trim()} - ${item.trip.destinationTo.split(",").last().trim()}"
+            binding.trip.text = "${item.trip.destinationFrom} - ${item.trip.destinationTo}"
 
             binding.root.setOnClickListener {
                 onItemClickListener.invoke(item)

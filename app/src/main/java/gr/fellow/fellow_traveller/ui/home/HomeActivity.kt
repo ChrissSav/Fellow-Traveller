@@ -49,6 +49,11 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
             }
         })
 
+
+        viewModel.notifications.observe(this, Observer { notifications ->
+            setUpNotifications(notifications.filter { !it.isRead }.size)
+        })
+
         viewModel.load.observe(this, Observer {
             if (it)
                 binding.genericLoader.progressLoad.visibility = View.VISIBLE
@@ -76,6 +81,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
         viewModel.loadCars()
         viewModel.loadTripsAsCreator()
         viewModel.loadTripsAsPassenger()
+        viewModel.loadNotifications()
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_container)
 
@@ -184,6 +190,18 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
             currentCheck = binding.home
             previousCheck = binding.home
         }
+    }
+
+
+    private fun setUpNotifications(num: Int) {
+
+        if (num < 1) {
+            binding.notificationCount.visibility = View.INVISIBLE
+        } else {
+            binding.notificationCount.text = num.toString()
+            binding.notificationCount.visibility = View.VISIBLE
+        }
+
     }
 
     override fun onClick(view: View?) {
