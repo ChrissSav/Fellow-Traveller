@@ -36,7 +36,13 @@ data class TripInvolved(
         get() = getTimeFromTimestamp(timestamp)
 
 
-    val seatsStatus
-        get() = "${passengers.size}/${seats}"
+    val seatsStatus: String
+        get() {
+            var current = 0
+            passengers.forEach {
+                current += it.seats
+            }
+            return "${current}/${seats}"
+        }
 
 }
