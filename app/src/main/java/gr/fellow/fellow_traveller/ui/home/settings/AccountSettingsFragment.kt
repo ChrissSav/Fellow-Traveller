@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.ui.home.settings
 
-import android.app.Activity.CONNECTIVITY_SERVICE
 import android.app.Activity.RESULT_OK
 import android.content.ContentResolver
 import android.content.Context
@@ -82,7 +81,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
         binding.saveButton.setOnClickListener {
 
 
-            if (binding.lastName.isCorrect() && binding.firstName.isCorrect()) {
+            if (binding.lastName.isCorrect() and binding.firstName.isCorrect()) {
                 val firstName = binding.firstName.text.toString()
                 val lastName = binding.lastName.text.toString()
                 viewModel.updateAccountInfo(firstName, lastName, binding.aboutMe.text)

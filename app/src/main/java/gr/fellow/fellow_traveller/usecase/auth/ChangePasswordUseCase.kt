@@ -6,8 +6,8 @@ import gr.fellow.fellow_traveller.framework.network.fellow.user.UpdatePasswordRe
 class ChangePasswordUseCase(
     private val dataSource: FellowDataSource
 ) {
-    suspend operator fun invoke(password: String) =
-        dataSource.changePassword(UpdatePasswordRequest(password, password))
+    suspend operator fun invoke(prevPassword: String, newPassword: String) =
+        dataSource.changePassword(UpdatePasswordRequest(prevPassword, newPassword, newPassword))
 
 
 }

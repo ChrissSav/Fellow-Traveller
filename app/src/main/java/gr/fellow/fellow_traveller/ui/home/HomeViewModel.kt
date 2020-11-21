@@ -146,9 +146,9 @@ constructor(
     }
 
 
-    fun changePassword(password: String) {
+    fun changePassword(prevPassword: String, password: String) {
         launch(true) {
-            val response = changePasswordUseCase(password)
+            val response = changePasswordUseCase(prevPassword, password)
             _changePassword.value = true
         }
     }

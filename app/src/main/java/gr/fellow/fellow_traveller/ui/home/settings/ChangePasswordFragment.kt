@@ -41,11 +41,11 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
         binding.buttonNext.setOnClickListener {
 
             hideKeyboard()
-            if (binding.password.isCorrect() && binding.passwordConfirm.isCorrect()) {
+            if (binding.previousPassword.isCorrect() and binding.password.isCorrect() and binding.passwordConfirm.isCorrect()) {
                 val pass = binding.password.text.toString()
                 val passConfirm = binding.passwordConfirm.text.toString()
                 if (pass == passConfirm) {
-                    viewModel.changePassword(pass)
+                    viewModel.changePassword(binding.previousPassword.text.toString(), pass)
                 } else {
                     createAlerter(resources.getString(R.string.ERROR_PASSWORD_DO_NOT_MATCH))
                 }

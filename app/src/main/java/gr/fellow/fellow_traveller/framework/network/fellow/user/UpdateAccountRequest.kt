@@ -17,6 +17,7 @@ data class UpdateMessengerRequest(
 
 
 data class UpdatePasswordRequest(
+    val previousPassword: String,
     val password: String,
     val repeatPassword: String
 )

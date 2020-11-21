@@ -35,7 +35,7 @@ class AccountInfoFragment : BaseFragment<FragmentAccountInfoBinding>() {
     override fun setUpViews() {
 
         binding.ImageButtonNext.button.setOnClickListener {
-            if (binding.firstName.isCorrect() && binding.lastName.isCorrect()) {
+            if (binding.firstName.isCorrect() and binding.lastName.isCorrect()) {
                 viewModel.storeUserInfo(binding.firstName.text.toString(), binding.lastName.text.toString())
                 viewModel.registerUser()
             }

@@ -35,7 +35,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
         binding.buttonLogin.setOnClickListener {
             hideKeyboard()
-            if (binding.email.isCorrect() && binding.password.isCorrect()) {
+            if (binding.email.isCorrect() and binding.password.isCorrect()) {
                 viewModel.login(binding.email.text.toString(), binding.password.text.toString())
             }
 

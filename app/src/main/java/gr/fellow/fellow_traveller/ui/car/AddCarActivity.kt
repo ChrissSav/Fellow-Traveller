@@ -48,12 +48,12 @@ class AddCarActivity : BaseActivityViewModel<ActivityAddCarBinding, AddCarViewMo
             }
 
             addCar.setOnClickListener {
-                val brandT = brand.text.toString()
-                val modelT = model.text.toString()
-                val plateT = plate.text.toString()
-                val colorT = color.text.toString()
 
-                if (brand.isCorrect() && model.isCorrect() && plate.isCorrect() && color.isCorrect()) {
+                if (brand.isCorrect() and model.isCorrect() and plate.isCorrect() and color.isCorrect()) {
+                    val brandT = brand.text.toString()
+                    val modelT = model.text.toString()
+                    val plateT = plate.text.toString()
+                    val colorT = color.text.toString()
                     viewModel.addCar(brandT, modelT, plateT, colorT)
                 }
             }

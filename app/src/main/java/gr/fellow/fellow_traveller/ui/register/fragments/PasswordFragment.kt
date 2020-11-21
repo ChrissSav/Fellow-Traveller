@@ -33,7 +33,7 @@ class PasswordFragment : BaseFragment<FragmentPasswordBinding>() {
 
         binding.ImageButtonNext.button.setOnClickListener {
             hideKeyboard()
-            if (binding.password.isCorrect() && binding.passwordConfirm.isCorrect()) {
+            if (binding.password.isCorrect() and binding.passwordConfirm.isCorrect()) {
                 val pass = binding.password.text.toString()
                 val passConfirm = binding.passwordConfirm.text.toString()
                 if (pass == passConfirm) {
