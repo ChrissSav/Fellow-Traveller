@@ -286,12 +286,14 @@ constructor(
 
     fun readNotification(notification: Notification) {
         launchWithLiveData(false, loadNotifications) {
-            updateNotificationsUseCase(notification.id)
-            notification.isRead = true
-            val temp = _notifications.value ?: mutableListOf()
-            val index = temp.indexOf(notification)
-            temp[index] = notification
-            _notifications.value = temp
+            if (!notification.isRead) {
+                updateNotificationsUseCase(notification.id)
+                notification.isRead = true
+                val temp = _notifications.value ?: mutableListOf()
+                val index = temp.indexOf(notification)
+                temp[index] = notification
+                _notifications.value = temp
+            }
             _notification.value = notification
         }
     }
