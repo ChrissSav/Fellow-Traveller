@@ -28,7 +28,7 @@ class RateAdapter(
             binding.username.text = currentItem.user.fullName
             binding.rate.text = currentItem.rate.toInt().toString()
             binding.root.setOnClickListener {
-                listener.invoke(currentItem.user)
+                listener.invoke(currentItem)
             }
         }
     }
