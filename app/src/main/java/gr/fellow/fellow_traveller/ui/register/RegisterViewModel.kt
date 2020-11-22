@@ -50,7 +50,7 @@ constructor(
             val firstName = userInfo.value?.first.toString()
             val lastName = userInfo.value?.second.toString()
 
-            val response = registerUserUseCase(firstName, lastName, email.value.toString(), password.value.toString())
+            registerUserUseCase(firstName, lastName, email.value.toString(), password.value.toString())
             _finish.value = true
 
         }

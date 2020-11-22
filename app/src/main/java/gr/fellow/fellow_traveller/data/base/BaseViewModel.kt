@@ -53,6 +53,7 @@ open class BaseViewModel : ViewModel() {
         error.value = internalError(errorMsg)
     }
 
+
     private fun handleError(e: Exception) {
         e.printStackTrace()
         when (e) {

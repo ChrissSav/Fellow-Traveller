@@ -53,6 +53,10 @@ class BaseSettingsFragment : BaseFragment<FragmentBaseSettingsBinding>() {
             findNavController()?.navigate(R.id.action_baseSettingsFragment_to_userCarsFragment)
         }
 
+        binding.messenger.setOnClickListener {
+            findNavController()?.navigate(R.id.action_baseSettingsFragment_to_homeMessengerFragment)
+        }
+
         binding.logout.setOnClickListener {
             viewModel.logOut()
         }

@@ -45,9 +45,9 @@ constructor(
     private val getNotificationsUseCase: GetNotificationsUseCase,
     private val updateNotificationsUseCase: UpdateNotificationsUseCase,
     // UpdateInfo
-
     private val getUserInfoRemoteUseCase: GetUserInfoRemoteUseCase,
-    private val registerUserLocalUseCase: RegisterUserLocalUseCase
+    private val registerUserLocalUseCase: RegisterUserLocalUseCase,
+    private val updateUserMessengerUseCase: UpdateUserMessengerUseCase
 ) : BaseViewModel() {
 
 
@@ -148,10 +148,18 @@ constructor(
 
     fun changePassword(prevPassword: String, password: String) {
         launch(true) {
-            val response = changePasswordUseCase(prevPassword, password)
+            changePasswordUseCase(prevPassword, password)
             _changePassword.value = true
         }
     }
+
+    fun changeMessenger(messenger: String) {
+        launch(true) {
+            updateUserMessengerUseCase(messenger)
+            updateUserInfo()
+        }
+    }
+
 
     /** CARS ***/
 

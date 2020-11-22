@@ -139,12 +139,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/help"
+                android:id="@+id/messenger"
                 style="@style/settings_text_with_padding"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
-                android:text="Βοήθεια"
+                android:text="Messenger"
                 app:layout_constraintEnd_toEndOf="@+id/write_review"
                 app:layout_constraintStart_toStartOf="@+id/write_review"
                 app:layout_constraintTop_toBottomOf="@+id/write_review" />
@@ -156,9 +156,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
                 android:text="Όροι χρήσης"
-                app:layout_constraintEnd_toEndOf="@+id/help"
-                app:layout_constraintStart_toStartOf="@+id/help"
-                app:layout_constraintTop_toBottomOf="@+id/help" />
+                app:layout_constraintEnd_toEndOf="@+id/messenger"
+                app:layout_constraintStart_toStartOf="@+id/messenger"
+                app:layout_constraintTop_toBottomOf="@+id/messenger" />
 
             <TextView
                 android:id="@+id/privacy_Policy"

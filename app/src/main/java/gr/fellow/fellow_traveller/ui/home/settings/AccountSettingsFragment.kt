@@ -52,7 +52,14 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                 lastName.text = it.lastName
                 email.text = it.email
                 aboutMe.text = it.aboutMe
+
+                picture.clearFocus()
+                firstName.clearFocus()
+                lastName.clearFocus()
+                email.clearFocus()
+                aboutMe.clearFocus()
             }
+
 
         })
 

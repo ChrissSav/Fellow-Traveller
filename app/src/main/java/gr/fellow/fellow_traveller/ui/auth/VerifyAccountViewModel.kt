@@ -21,7 +21,7 @@ constructor(
     fun verify(token: String) {
         launch(true) {
             delay(500)
-            val response = verifyAccountUseCase(token)
+            verifyAccountUseCase(token)
             _success.value = true
 
         }

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.home.messenger.fragments.HomeMessengerFragment">
+
+
+    <ImageButton
+        android:id="@+id/back"
+        style="@style/border_icon_button"
+        android:layout_width="@dimen/back_button_width_height"
+        android:layout_height="@dimen/back_button_width_height"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_back_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textView43"
+        style="@style/display_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Messenger"
+        app:layout_constraintStart_toStartOf="@+id/back"
+        app:layout_constraintTop_toBottomOf="@+id/back" />
+
+
+    <TextView
+        android:id="@+id/trip"
+        style="@style/paragraph_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/background_border_stroke_12dp"
+        android:drawablePadding="16dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Οδηγός βοηθείας"
+        app:drawableStartCompat="@drawable/ic_messages"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/messenger_link" />
+
+    <TextView
+        android:id="@+id/textView42"
+        style="@style/paragraph_3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:text="Αν δεν μπορειτε να βρείτε τον σύνδεσμο του λογαριασμού σας στο messenger, δείτε τον οδηγό βοηθείας."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/trip"
+        app:layout_constraintTop_toBottomOf="@+id/trip" />
+
+
+    <TextView
+        android:id="@+id/textView44"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp"
+        style="@style/label_1"
+        android:text="Λογαριασμός messenger"
+        app:layout_constraintStart_toStartOf="@+id/textView43"
+        app:layout_constraintTop_toBottomOf="@+id/textView43" />
+
+    <TextView
+        android:id="@+id/textView45"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="m.me/"
+        style="@style/input_1"
+        android:textColor="@color/dark_gray_new"
+        app:layout_constraintStart_toStartOf="@+id/textView44"
+        app:layout_constraintTop_toBottomOf="@+id/textView44" />
+
+    <EditText
+        android:id="@+id/messenger_link"
+        style="@style/input_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:inputType="text"
+        android:singleLine="true"
+        android:hint="example"
+        android:textColorHint="@color/dark_gray_new"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView45"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView45" />
+
+
+    <ImageButton
+        android:id="@+id/save"
+        android:layout_width="@dimen/new_trip_float_action_button_width_height"
+        android:layout_height="@dimen/new_trip_float_action_button_width_height"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="@dimen/new_trip_float_action_button_margin_bottom"
+        android:background="@drawable/circle_button_shape"
+        android:padding="18dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
