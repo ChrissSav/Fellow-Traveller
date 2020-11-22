@@ -11,6 +11,7 @@ import gr.fellow.fellow_traveller.framework.network.fellow.car.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.notification.NotificationResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.notification.UpdateNotification
 import gr.fellow.fellow_traveller.framework.network.fellow.review.RegisterReviewRequest
+import gr.fellow.fellow_traveller.framework.network.fellow.review.ReviewResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.BookTripRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripCreateRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripInvolvedResponse
@@ -183,6 +184,11 @@ class FellowRepositoryImpl(
     override suspend fun checkReview(targetId: String): Boolean =
         networkCall {
             service.checkReview(targetId).handleApiFormat()
+        }
+
+    override suspend fun getUserReviews(targetId: String): MutableList<ReviewResponse> =
+        networkCall {
+            service.getUserReviews(targetId).handleApiFormat()
         }
 
 

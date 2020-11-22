@@ -17,6 +17,7 @@ import gr.fellow.fellow_traveller.usecase.register.CheckUserEmailUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserUseCase
 import gr.fellow.fellow_traveller.usecase.review.CheckReviewUseCase
+import gr.fellow.fellow_traveller.usecase.review.GetUserReviewsUseCase
 import gr.fellow.fellow_traveller.usecase.review.RegisterReviewUseCase
 import gr.fellow.fellow_traveller.usecase.trips.*
 import gr.fellow.fellow_traveller.usecase.user.GetUserInfoByIdUseCase
@@ -27,6 +28,11 @@ import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
 @Module
 class UseCasesModule {
 
+    @ActivityScoped
+    @Provides
+    fun provideGetUserReviewsUseCase(dataSource: FellowDataSource): GetUserReviewsUseCase {
+        return GetUserReviewsUseCase(dataSource)
+    }
 
 
     @ActivityScoped

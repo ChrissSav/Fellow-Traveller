@@ -5,6 +5,7 @@ import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.mappers.*
 import gr.fellow.fellow_traveller.domain.notification.Notification
+import gr.fellow.fellow_traveller.domain.review.Review
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.domain.user.LocalUser
@@ -128,6 +129,9 @@ class FellowDataSourceImpl(
 
     override suspend fun checkReview(targetId: String): Boolean =
         repository.checkReview(targetId)
+
+    override suspend fun getUserReviews(targetId: String): MutableList<Review> =
+        repository.getUserReviews(targetId).map { it.mapReview() }.toMutableList()
 
 
     /**
