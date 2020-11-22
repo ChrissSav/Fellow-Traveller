@@ -1,22 +1,17 @@
 package gr.fellow.fellow_traveller.ui.user
 
-import android.content.Intent
-import android.net.Uri
 import android.view.View
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
-import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivityViewModel
 import gr.fellow.fellow_traveller.databinding.ActivityUserInfoDetailsBinding
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
-import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 
 @AndroidEntryPoint
 class UserProfileDetailsActivity : BaseActivityViewModel<ActivityUserInfoDetailsBinding, UserInfoDetailsViewModel>(UserInfoDetailsViewModel::class.java) {
 
-    private var messengerLink: String? = null
 
-    private var userId: String? = null
+   private var userId: String? = null
 
     override fun handleIntent() {
         userId = intent.getStringExtra("userId")
@@ -26,28 +21,6 @@ class UserProfileDetailsActivity : BaseActivityViewModel<ActivityUserInfoDetails
         ActivityUserInfoDetailsBinding.inflate(layoutInflater)
 
     override fun setUpObservers() {
-
-
-        viewModel.user.observe(this, Observer { user ->
-            with(binding) {
-                if (user.messengerLink.isNullOrEmpty())
-                    messengerLink.visibility = View.INVISIBLE
-                userImage.loadImageFromUrl(user.picture)
-                userName.text = user.fullName
-                reviews.text = user.reviews.toString()
-                rate.text = user.rate.toString()
-                involved.text = user.tripsInvolved.toString()
-                offers.text = user.tripsOffers.toString()
-                this@UserProfileDetailsActivity.messengerLink = user.messengerLink
-                if (!user.aboutMe.isNullOrEmpty())
-                    aboutMe.text = user.aboutMe
-                constraintLayout.visibility = View.VISIBLE
-                binding.error.visibility = View.INVISIBLE
-            }
-
-
-        })
-
         viewModel.load.observe(this, Observer {
             if (it)
                 binding.genericLoader.progressLoad.visibility = View.VISIBLE
@@ -57,13 +30,11 @@ class UserProfileDetailsActivity : BaseActivityViewModel<ActivityUserInfoDetails
         })
 
         viewModel.error.observe(this, Observer {
-            binding.error.visibility = View.VISIBLE
             if (it.internal)
                 createAlerter(getString(it.messageId))
             else
                 createAlerter(it.message)
         })
-
     }
 
     override fun setUpViews() {
@@ -71,22 +42,10 @@ class UserProfileDetailsActivity : BaseActivityViewModel<ActivityUserInfoDetails
         if (userId == null) {
             finish()
         } else {
-            viewModel.loadUserInfo(userId.toString())
+            viewModel.setUserId(userId.toString())
+            viewModel.loadUserInfo()
         }
 
-
-        binding.backButton.setOnClickListener {
-            finish()
-        }
-
-        binding.messengerLink.setOnClickListener {
-            messengerLink?.let {
-                val uriUrl: Uri = Uri.parse(getString(R.string.messenger_link, it))
-                val launchBrowser = Intent(Intent.ACTION_VIEW, uriUrl)
-                startActivity(launchBrowser)
-            }
-
-        }
     }
 
 

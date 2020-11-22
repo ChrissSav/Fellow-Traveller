@@ -30,6 +30,13 @@ fun getDateFromTimestamp(timestamp: Long): String {
     return DateFormat.format("EEE, d MMM", calendar).toString()
 }
 
+
+fun getDateFromTimestamp(timestamp: Long, format: String): String {
+    val calendar = Calendar.getInstance(Locale.ENGLISH)
+    calendar.timeInMillis = timestamp * 1000L
+    return DateFormat.format(format, calendar).toString()
+}
+
 fun getTimeFromTimestamp(timestamp: Long): String {
     val calendar = Calendar.getInstance(Locale.ENGLISH)
     calendar.timeInMillis = timestamp * 1000L

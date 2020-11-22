@@ -8,10 +8,9 @@ import gr.fellow.fellow_traveller.domain.review.Review
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 
 
-class RateAdapter(
-    private val reviewList: MutableList<Review>,
-    private val listener: (Review) -> Unit
-) : RecyclerView.Adapter<RateAdapter.ViewHolder>() {
+class ReviewsAdapter(
+    private val reviewList: MutableList<Review>
+) : RecyclerView.Adapter<ReviewsAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,9 +26,7 @@ class RateAdapter(
             binding.picture.loadImageFromUrl(currentItem.user.picture)
             binding.username.text = currentItem.user.fullName
             binding.rate.text = currentItem.rate.toInt().toString()
-            binding.root.setOnClickListener {
-                listener.invoke(currentItem)
-            }
+
         }
     }
 
