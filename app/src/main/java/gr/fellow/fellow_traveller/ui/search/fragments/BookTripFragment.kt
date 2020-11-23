@@ -96,12 +96,7 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
             }
 
             book.setOnClickListener {
-                if (pet.text.isNullOrEmpty()) {
-                    createAlerter("Παρακαλώ επιλέξτε συνοδεία κατοικιδίου")
-                } else {
-                    val yes = getString(R.string.yes)
                     viewModel.bookTrip(currentTrip.id, binding.seats.currentNum, havePet)
-                }
             }
 
            /*
