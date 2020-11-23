@@ -164,13 +164,13 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
     @SuppressLint("UseCompatLoadingForColorStateLists")
     private fun setButtonUnCheck() {
         previousCheck?.setColorFilter(ContextCompat.getColor(this, R.color.black), android.graphics.PorterDuff.Mode.SRC_IN)
-        previousCheck?.backgroundTintList = resources.getColorStateList(R.color.white)
+        previousCheck?.backgroundTintList = resources.getColorStateList(R.color.white, null)
     }
 
     @SuppressLint("UseCompatLoadingForColorStateLists")
     private fun setButtonCheck() {
         currentCheck?.setColorFilter(ContextCompat.getColor(this, R.color.white), android.graphics.PorterDuff.Mode.SRC_IN)
-        currentCheck?.backgroundTintList = resources.getColorStateList(R.color.black)
+        currentCheck?.backgroundTintList = resources.getColorStateList(R.color.black, null)
     }
 
     private fun showHideBottomNav(targetHeight: Int) {

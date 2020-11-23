@@ -182,7 +182,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                 binding.progressBar.visibility = View.GONE
             }
                 .addOnProgressListener { taskSnapshot -> //We get progress from uploading the image file
-                    val progress = 100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount
+//                    val progress = 100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount
                     // TODO add progress bar
                     //imageProgressBar.setProgress(progress.toInt())
 

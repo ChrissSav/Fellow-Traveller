@@ -76,7 +76,7 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
                         }
                     }
                 } else {
-                    petsSwitch.setOnCheckedChangeListener { _, b ->
+                    petsSwitch.setOnCheckedChangeListener { _, _ ->
                         createToast("Ο οδηγός δεν επιτρέπει κατοικίδιο")
                         havePet = false
                         petsSwitch.isChecked = false

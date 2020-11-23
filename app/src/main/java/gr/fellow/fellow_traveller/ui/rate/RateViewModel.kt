@@ -22,7 +22,7 @@ constructor(
 
     fun registerRate(userId: String, rate: Float) {
         launch(true) {
-            val response = registerReviewUseCase(userId, rate)
+            registerReviewUseCase(userId, rate)
             _success.value = true
 
         }
