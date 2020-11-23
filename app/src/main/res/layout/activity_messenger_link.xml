@@ -45,7 +45,7 @@
         android:paddingStart="16dp"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
-        android:text="Κλείσιμο"
+        android:text="@string/close_prompt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="RtlSymmetry" />

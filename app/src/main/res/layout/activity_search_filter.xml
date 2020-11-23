@@ -49,7 +49,7 @@
                         style="@style/display_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Φίλτρα"
+                        android:text="@string/filters"
                         app:layout_constraintBottom_toBottomOf="@+id/back_button"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Ημερομηνία"
+                    android:text="@string/date"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -100,7 +100,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/filters_view_margin_top_second"
-                    android:text="Ελεύθερες Θέσεις"
+                    android:text="@string/seat_availability"
                     app:layout_constraintStart_toStartOf="@id/dateTextView"
                     app:layout_constraintTop_toBottomOf="@id/dateTextView" />
 
@@ -110,7 +110,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/filters_view_margin_top_second"
-                    android:text="Συνοδεία Κατοικιδίου"
+                    android:text="@string/pet_companionship"
                     app:layout_constraintStart_toStartOf="@+id/textView7"
                     app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -121,7 +121,7 @@
                     android:layout_height="@dimen/button_number_layout_height"
                     android:layout_marginEnd="16dp"
                     android:gravity="center|end"
-                    android:hint="Εύρος ημ/νίας"
+                    android:hint="@string/date_range"
                     android:paddingStart="16dp"
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp"
@@ -146,7 +146,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/button_number_layout_height"
                     android:gravity="center|end"
-                    android:hint="Ότιδήποτε"
+                    android:hint="@string/whatever"
                     android:padding="@dimen/calendar_margin_16dp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/textView10"
                     app:layout_constraintEnd_toEndOf="@+id/seats_pick_button" />
@@ -158,7 +158,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/filters_view_margin_top_second"
-                    android:text="Εύρος τιμής"
+                    android:text="@string/price_range"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView10"
                     app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -169,7 +169,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/button_number_layout_height"
                     android:gravity="center|end"
-                    android:hint="Εμφάνιση όλων"
+                    android:hint="@string/show_all"
                     android:padding="@dimen/calendar_margin_16dp"
                     app:layout_constraintBottom_toBottomOf="@+id/price_range_tv"
                     app:layout_constraintEnd_toEndOf="@+id/pet"
@@ -203,7 +203,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/filters_view_margin_top_second"
-                    android:text="Εύρος αφετηρίας"
+                    android:text="@string/starting_point_range"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView10"
                     app:layout_constraintTop_toBottomOf="@+id/price_range_seekbar" />
@@ -214,7 +214,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/button_number_layout_height"
                     android:gravity="center|end"
-                    android:hint="Εμφάνιση όλων"
+                    android:hint="@string/show_all"
                     android:padding="@dimen/calendar_margin_16dp"
                     app:layout_constraintBottom_toBottomOf="@+id/range_from_tv"
                     app:layout_constraintEnd_toEndOf="@+id/pet"
@@ -248,7 +248,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/filters_view_margin_top_second"
-                    android:text="Εύρος προορισμού"
+                    android:text="@string/destination_range"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView10"
                     app:layout_constraintTop_toBottomOf="@+id/from_range_seekbar" />
@@ -260,7 +260,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/button_number_layout_height"
                     android:gravity="center|end"
-                    android:hint="Εμφάνιση όλων"
+                    android:hint="@string/show_all"
                     android:padding="@dimen/calendar_margin_16dp"
                     app:layout_constraintBottom_toBottomOf="@+id/range_to_tv"
                     app:layout_constraintEnd_toEndOf="@+id/pet"
@@ -312,7 +312,7 @@
         android:gravity="center|end"
         android:paddingStart="22dp"
         android:paddingEnd="20dp"
-        android:text="Εφαρμογή"
+        android:text="@string/apply"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"

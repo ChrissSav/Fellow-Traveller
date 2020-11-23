@@ -3,6 +3,7 @@ package gr.fellow.fellow_traveller.ui.forgotPassword.fragments
 
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
+import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentForgotPasswordNumberBinding
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
@@ -34,7 +35,7 @@ class ForgotPasswordNumberFragment : BaseFragment<FragmentForgotPasswordNumberBi
         binding.finish.setOnClickListener {
             val code = binding.pinView.value.toString()
             if (code.length != 6) {
-                createAlerter("Παρακαλώ συμπληρώστε τον κωδικό.")
+                createAlerter(getString(R.string.password_missing))
             } else {
                 viewModel.resetPassword(code)
             }

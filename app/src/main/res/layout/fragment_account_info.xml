@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="Πώς ονομάζεσαι;"
+                android:text="@string/what_is_your_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +39,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/register_margin_label_title"
-                android:text="Μας βοηθά για την καλύτερη εξυπηρέτησή σας"
+                android:text="@string/it_helps_us_a_lot"
                 app:layout_constraintEnd_toEndOf="@+id/AccountInfoFragment_textView4"
                 app:layout_constraintStart_toStartOf="@id/AccountInfoFragment_textView4"
                 app:layout_constraintTop_toBottomOf="@id/AccountInfoFragment_textView4" />

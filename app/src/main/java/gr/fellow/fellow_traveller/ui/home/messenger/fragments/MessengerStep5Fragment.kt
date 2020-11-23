@@ -35,7 +35,7 @@ class MessengerStep5Fragment : BaseFragment<FragmentMessengerStep5Binding>() {
 
                 if (!isEditing) {
                     isEditing = true
-                    val sub = editable.toString().substringAfterLast("https://m.me/")
+                    val sub = editable.toString().substringAfterLast(getString(R.string.messenger_url))
                     if (sub.isNotEmpty()) {
                         binding.messengerLink.setText(sub)
                         binding.done.backgroundTintList = resources.getColorStateList(R.color.black)

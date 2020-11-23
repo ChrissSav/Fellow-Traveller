@@ -17,7 +17,7 @@ class PetBottomSheetDialog(
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = ConfirmBottomSheetDialogBinding.inflate(LayoutInflater.from(context), container, false)
 
-        binding.title.text = "Συνοδεία Κατοικιδίου"
+        binding.title.text = getString(R.string.pet_companionship)
 
         binding.yes.setOnClickListener {
             onItemClickListener(PetAnswerType.Yes)

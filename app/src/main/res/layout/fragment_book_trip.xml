@@ -23,7 +23,7 @@
         style="@style/display_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Κράτηση θέσης"
+        android:text="@string/rsvp_trip"
         app:layout_constraintBottom_toBottomOf="@+id/back_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
-                android:text="Από"
+                android:text="@string/from"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Πρός"
+                android:text="@string/to"
                 app:layout_constraintStart_toStartOf="@+id/from"
                 app:layout_constraintTop_toBottomOf="@+id/from" />
 
@@ -77,7 +77,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="16dp"
-                android:text="Θεσσαλονίκη"
+                android:text="@string/city_thessaloniki"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView15" />
@@ -89,7 +89,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Αθήνα"
+                android:text="@string/city_athens"
                 app:layout_constraintEnd_toEndOf="@+id/from"
                 app:layout_constraintStart_toStartOf="@+id/from"
                 app:layout_constraintTop_toBottomOf="@+id/textView19" />
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:tag="2"
-                android:text="07:00 AM"
+                android:text="@string/trip_time_placeholder"
                 app:layout_constraintStart_toStartOf="@+id/to"
                 app:layout_constraintTop_toBottomOf="@+id/to" />
 
@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:tag="2"
-                android:text="Δευ, 13 Μαρ"
+                android:text="@string/trip_date_placeholder"
                 app:layout_constraintBottom_toBottomOf="@+id/time"
                 app:layout_constraintStart_toEndOf="@+id/time"
                 app:layout_constraintTop_toTopOf="@+id/time" />
@@ -125,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="Θέσεις"
+                android:text="@string/available_seats_plural"
                 app:layout_constraintStart_toStartOf="@+id/to"
                 app:layout_constraintTop_toBottomOf="@+id/time" />
 
@@ -135,7 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Πόσες θέσεις θέλετε να κλείσετε;"
+                android:text="@string/how_many_seats_to_rsvp"
                 app:layout_constraintStart_toStartOf="@+id/textView22"
                 app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
@@ -154,7 +154,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="Συνοδεία Κατοικιδίου"
+                android:text="@string/pet_companionship"
 
                 app:layout_constraintStart_toStartOf="@+id/textView23"
                 app:layout_constraintTop_toBottomOf="@+id/textView23" />
@@ -165,7 +165,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Θα έχεις μαζί σου κατοικίδιο;"
+                android:text="@string/will_you_bring_a_pet"
                 app:layout_constraintStart_toStartOf="@+id/textView24"
                 app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
@@ -190,7 +190,7 @@
                 style="@style/paragraph_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Όχι"
+                android:text="@string/no"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toStartOf="@id/pets_switch"
                 app:layout_constraintTop_toTopOf="@id/pets_switch"
@@ -202,7 +202,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/button_number_layout_height"
                 android:gravity="center|end"
-                android:hint="Επιλέξτε"
+                android:hint="@string/choose"
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
@@ -218,7 +218,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="Τιμή"
+                android:text="@string/price"
                 app:layout_constraintStart_toStartOf="@+id/textView25"
                 app:layout_constraintTop_toBottomOf="@+id/textView25" />
 
@@ -230,7 +230,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="140dp"
                 android:gravity="end"
-                android:text="10"
+                android:text="@string/price_placeholder"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/pet"
                 app:layout_constraintTop_toTopOf="@+id/textView27"
@@ -256,7 +256,7 @@
         android:gravity="center|end"
         android:paddingStart="22dp"
         android:paddingEnd="20dp"
-        android:text="Κράτηση"
+        android:text="@string/rsvp"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"

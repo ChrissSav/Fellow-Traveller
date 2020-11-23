@@ -82,7 +82,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
             if (creator) {
                 binding.constraintLayoutInfo.backgroundTintList = ContextCompat.getColorStateList(binding.constraintLayoutInfo.context, R.color.green)
-                binding.labelDescription.text = "Είσαι ο οδηγός του ταξιδιού"
+                binding.labelDescription.text = getString(R.string.youre_trip_driver)
             }
 
             with(binding) {
@@ -121,7 +121,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
             binding.delete.setOnClickListener {
                 confirmBottomSheetDialog = ConfirmBottomSheetDialog(
-                    if (creator) "Θελείς να διαγράψεις το ταξίδι;" else "Θέλεις να αποχωρήσεις απο το ταξίδι;",
+                    if (creator) getString(R.string.delete_trip_question) else getString(R.string.leave_trip_question),
                     this@TripInvolvedDetailsFragment::onConfirmItemClickListener, 1
                 )
                 confirmBottomSheetDialog.show(childFragmentManager, "confirmBottomSheetDialog")
@@ -158,9 +158,9 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
     private fun getTripStatus(status: Int) =
         when (status) {
-            0 -> "Ενεργό"
-            1 -> "Σε εξέλιξη"
-            else -> "Ολοκληρωμένο"
+            0 -> getString(R.string.trip_status_active)
+            1 -> getString(R.string.trip_status_in_progress)
+            else -> getString(R.string.trip_status_complete)
         }
 
 }

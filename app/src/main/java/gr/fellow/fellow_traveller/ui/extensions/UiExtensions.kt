@@ -31,7 +31,7 @@ fun Activity.createAlerter(msg: String) {
     if (this.resources.getString(R.string.ERROR_INTERNET_CONNECTION) == msg)
         icon = R.drawable.ic_no_wifi
     Alerter.create(this)
-        .setTitle("Προσοχή")
+        .setTitle(getString(R.string.warning))
         .setText(msg)
         .setIcon(icon)
         .setBackgroundColorRes(R.color.colorPrimary)
@@ -46,7 +46,7 @@ fun Activity.createAlerter(msg: String, color: Int) {
     if (this.resources.getString(R.string.ERROR_INTERNET_CONNECTION) == msg)
         icon = R.drawable.ic_no_wifi
     Alerter.create(this)
-        .setTitle("Προσοχή")
+        .setTitle(getString(R.string.warning))
         .setText(msg)
         .setIcon(icon)
         .setBackgroundColorRes(color)
@@ -99,14 +99,14 @@ fun Activity.startActivityClearStack(activity: KClass<out Activity>) {
 fun Activity.openGoogleMaps(trip: TripSearch) {
     val uri = "http://maps.google.com/maps?f=d&hl=en&saddr=${trip.destFrom.latitude},${trip.destFrom.longitude}&daddr=${trip.destTo.latitude},${trip.destTo.longitude}&mode=d"
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
-    startActivity(Intent.createChooser(intent, "Select an application"))
+    startActivity(Intent.createChooser(intent, getString(R.string.select_application)))
 
 }
 
 fun Activity.openGoogleMaps(trip: TripInvolved) {
     val uri = "http://maps.google.com/maps?f=d&hl=en&saddr=${trip.destFrom.latitude},${trip.destFrom.longitude}&daddr=${trip.destTo.latitude},${trip.destTo.longitude}&mode=d"
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
-    startActivity(Intent.createChooser(intent, "Select an application"))
+    startActivity(Intent.createChooser(intent, getString(R.string.select_application)))
 }
 
 
@@ -178,7 +178,7 @@ fun Fragment.createAlerter(msg: String) {
     if (this.resources.getString(R.string.ERROR_INTERNET_CONNECTION) == msg)
         icon = R.drawable.ic_no_wifi
     Alerter.create(activity)
-        .setTitle("Προσοχή")
+        .setTitle(getString(R.string.warning))
         .setText(msg)
         .setIcon(icon)
         .setBackgroundColorRes(R.color.colorPrimary)
@@ -190,7 +190,7 @@ fun Fragment.createAlerter(msg: String) {
 
 fun Fragment.createAlerterInfo(msg: String, color: Int) {
     Alerter.create(activity)
-        .setTitle("Ενημέρωση")
+        .setTitle(getString(R.string.update))
         .setText(msg)
         .setIcon(R.drawable.ic_lock)
         .setBackgroundColorRes(color)

@@ -233,20 +233,20 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
         when (sortAnswerType) {
            SortAnswerType.Relevant -> {
-               createToast("Πιο σχετικά")
-               binding.sortButton.setText("Πιο σχετικά")
+               createToast(getString(R.string.more_recent))
+               binding.sortButton.text = getString(R.string.more_recent)
                viewModel.sortByDate()
                //sortOption = SortAnswerType.Relevant
            }
             SortAnswerType.Price -> {
-                createToast("Τιμή")
-                binding.sortButton.setText("Τιμή")
+                createToast(getString(R.string.price_title))
+                binding.sortButton.text = getString(R.string.price_title)
                 viewModel.sortByPrice()
                 //sortOption = SortAnswerType.Price
             }
            SortAnswerType.Rate -> {
-               createToast("Αξιολόγηση")
-               binding.sortButton.setText("Αξιολόγηση")
+               createToast(getString(R.string.rating_title))
+               binding.sortButton.text = getString(R.string.rating_title)
                viewModel.sortByRate()
                //sortOption = SortAnswerType.Rate
            }

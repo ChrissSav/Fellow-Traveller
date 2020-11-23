@@ -3,6 +3,7 @@ package gr.fellow.fellow_traveller.ui.user.fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
+import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentUserReviewsBinding
 import gr.fellow.fellow_traveller.domain.review.Review
@@ -28,7 +29,7 @@ class UserReviewsFragment : BaseFragment<FragmentUserReviewsBinding>() {
             binding.recyclerView.adapter?.notifyDataSetChanged()
             binding.swipeRefreshLayout.isRefreshing = false
 
-            binding.numRate.text = "${it.size} αξιολόγησεις"
+            binding.numRate.text = "${it.size} " + getString(R.string.ratings_count)
         })
     }
 

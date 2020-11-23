@@ -1,9 +1,11 @@
 package gr.fellow.fellow_traveller.ui.home
 
+import android.content.res.Resources
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.domain.car.Car
@@ -330,7 +332,7 @@ constructor(
         launch(true) {
             val response = deleteTripUseCase(tripId)
             _tripsAsCreatorActive.value = deleteTripWithId(tripId, _tripsAsCreatorActive.value)
-            _successDeletion.value = "Επιτυχής διαγραφή ταξιδιού"
+            _successDeletion.value = Resources.getSystem().getString(R.string.delete_trip_success)
             updateUserInfo()
         }
     }
@@ -375,7 +377,7 @@ constructor(
         launch(true) {
             val response = exitFromTripUseCase(tripId)
             _tripsAsPassengerActive.value = deleteTripWithId(tripId, _tripsAsPassengerActive.value)
-            _successDeletion.value = "Επιτυχής αποχώρηση απο το ταξίδι"
+            _successDeletion.value = Resources.getSystem().getString(R.string.leave_trip_success)
             updateUserInfo()
         }
     }

@@ -95,7 +95,7 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
     fun getUserRate() = userRate
 
     private fun openDialog() {
-        ExitCustomDialog(this, this::exitCustomDialogAnswerType, "Απόρριψη της καταχώρησης ;", 2).show(supportFragmentManager, "exitCustomDialog")
+        ExitCustomDialog(this, this::exitCustomDialogAnswerType, getString(R.string.prompt_cancel_offer), 2).show(supportFragmentManager, "exitCustomDialog")
     }
 
     private fun exitCustomDialogAnswerType(result: AnswerType) {

@@ -19,7 +19,7 @@ class SortSearchTripsBottomSheetDialog(
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = SortSearchTripsSheetDialogBinding.inflate(LayoutInflater.from(context), container, false)
 
-        binding.title.text = "Ταξινόμιση με βάση"
+        binding.title.text = getString(R.string.title_sort_by)
 
         binding.relevant.setOnClickListener {
             onItemClickListener(SortAnswerType.Relevant)

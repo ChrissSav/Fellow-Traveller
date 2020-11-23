@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Messenger"
+        android:text="@string/messenger"
         app:layout_constraintStart_toStartOf="@+id/back"
         app:layout_constraintTop_toBottomOf="@+id/back" />
 
@@ -41,7 +41,7 @@
         android:drawablePadding="16dp"
         android:gravity="center"
         android:padding="10dp"
-        android:text="Οδηγός βοηθείας"
+        android:text="@string/help_guides"
         app:drawableStartCompat="@drawable/ic_help"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/messenger_link" />
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
-        android:text="Αν δεν μπορειτε να βρείτε τον σύνδεσμο του λογαριασμού σας στο messenger, δείτε τον οδηγό βοηθείας."
+        android:text="@string/take_a_look_at_help_guide"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/help"
         app:layout_constraintTop_toBottomOf="@+id/help" />
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
         style="@style/label_1"
-        android:text="Λογαριασμός messenger"
+        android:text="@string/messenger_account"
         app:layout_constraintStart_toStartOf="@+id/textView43"
         app:layout_constraintTop_toBottomOf="@+id/textView43" />
 
@@ -74,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="m.me/"
+        android:text="@string/messenger_placeholder"
         style="@style/input_1"
         android:textColor="@color/dark_gray_new"
         app:layout_constraintStart_toStartOf="@+id/textView44"
@@ -89,7 +89,7 @@
         android:background="@null"
         android:inputType="text"
         android:singleLine="true"
-        android:hint="example"
+        android:hint="@string/messenger_username_example"
         android:textColorHint="@color/dark_gray_new"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView45"
         app:layout_constraintEnd_toEndOf="parent"
