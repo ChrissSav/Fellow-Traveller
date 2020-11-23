@@ -23,6 +23,7 @@ import com.tapadoo.alerter.Alerter
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
+import kotlin.math.round
 import kotlin.reflect.KClass
 
 
@@ -90,7 +91,7 @@ fun Activity.startActivityWithFade(activity: KClass<out Activity>, bundle: Bundl
 
 fun Activity.startActivityClearStack(activity: KClass<out Activity>) {
     val intent = Intent(this, activity.java)
-    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
     startActivity(intent)
     finishAffinity()
 
@@ -125,7 +126,7 @@ fun Fragment.startActivityToLeft(intent: Intent, code: Int) {
 
 fun Fragment.startActivityClearStack(activityTemp: KClass<out Activity>) {
     val intent = Intent(this.context, activityTemp.java)
-    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
     startActivity(intent)
     activity?.finishAffinity()
 }
@@ -310,3 +311,8 @@ val Double.toDp: Int
 val Double.toPx: Int
     get() = (this / Resources.getSystem().displayMetrics.density).toInt()
 
+fun Float.round(decimals: Int): Float {
+    var multiplier = 1.0
+    repeat(decimals) { multiplier *= 10 }
+    return (round(this * multiplier) / multiplier).toFloat()
+}

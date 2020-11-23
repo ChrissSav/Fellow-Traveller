@@ -34,7 +34,7 @@ class ExitCustomDialog(
         dialog.setCanceledOnTouchOutside(true)
 
         if (red != 1)
-            context?.resources?.getColor(R.color.red_color)?.let {
+            activity?.getColor(R.color.red_color)?.let {
                 binding.exit.setTextColor(it)
             }
 

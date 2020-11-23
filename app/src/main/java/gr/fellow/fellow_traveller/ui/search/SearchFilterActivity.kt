@@ -44,11 +44,10 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
 
             /** Initialization **/
 
-            seatsPickButton.currentNum = searchTripFilter.seatsMin ?: resources.getInteger(R.integer.seats_min)
+            seatsPickButton.currentNum = searchTripFilter.seatsMin
             fromRangeSeekbar.setMinStartValue((searchTripFilter.rangeFrom ?: resources.getInteger(R.integer.min_value_in_filters)).toFloat()).apply()
             toRangeSeekbar.setMinStartValue((searchTripFilter.rangeTo ?: resources.getInteger(R.integer.min_value_in_filters)).toFloat()).apply()
             priceRangeSeekbar.setMinStartValue((searchTripFilter.priceMax ?: resources.getInteger(R.integer.min_value_in_filters)).toFloat()).apply()
-            seatsPickButton.currentNum = searchTripFilter.seatsMin ?: 1
             initializePet()
 
             /** Date Picker Initialization **/
@@ -86,7 +85,7 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
             /** OnClicks **/
 
             date.setOnClickListener {
-                picker.show(this@SearchFilterActivity?.supportFragmentManager!!, picker.toString())
+                picker.show(this@SearchFilterActivity.supportFragmentManager, picker.toString())
 
             }
 

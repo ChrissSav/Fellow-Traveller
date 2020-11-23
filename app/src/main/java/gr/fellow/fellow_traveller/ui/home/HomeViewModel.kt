@@ -191,7 +191,7 @@ constructor(
 
     fun deleteCar(car: Car) {
         launch(true) {
-            val response = deleteCarUseCase(car.id)
+            deleteCarUseCase(car.id)
             _cars.value = getUserCarsLocalUseCase()
             _carDeletedId.value = car
         }
@@ -328,7 +328,7 @@ constructor(
 
     fun deleteTrip(tripId: String) {
         launch(true) {
-            val response = deleteTripUseCase(tripId)
+            deleteTripUseCase(tripId)
             _tripsAsCreatorActive.value = deleteTripWithId(tripId, _tripsAsCreatorActive.value)
             _successDeletion.value = "Επιτυχής διαγραφή ταξιδιού"
             updateUserInfo()
@@ -373,7 +373,7 @@ constructor(
 
     fun exitFromTrip(tripId: String) {
         launch(true) {
-            val response = exitFromTripUseCase(tripId)
+            exitFromTripUseCase(tripId)
             _tripsAsPassengerActive.value = deleteTripWithId(tripId, _tripsAsPassengerActive.value)
             _successDeletion.value = "Επιτυχής αποχώρηση απο το ταξίδι"
             updateUserInfo()

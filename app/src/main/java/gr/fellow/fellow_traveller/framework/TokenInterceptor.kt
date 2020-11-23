@@ -27,7 +27,7 @@ constructor(
 
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        var response: Response?
+        val response: Response?
         val request = chain.request()
         val firstRequest = request.newBuilder()
 
@@ -51,22 +51,22 @@ constructor(
             if (response.code == HttpURLConnection.HTTP_UNAUTHORIZED) {
 
                 if (lock.tryLock()) {
-                    Log.i("TokenInterceptor", "refresh token thread holds the lock");
+                    Log.i("TokenInterceptor", "refresh token thread holds the lock")
                     handleForbiddenResponse()
                     token = sharedPreferences.getString(PREFS_AUTH_ACCESS_TOKEN, "").toString()
                     firstRequest.removeHeader("Authorization")
                     firstRequest.addHeader("Authorization", "Bearer $token")
-                    Log.i("TokenInterceptor", "refresh token finished. release lock");
-                    lock.unlock();
+                    Log.i("TokenInterceptor", "refresh token finished. release lock")
+                    lock.unlock()
                     return chain.proceed(firstRequest.build())
                 } else {
-                    lock.lock(); // this will block the thread until the thread that is refreshing
+                    lock.lock() // this will block the thread until the thread that is refreshing
                     // the token will call .unlock() method
                     handleForbiddenResponse()
                     token = sharedPreferences.getString(PREFS_AUTH_ACCESS_TOKEN, "").toString()
                     firstRequest.removeHeader("Authorization")
                     firstRequest.addHeader("Authorization", "Bearer $token")
-                    lock.unlock();
+                    lock.unlock()
                     return chain.proceed(firstRequest.build())
                 }
             }

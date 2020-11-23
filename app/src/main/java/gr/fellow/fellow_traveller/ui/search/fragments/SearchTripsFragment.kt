@@ -33,7 +33,6 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
     private var clickTimeDialog = 0L
     private var bundle = bundleOf()
     private lateinit var sortSearchTripsBottomSheetDialog: SortSearchTripsBottomSheetDialog
-    private var pickerFlag: Boolean = true
 
 
 
@@ -232,24 +231,24 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
     private fun onSortItemClickListener(sortAnswerType: SortAnswerType) {
 
         when (sortAnswerType) {
-           SortAnswerType.Relevant -> {
-               createToast("Πιο σχετικά")
-               binding.sortButton.setText("Πιο σχετικά")
-               viewModel.sortByDate()
-               //sortOption = SortAnswerType.Relevant
-           }
+            SortAnswerType.Relevant -> {
+                createToast("Πιο σχετικά")
+                binding.sortButton.text = "Πιο σχετικά"
+                viewModel.sortByDate()
+                //sortOption = SortAnswerType.Relevant
+            }
             SortAnswerType.Price -> {
                 createToast("Τιμή")
-                binding.sortButton.setText("Τιμή")
+                binding.sortButton.text = "Τιμή"
                 viewModel.sortByPrice()
                 //sortOption = SortAnswerType.Price
             }
-           SortAnswerType.Rate -> {
-               createToast("Αξιολόγηση")
-               binding.sortButton.setText("Αξιολόγηση")
-               viewModel.sortByRate()
-               //sortOption = SortAnswerType.Rate
-           }
+            SortAnswerType.Rate -> {
+                createToast("Αξιολόγηση")
+                binding.sortButton.text = "Αξιολόγηση"
+                viewModel.sortByRate()
+                //sortOption = SortAnswerType.Rate
+            }
 
         }
     }

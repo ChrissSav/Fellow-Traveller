@@ -22,11 +22,11 @@ class ConfirmBottomSheetDialog(
         binding.title.text = title
 
         if (red == 1)
-            context?.resources?.getColor(R.color.red_color)?.let {
+            activity?.getColor(R.color.red_color)?.let {
                 binding.yes.setTextColor(it)
             }
         else
-            context?.resources?.getColor(R.color.red_color)?.let {
+            activity?.getColor(R.color.red_color)?.let {
                 binding.no.setTextColor(it)
             }
 

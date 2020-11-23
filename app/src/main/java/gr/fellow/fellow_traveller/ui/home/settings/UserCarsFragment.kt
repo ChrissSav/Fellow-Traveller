@@ -10,7 +10,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentUserCarsBinding
-import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.ui.car.AddCarActivity
 import gr.fellow.fellow_traveller.ui.car.CarAdapter
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
@@ -25,7 +24,6 @@ class UserCarsFragment : BaseFragment<FragmentUserCarsBinding>() {
 
 
     private val viewModel: HomeViewModel by activityViewModels()
-    private var carsList = mutableListOf<Car>()
 
 
     override fun getViewBinding(): FragmentUserCarsBinding =

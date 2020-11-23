@@ -82,14 +82,17 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
         viewModel.loadCars()
         viewModel.loadTripsAsCreator()
         viewModel.loadTripsAsPassenger()
+        viewModel.loadTripsAsCreatorHistory()
+        viewModel.loadTripsAsPassengerHistory()
         viewModel.loadNotifications()
+
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_container)
 
 
         setupBottomNavMenu()
 
-        navController.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { _, destination, _ ->
+        navController.addOnDestinationChangedListener { _, destination, _ ->
 
 
             if (destination.id in homeLayout) {
@@ -139,7 +142,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
                     }
                 }
             }
-        })
+        }
 
         binding.constraintLayoutMessenger.setOnClickListener {
             navController.navigateWithFade(R.id.accountSettingsFragment)
@@ -160,14 +163,14 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
     @SuppressLint("UseCompatLoadingForColorStateLists")
     private fun setButtonUnCheck() {
-        previousCheck?.setColorFilter(ContextCompat.getColor(this, R.color.black), android.graphics.PorterDuff.Mode.SRC_IN);
-        previousCheck?.backgroundTintList = resources.getColorStateList(R.color.white);
+        previousCheck?.setColorFilter(ContextCompat.getColor(this, R.color.black), android.graphics.PorterDuff.Mode.SRC_IN)
+        previousCheck?.backgroundTintList = resources.getColorStateList(R.color.white)
     }
 
     @SuppressLint("UseCompatLoadingForColorStateLists")
     private fun setButtonCheck() {
-        currentCheck?.setColorFilter(ContextCompat.getColor(this, R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
-        currentCheck?.backgroundTintList = resources.getColorStateList(R.color.black);
+        currentCheck?.setColorFilter(ContextCompat.getColor(this, R.color.white), android.graphics.PorterDuff.Mode.SRC_IN)
+        currentCheck?.backgroundTintList = resources.getColorStateList(R.color.black)
     }
 
     private fun showHideBottomNav(targetHeight: Int) {
