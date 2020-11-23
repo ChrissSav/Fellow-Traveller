@@ -7,19 +7,15 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentSearchTripsBinding
-import gr.fellow.fellow_traveller.domain.PetAnswerType
 import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.domain.SortAnswerType
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
-import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.SearchTripPetBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.SortSearchTripsBottomSheetDialog
-import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.UserImagePickBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.search.SearchFilterActivity
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
@@ -170,7 +166,8 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
         }
 
         viewModel.deleteTripId?.let {
-            viewModel.handleErrorBook(it)
+            binding.searchButton.performClick()
+            viewModel.deleteTripId = null
         }
     }
 

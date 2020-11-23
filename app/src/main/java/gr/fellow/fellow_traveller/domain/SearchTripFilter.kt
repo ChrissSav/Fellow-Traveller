@@ -14,7 +14,7 @@ data class SearchTripFilter(
     var rangeTo: Int? = null,
     var timestampMin: Long? = null,
     var timestampMax: Long? = null,
-    var seatsMin: Int? = null,
+    var seatsMin: Int = 1,
     var seatsMax: Int? = null,
     var priceMin: Int? = null,
     var priceMax: Int? = null,
@@ -25,7 +25,7 @@ data class SearchTripFilter(
         rangeTo = null
         timestampMin = null
         timestampMax = null
-        seatsMin = null
+        seatsMin = 1
         seatsMax = null
         priceMin = null
         priceMax = null

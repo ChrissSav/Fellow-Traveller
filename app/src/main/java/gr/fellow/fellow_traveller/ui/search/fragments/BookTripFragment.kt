@@ -38,7 +38,7 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
                 createAlerter(getString(it.messageId))
             else {
                 createAlerter(it.message)
-                findNavController()?.popBackStack(R.id.searchTripsFragment, true)
+                findNavController()?.navigate(R.id.action_bookTripFragment_to_searchTripsFragment)
             }
 
         })

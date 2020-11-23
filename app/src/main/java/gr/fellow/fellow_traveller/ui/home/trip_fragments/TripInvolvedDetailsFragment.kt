@@ -159,7 +159,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
     private fun getTripStatus(status: Int) =
         when (status) {
             0 -> "Ενεργό"
-            1 -> "Εκκρεμεί"
+            1 -> "Σε εξέλιξη"
             else -> "Ολοκληρωμένο"
         }
 

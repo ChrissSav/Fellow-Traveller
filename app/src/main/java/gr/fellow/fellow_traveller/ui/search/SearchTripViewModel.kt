@@ -12,7 +12,6 @@ import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.usecase.trips.BookTripUseCase
 import gr.fellow.fellow_traveller.usecase.trips.SearchTripsUseCase
-import kotlinx.coroutines.delay
 
 
 class SearchTripViewModel
@@ -108,21 +107,15 @@ constructor(
 
 
     fun handleErrorBook(tripId: String) {
-        launch {
-            delay(200)
-            val tempTrips = mutableListOf<TripSearch>()
-            tempTrips.addAll(_resultTrips.value ?: emptyList())
-            val index = tempTrips.indexOfFirst { it.id == tripId }
-            if (index != -1) {
-                tempTrips.removeAt(index)
-                _resultTrips.value = mutableListOf()
-            }
-
-        }
-
+        var tempTrips = mutableListOf<TripSearch>()
+        tempTrips.addAll(_resultTrips.value ?: emptyList())
+        tempTrips = tempTrips.filter { it.id != tripId }.toMutableList()
+        _resultTrips.value = mutableListOf()
+        _resultTrips.value = tempTrips
+        deleteTripId = null
     }
 
-    //Can merge these 3 fun to 1 TODO
+    // TODO Can merge these 3 fun to 1
     fun sortByDate() {
         val sortedList = _resultTrips.value?.sortedWith(compareBy { it.timestamp })?.toMutableList()
         _resultTrips.value = sortedList

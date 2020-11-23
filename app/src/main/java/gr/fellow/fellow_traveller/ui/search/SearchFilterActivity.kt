@@ -11,6 +11,7 @@ import gr.fellow.fellow_traveller.databinding.ActivitySearchFilterBinding
 import gr.fellow.fellow_traveller.domain.PetAnswerType
 import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.SearchTripPetBottomSheetDialog
+import gr.fellow.fellow_traveller.ui.views.PickButtonActionListener
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -20,7 +21,6 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
 
     private lateinit var petBottomSheetDialog: SearchTripPetBottomSheetDialog
     private lateinit var searchTripFilter: SearchTripFilter
-
 
 
     override fun provideViewBinding(): ActivitySearchFilterBinding =
@@ -118,17 +118,26 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
                 builder.setSelection(androidx.core.util.Pair(now.timeInMillis, now.timeInMillis))
                 builder.build()
                 //Long first/second to null
-                date.setText("Εύρος ημ/νίας")}
+                date.setText("Εύρος ημ/νίας")
+            }
 
             picker.addOnPositiveButtonClickListener {
                 //"The selected date range it  ${it.first} - ${it.second}"
                 //Convert Long to Date Format
-                date.setText(it.first?.let { it1 -> convertLongToTime(it1) } + " - " + it.second?.let { it1 -> convertLongToTime(it1) }) }
+                date.setText(it.first?.let { it1 -> convertLongToTime(it1) } + " - " + it.second?.let { it1 -> convertLongToTime(it1) })
+            }
 
             picker.addOnCancelListener { }
             picker.addOnDismissListener { }
 
 
+
+
+            seatsPickButton.pickButtonActionListener = object : PickButtonActionListener {
+                override fun onPickAction(value: Int) {
+                    searchTripFilter.seatsMin = value
+                }
+            }
 
 
             fromRangeSeekbar.setOnSeekbarChangeListener { value ->
@@ -164,15 +173,14 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
         }
     }
 
-    fun convertLongToTime(time: Long): String {
+    private fun convertLongToTime(time: Long): String {
         val date = Date(time)
         val format = SimpleDateFormat("dd MMM")
         return format.format(date)
     }
+
     private fun applyChanges() {
         val resultIntent = Intent()
-        if (binding.seatsPickButton.currentNum != 1)
-            searchTripFilter.seatsMin = 1
         resultIntent.putExtra("filter", searchTripFilter)
         setResult(Activity.RESULT_OK, resultIntent)
         finish()
