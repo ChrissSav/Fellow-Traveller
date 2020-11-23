@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import gr.fellow.fellow_traveller.databinding.ReviewItemLayoutBinding
 import gr.fellow.fellow_traveller.domain.review.Review
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
+import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
 
 
 class ReviewsAdapter(
@@ -25,8 +26,8 @@ class ReviewsAdapter(
         with(holder) {
             binding.picture.loadImageFromUrl(currentItem.user.picture)
             binding.username.text = currentItem.user.fullName
-            binding.rate.text = currentItem.rate.toInt().toString()
-
+            binding.rate.text = currentItem.rate.toString()
+            binding.date.text = getDateFromTimestamp(currentItem.timestamp, "d MMM yyyy")
         }
     }
 

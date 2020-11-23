@@ -2,18 +2,17 @@ package gr.fellow.fellow_traveller.ui.newtrip.fragments
 
 import android.app.Activity
 import android.content.Intent
+import android.widget.CompoundButton
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentBaseInfoBinding
 import gr.fellow.fellow_traveller.domain.BagsStatusType
-import gr.fellow.fellow_traveller.domain.PetAnswerType
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.ui.car.AddCarActivity
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.BagsStatusPickBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.CarPickBottomSheetDialog
-import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.PetBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.startActivityForResultWithFade
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripViewModel
@@ -25,7 +24,6 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
     private val viewModel: NewTripViewModel by activityViewModels()
     private var carList = mutableListOf<Car>()
 
-    private lateinit var petBottomSheetDialog: PetBottomSheetDialog
     private lateinit var carPickBottomSheetDialog: CarPickBottomSheetDialog
     private lateinit var bagsStatusPickBottomSheetDialog: BagsStatusPickBottomSheetDialog
 
@@ -48,7 +46,7 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
             })
 
             pet.observe(viewLifecycleOwner, Observer {
-                binding.pet.setText(if (it) getString(R.string.allowed) else getString(R.string.not_allowed))
+                binding.pet.isChecked = it
             })
 
             carList.observe(viewLifecycleOwner, Observer {
@@ -82,11 +80,10 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
                 }
             }
 
-            pet.setOnClickListener {
-                petBottomSheetDialog = PetBottomSheetDialog(this@BaseInfoFragment::onItemClickListener)
-                petBottomSheetDialog.show(childFragmentManager, "petBottomSheetDialog")
 
-            }
+            pet.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { _, b ->
+                viewModel.setPet(b)
+            })
 
 
             carEdiText.setOnClickListener {
@@ -108,11 +105,6 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
             return false
         }
 
-        if (binding.pet.text.isNullOrEmpty()) {
-            viewModel.setErrorMessage(R.string.ERROR_SELECT_PET)
-            return false
-        }
-
         return true
     }
 
@@ -121,14 +113,6 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
         viewModel.setBags(bagsStatusType)
     }
 
-    private fun onItemClickListener(petAnswerType: PetAnswerType) {
-        if (petAnswerType == PetAnswerType.Yes) {
-            viewModel.setPet(true)
-
-        } else {
-            viewModel.setPet(false)
-        }
-    }
 
 
     private fun onCarItemClickListener(car: Car?) {

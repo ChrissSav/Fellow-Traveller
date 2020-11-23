@@ -13,15 +13,15 @@
         android:id="@+id/place_item_imageview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:background="@drawable/ic_pin"
-        app:layout_constraintBottom_toBottomOf="@id/place_item_textView"
+        app:layout_constraintBottom_toBottomOf="@id/title"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@id/place_item_textView" />
+        app:layout_constraintTop_toTopOf="@id/title" />
 
 
     <TextView
-        android:id="@+id/place_item_textView"
+        android:id="@+id/title"
         style="@style/input_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

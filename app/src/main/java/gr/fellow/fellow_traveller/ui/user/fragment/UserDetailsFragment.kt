@@ -53,7 +53,7 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
                     val first = it.first()
 
                     binding.rateItem.picture.loadImageFromUrl(first.user.picture)
-                    binding.rateItem.date.text = getDateFromTimestamp(first.timestamp, "d MMM EEE")
+                    binding.rateItem.date.text = getDateFromTimestamp(first.timestamp, "d MMM yyyy")
                     binding.rateItem.rate.text = first.rate.toString()
 
                     binding.viewAll.visibility = View.VISIBLE

@@ -169,17 +169,22 @@
                 app:layout_constraintEnd_toEndOf="@+id/car_ediText"
                 app:layout_constraintTop_toTopOf="@+id/textView_2" />
 
-            <EditText
+
+            <Switch
                 android:id="@+id/pet"
-                android:gravity="center|end"
-                style="@style/editText_not_editable"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/button_number_layout_height"
-                android:padding="@dimen/calendar_margin_16dp"
-                android:hint="Καθορίστε"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@null"
+                android:checked="false"
+                android:scaleX="1.1"
+                android:scaleY="1.1"
+                android:thumb="@drawable/switch_thumb"
+                android:track="@drawable/switch_tracker"
                 app:layout_constraintBottom_toBottomOf="@+id/textView10"
                 app:layout_constraintEnd_toEndOf="@+id/textView6v"
-                app:layout_constraintTop_toTopOf="@+id/textView10" />
+                app:layout_constraintTop_toTopOf="@+id/textView10"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

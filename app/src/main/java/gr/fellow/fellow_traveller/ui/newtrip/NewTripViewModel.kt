@@ -64,25 +64,22 @@ constructor(
     val userInfo: LiveData<LocalUser> = _userInfo
 
 
-    fun applyDate(date: String) {
-        launch {
-            _date.value = date
-        }
+    init {
+        _seats.value = 1
+        _pet.value = false
+    }
 
+    fun applyDate(date: String) {
+        _date.value = date
     }
 
     fun applyTime(time: String) {
-        launch {
-            _time.value = time
-        }
-
+        _time.value = time
     }
 
 
     fun setDestinationFrom(id: String, title: String) {
-        launch {
-            _destinationFrom.value = DestinationModel(id, title)
-        }
+        _destinationFrom.value = DestinationModel(id, title)
     }
 
     fun setDestinationTo(id: String, title: String) {
@@ -94,27 +91,19 @@ constructor(
 
 
     fun setPrice(priceCurrent: Float) {
-        launch {
-            _price.value = priceCurrent
-        }
+        _price.value = priceCurrent
     }
 
     fun setSeats(seatCurrent: Int) {
-        launch {
-            _seats.value = seatCurrent
-        }
+        _seats.value = seatCurrent
     }
 
     fun setBags(bagsCurrent: BagsStatusType) {
-        launch {
-            _bags.value = bagsCurrent
-        }
+        _bags.value = bagsCurrent
     }
 
     fun setPet(pet: Boolean) {
-        launch {
-            _pet.value = pet
-        }
+        _pet.value = pet
     }
 
     fun setMessage(msg: String?) {
@@ -122,9 +111,7 @@ constructor(
     }
 
     fun setCar(carTemp: Car) {
-        launch {
-            _car.value = carTemp
-        }
+        _car.value = carTemp
     }
 
     fun loadUserCars() {
