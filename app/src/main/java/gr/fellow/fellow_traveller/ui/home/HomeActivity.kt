@@ -55,6 +55,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
         })
 
         viewModel.load.observe(this, Observer {
+            hideKeyboard()
             if (it)
                 binding.genericLoader.progressLoad.visibility = View.VISIBLE
             else
