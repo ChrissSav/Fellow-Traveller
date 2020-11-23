@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.ui.search.fragments
 
+import android.widget.CompoundButton
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
@@ -10,9 +11,11 @@ import gr.fellow.fellow_traveller.domain.PetAnswerType
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.PetBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
+import gr.fellow.fellow_traveller.ui.extensions.createToast
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
+
 
 @AndroidEntryPoint
 class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
@@ -22,6 +25,7 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
     private lateinit var currentTrip: TripSearch
     private lateinit var petBottomSheetDialog: PetBottomSheetDialog
     private var petAllow = false
+    private var havePet = false
 
     override fun getViewBinding(): FragmentBookTripBinding =
         FragmentBookTripBinding.inflate(layoutInflater)
@@ -60,8 +64,29 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
                 seats.setUpperLimit(currentTrip.vacancies)
                 price.text = getString(R.string.price, currentTrip.price.toString())
                 petAllow = currentTrip.hasPet
-                if (!currentTrip.hasPet)
-                    pet.setText(getString(R.string.no))
+                /*if (!currentTrip.hasPet)
+                    pet.setText(getString(R.string.no))*/
+
+                //Check if the trips allows pet
+                if (currentTrip.hasPet) {
+                    petsSwitch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { compoundButton, b ->
+                        //Listener for user if wants pet on the trip
+                        if (b) {
+                            havePetSwitchInfo.setText("Ναι")
+                            havePet = true
+                        } else {
+                            havePetSwitchInfo.setText("Όχι")
+                            havePet = false
+                        }
+                    })
+                } else {
+                    petsSwitch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { compoundButton, b ->
+                        createToast("Ο οδηγός δεν επιτρέπει κατοικίδιο")
+                        havePet = false
+                        petsSwitch.setChecked(false)
+                    })
+                }
+
             }
         }
         with(binding) {
@@ -71,20 +96,16 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
             }
 
             book.setOnClickListener {
-                if (pet.text.isNullOrEmpty()) {
-                    createAlerter("Παρακαλώ επιλέξτε συνοδεία κατοικιδίου")
-                } else {
-                    val yes = getString(R.string.yes)
-                    viewModel.bookTrip(currentTrip.id, binding.seats.currentNum, binding.pet.text.toString() == yes)
-                }
+                    viewModel.bookTrip(currentTrip.id, binding.seats.currentNum, havePet)
             }
 
+           /*
             pet.setOnClickListener {
                 if (petAllow) {
                     petBottomSheetDialog = PetBottomSheetDialog(this@BookTripFragment::onPetItemClickListener)
                     petBottomSheetDialog.show(childFragmentManager, "petBottomSheetDialog")
                 }
-            }
+            }*/
         }
     }
 

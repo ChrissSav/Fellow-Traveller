@@ -49,14 +49,12 @@
                         style="@style/display_1"
                         android:layout_width="0dp"
                         android:layout_height="32dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="23dp"
                         android:layout_marginEnd="16dp"
-                        android:gravity="center"
-                        android:text="Ο λογαριασμός μου"
+                        android:text="Προσωπικές πληροφορίες"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintStart_toStartOf="@id/back_button"
+                        app:layout_constraintTop_toBottomOf="@id/back_button"  />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -77,14 +75,15 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/picture"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="106dp"
+                    android:layout_height="106dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="36dp"
                     android:background="@drawable/ic_boy"
                     android:elevation="1dp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ProgressBar
@@ -98,28 +97,39 @@
                     app:layout_constraintBottom_toBottomOf="@id/picture"
                     app:layout_constraintStart_toEndOf="@id/picture" />
 
-                <ImageButton
+                <Button
                     android:id="@+id/upload_image"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:background="@android:color/transparent"
-                    android:elevation="16dp"
-                    android:src="@drawable/ic_edit_pen"
-                    app:layout_constraintEnd_toEndOf="@+id/picture"
-                    app:layout_constraintTop_toTopOf="@+id/picture" />
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    style="@style/border_icon_button"
+                    android:stateListAnimator="@null"
+                    android:text="Επεξεργασία εικόνας προφίλ"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:textAllCaps="false"
+                    android:fontFamily="@font/alegreyasans_light"
+                    android:textColor="@color/black_color"
+                    android:drawableLeft="@drawable/ic_edit_pen"
+                    android:drawableTint="@color/black_color"
+                    android:gravity="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/picture" />
 
 
                 <gr.fellow.fellow_traveller.ui.views.FellowEditText
                     android:id="@+id/first_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/fragment_settings_text_margin_top"
+                    android:layout_marginTop="51dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     app:hint_f="Όνομα"
                     app:imeOptions_f="actionNext"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/picture"
-                    app:layout_constraintTop_toBottomOf="@+id/picture"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/upload_image"
                     app:regex_f="@string/regex_min_3_chars" />
 
 

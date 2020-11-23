@@ -37,7 +37,8 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginTop="32dp"
                     android:text="Ιστορικό προσφορών"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:stateListAnimator="@null"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"

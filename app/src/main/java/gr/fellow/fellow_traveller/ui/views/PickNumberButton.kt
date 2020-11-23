@@ -73,6 +73,7 @@ class PickNumberButton(context: Context, attrs: AttributeSet) : ConstraintLayout
     private fun increasePick() {
         currentNum++
         pickButtonActionListener?.onPickAction(currentNum)
+
     }
 
     private fun updateTextView(currentNum: Int) {

@@ -135,7 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Μία πρόταση"
+                android:text="Πόσες θέσεις θέλετε να κλείσετε;"
                 app:layout_constraintStart_toStartOf="@+id/textView22"
                 app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
@@ -165,10 +165,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Μία πρόταση"
+                android:text="Θα έχεις μαζί σου κατοικίδιο;"
                 app:layout_constraintStart_toStartOf="@+id/textView24"
                 app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
+
+            <Switch
+                android:id="@+id/pets_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@null"
+                android:checked="false"
+                android:scaleX="1.1"
+                android:scaleY="1.1"
+                android:thumb="@drawable/switch_thumb"
+                android:track="@drawable/switch_tracker"
+                app:layout_constraintBottom_toBottomOf="@id/textView24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/textView24"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+            <TextView
+                android:id="@+id/have_pet_switch_info"
+                style="@style/paragraph_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Όχι"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toStartOf="@id/pets_switch"
+                app:layout_constraintTop_toTopOf="@id/pets_switch"
+                app:layout_constraintBottom_toBottomOf="@id/pets_switch"/>
 
             <EditText
                 android:id="@+id/pet"
@@ -177,10 +203,11 @@
                 android:layout_height="@dimen/button_number_layout_height"
                 android:gravity="center|end"
                 android:hint="Επιλέξτε"
-                android:textAppearance="@style/paragraph_2"
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
+                android:textAppearance="@style/paragraph_2"
+                android:visibility="gone"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView24"
                 app:layout_constraintEnd_toEndOf="@+id/seats"
                 tools:ignore="RtlSymmetry" />
