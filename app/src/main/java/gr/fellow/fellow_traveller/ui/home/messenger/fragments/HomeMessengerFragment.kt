@@ -8,6 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentHomeMessengerBinding
+import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
 import gr.fellow.fellow_traveller.ui.extensions.startActivityForResultWithFade
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
@@ -45,6 +46,7 @@ class HomeMessengerFragment : BaseFragment<FragmentHomeMessengerBinding>() {
             onBackPressed()
         }
         binding.help.setOnClickListener {
+            hideKeyboard()
             startActivityForResultWithFade(MessengerLinkActivity::class, 10)
         }
     }

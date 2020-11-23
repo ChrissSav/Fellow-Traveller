@@ -8,7 +8,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.view.inputmethod.InputMethodManager
-import android.widget.*
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -65,10 +68,6 @@ fun Activity.createToast(msg: String) {
 
 
 fun Activity.hideKeyboard() {
-    val focus = this.currentFocus
-    if (focus is EditText) {
-        focus.clearFocus()
-    }
     val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
 }
