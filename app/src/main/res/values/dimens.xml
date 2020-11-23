@@ -80,7 +80,8 @@
     <dimen name="home_bottom_padding">10dp</dimen>
 
     <!-- Messenger -->
-    <dimen name="messenger_percent">0.62</dimen>
+    <dimen name="messenger_percent">0.55</dimen>
+    <dimen name="messenger_percent_image">0.7</dimen>
     <dimen name="messenger_view_height">1dp</dimen>
     <dimen name="messenger_title_top_margin">10dp</dimen>
     <dimen name="messenger_des_top_margin">18dp</dimen>

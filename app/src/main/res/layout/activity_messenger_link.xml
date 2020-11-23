@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="40dp"
         app:dotsColor="@color/gray_new"
         app:dotsCornerRadius="8dp"
         app:dotsSize="16dp"
@@ -35,15 +35,20 @@
         app:progressMode="true"
         app:selectedDotColor="@color/orange_new" />
 
-    <ImageButton
+    <TextView
         android:id="@+id/exit"
-        style="@style/border_icon_button"
-        android:layout_width="@dimen/back_button_width_height"
-        android:layout_height="@dimen/back_button_width_height"
+        style="@style/paragraph_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/ic_close"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:text="Κλείσιμο"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

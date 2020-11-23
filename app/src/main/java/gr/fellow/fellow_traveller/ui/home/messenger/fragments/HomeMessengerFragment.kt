@@ -1,5 +1,7 @@
 package gr.fellow.fellow_traveller.ui.home.messenger.fragments
 
+import android.app.Activity
+import android.content.Intent
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
@@ -7,7 +9,9 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentHomeMessengerBinding
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
+import gr.fellow.fellow_traveller.ui.extensions.startActivityForResultWithFade
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
+import gr.fellow.fellow_traveller.ui.home.messenger.MessengerLinkActivity
 
 @AndroidEntryPoint
 class HomeMessengerFragment : BaseFragment<FragmentHomeMessengerBinding>() {
@@ -39,6 +43,22 @@ class HomeMessengerFragment : BaseFragment<FragmentHomeMessengerBinding>() {
 
         binding.back.setOnClickListener {
             onBackPressed()
+        }
+        binding.help.setOnClickListener {
+            startActivityForResultWithFade(MessengerLinkActivity::class, 10)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 10) {
+            if (resultCode == Activity.RESULT_OK) {
+                val messenger = data?.getStringExtra("messenger")
+                messenger?.let {
+                    viewModel.changeMessenger(it)
+                }
+            }
         }
     }
 

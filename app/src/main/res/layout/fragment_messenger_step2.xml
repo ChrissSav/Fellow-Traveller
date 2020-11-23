@@ -15,16 +15,16 @@
         android:orientation="horizontal" />
 
 
-    <View
-        android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/messenger_view_height"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@color/orange_new"
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_messenger_3"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="@dimen/messenger_percent_image"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline6" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
@@ -35,7 +35,8 @@
         android:layout_marginTop="@dimen/messenger_title_top_margin"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Πάτησε το κουμπί “Όνομα χρήστη”"
+        android:text="Πατήστε στις ρυθμίσεις"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +48,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/messenger_des_top_margin"
-        android:text="Το κουμπί βρίσκεται στην κατηγορία “Προφιλ”, περίπου στο μεσο της οθόνης"
+        android:gravity="center"
+        android:text="Ανοίξτε την εφαργμογή του messenger"
         app:layout_constraintEnd_toEndOf="@+id/textView33"
         app:layout_constraintStart_toStartOf="@+id/textView33"
         app:layout_constraintTop_toBottomOf="@+id/textView33" />

@@ -31,7 +31,7 @@
 
 
     <TextView
-        android:id="@+id/trip"
+        android:id="@+id/help"
         style="@style/paragraph_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="Οδηγός βοηθείας"
-        app:drawableStartCompat="@drawable/ic_messages"
+        app:drawableStartCompat="@drawable/ic_help"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/messenger_link" />
 
@@ -55,8 +55,8 @@
         android:layout_marginEnd="16dp"
         android:text="Αν δεν μπορειτε να βρείτε τον σύνδεσμο του λογαριασμού σας στο messenger, δείτε τον οδηγό βοηθείας."
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/trip"
-        app:layout_constraintTop_toBottomOf="@+id/trip" />
+        app:layout_constraintStart_toStartOf="@+id/help"
+        app:layout_constraintTop_toBottomOf="@+id/help" />
 
 
     <TextView
