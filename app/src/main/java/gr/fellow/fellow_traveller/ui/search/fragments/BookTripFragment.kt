@@ -72,11 +72,9 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
                     petsSwitch.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { compoundButton, b ->
                         //Listener for user if wants pet on the trip
                         if (b) {
-                            havePetSwitchInfo.setText("Ναι")
                             havePetSwitchInfo.text = getString(R.string.option_yes)
                             havePet = true
                         } else {
-                            havePetSwitchInfo.setText("Όχι")
                             havePetSwitchInfo.text = getString(R.string.option_no)
                             havePet = false
                         }

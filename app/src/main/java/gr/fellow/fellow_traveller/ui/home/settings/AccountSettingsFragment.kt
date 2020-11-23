@@ -131,7 +131,6 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                 compressUriImage()
             } else if (resultCode === CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 // val e = result.error
-                createToast("Error")
                 createToast(getString(R.string.error_msg))
             }
         }
