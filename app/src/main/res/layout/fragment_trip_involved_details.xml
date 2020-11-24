@@ -78,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:text="Από"
+                    android:text="@string/from"
                     app:layout_constraintStart_toStartOf="@+id/from"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -88,7 +88,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Πρός"
+                    android:text="@string/to"
                     app:layout_constraintStart_toStartOf="@+id/from"
                     app:layout_constraintTop_toBottomOf="@+id/from" />
 
@@ -102,7 +102,7 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="16dp"
                     android:tag="1"
-                    android:text="Θεσσαλονίκη"
+                    android:text="@string/city_thessaloniki"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView15" />
@@ -115,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:tag="1"
-                    android:text="Αθήνα"
+                    android:text="@string/city_athens"
                     app:layout_constraintEnd_toEndOf="@+id/from"
                     app:layout_constraintStart_toStartOf="@+id/from"
                     app:layout_constraintTop_toBottomOf="@+id/textView19" />
@@ -128,7 +128,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:tag="2"
-                    android:text="07:00 AM"
+                    android:text="@string/trip_time_placeholder"
                     app:layout_constraintStart_toStartOf="@+id/to"
                     app:layout_constraintTop_toBottomOf="@+id/to" />
 
@@ -139,7 +139,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:tag="2"
-                    android:text="Δευ, 13 Μαρ"
+                    android:text="@string/trip_date_placeholder"
                     app:layout_constraintBottom_toBottomOf="@+id/time"
                     app:layout_constraintStart_toEndOf="@+id/time"
                     app:layout_constraintTop_toTopOf="@+id/time" />
@@ -152,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:drawablePadding="8dp"
                     android:padding="10dp"
-                    android:text="Google maps"
+                    android:text="@string/google_maps"
                     app:drawableEndCompat="@drawable/ic_google_maps"
                     app:layout_constraintBottom_toBottomOf="@+id/day"
                     app:layout_constraintEnd_toEndOf="@+id/to"
@@ -178,7 +178,7 @@
                         android:layout_marginEnd="32dp"
                         android:layout_marginBottom="32dp"
                         android:tag="5"
-                        android:text="Παρα πολυ καλο παιδι αλλα θελει δουλεια.. Τουλαχιστον ακουγε sugar boy"
+                        android:text="@string/trip_review_placeholder"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/user_image"
@@ -194,7 +194,7 @@
                         android:layout_marginEnd="16dp"
                         android:ellipsize="end"
                         android:singleLine="true"
-                        android:text="Πατριάρχης Φώτιος"
+                        android:text="@string/rate_user_placeholder"
                         app:layout_constraintBottom_toBottomOf="@+id/user_image"
                         app:layout_constraintEnd_toStartOf="@+id/rate"
                         app:layout_constraintStart_toEndOf="@+id/user_image"
@@ -206,7 +206,7 @@
                         android:layout_height="64dp"
                         android:background="@drawable/background_rate_radius_16_black"
                         android:gravity="center"
-                        android:text="4.6"
+                        android:text="@string/rating_placeholder"
                         style="@style/header_3"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -292,7 +292,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="64dp"
-                    android:text="Όχημα"
+                    android:text="@string/vehicle"
                     app:layout_constraintStart_toStartOf="@+id/constraintLayout6"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
@@ -329,7 +329,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:text="TextView"
+                        android:text="@string/car_textview"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/imageView4"
@@ -344,7 +344,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="48dp"
-                    android:text="Επιβάτες"
+                    android:text="@string/passengers"
                     app:layout_constraintStart_toStartOf="@+id/constraintLayout5"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
 
@@ -371,7 +371,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="100dp"
-                    android:text="Όλοι οι επιβάτες"
+                    android:text="@string/all_passengers"
                     android:textColor="@color/colorPrimary"
                     android:visibility="invisible"
                     app:drawableEndCompat="@drawable/ic_right_arrow"
@@ -404,7 +404,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
-            android:text="Είσαι μέλος του ταξιδιού"
+            android:text="@string/youre_member_of_trip"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -416,7 +416,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
-            android:text="Δες την κρατησή σου"
+            android:text="@string/view_your_booking"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

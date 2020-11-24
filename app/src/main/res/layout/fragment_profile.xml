@@ -43,7 +43,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:singleLine="true"
-            android:text="Tyler Joseph"
+            android:text="@string/rate_user_placeholder"
             app:layout_constraintBottom_toBottomOf="@id/user_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/user_image"
@@ -57,7 +57,7 @@
             android:layout_marginTop="31dp"
             android:layout_marginEnd="16dp"
             android:focusable="false"
-            android:hint="Δεν υπάρχει κάποια σχετική περιγραφή"
+            android:hint="@string/no_description_available"
             android:longClickable="false"
             android:textColorHint="@color/greyBlack_transparent_color"
             app:layout_constraintEnd_toEndOf="parent"
@@ -143,7 +143,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="43dp"
-            android:text="Κύριο όχημα"
+            android:text="@string/main_vehicle"
             app:layout_constraintStart_toStartOf="@id/user_image"
             app:layout_constraintTop_toBottomOf="@id/user_info_section" />
 
@@ -163,7 +163,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
-            android:text="Τελευταία αξιολόγηση"
+            android:text="@string/last_review"
             app:layout_constraintStart_toStartOf="@id/user_image"
             app:layout_constraintTop_toBottomOf="@id/car_item" />
 
@@ -183,11 +183,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="Όλες οι αξιολογήσεις"
-            android:drawableRight="@drawable/ic_star"
+            android:text="@string/all_ratings"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/review_item" />
+            app:layout_constraintTop_toBottomOf="@id/review_item"
+            app:drawableEndCompat="@drawable/ic_star" />
 
         <TextView
             android:id="@+id/all_cars"
@@ -195,11 +195,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Τα οχήματα μου"
-            android:drawableRight="@drawable/ic_car"
+            android:text="@string/my_vehicles"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/all_reviews" />
+            app:layout_constraintTop_toBottomOf="@id/all_reviews"
+            app:drawableEndCompat="@drawable/ic_car" />
 
         <TextView
             android:id="@+id/all_searchs"
@@ -207,22 +207,22 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Ιστορικό αναζητήσεων"
-            android:drawableRight="@drawable/ic_search"
+            android:text="@string/searches_history"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/all_cars" />
+            app:layout_constraintTop_toBottomOf="@id/all_cars"
+            app:drawableEndCompat="@drawable/ic_search" />
         <TextView
             android:id="@+id/all_offers"
             style="@style/settings_text_with_padding"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Ιστορικό αναζητήσεων"
-            android:drawableRight="@drawable/ic_steer"
+            android:text="@string/offers_history"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/all_searchs" />
+            app:layout_constraintTop_toBottomOf="@id/all_searchs"
+            app:drawableRightCompat="@drawable/ic_steer" />
 
 
         <TextView
@@ -231,7 +231,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="51dp"
-            android:text="Σχετικά με εμένα"
+            android:text="@string/about_me"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/about_me"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />

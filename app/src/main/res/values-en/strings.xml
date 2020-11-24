@@ -195,7 +195,7 @@
     <string name="date_range">Date range</string>
     <string name="cancel_search">Cancel search?</string>
     <string name="per_person">per person</string>
-    <string name="more_recent">Most relevant</string>
+    <string name="more_relevant">Most relevant</string>
     <string name="price_title">Price</string>
     <string name="rating_title">Rating</string>
     <string name="enter_destination">Choose a destination</string>

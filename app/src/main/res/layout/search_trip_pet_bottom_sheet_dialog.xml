@@ -13,7 +13,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:text="Συνοδεία κατοικιδίου;"
+        android:text="@string/pet_companionship"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +38,7 @@
         android:layout_height="50dp"
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center"
-        android:text="Οτιδήποτε"
+        android:text="@string/whatever"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/yes" />

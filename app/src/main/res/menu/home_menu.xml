@@ -4,19 +4,19 @@
     <item
         android:id="@+id/destination_main"
         android:icon="@drawable/ic_logo_black"
-        android:title="Αρχική" />
+        android:title="@string/home" />
     <item
         android:id="@+id/destination_trips"
         android:icon="@drawable/ic_car"
-        android:title="Ταξίδια" />
+        android:title="@string/trips" />
 
     <item
         android:id="@+id/destination_notifications"
         android:icon="@drawable/ic_notifications"
-        android:title="Ειδοποιήσεις" />
+        android:title="@string/notifications" />
     <item
         android:id="@+id/destination_info"
         android:icon="@drawable/ic_person"
-        android:title="Προφίλ" />
+        android:title="@string/profile" />
 
 </menu>
