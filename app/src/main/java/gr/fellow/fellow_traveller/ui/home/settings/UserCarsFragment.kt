@@ -14,7 +14,6 @@ import gr.fellow.fellow_traveller.ui.car.AddCarActivity
 import gr.fellow.fellow_traveller.ui.car.CarAdapter
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
-import gr.fellow.fellow_traveller.ui.extensions.postDelay
 import gr.fellow.fellow_traveller.ui.extensions.startActivityForResult
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 
@@ -31,12 +30,10 @@ class UserCarsFragment : BaseFragment<FragmentUserCarsBinding>() {
 
 
     override fun setUpObservers() {
-        postDelay(250) {
-            viewModel.cars.observe(viewLifecycleOwner, Observer {
-                (binding.myCarsRecycler.adapter as CarAdapter).submitList(it)
-                binding.refresh.isRefreshing = false
-            })
-        }
+        viewModel.cars.observe(viewLifecycleOwner, Observer {
+            (binding.myCarsRecycler.adapter as CarAdapter).submitList(it)
+            binding.refresh.isRefreshing = false
+        })
     }
 
     override fun setUpViews() {
