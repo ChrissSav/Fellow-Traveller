@@ -2,6 +2,8 @@ package gr.fellow.fellow_traveller.ui.home.tabs
 
 import android.content.Intent
 import android.net.Uri
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -39,10 +41,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 binding.reviewItem.date.text = getDateFromTimestamp(first.timestamp, "d MMM yyyy")
                 binding.reviewItem.rate.text = first.rate.toString()
                 binding.reviewItem.username.text = first.user.fullName
-                //binding.viewAll.visibility = View.VISIBLE
+
+                binding.reviewSection.visibility = VISIBLE
                 //binding.reviewsConstraintLayout.visibility = View.VISIBLE
             } else {
-                //GONE the constraints
+                binding.reviewSection.visibility = GONE
             }
 
         })
@@ -73,11 +76,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     carItem.model.text = firstCar.model
                     carItem.plate.text = firstCar.plate
                     carItem.color.text = firstCar.color
+
+                    binding.carSection.visibility = VISIBLE
                     //binding.viewAll.visibility = View.INVISIBLE
                     //binding.reviewsConstraintLayout.visibility = View.INVISIBLE
                 } catch (e: NoSuchElementException) {
                     //binding.viewAll.visibility = View.GONE
                     //binding.reviewsConstraintLayout.visibility = View.GONE
+                    binding.carSection.visibility = GONE
                 }
 
             }
