@@ -2,6 +2,7 @@ package gr.fellow.fellow_traveller.ui.home.tabs
 
 import android.content.Intent
 import android.net.Uri
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
@@ -88,6 +89,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
         binding.settingsButton.setOnClickListener {
             findNavController()?.navigate(R.id.to_setting)
+        }
+        binding.allCars.setOnClickListener {
+            findNavController()?.navigate(R.id.action_destination_info_to_userCarsFragment)
+        }
+        binding.allSearchs.setOnClickListener {
+            findNavController()?.navigate(R.id.action_destination_info_to_tripInvolvedHistoryFragment, bundleOf("creator" to false))
+        }
+        binding.allOffers.setOnClickListener {
+            findNavController()?.navigate(R.id.action_destination_info_to_tripInvolvedHistoryFragment, bundleOf("creator" to true))
         }
 
         binding.messengerLink.setOnClickListener {
