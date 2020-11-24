@@ -14,7 +14,7 @@
         android:layout_marginStart="16dp"
         style="@style/display_1"
         android:layout_marginTop="32dp"
-        android:text="Ταξίδια"
+        android:text="@string/trips"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="@dimen/new_trip_margin_from_top"
-                android:text="Όχημα"
+                android:text="@string/vehicle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textView2" />
 
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:text="Επιλέξτε αμάξι για το ταξίδι σας"
+                android:text="@string/choose_vehicle_for_trip"
                 android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView"
@@ -83,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="45dp"
-                android:text="Θέσεις"
+                android:text="@string/available_seats_plural"
                 app:layout_constraintStart_toStartOf="@+id/textView6"
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -93,7 +93,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Εισάγετε τον αριθμό των ελεύθερων θέσεων που θέλετε να μοιραστείτε"
+                android:text="@string/enter_seat_availability"
 
                 android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="@+id/seats_pick_button"
@@ -106,7 +106,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="45dp"
-                android:text="Κατοικίδια"
+                android:text="@string/pets"
                 app:layout_constraintStart_toStartOf="@+id/textView6v"
                 app:layout_constraintTop_toBottomOf="@+id/textView6v" />
 
@@ -117,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="32dp"
-                android:text="Επιτρέπεται κατοικίδια ή όχι;"
+                android:text="@string/are_pets_allowed_or_not"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView10"
@@ -130,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Αποσκεύες"
+                android:text="@string/luggage"
                 app:layout_constraintStart_toStartOf="@+id/textView8"
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -140,7 +140,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Εισάγετε τον αριθμό για τις αποσκευές των επιβατών"
+                android:text="@string/enter_luggage_availability"
                 android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="@+id/bags_pick_button"
                 app:layout_constraintStart_toStartOf="@+id/textView_2"
@@ -163,7 +163,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/button_number_layout_height"
                 android:gravity="center|end"
-                android:hint="Καθορίστε"
+                android:hint="@string/specify"
                 android:padding="@dimen/calendar_margin_16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView_2"
                 app:layout_constraintEnd_toEndOf="@+id/car_ediText"

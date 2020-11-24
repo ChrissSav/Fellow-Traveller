@@ -23,6 +23,7 @@ import com.tapadoo.alerter.Alerter
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
+import kotlin.math.round
 import kotlin.reflect.KClass
 
 
@@ -31,7 +32,7 @@ fun Activity.createAlerter(msg: String) {
     if (this.resources.getString(R.string.ERROR_INTERNET_CONNECTION) == msg)
         icon = R.drawable.ic_no_wifi
     Alerter.create(this)
-        .setTitle("Προσοχή")
+        .setTitle(getString(R.string.warning))
         .setText(msg)
         .setIcon(icon)
         .setBackgroundColorRes(R.color.colorPrimary)
@@ -46,7 +47,7 @@ fun Activity.createAlerter(msg: String, color: Int) {
     if (this.resources.getString(R.string.ERROR_INTERNET_CONNECTION) == msg)
         icon = R.drawable.ic_no_wifi
     Alerter.create(this)
-        .setTitle("Προσοχή")
+        .setTitle(getString(R.string.warning))
         .setText(msg)
         .setIcon(icon)
         .setBackgroundColorRes(color)
@@ -90,7 +91,7 @@ fun Activity.startActivityWithFade(activity: KClass<out Activity>, bundle: Bundl
 
 fun Activity.startActivityClearStack(activity: KClass<out Activity>) {
     val intent = Intent(this, activity.java)
-    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
     startActivity(intent)
     finishAffinity()
 
@@ -99,14 +100,14 @@ fun Activity.startActivityClearStack(activity: KClass<out Activity>) {
 fun Activity.openGoogleMaps(trip: TripSearch) {
     val uri = "http://maps.google.com/maps?f=d&hl=en&saddr=${trip.destFrom.latitude},${trip.destFrom.longitude}&daddr=${trip.destTo.latitude},${trip.destTo.longitude}&mode=d"
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
-    startActivity(Intent.createChooser(intent, "Select an application"))
+    startActivity(Intent.createChooser(intent, getString(R.string.select_application)))
 
 }
 
 fun Activity.openGoogleMaps(trip: TripInvolved) {
     val uri = "http://maps.google.com/maps?f=d&hl=en&saddr=${trip.destFrom.latitude},${trip.destFrom.longitude}&daddr=${trip.destTo.latitude},${trip.destTo.longitude}&mode=d"
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
-    startActivity(Intent.createChooser(intent, "Select an application"))
+    startActivity(Intent.createChooser(intent, getString(R.string.select_application)))
 }
 
 
@@ -125,7 +126,7 @@ fun Fragment.startActivityToLeft(intent: Intent, code: Int) {
 
 fun Fragment.startActivityClearStack(activityTemp: KClass<out Activity>) {
     val intent = Intent(this.context, activityTemp.java)
-    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
     startActivity(intent)
     activity?.finishAffinity()
 }
@@ -178,7 +179,7 @@ fun Fragment.createAlerter(msg: String) {
     if (this.resources.getString(R.string.ERROR_INTERNET_CONNECTION) == msg)
         icon = R.drawable.ic_no_wifi
     Alerter.create(activity)
-        .setTitle("Προσοχή")
+        .setTitle(getString(R.string.warning))
         .setText(msg)
         .setIcon(icon)
         .setBackgroundColorRes(R.color.colorPrimary)
@@ -190,7 +191,7 @@ fun Fragment.createAlerter(msg: String) {
 
 fun Fragment.createAlerterInfo(msg: String, color: Int) {
     Alerter.create(activity)
-        .setTitle("Ενημέρωση")
+        .setTitle(getString(R.string.update))
         .setText(msg)
         .setIcon(R.drawable.ic_lock)
         .setBackgroundColorRes(color)
@@ -310,3 +311,8 @@ val Double.toDp: Int
 val Double.toPx: Int
     get() = (this / Resources.getSystem().displayMetrics.density).toInt()
 
+fun Float.round(decimals: Int): Float {
+    var multiplier = 1.0
+    repeat(decimals) { multiplier *= 10 }
+    return (round(this * multiplier) / multiplier).toFloat()
+}

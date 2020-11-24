@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:text="Επέλεξε αυτοκίνητο"
+        android:text="@string/choose_vehicle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,7 +41,7 @@
         android:paddingTop="10dp"
         android:paddingRight="28dp"
         android:paddingBottom="10dp"
-        android:text="Προσθήκη αυτοκινήτου"
+        android:text="@string/add_vehicle"
         android:textAllCaps="false"
         android:textColor="@color/home_blue"
         android:textSize="18sp"

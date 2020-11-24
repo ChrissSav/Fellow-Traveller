@@ -59,7 +59,7 @@ class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>
                     }
 
 
-                    description.text = "${price.text} ανά άτομο"
+                    description.text = "${price.text} " + getString(R.string.per_person)
 
                     if (!trip.passengers.isNullOrEmpty()) {
                         binding.passengerRecyclerView.adapter = PassengerAdapter(trip.passengers, this@SearchTripDetailsFragment::onPassengerListener)

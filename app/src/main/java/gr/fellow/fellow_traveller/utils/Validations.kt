@@ -16,11 +16,6 @@ fun validateDateTimeDiffer(date: String, time: String, timeDiffer: Int): Boolean
     return false
 }
 
-fun isValidPhone(phone: String): Boolean {
-    val regexPattern = Pattern.compile("^[6][9][0-9]{8}$")
-    return regexPattern.matcher(phone).matches()
-}
-
 
 fun isValidPlate(plate: String): Boolean {
     val regexPattern = Pattern.compile("^[ΑΒΕΖΗΙΚΜΝΟΡΤΥΧ]{3}-[0-9]{4}$")

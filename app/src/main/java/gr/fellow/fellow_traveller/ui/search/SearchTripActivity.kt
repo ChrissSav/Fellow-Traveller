@@ -39,7 +39,7 @@ class SearchTripActivity : BaseActivityViewModel<ActivitySearchTripBinding, Sear
     override fun onBackPressed() {
 
         if (nav.currentDestination?.id == R.id.searchTripsFragment) {
-            ExitCustomDialog(this, this::exitCustomDialogAnswerType, "Απόρριψη της αναζήτησης ;", 2).show(supportFragmentManager, "exitCustomDialog")
+            ExitCustomDialog(this, this::exitCustomDialogAnswerType, getString(R.string.cancel_search), 2).show(supportFragmentManager, "exitCustomDialog")
         } else {
             super.onBackPressed()
         }

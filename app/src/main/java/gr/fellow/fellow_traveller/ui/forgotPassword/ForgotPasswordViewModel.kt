@@ -34,7 +34,7 @@ constructor(
 
     fun forgotPassword(email: String) {
         launch(true) {
-            val response = forgotPasswordUserCase(email)
+            forgotPasswordUserCase(email)
             this.email = email
             _successForgotRequest.value = true
         }
@@ -43,14 +43,14 @@ constructor(
 
     fun resetPassword(code: String) {
         launch(true) {
-            val response = resetPasswordUserCase(email, code, _password.value.toString())
+            resetPasswordUserCase(email, code, _password.value.toString())
             _successResetPassword.value = true
         }
     }
 
     fun forgotPassword() {
         launch(true) {
-            val response = forgotPasswordUserCase(email)
+            forgotPasswordUserCase(email)
             _successForgotRequest.value = true
         }
     }

@@ -17,7 +17,6 @@ class TimePickerCustomDialog(
 
     private var hour = 0
     private var min = 0
-    private lateinit var calendar: Calendar
 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

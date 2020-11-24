@@ -32,7 +32,7 @@
         android:background="@android:color/transparent"
         android:drawableEnd="@drawable/ic_magnifier"
         android:ellipsize="end"
-        android:hint="Επιλογή τοποθεσίας..."
+        android:hint="@string/select_location"
         android:imeOptions="actionSearch"
         android:inputType="text"
         android:singleLine="true"

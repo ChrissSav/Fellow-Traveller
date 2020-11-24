@@ -44,11 +44,10 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
 
             /** Initialization **/
 
-            seatsPickButton.currentNum = searchTripFilter.seatsMin ?: resources.getInteger(R.integer.seats_min)
+            seatsPickButton.currentNum = searchTripFilter.seatsMin
             fromRangeSeekbar.setMinStartValue((searchTripFilter.rangeFrom ?: resources.getInteger(R.integer.min_value_in_filters)).toFloat()).apply()
             toRangeSeekbar.setMinStartValue((searchTripFilter.rangeTo ?: resources.getInteger(R.integer.min_value_in_filters)).toFloat()).apply()
             priceRangeSeekbar.setMinStartValue((searchTripFilter.priceMax ?: resources.getInteger(R.integer.min_value_in_filters)).toFloat()).apply()
-            seatsPickButton.currentNum = searchTripFilter.seatsMin ?: 1
             initializePet()
 
             /** Date Picker Initialization **/
@@ -80,13 +79,13 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
 
 
             builder.setCalendarConstraints(constraintBuilder.build())
-            builder.setTitleText("Επιλέξτε εύρος ημερομηνίας για αναζήτηση")
+            builder.setTitleText(getString(R.string.choose_date_range_for_search))
             val picker = builder.build()
 
             /** OnClicks **/
 
             date.setOnClickListener {
-                picker.show(this@SearchFilterActivity?.supportFragmentManager!!, picker.toString())
+                picker.show(this@SearchFilterActivity.supportFragmentManager, picker.toString())
 
             }
 
@@ -118,7 +117,7 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
                 builder.setSelection(androidx.core.util.Pair(now.timeInMillis, now.timeInMillis))
                 builder.build()
                 //Long first/second to null
-                date.setText("Εύρος ημ/νίας")
+                date.setText(getString(R.string.date_range))
             }
 
             picker.addOnPositiveButtonClickListener {

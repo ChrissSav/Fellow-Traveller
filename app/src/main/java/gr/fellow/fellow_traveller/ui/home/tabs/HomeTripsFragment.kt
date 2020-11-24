@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.ui.home.tabs
 
 import dagger.hilt.android.AndroidEntryPoint
+import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentHomeTripsBinding
 import gr.fellow.fellow_traveller.ui.home.adapter.TripsViewPagerAdapter
@@ -21,8 +22,8 @@ class HomeTripsFragment : BaseFragment<FragmentHomeTripsBinding>() {
 
     override fun setUpViews() {
         val tripsViewPagerAdapter = TripsViewPagerAdapter(childFragmentManager)
-        tripsViewPagerAdapter.addFragment(tripsTakesPartFragment, "Αναζητήσεις")
-        tripsViewPagerAdapter.addFragment(tripsOffersFragment, "Προσφορές")
+        tripsViewPagerAdapter.addFragment(tripsTakesPartFragment, getString(R.string.title_searches))
+        tripsViewPagerAdapter.addFragment(tripsOffersFragment, getString(R.string.title_offers))
         binding.fragmentTripViewPager.adapter = tripsViewPagerAdapter
         binding.fragmentTripTabLayout.setupWithViewPager(binding.fragmentTripViewPager)
 

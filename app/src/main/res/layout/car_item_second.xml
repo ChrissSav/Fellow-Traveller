@@ -15,14 +15,14 @@
         android:padding="16dp"
         android:layout_marginBottom="16dp"
         android:background="?android:attr/selectableItemBackground"
-        android:drawableEnd="@drawable/ic_car"
         android:gravity="center|start"
         android:paddingEnd="16dp"
-        android:text="Rolls-Royce Phanton"
+        android:text="@string/placeholder_car_make_model"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="RtlSymmetry" />
+        tools:ignore="RtlSymmetry"
+        app:drawableEndCompat="@drawable/ic_car" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -45,7 +45,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
     override fun setUpViews() {
         nav = Navigation.findNavController(this, R.id.RegisterActivity_nav_host)
 
-        nav.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { _, destination, _ ->
+        nav.addOnDestinationChangedListener { _, destination, _ ->
             hideKeyboard()
             when (destination.id) {
                 R.id.emailFragment -> binding.progressBar.progress = 30
@@ -57,7 +57,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
                 }
             }
 
-        })
+        }
 
 
 

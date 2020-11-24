@@ -26,7 +26,7 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
     override fun setUpObservers() {
 
         viewModel.changePassword.observe(viewLifecycleOwner, Observer {
-            createToast("Επιτυχής Αλλαγή κωδικού")
+            createToast(getString(R.string.password_change_success))
             onBackPressed()
         })
 

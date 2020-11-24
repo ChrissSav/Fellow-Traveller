@@ -7,6 +7,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
+import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentHomeBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
@@ -36,31 +37,32 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun setUpViews() {
         binding.constraintLayoutNew.setOnClickListener {
-            if (accountCorrect)
+            if (accountCorrect) {
                 startActivityForResult(NewTripActivity::class, 1, null)
-            else
-                createAlerter("Πρέπει να ολοκληρώσετε το προφίλ σας πρώτα !")
+            } else {
+                createAlerter(getString(R.string.complete_profile_warning))
+            }
         }
 
         binding.newTrip.setOnClickListener {
             if (accountCorrect)
                 startActivityForResult(NewTripActivity::class, 1, bundleOf("userRate" to viewModel.user.value?.rate))
             else
-                createAlerter("Πρέπει να ολοκληρώσετε το προφίλ σας πρώτα !")
+                createAlerter(getString(R.string.complete_profile_warning))
         }
 
         binding.constraintLayoutSearch.setOnClickListener {
             if (accountCorrect)
                 startActivityForResult(SearchTripActivity::class, 2, null)
             else
-                createAlerter("Πρέπει να ολοκληρώσετε το προφίλ σας πρώτα !")
+                createAlerter(getString(R.string.complete_profile_warning))
         }
 
         binding.searchTrip.setOnClickListener {
             if (accountCorrect)
                 startActivityForResult(SearchTripActivity::class, 2, null)
             else
-                createAlerter("Πρέπει να ολοκληρώσετε το προφίλ σας πρώτα !")
+                createAlerter(getString(R.string.complete_profile_warning))
         }
         binding.help.setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://fellowtraveller.gr"))

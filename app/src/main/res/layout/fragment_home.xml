@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text="Βρες συνταξιδιώτες\n στο λεπτό"
+            android:text="@string/find_co_travellers_in_an_instant"
             app:layout_constraintBottom_toBottomOf="@+id/textView12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView12"
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
-                android:text="Αναζητήστε ένα ταξίδι"
+                android:text="@string/search_for_a_trip"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,7 +69,7 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="24dp"
                 android:lineSpacingExtra="5dp"
-                android:text="Βρείτε τους ιδανικούς συνταξιδιώτες πολυ γρηγορα"
+                android:text="@string/find_the_best_co_travelers_in_no_time"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/search_trip"
                 app:layout_constraintStart_toStartOf="@+id/textView28"
@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
-                android:text="Προσφέρετε ένα ταξίδι"
+                android:text="@string/make_a_trip_offer"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -122,7 +122,7 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="24dp"
                 android:lineSpacingExtra="5dp"
-                android:text="Βρείτε τους ιδανικούς συνταξιδιώτες πολυ γρηγορα"
+                android:text="@string/find_the_best_co_travelers_in_no_time"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/new_trip"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
@@ -150,7 +150,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="54dp"
-            android:text="Δημοφιλείς Ταξίδια"
+            android:text="@string/popular_trips"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout_new"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout_new" />
 
@@ -161,7 +161,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="Επέλεξε μία από τις πιο δημοφιλής διαδρομές"
+            android:text="@string/choose_a_popular_trip"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView31"
             app:layout_constraintTop_toBottomOf="@+id/textView31" />
@@ -190,7 +190,7 @@
             android:layout_marginEnd="16dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="Θεσσαλονίκη - Αθήνα"
+            android:text="@string/popular_trip_thess_athens"
             app:layout_constraintEnd_toEndOf="@id/guideline4"
             app:layout_constraintStart_toStartOf="@id/city_choice_1"
             app:layout_constraintTop_toBottomOf="@id/city_choice_1" />
@@ -220,7 +220,7 @@
             android:layout_marginEnd="16dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="Ιωάννινα - Αθήνα"
+            android:text="@string/popular_trip_ioannina_athens"
             app:layout_constraintEnd_toEndOf="@id/guideline4"
             app:layout_constraintStart_toStartOf="@id/city_choice_2"
             app:layout_constraintTop_toBottomOf="@id/city_choice_2" />
@@ -251,7 +251,7 @@
             android:layout_marginEnd="16dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="Ιωάννινα - Πάτρα"
+            android:text="@string/popular_trip_ioannina_patra"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/city_choice_3"
             app:layout_constraintTop_toBottomOf="@id/city_choice_3" />
@@ -280,7 +280,7 @@
             android:layout_marginEnd="16dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="Καβάλα - Θεσσαλονίκη"
+            android:text="@string/popular_trip_kavala_thess"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/city_choice_4"
             app:layout_constraintTop_toBottomOf="@id/city_choice_4" />
@@ -292,7 +292,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
-            android:text="Οδηγοί βοηθείας"
+            android:text="@string/help_guides"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout_new"
             app:layout_constraintTop_toBottomOf="@+id/city_name_4" />
 
@@ -314,7 +314,7 @@
                 style="@style/settings_text_with_padding"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Πώς λειτουργεί το fellow;"
+                android:text="@string/how_does_fellow_work"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -325,7 +325,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
-                android:text="Τι μπορείς να κάνεις στο fellow;"
+                android:text="@string/what_can_you_do_with_fellow"
                 app:layout_constraintEnd_toEndOf="@id/guide"
                 app:layout_constraintStart_toStartOf="@+id/guide"
                 app:layout_constraintTop_toBottomOf="@+id/guide" />
@@ -336,7 +336,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
-                android:text="Αναζήτηση και κράτηση θέσης"
+                android:text="@string/search_and_rsvp_a_trip"
                 app:layout_constraintEnd_toEndOf="@+id/help"
                 app:layout_constraintStart_toStartOf="@+id/help"
                 app:layout_constraintTop_toBottomOf="@+id/help" />
