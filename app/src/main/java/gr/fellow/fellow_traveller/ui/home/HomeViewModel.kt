@@ -129,7 +129,6 @@ constructor(
                 return@launch
             }
             _user.value = loadUserLocalInfoUseCase()
-
             loadReviews()
         }
     }
