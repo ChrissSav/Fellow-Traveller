@@ -1,15 +1,10 @@
 package gr.fellow.fellow_traveller.ui.home.settings
 
 import android.app.Activity.RESULT_OK
-import android.content.ContentResolver
-import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.net.Uri
 import android.util.Log
 import android.view.View
-import android.webkit.MimeTypeMap
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -27,12 +22,16 @@ import gr.fellow.fellow_traveller.ui.extensions.createToast
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
+import gr.fellow.fellow_traveller.utils.ConnectivityHelper
 import java.io.File
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
 
+    @Inject
+    lateinit var connectivityHelper: ConnectivityHelper
     private val viewModel: HomeViewModel by activityViewModels()
     private var mImageUri: Uri? = null
     private var mStorageRef: StorageReference? = null
@@ -77,7 +76,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
             onBackPressed()
         }
 
-        mStorageRef = FirebaseStorage.getInstance().getReference("profile_images");
+        mStorageRef = FirebaseStorage.getInstance().getReference("profile_images")
 
         binding.uploadImage.setOnClickListener {
             userImagePickBottomSheetDialog = UserImagePickBottomSheetDialog(this@AccountSettingsFragment::onImageSelect)
@@ -109,12 +108,12 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
         startActivityForResult(intent, CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE)
     }
 
-    //Get the extension of the image
+/*    //Get the extension of the image
     private fun getFileExtension(uri: Uri): String? {
         val cR: ContentResolver = (requireContext().contentResolver as ContentResolver)//getContentResolver()
         val mime = MimeTypeMap.getSingleton()
         return mime.getExtensionFromMimeType(cR.getType(uri))
-    }
+    }*/
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -142,7 +141,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                 SiliCompressor.with(this.context)
                     .compress(
                         FileUtils.getPath(this.context, mImageUri), File(
-                            requireActivity().getCacheDir(),
+                            requireActivity().cacheDir,
                             "temp"
                         )
                     )
@@ -184,7 +183,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                 binding.progressBar.visibility = View.GONE
             }
                 .addOnProgressListener { taskSnapshot -> //We get progress from uploading the image file
-                    val progress = 100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount
+//                    val progress = 100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount
                     // TODO add progress bar
                     //imageProgressBar.setProgress(progress.toInt())
 
@@ -205,28 +204,18 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
 //    }
 
     private fun onImageSelect(value: Boolean) {
-        if (value) {
-            if (isConnected()) {
+        if (value)
+            if (connectivityHelper.checkInternetConnection())
                 onChooseFile()
-            } else {
-                createToast(getString(R.string.internet_connection_failure))
-            }
-        } else {
-            if (isConnected()) {
+            else
+                createToast("Ελέγξτε την σύνδεση του δικτύου σας για το ανεβάσμα νέας φωτογραφίας")
+        else
+            if (connectivityHelper.checkInternetConnection())
                 viewModel.updateUserImage(null)
-            } else {
-                createToast(getString(R.string.internet_connection_failure))
-            }
-        }
+            else
+                createToast("Ελέγξτε την σύνδεση του δικτύου σας για το ανεβάσμα νέας φωτογραφίας")
     }
 
-    private fun isConnected(): Boolean {
-        //Connection Manager
-        val connectionManager: ConnectivityManager = activity?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activeNetwork: NetworkInfo? = connectionManager.activeNetworkInfo
-        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
 
-        return isConnected
-    }
 
 }

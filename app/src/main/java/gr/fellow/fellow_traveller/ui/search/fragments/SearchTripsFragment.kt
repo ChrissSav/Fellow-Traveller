@@ -33,7 +33,6 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
     private var clickTimeDialog = 0L
     private var bundle = bundleOf()
     private lateinit var sortSearchTripsBottomSheetDialog: SortSearchTripsBottomSheetDialog
-    private var pickerFlag: Boolean = true
 
 
 
@@ -230,26 +229,25 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
     }
 
     private fun onSortItemClickListener(sortAnswerType: SortAnswerType) {
-
-        when (sortAnswerType) {
-           SortAnswerType.Relevant -> {
-               createToast(getString(R.string.more_recent))
-               binding.sortButton.text = getString(R.string.more_recent)
-               viewModel.sortByDate()
-               //sortOption = SortAnswerType.Relevant
-           }
+         when (sortAnswerType) {
+            SortAnswerType.Relevant -> {
+                createToast("Πιο σχετικά")
+                binding.sortButton.text = getString(R.string.more_recent)
+                viewModel.sortByDate()
+                //sortOption = SortAnswerType.Relevant
+            }
             SortAnswerType.Price -> {
-                createToast(getString(R.string.price_title))
+                createToast("Τιμή")
                 binding.sortButton.text = getString(R.string.price_title)
                 viewModel.sortByPrice()
                 //sortOption = SortAnswerType.Price
             }
-           SortAnswerType.Rate -> {
-               createToast(getString(R.string.rating_title))
-               binding.sortButton.text = getString(R.string.rating_title)
-               viewModel.sortByRate()
-               //sortOption = SortAnswerType.Rate
-           }
+            SortAnswerType.Rate -> {
+                createToast("Αξιολόγηση")
+                binding.sortButton.text = getString(R.string.rating_title)
+                viewModel.sortByRate()
+                //sortOption = SortAnswerType.Rate
+            }
 
         }
     }

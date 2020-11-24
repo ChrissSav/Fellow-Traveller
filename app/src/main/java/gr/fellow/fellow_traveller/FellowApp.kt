@@ -11,10 +11,4 @@ class FellowApp : Application() {
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
-    override fun onCreate() {
-        super.onCreate()
-
-
-
-    }
 }

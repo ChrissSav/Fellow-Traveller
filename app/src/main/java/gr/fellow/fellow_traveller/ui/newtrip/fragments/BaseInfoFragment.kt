@@ -2,7 +2,6 @@ package gr.fellow.fellow_traveller.ui.newtrip.fragments
 
 import android.app.Activity
 import android.content.Intent
-import android.widget.CompoundButton
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import gr.fellow.fellow_traveller.R
@@ -81,9 +80,9 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
             }
 
 
-            pet.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { _, b ->
+            pet.setOnCheckedChangeListener { _, b ->
                 viewModel.setPet(b)
-            })
+            }
 
 
             carEdiText.setOnClickListener {

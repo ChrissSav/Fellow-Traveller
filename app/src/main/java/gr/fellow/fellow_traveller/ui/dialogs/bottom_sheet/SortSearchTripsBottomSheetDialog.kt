@@ -6,9 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.databinding.ConfirmBottomSheetDialogBinding
 import gr.fellow.fellow_traveller.databinding.SortSearchTripsSheetDialogBinding
-import gr.fellow.fellow_traveller.domain.PetAnswerType
 import gr.fellow.fellow_traveller.domain.SortAnswerType
 
 class SortSearchTripsBottomSheetDialog(

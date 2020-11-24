@@ -118,12 +118,11 @@ object NetworkModule {
     @GoogleService
     @Singleton
     @Provides
-    fun provideOkHttpClientGoogle(loggingInterceptor: HttpLoggingInterceptor, connectivityHelper: ConnectivityHelper): OkHttpClient.Builder {
+    fun provideOkHttpClientGoogle(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient.Builder {
         return OkHttpClient.Builder().proxy(Proxy.NO_PROXY)
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
-            //  .addInterceptor(NetworkConnectionInterceptor(connectivityHelper))
             .addInterceptor(loggingInterceptor)
     }
 

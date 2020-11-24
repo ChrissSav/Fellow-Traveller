@@ -55,7 +55,7 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
     override fun setUpViews() {
         nav = Navigation.findNavController(this, R.id.RegisterActivity_nav_host)
 
-        nav.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { _, destination, _ ->
+        nav.addOnDestinationChangedListener { _, destination, _ ->
             hideKeyboard()
             when (destination.id) {
                 R.id.destinationsFragment -> binding.progressBar.progress = 30
@@ -67,7 +67,7 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
                 R.id.successTripFragment -> binding.constraintLayout.visibility = View.GONE
             }
 
-        })
+        }
 
 
         binding.imageButtonExit.setOnClickListener {
