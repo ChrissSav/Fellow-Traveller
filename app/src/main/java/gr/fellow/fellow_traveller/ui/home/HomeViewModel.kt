@@ -8,6 +8,7 @@ import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.notification.Notification
+import gr.fellow.fellow_traveller.domain.review.Review
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.usecase.auth.ChangePasswordUseCase
@@ -16,6 +17,7 @@ import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.notification.GetNotificationsUseCase
 import gr.fellow.fellow_traveller.usecase.notification.UpdateNotificationsUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
+import gr.fellow.fellow_traveller.usecase.review.GetUserReviewsUseCase
 import gr.fellow.fellow_traveller.usecase.trips.DeleteTripUseCase
 import gr.fellow.fellow_traveller.usecase.trips.ExitFromTripUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsCreatorRemoteUseCase
@@ -44,13 +46,17 @@ constructor(
     private val exitFromTripUseCase: ExitFromTripUseCase,
     private val getNotificationsUseCase: GetNotificationsUseCase,
     private val updateNotificationsUseCase: UpdateNotificationsUseCase,
-    // UpdateInfo
+    //UpdateInfo
     private val getUserInfoRemoteUseCase: GetUserInfoRemoteUseCase,
     private val registerUserLocalUseCase: RegisterUserLocalUseCase,
-    private val updateUserMessengerUseCase: UpdateUserMessengerUseCase
+    private val updateUserMessengerUseCase: UpdateUserMessengerUseCase,
+    //Get Reviews
+    private val getUserReviewsUseCase: GetUserReviewsUseCase
 ) : BaseViewModel() {
 
+    private var userId: String? = null
 
+    
     private val _user = MutableLiveData<LocalUser>()
     val user: LiveData<LocalUser> = _user
 
@@ -110,6 +116,10 @@ constructor(
     private val _successDeletion = SingleLiveEvent<String>()
     val successDeletion: LiveData<String> = _successDeletion
 
+    /** Profile **/
+    private val _reviews = MutableLiveData<MutableList<Review>>()
+    val reviews: LiveData<MutableList<Review>> = _reviews
+
     /*****************************************************************************************************/
 
     fun loadUserInfo() {
@@ -118,6 +128,9 @@ constructor(
                 return@launch
             }
             _user.value = loadUserLocalInfoUseCase()
+
+            val response = getUserReviewsUseCase(userId.toString())
+            _reviews.value = response
         }
     }
 
@@ -378,6 +391,17 @@ constructor(
             _successDeletion.value = "Επιτυχής αποχώρηση απο το ταξίδι"
             updateUserInfo()
         }
+    }
+
+    fun loadReviews() {
+        launch(true) {
+            val response = getUserReviewsUseCase(userId.toString())
+            _reviews.value = response
+        }
+    }
+
+    fun setUserId(userId: String) {
+        this.userId = userId
     }
 
 }

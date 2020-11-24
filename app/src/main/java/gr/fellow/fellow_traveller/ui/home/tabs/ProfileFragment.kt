@@ -2,6 +2,7 @@ package gr.fellow.fellow_traveller.ui.home.tabs
 
 import android.content.Intent
 import android.net.Uri
+import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
@@ -11,6 +12,7 @@ import gr.fellow.fellow_traveller.databinding.FragmentProfileBinding
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
+import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
 
 
 @AndroidEntryPoint
@@ -25,6 +27,23 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
 
     override fun setUpObservers() {
+
+        viewModel.reviews.observe(this, Observer { list ->
+            list?.let {
+                if (it.isNotEmpty()) {
+
+
+                    val first = it.first()
+
+                    binding.reviewItem.picture.loadImageFromUrl(first.user.picture)
+                    binding.reviewItem.date.text = getDateFromTimestamp(first.timestamp, "d MMM yyyy")
+                    binding.reviewItem.rate.text = first.rate.toString()
+                    binding.reviewItem.username.text = first.user.fullName.toString()
+                    //binding.viewAll.visibility = View.VISIBLE
+                    //binding.reviewsConstraintLayout.visibility = View.VISIBLE
+                }
+            }
+        })
 
         viewModel.user.observe(viewLifecycleOwner, Observer { user ->
 
@@ -43,6 +62,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     }
 
     override fun setUpViews() {
+
+        viewModel.loadUserInfo()
         binding.settingsButton.setOnClickListener {
             findNavController()?.navigate(R.id.to_setting)
         }
