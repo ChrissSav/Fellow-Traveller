@@ -1,5 +1,7 @@
 package gr.fellow.fellow_traveller.ui.home.settings
 
+import android.content.Intent
+import android.net.Uri
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,7 +58,14 @@ class BaseSettingsFragment : BaseFragment<FragmentBaseSettingsBinding>() {
         binding.messenger.setOnClickListener {
             findNavController()?.navigate(R.id.action_baseSettingsFragment_to_homeMessengerFragment)
         }
-
+        binding.termsOfUse.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://fellowtraveller.gr/tos/"))
+            startActivity(browserIntent)
+        }
+        binding.privacyPolicy.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://fellowtraveller.gr/tos/"))
+            startActivity(browserIntent)
+        }
         binding.logout.setOnClickListener {
             viewModel.logOut()
         }
