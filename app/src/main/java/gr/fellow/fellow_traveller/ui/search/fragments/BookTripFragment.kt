@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.ui.search.fragments
 
+import android.util.Log
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,6 +58,7 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
                 to.text = currentTrip.destFrom.title
                 time.text = currentTrip.time
                 day.text = currentTrip.date
+                Log.i("maxValue", "currentTrip.vacancies " + currentTrip.vacancies.toString())
                 seats.setUpperLimit(currentTrip.vacancies)
                 price.text = getString(R.string.price, currentTrip.price.toString())
                 petAllow = currentTrip.hasPet

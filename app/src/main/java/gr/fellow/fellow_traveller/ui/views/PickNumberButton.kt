@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import gr.fellow.fellow_traveller.R
@@ -78,6 +79,7 @@ class PickNumberButton(context: Context, attrs: AttributeSet) : ConstraintLayout
 
     private fun updateTextView(currentNum: Int) {
         binding.label.text = currentNum.toString()
+        Log.i("maxValue", maxValue.toString())
         binding.minus.isEnabled = currentNum != minValue
         binding.plus.isEnabled = currentNum != maxValue
     }
