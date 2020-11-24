@@ -47,6 +47,33 @@ class PassengerAdapter(
             }
             image.loadImageFromUrl(passenger.user.picture)
             name.text = passenger.user.fullName
+
+            when (passenger.seats) {
+                1 -> {  //Booked 1 seat
+                    seat1.visibility = View.VISIBLE
+
+                }
+                2 -> {  //Booked 2 seats
+                    seat1.visibility = View.VISIBLE
+                    seat2.visibility = View.VISIBLE
+                }
+                3 -> {  //Booked 3 seats
+                    seat1.visibility = View.VISIBLE
+                    seat2.visibility = View.VISIBLE
+                    seat3.visibility = View.VISIBLE
+                }
+                else -> { // More than 3 seats
+                    seat1.visibility = View.VISIBLE
+                    seat2.visibility = View.VISIBLE
+                    seat3.visibility = View.VISIBLE
+                    seat4.visibility = View.VISIBLE
+                }
+            }
+            // Display if passenger has a pet
+            if (passenger.pet)
+                pet.visibility = View.VISIBLE
+
+
         }
 
     }
@@ -56,6 +83,11 @@ class PassengerAdapter(
     class ExampleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.passenger_username
         val image: ImageView = itemView.picture
+        val seat1: ImageView = itemView.seat1
+        val seat2: ImageView = itemView.seat2
+        val seat3: ImageView = itemView.seat3
+        val seat4: ImageView = itemView.seat4
+        val pet: ImageView = itemView.pet
 
     }
 }
