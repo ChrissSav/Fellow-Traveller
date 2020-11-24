@@ -73,6 +73,13 @@
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_destination_info_to_profileReviewsFragment"
+            app:destination="@id/profileReviewsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
     </fragment>
 
 
@@ -193,6 +200,11 @@
         android:name="gr.fellow.fellow_traveller.ui.home.messenger.fragments.HomeMessengerFragment"
         android:label="fragment_home_messenger"
         tools:layout="@layout/fragment_home_messenger" />
+    <fragment
+        android:id="@+id/profileReviewsFragment"
+        android:name="gr.fellow.fellow_traveller.ui.home.reviews.ProfileReviewsFragment"
+        android:label="fragment_profile_reviews"
+        tools:layout="@layout/fragment_profile_reviews" />
 
 
 </navigation>
