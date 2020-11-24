@@ -14,6 +14,7 @@ import com.iceteck.silicompressorr.FileUtils
 import com.iceteck.silicompressorr.SiliCompressor
 import com.theartofdev.edmodo.cropper.CropImage
 import dagger.hilt.android.AndroidEntryPoint
+import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentAccountSettingsBinding
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.UserImagePickBottomSheetDialog
@@ -63,7 +64,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
         })
 
         viewModel.successUpdateInfo.observe(viewLifecycleOwner, Observer {
-            createToast("Επιτυχής αποθήκευση")
+            createToast(getString(R.string.profile_update_success))
         })
 
     }
@@ -129,7 +130,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                 compressUriImage()
             } else if (resultCode === CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 // val e = result.error
-                createToast("Error")
+                createToast(getString(R.string.error_msg))
             }
         }
     }
@@ -172,7 +173,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                     //updateUserImageOnFirebase(uri.toString())
                     //updateUserPicture(uri.toString())
 
-                    createToast("Η φωτογραφία ανέβηκε επιτυχώς")
+                    createToast(getString(R.string.image_upload_success))
                 }
                 //Log.i("Image", taskSnapshot.uploadSessionUri.toString())
             }.addOnFailureListener { e ->
@@ -189,7 +190,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                 }
         } else {
             viewModel.setLoad(false)
-            createToast("Η φωτογραφία που επιλέξατε δεν είναι έγκυρη")
+            createToast(getString(R.string.image_upload_failure))
         }
     }
 

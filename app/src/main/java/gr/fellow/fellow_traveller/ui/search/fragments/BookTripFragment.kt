@@ -68,16 +68,16 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
                     petsSwitch.setOnCheckedChangeListener { _, b ->
                         //Listener for user if wants pet on the trip
                         if (b) {
-                            havePetSwitchInfo.text = "Ναι"
+                            havePetSwitchInfo.text = getString(R.string.option_yes)
                             havePet = true
                         } else {
-                            havePetSwitchInfo.text = "Όχι"
+                            havePetSwitchInfo.text = getString(R.string.option_no)
                             havePet = false
                         }
                     }
                 } else {
                     petsSwitch.setOnCheckedChangeListener { _, _ ->
-                        createToast("Ο οδηγός δεν επιτρέπει κατοικίδιο")
+                        createToast(getString(R.string.driver_no_pets_allowed))
                         havePet = false
                         petsSwitch.isChecked = false
                     }

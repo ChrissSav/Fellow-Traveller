@@ -33,7 +33,7 @@ class RateActivity : BaseActivityViewModel<ActivityRateBinding, RateViewModel>(R
     override fun setUpObservers() {
 
         viewModel.success.observe(this, Observer {
-            createToast("Η αξιολόγηση καταχωρήθηκε")
+            createToast(getString(R.string.rating_submission_success))
             finish()
         })
 
@@ -80,7 +80,7 @@ class RateActivity : BaseActivityViewModel<ActivityRateBinding, RateViewModel>(R
 
 
             rateBar.setOnRatingChangeListener { _, rating, _ ->
-                createToast("Η αξιολόγηση σας είναι: $rating")
+                createToast(getString(R.string.your_rating_is) + rating)
             }
 
 

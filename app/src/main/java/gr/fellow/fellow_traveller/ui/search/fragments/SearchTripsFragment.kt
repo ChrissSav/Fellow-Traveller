@@ -229,23 +229,22 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
     }
 
     private fun onSortItemClickListener(sortAnswerType: SortAnswerType) {
-
-        when (sortAnswerType) {
+         when (sortAnswerType) {
             SortAnswerType.Relevant -> {
                 createToast("Πιο σχετικά")
-                binding.sortButton.text = "Πιο σχετικά"
+                binding.sortButton.text = getString(R.string.more_recent)
                 viewModel.sortByDate()
                 //sortOption = SortAnswerType.Relevant
             }
             SortAnswerType.Price -> {
                 createToast("Τιμή")
-                binding.sortButton.text = "Τιμή"
+                binding.sortButton.text = getString(R.string.price_title)
                 viewModel.sortByPrice()
                 //sortOption = SortAnswerType.Price
             }
             SortAnswerType.Rate -> {
                 createToast("Αξιολόγηση")
-                binding.sortButton.text = "Αξιολόγηση"
+                binding.sortButton.text = getString(R.string.rating_title)
                 viewModel.sortByRate()
                 //sortOption = SortAnswerType.Rate
             }

@@ -57,11 +57,11 @@ class TripInvolvedHistoryFragment : BaseFragment<FragmentTripInvolvedHistoryBind
         if (args.creator) {
             viewModel.loadTripsAsCreatorHistory()
             binding.recyclerView.adapter = TripsHistoryAdapter(R.drawable.background_stroke_radius_27_green, this@TripInvolvedHistoryFragment::onTripClick)
-            binding.label.text = "Ιστορικό προσφορών"
+            binding.label.text = getString(R.string.offers_history)
         } else {
             viewModel.loadTripsAsPassengerHistory()
             binding.recyclerView.adapter = TripsHistoryAdapter(R.drawable.background_stroke_radius_27_orange, this@TripInvolvedHistoryFragment::onTripClick)
-            binding.label.text = "Ιστορικό αναζητήσεων"
+            binding.label.text = getString(R.string.searches_history)
         }
 
 

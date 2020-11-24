@@ -79,7 +79,7 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
 
 
             builder.setCalendarConstraints(constraintBuilder.build())
-            builder.setTitleText("Επιλέξτε εύρος ημερομηνίας για αναζήτηση")
+            builder.setTitleText(getString(R.string.choose_date_range_for_search))
             val picker = builder.build()
 
             /** OnClicks **/
@@ -117,7 +117,7 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
                 builder.setSelection(androidx.core.util.Pair(now.timeInMillis, now.timeInMillis))
                 builder.build()
                 //Long first/second to null
-                date.setText("Εύρος ημ/νίας")
+                date.setText(getString(R.string.date_range))
             }
 
             picker.addOnPositiveButtonClickListener {

@@ -45,9 +45,9 @@ class SelectDestinationActivity : BaseActivity<ActivitySelectDestinationBinding>
     override fun setUpViews() {
 
         if ("to" == intent.getStringExtra("info"))
-            binding.endDestLabel.text = "Επιλέξτε τον προορισμό σας"
+            binding.endDestLabel.text = getString(R.string.enter_destination)
         else
-            binding.endDestLabel.text = "Επιλέξτε την αφετηρία σας"
+            binding.endDestLabel.text = getString(R.string.enter_starting_point)
 
         with(binding) {
             athensButton.setOnClickListener(this@SelectDestinationActivity)
@@ -119,19 +119,19 @@ class SelectDestinationActivity : BaseActivity<ActivitySelectDestinationBinding>
 
         when (view.id) {
             binding.athensButton.id -> {
-                place = PlaceModel("ChIJ8UNwBh-9oRQR3Y1mdkU1Nic", "Αθήνα", 37.97534.toFloat(), 23.736151.toFloat())
+                place = PlaceModel("ChIJ8UNwBh-9oRQR3Y1mdkU1Nic", getString(R.string.city_athens), 37.97534.toFloat(), 23.736151.toFloat())
             }
             binding.thessalonikiButton.id -> {
-                place = PlaceModel("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", "Θεσσαλονίκη", 40.634781.toFloat(), 22.943090.toFloat())
+                place = PlaceModel("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", getString(R.string.city_thessaloniki), 40.634781.toFloat(), 22.943090.toFloat())
             }
             binding.ioanninaButton.id -> {
-                place = PlaceModel("ChIJZ93-3qLpWxMRwJe54iy9AAQ", "Ιωάννινα", 39.674530.toFloat(), 20.840210.toFloat())
+                place = PlaceModel("ChIJZ93-3qLpWxMRwJe54iy9AAQ", getString(R.string.city_ioannina), 39.674530.toFloat(), 20.840210.toFloat())
             }
             binding.patraButton.id -> {
-                place = PlaceModel("ChIJLe0kpZk1XhMRoIy54iy9AAQ", "Πάτρα", 38.246639.toFloat(), 21.734573.toFloat())
+                place = PlaceModel("ChIJLe0kpZk1XhMRoIy54iy9AAQ", getString(R.string.city_patra), 38.246639.toFloat(), 21.734573.toFloat())
             }
             binding.larisaButton.id -> {
-                place = PlaceModel("ChIJoUddWVyIWBMRMJy54iy9AAQ", "Λάρισα", 39.638779.toFloat(), 22.415979.toFloat())
+                place = PlaceModel("ChIJoUddWVyIWBMRMJy54iy9AAQ", getString(R.string.city_larisa), 39.638779.toFloat(), 22.415979.toFloat())
             }
         }
         sendPlaceToParent(place)

@@ -24,10 +24,10 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="35dp"
-        android:paddingLeft="32dp"
+        android:paddingStart="32dp"
         android:background="?android:attr/selectableItemBackground"
-        android:gravity="left|center"
-        android:text="Ανέβασμα νέας φωτογραφίας"
+        android:gravity="start|center"
+        android:text="@string/upload_new_photo"
         app:layout_constraintEnd_toEndOf="@+id/delete"
         app:layout_constraintStart_toStartOf="@+id/delete"
         app:layout_constraintTop_toBottomOf="@+id/title" />
@@ -39,18 +39,18 @@
         android:layout_height="50dp"
         android:layout_marginTop="28dp"
         android:layout_marginBottom="24dp"
-        android:paddingLeft="32dp"
+        android:paddingStart="32dp"
         android:textColor="@color/red_color"
         android:background="?android:attr/selectableItemBackground"
-        android:gravity="left|center"
-        android:text="Αφαίρεση φωτογραφίας"
-        android:drawableRight="@drawable/ic_bin"
-        android:drawableTint="@color/red_color"
-        android:paddingRight="16dp"
+        android:gravity="start|center"
+        android:text="@string/remove_profile_photo"
+        android:paddingEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upload" />
+        app:layout_constraintTop_toBottomOf="@+id/upload"
+        app:drawableEndCompat="@drawable/ic_bin"
+        app:drawableTint="@color/red_color" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

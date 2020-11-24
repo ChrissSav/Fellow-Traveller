@@ -14,7 +14,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
-        android:text="Απόρριψη της αναζήτησης;"
+        android:text="@string/cancel_search"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +31,7 @@
         style="@style/button_orange_empty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Παραμονή"
+        android:text="@string/option_stay"
         android:textColor="@color/black_color" />
 
 
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Απόρριψη"
+        android:text="@string/option_cancel"
         android:textColor="@color/red_color" />
 
 </LinearLayout>

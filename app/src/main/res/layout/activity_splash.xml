@@ -18,7 +18,7 @@
         android:scaleX="0"
         style="@style/display_1"
         android:scaleY="0"
-        android:text="fellow."
+        android:text="@string/application_name"
         android:textColor="@color/white"
         android:textSize="39sp"
         app:layout_constraintBottom_toBottomOf="@+id/ImageView"

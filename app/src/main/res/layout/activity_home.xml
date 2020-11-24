@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
-            android:text="Ολοκλήρωση προφίλ"
+            android:text="@string/complete_profile"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,7 +60,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
-            android:text="- συμπληρωση messenger link"
+            android:text="@string/enter_messenger_link"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/toAccountInfo"
             app:layout_constraintStart_toStartOf="parent"
@@ -155,10 +155,10 @@
             android:background="@drawable/circle_button_shape"
             android:backgroundTint="@color/red_color"
             android:gravity="center_vertical|center_horizontal"
-            android:text="10"
+            android:text="@string/notifications_count_placeholder"
             android:textColor="@color/white"
             android:visibility="invisible"
-            android:textSize="10dp"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@+id/notification"
             app:layout_constraintTop_toTopOf="@+id/notification" />
 

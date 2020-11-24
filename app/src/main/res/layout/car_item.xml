@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="Μάρκα"
+            android:text="@string/brand"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,7 +50,7 @@
             android:layout_marginEnd="16dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Rolls-Royce"
+            android:text="@string/placeholder_car_make_model"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView34"
             app:layout_constraintTop_toBottomOf="@+id/textView34" />
@@ -63,7 +63,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:text="Μοντέλο"
+            android:text="@string/model"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="24dp"
-            android:text="Phanton"
+            android:text="@string/placeholder_car_make_model"
             android:maxLines="1"
             android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -89,7 +89,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:text="Χρώμα"
+            android:text="@string/color"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView36"
             app:layout_constraintEnd_toStartOf="@+id/textView40"
             app:layout_constraintStart_toStartOf="@+id/guideline5" />
@@ -99,7 +99,7 @@
             style="@style/paragraph_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Κόκκινο"
+            android:text="@string/car_color_placeholder"
             android:maxLines="1"
             android:ellipsize="end"
             app:layout_constraintBaseline_toBaselineOf="@+id/model"
@@ -112,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:text="Αριθμός Κυκλοφορίας"
+            android:text="@string/plate"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView38"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -121,7 +121,7 @@
             style="@style/paragraph_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="ΑΒΔ-1239"
+            android:text="@string/number_plate_placeholder"
             android:maxLines="1"
             android:ellipsize="end"
             app:layout_constraintBaseline_toBaselineOf="@+id/model"
