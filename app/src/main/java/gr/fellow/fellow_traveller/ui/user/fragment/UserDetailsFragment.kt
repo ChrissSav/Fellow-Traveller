@@ -46,20 +46,21 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
         })
 
         viewModel.reviews.observe(this, Observer { list ->
-            list?.let {
-                if (it.isNotEmpty()) {
+
+            if (list.isNotEmpty()) {
 
 
-                    val first = it.first()
+                val first = list.first()
 
-                    binding.rateItem.picture.loadImageFromUrl(first.user.picture)
-                    binding.rateItem.date.text = getDateFromTimestamp(first.timestamp, "d MMM yyyy")
-                    binding.rateItem.rate.text = first.rate.toString()
+                binding.rateItem.picture.loadImageFromUrl(first.user.picture)
+                binding.rateItem.date.text = getDateFromTimestamp(first.timestamp, "d MMM yyyy")
+                binding.rateItem.rate.text = first.rate.toString()
+                binding.rateItem.username.text = first.user.fullName
 
-                    binding.viewAll.visibility = View.VISIBLE
-                    binding.reviewsConstraintLayout.visibility = View.VISIBLE
-                }
+                binding.viewAll.visibility = View.VISIBLE
+                binding.reviewsConstraintLayout.visibility = View.VISIBLE
             }
+
         })
 
         viewModel.error.observe(this, Observer {
