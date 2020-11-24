@@ -56,7 +56,7 @@ constructor(
     private val getUserReviewsUseCase: GetUserReviewsUseCase
 ) : BaseViewModel() {
 
-    private var userId: String? = null
+
 
     
     private val _user = MutableLiveData<LocalUser>()
@@ -131,8 +131,7 @@ constructor(
             }
             _user.value = loadUserLocalInfoUseCase()
 
-            val response = getUserReviewsUseCase(userId.toString())
-            _reviews.value = response
+            loadReviews()
         }
     }
 
@@ -397,14 +396,14 @@ constructor(
 
     fun loadReviews() {
         launch(true) {
-            val response = getUserReviewsUseCase(userId.toString())
-            _reviews.value = response
+            _user.value?.id?.let {
+                val response = getUserReviewsUseCase(it)
+                _reviews.value = response
+            }
+
         }
     }
 
-    fun setUserId(userId: String) {
-        this.userId = userId
-    }
 
 }
 
