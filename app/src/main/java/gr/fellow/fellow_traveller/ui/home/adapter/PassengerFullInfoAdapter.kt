@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.ui.home.adapter
 
-import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -29,8 +28,11 @@ class PassengerFullInfoAdapter(
         with(holder) {
             binding.picture.loadImageFromUrl(currentPassenger.user.picture)
             binding.username.text = currentPassenger.user.fullName
-            binding.seats.text = if (currentPassenger.seats == 1) "${currentPassenger.seats} " + Resources.getSystem().getString(R.string.available_seats_singular) else "${currentPassenger.seats} " + Resources.getSystem().getString(
-                            R.string.available_seats_plural)
+            binding.seats.text =
+                if (currentPassenger.seats == 1)
+                    "${currentPassenger.seats} " + binding.pet.resources.getString(R.string.available_seats_singular)
+                else
+                    "${currentPassenger.seats} " + binding.pet.resources.getString(R.string.available_seats_plural)
             binding.pet.text = if (currentPassenger.pet) binding.pet.resources.getString(R.string.with_pet) else binding.pet.resources.getString(R.string.without_pet)
             binding.root.setOnClickListener {
                 listener.invoke(currentPassenger.user)

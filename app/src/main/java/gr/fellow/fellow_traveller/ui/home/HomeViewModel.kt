@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.ui.home
 
-import android.content.res.Resources
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -109,8 +108,8 @@ constructor(
     private val _successUpdateInfo = SingleLiveEvent<Boolean>()
     val successUpdateInfo: LiveData<Boolean> = _successUpdateInfo
 
-    private val _successDeletion = SingleLiveEvent<String>()
-    val successDeletion: LiveData<String> = _successDeletion
+    private val _successDeletion = SingleLiveEvent<Int>()
+    val successDeletion: LiveData<Int> = _successDeletion
 
     /*****************************************************************************************************/
 
@@ -332,7 +331,7 @@ constructor(
         launch(true) {
             deleteTripUseCase(tripId)
             _tripsAsCreatorActive.value = deleteTripWithId(tripId, _tripsAsCreatorActive.value)
-            _successDeletion.value = Resources.getSystem().getString(R.string.delete_trip_success)
+            _successDeletion.value = R.string.delete_trip_success
             updateUserInfo()
         }
     }
@@ -377,7 +376,7 @@ constructor(
         launch(true) {
             exitFromTripUseCase(tripId)
             _tripsAsPassengerActive.value = deleteTripWithId(tripId, _tripsAsPassengerActive.value)
-            _successDeletion.value = Resources.getSystem().getString(R.string.leave_trip_success)
+            _successDeletion.value = R.string.leave_trip_success
             updateUserInfo()
         }
     }

@@ -35,7 +35,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
     override fun setUpObservers() {
         viewModel.successDeletion.observe(viewLifecycleOwner, Observer {
-            createToast(it)
+            createToast(getString(it))
             onBackPressed()
         })
     }
