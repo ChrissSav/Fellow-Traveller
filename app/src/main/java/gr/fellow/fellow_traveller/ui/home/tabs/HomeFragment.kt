@@ -11,6 +11,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentHomeBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
+import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.extensions.openUrl
@@ -78,6 +79,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.cityChoice2.loadImageFromUrl("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2FIOA-ATH.jpg?alt=media&token=e374487c-9715-49ea-b972-25384cb90e42")
         binding.cityChoice3.loadImageFromUrl("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2FIOA-PAT.jpg?alt=media&token=0fb958e3-9027-4a10-9582-7262f7555a5c")
         binding.cityChoice4.loadImageFromUrl("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2FKAV-SKG.jpg?alt=media&token=e08813a7-53a7-424e-9077-12d42e24f086")
+
+        binding.cityChoice1.setOnClickListener {
+            val placeFrom = PlaceModel("ChIJ8UNwBh-9oRQR3Y1mdkU1Nic", getString(R.string.city_athens), 37.97534.toFloat(), 23.736151.toFloat())
+            val placeTo = PlaceModel("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", getString(R.string.city_thessaloniki), 40.634781.toFloat(), 22.943090.toFloat())
+            startActivityForResult(SearchTripActivity::class, 2, bundleOf("placeFrom" to placeFrom, "placeTo" to placeTo))
+        }
+
+        binding.cityChoice2.setOnClickListener {
+            val placeFrom = PlaceModel("ChIJZ93-3qLpWxMRwJe54iy9AAQ", getString(R.string.city_ioannina), 39.674530.toFloat(), 20.840210.toFloat())
+            val placeTo = PlaceModel("ChIJ8UNwBh-9oRQR3Y1mdkU1Nic", getString(R.string.city_athens), 37.97534.toFloat(), 23.736151.toFloat())
+            startActivityForResult(SearchTripActivity::class, 2, bundleOf("placeFrom" to placeFrom, "placeTo" to placeTo))
+        }
+        binding.cityChoice3.setOnClickListener {
+            val placeFrom = PlaceModel("ChIJZ93-3qLpWxMRwJe54iy9AAQ", getString(R.string.city_ioannina), 39.674530.toFloat(), 20.840210.toFloat())
+            val placeTo = PlaceModel("ChIJLe0kpZk1XhMRoIy54iy9AAQ", getString(R.string.city_patra), 38.246639.toFloat(), 21.734573.toFloat())
+            startActivityForResult(SearchTripActivity::class, 2, bundleOf("placeFrom" to placeFrom, "placeTo" to placeTo))
+        }
+        binding.cityChoice4.setOnClickListener {
+            val placeFrom = PlaceModel("ChIJoUddWVyIWBMRMJy54iy9AAQ", getString(R.string.city_larisa), 39.638779.toFloat(), 22.415979.toFloat())
+            val placeTo = PlaceModel("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", getString(R.string.city_thessaloniki), 40.634781.toFloat(), 22.943090.toFloat())
+            startActivityForResult(SearchTripActivity::class, 2, bundleOf("placeFrom" to placeFrom, "placeTo" to placeTo))
+        }
     }
 
 

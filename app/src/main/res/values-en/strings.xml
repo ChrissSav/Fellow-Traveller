@@ -107,10 +107,6 @@
     <string name="color">Color</string>
     <string name="car_delete_confirmation_message">Delete vehicle with number plate « %s »?</string>
 
-    <string name="regex_min_3_chars_english">^[a–zA–Z0–9]{3,}$</string>
-    <string name="regex_min_3_chars">^.{3,}$</string>
-    <string name="regex_accept_all">^.{0,50}$</string>
-    <string name="regex_car_plate">^[ΑΒΕΖΗΙΚΜΝΟΡΤΥΧ]{3}–[0–9]{4}$</string>
 
     <!--Car -->
 
@@ -300,6 +296,7 @@
     <string name="popular_trip_ioannina_athens">Ioannina - Athens</string>
     <string name="popular_trip_ioannina_patra">Ioannina - Patra</string>
     <string name="popular_trip_kavala_thess">Kavala - Thessaloniki</string>
+    <string name="popular_trip_larisa_thess">Larisa - Θεσσαλονίκη</string>
     <string name="help_guides">Help Guide</string>
     <string name="how_does_fellow_work">How does fellow. work?</string>
     <string name="what_can_you_do_with_fellow">What can you do with fellow.?</string>

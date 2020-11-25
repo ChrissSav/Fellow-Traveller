@@ -108,10 +108,10 @@
     <string name="color">Χρώμα</string>
     <string name="car_delete_confirmation_message">Διαγραφή του οχήματος με αριθμό πινακίδας « %s »;</string>
 
-    <string name="regex_min_3_chars_english">^[a-zA-Z0-9]{3,}$</string>
-    <string name="regex_min_3_chars">^.{3,}$</string>
-    <string name="regex_accept_all">^.{0,50}$</string>
-    <string name="regex_car_plate">^[ΑΒΕΖΗΙΚΜΝΟΡΤΥΧ]{3}-[0-9]{4}$</string>
+    <string name="regex_min_3_chars_english" translatable="false">^[a-zA-Z0-9]{3,}$</string>
+    <string name="regex_min_3_chars" translatable="false">^.{3,}$</string>
+    <string name="regex_accept_all" translatable="false">^.{0,50}$</string>
+    <string name="regex_car_plate" translatable="false">^[ΑΒΕΖΗΙΚΜΝΟΡΤΥΧ]{3}-[0-9]{4}$</string>
 
     <!--Car -->
 
@@ -263,6 +263,7 @@
     <string name="popular_trip_ioannina_athens">Ιωάννινα - Αθήνα</string>
     <string name="popular_trip_ioannina_patra">Ιωάννινα - Πάτρα</string>
     <string name="popular_trip_kavala_thess">Καβάλα - Θεσσαλονίκη</string>
+    <string name="popular_trip_larisa_thess">Λάρισα - Θεσσαλονίκη</string>
     <string name="help_guides">Οδηγοί βοηθείας</string>
     <string name="how_does_fellow_work">Πώς λειτουργεί το fellow;</string>
     <string name="what_can_you_do_with_fellow">Τι μπορείς να κάνεις στο fellow;</string>

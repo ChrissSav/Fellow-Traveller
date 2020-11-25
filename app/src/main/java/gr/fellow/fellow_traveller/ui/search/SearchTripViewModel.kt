@@ -64,7 +64,6 @@ constructor(
             _destinations.value?.second?.latitude!!.toFloat(),
             _destinations.value?.second?.longitude!!.toFloat()
         )
-
     }
 
     fun getTrips() {
