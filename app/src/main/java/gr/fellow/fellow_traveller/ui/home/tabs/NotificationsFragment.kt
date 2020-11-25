@@ -4,8 +4,6 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
@@ -67,24 +65,12 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
         viewModel.loadNotifications()
         binding.recyclerView.adapter = NotificationAdapter(viewModel::readNotification)
 
-        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-
-                if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    if ((binding.recyclerView.layoutManager as LinearLayoutManager).findLastVisibleItemPosition() != 0)
-                        viewModel.loadNotifications(true)
-                }
-            }
-
-        })
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             (binding.recyclerView.adapter as NotificationAdapter).submitList(mutableListOf<Notification>())
             loadMoreTripsAsCreator = true
             loadMoreTripsAsPassenger = true
-            viewModel.loadNotificationsClear()
+            viewModel.loadNotifications(true)
         }
     }
 

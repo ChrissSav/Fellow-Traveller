@@ -6,7 +6,7 @@ class GetNotificationsUseCase(
     private val dataSource: FellowDataSource
 ) {
 
-    suspend operator fun invoke(page: Int) =
-        dataSource.getNotification(page)
+    suspend operator fun invoke() =
+        dataSource.getNotification()
 
 }

@@ -78,7 +78,7 @@ interface FellowRepository {
 
     // Notification
 
-    suspend fun getNotification(page: Int): MutableList<NotificationResponse>
+    suspend fun getNotification(): MutableList<NotificationResponse>
 
     suspend fun setNotificationRead(updateNotification: UpdateNotification): String
 

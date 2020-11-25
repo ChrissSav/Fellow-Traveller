@@ -101,7 +101,6 @@ constructor(
 
     /**  NOTIFICATIONS **/
 
-    private var notificationsPage = 0
     private val _notifications = MutableLiveData<MutableList<Notification>>()
     val notifications: LiveData<MutableList<Notification>> = _notifications
     val loadNotifications = MutableLiveData<Boolean>()
@@ -250,14 +249,10 @@ constructor(
             }
             loadMoreTripsAsCreator = true
             loadMoreTripsAsPassenger = true
-            val response = getNotificationsUseCase(notificationsPage)
-            if (response.isNotEmpty()) {
-                notificationsPage++
-            }
-            if (more)
-                _notifications.value?.addAll(response)
-            else
-                _notifications.value = response
+            val response = getNotificationsUseCase()
+
+
+            _notifications.value = response
 
             if (response.filter { (it.type == 1 || it.type == 2) && !it.isRead }.any() && loadMoreTripsAsCreator) {
                 loadTripsAsCreator(true)
@@ -268,17 +263,6 @@ constructor(
                 loadMoreTripsAsPassenger = false
             }
 
-        }
-    }
-
-    fun loadNotificationsClear() {
-        launchWithLiveData(false, loadNotifications) {
-            notificationsPage = 0
-            val response = getNotificationsUseCase(notificationsPage)
-            if (response.isNotEmpty()) {
-                notificationsPage++
-            }
-            _notifications.value = response
         }
     }
 

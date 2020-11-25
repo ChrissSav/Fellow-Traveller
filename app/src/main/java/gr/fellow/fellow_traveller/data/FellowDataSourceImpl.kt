@@ -117,8 +117,8 @@ class FellowDataSourceImpl(
     override suspend fun deleteTrip(tripId: String): String =
         repository.deleteTrip(tripId)
 
-    override suspend fun getNotification(page: Int): MutableList<Notification> =
-        repository.getNotification(page).map { it.mapToNotification() }.toMutableList()
+    override suspend fun getNotification(): MutableList<Notification> =
+        repository.getNotification().map { it.mapToNotification() }.toMutableList()
 
 
     override suspend fun setNotificationRead(updateNotification: UpdateNotification): String =

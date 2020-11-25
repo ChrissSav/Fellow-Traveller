@@ -163,9 +163,9 @@ class FellowRepositoryImpl(
             service.deleteTrip(tripId).handleApiFormat()
         }
 
-    override suspend fun getNotification(page: Int): MutableList<NotificationResponse> =
+    override suspend fun getNotification(): MutableList<NotificationResponse> =
         networkCall {
-            service.getNotifications(page).handleApiFormat()
+            service.getNotifications().handleApiFormat()
         }
 
     override suspend fun setNotificationRead(updateNotification: UpdateNotification): String =

@@ -86,7 +86,7 @@ interface FellowDataSource {
 
     // Notification
 
-    suspend fun getNotification(page: Int): MutableList<Notification>
+    suspend fun getNotification(): MutableList<Notification>
 
     suspend fun setNotificationRead(updateNotification: UpdateNotification): String
 

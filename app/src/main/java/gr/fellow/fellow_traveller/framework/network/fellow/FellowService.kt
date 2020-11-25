@@ -188,9 +188,7 @@ interface FellowService {
     /** NOTIFICATION **/
 
     @GET("notification")
-    suspend fun getNotifications(
-        @Query("page") page: Int
-    ): Response<BaseResponse<MutableList<NotificationResponse>>>
+    suspend fun getNotifications(): Response<BaseResponse<MutableList<NotificationResponse>>>
 
     @PUT("notification")
     suspend fun setNotificationRead(
