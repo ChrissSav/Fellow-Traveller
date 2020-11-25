@@ -34,7 +34,8 @@ constructor(
 
     fun checkUserEmail(email: String) {
         launch(true) {
-            _email.value = checkUserEmailUseCase(email)
+            checkUserEmailUseCase(email)
+            _email.value = email
         }
 
     }
