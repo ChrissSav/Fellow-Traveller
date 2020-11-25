@@ -2,11 +2,10 @@ package gr.fellow.fellow_traveller.ui.splash
 
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.data.base.BaseActivity
+import gr.fellow.fellow_traveller.data.base.BaseActivityViewModel
 import gr.fellow.fellow_traveller.databinding.ActivitySplashBinding
 import gr.fellow.fellow_traveller.ui.extensions.openActivityWithFade
 import gr.fellow.fellow_traveller.ui.extensions.postDelay
@@ -17,9 +16,8 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class SplashActivity : BaseActivity<ActivitySplashBinding>() {
+class SplashActivity : BaseActivityViewModel<ActivitySplashBinding, SplashViewModel>(SplashViewModel::class.java) {
 
-    private val viewModel: SplashViewModel by viewModels()
 
     private var intentOpen: Intent? = null
 

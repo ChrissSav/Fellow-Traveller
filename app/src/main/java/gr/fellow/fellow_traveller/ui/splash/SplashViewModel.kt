@@ -26,7 +26,6 @@ constructor(
             val response = getUserInfoRemoteUseCase()
             registerUserLocalUseCase(response)
             _userInfo.value = true
-
         }
     }
 

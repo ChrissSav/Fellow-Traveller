@@ -14,9 +14,7 @@ import gr.fellow.fellow_traveller.usecase.home.DeleteUserLocalCars
 import gr.fellow.fellow_traveller.utils.PREFS_AUTH_ACCESS_TOKEN
 import gr.fellow.fellow_traveller.utils.PREFS_AUTH_REFRESH_TOKEN
 import gr.fellow.fellow_traveller.utils.set
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 abstract class BaseActivityViewModel<VB : ViewBinding, VM : BaseViewModel>(clazz: Class<VM>) : AppCompatActivity() {
@@ -55,14 +53,12 @@ abstract class BaseActivityViewModel<VB : ViewBinding, VM : BaseViewModel>(clazz
         viewModel.forceLogOut.observe(this, Observer {
             if (it) {
                 runBlocking {
-                    withContext(Dispatchers.IO) {
-                        sharedPrefs[PREFS_AUTH_ACCESS_TOKEN] = null
-                        sharedPrefs[PREFS_AUTH_REFRESH_TOKEN] = null
-                        deleteUserAuthLocalUseCase()
-                        deleteUserLocalCars()
-                        Log.i("rpjgpoirjgre", "register_fab")
-                        startActivityClearStack(MainActivity::class)
-                    }
+                    sharedPrefs[PREFS_AUTH_ACCESS_TOKEN] = null
+                    sharedPrefs[PREFS_AUTH_REFRESH_TOKEN] = null
+                    deleteUserAuthLocalUseCase()
+                    deleteUserLocalCars()
+                    Log.i("rpjgpoirjgre", "register_fab")
+                    startActivityClearStack(MainActivity::class)
                 }
             }
 
