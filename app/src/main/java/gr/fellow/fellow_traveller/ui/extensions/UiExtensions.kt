@@ -97,6 +97,12 @@ fun Activity.startActivityClearStack(activity: KClass<out Activity>) {
 
 }
 
+
+fun Activity.openUrl(url: String) {
+    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+    startActivity(browserIntent)
+}
+
 fun Activity.openGoogleMaps(trip: TripSearch) {
     val uri = "http://maps.google.com/maps?f=d&hl=en&saddr=${trip.destFrom.latitude},${trip.destFrom.longitude}&daddr=${trip.destTo.latitude},${trip.destTo.longitude}&mode=d"
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))

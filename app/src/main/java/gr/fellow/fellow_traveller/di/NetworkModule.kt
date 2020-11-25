@@ -99,14 +99,14 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideFellowService(@Fellow retrofit: Retrofit.Builder): FellowService {
-        return retrofit.baseUrl("https://api.fellowtraveller.gr/v1/").build()
+        return retrofit.baseUrl(BuildConfig.FELLOW_API_URL).build()
             .create(FellowService::class.java)
     }
 
     @Singleton
     @Provides
     fun provideFellowTokenService(@GoogleService retrofit: Retrofit.Builder): FellowTokenService {
-        return retrofit.baseUrl("https://api.fellowtraveller.gr/v1/").build()
+        return retrofit.baseUrl(BuildConfig.FELLOW_API_URL).build()
             .create(FellowTokenService::class.java)
     }
 
@@ -141,7 +141,7 @@ object NetworkModule {
     @Provides
     fun provideFellowGoogleService(@GoogleService retrofit: Retrofit.Builder): PlaceApiService {
         return retrofit
-            .baseUrl("https://maps.googleapis.com/maps/api/place/")
+            .baseUrl(BuildConfig.PLACE_API_URL)
             .build()
             .create(PlaceApiService::class.java)
     }
