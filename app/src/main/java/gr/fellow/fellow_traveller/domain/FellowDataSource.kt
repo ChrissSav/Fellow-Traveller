@@ -116,13 +116,6 @@ interface FellowDataSource {
 
     suspend fun logoutUserLocal(): Int
 
-    suspend fun getAllCarsLocal(): MutableList<Car>
-
-    suspend fun insertCarLocal(car: Car)
-
-    suspend fun deleteCarLocal(carId: String): Int
-
-    suspend fun deleteAllLocaleCars(): Int
 
     //  suspend fun addTripLocal(tripCreateRequest: TripCreateRequest): TripResponse>
 

@@ -34,11 +34,8 @@ constructor(
     private val deleteUserAuthLocalUseCase: DeleteUserAuthLocalUseCase,
     private val logoutRemoteUseCase: LogoutRemoteUseCase,
     private val getUserCarsRemoteUseCase: GetUserCarsRemoteUseCase,
-    private val getUserCarsLocalUseCase: GetUserCarsLocalUseCase,
-    private val registerCarLocalUseCase: RegisterCarLocalUseCase,
     private val deleteCarUseCase: DeleteCarUseCase,
     private val updateAccountInfoUseCase: UpdateAccountInfoUseCase,
-    private val deleteUserLocalCars: DeleteUserLocalCars,
     private val getTripsAsCreatorRemoteUseCase: GetTripsAsCreatorRemoteUseCase,
     private val getTripsAsPassengerRemoteUseCase: GetTripsAsPassengerRemoteUseCase,
     private val updateUserPictureUseCase: UpdateUserPictureUseCase,
@@ -56,8 +53,6 @@ constructor(
 ) : BaseViewModel() {
 
 
-
-    
     private val _user = MutableLiveData<LocalUser>()
     val user: LiveData<LocalUser> = _user
 
@@ -139,7 +134,6 @@ constructor(
             try {
                 logoutRemoteUseCase()
                 deleteUserAuthLocalUseCase()
-                deleteUserLocalCars()
             } catch (e: java.lang.Exception) {
 
             }
@@ -178,33 +172,14 @@ constructor(
 
     fun loadCars() {
         launch {
-            try {
-                val response = getUserCarsRemoteUseCase()
-                deleteUserLocalCars()
-                for (item in response) {
-                    registerCarLocalUseCase(item)
-                }
-                _cars.value = getUserCarsLocalUseCase()
-
-            } catch (exception: Exception) {
-                _cars.value = getUserCarsLocalUseCase()
-                throw  exception
-            }
-
+            _cars.value = getUserCarsRemoteUseCase()
         }
     }
-
-    fun loadCarsLocal() {
-        launch {
-            _cars.value = getUserCarsLocalUseCase()
-        }
-    }
-
 
     fun deleteCar(car: Car) {
         launch(true) {
             deleteCarUseCase(car.id)
-            _cars.value = getUserCarsLocalUseCase()
+            _cars.value = getUserCarsRemoteUseCase()
             _carDeletedId.value = car
         }
     }

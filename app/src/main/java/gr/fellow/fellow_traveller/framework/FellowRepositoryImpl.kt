@@ -17,17 +17,14 @@ import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripCreateReques
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripInvolvedResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripSearchResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.user.*
-import gr.fellow.fellow_traveller.room.dao.CarDao
 import gr.fellow.fellow_traveller.room.dao.UserAuthDao
-import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 import gr.fellow.fellow_traveller.utils.*
 
 class FellowRepositoryImpl(
     private val service: FellowService,
     private val sharedPrefs: SharedPreferences,
-    private val userAuthDao: UserAuthDao,
-    private val carDao: CarDao
+    private val userAuthDao: UserAuthDao
 ) : FellowRepository {
 
 
@@ -210,24 +207,6 @@ class FellowRepositoryImpl(
             userAuthDao.deleteUser()
         }
 
-    override suspend fun deleteCarsLocal() =
-        roomCall {
-            carDao.deleteCars()
-        }
 
-    override suspend fun deleteCarByIdLocal(id: String) =
-        roomCall {
-            carDao.deleteCarById(id)
-        }
-
-    override suspend fun getAllCarsLocal() =
-        roomCall {
-            carDao.getCars()
-        }
-
-    override suspend fun insertCarLocal(car: CarEntity) =
-        roomCall {
-            carDao.insertUser(car)
-        }
 
 }

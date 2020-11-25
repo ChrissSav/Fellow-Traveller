@@ -9,7 +9,7 @@ import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.framework.network.google.model.DestinationModel
-import gr.fellow.fellow_traveller.usecase.home.GetUserCarsLocalUseCase
+import gr.fellow.fellow_traveller.usecase.home.GetUserCarsRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.RegisterTripRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
 import gr.fellow.fellow_traveller.utils.dateTimeToTimestamp
@@ -19,7 +19,7 @@ class NewTripViewModel
 @ViewModelInject
 constructor(
     private val loadUserLocalInfoUseCase: LoadUserLocalInfoUseCase,
-    private val getUserCarsLocalUseCase: GetUserCarsLocalUseCase,
+    private val getUserCarsRemoteUseCase: GetUserCarsRemoteUseCase,
     private val registerTripRemoteUseCase: RegisterTripRemoteUseCase
 ) : BaseViewModel() {
 
@@ -116,7 +116,7 @@ constructor(
 
     fun loadUserCars() {
         launch {
-            _carList.value = getUserCarsLocalUseCase()
+            _carList.value = getUserCarsRemoteUseCase()
         }
     }
 

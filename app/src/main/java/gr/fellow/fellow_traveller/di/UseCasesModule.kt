@@ -194,22 +194,8 @@ class UseCasesModule {
 
     @ActivityScoped
     @Provides
-    fun provideGetUserCarsUseCase(dataSource: FellowDataSource): GetUserCarsLocalUseCase {
-        return GetUserCarsLocalUseCase(dataSource)
-    }
-
-
-    @ActivityScoped
-    @Provides
     fun provideGetUserCarsRemoteUseCase(dataSource: FellowDataSource): GetUserCarsRemoteUseCase {
         return GetUserCarsRemoteUseCase(dataSource)
-    }
-
-
-    @ActivityScoped
-    @Provides
-    fun provideRegisterCarLocalUseCase(dataSource: FellowDataSource): RegisterCarLocalUseCase {
-        return RegisterCarLocalUseCase(dataSource)
     }
 
 
@@ -220,11 +206,6 @@ class UseCasesModule {
     }
 
 
-    @ActivityScoped
-    @Provides
-    fun provideDeleteCarUseCase(dataSource: FellowDataSource): DeleteUserLocalCars {
-        return DeleteUserLocalCars(dataSource)
-    }
 
     @ActivityScoped
     @Provides

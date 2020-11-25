@@ -5,12 +5,10 @@ import androidx.lifecycle.LiveData
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.home.AddCarToRemoteUseCase
-import gr.fellow.fellow_traveller.usecase.home.RegisterCarLocalUseCase
 
 class AddCarViewModel
 @ViewModelInject
 constructor(
-    private val registerCarLocalUseCase: RegisterCarLocalUseCase,
     private val addCarToRemoteUseCase: AddCarToRemoteUseCase
 ) : BaseViewModel() {
 
@@ -20,7 +18,6 @@ constructor(
     fun addCar(brand: String, model: String, plate: String, color: String) {
         launch(true) {
             val response = addCarToRemoteUseCase(brand, model, plate, color)
-            registerCarLocalUseCase(response)
             _saved.value = true
         }
     }

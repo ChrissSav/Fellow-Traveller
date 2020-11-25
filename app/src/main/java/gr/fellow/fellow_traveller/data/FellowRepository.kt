@@ -13,7 +13,6 @@ import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripCreateReques
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripInvolvedResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripSearchResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.user.*
-import gr.fellow.fellow_traveller.room.entites.CarEntity
 import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 
 interface FellowRepository {
@@ -102,14 +101,5 @@ interface FellowRepository {
 
     suspend fun logoutUserLocal(): Int
 
-    // Cars
-
-    suspend fun deleteCarsLocal(): Int
-
-    suspend fun deleteCarByIdLocal(id: String): Int
-
-    suspend fun getAllCarsLocal(): MutableList<CarEntity>
-
-    suspend fun insertCarLocal(car: CarEntity)
 
 }

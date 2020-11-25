@@ -7,9 +7,6 @@ class DeleteCarUseCase(
 ) {
 
     suspend operator fun invoke(carId: String): String {
-        val response = dataSource.deleteCarRemote(carId)
-        dataSource.deleteCarLocal(carId)
-
-        return response
+        return dataSource.deleteCarRemote(carId)
     }
 }

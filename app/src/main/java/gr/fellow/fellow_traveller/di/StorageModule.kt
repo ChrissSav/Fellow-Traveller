@@ -17,7 +17,6 @@ import gr.fellow.fellow_traveller.framework.GoogleServiceRepositoryImpl
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
 import gr.fellow.fellow_traveller.framework.network.google.PlaceApiService
 import gr.fellow.fellow_traveller.room.FellowDatabase
-import gr.fellow.fellow_traveller.room.dao.CarDao
 import gr.fellow.fellow_traveller.room.dao.UserAuthDao
 import javax.inject.Singleton
 
@@ -27,8 +26,8 @@ object StorageModule {
 
     @Singleton
     @Provides
-    fun provideRepository(service: FellowService, sharedPreferences: SharedPreferences, userAuthDao: UserAuthDao, carDao: CarDao): FellowRepository =
-        FellowRepositoryImpl(service, sharedPreferences, userAuthDao, carDao)
+    fun provideRepository(service: FellowService, sharedPreferences: SharedPreferences, userAuthDao: UserAuthDao): FellowRepository =
+        FellowRepositoryImpl(service, sharedPreferences, userAuthDao)
 
 
     @Singleton
@@ -61,11 +60,6 @@ object StorageModule {
     fun providesProductDao(fellowDatabase: FellowDatabase): UserAuthDao =
         fellowDatabase.userAuthDao()
 
-
-    @Singleton
-    @Provides
-    fun providesCarDao(fellowDatabase: FellowDatabase): CarDao =
-        fellowDatabase.carDao()
 
 
 }

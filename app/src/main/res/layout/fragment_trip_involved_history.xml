@@ -48,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/trip_involved_item_layout" />
+                tools:listitem="@layout/trip_involved_history_item_layout" />
 
             <ProgressBar
                 android:id="@+id/progressBar2"

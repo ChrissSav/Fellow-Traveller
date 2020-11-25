@@ -79,17 +79,6 @@
                 app:layout_constraintStart_toStartOf="@+id/personal_info"
                 app:layout_constraintTop_toBottomOf="@+id/password" />
 
-
-            <TextView
-                android:id="@+id/my_cars"
-                style="@style/settings_text_with_padding"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
-                android:text="@string/notifications"
-                app:layout_constraintEnd_toEndOf="@+id/personal_info"
-                app:layout_constraintStart_toStartOf="@+id/personal_info"
-                app:layout_constraintTop_toBottomOf="@+id/messenger" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -111,18 +100,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/notifications"
-                style="@style/settings_text_with_padding"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
-                android:text="@string/notifications"
-                app:layout_constraintEnd_toEndOf="@+id/write_review"
-                app:layout_constraintStart_toStartOf="@+id/write_review"
-                app:layout_constraintTop_toBottomOf="@id/write_review"
-
-                />
 
             <TextView
                 android:id="@+id/terms_of_use"
@@ -131,9 +108,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
                 android:text="@string/terms_of_use"
-                app:layout_constraintEnd_toEndOf="@+id/notifications"
-                app:layout_constraintStart_toStartOf="@+id/notifications"
-                app:layout_constraintTop_toBottomOf="@+id/notifications" />
+                app:layout_constraintEnd_toEndOf="@+id/write_review"
+                app:layout_constraintStart_toStartOf="@+id/write_review"
+                app:layout_constraintTop_toBottomOf="@id/write_review" />
 
             <TextView
                 android:id="@+id/privacy_Policy"

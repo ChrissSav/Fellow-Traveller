@@ -102,7 +102,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
             }
 
 
-            if (destination.id == R.id.accountSettingsFragment)
+            if (destination.id == R.id.homeMessengerFragment)
                 binding.constraintLayoutMessenger.visibility = View.GONE
             else if (viewModel.user.value?.messengerLink == null)
                 binding.constraintLayoutMessenger.visibility = View.VISIBLE
@@ -145,11 +145,11 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
         }
 
         binding.constraintLayoutMessenger.setOnClickListener {
-            navController.navigateWithFade(R.id.accountSettingsFragment)
+            navController.navigateWithFade(R.id.homeMessengerFragment)
         }
 
         binding.toAccountInfo.setOnClickListener {
-            navController.navigateWithFade(R.id.accountSettingsFragment)
+            navController.navigateWithFade(R.id.homeMessengerFragment)
         }
 
         binding.home.setOnClickListener(this)

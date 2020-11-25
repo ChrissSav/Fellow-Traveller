@@ -155,17 +155,4 @@ class FellowDataSourceImpl(
     override suspend fun logoutUserLocal() =
         repository.logoutUserLocal()
 
-    override suspend fun getAllCarsLocal(): MutableList<Car> =
-        repository.getAllCarsLocal().map { it.mapToCar() }.toMutableList()
-
-    override suspend fun insertCarLocal(car: Car) =
-        repository.insertCarLocal(car.mapToCarEntity())
-
-    override suspend fun deleteCarLocal(carId: String) =
-        repository.deleteCarByIdLocal(carId)
-
-    override suspend fun deleteAllLocaleCars() =
-        repository.deleteCarsLocal()
-
-
 }

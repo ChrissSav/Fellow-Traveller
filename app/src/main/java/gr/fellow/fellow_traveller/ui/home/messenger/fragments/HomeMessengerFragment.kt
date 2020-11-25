@@ -8,6 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentHomeMessengerBinding
+import gr.fellow.fellow_traveller.ui.extensions.createToast
 import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
 import gr.fellow.fellow_traveller.ui.extensions.startActivityForResultWithFade
@@ -28,6 +29,7 @@ class HomeMessengerFragment : BaseFragment<FragmentHomeMessengerBinding>() {
         viewModel.user.observe(viewLifecycleOwner, Observer {
             binding.messengerLink.setText(it.messengerLink)
             binding.messengerLink.clearFocus()
+            createToast(getString(R.string.success_add))
         })
 
     }
