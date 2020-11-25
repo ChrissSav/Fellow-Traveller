@@ -51,8 +51,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                 firstName.text = it.firstName
                 lastName.text = it.lastName
                 email.text = it.email
-                aboutMe.text = it.aboutMe
-
+                aboutMe.setText(it.aboutMe)
                 picture.clearFocus()
                 firstName.clearFocus()
                 lastName.clearFocus()
@@ -91,7 +90,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
             if (binding.lastName.isCorrect() and binding.firstName.isCorrect()) {
                 val firstName = binding.firstName.text.toString()
                 val lastName = binding.lastName.text.toString()
-                viewModel.updateAccountInfo(firstName, lastName, binding.aboutMe.text)
+                viewModel.updateAccountInfo(firstName, lastName, binding.aboutMe.text.toString().trim())
             }
         }
 

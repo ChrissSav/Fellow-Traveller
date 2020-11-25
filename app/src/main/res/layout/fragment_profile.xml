@@ -27,11 +27,10 @@
             android:id="@+id/user_image"
             android:layout_width="82dp"
             android:layout_height="82dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="63dp"
+            android:layout_marginTop="32dp"
             android:background="@drawable/ic_boy"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/settings_button"
+            app:layout_constraintTop_toBottomOf="@+id/settings_button" />
 
         <TextView
             android:id="@+id/user_name"
@@ -39,14 +38,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:singleLine="true"
             android:text="Tyler Joseph"
-            app:layout_constraintBottom_toBottomOf="@id/user_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/user_image"
+            app:layout_constraintEnd_toStartOf="@+id/user_image"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/user_image" />
 
         <TextView
@@ -54,39 +53,21 @@
             style="@style/paragraph_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="31dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
             android:focusable="false"
             android:hint="Δεν υπάρχει κάποια σχετική περιγραφή"
             android:longClickable="false"
             android:textColorHint="@color/greyBlack_transparent_color"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/user_name"
             app:layout_constraintStart_toStartOf="@id/user_name"
             app:layout_constraintTop_toBottomOf="@id/user_name" />
 
-        <TextView
-            android:id="@+id/messengerLink"
-            style="@style/paragraph_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:drawablePadding="8dp"
-            android:gravity="center"
-            android:text="@string/send_message"
-            android:visibility="invisible"
-            app:drawableStartCompat="@drawable/ic_messenger"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/user_name" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/user_info_section"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="47dp"
+            android:layout_marginTop="43dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/about_me">

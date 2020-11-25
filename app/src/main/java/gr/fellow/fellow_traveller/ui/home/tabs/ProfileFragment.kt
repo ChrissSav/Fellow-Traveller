@@ -1,7 +1,5 @@
 package gr.fellow.fellow_traveller.ui.home.tabs
 
-import android.content.Intent
-import android.net.Uri
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.core.os.bundleOf
@@ -108,15 +106,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             findNavController()?.navigate(R.id.action_destination_info_to_tripInvolvedHistoryFragment, bundleOf("creator" to true))
         }
 
-
-        binding.messengerLink.setOnClickListener {
-            messengerLink?.let {
-                val uriUrl: Uri = Uri.parse(getString(R.string.messenger_link, it))
-                val launchBrowser = Intent(Intent.ACTION_VIEW, uriUrl)
-                startActivity(launchBrowser)
-            }
-
-        }
     }
 
 }

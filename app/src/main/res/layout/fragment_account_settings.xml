@@ -99,22 +99,22 @@
 
                 <Button
                     android:id="@+id/upload_image"
+                    style="@style/border_icon_button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    style="@style/border_icon_button"
-                    android:stateListAnimator="@null"
-                    android:text="@string/edit_profile_photo"
-                    android:layout_marginTop="24dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
                     android:layout_marginEnd="16dp"
-                    android:textAllCaps="false"
-                    android:fontFamily="@font/alegreyasans_light"
-                    android:textColor="@color/black_color"
                     android:drawableStart="@drawable/ic_edit_pen"
                     android:drawableTint="@color/black_color"
+                    android:fontFamily="@font/alegreyasans_light"
                     android:gravity="center"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:stateListAnimator="@null"
+                    android:text="@string/edit_profile_photo"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black_color"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/picture" />
 
 
@@ -162,21 +162,36 @@
                     app:text_type_f="textEmailAddress" />
 
 
-                <gr.fellow.fellow_traveller.ui.views.FellowEditText
-                    android:id="@+id/about_me"
+                <TextView
+                    android:id="@+id/label"
+                    style="@style/label_1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/fragment_settings_text_margin_top"
-                    android:layout_marginBottom="32dp"
-                    app:error_message_f=""
-                    app:hint_f="Σχετικά με εμένα"
-                    app:imeOptions_f="actionDone"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/first_name"
+                    android:layout_marginTop="16dp"
+                    android:ellipsize="middle"
+                    android:singleLine="true"
+                    android:text="Σχετικά με εμένα"
+                    app:layout_constraintEnd_toEndOf="@+id/email"
                     app:layout_constraintStart_toStartOf="@+id/email"
-                    app:layout_constraintTop_toBottomOf="@+id/email"
-                    app:layout_constraintVertical_bias="0.0"
-                    app:regex_f="@string/regex_min_3_chars" />
+                    app:layout_constraintTop_toBottomOf="@+id/email" />
+
+                <EditText
+                    android:id="@+id/about_me"
+                    style="@style/input_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="150dp"
+                    android:background="@null"
+                    android:hint="Σχετικά με εμένα"
+                    android:inputType="textMultiLine"
+                    android:paddingTop="8dp"
+                    android:textColorHint="#B1B1B1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/label"
+                    app:layout_constraintStart_toStartOf="@+id/label"
+                    app:layout_constraintTop_toBottomOf="@+id/label"
+                    app:layout_constraintVertical_bias="0.0" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
