@@ -62,6 +62,9 @@ constructor(
     private val _cars = MutableLiveData<MutableList<Car>>()
     val cars: LiveData<MutableList<Car>> = _cars
 
+    private val _messengerUpdate = SingleLiveEvent<Boolean>()
+    val messengerUpdate: LiveData<Boolean> = _messengerUpdate
+
 
     private val _carDeletedId = SingleLiveEvent<Car>()
     val carDeletedId: LiveData<Car> = _carDeletedId
@@ -163,6 +166,7 @@ constructor(
         launch(true) {
             updateUserMessengerUseCase(messenger)
             updateUserInfo()
+            _messengerUpdate.value = true
         }
     }
 

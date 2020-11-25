@@ -29,6 +29,10 @@ class HomeMessengerFragment : BaseFragment<FragmentHomeMessengerBinding>() {
         viewModel.user.observe(viewLifecycleOwner, Observer {
             binding.messengerLink.setText(it.messengerLink)
             binding.messengerLink.clearFocus()
+
+        })
+
+        viewModel.messengerUpdate.observe(viewLifecycleOwner, Observer {
             createToast(getString(R.string.success_add))
         })
 

@@ -75,6 +75,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.searchAndOffer.setOnClickListener {
             activity?.openUrl(BuildConfig.FELLOW_WEB_SITE_URL)
         }
+
         binding.cityChoice1.loadImageFromUrl("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2FSKG-ATH.jpg?alt=media&token=ea8aac0d-b2af-4f09-af83-2db87e69dcf4")
         binding.cityChoice2.loadImageFromUrl("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2FIOA-ATH.jpg?alt=media&token=e374487c-9715-49ea-b972-25384cb90e42")
         binding.cityChoice3.loadImageFromUrl("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2FIOA-PAT.jpg?alt=media&token=0fb958e3-9027-4a10-9582-7262f7555a5c")
