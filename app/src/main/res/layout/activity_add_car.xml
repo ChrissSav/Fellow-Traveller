@@ -141,28 +141,25 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <Button
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/add_car"
         style="@style/header_3"
         android:layout_width="wrap_content"
+        android:text="@string/submit"
+        android:background="@drawable/button_background_green_30dp"
+        app:backgroundTint="@color/green"
+        app:icon="@drawable/ic_tick"
+        android:paddingStart="22dp"
+        android:paddingEnd="20dp"
+        android:gravity="center|end"
+        app:iconPadding="16dp"
+        android:textColor="@color/white"
         android:layout_height="@dimen/car_float_action_button_height"
         android:layout_marginEnd="@dimen/car_trip_float_action_button_margin_right"
         android:layout_marginBottom="@dimen/car_trip_float_action_button_margin_bottom"
-        android:background="@drawable/fab_background_aqua"
-        android:drawableStart="@drawable/ic_tick"
-        android:drawableTint="@color/white"
-        android:elevation="16dp"
-        android:gravity="center|end"
-        android:minWidth="155dp"
-        android:paddingStart="22dp"
-        android:paddingEnd="20dp"
-        android:backgroundTint="@color/green"
-        android:text="@string/submit"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="RtlSymmetry" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <include
         android:id="@+id/generic_loader"

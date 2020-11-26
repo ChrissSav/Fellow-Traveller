@@ -40,7 +40,7 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
                 if (!user.aboutMe.isNullOrEmpty())
                     aboutMe.text = user.aboutMe
                 constraintLayout.visibility = View.VISIBLE
-                binding.error.visibility = View.INVISIBLE
+                binding.error.root.visibility = View.INVISIBLE
             }
 
         })
@@ -64,7 +64,7 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
         })
 
         viewModel.error.observe(this, Observer {
-            binding.error.visibility = View.VISIBLE
+            binding.error.root.visibility = View.VISIBLE
         })
 
     }

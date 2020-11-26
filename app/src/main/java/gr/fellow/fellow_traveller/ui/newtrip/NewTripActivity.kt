@@ -31,7 +31,11 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
     }
 
     override fun setUpObservers() {
-        viewModel.setSeats(1)
+
+        viewModel.carList.observe(this, Observer { list ->
+            if (list.size == 1)
+                viewModel.setCar(list.first())
+        })
 
         viewModel.error.observe(this, Observer {
             if (it.internal)
@@ -53,6 +57,11 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
 
 
     override fun setUpViews() {
+
+        viewModel.loadUserCars()
+        viewModel.setSeats(1)
+
+
         nav = Navigation.findNavController(this, R.id.RegisterActivity_nav_host)
 
         nav.addOnDestinationChangedListener { _, destination, _ ->

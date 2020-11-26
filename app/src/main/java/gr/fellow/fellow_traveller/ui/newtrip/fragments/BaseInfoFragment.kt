@@ -57,7 +57,6 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
     }
 
     override fun setUpViews() {
-        viewModel.loadUserCars()
 
         with(binding) {
 
@@ -133,6 +132,5 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
             }
         }
     }
-
 
 }

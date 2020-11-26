@@ -3,14 +3,11 @@ package gr.fellow.fellow_traveller.ui.register.fragments
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
-import gr.fellow.fellow_traveller.BuildConfig
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentEmailBinding
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
-import gr.fellow.fellow_traveller.ui.extensions.openUrl
-import gr.fellow.fellow_traveller.ui.extensions.setTextHtml
 import gr.fellow.fellow_traveller.ui.register.RegisterViewModel
 
 @AndroidEntryPoint
@@ -38,12 +35,7 @@ class EmailFragment : BaseFragment<FragmentEmailBinding>() {
             }
         }
 
-        binding.tos.setTextHtml(getString(R.string.agree_with_fellow_tos))
 
-
-        binding.tos.setOnClickListener {
-            activity?.openUrl(BuildConfig.FELLOW_TOS_URL)
-        }
     }
 
 }

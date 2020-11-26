@@ -8,66 +8,91 @@
 
     <ImageView
         android:id="@+id/MainActivity_ImageView_logo"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="84dp"
-        android:src="@drawable/ic_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_fellow"
+        app:layout_constraintBottom_toTopOf="@+id/MainActivity_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/MainActivity_textView"
-        style="@style/paragraph_1"
+        style="@style/display_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Καλώς όρισες στο"
-        android:textSize="30sp"
+        android:text="Ξεκινήστε το ταξίδι σας"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MainActivity_ImageView_logo" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45" />
 
     <TextView
         android:id="@+id/MainActivity_textView2"
-        style="@style/header_1"
+        style="@style/paragraph_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Fellow Traveller"
-        android:textSize="30sp"
+        android:layout_marginTop="16dp"
+        android:text="Συνδεθείτε ή δημιουργήστε ένα νέο λογαριασμό"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MainActivity_textView" />
 
 
-    <Button
-        android:id="@+id/button_login"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="24dp"
-        android:background="@drawable/button_background_orange_16dp"
-        android:stateListAnimator="@null"
-        android:text="Σύνδεση"
-        android:textAppearance="@style/header_1"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/button_register"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MainActivity_textView2">
 
-    <Button
-        android:id="@+id/button_register"
-        style="@style/button_orange_outline"
+        <Button
+            android:id="@+id/button_login"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="72dp"
+            android:layout_marginEnd="72dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/button_background_orange_16dp"
+            android:stateListAnimator="@null"
+            android:text="Είσοδος"
+            android:textAppearance="@style/header_1"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/button_register"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/button_register"
+            style="@style/button_orange_outline"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:text="Εγγραφή"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/button_login"
+            app:layout_constraintStart_toStartOf="@+id/button_login" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tos"
+        style="@style/paragraph_1"
         android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="50dp"
-        android:text="Εγγραφή"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:text="@string/agree_with_fellow_tos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

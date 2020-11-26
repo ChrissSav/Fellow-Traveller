@@ -197,6 +197,9 @@
     <string name="enter_destination">Choose a destination</string>
     <string name="enter_starting_point">Choose a starting point</string>
     <string name="city_athens">Athens</string>
+    <string name="city_ksanthi">Ksanthi</string>
+    <string name="city_serres">Serres</string>
+    <string name="city_aleksandroupoli">Aleksandroupoli</string>
     <string name="city_thessaloniki">Thessaloniki</string>
     <string name="city_ioannina">Ioannina</string>
     <string name="city_patra">Patra</string>
@@ -306,6 +309,6 @@
     <string name="trips">Trips</string>
     <string name="sign_in">Sign In</string>
     <string name="did_you_forgot_password">Forgot Password</string>
-    <string name="agree_with_fellow_tos">By creating an account, you agree to our &lt;b&gt;Privacy Policy&lt;/b></string>
+    <string name="agree_with_fellow_tos">* By creating an account, you agree to our &lt;b&gt;Privacy Policy&lt;/b></string>
 
 </resources>
