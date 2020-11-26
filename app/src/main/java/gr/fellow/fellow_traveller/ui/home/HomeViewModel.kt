@@ -313,11 +313,14 @@ constructor(
 
     fun addTripCreate(trip: TripInvolved) {
         launch {
-            tripsAsCreatorActive.value?.let {
+            _tripsAsCreatorActive.value?.let { list ->
                 updateUserInfo()
-                val tempTrip = it
+                val tempTrip = list
                 tempTrip.add(trip)
                 _tripsAsCreatorActive.value = tempTrip
+                val car = _cars.value?.first { it.plate == trip.car.plate }
+                if (car == null)
+                    loadCars()
             }
 
         }
