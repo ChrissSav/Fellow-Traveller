@@ -9,6 +9,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentTakesPartTabBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
+import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.TripsInvolvedAdapter
@@ -18,7 +19,7 @@ import gr.fellow.fellow_traveller.ui.home.adapter.TripsInvolvedAdapter
 class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
 
     private val viewModel: HomeViewModel by activityViewModels()
-
+    private var accountCorrect = false
 
     override fun getViewBinding(): FragmentTakesPartTabBinding =
         FragmentTakesPartTabBinding.inflate(layoutInflater)
@@ -27,6 +28,12 @@ class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
     override fun setUpObservers() {
         viewModel.tripsAsPassengerActive.observe(viewLifecycleOwner, Observer { list ->
             (binding.recyclerView.adapter as TripsInvolvedAdapter).submitList(list)
+
+            //Check if we have active trips
+            if (list.isNullOrEmpty())
+                binding.searchSection.visibility = View.VISIBLE
+            else
+                binding.searchSection.visibility = View.GONE
         })
 
         viewModel.loadPassengerActive.observe(viewLifecycleOwner, Observer {
@@ -38,11 +45,9 @@ class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
             }
         })
 
-
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            (binding.recyclerView.adapter as TripsInvolvedAdapter).submitList(null)
-            viewModel.loadTripsAsPassenger(true)
-        }
+        viewModel.user.observe(viewLifecycleOwner, Observer {
+            accountCorrect = it.messengerLink != null
+        })
 
     }
 
@@ -57,6 +62,18 @@ class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
 
         binding.buttonHistory.setOnClickListener {
             findNavController()?.navigate(R.id.action_destination_trips_to_tripInvolvedHistoryFragment, bundleOf("creator" to false))
+        }
+
+        binding.searchButton.setOnClickListener {
+            if (accountCorrect)
+                findNavController()?.navigate(R.id.action_destination_trips_to_searchTripActivity)
+            else
+                createAlerter(getString(R.string.complete_profile_warning))
+        }
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            (binding.recyclerView.adapter as TripsInvolvedAdapter).submitList(null)
+            viewModel.loadTripsAsPassenger(true)
         }
 
     }
