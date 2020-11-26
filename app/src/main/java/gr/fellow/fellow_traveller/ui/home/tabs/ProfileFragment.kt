@@ -1,5 +1,8 @@
 package gr.fellow.fellow_traveller.ui.home.tabs
 
+import android.app.Activity
+import android.content.Intent
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.core.os.bundleOf
@@ -9,8 +12,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentProfileBinding
+import gr.fellow.fellow_traveller.ui.car.AddCarActivity
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
+import gr.fellow.fellow_traveller.ui.extensions.startActivityForResult
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
 
@@ -76,12 +81,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     carItem.color.text = firstCar.color
 
                     binding.carSection.visibility = VISIBLE
-                    //binding.viewAll.visibility = View.INVISIBLE
-                    //binding.reviewsConstraintLayout.visibility = View.INVISIBLE
+                    binding.addCarSection.visibility = View.GONE
+
                 } catch (e: NoSuchElementException) {
                     //binding.viewAll.visibility = View.GONE
-                    //binding.reviewsConstraintLayout.visibility = View.GONE
                     binding.carSection.visibility = GONE
+                    binding.addCarSection.visibility = View.VISIBLE
                 }
 
             }
@@ -105,7 +110,20 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         binding.allOffers.setOnClickListener {
             findNavController()?.navigate(R.id.action_destination_info_to_tripInvolvedHistoryFragment, bundleOf("creator" to true))
         }
+        binding.addCarSection.setOnClickListener {
+            startActivityForResult(AddCarActivity::class, 1, null)
+        }
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                viewModel.loadCars()
+            }
+        }
     }
 
 }
