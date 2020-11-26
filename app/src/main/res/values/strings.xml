@@ -278,6 +278,6 @@
     <string name="trips">Ταξίδια</string>
     <string name="sign_in">Σύνδεση</string>
     <string name="did_you_forgot_password">Ξέχασα τον κωδικό πρόσβασης</string>
-    <string name="agree_with_fellow_tos">Με τη δημιουργία λογαριασμού, αποδέχεστε την &lt;b&gt;Πολιτική Απορρήτου&lt;/b> μας</string>
+    <string name="agree_with_fellow_tos">* Με τη δημιουργία λογαριασμού, αποδέχεστε την &lt;b&gt;Πολιτική Απορρήτου&lt;/b> μας</string>
 
 </resources>
