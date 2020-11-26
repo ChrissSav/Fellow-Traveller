@@ -6,199 +6,77 @@
     android:layout_height="match_parent"
     tools:context=".ui.search.locations.SelectDestinationActivity">
 
+
     <ImageButton
         android:id="@+id/back_button"
-        style="@style/border_icon_button"
-        android:layout_width="@dimen/back_button_width_height"
-        android:layout_height="@dimen/back_button_width_height"
-        android:layout_marginStart="16dp"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+        android:background="?android:selectableItemBackgroundBorderless"
+        android:padding="6dp"
+        android:scaleType="centerInside"
         android:src="@drawable/ic_back_button"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/end_dest_label"
-        style="@style/display_1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/enter_destination"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/back_button"
-        app:layout_constraintTop_toBottomOf="@id/back_button" />
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/end_dest_section"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/search_border"
-        android:elevation="1dp"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/end_dest_label"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/end_dest_label"
-        app:layout_constraintTop_toBottomOf="@id/end_dest_label">
-
-        <EditText
-            android:id="@+id/dest_editText"
-            style="@style/header_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="50dp"
-            android:background="@android:color/transparent"
-            android:dropDownWidth="match_parent"
-            android:dropDownVerticalOffset="20dp"
-            android:hint="@string/select_destination"
-            android:inputType="text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/erase_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?android:selectableItemBackgroundBorderless"
-            android:backgroundTint="@color/black_color"
-            android:padding="8dp"
-            android:src="@drawable/ic_erase"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@id/dest_editText"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/dest_editText" />
-
-        <ImageView
-            android:id="@+id/search_image"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@drawable/ic_search"
-            android:backgroundTint="@color/black_color"
-            android:padding="10dp"
-            android:rotation="90"
-            app:layout_constraintBottom_toBottomOf="@id/dest_editText"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/dest_editText" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <ScrollView
-        android:id="@+id/protaseis"
+    <EditText
+        android:id="@+id/edit_text"
+        style="@style/input_1"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/transparent"
+        android:drawableEnd="@drawable/ic_magnifier"
+        android:ellipsize="end"
+        android:hint="@string/select_location"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:singleLine="true"
+        app:layout_constraintBottom_toBottomOf="@+id/back_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/back_button"
+        app:layout_constraintTop_toTopOf="@+id/back_button">
+
+        <requestFocus />
+    </EditText>
+
+
+    <View
+        android:id="@+id/SelectLocationActivity_textView6"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/end_dest_section"
-        app:layout_constraintStart_toStartOf="@+id/end_dest_section"
-        app:layout_constraintTop_toBottomOf="@+id/end_dest_section">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/alternative_label"
-                style="@style/header_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/alternative_suggestions"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/your_location_button"
-                style="@style/button_outline_orange_with_left_drawable"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:drawableStart="@drawable/ic_location"
-                android:text="@string/your_location"
-                android:visibility="gone"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/alternative_label" />
-
-            <Button
-                android:id="@+id/athens_button"
-                style="@style/button_outline_orange_with_left_drawable"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:drawableStart="@drawable/ic_pin"
-                android:text="@string/city_athens"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/your_location_button" />
-
-            <Button
-                android:id="@+id/thessaloniki_button"
-                style="@style/button_outline_orange_with_left_drawable"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:drawableStart="@drawable/ic_pin"
-                android:text="@string/city_thessaloniki"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/athens_button" />
-
-            <Button
-                android:id="@+id/ioannina_button"
-                style="@style/button_outline_orange_with_left_drawable"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:drawableStart="@drawable/ic_pin"
-                android:text="@string/city_ioannina"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/thessaloniki_button" />
-
-            <Button
-                android:id="@+id/patra_button"
-                style="@style/button_outline_orange_with_left_drawable"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:drawableStart="@drawable/ic_pin"
-                android:text="@string/city_patra"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ioannina_button" />
-
-            <Button
-                android:id="@+id/larisa_button"
-                style="@style/button_outline_orange_with_left_drawable"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="26dp"
-                android:drawableStart="@drawable/ic_pin"
-                android:text="@string/city_larisa"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/patra_button" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+        android:background="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text" />
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/end_dest_section" />
+        app:layout_constraintTop_toBottomOf="@+id/SelectLocationActivity_textView6"
+        tools:listitem="@layout/place_item" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_popular"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SelectLocationActivity_textView6"
+        tools:listitem="@layout/place_popular_item" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

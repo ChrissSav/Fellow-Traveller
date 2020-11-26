@@ -157,6 +157,9 @@
     <string name="enter_destination">Επιλέξτε τον προορισμό σας</string>
     <string name="enter_starting_point">Επιλέξτε την αφετηρία σας</string>
     <string name="city_athens">Αθήνα</string>
+    <string name="city_ksanthi">Ξάνθη</string>
+    <string name="city_serres">Σέρρες</string>
+    <string name="city_aleksandroupoli">Αλεξανδρούπολη</string>
     <string name="city_thessaloniki">Θεσσαλονίκη</string>
     <string name="city_ioannina">Ιωάννινα</string>
     <string name="city_patra">Πάτρα</string>

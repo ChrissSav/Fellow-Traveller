@@ -7,7 +7,6 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivity
@@ -16,24 +15,25 @@ import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.framework.network.google.response.PredictionResponse
 import gr.fellow.fellow_traveller.ui.location.SelectLocationViewModel
 import gr.fellow.fellow_traveller.ui.location.adapter.PlacesAdapter
+import gr.fellow.fellow_traveller.ui.location.adapter.PlacesPopularAdapter
 
 @AndroidEntryPoint
-class SelectDestinationActivity : BaseActivity<ActivitySelectDestinationBinding>(), View.OnClickListener {
+class SelectDestinationActivity : BaseActivity<ActivitySelectDestinationBinding>() {
 
     private val viewModel: SelectLocationViewModel by viewModels()
     private var placesList = mutableListOf<PredictionResponse>()
+    private var placesListPopular = mutableListOf<PredictionResponse>()
 
     override fun provideViewBinding(): ActivitySelectDestinationBinding =
         ActivitySelectDestinationBinding.inflate(layoutInflater)
 
     override fun setUpObservers() {
         viewModel.destinations.observe(this, Observer {
-            if (it.isNotEmpty()) {
-                placesList.clear()
-                placesList.addAll(it)
-                binding.recyclerView.adapter?.notifyDataSetChanged()
-            }
-
+            placesList.clear()
+            placesList.addAll(it)
+            binding.recyclerView.adapter?.notifyDataSetChanged()
+            binding.recyclerViewPopular.visibility = View.GONE
+            binding.recyclerView.visibility = View.VISIBLE
         })
 
         viewModel.place.observe(this, Observer {
@@ -43,33 +43,36 @@ class SelectDestinationActivity : BaseActivity<ActivitySelectDestinationBinding>
     }
 
     override fun setUpViews() {
+        placesListPopular = mutableListOf(
+            PredictionResponse("ChIJ8UNwBh-9oRQR3Y1mdkU1Nic", getString(R.string.city_athens)),
+            PredictionResponse("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", getString(R.string.city_thessaloniki)),
+            PredictionResponse("ChIJZ93-3qLpWxMRwJe54iy9AAQ", getString(R.string.city_ioannina)),
+            PredictionResponse("ChIJLe0kpZk1XhMRoIy54iy9AAQ", getString(R.string.city_patra)),
+            PredictionResponse("ChIJoUddWVyIWBMRMJy54iy9AAQ", getString(R.string.city_larisa)),
+            PredictionResponse("ChIJfdnlaDstrBQR3tAiUqN47vY", getString(R.string.city_ksanthi)),
+            PredictionResponse("ChIJ1eUpZ4txqRQRV-NcWXB83Qk", getString(R.string.city_serres)),
+            PredictionResponse("ChIJ1cgCXJ8cshQR40EeRCv5sLo", getString(R.string.city_aleksandroupoli))
+        )
 
-        if ("to" == intent.getStringExtra("info"))
+        /*if ("to" == intent.getStringExtra("info"))
             binding.endDestLabel.text = getString(R.string.enter_destination)
         else
-            binding.endDestLabel.text = getString(R.string.enter_starting_point)
+            binding.endDestLabel.text = getString(R.string.enter_starting_point)*/
 
-        with(binding) {
-            athensButton.setOnClickListener(this@SelectDestinationActivity)
-            thessalonikiButton.setOnClickListener(this@SelectDestinationActivity)
-            ioanninaButton.setOnClickListener(this@SelectDestinationActivity)
-            patraButton.setOnClickListener(this@SelectDestinationActivity)
-            larisaButton.setOnClickListener(this@SelectDestinationActivity)
-            backButton.setOnClickListener {
-                onBackPressed()
-            }
+
+        binding.backButton.setOnClickListener {
+            onBackPressed()
         }
 
 
-        binding.destEditText.addTextChangedListener(object : TextWatcher {
+
+        binding.editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(charSequence: Editable?) {
-                if (charSequence.toString().trim().length > 2) {
-                    binding.protaseis.visibility = View.GONE
-                    binding.recyclerView.visibility = View.VISIBLE
+                if (charSequence.toString().trim().length > 2)
                     viewModel.getAllDestinations(charSequence.toString().trim())
-                } else {
+                else if (charSequence.toString().trim().isEmpty()) {
+                    binding.recyclerViewPopular.visibility = View.VISIBLE
                     binding.recyclerView.visibility = View.GONE
-                    binding.protaseis.visibility = View.VISIBLE
                 }
             }
 
@@ -89,8 +92,8 @@ class SelectDestinationActivity : BaseActivity<ActivitySelectDestinationBinding>
 
     private fun initializeRecycle() {
         with(binding) {
-            recyclerView.layoutManager = LinearLayoutManager(this@SelectDestinationActivity)
             recyclerView.adapter = PlacesAdapter(placesList, this@SelectDestinationActivity::onPredictionItemSelected)
+            recyclerViewPopular.adapter = PlacesPopularAdapter(placesListPopular, this@SelectDestinationActivity::onPredictionItemSelected)
         }
     }
 
@@ -111,30 +114,6 @@ class SelectDestinationActivity : BaseActivity<ActivitySelectDestinationBinding>
     override fun finish() {
         super.finish()
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-    }
-
-
-    override fun onClick(view: View) {
-        lateinit var place: PlaceModel
-
-        when (view.id) {
-            binding.athensButton.id -> {
-                place = PlaceModel("ChIJ8UNwBh-9oRQR3Y1mdkU1Nic", getString(R.string.city_athens), 37.97534.toFloat(), 23.736151.toFloat())
-            }
-            binding.thessalonikiButton.id -> {
-                place = PlaceModel("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", getString(R.string.city_thessaloniki), 40.634781.toFloat(), 22.943090.toFloat())
-            }
-            binding.ioanninaButton.id -> {
-                place = PlaceModel("ChIJZ93-3qLpWxMRwJe54iy9AAQ", getString(R.string.city_ioannina), 39.674530.toFloat(), 20.840210.toFloat())
-            }
-            binding.patraButton.id -> {
-                place = PlaceModel("ChIJLe0kpZk1XhMRoIy54iy9AAQ", getString(R.string.city_patra), 38.246639.toFloat(), 21.734573.toFloat())
-            }
-            binding.larisaButton.id -> {
-                place = PlaceModel("ChIJoUddWVyIWBMRMJy54iy9AAQ", getString(R.string.city_larisa), 39.638779.toFloat(), 22.415979.toFloat())
-            }
-        }
-        sendPlaceToParent(place)
     }
 
 
