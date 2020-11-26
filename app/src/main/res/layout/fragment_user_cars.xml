@@ -65,21 +65,16 @@
         </com.google.android.material.appbar.AppBarLayout>
 
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp">
 
-                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                    android:id="@+id/refresh"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:context=".ui.home.settings.UserCarsFragment" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/my_cars_recycler"
@@ -98,10 +93,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="100dp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:visibility="gone">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
                         android:id="@+id/image"
@@ -113,9 +108,7 @@
                         android:src="@drawable/ic_rocket"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-
-                        />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/header_text"
@@ -146,29 +139,27 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <Button
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/new_car_button"
         style="@style/header_3"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/car_float_action_button_height"
         android:layout_marginEnd="@dimen/car_trip_float_action_button_margin_right"
         android:layout_marginBottom="@dimen/car_trip_float_action_button_margin_bottom"
-        android:background="@drawable/fab_background_aqua"
-        android:backgroundTint="@color/green"
-        android:drawableStart="@drawable/ic_plus_new"
-        android:elevation="16dp"
+        android:background="@drawable/button_background_green_30dp"
         android:gravity="center|end"
-        android:minWidth="140dp"
         android:paddingStart="22dp"
         android:paddingEnd="20dp"
         android:text="Προσθήκη"
-        android:textAllCaps="false"
         android:textColor="@color/white"
+        app:backgroundTint="@color/green"
+        app:icon="@drawable/ic_plus_new"
+        app:iconPadding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="RtlSymmetry" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
