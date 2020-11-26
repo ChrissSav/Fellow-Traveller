@@ -9,6 +9,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentTripsOffersBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
+import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.TripsInvolvedAdapter
@@ -18,7 +19,7 @@ import gr.fellow.fellow_traveller.ui.home.adapter.TripsInvolvedAdapter
 class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
 
     private val viewModel: HomeViewModel by activityViewModels()
-
+    private var accountCorrect = false
 
     override fun getViewBinding(): FragmentTripsOffersBinding =
         FragmentTripsOffersBinding.inflate(layoutInflater)
@@ -28,6 +29,12 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
 
         viewModel.tripsAsCreatorActive.observe(viewLifecycleOwner, Observer { list ->
             (binding.recyclerView.adapter as TripsInvolvedAdapter).submitList(list)
+
+            //Check if we have active trips
+            if (list.isNullOrEmpty())
+                binding.offersSection.visibility = View.VISIBLE
+            else
+                binding.offersSection.visibility = View.GONE
         })
 
         viewModel.loadCreatorActive.observe(viewLifecycleOwner, Observer {
@@ -39,6 +46,10 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
             }
         })
 
+        viewModel.user.observe(viewLifecycleOwner, Observer {
+            accountCorrect = it.messengerLink != null
+        })
+
     }
 
     override fun setUpViews() {
@@ -48,6 +59,13 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
 
         binding.buttonHistory.setOnClickListener {
             findNavController()?.navigate(R.id.action_destination_trips_to_tripInvolvedHistoryFragment, bundleOf("creator" to true))
+        }
+
+        binding.offerButton.setOnClickListener {
+            if (accountCorrect)
+                findNavController()?.navigate(R.id.action_destination_trips_to_newTripActivity)
+            else
+                createAlerter(getString(R.string.complete_profile_warning))
         }
 
 

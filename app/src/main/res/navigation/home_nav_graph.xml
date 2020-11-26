@@ -44,6 +44,20 @@
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_destination_trips_to_searchTripActivity"
+            app:destination="@id/searchTripActivity"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_destination_trips_to_newTripActivity"
+            app:destination="@id/newTripActivity"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
     </fragment>
 
 
@@ -205,6 +219,16 @@
         android:name="gr.fellow.fellow_traveller.ui.home.reviews.ProfileReviewsFragment"
         android:label="fragment_profile_reviews"
         tools:layout="@layout/fragment_profile_reviews" />
+    <activity
+        android:id="@+id/searchTripActivity"
+        android:name="gr.fellow.fellow_traveller.ui.search.SearchTripActivity"
+        android:label="activity_search_trip"
+        tools:layout="@layout/activity_search_trip" />
+    <activity
+        android:id="@+id/newTripActivity"
+        android:name="gr.fellow.fellow_traveller.ui.newtrip.NewTripActivity"
+        android:label="activity_new_trip"
+        tools:layout="@layout/activity_new_trip" />
 
 
 </navigation>

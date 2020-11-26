@@ -55,6 +55,7 @@
     <!--New Colors-->
 
     <color name="green">#427856</color>
+    <color name="green_pressed">#4F8F67</color>
     <color name="orange_new">#FF7733</color>
     <color name="light_aqua_New">#B2E8BF</color>
     <color name="light_orange_New">#F7E5CD</color>

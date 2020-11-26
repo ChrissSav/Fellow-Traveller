@@ -34,6 +34,12 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
             binding.swipeRefreshLayout.isRefreshing = false
             (binding.recyclerView.adapter as NotificationAdapter).submitList(list)
 
+            //if there are no notifications to display, show specific message, else show notifications
+            if (list.isNullOrEmpty())
+                binding.notificationsSection.visibility = View.VISIBLE
+            else
+                binding.notificationsSection.visibility = View.GONE
+
         })
 
         viewModel.loadNotifications.observe(viewLifecycleOwner, Observer {

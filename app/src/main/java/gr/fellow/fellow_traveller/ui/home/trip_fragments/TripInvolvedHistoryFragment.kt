@@ -30,11 +30,25 @@ class TripInvolvedHistoryFragment : BaseFragment<FragmentTripInvolvedHistoryBind
             viewModel.tripsAsCreatorHistory.observe(viewLifecycleOwner, Observer { list ->
                 binding.swipeRefreshLayout.isRefreshing = false
                 (binding.recyclerView.adapter as TripsHistoryAdapter).submitList(list)
+
+                //Check if we have trips in history
+                if (list.isNullOrEmpty())
+                    binding.historySection.visibility = View.VISIBLE
+                else
+                    binding.historySection.visibility = View.GONE
+
             })
         } else {
             viewModel.tripsAsPassengerHistory.observe(viewLifecycleOwner, Observer { list ->
                 binding.swipeRefreshLayout.isRefreshing = false
                 (binding.recyclerView.adapter as TripsHistoryAdapter).submitList(list)
+
+                //Check if we have trips in history
+                if (list.isNullOrEmpty())
+                    binding.historySection.visibility = View.VISIBLE
+                else
+                    binding.historySection.visibility = View.GONE
+
             })
         }
 

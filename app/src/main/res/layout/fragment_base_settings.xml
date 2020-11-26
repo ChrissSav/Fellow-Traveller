@@ -53,6 +53,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/personal_info"
+                android:drawableRight="@drawable/ic_person"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -64,6 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
                 android:text="@string/password"
+                android:drawableRight="@drawable/ic_lock"
                 app:layout_constraintEnd_toEndOf="@+id/personal_info"
                 app:layout_constraintStart_toStartOf="@+id/personal_info"
                 app:layout_constraintTop_toBottomOf="@+id/personal_info" />
@@ -74,6 +76,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
+                android:drawableRight="@drawable/ic_messenger"
+
                 android:text="@string/messenger"
                 app:layout_constraintEnd_toEndOf="@id/personal_info"
                 app:layout_constraintStart_toStartOf="@+id/personal_info"
@@ -96,6 +100,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/write_a_review"
+                android:drawableRight="@drawable/ic_review"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -108,6 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
                 android:text="@string/terms_of_use"
+                android:drawableRight="@drawable/ic_form"
                 app:layout_constraintEnd_toEndOf="@+id/write_review"
                 app:layout_constraintStart_toStartOf="@+id/write_review"
                 app:layout_constraintTop_toBottomOf="@id/write_review" />
@@ -119,6 +125,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
                 android:text="@string/data_privacy_and_security"
+                android:drawableRight="@drawable/ic_form"
                 app:layout_constraintEnd_toEndOf="@+id/terms_of_use"
                 app:layout_constraintStart_toStartOf="@+id/terms_of_use"
                 app:layout_constraintTop_toBottomOf="@+id/terms_of_use" />

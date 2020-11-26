@@ -42,7 +42,7 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/help_guides"
-        app:drawableStartCompat="@drawable/ic_help"
+        app:drawableStartCompat="@drawable/ic_form"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/messenger_link" />
 
@@ -103,9 +103,11 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="@dimen/new_trip_float_action_button_margin_bottom"
         android:background="@drawable/circle_button_shape"
+        android:backgroundTint="@color/black_color"
         android:padding="18dp"
         android:scaleType="fitXY"
         android:src="@drawable/ic_save"
+        android:tint="@color/white_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

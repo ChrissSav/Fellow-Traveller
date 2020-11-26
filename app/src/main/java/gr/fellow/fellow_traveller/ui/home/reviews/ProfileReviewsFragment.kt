@@ -1,5 +1,7 @@
 package gr.fellow.fellow_traveller.ui.home.reviews
 
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +35,14 @@ class ProfileReviewsFragment : BaseFragment<FragmentProfileReviewsBinding>() {
 
     override fun setUpViews() {
         binding.recyclerView.adapter = ReviewsAdapter(reviewsList)
+
+        //if there are no reviews to display, show specific message, else show reviews
+        if (reviewsList.isNullOrEmpty())
+            binding.reviewsSection.visibility = VISIBLE
+        else
+            binding.reviewsSection.visibility = GONE
+
+
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.loadReviews()
         }

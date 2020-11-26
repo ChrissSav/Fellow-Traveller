@@ -60,9 +60,11 @@ class RateActivity : BaseActivityViewModel<ActivityRateBinding, RateViewModel>(R
         with(binding) {
             viewModel.checkReview(notification.user.id)
 
+            rateTrip.text = notification.trip.destinationFrom + " - " + notification.trip.destinationTo
 
             rateName.text = notification.user.fullName
             rateImage.loadImageFromUrl(notification.user.picture)
+
 
 
 
