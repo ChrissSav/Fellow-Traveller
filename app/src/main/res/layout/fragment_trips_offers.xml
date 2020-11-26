@@ -28,17 +28,32 @@
                 android:orientation="vertical">
 
 
-                <Button
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/button_history"
                     style="@style/border_icon_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="52dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginTop="32dp"
-                    android:text="Ιστορικό προσφορών"
-                    android:textAllCaps="false"
-                    android:stateListAnimator="@null"/>
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <TextView
+                        style="@style/paragraph_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_history"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/black_color"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="Ιστορικό προσφορών"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"
