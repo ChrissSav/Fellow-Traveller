@@ -3,6 +3,13 @@ package gr.fellow.fellow_traveller.ui.home
 import android.animation.AnimatorSet
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.ConnectivityManager.NetworkCallback
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkRequest
+import android.os.Build
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
@@ -157,7 +164,34 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
         binding.notification.setOnClickListener(this)
         binding.account.setOnClickListener(this)
 
+        val networkCallback: NetworkCallback = object : NetworkCallback() {
+            override fun onAvailable(network: Network) {
+                postDelay(800) {
+                    viewModel.loadUserInfo()
+                    viewModel.loadCars()
+                    viewModel.loadTripsAsCreator()
+                    viewModel.loadTripsAsPassenger()
+                    viewModel.loadTripsAsCreatorHistory()
+                    viewModel.loadTripsAsPassengerHistory()
+                    viewModel.loadNotifications()
+                }
 
+            }
+
+            override fun onLost(network: Network) {
+                // network unavailable
+            }
+        }
+
+        val connectivityManager: ConnectivityManager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            connectivityManager.registerDefaultNetworkCallback(networkCallback)
+        } else {
+            val request = NetworkRequest.Builder()
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET).build()
+            connectivityManager.registerNetworkCallback(request, networkCallback)
+        }
     }
 
 
