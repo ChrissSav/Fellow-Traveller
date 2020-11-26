@@ -3,6 +3,7 @@ package gr.fellow.fellow_traveller.ui.home.settings
 
 import android.app.Activity
 import android.content.Intent
+import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -33,6 +34,12 @@ class UserCarsFragment : BaseFragment<FragmentUserCarsBinding>() {
         viewModel.cars.observe(viewLifecycleOwner, Observer {
             (binding.myCarsRecycler.adapter as CarAdapter).submitList(it)
             binding.refresh.isRefreshing = false
+
+            //if there are no cars to display, show specific message, else show cars
+            if (it.isNullOrEmpty())
+                binding.carSection.visibility = View.VISIBLE
+            else
+                binding.carSection.visibility = View.GONE
         })
     }
 
