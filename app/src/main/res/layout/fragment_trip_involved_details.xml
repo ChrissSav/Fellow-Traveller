@@ -202,12 +202,12 @@
 
                     <TextView
                         android:id="@+id/rate"
+                        style="@style/header_3"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
                         android:background="@drawable/background_rate_radius_16_black"
                         android:gravity="center"
                         android:text="4.6"
-                        style="@style/header_3"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -380,6 +380,59 @@
                     app:layout_constraintEnd_toEndOf="@+id/constraintLayout5"
                     app:layout_constraintTop_toBottomOf="@+id/passenger_recycler_view"
                     app:layout_constraintVertical_bias="0.0" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/passengers_section"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginBottom="120dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/passengers_label">
+
+                    <ImageView
+                        android:id="@+id/image"
+                        android:layout_width="74dp"
+                        android:layout_height="74dp"
+                        android:background="@drawable/circle_button_shape"
+                        android:backgroundTint="@color/softGrey_color"
+                        android:padding="16dp"
+                        android:src="@drawable/ic_person"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/header_text"
+                        style="@style/header_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:gravity="center"
+                        android:text="Δεν υπάρχουν επιβάτες"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/image" />
+
+                    <TextView
+                        android:id="@+id/info_text"
+                        style="@style/paragraph_1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="32dp"
+                        android:gravity="center"
+                        android:text="Γίνε εσύ ο πρώτος επιβάτης αυτού του ταξιδιού"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/header_text" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

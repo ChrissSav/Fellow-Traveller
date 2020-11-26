@@ -103,7 +103,11 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
                 if (!trip.passengers.isNullOrEmpty()) {
                     binding.viewAllPassengers.visibility = View.VISIBLE
+                    binding.passengersSection.visibility = View.GONE
                     binding.passengerRecyclerView.adapter = PassengerAdapter(trip.passengers, this@TripInvolvedDetailsFragment::onPassengerListener)
+                } else {
+                    binding.passengersSection.visibility = View.VISIBLE
+                    binding.viewAllPassengers.visibility = View.GONE
                 }
 
             }
