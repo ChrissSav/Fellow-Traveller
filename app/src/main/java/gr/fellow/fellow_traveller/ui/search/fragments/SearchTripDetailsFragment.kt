@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.ui.search.fragments
 
+import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -62,7 +63,10 @@ class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>
                     description.text = "${price.text} " + getString(R.string.per_person)
 
                     if (!trip.passengers.isNullOrEmpty()) {
+                        binding.passengersSection.visibility = View.GONE
                         binding.passengerRecyclerView.adapter = PassengerAdapter(trip.passengers, this@SearchTripDetailsFragment::onPassengerListener)
+                    } else {
+                        binding.passengersSection.visibility = View.VISIBLE
                     }
 
                 }
