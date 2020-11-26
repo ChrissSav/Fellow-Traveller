@@ -29,7 +29,7 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
         viewModel.user.observe(this, Observer { user ->
             with(binding) {
                 if (user.messengerLink.isNullOrEmpty())
-                    messengerLink.visibility = View.INVISIBLE
+                    messengerLink1.visibility = View.INVISIBLE
                 userImage.loadImageFromUrl(user.picture)
                 userName.text = user.fullName
                 reviews.text = user.reviews.toString()
@@ -76,7 +76,7 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
             activity?.finish()
         }
 
-        binding.messengerLink.setOnClickListener {
+        binding.messengerLink1.setOnClickListener {
             messengerLink?.let {
                 val uriUrl: Uri = Uri.parse(getString(R.string.messenger_link, it))
                 val launchBrowser = Intent(Intent.ACTION_VIEW, uriUrl)
