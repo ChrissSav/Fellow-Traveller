@@ -8,7 +8,9 @@ import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentForgotPasswordNumberBinding
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
+import gr.fellow.fellow_traveller.ui.extensions.pasteTextFromClipboard
 import gr.fellow.fellow_traveller.ui.forgotPassword.ForgotPasswordViewModel
+
 
 @AndroidEntryPoint
 class ForgotPasswordNumberFragment : BaseFragment<FragmentForgotPasswordNumberBinding>() {
@@ -39,6 +41,10 @@ class ForgotPasswordNumberFragment : BaseFragment<FragmentForgotPasswordNumberBi
             } else {
                 viewModel.resetPassword(code)
             }
+        }
+
+        binding.paste.setOnClickListener {
+            binding.pinView.value = activity?.pasteTextFromClipboard()
         }
 
     }

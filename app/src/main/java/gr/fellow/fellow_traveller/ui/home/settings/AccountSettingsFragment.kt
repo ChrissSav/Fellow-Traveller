@@ -64,6 +64,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
 
         viewModel.successUpdateInfo.observe(viewLifecycleOwner, Observer {
             createToast(getString(R.string.profile_update_success))
+            onBackPressed()
         })
 
     }

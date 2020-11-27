@@ -1,6 +1,8 @@
 package gr.fellow.fellow_traveller.ui.extensions
 
 import android.app.Activity
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Resources
@@ -59,6 +61,11 @@ fun Activity.createAlerter(msg: String, color: Int) {
         .show()
 }
 
+
+fun Activity.pasteTextFromClipboard(): String? {
+    val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    return clipboardManager.primaryClip?.getItemAt(0)?.text?.toString()
+}
 
 fun Activity.openActivityWithFade(intent: Intent) {
     startActivity(intent)
@@ -205,17 +212,6 @@ fun Fragment.createAlerter(msg: String) {
         .show()
 }
 
-
-fun Fragment.createAlerterInfo(msg: String, color: Int) {
-    Alerter.create(activity)
-        .setTitle(getString(R.string.update))
-        .setText(msg)
-        .setIcon(R.drawable.ic_lock)
-        .setBackgroundColorRes(color)
-        .setDuration(1800)
-        .enableSwipeToDismiss() //seems to not work well with OnClickListener
-        .show()
-}
 
 
 /***  NAV GRAPH***/

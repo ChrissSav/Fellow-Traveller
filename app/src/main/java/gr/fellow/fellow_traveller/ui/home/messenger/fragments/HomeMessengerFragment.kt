@@ -34,6 +34,7 @@ class HomeMessengerFragment : BaseFragment<FragmentHomeMessengerBinding>() {
 
         viewModel.messengerUpdate.observe(viewLifecycleOwner, Observer {
             createToast(getString(R.string.success_add))
+            onBackPressed()
         })
 
     }
