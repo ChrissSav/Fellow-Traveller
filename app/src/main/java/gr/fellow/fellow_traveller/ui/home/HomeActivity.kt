@@ -10,6 +10,7 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.os.Build
+import android.util.Log
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
@@ -166,6 +167,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
         val networkCallback: NetworkCallback = object : NetworkCallback() {
             override fun onAvailable(network: Network) {
+                Log.i("dfdf", "fkdikgidogdg")
                 postDelay(800) {
                     viewModel.loadUserInfo()
                     viewModel.loadCars()

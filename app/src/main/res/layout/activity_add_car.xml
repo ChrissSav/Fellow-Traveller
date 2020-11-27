@@ -87,7 +87,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:regex_f="@string/regex_min_3_chars_english" />
+                    app:regex_f="@string/regex_min_3_chars_english_with_space" />
 
 
                 <gr.fellow.fellow_traveller.ui.views.FellowEditText
@@ -100,7 +100,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/brand"
                     app:layout_constraintStart_toStartOf="@+id/brand"
                     app:layout_constraintTop_toBottomOf="@+id/brand"
-                    app:regex_f="@string/regex_min_3_chars_english" />
+                    app:regex_f="@string/regex_min_3_chars_english_with_space" />
 
                 <gr.fellow.fellow_traveller.ui.views.FellowEditText
                     android:id="@+id/plate"

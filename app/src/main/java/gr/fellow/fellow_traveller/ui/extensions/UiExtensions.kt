@@ -2,6 +2,7 @@ package gr.fellow.fellow_traveller.ui.extensions
 
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Resources
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.net.Uri
@@ -23,6 +24,8 @@ import com.tapadoo.alerter.Alerter
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
+import gr.fellow.fellow_traveller.utils.RESENT_EMAIL
+import gr.fellow.fellow_traveller.utils.set
 import kotlin.math.round
 import kotlin.reflect.KClass
 
@@ -94,7 +97,6 @@ fun Activity.startActivityClearStack(activity: KClass<out Activity>) {
     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
     startActivity(intent)
     finishAffinity()
-
 }
 
 
@@ -177,6 +179,15 @@ fun Fragment.findNavController(): NavController? {
 fun Fragment.hideKeyboard() {
     val imm = this.activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(this.view?.rootView?.windowToken, 0)
+}
+
+
+fun getResentEmail(sharedPreferences: SharedPreferences): String? {
+    return sharedPreferences.getString(RESENT_EMAIL, "")
+}
+
+fun setResentEmail(sharedPreferences: SharedPreferences, email: String?) {
+    sharedPreferences[RESENT_EMAIL] = email
 }
 
 

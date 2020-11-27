@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.ui.register
 
+import android.content.SharedPreferences
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,11 +8,14 @@ import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.register.CheckUserEmailUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserUseCase
+import gr.fellow.fellow_traveller.utils.RESENT_EMAIL
+import gr.fellow.fellow_traveller.utils.set
 
 
 class RegisterViewModel
 @ViewModelInject
 constructor(
+    private var sharedPreferences: SharedPreferences,
     private val checkUserEmailUseCase: CheckUserEmailUseCase,
     private val registerUserUseCase: RegisterUserUseCase
 ) : BaseViewModel() {
@@ -52,6 +56,7 @@ constructor(
             val lastName = userInfo.value?.second.toString()
 
             registerUserUseCase(firstName, lastName, email.value.toString(), password.value.toString())
+            sharedPreferences[RESENT_EMAIL] = email.value.toString()
             _finish.value = true
 
         }

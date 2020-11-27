@@ -9,3 +9,6 @@ const val components = "country:gr"
 
 const val ACCESS_DENIED = 50
 const val SOMETHING_WRONG = 60
+
+const val RESENT_EMAIL = ""
+
