@@ -17,7 +17,7 @@ constructor(
 
     fun addCar(brand: String, model: String, plate: String, color: String) {
         launch(true) {
-            val response = addCarToRemoteUseCase(brand, model, plate, color)
+            addCarToRemoteUseCase(brand, model, plate, color)
             _saved.value = true
         }
     }
