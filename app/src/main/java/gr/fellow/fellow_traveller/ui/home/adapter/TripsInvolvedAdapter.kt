@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.databinding.TripInvolvedItemLayoutBinding
 import gr.fellow.fellow_traveller.databinding.TripInvolvedItemLayoutSecondsBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.ui.extensions.TripInvolvedDiffCallback
@@ -18,7 +19,7 @@ class TripsInvolvedAdapter(
 ) : ListAdapter<TripInvolved, TripsInvolvedAdapter.ViewHolder>(TripInvolvedDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = TripInvolvedItemLayoutSecondsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = TripInvolvedItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -26,7 +27,7 @@ class TripsInvolvedAdapter(
 
         with(holder) {
             val currentTrip = currentList[position]
-            binding.background.background = ContextCompat.getDrawable(binding.background.context, drawable)
+            //binding.background.background = ContextCompat.getDrawable(binding.background.context, drawable)
             //= binding.background.context.resources.getColorStateList(color)
             binding.from.text = currentTrip.destFrom.title
             binding.to.text = currentTrip.destTo.title
@@ -48,6 +49,6 @@ class TripsInvolvedAdapter(
         }
     }
 
-    class ViewHolder(val binding: TripInvolvedItemLayoutSecondsBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: TripInvolvedItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 }
 
