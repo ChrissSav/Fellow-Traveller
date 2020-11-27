@@ -9,6 +9,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.TripInvolvedHistoryItemLayoutBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.ui.extensions.TripInvolvedDiffCallback
+import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 
 class TripsHistoryAdapter(
     private val drawable: Int = R.drawable.background_stroke_radius_27_green,
@@ -29,6 +30,8 @@ class TripsHistoryAdapter(
             binding.to.text = currentTrip.destTo.title
             binding.date.text = currentTrip.date
             binding.time.text = currentTrip.time
+            binding.name.text = currentTrip.creatorUser.fullName
+            binding.picture.loadImageFromUrl(currentTrip.creatorUser.picture)
             binding.root.setOnClickListener {
                 onTripClickListener.invoke(currentTrip)
             }
