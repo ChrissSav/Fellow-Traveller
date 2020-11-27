@@ -59,6 +59,8 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
 
                 binding.viewAll.visibility = View.VISIBLE
                 binding.reviewsConstraintLayout.visibility = View.VISIBLE
+            } else {
+                binding.noReview.visibility = View.VISIBLE
             }
 
         })
