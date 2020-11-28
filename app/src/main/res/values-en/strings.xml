@@ -4,8 +4,6 @@
     <string name="PLACE_KEY">AIzaSyBJ8UG-fR3GSjfbfAcatZezGZi2Y8FDzqA</string>
     <string name="PLACE_LANGUAGE">en</string>
     <string name="register_fragment_stage_2_choose_password_title">Enter a password</string>
-    <string name="password">Password</string>
-    <string name="confirm_password">Confirm Password</string>
     <string name="password_complexity_requirements_description">Password should contain a digit, a lowercase and an uppercase letter, a special character and be at least 8 characters in length.</string>
     <string name="register_fragment_stage_1_add_email_title">What\'s your e-mail address?</string>
     <string name="register_fragment_stage_1_email_input_field_title">E-mail address</string>
