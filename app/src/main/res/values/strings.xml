@@ -149,7 +149,7 @@
     <string name="your_rating_is">Η αξιολόγηση σας είναι:</string>
     <string name="choose_date_range_for_search">Επιλέξτε εύρος ημερομηνίας για αναζήτηση</string>
     <string name="date_range">Εύρος ημ/νίας</string>
-    <string name="cancel_search">Απόρριψη της αναζήτησης;</string>
+    <string name="cancel_search">Ακύρωση αναζήτησης;</string>
     <string name="per_person">ανά άτομο</string>
     <string name="most_relevant">Πιο σχετικά</string>
     <string name="price_title">Τιμή</string>
@@ -377,5 +377,13 @@
     <string name="you_dont_have_vehicle_desc">Φαίνεται ότι δεν έχετε προσθέσει κάποιο όχημα. Κάνετε μία προσθήκη για να μπορείτε να προσφέρετε διαδρομές</string>
     <string name="no_ratings">Δεν υπάρχουν αξιολογήσεις</string>
     <string name="no_ratings_desc">Φαίνεται ότι δεν έχετε κάποια αξιολόγηση</string>
+    <string name="check_connection_for_image_upload">Ελέγξτε την σύνδεση του δικτύου σας για το ανεβάσμα νέας φωτογραφίας</string>
+    <string name="TOS_URL" translatable="false">https://fellowtraveller.gr/tos/</string>
+    <string name="PRIVACY_POLICY_URL" translatable="false">https://fellowtraveller.gr/tos/</string>
+    <string name="availability_none">Καθόλου</string>
+    <string name="offerings">Προσφορές</string>
+    <string name="bookings">Κρατήσεις</string>
+    <string name="kritikes">Κριτικές</string>
+    <string name="space">Χωρητικότητα</string>
 
 </resources>

@@ -200,8 +200,8 @@
     <string name="trip_status_in_progress">In Progress</string>
     <string name="trip_status_complete">Completed</string>
     <string name="offers_history">Offers History</string>
-    <string name="searches_history">Searches History</string>
-    <string name="warning">Warning</string>
+    <string name="searches_history">Bookings History</string>
+    <string name="warning">Error</string>
     <string name="select_application">Select an application</string>
     <string name="update">Update</string>
     <string name="remove_profile_photo">Remove photo</string>
@@ -218,13 +218,13 @@
     <string name="filters">Filters</string>
     <string name="date">Date</string>
     <string name="seat_availability">Available Seats</string>
-    <string name="whatever">Whatever</string>
+    <string name="whatever">Any</string>
     <string name="price_range">Price Range</string>
     <string name="show_all">Show All</string>
     <string name="starting_point_range">Starting Point Range</string>
     <string name="destination_range">Destination Range</string>
     <string name="apply">Apply</string>
-    <string name="alternative_suggestions">fellow. suggests</string>
+    <string name="alternative_suggestions">Alternative suggestions</string>
     <string name="your_location">Your location</string>
     <string name="select_destination">Select destination...</string>
     <string name="select_location">Select location...</string>
@@ -259,7 +259,7 @@
     <string name="rsvp_trip">Book Trip</string>
     <string name="from">From</string>
     <string name="to">To</string>
-    <string name="how_many_seats_to_rsvp">How many seats would you like to RSVP?</string>
+    <string name="how_many_seats_to_rsvp">How many seats would you like to reserve?</string>
     <string name="will_you_bring_a_pet">Will you bring a pet?</string>
     <string name="choose">Choose</string>
     <string name="rsvp">Book</string>
@@ -291,7 +291,7 @@
     <string name="help_guides">Help Guide</string>
     <string name="how_does_fellow_work">How does fellow. work?</string>
     <string name="what_can_you_do_with_fellow">What can you do with fellow.?</string>
-    <string name="search_and_rsvp_a_trip">Trip search and RSVP</string>
+    <string name="search_and_rsvp_a_trip">Search and book a trip.</string>
     <string name="take_a_look_at_help_guide">If you can\'t find your Messenger username, see the help guide.</string>
     <string name="messenger_account">Messenger Profile</string>
     <string name="trips">Trips</string>
@@ -354,7 +354,7 @@
     <string name="time_placeholder">20:30</string>
     <string name="clear">Clear</string>
     <string name="availability">Luggage Availability</string>
-    <string name="review_title">Rate</string>
+    <string name="review_title">Rating</string>
     <string name="time">Time</string>
     <string name="textview_placeholder">TextView</string>
     <string name="user_deleted_trip">User EXAMPLE deleted a trip you have booked.</string>
@@ -390,4 +390,9 @@
     <string name="you_dont_have_vehicle_desc">Looks like you haven\'t added any vehicles. Add a vehicle to create a trip offering</string>
     <string name="no_ratings">No ratings.</string>
     <string name="no_ratings_desc">Looks like you don\'t have any ratings.</string>
+    <string name="offerings">Offerings</string>
+    <string name="bookings">Bookings</string>
+    <string name="kritikes">Reviews</string>
+    <string name="availability_none">None</string>
+    <string name="space">Luggage Space</string>
 </resources>
