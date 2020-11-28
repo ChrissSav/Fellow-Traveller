@@ -293,13 +293,13 @@
     <string name="messenger_step5_desc">Ανοίξτε την εφαργμογή του messenger</string>
     <string name="trip_overview">Επισκόπηση ταξιδιού</string>
     <string name="this_is_how_trip_will_look_to_others">Έτσι θα εμφανίζεται το ταξίδι σας μετά την καταχώριση</string>
-    <string name="trip_review_placeholder">Very good trip</string>
+    <string name="trip_review_placeholder">\'Ηταν ένα πολύ καλό ταξίδι</string>
     <string name="rating_placeholder">4.6</string>
     <string name="ensure_account_security">Για να διασφαλίσετε τον λογαριαμό σας</string>
     <string name="enter_price">Ορίστε μία τιμή</string>
     <string name="price_goes_per_person">Η τιμή ορίζεται ανά άτομο</string>
     <string name="zero_price_placeholder">0.00</string>
-    <string name="price_total">Συνολικό</string>
+    <string name="price_total">Σύνολο</string>
     <string name="price_calc_placeholder">4 x 5,00 €</string>
     <string name="price_total_placeholder">0 €</string>
     <string name="no_description_available">Δεν υπάρχει κάποια σχετική περιγραφή</string>
@@ -308,7 +308,7 @@
     <string name="all_ratings">Όλες οι αξιολογήσεις</string>
     <string name="about_me">Σχετικά με εμένα</string>
     <string name="enter_new_password">Δημιουργήστε ένα νέο κωδικό πρόσβασης</string>
-    <string name="google_maps">Google maps</string>
+    <string name="google_maps">Χάρτες Google</string>
     <string name="car_textview">TextView</string>
     <string name="passengers">Επιβάτες</string>
     <string name="price_per_person">5.50$ ανά άτομο</string>
