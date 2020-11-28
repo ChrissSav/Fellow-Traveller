@@ -104,7 +104,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         binding.allCars.setOnClickListener {
             findNavController()?.navigate(R.id.action_destination_info_to_userCarsFragment)
         }
-        binding.allSearchs.setOnClickListener {
+        binding.allBookings.setOnClickListener {
             findNavController()?.navigate(R.id.action_destination_info_to_tripInvolvedHistoryFragment, bundleOf("creator" to false))
         }
         binding.allOffers.setOnClickListener {

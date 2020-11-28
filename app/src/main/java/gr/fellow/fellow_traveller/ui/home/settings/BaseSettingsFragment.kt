@@ -45,11 +45,11 @@ class BaseSettingsFragment : BaseFragment<FragmentBaseSettingsBinding>() {
             findNavController()?.navigate(R.id.action_baseSettingsFragment_to_homeMessengerFragment)
         }
         binding.termsOfUse.setOnClickListener {
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://fellowtraveller.gr/tos/"))
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.TOS_URL)))
             startActivity(browserIntent)
         }
         binding.privacyPolicy.setOnClickListener {
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://fellowtraveller.gr/tos/"))
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.PRIVACY_POLICY_URL)))
             startActivity(browserIntent)
         }
         binding.logout.setOnClickListener {

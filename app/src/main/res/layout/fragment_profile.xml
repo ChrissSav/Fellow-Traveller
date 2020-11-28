@@ -77,7 +77,7 @@
                 android:id="@+id/rate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:label_text="Αξιολόγηση"
+                app:label_text="@string/review_title"
                 app:layout_constraintEnd_toStartOf="@+id/reviews"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -87,7 +87,7 @@
                 android:id="@+id/reviews"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:label_text="Κριτικές"
+                app:label_text="@string/kritikes"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/involved"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -98,7 +98,7 @@
                 android:id="@+id/involved"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:label_text="Αναζητήσεις"
+                app:label_text="@string/bookings"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/offers"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -109,7 +109,7 @@
                 android:id="@+id/offers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:label_text="Προσφορές"
+                app:label_text="@string/offerings"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -144,15 +144,15 @@
                     style="@style/paragraph_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_add_car"
                     android:drawablePadding="10dp"
-                    android:drawableTint="@color/black_color"
                     android:gravity="center_vertical|center_horizontal"
-                    android:text="Προσθέστε ένα όχημα"
+                    android:text="@string/add_a_vehicle"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:drawableStartCompat="@drawable/ic_add_car"
+                    app:drawableTint="@color/black_color" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -229,11 +229,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:drawableEnd="@drawable/ic_star"
             android:text="@string/all_ratings"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linear_section" />
+            app:layout_constraintTop_toBottomOf="@id/linear_section"
+            app:drawableEndCompat="@drawable/ic_star" />
 
         <TextView
             android:id="@+id/all_cars"
@@ -241,23 +241,23 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:drawableEnd="@drawable/ic_car"
             android:text="@string/my_vehicles"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/all_reviews" />
+            app:layout_constraintTop_toBottomOf="@id/all_reviews"
+            app:drawableEndCompat="@drawable/ic_car" />
 
         <TextView
-            android:id="@+id/all_searchs"
+            android:id="@+id/all_bookings"
             style="@style/settings_text_with_padding"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:drawableEnd="@drawable/ic_search"
             android:text="@string/searches_history"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/all_cars" />
+            app:layout_constraintTop_toBottomOf="@id/all_cars"
+            app:drawableEndCompat="@drawable/ic_search" />
 
         <TextView
             android:id="@+id/all_offers"
@@ -265,11 +265,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:drawableEnd="@drawable/ic_steer"
             android:text="@string/offers_history"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/all_searchs" />
+            app:layout_constraintTop_toBottomOf="@id/all_bookings"
+            app:drawableEndCompat="@drawable/ic_steer" />
 
 
         <TextView
@@ -278,7 +278,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="51dp"
-            android:text="Σχετικά με εμένα"
+            android:text="@string/about_me"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/about_me"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />

@@ -208,12 +208,12 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
             if (connectivityHelper.checkInternetConnection())
                 onChooseFile()
             else
-                createToast("Ελέγξτε την σύνδεση του δικτύου σας για το ανεβάσμα νέας φωτογραφίας")
+                createToast(getString(R.string.check_connection_for_image_upload))
         else
             if (connectivityHelper.checkInternetConnection())
                 viewModel.updateUserImage(null)
             else
-                createToast("Ελέγξτε την σύνδεση του δικτύου σας για το ανεβάσμα νέας φωτογραφίας")
+                createToast(getString(R.string.check_connection_for_image_upload))
     }
 
 
