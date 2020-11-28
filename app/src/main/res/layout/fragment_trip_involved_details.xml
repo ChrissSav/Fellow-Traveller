@@ -393,7 +393,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="100dp"
-                    android:text="Όλοι οι επιβάτες"
+                    android:text="@string/all_passengers"
                     android:textColor="@color/colorPrimary"
                     android:visibility="invisible"
                     app:drawableEndCompat="@drawable/ic_right_arrow"

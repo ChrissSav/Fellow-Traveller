@@ -392,5 +392,7 @@
     <string name="bookings">Κρατήσεις</string>
     <string name="kritikes">Κριτικές</string>
     <string name="space">Χωρητικότητα</string>
+    <string name="lastname">Επίθετο</string>
+    <string name="email">Email</string>
 
 </resources>
