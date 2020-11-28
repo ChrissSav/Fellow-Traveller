@@ -360,7 +360,6 @@
     <string name="price_calc_per_person">4 x 5,00 €</string>
     <string name="zero_euros">0 €</string>
     <string name="add_a_vehicle">Προσθέστε ένα όχημα</string>
-    <string name="no_ratings">Δεν υπάρχουν αξιολογήσεις</string>
     <string name="no_ratings_description">Φαίνεται ότι δεν έχετε κάποια αξιολόγηση</string>
     <string name="no_passengers">Δεν υπάρχουν επιβάτες</string>
     <string name="be_the_first_to_book">Γίνε εσύ ο πρώτος επιβάτης αυτού του ταξιδιού</string>
