@@ -76,6 +76,11 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
             if (trip.status != 0)
                 binding.delete.visibility = View.INVISIBLE
 
+            if (trip.status == 2) {
+                binding.headerText.text = getString(R.string.trip_involved_passenger_header_in_history)
+                binding.infoText.text = getString(R.string.trip_involved_passenger_description_in_history)
+
+            }
             binding.description.setTextHtml(getString(R.string.trip_involved_description, getTripStatus(trip.status)))
 
             creator = !trip.passengers.filter { it.user.id == viewModel.user.value?.id.toString() }.any()
@@ -84,6 +89,8 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
                 binding.constraintLayoutInfo.backgroundTintList = ContextCompat.getColorStateList(binding.constraintLayoutInfo.context, R.color.green)
                 binding.labelDescription.text = getString(R.string.youre_trip_driver)
                 binding.messengerLinkConstraintLayout.visibility = View.GONE
+                if (trip.status != 2)
+                    binding.infoText.text = getString(R.string.trip_involved_passenger_description_as_creator)
             }
 
             with(binding) {
@@ -144,7 +151,12 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
             }
 
             binding.userImage.setOnClickListener {
-                activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to trip.creatorUser.id))
+                val userId = viewModel.user.value?.id
+                if (trip.creatorUser.id != userId)
+                    activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to trip.creatorUser.id))
+                else {
+                    findNavController()?.navigate(R.id.action_tripInvolvedDetailsFragment_to_destination_info)
+                }
             }
 
             binding.googleMaps.setOnClickListener {
@@ -155,7 +167,12 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
     }
 
     private fun onPassengerListener(user: UserBase) {
-        activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to user.id))
+        val userId = viewModel.user.value?.id
+        if (user.id != userId)
+            activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to user.id))
+        else {
+            findNavController()?.navigate(R.id.action_tripInvolvedDetailsFragment_to_destination_info)
+        }
     }
 
 
