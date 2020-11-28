@@ -202,8 +202,8 @@
     <string name="apply">Εφαρμογή</string>
     <string name="alternative_suggestions">Εναλλακτικές προτάσεις</string>
     <string name="your_location">Η τοποθεσία σας</string>
-    <string name="select_destination">Επιλογή προορισμού...</string>
-    <string name="select_location">Επιλογή τοποθεσίας...</string>
+    <string name="select_destination">Επιλογή προορισμού…</string>
+    <string name="select_location">Επιλογή τοποθεσίας…</string>
     <string name="application_name" translatable="false">fellow.</string>
     <string name="space_availability">Κατάσταση αποσκεύων</string>
     <string name="luggage_availability_none">Καθόλου</string>
@@ -305,7 +305,6 @@
     <string name="ensure_account_security">Για να διασφαλίσετε τον λογαριαμό σας</string>
     <string name="enter_price">Ορίστε μία τιμή</string>
     <string name="price_goes_per_person">Η τιμή ορίζεται ανά άτομο</string>
-    <string name="zero_price_placeholder">0.00</string>
     <string name="price_total">Σύνολο</string>
     <string name="price_calc_placeholder">4 x 5,00 €</string>
     <string name="price_total_placeholder">0 €</string>
@@ -321,7 +320,6 @@
     <string name="price_per_person">5.50$ ανά άτομο</string>
     <string name="search_trip">Αναζήτηση ταξιδιού</string>
     <string name="switch_text">Εναλλαγή</string>
-    <string name="search">Αναζήτηση</string>
     <string name="verify_your_email">Επιβεβαιώστε το email σας</string>
     <string name="warning_email_spam">Προσοχή! Το email επιβεβαίωσης μπορεί να μεταφερθεί αυτόματα στην ανεπιθύμητη αλληλογραφία</string>
     <string name="we_have_sent_you_an_email">Σας έχουμε αποστείλει ένα email επιβεβαίωσης στο example@email.com</string>
