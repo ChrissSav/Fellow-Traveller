@@ -3,41 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:paddingStart="32dp"
+    android:paddingEnd="32dp"
     android:layout_marginBottom="16dp"
-    android:background="@drawable/component_border_icon_button_shape">
+    android:background="?android:attr/selectableItemBackground"
+    app:layout_goneMarginBottom="8dp">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="58dp"
+        android:layout_height="60dp"
+        android:background="@drawable/background_stroke_radius_27_grey"
+        android:padding="16dp"
+        android:src="@drawable/ic_car"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="58dp"
-            android:layout_height="60dp"
-            android:background="@drawable/background_car_radius_27_orange"
-            android:backgroundTint="@color/black"
-            android:padding="16dp"
-            android:src="@drawable/ic_car"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/white" />
-
-        <TextView
-            android:id="@+id/car"
-            style="@style/paragraph_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView4"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/car"
+        style="@style/paragraph_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

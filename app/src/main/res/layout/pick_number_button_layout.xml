@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="140dp"
+    android:layout_width="wrap_content"
     android:layout_height="55dp">
 
 
@@ -9,12 +9,9 @@
         android:id="@+id/minus"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginStart="8dp"
         android:background="?selectableItemBackgroundBorderless"
         android:src="@drawable/ic_minus_1"
         app:layout_constraintBottom_toBottomOf="@+id/label"
-        app:layout_constraintEnd_toStartOf="@+id/label"
-        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/label" />
 
@@ -23,28 +20,27 @@
         style="@style/paragraph_1"
         android:layout_width="36dp"
         android:layout_height="36dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/background_black_round"
         android:gravity="center"
         android:text="200"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/plus"
+        app:layout_constraintStart_toEndOf="@+id/minus"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/plus"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginEnd="8dp"
         android:background="?selectableItemBackgroundBorderless"
         android:src="@drawable/ic_plus"
         app:layout_constraintBottom_toBottomOf="@+id/label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toEndOf="@+id/label"
         app:layout_constraintTop_toTopOf="@+id/label" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

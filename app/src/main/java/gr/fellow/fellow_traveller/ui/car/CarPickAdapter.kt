@@ -23,11 +23,8 @@ class CarPickAdapter(
         with(holder) {
             val currentItem = currentList[position]
             binding.car.text = currentItem.fullInfo
-            binding.root.setOnClickListener {
-                onCarItemClickListener(currentItem)
-            }
 
-            binding.car.setOnClickListener {
+            binding.root.setOnClickListener {
                 onCarItemClickListener(currentItem)
             }
         }
