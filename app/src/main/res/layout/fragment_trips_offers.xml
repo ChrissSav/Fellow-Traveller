@@ -43,15 +43,15 @@
                         style="@style/paragraph_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_history"
+                        android:drawableStart="@drawable/ic_history"
                         android:drawablePadding="10dp"
-                        android:drawableTint="@color/black_color"
                         android:gravity="center_vertical|center_horizontal"
-                        android:text="Ιστορικό προσφορών"
+                        android:text="@string/offers_history"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:drawableTint="@color/black_color" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

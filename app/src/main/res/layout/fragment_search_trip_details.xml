@@ -48,7 +48,6 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
 
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
@@ -71,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Από"
+                    android:text="@string/from"
                     app:layout_constraintStart_toStartOf="@+id/from"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -81,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Πρός"
+                    android:text="@string/to"
                     app:layout_constraintStart_toStartOf="@+id/from"
                     app:layout_constraintTop_toBottomOf="@+id/from" />
 
@@ -95,7 +94,7 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="16dp"
                     android:tag="1"
-                    android:text="Θεσσαλονίκη"
+                    android:text="@string/city_thessaloniki"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView15" />
@@ -108,11 +107,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:tag="1"
-                    android:text="Αθήνα"
+                    android:text="@string/city_athens"
                     app:layout_constraintEnd_toEndOf="@+id/from"
                     app:layout_constraintStart_toStartOf="@+id/from"
                     app:layout_constraintTop_toBottomOf="@+id/textView19" />
-
 
 
                 <TextView
@@ -123,7 +121,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="4dp"
                     android:tag="2"
-                    android:text="07:00 AM"
+                    android:text="@string/trip_time_placeholder"
                     app:layout_constraintStart_toEndOf="@+id/day"
                     app:layout_constraintTop_toTopOf="@+id/imageView_1" />
 
@@ -134,7 +132,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:tag="2"
-                    android:text="Δευ, 13 Μαρ"
+                    android:text="@string/trip_date_placeholder"
                     app:layout_constraintBottom_toBottomOf="@+id/time"
                     app:layout_constraintStart_toEndOf="@+id/imageView_1"
                     app:layout_constraintTop_toTopOf="@+id/time" />
@@ -156,10 +154,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawablePadding="8dp"
-                    android:paddingTop="10dp"
                     android:paddingStart="10dp"
+                    android:paddingTop="10dp"
                     android:paddingBottom="10dp"
-                    android:text="Google maps"
+                    android:text="@string/google_maps"
                     app:drawableEndCompat="@drawable/ic_google_maps"
                     app:layout_constraintBottom_toBottomOf="@+id/day"
                     app:layout_constraintEnd_toEndOf="@+id/to"
@@ -174,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:tag="5"
-                    android:text="Παρα πολυ καλο παιδι αλλα θελει δουλεια.. Τουλαχιστον ακουγε sugar boy"
+                    android:text="@string/trip_review_placeholder"
                     app:layout_constraintEnd_toEndOf="@+id/rate"
                     app:layout_constraintStart_toStartOf="@+id/user_image"
                     app:layout_constraintTop_toBottomOf="@+id/user_image" />
@@ -188,7 +186,7 @@
                     android:layout_marginEnd="16dp"
                     android:ellipsize="end"
                     android:singleLine="true"
-                    android:text="Πατριάρχης Φώτιος"
+                    android:text="@string/rate_user_placeholder"
                     app:layout_constraintBaseline_toBaselineOf="@+id/rate"
                     app:layout_constraintEnd_toStartOf="@+id/rate"
                     app:layout_constraintStart_toEndOf="@+id/user_image" />
@@ -202,7 +200,7 @@
                     android:background="@drawable/background_border_stroke_12dp"
                     android:backgroundTint="@color/black"
                     android:gravity="center"
-                    android:text="4.6"
+                    android:text="@string/rating_placeholder"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="@+id/user_image"
                     app:layout_constraintEnd_toEndOf="@+id/google_maps"
@@ -292,8 +290,8 @@
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
                     <TextView
-                        style="@style/paragraph_1"
                         android:id="@+id/messenger_link_text"
+                        style="@style/paragraph_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/ic_messenger"
@@ -315,7 +313,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="48dp"
-                    android:text="Όχημα"
+                    android:text="@string/vehicle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/messengerLink_constraintLayout" />
 
@@ -363,7 +361,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="48dp"
-                    android:text="Επιβάτες"
+                    android:text="@string/passengers"
                     app:layout_constraintStart_toStartOf="@+id/constraintLayout5"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
 
@@ -389,9 +387,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
                     android:layout_marginBottom="120dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/passengers_label">
 
                     <ImageView
@@ -404,9 +402,7 @@
                         android:src="@drawable/ic_person"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-
-                        />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/header_text"
@@ -440,6 +436,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutMessenger"
         android:layout_width="match_parent"
@@ -467,8 +464,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
-            android:src="@drawable/ic_right_arrow"
             android:backgroundTint="@color/light_orange_New"
+            android:src="@drawable/ic_right_arrow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
