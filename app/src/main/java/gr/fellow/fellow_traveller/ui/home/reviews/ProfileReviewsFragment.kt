@@ -29,6 +29,12 @@ class ProfileReviewsFragment : BaseFragment<FragmentProfileReviewsBinding>() {
             binding.recyclerView.adapter?.notifyDataSetChanged()
             binding.swipeRefreshLayout.isRefreshing = false
 
+            //if there are no reviews to display, show specific message, else show reviews
+            if (it.isNullOrEmpty())
+                binding.reviewsSection.visibility = VISIBLE
+            else
+                binding.reviewsSection.visibility = GONE
+
             binding.numRate.text = "${it.size} ${getString(R.string.ratings_count)}"
         })
     }
@@ -36,11 +42,7 @@ class ProfileReviewsFragment : BaseFragment<FragmentProfileReviewsBinding>() {
     override fun setUpViews() {
         binding.recyclerView.adapter = ReviewsAdapter(reviewsList)
 
-        //if there are no reviews to display, show specific message, else show reviews
-        if (reviewsList.isNullOrEmpty())
-            binding.reviewsSection.visibility = VISIBLE
-        else
-            binding.reviewsSection.visibility = GONE
+
 
 
         binding.swipeRefreshLayout.setOnRefreshListener {

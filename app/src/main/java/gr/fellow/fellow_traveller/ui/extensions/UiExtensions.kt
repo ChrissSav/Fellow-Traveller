@@ -219,7 +219,6 @@ fun Fragment.createAlerter(msg: String) {
 }
 
 
-
 /***  NAV GRAPH***/
 
 fun NavController.navigateWithFade(actionId: Int) {
@@ -267,6 +266,26 @@ fun ImageView.loadImageFromUrl(url: String?) {
             .into(this)
     else
         setImageDrawable(null)
+}
+
+fun getRandomImage(): String {
+    val cities = mutableListOf<String>()
+    cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fstelios-kontoulis-CfdKapTCfEQ-unsplash-min.jpg?alt=media&token=ce76d3a4-c790-4a35-9d93-67f64124f7c9")
+    cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fmaxime-vermeil-max-vrm-0yU_eHPC_Ic-unsplash-min.jpg?alt=media&token=882c83e3-0e36-46d8-b91c-2bc5512f1b19")
+    cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fphilip-jahn-PYkpulrIMG0-unsplash-min.jpg?alt=media&token=ff65c766-1570-40c2-af38-08ae033a86f3")
+    cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fstavrialena-gontzou-tsc0SC2LXxc-unsplash-min.jpg?alt=media&token=cf987a6d-5d22-47cf-b2b2-10da27f8d844")
+    cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fmax-van-den-oetelaar-0ta9IhdKFgI-unsplash-min.jpg?alt=media&token=047466af-8656-45bd-9c72-411ce60d80e9")
+    cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fmatt-artz-eQQI_HzT9RE-unsplash-min.jpg?alt=media&token=2395bc63-c538-42e1-8270-f2c700a4f367")
+    cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fmarkus-winkler-gVnlbGa4LXk-unsplash-min.jpg?alt=media&token=8166a8ea-7893-408b-ba94-0c2bba475817")
+    cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fmarkus-winkler-gQqECU0YiMw-unsplash-min.jpg?alt=media&token=3e3a2506-ec10-4ee6-ab5b-5c86dd70d17e")
+    cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fjoshua-rondeau-KWUyjtSFNc0-unsplash-min.jpg?alt=media&token=79774f8b-c575-406a-b0d3-2b9a85dcab85")
+    cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fjason-blackeye-OUOMSXvkZH4-unsplash-min.jpg?alt=media&token=980db0b1-8bad-43b1-9d14-b68dd220c257")
+    cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fjason-blackeye-K1uLEiqTQEA-unsplash-min.jpg?alt=media&token=720a71ff-c0aa-42d8-aa9d-7d3ac2465605")
+    cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Ffleur-XMwPBhnJf7g-unsplash-min.jpg?alt=media&token=94319be4-766e-450f-ae54-d1d3149da3ca")
+    cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fdichatz-8OjTCSjlQic-unsplash-min.jpg?alt=media&token=fad25a5e-4b6c-404a-ac0c-ed4846e18455")
+    cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fdespina-galani-o6p3eBm4Da4-unsplash-min.jpg?alt=media&token=1b1e91bd-710c-47f0-a6d5-3204701d7d50")
+    cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Falex-antoniadis-em7-Tgt22mg-unsplash-min.jpg?alt=media&token=7ed06873-5e39-4b13-8315-8cd25328b3e4")
+    return cities.random()
 }
 
 

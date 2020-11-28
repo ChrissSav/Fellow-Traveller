@@ -26,6 +26,8 @@
     <string name="success_add">Επιτυχής καταχώρηση!</string>
     <string name="success_search">Συγχαρητήρια! Συμμετέχετε στο ταξίδι</string>
     <string name="success_add_review">Η αξιολόγηση σας καταχωρήθηκε</string>
+    <string name="hello">Γεια σου</string>
+    <string name="home_guide">Ξεκίνησε αναζητώντας ή προσφέροντας ένα ταξίδι</string>
 
 
     <string name="title_activity_maps">Χάρτης</string>

@@ -34,6 +34,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun setUpObservers() {
         viewModel.user.observe(viewLifecycleOwner, Observer {
             accountCorrect = it.messengerLink != null
+
+
+            //Delete the "ς" or "s" when we display the name
+            if (it.firstName.takeLast(1).equals("ς") || it.firstName.takeLast(1).equals("s"))
+                binding.userName.text = it.firstName.dropLast(1) + ","
+            else
+                binding.userName.text = it.firstName + ","
+
         })
     }
 
