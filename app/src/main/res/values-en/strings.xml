@@ -28,6 +28,8 @@
     <string name="success_search">Congratulations! You\'re part of the trip.</string>
     <string name="success_add_review">Your review was submitted!</string>
     <string name="switch_text">switch</string>
+    <string name="hello">Hello</string>
+    <string name="home_guide">Start by looking for or offering a new journey</string>
 
     <string name="title_activity_maps">Map</string>
     <string name="no_driver_message">The driver of this trip hasn\'t left a message.</string>

@@ -11,42 +11,56 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <TextView
             android:id="@+id/textView12"
-            android:layout_width="35dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/display_1"
             android:layout_marginStart="16dp"
             android:layout_marginTop="42dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_logo_asset_2"
+            android:text="@string/hello"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/black" />
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
-            android:id="@+id/textView26"
+            android:id="@+id/user_name"
             style="@style/display_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@string/find_co_travellers_in_an_instant"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/green"
+            android:text="Φώτη,"
             app:layout_constraintBottom_toBottomOf="@+id/textView12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView12"
             app:layout_constraintTop_toTopOf="@+id/textView12" />
+
+        <TextView
+            android:id="@+id/home_guide"
+            style="@style/paragraph_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/home_guide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView12"
+            app:layout_constraintTop_toBottomOf="@+id/user_name" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout_search"
             android:layout_width="0dp"
             android:layout_height="135dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/background_white_outline_radius_28"
             android:backgroundTint="@color/light_orange_New"
-            app:layout_constraintEnd_toEndOf="@+id/textView26"
+            app:layout_constraintEnd_toEndOf="@+id/user_name"
             app:layout_constraintStart_toStartOf="@+id/textView12"
-            app:layout_constraintTop_toBottomOf="@+id/textView26">
+            app:layout_constraintTop_toBottomOf="@+id/home_guide">
 
 
             <TextView
@@ -96,7 +110,7 @@
             android:layout_marginTop="24dp"
             android:background="@drawable/background_white_outline_radius_28"
             android:backgroundTint="@color/light_aqua_New"
-            app:layout_constraintEnd_toEndOf="@+id/textView26"
+            app:layout_constraintEnd_toEndOf="@+id/user_name"
             app:layout_constraintStart_toStartOf="@+id/textView12"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout_search">
 

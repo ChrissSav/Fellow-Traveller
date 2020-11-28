@@ -12,10 +12,7 @@ import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentHomeBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
-import gr.fellow.fellow_traveller.ui.extensions.createAlerter
-import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
-import gr.fellow.fellow_traveller.ui.extensions.openUrl
-import gr.fellow.fellow_traveller.ui.extensions.startActivityForResult
+import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripActivity
 import gr.fellow.fellow_traveller.ui.search.SearchTripActivity
@@ -34,6 +31,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun setUpObservers() {
         viewModel.user.observe(viewLifecycleOwner, Observer {
             accountCorrect = it.messengerLink != null
+            createToast(it.firstName.takeLast(1))
+
+            binding.userName.text = it.firstName + ","
         })
     }
 
