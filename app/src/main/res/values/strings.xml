@@ -137,7 +137,7 @@
     <string name="authentication_success">Επιτυχής αυθεντικοποίηση</string>
     <string name="msg_continue">Συνέχεια</string>
     <string name="placeholder_car_make_model" translatable="false">Rolls-Royce Phantom</string>
-    <string name="title_searches">Αναζητήσεις</string>
+    <string name="title_searches">Κρατήσεις</string>
     <string name="title_offers">Προσφορές</string>
     <string name="delete_trip_success">Επιτυχής διαγραφή ταξιδιού</string>
     <string name="leave_trip_success">Επιτυχής αποχώρηση απο το ταξίδι</string>
@@ -173,7 +173,7 @@
     <string name="trip_status_in_progress">Σε εξέλιξη</string>
     <string name="trip_status_complete">Ολοκληρωμένο</string>
     <string name="offers_history">Ιστορικό προσφορών</string>
-    <string name="searches_history">Ιστορικό αναζητήσεων</string>
+    <string name="searches_history">Ιστορικό κρατήσεων</string>
     <string name="warning">Προσοχή</string>
     <string name="select_application">Επιλέξτε μια εφαρμογή</string>
     <string name="update">Ενημέρωση</string>
