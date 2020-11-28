@@ -346,7 +346,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
-                        android:text="TextView"
+                        android:text="@string/textview_placeholder"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -411,7 +411,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
                         android:gravity="center"
-                        android:text="Δεν υπάρχουν επιβάτες"
+                        android:text="@string/no_passengers"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/image" />
@@ -425,7 +425,7 @@
                         android:layout_marginTop="15dp"
                         android:layout_marginEnd="32dp"
                         android:gravity="center"
-                        android:text="Γίνε εσύ ο πρώτος επιβάτης αυτού του ταξιδιού"
+                        android:text="@string/be_the_first_to_book"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/header_text" />
@@ -454,7 +454,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
-            android:text="Κάνε κράτηση"
+            android:text="@string/rsvp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -478,7 +478,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
-            android:text="5.50$ ανά άτομο"
+            android:text="@string/price_per_person"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/book_trip"
             app:layout_constraintStart_toStartOf="parent"

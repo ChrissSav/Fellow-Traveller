@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:gravity="center"
-                    android:text="Δεν έχετε ταξίδια στο ιστορικό σας"
+                    android:text="@string/you_dont_have_trips"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/image" />
@@ -93,7 +93,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="32dp"
                     android:gravity="center"
-                    android:text="Φαίνεται ότι δεν έχετε ακόμα κάποια ταξίδια στο ιστορικό σας. Εδώ θα φαίνονται τα ταξίδια σας ως αρχειοθετημένα"
+                    android:text="@string/you_dont_have_trips_history"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/header_text" />

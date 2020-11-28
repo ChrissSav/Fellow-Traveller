@@ -48,7 +48,7 @@
         android:layout_marginTop="18dp"
         android:background="@drawable/background_border_stroke_12dp"
         android:padding="15dp"
-        android:text="Αθήνα - Καβάλα"
+        android:text="@string/trip_athens_kavala"
         app:layout_constraintStart_toStartOf="@+id/rate_header"
         app:layout_constraintTop_toBottomOf="@+id/rate_info" />
 

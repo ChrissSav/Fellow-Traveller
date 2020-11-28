@@ -206,7 +206,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
                 android:gravity="center"
-                android:text="Δεν υπάρχουν ταξίδια"
+                android:text="@string/no_trips"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/image" />
@@ -219,7 +219,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="16dp"
                 android:gravity="center"
-                android:text="Μην ξεχνάς οτι μπορείς να διαμορφωσεις τα φίλτρα και να βρείς αυτό που ψάχνεις"
+                android:text="@string/you_can_change_filters"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/header_text" />

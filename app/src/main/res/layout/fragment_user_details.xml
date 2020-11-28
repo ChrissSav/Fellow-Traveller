@@ -243,7 +243,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:gravity="center"
-                    android:text="Δεν υπάρχουν αξιολογήσεις"
+                    android:text="@string/no_ratings"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/image" />
@@ -256,7 +256,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="32dp"
                     android:gravity="center"
-                    android:text="Φαίνεται ότι δεν έχετε κάποια αξιολόγηση"
+                    android:text="@string/no_ratings_desc"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/header_text" />

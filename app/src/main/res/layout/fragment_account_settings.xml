@@ -177,7 +177,7 @@
                     android:layout_marginTop="16dp"
                     android:ellipsize="middle"
                     android:singleLine="true"
-                    android:text="Σχετικά με εμένα"
+                    android:text="@string/about_me"
                     app:layout_constraintEnd_toEndOf="@+id/email"
                     app:layout_constraintStart_toStartOf="@+id/email"
                     app:layout_constraintTop_toBottomOf="@+id/email" />
@@ -190,7 +190,7 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="150dp"
                     android:background="@null"
-                    android:hint="Σχετικά με εμένα"
+                    android:hint="@string/about_me"
                     android:inputType="textMultiLine"
                     android:paddingTop="8dp"
                     android:textColorHint="#B1B1B1"

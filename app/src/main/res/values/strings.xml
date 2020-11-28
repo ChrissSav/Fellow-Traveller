@@ -352,5 +352,35 @@
     <string name="passenger_availability_placeholder">3/4</string>
     <string name="small">Μικρή</string>
     <string name="no_pet">Όχι Κατοικίδια</string>
+    <string name="settings">Ρυθμίσεις</string>
+    <string name="paste">Επικόλληση</string>
+    <string name="start_your_trip">Ξεκινήστε το ταξίδι σας</string>
+    <string name="sign_in_or_sign_up">Συνδεθείτε ή δημιουργήστε ένα νέο λογαριασμό</string>
+    <string name="no_notifications">Δεν έχετε κάποια ειδοποίηση</string>
+    <string name="all_activities_show_up_here">Όλες οι δραστηριότητες σας θα εμφανίζονται εδώ</string>
+    <string name="zero_price_placeholder">0.00</string>
+    <string name="price_calc_per_person">4 x 5,00 €</string>
+    <string name="zero_euros">0 €</string>
+    <string name="add_a_vehicle">Προσθέστε ένα όχημα</string>
+    <string name="no_ratings">Δεν υπάρχουν αξιολογήσεις</string>
+    <string name="no_ratings_description">Φαίνεται ότι δεν έχετε κάποια αξιολόγηση</string>
+    <string name="no_passengers">Δεν υπάρχουν επιβάτες</string>
+    <string name="be_the_first_to_book">Γίνε εσύ ο πρώτος επιβάτης αυτού του ταξιδιού</string>
+    <string name="no_trips">Δεν υπάρχουν ταξίδια</string>
+    <string name="you_can_change_filters">Μην ξεχνάς οτι μπορείς να διαμορφωσεις τα φίλτρα και να βρείς αυτό που ψάχνεις</string>
+    <string name="no_bookings">Δεν υπάρχουν κρατήσεις</string>
+    <string name="looks_like_no_active_trips">Φαίνεται ότι δεν έχετε κάποιο ενεργό ταξίδι. Βρείτε καινούρια ταξίδια εδώ</string>
+    <string name="search">Αναζήτηση</string>
+    <string name="you_have_booked">Είσαι μέλος του ταξιδιού</string>
+    <string name="see_your_booking">Δες την κρατησή σου</string>
+    <string name="you_dont_have_trips">Δεν έχετε ταξίδια στο ιστορικό σας</string>
+    <string name="you_dont_have_trips_history">Φαίνεται ότι δεν έχετε ακόμα κάποια ταξίδια στο ιστορικό σας. Εδώ θα φαίνονται τα ταξίδια σας ως αρχειοθετημένα</string>
+    <string name="you_dont_have_offers">Δεν έχετε προσφορές ταξιδιών</string>
+    <string name="you_dont_have_offers_desc">Φαίνεται ότι δεν έχετε μοιράσει κάποια διαδρομή σας πρόσφατα. Προσφέρετε νέες διαδρομές εδώ</string>
+    <string name="offer">Προσφορά</string>
+    <string name="you_dont_have_vehicle">Δεν έχετε κάποιο όχημα</string>
+    <string name="you_dont_have_vehicle_desc">Φαίνεται ότι δεν έχετε προσθέσει κάποιο όχημα. Κάνετε μία προσθήκη για να μπορείτε να προσφέρετε διαδρομές</string>
+    <string name="no_ratings">Δεν υπάρχουν αξιολογήσεις</string>
+    <string name="no_ratings_desc">Φαίνεται ότι δεν έχετε κάποια αξιολόγηση</string>
 
 </resources>
