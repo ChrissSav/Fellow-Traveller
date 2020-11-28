@@ -43,15 +43,15 @@
                         style="@style/paragraph_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_history"
                         android:drawablePadding="10dp"
                         android:gravity="center_vertical|center_horizontal"
-                        android:text="Ιστορικό κρατήσεων"
+                        android:text="@string/searches_history"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:drawableTint="@color/black_color" />
+                        app:drawableTint="@color/black_color"
+                        app:drawableStartCompat="@drawable/ic_history" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
