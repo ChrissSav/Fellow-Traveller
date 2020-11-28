@@ -48,7 +48,13 @@ class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>
                     pet.text = if (trip.hasPet) resources.getString(R.string.yes) else resources.getString(R.string.no)
                     car.text = trip.carBase.baseInfo
                     message.text = if (trip.msg.isNullOrEmpty()) resources.getString(R.string.no_driver_message) else trip.msg
-                    messengerLinkText.text = getString(R.string.send_message_to, trip.creatorUser.firstName)
+
+
+                    //Delete the "ς" or "s" when we display the name of the creator in the messenger button
+                    if (trip.creatorUser.firstName.takeLast(1).equals("ς"))
+                        messengerLinkText.text = getString(R.string.send_message_to, trip.creatorUser.firstName.dropLast(1))
+                    else
+                        messengerLinkText.text = getString(R.string.send_message_to, trip.creatorUser.firstName)
 
 
 
