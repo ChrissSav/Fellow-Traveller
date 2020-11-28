@@ -151,7 +151,7 @@
             android:layout_marginEnd="20dp"
             android:drawablePadding="10dp"
             android:gravity="center"
-            android:text="@string/more_relevant"
+            android:text="@string/most_relevant"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/results_label"
             app:layout_constraintEnd_toEndOf="parent"
