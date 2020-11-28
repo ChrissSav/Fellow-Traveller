@@ -27,6 +27,7 @@ class TripsHistoryAdapter(
             val currentTrip = currentList[position]
             binding.background.background = ContextCompat.getDrawable(binding.background.context, drawable)
             binding.from.text = currentTrip.destFrom.title
+            binding.price.text = binding.price.context.getString(R.string.price, currentTrip.price.toString())
             binding.to.text = currentTrip.destTo.title
             binding.date.text = currentTrip.date
             binding.time.text = currentTrip.time
