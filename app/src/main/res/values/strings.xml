@@ -130,6 +130,7 @@
     <string name="password_change_success">Επιτυχής Αλλαγή κωδικού</string>
     <string name="password_missing">Παρακαλώ συμπληρώστε τον κωδικό.</string>
     <string name="send_message">Στείλε μήνυμα</string>
+    <string name="send_message_to">Στείλε μήνυμα στον %s</string>
     <string name="complete_profile_setup">Ολοκλήρωση προφίλ</string>
     <string name="enter_messenger_link">Συμπληρώστε το messenger link σας!</string>
     <string name="complete_profile_warning">Πρέπει να ολοκληρώσετε το προφίλ σας πρώτα !</string>

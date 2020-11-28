@@ -2,7 +2,7 @@ package gr.fellow.fellow_traveller.framework.network.fellow.trip
 
 import com.google.gson.annotations.SerializedName
 import gr.fellow.fellow_traveller.framework.network.fellow.car.CarBaseResponse
-import gr.fellow.fellow_traveller.framework.network.fellow.user.UserBaseResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.user.UserCreatorResponse
 
 data class TripSearchResponse(
     val id: String,
@@ -10,7 +10,7 @@ data class TripSearchResponse(
     val destFrom: DestinationResponse,
     @SerializedName("destinationTo")
     val destTo: DestinationResponse,
-    val creator: UserBaseResponse,
+    val creator: UserCreatorResponse,
     val car: CarBaseResponse,
     @SerializedName("pet")
     val hasPet: Boolean,

@@ -1,7 +1,5 @@
 package gr.fellow.fellow_traveller.ui.user.fragment
 
-import android.content.Intent
-import android.net.Uri
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -11,6 +9,7 @@ import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentUserDetailsBinding
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
+import gr.fellow.fellow_traveller.ui.extensions.openMessenger
 import gr.fellow.fellow_traveller.ui.user.UserInfoDetailsViewModel
 import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
 
@@ -81,17 +80,13 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
 
         binding.messengerLink1.setOnClickListener {
             messengerLink?.let {
-                val uriUrl: Uri = Uri.parse(getString(R.string.messenger_link, it))
-                val launchBrowser = Intent(Intent.ACTION_VIEW, uriUrl)
-                startActivity(launchBrowser)
+                activity?.openMessenger(it)
             }
 
         }
         binding.messengerLink1.setOnClickListener {
             messengerLink?.let {
-                val uriUrl: Uri = Uri.parse(getString(R.string.messenger_link, it))
-                val launchBrowser = Intent(Intent.ACTION_VIEW, uriUrl)
-                startActivity(launchBrowser)
+                activity?.openMessenger(it)
             }
 
         }

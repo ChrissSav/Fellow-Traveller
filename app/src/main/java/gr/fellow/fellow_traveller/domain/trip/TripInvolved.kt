@@ -3,7 +3,7 @@ package gr.fellow.fellow_traveller.domain.trip
 import android.os.Parcelable
 import gr.fellow.fellow_traveller.domain.car.CarInfoBase
 import gr.fellow.fellow_traveller.domain.user.Passenger
-import gr.fellow.fellow_traveller.domain.user.UserBase
+import gr.fellow.fellow_traveller.domain.user.UserCreator
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.DestinationResponse
 import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
 import gr.fellow.fellow_traveller.utils.getTimeFromTimestamp
@@ -15,7 +15,7 @@ data class TripInvolved(
     val id: String,
     val destFrom: DestinationResponse,
     val destTo: DestinationResponse,
-    val creatorUser: UserBase,
+    val creatorUser: UserCreator,
     val car: CarInfoBase,
     val hasPet: Boolean,
     val seats: Int,

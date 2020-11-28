@@ -2,9 +2,11 @@ package gr.fellow.fellow_traveller.domain.mappers
 
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.domain.user.UserBase
+import gr.fellow.fellow_traveller.domain.user.UserCreator
 import gr.fellow.fellow_traveller.domain.user.UserInfo
 import gr.fellow.fellow_traveller.framework.network.fellow.user.UserAuthResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.user.UserBaseResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.user.UserCreatorResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.user.UserInfoResponse
 import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 import gr.fellow.fellow_traveller.ui.extensions.round
@@ -21,6 +23,11 @@ fun LocalUser.mapToRegisteredUserEntity() = RegisteredUserEntity(
 fun UserBaseResponse.mapToUserBase() = UserBase(
     id, firstName, lastName, picture, rate.round(1), reviews
 )
+
+fun UserCreatorResponse.mapToUserCreatorResponse() = UserCreator(
+    id, firstName, lastName, picture, rate.round(1), reviews, messengerLink
+)
+
 
 fun RegisteredUserEntity.mapToLocalUser(): LocalUser {
     return LocalUser(id, firstName, lastName, rate.round(1), reviews, picture, aboutMe, email, messengerLink, tripsOffers, tripsInvolved)

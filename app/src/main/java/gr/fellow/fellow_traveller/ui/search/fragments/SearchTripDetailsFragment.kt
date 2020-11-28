@@ -48,6 +48,7 @@ class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>
                     pet.text = if (trip.hasPet) resources.getString(R.string.yes) else resources.getString(R.string.no)
                     car.text = trip.carBase.baseInfo
                     message.text = if (trip.msg.isNullOrEmpty()) resources.getString(R.string.no_driver_message) else trip.msg
+                    messengerLinkText.text = getString(R.string.send_message_to, trip.creatorUser.firstName)
 
 
 
@@ -59,6 +60,10 @@ class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>
                         activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to trip.creatorUser.id))
                     }
 
+                    messengerLinkConstraintLayout.setOnClickListener {
+
+                    }
+
 
                     description.text = "${price.text} " + getString(R.string.per_person)
 
@@ -67,6 +72,11 @@ class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>
                         binding.passengerRecyclerView.adapter = PassengerAdapter(trip.passengers, this@SearchTripDetailsFragment::onPassengerListener)
                     } else {
                         binding.passengersSection.visibility = View.VISIBLE
+                    }
+
+
+                    messengerLinkConstraintLayout.setOnClickListener {
+                        activity?.openMessenger(trip.creatorUser.messengerLink)
                     }
 
                 }

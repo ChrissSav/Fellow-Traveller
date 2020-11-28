@@ -171,6 +171,7 @@
     <string name="password_change_success">Password changed successfully.</string>
     <string name="password_missing">Please enter your password.</string>
     <string name="send_message">Send a message.</string>
+    <string name="send_message_to">Send a message to %s</string>
     <string name="complete_profile_setup">Complete your profile.</string>
     <string name="enter_messenger_link">enter your Messenger link.</string>
     <string name="complete_profile_warning">You should complete your profile first.</string>

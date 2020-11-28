@@ -284,16 +284,45 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/messengerLink_constraintLayout"
+                    style="@style/border_icon_button"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="42dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+                    <TextView
+                        android:id="@+id/messenger_link_text"
+                        style="@style/paragraph_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_messenger"
+                        android:drawablePadding="10dp"
+                        android:drawableTint="@color/black_color"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="@string/send_message_to"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <TextView
                     android:id="@+id/textView9"
                     style="@style/header_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="64dp"
+                    android:layout_marginTop="48dp"
                     android:text="Όχημα"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+                    app:layout_constraintTop_toBottomOf="@+id/messengerLink_constraintLayout" />
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -380,9 +409,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
                     android:layout_marginBottom="120dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/passengers_label">
 
                     <ImageView

@@ -99,7 +99,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
                 pet.text = if (trip.hasPet) resources.getString(R.string.yes) else resources.getString(R.string.no)
                 car.text = trip.car.fullInfo
                 message.text = if (trip.msg.isNullOrEmpty()) resources.getString(R.string.no_driver_message) else trip.msg
-
+                messengerLinkText.text = getString(R.string.send_message_to, trip.creatorUser.firstName)
 
                 if (!trip.passengers.isNullOrEmpty()) {
                     binding.viewAllPassengers.visibility = View.VISIBLE
@@ -130,6 +130,10 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
                 )
                 confirmBottomSheetDialog.show(childFragmentManager, "confirmBottomSheetDialog")
 
+            }
+
+            binding.messengerLinkConstraintLayout.setOnClickListener {
+                activity?.openMessenger(trip.creatorUser.messengerLink)
             }
 
             binding.userImage.setOnClickListener {
