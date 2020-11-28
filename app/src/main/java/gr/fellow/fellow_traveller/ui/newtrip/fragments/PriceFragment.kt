@@ -32,7 +32,7 @@ class PriceFragment : BaseFragment<FragmentPriceBinding>() {
     }
 
     override fun setUpViews() {
-        binding.ImageButtonNext.button.setOnClickListener {
+        binding.ImageButtonNext.setOnClickListener {
             findNavController()?.navigate(R.id.next_fragment)
         }
 

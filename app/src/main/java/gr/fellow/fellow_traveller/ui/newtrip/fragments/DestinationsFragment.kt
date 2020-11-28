@@ -43,7 +43,7 @@ class DestinationsFragment : BaseFragment<FragmentDestinationsBinding>() {
             startActivityForResultWithFade(SelectLocationActivity::class, 2)
         }
 
-        binding.ImageButtonNext.button.setOnClickListener {
+        binding.ImageButtonNext.setOnClickListener {
 
             when {
                 viewModel.destinationFrom.value == null -> {

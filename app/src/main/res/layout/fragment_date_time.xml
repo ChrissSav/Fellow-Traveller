@@ -45,11 +45,12 @@
         app:layout_constraintTop_toBottomOf="@+id/fellowTextInput_date" />
 
 
-    <include
+    <ImageButton
         android:id="@+id/ImageButton_next"
-        layout="@layout/float_action_button_new_trip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@null"
+        android:src="@drawable/new_trip_fab_ripple"
         android:layout_marginEnd="@dimen/new_trip_float_action_button_margin_right"
         android:layout_marginBottom="@dimen/new_trip_float_action_button_margin_bottom"
         app:layout_constraintBottom_toBottomOf="parent"

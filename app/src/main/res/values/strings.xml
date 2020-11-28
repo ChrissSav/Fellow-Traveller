@@ -36,7 +36,7 @@
 
     <string name="set_date">Όρισε την ημερομηνία</string>
     <string name="set_time">Όρισε την ώρα</string>
-    <string name="select_car">Διάλεξε αυτοκίνητο</string>
+    <string name="select_car">Επέλεξε όχημα</string>
 
     <string name="allowed">Επιτρέπονται</string>
     <string name="not_allowed">Δεν επιτρέπονται</string>
@@ -219,11 +219,11 @@
     <string name="edit_profile_photo">Επεξεργασία εικόνας προφίλ</string>
     <string name="vehicle">Όχημα</string>
     <string name="choose_vehicle_for_trip">Επιλέξτε αμάξι για το ταξίδι σας</string>
-    <string name="enter_seat_availability">Εισάγετε τον αριθμό των ελεύθερων θέσεων που θέλετε να μοιραστείτε</string>
+    <string name="enter_seat_availability">Επέλεξε τον αριθμό των ελεύθερων θέσεων που θέλετε να μοιραστείτε</string>
     <string name="pets">Κατοικίδια</string>
-    <string name="are_pets_allowed_or_not">Επιτρέπονται κατοικίδια;</string>
+    <string name="are_pets_allowed_or_not">Καθόρισε αν το ταξιδι δέχεται την παρουσία κατικοιδίων</string>
     <string name="luggage">Αποσκεύες</string>
-    <string name="enter_luggage_availability">Εισάγετε τον αριθμό για τις αποσκευές των επιβατών</string>
+    <string name="enter_luggage_availability">Καθόρισε την κατασταση τον αποσκευων για το ταξιδι </string>
     <string name="specify">Καθορίστε</string>
     <string name="password">Κωδικός Πρόσβασης</string>
     <string name="notifications">Ειδοποιήσεις</string>

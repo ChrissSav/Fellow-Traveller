@@ -26,6 +26,8 @@
 
 
     <!--Base info fragment-->
+    <dimen name="base_info_margin_between_sections">45dp</dimen>
+    <dimen name="base_info_margin_text">25dp</dimen>
     <dimen name="button_number_layout_height">55dp</dimen>
     <dimen name="button_number_layout_width">140dp</dimen>
 
@@ -49,11 +51,8 @@
     <!--    float_action_button-->
     <dimen name="new_trip_float_action_button_margin_right">16dp</dimen>
     <dimen name="new_trip_float_action_button_margin_bottom">32dp</dimen>
-    <dimen name="new_trip_float_action_button_width">63dp</dimen>
-    <dimen name="new_trip_float_action_button_height">63dp</dimen>
     <dimen name="new_trip_float_action_button_width_height">60dp</dimen>
-
-
+    <dimen name="new_trip_float_action_button_padding">16dp</dimen>
     <!--    float_action_button car-->
     <dimen name="car_trip_float_action_button_margin_right">16dp</dimen>
     <dimen name="car_trip_float_action_button_margin_bottom">42dp</dimen>

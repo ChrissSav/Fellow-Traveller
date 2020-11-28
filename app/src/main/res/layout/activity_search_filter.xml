@@ -118,7 +118,7 @@
                     android:id="@+id/date"
                     style="@style/editText_not_editable"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/button_number_layout_height"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:gravity="center|end"
                     android:hint="@string/date_range"
@@ -134,9 +134,8 @@
                     android:id="@+id/seats_pick_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     app:layout_constraintBottom_toBottomOf="@id/textView7"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/date"
                     app:layout_constraintTop_toTopOf="@id/textView7"
                     app:minValue="1" />
 
@@ -144,10 +143,12 @@
                     android:id="@+id/pet"
                     style="@style/editText_not_editable"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/button_number_layout_height"
+                    android:layout_height="wrap_content"
                     android:gravity="center|end"
                     android:hint="@string/whatever"
-                    android:padding="@dimen/calendar_margin_16dp"
+                    android:paddingStart="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/textView10"
                     app:layout_constraintEnd_toEndOf="@+id/seats_pick_button" />
 
@@ -167,10 +168,9 @@
                     android:id="@+id/price_tv"
                     style="@style/editText_not_editable"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/button_number_layout_height"
+                    android:layout_height="wrap_content"
                     android:gravity="center|end"
                     android:hint="@string/show_all"
-                    android:padding="@dimen/calendar_margin_16dp"
                     app:layout_constraintBottom_toBottomOf="@+id/price_range_tv"
                     app:layout_constraintEnd_toEndOf="@+id/pet"
                     app:layout_constraintTop_toTopOf="@+id/price_range_tv" />
@@ -206,16 +206,15 @@
                     android:text="@string/starting_point_range"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView10"
-                    app:layout_constraintTop_toBottomOf="@+id/price_range_seekbar" />
+                    app:layout_constraintTop_toBottomOf="@+id/price_range_tv" />
 
                 <EditText
                     android:id="@+id/from_range_radius_tv"
                     style="@style/editText_not_editable"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/button_number_layout_height"
+                    android:layout_height="wrap_content"
                     android:gravity="center|end"
                     android:hint="@string/show_all"
-                    android:padding="@dimen/calendar_margin_16dp"
                     app:layout_constraintBottom_toBottomOf="@+id/range_from_tv"
                     app:layout_constraintEnd_toEndOf="@+id/pet"
                     app:layout_constraintTop_toTopOf="@+id/range_from_tv" />
@@ -251,17 +250,16 @@
                     android:text="@string/destination_range"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView10"
-                    app:layout_constraintTop_toBottomOf="@+id/from_range_seekbar" />
+                    app:layout_constraintTop_toBottomOf="@+id/range_from_tv" />
 
 
                 <EditText
                     android:id="@+id/to_range_radius_tv"
                     style="@style/editText_not_editable"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/button_number_layout_height"
+                    android:layout_height="wrap_content"
                     android:gravity="center|end"
                     android:hint="@string/show_all"
-                    android:padding="@dimen/calendar_margin_16dp"
                     app:layout_constraintBottom_toBottomOf="@+id/range_to_tv"
                     app:layout_constraintEnd_toEndOf="@+id/pet"
                     app:layout_constraintTop_toTopOf="@+id/range_to_tv" />
@@ -295,7 +293,8 @@
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <Button
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/apply_button"
         style="@style/header_3"
         android:layout_width="wrap_content"
@@ -303,21 +302,17 @@
         android:layout_marginTop="62dp"
         android:layout_marginEnd="@dimen/car_trip_float_action_button_margin_right"
         android:layout_marginBottom="@dimen/car_trip_float_action_button_margin_bottom"
-        android:background="@drawable/fab_background_aqua"
-        android:backgroundTint="@color/colorPrimary"
-        android:drawableStart="@drawable/ic_tick"
-        android:drawablePadding="10dp"
-        android:drawableTint="@color/white"
-        android:elevation="16dp"
+        android:background="@drawable/login_button_background"
         android:gravity="center|end"
         android:paddingStart="22dp"
         android:paddingEnd="20dp"
         android:text="@string/apply"
-        android:textAllCaps="false"
         android:textColor="@color/white"
+        app:backgroundTint="@color/orange_new"
+        app:icon="@drawable/ic_tick"
+        app:iconPadding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
