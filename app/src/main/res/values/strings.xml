@@ -338,5 +338,15 @@
     <string name="availability">Χωρητικότητα</string>
     <string name="price_title">Τιμή</string>
     <string name="review_title">Αξιολόγηση</string>
+    <string name="time">Ώρα</string>
+    <string name="textview_placeholder">TextView</string>
+    <string name="user_deleted_trip">Ο χρήστης Όνομα διέγραψε ένα ταξίδι στο οποίο είστε μέλος</string>
+    <string name="trip_athens_kavala">Αθήνα - Καβάλα</string>
+    <string name="minutes_ago">πριν από 3 λεπτά</string>
+    <string name="name">Όνομα</string>
+    <string name="number_placeholder">200</string>
+    <string name="passenger_availability_placeholder">3/4</string>
+    <string name="small">Μικρή</string>
+    <string name="no_pet">Όχι Κατοικίδια</string>
 
 </resources>

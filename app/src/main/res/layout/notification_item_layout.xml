@@ -23,7 +23,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
-        android:text="Ο χρήστης Όνομα διέγραψε ένα ταξίδι στο οποίο είστε μέλος"
+        android:text="@string/user_deleted_trip"
         app:layout_constraintEnd_toStartOf="@+id/read"
         app:layout_constraintStart_toEndOf="@+id/picture"
         app:layout_constraintTop_toTopOf="@+id/picture" />
@@ -37,7 +37,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/background_border_stroke_12dp"
         android:padding="10dp"
-        android:text="Αθήνα - Καβάλα"
+        android:text="@string/trip_athens_kavala"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/description"
         app:layout_constraintTop_toBottomOf="@+id/description" />
@@ -47,7 +47,7 @@
         style="@style/paragraph_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="πριν από 3 λεπτά"
+        android:text="@string/minutes_ago"
         app:layout_constraintBaseline_toBaselineOf="@+id/trip"
         app:layout_constraintEnd_toEndOf="@+id/description" />
 

@@ -28,7 +28,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/background_black_round"
         android:gravity="center"
-        android:text="200"
+        android:text="@string/number_placeholder"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
