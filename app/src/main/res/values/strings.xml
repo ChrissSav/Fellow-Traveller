@@ -393,6 +393,10 @@
     <string name="kritikes">Κριτικές</string>
     <string name="space">Χωρητικότητα</string>
     <string name="lastname">Επίθετο</string>
-    <string name="email">Email</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="current_password">Τρέχων κωδικός</string>
+    <string name="new_password">Νέος κωδικός πρόσβασης</string>
+    <string name="repeat_password">Επανάληψη κωδικού πρόσβασης</string>
+    <string name="zero_placeholder" translatable="false">0</string>
 
 </resources>

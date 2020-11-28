@@ -402,4 +402,8 @@
     <string name="kritikes">Reviews</string>
     <string name="availability_none">None</string>
     <string name="space">Luggage Space</string>
+    <string name="lastname">Last Name</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="repeat_password">Confirm New Password</string>
 </resources>
