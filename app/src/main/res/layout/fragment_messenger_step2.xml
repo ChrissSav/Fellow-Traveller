@@ -36,7 +36,7 @@
         android:layout_marginTop="@dimen/messenger_title_top_margin"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Πατήστε στις ρυθμίσεις"
+        android:text="@string/messenger_step2"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/messenger_des_top_margin"
         android:gravity="center"
-        android:text="Ανοίξτε την εφαργμογή του messenger"
+        android:text="@string/messenger_step2_desc"
         app:layout_constraintEnd_toEndOf="@+id/textView33"
         app:layout_constraintStart_toStartOf="@+id/textView33"
         app:layout_constraintTop_toBottomOf="@+id/textView33" />

@@ -34,7 +34,7 @@
         android:layout_marginTop="@dimen/messenger_title_top_margin"
         android:layout_marginEnd="16dp"
 
-        android:text="Οδηγός βοηθείας Messenger"
+        android:text="@string/messenger_help_guide"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/messenger_des_top_margin"
-        android:text="Το messenger είναι το μέσο με το οποίο θα μπορέσεις να λυσεις και να εκφρασεις τυχον αποριες σου."
+        android:text="@string/messenger_description"
         app:layout_constraintEnd_toEndOf="@+id/textView33"
         app:layout_constraintStart_toStartOf="@+id/textView33"
         app:layout_constraintTop_toBottomOf="@+id/textView33" />

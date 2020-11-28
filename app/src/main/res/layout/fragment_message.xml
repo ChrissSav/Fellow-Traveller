@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="Γράψε ένα μήνυμα στους συνταξιδιώτες σου"
+                android:text="@string/leave_a_message_for_co_travellers"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Μήνυμα (προαιρετικό)"
+                android:text="@string/message_place_holder"
                 app:layout_constraintStart_toStartOf="@+id/AddMessageFragment_textView1"
                 app:layout_constraintTop_toBottomOf="@+id/AddMessageFragment_textView1" />
 
@@ -47,7 +47,7 @@
                 android:background="@null"
                 android:ems="10"
                 android:gravity="top|left"
-                android:hint="Γράψε κάτι ... "
+                android:hint="@string/write_something"
                 android:inputType="textCapSentences|textMultiLine"
                 android:singleLine="false"
                 app:layout_constraintBottom_toBottomOf="parent"

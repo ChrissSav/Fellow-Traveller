@@ -232,7 +232,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
          when (sortAnswerType) {
             SortAnswerType.Relevant -> {
                 createToast("Πιο σχετικά")
-                binding.sortButton.text = getString(R.string.more_recent)
+                binding.sortButton.text = getString(R.string.more_relevant)
                 viewModel.sortByDate()
                 //sortOption = SortAnswerType.Relevant
             }

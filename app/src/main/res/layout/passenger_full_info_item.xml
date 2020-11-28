@@ -27,7 +27,7 @@
         android:layout_marginEnd="16dp"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="Όνομα"
+        android:text="@string/name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/picture"
         app:layout_constraintTop_toTopOf="@+id/picture" />
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="TextView"
+        android:text="@string/textview_placeholder"
         app:layout_constraintStart_toStartOf="@+id/username"
         app:layout_constraintTop_toBottomOf="@+id/username" />
 
@@ -47,7 +47,7 @@
         style="@style/paragraph_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/textview_placeholder"
         app:layout_constraintBaseline_toBaselineOf="@+id/seats"
         app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
