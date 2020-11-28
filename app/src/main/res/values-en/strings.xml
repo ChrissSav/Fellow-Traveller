@@ -101,6 +101,11 @@
 
     <!--Fragment fragment trip involved details -->
     <string name="trip_involved_description">Trip status:  &lt;b&gt;%s&lt;/b></string>
+    <string name="trip_involved_passenger_description_as_creator">We hope you find your ideal passengers soon</string>
+    <string name="trip_involved_passenger_header_in_history">No passengers found</string>
+    <string name="trip_involved_passenger_description_in_history">It seems that no other passengers was involved in this trip</string>
+    <string name="trip_involved_passenger_header">There are no passengers</string>
+    <string name="trip_involved_passenger_description_as_passenger">Be the first passenger on this trip</string>
 
     <!--Car -->
     <string name="brand">Make</string>

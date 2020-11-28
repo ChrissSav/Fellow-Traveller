@@ -102,6 +102,11 @@
 
     <!--Fragment fragment trip involved details -->
     <string name="trip_involved_description">Κατάσταση ταξιδιού:  &lt;b&gt;%s&lt;/b></string>
+    <string name="trip_involved_passenger_description_as_creator">Ελπίζουμε σύντομα να βρεις τους ιδανικούς συνεπιβάτες σου</string>
+    <string name="trip_involved_passenger_header_in_history">Δεν βρέθηκε κάποιος επιβάτης</string>
+    <string name="trip_involved_passenger_description_in_history">Φαίνεται πως σε αυτό το ταξίδι σας δεν συμμετείχε κάποιος άλλος επιβάτης</string>
+    <string name="trip_involved_passenger_header">Δεν υπάρχουν επιβάτες</string>
+    <string name="trip_involved_passenger_description_as_passenger">Γίνε εσύ ο πρώτος επιβάτης αυτού του ταξιδιού</string>
 
     <!--Car -->
     <string name="brand">Μάρκα</string>
