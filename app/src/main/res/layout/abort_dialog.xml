@@ -31,7 +31,7 @@
         style="@style/button_orange_empty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/option_stay"
+        android:text="@string/option_no"
         android:textColor="@color/black_color" />
 
 
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="@string/option_cancel"
+        android:text="@string/option_yes"
         android:textColor="@color/red_color" />
 
 </LinearLayout>

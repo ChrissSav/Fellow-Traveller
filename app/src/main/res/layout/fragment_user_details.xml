@@ -137,7 +137,7 @@
                     android:id="@+id/offers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:label_text="@string/offerings"
+                    app:label_text="@string/offers"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"

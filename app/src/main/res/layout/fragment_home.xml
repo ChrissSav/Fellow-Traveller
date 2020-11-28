@@ -83,7 +83,7 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="24dp"
                 android:lineSpacingExtra="5dp"
-                android:text="@string/find_the_best_co_travelers_in_no_time"
+                android:text="@string/search_for_a_trip_description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/search_trip"
                 app:layout_constraintStart_toStartOf="@+id/textView28"
@@ -122,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
-                android:text="@string/make_a_trip_offer"
+                android:text="@string/offer_your_next_trip"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -135,7 +135,7 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="24dp"
                 android:lineSpacingExtra="5dp"
-                android:text="@string/find_the_best_co_travelers_in_no_time"
+                android:text="@string/offer_your_next_trip_description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/new_trip"
                 app:layout_constraintStart_toStartOf="@+id/textView2"

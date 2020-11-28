@@ -24,7 +24,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/new_trip_margin_from_top"
-        app:hint_f="@string/select_day"
+        app:hint_f="@string/date"
         app:imeOptions_f="actionNext"
         app:editable_f="false"
         app:layout_constraintEnd_toEndOf="@+id/AddDateTimeFragment_textView"

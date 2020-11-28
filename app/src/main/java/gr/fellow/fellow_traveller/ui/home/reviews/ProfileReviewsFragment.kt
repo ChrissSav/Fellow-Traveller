@@ -35,7 +35,7 @@ class ProfileReviewsFragment : BaseFragment<FragmentProfileReviewsBinding>() {
             else
                 binding.reviewsSection.visibility = GONE
 
-            binding.numRate.text = "${it.size} ${getString(R.string.ratings_count)}"
+            binding.numRate.text = "${it.size} ${getString(R.string.total_reviews)}"
         })
     }
 
