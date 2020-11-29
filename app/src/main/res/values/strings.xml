@@ -24,7 +24,10 @@
     <string name="submit_rating_success">Η αξιολόγηση σας καταχωρήθηκε</string>
     <string name="hello">Γεια σου</string>
     <string name="home_guide">Ξεκίνησε αναζητώντας ή προσφέροντας ένα ταξίδι</string>
-
+    <string name="or">ή</string>
+    <string name="account_settings_access_denied">Δεν δώσατε άδεια στην εφαρμογή για το ανέβασμα φωτογραφίας</string>
+    <string name="account_settings_dialog_message">Θα πρέπει να ρυθμίσετε τις άδειες της εφαρμογής για το ανέβασμα φωτογραφίας. Θέλετε να συνεχίσετε;</string>
+    <string name="account_settings_guid_message">Θα πρέπει να ενεργοποιήσετε τις άδειες τις εφαρμογής από τις ρυθμίσεις</string>
 
     <string name="title_activity_maps">Χάρτης</string>
     <string name="no_driver_message">Δεν υπάρχει κάποιο μήνυμα από τον οδηγό.</string>
