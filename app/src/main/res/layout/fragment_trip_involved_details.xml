@@ -171,14 +171,19 @@
                     app:layout_constraintTop_toTopOf="@+id/day" />
 
 
-                <TextView
+                <EditText
                     android:id="@+id/message"
                     style="@style/paragraph_1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
+                    android:longClickable="false"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:enabled="false"
                     android:tag="5"
-                    android:text="@string/trip_review_placeholder"
+                    android:background="@null"
+                    android:hint="@string/no_description_available"
                     app:layout_constraintEnd_toEndOf="@+id/rate"
                     app:layout_constraintStart_toStartOf="@+id/user_image"
                     app:layout_constraintTop_toBottomOf="@+id/user_image" />
