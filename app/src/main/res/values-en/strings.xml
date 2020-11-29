@@ -9,7 +9,7 @@
     <string name="account_fragment_about_me">No description available.</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="PASSWORD_CHANGED_SUCCESSFULLY">Password changed successfully!</string>
-    <string name="add_offer_success">Your offer was submitted successfully.</string>
+    <string name="submit_trip_offer_success">Your trip was submitted successfully.</string>
     <string name="book_trip_success">Congratulations! You\'re part of the trip.</string>
     <string name="submit_rating_success">Your rating was submitted successfully!</string>
     <string name="switch_text">Switch</string>
@@ -83,7 +83,7 @@
     <string name="trip_involved_passenger_description_as_creator">We hope you find your ideal passengers soon.</string>
     <string name="trip_involved_passenger_header_in_history">No passengers found</string>
     <string name="trip_involved_passenger_description_in_history">It seems that no other passengers are involved in this trip</string>
-    <string name="trip_involved_passenger_header">There are no passengers</string>
+    <string name="trip_involved_passenger_header">There are no passengers.</string>
     <string name="trip_involved_passenger_description_as_passenger">Be the first to book a seat on this trip</string>
 
     <!--Car -->
@@ -357,7 +357,6 @@
     <string name="sign_in_or_sign_up">Sign In or create a new account</string>
     <string name="no_notifications">You don\'t have any notifications.</string>
     <string name="all_activities_show_up_here">All activities will be shown here.</string>
-    <string name="add_a_vehicle">Add a vehicle</string>
     <string name="no_ratings_description">Looks like you don\'t have any ratings.</string>
     <string name="no_passengers">No passengers.</string>
     <string name="be_the_first_to_book">Be the first to book a reservation on this trip.</string>
@@ -365,7 +364,6 @@
     <string name="you_can_change_filters">You can customize the filters and find what you\'re looking for.</string>
     <string name="no_bookings">No bookings yet.</string>
     <string name="looks_like_no_active_trips">Looks like you haven\'t booked any trips yet.\nStart searching for your next trip.</string>
-    <string name="see_your_booking">See your booking.</string>
     <string name="you_dont_have_trips">No trips on your history.</string>
     <string name="you_dont_have_trips_history">Looks like you don\'t have any trips. This is where you can see your past trips.</string>
     <string name="you_dont_have_offers">No trip offers yet.</string>
@@ -388,4 +386,8 @@
     <string name="history">History</string>
     <string name="offer_your_next_trip_description">Share your next trip and find the ideal passengers.</string>
     <string name="confirm_booking">Confirm Booking</string>
+    <string name="placeholder_vehicle_brand">e.g. Tesla</string>
+    <string name="placeholder_vehicle_model">e.g. Model 3</string>
+    <string name="placeholder_vehicle_number_plate">e.g. XYZ-1234</string>
+    <string name="placeholder_vehicle_color">e.g. Red</string>
 </resources>

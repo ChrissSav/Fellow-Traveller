@@ -19,7 +19,7 @@
     <string name="confirm_password">Επιβεβαίωση κωδικού</string>
     <string name="PASSWORD_CHANGED_SUCCESSFULLY">Ο κωδικός πρόσβασης άλλαξε επιτυχώς.</string>
     <string name="EMAIL_PLACEHOLDER">π.χ. user@example.com</string>
-    <string name="add_offer_success">Επιτυχής καταχώρηση!</string>
+    <string name="submit_trip_offer_success">Επιτυχής καταχώρηση!</string>
     <string name="book_trip_success">Συγχαρητήρια! Συμμετέχετε στο ταξίδι</string>
     <string name="submit_rating_success">Η αξιολόγηση σας καταχωρήθηκε</string>
     <string name="hello">Γεια σου</string>
@@ -351,7 +351,6 @@
     <string name="zero_price_placeholder" translatable="false">0.00</string>
     <string name="price_calc_per_person" translatable="false">4 x 5,00 €</string>
     <string name="zero_euros" translatable="false">0 €</string>
-    <string name="add_a_vehicle">Προσθέστε ένα όχημα</string>
     <string name="no_ratings_description">Φαίνεται ότι δεν έχετε κάποια αξιολόγηση</string>
     <string name="no_passengers">Δεν υπάρχουν επιβάτες</string>
     <string name="be_the_first_to_book">Γίνε εσύ ο πρώτος επιβάτης αυτού του ταξιδιού</string>
@@ -385,5 +384,9 @@
     <string name="history">Ιστορικό</string>
     <string name="offer_your_next_trip_description">Μοίρασε το επόμενο σου ταξίδι και βρες συνταξιδιώτες στο λεπτό.</string>
     <string name="confirm_booking">Επικύρωση Κράτησης</string>
+    <string name="placeholder_vehicle_brand">π.χ. Tesla</string>
+    <string name="placeholder_vehicle_model">π.χ. Model 3</string>
+    <string name="placeholder_vehicle_number_plate">π.χ. ΧΥΖ-1234</string>
+    <string name="placeholder_vehicle_color">π.χ. Κόκκινο</string>
 
 </resources>
