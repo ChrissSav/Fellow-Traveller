@@ -33,7 +33,7 @@ class HomeMessengerFragment : BaseFragment<FragmentHomeMessengerBinding>() {
         })
 
         viewModel.messengerUpdate.observe(viewLifecycleOwner, Observer {
-            createToast(getString(R.string.submit_trip_offer_success))
+            createToast(getString(R.string.messenger_profile_saved_successfully))
             onBackPressed()
         })
 
