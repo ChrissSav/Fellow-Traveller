@@ -117,7 +117,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginBottom="100dp"
         android:background="@drawable/background_stroke_radius_16_grey"
-        android:backgroundTint="@color/dark_gray_new"
+        android:backgroundTint="@color/black"
         android:paddingStart="46dp"
         android:paddingTop="24dp"
         android:paddingEnd="46dp"
