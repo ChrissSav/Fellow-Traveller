@@ -91,7 +91,7 @@ class UserCarsFragment : BaseFragment<FragmentUserCarsBinding>() {
                             newCarButton.extend()
                         Log.i("makis", "Scrolling up")
 
-                    } else {
+                    } else if (dy > 10) {
                         if (newCarButton.isExtended)
                             newCarButton.shrink()
                         // Scrolling down
