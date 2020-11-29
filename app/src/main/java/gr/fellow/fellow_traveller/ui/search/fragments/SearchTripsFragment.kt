@@ -37,6 +37,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
 
 
+    
     override fun getViewBinding(): FragmentSearchTripsBinding =
         FragmentSearchTripsBinding.inflate(layoutInflater)
 
