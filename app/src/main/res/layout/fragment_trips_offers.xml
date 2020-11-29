@@ -46,7 +46,7 @@
                         android:drawableStart="@drawable/ic_history"
                         android:drawablePadding="10dp"
                         android:gravity="center_vertical|center_horizontal"
-                        android:text="@string/offers_history"
+                        android:text="@string/history"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -117,7 +117,7 @@
                         android:layout_height="wrap_content"
                         style="@style/button_green_filled"
                         android:layout_marginTop="28dp"
-                        android:text="@string/offer"
+                        android:text="@string/offer_a_trip"
                         app:layout_constraintTop_toBottomOf="@id/info_text"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />

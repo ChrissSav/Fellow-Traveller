@@ -22,8 +22,8 @@ class HomeTripsFragment : BaseFragment<FragmentHomeTripsBinding>() {
 
     override fun setUpViews() {
         val tripsViewPagerAdapter = TripsViewPagerAdapter(childFragmentManager)
-        tripsViewPagerAdapter.addFragment(tripsTakesPartFragment, getString(R.string.title_searches))
-        tripsViewPagerAdapter.addFragment(tripsOffersFragment, getString(R.string.title_offers))
+        tripsViewPagerAdapter.addFragment(tripsTakesPartFragment, getString(R.string.bookings))
+        tripsViewPagerAdapter.addFragment(tripsOffersFragment, getString(R.string.offers))
         binding.fragmentTripViewPager.adapter = tripsViewPagerAdapter
         binding.fragmentTripTabLayout.setupWithViewPager(binding.fragmentTripViewPager)
 

@@ -11,7 +11,7 @@
 
     <string name="ERROR_FIELDS_REQUIRE">Υπάρχουν κενά πεδία.</string>
 
-    <string name="ERROR_INVALID_EMAIL_FORMAT">Μη έγκυρο e-mail.</string>
+    <string name="ERROR_INVALID_EMAIL_FORMAT">Μη έγκυρο email.</string>
     <string name="ERROR_PASSWORD_COMPLEXITY_INVALID">Μη έγκυρος κωδικός πρόσβασης.</string>
     <string name="ERROR_PASSWORD_DOES_NOT_MEET_COMPLEXITY_REQUIREMENTS">Ο κωδικός δεν πληρεί τους κανόνες πολυπλοκότητας.</string>
     <string name="ERROR_PASSWORD_COMPLEXITY_SHOULD_CONTAIN">Ο κωδικός πρέπει να έχει:</string>
@@ -47,9 +47,9 @@
     <string name="ERROR_TRIP_PICKUP_POINT">Το σημείο της συνάντησης πρέπει να είναι σε ακτίνα 5 χμλ με βάση την τοποθέσια αναχώρησης.</string>
 
 
-    <string name="ERROR_REVIEW_YOURSELF">Δεν μπορείτε να αξιολογήσετε τον εαυτό σας</string>
-    <string name="ERROR_REVIEW_USER_TARGET_NOT_FOUND">Ο χρήστης δεν βρέθηκε.</string>
-    <string name="ERROR_REVIEW_CANT_REGISTER_THE_REVIEW">Έχετε ήδη αξιολογήση τον χρήστη.</string>
+    <string name="ERROR_RATING_YOURSELF">Δεν μπορείτε να αξιολογήσετε τον εαυτό σας</string>
+    <string name="ERROR_RATING_USER_TARGET_NOT_FOUND">Ο χρήστης δεν βρέθηκε.</string>
+    <string name="ERROR_RATING_CANT_REGISTER_THE_RATE">Έχετε ήδη αξιολογήση τον χρήστη.</string>
 
 
     <string name="ERROR_TRIP_USER_NOT_PASSENGER">Δεν συμμετέχετε σε αυτό το ταξίδι.</string>

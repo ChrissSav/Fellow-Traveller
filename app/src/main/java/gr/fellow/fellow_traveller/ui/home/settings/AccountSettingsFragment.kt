@@ -208,12 +208,12 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
             if (connectivityHelper.checkInternetConnection())
                 onChooseFile()
             else
-                createToast(getString(R.string.check_connection_for_image_upload))
+                createToast(getString(R.string.internet_connection_failure))
         else
             if (connectivityHelper.checkInternetConnection())
                 viewModel.updateUserImage(null)
             else
-                createToast(getString(R.string.check_connection_for_image_upload))
+                createToast(getString(R.string.internet_connection_failure))
     }
 
 

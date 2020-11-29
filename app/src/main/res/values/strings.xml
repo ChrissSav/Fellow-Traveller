@@ -11,27 +11,23 @@
     <string name="register_fragment_stage_2_choose_password_title">Επιλογή συνθηματικού</string>
     <string name="password_complexity_requirements_description">Ο κωδικός σας πρέπει να είναι τουλάχιστον 8 χαρακτήρες και να περιλαμβάνει τουλάχιστον έναν αριθμό, ένα κεφαλαίο, ένα μικρό γράμμα και έναν ειδικό χαρακτήρα.</string>
     <string name="register_fragment_stage_1_add_email_title">Ποιό είναι το email σας;</string>
-    <string name="register_fragment_stage_1_email_input_field_title">Διεύθυνση e-mail</string>
+    <string name="register_fragment_stage_1_email_input_field_title">Διεύθυνση email</string>
     <string name="register_fragment_become_a_fellow_traveller">Γίνε κι εσύ ένας Fellow \nTraveller</string>
     <string name="register_fragment_six_digit_code_notice_description">*Θα λάβετε έναν 6-ψήφιο κωδικό για την επιβεβαίωση του λογαριασμού.</string>
-    <string name="account_fragment_about_me">Δεν υπαρχει περιγραφή</string>
-    <string name="change_password_activity_change_password_button_text">Αλλαγή Κωδικού</string>
-    <string name="change_password_activity_old_password_label">Παλιός κωδικός</string>
-    <string name="change_password_activity_new_password_label">Νέος κωδικός</string>
+    <string name="account_fragment_about_me">Δεν υπάρχει κάποια σχετική περιγραφή.</string>
+    <string name="change_password">Αλλαγή Κωδικού</string>
     <string name="confirm_password">Επιβεβαίωση κωδικού</string>
-    <string name="change_password_activity_change_password_button_label">Αλλαγή</string>
-    <string name="PASSWORD_CHANGED_SUCCESSFULLY">Επιτυχής αλλαγή κωδικού.</string>
-    <string name="EMAIL_PLACEHOLDER" translatable="false">user@example.com</string>
-    <string name="activity_user_settings_account_settings_text_label">Ρυθμίσεις λογαριασμού</string>
-    <string name="success_add">Επιτυχής καταχώρηση!</string>
-    <string name="success_search">Συγχαρητήρια! Συμμετέχετε στο ταξίδι</string>
-    <string name="success_add_review">Η αξιολόγηση σας καταχωρήθηκε</string>
+    <string name="PASSWORD_CHANGED_SUCCESSFULLY">Ο κωδικός πρόσβασης άλλαξε επιτυχώς.</string>
+    <string name="EMAIL_PLACEHOLDER">π.χ. user@example.com</string>
+    <string name="submit_trip_offer_success">Επιτυχής καταχώρηση!</string>
+    <string name="book_trip_success">Συγχαρητήρια! Συμμετέχετε στο ταξίδι</string>
+    <string name="submit_rating_success">Η αξιολόγηση σας καταχωρήθηκε</string>
     <string name="hello">Γεια σου</string>
     <string name="home_guide">Ξεκίνησε αναζητώντας ή προσφέροντας ένα ταξίδι</string>
 
 
     <string name="title_activity_maps">Χάρτης</string>
-    <string name="no_driver_message">Δεν υπάρχει μήνυμα από τον οδηγό.</string>
+    <string name="no_driver_message">Δεν υπάρχει κάποιο μήνυμα από τον οδηγό.</string>
 
 
     <string name="set_date">Όρισε την ημερομηνία</string>
@@ -41,8 +37,8 @@
     <string name="allowed">Επιτρέπονται</string>
     <string name="not_allowed">Δεν επιτρέπονται</string>
 
-    <string name="with_pet">Με κατοικίδιο</string>
-    <string name="without_pet">Χωρίς κατοικίδιο</string>
+    <string name="with_pets">Με κατοικίδιο</string>
+    <string name="without_pets">Χωρίς κατοικίδιο</string>
 
     <string name="yes">Ναι</string>
     <string name="no">Όχι</string>
@@ -50,13 +46,12 @@
     <string name="price" translatable="false">%s €</string>
 
     <!-- Filter Fragment -->
-    <string name="range_text">Εύρος %s χλμ</string>
+    <string name="range_text">Εύρος %s χλμ.</string>
     <string name="range_text_price" formatted="false">Έως %s €</string>
     <string name="range_text_in_filters" formatted="false" translatable="false">%s ~ %s </string>
-    <string name="range_view_all">Εμφάνιση όλων</string>
 
-    <string name="have_pet">Έχω κατικοίδιο</string>
-    <string name="have_not_pet">Δεν έχω κατικοίδιο</string>
+    <string name="have_pet">Έχω κατοικίδιο</string>
+    <string name="have_not_pet">Δεν έχω κατοικίδιο</string>
 
     <string name="not_selected_filters">Δεν έχετε ορίσει κάποιο φίλτρο.</string>
     <string name="trip_found">%s αποτελέσματα</string>
@@ -75,8 +70,8 @@
     <!--Fragment destinations-->
 
     <string name="fragment_destinations_header">Εισάγεται την αφετηρία και τον προορισμό</string>
-    <string name="select_destination_from">Αφετηρία</string>
-    <string name="select_destination_to">Προορισμός</string>
+    <string name="starting_point">Αφετηρία</string>
+    <string name="destination">Προορισμός</string>
 
 
     <!--Fragment PickUp point-->
@@ -87,8 +82,6 @@
     <!--Fragment PickUp point-->
 
     <string name="fragment_date_time_header">Πότε θα πραγματοποιηθεί το ταξίδι;</string>
-    <string name="select_day">Ημερομηνία</string>
-    <string name="select_time">Ώρα</string>
 
     <!--Fragment fragment_base_info -->
 
@@ -111,7 +104,7 @@
     <string name="model">Μοντέλο</string>
     <string name="plate">Αριθμός Κυκλοφορίας</string>
     <string name="color">Χρώμα</string>
-    <string name="car_delete_confirmation_message">Διαγραφή του οχήματος με αριθμό πινακίδας « %s »;</string>
+    <string name="car_delete_confirmation_message">Διαγραφή του οχήματος με αριθμό πινακίδας <b>%s</b></string>
 
     <string name="regex_min_3_chars_english" translatable="false">^[a-zA-Z0-9]{3,}$</string>
     <string name="regex_min_3_chars_english_with_space" translatable="false">^[a-zA-Z0-9_ ]{3,}$</string>
@@ -122,37 +115,35 @@
     <!--Car -->
 
     <string name="notification_to_rate">Ήρθε η ώρα να αξιολογήσετε το χρήστη &lt;b&gt;%s&lt;/b&gt;</string>
-    <string name="notification_delete_trip">Ο χρήστης &lt;b&gt;%s&lt;/b&gt; διέγραψε ένα ταξίδι στο οποίο είστε μέλος</string>
-    <string name="notification_passenger_enter">Ο χρήστης &lt;b&gt;%s&lt;/b&gt; έγινε μέλος του ταξιδιού σου</string>
-    <string name="notification_passenger_exit">Ο χρήστης &lt;b&gt;%s&lt;/b&gt; αποχώρησε απο το ταξίδι σου</string>
+    <string name="notification_delete_trip">Ο χρήστης &lt;b&gt;%s&lt;/b&gt; ακύρωσε ένα ταξίδι στο οποίο είχατε κάνει κράτηση.</string>
+    <string name="notification_passenger_enter">Ο χρήστης &lt;b&gt;%s&lt;/b&gt; έκανε κράτηση στο ταξίδι σας.</string>
+    <string name="notification_passenger_exit">Ο χρήστης &lt;b&gt;%s&lt;/b&gt; ακύρωσε την κράτηση από το ταξίδι σας.</string>
     <string name="image_upload_success">Η φωτογραφία ανέβηκε επιτυχώς</string>
     <string name="image_upload_failure">Η φωτογραφία που επιλέξατε δεν είναι έγκυρη</string>
-    <string name="profile_update_success">Επιτυχής αποθήκευση</string>
+    <string name="profile_update_success">Επιτυχής Αποθήκευση</string>
     <string name="internet_connection_failure">Ελέγξτε την σύνδεση του δικτύου σας για το ανεβάσμα νέας φωτογραφίας</string>
-    <string name="option_yes">Ναι</string>
-    <string name="option_no">Όχι</string>
-    <string name="driver_no_pets_allowed">Ο οδηγός δεν επιτρέπει κατοικίδιο</string>
+    <string name="driver_no_pets_allowed">Λυπούμαστε! Το ταξίδι αυτό δεν επιτρέπει κατοικίδια.</string>
     <string name="password_change_success">Επιτυχής αλλαγή κωδικού πρόσβασης!</string>
     <string name="password_missing">Παρακαλώ συμπληρώστε τον κωδικό.</string>
-    <string name="send_message">Στείλε μήνυμα</string>
+    <string name="send_message">Στείλε μήνυμα.</string>
     <string name="send_message_to">Στείλε μήνυμα στον %s</string>
     <string name="complete_profile_setup">Ολοκλήρωση προφίλ</string>
-    <string name="enter_messenger_link">Συμπληρώστε το messenger link σας!</string>
-    <string name="complete_profile_warning">Πρέπει να ολοκληρώσετε το προφίλ σας πρώτα !</string>
+    <string name="enter_messenger_link">Συμπληρώστε το όνομα χρήστη σας στο Messenger.</string>
+    <string name="complete_profile_warning">Πρέπει πρώτα να ολοκληρώσετε το προφίλ!</string>
     <string name="error_msg">Σφάλμα</string>
-    <string name="authentication_success">Επιτυχής αυθεντικοποίηση</string>
+    <string name="authentication_success">Επιτυχής Επιβεβαίωση</string>
     <string name="msg_continue">Συνέχεια</string>
     <string name="placeholder_car_make_model" translatable="false">Rolls-Royce Phantom</string>
-    <string name="title_searches">Κρατήσεις</string>
-    <string name="title_offers">Προσφορές</string>
+    <string name="bookings">Κρατήσεις</string>
+    <string name="offers">Προσφορές</string>
     <string name="delete_trip_success">Επιτυχής διαγραφή ταξιδιού</string>
-    <string name="leave_trip_success">Επιτυχής αποχώρηση απο το ταξίδι</string>
+    <string name="leave_trip_success">Επιτυχής Ακύρωση Κράτησης</string>
     <string name="messenger_url" translatable="false">https://m.me/</string>
-    <string name="prompt_cancel_offer">Απόρριψη της καταχώρησης προσφοράς;</string>
+    <string name="prompt_cancel_offer">Ακύρωση καταχώρησης προσφοράς ταξιδιού;</string>
     <string name="seat">Θέση</string>
     <string name="seats">Θέσεις</string>
     <string name="pet_companionship">Συνοδεία Κατοικιδίου</string>
-    <string name="rating_submission_success">Η αξιολόγηση καταχωρήθηκε</string>
+    <string name="rating_submission_success">Η αξιολόγηση καταχωρήθηκε επιτυχώς.</string>
     <string name="your_rating_is">Η αξιολόγηση σας είναι:</string>
     <string name="choose_date_range_for_search">Επιλέξτε εύρος ημερομηνίας για αναζήτηση</string>
     <string name="date_range">Εύρος ημ/νίας</string>
@@ -160,46 +151,43 @@
     <string name="per_person">ανά άτομο</string>
     <string name="most_relevant">Πιο σχετικά</string>
     <string name="price_title">Τιμή</string>
-    <string name="rating_title">Αξιολόγηση</string>
     <string name="enter_destination">Επιλέξτε τον προορισμό σας</string>
     <string name="enter_starting_point">Επιλέξτε την αφετηρία σας</string>
-    <string name="city_athens">Αθήνα</string>
-    <string name="city_ksanthi">Ξάνθη</string>
-    <string name="city_serres">Σέρρες</string>
-    <string name="city_aleksandroupoli">Αλεξανδρούπολη</string>
-    <string name="city_thessaloniki">Θεσσαλονίκη</string>
-    <string name="city_ioannina">Ιωάννινα</string>
-    <string name="city_patra">Πάτρα</string>
-    <string name="city_larisa">Λάρισα</string>
+    <string name="placeholder_city_athens">Αθήνα</string>
+    <string name="placeholder_city_ksanthi">Ξάνθη</string>
+    <string name="placeholder_city_serres">Σέρρες</string>
+    <string name="placeholder_city_aleksandroupoli">Αλεξανδρούπολη</string>
+    <string name="placeholder_city_thessaloniki">Θεσσαλονίκη</string>
+    <string name="placeholder_city_ioannina">Ιωάννινα</string>
+    <string name="placeholder_city_patra">Πάτρα</string>
+    <string name="placeholder_city_larisa">Λάρισα</string>
     <string name="title_sort_by">Ταξινόμιση με βάση</string>
-    <string name="youre_trip_driver">Είσαι ο οδηγός του ταξιδιού</string>
+    <string name="youre_trip_driver">Αυτή είναι η προσφορά σας</string>
     <string name="delete_trip_question">Θελείς να διαγράψεις το ταξίδι;</string>
-    <string name="leave_trip_question">Θέλεις να αποχωρήσεις απο το ταξίδι;</string>
+    <string name="leave_trip_question">Θέλεις να ακυρώσεις τη κράτηση σου απο το ταξίδι;</string>
     <string name="trip_status_active">Ενεργό</string>
     <string name="trip_status_in_progress">Σε εξέλιξη</string>
     <string name="trip_status_complete">Ολοκληρωμένο</string>
-    <string name="offers_history">Ιστορικό προσφορών</string>
-    <string name="searches_history">Ιστορικό κρατήσεων</string>
+    <string name="my_offers">Ιστορικό προσφορών</string>
+    <string name="my_bookings">Ιστορικό κρατήσεων</string>
     <string name="warning">Προσοχή</string>
     <string name="select_application">Επιλέξτε μια εφαρμογή</string>
     <string name="update">Ενημέρωση</string>
     <string name="remove_profile_photo">Αφαίρεση φωτογραφίας</string>
     <string name="upload_new_photo">Ανέβασμα νέας φωτογραφίας</string>
-    <string name="ratings_count">αξιολόγησεις</string>
+    <string name="total_ratings">αξιολόγησεις</string>
     <string name="complete_profile">Ολοκλήρωση προφίλ</string>
     <string name="notifications_count_placeholder" translatable="false">10</string>
-    <string name="option_stay">Παραμονή</string>
-    <string name="option_cancel">Απόρριψη</string>
-    <string name="vehicle_add">Προσθήκη οχήματος</string>
+    <string name="add_vehicle">Προσθήκη Οχήματος</string>
     <string name="submit">Καταχώρηση</string>
     <string name="close_prompt">Κλείσιμο</string>
     <string name="how_was_your_trip">Πως ήταν το ταξίδι σας;</string>
-    <string name="rate_your_experience">Αξιολογήστε την εμπειρία σας</string>
+    <string name="rate_your_experience">Αξιολογήστε την εμπειρία σας σε αυτό το ταξίδι.</string>
     <string name="rate_user_placeholder" translatable="false">Tyler Joseph</string>
     <string name="filters">Φίλτρα</string>
     <string name="date">Ημερομηνία</string>
     <string name="seat_availability">Ελεύθερες Θέσεις</string>
-    <string name="whatever">Ότιδήποτε</string>
+    <string name="anything">Ότιδήποτε</string>
     <string name="price_range">Εύρος τιμής</string>
     <string name="show_all">Εμφάνιση όλων</string>
     <string name="starting_point_range">Εύρος αφετηρίας</string>
@@ -208,38 +196,36 @@
     <string name="alternative_suggestions">Εναλλακτικές προτάσεις</string>
     <string name="your_location">Η τοποθεσία σας</string>
     <string name="select_destination">Επιλογή προορισμού…</string>
-    <string name="select_location">Επιλογή τοποθεσίας…</string>
+    <string name="select_location">Αναζήτηση τοποθεσίας…</string>
     <string name="application_name" translatable="false">fellow.</string>
-    <string name="space_availability">Κατάσταση αποσκεύων</string>
-    <string name="luggage_availability_none">Καθόλου</string>
-    <string name="luggage_availability_limited">Περιορισμένη</string>
-    <string name="luggage_availability_big">Μεγάλη</string>
+    <string name="baggage_allowance">Χώρος Αποσκεύων</string>
+    <string name="availability_none">Καθόλου</string>
+    <string name="availability_limited">Περιορισμένη</string>
+    <string name="availability_great">Μεγάλη</string>
     <string name="car_color_placeholder">Κόκκινο</string>
     <string name="number_plate_placeholder">ΑΒΔ-1239</string>
     <string name="select_vehicle">Επιλογή οχήματος</string>
-    <string name="add_vehicle">Προσθήκη αυτοκινήτου</string>
-    <string name="choose_vehicle">Επέλεξε αυτοκίνητο</string>
     <string name="what_is_your_name">Πώς ονομάζεσαι;</string>
     <string name="it_helps_us_a_lot">Μας βοηθά για την καλύτερη εξυπηρέτησή σας</string>
-    <string name="personal_info">Προσωπικές πληροφορίες</string>
+    <string name="personal_info">Προσωπικές Πληροφορίες</string>
     <string name="edit_profile_photo">Επεξεργασία εικόνας προφίλ</string>
     <string name="vehicle">Όχημα</string>
     <string name="choose_vehicle_for_trip">Επιλέξτε αμάξι για το ταξίδι σας</string>
     <string name="enter_seat_availability">Επέλεξε τον αριθμό των ελεύθερων θέσεων που θέλετε να μοιραστείτε</string>
     <string name="pets">Κατοικίδια</string>
-    <string name="are_pets_allowed_or_not">Καθόρισε αν το ταξιδι δέχεται την παρουσία κατικοιδίων</string>
-    <string name="luggage">Αποσκεύες</string>
-    <string name="enter_luggage_availability">Καθόρισε την κατασταση τον αποσκευων για το ταξιδι </string>
+    <string name="are_pets_allowed_or_not">Επιτρέπεται η παρουσία κατοικιδίων σε αυτό το ταξίδι;</string>
+    <string name="baggage">Αποσκεύες</string>
+    <string name="enter_baggage_availability">Καθόρισε την κατάσταση των αποσκευών</string>
     <string name="specify">Καθορίστε</string>
     <string name="password">Κωδικός Πρόσβασης</string>
     <string name="notifications">Ειδοποιήσεις</string>
     <string name="my_vehicles">Τα οχήματά μου</string>
-    <string name="write_a_review">Γράψε μία κριτική</string>
+    <string name="leave_a_review">Γράψε μία κριτική</string>
     <string name="messenger" translatable="false">Messenger</string>
     <string name="terms_of_use">Όροι χρήσης</string>
     <string name="data_privacy_and_security">Πολιτική Προστασίας Προσωπικών Δεδομένων</string>
-    <string name="logout">Αποσύνδεση</string>
-    <string name="rsvp_trip">Κράτηση θέσης</string>
+    <string name="sign_out">Αποσύνδεση</string>
+    <string name="booking_details">Λεπτομέρειες Κράτησης</string>
     <string name="from">Από</string>
     <string name="to">Πρός</string>
     <string name="trip_time_placeholder" translatable="false">07:00 AM</string>
@@ -248,13 +234,12 @@
     <string name="will_you_bring_a_pet">Θα έχεις μαζί σου κατοικίδιο;</string>
     <string name="choose">Επιλέξτε</string>
     <string name="price_placeholder" translatable="false">10</string>
-    <string name="rsvp">Κράτηση</string>
-    <string name="vehicle_details">Λεπτομέριες οχήματος</string>
+    <string name="book_a_seat">Κάντε κράτηση</string>
+    <string name="vehicle_details">Λεπτομέρειες Οχήματος</string>
     <string name="delete">Διαγραφή</string>
-    <string name="change_password">Αλλαγή κωδικού πρόσβασης</string>
-    <string name="change_password_description">Δημιουργήστε ένα νέο κωδικό πρόσβασης</string>
+    <string name="change_password_description">Αλλαγή κωδικού πρόσβασης.</string>
     <string name="complete">Ολοκλήρωση</string>
-    <string name="email_will_be_sent">Θα σας αποστείλουμαι ένα email επιβεβαίωσης</string>
+    <string name="email_will_be_sent">Ένας σύνδεσμος επιβεβαίωσης θα σταλεί στο email σας ώστε να ενεργοποιήσετε τον λογαριασμός σας.</string>
     <string name="password_recovery">Ανάκτηση κωδικού πρόσβασης</string>
     <string name="enter_your_email">Εισάγεται το email σας</string>
     <string name="we_will_send_a_6_digit_verification_code">Θα σας αποστείλουμαι ένα email με τον 6-ψήφιο κωδικό</string>
@@ -265,36 +250,36 @@
     <string name="you_can_request_code_resend">Μπορείτε να απαιτήσετε επαναποστολή κωδικού.</string>
     <string name="find_co_travellers_in_an_instant">Βρες συνταξιδιώτες\n στο λεπτό</string>
     <string name="search_for_a_trip">Αναζητήστε ένα ταξίδι</string>
-    <string name="find_the_best_co_travelers_in_no_time">Βρείτε τους ιδανικούς συνταξιδιώτες πολυ γρηγορα</string>
-    <string name="make_a_trip_offer">Προσφέρετε ένα ταξίδι</string>
+    <string name="search_for_a_trip_description">Αναζήτησε έναν προορισμό και κλείσε το επόμενό σου ταξίδι.</string>
+    <string name="offer_your_next_trip">Προσφέρετε ένα ταξίδι</string>
     <string name="popular_trips">Δημοφιλή Ταξίδια</string>
-    <string name="choose_a_popular_trip">Επέλεξε μία από τις πιο δημοφιλής διαδρομές</string>
+    <string name="choose_a_popular_trip">Αναζήτησε το επόμενό σου ταξίδι επιλέγοντας μία από τις πιο δημοφιλής διαδρομές.</string>
     <string name="popular_trip_thess_athens">Θεσσαλονίκη - Αθήνα</string>
     <string name="popular_trip_ioannina_athens">Ιωάννινα - Αθήνα</string>
     <string name="popular_trip_ioannina_patra">Ιωάννινα - Πάτρα</string>
     <string name="popular_trip_kavala_thess">Καβάλα - Θεσσαλονίκη</string>
     <string name="popular_trip_larisa_thess">Λάρισα - Θεσσαλονίκη</string>
-    <string name="help_guides">Οδηγοί βοηθείας</string>
-    <string name="how_does_fellow_work">Πώς λειτουργεί το fellow;</string>
-    <string name="what_can_you_do_with_fellow">Τι μπορείς να κάνεις στο fellow;</string>
-    <string name="search_and_rsvp_a_trip">Αναζήτηση και κράτηση θέσης</string>
-    <string name="take_a_look_at_help_guide">Αν δεν μπορειτε να βρείτε τον σύνδεσμο του λογαριασμού σας στο messenger, δείτε τον οδηγό βοηθείας.</string>
+    <string name="help_guides">Οδηγός Βοήθειας</string>
+    <string name="how_does_fellow_work">Πώς λειτουργεί το <b>fellow.</b>;</string>
+    <string name="what_can_you_do_with_fellow">Τι μπορείς να κάνεις στο <b>fellow.</b>;</string>
+    <string name="search_and_rsvp_a_trip">Αναζήτηση και κράτηση θέσης.</string>
+    <string name="take_a_look_at_help_guide">Ρίξε μια ματιά στον Οδηγό Βοήθειας εαν χρειαστείς υποστήριξη με τον σύνδεσμο του λογαριασμού σου στο Messenger.</string>
     <string name="messenger_account">Λογαριασμός Messenger</string>
     <string name="messenger_placeholder" translatable="false">m.me/</string>
     <string name="messenger_username_example" translatable="false">example</string>
     <string name="trips">Ταξίδια</string>
     <string name="sign_in">Σύνδεση</string>
-    <string name="did_you_forgot_password">Ξέχασα τον κωδικό πρόσβασης</string>
-    <string name="agree_with_fellow_tos"> Με τη δημιουργία λογαριασμού, αποδέχεστε την &lt;b&gt;Πολιτική Απορρήτου&lt;/b> μας</string>
+    <string name="did_you_forgot_password">Ξέχασες τον κωδικό πρόσβασης;</string>
+    <string name="agree_with_fellow_tos">" Με τη δημιουργία λογαριασμού, αποδέχεστε την &lt;b&gt;Πολιτική Απορρήτου&lt;/b>"</string>
     <string name="welcome_to">Καλώς όρισες στο</string>
     <string name="sign_up">Εγγραφή</string>
     <string name="leave_a_message_for_co_travellers">Γράψε ένα μήνυμα στους συνταξιδιώτες σου</string>
     <string name="message_place_holder">Μήνυμα (προαιρετικό)</string>
-    <string name="write_something">Γράψε κάτι ...</string>
-    <string name="messenger_help_guide">Οδηγός βοήθειας Messenger</string>
+    <string name="write_something">Γράψε κάτι …</string>
+    <string name="messenger_help_guide">Οδηγός Βοήθειας Messenger</string>
     <string name="messenger_description">Το messenger είναι το μέσο με το οποίο θα μπορέσεις να λυσεις και να εκφρασεις τυχον αποριες σου.</string>
     <string name="messenger_step_1">Ανοίξτε την εφαργμογή του messenger</string>
-    <string name="messenger_step_1_description">Ανοίξτε την εφαργμογή του messenger</string>
+    <string name="messenger_step_1_description">Από την αρχική σελίδα του κινητού σου, άνοιξε την εφαρμογή Messenger.</string>
     <string name="messenger_step2">Πατήστε στις ρυθμίσεις</string>
     <string name="messenger_step2_desc">Ανοίξτε την εφαργμογή του messenger</string>
     <string name="messenger_step3">Επιλέξτε το “Username”</string>
@@ -314,8 +299,8 @@
     <string name="price_calc_placeholder" translatable="false">4 x 5,00 €</string>
     <string name="price_total_placeholder" translatable="false">0 €</string>
     <string name="no_description_available">Δεν υπάρχει κάποια σχετική περιγραφή.</string>
-    <string name="main_vehicle">Κύριο όχημα</string>
-    <string name="last_review">Τελευταία αξιολόγηση</string>
+    <string name="main_vehicle">Κύριο Όχημα</string>
+    <string name="latest_rating">Τελευταία Αξιολόγηση</string>
     <string name="all_ratings">Όλες οι αξιολογήσεις</string>
     <string name="about_me">Σχετικά με εμένα</string>
     <string name="enter_new_password">Δημιουργήστε ένα νέο κωδικό πρόσβασης</string>
@@ -328,75 +313,70 @@
     <string name="verify_your_email">Επιβεβαιώστε το email σας</string>
     <string name="warning_email_spam">Προσοχή! Το email επιβεβαίωσης μπορεί να μεταφερθεί αυτόματα στην ανεπιθύμητη αλληλογραφία</string>
     <string name="we_have_sent_you_an_email">Σας έχουμε αποστείλει ένα email επιβεβαίωσης στο example@email.com</string>
-    <string name="success_rsvp">Επιτυχής επιλογή</string>
+    <string name="success_rsvp">Η κράτηση σας ήταν επιτυχής</string>
     <string name="all_passengers">Όλοι οι επιβάτες</string>
-    <string name="youre_member_of_trip">Είσαι μέλος του ταξιδιού</string>
-    <string name="view_your_booking">Δες την κρατησή σου</string>
     <string name="vehicle_management">Διαχείριση οχημάτων</string>
-    <string name="add">Προσθήκη</string>
-    <string name="reviews">Αξιολόγησεις</string>
-    <string name="review_count_placeholder">3 αξιολόγησεις</string>
-    <string name="more_recent">Πιο πρόσφατο</string>
+    <string name="ratings">Αξιολόγησεις</string>
+    <string name="placeholder_ratings_count">3 αξιολόγησεις</string>
+    <string name="most_recent">Πιο πρόσφατο</string>
     <string name="home">Αρχική</string>
     <string name="profile">Προφίλ</string>
     <string name="profile_photo">Φωτογραφία προφίλ</string>
-    <string name="date_placeholder">22 Φεβ. 2020</string>
-    <string name="time_placeholder">20:30</string>
+    <string name="placeholder_date">22 Φεβ. 2020</string>
+    <string name="placeholder_time">20:30</string>
     <string name="clear">Καθαρισμός</string>
-    <string name="availability">Χωρητικότητα</string>
-    <string name="review_title">Αξιολόγηση</string>
+    <string name="rating">Αξιολόγηση</string>
     <string name="time">Ώρα</string>
     <string name="textview_placeholder">TextView</string>
-    <string name="user_deleted_trip">Ο χρήστης Όνομα διέγραψε ένα ταξίδι στο οποίο είστε μέλος</string>
+    <string name="placeholder_user_deleted_trip">Ο χρήστης Όνομα διέγραψε ένα ταξίδι στο οποίο είστε μέλος</string>
     <string name="trip_athens_kavala">Αθήνα - Καβάλα</string>
-    <string name="minutes_ago">πριν από 3 λεπτά</string>
-    <string name="name">Όνομα</string>
-    <string name="number_placeholder">200</string>
-    <string name="passenger_availability_placeholder">3/4</string>
-    <string name="small">Μικρή</string>
-    <string name="no_pet">Όχι Κατοικίδια</string>
+    <string name="placeholder_minutes_ago">πριν από 3 λεπτά</string>
+    <string name="first_name">Όνομα</string>
+    <string name="number_placeholder" translatable="false">200</string>
+    <string name="passenger_availability_placeholder" translatable="false">3/4</string>
     <string name="settings">Ρυθμίσεις</string>
     <string name="paste">Επικόλληση</string>
-    <string name="start_your_trip">Ξεκινήστε το ταξίδι σας</string>
+    <string name="ready_for_your_next_trip">Έτοιμος για το επόμενο σου ταξίδι;</string>
     <string name="sign_in_or_sign_up">Συνδεθείτε ή δημιουργήστε ένα νέο λογαριασμό</string>
     <string name="no_notifications">Δεν έχετε κάποια ειδοποίηση</string>
     <string name="all_activities_show_up_here">Όλες οι δραστηριότητες σας θα εμφανίζονται εδώ</string>
-    <string name="zero_price_placeholder">0.00</string>
+    <string name="zero_price_placeholder" translatable="false">0.00</string>
     <string name="price_calc_per_person" translatable="false">4 x 5,00 €</string>
     <string name="zero_euros" translatable="false">0 €</string>
-    <string name="add_a_vehicle">Προσθέστε ένα όχημα</string>
-    <string name="no_ratings_description">Φαίνεται ότι δεν έχετε κάποια αξιολόγηση</string>
+    <string name="no_ratings">Δεν υπάρχουν αξιολογήσεις</string>
+    <string name="no_ratings_description">Φαίνεται ότι δεν υπάρχει κάποια αξιολόγηση</string>
     <string name="no_passengers">Δεν υπάρχουν επιβάτες</string>
-    <string name="be_the_first_to_book">Γίνε εσύ ο πρώτος επιβάτης αυτού του ταξιδιού</string>
+    <string name="no_passengers_description">Γίνε εσύ ο πρώτος επιβάτης αυτού του ταξιδιού.\nΚάνε κράτηση.</string>
     <string name="no_trips">Δεν υπάρχουν ταξίδια</string>
     <string name="you_can_change_filters">Μην ξεχνάς οτι μπορείς να διαμορφωσεις τα φίλτρα και να βρείς αυτό που ψάχνεις</string>
     <string name="no_bookings">Δεν υπάρχουν κρατήσεις</string>
     <string name="looks_like_no_active_trips">Φαίνεται ότι δεν έχετε κάποιο ενεργό ταξίδι. Βρείτε καινούρια ταξίδια εδώ</string>
     <string name="search">Αναζήτηση</string>
-    <string name="you_have_booked">Είσαι μέλος του ταξιδιού</string>
-    <string name="see_your_booking">Δες την κρατησή σου</string>
+    <string name="you_have_booked_this_trip">Έχετε κάνει κράτηση σε αυτό το ταξίδι</string>
     <string name="you_dont_have_trips">Δεν έχετε ταξίδια στο ιστορικό σας</string>
     <string name="you_dont_have_trips_history">Φαίνεται ότι δεν έχετε ακόμα κάποια ταξίδια στο ιστορικό σας. Εδώ θα φαίνονται τα ταξίδια σας ως αρχειοθετημένα</string>
     <string name="you_dont_have_offers">Δεν έχετε προσφορές ταξιδιών</string>
     <string name="you_dont_have_offers_desc">Φαίνεται ότι δεν έχετε μοιράσει κάποια διαδρομή σας πρόσφατα. Προσφέρετε νέες διαδρομές εδώ</string>
-    <string name="offer">Προσφορά</string>
-    <string name="you_dont_have_vehicle">Δεν έχετε κάποιο όχημα</string>
-    <string name="you_dont_have_vehicle_desc">Φαίνεται ότι δεν έχετε προσθέσει κάποιο όχημα. Κάνετε μία προσθήκη για να μπορείτε να προσφέρετε διαδρομές</string>
-    <string name="no_ratings">Δεν υπάρχουν αξιολογήσεις</string>
-    <string name="no_ratings_desc">Φαίνεται ότι δεν έχετε κάποια αξιολόγηση</string>
-    <string name="check_connection_for_image_upload">Ελέγξτε την σύνδεση του δικτύου σας για το ανεβάσμα νέας φωτογραφίας</string>
+    <string name="offer_a_trip">Προσφορά</string>
+    <string name="no_vehicles">Δεν έχετε κάποιο όχημα</string>
+    <string name="no_vehicles_description">Φαίνεται ότι δεν έχετε προσθέσει κάποιο όχημα. Κάνετε μία προσθήκη για να μπορείτε να προσφέρετε διαδρομές</string>
+
     <string name="TOS_URL" translatable="false">https://fellowtraveller.gr/tos/</string>
     <string name="PRIVACY_POLICY_URL" translatable="false">https://fellowtraveller.gr/tos/</string>
-    <string name="availability_none">Καθόλου</string>
-    <string name="offerings">Προσφορές</string>
-    <string name="bookings">Κρατήσεις</string>
-    <string name="kritikes">Κριτικές</string>
-    <string name="space">Χωρητικότητα</string>
-    <string name="lastname">Επίθετο</string>
+    <string name="last_name">Επίθετο</string>
     <string name="email" translatable="false">Email</string>
     <string name="current_password">Τρέχων κωδικός</string>
     <string name="new_password">Νέος κωδικός πρόσβασης</string>
     <string name="repeat_password">Επανάληψη κωδικού πρόσβασης</string>
     <string name="zero_placeholder" translatable="false">0</string>
+    <string name="placeholder_from">π.χ. Αθήνα</string>
+    <string name="placeholder_to">π.χ. Θεσσαλονίκη</string>
+    <string name="history">Ιστορικό</string>
+    <string name="offer_your_next_trip_description">Μοίρασε το επόμενο σου ταξίδι και βρες συνταξιδιώτες στο λεπτό.</string>
+    <string name="confirm_booking">Επικύρωση Κράτησης</string>
+    <string name="placeholder_vehicle_brand">π.χ. Tesla</string>
+    <string name="placeholder_vehicle_model">π.χ. Model 3</string>
+    <string name="placeholder_vehicle_number_plate">π.χ. ΧΥΖ-1234</string>
+    <string name="placeholder_vehicle_color">π.χ. Κόκκινο</string>
 
 </resources>

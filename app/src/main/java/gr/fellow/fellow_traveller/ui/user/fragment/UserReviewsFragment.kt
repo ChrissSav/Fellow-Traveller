@@ -29,7 +29,7 @@ class UserReviewsFragment : BaseFragment<FragmentUserReviewsBinding>() {
             binding.recyclerView.adapter?.notifyDataSetChanged()
             binding.swipeRefreshLayout.isRefreshing = false
 
-            binding.numRate.text = "${it.size} ${getString(R.string.ratings_count)}"
+            binding.numRate.text = "${it.size} ${getString(R.string.total_ratings)}"
         })
     }
 

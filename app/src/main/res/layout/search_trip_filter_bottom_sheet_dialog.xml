@@ -80,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/filters_view_margin_top_second"
-                android:text="@string/availability"
+                android:text="@string/baggage_allowance"
                 app:layout_constraintStart_toStartOf="@+id/textView7"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -112,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/button_number_layout_height"
                 android:gravity="center|end"
-                android:hint="@string/whatever"
+                android:hint="@string/anything"
                 android:padding="@dimen/calendar_margin_16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView_2"
                 app:layout_constraintEnd_toEndOf="@+id/seats_pick_button"
@@ -124,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/button_number_layout_height"
                 android:gravity="center|end"
-                android:hint="@string/whatever"
+                android:hint="@string/anything"
                 android:padding="@dimen/calendar_margin_16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView10"
                 app:layout_constraintEnd_toEndOf="@+id/bags_pick_button"

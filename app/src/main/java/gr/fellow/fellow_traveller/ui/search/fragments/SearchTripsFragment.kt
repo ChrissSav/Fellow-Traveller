@@ -244,7 +244,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
             }
             SortAnswerType.Rate -> {
                 createToast("Αξιολόγηση")
-                binding.sortButton.text = getString(R.string.rating_title)
+                binding.sortButton.text = getString(R.string.rating)
                 viewModel.sortByRate()
                 //sortOption = SortAnswerType.Rate
             }
