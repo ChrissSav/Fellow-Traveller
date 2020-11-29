@@ -47,12 +47,7 @@ class OverviewFragment : BaseFragment<FragmentOverviewBinding>(), View.OnClickLi
             car.text = viewModel.car.value?.fullInfo
             userImage.loadImageFromUrl(viewModel.userInfo.value?.picture)
             username.text = viewModel.userInfo.value?.fullName
-            message.text = if (viewModel.message.value.toString().isNotEmpty())
-                viewModel.message.value.toString()
-            else resources.getString(R.string.no_driver_message)
-
-
-
+            message.setText(viewModel.message.value)
 
             ImageButtonNext.setOnClickListener {
                 viewModel.registerTrip()
@@ -67,7 +62,7 @@ class OverviewFragment : BaseFragment<FragmentOverviewBinding>(), View.OnClickLi
             bags.setOnClickListener(this@OverviewFragment)
             seats.setOnClickListener(this@OverviewFragment)
             pet.setOnClickListener(this@OverviewFragment)
-            car.setOnClickListener(this@OverviewFragment)
+            constraintLayoutCar.setOnClickListener(this@OverviewFragment)
             message.setOnClickListener(this@OverviewFragment)
 
         }

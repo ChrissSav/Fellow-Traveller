@@ -106,7 +106,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
                 bags.text = getString(trip.bags.textInt)
                 pet.text = if (trip.hasPet) resources.getString(R.string.yes) else resources.getString(R.string.no)
                 car.text = trip.car.fullInfo
-                message.text = if (trip.msg.isNullOrEmpty()) resources.getString(R.string.no_driver_message) else trip.msg
+                message.setText(trip.msg)
 
 
                 //Delete the "ς" or "s" when we display the name of the creator in the messenger button
