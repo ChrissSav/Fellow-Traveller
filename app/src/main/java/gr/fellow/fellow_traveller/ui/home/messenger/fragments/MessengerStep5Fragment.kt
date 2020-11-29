@@ -3,6 +3,7 @@ package gr.fellow.fellow_traveller.ui.home.messenger.fragments
 import android.annotation.SuppressLint
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentMessengerStep5Binding
@@ -35,10 +36,13 @@ class MessengerStep5Fragment : BaseFragment<FragmentMessengerStep5Binding>() {
 
                 if (!isEditing) {
                     isEditing = true
+
                     val sub = editable.toString().substringAfterLast(getString(R.string.messenger_url))
-                    if (sub.isNotEmpty()) {
+                    if (sub.isNotEmpty() && sub != editable.toString()) {
                         binding.messengerLink.setText(sub)
-                        binding.done.backgroundTintList = resources.getColorStateList(R.color.black, null)
+                        binding.done.visibility = View.VISIBLE
+                    } else {
+                        binding.done.visibility = View.GONE
                     }
                     isEditing = false
                 }
@@ -47,9 +51,7 @@ class MessengerStep5Fragment : BaseFragment<FragmentMessengerStep5Binding>() {
         })
 
         binding.done.setOnClickListener {
-            if (binding.done.backgroundTintList == resources.getColorStateList(R.color.black, null)) {
-                (activity as MessengerLinkActivity).sendBackMessengerLink(binding.messengerLink.text.toString())
-            }
+            (activity as MessengerLinkActivity).sendBackMessengerLink(binding.messengerLink.text.toString())
         }
 
     }
