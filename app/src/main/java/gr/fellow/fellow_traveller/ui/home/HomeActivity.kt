@@ -24,6 +24,8 @@ import gr.fellow.fellow_traveller.data.base.BaseActivityViewModel
 import gr.fellow.fellow_traveller.databinding.ActivityHomeBinding
 import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.main.MainActivity
+import java.util.*
+import kotlin.concurrent.schedule
 
 
 @AndroidEntryPoint
@@ -168,7 +170,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
         val networkCallback: NetworkCallback = object : NetworkCallback() {
             override fun onAvailable(network: Network) {
                 Log.i("dfdf", "fkdikgidogdg")
-                postDelay(800) {
+                Timer("SettingUp", false).schedule(1000) {
                     viewModel.loadUserInfo()
                     viewModel.loadCars()
                     viewModel.loadTripsAsCreator()

@@ -66,7 +66,7 @@ interface FellowDataSource {
 
     suspend fun addTripRemote(
         destFrom: String, destTo: String, carId: String,
-        hasPet: Boolean, seats: Int, bags: String, msg: String?, price: Float, timestamp: Long
+        hasPet: Boolean, seats: Int, bags: Int, msg: String?, price: Float, timestamp: Long
     ): TripInvolved
 
     suspend fun searchTrips(query: SearchTripFilter): MutableList<TripSearch>

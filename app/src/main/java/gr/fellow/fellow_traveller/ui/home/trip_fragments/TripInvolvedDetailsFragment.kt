@@ -103,7 +103,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
                 rate.text = trip.creatorUser.rate.toString()
                 price.text = resources.getString(R.string.price, trip.price.toString())
                 seats.text = trip.seatsStatus
-                bags.text = trip.bags
+                bags.text = getString(trip.bags.textInt)
                 pet.text = if (trip.hasPet) resources.getString(R.string.yes) else resources.getString(R.string.no)
                 car.text = trip.car.fullInfo
                 message.text = if (trip.msg.isNullOrEmpty()) resources.getString(R.string.no_driver_message) else trip.msg

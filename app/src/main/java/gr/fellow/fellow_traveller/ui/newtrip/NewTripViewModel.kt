@@ -125,7 +125,7 @@ constructor(
         launch(true) {
             val response = registerTripRemoteUseCase(
                 destinationFrom.value?.placeId.toString(), destinationTo.value?.placeId.toString(), car.value?.id.toString(),
-                pet.value!!, seats.value!!, bags.value!!.value, message.value!!, price.value!!, getTimestamp()
+                pet.value!!, seats.value!!, bags.value!!.code, message.value!!, price.value!!, getTimestamp()
             )
 
             _success.value = response

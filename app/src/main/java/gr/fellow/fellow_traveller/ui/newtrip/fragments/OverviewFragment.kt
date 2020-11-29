@@ -42,7 +42,7 @@ class OverviewFragment : BaseFragment<FragmentOverviewBinding>(), View.OnClickLi
             time.text = getTimeFromTimestamp(viewModel.getTimestamp())
             price.text = getString(R.string.price, viewModel.price.value.toString())
             seats.text = viewModel.seats.value.toString()
-            bags.text = viewModel.bags.value?.value.toString()
+            bags.text = viewModel.bags.value?.textInt?.let { getString(it) }.toString()
             pet.text = if (viewModel.pet.value!!) resources.getString(R.string.yes) else resources.getString(R.string.no)
             car.text = viewModel.car.value?.fullInfo
             userImage.loadImageFromUrl(viewModel.userInfo.value?.picture)
