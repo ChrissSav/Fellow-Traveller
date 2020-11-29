@@ -50,9 +50,9 @@ class NotificationAdapter(
             }
 
             if (item.isRead)
-                binding.seen.visibility = View.INVISIBLE
+                binding.read.visibility = View.INVISIBLE
             else
-                binding.seen.visibility = View.VISIBLE
+                binding.read.visibility = View.VISIBLE
 
 
             binding.time.text = time(item.timestamp)
