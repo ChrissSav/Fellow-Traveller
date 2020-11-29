@@ -297,7 +297,7 @@
     <string name="messenger_step4">Copy Link</string>
     <string name="messenger_step4_desc">After you have selected the <b>Username</b> entry, choose <b>Copy Link</b> to copy your username.</string>
     <string name="messenger_step5">Paste the URL on fellow.</string>
-    <string name="messenger_step5_desc">Open <b>fellow.</b> and paste the copied URL in the Messenger Profile input field and save.</string>
+    <string name="messenger_step5_desc">Open <b>fellow.</b> and paste the copied URL in the Messenger Profile input field and then save.</string>
     <string name="trip_overview">Trip Overview</string>
     <string name="this_is_how_trip_will_look_to_others">This is how your trip will look to others.</string>
 
