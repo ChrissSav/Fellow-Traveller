@@ -11,7 +11,7 @@
 
     <string name="ERROR_FIELDS_REQUIRE">Υπάρχουν κενά πεδία.</string>
 
-    <string name="ERROR_INVALID_EMAIL_FORMAT">Μη έγκυρο e-mail.</string>
+    <string name="ERROR_INVALID_EMAIL_FORMAT">Μη έγκυρο email.</string>
     <string name="ERROR_PASSWORD_COMPLEXITY_INVALID">Μη έγκυρος κωδικός πρόσβασης.</string>
     <string name="ERROR_PASSWORD_DOES_NOT_MEET_COMPLEXITY_REQUIREMENTS">Ο κωδικός δεν πληρεί τους κανόνες πολυπλοκότητας.</string>
     <string name="ERROR_PASSWORD_COMPLEXITY_SHOULD_CONTAIN">Ο κωδικός πρέπει να έχει:</string>
