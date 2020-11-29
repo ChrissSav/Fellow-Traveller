@@ -10,6 +10,7 @@ import gr.fellow.fellow_traveller.databinding.TripInvolvedHistoryItemLayoutBindi
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.ui.extensions.TripInvolvedDiffCallback
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
+import gr.fellow.fellow_traveller.utils.convertTimestamptToFormat
 
 class TripsHistoryAdapter(
     private val drawable: Int = R.drawable.background_stroke_radius_27_green,
@@ -29,7 +30,7 @@ class TripsHistoryAdapter(
             binding.from.text = currentTrip.destFrom.title
             binding.price.text = binding.price.context.getString(R.string.price, currentTrip.price.toString())
             binding.to.text = currentTrip.destTo.title
-            binding.date.text = currentTrip.date
+            binding.date.text = convertTimestamptToFormat(currentTrip.timestamp, "EEE, d MMM yyyy")
             binding.time.text = currentTrip.time
             binding.name.text = currentTrip.creatorUser.fullName
             binding.picture.loadImageFromUrl(currentTrip.creatorUser.picture)

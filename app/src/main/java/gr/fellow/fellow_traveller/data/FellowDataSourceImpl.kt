@@ -87,7 +87,7 @@ class FellowDataSourceImpl(
 
     override suspend fun addTripRemote(
         destFrom: String, destTo: String, carId: String,
-        hasPet: Boolean, seats: Int, bags: String, msg: String?, price: Float, timestamp: Long
+        hasPet: Boolean, seats: Int, bags: Int, msg: String?, price: Float, timestamp: Long
     ): TripInvolved {
         val tripCreateRequest = TripCreateRequest(destFrom, destTo, carId, hasPet, seats, bags, msg, price, timestamp)
         return repository.registerTripRemote(tripCreateRequest).mapTripInvolved()

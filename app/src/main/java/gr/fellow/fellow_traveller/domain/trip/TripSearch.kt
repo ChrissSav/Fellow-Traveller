@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.domain.trip
 
 import android.os.Parcelable
+import gr.fellow.fellow_traveller.domain.BagsStatusType
 import gr.fellow.fellow_traveller.domain.car.CarBase
 import gr.fellow.fellow_traveller.domain.user.Passenger
 import gr.fellow.fellow_traveller.domain.user.UserCreator
@@ -18,7 +19,7 @@ data class TripSearch(
     val carBase: CarBase,
     val hasPet: Boolean,
     val seats: Int,
-    val bags: String,
+    val bags: BagsStatusType,
     val msg: String?,
     val price: Float,
     val timestamp: Long,

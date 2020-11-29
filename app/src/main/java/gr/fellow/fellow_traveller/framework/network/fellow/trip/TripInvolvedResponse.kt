@@ -15,7 +15,7 @@ data class TripInvolvedResponse(
     @SerializedName("pet")
     val hasPet: Boolean,
     val seats: Int,
-    val bags: String,
+    val bags: Int,
     @SerializedName("message")
     val msg: String?,
     @SerializedName("price")

@@ -8,8 +8,9 @@ class RegisterTripRemoteUseCase(
 
     suspend operator fun invoke(
         destFrom: String, destTo: String, carId: String,
-        hasPet: Boolean, seats: Int, bags: String, msg: String?, price: Float, timestamp: Long
+        hasPet: Boolean, seats: Int, bags: Int, msg: String?, price: Float, timestamp: Long
     ) =
+
         dataSource.addTripRemote(destFrom, destTo, carId, hasPet, seats, bags, msg, price, timestamp)
 
 

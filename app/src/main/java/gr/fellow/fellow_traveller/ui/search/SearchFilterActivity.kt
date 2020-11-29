@@ -12,7 +12,7 @@ import gr.fellow.fellow_traveller.domain.PetAnswerType
 import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.SearchTripPetBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.views.PickButtonActionListener
-import java.text.SimpleDateFormat
+import gr.fellow.fellow_traveller.utils.convertTimestamptToFormat
 import java.util.*
 
 
@@ -123,7 +123,7 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
             picker.addOnPositiveButtonClickListener {
                 //"The selected date range it  ${it.first} - ${it.second}"
                 //Convert Long to Date Format
-                date.setText(it.first?.let { it1 -> convertLongToTime(it1) } + " - " + it.second?.let { it1 -> convertLongToTime(it1) })
+                date.setText(it.first?.let { it1 -> convertTimestamptToFormat(it1, "dd MMM") } + " - " + it.second?.let { it1 -> convertTimestamptToFormat(it1, "dd MMM") })
             }
 
             picker.addOnCancelListener { }
@@ -172,11 +172,6 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
         }
     }
 
-    private fun convertLongToTime(time: Long): String {
-        val date = Date(time)
-        val format = SimpleDateFormat("dd MMM")
-        return format.format(date)
-    }
 
     private fun applyChanges() {
         val resultIntent = Intent()

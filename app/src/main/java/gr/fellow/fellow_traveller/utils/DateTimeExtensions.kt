@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.utils
 
+import android.annotation.SuppressLint
 import android.text.format.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -41,4 +42,13 @@ fun getTimeFromTimestamp(timestamp: Long): String {
     val calendar = Calendar.getInstance(Locale.ENGLISH)
     calendar.timeInMillis = timestamp * 1000L
     return DateFormat.format("hh:mm aaa", calendar).toString()
+}
+
+@SuppressLint("SimpleDateFormat")
+fun convertTimestamptToFormat(time: Long, format: String): String {
+    val date = if (time.toString().length == 10)
+        Date(time * 1000L)
+    else
+        Date(time)
+    return SimpleDateFormat(format).format(date)
 }

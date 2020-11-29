@@ -41,7 +41,7 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
             })
 
             bags.observe(viewLifecycleOwner, Observer {
-                binding.bagsPickButton.setText(it.value)
+                binding.bagsPickButton.setText(it.textInt)
             })
 
             pet.observe(viewLifecycleOwner, Observer {
