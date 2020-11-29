@@ -404,5 +404,7 @@
     <string name="placeholder_city_ioannina">Ioannina</string>
     <string name="placeholder_city_patra">Patra</string>
     <string name="placeholder_city_larisa">Larisa</string>
+    <string name="messenger_profile_saved_successfully">Saved Successfully</string>
+    <string name="add">Add</string>
 
 </resources>

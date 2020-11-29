@@ -381,5 +381,7 @@
     <string name="placeholder_vehicle_model">π.χ. Model 3</string>
     <string name="placeholder_vehicle_number_plate">π.χ. ΧΥΖ-1234</string>
     <string name="placeholder_vehicle_color">π.χ. Κόκκινο</string>
+    <string name="messenger_profile_saved_successfully">Επιτυχής Αποθήκευση</string>
+    <string name="add">Προσθήκη</string>
 
 </resources>
