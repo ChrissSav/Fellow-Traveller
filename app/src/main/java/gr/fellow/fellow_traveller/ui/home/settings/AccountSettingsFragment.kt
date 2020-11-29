@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.ui.home.settings
 
 import android.app.Activity.RESULT_OK
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import com.github.florent37.runtimepermission.kotlin.askPermission
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.iceteck.silicompressorr.FileUtils
@@ -203,11 +205,13 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
 //        }
 //    }
 
+    //Upload or Delete Photo
     private fun onImageSelect(value: Boolean) {
         if (value)
-            if (connectivityHelper.checkInternetConnection())
-                onChooseFile()
-            else
+            if (connectivityHelper.checkInternetConnection()) {
+                //Grand permission for gallery and camera
+                askForPermission()
+            } else
                 createToast(getString(R.string.check_connection_for_image_upload))
         else
             if (connectivityHelper.checkInternetConnection())
@@ -217,5 +221,32 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
     }
 
 
+    private fun askForPermission() {
+        askPermission(
+            android.Manifest.permission.CAMERA,
+            android.Manifest.permission.READ_EXTERNAL_STORAGE
+        ) {
+            //open gallery
+            onChooseFile()
+        }.onDeclined { e ->
+            if (e.hasDenied()) {
+                Toast.makeText(activity, "Δεν δώσατε άδεια στην εφαρμογή για το ανέβασμα φωτογραφίας", Toast.LENGTH_LONG).show()
+            }
+            if (e.hasForeverDenied()) {
+
+                AlertDialog.Builder(activity)
+                    .setMessage("Θα πρέπει να ρυθμίσετε τις άδειες της εφαρμογής για το ανέβασμα φωτογραφίας. Θέλετε να συνεχίσετε;")
+                    .setPositiveButton(getString(R.string.yes)) { dialog, which ->
+                        e.goToSettings()
+                        Toast.makeText(activity, "Θα πρέπει να ενεργοποιήσετε τις άδειες τις εφαρμογής", Toast.LENGTH_LONG).show()
+                    } //ask again
+                    .setNegativeButton(getString(R.string.no)) { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    .show()
+
+            }
+        }
+    }
 
 }
