@@ -97,7 +97,7 @@
                 android:layout_marginEnd="8dp"
                 android:ellipsize="middle"
                 android:singleLine="true"
-                android:text="@string/city_athens"
+                android:text="@string/placeholder_city_athens"
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
                 app:layout_constraintStart_toStartOf="@id/from_tv_search"
                 app:layout_constraintTop_toBottomOf="@id/from_tv_search" />
@@ -120,7 +120,7 @@
                 android:layout_marginTop="4dp"
                 android:ellipsize="middle"
                 android:singleLine="true"
-                android:text="@string/city_thessaloniki"
+                android:text="@string/placeholder_city_thessaloniki"
                 app:layout_constraintEnd_toEndOf="@+id/from"
                 app:layout_constraintStart_toStartOf="@+id/from"
                 app:layout_constraintTop_toBottomOf="@+id/to_tv_search" />
@@ -139,7 +139,7 @@
                 style="@style/paragraph_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/date_placeholder"
+                android:text="@string/placeholder_date"
                 app:layout_constraintBaseline_toBaselineOf="@+id/from"
                 app:layout_constraintEnd_toEndOf="@+id/price"
                 app:layout_constraintStart_toStartOf="@+id/date_tv_search" />
@@ -158,7 +158,7 @@
                 style="@style/paragraph_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/time_placeholder"
+                android:text="@string/placeholder_time"
                 app:layout_constraintBaseline_toBaselineOf="@+id/to"
                 app:layout_constraintEnd_toEndOf="@+id/price"
                 app:layout_constraintStart_toStartOf="@id/time_tv_search" />

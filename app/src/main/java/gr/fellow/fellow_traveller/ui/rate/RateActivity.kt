@@ -47,7 +47,7 @@ class RateActivity : BaseActivityViewModel<ActivityRateBinding, RateViewModel>(R
         viewModel.error.observe(this, Observer {
             if (it.internal) {
                 createToast(getString(it.messageId))
-                if (it.messageId == R.string.ERROR_REVIEW_CANT_REGISTER_THE_REVIEW)
+                if (it.messageId == R.string.ERROR_RATING_CANT_REGISTER_THE_RATE)
                     finish()
             } else
                 createAlerter(it.message)

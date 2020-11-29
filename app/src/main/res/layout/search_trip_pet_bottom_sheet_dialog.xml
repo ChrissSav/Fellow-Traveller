@@ -38,7 +38,7 @@
         android:layout_height="50dp"
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center"
-        android:text="@string/whatever"
+        android:text="@string/anything"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/yes" />

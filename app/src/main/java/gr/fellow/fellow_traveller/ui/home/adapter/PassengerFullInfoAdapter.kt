@@ -33,7 +33,7 @@ class PassengerFullInfoAdapter(
                     "${currentPassenger.seats} " + binding.pet.resources.getString(R.string.seat)
                 else
                     "${currentPassenger.seats} " + binding.pet.resources.getString(R.string.seats)
-            binding.pet.text = if (currentPassenger.pet) binding.pet.resources.getString(R.string.with_pet) else binding.pet.resources.getString(R.string.without_pet)
+            binding.pet.text = if (currentPassenger.pet) binding.pet.resources.getString(R.string.with_pets) else binding.pet.resources.getString(R.string.without_pets)
             binding.root.setOnClickListener {
                 listener.invoke(currentPassenger.user)
             }

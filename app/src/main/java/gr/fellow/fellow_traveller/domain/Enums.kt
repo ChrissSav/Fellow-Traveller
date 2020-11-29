@@ -18,7 +18,7 @@ enum class AnswerType {
 
 
 enum class BagsStatusType(val textInt: Int, val code: Int) {
-    NONE(R.string.luggage_availability_none, 0),
-    LIMITED(R.string.luggage_availability_limited, 1),
-    LARGE(R.string.luggage_availability_big, 2)
+    NONE(R.string.availability_none, 0),
+    LIMITED(R.string.availability_limited, 1),
+    LARGE(R.string.availability_great, 2)
 }

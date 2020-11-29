@@ -45,7 +45,7 @@
                         android:layout_height="wrap_content"
                         android:drawablePadding="10dp"
                         android:gravity="center_vertical|center_horizontal"
-                        android:text="@string/searches_history"
+                        android:text="@string/history"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

@@ -104,7 +104,7 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="16dp"
                     android:tag="1"
-                    android:text="@string/city_thessaloniki"
+                    android:text="@string/placeholder_city_thessaloniki"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView15" />
@@ -117,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:tag="1"
-                    android:text="@string/city_athens"
+                    android:text="@string/placeholder_city_athens"
                     app:layout_constraintEnd_toEndOf="@+id/from"
                     app:layout_constraintStart_toStartOf="@+id/from"
                     app:layout_constraintTop_toBottomOf="@+id/textView19" />
@@ -171,14 +171,19 @@
                     app:layout_constraintTop_toTopOf="@+id/day" />
 
 
-                <TextView
+                <EditText
                     android:id="@+id/message"
                     style="@style/paragraph_1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
+                    android:longClickable="false"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:enabled="false"
                     android:tag="5"
-                    android:text="@string/trip_review_placeholder"
+                    android:background="@null"
+                    android:hint="@string/no_driver_message"
                     app:layout_constraintEnd_toEndOf="@+id/rate"
                     app:layout_constraintStart_toStartOf="@+id/user_image"
                     app:layout_constraintTop_toBottomOf="@+id/user_image" />
@@ -262,7 +267,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:tag="3"
-                        app:label_text="@string/availability"
+                        app:label_text="@string/baggage_allowance"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/pet"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -479,7 +484,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
-            android:text="@string/trip_involved_passenger_header"
+            android:text="@string/you_have_booked_this_trip"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -491,7 +496,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
-            android:text="@string/trip_involved_passenger_description_as_passenger"            android:textColor="@color/white"
+            android:text="@string/trip_involved_passenger_description_as_passenger"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label_description"

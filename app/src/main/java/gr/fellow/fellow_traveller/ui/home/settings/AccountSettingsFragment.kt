@@ -208,16 +208,15 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
     //Upload or Delete Photo
     private fun onImageSelect(value: Boolean) {
         if (value)
-            if (connectivityHelper.checkInternetConnection()) {
-                //Grand permission for gallery and camera
+            if (connectivityHelper.checkInternetConnection())
                 askForPermission()
-            } else
-                createToast(getString(R.string.check_connection_for_image_upload))
+            else
+                createToast(getString(R.string.internet_connection_failure))
         else
             if (connectivityHelper.checkInternetConnection())
                 viewModel.updateUserImage(null)
             else
-                createToast(getString(R.string.check_connection_for_image_upload))
+                createToast(getString(R.string.internet_connection_failure))
     }
 
 

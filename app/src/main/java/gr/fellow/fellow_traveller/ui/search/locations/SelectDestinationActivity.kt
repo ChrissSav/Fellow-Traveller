@@ -44,14 +44,14 @@ class SelectDestinationActivity : BaseActivity<ActivitySelectDestinationBinding>
 
     override fun setUpViews() {
         placesListPopular = mutableListOf(
-            PredictionResponse("ChIJ8UNwBh-9oRQR3Y1mdkU1Nic", getString(R.string.city_athens)),
-            PredictionResponse("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", getString(R.string.city_thessaloniki)),
-            PredictionResponse("ChIJZ93-3qLpWxMRwJe54iy9AAQ", getString(R.string.city_ioannina)),
-            PredictionResponse("ChIJLe0kpZk1XhMRoIy54iy9AAQ", getString(R.string.city_patra)),
-            PredictionResponse("ChIJoUddWVyIWBMRMJy54iy9AAQ", getString(R.string.city_larisa)),
-            PredictionResponse("ChIJfdnlaDstrBQR3tAiUqN47vY", getString(R.string.city_ksanthi)),
-            PredictionResponse("ChIJ1eUpZ4txqRQRV-NcWXB83Qk", getString(R.string.city_serres)),
-            PredictionResponse("ChIJ1cgCXJ8cshQR40EeRCv5sLo", getString(R.string.city_aleksandroupoli))
+            PredictionResponse("ChIJ8UNwBh-9oRQR3Y1mdkU1Nic", getString(R.string.placeholder_city_athens)),
+            PredictionResponse("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", getString(R.string.placeholder_city_thessaloniki)),
+            PredictionResponse("ChIJZ93-3qLpWxMRwJe54iy9AAQ", getString(R.string.placeholder_city_ioannina)),
+            PredictionResponse("ChIJLe0kpZk1XhMRoIy54iy9AAQ", getString(R.string.placeholder_city_patra)),
+            PredictionResponse("ChIJoUddWVyIWBMRMJy54iy9AAQ", getString(R.string.placeholder_city_larisa)),
+            PredictionResponse("ChIJfdnlaDstrBQR3tAiUqN47vY", getString(R.string.placeholder_city_ksanthi)),
+            PredictionResponse("ChIJ1eUpZ4txqRQRV-NcWXB83Qk", getString(R.string.placeholder_city_serres)),
+            PredictionResponse("ChIJ1cgCXJ8cshQR40EeRCv5sLo", getString(R.string.placeholder_city_aleksandroupoli))
         )
 
         /*if ("to" == intent.getStringExtra("info"))
