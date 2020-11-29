@@ -31,7 +31,7 @@
             android:id="@+id/imageView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="16dp"
             android:src="@drawable/ic_messenger"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -55,11 +55,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="11dp"
             android:layout_marginBottom="16dp"
-            android:text="@string/messenger_url"
+            android:text="@string/messenger_placeholder"
             android:textColor="@color/dark_gray_new"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView44"
             app:layout_constraintTop_toBottomOf="@+id/textView44" />
+
 
         <EditText
             android:id="@+id/messenger_link"
@@ -68,7 +69,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:background="@null"
-            android:clickable="false"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             android:focusable="false"
             android:hint="@string/messenger_username_example"
             android:inputType="text"
@@ -77,6 +79,7 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/textView45"
             app:layout_constraintEnd_toStartOf="@+id/imageView6"
             app:layout_constraintStart_toEndOf="@+id/textView45" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -114,7 +117,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginBottom="100dp"
         android:background="@drawable/background_stroke_radius_16_grey"
-        android:backgroundTint="@color/dark_gray_new"
+        android:backgroundTint="@color/black"
         android:paddingStart="46dp"
         android:paddingTop="24dp"
         android:paddingEnd="46dp"
