@@ -23,7 +23,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/user_deleted_trip"
+        android:text="@string/placeholder_user_deleted_trip"
         app:layout_constraintEnd_toStartOf="@+id/read"
         app:layout_constraintStart_toEndOf="@+id/picture"
         app:layout_constraintTop_toTopOf="@+id/picture" />
@@ -47,7 +47,7 @@
         style="@style/paragraph_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/minutes_ago"
+        android:text="@string/placeholder_minutes_ago"
         app:layout_constraintBaseline_toBaselineOf="@+id/trip"
         app:layout_constraintEnd_toEndOf="@+id/description" />
 

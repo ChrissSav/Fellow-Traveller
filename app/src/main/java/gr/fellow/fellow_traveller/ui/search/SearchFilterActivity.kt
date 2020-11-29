@@ -141,7 +141,7 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
 
             fromRangeSeekbar.setOnSeekbarChangeListener { value ->
                 if (value.toInt() == 0) {
-                    binding.fromRangeRadiusTv.setText(getString(R.string.range_view_all))
+                    binding.fromRangeRadiusTv.setText(getString(R.string.show_all))
                     searchTripFilter.rangeFrom = null
                 } else {
                     binding.fromRangeRadiusTv.setText(getString(R.string.range_text, value.toString()))
@@ -151,7 +151,7 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
 
             toRangeSeekbar.setOnSeekbarChangeListener { value ->
                 if (value.toInt() == 0) {
-                    binding.toRangeRadiusTv.setText(getString(R.string.range_view_all))
+                    binding.toRangeRadiusTv.setText(getString(R.string.show_all))
                     searchTripFilter.rangeTo = null
                 } else {
                     binding.toRangeRadiusTv.setText(getString(R.string.range_text, value.toString()))
@@ -162,7 +162,7 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
 
             priceRangeSeekbar.setOnSeekbarChangeListener { value ->
                 if (value.toInt() == 0) {
-                    binding.priceTv.setText(getString(R.string.range_view_all))
+                    binding.priceTv.setText(getString(R.string.show_all))
                     searchTripFilter.priceMax = null
                 } else {
                     binding.priceTv.setText(getString(R.string.range_text_price, value.toString()))

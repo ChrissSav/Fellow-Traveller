@@ -13,7 +13,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:text="@string/space_availability"
+        android:text="@string/baggage_allowance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +26,7 @@
         android:layout_marginTop="32dp"
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center"
-        android:text="@string/luggage_availability_none"
+        android:text="@string/availability_none"
         app:layout_constraintEnd_toEndOf="@+id/limited"
         app:layout_constraintStart_toStartOf="@+id/limited"
         app:layout_constraintTop_toBottomOf="@+id/title" />
@@ -38,7 +38,7 @@
         android:layout_height="50dp"
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center"
-        android:text="@string/luggage_availability_limited"
+        android:text="@string/availability_limited"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/none" />
@@ -52,7 +52,7 @@
         android:layout_marginBottom="16dp"
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center"
-        android:text="@string/luggage_availability_big"
+        android:text="@string/availability_great"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

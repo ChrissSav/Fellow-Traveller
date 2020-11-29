@@ -145,7 +145,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center|end"
-                    android:hint="@string/whatever"
+                    android:hint="@string/anything"
                     android:paddingStart="16dp"
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp"

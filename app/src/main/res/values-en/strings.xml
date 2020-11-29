@@ -27,8 +27,8 @@
     <string name="allowed">Allowed</string>
     <string name="not_allowed">Not Allowed</string>
 
-    <string name="with_pet">Pets</string>
-    <string name="without_pet">No pets</string>
+    <string name="with_pets">Pets</string>
+    <string name="without_pets">No pets</string>
 
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -36,7 +36,6 @@
     <!-- Filter Fragment -->
     <string name="range_text">Range %s km</string>
     <string name="range_text_price" formatted="false">Max %s €</string>
-    <string name="range_view_all">Show All</string>
 
     <string name="have_pet">I have a pet</string>
     <string name="have_not_pet">I don\'t have a pet</string>
@@ -69,7 +68,6 @@
 
     <string name="fragment_date_time_header">When will the trip take place?</string>
     <string name="date">Date</string>
-    <string name="select_time">Time</string>
 
     <!--Fragment fragment_base_info -->
 
@@ -91,13 +89,13 @@
     <string name="model">Model</string>
     <string name="plate">Number Plate</string>
     <string name="color">Colour</string>
-    <string name="car_delete_confirmation_message">Are you sure you want to delete vehicle with number plate &lt;b&gt;%s&lt;/b&gt;?</string>
+    <string name="car_delete_confirmation_message">Are you sure you want to delete vehicle with number plate <b>%s</b>?</string>
 
 
     <!--Car -->
 
-    <string name="notification_to_rate">You trip has come to an end.\\nLeave a rating for &lt;b&gt;%s&lt;/b&gt;</string>
-    <string name="notification_delete_trip">User &lt;b&gt;%s&lt;/b&gt; canceled a trip you had booked.</string>
+    <string name="notification_to_rate">You trip with &lt;b&gt;%s&lt;/b&gt; has come to an end. Leave a rating about your experience on this trip, we\'d love to hear it.</string>
+    <string name="notification_delete_trip">User &lt;b&gt;%s&lt;/b&gt; canceled a trip you had previously booked a reservation on.</string>
     <string name="notification_passenger_enter">User &lt;b&gt;%s&lt;/b&gt; booked a reservation on your trip.</string>
     <string name="notification_passenger_exit">User &lt;b&gt;%s&lt;/b&gt; canceled their booking on your trip.</string>
     <string name="ERROR_API_UNREACHABLE">Unable to establish connection with the API.</string>
@@ -131,7 +129,7 @@
     <string name="ERROR_TRIP_USER_ALREADY_PASSENGER">You have already booked this trip.</string>
     <string name="ERROR_TRIP_USER_IS_CREATOR">You are the creator of the trip.</string>
     <string name="ERROR_TRIP_NOT_AVAILABLE_SEATS">No available seats.</string>
-    <string name="ERROR_TRIP_NOT_AVAILABLE_LUGGAGE">Luggage space not available.</string>
+    <string name="ERROR_TRIP_NOT_AVAILABLE_LUGGAGE">Baggage allowance space not available.</string>
     <string name="ERROR_TRIP_CHECK_PET_ACCEPTS">Check if the trip allows for pets.</string>
     <string name="ERROR_TRIP_TIMESTAMP">The departure time should be at least 15 min. ahead of the present.</string>
     <string name="ERROR_TRIP_PICKUP_POINT">The meeting location should be in a 5 km range of the departure point.</string>
@@ -145,18 +143,16 @@
     <string name="ERROR_SELECT_DEST_FROM">Enter a starting point.</string>
     <string name="ERROR_SELECT_DEST_TO">Enter a destination.</string>
     <string name="ERROR_SELECT_PET">Choose whether this trip allows pets.</string>
-    <string name="ERROR_SELECT_SEAT">"Provide the available luggage space. "</string>
+    <string name="ERROR_SELECT_SEAT">"Select the available baggage allowance. "</string>
     <string name="check_field">Check the field.</string>
     <string name="image_upload_success">Photo uploaded successfully.</string>
     <string name="image_upload_failure">Invalid photo.</string>
     <string name="profile_update_success">Saved successfully.</string>
     <string name="internet_connection_failure">Please check your internet connection.</string>
-    <string name="option_yes">Yes</string>
-    <string name="option_no">No</string>
     <string name="driver_no_pets_allowed">We\'re sorry! No pets are allowed on this trip.</string>
     <string name="password_change_success">Password changed successfully.</string>
     <string name="password_missing">Please enter your password.</string>
-    <string name="send_message">Send a message.</string>
+    <string name="send_message">Send a message</string>
     <string name="send_message_to">Send a message to %s</string>
     <string name="complete_profile_setup">Complete your profile.</string>
     <string name="enter_messenger_link">Εnter your Messenger username.</string>
@@ -182,14 +178,7 @@
     <string name="rating">Rating</string>
     <string name="enter_destination">Choose a destination</string>
     <string name="enter_starting_point">Choose a starting point</string>
-    <string name="city_athens">Athens</string>
-    <string name="city_ksanthi">Ksanthi</string>
-    <string name="city_serres">Serres</string>
-    <string name="city_aleksandroupoli">Aleksandroupoli</string>
-    <string name="city_thessaloniki">Thessaloniki</string>
-    <string name="city_ioannina">Ioannina</string>
-    <string name="city_patra">Patra</string>
-    <string name="city_larisa">Larisa</string>
+
     <string name="title_sort_by">Sort By</string>
     <string name="youre_trip_driver">This is your trip offer</string>
     <string name="delete_trip_question">Are you sure you want to delete this trip?</string>
@@ -212,7 +201,7 @@
     <string name="rate_your_experience">Rate your experience on this trip.</string>
     <string name="filters">Filters</string>
     <string name="seat_availability">Available Seats</string>
-    <string name="whatever">Any</string>
+    <string name="anything">Any</string>
     <string name="price_range">Price Range</string>
     <string name="show_all">Show All</string>
     <string name="starting_point_range">Starting Point Range</string>
@@ -222,12 +211,12 @@
     <string name="your_location">Your location</string>
     <string name="select_destination">Select destination…</string>
     <string name="select_location">Search location…</string>
-    <string name="space_availability">Baggage Allowance</string>
-    <string name="luggage_availability_none">None</string>
-    <string name="luggage_availability_limited">Limited</string>
-    <string name="luggage_availability_big">Great</string>
-    <string name="car_color_placeholder">Red</string>
-    <string name="number_plate_placeholder">ABC-1234</string>
+
+    <string name="baggage_allowance">Baggage Allowance</string>
+    <string name="availability_none">None</string>
+    <string name="availability_limited">Limited</string>
+    <string name="availability_great">Great</string>
+
     <string name="select_vehicle">Select vehicle</string>
     <string name="add_vehicle">Add Vehicle</string>
     <string name="what_is_your_name">How should we call you?</string>
@@ -239,8 +228,8 @@
     <string name="enter_seat_availability">Enter seat availability</string>
     <string name="pets">Pets</string>
     <string name="are_pets_allowed_or_not">Are pets allowed on this trip?</string>
-    <string name="luggage">Baggage</string>
-    <string name="enter_luggage_availability">Enter baggage allowance</string>
+    <string name="baggage">Baggage</string>
+    <string name="enter_baggage_availability">Enter baggage allowance</string>
     <string name="specify">Select</string>
     <string name="password">Password</string>
     <string name="notifications">Notifications</string>
@@ -248,14 +237,15 @@
     <string name="leave_a_review">Leave a review</string>
     <string name="terms_of_use">Terms of Use</string>
     <string name="data_privacy_and_security">Data Privacy and Security Policy</string>
-    <string name="logout">Sign Out</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_out">Sign Out</string>
     <string name="booking_details">Booking Details</string>
     <string name="from">From</string>
     <string name="to">To</string>
     <string name="how_many_seats_to_rsvp">Select the number of seats</string>
     <string name="will_you_bring_a_pet">Will you bring a pet?</string>
     <string name="choose">Choose</string>
-    <string name="book_a_seat">Book a seat on this trip</string>
+    <string name="book_a_seat">Book a reservation</string>
     <string name="vehicle_details">Vehicle Details</string>
     <string name="delete">Delete</string>
     <string name="change_password">Change Password</string>
@@ -275,7 +265,7 @@
     <string name="search_for_a_trip_description">Enter a destination and book your next trip.</string>
     <string name="offer_your_next_trip">Offer your next trip</string>
     <string name="popular_trips">Popular Trips</string>
-    <string name="choose_a_popular_trip">Search for your next trip by selecting one of the popular destinations.</string>
+    <string name="choose_a_popular_trip">Find your next trip by selecting one of the popular destinations.</string>
     <string name="popular_trip_thess_athens">Thessaloniki - Athens</string>
     <string name="popular_trip_ioannina_athens">Ioannina - Athens</string>
     <string name="popular_trip_ioannina_patra">Ioannina - Patra</string>
@@ -288,12 +278,12 @@
     <string name="take_a_look_at_help_guide">Check out the Help Guide if you need assistance with your Messenger username.</string>
     <string name="messenger_account">Messenger Profile</string>
     <string name="trips">Trips</string>
-    <string name="sign_in">Sign In</string>
+
     <string name="did_you_forgot_password">Forgot password?</string>
     <string name="agree_with_fellow_tos">By creating an account, you agree to our &lt;b&gt;Privacy Policy&lt;/b></string>
     <string name="welcome_to">Welcome to</string>
     <string name="sign_up">Sign Up</string>
-    <string name="leave_a_message_for_co_travellers">Leave a message for your passengers.</string>
+    <string name="leave_a_message_for_co_travellers">Leave a message to your passengers.</string>
     <string name="message_place_holder">Message (optional)</string>
     <string name="write_something">Write something …</string>
     <string name="messenger_help_guide">Messenger Help Guide</string>
@@ -310,7 +300,7 @@
     <string name="messenger_step5_desc">Open <b>fellow.</b> and paste the copied URL in the Messenger Profile input field and save.</string>
     <string name="trip_overview">Trip Overview</string>
     <string name="this_is_how_trip_will_look_to_others">This is how your trip will look to others.</string>
-    <string name="trip_review_placeholder">Very good trip.</string>
+
     <string name="ensure_account_security">To secure your account.</string>
     <string name="enter_price">Set Price</string>
     <string name="price_goes_per_person">Total price is calculated per person for all the available seats.</string>
@@ -329,37 +319,34 @@
     <string name="verify_your_email">Verify your email</string>
     <string name="warning_email_spam">Warning! The verification email might end up in your spam folder.</string>
     <string name="we_have_sent_you_an_email">We have sent a verification email to user@example.com</string>
-    <string name="success_rsvp">Your booking was successful.</string>
+    <string name="success_rsvp">Your booking was submitted successfully.</string>
     <string name="all_passengers">All Passengers</string>
     <string name="you_have_booked_this_trip">You have booked this trip.</string>
     <string name="vehicle_management">Vehicle Management</string>
     <string name="ratings">Ratings</string>
-    <string name="placeholder_ratings_count">3 ratings</string>
+
     <string name="most_recent">Most Recent</string>
     <string name="home">Home</string>
     <string name="profile">Profile</string>
     <string name="profile_photo">Profile Photo</string>
-    <string name="placeholder_date">Feb. 22 2020</string>
-    <string name="placeholder_time">20:30</string>
+
     <string name="clear">Clear</string>
-    <string name="availability">Luggage Availability</string>
     <string name="time">Time</string>
-    <string name="textview_placeholder">TextView</string>
-    <string name="user_deleted_trip">User EXAMPLE deleted a trip you have booked.</string>
+
+
     <string name="trip_athens_kavala">Athens - Kavala</string>
-    <string name="minutes_ago">3 minutes ago.</string>
+
     <string name="first_name">First Name</string>
-    <string name="small">Small</string>
-    <string name="no_pet">No Pets</string>
+    <string name="last_name">Last Name</string>
+
     <string name="settings">Settings</string>
     <string name="paste">Paste</string>
-    <string name="start_your_trip">Start your trip</string>
-    <string name="sign_in_or_sign_up">Sign In or create a new account</string>
+    <string name="ready_for_your_next_trip">Ready for your next trip?</string>
+    <string name="sign_in_or_sign_up">Sign In or create a new account by Signing Up</string>
     <string name="no_notifications">You don\'t have any notifications.</string>
     <string name="all_activities_show_up_here">All activities will be shown here.</string>
-    <string name="no_ratings_description">Looks like you don\'t have any ratings.</string>
     <string name="no_passengers">No passengers.</string>
-    <string name="be_the_first_to_book">Be the first to book a reservation on this trip.</string>
+    <string name="no_passengers_description">Be the first to book a reservation on this trip.</string>
     <string name="no_trips">We couldn\'t find any trips.</string>
     <string name="you_can_change_filters">You can customize the filters and find what you\'re looking for.</string>
     <string name="no_bookings">No bookings yet.</string>
@@ -369,25 +356,48 @@
     <string name="you_dont_have_offers">No trip offers yet.</string>
     <string name="you_dont_have_offers_desc">Looks like you haven\'t offered any trips yet.\nStart by offering your next trip.</string>
     <string name="offer_a_trip">Offer a Trip</string>
-    <string name="you_dont_have_vehicle">You don\'t have any vehicles.</string>
-    <string name="you_dont_have_vehicle_desc">Looks like you haven\'t added any vehicles. Add a vehicle to create a trip offering</string>
+    <string name="no_vehicles">You don\'t have any vehicles.</string>
+    <string name="no_vehicles_description">Looks like you haven\'t added any vehicles. Add a vehicle to create a trip offering</string>
     <string name="no_ratings">No ratings.</string>
-    <string name="no_ratings_desc">Looks like there are no ratings here.</string>
+    <string name="no_ratings_description">Looks like there are no ratings here.</string>
     <string name="bookings">Bookings</string>
-    <string name="availability_none">None</string>
-    <string name="space">Luggage Space</string>
-    <string name="last_name">Last Name</string>
     <string name="current_password">Current Password</string>
     <string name="new_password">New Password</string>
     <string name="repeat_password">Confirm New Password</string>
-    <string name="EMAIL_PLACEHOLDER" translatable="false">e.g. user@example.com</string>
-    <string name="placeholder_from">e.g. Athens</string>
-    <string name="placeholder_to">e.g. Thessaloniki</string>
     <string name="history">History</string>
     <string name="offer_your_next_trip_description">Share your next trip and find the ideal passengers.</string>
     <string name="confirm_booking">Confirm Booking</string>
+
+
+
+    <!-- Date Time -->
+
+    <!-- Data placeholders -->
+
     <string name="placeholder_vehicle_brand">e.g. Tesla</string>
     <string name="placeholder_vehicle_model">e.g. Model 3</string>
     <string name="placeholder_vehicle_number_plate">e.g. XYZ-1234</string>
     <string name="placeholder_vehicle_color">e.g. Red</string>
+    <string name="EMAIL_PLACEHOLDER">e.g. user@example.com</string>
+    <string name="placeholder_from">e.g. Athens</string>
+    <string name="placeholder_to">e.g. Thessaloniki</string>
+    <string name="car_color_placeholder">Red</string>
+    <string name="number_plate_placeholder">ABC-1234</string>
+    <string name="trip_review_placeholder">Very good trip.</string>
+    <string name="placeholder_ratings_count">3 ratings</string>
+    <string name="placeholder_date">Feb. 22 2020</string>
+    <string name="placeholder_time">20:30</string>
+    <string name="textview_placeholder">TextView</string>
+    <string name="placeholder_user_deleted_trip">User EXAMPLE deleted a trip you have booked.</string>
+    <string name="placeholder_minutes_ago">3 minutes ago.</string>
+
+    <string name="placeholder_city_athens">Athens</string>
+    <string name="placeholder_city_ksanthi">Ksanthi</string>
+    <string name="placeholder_city_serres">Serres</string>
+    <string name="placeholder_city_aleksandroupoli">Aleksandroupoli</string>
+    <string name="placeholder_city_thessaloniki">Thessaloniki</string>
+    <string name="placeholder_city_ioannina">Ioannina</string>
+    <string name="placeholder_city_patra">Patra</string>
+    <string name="placeholder_city_larisa">Larisa</string>
+
 </resources>
