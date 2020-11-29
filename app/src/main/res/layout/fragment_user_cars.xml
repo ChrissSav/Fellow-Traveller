@@ -143,23 +143,30 @@
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
-    <com.google.android.material.button.MaterialButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/new_car_button"
-        style="@style/header_3"
+        android:textAppearance="@style/header_3"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/car_float_action_button_height"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/car_float_action_button_height"
         android:layout_marginEnd="@dimen/car_trip_float_action_button_margin_right"
         android:layout_marginBottom="@dimen/car_trip_float_action_button_margin_bottom"
-        android:background="@drawable/button_background_green_30dp"
-        android:gravity="center|end"
-        android:paddingStart="22dp"
-        android:paddingEnd="20dp"
+        android:padding="4dp"
+        android:elevation="0dp"
         android:text="@string/add"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         app:backgroundTint="@color/green"
+        app:cornerRadius="30dp"
+        android:stateListAnimator="@null"
         app:icon="@drawable/ic_plus_new"
-        app:iconPadding="16dp"
+        app:iconSize="18dp"
+        app:rippleColor="@color/light_orange_New"
+        app:iconTint="@color/white"
+        app:layout_anchorGravity="right|top"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

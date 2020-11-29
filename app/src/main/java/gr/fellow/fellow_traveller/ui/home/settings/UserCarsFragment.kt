@@ -3,10 +3,13 @@ package gr.fellow.fellow_traveller.ui.home.settings
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import android.view.View
+import androidx.annotation.NonNull
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
@@ -60,6 +63,44 @@ class UserCarsFragment : BaseFragment<FragmentUserCarsBinding>() {
             newCarButton.setOnClickListener {
                 startActivityForResult(AddCarActivity::class, 1, null)
             }
+
+            myCarsRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(@NonNull recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    /* if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        newCarButton.shrink()
+
+                        Log.i("makis","extend")
+
+                    }
+
+                    if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
+
+                        Log.i("makis","2trhmrtohitriuhtrihjit")
+
+
+                    }*/
+
+                }
+
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    if (dy < 0) {
+                        // Scrolling up
+                        if (!newCarButton.isExtended)
+                            newCarButton.extend()
+                        Log.i("makis", "Scrolling up")
+
+                    } else if (dy > 10) {
+                        if (newCarButton.isExtended)
+                            newCarButton.shrink()
+                        // Scrolling down
+                        Log.i("makis", " Scrolling down")
+
+                    }
+                }
+            })
+
         }
     }
 
