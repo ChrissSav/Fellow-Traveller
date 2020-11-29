@@ -213,7 +213,7 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
 
             })
 
-            NestedScrollView.setOnScrollChangeListener(androidx.core.widget.NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            NestedScrollView.setOnScrollChangeListener(androidx.core.widget.NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
                 Log.i("makis", "scrollY : $scrollY oldScrollY: $oldScrollY")
 
                 if (scrollY < oldScrollY) {

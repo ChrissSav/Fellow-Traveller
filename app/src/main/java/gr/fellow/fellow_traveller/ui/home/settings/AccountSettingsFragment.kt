@@ -162,7 +162,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
             //TODO possibility for same name if user changed his time or name of image
             //TODO dont upload large images
             val fileReference = mStorageRef!!.child("user-" + viewModel.user.value?.id.toString())
-            fileReference.putFile(imageUri).addOnSuccessListener { taskSnapshot ->
+            fileReference.putFile(imageUri).addOnSuccessListener { _ ->
                 fileReference.downloadUrl.addOnSuccessListener { uri ->
                     newImage = uri.toString()
                     tempImageFile!!.delete()
@@ -184,7 +184,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
                 Toast.makeText(this.context, e.localizedMessage, Toast.LENGTH_SHORT).show()
                 binding.progressBar.visibility = View.GONE
             }
-                .addOnProgressListener { taskSnapshot -> //We get progress from uploading the image file
+                .addOnProgressListener { _ -> //We get progress from uploading the image file
 //                    val progress = 100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount
                     // TODO add progress bar
                     //imageProgressBar.setProgress(progress.toInt())
@@ -235,11 +235,11 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
 
                 AlertDialog.Builder(activity)
                     .setMessage(getString(R.string.account_settings_dialog_message))
-                    .setPositiveButton(getString(R.string.yes)) { dialog, which ->
+                    .setPositiveButton(getString(R.string.yes)) { _, _ ->
                         e.goToSettings()
                         Toast.makeText(activity, getString(R.string.account_settings_guid_message), Toast.LENGTH_LONG).show()
                     } //ask again
-                    .setNegativeButton(getString(R.string.no)) { dialog, which ->
+                    .setNegativeButton(getString(R.string.no)) { dialog, _ ->
                         dialog.dismiss()
                     }
                     .show()
