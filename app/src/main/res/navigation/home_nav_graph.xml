@@ -180,6 +180,13 @@
         <argument
             android:name="passengerList"
             app:argType="gr.fellow.fellow_traveller.domain.user.Passenger[]" />
+        <action
+            android:id="@+id/action_tripInvolvedPassengerDetailsFragment_to_destination_info"
+            app:destination="@id/destination_info"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
     </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"

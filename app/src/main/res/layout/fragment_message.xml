@@ -41,7 +41,7 @@
                 android:id="@+id/AddMessageFragment_editText"
                 style="@style/input_1"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="64dp"
                 android:layout_marginBottom="170dp"
                 android:background="@null"
@@ -49,11 +49,13 @@
                 android:gravity="top|left"
                 android:hint="@string/write_something"
                 android:inputType="textCapSentences|textMultiLine"
+                android:minHeight="200dp"
                 android:singleLine="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/AddMessageFragment_textView1"
                 app:layout_constraintStart_toStartOf="@+id/AddMessageFragment_textView1"
                 app:layout_constraintTop_toBottomOf="@+id/AddMessageFragment_textView2"
+                app:layout_constraintVertical_bias="0.0"
                 tools:ignore="RtlHardcoded" />
 
 
