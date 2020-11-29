@@ -301,7 +301,7 @@
     <string name="trip_overview">Trip Overview</string>
     <string name="this_is_how_trip_will_look_to_others">This is how your trip will look to others.</string>
 
-    <string name="ensure_account_security">To secure your account.</string>
+    <string name="ensure_account_security">Secure your account by choosing a strong password.</string>
     <string name="enter_price">Set Price</string>
     <string name="price_goes_per_person">Total price is calculated per person for all the available seats.</string>
     <string name="price_total">Total</string>
