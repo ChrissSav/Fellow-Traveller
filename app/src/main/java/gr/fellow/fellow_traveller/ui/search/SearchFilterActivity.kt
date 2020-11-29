@@ -2,6 +2,9 @@ package gr.fellow.fellow_traveller.ui.search
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
+import android.widget.SeekBar
+import androidx.core.widget.NestedScrollView
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -13,6 +16,7 @@ import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.SearchTripPetBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.views.PickButtonActionListener
 import gr.fellow.fellow_traveller.utils.convertTimestamptToFormat
+import kotlinx.android.synthetic.main.label_text_component.view.*
 import java.util.*
 
 
@@ -45,9 +49,17 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
             /** Initialization **/
 
             seatsPickButton.currentNum = searchTripFilter.seatsMin
-            fromRangeSeekbar.setMinStartValue((searchTripFilter.rangeFrom ?: resources.getInteger(R.integer.min_value_in_filters)).toFloat()).apply()
-            toRangeSeekbar.setMinStartValue((searchTripFilter.rangeTo ?: resources.getInteger(R.integer.min_value_in_filters)).toFloat()).apply()
-            priceRangeSeekbar.setMinStartValue((searchTripFilter.priceMax ?: resources.getInteger(R.integer.min_value_in_filters)).toFloat()).apply()
+            fromRangeSeekbar.progress = ((searchTripFilter.rangeFrom ?: resources.getInteger(R.integer.min_value_in_filters)).toInt())
+            binding.fromRangeRadiusTv.setText(getString(R.string.range_text_price, fromRangeSeekbar.progress.toString()))
+
+            toRangeSeekbar.progress = ((searchTripFilter.rangeTo ?: resources.getInteger(R.integer.min_value_in_filters)).toInt())
+            binding.toRangeRadiusTv.setText(getString(R.string.range_text_price, toRangeSeekbar.progress.toString()))
+
+
+            priceRangeSeekbar.progress = ((searchTripFilter.priceMax ?: resources.getInteger(R.integer.min_value_in_filters)).toInt())
+            binding.priceTv.setText(getString(R.string.range_text_price, priceRangeSeekbar.progress.toString()))
+
+
             initializePet()
 
             /** Date Picker Initialization **/
@@ -139,36 +151,86 @@ class SearchFilterActivity : BaseActivity<ActivitySearchFilterBinding>() {
             }
 
 
-            fromRangeSeekbar.setOnSeekbarChangeListener { value ->
-                if (value.toInt() == 0) {
-                    binding.fromRangeRadiusTv.setText(getString(R.string.show_all))
-                    searchTripFilter.rangeFrom = null
-                } else {
-                    binding.fromRangeRadiusTv.setText(getString(R.string.range_text, value.toString()))
-                    searchTripFilter.rangeFrom = value.toInt()
-                }
-            }
 
-            toRangeSeekbar.setOnSeekbarChangeListener { value ->
-                if (value.toInt() == 0) {
-                    binding.toRangeRadiusTv.setText(getString(R.string.show_all))
-                    searchTripFilter.rangeTo = null
-                } else {
-                    binding.toRangeRadiusTv.setText(getString(R.string.range_text, value.toString()))
-                    searchTripFilter.rangeTo = value.toInt()
+            fromRangeSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(p0: SeekBar?, value: Int, p2: Boolean) {
+                    if (value == 0) {
+                        binding.fromRangeRadiusTv.setText(getString(R.string.show_all))
+                        searchTripFilter.rangeFrom = null
+                    } else {
+                        binding.fromRangeRadiusTv.setText(getString(R.string.range_text, value.toString()))
+                        searchTripFilter.rangeFrom = value
+                    }
                 }
-            }
+
+                override fun onStartTrackingTouch(p0: SeekBar?) {
+                }
+
+                override fun onStopTrackingTouch(p0: SeekBar?) {
+
+                }
+
+            })
 
 
-            priceRangeSeekbar.setOnSeekbarChangeListener { value ->
-                if (value.toInt() == 0) {
-                    binding.priceTv.setText(getString(R.string.show_all))
-                    searchTripFilter.priceMax = null
-                } else {
-                    binding.priceTv.setText(getString(R.string.range_text_price, value.toString()))
-                    searchTripFilter.priceMax = value.toInt()
+            toRangeSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(p0: SeekBar?, value: Int, p2: Boolean) {
+                    if (value == 0) {
+                        binding.toRangeRadiusTv.setText(getString(R.string.show_all))
+                        searchTripFilter.rangeTo = null
+                    } else {
+                        binding.toRangeRadiusTv.setText(getString(R.string.range_text, value.toString()))
+                        searchTripFilter.rangeTo = value
+                    }
                 }
-            }
+
+                override fun onStartTrackingTouch(p0: SeekBar?) {
+                }
+
+                override fun onStopTrackingTouch(p0: SeekBar?) {
+
+                }
+
+            })
+
+            priceRangeSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(p0: SeekBar?, value: Int, p2: Boolean) {
+                    if (value == 0) {
+                        binding.priceTv.setText(getString(R.string.show_all))
+                        searchTripFilter.priceMax = null
+                    } else {
+                        binding.priceTv.setText(getString(R.string.range_text_price, value.toString()))
+                        searchTripFilter.priceMax = value
+                    }
+                }
+
+                override fun onStartTrackingTouch(p0: SeekBar?) {
+                }
+
+                override fun onStopTrackingTouch(p0: SeekBar?) {
+
+                }
+
+            })
+
+            NestedScrollView.setOnScrollChangeListener(androidx.core.widget.NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+                Log.i("makis", "scrollY : $scrollY oldScrollY: $oldScrollY")
+
+                if (scrollY < oldScrollY) {
+                    // Scrolling up
+                    if (!applyButton.isExtended)
+                        applyButton.extend()
+                    Log.i("makis", "Scrolling up")
+
+                } else {
+                    if (applyButton.isExtended)
+                        applyButton.shrink()
+                    // Scrolling down
+                    Log.i("makis", " Scrolling down")
+
+                }
+
+            })
         }
     }
 

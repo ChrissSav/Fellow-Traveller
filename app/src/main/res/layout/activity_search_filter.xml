@@ -39,7 +39,9 @@
                         android:layout_height="@dimen/back_button_width_height"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
                         android:src="@drawable/ic_back_button"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -74,6 +76,7 @@
 
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/NestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
@@ -90,6 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/date"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -175,26 +179,22 @@
                     app:layout_constraintEnd_toEndOf="@+id/pet"
                     app:layout_constraintTop_toTopOf="@+id/price_range_tv" />
 
-
-                <com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar
+                <SeekBar
                     android:id="@+id/price_range_seekbar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/filters_seekBar_margin_top"
-                    app:bar_color="@color/softGrey_color"
-                    app:bar_highlight_color="@color/colorPrimary"
-                    app:corner_radius="6"
-                    app:data_type="_integer"
+                    android:max="300"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="8dp"
+                    android:thumb="@drawable/seek_bar_circle_shape"
                     app:layout_constraintEnd_toEndOf="@+id/from_range_radius_tv"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/price_range_tv"
                     app:layout_constraintTop_toBottomOf="@+id/price_range_tv"
-                    app:left_thumb_color="@color/colorPrimary"
-                    app:left_thumb_color_pressed="@color/colorPrimary"
-                    app:max_value="100"
-                    app:min_value="@integer/min_value_in_filters" />
+                    tools:ignore="RtlSymmetry" />
 
 
                 <TextView
@@ -202,11 +202,11 @@
                     style="@style/header_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/filters_view_margin_top_second"
+                    android:layout_marginTop="32dp"
                     android:text="@string/starting_point_range"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView10"
-                    app:layout_constraintTop_toBottomOf="@+id/price_range_tv" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView39" />
 
                 <EditText
                     android:id="@+id/from_range_radius_tv"
@@ -220,38 +220,32 @@
                     app:layout_constraintTop_toTopOf="@+id/range_from_tv" />
 
 
-                <com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar
+                <SeekBar
                     android:id="@+id/from_range_seekbar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/filters_seekBar_margin_top"
-                    app:bar_color="@color/softGrey_color"
-                    app:bar_highlight_color="@color/colorPrimary"
-                    app:corner_radius="6"
-                    app:data_type="_integer"
+                    android:max="300"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="8dp"
+                    android:thumb="@drawable/seek_bar_circle_shape"
                     app:layout_constraintEnd_toEndOf="@+id/from_range_radius_tv"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/range_from_tv"
-                    app:layout_constraintTop_toBottomOf="@+id/range_from_tv"
-                    app:left_thumb_color="@color/colorPrimary"
-                    app:left_thumb_color_pressed="@color/colorPrimary"
-                    app:max_value="300"
-                    app:min_value="@integer/min_value_in_filters" />
-
+                    app:layout_constraintTop_toBottomOf="@+id/range_from_tv" />
 
                 <TextView
                     android:id="@+id/range_to_tv"
                     style="@style/header_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/filters_view_margin_top_second"
+                    android:layout_marginTop="32dp"
                     android:text="@string/destination_range"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView10"
-                    app:layout_constraintTop_toBottomOf="@+id/range_from_tv" />
-
+                    app:layout_constraintTop_toBottomOf="@+id/textView48" />
 
                 <EditText
                     android:id="@+id/to_range_radius_tv"
@@ -265,16 +259,12 @@
                     app:layout_constraintTop_toTopOf="@+id/range_to_tv" />
 
 
-                <com.crystal.crystalrangeseekbar.widgets.CrystalSeekbar
+                <SeekBar
                     android:id="@+id/to_range_seekbar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/filters_seekBar_margin_top"
                     android:layout_marginBottom="130dp"
-                    app:bar_color="@color/softGrey_color"
-                    app:bar_highlight_color="@color/colorPrimary"
-                    app:corner_radius="6"
-                    app:data_type="_integer"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/from_range_radius_tv"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -283,10 +273,46 @@
                     app:layout_constraintStart_toStartOf="@+id/range_to_tv"
                     app:layout_constraintTop_toBottomOf="@+id/range_to_tv"
                     app:layout_constraintVertical_bias="0.0"
-                    app:left_thumb_color="@color/colorPrimary"
-                    app:left_thumb_color_pressed="@color/colorPrimary"
-                    app:max_value="300"
-                    app:min_value="@integer/min_value_in_filters" />
+                    android:paddingStart="10dp"
+                    android:max="300"
+                    android:paddingEnd="8dp"
+                    android:thumb="@drawable/seek_bar_circle_shape" />
+
+                <TextView
+                    android:id="@+id/textView39"
+                    style="@style/paragraph_4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/filters_margin_top_descriptions"
+                    android:text="@string/filter_price_range_description"
+                    app:layout_constraintEnd_toStartOf="@+id/price_tv"
+                    app:layout_constraintStart_toStartOf="@+id/price_range_seekbar"
+                    app:layout_constraintTop_toBottomOf="@+id/price_range_seekbar" />
+
+                <TextView
+                    android:id="@+id/textView48"
+                    style="@style/paragraph_4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/filters_margin_top_descriptions"
+                    android:text="@string/filter_from_range_description"
+                    app:layout_constraintEnd_toStartOf="@+id/from_range_radius_tv"
+                    app:layout_constraintStart_toStartOf="@+id/from_range_seekbar"
+                    app:layout_constraintTop_toBottomOf="@+id/from_range_seekbar" />
+
+                <TextView
+                    android:id="@+id/textView49"
+                    style="@style/paragraph_4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/filters_margin_top_descriptions"
+                    android:layout_marginBottom="120dp"
+                    android:text="@string/filter_to_range_description"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/to_range_radius_tv"
+                    app:layout_constraintStart_toStartOf="@+id/to_range_seekbar"
+                    app:layout_constraintTop_toBottomOf="@+id/to_range_seekbar"
+                    app:layout_constraintVertical_bias="0.0" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -294,25 +320,30 @@
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
-    <com.google.android.material.button.MaterialButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/apply_button"
-        style="@style/header_3"
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/car_float_action_button_height"
-        android:layout_marginTop="62dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/car_trip_float_action_button_margin_right"
         android:layout_marginBottom="@dimen/car_trip_float_action_button_margin_bottom"
-        android:background="@drawable/login_button_background"
-        android:gravity="center|end"
-        android:paddingStart="22dp"
-        android:paddingEnd="20dp"
+        android:elevation="0dp"
+        android:minHeight="@dimen/car_float_action_button_height"
+        android:padding="4dp"
+        android:stateListAnimator="@null"
         android:text="@string/apply"
+        android:textAllCaps="false"
+        android:textAppearance="@style/header_3"
         android:textColor="@color/white"
-        app:backgroundTint="@color/orange_new"
+        app:backgroundTint="@color/black"
+        app:cornerRadius="30dp"
         app:icon="@drawable/ic_tick"
-        app:iconPadding="16dp"
+        app:iconSize="18dp"
+        app:iconTint="@color/white"
+        app:layout_anchorGravity="right|top"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="@color/light_orange_New" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

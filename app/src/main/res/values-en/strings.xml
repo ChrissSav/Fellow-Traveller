@@ -48,6 +48,9 @@
     <string name="not_selected_filters">You haven\'t selected any filter.</string>
     <string name="trip_found">%s results</string>
 
+    <string name="filter_price_range_description">With this option you set the maximum value</string>
+    <string name="filter_from_range_description">With this option you increase the starting destination radius</string>
+    <string name="filter_to_range_description">>With this option you increase the final destination radius</string>
 
     <string name="show_password">Show</string>
     <string name="hide_password">Hide</string>

@@ -53,6 +53,10 @@
     <string name="range_text_price" formatted="false">Έως %s €</string>
     <string name="range_text_in_filters" formatted="false" translatable="false">%s ~ %s </string>
 
+    <string name="filter_price_range_description">Με την επιλογή αυτή καθορίζεις την μέγιστη τιμή</string>
+    <string name="filter_from_range_description">Με την επιλογή αυτή αυξάνεις την ακτίνα της αφετηρίας</string>
+    <string name="filter_to_range_description">Με την επιλογή αυτή αυξάνεις την ακτίνα του προορισμού</string>
+
     <string name="have_pet">Έχω κατοικίδιο</string>
     <string name="have_not_pet">Δεν έχω κατοικίδιο</string>
 
@@ -72,7 +76,7 @@
 
     <!--Fragment destinations-->
 
-    <string name="fragment_destinations_header">Εισάγεται την αφετηρία και τον προορισμό</string>
+    <string name="fragment_destinations_header">Εισήγαγε την αφετηρία και τον προορισμό</string>
     <string name="starting_point">Αφετηρία</string>
     <string name="destination">Προορισμός</string>
 
@@ -213,13 +217,13 @@
     <string name="personal_info">Προσωπικές Πληροφορίες</string>
     <string name="edit_profile_photo">Επεξεργασία εικόνας προφίλ</string>
     <string name="vehicle">Όχημα</string>
-    <string name="choose_vehicle_for_trip">Επιλέξτε αμάξι για το ταξίδι σας</string>
-    <string name="enter_seat_availability">Επέλεξε τον αριθμό των ελεύθερων θέσεων που θέλετε να μοιραστείτε</string>
+    <string name="choose_vehicle_for_trip">Επέλεξε όχημα για το ταξίδι σας</string>
+    <string name="enter_seat_availability">Επέλεξε τον αριθμό των ελεύθερων θέσεων που θέλεις να μοιραστείς</string>
     <string name="pets">Κατοικίδια</string>
-    <string name="are_pets_allowed_or_not">Επιτρέπεται η παρουσία κατοικιδίων σε αυτό το ταξίδι;</string>
+    <string name="are_pets_allowed_or_not">Επιτρέπεται η συνοδεία κατοικιδίων σε αυτό το ταξίδι;</string>
     <string name="baggage">Αποσκεύες</string>
     <string name="enter_baggage_availability">Καθόρισε την κατάσταση των αποσκευών</string>
-    <string name="specify">Καθορίστε</string>
+    <string name="specify">Καθόρισε</string>
     <string name="password">Κωδικός Πρόσβασης</string>
     <string name="notifications">Ειδοποιήσεις</string>
     <string name="my_vehicles">Τα οχήματά μου</string>
@@ -230,31 +234,31 @@
     <string name="sign_out">Αποσύνδεση</string>
     <string name="booking_details">Λεπτομέρειες Κράτησης</string>
     <string name="from">Από</string>
-    <string name="to">Πρός</string>
+    <string name="to">Προς</string>
     <string name="trip_time_placeholder" translatable="false">07:00 AM</string>
     <string name="trip_date_placeholder" translatable="false">Δευ, 13 Μαρ</string>
-    <string name="how_many_seats_to_rsvp">Πόσες θέσεις θέλετε να κλείσετε;</string>
+    <string name="how_many_seats_to_rsvp">Πόσες θέσεις θες να κλείσεις;</string>
     <string name="will_you_bring_a_pet">Θα έχεις μαζί σου κατοικίδιο;</string>
     <string name="choose">Επιλέξτε</string>
     <string name="price_placeholder" translatable="false">10</string>
-    <string name="book_a_seat">Κάντε κράτηση</string>
+    <string name="book_a_seat">Κάνε κράτηση</string>
     <string name="vehicle_details">Λεπτομέρειες Οχήματος</string>
     <string name="delete">Διαγραφή</string>
     <string name="change_password_description">Αλλαγή κωδικού πρόσβασης.</string>
     <string name="complete">Ολοκλήρωση</string>
-    <string name="email_will_be_sent">Ένας σύνδεσμος επιβεβαίωσης θα σταλεί στο email σας ώστε να ενεργοποιήσετε τον λογαριασμός σας.</string>
+    <string name="email_will_be_sent">Ένας σύνδεσμος επιβεβαίωσης θα σταλεί στο email σου ώστε να ενεργοποιήσεις τον λογαριασμός σου.</string>
     <string name="password_recovery">Ανάκτηση κωδικού πρόσβασης</string>
-    <string name="enter_your_email">Εισάγεται το email σας</string>
-    <string name="we_will_send_a_6_digit_verification_code">Θα σας αποστείλουμαι ένα email με τον 6-ψήφιο κωδικό</string>
+    <string name="enter_your_email">Εισήγαγε το email σου</string>
+    <string name="we_will_send_a_6_digit_verification_code">Θα σου αποστείλουμαι ένα email με τον 6-ψήφιο κωδικό</string>
     <string name="reset">Ανάκτηση</string>
     <string name="confirm_password_reset">Επιβεβαίωση ανάκτησης κωδικού</string>
-    <string name="enter_verification_code">Εισάγεται τον 6-ψήφιο κωδικό</string>
+    <string name="enter_verification_code">Εισήγαγε τον 6-ψήφιο κωδικό</string>
     <string name="resend_verification_code">Επαναποστολή κωδικού</string>
-    <string name="you_can_request_code_resend">Μπορείτε να απαιτήσετε επαναποστολή κωδικού.</string>
+    <string name="you_can_request_code_resend">Μπορείς να απαιτήσεις επαναποστολή κωδικού.</string>
     <string name="find_co_travellers_in_an_instant">Βρες συνταξιδιώτες\n στο λεπτό</string>
-    <string name="search_for_a_trip">Αναζητήστε ένα ταξίδι</string>
+    <string name="search_for_a_trip">Αναζήτησε ένα ταξίδι</string>
     <string name="search_for_a_trip_description">Αναζήτησε έναν προορισμό και κλείσε το επόμενό σου ταξίδι.</string>
-    <string name="offer_your_next_trip">Προσφέρετε ένα ταξίδι</string>
+    <string name="offer_your_next_trip">Πρόσφερε ένα ταξίδι</string>
     <string name="popular_trips">Δημοφιλή Ταξίδια</string>
     <string name="choose_a_popular_trip">Αναζήτησε το επόμενό σου ταξίδι επιλέγοντας μία από τις πιο δημοφιλής διαδρομές.</string>
     <string name="popular_trip_thess_athens">Θεσσαλονίκη - Αθήνα</string>
@@ -273,7 +277,7 @@
     <string name="trips">Ταξίδια</string>
     <string name="sign_in">Σύνδεση</string>
     <string name="did_you_forgot_password">Ξέχασες τον κωδικό πρόσβασης;</string>
-    <string name="agree_with_fellow_tos">" Με τη δημιουργία λογαριασμού, αποδέχεστε την &lt;b&gt;Πολιτική Απορρήτου&lt;/b>"</string>
+    <string name="agree_with_fellow_tos">" Με τη δημιουργία λογαριασμού, αποδέχεσαι την &lt;b&gt;Πολιτική Απορρήτου&lt;/b>"</string>
     <string name="welcome_to">Καλώς όρισες στο</string>
     <string name="sign_up">Εγγραφή</string>
     <string name="leave_a_message_for_co_travellers">Γράψε ένα μήνυμα στους συνταξιδιώτες σου</string>
@@ -292,11 +296,11 @@
     <string name="messenger_step5">Τοποθετήστε τον σύνδεσμο στο fellow.</string>
     <string name="messenger_step5_desc">Ανοίξτε την εφαργμογή του messenger</string>
     <string name="trip_overview">Επισκόπηση ταξιδιού</string>
-    <string name="this_is_how_trip_will_look_to_others">Έτσι θα εμφανίζεται το ταξίδι σας μετά την καταχώριση</string>
+    <string name="this_is_how_trip_will_look_to_others">\'Έτσι θα εμφανίζεται το ταξίδι μετά την καταχώριση</string>
     <string name="trip_review_placeholder">\'Ηταν ένα πολύ καλό ταξίδι</string>
     <string name="rating_placeholder" translatable="false">4.6</string>
-    <string name="ensure_account_security">Για να διασφαλίσετε τον λογαριαμό σας</string>
-    <string name="enter_price">Ορίστε μία τιμή</string>
+    <string name="ensure_account_security">Για να διασφαλίσεις τον λογαριαμό σου</string>
+    <string name="enter_price">\Όρισε μία τιμή</string>
     <string name="price_goes_per_person">Η τιμή ορίζεται ανά άτομο</string>
     <string name="price_total">Σύνολο</string>
     <string name="price_calc_placeholder" translatable="false">4 x 5,00 €</string>
@@ -306,16 +310,16 @@
     <string name="latest_rating">Τελευταία Αξιολόγηση</string>
     <string name="all_ratings">Όλες οι αξιολογήσεις</string>
     <string name="about_me">Σχετικά με εμένα</string>
-    <string name="enter_new_password">Δημιουργήστε ένα νέο κωδικό πρόσβασης</string>
+    <string name="enter_new_password">Δημιούργησε ένα νέο κωδικό πρόσβασης</string>
     <string name="google_maps">Χάρτες Google</string>
     <string name="car_textview" translatable="false">TextView</string>
     <string name="passengers">Επιβάτες</string>
     <string name="price_per_person">5.50$ ανά άτομο</string>
     <string name="search_trip">Αναζήτηση ταξιδιού</string>
     <string name="switch_text">Εναλλαγή</string>
-    <string name="verify_your_email">Επιβεβαιώστε το email σας</string>
+    <string name="verify_your_email">Επιβεβαιώσε το email σου</string>
     <string name="warning_email_spam">Προσοχή! Το email επιβεβαίωσης μπορεί να μεταφερθεί αυτόματα στην ανεπιθύμητη αλληλογραφία</string>
-    <string name="we_have_sent_you_an_email">Σας έχουμε αποστείλει ένα email επιβεβαίωσης στο example@email.com</string>
+    <string name="we_have_sent_you_an_email">Σου έχουμε αποστείλει ένα email επιβεβαίωσης στο example@email.com</string>
     <string name="success_rsvp">Η κράτηση σας ήταν επιτυχής</string>
     <string name="all_passengers">Όλοι οι επιβάτες</string>
     <string name="vehicle_management">Διαχείριση οχημάτων</string>

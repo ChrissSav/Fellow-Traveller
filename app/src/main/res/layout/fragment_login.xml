@@ -81,6 +81,7 @@
                 android:layout_marginBottom="100dp"
                 android:text="@string/did_you_forgot_password"
                 app:layout_constraintBottom_toBottomOf="parent"
+                android:gravity="center_vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/password"

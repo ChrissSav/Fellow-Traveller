@@ -165,14 +165,18 @@
                     tools:ignore="RtlSymmetry" />
 
 
-                <TextView
+                <EditText
                     android:id="@+id/message"
                     style="@style/paragraph_1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:tag="5"
-                    android:text="@string/trip_review_placeholder"
+                    android:longClickable="false"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:enabled="false"
+                    android:background="@null"
+                    android:hint="@string/no_description_available"
                     app:layout_constraintEnd_toEndOf="@+id/rate"
                     app:layout_constraintStart_toStartOf="@+id/user_image"
                     app:layout_constraintTop_toBottomOf="@+id/user_image" />
@@ -390,7 +394,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/passengers_label">
+                    app:layout_constraintTop_toBottomOf="@id/passengers_label"
+                    app:layout_constraintVertical_bias="0.0">
 
                     <ImageView
                         android:id="@+id/image"

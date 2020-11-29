@@ -50,9 +50,13 @@ class SearchTripActivity : BaseActivityViewModel<ActivitySearchTripBinding, Sear
 
     override fun onBackPressed() {
 
-        if (nav.currentDestination?.id == R.id.searchTripsFragment) {
-            ExitCustomDialog(this, this::exitCustomDialogAnswerType, getString(R.string.cancel_search), 2).show(supportFragmentManager, "exitCustomDialog")
-        } else {
+        if (viewModel.searchFilter.value?.latitudeFrom != null && viewModel.searchFilter.value?.latitudeTo != null)
+            if (nav.currentDestination?.id == R.id.searchTripsFragment) {
+                ExitCustomDialog(this, this::exitCustomDialogAnswerType, getString(R.string.cancel_search), 2).show(supportFragmentManager, "exitCustomDialog")
+            } else {
+                super.onBackPressed()
+            }
+        else {
             super.onBackPressed()
         }
 
