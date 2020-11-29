@@ -47,9 +47,9 @@
     <string name="ERROR_TRIP_PICKUP_POINT">Το σημείο της συνάντησης πρέπει να είναι σε ακτίνα 5 χμλ με βάση την τοποθέσια αναχώρησης.</string>
 
 
-    <string name="ERROR_REVIEW_YOURSELF">Δεν μπορείτε να αξιολογήσετε τον εαυτό σας</string>
-    <string name="ERROR_REVIEW_USER_TARGET_NOT_FOUND">Ο χρήστης δεν βρέθηκε.</string>
-    <string name="ERROR_REVIEW_CANT_REGISTER_THE_REVIEW">Έχετε ήδη αξιολογήση τον χρήστη.</string>
+    <string name="ERROR_RATING_YOURSELF">Δεν μπορείτε να αξιολογήσετε τον εαυτό σας</string>
+    <string name="ERROR_RATING_USER_TARGET_NOT_FOUND">Ο χρήστης δεν βρέθηκε.</string>
+    <string name="ERROR_RATING_CANT_REGISTER_THE_RATE">Έχετε ήδη αξιολογήση τον χρήστη.</string>
 
 
     <string name="ERROR_TRIP_USER_NOT_PASSENGER">Δεν συμμετέχετε σε αυτό το ταξίδι.</string>

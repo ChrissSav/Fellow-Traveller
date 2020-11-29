@@ -32,7 +32,7 @@ constructor(
         launch(true) {
             val response = checkReviewUseCase(userId)
             if (!response) {
-                error.value = internalError(R.string.ERROR_REVIEW_CANT_REGISTER_THE_REVIEW)
+                error.value = internalError(R.string.ERROR_RATING_CANT_REGISTER_THE_RATE)
             }
         }
     }

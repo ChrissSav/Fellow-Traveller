@@ -99,7 +99,7 @@
                 style="@style/settings_text_with_padding"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/write_a_review"
+                android:text="@string/leave_a_review"
                 android:drawableEnd="@drawable/ic_review"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
