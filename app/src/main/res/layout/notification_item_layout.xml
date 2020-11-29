@@ -39,7 +39,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:text="@string/placeholder_user_deleted_trip"
-        app:layout_constraintEnd_toStartOf="@+id/read"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/picture"
         app:layout_constraintTop_toTopOf="@+id/picture" />
 
