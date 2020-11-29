@@ -229,15 +229,15 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
             onChooseFile()
         }.onDeclined { e ->
             if (e.hasDenied()) {
-                Toast.makeText(activity, "Δεν δώσατε άδεια στην εφαρμογή για το ανέβασμα φωτογραφίας", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, getString(R.string.account_settings_access_denied), Toast.LENGTH_LONG).show()
             }
             if (e.hasForeverDenied()) {
 
                 AlertDialog.Builder(activity)
-                    .setMessage("Θα πρέπει να ρυθμίσετε τις άδειες της εφαρμογής για το ανέβασμα φωτογραφίας. Θέλετε να συνεχίσετε;")
+                    .setMessage(getString(R.string.account_settings_dialog_message))
                     .setPositiveButton(getString(R.string.yes)) { dialog, which ->
                         e.goToSettings()
-                        Toast.makeText(activity, "Θα πρέπει να ενεργοποιήσετε τις άδειες τις εφαρμογής", Toast.LENGTH_LONG).show()
+                        Toast.makeText(activity, getString(R.string.account_settings_guid_message), Toast.LENGTH_LONG).show()
                     } //ask again
                     .setNegativeButton(getString(R.string.no)) { dialog, which ->
                         dialog.dismiss()
