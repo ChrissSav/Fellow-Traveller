@@ -59,13 +59,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
         viewModel.getUserInfo()
 
-
         Glide.with(this)
-            .load(R.raw.fellow_logo_gif)
+            .load(R.raw.fellow_splash_black)
             .into(GifDrawableImageViewTarget(binding.ImageView, 1) {
                 viewModel.setSecond(true)
             })
     }
-
-
 }
