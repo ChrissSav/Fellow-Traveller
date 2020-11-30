@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.data.base
 
-
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.vectordrawable.graphics.drawable.Animatable2Compat

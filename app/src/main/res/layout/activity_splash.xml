@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/motion"
     android:background="#252326"
+    android:id="@+id/motion"
     tools:context=".ui.splash.SplashActivity">
 
 
@@ -18,11 +18,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- <pl.droidsonroids.gif.GifImageView
-         android:id="@+id/GifImageView"
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         android:src="@drawable/d"     />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
