@@ -97,7 +97,7 @@ constructor(
         launchWithLiveData(true, loadResults) {
             _searchFilter.value?.let { searchFilters ->
                 val response = searchTripsUseCase(searchFilters)
-                delay(500)
+                delay(250)
                 setSortOption(sortOption, response)
             }
         }
