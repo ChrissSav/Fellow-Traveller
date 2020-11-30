@@ -2,13 +2,15 @@ package gr.fellow.fellow_traveller.ui.splash
 
 import android.content.Intent
 import android.content.SharedPreferences
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.data.base.BaseActivityViewModel
+import gr.fellow.fellow_traveller.data.base.BaseActivity
+import gr.fellow.fellow_traveller.data.base.GifDrawableImageViewTarget
 import gr.fellow.fellow_traveller.databinding.ActivitySplashBinding
 import gr.fellow.fellow_traveller.ui.extensions.openActivityWithFade
-import gr.fellow.fellow_traveller.ui.extensions.postDelay
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.main.MainActivity
 import gr.fellow.fellow_traveller.utils.PREFS_AUTH_REFRESH_TOKEN
@@ -16,9 +18,9 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class SplashActivity : BaseActivityViewModel<ActivitySplashBinding, SplashViewModel>(SplashViewModel::class.java) {
+class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
-
+    private val viewModel: SplashViewModel by viewModels()
     private var intentOpen: Intent? = null
 
     @Inject
@@ -56,10 +58,13 @@ class SplashActivity : BaseActivityViewModel<ActivitySplashBinding, SplashViewMo
     override fun setUpViews() {
 
         viewModel.getUserInfo()
-        postDelay(800) {
-            viewModel.setSecond(true)
-        }
 
+
+        Glide.with(this)
+            .load(R.raw.fellow_logo_gif)
+            .into(GifDrawableImageViewTarget(binding.ImageView, 1) {
+                viewModel.setSecond(true)
+            })
     }
 
 
