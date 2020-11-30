@@ -68,7 +68,6 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 /*                tripsList.clear()
                 tripsList.addAll(it)*/
                 //   binding.recyclerView.adapter?.notifyDataSetChanged()
-
                 (binding.recyclerView.adapter as SearchResultsListAdapter).submitList(it)
 
 
@@ -152,6 +151,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
                 if (!destFromButton.text.isNullOrEmpty() && !destToButton.text.isNullOrEmpty()) {
                     viewModel.swapDestinations()
                     motion.transitionToEnd()
+                    viewModel.getTrips()
                     //viewModel.setSortOption(sortOption)
                 }
             }

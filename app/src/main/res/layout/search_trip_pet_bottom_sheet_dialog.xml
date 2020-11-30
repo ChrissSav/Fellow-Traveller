@@ -49,7 +49,7 @@
         style="@style/input_1"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="24dp"
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center"
         android:text="@string/no"
