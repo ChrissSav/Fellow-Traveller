@@ -42,11 +42,8 @@ class ProfileReviewsFragment : BaseFragment<FragmentProfileReviewsBinding>() {
     override fun setUpViews() {
         binding.recyclerView.adapter = ReviewsAdapter(reviewsList)
 
-
-
-
         binding.swipeRefreshLayout.setOnRefreshListener {
-            viewModel.loadReviews()
+            viewModel.loadReviews(true)
         }
 
         binding.backButton.setOnClickListener {

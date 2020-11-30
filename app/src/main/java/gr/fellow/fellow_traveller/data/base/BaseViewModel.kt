@@ -12,6 +12,7 @@ import gr.fellow.fellow_traveller.domain.externalError
 import gr.fellow.fellow_traveller.domain.internalError
 import gr.fellow.fellow_traveller.utils.ACCESS_DENIED
 import kotlinx.coroutines.launch
+import java.net.UnknownHostException
 
 open class BaseViewModel : ViewModel() {
 
@@ -77,6 +78,9 @@ open class BaseViewModel : ViewModel() {
             is UnauthorizedException -> {
                 forceLogOut.value = true
                 error.value = internalError(R.string.ERROR_API_UNAUTHORIZED)
+            }
+            is UnknownHostException -> {
+
             }
             else -> {
                 error.value = internalError(R.string.ERROR_SOMETHING_WRONG)

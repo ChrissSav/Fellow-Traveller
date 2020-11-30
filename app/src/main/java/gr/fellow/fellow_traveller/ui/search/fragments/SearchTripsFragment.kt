@@ -19,7 +19,7 @@ import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.SortSearchTripsBottomS
 import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.search.SearchFilterActivity
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
-import gr.fellow.fellow_traveller.ui.search.adapter.SearchResultsAdapter
+import gr.fellow.fellow_traveller.ui.search.adapter.SearchResultsListAdapter
 import gr.fellow.fellow_traveller.ui.search.locations.SelectDestinationActivity
 import gr.fellow.fellow_traveller.utils.currentTimeStamp
 
@@ -28,15 +28,10 @@ import gr.fellow.fellow_traveller.utils.currentTimeStamp
 class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
     private val viewModel: SearchTripViewModel by activityViewModels()
-    private var tripsList = mutableListOf<TripSearch>()
     private var clickTime = 0L
     private var clickTimeDialog = 0L
     private var bundle = bundleOf()
     private lateinit var sortSearchTripsBottomSheetDialog: SortSearchTripsBottomSheetDialog
-
-
-
-
     
     override fun getViewBinding(): FragmentSearchTripsBinding =
         FragmentSearchTripsBinding.inflate(layoutInflater)
@@ -46,8 +41,6 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
 
         with(viewModel) {
-
-
             destinations.observe(viewLifecycleOwner, Observer {
                 binding.destFromButton.text = it.first?.title
                 binding.destToButton.text = it.second?.title
@@ -72,15 +65,19 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
 
             resultTrips.observe(viewLifecycleOwner, Observer {
+/*                tripsList.clear()
+                tripsList.addAll(it)*/
+                //   binding.recyclerView.adapter?.notifyDataSetChanged()
 
-                binding.resultsLabel.visibility = View.VISIBLE
-                binding.sortButton.visibility = View.VISIBLE
-                tripsList.clear()
-                tripsList.addAll(it)
-                binding.recyclerView.adapter?.notifyDataSetChanged()
+                (binding.recyclerView.adapter as SearchResultsListAdapter).submitList(it)
+
+
                 binding.resultsLabel.text = getString(R.string.trip_found, it.size.toString())
+                binding.resultsLabel.visibility = View.VISIBLE
+
                 if (it.isNotEmpty()) {
                     binding.recyclerView.visibility = View.VISIBLE
+                    binding.sortButton.visibility = View.VISIBLE
                     binding.notFoundImage.visibility = View.GONE
                 } else {
                     binding.recyclerView.visibility = View.GONE
@@ -92,7 +89,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
             searchFilter.observe(viewLifecycleOwner, Observer {
                 binding.filterButton.visibility = View.VISIBLE
-                viewModel.getTrips()
+                //viewModel.getTrips()
             })
 
         }
@@ -103,7 +100,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
         with(binding) {
 
-            recyclerView.adapter = SearchResultsAdapter(tripsList, this@SearchTripsFragment::onTripClicked)
+            recyclerView.adapter = SearchResultsListAdapter(this@SearchTripsFragment::onTripClicked)
 
             
             binding.sortButton.setOnClickListener {
@@ -116,8 +113,6 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
                 }
             }
 
-            if (tripsList.isNotEmpty())
-                binding.recyclerView.visibility = View.VISIBLE
             label.setOnClickListener {
                 binding.motion.transitionToStart()
             }
@@ -125,10 +120,9 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
             destFromButton.addOnClickListener {
                 startActivityForResultWithFade(SelectDestinationActivity::class, 1)
             }
+
             destToButton.addOnClickListener {
-                val intent = Intent(activity, SelectDestinationActivity::class.java)
-                intent.putExtra("info", "to")
-                startActivityForResultWithFade(intent, 2)
+                startActivityForResultWithFade(SelectDestinationActivity::class, 2)
             }
 
 
@@ -138,10 +132,8 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
             searchButton.setOnClickListener {
                 if (viewModel.destinations.value?.first != null && viewModel.destinations.value?.second != null) {
-                    viewModel.updateFilter()
+                    viewModel.getTrips()
                     motion.transitionToEnd()
-                    //viewModel.setSortOption(sortOption)
-
                 } else {
                     createAlerter(resources.getString(R.string.ERROR_FIELDS_REQUIRE))
                 }
@@ -165,10 +157,6 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
             }
         }
 
-        viewModel.deleteTripId?.let {
-            binding.searchButton.performClick()
-            viewModel.deleteTripId = null
-        }
     }
 
 
@@ -176,7 +164,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
     private fun onTripClicked(item: TripSearch) {
         if (currentTimeStamp() - clickTime > 1) {
             clickTime = currentTimeStamp()
-            findNavController()?.navigate(R.id.action_searchTripsFragment_to_searchTripDetailsFragment, bundleOf("tripId" to item.id))
+            findNavController()?.navigate(R.id.action_searchTripsFragment_to_searchTripDetailsFragment, bundleOf("trip" to item))
         }
     }
 
@@ -185,6 +173,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
         bundle.putFloat("motionCurrentState", binding.motion.progress)
         bundle.putInt("resultsLabelVisibility", binding.resultsLabel.visibility)
         bundle.putInt("sortButtonVisibility", binding.sortButton.visibility)
+        bundle.putInt("notFoundImage", binding.notFoundImage.visibility)
         super.onStop()
 
     }
@@ -193,6 +182,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
         binding.motion.progress = bundle.getFloat("motionCurrentState", 0f)
         binding.resultsLabel.visibility = bundle.getInt("resultsLabelVisibility", View.GONE)
         binding.sortButton.visibility = bundle.getInt("sortButtonVisibility", View.GONE)
+        binding.notFoundImage.visibility = bundle.getInt("notFoundImage", View.GONE)
         super.onResume()
 
     }
@@ -230,39 +220,25 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
     }
 
     private fun onSortItemClickListener(sortAnswerType: SortAnswerType) {
-         when (sortAnswerType) {
-            SortAnswerType.Relevant -> {
-                createToast("Πιο σχετικά")
-                binding.sortButton.text = getString(R.string.most_relevant)
-                viewModel.sortByDate()
-                //sortOption = SortAnswerType.Relevant
-            }
-            SortAnswerType.Price -> {
-                createToast("Τιμή")
-                binding.sortButton.text = getString(R.string.price_title)
-                viewModel.sortByPrice()
-                //sortOption = SortAnswerType.Price
-            }
-            SortAnswerType.Rate -> {
-                createToast("Αξιολόγηση")
-                binding.sortButton.text = getString(R.string.rating)
-                viewModel.sortByRate()
-                //sortOption = SortAnswerType.Rate
-            }
+        /*  when (sortAnswerType) {
+             SortAnswerType.Relevant -> {
+                 binding.sortButton.text = getString(R.string.most_relevant)
+                 viewModel.setSortOption(sortAnswerType)
+                 //sortOption = SortAnswerType.Relevant
+             }
+             SortAnswerType.Price -> {
+                 binding.sortButton.text = getString(R.string.price_title)
+                 viewModel.setSortOption(sortAnswerType)
+                 //sortOption = SortAnswerType.Price
+             }
+             SortAnswerType.Rate -> {
 
-        }
+                 //sortOption = SortAnswerType.Rate
+             }
+
+         }*/
+        binding.sortButton.text = getString(sortAnswerType.textInt)
+        viewModel.setSortOption(sortAnswerType, null)
     }
-/*
-    //Set Up Sort Option, based on previous choice
-    private fun setSortOption(){
-        when (sortOption) {
-            SortAnswerType.Relevant -> viewModel.sortByDate()
-            SortAnswerType.Price -> viewModel.sortByPrice()
-            else -> viewModel.sortByRate()
-        }
-
-    }
-*/
-
 
 }

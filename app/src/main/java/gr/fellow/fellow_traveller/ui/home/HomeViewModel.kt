@@ -52,6 +52,7 @@ constructor(
     private val getUserReviewsUseCase: GetUserReviewsUseCase
 ) : BaseViewModel() {
 
+    val reloadConnection = MutableLiveData<Boolean>()
 
     private val _user = MutableLiveData<LocalUser>()
     val user: LiveData<LocalUser> = _user
@@ -239,6 +240,14 @@ constructor(
     }
 
 
+    fun reload(l: Boolean = false) {
+        launch {
+            reloadConnection.value = l
+
+        }
+    }
+
+
     /** Notification ***/
 
     fun loadNotifications(more: Boolean = false) {
@@ -358,13 +367,15 @@ constructor(
         }
     }
 
-    fun loadReviews() {
+    fun loadReviews(more: Boolean = false) {
         launch(true) {
             _user.value?.id?.let {
+                if (_reviews.value != null && !more) {
+                    return@launch
+                }
                 val response = getUserReviewsUseCase(it)
                 _reviews.value = response
             }
-
         }
     }
 

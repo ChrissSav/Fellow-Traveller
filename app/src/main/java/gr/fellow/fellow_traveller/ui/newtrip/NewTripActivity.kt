@@ -91,10 +91,13 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
 
     @SuppressLint("RestrictedApi")
     override fun onBackPressed() {
-
-        if (nav.backStack.size == 2) {
-            openDialog()
-        } else if (nav.currentDestination?.id != R.id.successTripFragment) {
+        if (viewModel.destinationFrom.value?.placeId != null && viewModel.destinationTo.value?.placeId != null) {
+            if (nav.backStack.size == 2) {
+                openDialog()
+            } else if (nav.currentDestination?.id != R.id.successTripFragment) {
+                super.onBackPressed()
+            }
+        } else {
             super.onBackPressed()
         }
 

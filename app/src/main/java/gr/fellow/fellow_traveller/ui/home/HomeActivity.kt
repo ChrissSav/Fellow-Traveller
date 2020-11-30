@@ -10,7 +10,6 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.os.Build
-import android.util.Log
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
@@ -59,6 +58,19 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
             }
         })
 
+        viewModel.reloadConnection.observe(this, Observer {
+            if (it) {
+                viewModel.loadCars()
+                viewModel.loadTripsAsCreator()
+                viewModel.loadTripsAsPassenger()
+                viewModel.loadTripsAsCreatorHistory()
+                viewModel.loadTripsAsPassengerHistory()
+                viewModel.loadNotifications()
+                viewModel.loadReviews()
+                viewModel.reload(false)
+            }
+        })
+
 
         viewModel.notifications.observe(this, Observer { notifications ->
             setUpNotifications(notifications.filter { !it.isRead }.size)
@@ -95,6 +107,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
         viewModel.loadTripsAsCreatorHistory()
         viewModel.loadTripsAsPassengerHistory()
         viewModel.loadNotifications()
+        viewModel.loadReviews()
 
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_container)
@@ -169,15 +182,8 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
         val networkCallback: NetworkCallback = object : NetworkCallback() {
             override fun onAvailable(network: Network) {
-                Log.i("dfdf", "fkdikgidogdg")
                 Timer("SettingUp", false).schedule(1000) {
-                    viewModel.loadUserInfo()
-                    viewModel.loadCars()
-                    viewModel.loadTripsAsCreator()
-                    viewModel.loadTripsAsPassenger()
-                    viewModel.loadTripsAsCreatorHistory()
-                    viewModel.loadTripsAsPassengerHistory()
-                    viewModel.loadNotifications()
+                    viewModel.reload(true)
                 }
 
             }

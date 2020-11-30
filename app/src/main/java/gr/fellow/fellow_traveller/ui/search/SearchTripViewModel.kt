@@ -12,6 +12,7 @@ import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.usecase.trips.BookTripUseCase
 import gr.fellow.fellow_traveller.usecase.trips.SearchTripsUseCase
+import kotlinx.coroutines.delay
 
 
 class SearchTripViewModel
@@ -37,7 +38,7 @@ constructor(
     private val _searchFilter = SingleLiveEvent<SearchTripFilter>()
     val searchFilter: LiveData<SearchTripFilter> = _searchFilter
 
-    private val _resultTrips = SingleLiveEvent<MutableList<TripSearch>>()
+    private val _resultTrips = MutableLiveData<MutableList<TripSearch>>()
     val resultTrips: LiveData<MutableList<TripSearch>> = _resultTrips
 
     var deleteTripId: String? = null
@@ -66,18 +67,6 @@ constructor(
         )
     }
 
-    fun getTrips() {
-        launch {
-            loadResults.value = true
-            _searchFilter.value?.let { searchFilters ->
-                val response = searchTripsUseCase(searchFilters)
-                _resultTrips.value = response
-                setSortOption(sortOption)
-            }
-            loadResults.value = false
-        }
-    }
-
 
     fun swapDestinations() {
         _destinations.value = Pair(_destinations.value?.second, _destinations.value?.first)
@@ -96,7 +85,7 @@ constructor(
                 val response = bookTripUseCase(tripId, seats, pet)
                 _tripBook.value = response
             } catch (e: Exception) {
-                deleteTripId = tripId
+                handleErrorBook(tripId)
                 throw e
             }
 
@@ -104,42 +93,51 @@ constructor(
 
     }
 
+    fun getTrips() {
+        launchWithLiveData(true, loadResults) {
+            _searchFilter.value?.let { searchFilters ->
+                val response = searchTripsUseCase(searchFilters)
+                delay(500)
+                setSortOption(sortOption, response)
+            }
+        }
+    }
 
-    fun handleErrorBook(tripId: String) {
-        var tempTrips = mutableListOf<TripSearch>()
-        tempTrips.addAll(_resultTrips.value ?: emptyList())
+
+    private fun handleErrorBook(tripId: String) {
+        var tempTrips = _resultTrips.value ?: mutableListOf()
         tempTrips = tempTrips.filter { it.id != tripId }.toMutableList()
-        _resultTrips.value = mutableListOf()
         _resultTrips.value = tempTrips
-        deleteTripId = null
     }
 
     // TODO Can merge these 3 fun to 1
-    fun sortByDate() {
-        val sortedList = _resultTrips.value?.sortedWith(compareBy { it.timestamp })?.toMutableList()
+    private fun sortByDate(list: MutableList<TripSearch>? = null) {
+        val compareList = list ?: _resultTrips.value?.toMutableList() ?: mutableListOf()
+        val sortedList = compareList.sortedWith(compareBy { it.timestamp }).toMutableList()
         _resultTrips.value = sortedList
         sortOption = SortAnswerType.Relevant
-
     }
 
-    fun sortByPrice() {
-        val sortedList = _resultTrips.value?.sortedWith(compareBy { it.price })?.toMutableList()
+    private fun sortByPrice(list: MutableList<TripSearch>? = null) {
+        val compareList = list ?: _resultTrips.value?.toMutableList() ?: mutableListOf()
+        val sortedList = compareList.sortedWith(compareBy { it.price }).toMutableList()
         _resultTrips.value = sortedList
         sortOption = SortAnswerType.Price
     }
 
-    fun sortByRate() {
-        val sortedList = _resultTrips.value?.sortedWith(compareBy { it.creatorUser.rate })?.toMutableList()
+    private fun sortByRate(list: MutableList<TripSearch>? = null) {
+        val compareList = list ?: _resultTrips.value?.toMutableList() ?: mutableListOf()
+        val sortedList = compareList.sortedWith(compareBy { it.creatorUser.rate }).toMutableList()
         _resultTrips.value = sortedList
         sortOption = SortAnswerType.Rate
     }
 
     //Set Up Sort Option, based on previous choice
-    private fun setSortOption(sortOption: SortAnswerType) {
+    fun setSortOption(sortOption: SortAnswerType, list: MutableList<TripSearch>? = null) {
         when (sortOption) {
-            SortAnswerType.Relevant -> sortByDate()
-            SortAnswerType.Price -> sortByPrice()
-            else -> sortByRate()
+            SortAnswerType.Relevant -> sortByDate(list)
+            SortAnswerType.Price -> sortByPrice(list)
+            else -> sortByRate(list)
         }
 
     }

@@ -171,6 +171,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            android:layoutAnimation="@anim/layout_animation"
             app:layout_constraintTop_toBottomOf="@id/results_label"
             tools:listitem="@layout/search_result_item" />
 

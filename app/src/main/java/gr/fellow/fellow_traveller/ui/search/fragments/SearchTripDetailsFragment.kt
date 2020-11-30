@@ -3,6 +3,7 @@ package gr.fellow.fellow_traveller.ui.search.fragments
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
@@ -17,75 +18,65 @@ import gr.fellow.fellow_traveller.ui.user.UserProfileDetailsActivity
 @AndroidEntryPoint
 class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>() {
 
+    private val args: SearchTripDetailsFragmentArgs by navArgs()
     private val viewModel: SearchTripViewModel by activityViewModels()
-    private var tripId = "0"
-    private var index: Int? = null
 
-
-    override fun handleIntent() {
-        tripId = requireArguments().getString("tripId").toString()
-    }
 
     override fun getViewBinding(): FragmentSearchTripDetailsBinding =
         FragmentSearchTripDetailsBinding.inflate(layoutInflater)
 
 
     override fun setUpObservers() {
-        index = viewModel.resultTrips.value?.indexOfFirst { it.id == tripId }
-        if (index != null) {
-            viewModel.resultTrips.value?.get(index!!)?.let { trip ->
-                with(binding) {
-                    from.text = trip.destFrom.title
-                    to.text = trip.destTo.title
-                    time.text = trip.time
-                    day.text = trip.date
-                    userImage.loadImageFromUrl(trip.creatorUser.picture)
-                    username.text = trip.creatorUser.fullName
-                    rate.text = trip.creatorUser.rate.toString()
-                    price.text = resources.getString(R.string.price, trip.price.toString())
-                    seats.text = trip.seatsStatus
-                    bags.text = getString(trip.bags.textInt)
-                    pet.text = if (trip.hasPet) resources.getString(R.string.yes) else resources.getString(R.string.no)
-                    car.text = trip.carBase.baseInfo
-                    message.setText(trip.msg)
+        val trip = args.trip
+
+        if (trip != null) {
+
+            with(binding) {
+                from.text = trip.destFrom.title
+                to.text = trip.destTo.title
+                time.text = trip.time
+                day.text = trip.date
+                userImage.loadImageFromUrl(trip.creatorUser.picture)
+                username.text = trip.creatorUser.fullName
+                rate.text = trip.creatorUser.rate.toString()
+                price.text = resources.getString(R.string.price, trip.price.toString())
+                seats.text = trip.seatsStatus
+                bags.text = getString(trip.bags.textInt)
+                pet.text = if (trip.hasPet) resources.getString(R.string.yes) else resources.getString(R.string.no)
+                car.text = trip.carBase.baseInfo
+                message.setText(trip.msg)
+                description.text = "${price.text} ${getString(R.string.per_person)}"
 
 
-                    //Delete the "ς" or "s" when we display the name of the creator in the messenger button
-                    if (trip.creatorUser.firstName.takeLast(1).equals("ς"))
-                        messengerLinkText.text = getString(R.string.send_message_to, trip.creatorUser.firstName.dropLast(1))
-                    else
-                        messengerLinkText.text = getString(R.string.send_message_to, trip.creatorUser.firstName)
+                //Delete the "ς" or "s" when we display the name of the creator in the messenger button
+                if (trip.creatorUser.firstName.takeLast(1).equals("ς"))
+                    messengerLinkText.text = getString(R.string.send_message_to, trip.creatorUser.firstName.dropLast(1))
+                else
+                    messengerLinkText.text = getString(R.string.send_message_to, trip.creatorUser.firstName)
 
 
 
-                    googleMaps.setOnClickListener {
-                        activity?.openGoogleMaps(trip)
-                    }
-
-                    userImage.setOnClickListener {
-                        activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to trip.creatorUser.id))
-                    }
-
-                    messengerLinkConstraintLayout.setOnClickListener {
-
-                    }
-
-
-                    description.text = "${price.text} " + getString(R.string.per_person)
-
-                    if (!trip.passengers.isNullOrEmpty()) {
-                        binding.passengersSection.visibility = View.GONE
-                        binding.passengerRecyclerView.adapter = PassengerAdapter(trip.passengers, this@SearchTripDetailsFragment::onPassengerListener)
-                    } else {
-                        binding.passengersSection.visibility = View.VISIBLE
-                    }
-
-
-                    messengerLinkConstraintLayout.setOnClickListener {
-                        activity?.openMessenger(trip.creatorUser.messengerLink)
-                    }
-
+                googleMaps.setOnClickListener {
+                    activity?.openGoogleMaps(trip)
                 }
+
+                userImage.setOnClickListener {
+                    activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to trip.creatorUser.id))
+                }
+
+
+                if (!trip.passengers.isNullOrEmpty()) {
+                    binding.passengersSection.visibility = View.GONE
+                    binding.passengerRecyclerView.adapter = PassengerAdapter(trip.passengers, this@SearchTripDetailsFragment::onPassengerListener)
+                } else {
+                    binding.passengersSection.visibility = View.VISIBLE
+                }
+
+
+                messengerLinkConstraintLayout.setOnClickListener {
+                    activity?.openMessenger(trip.creatorUser.messengerLink)
+                }
+
             }
         } else {
             onBackPressed()
@@ -97,14 +88,12 @@ class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>
             onBackPressed()
         }
 
-
-
         binding.constraintLayoutMessenger.setOnClickListener {
-            findNavController()?.navigate(R.id.action_searchTripDetailsFragment_to_bookTripFragment, bundleOf("index" to index))
+            findNavController()?.navigate(R.id.action_searchTripDetailsFragment_to_bookTripFragment, bundleOf("trip" to args.trip))
         }
 
         binding.bookTrip.setOnClickListener {
-            findNavController()?.navigate(R.id.action_searchTripDetailsFragment_to_bookTripFragment, bundleOf("index" to index))
+            findNavController()?.navigate(R.id.action_searchTripDetailsFragment_to_bookTripFragment, bundleOf("trip" to args.trip))
         }
     }
 

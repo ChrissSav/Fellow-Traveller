@@ -86,10 +86,14 @@ class PickNumberButton(context: Context, attrs: AttributeSet) : ConstraintLayout
 
     fun setUpperLimit(limit: Int) {
         maxValue = limit
+        binding.minus.isEnabled = currentNum != minValue
+        binding.plus.isEnabled = currentNum != maxValue
     }
 
     fun setLowerLimit(limit: Int) {
         minValue = limit
+        binding.minus.isEnabled = currentNum != minValue
+        binding.plus.isEnabled = currentNum != maxValue
     }
 }
 

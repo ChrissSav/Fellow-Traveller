@@ -45,7 +45,7 @@ fun getTimeFromTimestamp(timestamp: Long): String {
 }
 
 @SuppressLint("SimpleDateFormat")
-fun convertTimestamptToFormat(time: Long, format: String): String {
+fun convertTimestampToFormat(time: Long, format: String): String {
     val date = if (time.toString().length == 10)
         Date(time * 1000L)
     else

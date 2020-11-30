@@ -80,12 +80,6 @@ class RateActivity : BaseActivityViewModel<ActivityRateBinding, RateViewModel>(R
 
             }
 
-
-            rateBar.setOnRatingChangeListener { _, rating, _ ->
-                createToast(getString(R.string.your_rating_is) + rating)
-            }
-
-
         }
     }
 

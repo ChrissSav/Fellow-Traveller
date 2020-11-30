@@ -1,17 +1,13 @@
 package gr.fellow.fellow_traveller.ui.search.fragments
 
-import android.util.Log
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentBookTripBinding
-import gr.fellow.fellow_traveller.domain.trip.TripSearch
-import gr.fellow.fellow_traveller.ui.extensions.createAlerter
-import gr.fellow.fellow_traveller.ui.extensions.createToast
-import gr.fellow.fellow_traveller.ui.extensions.findNavController
-import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
+import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
 
 
@@ -19,17 +15,13 @@ import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
 class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
 
     private val viewModel: SearchTripViewModel by activityViewModels()
-    private var index: Int = 0
-    private lateinit var currentTrip: TripSearch
+    private val args: BookTripFragmentArgs by navArgs()
+
     private var petAllow = false
     private var havePet = false
 
     override fun getViewBinding(): FragmentBookTripBinding =
         FragmentBookTripBinding.inflate(layoutInflater)
-
-    override fun handleIntent() {
-        index = requireArguments().getInt("index")
-    }
 
 
     override fun setUpObservers() {
@@ -39,7 +31,7 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
                 createAlerter(getString(it.messageId))
             else {
                 createAlerter(it.message)
-                findNavController()?.navigate(R.id.action_bookTripFragment_to_searchTripsFragment)
+                findNavController()?.bottomNav(R.id.searchTripsFragment)
             }
 
         })
@@ -47,23 +39,21 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
         viewModel.tripBook.observe(viewLifecycleOwner, Observer {
             findNavController()?.navigate(R.id.action_bookTripFragment_to_successTripBookFragment)
         })
+
     }
 
     override fun setUpViews() {
 
-        viewModel.resultTrips.value?.get(index)?.let { tripSearch ->
-            currentTrip = tripSearch
+        args.trip?.let { currentTrip ->
             with(binding) {
                 from.text = currentTrip.destTo.title
                 to.text = currentTrip.destFrom.title
                 time.text = currentTrip.time
                 day.text = currentTrip.date
-                Log.i("maxValue", "currentTrip.vacancies " + currentTrip.vacancies.toString())
                 seats.setUpperLimit(currentTrip.vacancies)
                 price.text = getString(R.string.price, currentTrip.price.toString())
                 petAllow = currentTrip.hasPet
-                /*if (!currentTrip.hasPet)
-                    pet.setText(getString(R.string.no))*/
+
 
                 //Check if the trips allows pet
                 if (currentTrip.hasPet) {
@@ -84,27 +74,16 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
                         petsSwitch.isChecked = false
                     }
                 }
-
-            }
-        }
-        with(binding) {
-
-            backButton.setOnClickListener {
-                onBackPressed()
-            }
-
-            book.setOnClickListener {
-                    viewModel.bookTrip(currentTrip.id, binding.seats.currentNum, havePet)
-            }
-
-           /*
-            pet.setOnClickListener {
-                if (petAllow) {
-                    petBottomSheetDialog = PetBottomSheetDialog(this@BookTripFragment::onPetItemClickListener)
-                    petBottomSheetDialog.show(childFragmentManager, "petBottomSheetDialog")
+                backButton.setOnClickListener {
+                    onBackPressed()
                 }
-            }*/
+
+                book.setOnClickListener {
+                    viewModel.bookTrip(currentTrip.id, binding.seats.currentNum, havePet)
+                }
+            }
         }
+
     }
 
 

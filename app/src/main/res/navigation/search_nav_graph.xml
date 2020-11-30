@@ -31,9 +31,13 @@
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
+
+
         <argument
-            android:name="tripId"
-            app:argType="string" />
+            android:name="trip"
+            android:defaultValue="@null"
+            app:argType="gr.fellow.fellow_traveller.domain.trip.TripSearch"
+            app:nullable="true" />
 
     </fragment>
     <fragment
@@ -41,10 +45,12 @@
         android:name="gr.fellow.fellow_traveller.ui.search.fragments.BookTripFragment"
         android:label="fragment_book_trip"
         tools:layout="@layout/fragment_book_trip">
-        <argument
-            android:name="index"
-            app:argType="integer" />
 
+        <argument
+            android:name="trip"
+            android:defaultValue="@null"
+            app:argType="gr.fellow.fellow_traveller.domain.trip.TripSearch"
+            app:nullable="true" />
 
         <action
             android:id="@+id/action_bookTripFragment_to_successTripBookFragment"
@@ -53,11 +59,7 @@
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
-        <action
-            android:id="@+id/action_bookTripFragment_to_searchTripsFragment"
-            app:destination="@id/searchTripsFragment"
-            app:popUpTo="@id/searchTripsFragment"
-            app:popUpToInclusive="true" />
+
     </fragment>
     <fragment
         android:id="@+id/successTripBookFragment"

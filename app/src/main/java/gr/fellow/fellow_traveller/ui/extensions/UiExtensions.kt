@@ -242,19 +242,8 @@ fun NavController.bottomNav(actionId: Int) {
         navBuilder.setPopExitAnim(R.anim.fade_out)
         this.navigate(actionId, null, navBuilder.build())
     }
-
 }
 
-fun NavController.navigateWithAnimation(actionId: Int, bundle: Bundle? = null) {
-
-    val navBuilder = NavOptions.Builder()
-
-    navBuilder.setEnterAnim(R.anim.enter_from_right)
-    navBuilder.setExitAnim(R.anim.exit_to_left)
-    navBuilder.setPopEnterAnim(R.anim.enter_from_left)
-    navBuilder.setPopExitAnim(R.anim.exit_to_right)
-    this.navigate(actionId, bundle, navBuilder.build())
-}
 
 /** ____________OTHERS_____________________________ */
 

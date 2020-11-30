@@ -3,7 +3,6 @@ package gr.fellow.fellow_traveller.ui.home.settings
 
 import android.app.Activity
 import android.content.Intent
-import android.util.Log
 import android.view.View
 import androidx.annotation.NonNull
 import androidx.core.os.bundleOf
@@ -89,13 +88,13 @@ class UserCarsFragment : BaseFragment<FragmentUserCarsBinding>() {
                         // Scrolling up
                         if (!newCarButton.isExtended)
                             newCarButton.extend()
-                        Log.i("makis", "Scrolling up")
+                        //Log.i("makis", "Scrolling up")
 
                     } else if (dy > 10) {
                         if (newCarButton.isExtended)
                             newCarButton.shrink()
                         // Scrolling down
-                        Log.i("makis", " Scrolling down")
+                        // Log.i("makis", " Scrolling down")
 
                     }
                 }

@@ -8,8 +8,10 @@ enum class PetAnswerType {
 }
 
 
-enum class SortAnswerType {
-    Price, Relevant, Rate
+enum class SortAnswerType(val textInt: Int) {
+    Price(R.string.price_title),
+    Relevant(R.string.most_relevant),
+    Rate(R.string.rating)
 }
 
 enum class AnswerType {

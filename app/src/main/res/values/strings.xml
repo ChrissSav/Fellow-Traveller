@@ -338,6 +338,12 @@
     <string name="placeholder_user_deleted_trip">Ο χρήστης Όνομα διέγραψε ένα ταξίδι στο οποίο είστε μέλος</string>
     <string name="trip_athens_kavala">Αθήνα - Καβάλα</string>
     <string name="placeholder_minutes_ago">πριν από 3 λεπτά</string>
+    <string name="minutes_ago">πριν από %s λεπτά</string>
+    <string name="minute_ago">πριν από 1 λεπτό</string>
+    <string name="hours_ago">πριν από %s ώρες</string>
+    <string name="hour_ago">πριν από 1 ώρα</string>
+    <string name="days_ago">πριν %s μέρες</string>
+    <string name="day_ago">πριν από 1 μέρα</string>
     <string name="first_name">Όνομα</string>
     <string name="number_placeholder" translatable="false">200</string>
     <string name="passenger_availability_placeholder" translatable="false">3/4</string>

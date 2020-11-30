@@ -8,7 +8,6 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentBaseSettingsBinding
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
-import gr.fellow.fellow_traveller.ui.extensions.navigateWithAnimation
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 
@@ -32,7 +31,7 @@ class BaseSettingsFragment : BaseFragment<FragmentBaseSettingsBinding>() {
 
 
         binding.personalInfo.setOnClickListener {
-            findNavController()?.navigateWithAnimation(R.id.action_baseSettingsFragment_to_accountSettingsFragment)
+            findNavController()?.navigate(R.id.action_baseSettingsFragment_to_accountSettingsFragment)
 
         }
 
