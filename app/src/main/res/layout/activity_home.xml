@@ -23,10 +23,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutMessenger"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="95dp"
         android:background="@drawable/bottom_sheet_dialog_shape"
         android:backgroundTint="@color/light_orange_New"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView">
 
         <TextView
@@ -46,8 +45,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
-            android:backgroundTint="@color/light_orange_New"
             android:src="@drawable/ic_messenger"
+            android:backgroundTint="@color/white_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

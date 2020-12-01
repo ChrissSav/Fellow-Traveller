@@ -55,6 +55,7 @@
             android:background="@drawable/background_stroke_radius_27_aqua"
             android:padding="16dp"
             android:src="@drawable/ic_add"
+            android:backgroundTint="@color/green"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

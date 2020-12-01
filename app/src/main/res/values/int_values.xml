@@ -3,7 +3,7 @@
     <integer name="Time_difference">900</integer>
     <dimen name="space_between_lines">6dp</dimen>
 
-    <integer name="anim_duration">200</integer>
+    <integer name="anim_duration">140</integer>
     <integer name="seats_min">1</integer>
     <integer name="bags_min">0</integer>
     <integer name="price_max">100</integer>
