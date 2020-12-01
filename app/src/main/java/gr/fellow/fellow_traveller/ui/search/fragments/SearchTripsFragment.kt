@@ -173,7 +173,6 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
         bundle.putFloat("motionCurrentState", binding.motion.progress)
         bundle.putInt("resultsLabelVisibility", binding.resultsLabel.visibility)
         bundle.putInt("sortButtonVisibility", binding.sortButton.visibility)
-        bundle.putInt("notFoundImage", binding.notFoundImage.visibility)
         super.onStop()
 
     }
@@ -182,9 +181,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
         binding.motion.progress = bundle.getFloat("motionCurrentState", 0f)
         binding.resultsLabel.visibility = bundle.getInt("resultsLabelVisibility", View.GONE)
         binding.sortButton.visibility = bundle.getInt("sortButtonVisibility", View.GONE)
-        binding.notFoundImage.visibility = bundle.getInt("notFoundImage", View.GONE)
         super.onResume()
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
