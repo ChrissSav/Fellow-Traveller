@@ -45,7 +45,6 @@
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right"
             app:popUpTo="@+id/register_nav_graph"
-            s
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
