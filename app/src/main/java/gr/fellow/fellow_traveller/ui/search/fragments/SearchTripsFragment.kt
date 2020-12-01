@@ -56,9 +56,9 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
             loadResults.observe(viewLifecycleOwner, Observer {
                 if (it) {
+                    binding.notFoundImage.visibility = View.GONE
                     binding.progressBar.visibility = View.VISIBLE
                     binding.recyclerView.visibility = View.GONE
-                    binding.notFoundImage.visibility = View.GONE
                 } else
                     binding.progressBar.visibility = View.GONE
             })
@@ -88,7 +88,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
             searchFilter.observe(viewLifecycleOwner, Observer {
                 binding.filterButton.visibility = View.VISIBLE
-                //viewModel.getTrips()
+                viewModel.getTrips()
             })
 
         }
@@ -220,23 +220,6 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
     }
 
     private fun onSortItemClickListener(sortAnswerType: SortAnswerType) {
-        /*  when (sortAnswerType) {
-             SortAnswerType.Relevant -> {
-                 binding.sortButton.text = getString(R.string.most_relevant)
-                 viewModel.setSortOption(sortAnswerType)
-                 //sortOption = SortAnswerType.Relevant
-             }
-             SortAnswerType.Price -> {
-                 binding.sortButton.text = getString(R.string.price_title)
-                 viewModel.setSortOption(sortAnswerType)
-                 //sortOption = SortAnswerType.Price
-             }
-             SortAnswerType.Rate -> {
-
-                 //sortOption = SortAnswerType.Rate
-             }
-
-         }*/
         binding.sortButton.text = getString(sortAnswerType.textInt)
         viewModel.setSortOption(sortAnswerType, null)
     }
