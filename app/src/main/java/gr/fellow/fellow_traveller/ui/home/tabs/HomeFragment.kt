@@ -108,7 +108,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
 
         binding.cityChoice4.setOnClickListener {
-            val placeFrom = PlaceModel("ChIJoUddWVyIWBMRMJy54iy9AAQ", getString(R.string.placeholder_city_larisa), 39.638779.toFloat(), 22.415979.toFloat())
+            val placeFrom = PlaceModel("ChIJAfxmkHK7rhQRbEdqRDfhZ_U", getString(R.string.placeholder_city_kavala), 40.937607.toFloat(), 24.412866.toFloat())
             val placeTo = PlaceModel("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", getString(R.string.placeholder_city_thessaloniki), 40.634781.toFloat(), 22.943090.toFloat())
             startActivityForResult(SearchTripActivity::class, 2, bundleOf("placeFrom" to placeFrom, "placeTo" to placeTo))
         }

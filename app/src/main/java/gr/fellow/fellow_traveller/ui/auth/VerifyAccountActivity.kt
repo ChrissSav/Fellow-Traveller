@@ -50,6 +50,7 @@ class VerifyAccountActivity : BaseActivity<ActivityVerifyAccountBinding>() {
         })
 
         viewModel.success.observe(this, Observer {
+            binding.imageView.visibility = View.VISIBLE
             binding.view3.startAnimation()
             binding.buttonLogin.visibility = View.VISIBLE
 
