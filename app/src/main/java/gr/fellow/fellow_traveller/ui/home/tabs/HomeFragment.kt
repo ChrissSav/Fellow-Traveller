@@ -37,7 +37,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
 
             //Delete the "ς" or "s" when we display the name
-            if (it.firstName.takeLast(1).equals("ς") || it.firstName.takeLast(1).equals("s"))
+            if (it.firstName.takeLast(1).equals("ς"))
                 binding.userName.text = it.firstName.dropLast(1) + ","
             else
                 binding.userName.text = it.firstName + ","
