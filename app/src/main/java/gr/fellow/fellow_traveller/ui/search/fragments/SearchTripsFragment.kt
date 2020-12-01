@@ -131,6 +131,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
             searchButton.setOnClickListener {
                 if (viewModel.destinations.value?.first != null && viewModel.destinations.value?.second != null) {
+                    viewModel.updateFilter()
                     viewModel.getTrips()
                     motion.transitionToEnd()
                 } else {
@@ -152,7 +153,6 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
                     viewModel.swapDestinations()
                     motion.transitionToEnd()
                     viewModel.getTrips()
-                    //viewModel.setSortOption(sortOption)
                 }
             }
         }
