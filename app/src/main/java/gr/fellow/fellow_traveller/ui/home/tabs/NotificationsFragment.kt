@@ -77,6 +77,8 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
             loadMoreTripsAsCreator = true
             loadMoreTripsAsPassenger = true
             viewModel.loadNotifications(true)
+            (binding.recyclerView.adapter as NotificationAdapter).submitList(null)
+
         }
     }
 
