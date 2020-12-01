@@ -327,11 +327,14 @@ constructor(
                 val tempTrip = list
                 tempTrip.add(trip)
                 _tripsAsCreatorActive.value = tempTrip
-                val car = _cars.value?.first { it.plate == trip.car.plate }
-                if (car == null)
+                try {
+                    val car = _cars.value?.first { it.plate == trip.car.plate }
+                    if (car == null)
+                        loadCars()
+                } catch (e: NoSuchElementException) {
                     loadCars()
+                }
             }
-
         }
     }
 

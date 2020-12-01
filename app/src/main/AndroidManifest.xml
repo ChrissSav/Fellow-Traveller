@@ -43,6 +43,7 @@
         <activity
             android:name=".ui.car.AddCarActivity"
             android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.search.locations.SelectDestinationActivity"
@@ -72,6 +73,7 @@
         <activity
             android:name=".ui.register.RegisterActivity"
             android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.splash.SplashActivity"

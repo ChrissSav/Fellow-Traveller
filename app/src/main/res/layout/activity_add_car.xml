@@ -126,16 +126,16 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/fragment_car_details_margin_inputs"
-                    android:layout_marginBottom="32dp"
-                    app:label_f="@string/color"
+                    android:layout_marginBottom="120dp"
                     app:hint_f="@string/placeholder_vehicle_color"
                     app:imeOptions_f="actionDone"
-                    app:max_length_f="10"
+                    app:label_f="@string/color"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/brand"
                     app:layout_constraintStart_toStartOf="@+id/brand"
                     app:layout_constraintTop_toBottomOf="@+id/plate"
                     app:layout_constraintVertical_bias="0.0"
+                    app:max_length_f="10"
                     app:regex_f="@string/regex_min_3_chars" />
 
 
@@ -170,4 +170,6 @@
         layout="@layout/generic_loader"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
