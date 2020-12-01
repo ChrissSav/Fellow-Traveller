@@ -84,10 +84,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             activity?.openUrl(BuildConfig.FELLOW_WEB_SITE_URL)
         }
 
-        binding.cityChoice1.loadImageFromUrl("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2FSKG-ATH.jpg?alt=media&token=ea8aac0d-b2af-4f09-af83-2db87e69dcf4")
-        binding.cityChoice2.loadImageFromUrl("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2FIOA-ATH.jpg?alt=media&token=e374487c-9715-49ea-b972-25384cb90e42")
-        binding.cityChoice3.loadImageFromUrl("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2FIOA-PAT.jpg?alt=media&token=0fb958e3-9027-4a10-9582-7262f7555a5c")
-        binding.cityChoice4.loadImageFromUrl("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2FKAV-SKG.jpg?alt=media&token=e08813a7-53a7-424e-9077-12d42e24f086")
+        binding.cityChoice1.loadImageFromUrl("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2FSKG%20-%20Athens.jpg?alt=media&token=6ed5258b-c268-4fc5-8236-c9af098d187e")
+        binding.cityChoice2.loadImageFromUrl("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2FIOA%20-%20ATH%202.jpg?alt=media&token=e7dca60f-cc8f-416f-9639-c9a0233b428a")
+        binding.cityChoice3.loadImageFromUrl("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2FIOA%20-%20PAT%202%20.jpg?alt=media&token=edefdd27-078c-4524-bce9-5c498c120fe1")
+        binding.cityChoice4.loadImageFromUrl("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2FKAB%20-%20SKG.jpg?alt=media&token=39ba040f-9705-445c-a2a6-c8b478406133")
 
         binding.cityChoice1.setOnClickListener {
             val placeFrom = PlaceModel("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", getString(R.string.placeholder_city_thessaloniki), 40.634781.toFloat(), 22.943090.toFloat())
