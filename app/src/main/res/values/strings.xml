@@ -15,7 +15,7 @@
     <string name="register_fragment_become_a_fellow_traveller">Γίνε κι εσύ ένας Fellow \nTraveller</string>
     <string name="register_fragment_six_digit_code_notice_description">Θα λάβετε έναν 6-ψήφιο κωδικό για την επιβεβαίωση του λογαριασμού.</string>
     <string name="account_fragment_about_me">Δεν υπάρχει κάποια σχετική περιγραφή.</string>
-    <string name="change_password">Αλλαγή Κωδικού</string>
+    <string name="change_password">Αλλαγή Συνθηματικού</string>
     <string name="confirm_password">Επιβεβαίωση συνθηματικού</string>
     <string name="PASSWORD_CHANGED_SUCCESSFULLY">Το συνθηματικό πρόσβασης άλλαξε επιτυχώς.</string>
     <string name="EMAIL_PLACEHOLDER">π.χ. user@example.com</string>
