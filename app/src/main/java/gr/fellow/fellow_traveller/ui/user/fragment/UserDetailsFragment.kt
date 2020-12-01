@@ -37,7 +37,7 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
                 offers.text = user.tripsOffers.toString()
                 this@UserDetailsFragment.messengerLink = user.messengerLink
                 if (!user.aboutMe.isNullOrEmpty())
-                    aboutMe.text = user.aboutMe
+                    aboutMe.setText(user.aboutMe)
                 constraintLayout.visibility = View.VISIBLE
                 binding.error.root.visibility = View.INVISIBLE
             }
