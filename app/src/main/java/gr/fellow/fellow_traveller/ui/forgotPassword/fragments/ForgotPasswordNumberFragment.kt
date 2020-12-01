@@ -33,7 +33,8 @@ class ForgotPasswordNumberFragment : BaseFragment<FragmentForgotPasswordNumberBi
         binding.buttonResend.setOnClickListener {
             viewModel.forgotPassword()
         }
-        binding.pinView.clearFocus()
+
+        binding.pinView.requestPinEntryFocus()
 
         binding.finish.setOnClickListener {
             val code = binding.pinView.value.toString()
