@@ -119,14 +119,14 @@ fun Activity.openUrl(url: String) {
 }
 
 fun Activity.openGoogleMaps(trip: TripSearch) {
-    val uri = "http://maps.google.com/maps?f=d&hl=en&saddr=${trip.destFrom.latitude},${trip.destFrom.longitude}&daddr=${trip.destTo.latitude},${trip.destTo.longitude}&mode=d"
+    val uri = "https://www.google.com/maps/dir/${trip.destFrom.title}/${trip.destTo.title}/"
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
     startActivity(Intent.createChooser(intent, getString(R.string.select_application)))
 
 }
 
 fun Activity.openGoogleMaps(trip: TripInvolved) {
-    val uri = "http://maps.google.com/maps?f=d&hl=en&saddr=${trip.destFrom.latitude},${trip.destFrom.longitude}&daddr=${trip.destTo.latitude},${trip.destTo.longitude}&mode=d"
+    val uri = "https://www.google.com/maps/dir/${trip.destFrom.title}/${trip.destTo.title}/"
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
     startActivity(Intent.createChooser(intent, getString(R.string.select_application)))
 }
