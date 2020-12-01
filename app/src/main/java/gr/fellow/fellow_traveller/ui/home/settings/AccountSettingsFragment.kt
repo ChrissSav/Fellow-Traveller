@@ -120,9 +120,9 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode === CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             val result = CropImage.getActivityResult(data) ///sas
-            if (resultCode === RESULT_OK) {
+            if (resultCode == RESULT_OK) {
                 mImageUri = result.uri
                 //profilePicture.setImageURI(mImageUri);
                 //imageProgressBar.setVisibility(View.VISIBLE)
@@ -130,7 +130,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
 
                 binding.progressBar.visibility = View.VISIBLE
                 compressUriImage()
-            } else if (resultCode === CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 // val e = result.error
                 createToast(getString(R.string.error_msg))
             }
