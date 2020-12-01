@@ -91,6 +91,7 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
 
     @SuppressLint("RestrictedApi")
     override fun onBackPressed() {
+
         if (viewModel.destinationFrom.value?.placeId != null && viewModel.destinationTo.value?.placeId != null) {
             if (nav.backStack.size == 2) {
                 openDialog()
