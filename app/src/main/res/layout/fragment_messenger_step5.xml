@@ -72,7 +72,7 @@
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
             android:focusable="false"
-            android:hint="@string/messenger_username_example"
+            android:hint="@string/paste_where"
             android:inputType="text"
             android:singleLine="true"
             android:textColorHint="@color/dark_gray_new"
