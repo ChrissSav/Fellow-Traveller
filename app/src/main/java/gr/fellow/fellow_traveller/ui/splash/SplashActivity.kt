@@ -60,7 +60,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         viewModel.getUserInfo()
 
         Glide.with(this)
-            .load(R.raw.fellow_splash_green)
+            .load(R.raw.splash_green_100fps)
             .into(GifDrawableImageViewTarget(binding.ImageView, 1) {
                 viewModel.setSecond(true)
             })
