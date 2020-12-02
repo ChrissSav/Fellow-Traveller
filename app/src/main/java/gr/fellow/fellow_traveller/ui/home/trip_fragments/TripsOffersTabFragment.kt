@@ -11,9 +11,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentTripsOffersBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
-import gr.fellow.fellow_traveller.ui.extensions.createAlerter
-import gr.fellow.fellow_traveller.ui.extensions.findNavController
-import gr.fellow.fellow_traveller.ui.extensions.startActivityForResult
+import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.TripsInvolvedAdapter
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripActivity
@@ -33,6 +31,7 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
 
         viewModel.tripsAsCreatorActive.observe(viewLifecycleOwner, Observer { list ->
             (binding.recyclerView.adapter as TripsInvolvedAdapter).submitList(list)
+            binding.swipeRefreshLayout.isRefreshing = false
 
             //Check if we have active trips
             if (list.isNullOrEmpty())
@@ -42,11 +41,11 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
         })
 
         viewModel.loadCreatorActive.observe(viewLifecycleOwner, Observer {
-            if (it)
-                binding.genericLoader.progressLoad.visibility = View.VISIBLE
-            else {
-                binding.swipeRefreshLayout.isRefreshing = false
-                binding.genericLoader.progressLoad.visibility = View.GONE
+            if (it) {
+                binding.offersSection.visibility = View.GONE
+                binding.shimmerViewContainer.startShimmerWithVisibility()
+            } else {
+                binding.shimmerViewContainer.stopShimmerWithVisibility()
             }
         })
 

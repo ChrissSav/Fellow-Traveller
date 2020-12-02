@@ -26,10 +26,12 @@ open class BaseViewModel : ViewModel() {
             load.value = shouldLoad
             try {
                 function.invoke()
+                load.value = false
             } catch (e: Exception) {
+                load.value = false
                 handleError(e)
             }
-            load.value = false
+
         }
     }
 

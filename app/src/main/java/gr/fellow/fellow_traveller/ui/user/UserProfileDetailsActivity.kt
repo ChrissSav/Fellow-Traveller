@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.ui.user
 
-import android.view.View
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseActivityViewModel
@@ -21,13 +20,7 @@ class UserProfileDetailsActivity : BaseActivityViewModel<ActivityUserInfoDetails
         ActivityUserInfoDetailsBinding.inflate(layoutInflater)
 
     override fun setUpObservers() {
-        viewModel.load.observe(this, Observer {
-            if (it)
-                binding.genericLoader.progressLoad.visibility = View.VISIBLE
-            else
-                binding.genericLoader.progressLoad.visibility = View.INVISIBLE
 
-        })
 
         viewModel.error.observe(this, Observer {
             if (it.internal)

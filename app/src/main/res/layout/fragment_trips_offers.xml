@@ -55,6 +55,24 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmerViewContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:visibility="gone"
+                    app:shimmer_duration="@integer/shimmer_anim_duration">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/trip_involved_item_layout_shimmer" />
+                    </LinearLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"
                     android:layout_width="match_parent"
@@ -63,6 +81,7 @@
                     android:nestedScrollingEnabled="false"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/trip_involved_item_layout_seconds" />
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/offers_section"
@@ -130,11 +149,5 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-
-    <include
-        android:id="@+id/generic_loader"
-        layout="@layout/generic_loader"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

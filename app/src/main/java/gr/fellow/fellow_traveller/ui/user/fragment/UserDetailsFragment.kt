@@ -7,9 +7,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentUserDetailsBinding
-import gr.fellow.fellow_traveller.ui.extensions.findNavController
-import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
-import gr.fellow.fellow_traveller.ui.extensions.openMessenger
+import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.user.UserInfoDetailsViewModel
 import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
 
@@ -25,7 +23,7 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
         FragmentUserDetailsBinding.inflate(layoutInflater)
 
     override fun setUpObservers() {
-        viewModel.user.observe(this, Observer { user ->
+        viewModel.user.observe(viewLifecycleOwner, Observer { user ->
             with(binding) {
                 if (user.messengerLink.isNullOrEmpty())
                     messengerLink1.visibility = View.INVISIBLE
@@ -39,12 +37,20 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
                 if (!user.aboutMe.isNullOrEmpty())
                     aboutMe.setText(user.aboutMe)
                 constraintLayout.visibility = View.VISIBLE
-                binding.error.root.visibility = View.INVISIBLE
+                binding.shimmerViewContainer.stopShimmerWithVisibility()
             }
 
         })
 
-        viewModel.reviews.observe(this, Observer { list ->
+        viewModel.load.observe(viewLifecycleOwner, Observer {
+            if (it)
+                binding.shimmerViewContainer.startShimmerWithVisibility()
+            else
+                binding.shimmerViewContainer.stopShimmerWithVisibility()
+
+        })
+
+        viewModel.reviews.observe(viewLifecycleOwner, Observer { list ->
 
             if (list.isNotEmpty()) {
 
@@ -65,8 +71,8 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
 
         })
 
-        viewModel.error.observe(this, Observer {
-            binding.error.root.visibility = View.VISIBLE
+        viewModel.error.observe(viewLifecycleOwner, Observer {
+            binding.shimmerViewContainer.startShimmerWithVisibility()
         })
 
     }

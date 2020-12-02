@@ -54,7 +54,6 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
                 binding.constraintLayoutMessenger.visibility = View.VISIBLE
             } else {
                 binding.constraintLayoutMessenger.visibility = View.GONE
-
             }
         })
 
@@ -125,10 +124,10 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
             }
 
 
-            if (destination.id == R.id.homeMessengerFragment)
+            /*if (destination.id == R.id.homeMessengerFragment)
                 binding.constraintLayoutMessenger.visibility = View.GONE
             else if (viewModel.user.value?.messengerLink == null)
-                binding.constraintLayoutMessenger.visibility = View.VISIBLE
+                binding.constraintLayoutMessenger.visibility = View.VISIBLE*/
 
 
             when (destination.id) {

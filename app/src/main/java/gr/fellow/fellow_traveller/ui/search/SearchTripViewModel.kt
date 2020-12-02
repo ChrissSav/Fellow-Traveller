@@ -41,7 +41,6 @@ constructor(
     private val _resultTrips = MutableLiveData<MutableList<TripSearch>>()
     val resultTrips: LiveData<MutableList<TripSearch>> = _resultTrips
 
-    var deleteTripId: String? = null
 
     fun setDestinationFrom(place: PlaceModel) {
         val temp = _destinations.value?.second
@@ -97,7 +96,7 @@ constructor(
         launchWithLiveData(true, loadResults) {
             _searchFilter.value?.let { searchFilters ->
                 val response = searchTripsUseCase(searchFilters)
-                delay(250)
+                delay(350)
                 setSortOption(sortOption, response)
             }
         }

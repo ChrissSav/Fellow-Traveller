@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.ui.extensions
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ClipboardManager
 import android.content.Context
@@ -24,8 +23,6 @@ import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.bumptech.glide.Glide
-import com.facebook.shimmer.Shimmer
-import com.facebook.shimmer.ShimmerDrawable
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.tapadoo.alerter.Alerter
 import gr.fellow.fellow_traveller.R
@@ -253,26 +250,10 @@ fun NavController.bottomNav(actionId: Int) {
 /** ____________OTHERS_____________________________ */
 
 
-@SuppressLint("CheckResult", "UseCompatLoadingForDrawables")
 fun ImageView.loadImageFromUrl(url: String?) {
     if (!url.isNullOrBlank()) {
-        val shimmer = Shimmer.AlphaHighlightBuilder()// The attributes for a ShimmerDrawable is set by this builder
-            .setDuration(1800) // how long the shimmering animation takes to do one full sweep
-            .setBaseAlpha(0.7f) //the alpha of the underlying children
-            .setHighlightAlpha(0.6f) // the shimmer alpha amount
-            .setDirection(Shimmer.Direction.LEFT_TO_RIGHT)
-            .setAutoStart(true)
-            .build()
-// This is the placeholder for the imageView
-        val shimmerDrawable = ShimmerDrawable().apply {
-            setShimmer(shimmer)
-        }
-
-
         Glide.with(this.context)
             .load(url)
-            .placeholder(shimmerDrawable)
-            .error(context.getDrawable(R.drawable.ic_add))
             .into(this)
     }
 }

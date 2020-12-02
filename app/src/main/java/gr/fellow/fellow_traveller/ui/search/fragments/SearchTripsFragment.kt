@@ -2,7 +2,6 @@ package gr.fellow.fellow_traveller.ui.search.fragments
 
 import android.app.Activity
 import android.content.Intent
-import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
@@ -47,27 +46,28 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
             })
 
             error.observe(viewLifecycleOwner, Observer {
-                binding.progressBar.visibility = View.GONE
+                binding.shimmerViewContainer.stopShimmerWithVisibility()
                 if (it.internal)
                     createAlerter(getString(it.messageId))
                 else
                     createAlerter(it.message)
             })
 
+
             loadResults.observe(viewLifecycleOwner, Observer {
                 if (it) {
+                    binding.sortButton.visibility = View.GONE
                     binding.notFoundImage.visibility = View.GONE
-                    binding.progressBar.visibility = View.VISIBLE
                     binding.recyclerView.visibility = View.GONE
-                } else
-                    binding.progressBar.visibility = View.GONE
+                    binding.shimmerViewContainer.startShimmerWithVisibility()
+                } else {
+                    binding.shimmerViewContainer.stopShimmerWithVisibility()
+                }
             })
 
 
             resultTrips.observe(viewLifecycleOwner, Observer {
-/*                tripsList.clear()
-                tripsList.addAll(it)*/
-                //   binding.recyclerView.adapter?.notifyDataSetChanged()
+
                 (binding.recyclerView.adapter as SearchResultsListAdapter).submitList(it)
 
 
@@ -108,7 +108,6 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
                     clickTimeDialog = currentTimeStamp()
                     sortSearchTripsBottomSheetDialog = SortSearchTripsBottomSheetDialog(this@SearchTripsFragment::onSortItemClickListener)
                     sortSearchTripsBottomSheetDialog.show(childFragmentManager, "sortSearchTripsBottomSheetDialog")
-                    Log.i("PICKER", "enter")
                 }
             }
 
