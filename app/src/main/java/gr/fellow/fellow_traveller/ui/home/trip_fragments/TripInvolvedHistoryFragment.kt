@@ -12,6 +12,8 @@ import gr.fellow.fellow_traveller.databinding.FragmentTripInvolvedHistoryBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
+import gr.fellow.fellow_traveller.ui.extensions.startShimmerWithVisibility
+import gr.fellow.fellow_traveller.ui.extensions.stopShimmerWithVisibility
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.TripsHistoryAdapter
 
@@ -39,25 +41,27 @@ class TripInvolvedHistoryFragment : BaseFragment<FragmentTripInvolvedHistoryBind
 
             })
         } else {
+
             viewModel.tripsAsPassengerHistory.observe(viewLifecycleOwner, Observer { list ->
                 binding.swipeRefreshLayout.isRefreshing = false
                 (binding.recyclerView.adapter as TripsHistoryAdapter).submitList(list)
 
                 //Check if we have trips in history
-                if (list.isNullOrEmpty())
+                if (list.isNullOrEmpty()) {
                     binding.historySection.visibility = View.VISIBLE
-                else
+                } else {
                     binding.historySection.visibility = View.GONE
+                }
 
             })
         }
 
         viewModel.loadHistory.observe(viewLifecycleOwner, Observer {
             if (it) {
-                binding.progressBar2.visibility = View.VISIBLE
-                binding.recyclerView.scrollToPosition((binding.recyclerView.adapter as TripsHistoryAdapter).currentList.size - 1)
+                binding.historySection.visibility = View.GONE
+                binding.shimmerViewContainer.startShimmerWithVisibility()
             } else
-                binding.progressBar2.visibility = View.GONE
+                binding.shimmerViewContainer.stopShimmerWithVisibility()
         })
 
         viewModel.error.observe(viewLifecycleOwner, Observer {

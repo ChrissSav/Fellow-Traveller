@@ -11,6 +11,8 @@ import gr.fellow.fellow_traveller.databinding.FragmentNotificationsBinding
 import gr.fellow.fellow_traveller.domain.notification.Notification
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.startActivityWithFade
+import gr.fellow.fellow_traveller.ui.extensions.startShimmerWithVisibility
+import gr.fellow.fellow_traveller.ui.extensions.stopShimmerWithVisibility
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.NotificationAdapter
 import gr.fellow.fellow_traveller.ui.rate.RateActivity
@@ -29,7 +31,6 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
 
     override fun setUpObservers() {
 
-
         viewModel.notifications.observe(viewLifecycleOwner, Observer { list ->
             binding.swipeRefreshLayout.isRefreshing = false
             (binding.recyclerView.adapter as NotificationAdapter).submitList(list)
@@ -44,11 +45,11 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
 
         viewModel.loadNotifications.observe(viewLifecycleOwner, Observer {
             if (it) {
-                binding.progressBar2.visibility = View.VISIBLE
-                binding.recyclerView.scrollToPosition((binding.recyclerView.adapter as NotificationAdapter).currentList.size - 1)
+                binding.notificationsSection.visibility = View.GONE
+                binding.shimmerViewContainer.startShimmerWithVisibility()
             } else {
+                binding.shimmerViewContainer.stopShimmerWithVisibility()
                 binding.swipeRefreshLayout.isRefreshing = false
-                binding.progressBar2.visibility = View.GONE
             }
 
         })

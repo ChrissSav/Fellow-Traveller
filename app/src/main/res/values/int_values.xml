@@ -4,6 +4,7 @@
     <dimen name="space_between_lines">6dp</dimen>
 
     <integer name="anim_duration">250</integer>
+    <integer name="shimmer_anim_duration">800</integer>
     <integer name="seats_min">1</integer>
     <integer name="bags_min">0</integer>
     <integer name="price_max">100</integer>

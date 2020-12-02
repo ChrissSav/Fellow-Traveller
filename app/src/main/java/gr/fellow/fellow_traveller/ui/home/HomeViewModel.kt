@@ -24,6 +24,7 @@ import gr.fellow.fellow_traveller.usecase.trips.ExitFromTripUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsCreatorRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsPassengerRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -197,6 +198,8 @@ constructor(
                 return@launchWithLiveData
             }
             val response = getTripsAsCreatorRemoteUseCase("active")
+            if (more)
+                delay(350)
             _tripsAsCreatorActive.value = response
         }
     }
@@ -209,6 +212,8 @@ constructor(
                 return@launchWithLiveData
             }
             val response = getTripsAsCreatorRemoteUseCase("inactive")
+            if (more)
+                delay(350)
             _tripsAsCreatorHistory.value = response
         }
     }
@@ -223,6 +228,8 @@ constructor(
                 return@launchWithLiveData
             }
             val response = getTripsAsPassengerRemoteUseCase("active")
+            if (more)
+                delay(350)
             _tripsAsPassengerActive.value = response
         }
 
@@ -235,6 +242,8 @@ constructor(
                 return@launchWithLiveData
             }
             val response = getTripsAsPassengerRemoteUseCase("inactive")
+            if (more)
+                delay(350)
             _tripsAsPassengerHistory.value = response
         }
     }
@@ -259,8 +268,8 @@ constructor(
             loadMoreTripsAsCreator = true
             loadMoreTripsAsPassenger = true
             val response = getNotificationsUseCase()
-
-
+            if (more)
+                delay(350)
             _notifications.value = response
 
             if (response.filter { (it.type == 1 || it.type == 2) && !it.isRead }.any() && loadMoreTripsAsCreator) {
@@ -376,6 +385,8 @@ constructor(
                 if (_reviews.value != null && !more) {
                     return@launch
                 }
+                if (more)
+                    delay(350)
                 val response = getUserReviewsUseCase(it)
                 _reviews.value = response
             }
