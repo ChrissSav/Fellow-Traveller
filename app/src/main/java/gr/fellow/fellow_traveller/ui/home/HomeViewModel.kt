@@ -63,6 +63,7 @@ constructor(
 
     private val _cars = MutableLiveData<MutableList<Car>>()
     val cars: LiveData<MutableList<Car>> = _cars
+    val loadCars = MutableLiveData<Boolean>()
 
     private val _messengerUpdate = SingleLiveEvent<Boolean>()
     val messengerUpdate: LiveData<Boolean> = _messengerUpdate
@@ -119,6 +120,7 @@ constructor(
     /** Profile **/
     private val _reviews = MutableLiveData<MutableList<Review>>()
     val reviews: LiveData<MutableList<Review>> = _reviews
+    val loadReviews = MutableLiveData<Boolean>()
 
     /*****************************************************************************************************/
 
@@ -175,9 +177,15 @@ constructor(
     /** CARS ***/
 
 
-    fun loadCars() {
-        launch {
-            _cars.value = getUserCarsRemoteUseCase()
+    fun loadCars(more: Boolean = false) {
+        launchWithLiveData(true, loadCars) {
+            if (_tripsAsCreatorActive.value != null && !more) {
+                return@launchWithLiveData
+            }
+            val response = getUserCarsRemoteUseCase()
+            if (more)
+                delay(350)
+            _cars.value = response
         }
     }
 
@@ -380,10 +388,10 @@ constructor(
     }
 
     fun loadReviews(more: Boolean = false) {
-        launch(true) {
+        launchWithLiveData(true, loadReviews) {
             _user.value?.id?.let {
                 if (_reviews.value != null && !more) {
-                    return@launch
+                    return@launchWithLiveData
                 }
                 if (more)
                     delay(350)

@@ -27,17 +27,12 @@ class UserReviewsFragment : BaseFragment<FragmentUserReviewsBinding>() {
             reviewsList.clear()
             reviewsList.addAll(it)
             binding.recyclerView.adapter?.notifyDataSetChanged()
-            binding.swipeRefreshLayout.isRefreshing = false
-
             binding.numRate.text = "${it.size} ${getString(R.string.total_ratings)}"
         })
     }
 
     override fun setUpViews() {
         binding.recyclerView.adapter = ReviewsAdapter(reviewsList)
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            viewModel.loadReviews()
-        }
 
         binding.backButton.setOnClickListener {
             onBackPressed()

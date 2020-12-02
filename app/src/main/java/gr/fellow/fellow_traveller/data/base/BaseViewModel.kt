@@ -40,10 +40,11 @@ open class BaseViewModel : ViewModel() {
             liveData.value = shouldLoad
             try {
                 function.invoke()
+                liveData.value = false
             } catch (e: Exception) {
+                liveData.value = false
                 handleError(e)
             }
-            liveData.value = false
         }
     }
 

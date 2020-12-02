@@ -4,7 +4,6 @@ package gr.fellow.fellow_traveller.ui.home.settings
 import android.app.Activity
 import android.content.Intent
 import android.view.View
-import androidx.annotation.NonNull
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -15,9 +14,7 @@ import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentUserCarsBinding
 import gr.fellow.fellow_traveller.ui.car.AddCarActivity
 import gr.fellow.fellow_traveller.ui.car.CarAdapter
-import gr.fellow.fellow_traveller.ui.extensions.findNavController
-import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
-import gr.fellow.fellow_traveller.ui.extensions.startActivityForResult
+import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 
 
@@ -40,13 +37,30 @@ class UserCarsFragment : BaseFragment<FragmentUserCarsBinding>() {
             //if there are no cars to display, show specific message, else show cars
             if (it.isNullOrEmpty())
                 binding.carSection.visibility = View.VISIBLE
-            else
+            else {
+                binding.myCarsRecycler.visibility = View.VISIBLE
                 binding.carSection.visibility = View.GONE
+            }
+        })
+
+        viewModel.loadCars.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                binding.myCarsRecycler.visibility = View.GONE
+                binding.carSection.visibility = View.GONE
+                binding.shimmerViewContainer.startShimmerWithVisibility()
+            } else {
+                binding.shimmerViewContainer.stopShimmerWithVisibility()
+                binding.refresh.isRefreshing = false
+            }
         })
     }
 
     override fun setUpViews() {
+
+        viewModel.loadCars()
+
         with(binding) {
+
             myCarsRecycler.adapter = CarAdapter {
                 findNavController()?.navigate(R.id.action_userCarsFragment_to_carDetailsFragment, bundleOf("car" to it))
             }
@@ -56,7 +70,7 @@ class UserCarsFragment : BaseFragment<FragmentUserCarsBinding>() {
             }
 
             refresh.setOnRefreshListener {
-                viewModel.loadCars()
+                viewModel.loadCars(true)
             }
 
             newCarButton.setOnClickListener {
@@ -64,23 +78,6 @@ class UserCarsFragment : BaseFragment<FragmentUserCarsBinding>() {
             }
 
             myCarsRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrollStateChanged(@NonNull recyclerView: RecyclerView, newState: Int) {
-                    super.onScrollStateChanged(recyclerView, newState)
-                    /* if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                        newCarButton.shrink()
-
-                        Log.i("makis","extend")
-
-                    }
-
-                    if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
-
-                        Log.i("makis","2trhmrtohitriuhtrihjit")
-
-
-                    }*/
-
-                }
 
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)

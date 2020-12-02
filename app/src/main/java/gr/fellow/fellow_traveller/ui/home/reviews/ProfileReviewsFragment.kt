@@ -10,6 +10,8 @@ import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentProfileReviewsBinding
 import gr.fellow.fellow_traveller.domain.review.Review
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
+import gr.fellow.fellow_traveller.ui.extensions.startShimmerWithVisibility
+import gr.fellow.fellow_traveller.ui.extensions.stopShimmerWithVisibility
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.ReviewsAdapter
 
@@ -23,7 +25,9 @@ class ProfileReviewsFragment : BaseFragment<FragmentProfileReviewsBinding>() {
         FragmentProfileReviewsBinding.inflate(layoutInflater)
 
     override fun setUpObservers() {
-        viewModel.reviews.observe(this, Observer {
+
+
+        viewModel.reviews.observe(viewLifecycleOwner, Observer {
             reviewsList.clear()
             reviewsList.addAll(it)
             binding.recyclerView.adapter?.notifyDataSetChanged()
@@ -36,6 +40,16 @@ class ProfileReviewsFragment : BaseFragment<FragmentProfileReviewsBinding>() {
                 binding.reviewsSection.visibility = GONE
 
             binding.numRate.text = "${it.size} ${getString(R.string.total_ratings)}"
+        })
+
+        viewModel.loadReviews.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                binding.reviewsSection.visibility = GONE
+                binding.shimmerViewContainer.startShimmerWithVisibility()
+            } else {
+                binding.shimmerViewContainer.stopShimmerWithVisibility()
+                binding.swipeRefreshLayout.isRefreshing = false
+            }
         })
     }
 
