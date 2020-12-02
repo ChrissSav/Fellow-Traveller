@@ -46,7 +46,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
             })
 
             error.observe(viewLifecycleOwner, Observer {
-                binding.shimmerViewContainer.stopShimmerWithVisibility()
+                binding.progressBar.visibility = View.GONE
                 if (it.internal)
                     createAlerter(getString(it.messageId))
                 else
@@ -59,9 +59,9 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
                     binding.sortButton.visibility = View.GONE
                     binding.notFoundImage.visibility = View.GONE
                     binding.recyclerView.visibility = View.GONE
-                    binding.shimmerViewContainer.startShimmerWithVisibility()
+                    binding.progressBar.visibility = View.VISIBLE
                 } else {
-                    binding.shimmerViewContainer.stopShimmerWithVisibility()
+                    binding.progressBar.visibility = View.GONE
                 }
             })
 
