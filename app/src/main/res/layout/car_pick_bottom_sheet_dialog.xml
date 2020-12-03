@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/bottom_sheet_dialog_shape">
 
     <TextView
@@ -19,62 +19,75 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:maxHeight="400dp"
-        android:paddingBottom="16dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13"
-        tools:listitem="@layout/car_item_pick" />
+        app:layout_constraintTop_toBottomOf="@+id/textView13">
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/add_car"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="49dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:paddingStart="32dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="32dp"
-        android:paddingBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_view">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="58dp"
-            android:layout_height="60dp"
-            android:background="@drawable/background_stroke_radius_27_aqua"
-            android:padding="16dp"
-            android:src="@drawable/ic_add"
-            app:tint="@color/green"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/car"
-            style="@style/paragraph_1"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/add"
-            android:textColor="@color/aqua_new"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:paddingBottom="64dp"
+            android:orientation="vertical">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView13"
+                tools:listitem="@layout/car_item_pick" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/add_car"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="49dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingStart="32dp"
+                android:paddingEnd="16dp">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="58dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/background_stroke_radius_27_aqua"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_add"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/green" />
+
+                <TextView
+                    android:id="@+id/car"
+                    style="@style/paragraph_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/add"
+                    android:textColor="@color/aqua_new"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

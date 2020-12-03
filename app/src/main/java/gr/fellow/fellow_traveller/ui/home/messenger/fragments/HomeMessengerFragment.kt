@@ -79,6 +79,7 @@ class HomeMessengerFragment : BaseFragment<FragmentHomeMessengerBinding>() {
                 }
             }
 
+
         })
         binding.back.setOnClickListener {
             onBackPressed()
