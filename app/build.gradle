@@ -5,11 +5,7 @@ apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: "androidx.navigation.safeargs.kotlin"
-apply plugin: 'com.chrisney.enigma'
 
-// Set Enigma options:
-enigma.enabled = true
-enigma.injectFakeKeys = true
 
 android {
 
@@ -55,7 +51,7 @@ android {
             buildConfigField "String", "PLACE_API_URL", "\"https://maps.googleapis.com/maps/api/place/\""
 
             versionNameSuffix "-R"
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

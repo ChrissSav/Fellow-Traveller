@@ -44,8 +44,9 @@ class VerifyAccountActivity : BaseActivity<ActivityVerifyAccountBinding>() {
         viewModel.error.observe(this, Observer {
             if (it.internal)
                 createToast(getString(it.messageId))
-            else
+            else {
                 createToast(it.message)
+            }
             finish()
         })
 
@@ -56,6 +57,7 @@ class VerifyAccountActivity : BaseActivity<ActivityVerifyAccountBinding>() {
 
 
     }
+
 
     override fun setUpViews() {
         viewModel.verify(token.toString())
