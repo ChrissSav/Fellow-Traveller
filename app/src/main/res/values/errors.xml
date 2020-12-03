@@ -7,30 +7,30 @@
     <!--Unauthorized API access-->
     <string name="ERROR_API_UNAUTHORIZED">Μη εξουσιοδοτημένη ενέργεια.</string>
     <!--User registration-->
-    <string name="ERROR_SOMETHING_WRONG">Ουπς! Κάτι πήγε στραβά. *_*</string>
+    <string name="ERROR_SOMETHING_WRONG">Ουπς! Κάτι πήγε στραβά.</string>
 
     <string name="ERROR_FIELDS_REQUIRE">Υπάρχουν κενά πεδία.</string>
 
     <string name="ERROR_INVALID_EMAIL_FORMAT">Μη έγκυρο email.</string>
-    <string name="ERROR_PASSWORD_COMPLEXITY_INVALID">Μη έγκυρος κωδικός πρόσβασης.</string>
-    <string name="ERROR_PASSWORD_DOES_NOT_MEET_COMPLEXITY_REQUIREMENTS">Ο κωδικός δεν πληρεί τους κανόνες πολυπλοκότητας.</string>
-    <string name="ERROR_PASSWORD_COMPLEXITY_SHOULD_CONTAIN">Ο κωδικός πρέπει να έχει:</string>
+    <string name="ERROR_PASSWORD_COMPLEXITY_INVALID">Μη έγκυρο συνθηματικό πρόσβασης.</string>
+    <string name="ERROR_PASSWORD_DOES_NOT_MEET_COMPLEXITY_REQUIREMENTS">Το συνθηματικό δεν πληρεί τους κανόνες πολυπλοκότητας.</string>
+    <string name="ERROR_PASSWORD_COMPLEXITY_SHOULD_CONTAIN">Το συνθηματικό πρέπει να έχει:</string>
     <string name="ERROR_PASSWORD_COMPLEXITY_LENGTH">\u2022 μήκος τουλάχιστον 8 χαρακτήρων</string>
     <string name="ERROR_PASSWORD_COMPLEXITY_LOWERCASE_LETTER">\u2022 ένα πεζό γράμμα</string>
     <string name="ERROR_PASSWORD_COMPLEXITY_UPPERCASE_LETTER">\u2022 ένα κεφαλαίο γράμμα</string>
     <string name="ERROR_PASSWORD_COMPLEXITY_DIGIT">\u2022 ένα ψηφίο</string>
     <string name="ERROR_PASSWORD_COMPLEXITY_SPECIAL_CHARACTER">\u2022 έναν ειδικό χαρακτήρα</string>
-    <string name="ERROR_PASSWORD_DO_NOT_MATCH">Οι κωδικοί πρόσβασης δεν ταιριάζουν.</string>
+    <string name="ERROR_PASSWORD_DO_NOT_MATCH">Τα συνθηματικά πρόσβασης δεν ταιριάζουν.</string>
     <string name="ERROR_EMAIL_ALREADY_EXISTS">Υπάρχει ήδη λογαριασμός με αυτό το email.</string>
     <string name="ERROR_PHONE_ALREADY_EXISTS">Υπάρχει ήδη λογαριασμός με αυτόν τον αριθμό τηλεφώνου.</string>
     <!--User authentication-->
-    <string name="ERROR_INVALID_CREDENTIALS">Λάθος email/κωδικός πρόσβασης.</string>
+    <string name="ERROR_INVALID_CREDENTIALS">Λάθος email/συνθηματικό πρόσβασης.</string>
     <!--Password change-->
-    <string name="ERROR_PASSWORD_CHANGE_INVALID_CURRENT_PASSWORD">Μη έκγυρος τρέχον κωδικός πρόσβασης.</string>
-    <string name="ERROR_OLD_PASSWORD_CANNOT_BE_SAME_AS_NEW_PASSWORD">Ο νέος κωδικός δεν μπορεί να είναι ίδιος με τον παλιό κωδικό.</string>
+    <string name="ERROR_PASSWORD_CHANGE_INVALID_CURRENT_PASSWORD">Μη έγκυρο τρέχον συνθηματικό.</string>
+    <string name="ERROR_OLD_PASSWORD_CANNOT_BE_SAME_AS_NEW_PASSWORD">Το νέο συνθηματικό δεν μπορεί να είναι ίδιο με τον παλιό.</string>
     <string name="INVALID_PHONE_FORMAT">Μη έγκυρος αριθμός τηλεφώνου.</string>
     <string name="CONFIRM_DELETION">Είσαι σίγουρος για την διαγραφή;</string>
-    <string name="ERROR_INVALID_PLATE_FORMAT">Η πινακίδα πρέπει να είναι της μορφής ΧΥΖ-1234 με ελληνικούς χαρακτήρες.</string>
+    <string name="ERROR_INVALID_PLATE_FORMAT">Η πινακίδα πρέπει να είναι της μορφής ΧΥΖ-1234 και να έχει ελληνικούς χαρακτήρες.</string>
     <string name="ERROR_PLATE_ALREADY_EXISTS">Υπάρχει ήδη αυτοκίνητο με αυτή τη πινακίδα.</string>
     <!--api status codes-->
 
@@ -38,32 +38,32 @@
     <string name="ERROR_TIME_DATE_VALIDATION">Η ημερ/νία που επιλέξατε δεν είναι έγκυρη.</string>
     <string name="ERROR_CAR_NOT_BELONG_TO_USER">Το αυτοκίνητο που επιλέξατε δεν σας ανήκει.</string>
     <string name="ERROR_TRIP_NOT_FOUND">Το ταξίδι δεν βρέθηκε ή δεν είναι ενεργό.</string>
-    <string name="ERROR_TRIP_USER_ALREADY_PASSENGER">Είστε ήδη επιβάτης.</string>
-    <string name="ERROR_TRIP_USER_IS_CREATOR">Είστε ο δημιουργός του ταξιδιού.</string>
+    <string name="ERROR_TRIP_USER_ALREADY_PASSENGER">Είσαι ήδη επιβάτης.</string>
+    <string name="ERROR_TRIP_USER_IS_CREATOR">Είσαι ο δημιουργός του ταξιδιού.</string>
     <string name="ERROR_TRIP_NOT_AVAILABLE_SEATS">Δεν υπάρχουν διαθέσιμες θέσεις.</string>
-    <string name="ERROR_TRIP_NOT_AVAILABLE_LUGGAGE">Ο χώρος αποσκευών που ζητήσατε δεν είναι διαθέσιμος.</string>
-    <string name="ERROR_TRIP_CHECK_PET_ACCEPTS">Ελέγξτε αν το ταξίδι δέχεται κατοικίδια.</string>
-    <string name="ERROR_TRIP_TIMESTAMP">Η αναχωρηση του ταξιδιού πρέπει να είναι τουλάχιστον 15 λεπτά αργότερα.</string>
+    <string name="ERROR_TRIP_NOT_AVAILABLE_LUGGAGE">Ο χώρος αποσκευών που ζητήσες δεν είναι διαθέσιμος.</string>
+    <string name="ERROR_TRIP_CHECK_PET_ACCEPTS">Έλεγξε αν το ταξίδι δέχεται κατοικίδια.</string>
+    <string name="ERROR_TRIP_TIMESTAMP">Η αναχώρηση του ταξιδιού πρέπει να είναι τουλάχιστον 15 λεπτά αργότερα.</string>
     <string name="ERROR_TRIP_PICKUP_POINT">Το σημείο της συνάντησης πρέπει να είναι σε ακτίνα 5 χμλ με βάση την τοποθέσια αναχώρησης.</string>
 
 
-    <string name="ERROR_RATING_YOURSELF">Δεν μπορείτε να αξιολογήσετε τον εαυτό σας</string>
+    <string name="ERROR_RATING_YOURSELF">Δεν μπορείς να αξιολογήσεις τον εαυτό σου</string>
     <string name="ERROR_RATING_USER_TARGET_NOT_FOUND">Ο χρήστης δεν βρέθηκε.</string>
-    <string name="ERROR_RATING_CANT_REGISTER_THE_RATE">Έχετε ήδη αξιολογήση τον χρήστη.</string>
+    <string name="ERROR_RATING_CANT_REGISTER_THE_RATE">Έχεις ήδη αξιολογήσει αυτόν τον χρήστη.</string>
 
 
-    <string name="ERROR_TRIP_USER_NOT_PASSENGER">Δεν συμμετέχετε σε αυτό το ταξίδι.</string>
+    <string name="ERROR_TRIP_USER_NOT_PASSENGER">Δεν συμμετέχεις σε αυτό το ταξίδι.</string>
     <string name="ERROR_TRIP_QRCODE_EARLY">Είναι νωρίς ακόμα για την σάρωση.</string>
     <string name="ERROR_TRIP_QRCODE_WRONG">Το QRCode είναι λάθος.</string>
 
 
-    <string name="ERROR_SELECT_CAR">Παρακαλώ επιλέξτε αυτοκίνητο.</string>
-    <string name="ERROR_SELECT_DEST_FROM">Παρακαλώ επιλέξτε σημείο αφετηρίας.</string>
-    <string name="ERROR_SELECT_DEST_TO">Παρακαλώ επιλέξτε σημείο προορισμού.</string>
-    <string name="ERROR_SELECT_PET">Παρακαλώ καθορίστε αν το ταξίδι δέχεται κατοικίδια.</string>
-    <string name="ERROR_SELECT_SEAT">Παρακαλώ καθορίστε την κατάσταση των αποσκεύων.</string>
+    <string name="ERROR_SELECT_CAR">Παρακαλώ επέλεξε αυτοκίνητο.</string>
+    <string name="ERROR_SELECT_DEST_FROM">Παρακαλώ επέλεξε σημείο αφετηρίας.</string>
+    <string name="ERROR_SELECT_DEST_TO">Παρακαλώ επέλεξε σημείο προορισμού.</string>
+    <string name="ERROR_SELECT_PET">Παρακαλώ καθόρισε αν το ταξίδι δέχεται κατοικίδια.</string>
+    <string name="ERROR_SELECT_SEAT">Παρακαλώ καθόριστε την κατάσταση των αποσκεύων.</string>
 
 
-    <string name="check_field">Παρακαλώ ελέγξε το πεδίο.</string>
+    <string name="check_field">Παρακαλώ έλεγξε το πεδίο.</string>
 
 </resources>
