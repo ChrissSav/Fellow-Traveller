@@ -88,7 +88,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:regex_f="@string/regex_min_3_chars_english_with_space" />
+                    app:regex_f="@string/regex_min_2_chars_english_with_space" />
 
 
                 <gr.fellow.fellow_traveller.ui.views.FellowEditText
