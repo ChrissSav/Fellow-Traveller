@@ -39,9 +39,12 @@ class FellowRepositoryImpl(
             service.registerUser(registerUserRequest).handleApiFormat()
         }
 
-    override suspend fun verifyAccount(token: String): String =
+    override suspend fun verifyAccount(token: String): UserAuthResponse =
         networkCall {
-            service.verifyAccount(token).handleApiFormat()
+            val response = service.verifyAccount(token).handleApiFormat()
+            sharedPrefs[PREFS_AUTH_ACCESS_TOKEN] = response.authenticationToken
+            sharedPrefs[PREFS_AUTH_REFRESH_TOKEN] = response.refreshToken
+            response.accountInfo
         }
 
     override suspend fun loginUserRemote(loginRequest: LoginRequest): UserAuthResponse =
@@ -206,7 +209,6 @@ class FellowRepositoryImpl(
             Log.i("rpjgpoirjgre", "regoireghreigr")
             userAuthDao.deleteUser()
         }
-
 
 
 }

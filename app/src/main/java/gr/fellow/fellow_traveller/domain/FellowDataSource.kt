@@ -24,7 +24,7 @@ interface FellowDataSource {
 
     suspend fun registerUser(firstName: String, lastName: String, email: String, password: String): String
 
-    suspend fun verifyAccount(token: String): String
+    suspend fun verifyAccount(token: String): UserAuthResponse
 
     suspend fun loginUser(username: String, password: String): UserAuthResponse
 

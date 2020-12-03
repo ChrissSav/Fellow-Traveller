@@ -23,7 +23,7 @@ interface FellowRepository {
 
     suspend fun registerUserRemote(registerUserRequest: AccountCreateRequest): String
 
-    suspend fun verifyAccount(token: String): String
+    suspend fun verifyAccount(token: String): UserAuthResponse
 
     suspend fun loginUserRemote(loginRequest: LoginRequest): UserAuthResponse
 

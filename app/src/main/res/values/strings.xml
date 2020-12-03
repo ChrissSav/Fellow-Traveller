@@ -139,6 +139,7 @@
     <string name="complete_profile_warning">Πρέπει πρώτα να ολοκληρώσεις το προφίλ!</string>
     <string name="error_msg">Σφάλμα</string>
     <string name="authentication_success">Επιτυχής Επιβεβαίωση</string>
+    <string name="authentication_account">Επιβεβαίωση λογαριασμού</string>
     <string name="msg_continue">Συνέχεια</string>
     <string name="placeholder_car_make_model" translatable="false">Rolls-Royce Phantom</string>
     <string name="bookings">Κρατήσεις</string>

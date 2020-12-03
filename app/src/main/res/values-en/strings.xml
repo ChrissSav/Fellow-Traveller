@@ -167,6 +167,7 @@
     <string name="complete_profile_warning">You should complete your profile first!</string>
     <string name="error_msg">An error has occurred.</string>
     <string name="authentication_success">Successful Verification</string>
+    <string name="authentication_account">Account verification</string>
     <string name="msg_continue">Next</string>
     <string name="offers">Offers</string>
     <string name="delete_trip_success">Trip was deleted successfully.</string>

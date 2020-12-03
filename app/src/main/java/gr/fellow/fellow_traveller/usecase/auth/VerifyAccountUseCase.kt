@@ -7,6 +7,4 @@ class VerifyAccountUseCase(
 ) {
     suspend operator fun invoke(token: String) =
         dataSource.verifyAccount(token)
-
-
 }

@@ -5,13 +5,14 @@ import androidx.lifecycle.LiveData
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.auth.VerifyAccountUseCase
-import kotlinx.coroutines.delay
+import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
 
 
 class VerifyAccountViewModel
 @ViewModelInject
 constructor(
-    private val verifyAccountUseCase: VerifyAccountUseCase
+    private val verifyAccountUseCase: VerifyAccountUseCase,
+    private val registerUserLocalUseCase: RegisterUserLocalUseCase
 ) : BaseViewModel() {
 
     private val _success = SingleLiveEvent<Boolean>()
@@ -20,8 +21,9 @@ constructor(
 
     fun verify(token: String) {
         launch(true) {
-            delay(500)
-            verifyAccountUseCase(token)
+
+            val response = verifyAccountUseCase(token)
+            registerUserLocalUseCase(response)
             _success.value = true
 
         }
