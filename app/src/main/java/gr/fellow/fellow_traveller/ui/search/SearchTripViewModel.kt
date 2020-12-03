@@ -58,12 +58,19 @@ constructor(
     }
 
     fun updateFilter() {
-        _searchFilter.value = SearchTripFilter(
-            _destinations.value?.first?.latitude!!.toFloat(),
-            _destinations.value?.first?.longitude!!.toFloat(),
-            _destinations.value?.second?.latitude!!.toFloat(),
-            _destinations.value?.second?.longitude!!.toFloat()
-        )
+        if (_searchFilter.value != null) {
+            _searchFilter.value?.latitudeFrom = _destinations.value?.first?.latitude!!.toFloat()
+            _searchFilter.value?.longitudeFrom = _destinations.value?.first?.longitude!!.toFloat()
+            _searchFilter.value?.latitudeTo = _destinations.value?.second?.latitude!!.toFloat()
+            _searchFilter.value?.longitudeTo = _destinations.value?.second?.longitude!!.toFloat()
+        } else {
+            _searchFilter.value = SearchTripFilter(
+                _destinations.value?.first?.latitude!!.toFloat(),
+                _destinations.value?.first?.longitude!!.toFloat(),
+                _destinations.value?.second?.latitude!!.toFloat(),
+                _destinations.value?.second?.longitude!!.toFloat()
+            )
+        }
     }
 
 
