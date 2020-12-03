@@ -121,7 +121,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
-                viewModel.loadCars()
+                viewModel.loadCars(true)
             }
         }
     }

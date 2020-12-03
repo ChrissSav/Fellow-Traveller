@@ -260,7 +260,6 @@ constructor(
     fun reload(l: Boolean = false) {
         launch {
             reloadConnection.value = l
-
         }
     }
 
@@ -347,9 +346,9 @@ constructor(
                 try {
                     val car = _cars.value?.first { it.plate == trip.car.plate }
                     if (car == null)
-                        loadCars()
+                        loadCars(true)
                 } catch (e: NoSuchElementException) {
-                    loadCars()
+                    loadCars(true)
                 }
             }
         }
