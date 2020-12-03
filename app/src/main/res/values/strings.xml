@@ -115,6 +115,7 @@
 
     <string name="regex_min_3_chars_english" translatable="false">^[a-zA-Z0-9]{3,}$</string>
     <string name="regex_min_3_chars_english_with_space" translatable="false">^[a-zA-Z0-9_ ]{3,}$</string>
+    <string name="regex_min_2_chars_english_with_space" translatable="false">^[a-zA-Z0-9_ ]{2,}$</string>
     <string name="regex_min_3_chars" translatable="false">^.{3,}$</string>
     <string name="regex_accept_all" translatable="false">^.{0,50}$</string>
     <string name="regex_car_plate" translatable="false">^[ΑΒΕΖΗΙΚΜΝΟΡΤΥΧ]{3}-[0-9]{4}$</string>

@@ -106,7 +106,7 @@ class UserCarsFragment : BaseFragment<FragmentUserCarsBinding>() {
 
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
-                viewModel.loadCars()
+                viewModel.loadCars(true)
             }
         }
     }

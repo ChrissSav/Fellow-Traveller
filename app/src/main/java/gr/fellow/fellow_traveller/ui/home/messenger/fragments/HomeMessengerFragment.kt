@@ -1,7 +1,10 @@
 package gr.fellow.fellow_traveller.ui.home.messenger.fragments
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,6 +17,7 @@ import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
 import gr.fellow.fellow_traveller.ui.extensions.startActivityForResultWithFade
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.messenger.MessengerLinkActivity
+
 
 @AndroidEntryPoint
 class HomeMessengerFragment : BaseFragment<FragmentHomeMessengerBinding>() {
@@ -49,6 +53,34 @@ class HomeMessengerFragment : BaseFragment<FragmentHomeMessengerBinding>() {
             }
         }
 
+        binding.messengerLink.addTextChangedListener(object : TextWatcher {
+            private var isEditing = false
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            @SuppressLint("UseCompatLoadingForColorStateLists")
+            override fun afterTextChanged(editable: Editable?) {
+
+                if (!isEditing) {
+                    isEditing = true
+
+                    val text = editable?.toString() ?: ""
+                    if (text.contains("https")) {
+                        val sub = text.substringAfterLast(getString(R.string.messenger_url))
+                        binding.messengerLink.setText(sub)
+                        binding.messengerLink.setSelection(binding.messengerLink.text.length)
+                    }
+
+                    isEditing = false
+                }
+            }
+
+
+        })
         binding.back.setOnClickListener {
             onBackPressed()
         }
@@ -56,6 +88,8 @@ class HomeMessengerFragment : BaseFragment<FragmentHomeMessengerBinding>() {
             hideKeyboard()
             startActivityForResultWithFade(MessengerLinkActivity::class, 10)
         }
+
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
