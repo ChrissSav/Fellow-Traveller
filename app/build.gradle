@@ -5,11 +5,23 @@ apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'com.chrisney.enigma'
 
+// Set Enigma options:
+enigma.enabled = true
+enigma.injectFakeKeys = true
 
 android {
+
     compileSdkVersion 30
     buildToolsVersion "30.0.0"
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
 
     defaultConfig {
         applicationId "gr.fellow.fellow_traveller"
@@ -43,19 +55,12 @@ android {
             buildConfigField "String", "PLACE_API_URL", "\"https://maps.googleapis.com/maps/api/place/\""
 
             versionNameSuffix "-R"
-
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     
     signingConfigs {
-        release {
-          storeFile file('keystore/keystore_debug.jks')
-            keyAlias 'key0'
-            storePassword '123456'
-            keyPassword '123456'
-        }
 
         debug {
             storeFile file('keystore/keystore_debug.jks')

@@ -10,7 +10,7 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="PASSWORD_CHANGED_SUCCESSFULLY">Password changed successfully!</string>
     <string name="submit_trip_offer_success">Your trip was submitted successfully.</string>
-    <string name="book_trip_success">Congratulations! Your booking was submitted successfully.</string>
+    <string name="book_trip_success">Congratulations! Your trip was booked successfully.</string>
     <string name="submit_rating_success">Your rating was submitted successfully!</string>
     <string name="switch_text">Switch</string>
     <string name="hello">Hello</string>
