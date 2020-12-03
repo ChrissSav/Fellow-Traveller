@@ -383,8 +383,8 @@
     <string name="last_name">Επίθετο</string>
     <string name="email" translatable="false">Email</string>
     <string name="current_password">Τρέχων συνθηματικό</string>
-    <string name="new_password">Νέο συνθηματικό πρόσβασης</string>
-    <string name="repeat_password">Επανάληψη συνθηματικού πρόσβασης</string>
+    <string name="new_password">Νέο συνθηματικό</string>
+    <string name="repeat_password">Επανάληψη συνθηματικού</string>
     <string name="zero_placeholder" translatable="false">0</string>
     <string name="placeholder_from">π.χ. Αθήνα</string>
     <string name="placeholder_to">π.χ. Θεσσαλονίκη</string>
