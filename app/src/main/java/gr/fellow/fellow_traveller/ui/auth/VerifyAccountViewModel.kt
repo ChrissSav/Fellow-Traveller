@@ -21,11 +21,9 @@ constructor(
 
     fun verify(token: String) {
         launch(true) {
-
             val response = verifyAccountUseCase(token)
             registerUserLocalUseCase(response)
             _success.value = true
-
         }
     }
 

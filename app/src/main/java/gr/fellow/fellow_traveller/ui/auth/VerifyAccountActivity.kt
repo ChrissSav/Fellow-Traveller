@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.ui.auth
 
-import android.content.Intent
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
@@ -11,7 +10,6 @@ import gr.fellow.fellow_traveller.databinding.ActivityVerifyAccountBinding
 import gr.fellow.fellow_traveller.ui.extensions.createToast
 import gr.fellow.fellow_traveller.ui.extensions.startActivityClearStack
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
-import gr.fellow.fellow_traveller.ui.main.MainActivity
 
 @AndroidEntryPoint
 class VerifyAccountActivity : BaseActivity<ActivityVerifyAccountBinding>() {
@@ -56,14 +54,6 @@ class VerifyAccountActivity : BaseActivity<ActivityVerifyAccountBinding>() {
             startActivityClearStack(HomeActivity::class)
         })
 
-
-        binding.buttonLogin.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            intent.putExtra("login", true)
-            startActivity(intent)
-            finishAffinity()
-        }
 
     }
 

@@ -42,27 +42,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <Button
-        android:id="@+id/buttonLogin"
-        style="@style/header_3"
-        android:visibility="invisible"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="42dp"
-        android:background="@drawable/login_button_background"
-        android:drawableStart="@drawable/ic_right_arrow"
-        android:drawablePadding="8dp"
-        android:drawableTint="@color/white"
-        android:gravity="center|end"
-        android:paddingStart="16dp"
-        android:paddingEnd="20dp"
-        android:stateListAnimator="@null"
-        android:text="@string/msg_continue"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="RtlSymmetry" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
