@@ -12,3 +12,5 @@
 /captures
 .externalNativeBuild
 .cxx
+app/release/output-metadata.json
+app/release/gr.fellow.fellow_traveller-v1(1.0)-release.apk
