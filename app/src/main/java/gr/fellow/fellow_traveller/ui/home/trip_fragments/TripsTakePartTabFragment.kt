@@ -29,6 +29,7 @@ class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
 
     override fun setUpObservers() {
         viewModel.tripsAsPassengerActive.observe(viewLifecycleOwner, Observer { list ->
+            (binding.recyclerView.adapter as TripsInvolvedAdapter).submitList(null)
             (binding.recyclerView.adapter as TripsInvolvedAdapter).submitList(list)
             binding.swipeRefreshLayout.isRefreshing = false
             //Check if we have active trips

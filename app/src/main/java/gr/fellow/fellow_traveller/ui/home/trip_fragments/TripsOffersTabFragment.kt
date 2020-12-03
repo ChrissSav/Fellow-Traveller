@@ -30,6 +30,7 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
 
 
         viewModel.tripsAsCreatorActive.observe(viewLifecycleOwner, Observer { list ->
+            (binding.recyclerView.adapter as TripsInvolvedAdapter).submitList(null)
             (binding.recyclerView.adapter as TripsInvolvedAdapter).submitList(list)
             binding.swipeRefreshLayout.isRefreshing = false
 
