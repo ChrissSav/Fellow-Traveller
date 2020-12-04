@@ -4,12 +4,14 @@ import android.animation.AnimatorSet
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.ConnectivityManager.NetworkCallback
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.os.Build
+import android.util.Log
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
@@ -21,19 +23,26 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivityViewModel
 import gr.fellow.fellow_traveller.databinding.ActivityHomeBinding
+import gr.fellow.fellow_traveller.service.NotificationService
+import gr.fellow.fellow_traveller.service.NotificationSocketViewModel
 import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.main.MainActivity
 import java.util.*
+import javax.inject.Inject
 import kotlin.concurrent.schedule
 
 
 @AndroidEntryPoint
 class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(HomeViewModel::class.java), View.OnClickListener {
 
-
+    private val TAG = "MyService"
+    private var mService: NotificationService? = null
     private lateinit var navController: NavController
     private var currentCheck: ImageView? = null
     private var previousCheck: ImageView? = null
+
+    @Inject
+    lateinit var viewModelSecond: NotificationSocketViewModel
 
     private val homeLayout = listOf(
         R.id.destination_main,
@@ -71,9 +80,10 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
         })
 
 
-        viewModel.notifications.observe(this, Observer { notifications ->
-            setUpNotifications(notifications.filter { !it.isRead }.size)
-        })
+        /* viewModel.notifications.observe(this, Observer { notifications ->
+              setUpNotifications(notifications.filter { !it.isRead }.size)
+          })*/
+
 
         viewModel.load.observe(this, Observer {
             hideKeyboard()
@@ -94,6 +104,55 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
         viewModel.logout.observe(this, Observer {
             startActivityClearStack(MainActivity::class)
         })
+
+
+        viewModel.mBinder.observe(this, Observer {
+            if (it == null) {
+                Log.d(TAG, "onChanged: unbound from service")
+            } else {
+                Log.d(TAG, "onChanged: bound to service.")
+                mService = it.service
+                mService?.startPretendLongRunningTask()
+            }
+        })
+
+        viewModelSecond.notificationCount.observe(this, Observer {
+            if (it > 0)
+                viewModel.loadNotifications(true)
+            setUpNotifications(it)
+        })
+
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        startService()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (viewModel.mBinder.value != null) {
+            unbindService(viewModel.serviceConnection)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        val serviceIntent = Intent(this, NotificationService::class.java)
+        stopService(serviceIntent)
+    }
+
+
+    private fun startService() {
+        val serviceIntent = Intent(this, NotificationService::class.java)
+        startService(serviceIntent)
+        bindService()
+    }
+
+    private fun bindService() {
+        val serviceBindIntent = Intent(this, NotificationService::class.java)
+        bindService(serviceBindIntent, viewModel.serviceConnection, BIND_AUTO_CREATE)
     }
 
     override fun setUpViews() {
@@ -150,6 +209,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
                         currentCheck = binding.notification
                         setButtonCheck()
                         setButtonUnCheck()
+                        viewModelSecond.updateNotificationCount(0)
                     }
                 }
                 R.id.destination_info -> {

@@ -126,6 +126,10 @@
     <string name="notification_delete_trip">Ο χρήστης &lt;b&gt;%s&lt;/b&gt; ακύρωσε ένα ταξίδι στο οποίο είχατε κάνει κράτηση.</string>
     <string name="notification_passenger_enter">Ο χρήστης &lt;b&gt;%s&lt;/b&gt; έκανε κράτηση στο ταξίδι σου.</string>
     <string name="notification_passenger_exit">Ο χρήστης &lt;b&gt;%s&lt;/b&gt; ακύρωσε την κράτηση από το ταξίδι σου.</string>
+    <string name="notification_to_rate_title">Αξιολόγηση</string>
+    <string name="notification_delete_trip_title">Διαγραφή ταξιδιού</string>
+    <string name="notification_passenger_enter_title">Νέος επιβάτης</string>
+    <string name="notification_passenger_exit_title">Αποχώρηση επιβάτη</string>
     <string name="image_upload_success">Η φωτογραφία ανέβηκε επιτυχώς</string>
     <string name="image_upload_failure">Η φωτογραφία που επέλεξες δεν είναι έγκυρη</string>
     <string name="profile_update_success">Επιτυχής Αποθήκευση</string>

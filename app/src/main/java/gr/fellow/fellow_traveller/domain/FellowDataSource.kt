@@ -88,6 +88,8 @@ interface FellowDataSource {
 
     suspend fun getNotification(): MutableList<Notification>
 
+    suspend fun getNotificationSocket(): MutableList<Notification>
+
     suspend fun setNotificationRead(updateNotification: UpdateNotification): String
 
 

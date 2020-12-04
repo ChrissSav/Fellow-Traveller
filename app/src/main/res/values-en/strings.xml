@@ -106,6 +106,10 @@
     <string name="notification_delete_trip">User &lt;b&gt;%s&lt;/b&gt; canceled a trip you had previously booked a reservation on.</string>
     <string name="notification_passenger_enter">User &lt;b&gt;%s&lt;/b&gt; booked a reservation on your trip.</string>
     <string name="notification_passenger_exit">User &lt;b&gt;%s&lt;/b&gt; canceled their booking on your trip.</string>
+    <string name="notification_to_rate_title">Rate</string>
+    <string name="notification_delete_trip_title">Trip cancellation</string>
+    <string name="notification_passenger_enter_title">Passenger entry</string>
+    <string name="notification_passenger_exit_title">Passenger exit</string>
     <string name="ERROR_API_UNREACHABLE">Unable to establish connection with the API.</string>
     <string name="ERROR_API_UNAUTHORIZED">This action is unauthorized.</string>
     <string name="ERROR_SOMETHING_WRONG">Oops! An error has occurred. *_*</string>

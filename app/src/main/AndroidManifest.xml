@@ -98,6 +98,8 @@
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Base.Theme.AppCompat" />
+
+        <service android:name=".service.NotificationService" />
     </application>
 
 </manifest>

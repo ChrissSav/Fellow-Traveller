@@ -171,6 +171,11 @@ class FellowRepositoryImpl(
             service.getNotifications().handleApiFormat()
         }
 
+    override suspend fun getNotificationsSocket(): MutableList<NotificationResponse> =
+        networkCall {
+            service.getNotificationsSocket().handleApiFormat()
+        }
+
     override suspend fun setNotificationRead(updateNotification: UpdateNotification): String =
         networkCall {
             service.setNotificationRead(updateNotification).handleApiFormat()

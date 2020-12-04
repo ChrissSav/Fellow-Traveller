@@ -333,6 +333,7 @@ fun TextView.setTextHtml(text: String) {
     this.text = HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY)
 }
 
+fun String.getTextHtml(): String = HtmlCompat.fromHtml(this, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
 
 fun CharSequence.getString(): String? {
     return if (this.isEmpty()) null else this.toString().trim()

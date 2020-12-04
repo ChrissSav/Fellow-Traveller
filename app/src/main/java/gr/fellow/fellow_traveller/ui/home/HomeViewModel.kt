@@ -1,5 +1,9 @@
 package gr.fellow.fellow_traveller.ui.home
 
+import android.content.ComponentName
+import android.content.ServiceConnection
+import android.os.IBinder
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,6 +16,7 @@ import gr.fellow.fellow_traveller.domain.notification.Notification
 import gr.fellow.fellow_traveller.domain.review.Review
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
+import gr.fellow.fellow_traveller.service.NotificationService
 import gr.fellow.fellow_traveller.usecase.auth.ChangePasswordUseCase
 import gr.fellow.fellow_traveller.usecase.auth.DeleteUserAuthLocalUseCase
 import gr.fellow.fellow_traveller.usecase.home.*
@@ -400,6 +405,33 @@ constructor(
         }
     }
 
+
+    private val TAG = "MyService"
+
+    private val _mIsProgressBarUpdating = MutableLiveData<Boolean>()
+    val mIsProgressBarUpdating: LiveData<Boolean> = _mIsProgressBarUpdating
+
+    private val _mBinder = MutableLiveData<NotificationService.MyBinder>()
+    val mBinder: LiveData<NotificationService.MyBinder> = _mBinder
+
+
+    var serviceConnection = object : ServiceConnection {
+        override fun onServiceConnected(className: ComponentName, iBinder: IBinder) {
+            Log.d(TAG, "ServiceConnection: connected to service.")
+            // We've bound to MyService, cast the IBinder and get MyBinder instance
+            val binder = iBinder as NotificationService.MyBinder
+            _mBinder.postValue(binder)
+        }
+
+        override fun onServiceDisconnected(arg0: ComponentName) {
+            Log.d(TAG, "ServiceConnection: disconnected from service.")
+            _mBinder.postValue(null)
+        }
+    }
+
+    fun setIsProgressBarUpdating(isUpdating: Boolean) {
+        _mIsProgressBarUpdating.value = (isUpdating)
+    }
 
 }
 

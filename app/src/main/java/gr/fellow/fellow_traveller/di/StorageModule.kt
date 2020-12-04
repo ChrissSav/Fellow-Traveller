@@ -18,6 +18,7 @@ import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
 import gr.fellow.fellow_traveller.framework.network.google.PlaceApiService
 import gr.fellow.fellow_traveller.room.FellowDatabase
 import gr.fellow.fellow_traveller.room.dao.UserAuthDao
+import gr.fellow.fellow_traveller.usecase.notification.GetNotificationsSocketUseCase
 import javax.inject.Singleton
 
 @InstallIn(ApplicationComponent::class)
@@ -32,9 +33,14 @@ object StorageModule {
 
     @Singleton
     @Provides
+    fun provideGetNotificationsSocketUseCase(dataSource: FellowDataSource): GetNotificationsSocketUseCase {
+        return GetNotificationsSocketUseCase(dataSource)
+    }
+
+    @Singleton
+    @Provides
     fun provideGoogleServiceRepository(service: PlaceApiService): GoogleServiceRepository =
         GoogleServiceRepositoryImpl(service)
-
 
 
     @Singleton

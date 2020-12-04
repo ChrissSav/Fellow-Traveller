@@ -120,6 +120,9 @@ class FellowDataSourceImpl(
     override suspend fun getNotification(): MutableList<Notification> =
         repository.getNotification().map { it.mapToNotification() }.toMutableList()
 
+    override suspend fun getNotificationSocket(): MutableList<Notification> =
+        repository.getNotificationsSocket().map { it.mapToNotification() }.toMutableList()
+
 
     override suspend fun setNotificationRead(updateNotification: UpdateNotification): String =
         repository.setNotificationRead(updateNotification)

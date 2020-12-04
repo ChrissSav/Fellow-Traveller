@@ -190,6 +190,9 @@ interface FellowService {
     @GET("notification")
     suspend fun getNotifications(): Response<BaseResponse<MutableList<NotificationResponse>>>
 
+    @GET("notification/socket")
+    suspend fun getNotificationsSocket(): Response<BaseResponse<MutableList<NotificationResponse>>>
+
     @PUT("notification")
     suspend fun setNotificationRead(
         @Body updateNotification: UpdateNotification

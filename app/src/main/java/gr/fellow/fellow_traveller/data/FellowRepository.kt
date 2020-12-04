@@ -76,9 +76,11 @@ interface FellowRepository {
     suspend fun deleteTrip(tripId: String): String
 
 
-    // Notification
+    // Notificationget
 
     suspend fun getNotification(): MutableList<NotificationResponse>
+
+    suspend fun getNotificationsSocket(): MutableList<NotificationResponse>
 
     suspend fun setNotificationRead(updateNotification: UpdateNotification): String
 
