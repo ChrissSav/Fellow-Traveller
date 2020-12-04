@@ -40,6 +40,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
     private lateinit var navController: NavController
     private var currentCheck: ImageView? = null
     private var previousCheck: ImageView? = null
+    private var destinationToGo = 0
 
     @Inject
     lateinit var viewModelSecond: NotificationSocketViewModel
@@ -50,6 +51,11 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
         R.id.destination_notifications,
         R.id.destination_info
     )
+
+
+    override fun handleIntent() {
+        destinationToGo = intent.getIntExtra("destinationId", -252)
+    }
 
 
     override fun provideViewBinding(): ActivityHomeBinding =
@@ -79,10 +85,6 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
             }
         })
 
-
-        /* viewModel.notifications.observe(this, Observer { notifications ->
-              setUpNotifications(notifications.filter { !it.isRead }.size)
-          })*/
 
 
         viewModel.load.observe(this, Observer {
@@ -156,8 +158,6 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
     }
 
     override fun setUpViews() {
-
-
         viewModel.loadUserInfo()
         viewModel.loadCars()
         viewModel.loadTripsAsCreator()
@@ -170,6 +170,8 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_container)
 
+        if (destinationToGo != -252)
+            navController.navigate(destinationToGo)
 
         setupBottomNavMenu()
 
@@ -182,6 +184,8 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
                 showHideBottomNav(0)
             }
 
+            if (destination.id == R.id.destination_notifications)
+                viewModelSecond.updateNotificationCount(0)
 
             if (destination.id == R.id.homeMessengerFragment)
                 binding.constraintLayoutMessenger.visibility = View.GONE
@@ -209,7 +213,6 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
                         currentCheck = binding.notification
                         setButtonCheck()
                         setButtonUnCheck()
-                        viewModelSecond.updateNotificationCount(0)
                     }
                 }
                 R.id.destination_info -> {
