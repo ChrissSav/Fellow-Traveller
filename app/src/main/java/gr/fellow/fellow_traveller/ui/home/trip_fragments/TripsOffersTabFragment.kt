@@ -2,6 +2,7 @@ package gr.fellow.fellow_traveller.ui.home.trip_fragments
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
@@ -30,6 +31,7 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
 
 
         viewModel.tripsAsCreatorActive.observe(viewLifecycleOwner, Observer { list ->
+            Log.i("makis", "list.size ${list.size}")
             (binding.recyclerView.adapter as TripsInvolvedAdapter).submitList(null)
             (binding.recyclerView.adapter as TripsInvolvedAdapter).submitList(list)
             binding.swipeRefreshLayout.isRefreshing = false

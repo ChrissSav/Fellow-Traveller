@@ -91,7 +91,10 @@ constructor(
 
 
     fun setPrice(priceCurrent: Float) {
-        _price.value = priceCurrent
+        if (priceCurrent < 0)
+            _price.value = priceCurrent * -1
+        else
+            _price.value = priceCurrent
     }
 
     fun setSeats(seatCurrent: Int) {

@@ -24,7 +24,8 @@ class PriceFragment : BaseFragment<FragmentPriceBinding>() {
     override fun setUpObservers() {
 
         viewModel.price.observe(viewLifecycleOwner, Observer {
-            binding.AddPriceFragmentEditTextPrice.setText(it.toString())
+            if (it != 0f)
+                binding.AddPriceFragmentEditTextPrice.setText(it.toString())
             updateTotal(it)
         })
 

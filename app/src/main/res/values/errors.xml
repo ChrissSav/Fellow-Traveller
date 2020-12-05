@@ -3,7 +3,7 @@
     <string name="ERROR_INTERNET_CONNECTION">Δεν υπάρχει σύνδεση στο διαδίκτυο.</string>
 
     <!--API connection-->
-    <string name="ERROR_API_UNREACHABLE">Αδυναμία επικοινωνίας με το API.</string>
+    <string name="ERROR_API_UNREACHABLE">Αδυναμία επικοινωνίας με τον διακομιστή.</string>
     <!--Unauthorized API access-->
     <string name="ERROR_API_UNAUTHORIZED">Μη εξουσιοδοτημένη ενέργεια.</string>
     <!--User registration-->
@@ -53,8 +53,6 @@
 
 
     <string name="ERROR_TRIP_USER_NOT_PASSENGER">Δεν συμμετέχεις σε αυτό το ταξίδι.</string>
-    <string name="ERROR_TRIP_QRCODE_EARLY">Είναι νωρίς ακόμα για την σάρωση.</string>
-    <string name="ERROR_TRIP_QRCODE_WRONG">Το QRCode είναι λάθος.</string>
 
 
     <string name="ERROR_SELECT_CAR">Παρακαλώ επέλεξε αυτοκίνητο.</string>

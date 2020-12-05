@@ -40,10 +40,11 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
     private lateinit var navController: NavController
     private var currentCheck: ImageView? = null
     private var previousCheck: ImageView? = null
-    private var destinationToGo = 0
+    private var destinationToGo: Int? = null
 
     @Inject
     lateinit var viewModelSecond: NotificationSocketViewModel
+    private var bottomNavButtons = mutableListOf<Pair<ImageView, Int>>()
 
     private val homeLayout = listOf(
         R.id.destination_main,
@@ -51,12 +52,6 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
         R.id.destination_notifications,
         R.id.destination_info
     )
-
-
-    override fun handleIntent() {
-        destinationToGo = intent.getIntExtra("destinationId", -252)
-    }
-
 
     override fun provideViewBinding(): ActivityHomeBinding =
         ActivityHomeBinding.inflate(layoutInflater)
@@ -126,6 +121,15 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
     }
 
+    private fun initialBottomNavButtonsList() {
+        bottomNavButtons = mutableListOf(
+            Pair(binding.home, R.id.destination_main),
+            Pair(binding.trips, R.id.destination_trips),
+            Pair(binding.notification, R.id.destination_notifications),
+            Pair(binding.account, R.id.destination_info)
+        )
+    }
+
 
     override fun onResume() {
         super.onResume()
@@ -157,26 +161,31 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
         bindService(serviceBindIntent, viewModel.serviceConnection, BIND_AUTO_CREATE)
     }
 
+
     override fun setUpViews() {
         viewModel.loadUserInfo()
         viewModel.loadCars()
-        viewModel.loadTripsAsCreator()
-        viewModel.loadTripsAsPassenger()
+        /* viewModel.loadTripsAsCreator()
+         viewModel.loadTripsAsPassenger()*/
         viewModel.loadTripsAsCreatorHistory()
         viewModel.loadTripsAsPassengerHistory()
         viewModel.loadNotifications()
         viewModel.loadReviews()
 
+        initialBottomNavButtonsList()
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_container)
 
-        if (destinationToGo != -252)
-            navController.navigate(destinationToGo)
+        destinationToGo?.let {
+            navController.bottomNav(it)
+            destinationToGo = null
+        }
 
-        setupBottomNavMenu()
+
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
 
+            setupBottomNavMenu(destination.id)
 
             if (destination.id in homeLayout) {
                 showHideBottomNav(65.toPx)
@@ -190,40 +199,6 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
             if (destination.id == R.id.homeMessengerFragment)
                 binding.constraintLayoutMessenger.visibility = View.GONE
 
-            when (destination.id) {
-                R.id.destination_main -> {
-                    if (currentCheck?.id != binding.home.id) {
-                        previousCheck = currentCheck
-                        currentCheck = binding.home
-                        setButtonCheck()
-                        setButtonUnCheck()
-                    }
-                }
-                R.id.destination_trips -> {
-                    if (currentCheck?.id != binding.trips.id) {
-                        previousCheck = currentCheck
-                        currentCheck = binding.trips
-                        setButtonCheck()
-                        setButtonUnCheck()
-                    }
-                }
-                R.id.destination_notifications -> {
-                    if (currentCheck?.id != binding.notification.id) {
-                        previousCheck = currentCheck
-                        currentCheck = binding.notification
-                        setButtonCheck()
-                        setButtonUnCheck()
-                    }
-                }
-                R.id.destination_info -> {
-                    if (currentCheck?.id != binding.account.id) {
-                        previousCheck = currentCheck
-                        currentCheck = binding.account
-                        setButtonCheck()
-                        setButtonUnCheck()
-                    }
-                }
-            }
         }
 
         binding.constraintLayoutMessenger.setOnClickListener {
@@ -264,16 +239,26 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
     }
 
 
-    @SuppressLint("UseCompatLoadingForColorStateLists")
-    private fun setButtonUnCheck() {
-        previousCheck?.setColorFilter(ContextCompat.getColor(this, R.color.black), android.graphics.PorterDuff.Mode.SRC_IN)
-        previousCheck?.backgroundTintList = resources.getColorStateList(R.color.white, null)
+    private fun setupBottomNavMenu(destination: Int) {
+        bottomNavButtons.forEach {
+            if (destination in homeLayout)
+                if (it.second != destination)
+                    setButtonUnCheck(it.first)
+                else
+                    setButtonCheck(it.first)
+        }
     }
 
     @SuppressLint("UseCompatLoadingForColorStateLists")
-    private fun setButtonCheck() {
-        currentCheck?.setColorFilter(ContextCompat.getColor(this, R.color.white), android.graphics.PorterDuff.Mode.SRC_IN)
-        currentCheck?.backgroundTintList = resources.getColorStateList(R.color.black, null)
+    private fun setButtonUnCheck(imageView: ImageView) {
+        imageView.setColorFilter(ContextCompat.getColor(this, R.color.black), android.graphics.PorterDuff.Mode.SRC_IN)
+        imageView.backgroundTintList = resources.getColorStateList(R.color.white, null)
+    }
+
+    @SuppressLint("UseCompatLoadingForColorStateLists")
+    private fun setButtonCheck(imageView: ImageView) {
+        imageView.setColorFilter(ContextCompat.getColor(this, R.color.white), android.graphics.PorterDuff.Mode.SRC_IN)
+        imageView.backgroundTintList = resources.getColorStateList(R.color.black, null)
     }
 
     private fun showHideBottomNav(targetHeight: Int) {
@@ -292,16 +277,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
     }
 
 
-    private fun setupBottomNavMenu() {
-        if (currentCheck == null) {
-            currentCheck = binding.home
-            previousCheck = binding.home
-        }
-    }
-
-
     private fun setUpNotifications(num: Int) {
-
         if (num < 1) {
             binding.notificationCount.visibility = View.INVISIBLE
         } else {

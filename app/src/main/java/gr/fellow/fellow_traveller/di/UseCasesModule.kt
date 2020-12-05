@@ -43,8 +43,8 @@ class UseCasesModule {
 
     @ActivityScoped
     @Provides
-    fun provideGetTripByIdUseCase(dataSource: FellowDataSource): GetTripByIdUseCase {
-        return GetTripByIdUseCase(dataSource)
+    fun provideGetTripByIdUseCase(dataSource: FellowDataSource): GetTripInvolvedByIdUseCase {
+        return GetTripInvolvedByIdUseCase(dataSource)
     }
 
 

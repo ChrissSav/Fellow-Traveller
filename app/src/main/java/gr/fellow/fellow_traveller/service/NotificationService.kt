@@ -11,6 +11,7 @@ import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.os.bundleOf
+import androidx.navigation.NavDeepLinkBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.FellowApp.Companion.CHANNEL_TRIPS_ID
 import gr.fellow.fellow_traveller.R
@@ -109,10 +110,19 @@ class NotificationService : Service() {
             val pendingIntent = PendingIntent.getActivity(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
             notification.contentIntent = pendingIntent
         } else {
-            val intent = Intent(this, HomeActivity::class.java)
-            intent.putExtras(bundleOf("destinationId" to R.id.destination_notifications))
-            val pendingIntent = PendingIntent.getActivity(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-            notification.contentIntent = pendingIntent
+
+            val p = NavDeepLinkBuilder(this)
+                .setGraph(R.navigation.home_nav_graph)
+                .setComponentName(HomeActivity::class.java)
+                .setDestination(R.id.tripInvolvedCreatorDetailsFragment)
+                .setArguments(bundleOf("reload" to true, "history" to false, "tripId" to notificationItem.trip.id))
+                .createPendingIntent()
+
+            /* val notificationIntent = Intent(this, HomeActivity::class.java)
+             notificationIntent.putExtra("destinationToGo", R.id.destination_trips)
+             notificationIntent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+             val intent = PendingIntent.getActivity(this, 15, notificationIntent, PendingIntent.FLAG_ONE_SHOT)*/
+            notification.contentIntent = p
         }
         notificationManager.notify(notificationItem.id.toInt(), notification)
     }

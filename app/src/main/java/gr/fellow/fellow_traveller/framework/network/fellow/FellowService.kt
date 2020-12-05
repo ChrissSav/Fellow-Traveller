@@ -120,8 +120,8 @@ interface FellowService {
         @Body trip: TripCreateRequest
     ): Response<BaseResponse<TripInvolvedResponse>>
 
-    @GET("trip/{trip_id}")
-    suspend fun getTripById(
+    @GET("trip/involved/{trip_id}")
+    suspend fun getTripInvolvedById(
         @Path("trip_id") tripId: String
     ): Response<BaseResponse<TripInvolvedResponse>>
 

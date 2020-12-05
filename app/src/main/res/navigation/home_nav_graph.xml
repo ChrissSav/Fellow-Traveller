@@ -221,5 +221,25 @@
         android:label="fragment_profile_reviews"
         tools:layout="@layout/fragment_profile_reviews" />
 
+    <fragment
+        android:id="@+id/tripInvolvedCreatorDetailsFragment"
+        android:name="gr.fellow.fellow_traveller.ui.home.trip_fragments.TripInvolvedCreatorDetailsFragment"
+        android:label="fragment_trip_involved_creator_details"
+        tools:layout="@layout/fragment_trip_involved_creator_details">
+
+        <argument
+            android:name="reload"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <argument
+            android:name="history"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <argument
+            android:name="tripId"
+            app:argType="string" />
+
+    </fragment>
+
 
 </navigation>

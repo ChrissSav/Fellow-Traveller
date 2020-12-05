@@ -3,7 +3,6 @@ package gr.fellow.fellow_traveller.ui.home
 import android.content.ComponentName
 import android.content.ServiceConnection
 import android.os.IBinder
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,6 +16,8 @@ import gr.fellow.fellow_traveller.domain.review.Review
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.service.NotificationService
+import gr.fellow.fellow_traveller.ui.extensions.addOrReplace
+import gr.fellow.fellow_traveller.ui.extensions.toMutableListSafe
 import gr.fellow.fellow_traveller.usecase.auth.ChangePasswordUseCase
 import gr.fellow.fellow_traveller.usecase.auth.DeleteUserAuthLocalUseCase
 import gr.fellow.fellow_traveller.usecase.home.*
@@ -24,10 +25,7 @@ import gr.fellow.fellow_traveller.usecase.notification.GetNotificationsUseCase
 import gr.fellow.fellow_traveller.usecase.notification.UpdateNotificationsUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
 import gr.fellow.fellow_traveller.usecase.review.GetUserReviewsUseCase
-import gr.fellow.fellow_traveller.usecase.trips.DeleteTripUseCase
-import gr.fellow.fellow_traveller.usecase.trips.ExitFromTripUseCase
-import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsCreatorRemoteUseCase
-import gr.fellow.fellow_traveller.usecase.trips.GetTripsAsPassengerRemoteUseCase
+import gr.fellow.fellow_traveller.usecase.trips.*
 import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -50,6 +48,7 @@ constructor(
     private val exitFromTripUseCase: ExitFromTripUseCase,
     private val getNotificationsUseCase: GetNotificationsUseCase,
     private val updateNotificationsUseCase: UpdateNotificationsUseCase,
+    private val getTripInvolvedByIdUseCase: GetTripInvolvedByIdUseCase,
     //UpdateInfo
     private val getUserInfoRemoteUseCase: GetUserInfoRemoteUseCase,
     private val registerUserLocalUseCase: RegisterUserLocalUseCase,
@@ -128,6 +127,7 @@ constructor(
     val loadReviews = MutableLiveData<Boolean>()
 
     /*****************************************************************************************************/
+
 
     fun loadUserInfo() {
         launch {
@@ -406,32 +406,56 @@ constructor(
     }
 
 
-    private val TAG = "MyService"
-
-    private val _mIsProgressBarUpdating = MutableLiveData<Boolean>()
-    val mIsProgressBarUpdating: LiveData<Boolean> = _mIsProgressBarUpdating
-
     private val _mBinder = MutableLiveData<NotificationService.MyBinder>()
     val mBinder: LiveData<NotificationService.MyBinder> = _mBinder
 
 
     var serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(className: ComponentName, iBinder: IBinder) {
-            Log.d(TAG, "ServiceConnection: connected to service.")
-            // We've bound to MyService, cast the IBinder and get MyBinder instance
             val binder = iBinder as NotificationService.MyBinder
             _mBinder.postValue(binder)
         }
 
         override fun onServiceDisconnected(arg0: ComponentName) {
-            Log.d(TAG, "ServiceConnection: disconnected from service.")
             _mBinder.postValue(null)
         }
     }
 
-    fun setIsProgressBarUpdating(isUpdating: Boolean) {
-        _mIsProgressBarUpdating.value = (isUpdating)
+
+    private val _tripInvolvedDetails = SingleLiveEvent<TripInvolved>()
+    val tripInvolvedDetails: LiveData<TripInvolved> = _tripInvolvedDetails
+    val loadTripInvolvedDetails = MutableLiveData<Boolean>()
+
+    fun loadTripCreatorActiveInvolvedDetails(tripId: String, reload: Boolean = false) {
+        launchWithLiveData(true, loadTripInvolvedDetails) {
+            delay(250)
+            val index = _tripsAsCreatorActive.toMutableListSafe().indexOfFirst { it.id == tripId }
+            if (reload || index == -1) {
+                val trip = getTripInvolvedByIdUseCase(tripId)
+                _tripsAsCreatorActive.addOrReplace(trip)
+                _tripInvolvedDetails.value = trip
+            } else {
+                _tripInvolvedDetails.value = _tripsAsCreatorActive.toMutableListSafe()[index]
+            }
+        }
+    }
+
+    fun loadTripCreatorHistoryInvolvedDetails(tripId: String, reload: Boolean = false) {
+        launchWithLiveData(true, loadTripInvolvedDetails) {
+            delay(250)
+            val index = _tripsAsCreatorHistory.toMutableListSafe().indexOfFirst { it.id == tripId }
+            if (reload || index == -1) {
+                val trip = getTripInvolvedByIdUseCase(tripId)
+                _tripsAsCreatorHistory.addOrReplace(trip)
+                _tripInvolvedDetails.value = trip
+            } else {
+                _tripInvolvedDetails.value = _tripsAsCreatorHistory.toMutableListSafe()[index]
+            }
+        }
     }
 
 }
+
+
+
 

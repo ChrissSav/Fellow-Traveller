@@ -31,16 +31,18 @@ class FellowApp : Application() {
 
     private fun createNotificationChannels() {
         val alarmSound: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_NOTIFICATION)
             .build()
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel1 = NotificationChannel(
                 CHANNEL_TRIPS_ID,
                 "Ειδοποιήσεις σχετικά με ταξίδια",
                 NotificationManager.IMPORTANCE_HIGH
             )
-            channel1.description = "This is Channel 1"
+            channel1.description = "Ειδοποιήσεις σχετικά με ταξίδια"
             channel1.enableVibration(true)
             channel1.setSound(alarmSound, audioAttributes);
             val manager = getSystemService(NotificationManager::class.java)

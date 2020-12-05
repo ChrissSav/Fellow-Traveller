@@ -7,6 +7,13 @@ enum class PetAnswerType {
     Yes, No, Anything
 }
 
+enum class TripStatus(val code: Int) {
+    ACTIVE(0),
+    PENDING(1),
+    COMPLETED(2),
+    DELETED(3)
+}
+
 
 enum class SortAnswerType(val textInt: Int) {
     Price(R.string.price_title),
