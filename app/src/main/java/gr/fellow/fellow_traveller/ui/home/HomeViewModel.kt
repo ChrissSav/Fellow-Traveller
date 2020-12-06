@@ -425,6 +425,7 @@ constructor(
     private val _tripInvolvedDetails = SingleLiveEvent<TripInvolved>()
     val tripInvolvedDetails: LiveData<TripInvolved> = _tripInvolvedDetails
     val loadTripInvolvedDetails = MutableLiveData<Boolean>()
+    private val tripInvolvedDetailsDelay = 100L
 
     fun loadTripCreatorActiveInvolvedDetails(tripId: String, reload: Boolean = false) {
         launchWithLiveData(true, loadTripInvolvedDetails) {
@@ -434,6 +435,7 @@ constructor(
                 _tripsAsCreatorActive.addOrReplace(trip)
                 _tripInvolvedDetails.value = trip
             } else {
+                delay(tripInvolvedDetailsDelay)
                 _tripInvolvedDetails.value = _tripsAsCreatorActive.toMutableListSafe()[index]
             }
         }
@@ -447,6 +449,7 @@ constructor(
                 _tripsAsCreatorHistory.addOrReplace(trip)
                 _tripInvolvedDetails.value = trip
             } else {
+                delay(tripInvolvedDetailsDelay)
                 _tripInvolvedDetails.value = _tripsAsCreatorHistory.toMutableListSafe()[index]
             }
         }
@@ -461,6 +464,7 @@ constructor(
                 _tripsAsPassengerActive.addOrReplace(trip)
                 _tripInvolvedDetails.value = trip
             } else {
+                delay(tripInvolvedDetailsDelay)
                 _tripInvolvedDetails.value = _tripsAsPassengerActive.toMutableListSafe()[index]
             }
         }
@@ -474,6 +478,7 @@ constructor(
                 _tripsAsPassengerHistory.addOrReplace(trip)
                 _tripInvolvedDetails.value = trip
             } else {
+                delay(tripInvolvedDetailsDelay)
                 _tripInvolvedDetails.value = _tripsAsPassengerHistory.toMutableListSafe()[index]
             }
         }
