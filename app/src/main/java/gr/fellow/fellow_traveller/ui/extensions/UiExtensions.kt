@@ -184,10 +184,14 @@ fun Fragment.createToast(msg: String) {
 }
 
 fun Fragment.findNavController(): NavController? {
-    view?.let {
-        return Navigation.findNavController(it)
+    try {
+        view?.let {
+            return Navigation.findNavController(it)
+        }
+        return null
+    } catch (e: java.lang.Exception) {
+        return null
     }
-    return null
 }
 
 fun Fragment.hideKeyboard() {
@@ -257,7 +261,6 @@ fun ImageView.loadImageFromUrl(url: String?) {
     } else
         setImageDrawable(null)
 }
-
 
 
 fun ImageView.startAnimation() {

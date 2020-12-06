@@ -15,6 +15,8 @@ import androidx.navigation.NavDeepLinkBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.FellowApp.Companion.CHANNEL_TRIPS_ID
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.domain.NotificationStatus
+import gr.fellow.fellow_traveller.domain.TripStatus
 import gr.fellow.fellow_traveller.ui.extensions.getTextHtml
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.rate.RateActivity
@@ -93,7 +95,7 @@ class NotificationService : Service() {
 
 
         val notification: android.app.Notification = NotificationCompat.Builder(this, CHANNEL_TRIPS_ID)
-            .setSmallIcon(R.drawable.ic_logo)
+            .setSmallIcon(R.drawable.ic_logo_white)
             .setContentTitle(getTitle(notificationItem))
             .setStyle(
                 NotificationCompat.BigTextStyle()
@@ -104,39 +106,35 @@ class NotificationService : Service() {
             .setSound(alarmSound)
             .build()
 
-        if (notificationItem.type == 0) {
+        if (notificationItem.type == NotificationStatus.RATE.code) {
             val intent = Intent(this, RateActivity::class.java)
             intent.putExtras(bundleOf("notification" to notificationItem))
             val pendingIntent = PendingIntent.getActivity(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
             notification.contentIntent = pendingIntent
-        } else {
 
+        } else if (notificationItem.type == NotificationStatus.PASSENGER_ENTER.code || notificationItem.type == NotificationStatus.PASSENGER_EXIT.code) {
             val p = NavDeepLinkBuilder(this)
                 .setGraph(R.navigation.home_nav_graph)
                 .setComponentName(HomeActivity::class.java)
-                .setDestination(R.id.tripInvolvedCreatorDetailsFragment)
-                .setArguments(bundleOf("reload" to true, "history" to false, "tripId" to notificationItem.trip.id))
+                .setDestination(R.id.tripInvolvedDetailsSecondFragment)
+                .setArguments(bundleOf("reload" to true, "history" to (notificationItem.trip.status == TripStatus.COMPLETED.code), "tripId" to notificationItem.trip.id, "creator" to true))
                 .createPendingIntent()
-
-            /* val notificationIntent = Intent(this, HomeActivity::class.java)
-             notificationIntent.putExtra("destinationToGo", R.id.destination_trips)
-             notificationIntent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-             val intent = PendingIntent.getActivity(this, 15, notificationIntent, PendingIntent.FLAG_ONE_SHOT)*/
             notification.contentIntent = p
         }
+
         notificationManager.notify(notificationItem.id.toInt(), notification)
     }
 
 
     private fun getDescription(item: gr.fellow.fellow_traveller.domain.notification.Notification): String {
         return when (item.type) {
-            0 -> {
+            NotificationStatus.RATE.code -> {
                 getString(R.string.notification_to_rate, item.user.fullName).getTextHtml()
             }
-            1 -> {
+            NotificationStatus.PASSENGER_EXIT.code -> {
                 getString(R.string.notification_passenger_exit, item.user.fullName).getTextHtml()
             }
-            2 -> {
+            NotificationStatus.PASSENGER_ENTER.code -> {
                 getString(R.string.notification_passenger_enter, item.user.fullName).getTextHtml()
             }
             else -> {
@@ -147,13 +145,13 @@ class NotificationService : Service() {
 
     private fun getTitle(item: gr.fellow.fellow_traveller.domain.notification.Notification): String {
         return when (item.type) {
-            0 -> {
+            NotificationStatus.RATE.code -> {
                 getString(R.string.notification_to_rate_title)
             }
-            1 -> {
+            NotificationStatus.PASSENGER_EXIT.code -> {
                 getString(R.string.notification_passenger_exit_title)
             }
-            2 -> {
+            NotificationStatus.PASSENGER_ENTER.code -> {
                 getString(R.string.notification_passenger_enter_title)
             }
             else -> {

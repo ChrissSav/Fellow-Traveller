@@ -18,5 +18,6 @@ data class Notification(
 data class NotificationTrip(
     val id: String,
     val destinationFrom: String,
-    val destinationTo: String
+    val destinationTo: String,
+    val status: Int
 ) : Parcelable

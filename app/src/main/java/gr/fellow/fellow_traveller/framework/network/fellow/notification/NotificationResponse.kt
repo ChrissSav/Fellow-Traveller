@@ -14,7 +14,8 @@ data class NotificationResponse(
 data class NotificationTripResponse(
     val id: String,
     val destinationFrom: String,
-    val destinationTo: String
+    val destinationTo: String,
+    val status: Int
 )
 
 data class UpdateNotification(

@@ -428,7 +428,6 @@ constructor(
 
     fun loadTripCreatorActiveInvolvedDetails(tripId: String, reload: Boolean = false) {
         launchWithLiveData(true, loadTripInvolvedDetails) {
-            delay(250)
             val index = _tripsAsCreatorActive.toMutableListSafe().indexOfFirst { it.id == tripId }
             if (reload || index == -1) {
                 val trip = getTripInvolvedByIdUseCase(tripId)
@@ -442,7 +441,6 @@ constructor(
 
     fun loadTripCreatorHistoryInvolvedDetails(tripId: String, reload: Boolean = false) {
         launchWithLiveData(true, loadTripInvolvedDetails) {
-            delay(250)
             val index = _tripsAsCreatorHistory.toMutableListSafe().indexOfFirst { it.id == tripId }
             if (reload || index == -1) {
                 val trip = getTripInvolvedByIdUseCase(tripId)
@@ -454,6 +452,32 @@ constructor(
         }
     }
 
+
+    fun loadTripTakesPartActiveInvolvedDetails(tripId: String, reload: Boolean = false) {
+        launchWithLiveData(true, loadTripInvolvedDetails) {
+            val index = _tripsAsPassengerActive.toMutableListSafe().indexOfFirst { it.id == tripId }
+            if (reload || index == -1) {
+                val trip = getTripInvolvedByIdUseCase(tripId)
+                _tripsAsPassengerActive.addOrReplace(trip)
+                _tripInvolvedDetails.value = trip
+            } else {
+                _tripInvolvedDetails.value = _tripsAsPassengerActive.toMutableListSafe()[index]
+            }
+        }
+    }
+
+    fun loadTripTakesPartHistoryInvolvedDetails(tripId: String, reload: Boolean = false) {
+        launchWithLiveData(true, loadTripInvolvedDetails) {
+            val index = _tripsAsPassengerHistory.toMutableListSafe().indexOfFirst { it.id == tripId }
+            if (reload || index == -1) {
+                val trip = getTripInvolvedByIdUseCase(tripId)
+                _tripsAsPassengerHistory.addOrReplace(trip)
+                _tripInvolvedDetails.value = trip
+            } else {
+                _tripInvolvedDetails.value = _tripsAsPassengerHistory.toMutableListSafe()[index]
+            }
+        }
+    }
 }
 
 

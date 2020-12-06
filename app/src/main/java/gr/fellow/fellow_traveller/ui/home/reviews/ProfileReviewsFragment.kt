@@ -57,6 +57,8 @@ class ProfileReviewsFragment : BaseFragment<FragmentProfileReviewsBinding>() {
         binding.recyclerView.adapter = ReviewsAdapter(reviewsList)
 
         binding.swipeRefreshLayout.setOnRefreshListener {
+            reviewsList.clear()
+            binding.recyclerView.adapter?.notifyDataSetChanged()
             viewModel.loadReviews(true)
         }
 

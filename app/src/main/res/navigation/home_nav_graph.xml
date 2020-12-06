@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_notifications">
         <action
             android:id="@+id/action_destination_notifications_to_tripInvolvedDetailsFragment"
-            app:destination="@id/tripInvolvedDetailsFragment"
+            app:destination="@id/tripInvolvedDetailsSecondFragment"
             app:enterAnim="@anim/enter_from_left"
             app:exitAnim="@anim/exit_to_right"
             app:popEnterAnim="@anim/enter_from_right"
@@ -32,7 +32,7 @@
         tools:layout="@layout/fragment_home_trips">
         <action
             android:id="@+id/action_destination_trips_to_tripInvolvedDetailsFragment"
-            app:destination="@id/tripInvolvedDetailsFragment"
+            app:destination="@id/tripInvolvedDetailsSecondFragment"
             app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
@@ -145,33 +145,7 @@
             android:name="car"
             app:argType="gr.fellow.fellow_traveller.domain.car.Car" />
     </fragment>
-    <fragment
-        android:id="@+id/tripInvolvedDetailsFragment"
-        android:name="gr.fellow.fellow_traveller.ui.home.trip_fragments.TripInvolvedDetailsFragment"
-        android:label="fragment_trip_involved_details"
-        tools:layout="@layout/fragment_trip_involved_details">
 
-        <action
-            android:id="@+id/action_tripInvolvedDetailsFragment_to_tripInvolvedPassengerDetailsFragment"
-            app:destination="@id/tripInvolvedPassengerDetailsFragment"
-            app:enterAnim="@anim/enter_from_right"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
-
-        <argument
-            android:name="tripId"
-            app:argType="string"
-            android:defaultValue="10" />
-        <action
-            android:id="@+id/action_tripInvolvedDetailsFragment_to_destination_info"
-            app:destination="@id/destination_info"
-            app:enterAnim="@anim/enter_from_right"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
-
-    </fragment>
     <fragment
         android:id="@+id/tripInvolvedPassengerDetailsFragment"
         android:name="gr.fellow.fellow_traveller.ui.home.trip_fragments.TripInvolvedPassengerDetailsFragment"
@@ -188,6 +162,7 @@
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
     </fragment>
+
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="gr.fellow.fellow_traveller.ui.home.settings.ChangePasswordFragment"
@@ -200,11 +175,11 @@
         tools:layout="@layout/fragment_trip_involved_history">
         <argument
             android:name="creator"
-            app:argType="boolean"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            app:argType="boolean" />
         <action
             android:id="@+id/action_tripInvolvedHistoryFragment_to_tripInvolvedDetailsFragment"
-            app:destination="@id/tripInvolvedDetailsFragment"
+            app:destination="@id/tripInvolvedDetailsSecondFragment"
             app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
@@ -222,22 +197,45 @@
         tools:layout="@layout/fragment_profile_reviews" />
 
     <fragment
-        android:id="@+id/tripInvolvedCreatorDetailsFragment"
-        android:name="gr.fellow.fellow_traveller.ui.home.trip_fragments.TripInvolvedCreatorDetailsFragment"
+        android:id="@+id/tripInvolvedDetailsSecondFragment"
+        android:name="gr.fellow.fellow_traveller.ui.home.trip_fragments.TripInvolvedDetailsSecondFragment"
         android:label="fragment_trip_involved_creator_details"
         tools:layout="@layout/fragment_trip_involved_creator_details">
 
         <argument
             android:name="reload"
-            app:argType="boolean"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            app:argType="boolean" />
+
         <argument
             android:name="history"
-            app:argType="boolean"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            app:argType="boolean" />
+
         <argument
             android:name="tripId"
             app:argType="string" />
+
+        <argument
+            android:name="creator"
+            android:defaultValue="false"
+            app:argType="boolean" />
+
+
+        <action
+            android:id="@+id/action_tripInvolvedCreatorDetailsFragment_to_tripInvolvedPassengerDetailsFragment2"
+            app:destination="@id/tripInvolvedPassengerDetailsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_tripInvolvedCreatorDetailsFragment_to_destination_info"
+            app:destination="@id/destination_info"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
 
     </fragment>
 

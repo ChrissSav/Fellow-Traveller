@@ -11,4 +11,4 @@ fun NotificationResponse.mapToNotification() =
 
 
 fun NotificationTripResponse.mapToNotificationTrip() =
-    NotificationTrip(id, destinationFrom, destinationTo)
+    NotificationTrip(id, destinationFrom, destinationTo, status)

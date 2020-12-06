@@ -14,6 +14,12 @@ enum class TripStatus(val code: Int) {
     DELETED(3)
 }
 
+enum class NotificationStatus(val code: Int) {
+    RATE(0),
+    PASSENGER_EXIT(1),
+    PASSENGER_ENTER(2),
+    TRIP_DELETED(3)
+}
 
 enum class SortAnswerType(val textInt: Int) {
     Price(R.string.price_title),

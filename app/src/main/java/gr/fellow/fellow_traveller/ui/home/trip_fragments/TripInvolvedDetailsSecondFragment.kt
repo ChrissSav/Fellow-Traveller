@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.ui.home.trip_fragments
 
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -20,9 +21,9 @@ import gr.fellow.fellow_traveller.ui.user.UserProfileDetailsActivity
 import kotlinx.android.synthetic.main.notification_item_layout.*
 
 @AndroidEntryPoint
-class TripInvolvedCreatorDetailsFragment : BaseFragment<FragmentTripInvolvedCreatorDetailsBinding>() {
+class TripInvolvedDetailsSecondFragment : BaseFragment<FragmentTripInvolvedCreatorDetailsBinding>() {
 
-    private val args: TripInvolvedCreatorDetailsFragmentArgs by navArgs()
+    private val args: TripInvolvedDetailsSecondFragmentArgs by navArgs()
     private val viewModel: HomeViewModel by activityViewModels()
     private lateinit var confirmBottomSheetDialog: ConfirmBottomSheetDialog
 
@@ -78,7 +79,7 @@ class TripInvolvedCreatorDetailsFragment : BaseFragment<FragmentTripInvolvedCrea
                 if (!trip.passengers.isNullOrEmpty()) {
                     binding.viewAllPassengers.visibility = View.VISIBLE
                     binding.passengersSection.visibility = View.GONE
-                    binding.passengerRecyclerView.adapter = PassengerAdapter(trip.passengers, this@TripInvolvedCreatorDetailsFragment::onPassengerListener)
+                    binding.passengerRecyclerView.adapter = PassengerAdapter(trip.passengers, this@TripInvolvedDetailsSecondFragment::onPassengerListener)
                 } else {
                     binding.passengersSection.visibility = View.VISIBLE
                     binding.viewAllPassengers.visibility = View.GONE
@@ -87,29 +88,22 @@ class TripInvolvedCreatorDetailsFragment : BaseFragment<FragmentTripInvolvedCrea
                 description.setTextHtml(getString(R.string.trip_involved_description, getTripStatus(trip.status)))
 
 
+                if (trip.creatorUser.firstName.takeLast(1) == "ς")
+                    messengerLinkText.text = getString(R.string.send_message_to, trip.creatorUser.firstName.dropLast(1))
+                else
+                    messengerLinkText.text = getString(R.string.send_message_to, trip.creatorUser.firstName)
+
 
                 googleMaps.setOnClickListener {
                     activity?.openGoogleMaps(trip)
                 }
 
+
                 viewAllPassengers.setOnClickListener {
                     findNavController()?.navigate(
-                        R.id.action_tripInvolvedDetailsFragment_to_tripInvolvedPassengerDetailsFragment,
+                        R.id.action_tripInvolvedCreatorDetailsFragment_to_tripInvolvedPassengerDetailsFragment2,
                         bundleOf("passengerList" to trip.passengers.toTypedArray())
                     )
-                }
-
-                backButton.setOnClickListener {
-                    onBackPressed()
-                }
-
-                delete.setOnClickListener {
-                    confirmBottomSheetDialog = ConfirmBottomSheetDialog(
-                        getString(R.string.delete_trip_question),
-                        this@TripInvolvedCreatorDetailsFragment::onConfirmItemClickListener, 1
-                    )
-                    confirmBottomSheetDialog.show(childFragmentManager, "confirmBottomSheetDialog")
-
                 }
 
 
@@ -118,7 +112,7 @@ class TripInvolvedCreatorDetailsFragment : BaseFragment<FragmentTripInvolvedCrea
                     if (trip.creatorUser.id != userId)
                         activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to trip.creatorUser.id))
                     else {
-                        findNavController()?.navigate(R.id.action_tripInvolvedDetailsFragment_to_destination_info)
+                        findNavController()?.navigate(R.id.action_tripInvolvedCreatorDetailsFragment_to_destination_info)
                     }
                 }
             }
@@ -128,10 +122,37 @@ class TripInvolvedCreatorDetailsFragment : BaseFragment<FragmentTripInvolvedCrea
 
 
     override fun setUpViews() {
-        if (args.history)
-            viewModel.loadTripCreatorHistoryInvolvedDetails(args.tripId, args.reload)
-        else
-            viewModel.loadTripCreatorActiveInvolvedDetails(args.tripId, args.reload)
+        if (args.creator) {
+            binding.messengerLinkConstraintLayout.visibility = View.GONE
+            binding.constraintLayoutInfo.backgroundTintList = ContextCompat.getColorStateList(binding.constraintLayoutInfo.context, R.color.green)
+            binding.labelDescription.text = getString(R.string.youre_trip_driver)
+            if (args.history)
+                viewModel.loadTripCreatorHistoryInvolvedDetails(args.tripId, args.reload)
+            else
+                viewModel.loadTripCreatorActiveInvolvedDetails(args.tripId, args.reload)
+        } else {
+            binding.constraintLayoutInfo.backgroundTintList = ContextCompat.getColorStateList(binding.constraintLayoutInfo.context, R.color.orange_new)
+            binding.labelDescription.text = getString(R.string.you_have_booked_this_trip)
+            binding.messengerLinkConstraintLayout.visibility = View.VISIBLE
+            if (args.history)
+                viewModel.loadTripTakesPartHistoryInvolvedDetails(args.tripId, args.reload)
+            else
+                viewModel.loadTripTakesPartActiveInvolvedDetails(args.tripId, args.reload)
+        }
+
+
+        binding.backButton.setOnClickListener {
+            onBackPressed()
+        }
+
+        binding.delete.setOnClickListener {
+            confirmBottomSheetDialog = ConfirmBottomSheetDialog(
+                if (args.creator) getString(R.string.delete_trip_question) else getString(R.string.leave_trip_question),
+                this@TripInvolvedDetailsSecondFragment::onConfirmItemClickListener, 1
+            )
+            confirmBottomSheetDialog.show(childFragmentManager, "confirmBottomSheetDialog")
+        }
+
     }
 
     private fun onPassengerListener(user: UserBase) {
@@ -139,7 +160,7 @@ class TripInvolvedCreatorDetailsFragment : BaseFragment<FragmentTripInvolvedCrea
         if (user.id != userId)
             activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to user.id))
         else {
-            findNavController()?.navigate(R.id.action_tripInvolvedDetailsFragment_to_destination_info)
+            findNavController()?.navigate(R.id.action_tripInvolvedCreatorDetailsFragment_to_destination_info)
         }
     }
 

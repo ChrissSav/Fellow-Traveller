@@ -79,7 +79,10 @@ class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
     }
 
     private fun onTripClick(tripInvolved: TripInvolved) {
-        findNavController()?.navigate(R.id.action_destination_trips_to_tripInvolvedDetailsFragment, bundleOf("tripId" to tripInvolved.id))
+        findNavController()?.navigate(
+            R.id.action_destination_trips_to_tripInvolvedDetailsFragment,
+            bundleOf("tripId" to tripInvolved.id, "reload" to false, "history" to false, "creator" to false)
+        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

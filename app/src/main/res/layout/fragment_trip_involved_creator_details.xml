@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.trip_fragments.TripInvolvedCreatorDetailsFragment">
+    tools:context=".ui.home.trip_fragments.TripInvolvedDetailsSecondFragment">
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -95,8 +95,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/trip_detail_constraintLayout"
-                    android:visibility="invisible"
                     android:layout_width="match_parent"
+                    android:visibility="invisible"
                     android:layout_height="match_parent">
 
                     <TextView
@@ -314,6 +314,35 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/messengerLink_constraintLayout"
+                        style="@style/border_icon_button"
+                        android:layout_width="0dp"
+                        android:layout_height="52dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="42dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+                        <TextView
+                            android:id="@+id/messenger_link_text"
+                            style="@style/paragraph_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="10dp"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:text="@string/send_message_to"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:drawableTint="@color/black_color"
+                            app:drawableStartCompat="@drawable/ic_messenger" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                     <TextView
                         android:id="@+id/textView9"
                         style="@style/header_2"
@@ -323,7 +352,7 @@
                         android:layout_marginTop="48dp"
                         android:text="@string/vehicle"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+                        app:layout_constraintTop_toBottomOf="@+id/messengerLink_constraintLayout" />
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -353,7 +382,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="16dp"
-                            android:text="TextView"
+                            android:text="@string/car_color_placeholder"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -378,7 +407,6 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="110dp"
                         android:orientation="horizontal"
-                        android:visibility="invisible"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -468,8 +496,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout_info"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
         android:visibility="invisible"
+        android:layout_height="90dp"
         android:background="@drawable/bottom_sheet_dialog_shape"
         android:backgroundTint="@color/green"
         android:clickable="true"
