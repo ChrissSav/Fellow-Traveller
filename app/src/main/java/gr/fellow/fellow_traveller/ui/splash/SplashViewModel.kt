@@ -2,6 +2,7 @@ package gr.fellow.fellow_traveller.ui.splash
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.usecase.home.GetUserInfoRemoteUseCase
@@ -17,7 +18,7 @@ constructor(
     private val _userInfo = SingleLiveEvent<Boolean>()
     val userInfo: LiveData<Boolean> = _userInfo
 
-    private val _finish = SingleLiveEvent<Pair<Boolean, Boolean>>()
+    private val _finish = MutableLiveData<Pair<Boolean, Boolean>>()
     val finish: LiveData<Pair<Boolean, Boolean>> = _finish
 
 
