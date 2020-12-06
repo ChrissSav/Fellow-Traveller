@@ -2,7 +2,6 @@ package gr.fellow.fellow_traveller.data.base
 
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
-import androidx.vectordrawable.graphics.drawable.Animatable2Compat
 import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.target.ImageViewTarget
 
@@ -21,11 +20,6 @@ class GifDrawableImageViewTarget : ImageViewTarget<Drawable?> {
     override fun setResource(resource: Drawable?) {
         if (resource is GifDrawable) {
             resource.setLoopCount(mLoopCount)
-            resource.registerAnimationCallback(object : Animatable2Compat.AnimationCallback() {
-                override fun onAnimationEnd(drawable: Drawable) {
-                    super.onAnimationEnd(drawable)
-                }
-            })
         }
 
         view.setImageDrawable(resource)

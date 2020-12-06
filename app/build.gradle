@@ -208,6 +208,9 @@ dependencies {
     // Recommended: Add the Google Analytics SDK.
     implementation 'com.google.firebase:firebase-analytics:18.0.0'
 
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.30.1'
+
+
 }
 kapt {
     correctErrorTypes true
