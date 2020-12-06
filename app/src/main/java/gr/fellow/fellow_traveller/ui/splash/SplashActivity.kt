@@ -14,7 +14,6 @@ import gr.fellow.fellow_traveller.ui.extensions.openActivityWithFade
 import gr.fellow.fellow_traveller.ui.extensions.postDelay
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.main.MainActivity
-import gr.fellow.fellow_traveller.utils.PREFS_AUTH_REFRESH_TOKEN
 import javax.inject.Inject
 
 
@@ -32,10 +31,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     override fun setUpObservers() {
         viewModel.userInfo.observe(this, Observer {
-            intentOpen = if (it)
-                Intent(this, HomeActivity::class.java)
-            else
-                Intent(this, MainActivity::class.java)
+            intentOpen = Intent(this, HomeActivity::class.java)
             viewModel.setFist(true)
         })
 
@@ -44,20 +40,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                 openActivityWithFade(intentOpen!!)
         })
 
-        viewModel.forceLogOut.observe(this, Observer {
-            if (it) {
-                intentOpen = Intent(this, MainActivity::class.java)
-                viewModel.setFist(true)
-            }
-        })
-
         viewModel.error.observe(this, Observer {
-            intentOpen = if (it.internal && it.messageId == R.string.ERROR_API_UNAUTHORIZED)
-                Intent(this, MainActivity::class.java)
-            else if (sharedPreferences.getString(PREFS_AUTH_REFRESH_TOKEN, "").isNullOrEmpty())
-                Intent(this, MainActivity::class.java)
-            else
-                Intent(this, HomeActivity::class.java)
+            intentOpen = Intent(this, MainActivity::class.java)
             viewModel.setFist(true)
         })
 
