@@ -1,18 +1,25 @@
 package gr.fellow.fellow_traveller.ui.splash
 
+import android.content.SharedPreferences
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
+import gr.fellow.fellow_traveller.usecase.auth.DeleteUserAuthLocalUseCase
 import gr.fellow.fellow_traveller.usecase.home.GetUserInfoRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
+import gr.fellow.fellow_traveller.utils.PREFS_AUTH_ACCESS_TOKEN
+import gr.fellow.fellow_traveller.utils.PREFS_AUTH_REFRESH_TOKEN
+import gr.fellow.fellow_traveller.utils.set
 
 class SplashViewModel
 @ViewModelInject
 constructor(
     private val getUserInfoRemoteUseCase: GetUserInfoRemoteUseCase,
-    private val registerUserLocalUseCase: RegisterUserLocalUseCase
+    private val registerUserLocalUseCase: RegisterUserLocalUseCase,
+    private val deleteUserAuthLocalUseCase: DeleteUserAuthLocalUseCase,
+    private val sharedPrefs: SharedPreferences
 ) : BaseViewModel() {
 
     private val _userInfo = SingleLiveEvent<Boolean>()
@@ -24,9 +31,17 @@ constructor(
 
     fun getUserInfo() {
         launch {
-            val response = getUserInfoRemoteUseCase()
-            registerUserLocalUseCase(response)
-            _userInfo.value = true
+            try {
+                val response = getUserInfoRemoteUseCase()
+                registerUserLocalUseCase(response)
+                _userInfo.value = true
+            } catch (e: Exception) {
+                sharedPrefs[PREFS_AUTH_ACCESS_TOKEN] = null
+                sharedPrefs[PREFS_AUTH_REFRESH_TOKEN] = null
+                deleteUserAuthLocalUseCase()
+                throw e
+            }
+
         }
     }
 

@@ -9,11 +9,9 @@ import com.bumptech.glide.request.target.ImageViewTarget
 
 class GifDrawableImageViewTarget : ImageViewTarget<Drawable?> {
     private var mLoopCount = GifDrawable.LOOP_FOREVER
-    private lateinit var function: (Boolean) -> Unit
 
-    constructor(view: ImageView?, loopCount: Int, listener: (Boolean) -> Unit) : super(view) {
+    constructor(view: ImageView?, loopCount: Int) : super(view) {
         mLoopCount = loopCount
-        function = listener
     }
 
     constructor(view: ImageView?, loopCount: Int, waitForLayout: Boolean) : super(view, waitForLayout) {
@@ -26,7 +24,6 @@ class GifDrawableImageViewTarget : ImageViewTarget<Drawable?> {
             resource.registerAnimationCallback(object : Animatable2Compat.AnimationCallback() {
                 override fun onAnimationEnd(drawable: Drawable) {
                     super.onAnimationEnd(drawable)
-                    function.invoke(true)
                 }
             })
         }

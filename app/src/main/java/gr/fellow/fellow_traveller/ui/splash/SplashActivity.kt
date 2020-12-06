@@ -11,6 +11,7 @@ import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.data.base.GifDrawableImageViewTarget
 import gr.fellow.fellow_traveller.databinding.ActivitySplashBinding
 import gr.fellow.fellow_traveller.ui.extensions.openActivityWithFade
+import gr.fellow.fellow_traveller.ui.extensions.postDelay
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.main.MainActivity
 import gr.fellow.fellow_traveller.utils.PREFS_AUTH_REFRESH_TOKEN
@@ -44,8 +45,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         })
 
         viewModel.forceLogOut.observe(this, Observer {
-            intentOpen = Intent(this, MainActivity::class.java)
-            viewModel.setFist(true)
+            if (it) {
+                intentOpen = Intent(this, MainActivity::class.java)
+                viewModel.setFist(true)
+            }
         })
 
         viewModel.error.observe(this, Observer {
@@ -64,10 +67,12 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
         viewModel.getUserInfo()
 
+        postDelay(2100) {
+            viewModel.setSecond(true)
+        }
+
         Glide.with(this)
             .load(R.raw.splash_green_100fps)
-            .into(GifDrawableImageViewTarget(binding.ImageView, 1) {
-                viewModel.setSecond(true)
-            })
+            .into(GifDrawableImageViewTarget(binding.ImageView, 1))
     }
 }
