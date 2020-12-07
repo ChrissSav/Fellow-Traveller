@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.BaseApiException
+import gr.fellow.fellow_traveller.data.NoInternetException
 import gr.fellow.fellow_traveller.data.UnauthorizedException
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
@@ -15,6 +16,7 @@ import gr.fellow.fellow_traveller.usecase.home.GetUserInfoRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
 import gr.fellow.fellow_traveller.utils.PREFS_AUTH_ACCESS_TOKEN
 import gr.fellow.fellow_traveller.utils.PREFS_AUTH_REFRESH_TOKEN
+import gr.fellow.fellow_traveller.utils.get
 import gr.fellow.fellow_traveller.utils.set
 
 class SplashViewModel
@@ -50,6 +52,12 @@ constructor(
                     else -> {
                         _userInfo.value = true
                     }
+                }
+            } catch (e: NoInternetException) {
+                if (sharedPrefs[PREFS_AUTH_REFRESH_TOKEN, ""]?.length ?: 0 > 10) {
+                    _userInfo.value = true
+                } else {
+                    error.value = internalError(R.string.ERROR_API_UNAUTHORIZED)
                 }
             }
         }

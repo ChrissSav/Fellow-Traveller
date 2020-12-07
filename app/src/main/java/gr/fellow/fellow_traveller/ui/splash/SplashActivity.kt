@@ -1,7 +1,6 @@
 package gr.fellow.fellow_traveller.ui.splash
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -21,7 +20,6 @@ import gr.fellow.fellow_traveller.ui.extensions.openActivityWithFade
 import gr.fellow.fellow_traveller.ui.extensions.postDelay
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.main.MainActivity
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -29,9 +27,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     private val viewModel: SplashViewModel by viewModels()
     private var intentOpen: Intent? = null
-
-    @Inject
-    lateinit var sharedPreferences: SharedPreferences
 
     override fun provideViewBinding(): ActivitySplashBinding =
         ActivitySplashBinding.inflate(layoutInflater)
@@ -44,7 +39,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
         viewModel.finish.observe(this, Observer {
             if (it.first && it.second)
-                openActivityWithFade(intentOpen!!)
+                openActivityWithFade(intentOpen ?: Intent(this@SplashActivity, MainActivity::class.java))
         })
 
         viewModel.error.observe(this, Observer {
@@ -58,15 +53,12 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
         viewModel.getUserInfo()
 
-        postDelay(2100) {
-            viewModel.setSecond(true)
-        }
-
         Glide.with(this).asGif().load(R.raw.splash_green_100fps).listener(object : RequestListener<GifDrawable?> {
 
             override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<GifDrawable?>?, isFirstResource: Boolean): Boolean {
-                binding.ImageView.setColorFilter(ContextCompat.getColor(this@SplashActivity, R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
-                binding.ImageView.setImageResource(R.drawable.ic_fellow);
+                binding.ImageView.setColorFilter(ContextCompat.getColor(this@SplashActivity, R.color.white), android.graphics.PorterDuff.Mode.SRC_IN)
+                binding.ImageView.setImageResource(R.drawable.ic_fellow)
+                backUp()
                 return true
             }
 
@@ -76,12 +68,19 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                 resource?.setLoopCount(1)
                 resource?.registerAnimationCallback(object : Animatable2Compat.AnimationCallback() {
                     override fun onAnimationEnd(drawable: Drawable) {
-
+                        viewModel.setSecond(true)
                     }
                 })
                 return false
             }
         }).override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
             .into(binding.ImageView)
+    }
+
+
+    private fun backUp() {
+        postDelay(2100) {
+            viewModel.setSecond(true)
+        }
     }
 }
