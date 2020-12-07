@@ -4,7 +4,6 @@ import android.animation.AnimatorSet
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.net.ConnectivityManager.NetworkCallback
 import android.net.Network
@@ -25,9 +24,6 @@ import gr.fellow.fellow_traveller.databinding.ActivityHomeBinding
 import gr.fellow.fellow_traveller.service.NotificationSocketViewModel
 import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.main.MainActivity
-import gr.fellow.fellow_traveller.utils.PREFS_AUTH_ACCESS_TOKEN
-import gr.fellow.fellow_traveller.utils.get
-import gr.fellow.fellow_traveller.utils.set
 import java.util.*
 import javax.inject.Inject
 import kotlin.concurrent.schedule
@@ -40,9 +36,6 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
     @Inject
     lateinit var viewModelSecond: NotificationSocketViewModel
-
-    @Inject
-    lateinit var sharedPreferences: SharedPreferences
 
     private var bottomNavButtons = mutableListOf<Pair<ImageView, Int>>()
 
@@ -139,11 +132,6 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_container)
 
-        binding.button2.setOnClickListener {
-            createAlerter(sharedPrefs[PREFS_AUTH_ACCESS_TOKEN, ""].toString())
-            sharedPrefs[PREFS_AUTH_ACCESS_TOKEN] = null
-            createToast(sharedPrefs[PREFS_AUTH_ACCESS_TOKEN, ""].toString())
-        }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
 
