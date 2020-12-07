@@ -1,8 +1,5 @@
 package gr.fellow.fellow_traveller.ui.home
 
-import android.content.ComponentName
-import android.content.ServiceConnection
-import android.os.IBinder
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,7 +12,6 @@ import gr.fellow.fellow_traveller.domain.notification.Notification
 import gr.fellow.fellow_traveller.domain.review.Review
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
-import gr.fellow.fellow_traveller.service.NotificationService
 import gr.fellow.fellow_traveller.ui.extensions.addOrReplace
 import gr.fellow.fellow_traveller.ui.extensions.toMutableListSafe
 import gr.fellow.fellow_traveller.usecase.auth.ChangePasswordUseCase
@@ -62,7 +58,7 @@ constructor(
     private val _user = MutableLiveData<LocalUser>()
     val user: LiveData<LocalUser> = _user
 
-    private val _logout = SingleLiveEvent<Boolean>()
+    private val _logout = MutableLiveData<Boolean>()
     val logout: LiveData<Boolean> = _logout
 
     private val _cars = MutableLiveData<MutableList<Car>>()
@@ -402,22 +398,6 @@ constructor(
                 val response = getUserReviewsUseCase(it)
                 _reviews.value = response
             }
-        }
-    }
-
-
-    private val _mBinder = MutableLiveData<NotificationService.MyBinder>()
-    val mBinder: LiveData<NotificationService.MyBinder> = _mBinder
-
-
-    var serviceConnection = object : ServiceConnection {
-        override fun onServiceConnected(className: ComponentName, iBinder: IBinder) {
-            val binder = iBinder as NotificationService.MyBinder
-            _mBinder.postValue(binder)
-        }
-
-        override fun onServiceDisconnected(arg0: ComponentName) {
-            _mBinder.postValue(null)
         }
     }
 
