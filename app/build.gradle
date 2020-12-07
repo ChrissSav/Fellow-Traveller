@@ -31,12 +31,12 @@ android {
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0.1"
+        versionName "1.0.2"
 
         testInstrumentationRunner "androidx.tick_animated.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
-        setProperty("archivesBaseName", applicationId + "-v" + versionCode + "(" + versionName + ")")
+        setProperty("archivesBaseName", applicationId + "-v" + versionName)
 
     }
 
@@ -56,7 +56,7 @@ android {
             buildConfigField "String", "FELLOW_WEB_SITE_URL", "\"https://fellowtraveller.gr/\""
             buildConfigField "String", "PLACE_API_URL", "\"https://maps.googleapis.com/maps/api/place/\""
 
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
