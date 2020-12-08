@@ -13,8 +13,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import gr.fellow.fellow_traveller.BuildConfig
+import gr.fellow.fellow_traveller.framework.NetworkConnectionInterceptor
 import gr.fellow.fellow_traveller.framework.TokenInterceptor
-import gr.fellow.fellow_traveller.framework.network.NetworkConnectionInterceptor
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowTokenService
 import gr.fellow.fellow_traveller.framework.network.google.PlaceApiService

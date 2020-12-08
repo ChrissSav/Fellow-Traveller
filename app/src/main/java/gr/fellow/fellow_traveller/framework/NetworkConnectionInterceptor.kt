@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.framework.network
+package gr.fellow.fellow_traveller.framework
 
 import gr.fellow.fellow_traveller.data.NoInternetException
 import gr.fellow.fellow_traveller.utils.ConnectivityHelper

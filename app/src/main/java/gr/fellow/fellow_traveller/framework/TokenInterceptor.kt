@@ -11,9 +11,6 @@ import gr.fellow.fellow_traveller.utils.set
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.net.HttpURLConnection
-import java.util.concurrent.locks.Lock
-import java.util.concurrent.locks.ReentrantLock
-
 
 class TokenInterceptor
 constructor(
@@ -21,60 +18,37 @@ constructor(
     private val fellowTokenService: FellowTokenService
 ) : Interceptor {
 
-    companion object {
-        val lock: Lock = ReentrantLock()
-    }
-
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val response: Response?
-        val request = chain.request()
-        val firstRequest = request.newBuilder()
+        synchronized(this) {
+            val originalRequest = chain.request()
+            if (!(originalRequest.url.encodedPath.contains("/signup") && originalRequest.method == "POST")
+                && !(originalRequest.url.encodedPath.contains("/signin") && originalRequest.method == "POST")
+                && !(originalRequest.url.encodedPath.contains("/check_email") && originalRequest.method == "POST")
+                && !(originalRequest.url.encodedPath.contains("/verify_account") && originalRequest.method == "GET")
+                && !(originalRequest.url.encodedPath.contains("/refresh_token") && originalRequest.method == "POST")
+                && !(originalRequest.url.encodedPath.contains("/forgot_password") && originalRequest.method == "POST")
+                && !(originalRequest.url.encodedPath.contains("/reset_password") && originalRequest.method == "POST")
+            ) {
+                var token = sharedPreferences.getString(PREFS_AUTH_ACCESS_TOKEN, "").toString()
 
-        if (!(request.url.encodedPath.contains("/signup") && request.method == "POST")
-            && !(request.url.encodedPath.contains("/signin") && request.method == "POST")
-            && !(request.url.encodedPath.contains("/check_email") && request.method == "POST")
-            && !(request.url.encodedPath.contains("/verify_account") && request.method == "GET")
-            && !(request.url.encodedPath.contains("/refresh_token") && request.method == "POST")
-            && !(request.url.encodedPath.contains("/forgot_password") && request.method == "POST")
-            && !(request.url.encodedPath.contains("/reset_password") && request.method == "POST")
-        ) {
-            var token = sharedPreferences.getString(PREFS_AUTH_ACCESS_TOKEN, "").toString()
+                val authenticationRequest = originalRequest.newBuilder()
+                    .addHeader("Authorization", "Bearer $token").build()
+                val initialResponse = chain.proceed(authenticationRequest)
 
-
-            // Add token to request
-            if (token.length > 10)
-                firstRequest.addHeader("Authorization", "Bearer $token")
-            // Execute Request
-            response = chain.proceed(firstRequest.build())
-
-            if (response.code == HttpURLConnection.HTTP_UNAUTHORIZED) {
-
-                if (lock.tryLock()) {
-                    Log.i("TokenInterceptor", "refresh token thread holds the lock")
+                return if (initialResponse.code == HttpURLConnection.HTTP_UNAUTHORIZED || initialResponse.code == HttpURLConnection.HTTP_FORBIDDEN) {
                     handleForbiddenResponse()
                     token = sharedPreferences.getString(PREFS_AUTH_ACCESS_TOKEN, "").toString()
-                    firstRequest.removeHeader("Authorization")
-                    firstRequest.addHeader("Authorization", "Bearer $token")
-                    Log.i("TokenInterceptor", "refresh token finished. release lock")
-                    lock.unlock()
-                    return chain.proceed(firstRequest.build())
+                    val newAuthenticationRequest = originalRequest.newBuilder()
+                        .addHeader("Authorization", "Bearer $token").build()
+                    chain.proceed(newAuthenticationRequest)
                 } else {
-                    lock.lock() // this will block the thread until the thread that is refreshing
-                    // the token will call .unlock() method
-                    handleForbiddenResponse()
-                    token = sharedPreferences.getString(PREFS_AUTH_ACCESS_TOKEN, "").toString()
-                    firstRequest.removeHeader("Authorization")
-                    firstRequest.addHeader("Authorization", "Bearer $token")
-                    lock.unlock()
-                    return chain.proceed(firstRequest.build())
+                    initialResponse
                 }
+            } else {
+                return chain.proceed(originalRequest)
             }
-            return response
-        } else {
-            return chain.proceed(firstRequest.build())
         }
-
     }
 
     private fun handleForbiddenResponse() {
