@@ -37,6 +37,7 @@ constructor(
                 val initialResponse = chain.proceed(authenticationRequest)
 
                 return if (initialResponse.code == HttpURLConnection.HTTP_UNAUTHORIZED || initialResponse.code == HttpURLConnection.HTTP_FORBIDDEN) {
+                    initialResponse.close()
                     handleForbiddenResponse()
                     token = sharedPreferences.getString(PREFS_AUTH_ACCESS_TOKEN, "").toString()
                     val newAuthenticationRequest = originalRequest.newBuilder()
