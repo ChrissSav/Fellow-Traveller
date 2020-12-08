@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.ui.rate
 
+import android.annotation.SuppressLint
 import android.view.View
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,16 +57,15 @@ class RateActivity : BaseActivityViewModel<ActivityRateBinding, RateViewModel>(R
 
     }
 
+    @SuppressLint("SetTextI18n")
     override fun setUpViews() {
         with(binding) {
-            viewModel.checkReview(notification.user.id)
+            viewModel.checkReview(notification)
 
-            rateTrip.text = notification.trip.destinationFrom + " - " + notification.trip.destinationTo
+            rateTrip.text = "${notification.trip.destinationFrom} -  ${notification.trip.destinationTo}"
 
             rateName.text = notification.user.fullName
             rateImage.loadImageFromUrl(notification.user.picture)
-
-
 
 
             backButton.setOnClickListener {
@@ -73,11 +73,9 @@ class RateActivity : BaseActivityViewModel<ActivityRateBinding, RateViewModel>(R
             }
 
             rate.setOnClickListener {
-
                 if (rateBar.rating != 0f) {
                     viewModel.registerRate(notification.user.id, rateBar.rating)
                 }
-
             }
 
         }

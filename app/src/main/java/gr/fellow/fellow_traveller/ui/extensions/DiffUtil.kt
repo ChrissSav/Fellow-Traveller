@@ -46,8 +46,7 @@ class NotificationDiffCallback : DiffUtil.ItemCallback<Notification>() {
         return oldItem.id == newItem.id
     }
 
-    @SuppressLint("DiffUtilEquals")
     override fun areContentsTheSame(oldItem: Notification, newItem: Notification): Boolean {
-        return oldItem == newItem
+        return false
     }
 }

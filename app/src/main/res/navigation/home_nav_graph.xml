@@ -208,6 +208,11 @@
             app:argType="boolean" />
 
         <argument
+            android:name="notificationId"
+            app:argType="long"
+            android:defaultValue="-10L" />
+
+        <argument
             android:name="history"
             android:defaultValue="false"
             app:argType="boolean" />

@@ -110,7 +110,15 @@ class NotificationJobService : JobService() {
                 .setGraph(R.navigation.home_nav_graph)
                 .setComponentName(HomeActivity::class.java)
                 .setDestination(R.id.tripInvolvedDetailsSecondFragment)
-                .setArguments(bundleOf("reload" to true, "history" to (notificationItem.trip.status == TripStatus.COMPLETED.code), "tripId" to notificationItem.trip.id, "creator" to true))
+                .setArguments(
+                    bundleOf(
+                        "notificationId" to notificationItem.id,
+                        "reload" to true,
+                        "history" to (notificationItem.trip.status == TripStatus.COMPLETED.code),
+                        "tripId" to notificationItem.trip.id,
+                        "creator" to true
+                    )
+                )
                 .createPendingIntent()
             notification.contentIntent = p
         }

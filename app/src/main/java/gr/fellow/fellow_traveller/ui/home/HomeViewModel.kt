@@ -13,6 +13,7 @@ import gr.fellow.fellow_traveller.domain.review.Review
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.ui.extensions.addOrReplace
+import gr.fellow.fellow_traveller.ui.extensions.setNotificationRead
 import gr.fellow.fellow_traveller.ui.extensions.toMutableListSafe
 import gr.fellow.fellow_traveller.usecase.auth.ChangePasswordUseCase
 import gr.fellow.fellow_traveller.usecase.auth.DeleteUserAuthLocalUseCase
@@ -297,11 +298,7 @@ constructor(
         launchWithLiveData(false, loadNotifications) {
             if (!notification.isRead) {
                 updateNotificationsUseCase(notification.id)
-                notification.isRead = true
-                val temp = _notifications.value ?: mutableListOf()
-                val index = temp.indexOf(notification)
-                temp[index] = notification
-                _notifications.value = temp
+                _notifications.setNotificationRead(notification.id)
             }
             _notification.value = notification
         }
@@ -407,10 +404,14 @@ constructor(
     val loadTripInvolvedDetails = MutableLiveData<Boolean>()
     private val tripInvolvedDetailsDelay = 100L
 
-    fun loadTripCreatorActiveInvolvedDetails(tripId: String, reload: Boolean = false) {
+    fun loadTripCreatorActiveInvolvedDetails(tripId: String, reload: Boolean = false, notificationId: Long) {
         launchWithLiveData(true, loadTripInvolvedDetails) {
             val index = _tripsAsCreatorActive.toMutableListSafe().indexOfFirst { it.id == tripId }
             if (reload || index == -1) {
+                if (notificationId > 0) {
+                    updateNotificationsUseCase(notificationId)
+                    _notifications.setNotificationRead(notificationId)
+                }
                 val trip = getTripInvolvedByIdUseCase(tripId)
                 _tripsAsCreatorActive.addOrReplace(trip)
                 _tripInvolvedDetails.value = trip
@@ -421,10 +422,14 @@ constructor(
         }
     }
 
-    fun loadTripCreatorHistoryInvolvedDetails(tripId: String, reload: Boolean = false) {
+    fun loadTripCreatorHistoryInvolvedDetails(tripId: String, reload: Boolean = false, notificationId: Long) {
         launchWithLiveData(true, loadTripInvolvedDetails) {
             val index = _tripsAsCreatorHistory.toMutableListSafe().indexOfFirst { it.id == tripId }
             if (reload || index == -1) {
+                if (notificationId > 0) {
+                    updateNotificationsUseCase(notificationId)
+                    _notifications.setNotificationRead(notificationId)
+                }
                 val trip = getTripInvolvedByIdUseCase(tripId)
                 _tripsAsCreatorHistory.addOrReplace(trip)
                 _tripInvolvedDetails.value = trip
@@ -436,10 +441,14 @@ constructor(
     }
 
 
-    fun loadTripTakesPartActiveInvolvedDetails(tripId: String, reload: Boolean = false) {
+    fun loadTripTakesPartActiveInvolvedDetails(tripId: String, reload: Boolean = false, notificationId: Long) {
         launchWithLiveData(true, loadTripInvolvedDetails) {
             val index = _tripsAsPassengerActive.toMutableListSafe().indexOfFirst { it.id == tripId }
             if (reload || index == -1) {
+                if (notificationId > 0) {
+                    updateNotificationsUseCase(notificationId)
+                    _notifications.setNotificationRead(notificationId)
+                }
                 val trip = getTripInvolvedByIdUseCase(tripId)
                 _tripsAsPassengerActive.addOrReplace(trip)
                 _tripInvolvedDetails.value = trip
@@ -450,10 +459,14 @@ constructor(
         }
     }
 
-    fun loadTripTakesPartHistoryInvolvedDetails(tripId: String, reload: Boolean = false) {
+    fun loadTripTakesPartHistoryInvolvedDetails(tripId: String, reload: Boolean = false, notificationId: Long) {
         launchWithLiveData(true, loadTripInvolvedDetails) {
             val index = _tripsAsPassengerHistory.toMutableListSafe().indexOfFirst { it.id == tripId }
             if (reload || index == -1) {
+                if (notificationId > 0) {
+                    updateNotificationsUseCase(notificationId)
+                    _notifications.setNotificationRead(notificationId)
+                }
                 val trip = getTripInvolvedByIdUseCase(tripId)
                 _tripsAsPassengerHistory.addOrReplace(trip)
                 _tripInvolvedDetails.value = trip

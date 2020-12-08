@@ -127,17 +127,17 @@ class TripInvolvedDetailsSecondFragment : BaseFragment<FragmentTripInvolvedCreat
             binding.constraintLayoutInfo.backgroundTintList = ContextCompat.getColorStateList(binding.constraintLayoutInfo.context, R.color.green)
             binding.labelDescription.text = getString(R.string.youre_trip_driver)
             if (args.history)
-                viewModel.loadTripCreatorHistoryInvolvedDetails(args.tripId, args.reload)
+                viewModel.loadTripCreatorHistoryInvolvedDetails(args.tripId, args.reload, args.notificationId)
             else
-                viewModel.loadTripCreatorActiveInvolvedDetails(args.tripId, args.reload)
+                viewModel.loadTripCreatorActiveInvolvedDetails(args.tripId, args.reload, args.notificationId)
         } else {
             binding.constraintLayoutInfo.backgroundTintList = ContextCompat.getColorStateList(binding.constraintLayoutInfo.context, R.color.orange_new)
             binding.labelDescription.text = getString(R.string.you_have_booked_this_trip)
             binding.messengerLinkConstraintLayout.visibility = View.VISIBLE
             if (args.history)
-                viewModel.loadTripTakesPartHistoryInvolvedDetails(args.tripId, args.reload)
+                viewModel.loadTripTakesPartHistoryInvolvedDetails(args.tripId, args.reload, args.notificationId)
             else
-                viewModel.loadTripTakesPartActiveInvolvedDetails(args.tripId, args.reload)
+                viewModel.loadTripTakesPartActiveInvolvedDetails(args.tripId, args.reload, args.notificationId)
         }
 
 

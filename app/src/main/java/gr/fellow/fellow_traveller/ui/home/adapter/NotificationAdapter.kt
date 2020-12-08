@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.NotificationItemLayoutBinding
+import gr.fellow.fellow_traveller.domain.NotificationStatus
 import gr.fellow.fellow_traveller.domain.notification.Notification
 import gr.fellow.fellow_traveller.ui.extensions.NotificationDiffCallback
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
@@ -37,13 +38,13 @@ class NotificationAdapter(
 
 
             when (item.type) {
-                0 -> {
+                NotificationStatus.RATE.code -> {
                     binding.description.setTextHtml(binding.description.context.getString(R.string.notification_to_rate, item.user.fullName))
                 }
-                1 -> {
+                NotificationStatus.PASSENGER_EXIT.code -> {
                     binding.description.setTextHtml(binding.description.context.getString(R.string.notification_passenger_exit, item.user.fullName))
                 }
-                2 -> {
+                NotificationStatus.PASSENGER_ENTER.code -> {
                     binding.description.setTextHtml(binding.description.context.getString(R.string.notification_passenger_enter, item.user.fullName))
                 }
                 else -> {
@@ -68,16 +69,6 @@ class NotificationAdapter(
     }
 
 
-    fun readNotification(notification: Notification) {
-
-        val item = currentList.find { it.id == notification.id }
-        if (item != null) {
-            val index = currentList.indexOf(item)
-            currentList[index].isRead = true
-            notifyItemChanged(index)
-        }
-    }
-
     private fun time(timestamp: Long, context: Context): String {
         val t = currentTimeStamp() - timestamp
         if (t <= 3600) {
@@ -94,7 +85,7 @@ class NotificationAdapter(
             else
                 context.getString(R.string.hours_ago, ((t / 3600).toInt()).toString())
         // "${(t / 3600).toInt()} ώρες"
-        else if ((t / (3600 * 24)) <= 30)
+        else if ((t / (3600 * 24)) <= 7)
             return if ((t / (3600 * 24)).toInt() == 1)
                 context.getString(R.string.day_ago)
             //"${(t / (3600 * 24)).toInt()} μέρα"

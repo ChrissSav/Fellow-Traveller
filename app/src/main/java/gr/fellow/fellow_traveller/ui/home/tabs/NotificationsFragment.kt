@@ -35,7 +35,8 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
 
         viewModel.notifications.observe(viewLifecycleOwner, Observer { list ->
             binding.swipeRefreshLayout.isRefreshing = false
-            (binding.recyclerView.adapter as NotificationAdapter).submitList(list)
+            //  (binding.recyclerView.adapter as NotificationAdapter).submitList(null)
+            (binding.recyclerView.adapter as NotificationAdapter).submitList(list.toMutableList())
 
             //if there are no notifications to display, show specific message, else show notifications
             if (list.isNullOrEmpty())
@@ -57,7 +58,6 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
         })
 
         viewModel.notification.observe(viewLifecycleOwner, Observer {
-            (binding.recyclerView.adapter as NotificationAdapter).readNotification(it)
             when (it.type) {
                 NotificationStatus.RATE.code -> {
                     activity?.startActivityWithFade(RateActivity::class, bundleOf("notification" to it))
@@ -76,7 +76,7 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
     override fun setUpViews() {
         viewModel.loadNotifications()
         binding.recyclerView.adapter = NotificationAdapter(viewModel::readNotification)
-
+        binding.recyclerView.hasFixedSize()
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             (binding.recyclerView.adapter as NotificationAdapter).submitList(mutableListOf<Notification>())

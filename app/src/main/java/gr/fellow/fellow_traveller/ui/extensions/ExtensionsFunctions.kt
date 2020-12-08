@@ -3,6 +3,7 @@ package gr.fellow.fellow_traveller.ui.extensions
 import android.content.res.Resources
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.MutableLiveData
+import gr.fellow.fellow_traveller.domain.notification.Notification
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 
 
@@ -80,6 +81,14 @@ fun MutableList<TripInvolved>.addOrReplace(item: TripInvolved) {
         this[index] = item
 }
 
+fun MutableList<Notification>.addOrReplace(item: Notification) {
+    val index = indexOfFirst { it.id == item.id }
+    if (index == -1)
+        add(item)
+    else
+        this[index] = item
+}
+
 fun <T> MutableLiveData<MutableList<T>>.toMutableListSafe(): MutableList<T> {
     return value ?: mutableListOf()
 }
@@ -88,4 +97,17 @@ fun MutableLiveData<MutableList<TripInvolved>>.addOrReplace(item: TripInvolved) 
     val temp = value ?: mutableListOf()
     temp.addOrReplace(item)
     value = temp
+}
+
+fun MutableLiveData<MutableList<Notification>>.setNotificationRead(item: Long) {
+    val tempList = value ?: mutableListOf()
+    try {
+        val test = tempList.first { it.id == item }
+        test.isRead = true
+        tempList.addOrReplace(test)
+    } catch (e: NoSuchElementException) {
+
+    }
+
+    value = tempList
 }
