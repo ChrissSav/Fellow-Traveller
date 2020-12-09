@@ -506,7 +506,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout_info"
         android:layout_width="match_parent"
-        android:visibility="invisiblevisible"
+        android:visibility="invisible"
         android:layout_height="wrap_content"
         android:paddingBottom="16dp"
         android:background="@drawable/bottom_sheet_dialog_shape"
