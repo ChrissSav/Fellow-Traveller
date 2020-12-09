@@ -31,7 +31,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
     private var clickTimeDialog = 0L
     private var bundle = bundleOf()
     private lateinit var sortSearchTripsBottomSheetDialog: SortSearchTripsBottomSheetDialog
-    
+
     override fun getViewBinding(): FragmentSearchTripsBinding =
         FragmentSearchTripsBinding.inflate(layoutInflater)
 
@@ -51,6 +51,15 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
                     createAlerter(getString(it.messageId))
                 else
                     createAlerter(it.message)
+            })
+
+
+            destinationsIsSet.observe(viewLifecycleOwner, Observer {
+                if (it) {
+                    viewModel.updateFilter()
+                } else {
+                    viewModel.destinationsIsSet.value = false
+                }
             })
 
 
@@ -101,7 +110,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
             recyclerView.adapter = SearchResultsListAdapter(this@SearchTripsFragment::onTripClicked)
 
-            
+
             binding.sortButton.setOnClickListener {
                 //Check because dialog open twice
                 if (currentTimeStamp() - clickTimeDialog > 1) {

@@ -198,9 +198,9 @@
 
     <fragment
         android:id="@+id/tripInvolvedDetailsSecondFragment"
-        android:name="gr.fellow.fellow_traveller.ui.home.trip_fragments.TripInvolvedDetailsSecondFragment"
+        android:name="gr.fellow.fellow_traveller.ui.home.trip_fragments.TripInvolvedDetailsFragment"
         android:label="fragment_trip_involved_creator_details"
-        tools:layout="@layout/fragment_trip_involved_creator_details">
+        tools:layout="@layout/fragment_trip_involved_details">
 
         <argument
             android:name="reload"

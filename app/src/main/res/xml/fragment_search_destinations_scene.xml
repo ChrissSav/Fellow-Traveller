@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:motion="http://schemas.android.com/apk/res-auto">
+    xmlns:motion="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools">
 
     <Transition
         motion:constraintSetEnd="@+id/end"
@@ -21,6 +22,22 @@
             android:alpha="0"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toBottomOf="@+id/search_button" />
+        <Constraint
+            android:id="@+id/filter_button"
+            android:layout_width="@dimen/back_button_width_height"
+            android:layout_height="@dimen/back_button_width_height"
+            android:layout_marginEnd="16dp"
+            android:visibility="invisible"
+            motion:layout_constraintBottom_toBottomOf="@+id/back_button"
+            motion:layout_constraintEnd_toEndOf="parent"
+            app:visibilityMode="ignore"
+            motion:layout_constraintTop_toTopOf="@+id/back_button">
+
+            <PropertySet
+                motion:applyMotionScene="false"
+                motion:visibilityMode="ignore" />
+
+        </Constraint>
 
     </ConstraintSet>
 
@@ -53,5 +70,16 @@
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="@id/back_button"
             motion:layout_constraintTop_toBottomOf="@+id/label" />
+
+        <Constraint
+            android:id="@+id/filter_button"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="@dimen/back_button_width_height"
+            android:layout_height="@dimen/back_button_width_height"
+            motion:layout_constraintBottom_toBottomOf="@+id/back_button"
+            android:visibility="visible"
+            android:layout_marginEnd="16dp"
+            motion:layout_constraintTop_toTopOf="@+id/back_button" />
+
     </ConstraintSet>
 </MotionScene>

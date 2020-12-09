@@ -26,7 +26,7 @@ class SearchTripActivity : BaseActivityViewModel<ActivitySearchTripBinding, Sear
         if (placeFrom != null && placeTo != null) {
             viewModel.setDestinationFrom(placeFrom)
             viewModel.setDestinationTo(placeTo)
-            viewModel.updateFilter()
+            viewModel.destinationsSet()
         }
     }
 

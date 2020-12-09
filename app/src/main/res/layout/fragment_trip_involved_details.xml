@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.trip_fragments.TripInvolvedDetailsSecondFragment">
+    tools:context=".ui.home.trip_fragments.TripInvolvedDetailsFragment">
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -96,7 +96,6 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/trip_detail_constraintLayout"
                     android:layout_width="match_parent"
-                    android:visibility="invisible"
                     android:layout_height="match_parent">
 
                     <TextView
@@ -152,12 +151,11 @@
                         style="@style/paragraph_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="4dp"
                         android:tag="2"
                         android:text="@string/trip_time_placeholder"
-                        app:layout_constraintStart_toEndOf="@+id/day"
-                        app:layout_constraintTop_toTopOf="@+id/imageView_1" />
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView_clock"
+                        app:layout_constraintStart_toStartOf="@+id/day"
+                        app:layout_constraintTop_toTopOf="@+id/imageView_clock" />
 
                     <TextView
                         android:id="@+id/day"
@@ -167,9 +165,9 @@
                         android:layout_marginStart="8dp"
                         android:tag="2"
                         android:text="@string/trip_date_placeholder"
-                        app:layout_constraintBottom_toBottomOf="@+id/time"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView_1"
                         app:layout_constraintStart_toEndOf="@+id/imageView_1"
-                        app:layout_constraintTop_toTopOf="@+id/time" />
+                        app:layout_constraintTop_toTopOf="@+id/imageView_1" />
 
 
                     <ImageView
@@ -182,12 +180,24 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/to" />
 
+
+                    <ImageView
+                        android:id="@+id/imageView_clock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:src="@drawable/ic_clock"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView_1" />
+
                     <TextView
                         android:id="@+id/google_maps"
                         style="@style/paragraph_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawablePadding="8dp"
+                        android:gravity="center"
                         android:padding="10dp"
                         android:text="@string/google_maps"
                         app:drawableEndCompat="@drawable/ic_google_maps"
@@ -248,11 +258,11 @@
                         android:layout_height="44dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="80dp"
+                        android:layout_marginTop="60dp"
                         android:background="@drawable/ic_boy"
                         android:elevation="1dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/day" />
+                        app:layout_constraintTop_toBottomOf="@+id/time" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayout2"

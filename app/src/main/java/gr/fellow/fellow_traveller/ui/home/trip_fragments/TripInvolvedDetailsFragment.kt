@@ -9,7 +9,7 @@ import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
-import gr.fellow.fellow_traveller.databinding.FragmentTripInvolvedCreatorDetailsBinding
+import gr.fellow.fellow_traveller.databinding.FragmentTripInvolvedDetailsBinding
 import gr.fellow.fellow_traveller.domain.AnswerType
 import gr.fellow.fellow_traveller.domain.TripStatus
 import gr.fellow.fellow_traveller.domain.user.UserBase
@@ -21,15 +21,15 @@ import gr.fellow.fellow_traveller.ui.user.UserProfileDetailsActivity
 import kotlinx.android.synthetic.main.notification_item_layout.*
 
 @AndroidEntryPoint
-class TripInvolvedDetailsSecondFragment : BaseFragment<FragmentTripInvolvedCreatorDetailsBinding>() {
+class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBinding>() {
 
-    private val args: TripInvolvedDetailsSecondFragmentArgs by navArgs()
+    private val args: TripInvolvedDetailsFragmentArgs by navArgs()
     private val viewModel: HomeViewModel by activityViewModels()
     private lateinit var confirmBottomSheetDialog: ConfirmBottomSheetDialog
 
 
-    override fun getViewBinding(): FragmentTripInvolvedCreatorDetailsBinding =
-        FragmentTripInvolvedCreatorDetailsBinding.inflate(layoutInflater)
+    override fun getViewBinding(): FragmentTripInvolvedDetailsBinding =
+        FragmentTripInvolvedDetailsBinding.inflate(layoutInflater)
 
     override fun setUpObservers() {
 
@@ -79,7 +79,7 @@ class TripInvolvedDetailsSecondFragment : BaseFragment<FragmentTripInvolvedCreat
                 if (!trip.passengers.isNullOrEmpty()) {
                     binding.viewAllPassengers.visibility = View.VISIBLE
                     binding.passengersSection.visibility = View.GONE
-                    binding.passengerRecyclerView.adapter = PassengerAdapter(trip.passengers, this@TripInvolvedDetailsSecondFragment::onPassengerListener)
+                    binding.passengerRecyclerView.adapter = PassengerAdapter(trip.passengers, this@TripInvolvedDetailsFragment::onPassengerListener)
                 } else {
                     binding.passengersSection.visibility = View.VISIBLE
                     binding.viewAllPassengers.visibility = View.GONE
@@ -148,7 +148,7 @@ class TripInvolvedDetailsSecondFragment : BaseFragment<FragmentTripInvolvedCreat
         binding.delete.setOnClickListener {
             confirmBottomSheetDialog = ConfirmBottomSheetDialog(
                 if (args.creator) getString(R.string.delete_trip_question) else getString(R.string.leave_trip_question),
-                this@TripInvolvedDetailsSecondFragment::onConfirmItemClickListener, 1
+                this@TripInvolvedDetailsFragment::onConfirmItemClickListener, 1
             )
             confirmBottomSheetDialog.show(childFragmentManager, "confirmBottomSheetDialog")
         }

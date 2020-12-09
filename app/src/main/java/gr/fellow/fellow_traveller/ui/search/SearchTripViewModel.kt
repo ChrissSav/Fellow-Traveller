@@ -27,6 +27,7 @@ constructor(
 
     val loadResults = MutableLiveData<Boolean>()
 
+    val destinationsIsSet = MutableLiveData<Boolean>()
 
     private val _tripBook = SingleLiveEvent<TripInvolved>()
     val tripBook: LiveData<TripInvolved> = _tripBook
@@ -73,6 +74,10 @@ constructor(
         }
     }
 
+    fun destinationsSet() {
+        destinationsIsSet.value = true
+    }
+
 
     fun swapDestinations() {
         _destinations.value = Pair(_destinations.value?.second, _destinations.value?.first)
@@ -103,7 +108,7 @@ constructor(
         launchWithLiveData(true, loadResults) {
             _searchFilter.value?.let { searchFilters ->
                 val response = searchTripsUseCase(searchFilters)
-                delay(350)
+                delay(250)
                 setSortOption(sortOption, response)
             }
         }
