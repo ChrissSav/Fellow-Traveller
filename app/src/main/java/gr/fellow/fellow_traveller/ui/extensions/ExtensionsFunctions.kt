@@ -9,7 +9,6 @@ import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 
 fun getRandomImage(): String {
     val cities = mutableListOf<String>()
-    cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fcity-1.jpg?alt=media&token=897e0c15-6b66-461f-a50a-a08d4715fd2e")
     cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fcity-10.jpg?alt=media&token=2783d8b8-aa6c-4c0a-835f-4bf9ae7be4ed")
     cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fcity-11.jpg?alt=media&token=9d3f9c0b-b601-4dcd-a85d-a19667e366db")
     cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fcity-12.jpg?alt=media&token=9608bd94-d866-4153-a7f6-3b57a4cf556c")
@@ -22,7 +21,6 @@ fun getRandomImage(): String {
     cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fcity-19.jpg?alt=media&token=34934ca4-aa42-481b-91de-9c108b35a307")
     cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fcity-21.jpg?alt=media&token=33369ccb-b560-4df5-96c9-24672f477c48")
     cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fcity-22.jpg?alt=media&token=4a3de3e5-4952-4305-9d69-8b77ecb8fb69")
-    cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fcity-23.jpg?alt=media&token=1d072a15-2322-4091-a708-23d91a752481")
     cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fcity-20.jpg?alt=media&token=74a402d7-46e8-4dc0-84bf-b9c60825ee3c")
     cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fcity-3.jpg?alt=media&token=a191a082-121a-4cc8-8a2e-5c428518e21c")
     cities.add("https://firebasestorage.googleapis.com/v0/b/fellow-traveller-firebase.appspot.com/o/userImages%2Fcity-4.jpg?alt=media&token=857b5e18-cdfb-4785-946a-ba31f7e56725")
