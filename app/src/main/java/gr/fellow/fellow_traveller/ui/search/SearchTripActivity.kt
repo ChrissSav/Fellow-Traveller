@@ -52,7 +52,7 @@ class SearchTripActivity : BaseActivityViewModel<ActivitySearchTripBinding, Sear
 
         if (viewModel.searchFilter.value?.latitudeFrom != null && viewModel.searchFilter.value?.latitudeTo != null)
             if (nav.currentDestination?.id == R.id.searchTripsFragment) {
-                ExitCustomDialog(this, this::exitCustomDialogAnswerType, getString(R.string.cancel_search), 2).show(supportFragmentManager, "exitCustomDialog")
+                ExitCustomDialog(this, this::exitCustomDialogAnswerType, getString(R.string.cancel_search), 1).show(supportFragmentManager, "exitCustomDialog")
             } else {
                 super.onBackPressed()
             }
