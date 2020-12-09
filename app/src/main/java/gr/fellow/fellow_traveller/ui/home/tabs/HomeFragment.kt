@@ -46,6 +46,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun setUpViews() {
+
         binding.constraintLayoutNew.setOnClickListener {
             if (accountCorrect) {
                 startActivityForResult(NewTripActivity::class, 1, null)

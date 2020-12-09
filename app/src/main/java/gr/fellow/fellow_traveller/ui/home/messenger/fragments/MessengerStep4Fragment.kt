@@ -1,7 +1,9 @@
 package gr.fellow.fellow_traveller.ui.home.messenger.fragments
 
+import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentMessengerStep4Binding
+import java.util.*
 
 class MessengerStep4Fragment : BaseFragment<FragmentMessengerStep4Binding>() {
 
@@ -12,6 +14,12 @@ class MessengerStep4Fragment : BaseFragment<FragmentMessengerStep4Binding>() {
     }
 
     override fun setUpViews() {
+
+        if (Locale.getDefault().language.equals("el"))
+            binding.imageView5.setImageResource(R.drawable.ic_messenger_5)
+        else
+            binding.imageView5.setImageResource(R.drawable.ic_messenger_5)
+
     }
 
 }
