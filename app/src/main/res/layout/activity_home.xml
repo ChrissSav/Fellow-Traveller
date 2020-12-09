@@ -23,8 +23,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutMessenger"
         android:layout_width="match_parent"
-        android:layout_height="95dp"
-        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
         android:background="@drawable/bottom_sheet_dialog_shape"
         android:backgroundTint="@color/light_orange_New"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView">
