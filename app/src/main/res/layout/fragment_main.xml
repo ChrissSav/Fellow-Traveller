@@ -19,33 +19,38 @@
     <TextView
         android:id="@+id/MainActivity_textView"
         style="@style/display_1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/ready_for_your_next_trip"
+        android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.38" />
+        app:layout_constraintVertical_bias="0.38"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp" />
 
     <TextView
         android:id="@+id/MainActivity_textView2"
         style="@style/paragraph_1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:gravity="center_horizontal"
         android:text="@string/sign_in_or_sign_up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MainActivity_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/MainActivity_textView"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MainActivity_textView2">
