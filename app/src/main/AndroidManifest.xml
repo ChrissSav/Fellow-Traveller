@@ -38,7 +38,7 @@
 
                 <data
                     android:host="api.fellowtraveller.gr"
-                    android:pathPrefix="/verify_account"
+                    android:pathPrefix="/v1/auth/verify_account/desktop"
                     android:scheme="https" />
             </intent-filter>
         </activity>

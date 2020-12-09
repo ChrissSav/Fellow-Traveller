@@ -31,7 +31,7 @@ interface FellowService {
         @Body request: AccountCreateRequest
     ): Response<BaseResponse<String>>
 
-    @GET("auth/verify_account")
+    @GET("auth/verify_account/phone")
     suspend fun verifyAccount(
         @Query("token") token: String
     ): Response<BaseResponse<AuthenticationResponse>>
