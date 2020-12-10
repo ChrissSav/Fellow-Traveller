@@ -56,7 +56,7 @@
 
     <style name="Full" parent="AppTheme">
         <!--this property will help hide the ActionBar-->
-        <item name="android:windowFullscreen">true</item>
+        <item name="android:statusBarColor">#417456</item>
 
     </style>
 

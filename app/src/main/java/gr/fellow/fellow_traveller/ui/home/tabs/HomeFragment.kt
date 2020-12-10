@@ -2,6 +2,7 @@ package gr.fellow.fellow_traveller.ui.home.tabs
 
 import android.app.Activity
 import android.content.Intent
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -26,6 +27,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val viewModel: HomeViewModel by activityViewModels()
     private var accountCorrect = false
+    private var progress = 0f
 
     override fun getViewBinding(): FragmentHomeBinding =
         FragmentHomeBinding.inflate(layoutInflater)
@@ -46,6 +48,29 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun setUpViews() {
+
+        binding.motion.progress = progress
+
+        binding.motion.setTransitionListener(object : MotionLayout.TransitionListener {
+            override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
+            }
+
+            override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
+
+            }
+
+            override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
+                progress = p0?.progress ?: 0f
+            }
+
+            override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
+            }
+
+        })
+
+        binding.textViewInfo.setOnClickListener {
+            activity?.openUrl("https://covid19.gov.gr")
+        }
 
         binding.constraintLayoutNew.setOnClickListener {
             if (accountCorrect) {

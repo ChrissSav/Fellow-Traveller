@@ -1,371 +1,421 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
+    android:id="@+id/motion"
+    app:layoutDescription="@xml/fragment_home_scene"
     tools:context=".ui.home.tabs.HomeFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
+        android:id="@+id/textView26"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/light_orange_New"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/display_1"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="42dp"
-            android:scaleType="fitCenter"
-            android:text="@string/hello"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-            android:id="@+id/user_name"
-            style="@style/display_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="16dp"
-            android:singleLine="true"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:text="@string/hello"
-            android:textColor="@color/green"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textView12"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView12" />
-
-        <TextView
-            android:id="@+id/home_guide"
+            android:id="@+id/textView_info"
             style="@style/paragraph_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="15dp"
-            android:text="@string/home_guide"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView12"
-            app:layout_constraintTop_toBottomOf="@+id/user_name" />
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout_search"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/background_white_outline_radius_28"
-            android:backgroundTint="@color/light_orange_New"
-            app:layout_constraintEnd_toEndOf="@+id/user_name"
-            app:layout_constraintStart_toStartOf="@+id/textView12"
-            app:layout_constraintTop_toBottomOf="@+id/home_guide">
-
-
-            <TextView
-                android:id="@+id/textView28"
-                style="@style/header_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                android:text="@string/search_for_a_trip"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView29"
-                style="@style/paragraph_1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="24dp"
-                android:text="@string/search_for_a_trip_description"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/search_trip"
-                app:layout_constraintStart_toStartOf="@+id/textView28"
-                app:layout_constraintTop_toBottomOf="@+id/textView28" />
-
-            <ImageButton
-                android:id="@+id/search_trip"
-                style="@style/border_icon_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
-                android:background="@drawable/background_white_radius_28"
-                android:backgroundTint="@color/light_orange_New"
-                android:src="@drawable/ic_search"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout_new"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/background_white_outline_radius_28"
-            android:backgroundTint="@color/light_aqua_New"
-            app:layout_constraintEnd_toEndOf="@+id/user_name"
-            app:layout_constraintStart_toStartOf="@+id/textView12"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout_search">
-
-
-            <TextView
-                android:id="@+id/textView2"
-                style="@style/header_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                android:text="@string/offer_your_next_trip"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView9"
-                style="@style/paragraph_1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="24dp"
-                android:text="@string/offer_your_next_trip_description"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/new_trip"
-                app:layout_constraintStart_toStartOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-            <ImageButton
-                android:id="@+id/new_trip"
-                style="@style/border_icon_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
-                android:background="@drawable/background_white_radius_28"
-                android:backgroundTint="@color/light_aqua_New"
-                android:src="@drawable/ic_add"
-                android:tint="@color/black_color"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <TextView
-            android:id="@+id/textView31"
-            style="@style/header_2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="54dp"
-            android:text="@string/popular_trips"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout_new"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout_new" />
-
-        <TextView
-            android:id="@+id/textView32"
-            style="@style/paragraph_1"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/choose_a_popular_trip"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView31"
-            app:layout_constraintTop_toBottomOf="@+id/textView31" />
-
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/city_choice_1"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/box_height"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="44dp"
-            android:layout_marginEnd="16dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toStartOf="@+id/guideline4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView32"
-            app:shapeAppearanceOverlay="@style/RoundedSquare" />
-
-        <TextView
-            android:id="@+id/city_name_1"
-            style="@style/paragraph_3"
-            android:layout_width="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:text="@string/popular_trip_thess_athens"
-            app:layout_constraintEnd_toEndOf="@id/guideline4"
-            app:layout_constraintStart_toStartOf="@id/city_choice_1"
-            app:layout_constraintTop_toBottomOf="@id/city_choice_1" />
-
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/city_choice_2"
-            style="@style/header_3"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/box_height"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toStartOf="@+id/guideline4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/city_name_1"
-            app:shapeAppearanceOverlay="@style/RoundedSquare" />
-
-        <TextView
-            android:id="@+id/city_name_2"
-            style="@style/paragraph_3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:text="@string/popular_trip_ioannina_athens"
-            app:layout_constraintEnd_toEndOf="@id/guideline4"
-            app:layout_constraintStart_toStartOf="@id/city_choice_2"
-            app:layout_constraintTop_toBottomOf="@id/city_choice_2" />
-
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/city_choice_3"
-            style="@style/header_3"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/box_height"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toTopOf="@+id/city_choice_1"
-            app:shapeAppearanceOverlay="@style/RoundedSquare" />
-
-        <TextView
-            android:id="@+id/city_name_3"
-            style="@style/paragraph_3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:text="@string/popular_trip_ioannina_patra"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/city_choice_3"
-            app:layout_constraintTop_toBottomOf="@id/city_choice_3" />
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/city_choice_4"
-            style="@style/header_3"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/box_height"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toBottomOf="@+id/city_name_3"
-            app:shapeAppearanceOverlay="@style/RoundedSquare" />
-
-        <TextView
-            android:id="@+id/city_name_4"
-            style="@style/paragraph_3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:text="@string/popular_trip_kavala_thess"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/city_choice_4"
-            app:layout_constraintTop_toBottomOf="@id/city_choice_4" />
-
-
-        <TextView
-            android:id="@+id/textView30"
-            style="@style/header_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:text="@string/help_guides"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout_new"
-            app:layout_constraintTop_toBottomOf="@+id/city_name_4" />
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="16dp"
+            android:drawablePadding="4dp"
+            android:gravity="center"
+            android:text="@string/covid"
+            app:drawableStartCompat="@drawable/ic_clock"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView30"
-            app:layout_constraintVertical_bias="0.0">
-
-            <TextView
-                android:id="@+id/guide"
-                style="@style/settings_text_with_padding"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/how_does_fellow_work"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/help"
-                style="@style/settings_text_with_padding"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
-                android:text="@string/what_can_you_do_with_fellow"
-                app:layout_constraintEnd_toEndOf="@id/guide"
-                app:layout_constraintStart_toStartOf="@+id/guide"
-                app:layout_constraintTop_toBottomOf="@+id/guide" />
-
-            <TextView
-                android:id="@+id/search_and_offer"
-                style="@style/settings_text_with_padding"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
-                android:text="@string/search_and_rsvp_a_trip"
-                app:layout_constraintEnd_toEndOf="@+id/help"
-                app:layout_constraintStart_toStartOf="@+id/help"
-                app:layout_constraintTop_toBottomOf="@+id/help" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
-
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</ScrollView>
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_white_radius_28_top"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout6">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/scroll2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView12"
+                style="@style/display_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="42dp"
+                android:scaleType="fitCenter"
+                android:text="@string/hello"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/user_name"
+                style="@style/display_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text="@string/hello"
+                android:textColor="@color/green"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView12" />
+
+            <TextView
+                android:id="@+id/home_guide"
+                style="@style/paragraph_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/home_guide"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView12"
+                app:layout_constraintTop_toBottomOf="@+id/user_name" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout_search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/background_white_outline_radius_28"
+                android:backgroundTint="@color/light_orange_New"
+                app:layout_constraintEnd_toEndOf="@+id/user_name"
+                app:layout_constraintStart_toStartOf="@+id/textView12"
+                app:layout_constraintTop_toBottomOf="@+id/home_guide">
+
+
+                <TextView
+                    android:id="@+id/textView28"
+                    style="@style/header_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/search_for_a_trip"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView29"
+                    style="@style/paragraph_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="24dp"
+                    android:text="@string/search_for_a_trip_description"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/search_trip"
+                    app:layout_constraintStart_toStartOf="@+id/textView28"
+                    app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+                <ImageButton
+                    android:id="@+id/search_trip"
+                    style="@style/border_icon_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/background_white_radius_28"
+                    android:backgroundTint="@color/light_orange_New"
+                    android:src="@drawable/ic_search"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout_new"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/background_white_outline_radius_28"
+                android:backgroundTint="@color/light_aqua_New"
+                app:layout_constraintEnd_toEndOf="@+id/user_name"
+                app:layout_constraintStart_toStartOf="@+id/textView12"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout_search">
+
+
+                <TextView
+                    android:id="@+id/textView2"
+                    style="@style/header_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/offer_your_next_trip"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    style="@style/paragraph_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="24dp"
+                    android:text="@string/offer_your_next_trip_description"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/new_trip"
+                    app:layout_constraintStart_toStartOf="@+id/textView2"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+                <ImageButton
+                    android:id="@+id/new_trip"
+                    style="@style/border_icon_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/background_white_radius_28"
+                    android:backgroundTint="@color/light_aqua_New"
+                    android:src="@drawable/ic_add"
+                    android:tint="@color/black_color"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <TextView
+                android:id="@+id/textView31"
+                style="@style/header_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="54dp"
+                android:text="@string/popular_trips"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout_new"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout_new" />
+
+            <TextView
+                android:id="@+id/textView32"
+                style="@style/paragraph_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/choose_a_popular_trip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView31"
+                app:layout_constraintTop_toBottomOf="@+id/textView31" />
+
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/city_choice_1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/box_height"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="44dp"
+                android:layout_marginEnd="16dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView32"
+                app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+            <TextView
+                android:id="@+id/city_name_1"
+                style="@style/paragraph_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@string/popular_trip_thess_athens"
+                app:layout_constraintEnd_toEndOf="@id/guideline4"
+                app:layout_constraintStart_toStartOf="@id/city_choice_1"
+                app:layout_constraintTop_toBottomOf="@id/city_choice_1" />
+
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/city_choice_2"
+                style="@style/header_3"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/box_height"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/city_name_1"
+                app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+            <TextView
+                android:id="@+id/city_name_2"
+                style="@style/paragraph_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@string/popular_trip_ioannina_athens"
+                app:layout_constraintEnd_toEndOf="@id/guideline4"
+                app:layout_constraintStart_toStartOf="@id/city_choice_2"
+                app:layout_constraintTop_toBottomOf="@id/city_choice_2" />
+
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/city_choice_3"
+                style="@style/header_3"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/box_height"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toTopOf="@+id/city_choice_1"
+                app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+            <TextView
+                android:id="@+id/city_name_3"
+                style="@style/paragraph_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@string/popular_trip_ioannina_patra"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/city_choice_3"
+                app:layout_constraintTop_toBottomOf="@id/city_choice_3" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/city_choice_4"
+                style="@style/header_3"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/box_height"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toBottomOf="@+id/city_name_3"
+                app:shapeAppearanceOverlay="@style/RoundedSquare" />
+
+            <TextView
+                android:id="@+id/city_name_4"
+                style="@style/paragraph_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@string/popular_trip_kavala_thess"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/city_choice_4"
+                app:layout_constraintTop_toBottomOf="@id/city_choice_4" />
+
+
+            <TextView
+                android:id="@+id/textView30"
+                style="@style/header_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:text="@string/help_guides"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout_new"
+                app:layout_constraintTop_toBottomOf="@+id/city_name_4" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView30"
+                app:layout_constraintVertical_bias="0.0">
+
+                <TextView
+                    android:id="@+id/guide"
+                    style="@style/settings_text_with_padding"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/how_does_fellow_work"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/help"
+                    style="@style/settings_text_with_padding"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
+                    android:text="@string/what_can_you_do_with_fellow"
+                    app:layout_constraintEnd_toEndOf="@id/guide"
+                    app:layout_constraintStart_toStartOf="@+id/guide"
+                    app:layout_constraintTop_toBottomOf="@+id/guide" />
+
+                <TextView
+                    android:id="@+id/search_and_offer"
+                    style="@style/settings_text_with_padding"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/fragment_profile_text_margin_top"
+                    android:text="@string/search_and_rsvp_a_trip"
+                    app:layout_constraintEnd_toEndOf="@+id/help"
+                    app:layout_constraintStart_toStartOf="@+id/help"
+                    app:layout_constraintTop_toBottomOf="@+id/help" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
