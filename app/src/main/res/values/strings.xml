@@ -26,6 +26,7 @@
     <string name="account_settings_guid_message">Θα πρέπει να ενεργοποιήσεις τις άδειες της εφαρμογής από τις ρυθμίσεις</string>
     <string name="covid">Ενημέρωση για τον <b><u>Covid-19</u></b></string>
 
+
     <string name="title_activity_maps">Χάρτης</string>
     <string name="no_driver_message">Δεν υπάρχει κάποιο μήνυμα από τον οδηγό.</string>
 

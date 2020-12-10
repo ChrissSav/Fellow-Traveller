@@ -11,6 +11,7 @@
             motion:dragDirection="dragUp"
             motion:touchAnchorId="@+id/scroll"
             motion:touchAnchorSide="top" />
+
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
@@ -21,7 +22,7 @@
 
             <CustomAttribute
                 motion:attributeName="backgroundColor"
-                motion:customColorValue="@color/light_orange_New" />
+                motion:customColorValue="@color/black_color" />
         </Constraint>
         <Constraint
             motion:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +31,7 @@
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             android:id="@+id/constraintLayout6"
-            android:layout_marginEnd="16dp" />
+            />
 
     </ConstraintSet>
 
