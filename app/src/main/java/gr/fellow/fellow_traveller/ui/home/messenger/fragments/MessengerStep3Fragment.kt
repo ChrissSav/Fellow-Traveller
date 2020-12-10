@@ -18,7 +18,7 @@ class MessengerStep3Fragment : BaseFragment<FragmentMessengerStep3Binding>() {
         if (Locale.getDefault().language.equals("el"))
             binding.imageView5.setImageResource(R.drawable.ic_messenger_4)
         else
-            binding.imageView5.setImageResource(R.drawable.ic_messenger_4)
+            binding.imageView5.setImageResource(R.drawable.ic_messenger_4_en)
 
     }
 
