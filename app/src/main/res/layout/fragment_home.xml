@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/motion"
+
     app:layoutDescription="@xml/fragment_home_scene"
     tools:context=".ui.home.tabs.HomeFragment">
 
@@ -22,6 +23,7 @@
         android:id="@+id/constraintLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -38,11 +40,12 @@
             android:drawablePadding="4dp"
             android:gravity="center"
             android:text="@string/covid"
-            app:drawableStartCompat="@drawable/ic_clock"
+            app:drawableStartCompat="@drawable/ic_info"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
