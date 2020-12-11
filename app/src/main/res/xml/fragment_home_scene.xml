@@ -6,7 +6,7 @@
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
         motion:duration="1000">
-        <KeyFrameSet></KeyFrameSet>
+        <KeyFrameSet />
         <OnSwipe
             motion:dragDirection="dragUp"
             motion:touchAnchorId="@+id/scroll"
@@ -25,13 +25,12 @@
                 motion:customColorValue="@color/black_color" />
         </Constraint>
         <Constraint
-            motion:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/constraintLayout6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/constraintLayout6"
-            />
+            motion:layout_constraintTop_toTopOf="parent" />
 
     </ConstraintSet>
 

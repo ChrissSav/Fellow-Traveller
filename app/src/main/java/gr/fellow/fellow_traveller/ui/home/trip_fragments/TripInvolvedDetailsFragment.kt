@@ -115,6 +115,13 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
                         findNavController()?.navigate(R.id.action_tripInvolvedCreatorDetailsFragment_to_destination_info)
                     }
                 }
+
+                messengerLinkConstraintLayout.setOnClickListener {
+                    activity?.openMessenger(trip.creatorUser.messengerLink)
+                }
+                messengerLinkText.setOnClickListener {
+                    activity?.openMessenger(trip.creatorUser.messengerLink)
+                }
             }
 
         })
@@ -152,6 +159,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
             )
             confirmBottomSheetDialog.show(childFragmentManager, "confirmBottomSheetDialog")
         }
+
 
     }
 
