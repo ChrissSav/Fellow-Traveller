@@ -7,7 +7,7 @@ import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import gr.fellow.fellow_traveller.data.FellowDataSourceImpl
 import gr.fellow.fellow_traveller.data.FellowRepository
 import gr.fellow.fellow_traveller.data.GoogleServiceRepository
@@ -21,7 +21,7 @@ import gr.fellow.fellow_traveller.room.dao.UserAuthDao
 import gr.fellow.fellow_traveller.usecase.notification.GetNotificationsSocketUseCase
 import javax.inject.Singleton
 
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 @Module
 object StorageModule {
 

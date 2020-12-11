@@ -24,8 +24,6 @@
         android:id="@+id/constraintLayoutMessenger"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:paddingBottom="16dp"
         android:background="@drawable/bottom_sheet_dialog_shape"
         android:backgroundTint="@color/light_orange_New"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView">
@@ -47,8 +45,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
-            android:src="@drawable/ic_messenger"
             android:backgroundTint="@color/white_color"
+            android:src="@drawable/ic_messenger"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -61,6 +59,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/enter_messenger_link"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/toAccountInfo"

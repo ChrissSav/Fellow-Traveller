@@ -279,7 +279,7 @@
     <string name="messenger_account">Λογαριασμός Messenger</string>
     <string name="messenger_placeholder" translatable="false">m.me/</string>
     <string name="messenger_username_example" translatable="false">example</string>
-    <string name="paste_where">επικκόληση εδώ</string>
+    <string name="paste_where">επικόληση εδώ</string>
     <string name="trips">Ταξίδια</string>
     <string name="sign_in">Σύνδεση</string>
     <string name="did_you_forgot_password">Ξέχασες τον συνθηματικό πρόσβασης;</string>
