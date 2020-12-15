@@ -65,7 +65,7 @@ android {
         }
 
         release {
-            signingConfig signingConfigs.release
+                
 
             buildConfigField "String", "FELLOW_TOS_URL", "\"https://fellowtraveller.gr/tos/\""
             buildConfigField "String", "FELLOW_API_URL", "\"https://api.fellowtraveller.gr/v1/\""

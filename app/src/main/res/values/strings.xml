@@ -231,6 +231,7 @@
     <string name="specify">Καθόρισε</string>
     <string name="password">Συνθηματικό Πρόσβασης</string>
     <string name="notifications">Ειδοποιήσεις</string>
+    <string name="messages">Συζητήσεις</string>
     <string name="my_vehicles">Τα οχήματά μου</string>
     <string name="leave_a_review">Γράψε μία κριτική</string>
     <string name="messenger" translatable="false">Messenger</string>

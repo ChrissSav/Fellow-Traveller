@@ -42,6 +42,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
     private val homeLayout = listOf(
         R.id.destination_main,
         R.id.destination_trips,
+        R.id.destination_messenger,
         R.id.destination_notifications,
         R.id.destination_info
     )
@@ -111,6 +112,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
         bottomNavButtons = mutableListOf(
             Pair(binding.home, R.id.destination_main),
             Pair(binding.trips, R.id.destination_trips),
+            Pair(binding.messenger, R.id.destination_messenger),
             Pair(binding.notification, R.id.destination_notifications),
             Pair(binding.account, R.id.destination_info)
         )
@@ -161,6 +163,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
         binding.home.setOnClickListener(this)
         binding.trips.setOnClickListener(this)
+        binding.messenger.setOnClickListener(this)
         binding.notification.setOnClickListener(this)
         binding.account.setOnClickListener(this)
 
@@ -244,6 +247,9 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
             }
             R.id.trips -> {
                 navController.bottomNav(R.id.destination_trips)
+            }
+            R.id.messenger -> {
+                navController.bottomNav(R.id.destination_messenger)
             }
             R.id.notification -> {
                 navController.bottomNav(R.id.destination_notifications)
