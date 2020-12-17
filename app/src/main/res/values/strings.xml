@@ -289,7 +289,7 @@
     <string name="sign_up">Εγγραφή</string>
     <string name="leave_a_message_for_co_travellers">Γράψε ένα μήνυμα στους συνταξιδιώτες σου</string>
     <string name="message_place_holder">Μήνυμα (προαιρετικό)</string>
-    <string name="write_something">Γράψε κάτι …</string>
+    <string name="write_something">Γράψε κάτι…</string>
     <string name="messenger_help_guide">Οδηγός Βοήθειας Messenger</string>
     <string name="messenger_description">Το Messenger είναι το μέσο με το οποίο θα μπορείς να ρθεις σε επικοινωνία με τους υπόλοιπους συνταξιδιώτες σου.</string>
     <string name="messenger_step_1">Άνοιξε την εφαργμογή του Messenger</string>
@@ -359,7 +359,9 @@
     <string name="ready_for_your_next_trip">Έτοιμος για το επόμενό σου ταξίδι;</string>
     <string name="sign_in_or_sign_up">Συνδέσου ή δημιούργησε ένα νέο λογαριασμό</string>
     <string name="no_notifications">Δεν έχεις κάποια ειδοποίηση</string>
-    <string name="all_activities_show_up_here">Όλες οι δραστηριότητες σου θα εμφανίζονται εδώ</string>
+    <string name="no_notifications_description">Όλες οι δραστηριότητες σου θα εμφανίζονται εδώ</string>
+    <string name="no_conversation">Δεν έχεις κάποια συζήτηση</string>
+    <string name="no_conversation_description">Όλες οι συζητήσεις σου θα φαίνονται εδώ</string>
     <string name="zero_price_placeholder" translatable="false">0.00</string>
     <string name="price_calc_per_person" translatable="false">4 x 5,00 €</string>
     <string name="zero_euros" translatable="false">0 €</string>
@@ -380,6 +382,7 @@
     <string name="offer_a_trip">Προσφορά</string>
     <string name="no_vehicles">Δεν έχεις κάποιο όχημα</string>
     <string name="no_vehicles_description">Φαίνεται ότι δεν έχεις προσθέσει κάποιο όχημα. Κάνε μία προσθήκη για να μπορείς να προσφέρεις διαδρομές</string>
+
 
     <string name="TOS_URL" translatable="false">https://fellowtraveller.gr/tos/</string>
     <string name="PRIVACY_POLICY_URL" translatable="false">https://fellowtraveller.gr/tos/</string>

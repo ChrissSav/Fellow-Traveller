@@ -26,9 +26,9 @@
 
     <fragment
         android:id="@+id/destination_messenger"
-        android:name="gr.fellow.fellow_traveller.ui.home.tabs.MessengerFragment"
+        android:name="gr.fellow.fellow_traveller.ui.home.tabs.ConversationsFragment"
         android:label="fragment_messenger"
-        tools:layout="@layout/fragment_messenger" />
+        tools:layout="@layout/fragment_conversations" />
 
     <fragment
         android:id="@+id/destination_trips"
