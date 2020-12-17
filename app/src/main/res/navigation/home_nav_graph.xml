@@ -28,7 +28,15 @@
         android:id="@+id/destination_messenger"
         android:name="gr.fellow.fellow_traveller.ui.home.tabs.ConversationsFragment"
         android:label="fragment_messenger"
-        tools:layout="@layout/fragment_conversations" />
+        tools:layout="@layout/fragment_conversations">
+        <action
+            android:id="@+id/action_destination_messenger_to_chatFragment"
+            app:destination="@id/chatFragment"
+            app:enterAnim="@anim/enter_from_left"
+            app:exitAnim="@anim/exit_to_right"
+            app:popEnterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_left" />
+    </fragment>
 
     <fragment
         android:id="@+id/destination_trips"
@@ -248,6 +256,11 @@
             app:popExitAnim="@anim/exit_to_right" />
 
     </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="gr.fellow.fellow_traveller.ui.home.chat.models.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
 
 
 </navigation>

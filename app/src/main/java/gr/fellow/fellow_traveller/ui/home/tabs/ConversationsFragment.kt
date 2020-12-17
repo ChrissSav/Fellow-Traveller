@@ -1,9 +1,12 @@
 package gr.fellow.fellow_traveller.ui.home.tabs
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
+import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentConversationsBinding
 import gr.fellow.fellow_traveller.ui.extensions.createToast
+import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.ConversationsAdapter
 import gr.fellow.fellow_traveller.ui.home.chat.models.Conversation
@@ -49,6 +52,11 @@ class ConversationsFragment : BaseFragment<FragmentConversationsBinding>() {
     //onClickListenerForAdapter
     private fun onConversationClick(aConversation: Conversation) {
         createToast(aConversation.tripId)
+        //findNavController()?.navigate(R.id.action_destination_messenger_to_chatFragment)
+        findNavController()?.navigate(
+            R.id.action_destination_messenger_to_chatFragment, bundleOf("ConversationItem" to aConversation)
+        )
+
     }
 
 
