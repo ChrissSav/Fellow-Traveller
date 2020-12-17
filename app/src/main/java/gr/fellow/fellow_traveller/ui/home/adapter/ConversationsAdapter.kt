@@ -12,7 +12,8 @@ import gr.fellow.fellow_traveller.utils.currentTimeStamp
 import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
 
 class ConversationsAdapter(
-    private val conversationsList: MutableList<Conversation>
+    private val conversationsList: MutableList<Conversation>,
+    private val onItemClickListener: (Conversation) -> Unit
 
 ) : RecyclerView.Adapter<ConversationsAdapter.ViewHolder>() {
 
@@ -38,6 +39,10 @@ class ConversationsAdapter(
                 binding.chatSeenIcon.visibility = View.INVISIBLE
             else
                 binding.chatSeenIcon.visibility = View.VISIBLE
+
+            binding.root.setOnClickListener {
+                onItemClickListener.invoke(currentItem)
+            }
         }
     }
 
