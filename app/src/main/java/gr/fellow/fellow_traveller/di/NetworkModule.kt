@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Context.CONNECTIVITY_SERVICE
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
+import com.google.firebase.storage.FirebaseStorage
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -57,6 +58,11 @@ object NetworkModule {
     fun provideTokenInterceptor(sharedPreferences: SharedPreferences, fellowTokenService: FellowTokenService): TokenInterceptor {
         return TokenInterceptor(sharedPreferences, fellowTokenService)
     }
+
+
+    @Singleton
+    @Provides
+    fun provideFirebaseStorage() = FirebaseStorage.getInstance()
 
 
     @Fellow

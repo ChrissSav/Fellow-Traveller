@@ -1,11 +1,11 @@
 package gr.fellow.fellow_traveller.utils
 
 import gr.fellow.fellow_traveller.data.BaseApiException
+import gr.fellow.fellow_traveller.data.BaseFirebaseException
 import gr.fellow.fellow_traveller.data.BaseResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
-
 
 fun <T : Any> Response<BaseResponse<T>>.handleApiFormat(): T {
     val body = body()
@@ -41,7 +41,16 @@ suspend fun <T : Any> roomCall(
     }
 
 
+suspend fun <T : Any> firebaseCall(
+    function: suspend () -> T
+): T =
+    withContext(Dispatchers.IO) {
+        try {
+            function.invoke()
+        } catch (e: Exception) {
+            throw BaseFirebaseException()
+        }
 
-
+    }
 
 

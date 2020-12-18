@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.data
 
+import android.net.Uri
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.domain.car.Car
@@ -23,7 +24,8 @@ import retrofit2.Response
 
 class FellowDataSourceImpl(
     private val repository: FellowRepository,
-    private val googleServiceRepository: GoogleServiceRepository
+    private val googleServiceRepository: GoogleServiceRepository,
+    private val firebaseRepository: FirebaseRepository
 ) : FellowDataSource {
 
 
@@ -136,6 +138,8 @@ class FellowDataSourceImpl(
     override suspend fun getUserReviews(targetId: String): MutableList<Review> =
         repository.getUserReviews(targetId).map { it.mapReview() }.toMutableList()
 
+    override suspend fun updatePictureFirebase(uri: Uri, userId: String): String =
+        firebaseRepository.uploadImage(uri, userId)
 
     /**
      * Google Service

@@ -4,15 +4,18 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
+import com.google.firebase.storage.FirebaseStorage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import gr.fellow.fellow_traveller.data.FellowDataSourceImpl
 import gr.fellow.fellow_traveller.data.FellowRepository
+import gr.fellow.fellow_traveller.data.FirebaseRepository
 import gr.fellow.fellow_traveller.data.GoogleServiceRepository
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.framework.FellowRepositoryImpl
+import gr.fellow.fellow_traveller.framework.FirebaseRepositoryImpl
 import gr.fellow.fellow_traveller.framework.GoogleServiceRepositoryImpl
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
 import gr.fellow.fellow_traveller.framework.network.google.PlaceApiService
@@ -33,6 +36,12 @@ object StorageModule {
 
     @Singleton
     @Provides
+    fun provideFirebaseRepository(firebaseStorage: FirebaseStorage): FirebaseRepository =
+        FirebaseRepositoryImpl(firebaseStorage)
+
+
+    @Singleton
+    @Provides
     fun provideGetNotificationsSocketUseCase(dataSource: FellowDataSource): GetNotificationsSocketUseCase {
         return GetNotificationsSocketUseCase(dataSource)
     }
@@ -45,8 +54,8 @@ object StorageModule {
 
     @Singleton
     @Provides
-    fun provideDataSource(repository: FellowRepository, googleServiceRepository: GoogleServiceRepository): FellowDataSource =
-        FellowDataSourceImpl(repository, googleServiceRepository)
+    fun provideDataSource(repository: FellowRepository, googleServiceRepository: GoogleServiceRepository, firebaseRepository: FirebaseRepository): FellowDataSource =
+        FellowDataSourceImpl(repository, googleServiceRepository, firebaseRepository)
 
 
     @Singleton
@@ -65,7 +74,6 @@ object StorageModule {
     @Provides
     fun providesProductDao(fellowDatabase: FellowDatabase): UserAuthDao =
         fellowDatabase.userAuthDao()
-
 
 
 }
