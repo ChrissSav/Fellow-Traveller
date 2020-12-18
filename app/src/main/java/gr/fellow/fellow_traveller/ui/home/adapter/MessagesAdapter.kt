@@ -2,48 +2,36 @@ package gr.fellow.fellow_traveller.ui.home.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.databinding.ConversationItemBinding
+import gr.fellow.fellow_traveller.databinding.MessageItemBinding
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
-import gr.fellow.fellow_traveller.ui.home.chat.models.Conversation
+import gr.fellow.fellow_traveller.ui.home.chat.models.Message
 import gr.fellow.fellow_traveller.utils.currentTimeStamp
 import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
 
-class ConversationsAdapter(
-    private val conversationsList: MutableList<Conversation>,
-    private val onItemClickListener: (Conversation) -> Unit
+class MessagesAdapter(
+    private val messagesList: MutableList<Message>
 
-) : RecyclerView.Adapter<ConversationsAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<MessagesAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ConversationItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = MessageItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val currentItem = conversationsList[position]
+        val currentItem = messagesList[position]
 
         with(holder) {
-            //Binding all views
-            binding.chatImage.loadImageFromUrl(currentItem.image)
-            binding.chatName.text = currentItem.tripName
-            binding.chatDescription.text = currentItem.description
+            binding.senderImage.loadImageFromUrl(currentItem.senderImage)
+            binding.senderName.text = currentItem.senderName
+            binding.message.text = currentItem.text
 
-            binding.chatDate.text = time(currentItem.date, binding.chatDate.context)
-
-            if (currentItem.isSeen)
-                binding.chatSeenIcon.visibility = View.INVISIBLE
-            else
-                binding.chatSeenIcon.visibility = View.VISIBLE
-
-            binding.root.setOnClickListener {
-                onItemClickListener.invoke(currentItem)
-            }
+            binding.messageTime.text = time(currentItem.timestamp, binding.messageTime.context)
         }
     }
 
@@ -78,7 +66,8 @@ class ConversationsAdapter(
         //return test
     }
 
-    class ViewHolder(val binding: ConversationItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: MessageItemBinding) : RecyclerView.ViewHolder(binding.root)
 
-    override fun getItemCount() = conversationsList.size
+    override fun getItemCount() = messagesList.size
+
 }

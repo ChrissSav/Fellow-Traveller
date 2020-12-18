@@ -29,6 +29,7 @@ class ConversationsFragment : BaseFragment<FragmentConversationsBinding>() {
 
     override fun setUpViews() {
 
+        conversationsList.clear()
         conversationsList.add(Conversation("1", "Φιλώτας-Πτολεμαΐδα", "Ναιι θα περάσω το παρωί αν είναι", 1608218840, "default", false))
         conversationsList.add(Conversation("2", "Φιλώτας-Πτολεμαΐδα", "Ναιι θα περάσω το πρωί αν είναι", 1608218126, "default", false))
         conversationsList.add(Conversation("3", "Φιλώτας-Πτολεμαΐδα", "Ναιι θα περάσω το πρωί αν είναι", 1608218126, "default", false))
@@ -45,7 +46,7 @@ class ConversationsFragment : BaseFragment<FragmentConversationsBinding>() {
         //Parse elements in adapter and on click listener
         binding.recyclerView.adapter = ConversationsAdapter(conversationsList, this::onConversationClick)
 
-        //binding.recyclerView.adapter?.notifyDataSetChanged()
+        binding.recyclerView.adapter?.notifyDataSetChanged()
 
     }
 
@@ -54,7 +55,7 @@ class ConversationsFragment : BaseFragment<FragmentConversationsBinding>() {
         createToast(aConversation.tripId)
         //findNavController()?.navigate(R.id.action_destination_messenger_to_chatFragment)
         findNavController()?.navigate(
-            R.id.action_destination_messenger_to_chatFragment, bundleOf("ConversationItem" to aConversation)
+            R.id.action_destination_messenger_to_chatFragment, bundleOf("conversationItem" to aConversation)
         )
 
     }
