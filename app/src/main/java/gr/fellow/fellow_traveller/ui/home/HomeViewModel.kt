@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.ui.home
 
+import android.net.Uri
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,6 +18,7 @@ import gr.fellow.fellow_traveller.ui.extensions.setNotificationRead
 import gr.fellow.fellow_traveller.ui.extensions.toMutableListSafe
 import gr.fellow.fellow_traveller.usecase.auth.ChangePasswordUseCase
 import gr.fellow.fellow_traveller.usecase.auth.DeleteUserAuthLocalUseCase
+import gr.fellow.fellow_traveller.usecase.firabase.UploadPictureFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.notification.GetNotificationsUseCase
 import gr.fellow.fellow_traveller.usecase.notification.UpdateNotificationsUseCase
@@ -39,7 +41,6 @@ constructor(
     private val updateAccountInfoUseCase: UpdateAccountInfoUseCase,
     private val getTripsAsCreatorRemoteUseCase: GetTripsAsCreatorRemoteUseCase,
     private val getTripsAsPassengerRemoteUseCase: GetTripsAsPassengerRemoteUseCase,
-    private val updateUserPictureUseCase: UpdateUserPictureUseCase,
     private val deleteTripUseCase: DeleteTripUseCase,
     private val changePasswordUseCase: ChangePasswordUseCase,
     private val exitFromTripUseCase: ExitFromTripUseCase,
@@ -50,6 +51,9 @@ constructor(
     private val getUserInfoRemoteUseCase: GetUserInfoRemoteUseCase,
     private val registerUserLocalUseCase: RegisterUserLocalUseCase,
     private val updateUserMessengerUseCase: UpdateUserMessengerUseCase,
+    private val updateUserPictureUseCase: UpdateUserPictureUseCase,
+    private val uploadPictureFirebaseUseCase: UploadPictureFirebaseUseCase,
+
     //Get Reviews
     private val getUserReviewsUseCase: GetUserReviewsUseCase
 ) : BaseViewModel() {
@@ -304,11 +308,16 @@ constructor(
         }
     }
 
-    fun updateUserImage(picture: String?) {
+    fun updateUserImage(uri: Uri?) {
         launch(true) {
-            val response = updateUserPictureUseCase(picture)
-            registerUserLocalUseCase(response)
-            _user.value = loadUserLocalInfoUseCase()
+            if (uri != null) {
+                val url = uploadPictureFirebaseUseCase(uri, _user.value?.id!!)
+                val response = updateUserPictureUseCase(url)
+                registerUserLocalUseCase(response)
+            } else {
+                val response = updateUserPictureUseCase(null)
+                registerUserLocalUseCase(response)
+            }
             updateUserInfo()
         }
     }

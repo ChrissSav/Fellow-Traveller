@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.domain
 
+import android.net.Uri
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.notification.Notification
 import gr.fellow.fellow_traveller.domain.review.Review
@@ -100,6 +101,14 @@ interface FellowDataSource {
     suspend fun checkReview(targetId: String): Boolean
 
     suspend fun getUserReviews(targetId: String): MutableList<Review>
+
+
+    /**
+     * Firebase
+     */
+
+
+    suspend fun updatePictureFirebase(uri: Uri, userId: String): String
 
 
     /**

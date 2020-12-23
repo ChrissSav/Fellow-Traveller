@@ -50,11 +50,15 @@ constructor(
                         error.value = internalError(R.string.ERROR_API_UNAUTHORIZED)
                     }
                     else -> {
-                        _userInfo.value = true
+                        if (!sharedPrefs[PREFS_AUTH_REFRESH_TOKEN, ""].isNullOrEmpty()) {
+                            _userInfo.value = true
+                        } else {
+                            error.value = internalError(R.string.ERROR_API_UNAUTHORIZED)
+                        }
                     }
                 }
             } catch (e: NoInternetException) {
-                if (sharedPrefs[PREFS_AUTH_REFRESH_TOKEN, ""]?.length ?: 0 > 10) {
+                if (!sharedPrefs[PREFS_AUTH_REFRESH_TOKEN, ""].isNullOrEmpty()) {
                     _userInfo.value = true
                 } else {
                     error.value = internalError(R.string.ERROR_API_UNAUTHORIZED)

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.BaseApiException
+import gr.fellow.fellow_traveller.data.BaseFirebaseException
 import gr.fellow.fellow_traveller.data.NoInternetException
 import gr.fellow.fellow_traveller.data.UnauthorizedException
 import gr.fellow.fellow_traveller.domain.ErrorMessage
@@ -84,6 +85,9 @@ open class BaseViewModel : ViewModel() {
             }
             is UnknownHostException -> {
 
+            }
+            is BaseFirebaseException -> {
+                error.value = internalError(R.string.ERROR_API_UNAUTHORIZED)
             }
             else -> {
                 error.value = internalError(R.string.ERROR_SOMETHING_WRONG)

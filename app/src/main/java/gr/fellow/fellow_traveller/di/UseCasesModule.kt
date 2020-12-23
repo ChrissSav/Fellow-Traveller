@@ -7,6 +7,7 @@ import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.scopes.ActivityScoped
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.usecase.auth.*
+import gr.fellow.fellow_traveller.usecase.firabase.UploadPictureFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.newtrip.GetGeometryFormPlaceUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.GetPlaceFromPlacesUseCase
@@ -34,6 +35,12 @@ class UseCasesModule {
         return GetUserReviewsUseCase(dataSource)
     }
 
+
+    @ActivityScoped
+    @Provides
+    fun provideUpdateUserPictureFirebaseUseCase(dataSource: FellowDataSource): UploadPictureFirebaseUseCase {
+        return UploadPictureFirebaseUseCase(dataSource)
+    }
 
     @ActivityScoped
     @Provides
