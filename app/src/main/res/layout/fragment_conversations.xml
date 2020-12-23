@@ -36,6 +36,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
+            <FrameLayout
+                android:id="@+id/start_panel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="start">
+
+                <include
+                    android:id="@+id/s1"
+                    layout="@layout/temp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </FrameLayout>
         </FrameLayout>
 
         <!-- Set layout_gravity on the end panel to "end" -->
