@@ -215,6 +215,9 @@ dependencies {
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
 
+    //Discord Overlaps
+    implementation 'com.github.discord:OverlappingPanels:0.1.1'
+
 
 }
 kapt {
