@@ -8,7 +8,6 @@ import gr.fellow.fellow_traveller.databinding.FragmentConversationsBinding
 import gr.fellow.fellow_traveller.ui.extensions.createToast
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
-import gr.fellow.fellow_traveller.ui.home.adapter.ConversationsAdapter
 import gr.fellow.fellow_traveller.ui.home.chat.models.Conversation
 
 @AndroidEntryPoint
@@ -44,9 +43,9 @@ class ConversationsFragment : BaseFragment<FragmentConversationsBinding>() {
         conversationsList.add(Conversation("ufsdfsf2432", "Φιλώτας-Πτολεμαΐδα", "Ναιι θα περάσω το πρωί αν είναι", 1608218126, "default", false))
 
         //Parse elements in adapter and on click listener
-        binding.recyclerView.adapter = ConversationsAdapter(conversationsList, this::onConversationClick)
+        //binding.recyclerView.adapter = ConversationsAdapter(conversationsList, this::onConversationClick)
 
-        binding.recyclerView.adapter?.notifyDataSetChanged()
+        //binding.recyclerView.adapter?.notifyDataSetChanged()
 
     }
 

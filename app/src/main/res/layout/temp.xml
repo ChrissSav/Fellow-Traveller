@@ -4,184 +4,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".ui.search.fragments.SearchTripDetailsFragment">
+    tools:context=".ui.home.tabs.ConversationsFragment">
+
+
+    <TextView
+        android:id="@+id/header_text"
+        style="@style/display_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/messages"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_text"
+        tools:listitem="@layout/conversation_item" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/messages_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/grey_border"
+        android:layout_marginTop="100dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/header_text">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/city_image"
-            style="@style/header_3"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/image"
-            app:layout_constraintBottom_toBottomOf="@id/guideline"
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:background="@drawable/circle_button_shape"
+            android:backgroundTint="@color/softGrey_color"
+            android:padding="17dp"
+            android:src="@drawable/ic_messenger"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/ImageShapeForTrip" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
+        <TextView
+            android:id="@+id/header"
+            style="@style/header_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="150dp" />
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="@string/no_conversation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/background"
-            android:layout_width="match_parent"
+        <TextView
+            style="@style/paragraph_1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/guideline">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/picture"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/ic_boy"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/name"
-                style="@style/header_3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:text="Tyler Joseph"
-                app:layout_constraintBottom_toBottomOf="@+id/picture"
-                app:layout_constraintEnd_toStartOf="@+id/price"
-                app:layout_constraintStart_toEndOf="@id/picture"
-                app:layout_constraintTop_toTopOf="@id/picture" />
-
-            <TextView
-                android:id="@+id/price"
-                style="@style/display_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
-                android:text="10 €"
-                app:layout_constraintBottom_toBottomOf="@id/picture"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/picture" />
-
-            <TextView
-                android:id="@+id/from_tv_search"
-                style="@style/paragraph_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/from"
-                app:layout_constraintStart_toStartOf="@id/picture"
-                app:layout_constraintTop_toBottomOf="@id/picture" />
-
-            <TextView
-                android:id="@+id/from"
-                style="@style/header_2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="8dp"
-                android:ellipsize="middle"
-                android:singleLine="true"
-                android:text="@string/placeholder_city_athens"
-                app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                app:layout_constraintStart_toStartOf="@id/from_tv_search"
-                app:layout_constraintTop_toBottomOf="@id/from_tv_search" />
-
-            <TextView
-                android:id="@+id/to_tv_search"
-                style="@style/paragraph_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/to"
-                app:layout_constraintStart_toStartOf="@+id/to"
-                app:layout_constraintTop_toBottomOf="@+id/from" />
-
-            <TextView
-                android:id="@+id/to"
-                style="@style/header_2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:ellipsize="middle"
-                android:singleLine="true"
-                android:text="@string/placeholder_city_thessaloniki"
-                app:layout_constraintEnd_toEndOf="@+id/from"
-                app:layout_constraintStart_toStartOf="@+id/from"
-                app:layout_constraintTop_toBottomOf="@+id/to_tv_search" />
-
-            <TextView
-                android:id="@+id/date_tv_search"
-                style="@style/paragraph_4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/date"
-                app:layout_constraintStart_toStartOf="@+id/guideline3"
-                app:layout_constraintTop_toTopOf="@+id/from_tv_search" />
-
-            <TextView
-                android:id="@+id/date"
-                style="@style/paragraph_1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/placeholder_date"
-                app:layout_constraintBaseline_toBaselineOf="@+id/from"
-                app:layout_constraintEnd_toEndOf="@+id/price"
-                app:layout_constraintStart_toStartOf="@+id/date_tv_search" />
-
-            <TextView
-                android:id="@+id/time_tv_search"
-                style="@style/paragraph_4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Ώρα"
-                app:layout_constraintStart_toStartOf="@+id/guideline3"
-                app:layout_constraintTop_toTopOf="@+id/to_tv_search" />
-
-            <TextView
-                android:id="@+id/time"
-                style="@style/paragraph_1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="20:30"
-                app:layout_constraintBaseline_toBaselineOf="@+id/to"
-                app:layout_constraintEnd_toEndOf="@+id/price"
-                app:layout_constraintStart_toStartOf="@id/time_tv_search" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_end="160dp" />
-
-            <ImageView
-                android:id="@+id/pet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
-                android:src="@drawable/ic_bone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/price"
-                app:layout_constraintTop_toBottomOf="@+id/time" />
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="center"
+            android:text="@string/no_conversation_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/FragmentMessenger_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/black_color"
+        android:indeterminateTintMode="src_atop"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_text" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
