@@ -8,6 +8,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentBookTripBinding
 import gr.fellow.fellow_traveller.ui.extensions.*
+import gr.fellow.fellow_traveller.ui.search.SearchTripActivity
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
 
 
@@ -79,7 +80,7 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
                 }
 
                 book.setOnClickListener {
-                    viewModel.bookTrip(currentTrip.id, binding.seats.currentNum, havePet)
+                    viewModel.bookTrip(currentTrip.id, binding.seats.currentNum, havePet, (activity as SearchTripActivity).userId)
                 }
             }
         }

@@ -92,12 +92,12 @@ constructor(
     }
 
 
-    fun bookTrip(tripId: String, seats: Int, pet: Boolean) {
+    fun bookTrip(tripId: String, seats: Int, pet: Boolean, userId: String) {
         launch(true) {
             try {
                 val response = bookTripUseCase(tripId, seats, pet)
                 _tripBook.value = response
-                createOrEnterConversation()
+                createOrEnterConversationFirebaseUseCase.invoke("myid", _tripBook.value?.creatorUser?.id.toString(), _tripBook.value?.id.toString(), "Δοκιμή")
             } catch (e: Exception) {
                 handleErrorBook(tripId)
                 throw e
@@ -155,22 +155,5 @@ constructor(
         }
 
     }
-
-
-    /** Chat **/
-
-    val createConversationFirebase = MutableLiveData<Boolean>()
-
-    fun createOrEnterConversation() {
-
-        launchWithLiveData(true, createConversationFirebase) {
-
-            createOrEnterConversationFirebaseUseCase.invoke("myid", _tripBook.value?.creatorUser?.id.toString(), _tripBook.value?.id.toString(), "Δοκιμή")
-
-        }
-
-
-    }
-
 
 }
