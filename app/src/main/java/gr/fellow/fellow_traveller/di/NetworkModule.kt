@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Context.CONNECTIVITY_SERVICE
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -64,6 +65,10 @@ object NetworkModule {
     @Provides
     fun provideFirebaseStorage() = FirebaseStorage.getInstance()
 
+
+    @Singleton
+    @Provides
+    fun provideFirebaseDatabase() = FirebaseDatabase.getInstance()
 
     @Fellow
     @Singleton

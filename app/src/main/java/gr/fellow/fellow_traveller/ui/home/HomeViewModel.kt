@@ -18,6 +18,7 @@ import gr.fellow.fellow_traveller.ui.extensions.setNotificationRead
 import gr.fellow.fellow_traveller.ui.extensions.toMutableListSafe
 import gr.fellow.fellow_traveller.usecase.auth.ChangePasswordUseCase
 import gr.fellow.fellow_traveller.usecase.auth.DeleteUserAuthLocalUseCase
+import gr.fellow.fellow_traveller.usecase.firabase.SendMessageFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.firabase.UploadPictureFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.notification.GetNotificationsUseCase
@@ -55,7 +56,11 @@ constructor(
     private val uploadPictureFirebaseUseCase: UploadPictureFirebaseUseCase,
 
     //Get Reviews
-    private val getUserReviewsUseCase: GetUserReviewsUseCase
+    private val getUserReviewsUseCase: GetUserReviewsUseCase,
+
+    //Messages
+    private val sendMessageFirebaseUseCase: SendMessageFirebaseUseCase
+
 ) : BaseViewModel() {
 
     val reloadConnection = MutableLiveData<Boolean>()
@@ -484,6 +489,15 @@ constructor(
                 _tripInvolvedDetails.value = _tripsAsPassengerHistory.toMutableListSafe()[index]
             }
         }
+    }
+
+    val loadMessageFirebase = MutableLiveData<Boolean>()
+    fun sendFirebaseMessage(textMessage: String, tripId: String) {
+
+        launchWithLiveData(true, loadMessageFirebase) {
+            sendMessageFirebaseUseCase.invoke(_user.value?.id.toString(), tripId, textMessage, _user.value?.firstName.toString())
+        }
+
     }
 }
 

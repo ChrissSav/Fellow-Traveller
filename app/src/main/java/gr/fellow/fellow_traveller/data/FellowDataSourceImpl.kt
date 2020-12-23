@@ -138,8 +138,14 @@ class FellowDataSourceImpl(
     override suspend fun getUserReviews(targetId: String): MutableList<Review> =
         repository.getUserReviews(targetId).map { it.mapReview() }.toMutableList()
 
+    /**
+     * Firebase Service
+     **/
     override suspend fun updatePictureFirebase(uri: Uri, userId: String): String =
         firebaseRepository.uploadImage(uri, userId)
+
+    override suspend fun sendFirebaseMessage(hashMap: HashMap<String, Any>) =
+        firebaseRepository.sendMessage(hashMap)
 
     /**
      * Google Service

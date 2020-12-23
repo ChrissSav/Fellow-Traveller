@@ -26,7 +26,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     override fun setUpViews() {
         binding.chatHeader.text = args.conversationItem.tripName
 
-
+        binding.writeEtChat.text
         messagesList.clear()
         messagesList.add(Message("uyugfafkdgskjgk234kfdkf", "Καλημέραααα", "fsj'dghsdfgsgjlg.zsd", 1608218126, "John", "default"))
         messagesList.add(Message("uyugfafkdgskjgk234kfdkf", "Καλημέραααα", "fsj'dghsdfgsgjlg.zsd", 1608218126, "John", "default"))
@@ -38,6 +38,9 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
         binding.chatRecyclerView.adapter?.notifyDataSetChanged()
 
+        binding.chatSendButton.setOnClickListener {
+            viewModel.sendFirebaseMessage(binding.writeEtChat.text.toString(), "gsdkjgksgo435sf")
+        }
 
     }
 

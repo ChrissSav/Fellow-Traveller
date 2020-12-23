@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import dagger.Module
 import dagger.Provides
@@ -28,6 +29,7 @@ import javax.inject.Singleton
 @Module
 object StorageModule {
 
+
     @Singleton
     @Provides
     fun provideRepository(service: FellowService, sharedPreferences: SharedPreferences, userAuthDao: UserAuthDao): FellowRepository =
@@ -36,8 +38,8 @@ object StorageModule {
 
     @Singleton
     @Provides
-    fun provideFirebaseRepository(firebaseStorage: FirebaseStorage): FirebaseRepository =
-        FirebaseRepositoryImpl(firebaseStorage)
+    fun provideFirebaseRepository(firebaseStorage: FirebaseStorage, firebaseDatabase: FirebaseDatabase): FirebaseRepository =
+        FirebaseRepositoryImpl(firebaseStorage, firebaseDatabase)
 
 
     @Singleton
