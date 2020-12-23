@@ -337,6 +337,7 @@
     <string name="you_have_booked_this_trip">You have booked this trip.</string>
     <string name="vehicle_management">Vehicle Management</string>
     <string name="ratings">Ratings</string>
+    <string name="driver">Driver</string>
 
     <string name="most_recent">Most Recent</string>
     <string name="home">Home</string>

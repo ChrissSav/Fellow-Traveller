@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.chat.ChatInfoFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/from_label"
+            style="@style/paragraph_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/from"
+            app:layout_constraintStart_toStartOf="@id/from"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/to_label"
+            style="@style/paragraph_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/to"
+            app:layout_constraintStart_toStartOf="@+id/from"
+            app:layout_constraintTop_toBottomOf="@+id/from" />
+
+
+        <TextView
+            android:id="@+id/from"
+            style="@style/display_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:tag="1"
+            android:text="@string/placeholder_city_thessaloniki"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/from_label" />
+
+
+        <TextView
+            android:id="@+id/to"
+            style="@style/display_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:tag="1"
+            android:text="@string/placeholder_city_athens"
+            app:layout_constraintEnd_toEndOf="@+id/from"
+            app:layout_constraintStart_toStartOf="@+id/from"
+            app:layout_constraintTop_toBottomOf="@+id/to_label" />
+
+        <TextView
+            android:id="@+id/time"
+            style="@style/paragraph_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="2"
+            android:text="@string/trip_time_placeholder"
+            app:layout_constraintBottom_toBottomOf="@+id/clock_imageView"
+            app:layout_constraintStart_toStartOf="@+id/day"
+            app:layout_constraintTop_toTopOf="@+id/clock_imageView" />
+
+        <TextView
+            android:id="@+id/day"
+            style="@style/paragraph_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:tag="2"
+            android:text="@string/trip_date_placeholder"
+            app:layout_constraintBottom_toBottomOf="@+id/time_imageView"
+            app:layout_constraintStart_toEndOf="@+id/time_imageView"
+            app:layout_constraintTop_toTopOf="@+id/time_imageView" />
+
+
+        <ImageView
+            android:id="@+id/time_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/ic_calendar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/to" />
+
+
+        <ImageView
+            android:id="@+id/clock_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_clock"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time_imageView" />
+
+        <View
+            android:id="@+id/underline"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="18dp"
+            android:background="@color/gray_new"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clock_imageView" />
+
+        <LinearLayout
+            android:id="@+id/buttons_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/underline">
+
+            <ImageButton
+                android:id="@+id/trip_button"
+                style="@style/border_icon_button"
+                android:layout_width="@dimen/back_button_width_height"
+                android:layout_height="@dimen/back_button_width_height"
+                android:layout_weight="1"
+                android:src="@drawable/ic_form" />
+
+            <ImageButton
+                android:id="@+id/exit_button"
+                style="@style/border_icon_button"
+                android:layout_width="@dimen/back_button_width_height"
+                android:layout_height="@dimen/back_button_width_height"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_back_button"
+                android:tint="@color/red_color" />
+
+            <ImageButton
+                android:id="@+id/details_button"
+                style="@style/border_icon_button"
+                android:layout_width="@dimen/back_button_width_height"
+                android:layout_height="@dimen/back_button_width_height"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_dots" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/driver_label"
+            style="@style/header_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="60dp"
+            android:text="@string/driver"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttons_section" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/driver_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/driver_label">
+
+            <ImageView
+                android:id="@+id/driver_image"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_boy"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/driver_name"
+                style="@style/paragraph_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/first_name"
+                app:layout_constraintBottom_toBottomOf="@id/driver_image"
+                app:layout_constraintEnd_toStartOf="@id/driver_icon"
+                app:layout_constraintStart_toEndOf="@+id/driver_image"
+                app:layout_constraintTop_toTopOf="@id/driver_image" />
+
+            <ImageView
+                android:id="@+id/driver_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_steer"
+                app:layout_constraintBottom_toBottomOf="@id/driver_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/driver_image" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/passengers_label"
+            style="@style/header_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/passengers"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/driver_section" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/passengers_label"
+            tools:listitem="@layout/chat_info_passenger_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
