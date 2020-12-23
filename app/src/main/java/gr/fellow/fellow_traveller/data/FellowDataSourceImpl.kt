@@ -147,6 +147,9 @@ class FellowDataSourceImpl(
     override suspend fun sendFirebaseMessage(hashMap: HashMap<String, Any>) =
         firebaseRepository.sendMessage(hashMap)
 
+    override suspend fun createOrEnterConversation(myId: String, creatorId: String, tripId: String, tripName: String) =
+        firebaseRepository.createOrEnterConversation(myId, creatorId, tripId, tripName)
+
     /**
      * Google Service
      **/

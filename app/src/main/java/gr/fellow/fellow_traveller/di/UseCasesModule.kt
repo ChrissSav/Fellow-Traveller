@@ -7,6 +7,7 @@ import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.scopes.ActivityScoped
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.usecase.auth.*
+import gr.fellow.fellow_traveller.usecase.firabase.CreateOrEnterConversationFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.firabase.SendMessageFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.firabase.UploadPictureFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.home.*
@@ -34,6 +35,12 @@ class UseCasesModule {
     @Provides
     fun provideSendFirebaseMessageUseCase(dataSource: FellowDataSource): SendMessageFirebaseUseCase {
         return SendMessageFirebaseUseCase(dataSource)
+    }
+
+    @ActivityScoped
+    @Provides
+    fun provideCreateOrEnterConversationFirebaseUseCase(dataSource: FellowDataSource): CreateOrEnterConversationFirebaseUseCase {
+        return CreateOrEnterConversationFirebaseUseCase(dataSource)
     }
 
     @ActivityScoped

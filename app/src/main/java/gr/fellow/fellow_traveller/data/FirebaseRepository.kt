@@ -1,7 +1,6 @@
 package gr.fellow.fellow_traveller.data
 
 import android.net.Uri
-import gr.fellow.fellow_traveller.domain.chat.ChatMessage
 
 
 interface FirebaseRepository {
@@ -10,6 +9,7 @@ interface FirebaseRepository {
 
     suspend fun sendMessage(hashMap: HashMap<String, Any>)
 
+    suspend fun createOrEnterConversation(myId: String, creatorId: String, tripId: String, tripName: String)
 
 
 }

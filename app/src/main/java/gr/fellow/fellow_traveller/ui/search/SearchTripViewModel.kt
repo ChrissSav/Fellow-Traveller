@@ -10,6 +10,7 @@ import gr.fellow.fellow_traveller.domain.SortAnswerType
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
+import gr.fellow.fellow_traveller.usecase.firabase.CreateOrEnterConversationFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.trips.BookTripUseCase
 import gr.fellow.fellow_traveller.usecase.trips.SearchTripsUseCase
 import kotlinx.coroutines.delay
@@ -19,7 +20,8 @@ class SearchTripViewModel
 @ViewModelInject
 constructor(
     private val searchTripsUseCase: SearchTripsUseCase,
-    private val bookTripUseCase: BookTripUseCase
+    private val bookTripUseCase: BookTripUseCase,
+    private val createOrEnterConversationFirebaseUseCase: CreateOrEnterConversationFirebaseUseCase
 
 ) : BaseViewModel() {
 
@@ -95,6 +97,7 @@ constructor(
             try {
                 val response = bookTripUseCase(tripId, seats, pet)
                 _tripBook.value = response
+                createOrEnterConversation()
             } catch (e: Exception) {
                 handleErrorBook(tripId)
                 throw e
@@ -150,6 +153,22 @@ constructor(
             SortAnswerType.Price -> sortByPrice(list)
             else -> sortByRate(list)
         }
+
+    }
+
+
+    /** Chat **/
+
+    val createConversationFirebase = MutableLiveData<Boolean>()
+
+    fun createOrEnterConversation() {
+
+        launchWithLiveData(true, createConversationFirebase) {
+
+            createOrEnterConversationFirebaseUseCase.invoke("myid", _tripBook.value?.creatorUser?.id.toString(), _tripBook.value?.id.toString(), "Δοκιμή")
+
+        }
+
 
     }
 
