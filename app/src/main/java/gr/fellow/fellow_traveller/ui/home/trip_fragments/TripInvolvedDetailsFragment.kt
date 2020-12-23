@@ -175,7 +175,10 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
     private fun onConfirmItemClickListener(answerType: AnswerType) {
         if (answerType == AnswerType.Yes) {
-            viewModel.deleteTrip(args.tripId)
+            if (args.creator)
+                viewModel.deleteTrip(args.tripId)
+            else
+                viewModel.exitFromTrip(args.tripId)
         }
     }
 
