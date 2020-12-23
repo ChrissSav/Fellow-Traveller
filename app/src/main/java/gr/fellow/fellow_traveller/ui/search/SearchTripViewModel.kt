@@ -97,7 +97,10 @@ constructor(
             try {
                 val response = bookTripUseCase(tripId, seats, pet)
                 _tripBook.value = response
-                createOrEnterConversationFirebaseUseCase.invoke("myid", _tripBook.value?.creatorUser?.id.toString(), _tripBook.value?.id.toString(), "Δοκιμή")
+                createOrEnterConversationFirebaseUseCase.invoke(
+                    userId, _tripBook.value?.creatorUser?.id.toString(), _tripBook.value?.id.toString(), _tripBook.value?.destFrom?.title.toString() + "-"
+                            + _tripBook.value?.destTo?.title.toString()
+                )
             } catch (e: Exception) {
                 handleErrorBook(tripId)
                 throw e
