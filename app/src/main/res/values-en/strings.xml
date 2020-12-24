@@ -245,6 +245,7 @@
     <string name="specify">Select</string>
     <string name="password">Password</string>
     <string name="notifications">Notifications</string>
+    <string name="messages">Discussions</string>
     <string name="my_vehicles">My Vehicles</string>
     <string name="leave_a_review">Leave a review</string>
     <string name="terms_of_use">Terms of Use</string>
@@ -336,6 +337,7 @@
     <string name="you_have_booked_this_trip">You have booked this trip.</string>
     <string name="vehicle_management">Vehicle Management</string>
     <string name="ratings">Ratings</string>
+    <string name="driver">Driver</string>
 
     <string name="most_recent">Most Recent</string>
     <string name="home">Home</string>
@@ -356,7 +358,9 @@
     <string name="ready_for_your_next_trip">Ready for your next trip?</string>
     <string name="sign_in_or_sign_up">Sign In or create a new account by Signing Up</string>
     <string name="no_notifications">You don\'t have any notifications.</string>
-    <string name="all_activities_show_up_here">All activities will be shown here.</string>
+    <string name="no_notifications_description">All activities will be shown here.</string>
+    <string name="no_conversation">You don\'t have any discussions.</string>
+    <string name="no_conversation_description">All your discussions will be displayed here</string>
     <string name="no_passengers">No passengers.</string>
     <string name="no_passengers_description">Be the first to book a reservation on this trip.</string>
     <string name="no_trips">We couldn\'t find any trips.</string>
@@ -379,7 +383,6 @@
     <string name="history">History</string>
     <string name="offer_your_next_trip_description">Share your next trip and find the ideal passengers.</string>
     <string name="confirm_booking">Confirm Booking</string>
-
 
 
     <!-- Date Time -->

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="1dp"
+    android:paddingBottom="1dp"
+    android:paddingLeft="5dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/sender_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_boy"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:baselineAlignBottom="true"
+
+        app:layout_constraintBottom_toBottomOf="@id/constraint" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/sender_image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:paddingRight="80dp"
+        android:layout_marginStart="10dp">
+
+        <TextView
+            android:id="@+id/sender_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tyler"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="10sp"
+            android:fontFamily="@font/firasans_light"
+            android:textColor="@color/black_color"
+            app:layout_constraintStart_toStartOf="@id/message"
+            android:layout_marginTop="8dp" />
+
+        <ImageView
+            android:id="@+id/divider"
+            android:layout_width="3dp"
+            android:layout_height="3dp"
+            android:backgroundTint="@color/black_color"
+            android:background="@drawable/ic_boy"
+            app:layout_constraintTop_toTopOf="@id/sender_name"
+            app:layout_constraintBottom_toBottomOf="@id/sender_name"
+            app:layout_constraintStart_toEndOf="@+id/sender_name"
+            android:layout_marginStart="5dp" />
+
+        <TextView
+            android:id="@+id/message_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="22:52"
+            app:layout_constraintTop_toTopOf="@id/sender_name"
+            app:layout_constraintBottom_toBottomOf="@id/sender_name"
+            app:layout_constraintStart_toEndOf="@+id/divider"
+            android:layout_marginStart="5dp"
+            android:textSize="10sp"
+            android:fontFamily="@font/firasans_light"
+            android:textColor="@color/black_color" />
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/message_shape_single"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/black_color"
+            android:backgroundTint="@color/receiverFill"
+            android:fontFamily="@font/firasans_medium"
+            android:text="Καλημέραααααααααααααααααααααααααα!!"
+            app:layout_constraintTop_toBottomOf="@+id/sender_name"
+            android:layout_marginTop="5dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

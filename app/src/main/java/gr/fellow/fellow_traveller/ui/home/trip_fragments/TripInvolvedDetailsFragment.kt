@@ -4,19 +4,22 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import com.discord.panels.OverlappingPanelsLayout
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentTripInvolvedDetailsBinding
 import gr.fellow.fellow_traveller.domain.AnswerType
 import gr.fellow.fellow_traveller.domain.TripStatus
+import gr.fellow.fellow_traveller.domain.mappers.mapToUserBase
+import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.UserBase
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.ConfirmBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.search.adapter.PassengerAdapter
+import gr.fellow.fellow_traveller.ui.search.adapter.PassengerAdapterVertical
 import gr.fellow.fellow_traveller.ui.user.UserProfileDetailsActivity
 import kotlinx.android.synthetic.main.notification_item_layout.*
 
@@ -26,6 +29,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
     private val args: TripInvolvedDetailsFragmentArgs by navArgs()
     private val viewModel: HomeViewModel by activityViewModels()
     private lateinit var confirmBottomSheetDialog: ConfirmBottomSheetDialog
+    private var userId = ""
 
 
     override fun getViewBinding(): FragmentTripInvolvedDetailsBinding =
@@ -33,13 +37,17 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
     override fun setUpObservers() {
 
-        viewModel.successDeletion.observe(viewLifecycleOwner, Observer {
+        viewModel.successDeletion.observe(viewLifecycleOwner, {
             createToast(getString(it))
             onBackPressed()
 
         })
 
-        viewModel.loadTripInvolvedDetails.observe(viewLifecycleOwner, Observer {
+        viewModel.user.observe(viewLifecycleOwner, {
+            userId = it.id
+        })
+
+        viewModel.loadTripInvolvedDetails.observe(viewLifecycleOwner, {
             if (it) {
                 binding.shimmerViewContainer.startShimmerWithVisibility()
             } else {
@@ -47,17 +55,18 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
             }
         })
 
-        viewModel.tripInvolvedDetails.observe(viewLifecycleOwner, Observer { trip ->
+        viewModel.tripInvolvedDetails.observe(viewLifecycleOwner, { trip ->
 
             with(binding) {
 
+                secondLayout(trip)
                 tripDetailConstraintLayout.visibility = View.VISIBLE
                 constraintLayoutInfo.visibility = View.VISIBLE
 
                 if (trip.status != TripStatus.ACTIVE.code)
-                    delete.visibility = View.INVISIBLE
+                    moreInfoLayout.exit.visibility = View.GONE
                 else
-                    delete.visibility = View.VISIBLE
+                    moreInfoLayout.exit.visibility = View.VISIBLE
 
 
                 from.text = trip.destFrom.title
@@ -100,10 +109,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
 
                 viewAllPassengers.setOnClickListener {
-                    findNavController()?.navigate(
-                        R.id.action_tripInvolvedCreatorDetailsFragment_to_tripInvolvedPassengerDetailsFragment2,
-                        bundleOf("passengerList" to trip.passengers.toTypedArray())
-                    )
+                    binding.overlappingPanels.openEndPanel()
                 }
 
 
@@ -122,6 +128,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
                 messengerLinkText.setOnClickListener {
                     activity?.openMessenger(trip.creatorUser.messengerLink)
                 }
+
             }
 
         })
@@ -129,6 +136,10 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
 
     override fun setUpViews() {
+
+        binding.overlappingPanels.setStartPanelLockState(OverlappingPanelsLayout.LockState.CLOSE)
+
+
         if (args.creator) {
             binding.messengerLinkConstraintLayout.visibility = View.GONE
             binding.constraintLayoutInfo.backgroundTintList = ContextCompat.getColorStateList(binding.constraintLayoutInfo.context, R.color.green)
@@ -152,7 +163,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
             onBackPressed()
         }
 
-        binding.delete.setOnClickListener {
+        binding.moreInfoLayout.exitButton.setOnClickListener {
             confirmBottomSheetDialog = ConfirmBottomSheetDialog(
                 if (args.creator) getString(R.string.delete_trip_question) else getString(R.string.leave_trip_question),
                 this@TripInvolvedDetailsFragment::onConfirmItemClickListener, 1
@@ -161,6 +172,21 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
         }
 
 
+        binding.moreInfo.setOnClickListener {
+            binding.overlappingPanels.openEndPanel()
+        }
+
+    }
+
+
+    private fun secondLayout(trip: TripInvolved) {
+        binding.moreInfoLayout.driverImage.loadImageFromUrl(trip.creatorUser.picture)
+        binding.moreInfoLayout.driverName.text = trip.creatorUser.firstName
+        binding.moreInfoLayout.passengers.adapter = PassengerAdapterVertical(trip.passengers, this@TripInvolvedDetailsFragment::onPassengerListener)
+
+        binding.moreInfoLayout.constraintLayoutDriver.setOnClickListener {
+            onPassengerListener(trip.creatorUser.mapToUserBase())
+        }
     }
 
     private fun onPassengerListener(user: UserBase) {

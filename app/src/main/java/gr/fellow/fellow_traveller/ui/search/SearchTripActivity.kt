@@ -18,10 +18,12 @@ class SearchTripActivity : BaseActivityViewModel<ActivitySearchTripBinding, Sear
 
 
     private lateinit var nav: NavController
+    lateinit var userId: String
 
     override fun handleIntent() {
         val placeFrom = intent.getParcelableExtra<PlaceModel>("placeFrom")
         val placeTo = intent.getParcelableExtra<PlaceModel>("placeTo")
+        userId = intent.getStringExtra("userId").toString()
 
         if (placeFrom != null && placeTo != null) {
             viewModel.setDestinationFrom(placeFrom)

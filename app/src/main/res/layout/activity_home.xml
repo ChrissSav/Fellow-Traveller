@@ -111,10 +111,24 @@
             android:background="@drawable/circle_button_shape"
             android:backgroundTint="@color/white"
             android:src="@drawable/ic_car"
-            app:layout_constraintEnd_toStartOf="@+id/notification"
+            app:layout_constraintEnd_toStartOf="@+id/messenger"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/home"
             app:layout_constraintTop_toTopOf="@+id/home"
+            app:tint="@color/black" />
+
+        <ImageView
+            android:id="@+id/messenger"
+            android:layout_width="@dimen/home_bottom_width"
+            android:layout_height="@dimen/home_bottom_width"
+            android:padding="@dimen/home_bottom_padding"
+            android:background="@drawable/circle_button_shape"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_messenger"
+            app:layout_constraintEnd_toStartOf="@+id/notification"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/trips"
+            app:layout_constraintTop_toTopOf="@+id/trips"
             app:tint="@color/black" />
 
         <ImageView
@@ -127,7 +141,7 @@
             android:src="@drawable/ic_notifications"
             app:layout_constraintEnd_toStartOf="@+id/account"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/trips"
+            app:layout_constraintStart_toEndOf="@+id/messenger"
             app:layout_constraintTop_toTopOf="@+id/trips"
             app:tint="@color/black" />
 

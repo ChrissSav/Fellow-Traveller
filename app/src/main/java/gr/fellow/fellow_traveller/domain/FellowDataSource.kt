@@ -110,6 +110,9 @@ interface FellowDataSource {
 
     suspend fun updatePictureFirebase(uri: Uri, userId: String): String
 
+    suspend fun sendFirebaseMessage(hashMap: HashMap<String, Any>)
+
+    suspend fun createOrEnterConversation(myId: String, creatorId: String, tripId: String, tripName: String)
 
     /**
      * Google Service
