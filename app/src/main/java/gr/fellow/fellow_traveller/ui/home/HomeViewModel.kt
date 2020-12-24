@@ -416,7 +416,7 @@ constructor(
     private val _tripInvolvedDetails = SingleLiveEvent<TripInvolved>()
     val tripInvolvedDetails: LiveData<TripInvolved> = _tripInvolvedDetails
     val loadTripInvolvedDetails = MutableLiveData<Boolean>()
-    private val tripInvolvedDetailsDelay = 100L
+    private val tripInvolvedDetailsDelay = 450L
 
     fun loadTripCreatorActiveInvolvedDetails(tripId: String, reload: Boolean = false, notificationId: Long) {
         launchWithLiveData(true, loadTripInvolvedDetails) {
