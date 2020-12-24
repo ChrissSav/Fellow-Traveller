@@ -160,23 +160,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/tripInvolvedPassengerDetailsFragment"
-        android:name="gr.fellow.fellow_traveller.ui.home.trip_fragments.TripInvolvedPassengerDetailsFragment"
-        android:label="fragment_trip_involved_passenger_details"
-        tools:layout="@layout/fragment_trip_involved_passenger_details">
-        <argument
-            android:name="passengerList"
-            app:argType="gr.fellow.fellow_traveller.domain.user.Passenger[]" />
-        <action
-            android:id="@+id/action_tripInvolvedPassengerDetailsFragment_to_destination_info"
-            app:destination="@id/destination_info"
-            app:enterAnim="@anim/enter_from_right"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
-    </fragment>
-
-    <fragment
         android:id="@+id/changePasswordFragment"
         android:name="gr.fellow.fellow_traveller.ui.home.settings.ChangePasswordFragment"
         android:label="fragment_change_password"
@@ -240,13 +223,6 @@
             app:argType="boolean" />
 
 
-        <action
-            android:id="@+id/action_tripInvolvedCreatorDetailsFragment_to_tripInvolvedPassengerDetailsFragment2"
-            app:destination="@id/tripInvolvedPassengerDetailsFragment"
-            app:enterAnim="@anim/enter_from_right"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
         <action
             android:id="@+id/action_tripInvolvedCreatorDetailsFragment_to_destination_info"
             app:destination="@id/destination_info"

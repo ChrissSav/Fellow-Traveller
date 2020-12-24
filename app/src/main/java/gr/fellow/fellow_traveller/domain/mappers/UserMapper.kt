@@ -28,6 +28,10 @@ fun UserCreatorResponse.mapToUserCreatorResponse() = UserCreator(
     id, firstName, lastName, picture, rate.round(1), reviews, messengerLink
 )
 
+fun UserCreator.mapToUserBase() = UserBase(
+    id, firstName, lastName, picture, rate.round(1), reviews
+)
+
 
 fun RegisteredUserEntity.mapToLocalUser(): LocalUser {
     return LocalUser(id, firstName, lastName, rate.round(1), reviews, picture, aboutMe, email, messengerLink, tripsOffers, tripsInvolved)

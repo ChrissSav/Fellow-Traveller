@@ -4,21 +4,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import gr.fellow.fellow_traveller.databinding.PassengerBaseInfoItemBinding
+import gr.fellow.fellow_traveller.databinding.PassengerFullInfoItemSecondBinding
 import gr.fellow.fellow_traveller.domain.user.Passenger
 import gr.fellow.fellow_traveller.domain.user.UserBase
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
-import gr.fellow.fellow_traveller.ui.extensions.toPx
 
 
-class PassengerAdapter(
+class PassengerAdapterVertical(
     private val passengerList: MutableList<Passenger>,
     private val listener: (UserBase) -> Unit
-) : RecyclerView.Adapter<PassengerAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<PassengerAdapterVertical.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = PassengerBaseInfoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = PassengerFullInfoItemSecondBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -26,22 +25,12 @@ class PassengerAdapter(
         val passenger = passengerList[position]
 
         with(holder) {
-            when (position) {
-                0 -> {
-                    itemView.setPadding(20.toPx, 10.toPx, 10.toPx, 10.toPx)
-                }
-                passengerList.size - 1 -> {
-                    itemView.setPadding(10.toPx, 10.toPx, 20.toPx, 10.toPx)
-                }
-                else -> {
-                    itemView.setPadding(10.toPx, 10.toPx, 10.toPx, 10.toPx)
-                }
-            }
             itemView.setOnClickListener {
                 listener(passenger.user)
             }
+
             binding.picture.loadImageFromUrl(passenger.user.picture)
-            binding.passengerUsername.text = passenger.user.fullName
+            binding.passengerUsername.text = passenger.user.firstName
 
             when (passenger.seats) {
                 1 -> {  //Booked 1 seat
@@ -81,7 +70,7 @@ class PassengerAdapter(
 
     override fun getItemCount() = passengerList.size
 
-    class ViewHolder(val binding: PassengerBaseInfoItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: PassengerFullInfoItemSecondBinding) : RecyclerView.ViewHolder(binding.root)
 
 }
 
