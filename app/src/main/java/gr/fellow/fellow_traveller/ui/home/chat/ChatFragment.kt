@@ -39,7 +39,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         binding.chatRecyclerView.adapter?.notifyDataSetChanged()
 
         binding.chatSendButton.setOnClickListener {
-            viewModel.sendFirebaseMessage(binding.writeEtChat.text.toString(), "gsdkjgksgo435sf")
+            //MessageType: When 0: message, When 1: event
+            viewModel.sendFirebaseMessage(binding.writeEtChat.text.toString(), "gsdkjgksgo435sf", 0)
         }
 
     }

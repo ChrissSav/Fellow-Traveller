@@ -492,10 +492,10 @@ constructor(
     }
 
     val loadMessageFirebase = MutableLiveData<Boolean>()
-    fun sendFirebaseMessage(textMessage: String, tripId: String) {
+    fun sendFirebaseMessage(textMessage: String, tripId: String, messageType: Int) {
 
         launchWithLiveData(true, loadMessageFirebase) {
-            sendMessageFirebaseUseCase.invoke(_user.value?.id.toString(), tripId, textMessage, _user.value?.firstName.toString())
+            sendMessageFirebaseUseCase.invoke(_user.value?.id.toString(), tripId, textMessage, _user.value?.firstName.toString(), messageType)
         }
 
     }
