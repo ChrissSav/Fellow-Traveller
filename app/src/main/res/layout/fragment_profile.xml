@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,283 +8,332 @@
     tools:context=".ui.home.tabs.ProfileFragment">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.discord.panels.OverlappingPanelsLayout
+        android:id="@+id/overlapping_panels"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageButton
-            android:id="@+id/settings_button"
-            style="@style/border_icon_button"
-            android:layout_width="@dimen/back_button_width_height"
-            android:layout_height="@dimen/back_button_width_height"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/ic_settings"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/user_image"
-            android:layout_width="82dp"
-            android:layout_height="82dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/ic_boy"
-            app:layout_constraintEnd_toEndOf="@+id/settings_button"
-            app:layout_constraintTop_toBottomOf="@+id/settings_button" />
-
-        <TextView
-            android:id="@+id/user_name"
-            style="@style/display_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:text="@string/rate_user_placeholder"
-            app:layout_constraintEnd_toStartOf="@+id/user_image"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/user_image" />
-
-        <TextView
-            android:id="@+id/about_me"
-            style="@style/paragraph_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:focusable="false"
-            android:hint="@string/no_description_available"
-            android:longClickable="false"
-            android:textColorHint="@color/greyBlack_transparent_color"
-            app:layout_constraintEnd_toEndOf="@+id/user_name"
-            app:layout_constraintStart_toStartOf="@id/user_name"
-            app:layout_constraintTop_toBottomOf="@id/user_name" />
+        android:layout_height="match_parent">
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/user_info_section"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="43dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/about_me">
-
-
-            <gr.fellow.fellow_traveller.ui.views.LabelTextComponent
-                android:id="@+id/rate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:label_text="@string/rating"
-                app:layout_constraintEnd_toStartOf="@+id/reviews"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <gr.fellow.fellow_traveller.ui.views.LabelTextComponent
-                android:id="@+id/reviews"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:label_text="@string/ratings"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/involved"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/rate"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <gr.fellow.fellow_traveller.ui.views.LabelTextComponent
-                android:id="@+id/involved"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:label_text="@string/bookings"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/offers"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/reviews"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <gr.fellow.fellow_traveller.ui.views.LabelTextComponent
-                android:id="@+id/offers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:label_text="@string/offers"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/involved"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <LinearLayout
-            android:id="@+id/linear_section"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/user_info_section">
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/add_car_section"
-                style="@style/border_icon_button"
-                android:layout_width="fill_parent"
-                android:layout_height="52dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="42dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <TextView
-                    style="@style/paragraph_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="10dp"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text="@string/add_vehicle"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:drawableStartCompat="@drawable/ic_add_car"
-                    app:drawableTint="@color/black_color" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/car_section"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="43dp"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/user_info_section">
-
-                <TextView
-                    android:id="@+id/car_label"
-                    style="@style/paragraph_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@string/main_vehicle"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <include
-                    android:id="@+id/car_item"
-                    layout="@layout/car_item"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/car_label" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/review_section"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/car_section">
-
-                <TextView
-                    android:id="@+id/review_label"
-                    style="@style/paragraph_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@string/latest_rating"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <include
-                    android:id="@+id/review_item"
-                    layout="@layout/review_item_layout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/review_label" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/all_reviews"
-            style="@style/settings_text_with_padding"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/all_ratings"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linear_section"
-            app:drawableEndCompat="@drawable/ic_star" />
-
-        <TextView
-            android:id="@+id/all_cars"
-            style="@style/settings_text_with_padding"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/my_vehicles"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/all_reviews"
-            app:drawableEndCompat="@drawable/ic_car" />
-
-        <TextView
-            android:id="@+id/all_bookings"
-            style="@style/settings_text_with_padding"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/my_bookings"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/all_cars"
-            app:drawableEndCompat="@drawable/ic_search" />
-
-        <TextView
-            android:id="@+id/all_offers"
-            style="@style/settings_text_with_padding"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/my_offers"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/all_bookings"
-            app:drawableEndCompat="@drawable/ic_steer" />
-
-
-        <TextView
-            android:id="@+id/textView3"
-            style="@style/header_3"
+        <!-- Set layout_gravity on the start panel to "start" -->
+        <FrameLayout
+            android:id="@+id/start_panel"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="51dp"
-            android:text="@string/about_me"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="@+id/about_me"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+            android:layout_height="match_parent"
+            android:layout_gravity="start">
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/center_panel"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:fillViewport="true"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:id="@+id/settings_button"
+                        style="@style/border_icon_button"
+                        android:layout_width="@dimen/back_button_width_height"
+                        android:layout_height="@dimen/back_button_width_height"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:src="@drawable/ic_settings"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/user_image"
+                        android:layout_width="82dp"
+                        android:layout_height="82dp"
+                        android:layout_marginTop="32dp"
+                        android:background="@drawable/ic_boy"
+                        app:layout_constraintEnd_toEndOf="@+id/settings_button"
+                        app:layout_constraintTop_toBottomOf="@+id/settings_button" />
+
+                    <TextView
+                        android:id="@+id/user_name"
+                        style="@style/display_1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/rate_user_placeholder"
+                        app:layout_constraintEnd_toStartOf="@+id/user_image"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/user_image" />
+
+                    <TextView
+                        android:id="@+id/about_me"
+                        style="@style/paragraph_1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:focusable="false"
+                        android:hint="@string/no_description_available"
+                        android:longClickable="false"
+                        android:textColorHint="@color/greyBlack_transparent_color"
+                        app:layout_constraintEnd_toEndOf="@+id/user_name"
+                        app:layout_constraintStart_toStartOf="@id/user_name"
+                        app:layout_constraintTop_toBottomOf="@id/user_name" />
 
 
-</ScrollView>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/user_info_section"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="43dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/about_me">
+
+
+                        <gr.fellow.fellow_traveller.ui.views.LabelTextComponent
+                            android:id="@+id/rate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:label_text="@string/rating"
+                            app:layout_constraintEnd_toStartOf="@+id/reviews"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <gr.fellow.fellow_traveller.ui.views.LabelTextComponent
+                            android:id="@+id/reviews"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:label_text="@string/ratings"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/involved"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/rate"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <gr.fellow.fellow_traveller.ui.views.LabelTextComponent
+                            android:id="@+id/involved"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:label_text="@string/bookings"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/offers"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/reviews"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <gr.fellow.fellow_traveller.ui.views.LabelTextComponent
+                            android:id="@+id/offers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:label_text="@string/offers"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/involved"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linear_section"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/user_info_section">
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/add_car_section"
+                            style="@style/border_icon_button"
+                            android:layout_width="fill_parent"
+                            android:layout_height="52dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="42dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginEnd="16dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <TextView
+                                style="@style/paragraph_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="10dp"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:text="@string/add_vehicle"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:drawableStartCompat="@drawable/ic_add_car"
+                                app:drawableTint="@color/black_color" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/car_section"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="43dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/user_info_section">
+
+                            <TextView
+                                android:id="@+id/car_label"
+                                style="@style/paragraph_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:text="@string/main_vehicle"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <include
+                                android:id="@+id/car_item"
+                                layout="@layout/car_item"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/car_label" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/review_section"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="11dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/car_section">
+
+                            <TextView
+                                android:id="@+id/review_label"
+                                style="@style/paragraph_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:text="@string/latest_rating"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <include
+                                android:id="@+id/review_item"
+                                layout="@layout/review_item_layout"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/review_label" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/all_reviews"
+                        style="@style/settings_text_with_padding"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:text="@string/all_ratings"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/linear_section"
+                        app:drawableEndCompat="@drawable/ic_star" />
+
+                    <TextView
+                        android:id="@+id/all_cars"
+                        style="@style/settings_text_with_padding"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/my_vehicles"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/all_reviews"
+                        app:drawableEndCompat="@drawable/ic_car" />
+
+                    <TextView
+                        android:id="@+id/all_bookings"
+                        style="@style/settings_text_with_padding"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/my_bookings"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/all_cars"
+                        app:drawableEndCompat="@drawable/ic_search" />
+
+                    <TextView
+                        android:id="@+id/all_offers"
+                        style="@style/settings_text_with_padding"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/my_offers"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/all_bookings"
+                        app:drawableEndCompat="@drawable/ic_steer" />
+
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        style="@style/header_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="51dp"
+                        android:text="@string/about_me"
+                        android:visibility="gone"
+                        app:layout_constraintStart_toStartOf="@+id/about_me"
+                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </ScrollView>
+        </FrameLayout>
+
+        <!-- Set layout_gravity on the end panel to "end" -->
+        <FrameLayout
+            android:id="@+id/end_panel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end">
+
+
+            <include
+                android:id="@+id/settings"
+                layout="@layout/settings_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
+
+    </com.discord.panels.OverlappingPanelsLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

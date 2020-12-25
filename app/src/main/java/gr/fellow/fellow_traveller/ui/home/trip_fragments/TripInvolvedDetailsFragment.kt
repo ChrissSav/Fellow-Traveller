@@ -59,6 +59,8 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
             with(binding) {
 
+                binding.overlappingPanels.setEndPanelLockState(OverlappingPanelsLayout.LockState.UNLOCKED)
+
                 secondLayout(trip)
                 tripDetailConstraintLayout.visibility = View.VISIBLE
                 constraintLayoutInfo.visibility = View.VISIBLE
@@ -138,9 +140,11 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
     override fun setUpViews() {
 
         binding.overlappingPanels.setStartPanelLockState(OverlappingPanelsLayout.LockState.CLOSE)
+        binding.overlappingPanels.setEndPanelLockState(OverlappingPanelsLayout.LockState.CLOSE)
 
 
         if (args.creator) {
+            binding.moreInfoLayout.deleteTextView.text = getString(R.string.delete)
             binding.messengerLinkConstraintLayout.visibility = View.GONE
             binding.constraintLayoutInfo.backgroundTintList = ContextCompat.getColorStateList(binding.constraintLayoutInfo.context, R.color.green)
             binding.labelDescription.text = getString(R.string.youre_trip_driver)
@@ -149,6 +153,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
             else
                 viewModel.loadTripCreatorActiveInvolvedDetails(args.tripId, args.reload, args.notificationId)
         } else {
+            binding.moreInfoLayout.deleteTextView.text = getString(R.string.cancel)
             binding.constraintLayoutInfo.backgroundTintList = ContextCompat.getColorStateList(binding.constraintLayoutInfo.context, R.color.orange_new)
             binding.labelDescription.text = getString(R.string.you_have_booked_this_trip)
             binding.messengerLinkConstraintLayout.visibility = View.VISIBLE
