@@ -276,7 +276,6 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
         val conversationListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
-                if (dataSnapshot.childrenCount > 0) {
 
                     val tempList = mutableListOf<Conversation>()
 
@@ -288,7 +287,6 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
                     viewModel.loadConversations(tempList)
 
-                }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {

@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.ui.home.tabs
 
+import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +33,9 @@ class ConversationsFragment : BaseFragment<FragmentConversationsBinding>() {
 
             (binding.recyclerView.adapter as ConversationsAdapter).submitList(list)
 
+
+            if (!list.isNullOrEmpty())
+                binding.messagesSection.visibility = View.GONE
         })
 
     }
@@ -40,9 +44,9 @@ class ConversationsFragment : BaseFragment<FragmentConversationsBinding>() {
 
         //conversationsList.clear()
 
-
         binding.recyclerView.adapter = ConversationsAdapter(this::onConversationClick)
 
+        binding.messagesSection.visibility = View.VISIBLE
 
     }
 
