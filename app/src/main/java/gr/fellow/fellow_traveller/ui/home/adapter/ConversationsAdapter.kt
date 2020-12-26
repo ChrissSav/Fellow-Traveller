@@ -34,9 +34,9 @@ class ConversationsAdapter(
             binding.chatName.text = currentItem.tripName
             binding.chatDescription.text = currentItem.description
 
-            binding.chatDate.text = time(currentItem.date, binding.chatDate.context)
+            binding.chatDate.text = time(currentItem.timestamp, binding.chatDate.context)
 
-            if (currentItem.isSeen)
+            if (currentItem.seen)
                 binding.chatSeenIcon.visibility = View.INVISIBLE
             else
                 binding.chatSeenIcon.visibility = View.VISIBLE
