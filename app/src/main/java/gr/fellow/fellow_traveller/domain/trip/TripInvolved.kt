@@ -6,7 +6,6 @@ import gr.fellow.fellow_traveller.domain.car.CarInfoBase
 import gr.fellow.fellow_traveller.domain.user.Passenger
 import gr.fellow.fellow_traveller.domain.user.UserCreator
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.DestinationResponse
-import gr.fellow.fellow_traveller.ui.extensions.getRandomImage
 import gr.fellow.fellow_traveller.utils.convertTimestampToFormat
 import gr.fellow.fellow_traveller.utils.getTimeFromTimestamp
 import kotlinx.android.parcel.Parcelize
@@ -26,10 +25,11 @@ data class TripInvolved(
     val price: Float,
     val timestamp: Long,
     val passengers: MutableList<Passenger>,
+    val picture: String,
     val status: Int
+
 ) : Parcelable {
 
-    val picture = getRandomImage()
 
     val date
         get() = convertTimestampToFormat(timestamp, "EEE, d MMM yyyy")

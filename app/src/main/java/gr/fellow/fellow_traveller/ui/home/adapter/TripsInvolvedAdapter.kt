@@ -38,11 +38,7 @@ class TripsInvolvedAdapter(
             binding.picture.loadImageFromUrl(currentTrip.creatorUser.picture)
             binding.pet.visibility = if (currentTrip.hasPet) View.VISIBLE else View.INVISIBLE
             binding.cityImage.loadImageFromUrl(currentTrip.picture)
-            //binding.rate.text = currentTrip.creatorUser.rate.toString()
-            //binding.review.text = currentTrip.creatorUser.reviews.toString()
-            /*  binding.seats.text = currentTrip.seatsStatus
-              binding.bags.text = currentTrip.bags
-              binding.pet.text = if (currentTrip.hasPet) binding.pet.resources.getString(R.string.allowed) else binding.pet.resources.getString(R.string.not_allowed)*/
+
             binding.root.setOnClickListener {
                 onTripClickListener.invoke(currentTrip)
             }
