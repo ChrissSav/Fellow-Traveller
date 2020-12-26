@@ -97,6 +97,60 @@ class ConversationsFragment : BaseFragment<FragmentConversationsBinding>() {
         reference.addValueEventListener(conversationListener)
 
 
+//        val childEventListener = object : ChildEventListener {
+//            override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
+//                Log.d(TAG, "onChildAdded:" + dataSnapshot.key!!)
+//
+//                // Get Post object and use the values to update the UI
+//                val conversation = dataSnapshot.getValue(Conversation::class.java)
+//
+//                if (conversation != null) {
+//                    conversationsList.add(conversation)
+//                }
+//                    binding.recyclerView.adapter?.notifyDataSetChanged()
+//
+//
+//                // ...
+//            }
+//
+//            override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
+//                Log.d(TAG, "onChildChanged: ${dataSnapshot.key}")
+//
+//                // A comment has changed, use the key to determine if we are displaying this
+//                // comment and if so displayed the changed comment.
+//                val commentKey = dataSnapshot.key
+//
+//                // ...
+//            }
+//
+//            override fun onChildRemoved(dataSnapshot: DataSnapshot) {
+//                Log.d(TAG, "onChildRemoved:" + dataSnapshot.key!!)
+//
+//                // A comment has changed, use the key to determine if we are displaying this
+//                // comment and if so remove it.
+//                val commentKey = dataSnapshot.key
+//
+//                // ...
+//            }
+//
+//            override fun onChildMoved(dataSnapshot: DataSnapshot, previousChildName: String?) {
+//                Log.d(TAG, "onChildMoved:" + dataSnapshot.key!!)
+//
+//                // A comment has changed position, use the key to determine if we are
+//                // displaying this comment and if so move it.
+//
+//                val commentKey = dataSnapshot.key
+//
+//                // ...
+//            }
+//
+//            override fun onCancelled(databaseError: DatabaseError) {
+//                Log.w(TAG, "postComments:onCancelled", databaseError.toException())
+//
+//            }
+//        }
+//        reference.addChildEventListener(childEventListener)
+
     }
 
 
