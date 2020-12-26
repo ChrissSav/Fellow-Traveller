@@ -2,12 +2,13 @@ package gr.fellow.fellow_traveller.ui.home.tabs
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
+import com.discord.panels.OverlappingPanelsLayout
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
@@ -33,7 +34,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     override fun setUpObservers() {
 
-        viewModel.reviews.observe(this, Observer { list ->
+        viewModel.reviews.observe(this, { list ->
 
             if (list.isNotEmpty()) {
 
@@ -53,7 +54,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
         })
 
-        viewModel.user.observe(viewLifecycleOwner, Observer { user ->
+        viewModel.user.observe(viewLifecycleOwner, { user ->
 
             with(binding) {
 
@@ -69,7 +70,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     aboutMe.text = user.aboutMe
             }
         })
-        viewModel.cars.observe(viewLifecycleOwner, Observer { car ->
+        viewModel.cars.observe(viewLifecycleOwner, { car ->
 
             with(binding) {
 
@@ -95,11 +96,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     override fun setUpViews() {
 
+        binding.overlappingPanels.setStartPanelLockState(OverlappingPanelsLayout.LockState.CLOSE)
+
         binding.allReviews.setOnClickListener {
             findNavController()?.navigate(R.id.action_destination_info_to_profileReviewsFragment)
         }
         binding.settingsButton.setOnClickListener {
-            findNavController()?.navigate(R.id.to_setting)
+            binding.overlappingPanels.openEndPanel()
         }
         binding.allCars.setOnClickListener {
             findNavController()?.navigate(R.id.action_destination_info_to_userCarsFragment)
@@ -112,6 +115,35 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         }
         binding.addCarSection.setOnClickListener {
             startActivityForResult(AddCarActivity::class, 1, null)
+        }
+
+        //Second Frame
+
+        binding.settings.personalInfo.setOnClickListener {
+            findNavController()?.navigate(R.id.action_baseSettingsFragment_to_accountSettingsFragment)
+
+        }
+
+        binding.settings.password.setOnClickListener {
+            findNavController()?.navigate(R.id.action_baseSettingsFragment_to_changePasswordFragment)
+        }
+
+        binding.settings.messenger.setOnClickListener {
+            findNavController()?.navigate(R.id.action_baseSettingsFragment_to_homeMessengerFragment)
+        }
+
+        binding.settings.termsOfUse.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.TOS_URL)))
+            startActivity(browserIntent)
+        }
+
+        binding.settings.privacyPolicy.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.PRIVACY_POLICY_URL)))
+            startActivity(browserIntent)
+        }
+
+        binding.settings.logout.setOnClickListener {
+            viewModel.logOut()
         }
 
     }
