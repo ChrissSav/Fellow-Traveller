@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.ui.home.tabs
 
 import android.util.Log
+import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import com.google.firebase.database.*
@@ -50,6 +51,8 @@ class ConversationsFragment : BaseFragment<FragmentConversationsBinding>() {
 
         binding.recyclerView.adapter = ConversationsAdapter(conversationsList, onItemClickListener)
         loadConversations(viewModel.user.value?.id.toString())
+
+
         //Parse elements in adapter and on click listener
         //binding.recyclerView.adapter = ConversationsAdapter(conversationsList, this::onConversationClick)
 
@@ -82,8 +85,15 @@ class ConversationsFragment : BaseFragment<FragmentConversationsBinding>() {
                         }
 
                     }
+
+
                     binding.recyclerView.adapter?.notifyDataSetChanged()
                 }
+
+                if (conversationsList.isNullOrEmpty())
+                    binding.messagesSection.visibility = View.VISIBLE
+                else
+                    binding.messagesSection.visibility = View.GONE
 
                 // ...
             }
