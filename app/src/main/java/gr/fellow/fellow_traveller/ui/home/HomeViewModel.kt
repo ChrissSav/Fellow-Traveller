@@ -501,15 +501,14 @@ constructor(
 
     }
 
-    private val _conversationList = SingleLiveEvent<MutableList<Conversation>>()
+
+    private val _conversationList = MutableLiveData<MutableList<Conversation>>()
     val conversationList: LiveData<MutableList<Conversation>> = _conversationList
 
     fun loadConversations(list: MutableList<Conversation>) {
+
         launch {
-
-
             _conversationList.value = list
-
 
         }
     }

@@ -10,6 +10,7 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.os.Build
+import android.util.Log
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
@@ -17,12 +18,15 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.google.firebase.database.*
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivityViewModel
 import gr.fellow.fellow_traveller.databinding.ActivityHomeBinding
+import gr.fellow.fellow_traveller.service.NotificationJobService
 import gr.fellow.fellow_traveller.service.NotificationSocketViewModel
 import gr.fellow.fellow_traveller.ui.extensions.*
+import gr.fellow.fellow_traveller.ui.home.chat.models.Conversation
 import gr.fellow.fellow_traveller.ui.main.MainActivity
 import java.util.*
 import javax.inject.Inject
@@ -36,6 +40,9 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
     @Inject
     lateinit var viewModelSecond: NotificationSocketViewModel
+
+    @Inject
+    lateinit var firebaseDatabase: FirebaseDatabase
 
     private var bottomNavButtons = mutableListOf<Pair<ImageView, Int>>()
 
@@ -59,6 +66,8 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
             } else {
                 binding.constraintLayoutMessenger.visibility = View.GONE
             }
+
+            loadConversations(it.id)
         })
 
         viewModel.reloadConnection.observe(this, Observer {
@@ -258,6 +267,38 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
                 navController.bottomNav(R.id.destination_info)
             }
         }
+
+    }
+
+    private fun loadConversations(userId: String) {
+        val reference: DatabaseReference = firebaseDatabase.getReference("UserTrips").child(userId)
+
+        val conversationListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                if (dataSnapshot.childrenCount > 0) {
+
+                    val tempList = mutableListOf<Conversation>()
+
+                    dataSnapshot.children.forEach {
+                        it.getValue(Conversation::class.java)?.let { conversation ->
+                            tempList.add(conversation)
+                        }
+                    }
+
+                    viewModel.loadConversations(tempList)
+
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(NotificationJobService.TAG, "loadConversation:onCancelled", databaseError.toException())
+                // ...
+            }
+        }
+        reference.addValueEventListener(conversationListener)
+
 
     }
 
