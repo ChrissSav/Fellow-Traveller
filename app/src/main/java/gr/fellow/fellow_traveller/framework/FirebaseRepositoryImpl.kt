@@ -68,7 +68,6 @@ class FirebaseRepositoryImpl(
             passengerToTrip.setValue(passengerMemberMap)
             creatorToTrip.setValue(creatorMemberMap)
 
-
         }
     }
 

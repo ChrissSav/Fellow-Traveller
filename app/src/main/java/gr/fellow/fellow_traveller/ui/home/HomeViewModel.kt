@@ -16,6 +16,7 @@ import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.ui.extensions.addOrReplace
 import gr.fellow.fellow_traveller.ui.extensions.setNotificationRead
 import gr.fellow.fellow_traveller.ui.extensions.toMutableListSafe
+import gr.fellow.fellow_traveller.ui.home.chat.models.Conversation
 import gr.fellow.fellow_traveller.usecase.auth.ChangePasswordUseCase
 import gr.fellow.fellow_traveller.usecase.auth.DeleteUserAuthLocalUseCase
 import gr.fellow.fellow_traveller.usecase.firabase.SendMessageFirebaseUseCase
@@ -498,6 +499,19 @@ constructor(
             sendMessageFirebaseUseCase.invoke(_user.value?.id.toString(), tripId, textMessage, _user.value?.firstName.toString(), messageType)
         }
 
+    }
+
+    private val _conversationList = SingleLiveEvent<MutableList<Conversation>>()
+    val conversationList: LiveData<MutableList<Conversation>> = _conversationList
+
+    fun loadConversations(list: MutableList<Conversation>) {
+        launch {
+
+
+            _conversationList.value = list
+
+
+        }
     }
 }
 
