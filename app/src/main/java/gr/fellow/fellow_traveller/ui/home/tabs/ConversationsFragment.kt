@@ -1,4 +1,6 @@
 package gr.fellow.fellow_traveller.ui.home.tabs
+
+import android.util.Log
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import com.google.firebase.database.*
@@ -6,6 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentConversationsBinding
+import gr.fellow.fellow_traveller.service.NotificationJobService.Companion.TAG
 import gr.fellow.fellow_traveller.ui.extensions.createToast
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
@@ -31,7 +34,7 @@ class ConversationsFragment : BaseFragment<FragmentConversationsBinding>() {
 
     override fun setUpViews() {
 
-        conversationsList.clear()
+        //conversationsList.clear()
 //        conversationsList.add(Conversation("1", "Φιλώτας-Πτολεμαΐδα", "Ναιι θα περάσω το παρωί αν είναι", 1608218840, "default", false))
 //        conversationsList.add(Conversation("2", "Φιλώτας-Πτολεμαΐδα", "Ναιι θα περάσω το πρωί αν είναι", 1608218126, "default", false))
 //        conversationsList.add(Conversation("3", "Φιλώτας-Πτολεμαΐδα", "Ναιι θα περάσω το πρωί αν είναι", 1608218126, "default", false))
@@ -45,6 +48,7 @@ class ConversationsFragment : BaseFragment<FragmentConversationsBinding>() {
 //        conversationsList.add(Conversation("ufsdfsf2432", "Φιλώτας-Πτολεμαΐδα", "Ναιι θα περάσω το πρωί αν είναι", 1608218126, "default", false))
 //        conversationsList.add(Conversation("ufsdfsf2432", "Φιλώτας-Πτολεμαΐδα", "Ναιι θα περάσω το πρωί αν είναι", 1608218126, "default", false))
 
+        binding.recyclerView.adapter = ConversationsAdapter(conversationsList, onItemClickListener)
         loadConversations(viewModel.user.value?.id.toString())
         //Parse elements in adapter and on click listener
         //binding.recyclerView.adapter = ConversationsAdapter(conversationsList, this::onConversationClick)
@@ -66,26 +70,32 @@ class ConversationsFragment : BaseFragment<FragmentConversationsBinding>() {
     private fun loadConversations(userId: String) {
         val reference: DatabaseReference = FirebaseDatabase.getInstance().getReference("UserTrips").child(userId)
 
-        reference.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                conversationsList.clear()
-                for (dataSnapshot: DataSnapshot in snapshot.children) {
-                    val conversation = dataSnapshot.getValue(Conversation::class.java)
+        val conversationListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                if (dataSnapshot.childrenCount > 0) {
+                    for (dataSnapshot: DataSnapshot in dataSnapshot.children) {
+                        val conversation = dataSnapshot.getValue(Conversation::class.java)
 
-                    if (conversation != null) {
-                        conversationsList.add(conversation)
+                        if (conversation != null) {
+                            conversationsList.add(conversation)
+                        }
+
                     }
+                    binding.recyclerView.adapter?.notifyDataSetChanged()
                 }
 
-                binding.recyclerView.adapter = ConversationsAdapter(conversationsList, onItemClickListener)
-                binding.recyclerView.adapter?.notifyDataSetChanged()
+                // ...
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadConversation:onCancelled", databaseError.toException())
+                // ...
             }
+        }
+        reference.addValueEventListener(conversationListener)
 
-        })
 
     }
 
