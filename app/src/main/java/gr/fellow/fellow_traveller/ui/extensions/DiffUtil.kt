@@ -6,14 +6,28 @@ import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.notification.Notification
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
+import gr.fellow.fellow_traveller.ui.home.chat.models.Conversation
 
 class CarDiffCallback : DiffUtil.ItemCallback<Car>() {
     override fun areItemsTheSame(oldItem: Car, newItem: Car): Boolean {
         return oldItem.id == newItem.id
     }
 
+
     @SuppressLint("DiffUtilEquals")
     override fun areContentsTheSame(oldItem: Car, newItem: Car): Boolean {
+        return oldItem == newItem
+    }
+}
+
+class ConversationsDiffCallback : DiffUtil.ItemCallback<Conversation>() {
+    override fun areItemsTheSame(oldItem: Conversation, newItem: Conversation): Boolean {
+        return oldItem.tripId == newItem.tripId
+    }
+
+
+    @SuppressLint("DiffUtilEquals")
+    override fun areContentsTheSame(oldItem: Conversation, newItem: Conversation): Boolean {
         return oldItem == newItem
     }
 }

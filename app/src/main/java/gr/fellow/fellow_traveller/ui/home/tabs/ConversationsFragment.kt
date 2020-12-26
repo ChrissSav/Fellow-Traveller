@@ -30,10 +30,7 @@ class ConversationsFragment : BaseFragment<FragmentConversationsBinding>() {
 
             list.sortByDescending { it.timestamp }
 
-            conversationsList.clear()
-            conversationsList.addAll(list)
-            binding.recyclerView.adapter?.notifyDataSetChanged()
-
+            (binding.recyclerView.adapter as ConversationsAdapter).submitList(list)
 
         })
 
@@ -44,7 +41,7 @@ class ConversationsFragment : BaseFragment<FragmentConversationsBinding>() {
         //conversationsList.clear()
 
 
-        binding.recyclerView.adapter = ConversationsAdapter(conversationsList, this::onConversationClick)
+        binding.recyclerView.adapter = ConversationsAdapter(this::onConversationClick)
 
 
     }

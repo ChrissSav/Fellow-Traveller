@@ -4,21 +4,23 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DatabaseReference
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.ConversationItemBinding
+import gr.fellow.fellow_traveller.ui.extensions.ConversationsDiffCallback
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.home.chat.models.Conversation
 import gr.fellow.fellow_traveller.utils.currentTimeStamp
 import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
 
 class ConversationsAdapter(
-    private val conversationsList: MutableList<Conversation>,
+
     private val onItemClickListener: (Conversation) -> Unit
 
 
-) : RecyclerView.Adapter<ConversationsAdapter.ViewHolder>() {
+) : ListAdapter<Conversation, ConversationsAdapter.ViewHolder>(ConversationsDiffCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,7 +30,7 @@ class ConversationsAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val currentItem = conversationsList[position]
+        val currentItem = currentList[position]
 
         with(holder) {
             //Binding all views
@@ -82,7 +84,7 @@ class ConversationsAdapter(
 
     class ViewHolder(val binding: ConversationItemBinding) : RecyclerView.ViewHolder(binding.root)
 
-    override fun getItemCount() = conversationsList.size
+
 
     fun getLastMessage(): String {
         val reference: DatabaseReference
@@ -90,3 +92,4 @@ class ConversationsAdapter(
         return "description"
     }
 }
+
