@@ -5,10 +5,10 @@ import gr.fellow.fellow_traveller.domain.FellowDataSource
 class CreateOrEnterConversationFirebaseUseCase(
     private val dataSource: FellowDataSource
 ) {
-    suspend operator fun invoke(myId: String, creatorId: String, tripId: String, tripName: String) {
+    suspend operator fun invoke(myId: String, creatorId: String, tripId: String, tripName: String, picture: String) {
 
 
-        dataSource.createOrEnterConversation(myId, creatorId, tripId, tripName)
+        dataSource.createOrEnterConversation(myId, creatorId, tripId, tripName, picture)
     }
 
 

@@ -98,8 +98,8 @@ constructor(
                 val response = bookTripUseCase(tripId, seats, pet)
                 _tripBook.value = response
                 createOrEnterConversationFirebaseUseCase.invoke(
-                    userId, _tripBook.value?.creatorUser?.id.toString(), _tripBook.value?.id.toString(), _tripBook.value?.destFrom?.title.toString() + " - "
-                            + _tripBook.value?.destTo?.title.toString()
+                    userId, tripId, _tripBook.value?.id.toString(), _tripBook.value?.destFrom?.title.toString() + " - "
+                            + _tripBook.value?.destTo?.title.toString(), _tripBook.value?.picture.toString()
                 )
             } catch (e: Exception) {
                 handleErrorBook(tripId)

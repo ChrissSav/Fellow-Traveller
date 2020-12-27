@@ -30,6 +30,7 @@ import gr.fellow.fellow_traveller.usecase.trips.*
 import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.*
 
 
 class HomeViewModel
@@ -493,10 +494,10 @@ constructor(
     }
 
     val loadMessageFirebase = MutableLiveData<Boolean>()
-    fun sendFirebaseMessage(textMessage: String, tripId: String, messageType: Int) {
+    fun sendFirebaseMessage(textMessage: String, tripId: String, messageType: Int, participantsList: ArrayList<String>) {
 
         launchWithLiveData(true, loadMessageFirebase) {
-            sendMessageFirebaseUseCase.invoke(_user.value?.id.toString(), tripId, textMessage, _user.value?.firstName.toString(), messageType)
+            sendMessageFirebaseUseCase.invoke(_user.value?.id.toString(), tripId, textMessage, _user.value?.firstName.toString(), messageType, participantsList)
         }
 
     }

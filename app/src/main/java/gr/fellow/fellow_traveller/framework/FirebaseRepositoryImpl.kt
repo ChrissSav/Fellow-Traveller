@@ -8,6 +8,10 @@ import com.google.firebase.storage.FirebaseStorage
 import gr.fellow.fellow_traveller.data.FirebaseRepository
 import gr.fellow.fellow_traveller.utils.firebaseCall
 import kotlinx.coroutines.tasks.await
+import java.util.*
+import kotlin.collections.HashMap
+import kotlin.collections.forEach
+import kotlin.collections.set
 
 
 class FirebaseRepositoryImpl(
@@ -26,17 +30,19 @@ class FirebaseRepositoryImpl(
             fileReference.downloadUrl.await().toString()
         }
 
-    override suspend fun sendMessage(hashMap: HashMap<String, Any>) {
+    override suspend fun sendMessage(hashMap: HashMap<String, Any>, participantsList: ArrayList<String>) {
         firebaseCall {
 
             val tripId = hashMap["tripId"].toString()
             hashMap["timestamp"] = ServerValue.TIMESTAMP
             val referenceMessage = firebaseDatabase.reference.child("Messages").child(tripId)
             referenceMessage.push().setValue(hashMap).await()
+
+            updateParticipantsStatus(hashMap, participantsList)
         }
     }
 
-    override suspend fun createOrEnterConversation(myId: String, creatorId: String, tripId: String, tripName: String) {
+    override suspend fun createOrEnterConversation(myId: String, creatorId: String, tripId: String, tripName: String, picture: String) {
         firebaseCall {
             //Assign to passenger a new conversation
             val passengerConversation = firebaseDatabase.reference.child("UserTrips").child(myId).child(tripId)
@@ -52,6 +58,8 @@ class FirebaseRepositoryImpl(
             tripsMap["seen"] = true
             tripsMap["tripId"] = tripId
             tripsMap["tripName"] = tripName
+            tripsMap["description"] = "default"
+            tripsMap["image"] = picture
 
             //Update creator and passenger conversation
             passengerConversation.setValue(tripsMap)
@@ -71,5 +79,30 @@ class FirebaseRepositoryImpl(
         }
     }
 
+    private suspend fun updateParticipantsStatus(hashMap: HashMap<String, Any>, participantsList: ArrayList<String>) {
+
+        val textMessage = hashMap["text"].toString()
+        val tripId = hashMap["tripId"].toString()
+
+        val updateMap: HashMap<String, Any> = HashMap()
+        updateMap["timestamp"] = ServerValue.TIMESTAMP
+        updateMap["description"] = textMessage
+        updateMap["seen"] = false
+
+
+        //Update conversation's info, of all participants (including mine)
+        participantsList.forEach {
+            val reference = firebaseDatabase.reference.child("UserTrips").child(it).child(tripId)
+            reference.updateChildren(updateMap).await()
+        }
+
+        //Update my hashMap as seen true
+        val reference = firebaseDatabase.reference.child("UserTrips").child(hashMap["senderId"].toString()).child(tripId)
+        val updateMyMap: HashMap<String, Any> = HashMap()
+        updateMyMap["seen"] = true
+        reference.updateChildren(updateMyMap).await()
+
+
+    }
 
 }

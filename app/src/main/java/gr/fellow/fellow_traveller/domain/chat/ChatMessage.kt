@@ -6,11 +6,11 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class ChatMessage(
 
-val senderId: String,
-val text: String,
-val tripId: String,
-val timestamp: Long,
-val senderName: String,
-var senderImage: String? = null
+    val senderId: String = "",
+    val text: String = "",
+    val tripId: String = "",
+    val timestamp: Long = 0,
+    val senderName: String = "",
+    var senderImage: String = ""
 ) : Parcelable
 

@@ -1,23 +1,30 @@
 package gr.fellow.fellow_traveller.ui.home.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.annotation.NonNull
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.*
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.ConversationItemBinding
+import gr.fellow.fellow_traveller.domain.chat.ChatMessage
 import gr.fellow.fellow_traveller.ui.extensions.ConversationsDiffCallback
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.home.chat.models.Conversation
 import gr.fellow.fellow_traveller.utils.currentTimeStamp
 import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
 
+
 class ConversationsAdapter(
 
-    private val onItemClickListener: (Conversation) -> Unit
+    private val onItemClickListener: (Conversation) -> Unit,
+    private val myId: String
 
 
 ) : ListAdapter<Conversation, ConversationsAdapter.ViewHolder>(ConversationsDiffCallback()) {
@@ -28,6 +35,7 @@ class ConversationsAdapter(
         return ViewHolder(binding)
     }
 
+    @SuppressLint("WrongConstant")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val currentItem = currentList[position]
@@ -40,10 +48,19 @@ class ConversationsAdapter(
 
             binding.chatDate.text = time(currentItem.timestamp, binding.chatDate.context)
 
-            if (currentItem.seen)
+            if (currentItem.seen) {
                 binding.chatSeenIcon.visibility = View.INVISIBLE
-            else
+                //If it's not seen, the text style will be bold
+                binding.chatDescription.typeface = Typeface.DEFAULT
+            } else {
                 binding.chatSeenIcon.visibility = View.VISIBLE
+                //If it's not seen, the text style will be normal
+                binding.chatDescription.typeface = Typeface.DEFAULT_BOLD
+            }
+            if (currentItem.description == "default") {
+                binding.chatDescription.text = ""
+                getLastMessage(currentItem.tripId, binding.chatDescription)
+            }
 
             binding.root.setOnClickListener {
                 onItemClickListener.invoke(currentItem)
@@ -54,7 +71,7 @@ class ConversationsAdapter(
 
     //Set minutes ago
     private fun time(timestamp: Long, context: Context): String {
-        val t = currentTimeStamp() - timestamp
+        val t = currentTimeStamp() - (timestamp / 1000)
         if (t <= 3600) {
             return if ((t / 60).toInt() == 1)
                 context.getString(R.string.minute_ago)
@@ -85,11 +102,36 @@ class ConversationsAdapter(
     class ViewHolder(val binding: ConversationItemBinding) : RecyclerView.ViewHolder(binding.root)
 
 
+    private fun getLastMessage(tripId: String, textView: TextView) {
 
-    fun getLastMessage(): String {
-        val reference: DatabaseReference
 
-        return "description"
+        var theLastMessage = "default"
+        val reference = FirebaseDatabase.getInstance().getReference("Messages").child(tripId)
+        var last: Query = reference.orderByKey().limitToLast(1)
+        last.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(@NonNull dataSnapshot: DataSnapshot) {
+                //for (snapshot in dataSnapshot.children) {
+                val item: ChatMessage? = dataSnapshot.getValue(ChatMessage::class.java)
+                var senderId = item?.senderId.toString()
+
+                if (senderId === myId) {
+                    theLastMessage = "Εσείς: " + item?.text.toString()
+                } else {
+                    theLastMessage = item?.text.toString()
+                }
+                // }
+                when (theLastMessage) {
+                    "default" -> textView.text = "Δεν υπάρχει κάποιο μήνυμα"
+                    else ->
+                        textView.text = theLastMessage
+                }
+                theLastMessage = "default"
+
+            }
+
+            override fun onCancelled(@NonNull databaseError: DatabaseError) {}
+        })
+
     }
 }
 

@@ -21,6 +21,7 @@ import gr.fellow.fellow_traveller.framework.network.fellow.user.*
 import gr.fellow.fellow_traveller.framework.network.google.response.DetailsResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
 import retrofit2.Response
+import java.util.*
 
 class FellowDataSourceImpl(
     private val repository: FellowRepository,
@@ -144,11 +145,11 @@ class FellowDataSourceImpl(
     override suspend fun updatePictureFirebase(uri: Uri, userId: String): String =
         firebaseRepository.uploadImage(uri, userId)
 
-    override suspend fun sendFirebaseMessage(hashMap: HashMap<String, Any>) =
-        firebaseRepository.sendMessage(hashMap)
+    override suspend fun sendFirebaseMessage(hashMap: HashMap<String, Any>, participantsList: ArrayList<String>) =
+        firebaseRepository.sendMessage(hashMap, participantsList)
 
-    override suspend fun createOrEnterConversation(myId: String, creatorId: String, tripId: String, tripName: String) =
-        firebaseRepository.createOrEnterConversation(myId, creatorId, tripId, tripName)
+    override suspend fun createOrEnterConversation(myId: String, creatorId: String, tripId: String, tripName: String, picture: String) =
+        firebaseRepository.createOrEnterConversation(myId, creatorId, tripId, tripName, picture)
 
     /**
      * Google Service

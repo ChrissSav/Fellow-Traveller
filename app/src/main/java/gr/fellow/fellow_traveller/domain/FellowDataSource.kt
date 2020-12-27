@@ -16,6 +16,7 @@ import gr.fellow.fellow_traveller.framework.network.fellow.user.UserAuthResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.DetailsResponse
 import gr.fellow.fellow_traveller.framework.network.google.response.PlaceApiResponse
 import retrofit2.Response
+import java.util.*
 
 interface FellowDataSource {
 
@@ -110,9 +111,9 @@ interface FellowDataSource {
 
     suspend fun updatePictureFirebase(uri: Uri, userId: String): String
 
-    suspend fun sendFirebaseMessage(hashMap: HashMap<String, Any>)
+    suspend fun sendFirebaseMessage(hashMap: HashMap<String, Any>, participantsList: ArrayList<String>)
 
-    suspend fun createOrEnterConversation(myId: String, creatorId: String, tripId: String, tripName: String)
+    suspend fun createOrEnterConversation(myId: String, creatorId: String, tripId: String, tripName: String, picture: String)
 
     /**
      * Google Service
