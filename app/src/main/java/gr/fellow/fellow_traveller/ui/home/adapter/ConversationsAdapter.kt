@@ -23,16 +23,20 @@ import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
 class ConversationsAdapter(
 
     private val onItemClickListener: (Conversation) -> Unit,
-    private val myId: String,
-    private val context: Context
+    private val myId: String
 
 
 ) : ListAdapter<Conversation, ConversationsAdapter.ViewHolder>(ConversationsDiffCallback()) {
 
-    private val DEFAULT = context.getString(R.string.DEFAULT)
+    private lateinit var context: Context
+    private var DEFAULT = ""
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ConversationItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        context = binding.root.context
+        DEFAULT = context.getString(R.string.DEFAULT)
         return ViewHolder(binding)
     }
 

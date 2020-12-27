@@ -3,18 +3,20 @@ package gr.fellow.fellow_traveller.ui.home.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.MessageItemBinding
+import gr.fellow.fellow_traveller.domain.chat.ChatMessage
+import gr.fellow.fellow_traveller.ui.extensions.MessagesDiffCallback
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
-import gr.fellow.fellow_traveller.ui.home.chat.models.Message
 import gr.fellow.fellow_traveller.utils.currentTimeStamp
 import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
 
 class MessagesAdapter(
-    private val messagesList: MutableList<Message>
 
-) : RecyclerView.Adapter<MessagesAdapter.ViewHolder>() {
+
+) : ListAdapter<ChatMessage, MessagesAdapter.ViewHolder>(MessagesDiffCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,7 +26,7 @@ class MessagesAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val currentItem = messagesList[position]
+        val currentItem = currentList[position]
 
         with(holder) {
             binding.senderImage.loadImageFromUrl(currentItem.senderImage)
@@ -68,6 +70,5 @@ class MessagesAdapter(
 
     class ViewHolder(val binding: MessageItemBinding) : RecyclerView.ViewHolder(binding.root)
 
-    override fun getItemCount() = messagesList.size
 
 }

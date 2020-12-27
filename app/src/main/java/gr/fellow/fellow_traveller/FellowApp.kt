@@ -8,6 +8,7 @@ import android.media.AudioAttributes
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
+import com.google.firebase.FirebaseApp
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
@@ -26,6 +27,7 @@ class FellowApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        FirebaseApp.initializeApp(this)
         createNotificationChannels()
     }
 

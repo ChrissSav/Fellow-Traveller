@@ -297,7 +297,6 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
         }
         reference.addValueEventListener(conversationListener)
 
-
     }
 
 }

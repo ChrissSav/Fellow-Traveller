@@ -16,3 +16,4 @@ data class ChatMessage(
     var senderImage: String = ""
 ) : Parcelable
 
+

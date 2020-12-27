@@ -44,7 +44,7 @@ class ConversationsFragment : BaseFragment<FragmentConversationsBinding>() {
 
         //conversationsList.clear()
 
-        binding.recyclerView.adapter = context?.let { ConversationsAdapter(this::onConversationClick, viewModel.user.value?.id.toString(), it) }
+        binding.recyclerView.adapter = ConversationsAdapter(this::onConversationClick, viewModel.user.value?.id.toString())
 
         binding.messagesSection.visibility = View.VISIBLE
 
