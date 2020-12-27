@@ -33,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="22:52"
+        style="@style/paragraph_4"
         android:layout_marginEnd="@dimen/calendar_margin_16dp"
         app:layout_constraintBottom_toBottomOf="@id/sender_name"
         app:layout_constraintEnd_toEndOf="parent"
