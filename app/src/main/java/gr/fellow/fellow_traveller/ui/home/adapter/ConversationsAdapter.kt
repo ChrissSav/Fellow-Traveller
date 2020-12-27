@@ -1,6 +1,5 @@
 package gr.fellow.fellow_traveller.ui.home.adapter
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Typeface
 import android.view.LayoutInflater
@@ -24,18 +23,20 @@ import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
 class ConversationsAdapter(
 
     private val onItemClickListener: (Conversation) -> Unit,
-    private val myId: String
+    private val myId: String,
+    private val context: Context
 
 
 ) : ListAdapter<Conversation, ConversationsAdapter.ViewHolder>(ConversationsDiffCallback()) {
 
+    private val DEFAULT = context.getString(R.string.DEFAULT)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ConversationItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
-    @SuppressLint("WrongConstant")
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val currentItem = currentList[position]
@@ -57,9 +58,9 @@ class ConversationsAdapter(
                 //If it's not seen, the text style will be normal
                 binding.chatDescription.typeface = Typeface.DEFAULT_BOLD
             }
-            if (currentItem.description == "default") {
+            if (currentItem.description == DEFAULT) {
                 binding.chatDescription.text = ""
-                getLastMessage(currentItem.tripId, binding.chatDescription)
+                //getLastMessage(currentItem.tripId, binding.chatDescription)
             }
 
             binding.root.setOnClickListener {
@@ -105,27 +106,30 @@ class ConversationsAdapter(
     private fun getLastMessage(tripId: String, textView: TextView) {
 
 
-        var theLastMessage = "default"
+        var theLastMessage = DEFAULT
         val reference = FirebaseDatabase.getInstance().getReference("Messages").child(tripId)
         var last: Query = reference.orderByKey().limitToLast(1)
         last.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(@NonNull dataSnapshot: DataSnapshot) {
-                //for (snapshot in dataSnapshot.children) {
                 val item: ChatMessage? = dataSnapshot.getValue(ChatMessage::class.java)
                 var senderId = item?.senderId.toString()
 
-                if (senderId === myId) {
-                    theLastMessage = "Εσείς: " + item?.text.toString()
+
+                if (senderId == myId) {
+                    theLastMessage = item?.text.toString() //Later we can use You: "message"
                 } else {
                     theLastMessage = item?.text.toString()
                 }
-                // }
+
                 when (theLastMessage) {
-                    "default" -> textView.text = "Δεν υπάρχει κάποιο μήνυμα"
+                    DEFAULT -> textView.text = context.getString(R.string.no_messages)
                     else ->
-                        textView.text = theLastMessage
+                        if (theLastMessage.isNullOrEmpty())
+                            textView.text = context.getString(R.string.no_messages)
+                        else
+                            textView.text = theLastMessage
                 }
-                theLastMessage = "default"
+                theLastMessage = DEFAULT
 
             }
 

@@ -20,6 +20,7 @@
     <string name="account_settings_dialog_message">Υou need to configure application permissions to upload a photo. Would you like to proceed?</string>
     <string name="account_settings_guid_message">You will need to enable the application permissions from the settings</string>
     <string name="covid">Get latest updates on <b><u>Covid-19</u></b></string>
+    <string name="no_messages">There is no message</string>
 
 
     <string name="title_activity_maps">Map</string>

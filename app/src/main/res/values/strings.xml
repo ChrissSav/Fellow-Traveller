@@ -2,6 +2,7 @@
     <string name="app_name" translatable="false">fellow.</string>
     <string name="PLACE_LANGUAGE">el</string>
     <string name="USER_INFO" translatable="false">userAuth</string>
+    <string name="DEFAULT" translatable="false">default</string>
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="euro_symbol" translatable="false">€</string>
     <string name="register_fragment_stage_2_choose_password_title">Επιλογή συνθηματικού</string>
@@ -25,7 +26,7 @@
     <string name="account_settings_dialog_message">Θα πρέπει να ρυθμίσεις τις άδειες της εφαρμογής για το ανέβασμα φωτογραφίας. Θέλεις να συνεχίσεις;</string>
     <string name="account_settings_guid_message">Θα πρέπει να ενεργοποιήσεις τις άδειες της εφαρμογής από τις ρυθμίσεις</string>
     <string name="covid">Ενημέρωση για τον <b><u>Covid-19</u></b></string>
-
+    <string name="no_messages">Δεν υπάρχει κάποιο μήνυμα</string>
 
     <string name="title_activity_maps">Χάρτης</string>
     <string name="no_driver_message">Δεν υπάρχει κάποιο μήνυμα από τον οδηγό.</string>

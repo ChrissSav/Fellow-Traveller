@@ -10,7 +10,6 @@ import com.google.firebase.database.ValueEventListener
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentChatBinding
-import gr.fellow.fellow_traveller.ui.extensions.createToast
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.MessagesAdapter
 import gr.fellow.fellow_traveller.ui.home.chat.models.Message
@@ -66,7 +65,6 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                     val aId = snapshot.child("userId").getValue(String::class.java)!!
                     participantsIdList.add(aId)
                 }
-                createToast(participantsIdList[0] + " " + participantsIdList[1])
             }
 
             override fun onCancelled(@NonNull databaseError: DatabaseError) {}
