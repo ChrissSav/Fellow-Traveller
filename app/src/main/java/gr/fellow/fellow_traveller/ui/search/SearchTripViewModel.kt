@@ -103,7 +103,7 @@ constructor(
                 val response = bookTripUseCase(tripId, seats, pet)
                 _tripBook.value = response
                 createOrEnterConversationFirebaseUseCase.invoke(
-                    userBase.id, tripId, _tripBook.value?.id.toString(), _tripBook.value?.destFrom?.title.toString() + " - "
+                    userBase.id, _tripBook.value?.creatorUser?.id.toString(), tripId, _tripBook.value?.destFrom?.title.toString() + " - "
                             + _tripBook.value?.destTo?.title.toString(), _tripBook.value?.picture.toString()
                 )
 
