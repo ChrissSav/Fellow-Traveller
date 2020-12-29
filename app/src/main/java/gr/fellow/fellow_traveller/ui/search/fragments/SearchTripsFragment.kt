@@ -95,8 +95,9 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
             })
 
-            searchFilter.observe(viewLifecycleOwner, Observer {
+            searchFilter.observe(viewLifecycleOwner, {
                 binding.filterButton.visibility = View.VISIBLE
+                binding.motion.getTransition(R.id.search_trip_transition).setEnable(true)
                 viewModel.getTrips()
             })
 
@@ -108,10 +109,10 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
         with(binding) {
 
+            motion.getTransition(R.id.search_trip_transition).setEnable(false)
             recyclerView.adapter = SearchResultsListAdapter(this@SearchTripsFragment::onTripClicked)
 
-
-            binding.sortButton.setOnClickListener {
+            sortButton.setOnClickListener {
                 //Check because dialog open twice
                 if (currentTimeStamp() - clickTimeDialog > 1) {
                     clickTimeDialog = currentTimeStamp()
