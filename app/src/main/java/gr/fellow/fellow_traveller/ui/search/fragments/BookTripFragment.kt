@@ -7,6 +7,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentBookTripBinding
+import gr.fellow.fellow_traveller.domain.mappers.mapToUserBase
 import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.search.SearchTripActivity
 import gr.fellow.fellow_traveller.ui.search.SearchTripViewModel
@@ -82,11 +83,11 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
 
                 book.setOnClickListener {
 
-                    var list: ArrayList<String> = ArrayList()
+                    val list: ArrayList<String> = ArrayList()
                     currentTrip.passengers.forEach {
                         list.add(it.user.id)
                     }
-                    viewModel.bookTrip(currentTrip.id, binding.seats.currentNum, havePet, (activity as SearchTripActivity).localUser.id, list)
+                    viewModel.bookTrip(currentTrip.id, binding.seats.currentNum, havePet, (activity as SearchTripActivity).localUser.mapToUserBase(), list)
                 }
             }
         }
