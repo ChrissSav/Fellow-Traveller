@@ -85,22 +85,22 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
 
 
-        viewModel.load.observe(this, Observer {
-            hideKeyboard()
-            if (it)
+        viewModel.load.observe(this, {
+            if (it) {
+                hideKeyboard()
                 binding.genericLoader.progressLoad.visibility = View.VISIBLE
-            else
+            } else
                 binding.genericLoader.progressLoad.visibility = View.INVISIBLE
         })
 
-        viewModel.error.observe(this, Observer {
+        viewModel.error.observe(this, {
             if (it.internal) {
                 createAlerter(getString(it.messageId))
             } else
                 createAlerter(it.message)
         })
 
-        viewModel.logout.observe(this, Observer {
+        viewModel.logout.observe(this, {
             if (it) {
                 cancelJob()
                 startActivityClearStack(MainActivity::class)
@@ -109,7 +109,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
 
 
-        viewModelSecond.notificationCount.observe(this, Observer {
+        viewModelSecond.notificationCount.observe(this, {
             if (it > 0)
                 viewModel.loadNotifications(true)
             setUpNotifications(it)
