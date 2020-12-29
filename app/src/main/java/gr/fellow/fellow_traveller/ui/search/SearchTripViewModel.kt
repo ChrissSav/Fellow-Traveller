@@ -11,9 +11,11 @@ import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.usecase.firabase.CreateOrEnterConversationFirebaseUseCase
+import gr.fellow.fellow_traveller.usecase.firabase.SendMessageFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.trips.BookTripUseCase
 import gr.fellow.fellow_traveller.usecase.trips.SearchTripsUseCase
 import kotlinx.coroutines.delay
+import java.util.*
 
 
 class SearchTripViewModel
@@ -21,9 +23,11 @@ class SearchTripViewModel
 constructor(
     private val searchTripsUseCase: SearchTripsUseCase,
     private val bookTripUseCase: BookTripUseCase,
-    private val createOrEnterConversationFirebaseUseCase: CreateOrEnterConversationFirebaseUseCase
+    private val createOrEnterConversationFirebaseUseCase: CreateOrEnterConversationFirebaseUseCase,
+    //Messages
+    private val sendMessageFirebaseUseCase: SendMessageFirebaseUseCase,
 
-) : BaseViewModel() {
+    ) : BaseViewModel() {
 
     private var sortOption: SortAnswerType = SortAnswerType.Relevant
 
@@ -92,7 +96,7 @@ constructor(
     }
 
 
-    fun bookTrip(tripId: String, seats: Int, pet: Boolean, userId: String) {
+    fun bookTrip(tripId: String, seats: Int, pet: Boolean, userId: String, list: ArrayList<String>) {
         launch(true) {
             try {
                 val response = bookTripUseCase(tripId, seats, pet)
@@ -101,6 +105,9 @@ constructor(
                     userId, tripId, _tripBook.value?.id.toString(), _tripBook.value?.destFrom?.title.toString() + " - "
                             + _tripBook.value?.destTo?.title.toString(), _tripBook.value?.picture.toString()
                 )
+
+
+                sendMessageFirebaseUseCase.invoke(userId, tripId, "default", "", 1, list)
             } catch (e: Exception) {
                 handleErrorBook(tripId)
                 throw e
