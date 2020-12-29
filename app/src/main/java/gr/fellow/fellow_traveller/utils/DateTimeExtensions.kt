@@ -1,7 +1,9 @@
 package gr.fellow.fellow_traveller.utils
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.text.format.DateFormat
+import gr.fellow.fellow_traveller.R
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -51,4 +53,37 @@ fun convertTimestampToFormat(time: Long, format: String): String {
     else
         Date(time)
     return SimpleDateFormat(format).format(date)
+}
+
+//Set minutes ago
+fun getTimeTiDisplay(mTimestamp: Long, context: Context): String {
+    var timestamp = mTimestamp
+    if (timestamp.toString().length > 10)
+        timestamp /= 1000
+    val t = currentTimeStamp() - timestamp
+    if (t <= 3600) {
+        return if ((t / 60).toInt() == 1)
+            context.getString(R.string.minute_ago)
+        //"${(t / 60).toInt()} λεπτό"
+        else
+            context.getString(R.string.minutes_ago, ((t / 60).toInt()).toString())
+        //"${(t / 60).toInt()} λεπτά"
+    } else if (t <= 3600 * 24)
+        return if ((t / 3600).toInt() == 1)
+            context.getString(R.string.hour_ago)
+        //"${(t / 3600).toInt()} ώρα"
+        else
+            context.getString(R.string.hours_ago, ((t / 3600).toInt()).toString())
+    // "${(t / 3600).toInt()} ώρες"
+    else if ((t / (3600 * 24)) <= 7)
+        return if ((t / (3600 * 24)).toInt() == 1)
+            context.getString(R.string.day_ago)
+        //"${(t / (3600 * 24)).toInt()} μέρα"
+        else
+            context.getString(R.string.days_ago, ((t / (3600 * 24)).toInt()).toString())
+    else
+        return getDateFromTimestamp(timestamp, "d MMM yyyy")
+    //  "${(t / (3600 * 24)).toInt()} μέρες"
+
+    //return test
 }

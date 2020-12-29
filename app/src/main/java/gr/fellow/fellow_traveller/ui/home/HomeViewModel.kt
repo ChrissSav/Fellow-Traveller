@@ -9,6 +9,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.domain.car.Car
+import gr.fellow.fellow_traveller.domain.chat.ChatMessage
 import gr.fellow.fellow_traveller.domain.notification.Notification
 import gr.fellow.fellow_traveller.domain.review.Review
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
@@ -61,9 +62,9 @@ constructor(
     private val getUserReviewsUseCase: GetUserReviewsUseCase,
 
     //Messages
-    private val sendMessageFirebaseUseCase: SendMessageFirebaseUseCase
+    private val sendMessageFirebaseUseCase: SendMessageFirebaseUseCase,
 
-) : BaseViewModel() {
+    ) : BaseViewModel() {
 
     val reloadConnection = MutableLiveData<Boolean>()
 
@@ -507,12 +508,18 @@ constructor(
     val conversationList: LiveData<MutableList<Conversation>> = _conversationList
 
     fun loadConversations(list: MutableList<Conversation>) {
-
         launch {
             _conversationList.value = list
-
         }
     }
+
+    private val _messagesList = SingleLiveEvent<ChatMessage>()
+    val messagesList: LiveData<ChatMessage> = _messagesList
+
+    fun loadChatMessage(chatMessage: ChatMessage) {
+        _messagesList.value = chatMessage
+    }
+
 }
 
 

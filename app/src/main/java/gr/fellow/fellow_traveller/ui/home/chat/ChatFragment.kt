@@ -28,34 +28,38 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     lateinit var firebaseDatabase: FirebaseDatabase
 
 
-    override fun getViewBinding(): FragmentChatBinding = FragmentChatBinding.inflate(layoutInflater)
+    override fun getViewBinding(): FragmentChatBinding =
+        FragmentChatBinding.inflate(layoutInflater)
 
     override fun setUpObservers() {
 
+        viewModel.messagesList.observe(viewLifecycleOwner, {
+            messagesList.add(it)
+            (binding.chatRecyclerView.adapter as MessagesAdapter).notifyItemInserted(messagesList.size - 1)
+            binding.chatRecyclerView.scrollToPosition(messagesList.size - 1)
+        })
 
     }
 
     override fun setUpViews() {
-        binding.chatHeader.text = args.conversationItem.tripName
+        messagesList.clear()
 
+        binding.chatHeader.text = args.conversationItem.tripName
+        binding.chatRecyclerView.adapter = MessagesAdapter(messagesList, viewModel.user.value?.id.toString())
         binding.chatSendButton.isEnabled = false
+
         getAllParticipantsId(args.conversationItem.tripId)
 
-
-
-        messagesList.clear()
         readMessages(args.conversationItem.tripId)
 //        messagesList.add(Message("uyugfafkdgskjgk234kfdkf", "Καλημέραααα", "fsj'dghsdfgsgjlg.zsd", 1608218126, "John", "default"))
 
         //Parse elements in adapter and on click listener
 
 
-
-
         binding.chatSendButton.setOnClickListener {
             //MessageType: When 0: message, When 1: event
             viewModel.sendFirebaseMessage(binding.messageEditText.text.toString(), args.conversationItem.tripId, 0, participantsIdList)
-            binding.messageEditText.setText("")
+            binding.messageEditText.text = null
 
         }
 
@@ -69,7 +73,6 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 for (snapshot in dataSnapshot.children) {
                     val aId = snapshot.child("userId").getValue(String::class.java)!!
                     participantsIdList.add(aId)
-
                 }
                 binding.chatSendButton.isEnabled = true
             }
@@ -86,19 +89,13 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
                 Log.d(TAG, "onChildAdded:" + dataSnapshot.key!!)
 
-                val comment = dataSnapshot.getValue(ChatMessage::class.java)
-
-                if (comment != null) {
-                    messagesList.add(comment)
+                dataSnapshot.getValue(ChatMessage::class.java)?.let {
+                    viewModel.loadChatMessage(it)
                 }
-                //messagesList.sortByDescending { it.timestamp }
-                //(binding.chatRecyclerView.adapter as MessagesAdapter).submitList(messagesList)
-                binding.chatRecyclerView.adapter = MessagesAdapter(messagesList, viewModel.user.value?.id.toString())
 
             }
 
             override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
-                binding.chatRecyclerView.adapter?.notifyDataSetChanged()
             }
 
             override fun onChildRemoved(dataSnapshot: DataSnapshot) {
