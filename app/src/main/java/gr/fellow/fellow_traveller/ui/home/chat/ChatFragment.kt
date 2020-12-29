@@ -3,12 +3,14 @@ package gr.fellow.fellow_traveller.ui.home.chat
 import android.util.Log
 import androidx.annotation.NonNull
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.database.*
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentChatBinding
 import gr.fellow.fellow_traveller.domain.chat.ChatMessage
+import gr.fellow.fellow_traveller.domain.user.UserInfo
 import gr.fellow.fellow_traveller.service.NotificationJobService.Companion.TAG
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.MessagesAdapter
@@ -22,6 +24,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     private val viewModel: HomeViewModel by activityViewModels()
     private val messagesList = mutableListOf<ChatMessage>()
     private val participantsIdList: ArrayList<String> = ArrayList()
+
+    private var participantsInfo = mutableListOf<UserInfo>()
 
 
     @Inject
@@ -39,13 +43,18 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             binding.chatRecyclerView.scrollToPosition(messagesList.size - 1)
         })
 
+        viewModel.listOfParticipants.observe(viewLifecycleOwner, {
+            participantsInfo = it
+        })
+
     }
 
     override fun setUpViews() {
         messagesList.clear()
 
+
         binding.chatHeader.text = args.conversationItem.tripName
-        binding.chatRecyclerView.adapter = MessagesAdapter(messagesList, viewModel.user.value?.id.toString())
+        binding.chatRecyclerView.adapter = MessagesAdapter(messagesList, viewModel.user.value?.id.toString(), participantsInfo)
         binding.chatSendButton.isEnabled = false
 
         getAllParticipantsId(args.conversationItem.tripId)
@@ -54,7 +63,6 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 //        messagesList.add(Message("uyugfafkdgskjgk234kfdkf", "Καλημέραααα", "fsj'dghsdfgsgjlg.zsd", 1608218126, "John", "default"))
 
         //Parse elements in adapter and on click listener
-
 
         binding.chatSendButton.setOnClickListener {
             //MessageType: When 0: message, When 1: event
@@ -75,6 +83,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                     participantsIdList.add(aId)
                 }
                 binding.chatSendButton.isEnabled = true
+                viewModel.getParticipants(participantsIdList)
             }
 
             override fun onCancelled(@NonNull databaseError: DatabaseError) {}
@@ -83,7 +92,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
     private fun readMessages(tripId: String) {
         val reference = firebaseDatabase.getReference("Messages").child(tripId)
-        val messageQuery: Query = reference.limitToLast(20)
+        val messageQuery: Query = reference.limitToLast(100)
         val childEventListener = object : ChildEventListener {
 
             override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {

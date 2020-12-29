@@ -108,7 +108,7 @@ constructor(
                 )
 
 
-                sendMessageFirebaseUseCase.invoke(userBase.id, tripId, "default", userBase.firstName, 1, list)
+                sendMessageFirebaseUseCase.invoke(userBase.id, tripId, "", userBase.firstName, 1, list)
             } catch (e: Exception) {
                 handleErrorBook(tripId)
                 throw e

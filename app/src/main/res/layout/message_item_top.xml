@@ -23,7 +23,6 @@
         style="@style/paragraph_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tyler"
         app:layout_constraintStart_toStartOf="@id/message_section"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,7 +31,6 @@
         android:id="@+id/message_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="22:52"
         style="@style/paragraph_4"
         android:layout_marginEnd="@dimen/calendar_margin_16dp"
         app:layout_constraintBottom_toBottomOf="@id/sender_name"
@@ -62,7 +60,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:background="@drawable/message_shape_sended"
-            android:text="Καλημέρααα" />
+           />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

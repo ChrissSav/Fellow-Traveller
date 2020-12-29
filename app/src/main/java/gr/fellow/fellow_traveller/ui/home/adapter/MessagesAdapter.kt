@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.domain.chat.ChatMessage
+import gr.fellow.fellow_traveller.domain.user.UserInfo
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.extensions.setTextHtml
 import gr.fellow.fellow_traveller.utils.getTimeTiDisplay
@@ -15,6 +16,7 @@ import gr.fellow.fellow_traveller.utils.getTimeTiDisplay
 class MessagesAdapter(
     private val messagesList: MutableList<ChatMessage>,
     private val myId: String,
+    private val participantsInfo: MutableList<UserInfo> = mutableListOf<UserInfo>(),
 
     ) : RecyclerView.Adapter<MessagesAdapter.ViewHolder>() {
 
@@ -23,6 +25,8 @@ class MessagesAdapter(
     private val MESSAGE_ENTRY = 2
 
     private var viewTypeLayout = -1
+
+    private var flag: Boolean = true
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -54,8 +58,22 @@ class MessagesAdapter(
 
         //if viewType is MESSAGE_TOP load all the details
         if (viewTypeLayout == 0) {
-            holder.name.text = currentItem.senderName
-            holder.image.loadImageFromUrl(currentItem.senderImage)
+
+            //Search in our participants info
+            flag = true
+            participantsInfo.forEach {
+                if (currentItem.senderId == it.id) {
+                    holder.name.text = it.firstName
+                    holder.image.loadImageFromUrl(it.picture)
+                    flag = false
+                }
+            }
+            //if we don't find any info (etc the user deleted this trip) we display his details from the firebase message data
+            if (flag) {
+                holder.name.text = currentItem.senderName
+                holder.image.loadImageFromUrl(currentItem.senderImage)
+            }
+
             holder.date.text = getTimeTiDisplay(currentItem.timestamp, holder.date.context)
         }
 

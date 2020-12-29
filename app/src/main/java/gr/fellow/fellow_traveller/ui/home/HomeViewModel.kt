@@ -14,6 +14,7 @@ import gr.fellow.fellow_traveller.domain.notification.Notification
 import gr.fellow.fellow_traveller.domain.review.Review
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
+import gr.fellow.fellow_traveller.domain.user.UserInfo
 import gr.fellow.fellow_traveller.ui.extensions.addOrReplace
 import gr.fellow.fellow_traveller.ui.extensions.setNotificationRead
 import gr.fellow.fellow_traveller.ui.extensions.toMutableListSafe
@@ -28,6 +29,7 @@ import gr.fellow.fellow_traveller.usecase.notification.UpdateNotificationsUseCas
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
 import gr.fellow.fellow_traveller.usecase.review.GetUserReviewsUseCase
 import gr.fellow.fellow_traveller.usecase.trips.*
+import gr.fellow.fellow_traveller.usecase.user.GetUserInfoByIdUseCase
 import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -58,10 +60,12 @@ constructor(
     private val updateUserPictureUseCase: UpdateUserPictureUseCase,
     private val uploadPictureFirebaseUseCase: UploadPictureFirebaseUseCase,
 
+
     //Get Reviews
     private val getUserReviewsUseCase: GetUserReviewsUseCase,
 
     //Messages
+    private val getUserInfoByIdUseCase: GetUserInfoByIdUseCase,
     private val sendMessageFirebaseUseCase: SendMessageFirebaseUseCase,
 
     ) : BaseViewModel() {
@@ -518,6 +522,22 @@ constructor(
 
     fun loadChatMessage(chatMessage: ChatMessage) {
         _messagesList.value = chatMessage
+    }
+
+    private val _listOfParticipants = SingleLiveEvent<MutableList<UserInfo>>()
+    val listOfParticipants: LiveData<MutableList<UserInfo>> = _listOfParticipants
+
+    fun getParticipants(participantsIDs: MutableList<String>) {
+
+        launch {
+            val tempList = mutableListOf<UserInfo>()
+            participantsIDs.forEach {
+                tempList.add(getUserInfoByIdUseCase.invoke(it))
+            }
+
+            _listOfParticipants.value = tempList
+        }
+
     }
 
 }
