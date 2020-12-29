@@ -89,14 +89,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         binding.constraintLayoutSearch.setOnClickListener {
             if (accountCorrect)
-                startActivityForResult(SearchTripActivity::class, 2, bundleOf("userId" to viewModel.user.value?.id.toString()))
+                startActivityForResult(SearchTripActivity::class, 2, bundleOf("localUser" to viewModel.user.value!!))
             else
                 createAlerter(getString(R.string.complete_profile_warning))
         }
 
         binding.searchTrip.setOnClickListener {
             if (accountCorrect)
-                startActivityForResult(SearchTripActivity::class, 2, bundleOf("userId" to viewModel.user.value?.id.toString()))
+                startActivityForResult(SearchTripActivity::class, 2, bundleOf("localUser" to viewModel.user.value!!))
             else
                 createAlerter(getString(R.string.complete_profile_warning))
         }

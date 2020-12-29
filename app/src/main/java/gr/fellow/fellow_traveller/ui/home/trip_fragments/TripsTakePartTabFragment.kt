@@ -66,7 +66,7 @@ class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
 
         binding.searchButton.setOnClickListener {
             if (accountCorrect)
-                startActivityForResult(SearchTripActivity::class, 2, bundleOf("userId" to viewModel.user.value?.id.toString()))
+                startActivityForResult(SearchTripActivity::class, 2, bundleOf("localUser" to viewModel.user.value!!))
             else
                 createAlerter(getString(R.string.complete_profile_warning))
         }

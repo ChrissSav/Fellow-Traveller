@@ -9,6 +9,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivityViewModel
 import gr.fellow.fellow_traveller.databinding.ActivitySearchTripBinding
 import gr.fellow.fellow_traveller.domain.AnswerType
+import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.ui.dialogs.ExitCustomDialog
 
@@ -18,12 +19,12 @@ class SearchTripActivity : BaseActivityViewModel<ActivitySearchTripBinding, Sear
 
 
     private lateinit var nav: NavController
-    lateinit var userId: String
+    lateinit var localUser: LocalUser
 
     override fun handleIntent() {
         val placeFrom = intent.getParcelableExtra<PlaceModel>("placeFrom")
         val placeTo = intent.getParcelableExtra<PlaceModel>("placeTo")
-        userId = intent.getStringExtra("userId").toString()
+        localUser = intent.getParcelableExtra<LocalUser>("localUser")!!
 
         if (placeFrom != null && placeTo != null) {
             viewModel.setDestinationFrom(placeFrom)
