@@ -13,7 +13,8 @@ data class ChatMessage(
     val tripId: String = "",
     val timestamp: Long = 0,
     val senderName: String = "",
-    var senderImage: String = ""
+    var senderImage: String = "",
+    val messageType: Int = 0,
 ) : Parcelable
 
 

@@ -48,13 +48,14 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 //        messagesList.add(Message("uyugfafkdgskjgk234kfdkf", "Καλημέραααα", "fsj'dghsdfgsgjlg.zsd", 1608218126, "John", "default"))
 
         //Parse elements in adapter and on click listener
-        binding.chatRecyclerView.adapter = MessagesAdapter()
+
 
 
 
         binding.chatSendButton.setOnClickListener {
             //MessageType: When 0: message, When 1: event
-            viewModel.sendFirebaseMessage(binding.writeEtChat.text.toString(), args.conversationItem.tripId, 0, participantsIdList)
+            viewModel.sendFirebaseMessage(binding.messageEditText.text.toString(), args.conversationItem.tripId, 0, participantsIdList)
+            binding.messageEditText.setText("")
 
         }
 
@@ -90,8 +91,9 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 if (comment != null) {
                     messagesList.add(comment)
                 }
-                messagesList.sortByDescending { it.timestamp }
-                (binding.chatRecyclerView.adapter as MessagesAdapter).submitList(messagesList)
+                //messagesList.sortByDescending { it.timestamp }
+                //(binding.chatRecyclerView.adapter as MessagesAdapter).submitList(messagesList)
+                binding.chatRecyclerView.adapter = MessagesAdapter(messagesList, viewModel.user.value?.id.toString())
 
             }
 
