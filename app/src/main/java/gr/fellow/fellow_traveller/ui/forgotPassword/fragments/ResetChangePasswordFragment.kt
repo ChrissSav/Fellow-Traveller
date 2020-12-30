@@ -20,7 +20,6 @@ class ResetChangePasswordFragment : BaseFragment<FragmentResetChangePasswordBind
 
     private val viewModel: ForgotPasswordViewModel by activityViewModels()
     private lateinit var passwordStrengthCalculator: PasswordStrengthCalculator
-    private var color: Int = R.color.weak
 
     override fun getViewBinding(): FragmentResetChangePasswordBinding =
         FragmentResetChangePasswordBinding.inflate(layoutInflater)
@@ -32,10 +31,6 @@ class ResetChangePasswordFragment : BaseFragment<FragmentResetChangePasswordBind
         viewModel.password.observe(viewLifecycleOwner, Observer {
             binding.password.text = it
             binding.passwordConfirm.text = it
-        })
-
-        passwordStrengthCalculator.strengthColor.observe(this, { strengthColor ->
-            color = strengthColor
         })
 
         passwordStrengthCalculator.lowerCase.observe(this, { value ->

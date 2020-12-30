@@ -290,6 +290,7 @@ fun TextView.setDrawableTint(color: Int) {
         if (it != null) {
             it.colorFilter = PorterDuffColorFilter(ContextCompat.getColor(this.context, color), PorterDuff.Mode.SRC_IN)
         }
+
     }
 }
 
@@ -379,8 +380,8 @@ fun View.visibleAnim() {
 
 fun displayPasswordSuggestions(value: Int, textView: TextView) {
     if (value == 1) {
-        textView.setTextColor(ContextCompat.getColor(textView.context, R.color.bulletproof))
-        textView.setDrawableTint(R.color.bulletproof)
+        textView.setTextColor(ContextCompat.getColor(textView.context, R.color.orange_new))
+        textView.setDrawableTint(R.color.orange_new)
     } else {
         textView.setTextColor(ContextCompat.getColor(textView.context, R.color.dark_gray_new))
         textView.setDrawableTint(R.color.dark_gray_new)

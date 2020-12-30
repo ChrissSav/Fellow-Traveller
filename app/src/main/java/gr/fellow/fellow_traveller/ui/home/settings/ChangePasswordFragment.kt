@@ -19,7 +19,6 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
 
     private val viewModel: HomeViewModel by activityViewModels()
     private lateinit var passwordStrengthCalculator: PasswordStrengthCalculator
-    private var color: Int = R.color.weak
 
 
     override fun getViewBinding(): FragmentChangePasswordBinding =
@@ -33,9 +32,6 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
             onBackPressed()
         })
 
-        passwordStrengthCalculator.strengthColor.observe(this, { strengthColor ->
-            color = strengthColor
-        })
 
         passwordStrengthCalculator.lowerCase.observe(this, { value ->
             displayPasswordSuggestions(value, binding.lowerCaseTxt)

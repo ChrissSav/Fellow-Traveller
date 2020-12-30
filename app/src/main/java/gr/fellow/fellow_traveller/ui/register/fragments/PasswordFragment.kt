@@ -20,7 +20,6 @@ class PasswordFragment : BaseFragment<FragmentPasswordBinding>() {
     private val viewModel: RegisterViewModel by activityViewModels()
     private lateinit var passwordStrengthCalculator: PasswordStrengthCalculator
 
-    private var color: Int = R.color.weak
 
     override fun getViewBinding(): FragmentPasswordBinding =
         FragmentPasswordBinding.inflate(layoutInflater)
@@ -32,9 +31,6 @@ class PasswordFragment : BaseFragment<FragmentPasswordBinding>() {
         })
 
 
-        passwordStrengthCalculator.strengthColor.observe(this, { strengthColor ->
-            color = strengthColor
-        })
 
         passwordStrengthCalculator.lowerCase.observe(this, { value ->
             displayPasswordSuggestions(value, binding.lowerCaseTxt)
