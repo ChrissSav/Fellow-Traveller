@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.ui.home.chat
 
+import android.R
 import android.util.Log
 import androidx.annotation.NonNull
 import androidx.fragment.app.activityViewModels
@@ -14,6 +15,10 @@ import gr.fellow.fellow_traveller.domain.user.UserInfo
 import gr.fellow.fellow_traveller.service.NotificationJobService.Companion.TAG
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.MessagesAdapter
+import gr.fellow.fellow_traveller.ui.home.chat.chat_notifications.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import javax.inject.Inject
 
 
@@ -56,6 +61,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         binding.chatHeader.text = args.conversationItem.tripName
         binding.chatRecyclerView.adapter = MessagesAdapter(messagesList, viewModel.user.value?.id.toString(), participantsInfo)
         binding.chatSendButton.isEnabled = false
+
+        var apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService::class.java)
 
         getAllParticipantsId(args.conversationItem.tripId)
 
@@ -120,11 +127,39 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
     }
 
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        runBlocking{
-//            reference.removeValue().await()
-//        }
-//
-//    }
+
+    private fun sendNotification(receiver: String, username: String, message: String) {
+        val tokens = firebaseDatabase.getReference("Tokens")
+        val query = tokens.orderByKey().equalTo(receiver)
+
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (snapshot in dataSnapshot.children) {
+                    val token: Token? = snapshot.getValue(Token::class.java)
+                    val data = Data(args.conversationItem.tripId, R.drawable.ic_btn_speak_now, username + ": " + message, "Νέο μήνυμα", receiver)
+                    val sender = Sender(data, token.getToken())
+                    apiService.sendNotification(sender)
+                        .enqueue(object : Callback<MyResponse?>() {
+                            fun onResponse(call: Call<MyResponse?>?, response: Response<MyResponse?>) {
+                                if (response.code() === 200) {
+                                    if (response.body()?.success !== 1) {
+                                        //Toast.makeText(ChatConversationActivity.this, "Απέτυχε", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+
+                            fun onFailure(call: Call<MyResponse?>?, t: Throwable?) {}
+                        })
+                }
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+
+            }
+        }
+        query.addValueEventListener(postListener)
+    }
+
+
 }
