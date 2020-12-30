@@ -502,7 +502,13 @@ constructor(
     fun sendFirebaseMessage(textMessage: String, tripId: String, messageType: Int, participantsList: ArrayList<String>) {
 
         launchWithLiveData(true, loadMessageFirebase) {
-            sendMessageFirebaseUseCase.invoke(_user.value?.id.toString(), tripId, textMessage, _user.value?.firstName.toString(), messageType, participantsList)
+            sendMessageFirebaseUseCase.invoke(_user.value?.id.toString(),
+                tripId,
+                textMessage,
+                _user.value?.firstName.toString(),
+                messageType,
+                participantsList,
+                _user.value?.picture.toString())
         }
 
     }

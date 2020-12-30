@@ -8,7 +8,7 @@ import kotlin.collections.set
 class SendMessageFirebaseUseCase(
     private val dataSource: FellowDataSource
 ) {
-    suspend operator fun invoke(userId: String, tripId: String, textMessage: String, senderName: String, messageType: Int, participantsList: ArrayList<String>) {
+    suspend operator fun invoke(userId: String, tripId: String, textMessage: String, senderName: String, messageType: Int, participantsList: ArrayList<String>, senderImage: String) {
         val hashMap: HashMap<String, Any> = HashMap()
         hashMap["senderId"] = userId
         hashMap["tripId"] = tripId
@@ -16,7 +16,7 @@ class SendMessageFirebaseUseCase(
         //Timestamp take value from ServerFirabase in FirebaseRepositoryImpl
         hashMap["senderName"] = senderName
         hashMap["messageType"] = messageType
-
+        hashMap["senderImage"] = senderImage
 
         dataSource.sendFirebaseMessage(hashMap, participantsList)
     }
