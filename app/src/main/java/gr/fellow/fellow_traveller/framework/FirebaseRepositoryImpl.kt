@@ -10,7 +10,6 @@ import gr.fellow.fellow_traveller.utils.firebaseCall
 import kotlinx.coroutines.tasks.await
 import java.util.*
 import kotlin.collections.HashMap
-import kotlin.collections.forEach
 import kotlin.collections.set
 
 
@@ -39,6 +38,13 @@ class FirebaseRepositoryImpl(
             referenceMessage.push().setValue(hashMap).await()
 
             updateParticipantsStatus(hashMap, participantsList)
+        }
+    }
+
+    override suspend fun updateSeenStatus(hashMap: HashMap<String, Any>, tripId: String, userId: String) {
+        firebaseCall {
+            val referenceUpdate = firebaseDatabase.reference.child("UserTrips").child(userId).child(tripId)
+            referenceUpdate.updateChildren(hashMap).await()
         }
     }
 

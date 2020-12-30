@@ -52,7 +52,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     override fun setUpViews() {
         messagesList.clear()
 
-
+        viewModel.updateSeenStatus(args.conversationItem.tripId)
         binding.chatHeader.text = args.conversationItem.tripName
         binding.chatRecyclerView.adapter = MessagesAdapter(messagesList, viewModel.user.value?.id.toString(), participantsInfo)
         binding.chatSendButton.isEnabled = false

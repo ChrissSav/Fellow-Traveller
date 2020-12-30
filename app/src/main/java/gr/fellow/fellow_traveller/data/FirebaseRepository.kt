@@ -10,6 +10,8 @@ interface FirebaseRepository {
 
     suspend fun sendMessage(hashMap: HashMap<String, Any>, participantsList: ArrayList<String>)
 
+    suspend fun updateSeenStatus(hashMap: HashMap<String, Any>, tripId: String, userId: String)
+
     suspend fun createOrEnterConversation(myId: String, creatorId: String, tripId: String, tripName: String, picture: String)
 
 

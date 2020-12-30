@@ -22,6 +22,7 @@ import gr.fellow.fellow_traveller.ui.home.chat.models.Conversation
 import gr.fellow.fellow_traveller.usecase.auth.ChangePasswordUseCase
 import gr.fellow.fellow_traveller.usecase.auth.DeleteUserAuthLocalUseCase
 import gr.fellow.fellow_traveller.usecase.firabase.SendMessageFirebaseUseCase
+import gr.fellow.fellow_traveller.usecase.firabase.UpdateSeenStatusFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.firabase.UploadPictureFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.notification.GetNotificationsUseCase
@@ -67,6 +68,7 @@ constructor(
     //Messages
     private val getUserInfoByIdUseCase: GetUserInfoByIdUseCase,
     private val sendMessageFirebaseUseCase: SendMessageFirebaseUseCase,
+    private val updateSeenStatusFirebaseUseCase: UpdateSeenStatusFirebaseUseCase,
 
     ) : BaseViewModel() {
 
@@ -513,6 +515,13 @@ constructor(
 
     }
 
+
+    fun updateSeenStatus(tripId: String) {
+        launch {
+            updateSeenStatusFirebaseUseCase.invoke(tripId, _user.value?.id.toString())
+        }
+
+    }
 
     private val _conversationList = MutableLiveData<MutableList<Conversation>>()
     val conversationList: LiveData<MutableList<Conversation>> = _conversationList

@@ -9,6 +9,7 @@ import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.usecase.auth.*
 import gr.fellow.fellow_traveller.usecase.firabase.CreateOrEnterConversationFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.firabase.SendMessageFirebaseUseCase
+import gr.fellow.fellow_traveller.usecase.firabase.UpdateSeenStatusFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.firabase.UploadPictureFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.newtrip.GetGeometryFormPlaceUseCase
@@ -36,6 +37,13 @@ class UseCasesModule {
     fun provideSendFirebaseMessageUseCase(dataSource: FellowDataSource): SendMessageFirebaseUseCase {
         return SendMessageFirebaseUseCase(dataSource)
     }
+
+    @ActivityScoped
+    @Provides
+    fun provideUpdateSeenStatusFirebaseUseCase(dataSource: FellowDataSource): UpdateSeenStatusFirebaseUseCase {
+        return UpdateSeenStatusFirebaseUseCase(dataSource)
+    }
+
 
     @ActivityScoped
     @Provides

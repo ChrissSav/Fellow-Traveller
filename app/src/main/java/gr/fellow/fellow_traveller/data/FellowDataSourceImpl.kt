@@ -148,6 +148,9 @@ class FellowDataSourceImpl(
     override suspend fun sendFirebaseMessage(hashMap: HashMap<String, Any>, participantsList: ArrayList<String>) =
         firebaseRepository.sendMessage(hashMap, participantsList)
 
+    override suspend fun updateSeenStatus(hashMap: HashMap<String, Any>, tripId: String, userId: String) =
+        firebaseRepository.updateSeenStatus(hashMap, tripId, userId)
+
     override suspend fun createOrEnterConversation(myId: String, creatorId: String, tripId: String, tripName: String, picture: String) =
         firebaseRepository.createOrEnterConversation(myId, creatorId, tripId, tripName, picture)
 
