@@ -1,10 +1,14 @@
 package gr.fellow.fellow_traveller.ui.extensions
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.app.Activity
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.net.Uri
 import android.os.Bundle
@@ -15,6 +19,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -280,6 +285,14 @@ fun ImageButton.startAnimation() {
 }
 
 
+fun TextView.setDrawableTint(color: Int) {
+    compoundDrawablesRelative.forEach {
+        if (it != null) {
+            it.colorFilter = PorterDuffColorFilter(ContextCompat.getColor(this.context, color), PorterDuff.Mode.SRC_IN)
+        }
+    }
+}
+
 fun ShimmerFrameLayout.startShimmerWithVisibility() {
     visibility = View.VISIBLE
     startShimmer()
@@ -308,3 +321,68 @@ fun TextView.setTextHtml(text: String) {
 }
 
 
+/*
+
+*/
+/** Convenient method that chooses between View.visible() or View.invisible() methods *//*
+
+fun View.visibleOrInvisibleWithAnim(show: Boolean ) {
+    if (show) visible(true) else invisible(true)
+}
+
+*/
+/** Convenient method that chooses between View.visible() or View.gone() methods *//*
+
+fun View.visibleOrGoneWithAnim(show: Boolean = true) {
+    if (show) visible(true) else gone(true)
+}
+
+
+*/
+/** Set the View visibility to INVISIBLE and eventually animate view alpha till 0% *//*
+
+private fun View.invisible(animate: Boolean = true) {
+    hide(View.INVISIBLE, animate)
+}
+
+
+*/
+/** Set the View visibility to GONE and eventually animate view alpha till 0% *//*
+
+private fun View.gone(animate: Boolean = true) {
+    hide(View.GONE, animate)
+}
+*/
+
+
+fun View.goneAnim() {
+    animate().alpha(0f).setDuration(150).setListener(object : AnimatorListenerAdapter() {
+        override fun onAnimationEnd(animation: Animator) {
+            super.onAnimationEnd(animation)
+            visibility = View.GONE
+        }
+    })
+
+}
+
+fun View.visibleAnim() {
+
+    animate().alpha(1f).setDuration(150).setListener(object : AnimatorListenerAdapter() {
+        override fun onAnimationStart(animation: Animator) {
+            super.onAnimationStart(animation)
+            visibility = View.VISIBLE
+        }
+    })
+
+}
+
+
+fun displayPasswordSuggestions(value: Int, textView: TextView) {
+    if (value == 1) {
+        textView.setTextColor(ContextCompat.getColor(textView.context, R.color.bulletproof))
+        textView.setDrawableTint(R.color.bulletproof)
+    } else {
+        textView.setTextColor(ContextCompat.getColor(textView.context, R.color.dark_gray_new))
+        textView.setDrawableTint(R.color.dark_gray_new)
+    }
+}

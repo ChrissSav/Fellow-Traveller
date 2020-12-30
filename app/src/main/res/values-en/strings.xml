@@ -424,4 +424,10 @@
     <string name="messenger_profile_saved_successfully">Saved Successfully</string>
     <string name="add">Add</string>
 
+    <string name="lowercase_letters">Lowercase Letters</string>
+    <string name="uppercase_letters">Uppercase Letters</string>
+    <string name="digits">Digits</string>
+    <string name="special_characters">Special Characters</string>
+    <string name="password_error">Password should contain min of 6 characters. Optionally at least 1 lowercase, 1 uppercase and 1 numeric value</string>
+
 </resources>

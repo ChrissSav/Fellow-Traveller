@@ -64,4 +64,10 @@
     <color name="dark_gray_new">#B1B1B1</color>
     <color name="aqua_new">#427856</color>
     <color name="shimmer_color">@color/lightGrey_color</color>
+
+
+    <color name="weak">#FF4646</color>
+    <color name="medium">#ff8f00</color>
+    <color name="strong">#FCCA3F</color>
+    <color name="bulletproof">#00c853</color>
 </resources>

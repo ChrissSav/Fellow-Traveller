@@ -37,3 +37,11 @@ enum class BagsStatusType(val textInt: Int, val code: Int) {
     LIMITED(R.string.availability_limited, 1),
     LARGE(R.string.availability_great, 2)
 }
+
+
+enum class StrengthLevel {
+    WEAK,
+    MEDIUM,
+    STRONG,
+    BULLETPROOF
+}
