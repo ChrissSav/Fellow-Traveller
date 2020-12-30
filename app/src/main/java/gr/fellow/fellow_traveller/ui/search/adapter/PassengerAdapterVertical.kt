@@ -62,6 +62,8 @@ class PassengerAdapterVertical(
             // Display if passenger has a pet
             if (passenger.pet)
                 binding.pet.visibility = View.VISIBLE
+            else
+                binding.pet.visibility = View.GONE
 
 
         }
