@@ -37,7 +37,14 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
                 if (!user.aboutMe.isNullOrEmpty())
                     aboutMe.setText(user.aboutMe)
                 constraintLayout.visibility = View.VISIBLE
+
+
+                binding.userImage.setOnClickListener {
+                    openDialogPicture(user.picture)
+                }
+
                 binding.shimmerViewContainer.stopShimmerWithVisibility()
+
             }
 
         })

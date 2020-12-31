@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.viewbinding.ViewBinding
+import gr.fellow.fellow_traveller.ui.dialogs.DisplayUserPictureDialog
 
 
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {
@@ -37,12 +38,15 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         try {
             navController = Navigation.findNavController(view)
 
         } catch (e: Exception) {
         }
+
         setUpViews()
+
         setUpObservers()
     }
 
@@ -50,5 +54,11 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    fun openDialogPicture(url: String?) {
+        if (url != null && activity?.supportFragmentManager != null)
+            DisplayUserPictureDialog(requireActivity(), url).show(activity?.supportFragmentManager!!, "DisplayUserPictureDialog")
+    }
+
 
 }
