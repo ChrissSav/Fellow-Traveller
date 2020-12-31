@@ -26,15 +26,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/new_trip_margin_from_top"
-        app:label_f="@string/starting_point"
+        app:editable_f="false"
+        app:error_message_f="@string/ERROR_SELECT_DEST_FROM"
         app:hint_f="@string/placeholder_from"
         app:imeOptions_f="actionNext"
-        app:editable_f="false"
-        app:regex_f="@string/regex_min_1_chars"
-        app:error_message_f="@string/ERROR_SELECT_DEST_FROM"
+        app:label_f="@string/starting_point"
         app:layout_constraintEnd_toEndOf="@+id/AddLocationsFragment_textView"
         app:layout_constraintStart_toStartOf="@+id/AddLocationsFragment_textView"
-        app:layout_constraintTop_toBottomOf="@+id/AddLocationsFragment_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/AddLocationsFragment_textView"
+        app:regex_f="@string/regex_min_1_chars" />
 
 
     <gr.fellow.fellow_traveller.ui.views.FellowEditText
@@ -42,30 +42,30 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/new_trip_margin_from_top_between_editTexts"
-        app:label_f="@string/destination"
+        app:editable_f="false"
+        app:error_message_f="@string/ERROR_SELECT_DEST_TO"
         app:hint_f="@string/placeholder_to"
         app:imeOptions_f="actionDone"
-        app:error_message_f="@string/ERROR_SELECT_DEST_TO"
-        app:editable_f="false"
+        app:label_f="@string/destination"
         app:layout_constraintEnd_toEndOf="@+id/AddLocationsFragment_textView"
         app:layout_constraintHorizontal_bias="0.0"
-        app:regex_f="@string/regex_min_1_chars"
         app:layout_constraintStart_toStartOf="@+id/AddLocationsFragment_textView"
-        app:layout_constraintTop_toBottomOf="@+id/editText_from" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_from"
+        app:regex_f="@string/regex_min_1_chars" />
 
 
     <ImageButton
         android:id="@+id/ImageButton_next"
         android:layout_width="@dimen/new_trip_float_action_button_width_height"
         android:layout_height="@dimen/new_trip_float_action_button_width_height"
-        android:background="@drawable/new_trip_fab_ripple"
         android:layout_marginEnd="@dimen/new_trip_float_action_button_margin_right"
         android:layout_marginBottom="@dimen/new_trip_float_action_button_margin_bottom"
-        android:tint="@color/white"
-        android:rotation="180"
-        android:src="@drawable/ic_back_button_white"
-        android:scaleType="fitXY"
+        android:background="@drawable/new_trip_fab_ripple"
         android:padding="@dimen/new_trip_float_action_button_padding"
+        android:rotation="180"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_back_button_white"
+        android:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

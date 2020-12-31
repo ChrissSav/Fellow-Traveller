@@ -139,12 +139,10 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
             }
 
             searchButton.setOnClickListener {
-                if (viewModel.destinations.value?.first != null && viewModel.destinations.value?.second != null) {
+                if (destFromButton.isCorrect() and destToButton.isCorrect()) {
                     viewModel.updateFilter()
                     viewModel.getTrips()
                     motion.transitionToEnd()
-                } else {
-                    createAlerter(resources.getString(R.string.ERROR_FIELDS_REQUIRE))
                 }
             }
 
