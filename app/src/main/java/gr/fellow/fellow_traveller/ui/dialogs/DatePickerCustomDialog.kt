@@ -41,9 +41,7 @@ class DatePickerCustomDialog(
     }
 
     override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
-
-        val date =
-            java.lang.String.format(Locale.getDefault(), "%02d/%02d/%04d", day, (month + 1), year)
+        val date = java.lang.String.format(Locale.getDefault(), "%02d/%02d/%04d", day, (month + 1), year)
         listener(date)
     }
 

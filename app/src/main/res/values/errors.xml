@@ -55,7 +55,9 @@
     <string name="ERROR_TRIP_USER_NOT_PASSENGER">Δεν συμμετέχεις σε αυτό το ταξίδι.</string>
 
 
-    <string name="ERROR_SELECT_CAR">Παρακαλώ επέλεξε αυτοκίνητο.</string>
+    <string name="ERROR_SELECT_CAR">Παρακαλώ επέλεξε όχημα.</string>
+    <string name="ERROR_SELECT_DATE">Παρακαλώ επέλεξε ημερομηνία.</string>
+    <string name="ERROR_SELECT_TIME">Παρακαλώ επέλεξε ώρα.</string>
     <string name="ERROR_SELECT_DEST_FROM">Παρακαλώ επέλεξε σημείο αφετηρίας.</string>
     <string name="ERROR_SELECT_DEST_TO">Παρακαλώ επέλεξε σημείο προορισμού.</string>
     <string name="ERROR_SELECT_PET">Παρακαλώ καθόρισε αν το ταξίδι δέχεται κατοικίδια.</string>

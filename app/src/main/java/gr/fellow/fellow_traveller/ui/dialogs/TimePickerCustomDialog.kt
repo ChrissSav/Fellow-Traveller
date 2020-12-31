@@ -34,9 +34,7 @@ class TimePickerCustomDialog(
     }
 
     override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int) {
-        val time =
-            java.lang.String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute)
-
+        val time = java.lang.String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute)
         listener(time)
     }
 

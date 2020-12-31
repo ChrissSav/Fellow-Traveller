@@ -151,6 +151,8 @@
     <string name="ERROR_RATING_CANT_REGISTER_THE_RATE">You have already rated this user.</string>
     <string name="ERROR_TRIP_USER_NOT_PASSENGER">You haven\'t booked this trip.</string>
     <string name="ERROR_SELECT_CAR">Select a vehicle.</string>
+    <string name="ERROR_SELECT_DATE">Select a date.</string>
+    <string name="ERROR_SELECT_TIME">Select a time.</string>
     <string name="ERROR_SELECT_DEST_FROM">Enter a starting point.</string>
     <string name="ERROR_SELECT_DEST_TO">Enter a destination.</string>
     <string name="ERROR_SELECT_PET">Choose whether this trip allows pets.</string>

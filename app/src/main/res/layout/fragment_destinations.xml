@@ -30,6 +30,8 @@
         app:hint_f="@string/placeholder_from"
         app:imeOptions_f="actionNext"
         app:editable_f="false"
+        app:regex_f="@string/regex_min_1_chars"
+        app:error_message_f="@string/ERROR_SELECT_DEST_FROM"
         app:layout_constraintEnd_toEndOf="@+id/AddLocationsFragment_textView"
         app:layout_constraintStart_toStartOf="@+id/AddLocationsFragment_textView"
         app:layout_constraintTop_toBottomOf="@+id/AddLocationsFragment_textView" />
@@ -43,9 +45,11 @@
         app:label_f="@string/destination"
         app:hint_f="@string/placeholder_to"
         app:imeOptions_f="actionDone"
+        app:error_message_f="@string/ERROR_SELECT_DEST_TO"
         app:editable_f="false"
         app:layout_constraintEnd_toEndOf="@+id/AddLocationsFragment_textView"
         app:layout_constraintHorizontal_bias="0.0"
+        app:regex_f="@string/regex_min_1_chars"
         app:layout_constraintStart_toStartOf="@+id/AddLocationsFragment_textView"
         app:layout_constraintTop_toBottomOf="@+id/editText_from" />
 

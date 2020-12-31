@@ -27,6 +27,8 @@
         app:hint_f="@string/date"
         app:imeOptions_f="actionNext"
         app:editable_f="false"
+        app:regex_f="@string/regex_min_1_chars"
+        app:error_message_f="@string/ERROR_SELECT_DATE"
         app:layout_constraintEnd_toEndOf="@+id/AddDateTimeFragment_textView"
         app:layout_constraintStart_toStartOf="@+id/AddDateTimeFragment_textView"
         app:layout_constraintTop_toBottomOf="@+id/AddDateTimeFragment_textView" />
@@ -40,6 +42,8 @@
         app:hint_f="@string/time"
         app:imeOptions_f="actionNext"
         app:editable_f="false"
+        app:regex_f="@string/regex_min_1_chars"
+        app:error_message_f="@string/ERROR_SELECT_TIME"
         app:layout_constraintEnd_toEndOf="@+id/fellowTextInput_date"
         app:layout_constraintStart_toStartOf="@+id/fellowTextInput_date"
         app:layout_constraintTop_toBottomOf="@+id/fellowTextInput_date" />
