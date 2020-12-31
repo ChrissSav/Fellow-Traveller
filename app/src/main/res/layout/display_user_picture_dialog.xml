@@ -5,13 +5,14 @@
     android:layout_height="match_parent">
 
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:minHeight="300dp"
         android:minWidth="300dp"
+        app:shapeAppearanceOverlay="@style/RoundedSquare"
         android:layout_marginStart="64dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="64dp"
