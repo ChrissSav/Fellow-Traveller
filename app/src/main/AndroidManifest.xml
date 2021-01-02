@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="gr.fellow.fellow_traveller">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,8 +17,10 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_logo"
         android:label="@string/app_name"
+        android:resizeableActivity="false"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:targetApi="n">
         <activity android:name=".ui.home.messenger.MessengerLinkActivity" />
         <activity android:name=".ui.user.UserProfileDetailsActivity" />
         <activity android:name=".ui.search.SearchFilterActivity" />
@@ -29,9 +32,7 @@
             android:name=".ui.auth.VerifyAccountActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
-            <intent-filter
-                android:autoVerify="true"
-                android:label="@string/app_name">
+            <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
