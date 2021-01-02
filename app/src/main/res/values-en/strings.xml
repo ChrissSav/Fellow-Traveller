@@ -301,6 +301,7 @@
     <string name="sign_up">Sign Up</string>
     <string name="leave_a_message_for_co_travellers">Leave a message to your passengers.</string>
     <string name="message_place_holder">Message (optional)</string>
+    <string name="conversation">Conversation</string>
     <string name="write_something">Write something …</string>
     <string name="messenger_help_guide">Messenger Help Guide</string>
     <string name="messenger_description">You can use Messenger to contact the trip organizer and answer any potential questions regarding the trip.</string>

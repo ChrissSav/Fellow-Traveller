@@ -15,6 +15,7 @@ import gr.fellow.fellow_traveller.domain.TripStatus
 import gr.fellow.fellow_traveller.domain.mappers.mapToUserBase
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.UserBase
+import gr.fellow.fellow_traveller.ui.dialogs.ExitCustomDialog
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.ConfirmBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
@@ -131,6 +132,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
                     activity?.openMessenger(trip.creatorUser.messengerLink)
                 }
 
+
             }
 
         })
@@ -168,13 +170,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
             onBackPressed()
         }
 
-        binding.moreInfoLayout.exitButton.setOnClickListener {
-            confirmBottomSheetDialog = ConfirmBottomSheetDialog(
-                if (args.creator) getString(R.string.delete_trip_question) else getString(R.string.leave_trip_question),
-                this@TripInvolvedDetailsFragment::onConfirmItemClickListener, 1
-            )
-            confirmBottomSheetDialog.show(childFragmentManager, "confirmBottomSheetDialog")
-        }
+
 
 
         binding.moreInfo.setOnClickListener {
@@ -185,13 +181,31 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
 
     private fun secondLayout(trip: TripInvolved) {
-        binding.moreInfoLayout.driverImage.loadImageFromUrl(trip.creatorUser.picture)
-        binding.moreInfoLayout.driverName.text = trip.creatorUser.firstName
-        binding.moreInfoLayout.passengers.adapter = PassengerAdapterVertical(trip.passengers, this@TripInvolvedDetailsFragment::onPassengerListener)
 
-        binding.moreInfoLayout.constraintLayoutDriver.setOnClickListener {
-            onPassengerListener(trip.creatorUser.mapToUserBase())
+        with(binding.moreInfoLayout) {
+            driverImage.loadImageFromUrl(trip.creatorUser.picture)
+            driverName.text = trip.creatorUser.firstName
+            passengers.adapter = PassengerAdapterVertical(trip.passengers, this@TripInvolvedDetailsFragment::onPassengerListener)
+
+            constraintLayoutDriver.setOnClickListener {
+                onPassengerListener(trip.creatorUser.mapToUserBase())
+            }
+
+            conversationButton.setOnClickListener {
+                findNavController()?.navigateWithFade(R.id.destination_messenger)
+            }
+
+            exitButton.setOnClickListener {
+                ExitCustomDialog(
+                    requireActivity(), this@TripInvolvedDetailsFragment::onConfirmItemClickListener,
+                    if (args.creator) getString(R.string.delete_trip_question) else getString(R.string.leave_trip_question),
+                    1
+                ).show(childFragmentManager, "exitCustomDialog")
+            }
+
         }
+
+
     }
 
     private fun onPassengerListener(user: UserBase) {
