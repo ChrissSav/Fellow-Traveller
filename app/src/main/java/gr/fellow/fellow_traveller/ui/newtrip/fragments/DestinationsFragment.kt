@@ -3,7 +3,6 @@ package gr.fellow.fellow_traveller.ui.newtrip.fragments
 import android.app.Activity
 import android.content.Intent
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
@@ -25,41 +24,35 @@ class DestinationsFragment : BaseFragment<FragmentDestinationsBinding>() {
 
 
     override fun setUpObservers() {
-        viewModel.destinationFrom.observe(viewLifecycleOwner, Observer {
+        viewModel.destinationFrom.observe(viewLifecycleOwner, {
             binding.editTextFrom.text = it.title
         })
 
-        viewModel.destinationTo.observe(viewLifecycleOwner, Observer {
+        viewModel.destinationTo.observe(viewLifecycleOwner, {
             binding.editTextTo.text = it.title
         })
     }
 
     override fun setUpViews() {
-        binding.editTextFrom.addOnClickListener {
-            startActivityForResultWithFade(SelectLocationActivity::class, 1)
-        }
 
-        binding.editTextTo.addOnClickListener {
-            startActivityForResultWithFade(SelectLocationActivity::class, 2)
-        }
+        with(binding) {
 
-        binding.ImageButtonNext.setOnClickListener {
+            editTextFrom.addOnClickListener {
+                startActivityForResultWithFade(SelectLocationActivity::class, 1)
+            }
 
-            when {
-                viewModel.destinationFrom.value == null -> {
-                    viewModel.setErrorMessage(R.string.ERROR_SELECT_DEST_FROM)
-                }
-                viewModel.destinationTo.value == null -> {
-                    viewModel.setErrorMessage(R.string.ERROR_SELECT_DEST_TO)
-                }
-                else -> {
+            editTextTo.addOnClickListener {
+                startActivityForResultWithFade(SelectLocationActivity::class, 2)
+            }
+
+            ImageButtonNext.setOnClickListener {
+                if (editTextFrom.isCorrect() and editTextTo.isCorrect())
                     findNavController()?.navigate(R.id.action_destinationsFragment_to_dateTimeFragment)
-                }
+
             }
 
         }
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

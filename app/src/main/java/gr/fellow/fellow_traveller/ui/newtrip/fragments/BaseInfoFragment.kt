@@ -3,7 +3,6 @@ package gr.fellow.fellow_traveller.ui.newtrip.fragments
 import android.app.Activity
 import android.content.Intent
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentBaseInfoBinding
@@ -32,23 +31,23 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
 
     override fun setUpObservers() {
         with(viewModel) {
-            car.observe(viewLifecycleOwner, Observer {
+            car.observe(viewLifecycleOwner, {
                 binding.carEdiText.setText(it.fullInfo)
             })
 
-            seats.observe(viewLifecycleOwner, Observer {
+            seats.observe(viewLifecycleOwner, {
                 binding.seatsPickButton.currentNum = it
             })
 
-            bags.observe(viewLifecycleOwner, Observer {
+            bags.observe(viewLifecycleOwner, {
                 binding.bagsPickButton.setText(it.textInt)
             })
 
-            pet.observe(viewLifecycleOwner, Observer {
+            pet.observe(viewLifecycleOwner, {
                 binding.pet.isChecked = it
             })
 
-            carList.observe(viewLifecycleOwner, Observer {
+            carList.observe(viewLifecycleOwner, {
                 this@BaseInfoFragment.carList.clear()
                 this@BaseInfoFragment.carList.addAll(it)
             })
@@ -110,7 +109,6 @@ class BaseInfoFragment : BaseFragment<FragmentBaseInfoBinding>() {
     private fun onBagsItemClickListener(bagsStatusType: BagsStatusType) {
         viewModel.setBags(bagsStatusType)
     }
-
 
 
     private fun onCarItemClickListener(car: Car?) {

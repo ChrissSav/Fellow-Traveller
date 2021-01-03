@@ -18,6 +18,8 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FellowEditTextBinding
 import gr.fellow.fellow_traveller.ui.extensions.getLength
 import gr.fellow.fellow_traveller.ui.extensions.getString
+import gr.fellow.fellow_traveller.ui.extensions.goneAnim
+import gr.fellow.fellow_traveller.ui.extensions.visibleAnim
 import gr.fellow.fellow_traveller.utils.isValidEmail
 import gr.fellow.fellow_traveller.utils.isValidRegex
 
@@ -38,6 +40,14 @@ class FellowEditText(context: Context, attrs: AttributeSet) : ConstraintLayout(c
     private var correct = false
     private var passwordIsHide = false
     private var checkText = false
+
+
+    fun setError(error: String) {
+        binding.error.text = error
+        binding.error.visibleAnim()
+    }
+
+    var fellowEditTextActionListener: FellowEditTextActionListener? = null
 
     var text: String? = null
         get() = binding.editText.text.getString()
@@ -116,6 +126,7 @@ class FellowEditText(context: Context, attrs: AttributeSet) : ConstraintLayout(c
             }
 
             override fun afterTextChanged(editable: Editable?) {
+                fellowEditTextActionListener?.onTextChange(editable)
                 if (checkText)
                     checkText()
             }
@@ -157,6 +168,8 @@ class FellowEditText(context: Context, attrs: AttributeSet) : ConstraintLayout(c
             passwordIsHide = !passwordIsHide
         }
 
+        binding.error.text = errorMessage
+
 
     }
 
@@ -166,20 +179,21 @@ class FellowEditText(context: Context, attrs: AttributeSet) : ConstraintLayout(c
             if (inputType == InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS) {
                 if (!isValidEmail(text)) {
                     Log.i("FellowEditText", "1")
-                    binding.error.text = errorMessage
+                    binding.error.visibleAnim()
                     correct = false
                 } else {
                     correct = true
-                    binding.error.text = null
-
+                    binding.error.goneAnim()
                 }
             } else if (!isValidRegex(text, regex)) {
                 Log.i("FellowEditText", "2")
                 binding.error.text = errorMessage
+                binding.error.visibleAnim()
                 correct = false
             } else {
+                Log.i("FellowEditText", "3")
                 correct = true
-                binding.error.text = null
+                binding.error.goneAnim()
             }
     }
 
@@ -194,6 +208,10 @@ class FellowEditText(context: Context, attrs: AttributeSet) : ConstraintLayout(c
     }
 
 
+}
+
+interface FellowEditTextActionListener {
+    fun onTextChange(value: Editable?)
 }
 
 

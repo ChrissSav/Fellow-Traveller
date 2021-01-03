@@ -49,17 +49,19 @@
     <gr.fellow.fellow_traveller.ui.views.FellowEditText
         android:id="@+id/destFrom_button"
         android:layout_width="0dp"
-        android:layout_height="58dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
         android:layout_marginEnd="20dp"
         app:editable_f="false"
-        app:label_f="@string/from"
+        app:error_message_f="@string/ERROR_SELECT_DEST_FROM"
         app:hint_f="@string/placeholder_from"
         app:imeOptions_f="actionDone"
+        app:label_f="@string/from"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/back_button"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:regex_f="@string/regex_min_1_chars" />
 
 
     <TextView
@@ -78,16 +80,18 @@
     <gr.fellow.fellow_traveller.ui.views.FellowEditText
         android:id="@+id/destTo_button"
         android:layout_width="0dp"
-        android:layout_height="58dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         app:editable_f="false"
-        app:label_f="@string/to"
+        app:error_message_f="@string/ERROR_SELECT_DEST_TO"
         app:hint_f="@string/placeholder_to"
         app:imeOptions_f="actionDone"
+        app:label_f="@string/to"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/back_button"
-        app:layout_constraintTop_toBottomOf="@+id/swap" />
+        app:layout_constraintTop_toBottomOf="@+id/swap"
+        app:regex_f="@string/regex_min_1_chars" />
 
 
     <Button
@@ -98,9 +102,9 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="42dp"
         android:background="@drawable/button_background_orange_16dp"
+        android:stateListAnimator="@null"
         android:text="@string/search"
         android:textAllCaps="false"
-        android:stateListAnimator="@null"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -148,18 +152,18 @@
 
         <TextView
             android:id="@+id/sort_button"
+            style="@style/paragraph_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/paragraph_2"
             android:layout_marginEnd="20dp"
             android:drawablePadding="10dp"
             android:gravity="center"
             android:text="@string/most_relevant"
             android:visibility="gone"
+            app:drawableEndCompat="@drawable/ic_sort"
             app:layout_constraintBottom_toBottomOf="@id/results_label"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/results_label"
-            app:drawableEndCompat="@drawable/ic_sort" />
+            app:layout_constraintTop_toTopOf="@id/results_label" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -167,12 +171,12 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="32dp"
+            android:layoutAnimation="@anim/layout_animation"
             android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layoutAnimation="@anim/layout_animation"
             app:layout_constraintTop_toBottomOf="@id/results_label"
             tools:listitem="@layout/search_result_item" />
 

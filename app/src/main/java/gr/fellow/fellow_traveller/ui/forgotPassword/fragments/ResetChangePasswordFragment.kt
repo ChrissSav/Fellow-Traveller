@@ -6,11 +6,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentResetChangePasswordBinding
-import gr.fellow.fellow_traveller.ui.extensions.createAlerter
+import gr.fellow.fellow_traveller.ui.extensions.displayPasswordSuggestions
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
 import gr.fellow.fellow_traveller.ui.forgotPassword.ForgotPasswordViewModel
+import gr.fellow.fellow_traveller.utils.PasswordStrengthCalculator
 
 
 @AndroidEntryPoint
@@ -18,7 +19,7 @@ class ResetChangePasswordFragment : BaseFragment<FragmentResetChangePasswordBind
 
 
     private val viewModel: ForgotPasswordViewModel by activityViewModels()
-
+    private lateinit var passwordStrengthCalculator: PasswordStrengthCalculator
 
     override fun getViewBinding(): FragmentResetChangePasswordBinding =
         FragmentResetChangePasswordBinding.inflate(layoutInflater)
@@ -30,6 +31,19 @@ class ResetChangePasswordFragment : BaseFragment<FragmentResetChangePasswordBind
         viewModel.password.observe(viewLifecycleOwner, Observer {
             binding.password.text = it
             binding.passwordConfirm.text = it
+        })
+
+        passwordStrengthCalculator.lowerCase.observe(this, { value ->
+            displayPasswordSuggestions(value, binding.lowerCaseTxt)
+        })
+        passwordStrengthCalculator.upperCase.observe(this, { value ->
+            displayPasswordSuggestions(value, binding.upperCaseTxt)
+        })
+        passwordStrengthCalculator.digit.observe(this, { value ->
+            displayPasswordSuggestions(value, binding.digitTxt)
+        })
+        passwordStrengthCalculator.specialChar.observe(this, { value ->
+            displayPasswordSuggestions(value, binding.specialCharTxt)
         })
     }
 
@@ -43,14 +57,14 @@ class ResetChangePasswordFragment : BaseFragment<FragmentResetChangePasswordBind
         binding.buttonNext.setOnClickListener {
 
             hideKeyboard()
-            if (binding.password.isCorrect() && binding.passwordConfirm.isCorrect()) {
+            if (binding.password.isCorrect() and binding.passwordConfirm.isCorrect()) {
                 val pass = binding.password.text.toString()
                 val passConfirm = binding.passwordConfirm.text.toString()
                 if (pass == passConfirm) {
                     viewModel.storePassword(pass)
                     findNavController()?.navigate(R.id.action_resetChangePasswordFragment_to_forgotPasswordNumberFragment)
                 } else {
-                    createAlerter(resources.getString(R.string.ERROR_PASSWORD_DO_NOT_MATCH))
+                    binding.passwordConfirm.setError(resources.getString(R.string.ERROR_PASSWORD_DO_NOT_MATCH))
                 }
             }
         }

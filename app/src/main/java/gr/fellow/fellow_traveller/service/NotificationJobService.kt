@@ -31,11 +31,9 @@ class NotificationJobService : JobService() {
 
     companion object {
         const val TAG = "NotificationJobService"
-
     }
 
     private var jobCancelled = false
-
 
     @Inject
     lateinit var getNotificationsUseCase: GetNotificationsSocketUseCase
@@ -90,10 +88,7 @@ class NotificationJobService : JobService() {
         val notification: android.app.Notification = NotificationCompat.Builder(this, FellowApp.CHANNEL_TRIPS_ID)
             .setSmallIcon(R.drawable.ic_logo_white)
             .setContentTitle(getTitle(notificationItem))
-            .setStyle(
-                NotificationCompat.BigTextStyle()
-                    .bigText(getDescription(notificationItem))
-            )
+            .setStyle(NotificationCompat.BigTextStyle().bigText(getDescription(notificationItem)))
             .setAutoCancel(true)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setSound(alarmSound)
@@ -106,7 +101,7 @@ class NotificationJobService : JobService() {
             notification.contentIntent = pendingIntent
 
         } else if (notificationItem.type == NotificationStatus.PASSENGER_ENTER.code || notificationItem.type == NotificationStatus.PASSENGER_EXIT.code) {
-            val p = NavDeepLinkBuilder(this)
+            val pendingIntent = NavDeepLinkBuilder(this)
                 .setGraph(R.navigation.home_nav_graph)
                 .setComponentName(HomeActivity::class.java)
                 .setDestination(R.id.tripInvolvedDetailsSecondFragment)
@@ -120,7 +115,7 @@ class NotificationJobService : JobService() {
                     )
                 )
                 .createPendingIntent()
-            notification.contentIntent = p
+            notification.contentIntent = pendingIntent
         }
 
         notificationManager.notify(notificationItem.id.toInt(), notification)

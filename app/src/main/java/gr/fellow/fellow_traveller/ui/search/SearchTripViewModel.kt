@@ -9,14 +9,11 @@ import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.domain.SortAnswerType
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
-import gr.fellow.fellow_traveller.domain.user.UserBase
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.usecase.firabase.CreateOrEnterConversationFirebaseUseCase
-import gr.fellow.fellow_traveller.usecase.firabase.SendMessageFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.trips.BookTripUseCase
 import gr.fellow.fellow_traveller.usecase.trips.SearchTripsUseCase
 import kotlinx.coroutines.delay
-import java.util.*
 
 
 class SearchTripViewModel
@@ -24,11 +21,9 @@ class SearchTripViewModel
 constructor(
     private val searchTripsUseCase: SearchTripsUseCase,
     private val bookTripUseCase: BookTripUseCase,
-    private val createOrEnterConversationFirebaseUseCase: CreateOrEnterConversationFirebaseUseCase,
-    //Messages
-    private val sendMessageFirebaseUseCase: SendMessageFirebaseUseCase,
+    private val createOrEnterConversationFirebaseUseCase: CreateOrEnterConversationFirebaseUseCase
 
-    ) : BaseViewModel() {
+) : BaseViewModel() {
 
     private var sortOption: SortAnswerType = SortAnswerType.Relevant
 
@@ -97,18 +92,12 @@ constructor(
     }
 
 
-    fun bookTrip(tripId: String, seats: Int, pet: Boolean, userBase: UserBase, list: ArrayList<String>) {
+    fun bookTrip(tripId: String, seats: Int, pet: Boolean, userId: String) {
         launch(true) {
             try {
                 val response = bookTripUseCase(tripId, seats, pet)
+                createOrEnterConversationFirebaseUseCase.invoke("myid", response.creatorUser.id, response.id, "Δοκιμή")
                 _tripBook.value = response
-                createOrEnterConversationFirebaseUseCase.invoke(
-                    userBase.id, _tripBook.value?.creatorUser?.id.toString(), tripId, _tripBook.value?.destFrom?.title.toString() + " - "
-                            + _tripBook.value?.destTo?.title.toString(), _tripBook.value?.picture.toString()
-                )
-
-
-                sendMessageFirebaseUseCase.invoke(userBase.id, tripId, "", userBase.firstName, 1, list, "")
             } catch (e: Exception) {
                 handleErrorBook(tripId)
                 throw e

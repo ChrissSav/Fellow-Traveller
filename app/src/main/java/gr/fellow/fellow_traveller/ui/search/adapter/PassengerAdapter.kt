@@ -13,7 +13,7 @@ import gr.fellow.fellow_traveller.ui.extensions.toPx
 
 class PassengerAdapter(
     private val passengerList: MutableList<Passenger>,
-    private val listener: (UserBase) -> Unit
+    private val listener: (UserBase) -> Unit,
 ) : RecyclerView.Adapter<PassengerAdapter.ViewHolder>() {
 
 
@@ -73,6 +73,8 @@ class PassengerAdapter(
             // Display if passenger has a pet
             if (passenger.pet)
                 binding.pet.visibility = View.VISIBLE
+            else
+                binding.pet.visibility = View.GONE
 
 
         }

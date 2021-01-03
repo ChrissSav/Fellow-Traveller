@@ -64,4 +64,5 @@
     <color name="dark_gray_new">#B1B1B1</color>
     <color name="aqua_new">#427856</color>
     <color name="shimmer_color">@color/lightGrey_color</color>
+
 </resources>

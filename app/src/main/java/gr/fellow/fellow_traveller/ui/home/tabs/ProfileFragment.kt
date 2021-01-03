@@ -3,7 +3,6 @@ package gr.fellow.fellow_traveller.ui.home.tabs
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.core.os.bundleOf
@@ -68,6 +67,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 this@ProfileFragment.messengerLink = user.messengerLink
                 if (!user.aboutMe.isNullOrEmpty())
                     aboutMe.text = user.aboutMe
+
+                binding.userImage.setOnClickListener {
+                    openDialogPicture(user.picture)
+                }
             }
         })
         viewModel.cars.observe(viewLifecycleOwner, { car ->
@@ -82,12 +85,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     carItem.color.text = firstCar.color
 
                     binding.carSection.visibility = VISIBLE
-                    binding.addCarSection.visibility = View.GONE
+                    binding.addCarSection.visibility = GONE
 
                 } catch (e: NoSuchElementException) {
                     //binding.viewAll.visibility = View.GONE
                     binding.carSection.visibility = GONE
-                    binding.addCarSection.visibility = View.VISIBLE
+                    binding.addCarSection.visibility = VISIBLE
                 }
 
             }
@@ -116,6 +119,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         binding.addCarSection.setOnClickListener {
             startActivityForResult(AddCarActivity::class, 1, null)
         }
+
 
         //Second Frame
 
