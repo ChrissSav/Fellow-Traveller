@@ -12,6 +12,7 @@ import gr.fellow.fellow_traveller.domain.user.UserInfo
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.extensions.setTextHtml
 import gr.fellow.fellow_traveller.utils.getTimeTiDisplay
+import java.util.*
 
 class MessagesAdapter(
     private val messagesList: MutableList<ChatMessage>,
@@ -24,24 +25,24 @@ class MessagesAdapter(
     private val MESSAGE_MIDDLE = 1
     private val MESSAGE_ENTRY = 2
 
-    private var viewTypeLayout = -1
+    // private var viewTypeLayout = -1
 
     private var flag: Boolean = true
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         if (viewType == MESSAGE_TOP) {
-            viewTypeLayout = 0
+            // viewTypeLayout = 0
             val view = LayoutInflater.from(parent.context).inflate(R.layout.message_item_top, parent, false)
-            return ViewHolder(view)
+            return ViewHolder(view, 0)
         } else if (viewType == MESSAGE_MIDDLE) {
-            viewTypeLayout = 1
+            //viewTypeLayout = 1
             val view = LayoutInflater.from(parent.context).inflate(R.layout.message_item_middle, parent, false)
-            return ViewHolder(view)
+            return ViewHolder(view, 1)
         } else {
-            viewTypeLayout = 2
+            //viewTypeLayout = 2
             val view = LayoutInflater.from(parent.context).inflate(R.layout.message_item_entry, parent, false)
-            return ViewHolder(view)
+            return ViewHolder(view, 2)
         }
     }
 
@@ -49,47 +50,67 @@ class MessagesAdapter(
 
         val currentItem = messagesList[position]
 
-        holder.message.text = currentItem.text
 
-        if (currentItem.senderId == myId && currentItem.messageType == 0)
-            holder.message.setBackgroundResource(R.drawable.message_shape_sended)
-        else if (currentItem.senderId != myId && currentItem.messageType == 0)
-            holder.message.setBackgroundResource(R.drawable.message_shape_received)
 
+
+        if (currentItem.messageType == 0) {
+            if (currentItem.senderId == myId)
+                holder.message.setBackgroundResource(R.drawable.message_shape_sended)
+            else
+                holder.message.setBackgroundResource(R.drawable.message_shape_received)
+
+        } else {
+            holder.message.setBackgroundResource(R.drawable.message_shape_entry)
+        }
         //if viewType is MESSAGE_TOP load all the details
-        if (viewTypeLayout == 0) {
+        if (holder.viewTypeLayout == 0) {
+
+            holder.message.text = currentItem.text
 
             //Search in our participants info
-            flag = true
-            participantsInfo.forEach {
-                if (currentItem.senderId == it.id) {
-                    holder.name.text = it.firstName
-                    holder.image.loadImageFromUrl(it.picture)
-                    flag = false
+//            flag = true
+//            participantsInfo.forEach {
+//                if (currentItem.senderId == it.id) {
+//                    holder.name.text = it.firstName
+//                    holder.image.loadImageFromUrl(it.picture)
+//                    flag = false
+//                }
+//            }
+            try {
+                participantsInfo.first {
+                    it.id == currentItem.senderId
+                }.apply {
+                    holder.name.text = this.firstName
+                    holder.image.loadImageFromUrl(this.picture)
                 }
-            }
-            //if we don't find any info (etc the user deleted this trip) we display his details from the firebase message data
-            if (flag) {
+            } catch (e: NoSuchElementException) {
                 holder.name.text = currentItem.senderName
                 holder.image.loadImageFromUrl(currentItem.senderImage)
             }
 
+            //if we don't find any info (etc the user deleted this trip) we display his details from the firebase message data
+//            if (flag) {
+//                holder.name.text = currentItem.senderName
+//                holder.image.loadImageFromUrl(currentItem.senderImage)
+//            }
+
             holder.date.text = getTimeTiDisplay(currentItem.timestamp, holder.date.context)
-        }
-
-        if (viewTypeLayout == 2)
+        } else if (holder.viewTypeLayout == 2)
             holder.message.setTextHtml(holder.message.context.getString(R.string.conversation_passenger_entry, currentItem.senderName))
-
+        else {
+            holder.message.text = currentItem.text
+        }
 
     }
 
 
-
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View, aViewTypeLayout: Int) : RecyclerView.ViewHolder(view) {
         val message: TextView = view.findViewById(R.id.message)
         val name: TextView = view.findViewById(R.id.sender_name)
         val date: TextView = view.findViewById(R.id.message_time)
         val image: ImageView = view.findViewById(R.id.sender_image)
+
+        val viewTypeLayout = aViewTypeLayout
     }
 
     override fun getItemViewType(position: Int): Int {

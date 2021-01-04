@@ -21,6 +21,7 @@ import gr.fellow.fellow_traveller.ui.home.chat.chat_notifications.RetrofitInstan
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 const val TOPIC = "/topics/myTopic"
@@ -34,6 +35,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
     private var participantsInfo = mutableListOf<UserInfo>()
 
+    private lateinit var messageQuery: Query
+    private lateinit var messageChildEventListener: ChildEventListener
 
     @Inject
     lateinit var firebaseDatabase: FirebaseDatabase
@@ -52,7 +55,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
         viewModel.listOfParticipants.observe(viewLifecycleOwner, {
             participantsInfo = it
-            binding.chatRecyclerView.adapter = MessagesAdapter(messagesList, viewModel.user.value?.id.toString(), participantsInfo)
+            (binding.chatRecyclerView.adapter as MessagesAdapter).notifyDataSetChanged()
             readMessages(args.conversationItem.tripId)
         })
 
@@ -67,6 +70,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         binding.chatSendButton.isEnabled = false
 
         //ar apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService::class.java)
+
+        binding.chatRecyclerView.adapter = MessagesAdapter(messagesList, viewModel.user.value?.id.toString(), participantsInfo)
 
         getAllParticipantsId(args.conversationItem.tripId)
 
@@ -108,8 +113,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
     private fun readMessages(tripId: String) {
         val reference = firebaseDatabase.getReference("Messages").child(tripId)
-        val messageQuery: Query = reference.limitToLast(100)
-        val childEventListener = object : ChildEventListener {
+        messageQuery = reference.limitToLast(100)
+        messageChildEventListener = object : ChildEventListener {
 
             override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
                 Log.d(TAG, "onChildAdded:" + dataSnapshot.key!!)
@@ -119,6 +124,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 }
 
             }
+
             override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
             }
 
@@ -131,7 +137,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             override fun onCancelled(databaseError: DatabaseError) {
             }
         }
-        messageQuery.addChildEventListener(childEventListener)
+        messageQuery.addChildEventListener(messageChildEventListener)
 
     }
 
@@ -184,5 +190,16 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             }
         }
 
+
+    override fun onDestroy() {
+        if (this::messageQuery.isInitialized) {
+            runBlocking {
+                messageQuery.removeEventListener(messageChildEventListener)
+            }
+        }
+        super.onDestroy()
+
+
+    }
 
 }
