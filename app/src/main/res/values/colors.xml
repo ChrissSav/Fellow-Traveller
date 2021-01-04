@@ -63,6 +63,6 @@
     <color name="gray_new">#E4E4E4</color>
     <color name="dark_gray_new">#B1B1B1</color>
     <color name="aqua_new">#427856</color>
-    <color name="shimmer_color">@color/lightGrey_color</color>
+    <color name="shimmer_color">#EBEBEB</color>
 
 </resources>
