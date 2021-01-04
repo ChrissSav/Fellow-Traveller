@@ -3,7 +3,6 @@ package gr.fellow.fellow_traveller.ui.home.tabs
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
@@ -26,6 +25,7 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
     private val viewModel: HomeViewModel by activityViewModels()
     private var loadMoreTripsAsCreator = true
     private var loadMoreTripsAsPassenger = true
+    private val notifications = mutableListOf<Notification>()
 
     override fun getViewBinding(): FragmentNotificationsBinding =
         FragmentNotificationsBinding.inflate(layoutInflater)
@@ -33,20 +33,16 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
 
     override fun setUpObservers() {
 
-        viewModel.notifications.observe(viewLifecycleOwner, Observer { list ->
-            binding.swipeRefreshLayout.isRefreshing = false
-            //  (binding.recyclerView.adapter as NotificationAdapter).submitList(null)
-            (binding.recyclerView.adapter as NotificationAdapter).submitList(list.toMutableList())
-
-            //if there are no notifications to display, show specific message, else show notifications
-            if (list.isNullOrEmpty())
+        viewModel.notifications.observe(viewLifecycleOwner, {
+            notifications.addAll(it)
+            viewModel.readNotificationAll(it)
+            if (it.isNullOrEmpty())
                 binding.notificationsSection.visibility = View.VISIBLE
             else
                 binding.notificationsSection.visibility = View.GONE
-
         })
 
-        viewModel.loadNotifications.observe(viewLifecycleOwner, Observer {
+        viewModel.loadNotifications.observe(viewLifecycleOwner, {
             if (it) {
                 binding.notificationsSection.visibility = View.GONE
                 binding.shimmerViewContainer.startShimmerWithVisibility()
@@ -57,7 +53,7 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
 
         })
 
-        viewModel.notification.observe(viewLifecycleOwner, Observer {
+        viewModel.notification.observe(viewLifecycleOwner, {
             when (it.type) {
                 NotificationStatus.RATE.code -> {
                     activity?.startActivityWithFade(RateActivity::class, bundleOf("notification" to it))
@@ -75,16 +71,14 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
 
     override fun setUpViews() {
         viewModel.loadNotifications()
-        binding.recyclerView.adapter = NotificationAdapter(viewModel::readNotification)
+        binding.recyclerView.adapter = NotificationAdapter(notifications, viewModel::readNotification)
         binding.recyclerView.hasFixedSize()
 
         binding.swipeRefreshLayout.setOnRefreshListener {
-            (binding.recyclerView.adapter as NotificationAdapter).submitList(mutableListOf<Notification>())
+            notifications.clear()
             loadMoreTripsAsCreator = true
             loadMoreTripsAsPassenger = true
             viewModel.loadNotifications(true)
-            (binding.recyclerView.adapter as NotificationAdapter).submitList(null)
-
         }
     }
 

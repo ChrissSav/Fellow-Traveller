@@ -287,7 +287,6 @@ constructor(
     /** Notification ***/
 
     fun loadNotifications(more: Boolean = false) {
-
         launchWithLiveData(true, loadNotifications) {
             if (_notifications.value != null && !more) {
                 return@launchWithLiveData
@@ -311,6 +310,15 @@ constructor(
         }
     }
 
+    fun readNotificationAll(notificationMutableList: MutableList<Notification>) {
+        launch {
+            notificationMutableList.filter {
+                !it.isRead
+            }.forEach { notification ->
+                updateNotificationsUseCase(notification.id)
+            }
+        }
+    }
 
     fun readNotification(notification: Notification) {
         launchWithLiveData(false, loadNotifications) {
