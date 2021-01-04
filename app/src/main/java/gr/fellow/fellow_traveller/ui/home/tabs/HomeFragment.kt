@@ -120,7 +120,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             if (accountCorrect) {
                 val placeFrom = PlaceModel("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", getString(R.string.placeholder_city_thessaloniki), 40.634781.toFloat(), 22.943090.toFloat())
                 val placeTo = PlaceModel("ChIJ8UNwBh-9oRQR3Y1mdkU1Nic", getString(R.string.placeholder_city_athens), 37.97534.toFloat(), 23.736151.toFloat())
-                startActivityForResult(SearchTripActivity::class, 2, bundleOf("placeFrom" to placeFrom, "placeTo" to placeTo, "userId" to viewModel.user.value?.id.toString()))
+                startActivityForResult(SearchTripActivity::class, 2, bundleOf("placeFrom" to placeFrom, "placeTo" to placeTo, "localUser" to viewModel.user.value))
             } else
                 createAlerter(getString(R.string.complete_profile_warning))
         }
@@ -129,7 +129,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             if (accountCorrect) {
                 val placeFrom = PlaceModel("ChIJZ93-3qLpWxMRwJe54iy9AAQ", getString(R.string.placeholder_city_ioannina), 39.674530.toFloat(), 20.840210.toFloat())
                 val placeTo = PlaceModel("ChIJ8UNwBh-9oRQR3Y1mdkU1Nic", getString(R.string.placeholder_city_athens), 37.97534.toFloat(), 23.736151.toFloat())
-                startActivityForResult(SearchTripActivity::class, 2, bundleOf("placeFrom" to placeFrom, "placeTo" to placeTo, "userId" to viewModel.user.value?.id.toString()))
+                startActivityForResult(SearchTripActivity::class, 2, bundleOf("placeFrom" to placeFrom, "placeTo" to placeTo, "localUser" to viewModel.user.value))
             } else
                 createAlerter(getString(R.string.complete_profile_warning))
         }
@@ -138,7 +138,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             if (accountCorrect) {
                 val placeFrom = PlaceModel("ChIJZ93-3qLpWxMRwJe54iy9AAQ", getString(R.string.placeholder_city_ioannina), 39.674530.toFloat(), 20.840210.toFloat())
                 val placeTo = PlaceModel("ChIJLe0kpZk1XhMRoIy54iy9AAQ", getString(R.string.placeholder_city_patra), 38.246639.toFloat(), 21.734573.toFloat())
-                startActivityForResult(SearchTripActivity::class, 2, bundleOf("placeFrom" to placeFrom, "placeTo" to placeTo, "userId" to viewModel.user.value?.id.toString()))
+                startActivityForResult(SearchTripActivity::class, 2, bundleOf("placeFrom" to placeFrom, "placeTo" to placeTo, "localUser" to viewModel.user.value))
             } else
                 createAlerter(getString(R.string.complete_profile_warning))
 
@@ -148,7 +148,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             if (accountCorrect) {
                 val placeFrom = PlaceModel("ChIJAfxmkHK7rhQRbEdqRDfhZ_U", getString(R.string.placeholder_city_kavala), 40.937607.toFloat(), 24.412866.toFloat())
                 val placeTo = PlaceModel("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", getString(R.string.placeholder_city_thessaloniki), 40.634781.toFloat(), 22.943090.toFloat())
-                startActivityForResult(SearchTripActivity::class, 2, bundleOf("placeFrom" to placeFrom, "placeTo" to placeTo, "userId" to viewModel.user.value?.id.toString()))
+                startActivityForResult(SearchTripActivity::class, 2, bundleOf("placeFrom" to placeFrom, "placeTo" to placeTo, "localUser" to viewModel.user.value))
             } else
                 createAlerter(getString(R.string.complete_profile_warning))
         }
