@@ -52,6 +52,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
         viewModel.listOfParticipants.observe(viewLifecycleOwner, {
             participantsInfo = it
+            binding.chatRecyclerView.adapter = MessagesAdapter(messagesList, viewModel.user.value?.id.toString(), participantsInfo)
+            readMessages(args.conversationItem.tripId)
         })
 
     }
@@ -61,14 +63,14 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
         viewModel.updateSeenStatus(args.conversationItem.tripId)
         binding.chatHeader.text = args.conversationItem.tripName
-        binding.chatRecyclerView.adapter = MessagesAdapter(messagesList, viewModel.user.value?.id.toString(), participantsInfo)
+
         binding.chatSendButton.isEnabled = false
 
         //ar apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService::class.java)
 
         getAllParticipantsId(args.conversationItem.tripId)
 
-        readMessages(args.conversationItem.tripId)
+
 //        messagesList.add(Message("uyugfafkdgskjgk234kfdkf", "Καλημέραααα", "fsj'dghsdfgsgjlg.zsd", 1608218126, "John", "default"))
 
         //Parse elements in adapter and on click listener
@@ -117,7 +119,6 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 }
 
             }
-
             override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
             }
 
