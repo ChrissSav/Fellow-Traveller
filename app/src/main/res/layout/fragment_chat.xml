@@ -80,7 +80,8 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/message_item_top" />
+                tools:listitem="@layout/message_item_top"
+                android:paddingBottom="8dp" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -160,7 +161,7 @@
                 android:layout_marginEnd="15dp"
                 android:background="@null"
                 android:hint="@string/write_something"
-                android:inputType="textCapSentences"
+                android:inputType="textCapSentences|textMultiLine"
                 android:maxHeight="90dp"
                 android:minHeight="50dp"
                 android:paddingTop="10dp"
