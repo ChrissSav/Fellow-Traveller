@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.ui.home.settings
 
+import android.text.Editable
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
@@ -11,6 +12,7 @@ import gr.fellow.fellow_traveller.ui.extensions.displayPasswordSuggestions
 import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
+import gr.fellow.fellow_traveller.ui.views.FellowEditTextActionListener
 import gr.fellow.fellow_traveller.utils.PasswordStrengthCalculator
 
 
@@ -50,8 +52,16 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
 
     override fun setUpViews() {
 
+        passwordStrengthCalculator = PasswordStrengthCalculator()
         binding.ImageButtonBack.setOnClickListener {
             onBackPressed()
+        }
+
+
+        binding.password.fellowEditTextActionListener = object : FellowEditTextActionListener {
+            override fun onTextChange(value: Editable?) {
+                passwordStrengthCalculator.onTextChanged(value)
+            }
         }
 
         binding.buttonNext.setOnClickListener {

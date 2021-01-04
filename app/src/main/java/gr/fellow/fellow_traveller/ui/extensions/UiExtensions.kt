@@ -322,58 +322,25 @@ fun TextView.setTextHtml(text: String) {
 }
 
 
-/*
-
-*/
-/** Convenient method that chooses between View.visible() or View.invisible() methods *//*
-
-fun View.visibleOrInvisibleWithAnim(show: Boolean ) {
-    if (show) visible(true) else invisible(true)
-}
-
-*/
-/** Convenient method that chooses between View.visible() or View.gone() methods *//*
-
-fun View.visibleOrGoneWithAnim(show: Boolean = true) {
-    if (show) visible(true) else gone(true)
-}
-
-
-*/
-/** Set the View visibility to INVISIBLE and eventually animate view alpha till 0% *//*
-
-private fun View.invisible(animate: Boolean = true) {
-    hide(View.INVISIBLE, animate)
-}
-
-
-*/
-/** Set the View visibility to GONE and eventually animate view alpha till 0% *//*
-
-private fun View.gone(animate: Boolean = true) {
-    hide(View.GONE, animate)
-}
-*/
-
-
 fun View.goneAnim() {
-    animate().alpha(0f).setDuration(150).setListener(object : AnimatorListenerAdapter() {
-        override fun onAnimationEnd(animation: Animator) {
-            super.onAnimationEnd(animation)
-            visibility = View.GONE
-        }
-    })
+    if (visibility != View.GONE)
+        animate().alpha(1f).setListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                super.onAnimationEnd(animation)
+                visibility = View.GONE
+            }
+        })
 
 }
 
 fun View.visibleAnim() {
-
-    animate().alpha(1f).setDuration(150).setListener(object : AnimatorListenerAdapter() {
-        override fun onAnimationStart(animation: Animator) {
-            super.onAnimationStart(animation)
-            visibility = View.VISIBLE
-        }
-    })
+    if (visibility != View.VISIBLE)
+        animate().alpha(1f).setListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationStart(animation: Animator) {
+                super.onAnimationStart(animation)
+                visibility = View.VISIBLE
+            }
+        })
 
 }
 
