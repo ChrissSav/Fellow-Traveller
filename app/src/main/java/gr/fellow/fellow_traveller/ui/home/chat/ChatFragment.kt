@@ -15,6 +15,8 @@ import gr.fellow.fellow_traveller.domain.chat.ChatMessage
 import gr.fellow.fellow_traveller.domain.user.UserInfo
 import gr.fellow.fellow_traveller.service.NotificationJobService.Companion.TAG
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
+import gr.fellow.fellow_traveller.ui.extensions.startShimmerWithVisibility
+import gr.fellow.fellow_traveller.ui.extensions.stopShimmerWithVisibility
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.ChatPassengersAdapter
 import gr.fellow.fellow_traveller.ui.home.adapter.MessagesAdapter
@@ -74,6 +76,18 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 driverName.text = it.creatorUser.fullName
                 driverImage.loadImageFromUrl(it.creatorUser.picture)
                 chatInfoPassengersRecyclerView.adapter = ChatPassengersAdapter(it.passengers)
+            }
+        })
+
+        viewModel.loadMessages.observe(viewLifecycleOwner, {
+
+            if (it) {
+                binding.chat.chatShimmer.startShimmerWithVisibility()
+                viewModel.loadMessages.value = false
+                //binding.messagesSection.visibility = View.INVISIBLE
+
+            } else {
+                binding.chat.chatShimmer.stopShimmerWithVisibility()
             }
         })
 
@@ -148,6 +162,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 Log.d(TAG, "onChildAdded:" + dataSnapshot.key!!)
 
                 dataSnapshot.getValue(ChatMessage::class.java)?.let {
+                    viewModel.loadMessages.value = true
                     viewModel.loadChatMessage(it)
                 }
 
