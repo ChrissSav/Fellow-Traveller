@@ -54,6 +54,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     override fun setUpObservers() {
 
         viewModel.messagesList.observe(viewLifecycleOwner, {
+            viewModel.loadMessages.value = false
             messagesList.add(it)
             (binding.chat.chatRecyclerView.adapter as MessagesAdapter).notifyItemInserted(messagesList.size - 1)
             binding.chat.chatRecyclerView.scrollToPosition(messagesList.size - 1)
@@ -82,8 +83,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         viewModel.loadMessages.observe(viewLifecycleOwner, {
 
             if (it) {
+                Log.i("kjhgrgrg", "rpogjirugreg")
                 binding.chat.chatShimmer.startShimmerWithVisibility()
-                viewModel.loadMessages.value = false
                 //binding.messagesSection.visibility = View.INVISIBLE
 
             } else {
@@ -137,6 +138,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     }
 
     private fun getAllParticipantsId(tripId: String) {
+        viewModel.loadMessages.value = true
         participantsIdList.clear()
         val reference2 = firebaseDatabase.getReference("TripsAndParticipants").child(tripId)
         reference2.addValueEventListener(object : ValueEventListener {
