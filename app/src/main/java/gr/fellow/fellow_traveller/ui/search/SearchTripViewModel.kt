@@ -29,7 +29,7 @@ constructor(
 
     ) : BaseViewModel() {
 
-    private var sortOption: SortAnswerType = SortAnswerType.Relevant
+    private var sortOption: SortAnswerType = SortAnswerType.RELEVANT
 
     val loadResults = MutableLiveData<Boolean>()
 
@@ -140,28 +140,28 @@ constructor(
         val compareList = list ?: _resultTrips.value?.toMutableList() ?: mutableListOf()
         val sortedList = compareList.sortedWith(compareBy { it.timestamp }).toMutableList()
         _resultTrips.value = sortedList
-        sortOption = SortAnswerType.Relevant
+        sortOption = SortAnswerType.RELEVANT
     }
 
     private fun sortByPrice(list: MutableList<TripSearch>? = null) {
         val compareList = list ?: _resultTrips.value?.toMutableList() ?: mutableListOf()
         val sortedList = compareList.sortedWith(compareBy { it.price }).toMutableList()
         _resultTrips.value = sortedList
-        sortOption = SortAnswerType.Price
+        sortOption = SortAnswerType.PRICE
     }
 
     private fun sortByRate(list: MutableList<TripSearch>? = null) {
         val compareList = list ?: _resultTrips.value?.toMutableList() ?: mutableListOf()
         val sortedList = compareList.sortedWith(compareBy { it.creatorUser.rate }).toMutableList()
         _resultTrips.value = sortedList
-        sortOption = SortAnswerType.Rate
+        sortOption = SortAnswerType.RATE
     }
 
     //Set Up Sort Option, based on previous choice
     fun setSortOption(sortOption: SortAnswerType, list: MutableList<TripSearch>? = null) {
         when (sortOption) {
-            SortAnswerType.Relevant -> sortByDate(list)
-            SortAnswerType.Price -> sortByPrice(list)
+            SortAnswerType.RELEVANT -> sortByDate(list)
+            SortAnswerType.PRICE -> sortByPrice(list)
             else -> sortByRate(list)
         }
 

@@ -8,9 +8,9 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentChangePasswordBinding
 import gr.fellow.fellow_traveller.ui.extensions.createToast
-import gr.fellow.fellow_traveller.ui.extensions.displayPasswordSuggestions
 import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
+import gr.fellow.fellow_traveller.ui.extensions.setTextBackTint
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.views.FellowEditTextActionListener
 import gr.fellow.fellow_traveller.utils.PasswordStrengthCalculator
@@ -35,17 +35,8 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
         })
 
 
-        passwordStrengthCalculator.lowerCase.observe(this, { value ->
-            displayPasswordSuggestions(value, binding.lowerCaseTxt)
-        })
-        passwordStrengthCalculator.upperCase.observe(this, { value ->
-            displayPasswordSuggestions(value, binding.upperCaseTxt)
-        })
-        passwordStrengthCalculator.digit.observe(this, { value ->
-            displayPasswordSuggestions(value, binding.digitTxt)
-        })
-        passwordStrengthCalculator.specialChar.observe(this, { value ->
-            displayPasswordSuggestions(value, binding.specialCharTxt)
+        passwordStrengthCalculator.strength.observe(viewLifecycleOwner, { value ->
+            binding.passwordStr.setTextBackTint(value.textInt, value.colorInt)
         })
 
     }

@@ -5,6 +5,8 @@ import androidx.core.text.HtmlCompat
 import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.domain.notification.Notification
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 
 fun getRandomImage(): String {
@@ -108,4 +110,11 @@ fun MutableLiveData<MutableList<Notification>>.setNotificationRead(item: Long) {
     }
 
     value = tempList
+}
+
+
+fun CharSequence.matchesRegex(regex: String): Boolean {
+    val pattern: Pattern = Pattern.compile(regex)
+    val hasSpecialChar: Matcher = pattern.matcher(this)
+    return hasSpecialChar.find()
 }

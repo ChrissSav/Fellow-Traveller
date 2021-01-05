@@ -10,10 +10,13 @@ import android.content.SharedPreferences
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.AnimatedVectorDrawable
+import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -322,6 +325,30 @@ fun TextView.setTextHtml(text: String) {
 }
 
 
+fun TextView.setTextBackTint(mText: Int, color: Int) {
+    if (text.toString() != resources.getString(mText)) {
+
+        val anim = AlphaAnimation(1.0f, 0.5f)
+        anim.duration = 150
+        anim.repeatCount = 1
+        anim.repeatMode = Animation.REVERSE
+
+        anim.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationEnd(animation: Animation?) {}
+            override fun onAnimationStart(animation: Animation?) {}
+            override fun onAnimationRepeat(animation: Animation?) {
+                text = resources.getString(mText)
+                val drawable = background as GradientDrawable
+                drawable.setStroke(3, ContextCompat.getColor(context, color))
+                setTextColor(ContextCompat.getColor(context, color));
+            }
+        })
+
+        startAnimation(anim)
+
+    }
+}
+
 fun View.goneAnim() {
     if (visibility != View.GONE)
         animate().alpha(1f).setListener(object : AnimatorListenerAdapter() {
@@ -354,3 +381,5 @@ fun displayPasswordSuggestions(value: Int, textView: TextView) {
         textView.setDrawableTint(R.color.dark_gray_new)
     }
 }
+
+
