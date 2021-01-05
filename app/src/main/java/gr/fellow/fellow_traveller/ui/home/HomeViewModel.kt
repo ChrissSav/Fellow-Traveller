@@ -71,6 +71,7 @@ constructor(
     private val sendMessageFirebaseUseCase: SendMessageFirebaseUseCase,
     private val updateSeenStatusFirebaseUseCase: UpdateSeenStatusFirebaseUseCase,
 
+
     ) : BaseViewModel() {
 
     companion object {
@@ -569,6 +570,20 @@ constructor(
         }
 
     }
+
+    private val _tripInfo = SingleLiveEvent<TripInvolved>()
+    val tripInfo: LiveData<TripInvolved> = _tripInfo
+
+    fun getTripById(tripId: String) {
+
+        launch {
+            val tripInvolved = getTripInvolvedByIdUseCase.invoke(tripId)
+            _tripInfo.value = tripInvolved
+
+        }
+
+    }
+
 
 }
 

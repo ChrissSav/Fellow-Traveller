@@ -14,7 +14,9 @@ import gr.fellow.fellow_traveller.databinding.FragmentChatBinding
 import gr.fellow.fellow_traveller.domain.chat.ChatMessage
 import gr.fellow.fellow_traveller.domain.user.UserInfo
 import gr.fellow.fellow_traveller.service.NotificationJobService.Companion.TAG
+import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
+import gr.fellow.fellow_traveller.ui.home.adapter.ChatPassengersAdapter
 import gr.fellow.fellow_traveller.ui.home.adapter.MessagesAdapter
 import gr.fellow.fellow_traveller.ui.home.chat.chat_notifications.NotificationData
 import gr.fellow.fellow_traveller.ui.home.chat.chat_notifications.PushNotification
@@ -61,12 +63,27 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             readMessages(args.conversationItem.tripId)
         })
 
+        viewModel.tripInfo.observe(viewLifecycleOwner, {
+            //Load end panel with tripInvolved info
+            with(binding.info) {
+                from.text = it.destFrom.title
+                to.text = it.destTo.title
+                day.text = it.date
+                time.text = it.time
+
+                driverName.text = it.creatorUser.fullName
+                driverImage.loadImageFromUrl(it.creatorUser.picture)
+                chatInfoPassengersRecyclerView.adapter = ChatPassengersAdapter(it.passengers)
+            }
+        })
+
     }
 
     override fun setUpViews() {
 
         binding.overlappingPanels.setStartPanelLockState(OverlappingPanelsLayout.LockState.CLOSE)
 
+        viewModel.getTripById(args.conversationItem.tripId)
 
         messagesList.clear()
 

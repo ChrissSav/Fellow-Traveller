@@ -251,7 +251,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/driver_label">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/driver_image"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
@@ -298,6 +298,7 @@
             app:layout_constraintTop_toBottomOf="@+id/driver_section" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chat_info_passengers_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
