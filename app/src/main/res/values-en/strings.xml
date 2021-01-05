@@ -202,6 +202,10 @@
     <string name="leave_trip_question">Do you want to cancel your booking on this trip?</string>
     <string name="trip_status_active">Active</string>
     <string name="trip_status_deleted">Deleted</string>
+    <string name="weak">Weak</string>
+    <string name="medium">Medium</string>
+    <string name="strong">Strong</string>
+    <string name="very_strong">Very Strong</string>
     <string name="trip_status_in_progress">In Progress</string>
     <string name="trip_status_complete">Completed</string>
     <string name="my_offers">My Offers</string>

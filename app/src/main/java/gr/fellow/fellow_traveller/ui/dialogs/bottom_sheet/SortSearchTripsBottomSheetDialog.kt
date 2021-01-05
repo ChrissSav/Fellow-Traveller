@@ -20,15 +20,15 @@ class SortSearchTripsBottomSheetDialog(
         binding.title.text = getString(R.string.title_sort_by)
 
         binding.relevant.setOnClickListener {
-            onItemClickListener(SortAnswerType.Relevant)
+            onItemClickListener(SortAnswerType.RELEVANT)
             dismiss()
         }
         binding.price.setOnClickListener {
-            onItemClickListener(SortAnswerType.Price)
+            onItemClickListener(SortAnswerType.PRICE)
             dismiss()
         }
         binding.rate.setOnClickListener {
-            onItemClickListener(SortAnswerType.Rate)
+            onItemClickListener(SortAnswerType.RATE)
             dismiss()
         }
         return binding.root.rootView

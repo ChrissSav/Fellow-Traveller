@@ -22,9 +22,9 @@ enum class NotificationStatus {
 }
 
 enum class SortAnswerType(val textInt: Int) {
-    Price(R.string.price_title),
-    Relevant(R.string.most_relevant),
-    Rate(R.string.rating)
+    PRICE(R.string.price_title),
+    RELEVANT(R.string.most_relevant),
+    RATE(R.string.rating)
 }
 
 enum class AnswerType {
@@ -36,4 +36,12 @@ enum class BagsStatusType(val textInt: Int, val code: Int) {
     NONE(R.string.availability_none, 0),
     LIMITED(R.string.availability_limited, 1),
     LARGE(R.string.availability_great, 2)
+}
+
+
+enum class PasswordStrength(val textInt: Int, val colorInt: Int) {
+    WEAK(R.string.weak, R.color.red_color),
+    MEDIUM(R.string.medium, R.color.orange_new),
+    STRONG(R.string.strong, R.color.yellow),
+    VERY_STRONG(R.string.very_strong, R.color.green)
 }
