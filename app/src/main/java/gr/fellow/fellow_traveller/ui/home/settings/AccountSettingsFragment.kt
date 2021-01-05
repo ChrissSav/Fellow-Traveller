@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import com.github.florent37.runtimepermission.kotlin.askPermission
 import com.iceteck.silicompressorr.FileUtils
 import com.iceteck.silicompressorr.SiliCompressor
@@ -44,24 +43,29 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
 
 
     override fun setUpObservers() {
-        viewModel.user.observe(viewLifecycleOwner, Observer {
+        viewModel.user.observe(viewLifecycleOwner, { user ->
             with(binding) {
-                picture.loadImageFromUrl(it.picture)
-                firstName.text = it.firstName
-                lastName.text = it.lastName
-                email.text = it.email
-                aboutMe.setText(it.aboutMe)
+                picture.loadImageFromUrl(user.picture)
+                firstName.text = user.firstName
+                lastName.text = user.lastName
+                email.text = user.email
+                aboutMe.setText(user.aboutMe)
                 picture.clearFocus()
                 firstName.clearFocus()
                 lastName.clearFocus()
                 email.clearFocus()
                 aboutMe.clearFocus()
+
+
+                picture.setOnClickListener {
+                    openDialogPicture(user.picture)
+                }
             }
 
 
         })
 
-        viewModel.successUpdateInfo.observe(viewLifecycleOwner, Observer {
+        viewModel.successUpdateInfo.observe(viewLifecycleOwner, {
             createToast(getString(R.string.profile_update_success))
             onBackPressed()
         })

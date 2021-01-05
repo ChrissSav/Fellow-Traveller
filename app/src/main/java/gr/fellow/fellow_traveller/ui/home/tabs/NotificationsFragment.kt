@@ -81,6 +81,7 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             loadMoreTripsAsCreator = true
             loadMoreTripsAsPassenger = true
+            notifications.clear()
             viewModel.loadNotifications(true)
         }
     }
