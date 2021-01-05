@@ -255,6 +255,7 @@
     <string name="book_a_seat">Κάνε κράτηση</string>
     <string name="vehicle_details">Λεπτομέρειες Οχήματος</string>
     <string name="delete">Διαγραφή</string>
+    <string name="leave">Αποχώρηση</string>
     <string name="cancel">Ακύρωση</string>
     <string name="change_password_description">Αλλαγή συνθηματικού πρόσβασης.</string>
     <string name="complete">Ολοκλήρωση</string>
@@ -296,6 +297,8 @@
     <string name="leave_a_message_for_co_travellers">Γράψε ένα μήνυμα στους συνταξιδιώτες σου</string>
     <string name="message_place_holder">Μήνυμα (προαιρετικό)</string>
     <string name="conversation">Συνομιλία</string>
+    <string name="notes">Σημειώσεις</string>
+    <string name="pictures">Εικόνες</string>
     <string name="write_something">Γράψε κάτι…</string>
     <string name="messenger_help_guide">Οδηγός Βοήθειας Messenger</string>
     <string name="messenger_description">Το Messenger είναι το μέσο με το οποίο θα μπορείς να ρθεις σε επικοινωνία με τους υπόλοιπους συνταξιδιώτες σου.</string>

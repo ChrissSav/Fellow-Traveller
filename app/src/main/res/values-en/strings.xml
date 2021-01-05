@@ -266,6 +266,7 @@
     <string name="book_a_seat">Book a reservation</string>
     <string name="vehicle_details">Vehicle Details</string>
     <string name="delete">Delete</string>
+    <string name="leave">Leave</string>
     <string name="cancel">Cancel</string>
     <string name="change_password">Change Password</string>
     <string name="change_password_description">Update password</string>
@@ -305,6 +306,8 @@
     <string name="leave_a_message_for_co_travellers">Leave a message to your passengers.</string>
     <string name="message_place_holder">Message (optional)</string>
     <string name="conversation">Conversation</string>
+    <string name="notes">Notes</string>
+    <string name="pictures">Pictures</string>
     <string name="write_something">Write something …</string>
     <string name="messenger_help_guide">Messenger Help Guide</string>
     <string name="messenger_description">You can use Messenger to contact the trip organizer and answer any potential questions regarding the trip.</string>

@@ -5,6 +5,7 @@ import androidx.annotation.NonNull
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
+import com.discord.panels.OverlappingPanelsLayout
 import com.google.firebase.database.*
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,29 +51,33 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
         viewModel.messagesList.observe(viewLifecycleOwner, {
             messagesList.add(it)
-            (binding.chatRecyclerView.adapter as MessagesAdapter).notifyItemInserted(messagesList.size - 1)
-            binding.chatRecyclerView.scrollToPosition(messagesList.size - 1)
+            (binding.chat.chatRecyclerView.adapter as MessagesAdapter).notifyItemInserted(messagesList.size - 1)
+            binding.chat.chatRecyclerView.scrollToPosition(messagesList.size - 1)
         })
 
         viewModel.listOfParticipants.observe(viewLifecycleOwner, {
             participantsInfo = it
-            (binding.chatRecyclerView.adapter as MessagesAdapter).notifyDataSetChanged()
+            (binding.chat.chatRecyclerView.adapter as MessagesAdapter).notifyDataSetChanged()
             readMessages(args.conversationItem.tripId)
         })
 
     }
 
     override fun setUpViews() {
+
+        binding.overlappingPanels.setStartPanelLockState(OverlappingPanelsLayout.LockState.CLOSE)
+
+
         messagesList.clear()
 
         viewModel.updateSeenStatus(args.conversationItem.tripId)
-        binding.chatHeader.text = args.conversationItem.tripName
+        binding.chat.chatHeader.text = args.conversationItem.tripName
 
-        binding.chatSendButton.isEnabled = false
+        binding.chat.chatSendButton.isEnabled = false
 
 
 
-        binding.chatRecyclerView.adapter = MessagesAdapter(messagesList, viewModel.user.value?.id.toString(), participantsInfo)
+        binding.chat.chatRecyclerView.adapter = MessagesAdapter(messagesList, viewModel.user.value?.id.toString(), participantsInfo)
 
         getAllParticipantsId(args.conversationItem.tripId)
 
@@ -80,17 +85,23 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         //Parse elements in adapter and on click listener
         FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
 
-        binding.chatSendButton.setOnClickListener {
-            if (!binding.messageEditText.text.toString().trim().isNullOrEmpty()) {
+        binding.chat.chatSendButton.setOnClickListener {
+            if (!binding.chat.messageEditText.text.toString().trim().isNullOrEmpty()) {
                 //MessageType: When 0: message, When 1: event
-                viewModel.sendFirebaseMessage(binding.messageEditText.text.toString().trim(), args.conversationItem.tripId, 0, participantsIdList)
+                viewModel.sendFirebaseMessage(binding.chat.messageEditText.text.toString().trim(), args.conversationItem.tripId, 0, participantsIdList)
                 PushNotification(
-                    NotificationData("Νέο μήνυμα", binding.messageEditText.text.toString()),
+                    NotificationData("Νέο μήνυμα", binding.chat.messageEditText.text.toString()),
                     TOPIC
                 ).also { sendNotification(it) }
-                binding.messageEditText.text = null
+                binding.chat.messageEditText.text = null
             }
         }
+
+
+        binding.chat.chatInfoButton.setOnClickListener {
+            binding.overlappingPanels.openEndPanel()
+        }
+
 
     }
 
@@ -103,7 +114,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                     val aId = snapshot.child("userId").getValue(String::class.java)!!
                     participantsIdList.add(aId)
                 }
-                binding.chatSendButton.isEnabled = true
+                binding.chat.chatSendButton.isEnabled = true
                 viewModel.getParticipants(participantsIdList)
             }
 

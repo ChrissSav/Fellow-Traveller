@@ -15,9 +15,10 @@
             style="@style/paragraph_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:text="@string/from"
-            app:layout_constraintStart_toStartOf="@id/from"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -27,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/to"
-            app:layout_constraintStart_toStartOf="@+id/from"
+            app:layout_constraintStart_toStartOf="@+id/from_label"
             app:layout_constraintTop_toBottomOf="@+id/from" />
 
 
@@ -55,19 +56,18 @@
             android:tag="1"
             android:text="@string/placeholder_city_athens"
             app:layout_constraintEnd_toEndOf="@+id/from"
-            app:layout_constraintStart_toStartOf="@+id/from"
+            app:layout_constraintStart_toStartOf="@+id/from_label"
             app:layout_constraintTop_toBottomOf="@+id/to_label" />
 
-        <TextView
-            android:id="@+id/time"
-            style="@style/paragraph_1"
+        <ImageView
+            android:id="@+id/time_imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:tag="2"
-            android:text="@string/trip_time_placeholder"
-            app:layout_constraintBottom_toBottomOf="@+id/clock_imageView"
-            app:layout_constraintStart_toStartOf="@+id/day"
-            app:layout_constraintTop_toTopOf="@+id/clock_imageView" />
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/ic_calendar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/to" />
 
         <TextView
             android:id="@+id/day"
@@ -81,27 +81,28 @@
             app:layout_constraintStart_toEndOf="@+id/time_imageView"
             app:layout_constraintTop_toTopOf="@+id/time_imageView" />
 
-
-        <ImageView
-            android:id="@+id/time_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:src="@drawable/ic_calendar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/to" />
-
-
         <ImageView
             android:id="@+id/clock_imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:src="@drawable/ic_clock"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/time_imageView" />
+            app:layout_constraintBottom_toBottomOf="@id/day"
+            app:layout_constraintStart_toEndOf="@id/day"
+            app:layout_constraintTop_toTopOf="@id/day" />
+
+        <TextView
+            android:id="@+id/time"
+            style="@style/paragraph_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:tag="2"
+            android:text="@string/trip_time_placeholder"
+            app:layout_constraintBottom_toBottomOf="@+id/clock_imageView"
+            app:layout_constraintStart_toEndOf="@+id/clock_imageView"
+            app:layout_constraintTop_toTopOf="@+id/clock_imageView" />
+
 
         <View
             android:id="@+id/underline"
@@ -109,49 +110,122 @@
             android:layout_height="1dp"
             android:layout_marginTop="18dp"
             android:background="@color/gray_new"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/clock_imageView" />
 
         <LinearLayout
             android:id="@+id/buttons_section"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:weightSum="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/underline">
 
-            <ImageButton
-                android:id="@+id/trip_button"
-                style="@style/border_icon_button"
-                android:layout_width="@dimen/back_button_width_height"
-                android:layout_height="@dimen/back_button_width_height"
-                android:layout_weight="1"
-                android:src="@drawable/ic_form" />
 
-            <ImageButton
-                android:id="@+id/exit_button"
-                style="@style/border_icon_button"
-                android:layout_width="@dimen/back_button_width_height"
-                android:layout_height="@dimen/back_button_width_height"
-                android:layout_marginStart="16dp"
+            <LinearLayout
+                android:id="@+id/notes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 android:layout_weight="1"
-                android:src="@drawable/ic_back_button"
-                android:tint="@color/red_color" />
+                android:orientation="vertical"
+                android:padding="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/exit"
+                app:layout_constraintEnd_toStartOf="@+id/exit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/exit">
 
-            <ImageButton
-                android:id="@+id/details_button"
-                style="@style/border_icon_button"
-                android:layout_width="@dimen/back_button_width_height"
-                android:layout_height="@dimen/back_button_width_height"
-                android:layout_marginStart="16dp"
+                <ImageButton
+                    android:id="@+id/notes_button"
+                    style="@style/border_icon_button"
+                    android:layout_width="@dimen/back_button_width_height"
+                    android:layout_height="@dimen/back_button_width_height"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_note" />
+
+                <TextView
+                    style="@style/paragraph_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/notes" />
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:id="@+id/pictures"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 android:layout_weight="1"
-                android:src="@drawable/ic_dots" />
+                android:orientation="vertical"
+                android:padding="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/exit"
+                app:layout_constraintEnd_toStartOf="@+id/exit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/exit">
+
+                <ImageButton
+                    android:id="@+id/pictures_button"
+                    style="@style/border_icon_button"
+                    android:layout_width="@dimen/back_button_width_height"
+                    android:layout_height="@dimen/back_button_width_height"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_gallery" />
+
+                <TextView
+                    style="@style/paragraph_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/pictures" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:id="@+id/exit_button"
+                    style="@style/border_icon_button"
+                    android:layout_width="@dimen/back_button_width_height"
+                    android:layout_height="@dimen/back_button_width_height"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_leave"
+                    android:tint="@color/red_color" />
+
+                <TextView
+                    android:id="@+id/delete_textView"
+                    style="@style/paragraph_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/leave" />
+
+            </LinearLayout>
+
+
         </LinearLayout>
 
         <TextView
