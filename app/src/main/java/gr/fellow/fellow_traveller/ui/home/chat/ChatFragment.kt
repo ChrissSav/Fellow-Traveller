@@ -16,6 +16,7 @@ import gr.fellow.fellow_traveller.databinding.FragmentChatBinding
 import gr.fellow.fellow_traveller.domain.TripStatus
 import gr.fellow.fellow_traveller.domain.chat.ChatMessage
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
+import gr.fellow.fellow_traveller.domain.user.Passenger
 import gr.fellow.fellow_traveller.domain.user.UserInfo
 import gr.fellow.fellow_traveller.service.NotificationJobService.Companion.TAG
 import gr.fellow.fellow_traveller.ui.extensions.*
@@ -25,6 +26,7 @@ import gr.fellow.fellow_traveller.ui.home.adapter.MessagesAdapter
 import gr.fellow.fellow_traveller.ui.home.chat.chat_notifications.NotificationData
 import gr.fellow.fellow_traveller.ui.home.chat.chat_notifications.PushNotification
 import gr.fellow.fellow_traveller.ui.home.chat.chat_notifications.RetrofitInstance
+import gr.fellow.fellow_traveller.ui.user.UserProfileDetailsActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -73,7 +75,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         viewModel.tripInfo.observe(viewLifecycleOwner, {
             //Load end panel with tripInvolved info
             tripInvolved = it
-            createToast(it.status.textInt.toString())
+
             with(binding.info) {
                 from.text = it.destFrom.title
                 to.text = it.destTo.title
@@ -81,7 +83,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
                 driverName.text = it.creatorUser.fullName
                 driverImage.loadImageFromUrl(it.creatorUser.picture)
-                chatInfoPassengersRecyclerView.adapter = ChatPassengersAdapter(it.passengers)
+                chatInfoPassengersRecyclerView.adapter = ChatPassengersAdapter(it.passengers, this@ChatFragment::onPassengerClick)
             }
             binding.chat.chatCreatorName.setTextHtml(binding.chat.chatCreatorName.context.getString(R.string.conversation_creator_name, it.creatorUser.fullName))
 
@@ -142,7 +144,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         }
 
         binding.info.tripButton.setOnClickListener {
-            if (tripInvolved != null) {
+            if (this@ChatFragment::tripInvolved.isInitialized) {
                 findNavController()?.navigate(
                     R.id.action_chatFragment_to_tripInvolvedDetailsSecondFragment,
                     bundleOf(
@@ -151,6 +153,14 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                         "history" to (tripInvolved.status == TripStatus.ACTIVE || tripInvolved.status == TripStatus.PENDING),
                         "creator" to (tripInvolved.creatorUser.id == viewModel.user.value?.id.toString()))
                 )
+            }
+        }
+
+        binding.info.driverSection.setOnClickListener {
+            if (tripInvolved.creatorUser.id != viewModel.user.value?.id.toString()) {
+                activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to tripInvolved.creatorUser.id))
+            } else {
+                findNavController()?.navigate(R.id.action_chatFragment_to_destination_info)
             }
         }
 
@@ -220,6 +230,18 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 Log.e(TAG, e.toString())
             }
         }
+
+
+    //onClickListenerForAdapter
+    private fun onPassengerClick(aPassenger: Passenger) {
+        if (viewModel.user.value?.id.toString() != aPassenger.user.id) {
+            activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to aPassenger.user.id))
+        } else {
+            findNavController()?.navigate(R.id.action_chatFragment_to_destination_info)
+        }
+
+
+    }
 
 
     override fun onDestroy() {

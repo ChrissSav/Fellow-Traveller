@@ -7,7 +7,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentConversationsBinding
-import gr.fellow.fellow_traveller.ui.extensions.createToast
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.startShimmerWithVisibility
 import gr.fellow.fellow_traveller.ui.extensions.stopShimmerWithVisibility
@@ -65,7 +64,6 @@ class ConversationsFragment : BaseFragment<FragmentConversationsBinding>() {
 
     //onClickListenerForAdapter
     private fun onConversationClick(aConversation: Conversation) {
-        createToast(aConversation.tripId)
         //findNavController()?.navigate(R.id.action_destination_messenger_to_chatFragment)
         findNavController()?.navigate(
             R.id.action_destination_messenger_to_chatFragment, bundleOf("conversationItem" to aConversation)
