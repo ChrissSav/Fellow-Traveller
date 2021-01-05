@@ -25,6 +25,7 @@ import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 const val TOPIC = "/topics/myTopic"
+
 @AndroidEntryPoint
 class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
@@ -69,27 +70,26 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
         binding.chatSendButton.isEnabled = false
 
-        //ar apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService::class.java)
+
 
         binding.chatRecyclerView.adapter = MessagesAdapter(messagesList, viewModel.user.value?.id.toString(), participantsInfo)
 
         getAllParticipantsId(args.conversationItem.tripId)
 
 
-//        messagesList.add(Message("uyugfafkdgskjgk234kfdkf", "Καλημέραααα", "fsj'dghsdfgsgjlg.zsd", 1608218126, "John", "default"))
-
         //Parse elements in adapter and on click listener
         FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
 
         binding.chatSendButton.setOnClickListener {
-            //MessageType: When 0: message, When 1: event
-            viewModel.sendFirebaseMessage(binding.messageEditText.text.toString(), args.conversationItem.tripId, 0, participantsIdList)
-            PushNotification(
-                NotificationData("Νέο μήνυμα", binding.messageEditText.text.toString()),
-                TOPIC
-            ).also { sendNotification(it) }
-            binding.messageEditText.text = null
-
+            if (!binding.messageEditText.text.toString().trim().isNullOrEmpty()) {
+                //MessageType: When 0: message, When 1: event
+                viewModel.sendFirebaseMessage(binding.messageEditText.text.toString().trim(), args.conversationItem.tripId, 0, participantsIdList)
+                PushNotification(
+                    NotificationData("Νέο μήνυμα", binding.messageEditText.text.toString()),
+                    TOPIC
+                ).also { sendNotification(it) }
+                binding.messageEditText.text = null
+            }
         }
 
     }
@@ -124,7 +124,6 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 }
 
             }
-
             override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
             }
 
@@ -142,47 +141,14 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     }
 
 
-//    private fun sendNotification(receiver: String, username: String, message: String) {
-//        val tokens = firebaseDatabase.getReference("Tokens")
-//        val query = tokens.orderByKey().equalTo(receiver)
-//
-//        val postListener = object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                for (snapshot in dataSnapshot.children) {
-//                    val token: Token? = snapshot.getValue(Token::class.java)
-//                    val data = Data(args.conversationItem.tripId, R.drawable.ic_btn_speak_now, username + ": " + message, "Νέο μήνυμα", receiver)
-//                    val sender = Sender(data, token.getToken())
-//                    apiService.sendNotification(sender)
-//                        .enqueue(object : Callback<MyResponse?>() {
-//                            fun onResponse(call: Call<MyResponse?>?, response: Response<MyResponse?>) {
-//                                if (response.code() === 200) {
-//                                    if (response.body()?.success !== 1) {
-//                                        //Toast.makeText(ChatConversationActivity.this, "Απέτυχε", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                }
-//                            }
-//
-//                            fun onFailure(call: Call<MyResponse?>?, t: Throwable?) {}
-//                        })
-//                }
-//
-//            }
-//
-//            override fun onCancelled(databaseError: DatabaseError) {
-//
-//            }
-//        }
-//        query.addValueEventListener(postListener)
-//    }
-
     private fun sendNotification(notification: PushNotification) =
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = RetrofitInstance.api.postNotification(notification)
                 if (response.isSuccessful) {
-                    //Log.e(TAG, "Response: ${Gson().toJson(response)}")
+
                 } else {
-                    // Log.e(TAG, response.errorBody().toString())
+
                 }
             } catch (e: Exception) {
                 val TAG = "ChatFragment"
@@ -197,6 +163,9 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 messageQuery.removeEventListener(messageChildEventListener)
             }
         }
+        //When we exit the frag we update the status as seen
+        viewModel.updateSeenStatus(args.conversationItem.tripId)
+
         super.onDestroy()
 
 

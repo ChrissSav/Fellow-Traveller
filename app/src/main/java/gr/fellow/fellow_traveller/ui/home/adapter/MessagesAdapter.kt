@@ -12,7 +12,6 @@ import gr.fellow.fellow_traveller.domain.user.UserInfo
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.extensions.setTextHtml
 import gr.fellow.fellow_traveller.utils.getTimeTiDisplay
-import java.util.*
 
 class MessagesAdapter(
     private val messagesList: MutableList<ChatMessage>,
@@ -62,37 +61,44 @@ class MessagesAdapter(
         } else {
             holder.message.setBackgroundResource(R.drawable.message_shape_entry)
         }
+
         //if viewType is MESSAGE_TOP load all the details
-        if (holder.viewTypeLayout == 0) {
+        if (currentItem.messageType == 0) {
 
             holder.message.text = currentItem.text
 
-            //Search in our participants info
-//            flag = true
-//            participantsInfo.forEach {
-//                if (currentItem.senderId == it.id) {
-//                    holder.name.text = it.firstName
-//                    holder.image.loadImageFromUrl(it.picture)
-//                    flag = false
-//                }
-//            }
-            try {
-                participantsInfo.first {
-                    it.id == currentItem.senderId
-                }.apply {
-                    holder.name.text = this.firstName
-                    holder.image.loadImageFromUrl(this.picture)
+            // Search in our participants info
+            flag = true
+            participantsInfo.forEach {
+                if (currentItem.senderId == it.id) {
+                    holder.name.text = it.firstName
+                    holder.image.loadImageFromUrl(it.picture)
+                    flag = false
                 }
-            } catch (e: NoSuchElementException) {
-                holder.name.text = currentItem.senderName
-                holder.image.loadImageFromUrl(currentItem.senderImage)
             }
-
-            //if we don't find any info (etc the user deleted this trip) we display his details from the firebase message data
-//            if (flag) {
+//
+//            try {
+//                val thisItem = participantsInfo.first {
+//                    it.id == currentItem.senderId
+//                }
+//                holder.name.text = thisItem.firstName
+//                holder.image.loadImageFromUrl(thisItem.picture)
+////                participantsInfo.first {
+////                    it.id == currentItem.senderId
+////                }.apply {
+////                    holder.name.text = this.firstName
+////                    holder.image.loadImageFromUrl(this.picture)
+////                }
+//            } catch (e: NoSuchElementException) {
 //                holder.name.text = currentItem.senderName
 //                holder.image.loadImageFromUrl(currentItem.senderImage)
 //            }
+
+            //if we don't find any info (etc the user deleted this trip) we display his details from the firebase message data
+            if (flag) {
+                holder.name.text = currentItem.senderName
+                holder.image.loadImageFromUrl(currentItem.senderImage)
+            }
 
             holder.date.text = getTimeTiDisplay(currentItem.timestamp, holder.date.context)
         } else if (holder.viewTypeLayout == 2)
