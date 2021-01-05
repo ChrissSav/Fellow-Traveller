@@ -200,6 +200,7 @@
     <string name="delete_trip_question">Are you sure you want to delete this trip?</string>
     <string name="leave_trip_question">Do you want to cancel your booking on this trip?</string>
     <string name="trip_status_active">Active</string>
+    <string name="trip_status_deleted">Deleted</string>
     <string name="trip_status_in_progress">In Progress</string>
     <string name="trip_status_complete">Completed</string>
     <string name="my_offers">My Offers</string>

@@ -7,18 +7,18 @@ enum class PetAnswerType {
     Yes, No, Anything
 }
 
-enum class TripStatus(val code: Int) {
-    ACTIVE(0),
-    PENDING(1),
-    COMPLETED(2),
-    DELETED(3)
+enum class TripStatus(val textInt: Int) {
+    ACTIVE(R.string.trip_status_active),
+    PENDING(R.string.trip_status_in_progress),
+    COMPLETED(R.string.trip_status_complete),
+    DELETED(R.string.trip_status_deleted)
 }
 
-enum class NotificationStatus(val code: Int) {
-    RATE(0),
-    PASSENGER_EXIT(1),
-    PASSENGER_ENTER(2),
-    TRIP_DELETED(3)
+enum class NotificationStatus {
+    RATE,
+    PASSENGER_EXIT,
+    PASSENGER_ENTER,
+    TRIP_DELETED
 }
 
 enum class SortAnswerType(val textInt: Int) {
@@ -36,12 +36,4 @@ enum class BagsStatusType(val textInt: Int, val code: Int) {
     NONE(R.string.availability_none, 0),
     LIMITED(R.string.availability_limited, 1),
     LARGE(R.string.availability_great, 2)
-}
-
-
-enum class StrengthLevel {
-    WEAK,
-    MEDIUM,
-    STRONG,
-    BULLETPROOF
 }

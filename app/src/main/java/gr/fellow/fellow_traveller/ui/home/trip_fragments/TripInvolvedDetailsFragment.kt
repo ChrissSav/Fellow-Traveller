@@ -60,13 +60,13 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
             with(binding) {
 
-                binding.overlappingPanels.setEndPanelLockState(OverlappingPanelsLayout.LockState.UNLOCKED)
+                overlappingPanels.setEndPanelLockState(OverlappingPanelsLayout.LockState.UNLOCKED)
 
                 secondLayout(trip)
                 tripDetailConstraintLayout.visibility = View.VISIBLE
                 constraintLayoutInfo.visibility = View.VISIBLE
 
-                if (trip.status != TripStatus.ACTIVE.code)
+                if (trip.status != TripStatus.ACTIVE)
                     moreInfoLayout.exit.visibility = View.GONE
                 else
                     moreInfoLayout.exit.visibility = View.VISIBLE
@@ -97,8 +97,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
                     binding.viewAllPassengers.visibility = View.GONE
                 }
 
-                description.setTextHtml(getString(R.string.trip_involved_description, getTripStatus(trip.status)))
-
+                description.setTextHtml(getString(R.string.trip_involved_description, getString(trip.status.textInt)))
 
                 if (trip.creatorUser.firstName.takeLast(1) == "ς")
                     messengerLinkText.text = getString(R.string.send_message_to, trip.creatorUser.firstName.dropLast(1))
@@ -226,13 +225,4 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
                 viewModel.exitFromTrip(args.tripId)
         }
     }
-
-
-    private fun getTripStatus(status: Int) =
-        when (status) {
-            TripStatus.ACTIVE.code -> getString(R.string.trip_status_active)
-            TripStatus.PENDING.code -> getString(R.string.trip_status_in_progress)
-            else -> getString(R.string.trip_status_complete)
-        }
-
 }

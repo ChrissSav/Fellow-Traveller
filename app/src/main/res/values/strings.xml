@@ -182,6 +182,7 @@
     <string name="delete_trip_question">Θέλεις να διαγράψεις το ταξίδι;</string>
     <string name="leave_trip_question">Θέλεις να ακυρώσεις τη κράτηση σου απο το ταξίδι;</string>
     <string name="trip_status_active">Ενεργό</string>
+    <string name="trip_status_deleted">Διαγραμμένο</string>
     <string name="trip_status_in_progress">Σε εξέλιξη</string>
     <string name="trip_status_complete">Ολοκληρωμένο</string>
     <string name="my_offers">Ιστορικό προσφορών</string>

@@ -15,7 +15,6 @@ import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.google.firebase.database.*
@@ -37,6 +36,8 @@ import kotlin.concurrent.schedule
 class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(HomeViewModel::class.java), View.OnClickListener {
 
     private lateinit var navController: NavController
+    private lateinit var reference: DatabaseReference
+    private lateinit var conversationListener: ValueEventListener
 
     @Inject
     lateinit var viewModelSecond: NotificationSocketViewModel
@@ -60,7 +61,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
     override fun setUpObservers() {
 
-        viewModel.user.observe(this, Observer {
+        viewModel.user.observe(this, {
             if (it.messengerLink == null) {
                 binding.constraintLayoutMessenger.visibility = View.VISIBLE
             } else {
@@ -70,7 +71,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
             loadConversations(it.id)
         })
 
-        viewModel.reloadConnection.observe(this, Observer {
+        viewModel.reloadConnection.observe(this, {
             if (it) {
                 viewModel.loadCars()
                 viewModel.loadTripsAsCreator()
@@ -271,32 +272,41 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
     }
 
     private fun loadConversations(userId: String) {
-        val reference: DatabaseReference = firebaseDatabase.getReference("UserTrips").child(userId)
+        reference = firebaseDatabase.getReference("UserTrips").child(userId)
 
-        val conversationListener = object : ValueEventListener {
+        conversationListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
 
-                    val tempList = mutableListOf<Conversation>()
+                val tempList = mutableListOf<Conversation>()
 
-                    dataSnapshot.children.forEach {
-                        it.getValue(Conversation::class.java)?.let { conversation ->
-                            tempList.add(conversation)
-                        }
+                dataSnapshot.children.forEach {
+                    it.getValue(Conversation::class.java)?.let { conversation ->
+                        tempList.add(conversation)
                     }
+                }
 
-                    viewModel.loadConversations(tempList)
+                viewModel.loadConversations(tempList)
 
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
                 // Getting Post failed, log a message
-                Log.w(NotificationJobService.TAG, "loadConversation:onCancelled", databaseError.toException())
+                Log.i(NotificationJobService.TAG, "loadConversation:onCancelled", databaseError.toException())
                 // ...
             }
         }
         reference.addValueEventListener(conversationListener)
-
     }
 
+
+    override fun onDestroy() {
+        reference.removeEventListener(conversationListener)
+        super.onDestroy()
+    }
+
+
+    fun readAllUnReadNotification() {
+        viewModel.readAllUnReadNotification()
+    }
 }

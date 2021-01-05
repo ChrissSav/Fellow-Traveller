@@ -7,8 +7,8 @@ import gr.fellow.fellow_traveller.framework.network.fellow.notification.Notifica
 
 
 fun NotificationResponse.mapToNotification() =
-    Notification(id, user.mapToUserBase(), type, read, trip.mapToNotificationTrip(), timestamp)
+    Notification(id, user.mapToUserBase(), getNotificationStatus(), read, trip.mapToNotificationTrip(), timestamp)
 
 
 fun NotificationTripResponse.mapToNotificationTrip() =
-    NotificationTrip(id, destinationFrom, destinationTo, status)
+    NotificationTrip(id, destinationFrom, destinationTo, getTripStatus())
