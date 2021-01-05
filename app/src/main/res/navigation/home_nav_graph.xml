@@ -229,6 +229,13 @@
         <argument
             android:name="conversationItem"
             app:argType="gr.fellow.fellow_traveller.ui.home.chat.models.Conversation" />
+        <action
+            android:id="@+id/action_chatFragment_to_tripInvolvedDetailsSecondFragment"
+            app:destination="@id/tripInvolvedDetailsSecondFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
     </fragment>
 
 
