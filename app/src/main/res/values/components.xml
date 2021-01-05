@@ -83,8 +83,8 @@
 
     <style name="border_icon_button">
         <item name="android:background">@drawable/component_border_icon_button_shape</item>
-        <item name="android:height">55dp</item>
-        <item name="android:width">55dp</item>
+        <item name="android:height">44dp</item>
+        <item name="android:width">44dp</item>
         <item name="android:padding">14dp</item>
     </style>
 

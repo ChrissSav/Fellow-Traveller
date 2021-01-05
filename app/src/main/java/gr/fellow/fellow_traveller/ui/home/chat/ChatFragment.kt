@@ -2,6 +2,7 @@ package gr.fellow.fellow_traveller.ui.home.chat
 
 import android.util.Log
 import androidx.annotation.NonNull
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
@@ -9,14 +10,15 @@ import com.discord.panels.OverlappingPanelsLayout
 import com.google.firebase.database.*
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
+import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentChatBinding
+import gr.fellow.fellow_traveller.domain.TripStatus
 import gr.fellow.fellow_traveller.domain.chat.ChatMessage
+import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.UserInfo
 import gr.fellow.fellow_traveller.service.NotificationJobService.Companion.TAG
-import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
-import gr.fellow.fellow_traveller.ui.extensions.startShimmerWithVisibility
-import gr.fellow.fellow_traveller.ui.extensions.stopShimmerWithVisibility
+import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.ChatPassengersAdapter
 import gr.fellow.fellow_traveller.ui.home.adapter.MessagesAdapter
@@ -44,6 +46,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     private lateinit var messageQuery: Query
     private lateinit var messageChildEventListener: ChildEventListener
 
+    private lateinit var tripInvolved: TripInvolved
+
     @Inject
     lateinit var firebaseDatabase: FirebaseDatabase
 
@@ -68,16 +72,19 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
         viewModel.tripInfo.observe(viewLifecycleOwner, {
             //Load end panel with tripInvolved info
+            tripInvolved = it
+            createToast(it.status.textInt.toString())
             with(binding.info) {
                 from.text = it.destFrom.title
                 to.text = it.destTo.title
                 day.text = it.date
-                time.text = it.time
 
                 driverName.text = it.creatorUser.fullName
                 driverImage.loadImageFromUrl(it.creatorUser.picture)
                 chatInfoPassengersRecyclerView.adapter = ChatPassengersAdapter(it.passengers)
             }
+            binding.chat.chatCreatorName.setTextHtml(binding.chat.chatCreatorName.context.getString(R.string.conversation_creator_name, it.creatorUser.fullName))
+
         })
 
         viewModel.loadMessages.observe(viewLifecycleOwner, {
@@ -134,6 +141,18 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             binding.overlappingPanels.openEndPanel()
         }
 
+        binding.info.tripButton.setOnClickListener {
+            if (tripInvolved != null) {
+                findNavController()?.navigate(
+                    R.id.action_chatFragment_to_tripInvolvedDetailsSecondFragment,
+                    bundleOf(
+                        "tripId" to args.conversationItem.tripId,
+                        "reload" to false,
+                        "history" to (tripInvolved.status == TripStatus.ACTIVE || tripInvolved.status == TripStatus.PENDING),
+                        "creator" to (tripInvolved.creatorUser.id == viewModel.user.value?.id.toString()))
+                )
+            }
+        }
 
     }
 
@@ -169,6 +188,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 }
 
             }
+
             override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
             }
 

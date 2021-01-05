@@ -22,6 +22,7 @@
     <string name="covid">Get latest updates on <b><u>Covid-19</u></b></string>
     <string name="no_messages">There is no message</string>
     <string name="conversation_passenger_entry">User &lt;b&gt;%s&lt;/b&gt; joined the trip</string>
+    <string name="conversation_creator_name">From &lt;b&gt;%s&lt;/b&gt;</string>
 
 
     <string name="title_activity_maps">Map</string>
@@ -302,6 +303,7 @@
     <string name="take_a_look_at_help_guide">Check out the Help Guide if you need assistance with your Messenger username.</string>
     <string name="messenger_account">Messenger Profile</string>
     <string name="trips">Trips</string>
+    <string name="trip">Trip</string>
     <string name="paste_where">paste here</string>
     <string name="did_you_forgot_password">Forgot password?</string>
     <string name="agree_with_fellow_tos">By creating an account, you agree to our &lt;b&gt;Privacy Policy&lt;/b></string>
