@@ -541,17 +541,23 @@ constructor(
 
     private val _conversationList = MutableLiveData<MutableList<Conversation>>()
     val conversationList: LiveData<MutableList<Conversation>> = _conversationList
+    val loadConversations = MutableLiveData<Boolean>()
 
     fun loadConversations(list: MutableList<Conversation>) {
-        launch {
+        launchWithLiveData(true, loadConversations) {
+            delay(DELAY_LOAD)
+            list.sortByDescending { it.timestamp }
             _conversationList.value = list
+
         }
     }
 
     private val _messagesList = SingleLiveEvent<ChatMessage>()
     val messagesList: LiveData<ChatMessage> = _messagesList
+    val loadMessages = MutableLiveData<Boolean>()
 
     fun loadChatMessage(chatMessage: ChatMessage) {
+
         _messagesList.value = chatMessage
     }
 

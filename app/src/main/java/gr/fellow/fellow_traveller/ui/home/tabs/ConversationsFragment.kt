@@ -9,6 +9,8 @@ import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentConversationsBinding
 import gr.fellow.fellow_traveller.ui.extensions.createToast
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
+import gr.fellow.fellow_traveller.ui.extensions.startShimmerWithVisibility
+import gr.fellow.fellow_traveller.ui.extensions.stopShimmerWithVisibility
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.ConversationsAdapter
 import gr.fellow.fellow_traveller.ui.home.chat.models.Conversation
@@ -29,13 +31,24 @@ class ConversationsFragment : BaseFragment<FragmentConversationsBinding>() {
 
         viewModel.conversationList.observe(viewLifecycleOwner, { list ->
 
-            list.sortByDescending { it.timestamp }
-
             (binding.recyclerView.adapter as ConversationsAdapter).submitList(list)
 
 
-            if (!list.isNullOrEmpty())
+            if (list.isEmpty()) {
+                binding.messagesSection.visibility = View.VISIBLE
+            } else {
                 binding.messagesSection.visibility = View.GONE
+            }
+        })
+
+        viewModel.loadConversations.observe(viewLifecycleOwner, {
+            if (it) {
+                binding.conversationsShimmer.startShimmerWithVisibility()
+                binding.messagesSection.visibility = View.INVISIBLE
+
+            } else {
+                binding.conversationsShimmer.stopShimmerWithVisibility()
+            }
         })
 
     }
