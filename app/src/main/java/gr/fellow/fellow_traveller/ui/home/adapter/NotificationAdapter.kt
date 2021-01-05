@@ -36,13 +36,13 @@ class NotificationAdapter(
 
 
             when (item.type) {
-                NotificationStatus.RATE.code -> {
+                NotificationStatus.RATE -> {
                     binding.description.setTextHtml(binding.description.context.getString(R.string.notification_to_rate, item.user.fullName))
                 }
-                NotificationStatus.PASSENGER_EXIT.code -> {
+                NotificationStatus.PASSENGER_EXIT -> {
                     binding.description.setTextHtml(binding.description.context.getString(R.string.notification_passenger_exit, item.user.fullName))
                 }
-                NotificationStatus.PASSENGER_ENTER.code -> {
+                NotificationStatus.PASSENGER_ENTER -> {
                     binding.description.setTextHtml(binding.description.context.getString(R.string.notification_passenger_enter, item.user.fullName))
                 }
                 else -> {

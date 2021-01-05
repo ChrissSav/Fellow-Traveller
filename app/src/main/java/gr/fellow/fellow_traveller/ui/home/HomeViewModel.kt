@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
+import gr.fellow.fellow_traveller.domain.NotificationStatus
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.chat.ChatMessage
 import gr.fellow.fellow_traveller.domain.notification.Notification
@@ -71,6 +72,11 @@ constructor(
     private val updateSeenStatusFirebaseUseCase: UpdateSeenStatusFirebaseUseCase,
 
     ) : BaseViewModel() {
+
+    companion object {
+        private const val DELAY_LOAD = 350L
+    }
+
 
     val reloadConnection = MutableLiveData<Boolean>()
 
@@ -204,7 +210,7 @@ constructor(
             }
             val response = getUserCarsRemoteUseCase()
             if (more)
-                delay(350)
+                delay(DELAY_LOAD)
             _cars.value = response
         }
     }
@@ -227,7 +233,7 @@ constructor(
             }
             val response = getTripsAsCreatorRemoteUseCase("active")
             if (more)
-                delay(350)
+                delay(DELAY_LOAD)
             _tripsAsCreatorActive.value = response
         }
     }
@@ -241,7 +247,7 @@ constructor(
             }
             val response = getTripsAsCreatorRemoteUseCase("inactive")
             if (more)
-                delay(350)
+                delay(DELAY_LOAD)
             _tripsAsCreatorHistory.value = response
         }
     }
@@ -257,7 +263,7 @@ constructor(
             }
             val response = getTripsAsPassengerRemoteUseCase("active")
             if (more)
-                delay(350)
+                delay(DELAY_LOAD)
             _tripsAsPassengerActive.value = response
         }
 
@@ -271,7 +277,7 @@ constructor(
             }
             val response = getTripsAsPassengerRemoteUseCase("inactive")
             if (more)
-                delay(350)
+                delay(DELAY_LOAD)
             _tripsAsPassengerHistory.value = response
         }
     }
@@ -295,14 +301,14 @@ constructor(
             loadMoreTripsAsPassenger = true
             val response = getNotificationsUseCase()
             if (more)
-                delay(350)
+                delay(DELAY_LOAD)
             _notifications.value = response
 
-            if (response.filter { (it.type == 1 || it.type == 2) && !it.isRead }.any() && loadMoreTripsAsCreator) {
+            if (response.filter { (it.type == NotificationStatus.PASSENGER_EXIT || it.type == NotificationStatus.PASSENGER_ENTER) && !it.isRead }.any() && loadMoreTripsAsCreator) {
                 loadTripsAsCreator(true)
                 loadMoreTripsAsCreator = false
             }
-            if (response.filter { it.type == 3 && !it.isRead }.any() && loadMoreTripsAsPassenger) {
+            if (response.filter { it.type == NotificationStatus.TRIP_DELETED && !it.isRead }.any() && loadMoreTripsAsPassenger) {
                 loadTripsAsPassenger(true)
                 loadMoreTripsAsPassenger = false
             }
@@ -310,11 +316,12 @@ constructor(
         }
     }
 
-    fun readNotificationAll(notificationMutableList: MutableList<Notification>) {
+    fun readAllUnReadNotification() {
         launch {
-            notificationMutableList.filter {
+            _notifications.toMutableListSafe().filter {
                 !it.isRead
             }.forEach { notification ->
+                notification.isRead = true
                 updateNotificationsUseCase(notification.id)
             }
         }
@@ -422,7 +429,7 @@ constructor(
                     return@launchWithLiveData
                 }
                 if (more)
-                    delay(350)
+                    delay(DELAY_LOAD)
                 val response = getUserReviewsUseCase(it)
                 _reviews.value = response
             }

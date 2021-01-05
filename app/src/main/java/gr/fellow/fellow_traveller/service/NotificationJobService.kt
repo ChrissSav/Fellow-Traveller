@@ -94,13 +94,13 @@ class NotificationJobService : JobService() {
             .setSound(alarmSound)
             .build()
 
-        if (notificationItem.type == NotificationStatus.RATE.code) {
+        if (notificationItem.type == NotificationStatus.RATE) {
             val intent = Intent(this, RateActivity::class.java)
             intent.putExtras(bundleOf("notification" to notificationItem))
             val pendingIntent = PendingIntent.getActivity(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
             notification.contentIntent = pendingIntent
 
-        } else if (notificationItem.type == NotificationStatus.PASSENGER_ENTER.code || notificationItem.type == NotificationStatus.PASSENGER_EXIT.code) {
+        } else if (notificationItem.type == NotificationStatus.PASSENGER_ENTER || notificationItem.type == NotificationStatus.PASSENGER_EXIT) {
             val pendingIntent = NavDeepLinkBuilder(this)
                 .setGraph(R.navigation.home_nav_graph)
                 .setComponentName(HomeActivity::class.java)
@@ -109,7 +109,7 @@ class NotificationJobService : JobService() {
                     bundleOf(
                         "notificationId" to notificationItem.id,
                         "reload" to true,
-                        "history" to (notificationItem.trip.status == TripStatus.COMPLETED.code),
+                        "history" to (notificationItem.trip.status == TripStatus.COMPLETED),
                         "tripId" to notificationItem.trip.id,
                         "creator" to true
                     )
@@ -124,13 +124,13 @@ class NotificationJobService : JobService() {
 
     private fun getDescription(item: gr.fellow.fellow_traveller.domain.notification.Notification): String {
         return when (item.type) {
-            NotificationStatus.RATE.code -> {
+            NotificationStatus.RATE -> {
                 getString(R.string.notification_to_rate, item.user.fullName).getTextHtml()
             }
-            NotificationStatus.PASSENGER_EXIT.code -> {
+            NotificationStatus.PASSENGER_EXIT -> {
                 getString(R.string.notification_passenger_exit, item.user.fullName).getTextHtml()
             }
-            NotificationStatus.PASSENGER_ENTER.code -> {
+            NotificationStatus.PASSENGER_ENTER -> {
                 getString(R.string.notification_passenger_enter, item.user.fullName).getTextHtml()
             }
             else -> {
@@ -141,13 +141,13 @@ class NotificationJobService : JobService() {
 
     private fun getTitle(item: gr.fellow.fellow_traveller.domain.notification.Notification): String {
         return when (item.type) {
-            NotificationStatus.RATE.code -> {
+            NotificationStatus.RATE -> {
                 getString(R.string.notification_to_rate_title)
             }
-            NotificationStatus.PASSENGER_EXIT.code -> {
+            NotificationStatus.PASSENGER_EXIT -> {
                 getString(R.string.notification_passenger_exit_title)
             }
-            NotificationStatus.PASSENGER_ENTER.code -> {
+            NotificationStatus.PASSENGER_ENTER -> {
                 getString(R.string.notification_passenger_enter_title)
             }
             else -> {

@@ -2,6 +2,7 @@ package gr.fellow.fellow_traveller.domain.trip
 
 import android.os.Parcelable
 import gr.fellow.fellow_traveller.domain.BagsStatusType
+import gr.fellow.fellow_traveller.domain.TripStatus
 import gr.fellow.fellow_traveller.domain.car.CarInfoBase
 import gr.fellow.fellow_traveller.domain.user.Passenger
 import gr.fellow.fellow_traveller.domain.user.UserCreator
@@ -26,8 +27,7 @@ data class TripInvolved(
     val timestamp: Long,
     val passengers: MutableList<Passenger>,
     val picture: String,
-    val status: Int
-
+    val status: TripStatus,
 ) : Parcelable {
 
 

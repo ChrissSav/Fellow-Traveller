@@ -14,6 +14,7 @@ import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.startActivityWithFade
 import gr.fellow.fellow_traveller.ui.extensions.startShimmerWithVisibility
 import gr.fellow.fellow_traveller.ui.extensions.stopShimmerWithVisibility
+import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.NotificationAdapter
 import gr.fellow.fellow_traveller.ui.rate.RateActivity
@@ -34,8 +35,8 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
     override fun setUpObservers() {
 
         viewModel.notifications.observe(viewLifecycleOwner, {
+            notifications.clear()
             notifications.addAll(it)
-            viewModel.readNotificationAll(it)
             if (it.isNullOrEmpty())
                 binding.notificationsSection.visibility = View.VISIBLE
             else
@@ -55,14 +56,17 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
 
         viewModel.notification.observe(viewLifecycleOwner, {
             when (it.type) {
-                NotificationStatus.RATE.code -> {
+                NotificationStatus.RATE -> {
                     activity?.startActivityWithFade(RateActivity::class, bundleOf("notification" to it))
                 }
-                NotificationStatus.PASSENGER_EXIT.code, NotificationStatus.PASSENGER_ENTER.code -> {
+                NotificationStatus.PASSENGER_EXIT, NotificationStatus.PASSENGER_ENTER -> {
                     findNavController()?.navigate(
                         R.id.action_destination_notifications_to_tripInvolvedDetailsFragment,
-                        bundleOf("reload" to (!it.isRead), "history" to (it.trip.status == TripStatus.COMPLETED.code), "tripId" to it.trip.id, "creator" to true)
+                        bundleOf("reload" to (!it.isRead), "history" to (it.trip.status == TripStatus.COMPLETED), "tripId" to it.trip.id, "creator" to true)
                     )
+                }
+                else -> {
+                    // Nothing
                 }
             }
         })
@@ -75,12 +79,16 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
         binding.recyclerView.hasFixedSize()
 
         binding.swipeRefreshLayout.setOnRefreshListener {
-            notifications.clear()
             loadMoreTripsAsCreator = true
             loadMoreTripsAsPassenger = true
             viewModel.loadNotifications(true)
         }
     }
 
+
+    override fun onDestroyView() {
+        (activity as HomeActivity).readAllUnReadNotification()
+        super.onDestroyView()
+    }
 
 }
