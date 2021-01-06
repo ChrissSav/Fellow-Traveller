@@ -75,12 +75,6 @@ fun Activity.pasteTextFromClipboard(): String? {
     return clipboardManager.primaryClip?.getItemAt(0)?.text?.toString()
 }
 
-fun Activity.openMessenger(url: String) {
-    val uriUrl: Uri = Uri.parse(getString(R.string.messenger_link, url))
-    val launchBrowser = Intent(Intent.ACTION_VIEW, uriUrl)
-    startActivity(launchBrowser)
-}
-
 fun Activity.openActivityWithFade(intent: Intent) {
     startActivity(intent)
     overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
@@ -265,8 +259,9 @@ fun ImageView.loadImageFromUrl(url: String?) {
         Glide.with(this.context)
             .load(url)
             .into(this)
-    } else
-        setImageDrawable(null)
+    } else {
+        setBackgroundResource(R.drawable.ic_boy)
+    }
 }
 
 

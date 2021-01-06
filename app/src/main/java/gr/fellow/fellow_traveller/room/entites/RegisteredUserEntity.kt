@@ -19,13 +19,11 @@ data class RegisteredUserEntity(
     @ColumnInfo(name = "about_me")
     val aboutMe: String?,
     val email: String,
-    val messengerLink: String?,
     val tripsOffers: Int,
     val tripsInvolved: Int
 
-
 ) {
     override fun toString(): String {
-        return "RegisteredUserEntity(id=$id, firstName='$firstName', lastName='$lastName', rate=$rate, reviews=$reviews, picture='$picture', aboutMe='$aboutMe', messengerLink='$messengerLink', email='$email')"
+        return "RegisteredUserEntity(id=$id, firstName='$firstName', lastName='$lastName', rate=$rate, reviews=$reviews, picture='$picture', aboutMe='$aboutMe',email='$email')"
     }
 }

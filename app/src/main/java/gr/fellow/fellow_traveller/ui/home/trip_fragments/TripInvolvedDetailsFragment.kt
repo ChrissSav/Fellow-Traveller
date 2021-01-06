@@ -16,7 +16,6 @@ import gr.fellow.fellow_traveller.domain.mappers.mapToUserBase
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.UserBase
 import gr.fellow.fellow_traveller.ui.dialogs.ExitCustomDialog
-import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.ConfirmBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.search.adapter.PassengerAdapter
@@ -28,7 +27,6 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
     private val args: TripInvolvedDetailsFragmentArgs by navArgs()
     private val viewModel: HomeViewModel by activityViewModels()
-    private lateinit var confirmBottomSheetDialog: ConfirmBottomSheetDialog
     private lateinit var tripInvolved: TripInvolved
     private var userId = ""
 
@@ -100,11 +98,6 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
                 description.setTextHtml(getString(R.string.trip_involved_description, getString(trip.status.textInt)))
 
-                if (trip.creatorUser.firstName.takeLast(1) == "ς")
-                    messengerLinkText.text = getString(R.string.send_message_to, trip.creatorUser.firstName.dropLast(1))
-                else
-                    messengerLinkText.text = getString(R.string.send_message_to, trip.creatorUser.firstName)
-
 
                 googleMaps.setOnClickListener {
                     activity?.openGoogleMaps(trip)
@@ -125,14 +118,6 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
                     }
                 }
 
-                messengerLinkConstraintLayout.setOnClickListener {
-                    activity?.openMessenger(trip.creatorUser.messengerLink)
-                }
-                messengerLinkText.setOnClickListener {
-                    activity?.openMessenger(trip.creatorUser.messengerLink)
-                }
-
-
             }
 
         })
@@ -147,7 +132,6 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
         if (args.creator) {
             binding.moreInfoLayout.deleteTextView.text = getString(R.string.delete)
-            binding.messengerLinkConstraintLayout.visibility = View.GONE
             binding.constraintLayoutInfo.backgroundTintList = ContextCompat.getColorStateList(binding.constraintLayoutInfo.context, R.color.green)
             binding.labelDescription.text = getString(R.string.youre_trip_driver)
             if (args.history)
@@ -158,7 +142,6 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
             binding.moreInfoLayout.deleteTextView.text = getString(R.string.cancel)
             binding.constraintLayoutInfo.backgroundTintList = ContextCompat.getColorStateList(binding.constraintLayoutInfo.context, R.color.orange_new)
             binding.labelDescription.text = getString(R.string.you_have_booked_this_trip)
-            binding.messengerLinkConstraintLayout.visibility = View.VISIBLE
             if (args.history)
                 viewModel.loadTripTakesPartHistoryInvolvedDetails(args.tripId, args.reload, args.notificationId)
             else

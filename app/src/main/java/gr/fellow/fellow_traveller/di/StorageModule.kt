@@ -21,6 +21,7 @@ import gr.fellow.fellow_traveller.framework.GoogleServiceRepositoryImpl
 import gr.fellow.fellow_traveller.framework.network.fellow.FellowService
 import gr.fellow.fellow_traveller.framework.network.google.PlaceApiService
 import gr.fellow.fellow_traveller.room.FellowDatabase
+import gr.fellow.fellow_traveller.room.MIGRATION_1_2
 import gr.fellow.fellow_traveller.room.dao.UserAuthDao
 import gr.fellow.fellow_traveller.usecase.notification.GetNotificationsSocketUseCase
 import javax.inject.Singleton
@@ -28,7 +29,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 object StorageModule {
-
 
     @Singleton
     @Provides
@@ -69,7 +69,9 @@ object StorageModule {
     @Singleton
     @Provides
     fun provideDatabase(application: Application): FellowDatabase =
-        Room.databaseBuilder(application.applicationContext, FellowDatabase::class.java, "Fellow_traveller-db").build()
+        Room.databaseBuilder(application.applicationContext, FellowDatabase::class.java, "Fellow_traveller-db")
+            .addMigrations(MIGRATION_1_2)
+            .build()
 
 
     @Singleton

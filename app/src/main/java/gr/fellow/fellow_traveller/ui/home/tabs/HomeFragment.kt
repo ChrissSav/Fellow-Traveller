@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.BuildConfig
 import gr.fellow.fellow_traveller.R
@@ -34,10 +33,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
 
     override fun setUpObservers() {
-        viewModel.user.observe(viewLifecycleOwner, Observer {
-            accountCorrect = it.messengerLink != null
-
-
+        viewModel.user.observe(viewLifecycleOwner, {
             //Delete the "ς" or "s" when we display the name
             if (it.firstName.takeLast(1) == "ς")
                 binding.userName.text = it.firstName.dropLast(1) + ","

@@ -13,7 +13,6 @@ data class LocalUser(
     val picture: String?,
     val aboutMe: String?,
     val email: String,
-    val messengerLink: String?,
     val tripsOffers: Int,
     val tripsInvolved: Int,
 ) : Parcelable {

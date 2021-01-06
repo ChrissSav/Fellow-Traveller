@@ -22,7 +22,6 @@ import gr.fellow.fellow_traveller.ui.newtrip.NewTripActivity
 class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
 
     private val viewModel: HomeViewModel by activityViewModels()
-    private var accountCorrect = false
 
     override fun getViewBinding(): FragmentTripsOffersBinding =
         FragmentTripsOffersBinding.inflate(layoutInflater)
@@ -52,10 +51,6 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
             }
         })
 
-        viewModel.user.observe(viewLifecycleOwner, Observer {
-            accountCorrect = it.messengerLink != null
-        })
-
     }
 
     override fun setUpViews() {
@@ -68,10 +63,7 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
         }
 
         binding.offerButton.setOnClickListener {
-            if (accountCorrect)
-                startActivityForResult(NewTripActivity::class, 1, bundleOf("userRate" to viewModel.user.value?.rate))
-            else
-                createAlerter(getString(R.string.complete_profile_warning))
+            startActivityForResult(NewTripActivity::class, 1, bundleOf("userRate" to viewModel.user.value?.rate))
         }
 
 

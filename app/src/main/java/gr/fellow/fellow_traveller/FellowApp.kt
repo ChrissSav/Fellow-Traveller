@@ -9,6 +9,7 @@ import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
 import com.google.firebase.FirebaseApp
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
@@ -28,6 +29,7 @@ class FellowApp : Application() {
         super.onCreate()
 
         FirebaseApp.initializeApp(this)
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
         createNotificationChannels()
     }
 

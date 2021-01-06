@@ -24,8 +24,6 @@ import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
 class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     private val viewModel: HomeViewModel by activityViewModels()
-    private var messengerLink: String? = null
-
 
     override fun getViewBinding(): FragmentProfileBinding =
         FragmentProfileBinding.inflate(layoutInflater)
@@ -64,7 +62,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 rate.text = user.rate.toString()
                 involved.text = user.tripsInvolved.toString()
                 offers.text = user.tripsOffers.toString()
-                this@ProfileFragment.messengerLink = user.messengerLink
                 if (!user.aboutMe.isNullOrEmpty())
                     aboutMe.text = user.aboutMe
 
@@ -130,10 +127,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
         binding.settings.password.setOnClickListener {
             findNavController()?.navigate(R.id.action_baseSettingsFragment_to_changePasswordFragment)
-        }
-
-        binding.settings.messenger.setOnClickListener {
-            findNavController()?.navigate(R.id.action_baseSettingsFragment_to_homeMessengerFragment)
         }
 
         binding.settings.termsOfUse.setOnClickListener {

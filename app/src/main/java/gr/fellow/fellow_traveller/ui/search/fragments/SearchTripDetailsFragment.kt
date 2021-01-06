@@ -48,14 +48,6 @@ class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>
                 description.text = "${price.text} ${getString(R.string.per_person)}"
 
 
-                //Delete the "ς" or "s" when we display the name of the creator in the messenger button
-                if (trip.creatorUser.firstName.takeLast(1).equals("ς"))
-                    messengerLinkText.text = getString(R.string.send_message_to, trip.creatorUser.firstName.dropLast(1))
-                else
-                    messengerLinkText.text = getString(R.string.send_message_to, trip.creatorUser.firstName)
-
-
-
                 googleMaps.setOnClickListener {
                     activity?.openGoogleMaps(trip)
                 }
@@ -72,10 +64,6 @@ class SearchTripDetailsFragment : BaseFragment<FragmentSearchTripDetailsBinding>
                     binding.passengersSection.visibility = View.VISIBLE
                 }
 
-
-                messengerLinkConstraintLayout.setOnClickListener {
-                    activity?.openMessenger(trip.creatorUser.messengerLink)
-                }
 
             }
         } else {

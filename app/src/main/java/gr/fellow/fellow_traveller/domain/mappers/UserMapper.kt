@@ -12,12 +12,12 @@ import gr.fellow.fellow_traveller.room.entites.RegisteredUserEntity
 import gr.fellow.fellow_traveller.ui.extensions.round
 
 fun UserAuthResponse.mapToRegisteredUserEntity() = RegisteredUserEntity(
-    id, firstName, lastName, rate.round(1), reviews, picture, aboutMe, email, messengerLink, tripsOffers, tripsInvolved
+    id, firstName, lastName, rate.round(1), reviews, picture, aboutMe, email, tripsOffers, tripsInvolved
 )
 
 
 fun LocalUser.mapToRegisteredUserEntity() = RegisteredUserEntity(
-    id, firstName, lastName, rate.round(1), reviews, picture, aboutMe, email, messengerLink, tripsOffers, tripsInvolved
+    id, firstName, lastName, rate.round(1), reviews, picture, aboutMe, email, tripsOffers, tripsInvolved
 )
 
 
@@ -39,10 +39,10 @@ fun UserCreator.mapToUserBase() = UserBase(
 
 
 fun RegisteredUserEntity.mapToLocalUser(): LocalUser {
-    return LocalUser(id, firstName, lastName, rate.round(1), reviews, picture, aboutMe, email, messengerLink, tripsOffers, tripsInvolved)
+    return LocalUser(id, firstName, lastName, rate.round(1), reviews, picture, aboutMe, email, tripsOffers, tripsInvolved)
 }
 
 
 fun UserInfoResponse.mapToUserInfo() = UserInfo(
-    id, firstName, lastName, rate.round(1), reviews, picture, messengerLink, aboutMe, tripsOffers, tripsInvolved
+    id, firstName, lastName, rate.round(1), reviews, picture, aboutMe, tripsOffers, tripsInvolved
 )

@@ -58,16 +58,9 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
     override fun provideViewBinding(): ActivityHomeBinding =
         ActivityHomeBinding.inflate(layoutInflater)
 
-
     override fun setUpObservers() {
 
         viewModel.user.observe(this, {
-            if (it.messengerLink == null) {
-                binding.constraintLayoutMessenger.visibility = View.VISIBLE
-            } else {
-                binding.constraintLayoutMessenger.visibility = View.GONE
-            }
-
             loadConversations(it.id)
         })
 
@@ -130,7 +123,6 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
 
     override fun setUpViews() {
-
         viewModel.loadUserInfo()
         viewModel.loadCars()
         viewModel.loadTripsAsCreator()
@@ -159,18 +151,9 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
             if (destination.id == R.id.destination_notifications)
                 viewModelSecond.updateNotificationCount(0)
 
-            if (destination.id == R.id.homeMessengerFragment)
-                binding.constraintLayoutMessenger.visibility = View.GONE
 
         }
 
-        binding.constraintLayoutMessenger.setOnClickListener {
-            navController.navigateWithFade(R.id.homeMessengerFragment)
-        }
-
-        binding.toAccountInfo.setOnClickListener {
-            navController.navigateWithFade(R.id.homeMessengerFragment)
-        }
 
         binding.home.setOnClickListener(this)
         binding.trips.setOnClickListener(this)

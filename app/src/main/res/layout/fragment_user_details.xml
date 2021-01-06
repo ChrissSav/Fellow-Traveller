@@ -18,8 +18,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
-
     <ScrollView
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
@@ -64,34 +62,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/user_image" />
 
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/messengerLink1"
-                style="@style/border_icon_button"
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
-
-                <TextView
-                    style="@style/paragraph_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_messenger"
-                    android:drawablePadding="10dp"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text="@string/send_message"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:drawableTint="@color/black_color" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout2"
@@ -175,7 +145,7 @@
                 android:layout_marginTop="47dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/messengerLink1">
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
                 <TextView
                     android:id="@+id/textView46"
@@ -228,7 +198,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/messengerLink1">
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
                 <ImageView
                     android:id="@+id/image"

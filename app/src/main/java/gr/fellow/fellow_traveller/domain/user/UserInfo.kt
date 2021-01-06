@@ -12,7 +12,6 @@ data class UserInfo(
     val rate: Float,
     val reviews: Int,
     val picture: String?,
-    val messengerLink: String?,
     val aboutMe: String?,
     val tripsOffers: Int,
     val tripsInvolved: Int

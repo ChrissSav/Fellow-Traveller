@@ -21,7 +21,6 @@ import gr.fellow.fellow_traveller.ui.search.SearchTripActivity
 class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
 
     private val viewModel: HomeViewModel by activityViewModels()
-    private var accountCorrect = false
 
     override fun getViewBinding(): FragmentTakesPartTabBinding =
         FragmentTakesPartTabBinding.inflate(layoutInflater)
@@ -48,10 +47,6 @@ class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
             }
         })
 
-        viewModel.user.observe(viewLifecycleOwner, Observer {
-            accountCorrect = it.messengerLink != null
-        })
-
     }
 
     override fun setUpViews() {
@@ -65,10 +60,7 @@ class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
         }
 
         binding.searchButton.setOnClickListener {
-            if (accountCorrect)
-                startActivityForResult(SearchTripActivity::class, 2, bundleOf("localUser" to viewModel.user.value!!))
-            else
-                createAlerter(getString(R.string.complete_profile_warning))
+            startActivityForResult(SearchTripActivity::class, 2, bundleOf("localUser" to viewModel.user.value!!))
         }
 
         binding.swipeRefreshLayout.setOnRefreshListener {

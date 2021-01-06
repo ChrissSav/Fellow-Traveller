@@ -3,6 +3,7 @@ package gr.fellow.fellow_traveller.data.base
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.BaseApiException
 import gr.fellow.fellow_traveller.data.BaseFirebaseException
@@ -128,12 +129,13 @@ open class BaseViewModel : ViewModel() {
                 error.value = internalError(R.string.ERROR_API_UNAUTHORIZED)
             }
             is UnknownHostException -> {
-
+                FirebaseCrashlytics.getInstance().recordException(e)
             }
             is BaseFirebaseException -> {
                 error.value = internalError(R.string.ERROR_API_UNAUTHORIZED)
             }
             else -> {
+                FirebaseCrashlytics.getInstance().recordException(e)
                 error.value = internalError(R.string.ERROR_SOMETHING_WRONG)
             }
         }

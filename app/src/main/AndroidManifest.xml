@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
@@ -21,10 +20,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="n">
-        <activity android:name=".ui.home.messenger.MessengerLinkActivity" />
-        <activity android:name=".ui.user.UserProfileDetailsActivity" />
-        <activity android:name=".ui.search.SearchFilterActivity" />
-        <activity android:name=".ui.forgotPassword.ForgotPasswordActivity" />
+
+        <activity
+            android:name=".ui.user.UserProfileDetailsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.search.SearchFilterActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.forgotPassword.ForgotPasswordActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.rate.RateActivity"
             android:screenOrientation="portrait" />

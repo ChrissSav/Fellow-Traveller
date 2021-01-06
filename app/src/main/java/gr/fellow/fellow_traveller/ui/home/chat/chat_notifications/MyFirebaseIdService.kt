@@ -3,9 +3,10 @@ package gr.fellow.fellow_traveller.ui.home.chat.chat_notifications
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessagingService
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class MyFirebaseIdService : FirebaseMessagingService() {
     @Inject
     lateinit var firebaseDatabase: FirebaseDatabase
