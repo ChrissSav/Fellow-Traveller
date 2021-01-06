@@ -54,7 +54,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     private lateinit var messageChildEventListener: ChildEventListener
     private lateinit var participantsListener: ValueEventListener
 
-    private lateinit var tripInvolved: TripInvolved
+    private var tripInvolved: TripInvolved? = null
 
     @Inject
     lateinit var firebaseDatabase: FirebaseDatabase
@@ -79,20 +79,22 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             readMessages(args.conversationItem.tripId)
         })
 
-        viewModel.tripInfo.observe(viewLifecycleOwner, {
+        viewModel.tripInfo.observe(viewLifecycleOwner, { trip ->
             //Load end panel with tripInvolved info
-            tripInvolved = it
+            tripInvolved = trip
+            trip?.let {
+                with(binding.info) {
+                    from.text = it.destFrom.title
+                    to.text = it.destTo.title
+                    day.text = it.date
 
-            with(binding.info) {
-                from.text = it.destFrom.title
-                to.text = it.destTo.title
-                day.text = it.date
-
-                driverName.text = it.creatorUser.fullName
-                driverImage.loadImageFromUrl(it.creatorUser.picture)
-                chatInfoPassengersRecyclerView.adapter = ChatPassengersAdapter(it.passengers, this@ChatFragment::onPassengerClick)
+                    driverName.text = it.creatorUser.fullName
+                    driverImage.loadImageFromUrl(it.creatorUser.picture)
+                    chatInfoPassengersRecyclerView.adapter = ChatPassengersAdapter(it.passengers, this@ChatFragment::onPassengerClick)
+                }
+                binding.chat.chatCreatorName.setTextHtml(binding.chat.chatCreatorName.context.getString(R.string.conversation_creator_name, it.creatorUser.fullName))
             }
-            binding.chat.chatCreatorName.setTextHtml(binding.chat.chatCreatorName.context.getString(R.string.conversation_creator_name, it.creatorUser.fullName))
+
 
         })
 
@@ -151,21 +153,21 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         }
 
         binding.info.tripButton.setOnClickListener {
-            if (this@ChatFragment::tripInvolved.isInitialized) {
+            tripInvolved?.let { trip ->
                 findNavController()?.navigate(
                     R.id.action_chatFragment_to_tripInvolvedDetailsSecondFragment,
                     bundleOf(
                         "tripId" to args.conversationItem.tripId,
                         "reload" to false,
-                        "history" to (tripInvolved.status == TripStatus.ACTIVE || tripInvolved.status == TripStatus.PENDING),
-                        "creator" to (tripInvolved.creatorUser.id == viewModel.user.value?.id.toString()))
+                        "history" to (trip.status != TripStatus.COMPLETED),
+                        "creator" to (trip.creatorUser.id == viewModel.user.value?.id.toString()))
                 )
             }
         }
 
         binding.info.driverSection.setOnClickListener {
-            if (tripInvolved.creatorUser.id != viewModel.user.value?.id.toString()) {
-                activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to tripInvolved.creatorUser.id))
+            if (tripInvolved?.creatorUser?.id != viewModel.user.value?.id.toString()) {
+                activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to tripInvolved?.creatorUser?.id))
             } else {
                 findNavController()?.navigate(R.id.action_chatFragment_to_destination_info)
             }
@@ -257,23 +259,23 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     }
 
     private fun exitCustomDialogAnswerType(result: AnswerType) {
-        if (result == AnswerType.Yes) {
+        tripInvolved?.let {
+            if (result == AnswerType.Yes) {
 
-            //if it Active delete or exit whether the user is the creator or not
-            //Delete trip use case on view model
-            if (tripInvolved.creatorUser.id == viewModel.user.value?.id.toString()) {
-                viewModel.deleteTrip(tripInvolved.id)
-            } else {
-                viewModel.exitFromTrip(tripInvolved.id, participantsIdList)
+                //if it Active delete or exit whether the user is the creator or not
+                //Delete trip use case on view model
+                if (it.creatorUser.id == viewModel.user.value?.id.toString()) {
+                    viewModel.deleteTrip(it.id)
+                } else {
+                    viewModel.exitFromTrip(it.id, participantsIdList)
+                }
+                if (it.status == TripStatus.ACTIVE) {
+                    onBackPressed()
+                }
+
+                //updateStatusWhenExit = false
             }
-
-            if (tripInvolved.status == TripStatus.ACTIVE) {
-                onBackPressed()
-            }
-
-            //updateStatusWhenExit = false
         }
-
 
     }
 

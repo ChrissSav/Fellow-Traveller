@@ -125,7 +125,7 @@ constructor(
 
 
     fun registerTrip() {
-        launchAfter(true, _success) {
+        launchAfter(_success) {
             var msg: String? = null
             if (message.value?.trim()?.length!! > 0) {
                 msg = message.value.toString()

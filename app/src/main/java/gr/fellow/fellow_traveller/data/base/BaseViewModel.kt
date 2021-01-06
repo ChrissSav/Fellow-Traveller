@@ -36,9 +36,9 @@ open class BaseViewModel : ViewModel() {
         }
     }
 
-    fun <T : Any> launchAfter(shouldLoad: Boolean = false, mLiveData: SingleLiveEvent<T>, function: suspend () -> T) {
+    fun <T : Any> launchAfter(mLiveData: SingleLiveEvent<T>, function: suspend () -> T) {
         viewModelScope.launch {
-            load.value = shouldLoad
+            load.value = true
             try {
                 val data = function.invoke()
                 load.value = false
@@ -51,9 +51,9 @@ open class BaseViewModel : ViewModel() {
         }
     }
 
-    fun <T : Any> launchAfter(shouldLoad: Boolean = false, mLiveData: MutableLiveData<T>, function: suspend () -> T) {
+    fun <T : Any> launchAfter(mLiveData: MutableLiveData<T>, function: suspend () -> T) {
         viewModelScope.launch {
-            load.value = shouldLoad
+            load.value = true
             try {
                 val data = function.invoke()
                 load.value = false

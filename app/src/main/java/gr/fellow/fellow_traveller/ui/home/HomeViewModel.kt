@@ -5,6 +5,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.data.BaseApiException
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
 import gr.fellow.fellow_traveller.domain.NotificationStatus
@@ -584,14 +585,17 @@ constructor(
 
     }
 
-    private val _tripInfo = SingleLiveEvent<TripInvolved>()
-    val tripInfo: LiveData<TripInvolved> = _tripInfo
+    private val _tripInfo = SingleLiveEvent<TripInvolved?>()
+    val tripInfo: LiveData<TripInvolved?> = _tripInfo
 
     fun getTripById(tripId: String) {
-
         launch {
-            val tripInvolved = getTripInvolvedByIdUseCase.invoke(tripId)
-            _tripInfo.value = tripInvolved
+            try {
+                val tripInvolved = getTripInvolvedByIdUseCase.invoke(tripId)
+                _tripInfo.value = tripInvolved
+            } catch (e: BaseApiException) {
+                _tripInfo.value = null
+            }
 
         }
 

@@ -97,7 +97,7 @@ constructor(
 
 
     fun bookTrip(tripId: String, seats: Int, pet: Boolean, userBase: UserBase, list: ArrayList<String>) {
-        launchAfter(true, _tripBook) {
+        launchAfter(_tripBook) {
             try {
                 val response = bookTripUseCase(tripId, seats, pet)
 

@@ -17,7 +17,7 @@ class RegisterViewModel
 constructor(
     private var sharedPreferences: SharedPreferences,
     private val checkUserEmailUseCase: CheckUserEmailUseCase,
-    private val registerUserUseCase: RegisterUserUseCase
+    private val registerUserUseCase: RegisterUserUseCase,
 ) : BaseViewModel() {
 
     private val _email = SingleLiveEvent<String>()
@@ -50,15 +50,12 @@ constructor(
 
 
     fun registerUser() {
-        launch(true) {
-
+        launchAfter(_finish) {
             val firstName = userInfo.value?.first.toString()
             val lastName = userInfo.value?.second.toString()
-
             registerUserUseCase(firstName, lastName, email.value.toString(), password.value.toString())
             sharedPreferences[RESENT_EMAIL] = email.value.toString()
-            _finish.value = true
-
+            return@launchAfter true
         }
     }
 
