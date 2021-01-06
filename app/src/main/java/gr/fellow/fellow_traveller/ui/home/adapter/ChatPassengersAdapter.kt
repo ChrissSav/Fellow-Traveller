@@ -10,6 +10,7 @@ import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 
 class ChatPassengersAdapter(
     private val passengersList: MutableList<Passenger>,
+    private val onItemClickListener: (Passenger) -> Unit,
 ) : RecyclerView.Adapter<ChatPassengersAdapter.ViewHolder>() {
 
 
@@ -27,7 +28,11 @@ class ChatPassengersAdapter(
             binding.passengerImage.loadImageFromUrl(currentItem.user.picture)
 
 
+            binding.root.setOnClickListener {
+                onItemClickListener.invoke(currentItem)
+            }
         }
+
     }
 
     class ViewHolder(val binding: ChatInfoPassengerItemBinding) : RecyclerView.ViewHolder(binding.root)

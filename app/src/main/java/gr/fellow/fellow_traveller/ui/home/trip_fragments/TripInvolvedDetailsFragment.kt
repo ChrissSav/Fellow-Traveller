@@ -22,7 +22,6 @@ import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.search.adapter.PassengerAdapter
 import gr.fellow.fellow_traveller.ui.search.adapter.PassengerAdapterVertical
 import gr.fellow.fellow_traveller.ui.user.UserProfileDetailsActivity
-import kotlinx.android.synthetic.main.notification_item_layout.*
 
 @AndroidEntryPoint
 class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBinding>() {
@@ -212,7 +211,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
         if (user.id != userId)
             activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to user.id))
         else {
-            findNavController()?.navigate(R.id.action_tripInvolvedCreatorDetailsFragment_to_destination_info)
+
         }
     }
 
