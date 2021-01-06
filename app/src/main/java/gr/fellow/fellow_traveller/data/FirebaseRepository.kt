@@ -8,7 +8,7 @@ interface FirebaseRepository {
 
     suspend fun uploadImage(uri: Uri, userId: String): String
 
-    suspend fun sendMessage(hashMap: HashMap<String, Any>, participantsList: ArrayList<String>)
+    suspend fun sendMessage(hashMap: HashMap<String, Any>, participantsList: MutableList<String>)
 
     suspend fun updateSeenStatus(hashMap: HashMap<String, Any>, tripId: String, userId: String)
 

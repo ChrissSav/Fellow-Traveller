@@ -145,7 +145,7 @@ class FellowDataSourceImpl(
     override suspend fun updatePictureFirebase(uri: Uri, userId: String): String =
         firebaseRepository.uploadImage(uri, userId)
 
-    override suspend fun sendFirebaseMessage(hashMap: HashMap<String, Any>, participantsList: ArrayList<String>) =
+    override suspend fun sendFirebaseMessage(hashMap: HashMap<String, Any>, participantsList: MutableList<String>) =
         firebaseRepository.sendMessage(hashMap, participantsList)
 
     override suspend fun updateSeenStatus(hashMap: HashMap<String, Any>, tripId: String, userId: String) =

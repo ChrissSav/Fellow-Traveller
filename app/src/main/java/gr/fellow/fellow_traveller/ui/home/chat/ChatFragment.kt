@@ -1,7 +1,6 @@
 package gr.fellow.fellow_traveller.ui.home.chat
 
 import android.util.Log
-import androidx.annotation.NonNull
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
@@ -44,14 +43,16 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     private val args: ChatFragmentArgs by navArgs()
     private val viewModel: HomeViewModel by activityViewModels()
     private val messagesList = mutableListOf<ChatMessage>()
-    private val participantsIdList: ArrayList<String> = ArrayList()
+    private var participantsIdList = mutableListOf<String>()
 
     private var participantsInfo = mutableListOf<UserInfo>()
 
     private var updateStatusWhenExit: Boolean = true
 
     private lateinit var messageQuery: Query
+    private lateinit var participantsReference: DatabaseReference
     private lateinit var messageChildEventListener: ChildEventListener
+    private lateinit var participantsListener: ValueEventListener
 
     private lateinit var tripInvolved: TripInvolved
 
@@ -178,9 +179,10 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     private fun getAllParticipantsId(tripId: String) {
         viewModel.loadMessages.value = true
         participantsIdList.clear()
-        val reference2 = firebaseDatabase.getReference("TripsAndParticipants").child(tripId)
-        reference2.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(@NonNull dataSnapshot: DataSnapshot) {
+        participantsReference = firebaseDatabase.getReference("TripsAndParticipants").child(tripId)
+
+        participantsListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (snapshot in dataSnapshot.children) {
                     val aId = snapshot.child("userId").getValue(String::class.java)!!
                     participantsIdList.add(aId)
@@ -189,8 +191,11 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 viewModel.getParticipants(participantsIdList)
             }
 
-            override fun onCancelled(@NonNull databaseError: DatabaseError) {}
-        })
+            override fun onCancelled(databaseError: DatabaseError) {
+
+            }
+        }
+        participantsReference.addValueEventListener(participantsListener)
     }
 
     private fun readMessages(tripId: String) {
@@ -221,7 +226,6 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             }
         }
         messageQuery.addChildEventListener(messageChildEventListener)
-
     }
 
 
@@ -254,9 +258,20 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
     private fun exitCustomDialogAnswerType(result: AnswerType) {
         if (result == AnswerType.Yes) {
-            viewModel.deleteFirebaseConversation(args.conversationItem.tripId)
+
+            //if it Active delete or exit whether the user is the creator or not
+            //Delete trip use case on view model
+            if (tripInvolved.creatorUser.id == viewModel.user.value?.id.toString()) {
+                viewModel.deleteTrip(tripInvolved.id)
+            } else {
+                viewModel.exitFromTrip(tripInvolved.id, participantsIdList)
+            }
+
+            if (tripInvolved.status == TripStatus.ACTIVE) {
+                onBackPressed()
+            }
+
             //updateStatusWhenExit = false
-            activity?.onBackPressed()
         }
 
 
@@ -266,6 +281,11 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         if (this::messageQuery.isInitialized) {
             runBlocking {
                 messageQuery.removeEventListener(messageChildEventListener)
+            }
+        }
+        if (this::participantsReference.isInitialized) {
+            runBlocking {
+                participantsReference.removeEventListener(participantsListener)
             }
         }
         //When we exit the frag we update the status as seen

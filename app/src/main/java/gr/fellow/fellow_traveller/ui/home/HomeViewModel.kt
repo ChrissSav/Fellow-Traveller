@@ -362,6 +362,7 @@ constructor(
         launch(true) {
             deleteTripUseCase(tripId)
             _tripsAsCreatorActive.value = deleteTripWithId(tripId, _tripsAsCreatorActive.value)
+            deleteFirebaseConversation(_user.value?.id.toString(), tripId)
             _successDeletion.value = R.string.delete_trip_success
             updateUserInfo()
         }
@@ -409,10 +410,14 @@ constructor(
     }
 
 
-    fun exitFromTrip(tripId: String) {
+    fun exitFromTrip(tripId: String, passengersIdList: MutableList<String>) {
         launch(true) {
             exitFromTripUseCase(tripId)
             _tripsAsPassengerActive.value = deleteTripWithId(tripId, _tripsAsPassengerActive.value)
+            passengersIdList.forEach {
+                deleteFirebaseConversation(it, tripId)
+            }
+
             _successDeletion.value = R.string.leave_trip_success
             updateUserInfo()
         }
@@ -512,7 +517,7 @@ constructor(
     }
 
     val loadMessageFirebase = MutableLiveData<Boolean>()
-    fun sendFirebaseMessage(textMessage: String, tripId: String, messageType: Int, participantsList: ArrayList<String>) {
+    fun sendFirebaseMessage(textMessage: String, tripId: String, messageType: Int, participantsList: MutableList<String>) {
 
         launchWithLiveData(true, loadMessageFirebase) {
             sendMessageFirebaseUseCase.invoke(_user.value?.id.toString(),
@@ -534,9 +539,9 @@ constructor(
 
     }
 
-    fun deleteFirebaseConversation(tripId: String) {
+    fun deleteFirebaseConversation(userId: String, tripId: String) {
         launch {
-            deleteConversationFirebaseUseCase.invoke(_user.value?.id.toString(), tripId)
+            deleteConversationFirebaseUseCase.invoke(userId, tripId)
         }
 
     }

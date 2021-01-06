@@ -29,6 +29,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
     private val args: TripInvolvedDetailsFragmentArgs by navArgs()
     private val viewModel: HomeViewModel by activityViewModels()
     private lateinit var confirmBottomSheetDialog: ConfirmBottomSheetDialog
+    private lateinit var tripInvolved: TripInvolved
     private var userId = ""
 
 
@@ -57,6 +58,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
         viewModel.tripInvolvedDetails.observe(viewLifecycleOwner, { trip ->
 
+            tripInvolved = trip
             with(binding) {
 
                 overlappingPanels.setEndPanelLockState(OverlappingPanelsLayout.LockState.UNLOCKED)
@@ -220,8 +222,15 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
         if (answerType == AnswerType.Yes) {
             if (args.creator)
                 viewModel.deleteTrip(args.tripId)
-            else
-                viewModel.exitFromTrip(args.tripId)
+            else {
+                var temp = mutableListOf<String>()
+                tripInvolved.passengers.forEach {
+                    temp.add(it.user.id)
+                }
+                temp.add(tripInvolved.creatorUser.id)
+                viewModel.exitFromTrip(args.tripId, temp)
+            }
+
         }
     }
 }
