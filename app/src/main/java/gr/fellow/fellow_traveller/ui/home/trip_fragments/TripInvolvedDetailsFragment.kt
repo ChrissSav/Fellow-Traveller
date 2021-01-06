@@ -223,12 +223,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
             if (args.creator)
                 viewModel.deleteTrip(args.tripId)
             else {
-                var temp = mutableListOf<String>()
-                tripInvolved.passengers.forEach {
-                    temp.add(it.user.id)
-                }
-                temp.add(tripInvolved.creatorUser.id)
-                viewModel.exitFromTrip(args.tripId, temp)
+                viewModel.exitFromTrip(args.tripId)
             }
 
         }

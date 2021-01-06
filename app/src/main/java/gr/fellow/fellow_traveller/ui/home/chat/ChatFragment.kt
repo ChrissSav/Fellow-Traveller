@@ -81,7 +81,12 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
         viewModel.tripInfo.observe(viewLifecycleOwner, {
             //Load end panel with tripInvolved info
+
+            createToast("Ναιι")
+
             tripInvolved = it
+
+
 
             with(binding.info) {
                 from.text = it.destFrom.title
@@ -264,7 +269,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             if (tripInvolved.creatorUser.id == viewModel.user.value?.id.toString()) {
                 viewModel.deleteTrip(tripInvolved.id)
             } else {
-                viewModel.exitFromTrip(tripInvolved.id, participantsIdList)
+                viewModel.exitFromTrip(tripInvolved.id)
             }
 
             if (tripInvolved.status == TripStatus.ACTIVE) {
