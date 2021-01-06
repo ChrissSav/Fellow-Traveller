@@ -5,7 +5,6 @@ data class UserCreatorResponse(
     val firstName: String,
     val lastName: String,
     val picture: String?,
-    val messengerLink: String,
     val rate: Float,
     val reviews: Int
 ) {

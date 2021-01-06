@@ -12,7 +12,6 @@ data class UserCreator(
     val picture: String?,
     val rate: Float,
     val reviews: Int,
-    val messengerLink: String
 ) : Parcelable {
 
     val fullName

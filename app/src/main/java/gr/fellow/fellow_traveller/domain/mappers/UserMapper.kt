@@ -30,7 +30,7 @@ fun UserBaseResponse.mapToUserBase() = UserBase(
 )
 
 fun UserCreatorResponse.mapToUserCreatorResponse() = UserCreator(
-    id, firstName, lastName, picture, rate.round(1), reviews, messengerLink
+    id, firstName, lastName, picture, rate.round(1), reviews
 )
 
 fun UserCreator.mapToUserBase() = UserBase(
