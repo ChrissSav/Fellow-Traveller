@@ -183,6 +183,8 @@
     <string name="prompt_cancel_offer">Do you want to cancel the offer?</string>
     <string name="seat">Seat</string>
     <string name="seats">Seats</string>
+    <string name="driver_deleted_trip_header">The driver has canceled this trip</string>
+    <string name="driver_deleted_trip_description">You can not see updates for this trip, because it is no longer available</string>
     <string name="pet_companionship">Pet Companion</string>
     <string name="rating_submission_success">Your rating was submitted successfully.</string>
     <string name="your_rating_is">You rating is:</string>

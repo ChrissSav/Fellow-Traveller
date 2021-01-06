@@ -67,7 +67,6 @@
             android:layout_height="44dp"
             android:layout_marginRight="20dp"
             android:src="@drawable/ic_info"
-
             app:layout_constraintBottom_toBottomOf="@id/chat_back_button"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/chat_back_button" />
@@ -81,11 +80,6 @@
         app:layout_constraintBottom_toTopOf="@id/ActivityProfile_about_me_underline"
         app:layout_constraintTop_toBottomOf="@+id/status_chat">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh_chat_conversation"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/chat_recycler_view"
                 android:layout_width="match_parent"
@@ -98,7 +92,6 @@
                 android:paddingBottom="8dp"
                 android:clipToPadding="false" />
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/chatShimmer"
@@ -223,6 +216,50 @@
             app:layout_constraintTop_toTopOf="@id/border_of_et" />
 
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/deleted_conversation_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_shape"
+        android:backgroundTint="@color/black_color"
+        android:minHeight="120dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TextView
+            android:id="@id/header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/header_1"
+            android:text="@string/driver_deleted_trip_header"
+            android:gravity="center"
+            android:textColor="@color/white_color"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:layout_marginTop="32dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/paragraph_4"
+            android:gravity="center"
+            android:textColor="@color/white_color"
+            android:text="@string/driver_deleted_trip_description"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            android:layout_marginTop="16dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
