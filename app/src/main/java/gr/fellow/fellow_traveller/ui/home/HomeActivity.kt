@@ -89,9 +89,9 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
         viewModel.load.observe(this, {
             if (it) {
                 hideKeyboard()
-                binding.genericLoader.root.startBlurVis()
+                binding.genericLoader.root.visibility = View.VISIBLE
             } else
-                binding.genericLoader.root.stopBlurVis()
+                binding.genericLoader.root.visibility = View.GONE
         })
 
         viewModel.error.observe(this, {
