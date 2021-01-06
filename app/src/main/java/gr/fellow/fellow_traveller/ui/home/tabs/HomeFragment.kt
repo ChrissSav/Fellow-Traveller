@@ -67,7 +67,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
 
         binding.constraintLayoutNew.setOnClickListener {
-            startActivityForResult(NewTripActivity::class, 1, null)
+            startActivityForResult(NewTripActivity::class, 1, bundleOf("userRate" to viewModel.user.value?.rate))
         }
 
         binding.newTrip.setOnClickListener {
