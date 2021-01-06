@@ -13,13 +13,16 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentChatBinding
+import gr.fellow.fellow_traveller.domain.AnswerType
 import gr.fellow.fellow_traveller.domain.TripStatus
 import gr.fellow.fellow_traveller.domain.chat.ChatMessage
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.Passenger
 import gr.fellow.fellow_traveller.domain.user.UserInfo
 import gr.fellow.fellow_traveller.service.NotificationJobService.Companion.TAG
+import gr.fellow.fellow_traveller.ui.dialogs.ExitCustomDialog
 import gr.fellow.fellow_traveller.ui.extensions.*
+import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.ChatPassengersAdapter
 import gr.fellow.fellow_traveller.ui.home.adapter.MessagesAdapter
@@ -164,6 +167,9 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 findNavController()?.navigate(R.id.action_chatFragment_to_destination_info)
             }
         }
+        binding.info.exitButton.setOnClickListener {
+            ExitCustomDialog(activity as HomeActivity, this::exitCustomDialogAnswerType, getString(R.string.exit_from_trip), 1).show(parentFragmentManager, "exitCustomDialog")
+        }
 
     }
 
@@ -187,7 +193,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
     private fun readMessages(tripId: String) {
         val reference = firebaseDatabase.getReference("Messages").child(tripId)
-        messageQuery = reference.limitToLast(100)
+        messageQuery = reference.limitToLast(1000)
         messageChildEventListener = object : ChildEventListener {
 
             override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
@@ -244,6 +250,14 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
     }
 
+    private fun exitCustomDialogAnswerType(result: AnswerType) {
+        if (result == AnswerType.Yes)
+            createToast("Διαγράφηκε")
+        else
+            createToast("Δεν διαγράφηκε")
+
+
+    }
 
     override fun onDestroy() {
         if (this::messageQuery.isInitialized) {
@@ -255,7 +269,6 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         viewModel.updateSeenStatus(args.conversationItem.tripId)
 
         super.onDestroy()
-
 
     }
 
