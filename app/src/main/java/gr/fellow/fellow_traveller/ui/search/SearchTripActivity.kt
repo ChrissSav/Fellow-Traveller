@@ -12,6 +12,7 @@ import gr.fellow.fellow_traveller.domain.AnswerType
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.ui.dialogs.ExitCustomDialog
+import gr.fellow.fellow_traveller.ui.extensions.initializeBlur
 
 
 @AndroidEntryPoint
@@ -40,14 +41,17 @@ class SearchTripActivity : BaseActivityViewModel<ActivitySearchTripBinding, Sear
     override fun setUpObservers() {
         viewModel.load.observe(this, Observer {
             if (it)
-                binding.genericLoader.progressLoad.visibility = View.VISIBLE
+                binding.genericLoader.root.visibility = View.VISIBLE
             else
-                binding.genericLoader.progressLoad.visibility = View.INVISIBLE
+                binding.genericLoader.root.visibility = View.INVISIBLE
         })
     }
 
 
     override fun setUpViews() {
+        initializeBlur(binding.genericLoader.blurView)
+
+
         nav = Navigation.findNavController(this, R.id.SearchTripActivity_nav_host)
     }
 

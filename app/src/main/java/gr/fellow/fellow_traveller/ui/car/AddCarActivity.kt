@@ -8,6 +8,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivityViewModel
 import gr.fellow.fellow_traveller.databinding.ActivityAddCarBinding
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
+import gr.fellow.fellow_traveller.ui.extensions.initializeBlur
 
 @AndroidEntryPoint
 class AddCarActivity : BaseActivityViewModel<ActivityAddCarBinding, AddCarViewModel>(AddCarViewModel::class.java) {
@@ -25,23 +26,26 @@ class AddCarActivity : BaseActivityViewModel<ActivityAddCarBinding, AddCarViewMo
                 createAlerter(it.message, R.color.aqua)
         })
 
-        viewModel.saved.observe(this, Observer {
+        viewModel.saved.observe(this, {
             val intent = Intent()
             setResult(RESULT_OK, intent)
             finish()
         })
 
-        viewModel.load.observe(this, Observer {
+        viewModel.load.observe(this, {
             if (it)
-                binding.genericLoader.progressLoad.visibility = View.VISIBLE
+                binding.genericLoader.root.visibility = View.VISIBLE
             else
-                binding.genericLoader.progressLoad.visibility = View.INVISIBLE
+                binding.genericLoader.root.visibility = View.INVISIBLE
 
         })
     }
 
     override fun setUpViews() {
         with(binding) {
+
+            initializeBlur(binding.genericLoader.blurView)
+
 
             back.setOnClickListener {
                 finish()

@@ -65,7 +65,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         })
 
         viewModel.listOfParticipants.observe(viewLifecycleOwner, {
-            participantsInfo = it
+            participantsInfo.clear()
+            participantsInfo.addAll(it)
             (binding.chat.chatRecyclerView.adapter as MessagesAdapter).notifyDataSetChanged()
             readMessages(args.conversationItem.tripId)
         })

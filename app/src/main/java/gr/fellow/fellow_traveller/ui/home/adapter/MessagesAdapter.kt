@@ -11,7 +11,7 @@ import gr.fellow.fellow_traveller.domain.chat.ChatMessage
 import gr.fellow.fellow_traveller.domain.user.UserInfo
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.extensions.setTextHtml
-import gr.fellow.fellow_traveller.utils.getTimeTiDisplay
+import gr.fellow.fellow_traveller.utils.convertTimestampToFormat
 
 class MessagesAdapter(
     private val messagesList: MutableList<ChatMessage>,
@@ -25,8 +25,6 @@ class MessagesAdapter(
     private val MESSAGE_ENTRY = 2
 
     // private var viewTypeLayout = -1
-
-    private var flag: Boolean = true
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -49,9 +47,6 @@ class MessagesAdapter(
 
         val currentItem = messagesList[position]
 
-
-
-
         if (currentItem.messageType == 0) {
             if (currentItem.senderId == myId)
                 holder.message.setBackgroundResource(R.drawable.message_shape_sended)
@@ -63,48 +58,26 @@ class MessagesAdapter(
         }
 
         //if viewType is MESSAGE_TOP load all the details
-        if (currentItem.messageType == 0) {
-
-            holder.message.text = currentItem.text
-
-            // Search in our participants info
-            flag = true
-            participantsInfo.forEach {
-                if (currentItem.senderId == it.id) {
-                    holder.name.text = it.firstName
-                    holder.image.loadImageFromUrl(it.picture)
-                    flag = false
+        when {
+            currentItem.messageType == 0 -> {
+                holder.message.text = currentItem.text
+                try {
+                    val user = participantsInfo.first {
+                        it.id == currentItem.senderId
+                    }
+                    holder.name.text = user.firstName
+                    holder.image.loadImageFromUrl(user.picture)
+                } catch (e: NoSuchElementException) {
+                    holder.name.text = currentItem.senderName
+                    holder.image.loadImageFromUrl(currentItem.senderImage)
                 }
-            }
-//
-//            try {
-//                val thisItem = participantsInfo.first {
-//                    it.id == currentItem.senderId
-//                }
-//                holder.name.text = thisItem.firstName
-//                holder.image.loadImageFromUrl(thisItem.picture)
-////                participantsInfo.first {
-////                    it.id == currentItem.senderId
-////                }.apply {
-////                    holder.name.text = this.firstName
-////                    holder.image.loadImageFromUrl(this.picture)
-////                }
-//            } catch (e: NoSuchElementException) {
-//                holder.name.text = currentItem.senderName
-//                holder.image.loadImageFromUrl(currentItem.senderImage)
-//            }
 
-            //if we don't find any info (etc the user deleted this trip) we display his details from the firebase message data
-            if (flag) {
-                holder.name.text = currentItem.senderName
-                holder.image.loadImageFromUrl(currentItem.senderImage)
+                holder.date.text = convertTimestampToFormat(currentItem.timestamp, "hh:mm aaa")
             }
-
-            holder.date.text = getTimeTiDisplay(currentItem.timestamp, holder.date.context)
-        } else if (holder.viewTypeLayout == 2)
-            holder.message.setTextHtml(holder.message.context.getString(R.string.conversation_passenger_entry, currentItem.senderName))
-        else {
-            holder.message.text = currentItem.text
+            holder.viewTypeLayout == 2 -> holder.message.setTextHtml(holder.message.context.getString(R.string.conversation_passenger_entry, currentItem.senderName))
+            else -> {
+                holder.message.text = currentItem.text
+            }
         }
 
     }
@@ -123,7 +96,7 @@ class MessagesAdapter(
 
         var currNext = "-1"
         var currPrev = "-1"
-        var current = messagesList[position].senderId
+        val current = messagesList[position].senderId
         //Initialize and check if we run out of the list
         if (position + 1 < messagesList.size) {
             currNext = messagesList[position + 1].senderId;

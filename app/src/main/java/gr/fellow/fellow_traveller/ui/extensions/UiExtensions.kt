@@ -15,6 +15,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.inputmethod.InputMethodManager
@@ -32,6 +33,8 @@ import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.bumptech.glide.Glide
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.tapadoo.alerter.Alerter
+import eightbitlab.com.blurview.BlurView
+import eightbitlab.com.blurview.RenderScriptBlur
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
@@ -139,6 +142,21 @@ fun Activity.openGoogleMaps(trip: TripInvolved) {
     startActivity(Intent.createChooser(intent, getString(R.string.select_application)))
 }
 
+fun Activity.initializeBlur(blurView: BlurView) {
+    val decorView = window.decorView
+    //ViewGroup you want to start blur from. Choose root as close to BlurView in hierarchy as possible.
+    val rootView = decorView.findViewById<View>(android.R.id.content) as ViewGroup
+    //Set drawable to draw in the beginning of each blurred frame (Optional).
+    //Can be used in case your layout has a lot of transparent space and your content
+    //gets kinda lost after after blur is applied.
+    val windowBackground = decorView.background
+    blurView.setupWith(rootView)
+        .setFrameClearDrawable(windowBackground)
+        .setBlurAlgorithm(RenderScriptBlur(this))
+        .setBlurRadius(4f)
+        .setBlurAutoUpdate(true)
+        .setHasFixedTransformationMatrix(true)
+}
 
 /** ____________FRAGMENTS_____________________________ */
 

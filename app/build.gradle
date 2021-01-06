@@ -38,7 +38,8 @@ android {
 
         setProperty("archivesBaseName", applicationId + "-v" + versionName)
 
-
+        renderscriptSupportModeEnabled true
+        renderscriptTargetApi 28
     }
     signingConfigs {
 
@@ -220,6 +221,11 @@ dependencies {
     //Discord Overlaps
     implementation 'com.github.discord:OverlappingPanels:0.1.1'
 
+    implementation 'com.agrawalsuneet.androidlibs:dotsloader:1.4'
+
+    implementation 'com.eightbitlab:supportrenderscriptblur:1.0.2'
+
+    implementation 'com.eightbitlab:blurview:1.6.5'
 
 }
 kapt {

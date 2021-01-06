@@ -11,6 +11,7 @@ import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivityRegisterBinding
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
+import gr.fellow.fellow_traveller.ui.extensions.initializeBlur
 
 
 @AndroidEntryPoint
@@ -26,9 +27,9 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
     override fun setUpObservers() {
         viewModel.load.observe(this, Observer {
             if (it)
-                binding.genericLoader.progressLoad.visibility = View.VISIBLE
+                binding.genericLoader.root.visibility = View.VISIBLE
             else
-                binding.genericLoader.progressLoad.visibility = View.INVISIBLE
+                binding.genericLoader.root.visibility = View.INVISIBLE
 
         })
 
@@ -43,6 +44,10 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
     }
 
     override fun setUpViews() {
+
+        initializeBlur(binding.genericLoader.blurView)
+
+
         nav = Navigation.findNavController(this, R.id.RegisterActivity_nav_host)
 
         nav.addOnDestinationChangedListener { _, destination, _ ->

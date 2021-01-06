@@ -4,7 +4,6 @@ import android.net.Uri
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
@@ -34,7 +33,6 @@ import gr.fellow.fellow_traveller.usecase.trips.*
 import gr.fellow.fellow_traveller.usecase.user.GetUserInfoByIdUseCase
 import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -162,15 +160,9 @@ constructor(
     }
 
     fun logOut() {
-        viewModelScope.launch {
-            load.value = true
-            try {
-                logoutRemoteUseCase()
-                deleteUserAuthLocalUseCase()
-            } catch (e: java.lang.Exception) {
-
-            }
-            load.value = false
+        launchWithOutException(true) {
+            logoutRemoteUseCase()
+            deleteUserAuthLocalUseCase()
             _logout.value = true
         }
     }
@@ -357,6 +349,7 @@ constructor(
             val response = updateAccountInfoUseCase(firstName, lastName, aboutMe)
             registerUserLocalUseCase(response)
             _user.value = loadUserLocalInfoUseCase()
+            delay(DELAY_LOAD)
             _successUpdateInfo.value = true
         }
 

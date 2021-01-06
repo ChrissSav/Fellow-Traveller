@@ -10,6 +10,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivityMainBinding
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
+import gr.fellow.fellow_traveller.ui.extensions.initializeBlur
 
 
 @AndroidEntryPoint
@@ -31,9 +32,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
             load.observe(this@MainActivity, Observer {
                 if (it)
-                    binding.genericLoader.progressLoad.visibility = View.VISIBLE
+                    binding.genericLoader.root.visibility = View.VISIBLE
                 else
-                    binding.genericLoader.progressLoad.visibility = View.INVISIBLE
+                    binding.genericLoader.root.visibility = View.INVISIBLE
             })
 
 
@@ -47,6 +48,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun setUpViews() {
+        initializeBlur(binding.genericLoader.blurView)
+
+
         nav = Navigation.findNavController(this, R.id.nav_host_fragment_container)
         if (goToLogin)
             nav.navigate(R.id.action_mainFragment_to_loginFragment)

@@ -2,12 +2,12 @@ package gr.fellow.fellow_traveller.ui.auth
 
 import android.view.View
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivityVerifyAccountBinding
 import gr.fellow.fellow_traveller.ui.extensions.createToast
+import gr.fellow.fellow_traveller.ui.extensions.initializeBlur
 import gr.fellow.fellow_traveller.ui.extensions.startActivityClearStack
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 
@@ -33,15 +33,15 @@ class VerifyAccountActivity : BaseActivity<ActivityVerifyAccountBinding>() {
 
     override fun setUpObservers() {
 
-        viewModel.load.observe(this, Observer {
+        viewModel.load.observe(this, {
             if (it)
-                binding.genericLoader.progressLoad.visibility = View.VISIBLE
+                binding.genericLoader.root.visibility = View.VISIBLE
             else
-                binding.genericLoader.progressLoad.visibility = View.INVISIBLE
+                binding.genericLoader.root.visibility = View.INVISIBLE
 
         })
 
-        viewModel.error.observe(this, Observer {
+        viewModel.error.observe(this, {
             if (it.internal)
                 createToast(getString(it.messageId))
             else {
@@ -50,7 +50,7 @@ class VerifyAccountActivity : BaseActivity<ActivityVerifyAccountBinding>() {
             finish()
         })
 
-        viewModel.success.observe(this, Observer {
+        viewModel.success.observe(this, {
             createToast(getString(R.string.authentication_success))
             startActivityClearStack(HomeActivity::class)
         })
@@ -61,6 +61,9 @@ class VerifyAccountActivity : BaseActivity<ActivityVerifyAccountBinding>() {
 
     override fun setUpViews() {
         viewModel.verify(token.toString())
+
+        initializeBlur(binding.genericLoader.blurView)
+
     }
 
 

@@ -36,6 +36,19 @@ open class BaseViewModel : ViewModel() {
         }
     }
 
+    fun launchWithOutException(shouldLoad: Boolean = false, function: suspend () -> Unit) {
+        viewModelScope.launch {
+            load.value = shouldLoad
+            try {
+                function.invoke()
+                load.value = false
+            } catch (e: Exception) {
+                load.value = false
+            }
+
+        }
+    }
+
     fun launchWithLiveData(shouldLoad: Boolean = false, liveData: MutableLiveData<Boolean>, function: suspend () -> Unit) {
         viewModelScope.launch {
             liveData.value = shouldLoad

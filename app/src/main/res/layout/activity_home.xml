@@ -70,12 +70,6 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <include
-        android:id="@+id/generic_loader"
-        layout="@layout/generic_loader"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
@@ -177,6 +171,14 @@
             app:layout_constraintTop_toTopOf="@+id/notification" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <include
+        android:id="@+id/generic_loader"
+        layout="@layout/generic_loader"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
