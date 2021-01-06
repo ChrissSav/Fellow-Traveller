@@ -76,6 +76,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         viewModel.listOfParticipants.observe(viewLifecycleOwner, {
             participantsInfo.clear()
             participantsInfo.addAll(it)
+            binding.chat.chatSendButton.isEnabled = true
             (binding.chat.chatRecyclerView.adapter as MessagesAdapter).notifyDataSetChanged()
             readMessages(args.conversationItem.tripId)
         })
@@ -203,7 +204,6 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                     val aId = snapshot.child("userId").getValue(String::class.java)!!
                     participantsIdList.add(aId)
                 }
-                binding.chat.chatSendButton.isEnabled = true
                 viewModel.getParticipants(participantsIdList)
             }
 
