@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.ui.home.chat
 
 import android.util.Log
+import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
@@ -82,6 +83,11 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         viewModel.tripInfo.observe(viewLifecycleOwner, { trip ->
             //Load end panel with tripInvolved info
             tripInvolved = trip
+            if (tripInvolved == null) {
+                createToast("Διαγράφηκε")
+                binding.overlappingPanels.setEndPanelLockState(OverlappingPanelsLayout.LockState.CLOSE)
+                binding.chat.deletedConversationSection.visibility = View.VISIBLE
+            }
             trip?.let {
                 with(binding.info) {
                     from.text = it.destFrom.title
@@ -267,7 +273,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 if (it.creatorUser.id == viewModel.user.value?.id.toString()) {
                     viewModel.deleteTrip(it.id)
                 } else {
-                    viewModel.exitFromTrip(it.id, participantsIdList)
+                    viewModel.exitFromTrip(it.id)
                 }
                 if (it.status == TripStatus.ACTIVE) {
                     onBackPressed()
