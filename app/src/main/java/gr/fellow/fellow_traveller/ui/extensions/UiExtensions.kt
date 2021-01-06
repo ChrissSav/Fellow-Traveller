@@ -15,7 +15,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.inputmethod.InputMethodManager
@@ -33,11 +32,10 @@ import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.bumptech.glide.Glide
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.tapadoo.alerter.Alerter
-import eightbitlab.com.blurview.BlurView
-import eightbitlab.com.blurview.RenderScriptBlur
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
+import gr.fellow.fellow_traveller.ui.views.blur.BlurLayout
 import gr.fellow.fellow_traveller.utils.RESENT_EMAIL
 import gr.fellow.fellow_traveller.utils.set
 import kotlin.reflect.KClass
@@ -142,21 +140,24 @@ fun Activity.openGoogleMaps(trip: TripInvolved) {
     startActivity(Intent.createChooser(intent, getString(R.string.select_application)))
 }
 
-fun Activity.initializeBlur(blurView: BlurView) {
+/*fun Activity.initializeBlur(blurView: BlurView, rootView: ViewGroup) {
+
+    val radius = 5f
     val decorView = window.decorView
-    //ViewGroup you want to start blur from. Choose root as close to BlurView in hierarchy as possible.
-    val rootView = decorView.findViewById<View>(android.R.id.content) as ViewGroup
-    //Set drawable to draw in the beginning of each blurred frame (Optional).
-    //Can be used in case your layout has a lot of transparent space and your content
-    //gets kinda lost after after blur is applied.
     val windowBackground = decorView.background
     blurView.setupWith(rootView)
+            .setFrameClearDrawable(windowBackground)
+            .setBlurAlgorithm(SupportRenderScriptBlur(this))
+            .setBlurRadius(radius)
+            .setHasFixedTransformationMatrix(false)
+
+*//*    blurView.setupWith(rootView)
         .setFrameClearDrawable(windowBackground)
         .setBlurAlgorithm(RenderScriptBlur(this))
         .setBlurRadius(4f)
         .setBlurAutoUpdate(true)
-        .setHasFixedTransformationMatrix(true)
-}
+        .setHasFixedTransformationMatrix(true)*//*
+}*/
 
 /** ____________FRAGMENTS_____________________________ */
 
@@ -325,6 +326,15 @@ fun ShimmerFrameLayout.stopShimmerWithVisibility() {
     visibility = View.GONE
 }
 
+fun BlurLayout.startBlurVis() {
+    startBlur()
+    visibility = View.VISIBLE
+}
+
+fun BlurLayout.stopBlurVis() {
+    pauseBlur()
+    visibility = View.GONE
+}
 
 fun postDelay(time: Long, function: () -> Unit) {
     /*Timer().schedule(object : TimerTask() {
@@ -387,17 +397,6 @@ fun View.visibleAnim() {
             }
         })
 
-}
-
-
-fun displayPasswordSuggestions(value: Int, textView: TextView) {
-    if (value == 1) {
-        textView.setTextColor(ContextCompat.getColor(textView.context, R.color.orange_new))
-        textView.setDrawableTint(R.color.orange_new)
-    } else {
-        textView.setTextColor(ContextCompat.getColor(textView.context, R.color.dark_gray_new))
-        textView.setDrawableTint(R.color.dark_gray_new)
-    }
 }
 
 

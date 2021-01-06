@@ -225,7 +225,8 @@ dependencies {
 
     implementation 'com.eightbitlab:supportrenderscriptblur:1.0.2'
 
-    implementation 'com.eightbitlab:blurview:1.6.5'
+
+
 
 }
 kapt {

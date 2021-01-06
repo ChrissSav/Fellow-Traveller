@@ -211,7 +211,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
         if (user.id != userId)
             activity?.startActivityWithBundle(UserProfileDetailsActivity::class, bundleOf("userId" to user.id))
         else {
-
+            findNavController()?.navigate(R.id.action_tripInvolvedCreatorDetailsFragment_to_destination_info)
         }
     }
 

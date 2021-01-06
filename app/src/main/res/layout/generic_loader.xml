@@ -1,45 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<gr.fellow.fellow_traveller.ui.views.blur.BlurLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:elevation="16dp">
-
-    <FrameLayout
-        android:id="@+id/blurView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="@color/background_color_progress"
-        android:focusableInTouchMode="true">
+    android:clickable="true"
+    android:elevation="16dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    app:blk_blurRadius="15">
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <com.agrawalsuneet.dotsloader.loaders.LazyLoader
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:lazyloader_animDur="250"
+        app:lazyloader_dotsDist="10dp"
+        app:lazyloader_dotsRadius="7dp"
+        app:lazyloader_firstDelayDur="150"
+        app:lazyloader_firstDotColor="@color/black_color"
+        app:lazyloader_interpolator="@android:anim/decelerate_interpolator"
+        app:lazyloader_secondDelayDur="300"
+        app:lazyloader_secondDotColor="@color/black_color"
+        app:lazyloader_thirdDotColor="@color/black_color" />
 
 
-            <com.agrawalsuneet.dotsloader.loaders.LazyLoader
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:lazyloader_animDur="500"
-                app:lazyloader_dotsDist="10dp"
-                app:lazyloader_dotsRadius="7dp"
-                app:lazyloader_firstDelayDur="150"
-                app:lazyloader_firstDotColor="@color/black_color"
-                app:lazyloader_interpolator="@android:anim/decelerate_interpolator"
-                app:lazyloader_secondDelayDur="300"
-                app:lazyloader_secondDotColor="@color/black_color"
-                app:lazyloader_thirdDotColor="@color/black_color" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </FrameLayout>
-
-
-</FrameLayout>
+</gr.fellow.fellow_traveller.ui.views.blur.BlurLayout>
