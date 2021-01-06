@@ -7,10 +7,7 @@ import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.scopes.ActivityScoped
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.usecase.auth.*
-import gr.fellow.fellow_traveller.usecase.firabase.CreateOrEnterConversationFirebaseUseCase
-import gr.fellow.fellow_traveller.usecase.firabase.SendMessageFirebaseUseCase
-import gr.fellow.fellow_traveller.usecase.firabase.UpdateSeenStatusFirebaseUseCase
-import gr.fellow.fellow_traveller.usecase.firabase.UploadPictureFirebaseUseCase
+import gr.fellow.fellow_traveller.usecase.firabase.*
 import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.newtrip.GetGeometryFormPlaceUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.GetPlaceFromPlacesUseCase
@@ -49,6 +46,12 @@ class UseCasesModule {
     @Provides
     fun provideCreateOrEnterConversationFirebaseUseCase(dataSource: FellowDataSource): CreateOrEnterConversationFirebaseUseCase {
         return CreateOrEnterConversationFirebaseUseCase(dataSource)
+    }
+
+    @ActivityScoped
+    @Provides
+    fun provideDeleteConversationFirebaseUseCase(dataSource: FellowDataSource): DeleteConversationFirebaseUseCase {
+        return DeleteConversationFirebaseUseCase(dataSource)
     }
 
     @ActivityScoped

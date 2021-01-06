@@ -1,7 +1,6 @@
 package gr.fellow.fellow_traveller.ui.home.chat
 
 import android.util.Log
-import androidx.annotation.NonNull
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
@@ -13,13 +12,16 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentChatBinding
+import gr.fellow.fellow_traveller.domain.AnswerType
 import gr.fellow.fellow_traveller.domain.TripStatus
 import gr.fellow.fellow_traveller.domain.chat.ChatMessage
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.Passenger
 import gr.fellow.fellow_traveller.domain.user.UserInfo
 import gr.fellow.fellow_traveller.service.NotificationJobService.Companion.TAG
+import gr.fellow.fellow_traveller.ui.dialogs.ExitCustomDialog
 import gr.fellow.fellow_traveller.ui.extensions.*
+import gr.fellow.fellow_traveller.ui.home.HomeActivity
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.ChatPassengersAdapter
 import gr.fellow.fellow_traveller.ui.home.adapter.MessagesAdapter
@@ -41,12 +43,16 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     private val args: ChatFragmentArgs by navArgs()
     private val viewModel: HomeViewModel by activityViewModels()
     private val messagesList = mutableListOf<ChatMessage>()
-    private val participantsIdList: ArrayList<String> = ArrayList()
+    private var participantsIdList = mutableListOf<String>()
 
     private var participantsInfo = mutableListOf<UserInfo>()
 
+    private var updateStatusWhenExit: Boolean = true
+
     private lateinit var messageQuery: Query
+    private lateinit var participantsReference: DatabaseReference
     private lateinit var messageChildEventListener: ChildEventListener
+    private lateinit var participantsListener: ValueEventListener
 
     private lateinit var tripInvolved: TripInvolved
 
@@ -164,15 +170,19 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 findNavController()?.navigate(R.id.action_chatFragment_to_destination_info)
             }
         }
+        binding.info.exitButton.setOnClickListener {
+            ExitCustomDialog(activity as HomeActivity, this::exitCustomDialogAnswerType, getString(R.string.exit_from_trip), 1).show(parentFragmentManager, "exitCustomDialog")
+        }
 
     }
 
     private fun getAllParticipantsId(tripId: String) {
         viewModel.loadMessages.value = true
         participantsIdList.clear()
-        val reference2 = firebaseDatabase.getReference("TripsAndParticipants").child(tripId)
-        reference2.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(@NonNull dataSnapshot: DataSnapshot) {
+        participantsReference = firebaseDatabase.getReference("TripsAndParticipants").child(tripId)
+
+        participantsListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (snapshot in dataSnapshot.children) {
                     val aId = snapshot.child("userId").getValue(String::class.java)!!
                     participantsIdList.add(aId)
@@ -181,13 +191,16 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 viewModel.getParticipants(participantsIdList)
             }
 
-            override fun onCancelled(@NonNull databaseError: DatabaseError) {}
-        })
+            override fun onCancelled(databaseError: DatabaseError) {
+
+            }
+        }
+        participantsReference.addValueEventListener(participantsListener)
     }
 
     private fun readMessages(tripId: String) {
         val reference = firebaseDatabase.getReference("Messages").child(tripId)
-        messageQuery = reference.limitToLast(100)
+        messageQuery = reference.limitToLast(1000)
         messageChildEventListener = object : ChildEventListener {
 
             override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
@@ -213,7 +226,6 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             }
         }
         messageQuery.addChildEventListener(messageChildEventListener)
-
     }
 
 
@@ -244,6 +256,26 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
     }
 
+    private fun exitCustomDialogAnswerType(result: AnswerType) {
+        if (result == AnswerType.Yes) {
+
+            //if it Active delete or exit whether the user is the creator or not
+            //Delete trip use case on view model
+            if (tripInvolved.creatorUser.id == viewModel.user.value?.id.toString()) {
+                viewModel.deleteTrip(tripInvolved.id)
+            } else {
+                viewModel.exitFromTrip(tripInvolved.id, participantsIdList)
+            }
+
+            if (tripInvolved.status == TripStatus.ACTIVE) {
+                onBackPressed()
+            }
+
+            //updateStatusWhenExit = false
+        }
+
+
+    }
 
     override fun onDestroy() {
         if (this::messageQuery.isInitialized) {
@@ -251,11 +283,17 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 messageQuery.removeEventListener(messageChildEventListener)
             }
         }
+        if (this::participantsReference.isInitialized) {
+            runBlocking {
+                participantsReference.removeEventListener(participantsListener)
+            }
+        }
         //When we exit the frag we update the status as seen
-        viewModel.updateSeenStatus(args.conversationItem.tripId)
+//        if(updateStatusWhenExit) {
+//            viewModel.updateSeenStatus(args.conversationItem.tripId)
+//        }
 
         super.onDestroy()
-
 
     }
 

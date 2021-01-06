@@ -190,6 +190,7 @@
     <string name="date_range">Date range</string>
     <string name="cancel_search">Do you want to cancel the search?</string>
     <string name="per_person">per person</string>
+    <string name="exit_from_trip">Are you sure you want to leave this trip?</string>
     <string name="most_relevant">Most Relevant</string>
     <string name="price_title">Price</string>
     <string name="rating">Rating</string>

@@ -165,6 +165,7 @@
     <string name="date_range">Εύρος ημ/νίας</string>
     <string name="cancel_search">Ακύρωση αναζήτησης;</string>
     <string name="per_person">ανά άτομο</string>
+    <string name="exit_from_trip">Θέλεις σίγουρα να αποχωρήσεις από αυτό το ταξίδι;</string>
     <string name="most_relevant">Πιο σχετικά</string>
     <string name="price_title">Τιμή</string>
     <string name="enter_destination">Επέλεξε τον προορισμό σου</string>

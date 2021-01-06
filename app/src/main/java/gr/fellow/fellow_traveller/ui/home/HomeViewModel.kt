@@ -21,6 +21,7 @@ import gr.fellow.fellow_traveller.ui.extensions.toMutableListSafe
 import gr.fellow.fellow_traveller.ui.home.chat.models.Conversation
 import gr.fellow.fellow_traveller.usecase.auth.ChangePasswordUseCase
 import gr.fellow.fellow_traveller.usecase.auth.DeleteUserAuthLocalUseCase
+import gr.fellow.fellow_traveller.usecase.firabase.DeleteConversationFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.firabase.SendMessageFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.firabase.UpdateSeenStatusFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.firabase.UploadPictureFirebaseUseCase
@@ -68,6 +69,7 @@ constructor(
     private val getUserInfoByIdUseCase: GetUserInfoByIdUseCase,
     private val sendMessageFirebaseUseCase: SendMessageFirebaseUseCase,
     private val updateSeenStatusFirebaseUseCase: UpdateSeenStatusFirebaseUseCase,
+    private val deleteConversationFirebaseUseCase: DeleteConversationFirebaseUseCase,
 
 
     ) : BaseViewModel() {
@@ -360,6 +362,7 @@ constructor(
         launch(true) {
             deleteTripUseCase(tripId)
             _tripsAsCreatorActive.value = deleteTripWithId(tripId, _tripsAsCreatorActive.value)
+            deleteFirebaseConversation(_user.value?.id.toString(), tripId)
             _successDeletion.value = R.string.delete_trip_success
             updateUserInfo()
         }
@@ -407,10 +410,14 @@ constructor(
     }
 
 
-    fun exitFromTrip(tripId: String) {
+    fun exitFromTrip(tripId: String, passengersIdList: MutableList<String>) {
         launch(true) {
             exitFromTripUseCase(tripId)
             _tripsAsPassengerActive.value = deleteTripWithId(tripId, _tripsAsPassengerActive.value)
+            passengersIdList.forEach {
+                deleteFirebaseConversation(it, tripId)
+            }
+
             _successDeletion.value = R.string.leave_trip_success
             updateUserInfo()
         }
@@ -510,7 +517,7 @@ constructor(
     }
 
     val loadMessageFirebase = MutableLiveData<Boolean>()
-    fun sendFirebaseMessage(textMessage: String, tripId: String, messageType: Int, participantsList: ArrayList<String>) {
+    fun sendFirebaseMessage(textMessage: String, tripId: String, messageType: Int, participantsList: MutableList<String>) {
 
         launchWithLiveData(true, loadMessageFirebase) {
             sendMessageFirebaseUseCase.invoke(_user.value?.id.toString(),
@@ -528,6 +535,13 @@ constructor(
     fun updateSeenStatus(tripId: String) {
         launch {
             updateSeenStatusFirebaseUseCase.invoke(tripId, _user.value?.id.toString())
+        }
+
+    }
+
+    fun deleteFirebaseConversation(userId: String, tripId: String) {
+        launch {
+            deleteConversationFirebaseUseCase.invoke(userId, tripId)
         }
 
     }

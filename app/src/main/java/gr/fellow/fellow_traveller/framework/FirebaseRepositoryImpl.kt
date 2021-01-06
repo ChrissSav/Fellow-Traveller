@@ -8,8 +8,6 @@ import com.google.firebase.storage.FirebaseStorage
 import gr.fellow.fellow_traveller.data.FirebaseRepository
 import gr.fellow.fellow_traveller.utils.firebaseCall
 import kotlinx.coroutines.tasks.await
-import java.util.*
-import kotlin.collections.HashMap
 import kotlin.collections.set
 
 
@@ -29,7 +27,7 @@ class FirebaseRepositoryImpl(
             fileReference.downloadUrl.await().toString()
         }
 
-    override suspend fun sendMessage(hashMap: HashMap<String, Any>, participantsList: ArrayList<String>) {
+    override suspend fun sendMessage(hashMap: HashMap<String, Any>, participantsList: MutableList<String>) {
         firebaseCall {
 
             val tripId = hashMap["tripId"].toString()
@@ -85,7 +83,17 @@ class FirebaseRepositoryImpl(
         }
     }
 
-    private suspend fun updateParticipantsStatus(hashMap: HashMap<String, Any>, participantsList: ArrayList<String>) {
+    override suspend fun deleteConversation(userId: String, tripId: String) {
+        firebaseCall {
+            val referenceUserTripsDelete = firebaseDatabase.reference.child("UserTrips").child(userId).child(tripId)
+            referenceUserTripsDelete.removeValue().await()
+
+            val referenceTripsAndParticipantsDelete = firebaseDatabase.reference.child("TripsAndParticipants").child(tripId).child(userId)
+            referenceTripsAndParticipantsDelete.removeValue().await()
+        }
+    }
+
+    private suspend fun updateParticipantsStatus(hashMap: HashMap<String, Any>, participantsList: MutableList<String>) {
 
         val textMessage = hashMap["text"].toString()
         val tripId = hashMap["tripId"].toString()
