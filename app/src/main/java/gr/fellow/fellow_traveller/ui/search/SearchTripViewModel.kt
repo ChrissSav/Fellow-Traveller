@@ -97,7 +97,7 @@ constructor(
 
 
     fun bookTrip(tripId: String, seats: Int, pet: Boolean, userBase: UserBase, list: ArrayList<String>) {
-        launch(true) {
+        launchAfter(true, _tripBook) {
             try {
                 val response = bookTripUseCase(tripId, seats, pet)
 
@@ -107,15 +107,12 @@ constructor(
                 )
 
                 sendMessageFirebaseUseCase.invoke(userBase.id, tripId, "", userBase.firstName, 1, list, "")
-
-                _tripBook.value = response
+                return@launchAfter response
             } catch (e: Exception) {
                 handleErrorBook(tripId)
                 throw e
             }
-
         }
-
     }
 
     fun getTrips() {
