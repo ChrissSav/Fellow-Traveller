@@ -10,7 +10,7 @@ const val components = "country:gr"
 const val ACCESS_DENIED = 50
 const val SOMETHING_WRONG = 60
 
-const val RESENT_EMAIL = ""
+const val RESENT_EMAIL = "RESENT_EMAIL"
 const val NOTIFICATION_TIME_LOOP = 15000L // every 15 seconds
 const val NOTIFICATION_SERVICE_CODE = 1997
 

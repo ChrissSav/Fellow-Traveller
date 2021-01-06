@@ -35,7 +35,6 @@ import com.tapadoo.alerter.Alerter
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
-import gr.fellow.fellow_traveller.ui.views.blur.BlurLayout
 import gr.fellow.fellow_traveller.utils.RESENT_EMAIL
 import gr.fellow.fellow_traveller.utils.set
 import kotlin.reflect.KClass
@@ -139,25 +138,6 @@ fun Activity.openGoogleMaps(trip: TripInvolved) {
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
     startActivity(Intent.createChooser(intent, getString(R.string.select_application)))
 }
-
-/*fun Activity.initializeBlur(blurView: BlurView, rootView: ViewGroup) {
-
-    val radius = 5f
-    val decorView = window.decorView
-    val windowBackground = decorView.background
-    blurView.setupWith(rootView)
-            .setFrameClearDrawable(windowBackground)
-            .setBlurAlgorithm(SupportRenderScriptBlur(this))
-            .setBlurRadius(radius)
-            .setHasFixedTransformationMatrix(false)
-
-*//*    blurView.setupWith(rootView)
-        .setFrameClearDrawable(windowBackground)
-        .setBlurAlgorithm(RenderScriptBlur(this))
-        .setBlurRadius(4f)
-        .setBlurAutoUpdate(true)
-        .setHasFixedTransformationMatrix(true)*//*
-}*/
 
 /** ____________FRAGMENTS_____________________________ */
 
@@ -326,15 +306,6 @@ fun ShimmerFrameLayout.stopShimmerWithVisibility() {
     visibility = View.GONE
 }
 
-fun BlurLayout.startBlurVis() {
-    startBlur()
-    visibility = View.VISIBLE
-}
-
-fun BlurLayout.stopBlurVis() {
-    pauseBlur()
-    visibility = View.GONE
-}
 
 fun postDelay(time: Long, function: () -> Unit) {
     /*Timer().schedule(object : TimerTask() {
