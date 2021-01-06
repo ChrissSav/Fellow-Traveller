@@ -83,11 +83,16 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         viewModel.tripInfo.observe(viewLifecycleOwner, { trip ->
             //Load end panel with tripInvolved info
             tripInvolved = trip
+
+            //if trip is null then the trip is deleted, so display the appropriate layout sections
             if (tripInvolved == null) {
-                createToast("Διαγράφηκε")
                 binding.overlappingPanels.setEndPanelLockState(OverlappingPanelsLayout.LockState.CLOSE)
                 binding.chat.deletedConversationSection.visibility = View.VISIBLE
+                binding.chat.sendMessageSection.visibility = View.GONE
+                binding.chat.chatInfoButton.visibility = View.GONE
             }
+
+
             trip?.let {
                 with(binding.info) {
                     from.text = it.destFrom.title
@@ -177,6 +182,9 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             } else {
                 findNavController()?.navigate(R.id.action_chatFragment_to_destination_info)
             }
+        }
+        binding.chat.chatBackButton.setOnClickListener {
+            onBackPressed()
         }
         binding.info.exitButton.setOnClickListener {
             ExitCustomDialog(activity as HomeActivity, this::exitCustomDialogAnswerType, getString(R.string.exit_from_trip), 1).show(parentFragmentManager, "exitCustomDialog")

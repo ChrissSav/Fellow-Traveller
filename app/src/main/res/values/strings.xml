@@ -158,6 +158,8 @@
     <string name="prompt_cancel_offer">Ακύρωση καταχώρησης προσφοράς ταξιδιού;</string>
     <string name="seat">Θέση</string>
     <string name="seats">Θέσεις</string>
+    <string name="driver_deleted_trip_header">Ο οδηγός έχει ακυρώσει αυτό το ταξίδι</string>
+    <string name="driver_deleted_trip_description">Δεν μπορείς να βλέπεις ενημερώσεις για αυτό ταξίδι, γιατί δεν είναι πλέον διαθέσιμο</string>
     <string name="pet_companionship">Συνοδεία Κατοικιδίου</string>
     <string name="rating_submission_success">Η αξιολόγηση καταχωρήθηκε επιτυχώς.</string>
     <string name="your_rating_is">Η αξιολόγηση σας είναι:</string>
