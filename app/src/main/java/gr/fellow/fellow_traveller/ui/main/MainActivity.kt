@@ -10,7 +10,6 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivityMainBinding
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
-import gr.fellow.fellow_traveller.ui.extensions.initializeBlur
 
 
 @AndroidEntryPoint
@@ -48,7 +47,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun setUpViews() {
-        initializeBlur(binding.genericLoader.blurView)
 
 
         nav = Navigation.findNavController(this, R.id.nav_host_fragment_container)

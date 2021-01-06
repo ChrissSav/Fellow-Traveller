@@ -10,7 +10,6 @@ import gr.fellow.fellow_traveller.databinding.ActivityRateBinding
 import gr.fellow.fellow_traveller.domain.notification.Notification
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 import gr.fellow.fellow_traveller.ui.extensions.createToast
-import gr.fellow.fellow_traveller.ui.extensions.initializeBlur
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 
 @AndroidEntryPoint
@@ -62,9 +61,8 @@ class RateActivity : BaseActivityViewModel<ActivityRateBinding, RateViewModel>(R
     override fun setUpViews() {
         with(binding) {
 
-            initializeBlur(binding.genericLoader.blurView)
 
-            viewModel.checkReview(notification)
+        viewModel.checkReview(notification)
 
             rateTrip.text = "${notification.trip.destinationFrom} -  ${notification.trip.destinationTo}"
 

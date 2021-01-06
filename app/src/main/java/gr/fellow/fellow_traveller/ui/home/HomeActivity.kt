@@ -132,8 +132,6 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
     override fun setUpViews() {
 
 
-        initializeBlur(binding.genericLoader.blurView)
-
         viewModel.loadUserInfo()
         viewModel.loadCars()
         viewModel.loadTripsAsCreator()

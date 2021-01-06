@@ -5,12 +5,13 @@
     android:layout_height="match_parent"
     android:elevation="16dp">
 
-    <eightbitlab.com.blurview.BlurView
+    <FrameLayout
         android:id="@+id/blurView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true"
         android:focusable="true"
+        android:background="@color/background_color_progress"
         android:focusableInTouchMode="true">
 
 
@@ -38,7 +39,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </eightbitlab.com.blurview.BlurView>
+    </FrameLayout>
 
 
 </FrameLayout>

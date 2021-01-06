@@ -7,7 +7,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivityForgotPasswordBinding
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
-import gr.fellow.fellow_traveller.ui.extensions.initializeBlur
 import gr.fellow.fellow_traveller.ui.main.MainActivity
 
 @AndroidEntryPoint
@@ -50,7 +49,6 @@ class ForgotPasswordActivity : BaseActivity<ActivityForgotPasswordBinding>() {
 
     override fun setUpViews() {
 
-        initializeBlur(binding.genericLoader.blurView)
 
     }
 

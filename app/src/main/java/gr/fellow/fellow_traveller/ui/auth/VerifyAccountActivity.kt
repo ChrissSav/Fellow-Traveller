@@ -7,7 +7,6 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivityVerifyAccountBinding
 import gr.fellow.fellow_traveller.ui.extensions.createToast
-import gr.fellow.fellow_traveller.ui.extensions.initializeBlur
 import gr.fellow.fellow_traveller.ui.extensions.startActivityClearStack
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 
@@ -62,7 +61,6 @@ class VerifyAccountActivity : BaseActivity<ActivityVerifyAccountBinding>() {
     override fun setUpViews() {
         viewModel.verify(token.toString())
 
-        initializeBlur(binding.genericLoader.blurView)
 
     }
 
