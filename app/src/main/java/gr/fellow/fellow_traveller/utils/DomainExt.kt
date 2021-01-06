@@ -2,12 +2,12 @@ package gr.fellow.fellow_traveller.utils
 
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import gr.fellow.fellow_traveller.data.BaseApiException
 import gr.fellow.fellow_traveller.data.BaseResponse
 import okhttp3.ResponseBody
+import java.net.InetAddress
 
 
 private inline fun SharedPreferences.edit(operation: (SharedPreferences.Editor) -> Unit) {
@@ -41,26 +41,14 @@ inline operator fun <reified T : Any> SharedPreferences.get(key: String, default
 
 
 class ConnectivityHelper(private val connectivityManager: ConnectivityManager) {
-
     fun checkInternetConnection(): Boolean {
-        val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-        if (capabilities != null) {
-            when {
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
-                    //Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
-                    return true
-                }
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
-                    // Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
-                    return true
-                }
-                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
-                    //  Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
-                    return true
-                }
-            }
+        return try {
+            val check = InetAddress.getByName("google.com")
+            //You can replace it with your name
+            !check.equals("")
+        } catch (e: java.lang.Exception) {
+            false
         }
-        return false
     }
 }
 
