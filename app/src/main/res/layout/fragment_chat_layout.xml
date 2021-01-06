@@ -80,12 +80,6 @@
         app:layout_constraintBottom_toTopOf="@id/ActivityProfile_about_me_underline"
         app:layout_constraintTop_toBottomOf="@+id/status_chat">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh_chat_conversation"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="invisible">
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/chat_recycler_view"
                 android:layout_width="match_parent"
@@ -98,7 +92,6 @@
                 android:paddingBottom="8dp"
                 android:clipToPadding="false" />
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/chatShimmer"
