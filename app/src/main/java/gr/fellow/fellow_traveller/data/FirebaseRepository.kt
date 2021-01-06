@@ -14,5 +14,7 @@ interface FirebaseRepository {
 
     suspend fun createOrEnterConversation(myId: String, creatorId: String, tripId: String, tripName: String, picture: String)
 
+    suspend fun deleteConversation(userId: String, tripId: String)
+
 
 }

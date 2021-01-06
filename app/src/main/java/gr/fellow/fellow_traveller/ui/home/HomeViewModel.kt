@@ -21,6 +21,7 @@ import gr.fellow.fellow_traveller.ui.extensions.toMutableListSafe
 import gr.fellow.fellow_traveller.ui.home.chat.models.Conversation
 import gr.fellow.fellow_traveller.usecase.auth.ChangePasswordUseCase
 import gr.fellow.fellow_traveller.usecase.auth.DeleteUserAuthLocalUseCase
+import gr.fellow.fellow_traveller.usecase.firabase.DeleteConversationFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.firabase.SendMessageFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.firabase.UpdateSeenStatusFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.firabase.UploadPictureFirebaseUseCase
@@ -68,6 +69,7 @@ constructor(
     private val getUserInfoByIdUseCase: GetUserInfoByIdUseCase,
     private val sendMessageFirebaseUseCase: SendMessageFirebaseUseCase,
     private val updateSeenStatusFirebaseUseCase: UpdateSeenStatusFirebaseUseCase,
+    private val deleteConversationFirebaseUseCase: DeleteConversationFirebaseUseCase,
 
 
     ) : BaseViewModel() {
@@ -528,6 +530,13 @@ constructor(
     fun updateSeenStatus(tripId: String) {
         launch {
             updateSeenStatusFirebaseUseCase.invoke(tripId, _user.value?.id.toString())
+        }
+
+    }
+
+    fun deleteFirebaseConversation(tripId: String) {
+        launch {
+            deleteConversationFirebaseUseCase.invoke(_user.value?.id.toString(), tripId)
         }
 
     }

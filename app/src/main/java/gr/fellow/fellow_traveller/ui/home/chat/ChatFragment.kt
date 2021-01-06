@@ -48,6 +48,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
     private var participantsInfo = mutableListOf<UserInfo>()
 
+    private var updateStatusWhenExit: Boolean = true
+
     private lateinit var messageQuery: Query
     private lateinit var messageChildEventListener: ChildEventListener
 
@@ -251,10 +253,11 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     }
 
     private fun exitCustomDialogAnswerType(result: AnswerType) {
-        if (result == AnswerType.Yes)
-            createToast("Διαγράφηκε")
-        else
-            createToast("Δεν διαγράφηκε")
+        if (result == AnswerType.Yes) {
+            viewModel.deleteFirebaseConversation(args.conversationItem.tripId)
+            //updateStatusWhenExit = false
+            activity?.onBackPressed()
+        }
 
 
     }
@@ -266,7 +269,9 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             }
         }
         //When we exit the frag we update the status as seen
-        viewModel.updateSeenStatus(args.conversationItem.tripId)
+//        if(updateStatusWhenExit) {
+//            viewModel.updateSeenStatus(args.conversationItem.tripId)
+//        }
 
         super.onDestroy()
 

@@ -85,6 +85,16 @@ class FirebaseRepositoryImpl(
         }
     }
 
+    override suspend fun deleteConversation(userId: String, tripId: String) {
+        firebaseCall {
+            val referenceUserTripsDelete = firebaseDatabase.reference.child("UserTrips").child(userId).child(tripId)
+            referenceUserTripsDelete.removeValue().await()
+
+            val referenceTripsAndParticipantsDelete = firebaseDatabase.reference.child("TripsAndParticipants").child(tripId).child(userId)
+            referenceTripsAndParticipantsDelete.removeValue().await()
+        }
+    }
+
     private suspend fun updateParticipantsStatus(hashMap: HashMap<String, Any>, participantsList: ArrayList<String>) {
 
         val textMessage = hashMap["text"].toString()
