@@ -7,7 +7,6 @@ import com.google.gson.JsonParser
 import gr.fellow.fellow_traveller.data.BaseApiException
 import gr.fellow.fellow_traveller.data.BaseResponse
 import okhttp3.ResponseBody
-import java.net.InetAddress
 
 
 private inline fun SharedPreferences.edit(operation: (SharedPreferences.Editor) -> Unit) {
@@ -43,9 +42,8 @@ inline operator fun <reified T : Any> SharedPreferences.get(key: String, default
 class ConnectivityHelper(private val connectivityManager: ConnectivityManager) {
     fun checkInternetConnection(): Boolean {
         return try {
-            val check = InetAddress.getByName("google.com")
-            //You can replace it with your name
-            !check.equals("")
+            val command = "ping -c 1 google.com"
+            return Runtime.getRuntime().exec(command).waitFor() == 0
         } catch (e: java.lang.Exception) {
             false
         }

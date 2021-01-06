@@ -293,7 +293,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
     }
 
-    override fun onDestroy() {
+    override fun onDetach() {
         if (this::messageQuery.isInitialized) {
             runBlocking {
                 messageQuery.removeEventListener(messageChildEventListener)
@@ -309,7 +309,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 //            viewModel.updateSeenStatus(args.conversationItem.tripId)
 //        }
 
-        super.onDestroy()
+        super.onDetach()
 
     }
 

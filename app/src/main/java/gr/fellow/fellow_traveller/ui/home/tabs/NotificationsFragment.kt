@@ -37,6 +37,7 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
         viewModel.notifications.observe(viewLifecycleOwner, {
             notifications.clear()
             notifications.addAll(it)
+            (binding.recyclerView.adapter as NotificationAdapter).notifyDataSetChanged()
             if (it.isNullOrEmpty())
                 binding.notificationsSection.visibility = View.VISIBLE
             else
@@ -82,6 +83,7 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
             loadMoreTripsAsCreator = true
             loadMoreTripsAsPassenger = true
             notifications.clear()
+            (binding.recyclerView.adapter as NotificationAdapter).notifyDataSetChanged()
             viewModel.loadNotifications(true)
         }
     }
