@@ -36,6 +36,37 @@ open class BaseViewModel : ViewModel() {
         }
     }
 
+    fun <T : Any> launchAfter(shouldLoad: Boolean = false, mLiveData: SingleLiveEvent<T>, function: suspend () -> T) {
+        viewModelScope.launch {
+            load.value = shouldLoad
+            try {
+                val data = function.invoke()
+                load.value = false
+                mLiveData.value = data
+            } catch (e: Exception) {
+                load.value = false
+                handleError(e)
+            }
+
+        }
+    }
+
+    fun <T : Any> launchAfter(shouldLoad: Boolean = false, mLiveData: MutableLiveData<T>, function: suspend () -> T) {
+        viewModelScope.launch {
+            load.value = shouldLoad
+            try {
+                val data = function.invoke()
+                load.value = false
+                mLiveData.value = data
+            } catch (e: Exception) {
+                load.value = false
+                handleError(e)
+            }
+
+        }
+    }
+
+
     fun launchWithOutException(shouldLoad: Boolean = false, function: suspend () -> Unit) {
         viewModelScope.launch {
             load.value = shouldLoad

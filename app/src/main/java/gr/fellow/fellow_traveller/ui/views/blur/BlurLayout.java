@@ -40,66 +40,42 @@ public class BlurLayout extends FrameLayout {
      */
     private float mDownscaleFactor;
 
-    /**
-     * Blur radius passed directly to stackblur library.
-     */
+    /** Blur radius passed directly to stackblur library. */
     private int mBlurRadius;
 
-    /**
-     * Number of blur invalidations to do per second.
-     */
+    /** Number of blur invalidations to do per second.  */
     private int mFPS;
 
-    /**
-     * Corner radius for the layouts blur. To make rounded rects and circles.
-     */
+    /** Corner radius for the layouts blur. To make rounded rects and circles. */
     private float mCornerRadius;
 
-    /**
-     * Alpha value to set transparency
-     */
+    /** Alpha value to set transparency */
     private float mAlpha;
 
-    /**
-     * Is blur running?
-     */
+    /** Is blur running? */
     private boolean mRunning;
 
-    /**
-     * Is window attached?
-     */
+    /** Is window attached? */
     private boolean mAttachedToWindow;
 
-    /**
-     * Do we need to recalculate the position each invalidation?
-     */
+    /** Do we need to recalculate the position each invalidation? */
     private boolean mPositionLocked;
 
-    /**
-     * Do we need to regenerate the view bitmap each invalidation?
-     */
+    /** Do we need to regenerate the view bitmap each invalidation? */
     private boolean mViewLocked;
 
     // Calculated class dependencies
 
-    /**
-     * ImageView to show the blurred content.
-     */
+    /** ImageView to show the blurred content. */
     private RoundedImageView mImageView;
 
-    /**
-     * Reference to View for top-parent. For retrieval see {@link #getActivityView() getActivityView}.
-     */
+    /** Reference to View for top-parent. For retrieval see {@link #getActivityView() getActivityView}. */
     private WeakReference<View> mActivityView;
 
-    /**
-     * A saved point to re-use when {@link #lockPosition()} called.
-     */
+    /** A saved point to re-use when {@link #lockPosition()} called. */
     private Point mLockedPoint;
 
-    /**
-     * A saved bitmap for the view to re-use when {@link #lockView()} called.
-     */
+    /** A saved bitmap for the view to re-use when {@link #lockView()} called. */
     private Bitmap mLockedBitmap;
 
     public BlurLayout(Context context) {
@@ -135,9 +111,7 @@ public class BlurLayout extends FrameLayout {
         setCornerRadius(mCornerRadius);
     }
 
-    /**
-     * Choreographer callback that re-draws the blur and schedules another callback.
-     */
+    /** Choreographer callback that re-draws the blur and schedules another callback. */
     private Choreographer.FrameCallback invalidationLoop = new Choreographer.FrameCallback() {
         @Override
         public void doFrame(long frameTimeNanos) {
@@ -146,9 +120,7 @@ public class BlurLayout extends FrameLayout {
         }
     };
 
-    /**
-     * Start BlurLayout continuous invalidation.
-     **/
+    /** Start BlurLayout continuous invalidation. **/
     public void startBlur() {
         if (mRunning) {
             return;
@@ -160,9 +132,7 @@ public class BlurLayout extends FrameLayout {
         }
     }
 
-    /**
-     * Pause BlurLayout continuous invalidation.
-     **/
+    /** Pause BlurLayout continuous invalidation. **/
     public void pauseBlur() {
         if (!mRunning) {
             return;
@@ -330,7 +300,6 @@ public class BlurLayout extends FrameLayout {
 
     /**
      * Casts context to Activity and attempts to create a view reference using the window decor view.
-     *
      * @return View reference for whole activity.
      */
     private View getActivityView() {
@@ -355,7 +324,6 @@ public class BlurLayout extends FrameLayout {
 
     /**
      * Finds the Point of the parent view, and offsets result by self getX() and getY().
-     *
      * @return Point determining position of the passed in view inside all of its ViewParents.
      */
     private PointF getPositionInScreen(View view) {
@@ -382,7 +350,6 @@ public class BlurLayout extends FrameLayout {
     /**
      * Users a View reference to create a bitmap, and downscales it using the passed in factor.
      * Uses a Rect to crop the view into the bitmap.
-     *
      * @return Bitmap made from view, downscaled by downscaleFactor.
      * @throws NullPointerException
      */

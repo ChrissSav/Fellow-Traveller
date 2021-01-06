@@ -20,7 +20,7 @@ class NewTripViewModel
 constructor(
     private val loadUserLocalInfoUseCase: LoadUserLocalInfoUseCase,
     private val getUserCarsRemoteUseCase: GetUserCarsRemoteUseCase,
-    private val registerTripRemoteUseCase: RegisterTripRemoteUseCase
+    private val registerTripRemoteUseCase: RegisterTripRemoteUseCase,
 ) : BaseViewModel() {
 
 
@@ -125,19 +125,15 @@ constructor(
 
 
     fun registerTrip() {
-        launch(true) {
+        launchAfter(true, _success) {
             var msg: String? = null
             if (message.value?.trim()?.length!! > 0) {
                 msg = message.value.toString()
             }
-            val response = registerTripRemoteUseCase(
+            return@launchAfter registerTripRemoteUseCase(
                 destinationFrom.value?.placeId.toString(), destinationTo.value?.placeId.toString(), car.value?.id.toString(),
                 pet.value!!, seats.value!!, bags.value!!.code, msg, price.value!!, getTimestamp()
             )
-
-            _success.value = response
-
-
         }
     }
 
