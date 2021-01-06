@@ -294,6 +294,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     }
 
     override fun onDetach() {
+        super.onDetach()
+
         if (this::messageQuery.isInitialized) {
             runBlocking {
                 messageQuery.removeEventListener(messageChildEventListener)
@@ -309,7 +311,6 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 //            viewModel.updateSeenStatus(args.conversationItem.tripId)
 //        }
 
-        super.onDetach()
 
     }
 
