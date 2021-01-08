@@ -308,9 +308,9 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         } catch (e: java.lang.Exception) {
 
         }
-        if (flag) {
-            viewModel.updateSeenStatus(args.conversationItem.tripId)
-        }
+//        if (flag) {
+//            viewModel.updateSeenStatus(args.conversationItem.tripId)
+//        }
     }
 
 
