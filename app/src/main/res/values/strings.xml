@@ -141,7 +141,7 @@
     <string name="send_message">Στείλε μήνυμα.</string>
     <string name="send_message_to">Στείλε μήνυμα στον %s</string>
     <string name="conversation_passenger_entry">Ο χρήστης &lt;b&gt;%s&lt;/b&gt; προστέθηκε στο ταξίδι</string>
-    <string name="conversation_creator_name">Του &lt;b&gt;%s&lt;/b&gt;</string>
+    <string name="conversation_creator_name">Από &lt;b&gt;%s&lt;/b&gt;</string>
     <string name="complete_profile_setup">Ολοκλήρωση προφίλ</string>
     <string name="enter_messenger_link">Συμπληρώσε το όνομα χρήστη σου στο Messenger.</string>
     <string name="complete_profile_warning">Πρέπει πρώτα να ολοκληρώσεις το προφίλ!</string>

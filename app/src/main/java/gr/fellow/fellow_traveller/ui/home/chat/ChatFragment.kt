@@ -48,6 +48,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     private var participantsInfo = mutableListOf<UserInfo>()
 
     private var updateStatusWhenExit: Boolean = true
+    private var flag: Boolean = true
 
     private lateinit var messageQuery: Query
     private lateinit var participantsReference: DatabaseReference
@@ -279,7 +280,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     private fun exitCustomDialogAnswerType(result: AnswerType) {
         tripInvolved?.let {
             if (result == AnswerType.Yes) {
-
+                flag = false
                 //if it Active delete or exit whether the user is the creator or not
                 //Delete trip use case on view model
                 if (it.creatorUser.id == viewModel.user.value?.id.toString()) {
@@ -291,19 +292,25 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                     onBackPressed()
                 }
 
-                //updateStatusWhenExit = false
             }
         }
 
     }
 
-    override fun onDetach() {
-        super.onDetach()
+    override fun onDestroy() {
+        super.onDestroy()
 
-        messageQuery.removeEventListener(messageChildEventListener)
-        participantsReference.removeEventListener(participantsListener)
+        try {
+            messageQuery.removeEventListener(messageChildEventListener)
+            participantsReference.removeEventListener(participantsListener)
+        } catch (e: java.lang.Exception) {
 
-
+        }
+        if (flag) {
+            viewModel.updateSeenStatus(args.conversationItem.tripId)
+        }
     }
+
+
 
 }
