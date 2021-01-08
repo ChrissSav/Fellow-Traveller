@@ -365,6 +365,8 @@
 
     <string name="clear">Clear</string>
     <string name="time">Time</string>
+    <string name="can_not_delete_trip">This trip can not be deleted</string>
+    <string name="can_not_leave_trip">You can not leave this trip</string>
 
 
     <string name="trip_athens_kavala">Athens - Kavala</string>

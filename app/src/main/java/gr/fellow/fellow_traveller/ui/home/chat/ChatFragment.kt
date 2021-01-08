@@ -286,13 +286,23 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 //if it Active delete or exit whether the user is the creator or not
                 //Delete trip use case on view model
                 if (it.creatorUser.id == viewModel.user.value?.id.toString()) {
-                    viewModel.deleteTrip(it.id)
+                    if (it.status == TripStatus.ACTIVE) {
+                        viewModel.deleteTrip(it.id)
+                        onBackPressed()
+                    } else {
+                        createToast(getString(R.string.can_not_delete_trip))
+                    }
                 } else {
-                    viewModel.exitFromTrip(it.id)
+                    if (it.status == TripStatus.ACTIVE) {
+                        viewModel.exitFromTrip(it.id)
+                        onBackPressed()
+                    } else {
+                        createToast(getString(R.string.can_not_leave_trip))
+                    }
                 }
-                if (it.status == TripStatus.ACTIVE) {
-                    onBackPressed()
-                }
+//                if (it.status == TripStatus.ACTIVE) {
+//                    onBackPressed()
+//                }
 
             }
         }

@@ -360,6 +360,8 @@
     <string name="clear">Καθαρισμός</string>
     <string name="rating">Αξιολόγηση</string>
     <string name="time">Ώρα</string>
+    <string name="can_not_delete_trip">Το συγκεκριμένο ταξίδι δεν μπορεί να διαγραφεί</string>
+    <string name="can_not_leave_trip">Δεν μπορείτε να αποχωρήσετε από αυτό ταξίδι</string>
     <string name="textview_placeholder">TextView</string>
     <string name="placeholder_user_deleted_trip">Ο χρήστης Όνομα διέγραψε ένα ταξίδι στο οποίο είσαι μέλος</string>
     <string name="trip_athens_kavala">Αθήνα - Καβάλα</string>

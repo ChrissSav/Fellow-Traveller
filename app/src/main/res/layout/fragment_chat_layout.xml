@@ -243,7 +243,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:layout_marginTop="32dp" />
+            android:layout_marginTop="16dp" />
 
         <TextView
             android:layout_width="wrap_content"
