@@ -39,6 +39,9 @@ data class TripInvolved(
         get() = getTimeFromTimestamp(timestamp)
 
 
+    val placesInfo
+        get() = "${destFrom.title} - ${destTo.title}"
+
     val seatsStatus: String
         get() {
             var current = 0
