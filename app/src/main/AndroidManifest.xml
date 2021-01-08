@@ -37,7 +37,7 @@
             android:name=".ui.rate.RateActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.auth.VerifyAccountActivity"
+            android:name=".ui.auth.VerifyUserAccountActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <intent-filter android:autoVerify="true">

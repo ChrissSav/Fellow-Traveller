@@ -11,7 +11,7 @@ import gr.fellow.fellow_traveller.ui.extensions.startActivityClearStack
 import gr.fellow.fellow_traveller.ui.home.HomeActivity
 
 @AndroidEntryPoint
-class VerifyAccountActivity : BaseActivity<ActivityVerifyAccountBinding>() {
+class VerifyUserAccountActivity : BaseActivity<ActivityVerifyAccountBinding>() {
 
     private val viewModel: VerifyAccountViewModel by viewModels()
     private var token: String? = null
