@@ -33,7 +33,6 @@ import gr.fellow.fellow_traveller.ui.user.UserProfileDetailsActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 const val TOPIC = "/topics/myTopic"
@@ -52,8 +51,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
     private lateinit var messageQuery: Query
     private lateinit var participantsReference: DatabaseReference
-    private lateinit var messageChildEventListener: ChildEventListener
-    private lateinit var participantsListener: ValueEventListener
+    private var messageChildEventListener: ChildEventListener? = null
+    private var participantsListener: ValueEventListener? = null
 
     private var tripInvolved: TripInvolved? = null
 
@@ -211,11 +210,14 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
             }
         }
-        participantsReference.addValueEventListener(participantsListener)
+
+        participantsListener?.let {
+            participantsReference.removeEventListener(it)
+            participantsReference.addValueEventListener(it)
+        }
     }
 
     private fun readMessages(tripId: String) {
-        messagesList.clear()
         val reference = firebaseDatabase.getReference("Messages").child(tripId)
         messageQuery = reference.limitToLast(1000)
         messageChildEventListener = object : ChildEventListener {
@@ -241,8 +243,11 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             override fun onCancelled(databaseError: DatabaseError) {
             }
         }
-        messageQuery.removeEventListener(messageChildEventListener)
-        messageQuery.addChildEventListener(messageChildEventListener)
+        messageChildEventListener?.let {
+            messageQuery.removeEventListener(it)
+            messageQuery.addChildEventListener(it)
+        }
+
     }
 
 
@@ -297,21 +302,12 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     override fun onDetach() {
         super.onDetach()
 
-        if (this::messageQuery.isInitialized) {
-            runBlocking {
-                messageQuery.removeEventListener(messageChildEventListener)
-            }
+        messageChildEventListener?.let {
+            messageQuery.removeEventListener(it)
         }
-        if (this::participantsReference.isInitialized) {
-            runBlocking {
-                participantsReference.removeEventListener(participantsListener)
-            }
+        participantsListener?.let {
+            participantsReference.removeEventListener(it)
         }
-        //When we exit the frag we update the status as seen
-//        if(updateStatusWhenExit) {
-//            viewModel.updateSeenStatus(args.conversationItem.tripId)
-//        }
-
 
     }
 
