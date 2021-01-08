@@ -241,6 +241,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             override fun onCancelled(databaseError: DatabaseError) {
             }
         }
+        messageQuery.removeEventListener(messageChildEventListener)
         messageQuery.addChildEventListener(messageChildEventListener)
     }
 
