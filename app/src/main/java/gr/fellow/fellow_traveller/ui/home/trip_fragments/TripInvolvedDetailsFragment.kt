@@ -18,6 +18,7 @@ import gr.fellow.fellow_traveller.domain.user.UserBase
 import gr.fellow.fellow_traveller.ui.dialogs.ExitCustomDialog
 import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
+import gr.fellow.fellow_traveller.ui.home.chat.models.Conversation
 import gr.fellow.fellow_traveller.ui.search.adapter.PassengerAdapter
 import gr.fellow.fellow_traveller.ui.search.adapter.PassengerAdapterVertical
 import gr.fellow.fellow_traveller.ui.user.UserProfileDetailsActivity
@@ -84,6 +85,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
                 pet.text = if (trip.hasPet) resources.getString(R.string.yes) else resources.getString(R.string.no)
                 car.text = trip.car.fullInfo
                 message.setText(trip.msg)
+
 
 
 
@@ -184,6 +186,15 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
                     if (args.creator) getString(R.string.delete_trip_question) else getString(R.string.leave_trip_question),
                     1
                 ).show(childFragmentManager, "exitCustomDialog")
+            }
+
+            conversationButton.setOnClickListener {
+                if (tripInvolved.passengers.isNotEmpty())
+                    findNavController()?.navigate(R.id.action_tripInvolvedDetailsSecondFragment_to_chatFragment,
+                        bundleOf("conversationItem" to Conversation(tripInvolved.id, tripInvolved.placesInfo, "",
+                            0, "", false)))
+                else
+                    findNavController()?.navigate(R.id.action_tripInvolvedDetailsSecondFragment_to_destination_messenger)
             }
 
         }

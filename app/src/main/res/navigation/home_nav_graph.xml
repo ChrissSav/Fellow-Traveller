@@ -208,6 +208,22 @@
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
 
+        <action
+            android:id="@+id/action_tripInvolvedDetailsSecondFragment_to_chatFragment"
+            app:destination="@id/chatFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+
+        <action
+            android:id="@+id/action_tripInvolvedDetailsSecondFragment_to_destination_messenger"
+            app:destination="@id/destination_messenger"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
