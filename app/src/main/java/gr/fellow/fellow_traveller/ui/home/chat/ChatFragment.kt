@@ -51,8 +51,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
     private lateinit var messageQuery: Query
     private lateinit var participantsReference: DatabaseReference
-    private var messageChildEventListener: ChildEventListener? = null
-    private var participantsListener: ValueEventListener? = null
+    private lateinit var messageChildEventListener: ChildEventListener
+    private lateinit var participantsListener: ValueEventListener
 
     private var tripInvolved: TripInvolved? = null
 
@@ -77,7 +77,10 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             participantsInfo.addAll(it)
             binding.chat.chatSendButton.isEnabled = true
             (binding.chat.chatRecyclerView.adapter as MessagesAdapter).notifyDataSetChanged()
-            readMessages(args.conversationItem.tripId)
+            if (updateStatusWhenExit) {
+                readMessages(args.conversationItem.tripId)
+                updateStatusWhenExit = false
+            }
         })
 
         viewModel.tripInfo.observe(viewLifecycleOwner, { trip ->
@@ -210,16 +213,13 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
             }
         }
-
-        participantsListener?.let {
-            participantsReference.removeEventListener(it)
-            participantsReference.addValueEventListener(it)
-        }
+        participantsReference.addValueEventListener(participantsListener)
     }
 
     private fun readMessages(tripId: String) {
         val reference = firebaseDatabase.getReference("Messages").child(tripId)
         messageQuery = reference.limitToLast(1000)
+        Log.i("makis", "readMessages")
         messageChildEventListener = object : ChildEventListener {
 
             override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
@@ -243,10 +243,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             override fun onCancelled(databaseError: DatabaseError) {
             }
         }
-        messageChildEventListener?.let {
-            messageQuery.removeEventListener(it)
-            messageQuery.addChildEventListener(it)
-        }
+        messageQuery.addChildEventListener(messageChildEventListener)
+
 
     }
 
@@ -302,12 +300,9 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     override fun onDetach() {
         super.onDetach()
 
-        messageChildEventListener?.let {
-            messageQuery.removeEventListener(it)
-        }
-        participantsListener?.let {
-            participantsReference.removeEventListener(it)
-        }
+        messageQuery.removeEventListener(messageChildEventListener)
+        participantsReference.removeEventListener(participantsListener)
+
 
     }
 

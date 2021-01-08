@@ -255,12 +255,14 @@ fun NavController.bottomNav(actionId: Int) {
 
 
 fun ImageView.loadImageFromUrl(url: String?) {
-    if (!url.isNullOrBlank()) {
+    if (url != null) {
         Glide.with(this.context)
             .load(url)
             .into(this)
     } else {
-        setBackgroundResource(R.drawable.ic_boy)
+        Glide.with(this.context)
+            .load(R.drawable.ic_boy)
+            .into(this)
     }
 }
 
