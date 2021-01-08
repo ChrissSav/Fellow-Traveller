@@ -75,6 +75,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
         viewModel.listOfParticipants.observe(viewLifecycleOwner, {
             participantsInfo.clear()
+            viewModel.getTripById(args.conversationItem.tripId)
             participantsInfo.addAll(it)
             binding.chat.chatSendButton.isEnabled = true
             (binding.chat.chatRecyclerView.adapter as MessagesAdapter).notifyDataSetChanged()
@@ -82,6 +83,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 readMessages(args.conversationItem.tripId)
                 updateStatusWhenExit = false
             }
+
         })
 
         viewModel.tripInfo.observe(viewLifecycleOwner, { trip ->
