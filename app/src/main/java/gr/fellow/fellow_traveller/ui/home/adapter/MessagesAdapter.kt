@@ -114,7 +114,6 @@ class MessagesAdapter(
             } else {
                 return MESSAGE_TOP;
             }
-
         } else {
             return MESSAGE_ENTRY
         }

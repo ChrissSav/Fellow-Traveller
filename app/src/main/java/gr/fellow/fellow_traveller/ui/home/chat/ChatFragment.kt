@@ -215,13 +215,13 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     }
 
     private fun readMessages(tripId: String) {
+        messagesList.clear()
         val reference = firebaseDatabase.getReference("Messages").child(tripId)
         messageQuery = reference.limitToLast(1000)
         messageChildEventListener = object : ChildEventListener {
 
             override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
                 Log.d(TAG, "onChildAdded:" + dataSnapshot.key!!)
-
                 dataSnapshot.getValue(ChatMessage::class.java)?.let {
                     viewModel.loadMessages.value = true
                     viewModel.loadChatMessage(it)
