@@ -169,7 +169,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
         with(binding.moreInfoLayout) {
             driverImage.loadImageFromUrl(trip.creatorUser.picture)
-            driverName.text = trip.creatorUser.firstName
+            driverName.text = trip.creatorUser.fullName
             passengers.adapter = PassengerAdapterVertical(trip.passengers, this@TripInvolvedDetailsFragment::onPassengerListener)
 
             constraintLayoutDriver.setOnClickListener {

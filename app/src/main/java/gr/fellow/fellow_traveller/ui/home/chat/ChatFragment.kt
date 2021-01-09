@@ -104,6 +104,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                     from.text = it.destFrom.title
                     to.text = it.destTo.title
                     day.text = it.date
+                    time.text = it.time
 
                     driverName.text = it.creatorUser.fullName
                     driverImage.loadImageFromUrl(it.creatorUser.picture)
@@ -191,6 +192,9 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         }
         binding.chat.chatBackButton.setOnClickListener {
             onBackPressed()
+        }
+        binding.info.picturesButton.setOnClickListener {
+            createToast(getString(R.string.exit_from_trip))
         }
         binding.info.exitButton.setOnClickListener {
             ExitCustomDialog(activity as HomeActivity, this::exitCustomDialogAnswerType, getString(R.string.exit_from_trip), 1).show(parentFragmentManager, "exitCustomDialog")

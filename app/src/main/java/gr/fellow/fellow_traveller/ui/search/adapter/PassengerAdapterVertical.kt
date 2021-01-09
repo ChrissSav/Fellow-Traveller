@@ -30,7 +30,7 @@ class PassengerAdapterVertical(
             }
 
             binding.picture.loadImageFromUrl(passenger.user.picture)
-            binding.passengerUsername.text = passenger.user.firstName
+            binding.passengerUsername.text = passenger.user.fullName
 
             when (passenger.seats) {
                 1 -> {  //Booked 1 seat
