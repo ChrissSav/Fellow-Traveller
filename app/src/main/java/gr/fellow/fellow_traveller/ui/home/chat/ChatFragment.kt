@@ -194,7 +194,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             onBackPressed()
         }
         binding.info.picturesButton.setOnClickListener {
-            createToast(getString(R.string.exit_from_trip))
+            createToast(getString(R.string.no_pictures))
         }
         binding.info.exitButton.setOnClickListener {
             ExitCustomDialog(activity as HomeActivity, this::exitCustomDialogAnswerType, getString(R.string.exit_from_trip), 1).show(parentFragmentManager, "exitCustomDialog")
