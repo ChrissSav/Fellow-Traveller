@@ -8,7 +8,10 @@ import gr.fellow.fellow_traveller.domain.BagsStatusType
 import gr.fellow.fellow_traveller.domain.car.Car
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
+import gr.fellow.fellow_traveller.domain.user.UserBase
 import gr.fellow.fellow_traveller.framework.network.google.model.DestinationModel
+import gr.fellow.fellow_traveller.usecase.firabase.CreateOrEnterConversationFirebaseUseCase
+import gr.fellow.fellow_traveller.usecase.firabase.SendMessageFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.home.GetUserCarsRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.RegisterTripRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
@@ -21,7 +24,10 @@ constructor(
     private val loadUserLocalInfoUseCase: LoadUserLocalInfoUseCase,
     private val getUserCarsRemoteUseCase: GetUserCarsRemoteUseCase,
     private val registerTripRemoteUseCase: RegisterTripRemoteUseCase,
-) : BaseViewModel() {
+    private val createOrEnterConversationFirebaseUseCase: CreateOrEnterConversationFirebaseUseCase,
+    private val sendMessageFirebaseUseCase: SendMessageFirebaseUseCase,
+
+    ) : BaseViewModel() {
 
 
     private val _success = MutableLiveData<TripInvolved>()
@@ -124,12 +130,18 @@ constructor(
     }
 
 
-    fun registerTrip() {
+    fun registerTrip(userBase: UserBase) {
         launchAfter(_success) {
             var msg: String? = null
             if (message.value?.trim()?.length!! > 0) {
                 msg = message.value.toString()
             }
+            //We create the creator's conversation
+//            createOrEnterConversationFirebaseUseCase.invoke(
+//                userBase.id, userBase.id, tripId, response.destFrom.title + " - "
+//                        + response.destTo.title, response.picture
+//            )
+
             return@launchAfter registerTripRemoteUseCase(
                 destinationFrom.value?.placeId.toString(), destinationTo.value?.placeId.toString(), car.value?.id.toString(),
                 pet.value!!, seats.value!!, bags.value!!.code, msg, price.value!!, getTimestamp()

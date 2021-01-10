@@ -12,7 +12,10 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentTripsOffersBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
-import gr.fellow.fellow_traveller.ui.extensions.*
+import gr.fellow.fellow_traveller.ui.extensions.findNavController
+import gr.fellow.fellow_traveller.ui.extensions.startActivityForResult
+import gr.fellow.fellow_traveller.ui.extensions.startShimmerWithVisibility
+import gr.fellow.fellow_traveller.ui.extensions.stopShimmerWithVisibility
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.TripsInvolvedAdapter
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripActivity
@@ -63,7 +66,7 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
         }
 
         binding.offerButton.setOnClickListener {
-            startActivityForResult(NewTripActivity::class, 1, bundleOf("userRate" to viewModel.user.value?.rate))
+            startActivityForResult(NewTripActivity::class, 1, bundleOf("userRate" to viewModel.user.value?.rate, "localUser" to viewModel.user.value!!))
         }
 
 

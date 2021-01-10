@@ -10,6 +10,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivityViewModel
 import gr.fellow.fellow_traveller.databinding.ActivityNewTripBinding
 import gr.fellow.fellow_traveller.domain.AnswerType
+import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.ui.dialogs.ExitCustomDialog
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
 import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
@@ -21,6 +22,7 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
 
     private lateinit var nav: NavController
     private var userRate: Float = 0f
+    lateinit var localUser: LocalUser
 
     override fun provideViewBinding(): ActivityNewTripBinding =
         ActivityNewTripBinding.inflate(layoutInflater)
@@ -28,6 +30,7 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
 
     override fun handleIntent() {
         userRate = intent.getFloatExtra("userRate", 0f)
+        localUser = intent.getParcelableExtra<LocalUser>("localUser")!!
     }
 
     override fun setUpObservers() {

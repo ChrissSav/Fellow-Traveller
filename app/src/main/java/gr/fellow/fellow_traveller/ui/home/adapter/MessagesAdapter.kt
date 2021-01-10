@@ -23,6 +23,7 @@ class MessagesAdapter(
     private val MESSAGE_TOP = 0
     private val MESSAGE_MIDDLE = 1
     private val MESSAGE_ENTRY = 2
+    private val MESSAGE_EXITED = 3
 
     // private var viewTypeLayout = -1
 
@@ -36,10 +37,14 @@ class MessagesAdapter(
             //viewTypeLayout = 1
             val view = LayoutInflater.from(parent.context).inflate(R.layout.message_item_middle, parent, false)
             return ViewHolder(view, 1)
-        } else {
+        } else if (viewType == MESSAGE_ENTRY) {
             //viewTypeLayout = 2
             val view = LayoutInflater.from(parent.context).inflate(R.layout.message_item_entry, parent, false)
             return ViewHolder(view, 2)
+        } else {
+            //viewTypeLayout = 3
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.message_item_exited, parent, false)
+            return ViewHolder(view, 3)
         }
     }
 
@@ -47,16 +52,20 @@ class MessagesAdapter(
 
         val currentItem = messagesList[position]
 
+        /** Get the background shape for each message **/
         if (currentItem.messageType == 0) {
             if (currentItem.senderId == myId)
                 holder.message.setBackgroundResource(R.drawable.message_shape_sended)
             else
                 holder.message.setBackgroundResource(R.drawable.message_shape_received)
 
-        } else {
+        } else if (currentItem.messageType == 1) {
             holder.message.setBackgroundResource(R.drawable.message_shape_entry)
-        }
+        } else
+            holder.message.setBackgroundResource(R.drawable.message_shape_exited)
 
+
+        /** Load details for each message **/
         //if viewType is MESSAGE_TOP load all the details
         when {
             currentItem.messageType == 0 -> {
@@ -74,7 +83,12 @@ class MessagesAdapter(
 
                 holder.date.text = convertTimestampToFormat(currentItem.timestamp, "hh:mm aaa")
             }
+            //Entry Layout
             holder.viewTypeLayout == 2 -> holder.message.setTextHtml(holder.message.context.getString(R.string.conversation_passenger_entry, currentItem.senderName))
+
+            //Exited Layout
+            holder.viewTypeLayout == 3 -> holder.message.setTextHtml(holder.message.context.getString(R.string.conversation_passenger_exited, currentItem.senderName))
+
             else -> {
                 holder.message.text = currentItem.text
             }
@@ -104,6 +118,12 @@ class MessagesAdapter(
         if (position - 1 > -1) {
             currPrev = messagesList[position - 1].senderId;
         }
+        /** FROM FIREBASE WE GET **/
+
+        /** 0 for MESSAGE_TOP and MESSAGE_MIDDLE **/
+        /** 1 for MESSAGE_ENTRY **/
+        /** 2 for MESSAGE_EXITED **/
+
 
         if (messagesList[position].messageType == 0) {
             if ((current == currPrev)) {
@@ -114,9 +134,12 @@ class MessagesAdapter(
             } else {
                 return MESSAGE_TOP;
             }
-        } else {
+        } else if (messagesList[position].messageType == 1) {
             return MESSAGE_ENTRY
+        } else {
+            return MESSAGE_EXITED
         }
+
     }
 
 

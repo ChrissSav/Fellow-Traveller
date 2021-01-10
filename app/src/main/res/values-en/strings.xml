@@ -21,7 +21,8 @@
     <string name="account_settings_guid_message">You will need to enable the application permissions from the settings</string>
     <string name="covid">Get latest updates on <b><u>Covid-19</u></b></string>
     <string name="no_messages">There is no message</string>
-    <string name="conversation_passenger_entry">User &lt;b&gt;%s&lt;/b&gt; joined the trip</string>
+    <string name="conversation_passenger_entry">User &lt;b&gt;%s&lt;/b&gt; joined this trip</string>
+    <string name="conversation_passenger_exited">User &lt;b&gt;%s&lt;/b&gt; has left this trip</string>
     <string name="conversation_creator_name">From &lt;b&gt;%s&lt;/b&gt;</string>
 
 

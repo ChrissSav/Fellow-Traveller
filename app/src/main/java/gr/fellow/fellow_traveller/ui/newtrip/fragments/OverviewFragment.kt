@@ -7,6 +7,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentOverviewBinding
+import gr.fellow.fellow_traveller.domain.mappers.mapToUserBase
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
@@ -50,7 +51,8 @@ class OverviewFragment : BaseFragment<FragmentOverviewBinding>(), View.OnClickLi
             message.setText(viewModel.message.value)
 
             ImageButtonNext.setOnClickListener {
-                viewModel.registerTrip()
+                //We pass the userBase to create the conversation
+                viewModel.registerTrip((activity as NewTripActivity).localUser.mapToUserBase())
             }
 
 

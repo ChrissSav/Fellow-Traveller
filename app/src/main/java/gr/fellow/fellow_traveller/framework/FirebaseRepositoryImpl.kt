@@ -35,7 +35,8 @@ class FirebaseRepositoryImpl(
             val referenceMessage = firebaseDatabase.reference.child("Messages").child(tripId)
             referenceMessage.push().setValue(hashMap).await()
 
-            updateParticipantsStatus(hashMap, participantsList)
+            if (hashMap["messageType"] != 2)
+                updateParticipantsStatus(hashMap, participantsList)
         }
     }
 

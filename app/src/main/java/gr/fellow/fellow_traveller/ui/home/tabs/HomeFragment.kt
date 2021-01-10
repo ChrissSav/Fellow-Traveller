@@ -67,11 +67,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
 
         binding.constraintLayoutNew.setOnClickListener {
-            startActivityForResult(NewTripActivity::class, 1, bundleOf("userRate" to viewModel.user.value?.rate))
+            startActivityForResult(NewTripActivity::class, 1, bundleOf("userRate" to viewModel.user.value?.rate, "localUser" to viewModel.user.value!!))
         }
 
         binding.newTrip.setOnClickListener {
-            startActivityForResult(NewTripActivity::class, 1, bundleOf("userRate" to viewModel.user.value?.rate))
+            startActivityForResult(NewTripActivity::class, 1, bundleOf("userRate" to viewModel.user.value?.rate, "localUser" to viewModel.user.value!!))
         }
 
         binding.constraintLayoutSearch.setOnClickListener {

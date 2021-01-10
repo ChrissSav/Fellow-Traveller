@@ -298,7 +298,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                     }
                 } else {
                     if (it.status == TripStatus.ACTIVE) {
-                        viewModel.exitFromTrip(it.id)
+                        viewModel.exitFromTrip(it.id, participantsIdList)
                         onBackPressed()
                     } else {
                         createToast(getString(R.string.can_not_leave_trip))
