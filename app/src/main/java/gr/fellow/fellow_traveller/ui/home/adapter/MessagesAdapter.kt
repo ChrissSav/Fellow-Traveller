@@ -26,6 +26,10 @@ class MessagesAdapter(
     private val MESSAGE_EXITED = 3
     private val MESSAGE_FIRST = 4
 
+    private companion object {
+        private const val TIME_DIFFERENCE: Long = 300000
+    }
+
     // private var viewTypeLayout = -1
 
 
@@ -42,11 +46,11 @@ class MessagesAdapter(
             //viewTypeLayout = 2
             val view = LayoutInflater.from(parent.context).inflate(R.layout.message_item_entry, parent, false)
             return ViewHolder(view, 2)
-        } else if (viewType == MESSAGE_EXITED){
+        } else if (viewType == MESSAGE_EXITED) {
             //viewTypeLayout = 3
             val view = LayoutInflater.from(parent.context).inflate(R.layout.message_item_exited, parent, false)
             return ViewHolder(view, 3)
-        }else{
+        } else {
             //viewTypeLayout = 4
             val view = LayoutInflater.from(parent.context).inflate(R.layout.message_item_first, parent, false)
             return ViewHolder(view, 4)
@@ -95,7 +99,7 @@ class MessagesAdapter(
             holder.viewTypeLayout == 3 -> holder.message.setTextHtml(holder.message.context.getString(R.string.conversation_passenger_exited, currentItem.senderName))
 
             //First Message Layout
-            holder.viewTypeLayout == 4 ->  holder.image.loadImageFromUrl(currentItem.senderImage)
+            holder.viewTypeLayout == 4 -> holder.image.loadImageFromUrl(currentItem.senderImage)
 
             else -> {
                 holder.message.text = currentItem.text
@@ -122,16 +126,16 @@ class MessagesAdapter(
         //Initialize and check if we run out of the list
         if (position + 1 < messagesList.size) {
             currNext = messagesList[position + 1].senderId;
-        }else{
+        } else {
             currNext = "-1"
         }
 
         if (position - 1 > -1) {
             currPrev = messagesList[position - 1].senderId;
-        }else{
+        } else {
             currPrev = "-1"
         }
-        
+
         /** FROM FIREBASE WE GET **/
 
         /** 0 for MESSAGE_TOP and MESSAGE_MIDDLE **/
@@ -142,18 +146,22 @@ class MessagesAdapter(
 
         if (messagesList[position].messageType == 0) {
             if ((current == currPrev)) {
-                if (messagesList[position - 1].messageType == 1 || messagesList[position - 1].messageType == 3 )
+                if (messagesList[position - 1].messageType == 1 || messagesList[position - 1].messageType == 3) {
                     return MESSAGE_TOP
-                else
-                    return MESSAGE_MIDDLE
+                } else {
+                    if (messagesList[position].timestamp - messagesList[position - 1].timestamp > TIME_DIFFERENCE)
+                        return MESSAGE_TOP
+                    else
+                        return MESSAGE_MIDDLE
+                }
             } else {
                 return MESSAGE_TOP;
             }
         } else if (messagesList[position].messageType == 1) {
             return MESSAGE_ENTRY
-        } else if (messagesList[position].messageType == 2){
+        } else if (messagesList[position].messageType == 2) {
             return MESSAGE_EXITED
-        }else
+        } else
             return MESSAGE_FIRST
 
     }
