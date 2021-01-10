@@ -133,33 +133,30 @@ constructor(
     fun registerTrip(userBase: UserBase) {
         launchAfter(_success) {
 
-            try {
-                var msg: String? = null
-                if (message.value?.trim()?.length!! > 0) {
-                    msg = message.value.toString()
-                }
 
-                val response = registerTripRemoteUseCase(
-                    destinationFrom.value?.placeId.toString(), destinationTo.value?.placeId.toString(), car.value?.id.toString(),
-                    pet.value!!, seats.value!!, bags.value!!.code, msg, price.value!!, getTimestamp()
-                )
-
-                //We create only the creator's conversation
-                createOrEnterConversationFirebaseUseCase.invoke(
-                    userBase.id, userBase.id, response.id, response.destFrom.title + " - "
-                            + response.destTo.title, response.picture
-                )
-
-                //We create a temp list with id, in this case we add only creator id and then we send a message with type 3(First Messag)
-                var tempIdList = mutableListOf<String>()
-                tempIdList.add(response.creatorUser.id)
-                sendMessageFirebaseUseCase.invoke(userBase.id,response.id,"", "", 3, tempIdList, response.picture)
-
-                return@launchAfter response
-            } catch (e: Exception) {
-                //handleErrorBook(tripId)
-                throw e
+            var msg: String? = null
+            if (message.value?.trim()?.length!! > 0) {
+                msg = message.value.toString()
             }
+
+            val response = registerTripRemoteUseCase(
+                destinationFrom.value?.placeId.toString(), destinationTo.value?.placeId.toString(), car.value?.id.toString(),
+                pet.value!!, seats.value!!, bags.value!!.code, msg, price.value!!, getTimestamp()
+            )
+
+            //We create only the creator's conversation
+            createOrEnterConversationFirebaseUseCase.invoke(
+                userBase.id, userBase.id, response.id, response.destFrom.title + " - "
+                        + response.destTo.title, response.picture
+            )
+
+            //We create a temp list with id, in this case we add only creator id and then we send a message with type 3(First Messag)
+            var tempIdList = mutableListOf<String>()
+            tempIdList.add(response.creatorUser.id)
+            sendMessageFirebaseUseCase.invoke(userBase.id, response.id, "", "", 3, tempIdList, response.picture)
+
+            return@launchAfter response
+
         }
     }
 
