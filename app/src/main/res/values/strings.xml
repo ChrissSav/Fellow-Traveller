@@ -204,7 +204,7 @@
     <string name="update">Ενημέρωση</string>
     <string name="remove_profile_photo">Αφαίρεση φωτογραφίας</string>
     <string name="upload_new_photo">Ανέβασμα νέας φωτογραφίας</string>
-    <string name="total_ratings">αξιολόγησεις</string>
+    <string name="total_ratings">αξιολογήσεις</string>
     <string name="complete_profile">Ολοκλήρωση προφίλ</string>
     <string name="notifications_count_placeholder" translatable="false">10</string>
     <string name="add_vehicle">Προσθήκη Οχήματος</string>
@@ -353,8 +353,8 @@
     <string name="success_rsvp">Η κράτηση σου ήταν επιτυχής</string>
     <string name="all_passengers">Όλοι οι επιβάτες</string>
     <string name="vehicle_management">Διαχείριση οχημάτων</string>
-    <string name="ratings">Αξιολόγησεις</string>
-    <string name="placeholder_ratings_count">3 αξιολόγησεις</string>
+    <string name="ratings">Αξιολογήσεις</string>
+    <string name="placeholder_ratings_count">3 αξιολογήσεις</string>
     <string name="most_recent">Πιο πρόσφατο</string>
     <string name="home">Αρχική</string>
     <string name="profile">Προφίλ</string>
