@@ -46,7 +46,7 @@ data class TripInvolvedResponse(
         }
 
     fun getBagsStatus(): BagsStatusType =
-        when (status) {
+        when (bags) {
             0 -> {
                 BagsStatusType.NONE
             }
