@@ -52,11 +52,11 @@ class FirebaseRepositoryImpl(
             //Assign to passenger a new conversation
             val passengerConversation = firebaseDatabase.reference.child("UserTrips").child(myId).child(tripId)
             //Assign to creator a new conversation
-            val creatorConversation = firebaseDatabase.reference.child("UserTrips").child(creatorId).child(tripId)
+            //val creatorConversation = firebaseDatabase.reference.child("UserTrips").child(creatorId).child(tripId)
             //Assign to to trip a new passenger member
             val passengerToTrip = firebaseDatabase.reference.child("TripsAndParticipants").child(tripId).child(myId)
             //Assign to to trip the creator as member
-            val creatorToTrip = firebaseDatabase.reference.child("TripsAndParticipants").child(tripId).child(creatorId)
+            //val creatorToTrip = firebaseDatabase.reference.child("TripsAndParticipants").child(tripId).child(creatorId)
 
             val tripsMap: HashMap<String, Any> = HashMap()
             tripsMap["timestamp"] = ServerValue.TIMESTAMP
@@ -68,7 +68,7 @@ class FirebaseRepositoryImpl(
 
             //Update creator and passenger conversation
             passengerConversation.setValue(tripsMap)
-            creatorConversation.setValue(tripsMap)
+            //creatorConversation.setValue(tripsMap)
 
             //Create Hash Maps, to assign the passenger and the creator to the trip's member
             val passengerMemberMap: HashMap<String, Any> = HashMap()
@@ -79,7 +79,7 @@ class FirebaseRepositoryImpl(
 
 
             passengerToTrip.setValue(passengerMemberMap)
-            creatorToTrip.setValue(creatorMemberMap)
+            //creatorToTrip.setValue(creatorMemberMap)
 
         }
     }

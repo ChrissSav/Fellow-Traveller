@@ -24,6 +24,8 @@
     <string name="conversation_passenger_entry">User &lt;b&gt;%s&lt;/b&gt; joined this trip</string>
     <string name="conversation_passenger_exited">User &lt;b&gt;%s&lt;/b&gt; has left this trip</string>
     <string name="conversation_creator_name">From &lt;b&gt;%s&lt;/b&gt;</string>
+    <string name="conversation_welcome_header">Welcome to this trip</string>
+    <string name="conversation_welcome_description">This is the discussion of your trip. Here you can clarify any questions.</string>
 
 
     <string name="title_activity_maps">Map</string>

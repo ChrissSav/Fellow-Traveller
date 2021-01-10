@@ -143,6 +143,8 @@
     <string name="conversation_passenger_entry">Ο χρήστης &lt;b&gt;%s&lt;/b&gt; προστέθηκε στο ταξίδι</string>
     <string name="conversation_passenger_exited">Ο χρήστης &lt;b&gt;%s&lt;/b&gt; αποχώρησε από το ταξίδι</string>
     <string name="conversation_creator_name">Από &lt;b&gt;%s&lt;/b&gt;</string>
+    <string name="conversation_welcome_header">Καλώς ήρθατε σε αυτό το ταξίδι</string>
+    <string name="conversation_welcome_description">Αυτή είναι η συζήτηση για το ταξίδι σας. Εδώ μπορείτε να διευκρινίσετε τυχόν απορίες.</string>
     <string name="complete_profile_setup">Ολοκλήρωση προφίλ</string>
     <string name="enter_messenger_link">Συμπληρώσε το όνομα χρήστη σου στο Messenger.</string>
     <string name="complete_profile_warning">Πρέπει πρώτα να ολοκληρώσεις το προφίλ!</string>
