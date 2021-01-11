@@ -67,6 +67,6 @@
         app:layout_constraintBottom_toBottomOf="@id/chat_description"
         app:layout_constraintEnd_toEndOf="@id/chat_date"
         app:layout_constraintTop_toTopOf="@id/chat_description"
-
         />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
