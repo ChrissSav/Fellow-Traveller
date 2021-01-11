@@ -145,6 +145,11 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
     }
 
+    override fun onPause() {
+        super.onPause()
+        updateStatusWhenExit = true
+    }
+
     override fun setUpViews() {
 
         binding.overlappingPanels.setStartPanelLockState(OverlappingPanelsLayout.LockState.CLOSE)
