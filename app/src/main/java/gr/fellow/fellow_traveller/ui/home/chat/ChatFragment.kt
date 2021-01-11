@@ -35,6 +35,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 const val TOPIC = "/topics/myTopic"
 
 @AndroidEntryPoint
@@ -198,6 +199,14 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         }
         binding.info.exitButton.setOnClickListener {
             ExitCustomDialog(activity as HomeActivity, this::exitCustomDialogAnswerType, getString(R.string.exit_from_trip), 1).show(parentFragmentManager, "exitCustomDialog")
+        }
+
+        binding.chat.chatRecyclerView.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
+            if (bottom < oldBottom) {
+                binding.chat.chatRecyclerView.postDelayed(Runnable {
+                    binding.chat.chatRecyclerView.smoothScrollToPosition(messagesList.size - 1)
+                }, 100)
+            }
         }
 
     }
