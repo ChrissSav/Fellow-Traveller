@@ -25,6 +25,7 @@ class MessagesAdapter(
     private val MESSAGE_ENTRY = 2
     private val MESSAGE_EXITED = 3
     private val MESSAGE_FIRST = 4
+    private val MESSAGE_DELETED = 5
 
     private companion object {
         private const val TIME_DIFFERENCE: Long = 300000
@@ -50,10 +51,15 @@ class MessagesAdapter(
             //viewTypeLayout = 3
             val view = LayoutInflater.from(parent.context).inflate(R.layout.message_item_exited, parent, false)
             return ViewHolder(view, 3)
-        } else {
+        } else if (viewType == MESSAGE_FIRST) {
             //viewTypeLayout = 4
             val view = LayoutInflater.from(parent.context).inflate(R.layout.message_item_first, parent, false)
             return ViewHolder(view, 4)
+        } else {
+            //viewTypeLayout = 5
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.message_item_deleted, parent, false)
+            return ViewHolder(view, 5)
+
         }
     }
 
@@ -101,6 +107,9 @@ class MessagesAdapter(
             //First Message Layout
             holder.viewTypeLayout == 4 -> holder.image.loadImageFromUrl(currentItem.senderImage)
 
+            //Deleted Conversation Layout
+            //holder.viewTypeLayout == 5 ->
+
             else -> {
                 holder.message.text = currentItem.text
             }
@@ -142,6 +151,7 @@ class MessagesAdapter(
         /** 1 for MESSAGE_ENTRY **/
         /** 2 for MESSAGE_EXITED **/
         /** 3 for MESSAGE_FIRST **/
+        /** 4 for MESSAGE_DELETED **/
 
 
         if (messagesList[position].messageType == 0) {
@@ -161,8 +171,10 @@ class MessagesAdapter(
             return MESSAGE_ENTRY
         } else if (messagesList[position].messageType == 2) {
             return MESSAGE_EXITED
-        } else
+        } else if (messagesList[position].messageType == 3)
             return MESSAGE_FIRST
+        else
+            return MESSAGE_DELETED
 
     }
 

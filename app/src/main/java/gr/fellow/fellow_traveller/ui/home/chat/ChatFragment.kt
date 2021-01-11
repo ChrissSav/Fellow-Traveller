@@ -300,8 +300,10 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 //Delete trip use case on view model
                 if (it.creatorUser.id == viewModel.user.value?.id.toString()) {
                     if (it.status == TripStatus.ACTIVE) {
-                        viewModel.deleteTrip(it.id)
-                        onBackPressed()
+                        viewModel.deleteTrip(it.id, participantsIdList)
+                        viewModel.getTripById(args.conversationItem.tripId)
+                        binding.overlappingPanels.openStartPanel()
+
                     } else {
                         createToast(getString(R.string.can_not_delete_trip))
                     }

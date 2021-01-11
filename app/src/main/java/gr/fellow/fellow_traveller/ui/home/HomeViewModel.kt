@@ -359,11 +359,12 @@ constructor(
     }
 
 
-    fun deleteTrip(tripId: String) {
+    fun deleteTrip(tripId: String, list: MutableList<String>) {
         launch(true) {
             deleteTripUseCase(tripId)
             _tripsAsCreatorActive.value = deleteTripWithId(tripId, _tripsAsCreatorActive.value)
-            deleteFirebaseConversation(tripId)
+            //deleteFirebaseConversation(tripId)
+            sendMessageFirebaseUseCase.invoke(_user.value?.id.toString(), tripId, "", _user.value?.firstName.toString(), 4, list, "")
             _successDeletion.value = R.string.delete_trip_success
             updateUserInfo()
         }

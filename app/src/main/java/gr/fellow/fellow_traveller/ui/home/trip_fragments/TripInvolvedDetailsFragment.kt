@@ -214,14 +214,17 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
     private fun onConfirmItemClickListener(answerType: AnswerType) {
         if (answerType == AnswerType.Yes) {
+
+            var tempIdList = mutableListOf<String>()
+            tripInvolved.passengers.forEach {
+                tempIdList.add(it.user.id)
+            }
+            tempIdList.add(tripInvolved.creatorUser.id)
+
             if (args.creator)
-                viewModel.deleteTrip(args.tripId)
+                viewModel.deleteTrip(args.tripId, tempIdList)
             else {
-                var tempIdList = mutableListOf<String>()
-                tripInvolved.passengers.forEach {
-                    tempIdList.add(it.user.id)
-                }
-                tempIdList.add(tripInvolved.creatorUser.id)
+
                 viewModel.exitFromTrip(args.tripId, tempIdList)
             }
 
