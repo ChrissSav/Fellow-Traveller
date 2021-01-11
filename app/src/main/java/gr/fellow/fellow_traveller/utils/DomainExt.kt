@@ -1,7 +1,10 @@
 package gr.fellow.fellow_traveller.utils
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import gr.fellow.fellow_traveller.data.BaseApiException
@@ -39,15 +42,37 @@ inline operator fun <reified T : Any> SharedPreferences.get(key: String, default
 }
 
 
-class ConnectivityHelper(private val connectivityManager: ConnectivityManager) {
+class ConnectivityHelper(private val context: Context) {
+
+    @Suppress("DEPRECATION")
     fun checkInternetConnection(): Boolean {
-        return try {
-            val command = "ping -c 1 google.com"
-            return Runtime.getRuntime().exec(command).waitFor() == 0
-        } catch (e: java.lang.Exception) {
-            false
+        var result = false
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            cm?.run {
+                cm.getNetworkCapabilities(cm.activeNetwork)?.run {
+                    result = when {
+                        hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                        hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                        hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                        else -> false
+                    }
+                }
+            }
+        } else {
+            cm?.run {
+                cm.activeNetworkInfo?.run {
+                    if (type == ConnectivityManager.TYPE_WIFI) {
+                        result = true
+                    } else if (type == ConnectivityManager.TYPE_MOBILE) {
+                        result = true
+                    }
+                }
+            }
         }
+        return result
     }
+
 }
 
 
@@ -63,4 +88,6 @@ fun getErrorResponseErrorBody(errorBody: ResponseBody?): String {
     }
 
 }
+
+
 

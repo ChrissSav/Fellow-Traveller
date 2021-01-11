@@ -2,9 +2,7 @@ package gr.fellow.fellow_traveller.di
 
 import android.app.Application
 import android.content.Context
-import android.content.Context.CONNECTIVITY_SERVICE
 import android.content.SharedPreferences
-import android.net.ConnectivityManager
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.gson.Gson
@@ -93,8 +91,7 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideConnectivityHelper(application: Application): ConnectivityHelper {
-        val connectivityManager = application.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-        return ConnectivityHelper(connectivityManager)
+        return ConnectivityHelper(application.applicationContext)
     }
 
 
