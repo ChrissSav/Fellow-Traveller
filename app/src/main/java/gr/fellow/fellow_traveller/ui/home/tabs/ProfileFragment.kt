@@ -13,6 +13,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentProfileBinding
 import gr.fellow.fellow_traveller.ui.car.AddCarActivity
+import gr.fellow.fellow_traveller.ui.extensions.createToast
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.extensions.startActivityForResult
@@ -129,6 +130,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             findNavController()?.navigate(R.id.action_baseSettingsFragment_to_changePasswordFragment)
         }
 
+        binding.settings.writeReview.setOnClickListener {
+            val uri = Uri.parse(getString(R.string.PLAYSTORE_RATE) + activity?.applicationContext?.packageName)
+            val browserIntent = Intent(Intent.ACTION_VIEW, uri)
+            try {
+                startActivity(browserIntent)
+            } catch (e: Exception) {
+                createToast(e.toString())
+            }
+
+        }
         binding.settings.termsOfUse.setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.TOS_URL)))
             startActivity(browserIntent)

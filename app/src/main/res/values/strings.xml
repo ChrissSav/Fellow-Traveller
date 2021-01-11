@@ -411,6 +411,8 @@
 
     <string name="TOS_URL" translatable="false">https://fellowtraveller.gr/tos/</string>
     <string name="PRIVACY_POLICY_URL" translatable="false">https://fellowtraveller.gr/tos/</string>
+    <string name="PLAYSTORE_RATE" translatable="false">https://play.google.com/store/apps/details?id=</string>
+
     <string name="last_name">Επίθετο</string>
     <string name="email" translatable="false">Email</string>
     <string name="current_password">Τρέχων συνθηματικό</string>
