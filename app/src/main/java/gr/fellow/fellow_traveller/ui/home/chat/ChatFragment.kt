@@ -321,7 +321,6 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 if (it.creatorUser.id == viewModel.user.value?.id.toString()) {
                     if (it.status == TripStatus.ACTIVE) {
                         viewModel.deleteTrip(it.id, participantsIdList)
-                        viewModel.getTripById(args.conversationItem.tripId)
                         binding.overlappingPanels.openStartPanel()
 
                     } else {

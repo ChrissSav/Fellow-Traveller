@@ -365,6 +365,7 @@ constructor(
             _tripsAsCreatorActive.value = deleteTripWithId(tripId, _tripsAsCreatorActive.value)
             //deleteFirebaseConversation(tripId)
             sendMessageFirebaseUseCase.invoke(_user.value?.id.toString(), tripId, "", _user.value?.firstName.toString(), 4, list, "")
+            getTripById(tripId)
             _successDeletion.value = R.string.delete_trip_success
             updateUserInfo()
         }
