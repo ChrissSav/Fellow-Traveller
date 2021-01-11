@@ -79,6 +79,9 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             viewModel.getTripById(args.conversationItem.tripId)
             participantsInfo.addAll(it)
             binding.chat.chatSendButton.isEnabled = true
+
+
+
             (binding.chat.chatRecyclerView.adapter as MessagesAdapter).notifyDataSetChanged()
             if (updateStatusWhenExit) {
                 readMessages(args.conversationItem.tripId)
@@ -99,8 +102,9 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 binding.chat.chatInfoButton.visibility = View.GONE
             }
 
-
             trip?.let {
+                binding.overlappingPanels.setEndPanelLockState(OverlappingPanelsLayout.LockState.UNLOCKED)
+
                 with(binding.info) {
                     from.text = it.destFrom.title
                     to.text = it.destTo.title
@@ -111,6 +115,19 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                     driverImage.loadImageFromUrl(it.creatorUser.picture)
                     chatInfoPassengersRecyclerView.adapter = ChatPassengersAdapter(it.passengers, this@ChatFragment::onPassengerClick)
                 }
+
+                if (it.creatorUser.id == viewModel.user.value?.id) {
+                    binding.info.deleteTextView.text = getString(R.string.delete)
+                } else {
+                    binding.info.deleteTextView.text = getString(R.string.leave)
+                }
+
+                if (it.passengers.isNotEmpty()) {
+                    binding.info.passengersSection.visibility = View.GONE
+                } else {
+                    binding.info.passengersSection.visibility = View.VISIBLE
+                }
+
                 binding.chat.chatCreatorName.setTextHtml(binding.chat.chatCreatorName.context.getString(R.string.conversation_creator_name, it.creatorUser.fullName))
             }
 
@@ -120,10 +137,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         viewModel.loadMessages.observe(viewLifecycleOwner, {
 
             if (it) {
-                Log.i("kjhgrgrg", "rpogjirugreg")
                 binding.chat.chatShimmer.startShimmerWithVisibility()
-                //binding.messagesSection.visibility = View.INVISIBLE
-
             } else {
                 binding.chat.chatShimmer.stopShimmerWithVisibility()
             }
@@ -134,6 +148,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     override fun setUpViews() {
 
         binding.overlappingPanels.setStartPanelLockState(OverlappingPanelsLayout.LockState.CLOSE)
+        binding.overlappingPanels.setEndPanelLockState(OverlappingPanelsLayout.LockState.CLOSE)
 
         viewModel.getTripById(args.conversationItem.tripId)
 
@@ -337,7 +352,6 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 //            viewModel.updateSeenStatus(args.conversationItem.tripId)
 //        }
     }
-
 
 
 }
