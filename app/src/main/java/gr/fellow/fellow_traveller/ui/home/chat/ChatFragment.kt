@@ -198,7 +198,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                     bundleOf(
                         "tripId" to args.conversationItem.tripId,
                         "reload" to false,
-                        "history" to (trip.status != TripStatus.COMPLETED),
+                        "history" to (trip.status == TripStatus.COMPLETED),
                         "creator" to (trip.creatorUser.id == viewModel.user.value?.id.toString()))
                 )
             }
