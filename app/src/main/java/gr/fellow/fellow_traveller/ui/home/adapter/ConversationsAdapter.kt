@@ -1,18 +1,20 @@
 package gr.fellow.fellow_traveller.ui.home.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Typeface
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.NonNull
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.ConversationItemBinding
 import gr.fellow.fellow_traveller.domain.chat.ChatMessage
+import gr.fellow.fellow_traveller.service.NotificationJobService
 import gr.fellow.fellow_traveller.ui.extensions.ConversationsDiffCallback
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.ui.home.chat.models.Conversation
@@ -29,7 +31,7 @@ class ConversationsAdapter(
 ) : ListAdapter<Conversation, ConversationsAdapter.ViewHolder>(ConversationsDiffCallback()) {
 
     private lateinit var context: Context
-    private var DEFAULT = ""
+    private var DEFAULT = "default"
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -49,7 +51,7 @@ class ConversationsAdapter(
             //Binding all views
             binding.chatImage.loadImageFromUrl(currentItem.image)
             binding.chatName.text = currentItem.tripName
-            binding.chatDescription.text = currentItem.description
+
 
             binding.chatDate.text = time(currentItem.timestamp, binding.chatDate.context)
 
@@ -62,10 +64,12 @@ class ConversationsAdapter(
                 //If it's not seen, the text style will be normal
                 binding.chatDescription.typeface = Typeface.DEFAULT_BOLD
             }
-            if (currentItem.description == DEFAULT) {
-                binding.chatDescription.text = ""
-                //getLastMessage(currentItem.tripId, binding.chatDescription)
-            }
+//            if (currentItem.description == DEFAULT || currentItem.description == "" ) {
+//                getLastMessage(currentItem.tripId, binding.chatDescription)
+//            }else{
+//                binding.chatDescription.text = currentItem.description
+//            }
+            getLastMessage(currentItem.tripId, binding.chatDescription)
 
             binding.root.setOnClickListener {
                 onItemClickListener.invoke(currentItem)
@@ -109,37 +113,47 @@ class ConversationsAdapter(
 
     private fun getLastMessage(tripId: String, textView: TextView) {
 
-
-        var theLastMessage = DEFAULT
         val reference = FirebaseDatabase.getInstance().getReference("Messages").child(tripId)
-        var last: Query = reference.orderByKey().limitToLast(1)
-        last.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(@NonNull dataSnapshot: DataSnapshot) {
-                val item: ChatMessage? = dataSnapshot.getValue(ChatMessage::class.java)
-                var senderId = item?.senderId.toString()
+        var messageQuery: Query = reference.limitToLast(1)
+        val messageChildEventListener = object : ChildEventListener {
 
+            @SuppressLint("SetTextI18n")
+            override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
+                Log.d(NotificationJobService.TAG, "onChildAdded:" + dataSnapshot.key!!)
 
-                if (senderId == myId) {
-                    theLastMessage = item?.text.toString() //Later we can use You: "message"
-                } else {
-                    theLastMessage = item?.text.toString()
-                }
-
-                when (theLastMessage) {
-                    DEFAULT -> textView.text = context.getString(R.string.no_messages)
-                    else ->
-                        if (theLastMessage.isNullOrEmpty())
-                            textView.text = context.getString(R.string.no_messages)
+                dataSnapshot.getValue(ChatMessage::class.java)?.let {
+                    if (it.messageType == 0) {
+                        if (myId == it.senderId)
+                            textView.text = context.getString(R.string.from_you) + ": " + it.text
                         else
-                            textView.text = theLastMessage
+                            textView.text = it.senderName + ": " + it.text
+                    } else if (it.messageType == 1) {
+                        textView.text = context.getString(R.string.user_added_message)
+                    } else if (it.messageType == 2) {
+                        textView.text = context.getString(R.string.user_deleted_message)
+                    } else if (it.messageType == 3) {
+                        textView.text = context.getString(R.string.no_message)
+                    } else {
+                        textView.text = context.getString(R.string.trip_deleted_message)
+                    }
+
                 }
-                theLastMessage = DEFAULT
 
             }
 
-            override fun onCancelled(@NonNull databaseError: DatabaseError) {}
-        })
+            override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
+            }
 
+            override fun onChildRemoved(dataSnapshot: DataSnapshot) {
+            }
+
+            override fun onChildMoved(dataSnapshot: DataSnapshot, previousChildName: String?) {
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+            }
+        }
+        messageQuery.addChildEventListener(messageChildEventListener)
     }
 }
 

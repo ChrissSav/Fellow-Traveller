@@ -104,7 +104,6 @@
             app:layout_constraintStart_toEndOf="@+id/clock_imageView"
             app:layout_constraintTop_toTopOf="@+id/clock_imageView" />
 
-
         <View
             android:id="@+id/underline"
             android:layout_width="match_parent"

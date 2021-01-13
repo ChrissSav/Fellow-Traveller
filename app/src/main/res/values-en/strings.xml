@@ -410,6 +410,12 @@
     <string name="confirm_booking">Confirm Booking</string>
 
 
+    <string name="from_you">From you</string>
+    <string name="user_added_message">A user has been added to this trip</string>
+    <string name="user_deleted_message">One user left this trip</string>
+    <string name="no_message">There is no message</string>
+    <string name="trip_deleted_message">This trip was canceled</string>
+
     <!-- Date Time -->
 
     <!-- Data placeholders -->
