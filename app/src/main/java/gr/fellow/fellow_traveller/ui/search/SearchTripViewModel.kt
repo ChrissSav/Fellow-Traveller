@@ -103,7 +103,7 @@ constructor(
 
                 createOrEnterConversationFirebaseUseCase.invoke(
                     userBase.id, response.creatorUser.id, tripId, response.destFrom.title + " - "
-                            + response.destTo.title, response.picture
+                            + response.destTo.title, response.picture, response.creatorUser.fullName
                 )
 
                 sendMessageFirebaseUseCase.invoke(userBase.id, tripId, "", userBase.firstName, 1, list, "")

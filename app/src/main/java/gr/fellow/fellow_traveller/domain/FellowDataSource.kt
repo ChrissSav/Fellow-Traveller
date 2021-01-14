@@ -115,7 +115,7 @@ interface FellowDataSource {
 
     suspend fun updateSeenStatus(hashMap: HashMap<String, Any>, tripId: String, userId: String)
 
-    suspend fun createOrEnterConversation(myId: String, creatorId: String, tripId: String, tripName: String, picture: String)
+    suspend fun createOrEnterConversation(myId: String, creatorId: String, tripId: String, tripName: String, picture: String, creatorName: String)
 
     suspend fun deleteConversation(userId: String, tripId: String)
 

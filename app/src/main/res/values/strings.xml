@@ -171,6 +171,7 @@
     <string name="cancel_search">Ακύρωση αναζήτησης;</string>
     <string name="per_person">ανά άτομο</string>
     <string name="exit_from_trip">Θέλεις σίγουρα να αποχωρήσεις από αυτό το ταξίδι;</string>
+    <string name="delete_this_trip">Θέλεις σίγουρα να διαγράψεις αυτό το ταξίδι;</string>
     <string name="no_pictures">Δεν υπάρχει ακόμα κάποια εικόνα για αυτήν την συνομιλία</string>
     <string name="most_relevant">Πιο σχετικά</string>
     <string name="price_title">Τιμή</string>
@@ -409,10 +410,12 @@
     <string name="no_vehicles_description">Φαίνεται ότι δεν έχεις προσθέσει κάποιο όχημα. Κάνε μία προσθήκη για να μπορείς να προσφέρεις διαδρομές</string>
     <string name="driver">Οδηγός</string>
     <string name="from_you">Εσύ</string>
-    <string name="user_added_message">Ο χρήστης %s προστέθηκε σε αυτό το ταξίδι</string>
-    <string name="user_deleted_message">Ο χρήστης %s αποχώρησε από αυτό το ταξίδι</string>
+    <string name="user_added_message">Ο χρήστης &lt;b&gt;%s&lt;/b&gt; προστέθηκε σε αυτό το ταξίδι</string>
+    <string name="user_deleted_message">Ο χρήστης &lt;b&gt;%s&lt;/b&gt; αποχώρησε από αυτό το ταξίδι</string>
     <string name="no_message">Καλώς όρισες σε αυτό το ταξίδι</string>
     <string name="trip_deleted_message">Το ταξίδι αυτό ακυρώθηκε </string>
+    <string name="conversation_from">από</string>
+    <string name="conversation_from_you">από Εσένα</string>
 
     <string name="TOS_URL" translatable="false">https://fellowtraveller.gr/tos/</string>
     <string name="PRIVACY_POLICY_URL" translatable="false">https://fellowtraveller.gr/tos/</string>

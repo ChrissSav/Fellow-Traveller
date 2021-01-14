@@ -65,6 +65,17 @@ class ConversationsAdapter(
                 //If it's not seen, the text style will be normal
                 binding.chatDescription.typeface = Typeface.DEFAULT_BOLD
             }
+
+            if (currentItem.creatorId.isNullOrEmpty()) {
+                binding.creatorName.visibility = View.GONE
+            } else {
+                if (currentItem.creatorId == myId) {
+                    binding.creatorName.text = context.getString(R.string.conversation_from_you)
+                } else {
+                    binding.creatorName.text = context.getString(R.string.conversation_from) + " " + currentItem.creatorName
+                }
+            }
+
 //            if (currentItem.description == DEFAULT || currentItem.description == "" ) {
 //                getLastMessage(currentItem.tripId, binding.chatDescription)
 //            }else{
@@ -112,7 +123,7 @@ class ConversationsAdapter(
     class ViewHolder(val binding: ConversationItemBinding) : RecyclerView.ViewHolder(binding.root)
 
 
-    private fun getLastMessage(tripId: String, textView: TextView) {
+    private fun getLastMessage(tripId: String, descriptionTextView: TextView) {
 
         val reference = FirebaseDatabase.getInstance().getReference("Messages").child(tripId)
         var messageQuery: Query = reference.limitToLast(1)
@@ -122,20 +133,21 @@ class ConversationsAdapter(
             override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
                 Log.d(NotificationJobService.TAG, "onChildAdded:" + dataSnapshot.key!!)
 
+                /** For description **/
                 dataSnapshot.getValue(ChatMessage::class.java)?.let {
                     if (it.messageType == 0) {
                         if (myId == it.senderId)
-                            textView.text = context.getString(R.string.from_you) + ": " + it.text
+                            descriptionTextView.text = context.getString(R.string.from_you) + ": " + it.text
                         else
-                            textView.text = it.senderName + ": " + it.text
+                            descriptionTextView.text = it.senderName + ": " + it.text
                     } else if (it.messageType == 1) {
-                        textView.setTextHtml(textView.context.getString(R.string.user_added_message, it.senderName))
+                        descriptionTextView.setTextHtml(descriptionTextView.context.getString(R.string.user_added_message, it.senderName))
                     } else if (it.messageType == 2) {
-                        textView.setTextHtml(textView.context.getString(R.string.user_deleted_message, it.senderName))
+                        descriptionTextView.setTextHtml(descriptionTextView.context.getString(R.string.user_deleted_message, it.senderName))
                     } else if (it.messageType == 3) {
-                        textView.text = context.getString(R.string.no_message)
+                        descriptionTextView.text = context.getString(R.string.no_message)
                     } else {
-                        textView.text = context.getString(R.string.trip_deleted_message)
+                        descriptionTextView.text = context.getString(R.string.trip_deleted_message)
                     }
 
                 }

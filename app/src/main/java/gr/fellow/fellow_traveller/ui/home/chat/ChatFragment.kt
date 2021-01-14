@@ -88,6 +88,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 updateStatusWhenExit = false
             }
 
+
         })
 
         viewModel.tripInfo.observe(viewLifecycleOwner, { trip ->
@@ -128,7 +129,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                     binding.info.passengersSection.visibility = View.VISIBLE
                 }
 
-                binding.chat.chatCreatorName.setTextHtml(binding.chat.chatCreatorName.context.getString(R.string.conversation_creator_name, it.creatorUser.fullName))
+                /** When we implement the Web Sockets we will use this updated value for creator's user name **/
+                //binding.chat.chatCreatorName.setTextHtml(binding.chat.chatCreatorName.context.getString(R.string.conversation_creator_name, it.creatorUser.fullName))
             }
 
 
@@ -154,6 +156,14 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
         binding.overlappingPanels.setStartPanelLockState(OverlappingPanelsLayout.LockState.CLOSE)
         binding.overlappingPanels.setEndPanelLockState(OverlappingPanelsLayout.LockState.CLOSE)
+
+        /** Now we get the value from firebase,which is not updated.. Later we gonna use it from tripInvolve **/
+        if (!args.conversationItem.creatorId.isNullOrEmpty()) {
+            if (viewModel.user.value?.id.toString() == args.conversationItem.creatorId)
+                binding.chat.chatCreatorName.text = getString(R.string.conversation_from_you)
+            else
+                binding.chat.chatCreatorName.setTextHtml(binding.chat.chatCreatorName.context.getString(R.string.conversation_creator_name, args.conversationItem.creatorName))
+        }
 
         viewModel.getTripById(args.conversationItem.tripId)
 
@@ -218,7 +228,10 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             createToast(getString(R.string.no_pictures))
         }
         binding.info.exitButton.setOnClickListener {
-            ExitCustomDialog(activity as HomeActivity, this::exitCustomDialogAnswerType, getString(R.string.exit_from_trip), 1).show(parentFragmentManager, "exitCustomDialog")
+            if (viewModel.user.value?.id == tripInvolved?.creatorUser?.id)
+                ExitCustomDialog(activity as HomeActivity, this::exitCustomDialogAnswerType, getString(R.string.delete_this_trip), 1).show(parentFragmentManager, "exitCustomDialog")
+            else
+                ExitCustomDialog(activity as HomeActivity, this::exitCustomDialogAnswerType, getString(R.string.exit_from_trip), 1).show(parentFragmentManager, "exitCustomDialog")
         }
 
         binding.chat.chatRecyclerView.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->

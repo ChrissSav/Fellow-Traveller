@@ -196,6 +196,7 @@
     <string name="cancel_search">Do you want to cancel the search?</string>
     <string name="per_person">per person</string>
     <string name="exit_from_trip">Are you sure you want to leave this trip?</string>
+    <string name="delete_this_trip">Are you sure you want to delete this trip?</string>
     <string name="no_pictures">There is no picture for this conversation yet</string>
     <string name="most_relevant">Most Relevant</string>
     <string name="price_title">Price</string>
@@ -411,10 +412,13 @@
 
 
     <string name="from_you">You</string>
-    <string name="user_added_message">User %s has been added to this trip</string>
-    <string name="user_deleted_message">User %s left this trip</string>
+    <string name="user_added_message">User &lt;b&gt;%s&lt;/b&gt; has been added to this trip</string>
+    <string name="user_deleted_message">User &lt;b&gt;%s&lt;/b&gt; left this trip</string>
     <string name="no_message">Welcome to this trip</string>
     <string name="trip_deleted_message">This trip was canceled</string>
+    <string name="conversation_from">from</string>
+    <string name="conversation_from_you">from You</string>
+
 
     <!-- Date Time -->
 
