@@ -197,6 +197,14 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
                     findNavController()?.navigate(R.id.action_tripInvolvedDetailsSecondFragment_to_destination_messenger)
             }
 
+
+            if (trip.passengers.isNotEmpty()) {
+                passengersSection.visibility = View.GONE
+            } else {
+                passengersSection.visibility = View.VISIBLE
+            }
+
+
         }
 
 
@@ -215,7 +223,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
     private fun onConfirmItemClickListener(answerType: AnswerType) {
         if (answerType == AnswerType.Yes) {
 
-            var tempIdList = mutableListOf<String>()
+            val tempIdList = mutableListOf<String>()
             tripInvolved.passengers.forEach {
                 tempIdList.add(it.user.id)
             }
