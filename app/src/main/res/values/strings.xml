@@ -408,10 +408,10 @@
     <string name="no_vehicles">Δεν έχεις κάποιο όχημα</string>
     <string name="no_vehicles_description">Φαίνεται ότι δεν έχεις προσθέσει κάποιο όχημα. Κάνε μία προσθήκη για να μπορείς να προσφέρεις διαδρομές</string>
     <string name="driver">Οδηγός</string>
-    <string name="from_you">Από εσένα</string>
-    <string name="user_added_message">Ένας χρήστης προστέθηκε σε αυτό το ταξίδι</string>
-    <string name="user_deleted_message">Ένας χρήστης αποχώρησε από αυτό το ταξίδι</string>
-    <string name="no_message">Δεν υπάρχει κάποιο μήνυμα</string>
+    <string name="from_you">Εσύ</string>
+    <string name="user_added_message">Ο χρήστης %s προστέθηκε σε αυτό το ταξίδι</string>
+    <string name="user_deleted_message">Ο χρήστης %s αποχώρησε από αυτό το ταξίδι</string>
+    <string name="no_message">Καλώς όρισες σε αυτό το ταξίδι</string>
     <string name="trip_deleted_message">Το ταξίδι αυτό ακυρώθηκε </string>
 
     <string name="TOS_URL" translatable="false">https://fellowtraveller.gr/tos/</string>

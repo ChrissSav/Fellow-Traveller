@@ -87,6 +87,7 @@ class BookTripFragment : BaseFragment<FragmentBookTripBinding>() {
                     currentTrip.passengers.forEach {
                         list.add(it.user.id)
                     }
+                    list.add(currentTrip.creatorUser.id)
                     viewModel.bookTrip(currentTrip.id, binding.seats.currentNum, havePet, (activity as SearchTripActivity).localUser.mapToUserBase(), list)
                 }
             }

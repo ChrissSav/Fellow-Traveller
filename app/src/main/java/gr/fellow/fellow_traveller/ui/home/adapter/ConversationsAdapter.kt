@@ -17,6 +17,7 @@ import gr.fellow.fellow_traveller.domain.chat.ChatMessage
 import gr.fellow.fellow_traveller.service.NotificationJobService
 import gr.fellow.fellow_traveller.ui.extensions.ConversationsDiffCallback
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
+import gr.fellow.fellow_traveller.ui.extensions.setTextHtml
 import gr.fellow.fellow_traveller.ui.home.chat.models.Conversation
 import gr.fellow.fellow_traveller.utils.currentTimeStamp
 import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
@@ -128,9 +129,9 @@ class ConversationsAdapter(
                         else
                             textView.text = it.senderName + ": " + it.text
                     } else if (it.messageType == 1) {
-                        textView.text = context.getString(R.string.user_added_message)
+                        textView.setTextHtml(textView.context.getString(R.string.user_added_message, it.senderName))
                     } else if (it.messageType == 2) {
-                        textView.text = context.getString(R.string.user_deleted_message)
+                        textView.setTextHtml(textView.context.getString(R.string.user_deleted_message, it.senderName))
                     } else if (it.messageType == 3) {
                         textView.text = context.getString(R.string.no_message)
                     } else {
@@ -156,4 +157,7 @@ class ConversationsAdapter(
         messageQuery.addChildEventListener(messageChildEventListener)
     }
 }
+
+
+
 
