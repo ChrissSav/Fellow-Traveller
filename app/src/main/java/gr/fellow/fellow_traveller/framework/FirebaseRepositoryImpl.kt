@@ -47,7 +47,7 @@ class FirebaseRepositoryImpl(
         }
     }
 
-    override suspend fun createOrEnterConversation(myId: String, creatorId: String, tripId: String, tripName: String, picture: String) {
+    override suspend fun createOrEnterConversation(myId: String, creatorId: String, tripId: String, tripName: String, picture: String, creatorName: String) {
         firebaseCall {
             //Assign to passenger a new conversation
             val passengerConversation = firebaseDatabase.reference.child("UserTrips").child(myId).child(tripId)
@@ -64,7 +64,9 @@ class FirebaseRepositoryImpl(
             tripsMap["tripId"] = tripId
             tripsMap["tripName"] = tripName
             tripsMap["description"] = "default"
+            tripsMap["creatorId"] = creatorId
             tripsMap["image"] = picture
+            tripsMap["creatorName"] = creatorName
 
             //Update creator and passenger conversation
             passengerConversation.setValue(tripsMap)

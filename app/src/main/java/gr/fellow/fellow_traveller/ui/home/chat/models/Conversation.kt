@@ -10,5 +10,7 @@ data class Conversation(
     val description: String = "",
     val timestamp: Long = 0,
     val image: String = "",
-    val seen: Boolean = false
+    val seen: Boolean = false,
+    val creatorName: String = "",
+    val creatorId: String = "",
 ) : Parcelable
