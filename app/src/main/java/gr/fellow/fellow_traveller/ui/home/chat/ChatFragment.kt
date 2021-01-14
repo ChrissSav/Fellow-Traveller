@@ -235,11 +235,19 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
         }
 
         binding.chat.chatRecyclerView.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
+
+            //When we don't have data on the list, it will cause crash if we scroll to position
+
             if (bottom < oldBottom) {
                 binding.chat.chatRecyclerView.postDelayed(Runnable {
-                    binding.chat.chatRecyclerView.smoothScrollToPosition(messagesList.size - 1)
+                    try {
+                        binding.chat.chatRecyclerView.smoothScrollToPosition(messagesList.size - 1)
+                    } catch (e: IllegalArgumentException) {
+                        Log.e("SCROLL_TO_POSITION", e.toString())
+                    }
                 }, 100)
             }
+
         }
 
     }
@@ -268,7 +276,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     private fun readMessages(tripId: String) {
         val reference = firebaseDatabase.getReference("Messages").child(tripId)
         messageQuery = reference.limitToLast(1000)
-        Log.i("makis", "readMessages")
+        Log.i("READ_MESSAGES", "readMessages")
         messageChildEventListener = object : ChildEventListener {
 
             override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {

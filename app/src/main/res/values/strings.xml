@@ -124,7 +124,7 @@
     <!--Car -->
 
     <string name="notification_to_rate">Ήρθε η ώρα να αξιολογήσεις το χρήστη &lt;b&gt;%s&lt;/b&gt;</string>
-    <string name="notification_delete_trip">Ο χρήστης &lt;b&gt;%s&lt;/b&gt; ακύρωσε ένα ταξίδι στο οποίο είχατε κάνει κράτηση.</string>
+    <string name="notification_delete_trip">Ο χρήστης &lt;b&gt;%s&lt;/b&gt; ακύρωσε ένα ταξίδι στο οποίο είχες κάνει κράτηση.</string>
     <string name="notification_passenger_enter">Ο χρήστης &lt;b&gt;%s&lt;/b&gt; έκανε κράτηση στο ταξίδι σου.</string>
     <string name="notification_passenger_exit">Ο χρήστης &lt;b&gt;%s&lt;/b&gt; ακύρωσε την κράτηση από το ταξίδι σου.</string>
     <string name="notification_to_rate_title">Αξιολόγηση</string>
