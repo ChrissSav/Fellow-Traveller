@@ -69,6 +69,7 @@ class ConversationsAdapter(
             if (currentItem.creatorId.isNullOrEmpty()) {
                 binding.creatorName.visibility = View.GONE
             } else {
+                binding.creatorName.visibility = View.VISIBLE
                 if (currentItem.creatorId == myId) {
                     binding.creatorName.text = context.getString(R.string.conversation_from_you)
                 } else {
