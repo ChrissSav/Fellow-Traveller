@@ -327,11 +327,11 @@
     <string name="messenger_step5">Τοποθετήστε τον σύνδεσμο στο fellow.</string>
     <string name="messenger_step5_desc">Άνοιξε την εφαργμογή του Messenger</string>
     <string name="trip_overview">Επισκόπηση ταξιδιού</string>
-    <string name="this_is_how_trip_will_look_to_others">\'Έτσι θα εμφανίζεται το ταξίδι μετά την καταχώριση</string>
-    <string name="trip_review_placeholder">\'Ηταν ένα πολύ καλό ταξίδι</string>
+    <string name="this_is_how_trip_will_look_to_others">Έτσι θα εμφανίζεται το ταξίδι μετά την καταχώριση</string>
+    <string name="trip_review_placeholder">Ήταν ένα πολύ καλό ταξίδι</string>
     <string name="rating_placeholder" translatable="false">4.6</string>
     <string name="ensure_account_security">Για να διασφαλίσεις τον λογαριαμό σου</string>
-    <string name="enter_price">\Όρισε μία τιμή</string>
+    <string name="enter_price">Όρισε μία τιμή</string>
     <string name="price_goes_per_person">Η τιμή ορίζεται ανά άτομο</string>
     <string name="price_total">Σύνολο</string>
     <string name="price_calc_placeholder" translatable="false">4 x 5,00 €</string>
@@ -430,7 +430,7 @@
     <string name="placeholder_from">π.χ. Αθήνα</string>
     <string name="placeholder_to">π.χ. Θεσσαλονίκη</string>
     <string name="history">Ιστορικό</string>
-    <string name="offer_your_next_trip_description">Μοίρασε το επόμενο σου ταξίδι και βρες συνταξιδιώτες στο λεπτό.</string>
+    <string name="offer_your_next_trip_description">Μοιράσου το επόμενο ταξίδι σου και βρες συνταξιδιώτες στο λεπτό.</string>
     <string name="confirm_booking">Επικύρωση Κράτησης</string>
     <string name="placeholder_vehicle_brand">π.χ. Tesla</string>
     <string name="placeholder_vehicle_model">π.χ. Model 3</string>
