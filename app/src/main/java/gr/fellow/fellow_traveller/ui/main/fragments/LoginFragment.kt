@@ -53,7 +53,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         }
 
 
-        binding.ImageButtonBack.setOnClickListener {
+        binding.ImageButtonBack.button.setOnClickListener {
             onBackPressed()
         }
     }

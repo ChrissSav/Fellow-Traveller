@@ -90,5 +90,6 @@
 
     <!-- New dime-->
     <dimen name="margin_label_from_title">4dp</dimen>
+    <dimen name="margin_top_of_back_button_new">24dp</dimen>
 
 </resources>

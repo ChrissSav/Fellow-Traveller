@@ -450,5 +450,7 @@
     <string name="welcome_message_title">Είσοδος στο fellow.</string>
     <string name="welcome_message_label">Επίλεξε ένα από τους παρακάτω τρόπους σύνδεσης.</string>
 
+    <string name="user_login">Σύνδεση χρήστη.</string>
+    <string name="user_login_label">Εισήγαγε τα στοιχεία του λογαριασμού σου.</string>
 
 </resources>

@@ -53,7 +53,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
         viewModel.getUserInfo()
 
-        Glide.with(this).asGif().load(R.raw.splash_green_100fps).listener(object : RequestListener<GifDrawable?> {
+        Glide.with(this).asGif().load(R.raw.fellow_splash_black).listener(object : RequestListener<GifDrawable?> {
 
             override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<GifDrawable?>?, isFirstResource: Boolean): Boolean {
                 binding.ImageView.setColorFilter(ContextCompat.getColor(this@SplashActivity, R.color.white), android.graphics.PorterDuff.Mode.SRC_IN)
@@ -63,7 +63,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             }
 
             override fun onResourceReady(
-                resource: GifDrawable?, model: Any?, target: Target<GifDrawable?>?, dataSource: DataSource?, isFirstResource: Boolean
+                resource: GifDrawable?, model: Any?, target: Target<GifDrawable?>?, dataSource: DataSource?, isFirstResource: Boolean,
             ): Boolean {
                 resource?.setLoopCount(1)
                 resource?.registerAnimationCallback(object : Animatable2Compat.AnimationCallback() {
