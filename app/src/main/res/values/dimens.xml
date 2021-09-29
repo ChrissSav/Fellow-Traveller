@@ -88,4 +88,7 @@
     <dimen name="messenger_des_top_margin">18dp</dimen>
 
 
+    <!-- New dime-->
+    <dimen name="margin_label_from_title">4dp</dimen>
+
 </resources>

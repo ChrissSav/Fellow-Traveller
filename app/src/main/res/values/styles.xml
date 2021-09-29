@@ -4,8 +4,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+        <item name="android:statusBarColor">@color/black_new</item>
         <item name="android:windowDisablePreview">true</item>
         <item name="colorPrimary">@color/black_color</item>
         <item name="colorPrimaryDark">@color/orange_color</item>

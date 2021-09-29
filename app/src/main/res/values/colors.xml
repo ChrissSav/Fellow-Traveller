@@ -56,7 +56,8 @@
 
     <color name="green">#427856</color>
     <color name="green_pressed">#4F8F67</color>
-    <color name="orange_new">#FF7733</color>
+    <color name="orange_new">#FF6230</color>
+    <color name="orange_20_new">#20FF6230</color>
     <color name="yellow">#F2D726</color>
     <color name="light_aqua_New">#B2E8BF</color>
     <color name="light_orange_New">#F7E5CD</color>
@@ -65,5 +66,11 @@
     <color name="dark_gray_new">#B1B1B1</color>
     <color name="aqua_new">#427856</color>
     <color name="shimmer_color">#EBEBEB</color>
+    <color name="black_new">#000</color>
+
+
+    <color name="green_new">#0E5034</color>
+    <color name="green_20_new">#200E5034</color>
+
 
 </resources>

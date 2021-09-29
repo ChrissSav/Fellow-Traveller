@@ -445,4 +445,10 @@
     <string name="special_characters">Ειδικοί χαρακτήρες</string>
 
     <string name="password_error">Ο κωδικός πρόσβασης πρέπει να περιέχει τουλάχιστον 6 χαρακτήρες. Προεραιτικά τουλάχιστον 1 πεζό, 1 κεφαλαίο και 1 αριθμό</string>
+
+
+    <string name="welcome_message_title">Είσοδος στο fellow.</string>
+    <string name="welcome_message_label">Επίλεξε ένα από τους παρακάτω τρόπους σύνδεσης.</string>
+
+
 </resources>

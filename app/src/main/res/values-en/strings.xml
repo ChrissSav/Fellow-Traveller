@@ -464,4 +464,8 @@
     <string name="special_characters">Special Characters</string>
     <string name="password_error">Password should contain min of 6 characters. Optionally at least 1 lowercase, 1 uppercase and 1 numeric value</string>
 
+
+    <string name="welcome_message_title">Login to fellow.</string>
+    <string name="welcome_message_label">Choose one of the following connection methods.</string>
+
 </resources>
