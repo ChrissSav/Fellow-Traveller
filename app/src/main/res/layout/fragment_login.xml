@@ -146,7 +146,7 @@
 
             <TextView
                 android:id="@+id/forgot_password"
-                style="@style/par"
+                style="@style/paragraph_2_new"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="32dp"
