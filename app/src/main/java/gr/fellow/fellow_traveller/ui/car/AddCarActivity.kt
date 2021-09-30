@@ -44,9 +44,9 @@ class AddCarActivity : BaseActivityViewModel<ActivityAddCarBinding, AddCarViewMo
         with(binding) {
 
 
-        back.setOnClickListener {
-                finish()
-            }
+        back.button.setOnClickListener {
+            finish()
+        }
 
             addCar.setOnClickListener {
 
