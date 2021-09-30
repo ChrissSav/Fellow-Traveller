@@ -466,10 +466,10 @@
 
 
     <string name="welcome_message_title">Login to fellow.</string>
-    <string name="welcome_message_label">Choose one of the following connection methods.</string>
+    <string name="welcome_message_label">Choose one of the following connection methods</string>
 
 
-    <string name="user_login">User login.</string>
-    <string name="user_login_label">Enter your account details.</string>
+    <string name="user_login">User login</string>
+    <string name="user_login_label">Enter your account details</string>
 
 </resources>

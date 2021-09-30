@@ -70,7 +70,7 @@
                 android:layout_marginTop="32dp"
                 android:background="@drawable/button_background_orange_16dp"
                 android:backgroundTint="@color/black_20_new"
-                android:padding="16dp"
+                android:padding="@dimen/padding_component_icon"
                 app:layout_constraintEnd_toEndOf="@+id/LoginActivity_textView_header"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header"
@@ -79,9 +79,9 @@
 
                 <View
                     android:id="@+id/view2"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/ic_login_new"
+                    android:layout_width="@dimen/component_input_icon_dime"
+                    android:layout_height="@dimen/component_input_icon_dime"
+                    android:background="@drawable/ic_profile"
                     android:backgroundTint="@color/white_60_new"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +111,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/button_background_orange_16dp"
                 android:backgroundTint="@color/black_20_new"
-                android:padding="16dp"
+                android:padding="@dimen/padding_component_icon"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout7"
                 app:layout_constraintStart_toStartOf="@+id/constraintLayout7"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout7">
@@ -119,8 +119,8 @@
 
                 <View
                     android:id="@+id/view22"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/component_input_icon_dime"
+                    android:layout_height="@dimen/component_input_icon_dime"
                     android:background="@drawable/ic_lock"
                     android:backgroundTint="@color/white_60_new"
                     app:layout_constraintBottom_toBottomOf="parent"

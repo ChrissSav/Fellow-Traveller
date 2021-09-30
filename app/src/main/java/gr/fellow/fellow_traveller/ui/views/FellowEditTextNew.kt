@@ -141,7 +141,7 @@ class FellowEditTextNew(context: Context, attrs: AttributeSet) : ConstraintLayou
             } else {
                 binding.editText.inputType = InputType.TYPE_CLASS_TEXT
                 binding.editText.transformationMethod = null
-                binding.showHide.setBackgroundResource(R.drawable.ic_eye_close)
+                binding.showHide.setBackgroundResource(R.drawable.ic_eye_closed)
             }
             binding.editText.setSelection(binding.editText.text.length)
             passwordIsHide = !passwordIsHide

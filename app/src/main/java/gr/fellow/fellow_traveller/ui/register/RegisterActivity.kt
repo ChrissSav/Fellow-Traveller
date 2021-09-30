@@ -2,15 +2,13 @@ package gr.fellow.fellow_traveller.ui.register
 
 import android.view.View
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivity
 import gr.fellow.fellow_traveller.databinding.ActivityRegisterBinding
 import gr.fellow.fellow_traveller.ui.extensions.createAlerter
-import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
+import gr.fellow.fellow_traveller.ui.extensions.setTextHtml
 
 
 @AndroidEntryPoint
@@ -24,7 +22,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
         ActivityRegisterBinding.inflate(layoutInflater)
 
     override fun setUpObservers() {
-        viewModel.load.observe(this, Observer {
+        viewModel.load.observe(this, {
             if (it)
                 binding.genericLoader.root.visibility = View.VISIBLE
             else
@@ -33,37 +31,40 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
         })
 
 
-        viewModel.error.observe(this, Observer {
+        viewModel.error.observe(this, {
             if (it.internal)
                 createAlerter(getString(it.messageId))
             else
                 createAlerter(it.message)
 
         })
+
+        viewModel.email.observe(this, {
+            binding.scroll.visibility = View.GONE
+            binding.constraintLayoutConfirm.visibility = View.VISIBLE
+            binding.emailConfirm.setTextHtml(getString(R.string.email_verify, it))
+
+        })
     }
 
     override fun setUpViews() {
 
-
-        nav = Navigation.findNavController(this, R.id.RegisterActivity_nav_host)
-
-        nav.addOnDestinationChangedListener { _, destination, _ ->
-            hideKeyboard()
-            when (destination.id) {
-                R.id.emailFragment -> binding.progressBar.progress = 30
-                R.id.passwordFragment -> binding.progressBar.progress = 60
-                R.id.accountFragment -> binding.progressBar.progress = 80
-                R.id.successRegistrationFragment -> {
-                    binding.progressBar.progress = 100
-                    binding.ImageButtonBack.visibility = View.GONE
+        binding.buttonRegister.setOnClickListener {
+            if (binding.email.isCorrect() and binding.password.isCorrect() and binding.passwordConfirm.isCorrect() and binding.firstName.isCorrect() and binding.lastName.isCorrect()) {
+                if (binding.password.text.toString() != binding.passwordConfirm.text.toString()) {
+                    binding.passwordConfirm.setError(resources.getString(R.string.ERROR_PASSWORD_DO_NOT_MATCH))
+                } else {
+                    val email = binding.email.text.toString()
+                    val password = binding.password.text.toString()
+                    val fistName = binding.firstName.text.toString()
+                    val lastName = binding.lastName.text.toString()
+                    viewModel.registerUser(fistName, lastName, email, password)
                 }
             }
-
         }
 
 
-
-        binding.ImageButtonBack.setOnClickListener {
+        binding.ImageButtonBack.button.setOnClickListener {
             onBackPressed()
         }
     }

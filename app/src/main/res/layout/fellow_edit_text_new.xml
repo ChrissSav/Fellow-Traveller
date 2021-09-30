@@ -54,7 +54,7 @@
         android:layout_height="20dp"
         android:animateLayoutChanges="true"
         android:background="@drawable/ic_eye_open"
-        android:gravity="bottom"
+        android:backgroundTint="@color/white_60_new"
         android:paddingStart="16dp"
         android:paddingEnd="4dp"
         android:visibility="gone"

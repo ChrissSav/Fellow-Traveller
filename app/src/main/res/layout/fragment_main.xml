@@ -69,7 +69,7 @@
         android:layout_marginTop="32dp"
         android:background="@drawable/button_background_orange_16dp"
         android:backgroundTint="@color/orange_20_new"
-        android:padding="16dp"
+        android:padding="@dimen/padding_component_icon"
         app:layout_constraintEnd_toEndOf="@+id/MainActivity_textView2"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/MainActivity_textView2"
@@ -92,7 +92,8 @@
             android:id="@+id/view2"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:background="@drawable/ic_login_new"
+            android:background="@drawable/ic_profile"
+            android:backgroundTint="@color/orange_new"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -113,10 +114,9 @@
         android:id="@+id/button_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:background="@drawable/button_background_orange_16dp"
         android:backgroundTint="@color/green_20_new"
-        android:padding="16dp"
+        android:padding="@dimen/padding_component_icon"
         app:layout_constraintEnd_toEndOf="@+id/button_login"
         app:layout_constraintStart_toStartOf="@+id/button_login"
         app:layout_constraintTop_toBottomOf="@+id/button_login">
@@ -137,7 +137,7 @@
             android:id="@+id/view4"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:background="@drawable/ic_login_new"
+            android:background="@drawable/ic_profile"
             android:backgroundTint="@color/green_new"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -147,9 +147,9 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@drawable/ic_arrow_right_new"
+            android:backgroundTint="@color/green_new"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:backgroundTint="@color/green_new"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

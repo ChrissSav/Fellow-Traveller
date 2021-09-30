@@ -4,54 +4,328 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black_new"
     tools:context=".ui.register.RegisterActivity">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="@style/CustomProgressBarOrange"
-        android:layout_width="0dp"
-        android:layout_height="5dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:progress="50"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:id="@+id/scroll"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-54dp">
 
 
-    <ImageButton
-        android:id="@+id/ImageButton_back"
-        style="@style/border_icon_button"
-        android:layout_width="@dimen/back_button_width_height"
-        android:layout_height="@dimen/back_button_width_height"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_back_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
 
-    <fragment
-        android:id="@+id/RegisterActivity_nav_host"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="24dp"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ImageButton_back"
-        app:navGraph="@navigation/register_nav_graph" />
+            <include
+                android:id="@+id/ImageButton_back"
+                layout="@layout/back_button_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+
+            <TextView
+                android:id="@+id/LoginActivity_textView_header"
+                style="@style/header_1_new"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="@dimen/margin_top_of_back_button_new"
+                android:layout_marginEnd="16dp"
+                android:text="Εγγραφή χρήστη"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ImageButton_back" />
+
+
+            <TextView
+                android:id="@+id/MainActivity_textView2"
+                style="@style/paragraph_2_new"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="@dimen/margin_label_from_title"
+                android:layout_marginEnd="16dp"
+                android:gravity="start"
+                android:text="@string/user_login_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/LoginActivity_textView_header" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/button_background_orange_16dp"
+                android:backgroundTint="@color/black_20_new"
+                android:padding="@dimen/padding_component_icon"
+                app:layout_constraintEnd_toEndOf="@+id/LoginActivity_textView_header"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header"
+                app:layout_constraintTop_toBottomOf="@+id/MainActivity_textView2">
+
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="@dimen/component_input_icon_dime"
+                    android:layout_height="@dimen/component_input_icon_dime"
+                    android:background="@drawable/ic_calendar"
+                    android:backgroundTint="@color/white_60_new"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <gr.fellow.fellow_traveller.ui.views.FellowEditTextNew
+                    android:id="@+id/email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:error_message_f="@string/ERROR_INVALID_EMAIL_FORMAT"
+                    app:hint_f="@string/EMAIL_PLACEHOLDER"
+                    app:imeOptions_f="actionNext"
+                    app:label_f="@string/email"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/view2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:text_type_f="textEmailAddress" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/button_background_orange_16dp"
+                android:backgroundTint="@color/black_20_new"
+                android:padding="@dimen/padding_component_icon"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout7"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout7"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout7">
+
+
+                <View
+                    android:id="@+id/view22"
+                    android:layout_width="@dimen/component_input_icon_dime"
+                    android:layout_height="@dimen/component_input_icon_dime"
+                    android:background="@drawable/ic_lock"
+                    android:backgroundTint="@color/white_60_new"
+                    app:layout_constraintBottom_toBottomOf="@+id/password"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/password" />
+
+                <gr.fellow.fellow_traveller.ui.views.FellowEditTextNew
+                    android:id="@+id/password"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:hint_f="@string/password"
+                    app:imeOptions_f="actionNext"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/view22"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:regex_f="@string/regex_min_3_chars"
+                    app:text_type_f="textPassword" />
+
+                <View
+                    android:layout_width="@dimen/component_input_icon_dime"
+                    android:layout_height="@dimen/component_input_icon_dime"
+                    android:background="@drawable/ic_lock"
+                    android:backgroundTint="@color/white_60_new"
+                    app:layout_constraintBottom_toBottomOf="@+id/password_confirm"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/password_confirm" />
+
+                <gr.fellow.fellow_traveller.ui.views.FellowEditTextNew
+                    android:id="@+id/password_confirm"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    app:hint_f="@string/repeat_password"
+                    app:imeOptions_f="actionNext"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/view22"
+                    app:layout_constraintTop_toBottomOf="@+id/password"
+                    app:regex_f="@string/regex_min_3_chars"
+                    app:text_type_f="textPassword" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout10"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/button_background_orange_16dp"
+                android:backgroundTint="@color/black_20_new"
+                android:padding="@dimen/padding_component_icon"
+                app:layout_constraintBottom_toTopOf="@+id/button_register"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout7"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout7"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout9"
+                app:layout_constraintVertical_bias="0.0">
+
+
+                <View
+                    android:id="@+id/view21"
+                    android:layout_width="@dimen/component_input_icon_dime"
+                    android:layout_height="@dimen/component_input_icon_dime"
+                    android:background="@drawable/ic_profile"
+                    android:backgroundTint="@color/white_60_new"
+                    app:layout_constraintBottom_toBottomOf="@+id/first_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/first_name" />
+
+                <gr.fellow.fellow_traveller.ui.views.FellowEditTextNew
+                    android:id="@+id/first_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:hint_f="@string/first_name"
+                    app:imeOptions_f="actionNext"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/view21"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:regex_f="@string/regex_min_3_chars"
+                    app:text_type_f="text" />
+
+                <View
+                    android:layout_width="@dimen/component_input_icon_dime"
+                    android:layout_height="@dimen/component_input_icon_dime"
+                    android:background="@drawable/ic_profile"
+                    android:backgroundTint="@color/white_60_new"
+                    app:layout_constraintBottom_toBottomOf="@+id/last_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/last_name" />
+
+                <gr.fellow.fellow_traveller.ui.views.FellowEditTextNew
+                    android:id="@+id/last_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:hint_f="@string/last_name"
+                    app:imeOptions_f="actionDone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/first_name"
+                    app:layout_constraintTop_toBottomOf="@+id/first_name"
+                    app:regex_f="@string/regex_min_3_chars"
+                    app:text_type_f="text" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/button_register"
+                style="@style/button_1"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="80dp"
+                android:layout_marginEnd="80dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/button_background_orange_16dp"
+                android:backgroundTint="@color/orange_20_new"
+                android:text="@string/sign_up"
+                android:textAllCaps="false"
+                android:textColor="@color/white_60_new"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout_confirm"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:background="@color/black_new"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView_title"
+            style="@style/header_1_new"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="120dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:text="@string/verify_your_email"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/textView14"
+            style="@style/paragraph_2_new"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="70dp"
+            android:gravity="center"
+            android:text="@string/warning_email_spam"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textView_title"
+            app:layout_constraintStart_toStartOf="@+id/textView_title" />
+
+        <TextView
+            android:id="@+id/email_confirm"
+            style="@style/paragraph_2_new"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="center"
+            android:text="@string/we_have_sent_you_an_email"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:src="@drawable/ic_plane"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_title"
+            app:layout_constraintVertical_bias="0.201" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include
         android:id="@+id/generic_loader"
         layout="@layout/generic_loader"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
