@@ -471,5 +471,6 @@
 
     <string name="user_login">User login</string>
     <string name="user_login_label">Enter your account details</string>
+    <string name="save">Save</string>
 
 </resources>

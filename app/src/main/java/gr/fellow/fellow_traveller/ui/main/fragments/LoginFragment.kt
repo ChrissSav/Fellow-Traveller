@@ -2,7 +2,6 @@ package gr.fellow.fellow_traveller.ui.main.fragments
 
 import android.content.SharedPreferences
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentLoginBinding
@@ -28,8 +27,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
 
     override fun setUpObservers() {
-        viewModel.loginResult.observe(viewLifecycleOwner, Observer {
-            setResentEmail(sharedPreferences, binding.email.text)
+        viewModel.loginResult.observe(viewLifecycleOwner, {
             startActivityClearStack(HomeActivity::class)
         })
     }
@@ -41,6 +39,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         binding.buttonLogin.setOnClickListener {
             hideKeyboard()
             if (binding.email.isCorrect() and binding.password.isCorrect()) {
+                setResentEmail(sharedPreferences, binding.email.text)
                 viewModel.login(binding.email.text.toString(), binding.password.text.toString())
             }
 

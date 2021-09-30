@@ -452,5 +452,6 @@
 
     <string name="user_login">Σύνδεση χρήστη</string>
     <string name="user_login_label">Εισήγαγε τα στοιχεία του λογαριασμού σου</string>
+    <string name="save">Αποθήκευση</string>
 
 </resources>

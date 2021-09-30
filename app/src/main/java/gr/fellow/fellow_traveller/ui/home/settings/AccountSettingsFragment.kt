@@ -46,15 +46,13 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
         viewModel.user.observe(viewLifecycleOwner, { user ->
             with(binding) {
                 picture.loadImageFromUrl(user.picture)
+                email.text = user.email
                 firstName.text = user.firstName
                 lastName.text = user.lastName
-                email.text = user.email
-                aboutMe.setText(user.aboutMe)
                 picture.clearFocus()
                 firstName.clearFocus()
                 lastName.clearFocus()
                 email.clearFocus()
-                aboutMe.clearFocus()
 
 
                 picture.setOnClickListener {
@@ -75,10 +73,10 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
 
     override fun setUpViews() {
 
-        binding.backButton.setOnClickListener {
+
+        binding.backButton.button.setOnClickListener {
             onBackPressed()
         }
-
         binding.uploadImage.setOnClickListener {
             userImagePickBottomSheetDialog = UserImagePickBottomSheetDialog(this@AccountSettingsFragment::onImageSelect)
             userImagePickBottomSheetDialog.show(childFragmentManager, "userImagePickBottomSheetDialog")
@@ -88,7 +86,7 @@ class AccountSettingsFragment : BaseFragment<FragmentAccountSettingsBinding>() {
             if (binding.lastName.isCorrect() and binding.firstName.isCorrect()) {
                 val firstName = binding.firstName.text.toString()
                 val lastName = binding.lastName.text.toString()
-                viewModel.updateAccountInfo(firstName, lastName, binding.aboutMe.text.toString().trim())
+                viewModel.updateAccountInfo(firstName.trim(), lastName.trim(), "")
             }
         }
 

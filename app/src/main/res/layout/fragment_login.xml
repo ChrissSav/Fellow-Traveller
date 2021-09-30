@@ -26,8 +26,8 @@
                 layout="@layout/back_button_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="@dimen/back_button_margin"
+                android:layout_marginTop="@dimen/back_button_margin"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,14 +37,13 @@
                 style="@style/header_1_new"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="@dimen/margin_top_of_back_button_new"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/back_button_margin"
                 android:text="@string/user_login"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/ImageButton_back"
                 app:layout_constraintTop_toBottomOf="@+id/ImageButton_back" />
 
 
@@ -53,13 +52,11 @@
                 style="@style/paragraph_2_new"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="@dimen/margin_label_from_title"
-                android:layout_marginEnd="16dp"
                 android:gravity="start"
                 android:text="@string/user_login_label"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/LoginActivity_textView_header"
+                app:layout_constraintStart_toStartOf="@+id/LoginActivity_textView_header"
                 app:layout_constraintTop_toBottomOf="@+id/LoginActivity_textView_header" />
 
 
@@ -150,13 +147,12 @@
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="100dp"
                 android:gravity="center_vertical"
                 android:text="@string/did_you_forgot_password"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/MainActivity_textView2"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/constraintLayout9"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout9"
