@@ -39,8 +39,8 @@ class FellowEditTextNew(context: Context, attrs: AttributeSet) : ConstraintLayou
     private var correct = false
     private var passwordIsHide = false
     private var checkText = false
-    private var fellowEditTextNewActionListener: FellowEditTextNewActionListener? = null
-    private var fellowEditTextNewOnClickListener: FellowEditTextNewOnClickListener? = null
+    var fellowEditTextNewActionListener: FellowEditTextNewActionListener? = null
+    var fellowEditTextNewOnClickListener: FellowEditTextNewOnClickListener? = null
 
     fun setError(error: String) {
         binding.error.text = error

@@ -10,9 +10,8 @@ import gr.fellow.fellow_traveller.databinding.FragmentChangePasswordBinding
 import gr.fellow.fellow_traveller.ui.extensions.createToast
 import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
-import gr.fellow.fellow_traveller.ui.extensions.setTextBackTint
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
-import gr.fellow.fellow_traveller.ui.views.FellowEditTextActionListener
+import gr.fellow.fellow_traveller.ui.views.FellowEditTextNewActionListener
 import gr.fellow.fellow_traveller.utils.PasswordStrengthCalculator
 
 
@@ -36,7 +35,7 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
 
 
         passwordStrengthCalculator.strength.observe(viewLifecycleOwner, { value ->
-            binding.passwordStr.setTextBackTint(value.textInt, value.colorInt)
+            //binding.passwordStr.setTextBackTint(value.textInt, value.colorInt)
         })
 
     }
@@ -44,18 +43,18 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
     override fun setUpViews() {
 
         passwordStrengthCalculator = PasswordStrengthCalculator()
-        binding.ImageButtonBack.setOnClickListener {
+        binding.ImageButtonBack.button.setOnClickListener {
             onBackPressed()
         }
 
 
-        binding.password.fellowEditTextActionListener = object : FellowEditTextActionListener {
+        binding.password.fellowEditTextNewActionListener = object : FellowEditTextNewActionListener {
             override fun onTextChange(value: Editable?) {
                 passwordStrengthCalculator.onTextChanged(value)
             }
         }
 
-        binding.buttonNext.setOnClickListener {
+        binding.save.setOnClickListener {
 
             hideKeyboard()
             if (binding.previousPassword.isCorrect() and binding.password.isCorrect() and binding.passwordConfirm.isCorrect()) {
