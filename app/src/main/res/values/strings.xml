@@ -271,7 +271,7 @@
     <string name="delete">Διαγραφή</string>
     <string name="leave">Αποχώρηση</string>
     <string name="cancel">Ακύρωση</string>
-    <string name="change_password_description">Αλλαγή συνθηματικού πρόσβασης.</string>
+    <string name="change_password_description">Αλλαγή συνθηματικού πρόσβασης</string>
     <string name="complete">Ολοκλήρωση</string>
     <string name="email_will_be_sent">Ένας σύνδεσμος επιβεβαίωσης θα σταλεί στο email σου, ώστε να ενεργοποιήσεις τον λογαριασμό σου.</string>
     <string name="password_recovery">Ανάκτηση συνθηματικού πρόσβασης</string>
@@ -454,5 +454,7 @@
     <string name="user_login">Σύνδεση χρήστη</string>
     <string name="user_login_label">Εισήγαγε τα στοιχεία του λογαριασμού σου</string>
     <string name="save">Αποθήκευση</string>
+    <string name="add_first_car">Βάλε το πρώτο σου όχημα</string>
+    <string name="add_first_car_label">Καταχώρησε το όχημά σου για να μπορεις να προσφερεις ταξιδια</string>
 
 </resources>

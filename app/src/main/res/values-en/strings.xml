@@ -474,4 +474,8 @@
     <string name="user_login_label">Enter your account details</string>
     <string name="save">Save</string>
 
+
+    <string name="add_first_car">Add your first vehicle</string>
+    <string name="add_first_car_label">Register your vehicle to be able to offer trips</string>
+
 </resources>
