@@ -74,5 +74,6 @@
 
     <color name="black_20_new">#10ffffff</color>
     <color name="white_60_new">#99FFFFFF</color>
+    <color name="white_40_new">#60FFFFFF</color>
 
 </resources>

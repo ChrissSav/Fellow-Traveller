@@ -4,203 +4,221 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black_new"
     tools:context=".ui.home.settings.UserCarsFragment">
 
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/ActivityReviews_main_coordinatorLayout"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home.settings.CarDetailsFragment">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="75dp">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            android:layout_height="0dp">
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/collapsingToolbar"
-                android:layout_width="match_parent"
+
+            <include
+                android:id="@+id/back"
+                layout="@layout/back_button_layout"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+                android:layout_marginStart="@dimen/back_button_margin"
+                android:layout_marginTop="@dimen/back_button_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/ActivitySearchResults_cities_section"
+
+            <TextView
+                android:id="@+id/manage_cars_settings_tv"
+                style="@style/header_1_new"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="@dimen/back_button_margin"
+                android:text="@string/my_vehicles"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/back"
+                app:layout_constraintTop_toBottomOf="@+id/back" />
+
+            <ScrollView
+                android:id="@+id/scroll_view_have_cars"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="24dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/manage_cars_settings_tv">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    app:layout_collapseMode="parallax"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:orientation="vertical">
 
-                    <ImageButton
-                        android:id="@+id/back_buttons"
-                        style="@style/border_icon_button"
-                        android:layout_width="@dimen/back_button_width_height"
-                        android:layout_height="@dimen/back_button_width_height"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="24dp"
-                        android:src="@drawable/ic_back_button"
-                        app:autoSizeTextType="uniform"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                    <TextView
-                        android:id="@+id/manage_cars_settings_tv"
-                        style="@style/display_1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginEnd="16dp"
-                        android:text="@string/vehicle_management"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/back_buttons"
-                        app:layout_constraintTop_toBottomOf="@+id/back_buttons" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-        </com.google.android.material.appbar.AppBarLayout>
-
-
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/refresh"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp">
-
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/my_cars_recycler"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="16dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:listitem="@layout/car_item" />
-
-
-                <com.facebook.shimmer.ShimmerFrameLayout
-                    android:id="@+id/shimmerViewContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="16dp"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:shimmer_duration="@integer/shimmer_anim_duration">
-
-                    <LinearLayout
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/my_cars_recycler"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/car_item_own" />
 
-                        <include layout="@layout/car_item_shimmer" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/new_car_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="24dp"
+                        android:background="@drawable/button_background_orange_16dp"
+                        android:backgroundTint="@color/green_20_new"
+                        android:minHeight="56dp">
 
-                        <include layout="@layout/car_item_shimmer" />
+                        <ImageView
+                            android:id="@+id/view211"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="8dp"
+                            android:background="@drawable/background_solid_radius_30_grey"
+                            android:backgroundTint="@color/green_new"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_add_car"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="@color/white" />
 
-                        <include layout="@layout/car_item_shimmer" />
+                        <TextView
+                            android:id="@+id/brand_model"
+                            style="@style/button_1_new"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="@string/add_vehicle"
+                            android:textColor="@color/green_new"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/view211"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                        <include layout="@layout/car_item_shimmer" />
 
-                        <include layout="@layout/car_item_shimmer" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
-                        <include layout="@layout/car_item_shimmer" />
 
-                    </LinearLayout>
+            </ScrollView>
 
-                </com.facebook.shimmer.ShimmerFrameLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/car_section"
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerViewContainer"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="24dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/manage_cars_settings_tv"
+                app:shimmer_duration="@integer/shimmer_anim_duration">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="100dp"
-                    android:visibility="gone"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/car_item_own_shimmer" />
+
+                    <include layout="@layout/car_item_own_shimmer" />
+
+                    <include layout="@layout/car_item_own_shimmer" />
+
+                    <include layout="@layout/car_item_own_shimmer" />
+
+                    <include layout="@layout/car_item_own_shimmer" />
+
+                    <include layout="@layout/car_item_own_shimmer" />
+
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/car_section_dont_found"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/manage_cars_settings_tv"
+                app:layout_constraintVertical_bias="0.25">
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="74dp"
+                    android:layout_height="74dp"
+                    android:layout_marginTop="60dp"
+                    android:background="@drawable/circle_button_shape"
+                    android:backgroundTint="@color/black_20_new"
+                    android:padding="17dp"
+                    android:src="@drawable/ic_rocket"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.120000005"
+                    app:tint="@color/white" />
 
-                    <ImageView
-                        android:id="@+id/image"
-                        android:layout_width="74dp"
-                        android:layout_height="74dp"
-                        android:background="@drawable/circle_button_shape"
-                        android:backgroundTint="@color/softGrey_color"
-                        android:padding="17dp"
-                        android:src="@drawable/ic_rocket"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/header_text"
+                    style="@style/header_4_new"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:text="@string/no_vehicles"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/image" />
 
-                    <TextView
-                        android:id="@+id/header_text"
-                        style="@style/header_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:gravity="center"
-                        android:text="@string/no_vehicles"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/image" />
-
-                    <TextView
-                        style="@style/paragraph_1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginEnd="32dp"
-                        android:gravity="center"
-                        android:text="@string/no_vehicles_description"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/header_text" />
+                <TextView
+                    style="@style/paragraph_2_new"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="32dp"
+                    android:gravity="center"
+                    android:text="@string/no_vehicles_description"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/header_text" />
 
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_add_car_second"
+                    style="@style/button_1"
+                    android:layout_width="@dimen/button_button_width"
+                    android:layout_height="@dimen/button_button_height"
+                    android:layout_marginBottom="@dimen/back_button_margin"
+                    android:background="@drawable/button_background_orange_16dp"
+                    android:gravity="center"
+                    android:text="@string/add"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/green_new"
+                    app:icon="@drawable/ic_add_car"
+                    app:iconGravity="textStart"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/new_car_button"
-        android:textAppearance="@style/header_3"
-        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minHeight="@dimen/car_float_action_button_height"
-        android:layout_marginEnd="@dimen/car_trip_float_action_button_margin_right"
-        android:layout_marginBottom="@dimen/car_trip_float_action_button_margin_bottom"
-        android:padding="4dp"
-        android:elevation="0dp"
-        android:text="@string/add"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:backgroundTint="@color/green"
-        app:cornerRadius="30dp"
-        android:stateListAnimator="@null"
-        app:icon="@drawable/ic_plus_new"
-        app:iconSize="18dp"
-        app:rippleColor="@color/light_orange_New"
-        app:iconTint="@color/white"
-        app:layout_anchorGravity="right|top"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

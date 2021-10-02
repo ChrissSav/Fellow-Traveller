@@ -282,6 +282,7 @@
     <string name="leave">Leave</string>
     <string name="cancel">Cancel</string>
     <string name="change_password">Change Password</string>
+    <string name="change">Change</string>
     <string name="change_password_description">Update password</string>
     <string name="complete">Change Password</string>
     <string name="email_will_be_sent">A verification link will be sent to your email in order to activate your account.</string>

@@ -36,19 +36,13 @@ class CarDetailsFragment : BaseFragment<FragmentCarDetailsBinding>() {
         binding.plate.text = args.car.plate
         binding.color.text = args.car.color
 
-        binding.back.setOnClickListener {
+        binding.back.button.setOnClickListener {
             onBackPressed()
         }
 
-        binding.delete.setOnClickListener {
-            confirmBottomSheetDialog = ConfirmBottomSheetDialog(
-                getString(R.string.car_delete_confirmation_message, args.car.plate),
-                this@CarDetailsFragment::onItemClickListener, 1
-            )
-            confirmBottomSheetDialog.show(childFragmentManager, "confirmBottomSheetDialog")
-        }
 
-        binding.delete1.setOnClickListener {
+
+        binding.delete.setOnClickListener {
             confirmBottomSheetDialog = ConfirmBottomSheetDialog(
                 getString(R.string.car_delete_confirmation_message, args.car.plate),
                 this@CarDetailsFragment::onItemClickListener, 1
