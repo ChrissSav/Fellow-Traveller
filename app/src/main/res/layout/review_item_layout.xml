@@ -1,79 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:background="@color/black_new"
+    android:padding="@dimen/back_button_margin">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/component_border_icon_button_shape"
+        android:background="@drawable/button_background_orange_16dp"
+        android:backgroundTint="@color/black_20_new"
+        android:minHeight="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/picture"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
             android:background="@drawable/ic_boy"
-            android:elevation="1dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/date"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/username" />
+
+        <TextView
+            android:id="@+id/username"
+            style="@style/paragraph_2_new"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="24dp"
+            android:maxLines="1"
+            android:text="@string/placeholder_car_make_model"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/rate"
+            app:layout_constraintStart_toEndOf="@+id/picture"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
-            android:id="@+id/username"
-            style="@style/header_3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="32dp"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="@string/rate_user_placeholder"
-            app:layout_constraintEnd_toStartOf="@+id/rate"
-            app:layout_constraintStart_toEndOf="@+id/picture"
-            app:layout_constraintTop_toTopOf="@+id/picture" />
-
-
-        <TextView
             android:id="@+id/date"
-            style="@style/paragraph_4"
-            android:layout_width="0dp"
+            style="@style/paragraph_2_new"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="12dp"
-            android:text="@string/textview_placeholder"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="14dp"
+            android:background="@drawable/background_rate_radius_4_black"
+            android:backgroundTint="#20FFFFFF"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:textAlignment="center"
+            android:textColor="#60FFFFFF"
+            android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/username"
             app:layout_constraintStart_toStartOf="@+id/username"
             app:layout_constraintTop_toBottomOf="@+id/username"
-            app:layout_constraintVertical_bias="0.0" />
+            tools:ignore="RtlSymmetry,SmallSp" />
+
+
+        <View
+            android:id="@+id/view6"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/ic_star"
+            android:backgroundTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/rate"
-            style="@style/header_3"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="12dp"
-            android:background="@drawable/background_border_stroke_12dp"
-            android:backgroundTint="@color/black"
-            android:gravity="center"
-            android:text="@string/number_placeholder"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/picture"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/picture" />
+            style="@style/header_4_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:maxLength="1"
+            app:layout_constraintBottom_toBottomOf="@+id/view6"
+            app:layout_constraintEnd_toStartOf="@+id/view6"
+            app:layout_constraintTop_toTopOf="@+id/view6" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

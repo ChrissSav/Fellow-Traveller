@@ -27,7 +27,7 @@ class ReviewsAdapter(
             binding.picture.loadImageFromUrl(currentItem.user.picture)
             binding.username.text = currentItem.user.fullName
             binding.rate.text = currentItem.rate.toString()
-            binding.date.text = getDateFromTimestamp(currentItem.timestamp, "d MMM yyyy")
+            binding.date.text = getDateFromTimestamp(currentItem.timestamp, "dd MMM yyyy")
         }
     }
 

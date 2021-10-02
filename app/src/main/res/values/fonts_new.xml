@@ -104,7 +104,7 @@
     <style name="paragraph_2_new">
         <item name="android:fontFamily">@font/commissioner_regular</item>
         <item name="android:textColor">#60ffffff</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
 

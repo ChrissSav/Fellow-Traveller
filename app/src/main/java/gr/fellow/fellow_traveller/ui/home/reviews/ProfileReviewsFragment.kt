@@ -1,5 +1,6 @@
 package gr.fellow.fellow_traveller.ui.home.reviews
 
+import android.annotation.SuppressLint
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.fragment.app.activityViewModels
@@ -24,6 +25,7 @@ class ProfileReviewsFragment : BaseFragment<FragmentProfileReviewsBinding>() {
     override fun getViewBinding(): FragmentProfileReviewsBinding =
         FragmentProfileReviewsBinding.inflate(layoutInflater)
 
+    @SuppressLint("SetTextI18n")
     override fun setUpObservers() {
 
 
@@ -34,10 +36,13 @@ class ProfileReviewsFragment : BaseFragment<FragmentProfileReviewsBinding>() {
             binding.swipeRefreshLayout.isRefreshing = false
 
             //if there are no reviews to display, show specific message, else show reviews
-            if (it.isNullOrEmpty())
+            if (it.isNullOrEmpty()) {
                 binding.reviewsSection.visibility = VISIBLE
-            else
+                binding.recyclerView.visibility = GONE
+            } else {
+                binding.recyclerView.visibility = VISIBLE
                 binding.reviewsSection.visibility = GONE
+            }
 
             binding.numRate.text = "${it.size} ${getString(R.string.total_ratings)}"
         })
@@ -62,12 +67,11 @@ class ProfileReviewsFragment : BaseFragment<FragmentProfileReviewsBinding>() {
             viewModel.loadReviews(true)
         }
 
-        binding.backButton.setOnClickListener {
+        binding.backButton.button.setOnClickListener {
             onBackPressed()
         }
 
     }
-
 
 
 }
