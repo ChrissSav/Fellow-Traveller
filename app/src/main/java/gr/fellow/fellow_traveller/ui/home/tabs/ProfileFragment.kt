@@ -1,8 +1,10 @@
 package gr.fellow.fellow_traveller.ui.home.tabs
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,7 +31,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     override fun setUpObservers() {
 
 
-
         viewModel.user.observe(viewLifecycleOwner, { user ->
 
             with(binding) {
@@ -48,31 +49,25 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 }
             }
         })
-//        viewModel.cars.observe(viewLifecycleOwner, { car ->
-//
-//            with(binding) {
-//
-//                try {
-//                    val firstCar = car.first()
-//                    carItem.brand.text = firstCar.brand
-//                    carItem.model.text = firstCar.model
-//                    carItem.plate.text = firstCar.plate
-//                    carItem.color.text = firstCar.color
-//
-//                    binding.carSection.visibility = VISIBLE
-//                    binding.addCarSection.visibility = GONE
-//
-//                } catch (e: NoSuchElementException) {
-//                    //binding.viewAll.visibility = View.GONE
-//                    binding.carSection.visibility = GONE
-//                    binding.addCarSection.visibility = VISIBLE
-//                }
-//
-//            }
-//        })
+        viewModel.cars.observe(viewLifecycleOwner, { car ->
+            if (car.size > 0) {
+                binding.addCarSection.visibility = View.GONE
+            } else {
+                binding.addCarSection.visibility = View.VISIBLE
+            }
+        })
     }
 
+    @SuppressLint("SetTextI18n")
     override fun setUpViews() {
+
+        context?.let {
+            val label = it.packageManager?.getApplicationLabel(it.applicationInfo).toString()
+            var version = it.packageManager?.getPackageInfo(it.packageName, 0)?.versionName ?: ""
+            version = version.replace("-debug", "")
+            version = version.replace("-release", "")
+            binding.appTitle.text = "${label}\nandroid version $version"
+        }
 
 
         binding.allReviews.setOnClickListener {

@@ -85,7 +85,7 @@
     <style name="header_1_new">
         <item name="android:fontFamily">@font/alegreyasans_black</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">25sp</item>
     </style>
 
 
@@ -121,13 +121,19 @@
     <style name="paragraph_2_new">
         <item name="android:fontFamily">@font/commissioner_regular</item>
         <item name="android:textColor">#60ffffff</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">13sp</item>
     </style>
 
     <style name="paragraph_3_new">
         <item name="android:fontFamily">@font/commissioner_regular</item>
         <item name="android:textColor">#60ffffff</item>
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="paragraph_4_new">
+        <item name="android:fontFamily">@font/commissioner_regular</item>
+        <item name="android:textColor">#60ffffff</item>
+        <item name="android:textSize">10.5sp</item>
     </style>
 
     <style name="paragraph_5_new">
