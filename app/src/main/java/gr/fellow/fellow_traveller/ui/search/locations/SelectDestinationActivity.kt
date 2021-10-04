@@ -61,17 +61,24 @@ class SelectDestinationActivity : BaseActivity<ActivitySelectDestinationBinding>
 
 
         binding.backButton.setOnClickListener {
-            onBackPressed()
+            finish()
         }
 
 
+        binding.deleteContent.setOnClickListener {
+            binding.editText.text = null
+        }
 
         binding.editText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(charSequence: Editable?) {
-                if (charSequence.toString().trim().length > 2)
+                if (charSequence.toString().trim().isNotEmpty()) {
+                    binding.deleteContent.visibility = View.VISIBLE
+                }
+                if (charSequence.toString().trim().length > 1) {
                     viewModel.getAllDestinations(charSequence.toString().trim())
-                else if (charSequence.toString().trim().isEmpty()) {
+                } else if (charSequence.toString().trim().isEmpty()) {
                     binding.recyclerViewPopular.visibility = View.VISIBLE
+                    binding.deleteContent.visibility = View.GONE
                     binding.recyclerView.visibility = View.GONE
                 }
             }

@@ -11,18 +11,19 @@
 
     <TextView
         android:id="@+id/title"
-        style="@style/input_1"
+        style="@style/paragraph_2_new"
+        android:minHeight="46dp"
+        android:paddingStart="24dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/messenger_profile_saved_successfully"
         android:background="?android:attr/selectableItemBackground"
-        android:drawablePadding="32dp"
         android:gravity="left|center_vertical"
-        android:padding="16dp"
-        app:drawableLeftCompat="@drawable/ic_pin_2"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="RtlHardcoded" />
+        tools:ignore="RtlHardcoded,RtlSymmetry" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
