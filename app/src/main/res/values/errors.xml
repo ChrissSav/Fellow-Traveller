@@ -30,7 +30,7 @@
     <string name="ERROR_OLD_PASSWORD_CANNOT_BE_SAME_AS_NEW_PASSWORD">Το νέο συνθηματικό δεν μπορεί να είναι ίδιο με τον παλιό.</string>
     <string name="INVALID_PHONE_FORMAT">Μη έγκυρος αριθμός τηλεφώνου.</string>
     <string name="CONFIRM_DELETION">Είσαι σίγουρος για την διαγραφή;</string>
-    <string name="ERROR_INVALID_PLATE_FORMAT">Η πινακίδα πρέπει να είναι της μορφής ΧΥΖ-1234 και να έχει ελληνικούς χαρακτήρες.</string>
+    <string name="ERROR_INVALID_PLATE_FORMAT">Η πινακίδα πρέπει να είναι της μορφής ΧΥΖ-1234.</string>
     <string name="ERROR_PLATE_ALREADY_EXISTS">Υπάρχει ήδη αυτοκίνητο με αυτή τη πινακίδα.</string>
     <!--api status codes-->
 

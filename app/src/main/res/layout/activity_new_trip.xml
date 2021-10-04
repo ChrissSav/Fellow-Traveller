@@ -1,94 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".ui.newtrip.NewTripActivity">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <ImageButton
-            android:id="@+id/imageButton_back"
-            style="@style/border_icon_button"
-            android:layout_width="@dimen/back_button_width_height"
-            android:layout_height="@dimen/back_button_width_height"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="28dp"
-            android:src="@drawable/ic_back_button"
+
+        <include
+            android:id="@+id/back"
+            layout="@layout/back_button_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/back_button_margin"
+            android:layout_marginTop="@dimen/back_button_margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/imageButton_exit"
-            style="@style/border_icon_button"
-            android:layout_width="@dimen/back_button_width_height"
-            android:layout_height="@dimen/back_button_width_height"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_close"
-            app:layout_constraintBottom_toBottomOf="@+id/imageButton_back"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageButton_back" />
 
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="@style/CustomProgressBar"
+        <TextView
+            android:id="@+id/manage_cars_settings_tv"
+            style="@style/header_1_new"
             android:layout_width="0dp"
-            android:layout_height="5dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:progress="50"
-            android:progressDrawable="@drawable/progress_new_trip_background"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="@dimen/back_button_margin"
+            android:text="@string/new_trip"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="@+id/back"
+            app:layout_constraintTop_toBottomOf="@+id/back" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout_trip_destinations"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/button_background_orange_16dp"
+            android:backgroundTint="@color/black_20_new"
+            app:layout_constraintEnd_toEndOf="@+id/manage_cars_settings_tv"
+            app:layout_constraintStart_toStartOf="@+id/manage_cars_settings_tv"
+            app:layout_constraintTop_toBottomOf="@+id/manage_cars_settings_tv">
+
+
+            <TextView
+                android:id="@+id/textView3"
+                style="@style/header_6_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/placeholder_city_athens"
+                tools:layout_editor_absoluteX="10dp"
+                tools:layout_editor_absoluteY="41dp" />
+
+            <TextView
+                android:id="@+id/textView12"
+                style="@style/header_6_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/placeholder_city_thessaloniki"
+                tools:layout_editor_absoluteX="328dp"
+                tools:layout_editor_absoluteY="43dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout1w0"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/button_background_orange_16dp"
+            android:backgroundTint="@color/black_20_new"
+            android:padding="@dimen/padding_component_icon"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout_trip_destinations"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout_trip_destinations"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout_trip_destinations">
+
+
+            <View
+                android:id="@+id/view211"
+                android:layout_width="@dimen/component_input_icon_dime"
+                android:layout_height="@dimen/component_input_icon_dime"
+                android:background="@drawable/ic_calendar"
+                android:backgroundTint="@color/white_60_new"
+                app:layout_constraintBottom_toBottomOf="@+id/color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/color" />
+
+            <gr.fellow.fellow_traveller.ui.views.FellowEditTextNew
+                android:id="@+id/color"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                app:editable_f="false"
+                app:error_message_f="@string/ERROR_SELECT_DATE"
+                app:hint_f="@string/trip_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/view211"
+                app:layout_constraintTop_toTopOf="parent"
+                app:regex_f="@string/regex_min_1_chars" />
+
+            <View
+                android:layout_width="@dimen/component_input_icon_dime"
+                android:layout_height="@dimen/component_input_icon_dime"
+                android:background="@drawable/ic_calendar"
+                android:backgroundTint="@color/white_60_new"
+                app:layout_constraintBottom_toBottomOf="@+id/plate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/plate" />
+
+            <gr.fellow.fellow_traveller.ui.views.FellowEditTextNew
+                android:id="@+id/plate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:error_message_f="@string/ERROR_SELECT_TIME"
+                app:hint_f="@string/trip_time"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/color"
+                app:layout_constraintTop_toBottomOf="@+id/color"
+                app:max_length_f="8"
+                app:regex_f="@string/regex_car_plate"
+                app:text_type_f="text" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <fragment
-        android:id="@+id/RegisterActivity_nav_host"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:navGraph="@navigation/new_trip_nav_graph" />
 
-    <FrameLayout
-        android:id="@+id/progress_load"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background_color_progress"
-        android:clickable="true"
-        android:focusable="true"
-        android:elevation="4dp"
-        android:focusableInTouchMode="true"
-        android:visibility="invisible">
-
-        <ProgressBar
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:indeterminateTint="@color/green"
-            android:indeterminate="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </FrameLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

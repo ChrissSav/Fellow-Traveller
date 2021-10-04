@@ -83,6 +83,8 @@
 
     <string name="fragment_date_time_header">When will the trip take place?</string>
     <string name="date">Date</string>
+    <string name="trip_date">Trip date</string>
+    <string name="trip_time">Trip time</string>
 
     <!--Fragment fragment_base_info -->
 
@@ -139,7 +141,7 @@
     <string name="ERROR_INTERNET_CONNECTION">No Internet Connection</string>
     <string name="INVALID_PHONE_FORMAT">Invalid phone number.</string>
     <string name="CONFIRM_DELETION">Are you sure you want to delete?</string>
-    <string name="ERROR_INVALID_PLATE_FORMAT">The number plate should be of the format XYZ-1234 in Greek.</string>
+    <string name="ERROR_INVALID_PLATE_FORMAT">The number plate should be of the format XYZ-1234.</string>
     <string name="ERROR_PLATE_ALREADY_EXISTS">A vehicle with this number plate already exists.</string>
     <string name="ERROR_REQUIRED_FIELD">This field is required.</string>
     <string name="ERROR_TIME_DATE_VALIDATION">Invalid date.</string>
@@ -477,5 +479,8 @@
 
     <string name="add_first_car">Add your first vehicle</string>
     <string name="add_first_car_label">Register your vehicle to be able to offer trips</string>
+
+
+    <string name="new_trip">New trip</string>
 
 </resources>
