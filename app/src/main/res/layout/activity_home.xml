@@ -10,40 +10,70 @@
     <fragment
         android:id="@+id/nav_host_fragment_container"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/home_nav_graph" />
 
 
+    <ImageButton
+        android:id="@+id/account"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="@dimen/back_button_margin"
+        android:layout_marginTop="@dimen/back_button_margin"
+        android:background="@drawable/background_stroke_radius_16_alpha_grey"
+        android:padding="@dimen/home_bottom_padding"
+        android:src="@drawable/ic_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+
+    <ImageButton
+        android:id="@+id/notification"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/back_button_margin"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/background_stroke_radius_16_alpha_grey"
+        android:padding="11dp"
+        android:src="@drawable/ic_notifications"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:background="@color/white"
         android:id="@+id/bottomNavigationView"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/background_rate_radius_16_black"
+        android:backgroundTint="#20ffffff"
+        android:padding="@dimen/padding_component_icon"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-
-        <ImageView
+        <ImageButton
             android:id="@+id/home"
             android:layout_width="@dimen/home_bottom_width"
             android:layout_height="@dimen/home_bottom_width"
-            android:background="@drawable/circle_button_shape"
-            android:backgroundTint="@color/black"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="@dimen/home_bottom_padding"
             android:src="@drawable/ic_home"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/trips"
             app:layout_constraintEnd_toStartOf="@+id/trips"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/trips"
             app:tint="@color/white" />
 
 
@@ -51,74 +81,31 @@
             android:id="@+id/trips"
             android:layout_width="@dimen/home_bottom_width"
             android:layout_height="@dimen/home_bottom_width"
-            android:padding="@dimen/home_bottom_padding"
-            android:background="@drawable/circle_button_shape"
-            android:backgroundTint="@color/white"
-            android:src="@drawable/ic_car"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="6dp"
+            android:src="@drawable/ic_car_front"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/messenger"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/home"
-            app:layout_constraintTop_toTopOf="@+id/home"
-            app:tint="@color/black" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
 
         <ImageView
             android:id="@+id/messenger"
             android:layout_width="@dimen/home_bottom_width"
             android:layout_height="@dimen/home_bottom_width"
-            android:padding="@dimen/home_bottom_padding"
-            android:background="@drawable/circle_button_shape"
-            android:backgroundTint="@color/white"
-            android:src="@drawable/ic_messenger"
-            app:layout_constraintEnd_toStartOf="@+id/notification"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="7dp"
+            android:src="@drawable/ic_message"
+            app:layout_constraintBottom_toBottomOf="@+id/trips"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/trips"
             app:layout_constraintTop_toTopOf="@+id/trips"
-            app:tint="@color/black" />
-
-        <ImageView
-            android:id="@+id/notification"
-            android:layout_width="@dimen/home_bottom_width"
-            android:layout_height="@dimen/home_bottom_width"
-            android:background="@drawable/circle_button_shape"
-            android:backgroundTint="@color/white"
-            android:padding="@dimen/home_bottom_padding"
-            android:src="@drawable/ic_notifications"
-            app:layout_constraintEnd_toStartOf="@+id/account"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/messenger"
-            app:layout_constraintTop_toTopOf="@+id/trips"
-            app:tint="@color/black" />
-
-        <ImageView
-            android:id="@+id/account"
-            android:layout_width="@dimen/home_bottom_width"
-            android:layout_height="@dimen/home_bottom_width"
-            android:padding="@dimen/home_bottom_padding"
-            android:src="@drawable/ic_person"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            android:background="@drawable/circle_button_shape"
-            android:backgroundTint="@color/white"
-            app:layout_constraintStart_toEndOf="@+id/notification"
-            app:layout_constraintTop_toTopOf="@+id/notification"
-            app:tint="@color/black" />
-
-        <TextView
-            android:id="@+id/notification_count"
-            style="@style/paragraph_1"
-            android:layout_width="17dp"
-            android:layout_height="17dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="6dp"
-            android:background="@drawable/circle_button_shape"
-            android:backgroundTint="@color/red_color"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="@string/notifications_count_placeholder"
-            android:textColor="@color/white"
-            android:visibility="invisible"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/notification"
-            app:layout_constraintTop_toTopOf="@+id/notification" />
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -126,9 +113,9 @@
     <include
         android:id="@+id/generic_loader"
         layout="@layout/generic_loader"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

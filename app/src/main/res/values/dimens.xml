@@ -77,7 +77,7 @@
 
 
     <!-- Home -->
-    <dimen name="home_bottom_width">50dp</dimen>
+    <dimen name="home_bottom_width">35dp</dimen>
     <dimen name="home_bottom_padding">10dp</dimen>
 
     <!-- Messenger -->

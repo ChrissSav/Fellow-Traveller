@@ -86,6 +86,9 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
             (binding.recyclerView.adapter as NotificationAdapter).notifyDataSetChanged()
             viewModel.loadNotifications(true)
         }
+        binding.back.button.setOnClickListener {
+            activity?.onBackPressed()
+        }
     }
 
 

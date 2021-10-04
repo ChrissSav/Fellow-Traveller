@@ -24,7 +24,10 @@ import gr.fellow.fellow_traveller.data.base.BaseActivityViewModel
 import gr.fellow.fellow_traveller.databinding.ActivityHomeBinding
 import gr.fellow.fellow_traveller.service.NotificationJobService
 import gr.fellow.fellow_traveller.service.NotificationSocketViewModel
-import gr.fellow.fellow_traveller.ui.extensions.*
+import gr.fellow.fellow_traveller.ui.extensions.bottomNav
+import gr.fellow.fellow_traveller.ui.extensions.createAlerter
+import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
+import gr.fellow.fellow_traveller.ui.extensions.startActivityClearStack
 import gr.fellow.fellow_traveller.ui.home.chat.models.Conversation
 import gr.fellow.fellow_traveller.ui.main.MainActivity
 import java.util.*
@@ -50,9 +53,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
     private val homeLayout = listOf(
         R.id.destination_main,
         R.id.destination_trips,
-        R.id.destination_messenger,
-        R.id.destination_notifications,
-        R.id.destination_info
+        R.id.destination_messenger
     )
 
     override fun provideViewBinding(): ActivityHomeBinding =
@@ -115,9 +116,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
         bottomNavButtons = mutableListOf(
             Pair(binding.home, R.id.destination_main),
             Pair(binding.trips, R.id.destination_trips),
-            Pair(binding.messenger, R.id.destination_messenger),
-            Pair(binding.notification, R.id.destination_notifications),
-            Pair(binding.account, R.id.destination_info)
+            Pair(binding.messenger, R.id.destination_messenger)
         )
     }
 
@@ -143,9 +142,9 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
             setupBottomNavMenu(destination.id)
 
             if (destination.id in homeLayout) {
-                showHideBottomNav(65.toPx)
+                showBottomNav()
             } else {
-                showHideBottomNav(0)
+                hideBottomNav()
             }
 
             if (destination.id == R.id.destination_notifications)
@@ -198,7 +197,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
     @SuppressLint("UseCompatLoadingForColorStateLists")
     private fun setButtonUnCheck(imageView: ImageView) {
-        imageView.setColorFilter(ContextCompat.getColor(this, R.color.black), android.graphics.PorterDuff.Mode.SRC_IN)
+        imageView.setColorFilter(ContextCompat.getColor(this, R.color.black_20_new), android.graphics.PorterDuff.Mode.SRC_IN)
         imageView.backgroundTintList = resources.getColorStateList(R.color.white, null)
     }
 
@@ -224,13 +223,30 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
     }
 
 
-    private fun setUpNotifications(num: Int) {
-        if (num < 1) {
-            binding.notificationCount.visibility = View.INVISIBLE
-        } else {
-            binding.notificationCount.text = num.toString()
-            binding.notificationCount.visibility = View.VISIBLE
+    private fun showBottomNav() {
+        with(binding) {
+            bottomNavigationView.visibility = View.VISIBLE
+            account.visibility = View.VISIBLE
+            notification.visibility = View.VISIBLE
         }
+    }
+
+    private fun hideBottomNav() {
+        with(binding) {
+            bottomNavigationView.visibility = View.GONE
+            account.visibility = View.GONE
+            notification.visibility = View.GONE
+        }
+    }
+
+
+    private fun setUpNotifications(num: Int) {
+        /* if (num < 1) {
+             binding.notificationCount.visibility = View.INVISIBLE
+         } else {
+             binding.notificationCount.text = num.toString()
+             binding.notificationCount.visibility = View.VISIBLE
+         }*/
 
     }
 

@@ -13,8 +13,8 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowBackground">@color/white_opaque</item>
-        <item name="android:colorBackground">@color/white_opaque</item>
+        <item name="android:windowBackground">@color/black_new</item>
+        <item name="android:colorBackground">@color/black_new</item>
         <item name="colorSecondary">@color/home_blue</item>
         <item name="colorError">@color/home_blue</item>
         <!-- New MaterialComponents attributes. -->

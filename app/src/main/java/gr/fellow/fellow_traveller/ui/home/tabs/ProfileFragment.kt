@@ -123,6 +123,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             viewModel.logOut()
         }
 
+
+        binding.back.button.setOnClickListener {
+            activity?.onBackPressed()
+        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
