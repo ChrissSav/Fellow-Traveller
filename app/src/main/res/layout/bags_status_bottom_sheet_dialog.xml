@@ -5,40 +5,53 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bottom_sheet_dialog_shape">
 
-    <TextView
-        android:id="@+id/title"
-        style="@style/header_1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+
+    <View
+        android:id="@+id/view8"
+        android:layout_width="48dp"
+        android:layout_height="4dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:text="@string/baggage_allowance"
+        android:background="@drawable/background_rate_radius_16_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/title"
+        style="@style/header_3_new"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/baggage_allowance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view8" />
+
+    <TextView
         android:id="@+id/large"
-        style="@style/input_1"
+        style="@style/paragraph_1_new"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center"
         android:text="@string/availability_great"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
         android:id="@+id/limited"
-        style="@style/input_1"
+        style="@style/paragraph_1_new"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center"
         android:text="@string/availability_limited"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/large" />
@@ -46,7 +59,8 @@
 
     <TextView
         android:id="@+id/none"
-        style="@style/input_1"
+        style="@style/paragraph_1_new"
+        android:textColor="@color/white"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginBottom="16dp"

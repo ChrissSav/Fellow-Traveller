@@ -2,32 +2,33 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="55dp">
+    android:layout_height="wrap_content">
 
 
     <ImageView
         android:id="@+id/minus"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:background="?selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_minus_1"
+        android:background="@drawable/button_background_green_30dp"
+        android:backgroundTint="@color/background_gray_40"
+        android:padding="6dp"
+        android:src="@drawable/ic_minus"
         app:layout_constraintBottom_toBottomOf="@+id/label"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/label" />
+        app:layout_constraintTop_toTopOf="@+id/label"
+        app:tint="@color/white_40_new" />
 
     <TextView
         android:id="@+id/label"
-        style="@style/paragraph_1"
+        style="@style/input_new"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="2dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="2dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/background_black_round"
         android:gravity="center"
         android:text="@string/number_placeholder"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/plus"
         app:layout_constraintStart_toEndOf="@+id/minus"
@@ -37,10 +38,13 @@
         android:id="@+id/plus"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:background="?selectableItemBackgroundBorderless"
+        android:background="@drawable/button_background_green_30dp"
+        android:backgroundTint="@color/background_gray_40"
+        android:padding="6dp"
         android:src="@drawable/ic_plus"
         app:layout_constraintBottom_toBottomOf="@+id/label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/label" />
+        app:layout_constraintTop_toTopOf="@+id/label"
+        app:tint="@color/white_40_new" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

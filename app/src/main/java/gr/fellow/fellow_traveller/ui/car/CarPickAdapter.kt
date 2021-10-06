@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.ui.car
 
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -18,12 +19,15 @@ class CarPickAdapter(
         return ViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         with(holder) {
-            val currentItem = currentList[position]
-            binding.car.text = currentItem.fullInfo
 
+            val currentItem = currentList[position]
+
+            binding.brandModel.text = "${currentItem.brand} ${currentItem.model}"
+            binding.color.text = "${currentItem.color} | ${currentItem.plate}"
             binding.root.setOnClickListener {
                 onCarItemClickListener(currentItem)
             }

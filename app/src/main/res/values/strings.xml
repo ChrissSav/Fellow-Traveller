@@ -14,6 +14,8 @@
     <string name="account_fragment_about_me">Δεν υπάρχει κάποια σχετική περιγραφή.</string>
     <string name="change_password">Αλλαγή Συνθηματικού</string>
     <string name="change">Αλλαγή</string>
+    <string name="change_time">Αλλαγή Ώρας</string>
+    <string name="add_date">Προσθήκη Ημ/νιας</string>
     <string name="confirm_password">Επιβεβαίωση συνθηματικού</string>
     <string name="PASSWORD_CHANGED_SUCCESSFULLY">Το συνθηματικό πρόσβασης άλλαξε επιτυχώς.</string>
     <string name="EMAIL_PLACEHOLDER">π.χ. user@example.com</string>
@@ -23,6 +25,7 @@
     <string name="hello">Γεια σου</string>
     <string name="home_guide">Ξεκίνησε αναζητώντας ή προσφέροντας ένα ταξίδι</string>
     <string name="or">ή</string>
+    <string name="sum">σύνολο</string>
     <string name="account_settings_access_denied">Δεν έδωσες άδεια στην εφαρμογή για το ανέβασμα φωτογραφίας</string>
     <string name="account_settings_dialog_message">Θα πρέπει να ρυθμίσεις τις άδειες της εφαρμογής για το ανέβασμα φωτογραφίας. Θέλεις να συνεχίσεις;</string>
     <string name="account_settings_guid_message">Θα πρέπει να ενεργοποιήσεις τις άδειες της εφαρμογής από τις ρυθμίσεις</string>
@@ -160,6 +163,7 @@
     <string name="messenger_url" translatable="false">https://m.me/</string>
     <string name="prompt_cancel_offer">Ακύρωση καταχώρησης προσφοράς ταξιδιού;</string>
     <string name="seat">Θέση</string>
+    <string name="edit">Επεξεργασία</string>
     <string name="seats">Θέσεις</string>
     <string name="driver_deleted_trip_header">Ο οδηγός έχει ακυρώσει αυτό το ταξίδι</string>
     <string name="driver_deleted_trip_description">Δεν μπορείς να βλέπεις ενημερώσεις για αυτό ταξίδι, γιατί δεν είναι πλέον διαθέσιμο</string>
@@ -218,7 +222,7 @@
     <string name="date">Ημερομηνία</string>
     <string name="trip_date">Ημερομηνία ταξιδιού</string>
     <string name="trip_time">Ώρα ταξιδιού</string>
-    <string name="seat_availability">Ελεύθερες Θέσεις</string>
+    <string name="seat_availability">Διαθέσιμες Θέσεις</string>
     <string name="anything">Οτιδήποτε</string>
     <string name="price_range">Εύρος τιμής</string>
     <string name="show_all">Εμφάνιση όλων</string>
@@ -393,6 +397,7 @@
     <string name="zero_price_placeholder" translatable="false">0.00</string>
     <string name="price_calc_per_person" translatable="false">4 x 5,00 €</string>
     <string name="zero_euros" translatable="false">0 €</string>
+    <string name="price_hint" translatable="false">00.00</string>
     <string name="no_ratings">Δεν υπάρχουν αξιολογήσεις</string>
     <string name="no_ratings_description">Φαίνεται ότι δεν υπάρχει κάποια αξιολόγηση</string>
     <string name="no_passengers">Δεν υπάρχουν επιβάτες</string>

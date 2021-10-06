@@ -16,6 +16,7 @@
     <string name="hello">Hello</string>
     <string name="home_guide">Start by looking for or offering a new journey</string>
     <string name="or">or</string>
+    <string name="sum">sum</string>
     <string name="account_settings_access_denied">You did not give the app permission to upload a photo</string>
     <string name="account_settings_dialog_message">Υou need to configure application permissions to upload a photo. Would you like to proceed?</string>
     <string name="account_settings_guid_message">You will need to enable the application permissions from the settings</string>
@@ -187,6 +188,7 @@
     <string name="leave_trip_success">Booking was canceled successfully.</string>
     <string name="prompt_cancel_offer">Do you want to cancel the offer?</string>
     <string name="seat">Seat</string>
+    <string name="edit">Edit</string>
     <string name="seats">Seats</string>
     <string name="driver_deleted_trip_header">The driver has canceled this trip</string>
     <string name="driver_deleted_trip_description">You can not see updates for this trip, because it is no longer available</string>
@@ -285,6 +287,8 @@
     <string name="cancel">Cancel</string>
     <string name="change_password">Change Password</string>
     <string name="change">Change</string>
+    <string name="change_time">Change time</string>
+    <string name="add_date">Add date</string>
     <string name="change_password_description">Update password</string>
     <string name="complete">Change Password</string>
     <string name="email_will_be_sent">A verification link will be sent to your email in order to activate your account.</string>

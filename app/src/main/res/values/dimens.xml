@@ -94,7 +94,7 @@
 
 
     <dimen name="padding_component_icon">16dp</dimen>
-    <dimen name="component_input_icon_dime">24dp</dimen>
+    <dimen name="component_input_icon_dime">22dp</dimen>
 
 
     <dimen name="back_button_margin">8dp</dimen>

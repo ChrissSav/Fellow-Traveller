@@ -14,6 +14,9 @@ import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
@@ -170,6 +173,11 @@ fun Fragment.startActivityForResultWithFade(activity: KClass<out Activity>, code
     this.activity?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
 }
 
+fun Activity.startActivityForResultWithFade(activity: KClass<out Activity>, code: Int) {
+    val intent = Intent(this, activity.java)
+    startActivityForResult(intent, code)
+    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+}
 
 fun Fragment.startActivityForResultWithFade(intent: Intent, code: Int) {
     startActivityForResult(intent, code)
@@ -336,7 +344,7 @@ fun TextView.setTextBackTint(mText: Int, color: Int) {
                 text = resources.getString(mText)
                 val drawable = background as GradientDrawable
                 drawable.setStroke(3, ContextCompat.getColor(context, color))
-                setTextColor(ContextCompat.getColor(context, color));
+                setTextColor(ContextCompat.getColor(context, color))
             }
         })
 
@@ -366,5 +374,23 @@ fun View.visibleAnim() {
         })
 
 }
+
+
+fun TextView.setSpanText(vararg pairs: Pair<String, Int>) {
+
+    val ssb = SpannableStringBuilder("")
+
+    pairs.forEach { current ->
+        val color = ForegroundColorSpan(ContextCompat.getColor(context, current.second))
+        val tempSsb = SpannableStringBuilder(current.first)
+        tempSsb.setSpan(color, 0, current.first.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        ssb.append(tempSsb)
+    }
+
+    this.setText(ssb, TextView.BufferType.SPANNABLE)
+}
+
+
+
 
 

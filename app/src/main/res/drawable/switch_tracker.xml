@@ -4,16 +4,15 @@
     android:exitFadeDuration="@android:integer/config_shortAnimTime">
     <item android:state_checked="true">
         <shape>
-            <solid android:color="@color/black_color"/>
-            <corners android:radius="10dp"/>
+            <solid android:color="@color/green" />
+            <corners android:radius="48dp" />
         </shape>
 
     </item>
     <item android:state_checked="false">
         <shape>
-            <solid android:color="@color/white"/>
-            <stroke android:width="1dp" android:color="@color/softGrey_color"/>
-            <corners android:radius="10dp"/>
+            <solid android:color="@color/orange_20_new" />
+            <corners android:radius="48dp" />
         </shape>
 
     </item>

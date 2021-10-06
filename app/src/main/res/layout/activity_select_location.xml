@@ -7,59 +7,77 @@
     tools:context=".ui.location.SelectLocationActivity">
 
 
-    <ImageButton
-        android:id="@+id/back_button"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:adjustViewBounds="true"
-        android:background="?android:selectableItemBackgroundBorderless"
-        android:padding="6dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/ic_back_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <EditText
-        android:id="@+id/selectLocationActivity_EditText_search_place"
-        style="@style/input_1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@android:color/transparent"
-        android:drawableEnd="@drawable/ic_magnifier"
-        android:ellipsize="end"
-        android:hint="@string/select_location"
-        android:imeOptions="actionSearch"
-        android:inputType="textCapWords"
-        android:singleLine="true"
-        app:layout_constraintBottom_toBottomOf="@+id/back_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/back_button"
-        app:layout_constraintTop_toTopOf="@+id/back_button">
-
-        <requestFocus />
-    </EditText>
-
-
-    <View
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/SelectLocationActivity_textView6"
         android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/softGrey_color"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/back_button_margin"
+        android:layout_marginTop="@dimen/back_button_margin"
+        android:layout_marginEnd="@dimen/back_button_margin"
+        android:background="@drawable/button_background_orange_16dp"
+        android:backgroundTint="@color/black_20_new"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectLocationActivity_EditText_search_place" />
+        app:layout_constraintTop_toTopOf="parent">
 
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="@dimen/back_button_margin"
+            android:layout_marginTop="@dimen/back_button_margin"
+            android:layout_marginBottom="@dimen/back_button_margin"
+            android:background="@drawable/background_stroke_grey_solid_black_radius_16"
+            android:src="@drawable/ic_arrow_back_new"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <EditText
+            android:id="@+id/edit_text"
+            style="@style/input_new"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/back_button_margin"
+            android:layout_marginEnd="8dp"
+            android:background="@android:color/transparent"
+            android:ellipsize="end"
+            android:hint="@string/select_location"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textColorHint="@color/white_40_new"
+            app:layout_constraintBottom_toBottomOf="@+id/back_button"
+            app:layout_constraintEnd_toStartOf="@+id/delete_content"
+            app:layout_constraintStart_toEndOf="@+id/back_button"
+            app:layout_constraintTop_toTopOf="@+id/back_button">
+
+            <requestFocus />
+        </EditText>
+
+        <ImageView
+            android:id="@+id/delete_content"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/button_background_green_30dp"
+            android:backgroundTint="@color/background_gray_40"
+            android:padding="5dp"
+            android:src="@drawable/ic_x"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/back_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/back_button"
+            app:tint="@color/white" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,12 +89,12 @@
         android:id="@+id/recyclerView_popular"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SelectLocationActivity_textView6"
         tools:listitem="@layout/place_popular_item" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -61,7 +61,7 @@ class SelectLocationActivity : BaseActivity<ActivitySelectLocationBinding>() {
                 finish()
             }
 
-            selectLocationActivityEditTextSearchPlace.addTextChangedListener(object : TextWatcher {
+            editText.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(charSequence: Editable) {
                     if (charSequence.toString().trim().length > 2)
                         viewModel.getAllDestinations(charSequence.toString().trim())

@@ -94,7 +94,7 @@
     </style>
 
     <style name="DialogCostumeTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorAccent">@color/green</item>
+        <item name="colorAccent">@color/black_new</item>
     </style>
 
 
@@ -108,8 +108,9 @@
     <style name="Theme_Dialog" parent="android:Theme.Holo.Dialog">
         <item name="android:windowMinWidthMajor">100%</item>
         <item name="android:windowMinWidthMinor">100%</item>
-        android:fromYDelta="50%p" android:toYDelta="0%p"
-        android:duration="@android:integer/config_longAnimTime"
+        <item name="android:fromYDelta">50%</item>
+        <item name="android:toYDelta">0%</item>
+        <item name="android:duration">@android:integer/config_longAnimTime</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="android:textColor">@color/black_color</item>
     </style>

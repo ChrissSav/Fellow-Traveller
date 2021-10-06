@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/back_button_margin"
             android:background="@drawable/background_orange_8dp"
-            android:backgroundTint="#1AFFFFFF"
+            android:backgroundTint="@color/background_gray_40"
             android:minWidth="74dp"
             android:padding="8dp"
             android:visibility="invisible"

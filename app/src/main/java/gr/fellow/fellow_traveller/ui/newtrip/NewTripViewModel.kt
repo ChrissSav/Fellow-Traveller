@@ -39,6 +39,10 @@ constructor(
     private val _destinationTo = MutableLiveData<DestinationModel>()
     val destinationTo: LiveData<DestinationModel> = _destinationTo
 
+
+    private val _destinationPickUp = MutableLiveData<DestinationModel>()
+    val destinationPickUp: LiveData<DestinationModel> = _destinationPickUp
+
     private val _date = MutableLiveData<String>()
     val date: LiveData<String> = _date
 
@@ -86,6 +90,10 @@ constructor(
 
     fun setDestinationFrom(id: String, title: String) {
         _destinationFrom.value = DestinationModel(id, title)
+    }
+
+    fun setDestinationPickUp(id: String, title: String) {
+        _destinationPickUp.value = DestinationModel(id, title)
     }
 
     fun setDestinationTo(id: String, title: String) {

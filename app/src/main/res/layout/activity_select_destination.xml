@@ -62,7 +62,7 @@
             android:layout_height="26dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/button_background_green_30dp"
-            android:backgroundTint="#1AFFFFFF"
+            android:backgroundTint="@color/background_gray_40"
             android:padding="5dp"
             android:src="@drawable/ic_x"
             android:visibility="invisible"

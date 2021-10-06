@@ -54,25 +54,32 @@
                 style="@style/header_6_new"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="41dp"
+                android:layout_marginBottom="39dp"
                 android:text="@string/placeholder_city_athens"
-                tools:layout_editor_absoluteX="10dp"
-                tools:layout_editor_absoluteY="41dp" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView12"
                 style="@style/header_6_new"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="43dp"
+                android:layout_marginBottom="37dp"
                 android:text="@string/placeholder_city_thessaloniki"
-                tools:layout_editor_absoluteX="328dp"
-                tools:layout_editor_absoluteY="43dp" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout1w0"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="50dp"
             android:background="@drawable/button_background_orange_16dp"
@@ -89,48 +96,439 @@
                 android:layout_height="@dimen/component_input_icon_dime"
                 android:background="@drawable/ic_calendar"
                 android:backgroundTint="@color/white_60_new"
-                app:layout_constraintBottom_toBottomOf="@+id/color"
+                app:layout_constraintBottom_toBottomOf="@+id/date"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/color" />
+                app:layout_constraintTop_toTopOf="@+id/date" />
 
             <gr.fellow.fellow_traveller.ui.views.FellowEditTextNew
-                android:id="@+id/color"
+                android:id="@+id/date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
                 app:editable_f="false"
                 app:error_message_f="@string/ERROR_SELECT_DATE"
                 app:hint_f="@string/trip_date"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/edit_date"
                 app:layout_constraintStart_toEndOf="@+id/view211"
                 app:layout_constraintTop_toTopOf="parent"
                 app:regex_f="@string/regex_min_1_chars" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/edit_date"
+                style="@style/button_3_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background_orange_8dp"
+                android:gravity="center"
+                android:paddingStart="8dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="4dp"
+                android:text="@string/edit"
+                android:textColor="@color/white_40_new"
+                app:backgroundTint="@color/background_gray_40"
+                app:icon="@drawable/ic_edit"
+                app:iconGravity="textStart"
+                app:iconSize="16dp"
+                app:iconTint="@color/white_40_new"
+                app:layout_constraintBottom_toBottomOf="@+id/date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/date" />
 
             <View
                 android:layout_width="@dimen/component_input_icon_dime"
                 android:layout_height="@dimen/component_input_icon_dime"
                 android:background="@drawable/ic_calendar"
                 android:backgroundTint="@color/white_60_new"
-                app:layout_constraintBottom_toBottomOf="@+id/plate"
+                app:layout_constraintBottom_toBottomOf="@+id/time"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/plate" />
+                app:layout_constraintTop_toTopOf="@+id/time" />
 
             <gr.fellow.fellow_traveller.ui.views.FellowEditTextNew
-                android:id="@+id/plate"
+                android:id="@+id/time"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
+                app:editable_f="false"
+                app:layout_constraintEnd_toStartOf="@+id/edit_time"
                 app:error_message_f="@string/ERROR_SELECT_TIME"
                 app:hint_f="@string/trip_time"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/color"
-                app:layout_constraintTop_toBottomOf="@+id/color"
-                app:max_length_f="8"
-                app:regex_f="@string/regex_car_plate"
+                app:layout_constraintStart_toStartOf="@+id/date"
+                app:layout_constraintTop_toBottomOf="@+id/date"
+                app:regex_f="@string/regex_min_1_chars"
                 app:text_type_f="text" />
 
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/edit_time"
+                style="@style/button_3_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background_orange_8dp"
+                android:gravity="center"
+                android:paddingStart="8dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="4dp"
+                android:text="@string/edit"
+                android:textColor="@color/white_40_new"
+                app:backgroundTint="@color/background_gray_40"
+                app:icon="@drawable/ic_edit"
+                app:iconGravity="textStart"
+                app:iconSize="16dp"
+                app:iconTint="@color/white_40_new"
+                app:layout_constraintBottom_toBottomOf="@+id/time"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/time" />
+
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="@dimen/component_input_icon_dime"
+                android:layout_height="@dimen/component_input_icon_dime"
+                android:background="@drawable/ic_pin"
+                android:backgroundTint="@color/white_60_new"
+                app:layout_constraintBottom_toBottomOf="@+id/pick_up_destination"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/pick_up_destination" />
+
+
+            <gr.fellow.fellow_traveller.ui.views.FellowEditTextNew
+                android:id="@+id/pick_up_destination"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
+                app:editable_f="false"
+                app:hint_f="@string/select_destination_pick_up"
+                app:layout_constraintEnd_toStartOf="@+id/edi_pick_up"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/view211"
+                app:layout_constraintTop_toBottomOf="@+id/time"
+                app:regex_f="@string/regex_min_1_chars" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/edi_pick_up"
+                style="@style/button_3_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background_orange_8dp"
+                android:gravity="center"
+                android:paddingStart="8dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="4dp"
+                android:text="@string/edit"
+                android:textColor="@color/white_40_new"
+                app:backgroundTint="@color/background_gray_40"
+                app:icon="@drawable/ic_edit"
+                app:iconGravity="textStart"
+                app:iconSize="16dp"
+                app:iconTint="@color/white_40_new"
+                app:layout_constraintBottom_toBottomOf="@+id/pick_up_destination"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/pick_up_destination" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/button_background_orange_16dp"
+            android:backgroundTint="@color/black_20_new"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout_trip_destinations"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout_trip_destinations"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout1w0">
+
+
+            <View
+                android:id="@+id/makis"
+                android:layout_width="@dimen/component_input_icon_dime"
+                android:layout_height="@dimen/component_input_icon_dime"
+                android:background="@drawable/ic_cash"
+                android:backgroundTint="@color/white_60_new"
+                app:layout_constraintBottom_toBottomOf="@+id/total_price"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView28" />
+
+            <TextView
+                android:id="@+id/textView28"
+                style="@style/label_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/price_title"
+                app:layout_constraintStart_toEndOf="@+id/makis"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/total_price"
+                style="@style/paragraph_4_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:lineSpacingExtra="4dp"
+                android:text="1 x $0.00\nσύνολο $130.00"
+                app:layout_constraintStart_toStartOf="@+id/textView28"
+                app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+            <TextView
+                android:id="@+id/textView29"
+                style="@style/paragraph_4_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/per_person"
+                app:layout_constraintBottom_toBottomOf="@+id/total_price"
+                app:layout_constraintEnd_toEndOf="@+id/textView30" />
+
+
+            <EditText
+                android:id="@+id/price_per_person"
+                style="@style/header_2_new"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="2dp"
+                android:background="@null"
+                android:ellipsize="end"
+                android:hint="@string/price_hint"
+                android:inputType="numberDecimal"
+                android:maxLength="7"
+                android:singleLine="true"
+                android:textAlignment="textEnd"
+                android:textColorHint="#40ffffff"
+                app:layout_constraintEnd_toStartOf="@+id/textView30"
+                app:layout_constraintStart_toEndOf="@+id/total_price"
+                app:layout_constraintTop_toTopOf="@+id/textView28" />
+
+            <TextView
+                android:id="@+id/textView30"
+                style="@style/header_2_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/euro_symbol"
+                app:layout_constraintBottom_toBottomOf="@+id/price_per_person"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/price_per_person" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout16"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/button_background_orange_16dp"
+            android:backgroundTint="@color/black_20_new"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout_trip_destinations"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout_trip_destinations"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout15">
+
+
+            <View
+                android:id="@+id/view7"
+                android:layout_width="@dimen/component_input_icon_dime"
+                android:layout_height="@dimen/component_input_icon_dime"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/ic_car_front"
+                android:backgroundTint="@color/white_60_new"
+                app:layout_constraintBottom_toBottomOf="@+id/car"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/car" />
+
+            <gr.fellow.fellow_traveller.ui.views.FellowEditTextNew
+                android:id="@+id/car"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="24dp"
+                app:editable_f="false"
+                app:error_message_f="@string/ERROR_SELECT_CAR"
+                app:hint_f="@string/select_car"
+                app:label_f="@string/vehicle"
+                app:layout_constraintEnd_toStartOf="@+id/pick_car"
+                app:layout_constraintStart_toEndOf="@+id/view7"
+                app:layout_constraintTop_toTopOf="parent"
+                app:regex_f="@string/regex_min_1_chars" />
+
+
+            <ImageView
+                android:id="@+id/pick_car"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:background="@drawable/button_background_green_30dp"
+                android:backgroundTint="@color/background_gray_40"
+                android:padding="2dp"
+                android:src="@drawable/ic_arrow_head_down"
+                app:layout_constraintBottom_toBottomOf="@+id/car"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/car"
+                app:tint="@color/white_40_new" />
+
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="@dimen/component_input_icon_dime"
+                android:layout_height="@dimen/component_input_icon_dime"
+                android:background="@drawable/ic_seat"
+                android:backgroundTint="@color/white_60_new"
+                app:layout_constraintBottom_toBottomOf="@+id/seats"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/seats" />
+
+            <gr.fellow.fellow_traveller.ui.views.FellowEditTextNew
+                android:id="@+id/seats"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                app:editable_f="false"
+                app:hint_f="@string/EMAIL_PLACEHOLDER"
+                app:label_f="@string/seat_availability"
+                app:layout_constraintEnd_toStartOf="@+id/seats_pick_button"
+                app:layout_constraintStart_toEndOf="@+id/view2"
+                app:layout_constraintTop_toBottomOf="@+id/car"
+                app:regex_f="@string/regex_min_1_chars" />
+
+
+            <gr.fellow.fellow_traveller.ui.views.PickNumberButton
+                android:id="@+id/seats_pick_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/seats"
+                app:layout_constraintEnd_toEndOf="@+id/pick_car"
+                app:layout_constraintTop_toTopOf="@+id/seats"
+                app:maxValue="10"
+                app:minValue="1" />
+
+
+            <gr.fellow.fellow_traveller.ui.views.FellowEditTextNew
+                android:id="@+id/bags"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                app:editable_f="false"
+                app:hint_f="@string/specify"
+                app:label_f="@string/baggage_allowance"
+                app:layout_constraintEnd_toEndOf="@+id/car"
+                app:layout_constraintStart_toEndOf="@+id/view2"
+                app:layout_constraintTop_toBottomOf="@+id/seats"
+                app:regex_f="@string/regex_min_1_chars" />
+
+
+            <View
+                android:id="@+id/view12"
+                android:layout_width="@dimen/component_input_icon_dime"
+                android:layout_height="@dimen/component_input_icon_dime"
+                android:background="@drawable/ic_luggage"
+                android:backgroundTint="@color/white_60_new"
+                app:layout_constraintBottom_toBottomOf="@+id/bags"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/bags" />
+
+
+            <ImageView
+                android:id="@+id/pick_bags"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:background="@drawable/button_background_green_30dp"
+                android:backgroundTint="@color/background_gray_40"
+                android:padding="2dp"
+                android:src="@drawable/ic_arrow_head_down"
+                app:layout_constraintBottom_toBottomOf="@+id/bags"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/bags"
+                app:tint="@color/white_40_new" />
+
+
+            <gr.fellow.fellow_traveller.ui.views.FellowEditTextNew
+                android:id="@+id/pet"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                app:editable_f="false"
+                app:hint_f="@string/pet_companionship"
+                app:layout_constraintEnd_toStartOf="@+id/pets_switch"
+                app:layout_constraintStart_toEndOf="@+id/view2"
+                app:layout_constraintTop_toBottomOf="@+id/bags"
+                app:regex_f="@string/regex_min_1_chars" />
+
+
+            <View
+                android:id="@+id/view121"
+                android:layout_width="@dimen/component_input_icon_dime"
+                android:layout_height="@dimen/component_input_icon_dime"
+                android:background="@drawable/ic_bone"
+                android:backgroundTint="@color/white_60_new"
+                app:layout_constraintBottom_toBottomOf="@+id/pet"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/pet" />
+
+
+            <Switch
+                android:id="@+id/pets_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:background="@null"
+                android:checked="false"
+                android:scaleX="1.1"
+                android:scaleY="1.1"
+                android:thumb="@drawable/switch_thumb"
+                android:track="@drawable/switch_tracker"
+                app:layout_constraintBottom_toBottomOf="@+id/pet"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/pet"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/save"
+            style="@style/button_1"
+            android:layout_width="@dimen/button_button_width"
+            android:layout_height="@dimen/button_button_height"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_background_orange_16dp"
+            android:gravity="center"
+            android:text="@string/complete"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/green_new"
+            app:iconGravity="textStart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout16"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <include
+            android:id="@+id/progressLoad"
+            layout="@layout/generic_loader"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

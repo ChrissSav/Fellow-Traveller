@@ -62,43 +62,30 @@
             tools:ignore="SmallSp" />
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/edit"
+            style="@style/button_3_new"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/back_button_margin"
             android:background="@drawable/button_background_orange_8dp"
-            android:backgroundTint="#1AFFFFFF"
-            android:minWidth="74dp"
-            android:padding="8dp"
+            android:gravity="center"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="4dp"
+            android:text="@string/change"
+            android:textColor="@color/white_40_new"
+            app:backgroundTint="@color/background_gray_40"
+            app:icon="@drawable/ic_edit"
+            app:iconGravity="textStart"
+            app:iconSize="16dp"
+            app:iconTint="@color/white_40_new"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-            <View
-                android:id="@+id/view5"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:background="@drawable/ic_edit"
-                android:backgroundTint="@color/white_40_new"
-                app:layout_constraintBottom_toBottomOf="@+id/textView50"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView50" />
-
-            <TextView
-                android:id="@+id/textView50"
-                style="@style/button_3_new"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:maxLines="1"
-                android:text="@string/change"
-                android:textColor="@color/white_40_new"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/view5"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

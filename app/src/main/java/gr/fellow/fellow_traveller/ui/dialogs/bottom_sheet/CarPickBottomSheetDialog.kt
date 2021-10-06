@@ -12,7 +12,7 @@ import gr.fellow.fellow_traveller.ui.car.CarPickAdapter
 
 class CarPickBottomSheetDialog(
     private val carList: MutableList<Car>,
-    private val onItemClickListener: (Car?) -> Unit
+    private val onItemClickListener: (Car) -> Unit,
 ) : BottomSheetDialogFragment() {
 
 
@@ -21,9 +21,6 @@ class CarPickBottomSheetDialog(
         val carAdapter = CarPickAdapter(onItemClickListener)
         binding.recyclerView.adapter = carAdapter
         carAdapter.submitList(carList)
-        binding.addCar.setOnClickListener {
-            onItemClickListener(null)
-        }
         return binding.root.rootView
     }
 
