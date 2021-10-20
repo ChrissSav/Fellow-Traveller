@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bottom_sheet_dialog_shape">
+
 
     <View
         android:id="@+id/view8"
@@ -23,39 +25,36 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/my_vehicles"
+        android:text="@string/pick_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view8" />
 
 
-    <TextView
-        android:id="@+id/yes"
-        style="@style/header_4_new"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="35dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:gravity="center"
-        android:text="@string/yes"
-        app:layout_constraintEnd_toEndOf="@+id/no"
-        app:layout_constraintStart_toStartOf="@+id/no"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
-
-    <TextView
-        android:id="@+id/no"
-        style="@style/header_4_new"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="24dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:gravity="center"
-        android:text="@string/no"
+        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yes" />
+        app:layout_constraintTop_toBottomOf="@+id/title">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:nestedScrollingEnabled="false"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView13"
+            tools:listitem="@layout/car_color_item" />
+
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

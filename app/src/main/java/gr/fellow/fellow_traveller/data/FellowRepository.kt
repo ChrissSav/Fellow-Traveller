@@ -2,10 +2,12 @@ package gr.fellow.fellow_traveller.data
 
 import gr.fellow.fellow_traveller.domain.SearchTripFilter
 import gr.fellow.fellow_traveller.framework.network.fellow.auth.*
+import gr.fellow.fellow_traveller.framework.network.fellow.car.CarColorResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.car.CarInfoResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.car.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.notification.NotificationResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.notification.UpdateNotification
+import gr.fellow.fellow_traveller.framework.network.fellow.place.PlaceAutocompleteResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.review.RegisterReviewRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.review.ReviewResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.BookTripRequest
@@ -48,7 +50,6 @@ interface FellowRepository {
     suspend fun changePassword(updatePasswordRequest: UpdatePasswordRequest): String
 
 
-
     // Cars
 
     suspend fun addCarRemote(carRequest: CarRequest): CarInfoResponse
@@ -56,6 +57,8 @@ interface FellowRepository {
     suspend fun getCarsRemote(): MutableList<CarInfoResponse>
 
     suspend fun deleteCarRemote(carId: String): String
+
+    suspend fun getCarColors(): MutableList<CarColorResponse>
 
     // Trips
 
@@ -75,6 +78,7 @@ interface FellowRepository {
 
     suspend fun deleteTrip(tripId: String): String
 
+    suspend fun getPlaceAutocomplete(query: String, type: String): MutableList<PlaceAutocompleteResponse>
 
     // Notificationget
 

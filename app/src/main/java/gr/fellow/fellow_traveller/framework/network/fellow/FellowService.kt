@@ -2,10 +2,12 @@ package gr.fellow.fellow_traveller.framework.network.fellow
 
 import gr.fellow.fellow_traveller.data.BaseResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.auth.*
+import gr.fellow.fellow_traveller.framework.network.fellow.car.CarColorResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.car.CarInfoResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.car.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.notification.NotificationResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.notification.UpdateNotification
+import gr.fellow.fellow_traveller.framework.network.fellow.place.PlaceAutocompleteResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.review.RegisterReviewRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.review.ReviewResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.BookTripRequest
@@ -22,118 +24,121 @@ interface FellowService {
 
     @POST("auth/check_email")
     suspend fun checkIfAccountInfoExist(
-        @Body emailRequest: CheckEmailRequest
+        @Body emailRequest: CheckEmailRequest,
     ): Response<BaseResponse<String>>
 
 
     @POST("auth/signup")
     suspend fun registerUser(
-        @Body request: AccountCreateRequest
+        @Body request: AccountCreateRequest,
     ): Response<BaseResponse<String>>
 
     @GET("auth/verify_account/phone")
     suspend fun verifyAccount(
-        @Query("token") token: String
+        @Query("token") token: String,
     ): Response<BaseResponse<AuthenticationResponse>>
 
 
     @POST("auth/signin")
     suspend fun userLogin(
-        @Body user: LoginRequest
+        @Body user: LoginRequest,
     ): Response<BaseResponse<AuthenticationResponse>>
 
 
     @POST("auth/logout")
     suspend fun logout(
-        @Body logoutRequest: LogoutRequest
+        @Body logoutRequest: LogoutRequest,
     ): Response<BaseResponse<String>>
 
 
     @POST("auth/forgot_password")
     suspend fun forgotPassword(
-        @Body forgotPasswordRequest: ForgotPasswordRequest
+        @Body forgotPasswordRequest: ForgotPasswordRequest,
     ): Response<BaseResponse<String>>
 
 
     @POST("auth/reset_password")
     suspend fun resetPassword(
-        @Body resetPasswordRequest: ResetPasswordRequest
+        @Body resetPasswordRequest: ResetPasswordRequest,
     ): Response<BaseResponse<String>>
 
 
     /** User **/
 
-    @PUT("user")
+    @PUT("users")
     suspend fun updateAccount(
-        @Body updateAccountRequest: UpdateAccountRequest
+        @Body updateAccountRequest: UpdateAccountRequest,
     ): Response<BaseResponse<UserAuthResponse>>
 
-    @GET("user/me")
+    @GET("users/me")
     suspend fun getUserInfo(
     ): Response<BaseResponse<UserAuthResponse>>
 
-    @GET("user/{user_id}")
+    @GET("users/{user_id}")
     suspend fun getUserInfo(
-        @Path("user_id") userId: String
+        @Path("user_id") userId: String,
     ): Response<BaseResponse<UserInfoResponse>>
 
 
-    @PUT("user/me/picture")
+    @PUT("users/me/picture")
     suspend fun updateUserPicture(
-        @Body updatePictureRequest: UpdatePictureRequest
+        @Body updatePictureRequest: UpdatePictureRequest,
     ): Response<BaseResponse<UserAuthResponse>>
 
 
-    @PUT("user/me/messenger")
+    @PUT("users/me/messenger")
     suspend fun updateUserMessenger(
-        @Body updateMessengerRequest: UpdateMessengerRequest
+        @Body updateMessengerRequest: UpdateMessengerRequest,
     ): Response<BaseResponse<UserAuthResponse>>
 
 
-    @PUT("user/me/password")
+    @PUT("users/me/password")
     suspend fun updateUserPassword(
-        @Body updatePasswordRequest: UpdatePasswordRequest
+        @Body updatePasswordRequest: UpdatePasswordRequest,
     ): Response<BaseResponse<String>>
 
     /** CAR **/
 
-    @GET("car")
+    @GET("cars")
     suspend fun userCars(): Response<BaseResponse<MutableList<CarInfoResponse>>>
 
 
-    @POST("car")
+    @POST("cars")
     suspend fun addCar(
-        @Body carRequest: CarRequest
+        @Body carRequest: CarRequest,
     ): Response<BaseResponse<CarInfoResponse>>
 
 
-    @DELETE("car/{car_id}")
+    @DELETE("cars/{car_id}")
     suspend fun deleteCar(
-        @Path("car_id") carId: String
+        @Path("car_id") carId: String,
     ): Response<BaseResponse<String>>
 
 
+    @GET("cars/colors")
+    suspend fun getCarColors(): Response<BaseResponse<MutableList<CarColorResponse>>>
+
     /** TRIP **/
 
-    @POST("trip")
+    @POST("trips")
     suspend fun registerTrip(
-        @Body trip: TripCreateRequest
+        @Body trip: TripCreateRequest,
     ): Response<BaseResponse<TripInvolvedResponse>>
 
-    @GET("trip/involved/{trip_id}")
+    @GET("trips/involved/{trip_id}")
     suspend fun getTripInvolvedById(
-        @Path("trip_id") tripId: String
+        @Path("trip_id") tripId: String,
     ): Response<BaseResponse<TripInvolvedResponse>>
 
 
-    @GET("trip")
+    @GET("trips")
     suspend fun getTripsAs(
         @Query("type") type: String,
-        @Query("status") status: String
+        @Query("status") status: String,
         // @Query("page") page: Int
     ): Response<BaseResponse<MutableList<TripInvolvedResponse>>>
 
-    @GET("trip/search")
+    @GET("trips/search")
     suspend fun searchTrips(
         @Query("latitude_from") latitudeFrom: Float,
         @Query("longitude_from") longitudeFrom: Float,
@@ -147,54 +152,61 @@ interface FellowService {
         @Query("seats_max") seatsMax: Int?,
         @Query("price_min") priceMin: Int?,
         @Query("price_max") priceMax: Int?,
-        @Query("pet") pet: Boolean?
+        @Query("pet") pet: Boolean?,
     ): Response<BaseResponse<MutableList<TripSearchResponse>>>
 
 
-    @PUT("trip/passenger")
+    @PUT("trips/passenger")
     suspend fun bookTrip(
-        @Body request: BookTripRequest
+        @Body request: BookTripRequest,
     ): Response<BaseResponse<TripInvolvedResponse>>
 
-    @DELETE("trip/passenger/{trip_id}")
+    @DELETE("trips/passenger/{trip_id}")
     suspend fun exitFromTrip(
-        @Path("trip_id") tripId: String
+        @Path("trip_id") tripId: String,
     ): Response<BaseResponse<String>>
 
 
-    @DELETE("trip/{trip_id}")
+    @DELETE("trips/{trip_id}")
     suspend fun deleteTrip(
-        @Path("trip_id") tripId: String
+        @Path("trip_id") tripId: String,
     ): Response<BaseResponse<String>>
 
+
+    /** Place **/
+    @GET("trips/place/autocomplete")
+    suspend fun getPlaceAutocomplete(
+        @Query("query") query: String,
+        @Query("type") type: String,
+    ): Response<BaseResponse<MutableList<PlaceAutocompleteResponse>>>
 
     /** REVIEW **/
 
-    @POST("review")
+    @POST("reviews")
     suspend fun registerReview(
-        @Body registerReviewRequest: RegisterReviewRequest
+        @Body registerReviewRequest: RegisterReviewRequest,
     ): Response<BaseResponse<String>>
 
-    @GET("review/check/{targetId}")
+    @GET("reviews/check/{targetId}")
     suspend fun checkReview(
-        @Path("targetId") targetId: String
+        @Path("targetId") targetId: String,
     ): Response<BaseResponse<Boolean>>
 
-    @GET("review/{user_id}")
+    @GET("reviews/{user_id}")
     suspend fun getUserReviews(
-        @Path("user_id") userId: String
+        @Path("user_id") userId: String,
     ): Response<BaseResponse<MutableList<ReviewResponse>>>
 
     /** NOTIFICATION **/
 
-    @GET("notification")
+    @GET("notifications")
     suspend fun getNotifications(): Response<BaseResponse<MutableList<NotificationResponse>>>
 
-    @GET("notification/socket")
+    @GET("notifications/socket")
     suspend fun getNotificationsSocket(): Response<BaseResponse<MutableList<NotificationResponse>>>
 
-    @PUT("notification")
+    @PUT("notifications")
     suspend fun setNotificationRead(
-        @Body updateNotification: UpdateNotification
+        @Body updateNotification: UpdateNotification,
     ): Response<BaseResponse<String>>
 }

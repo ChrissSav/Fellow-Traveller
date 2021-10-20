@@ -100,7 +100,6 @@ class FellowEditTextNew(context: Context, attrs: AttributeSet) : ConstraintLayou
 
         if (!isEditable) {
             binding.editText.keyListener = null
-            binding.editText.isClickable = false
             binding.editText.isFocusable = false
             binding.editText.isLongClickable = false
             binding.editText.isFocusableInTouchMode = false

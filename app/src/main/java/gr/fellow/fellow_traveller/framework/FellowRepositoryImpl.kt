@@ -24,7 +24,7 @@ import gr.fellow.fellow_traveller.utils.*
 class FellowRepositoryImpl(
     private val service: FellowService,
     private val sharedPrefs: SharedPreferences,
-    private val userAuthDao: UserAuthDao
+    private val userAuthDao: UserAuthDao,
 ) : FellowRepository {
 
 
@@ -121,6 +121,11 @@ class FellowRepositoryImpl(
             service.deleteCar(carId).handleApiFormat()
         }
 
+    override suspend fun getCarColors() =
+        networkCall {
+            service.getCarColors().handleApiFormat()
+        }
+
     override suspend fun registerTripRemote(trip: TripCreateRequest): TripInvolvedResponse =
         networkCall {
             service.registerTrip(trip).handleApiFormat()
@@ -164,6 +169,11 @@ class FellowRepositoryImpl(
     override suspend fun deleteTrip(tripId: String): String =
         networkCall {
             service.deleteTrip(tripId).handleApiFormat()
+        }
+
+    override suspend fun getPlaceAutocomplete(query: String, type: String) =
+        networkCall {
+            service.getPlaceAutocomplete(query, type).handleApiFormat()
         }
 
     override suspend fun getNotification(): MutableList<NotificationResponse> =

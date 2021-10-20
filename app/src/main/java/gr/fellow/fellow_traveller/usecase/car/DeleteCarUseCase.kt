@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.usecase.home
+package gr.fellow.fellow_traveller.usecase.car
 
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 

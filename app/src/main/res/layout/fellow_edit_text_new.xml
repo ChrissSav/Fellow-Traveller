@@ -29,6 +29,7 @@
         android:maxLength="50"
         android:paddingTop="4dp"
         android:singleLine="true"
+        android:scrollHorizontally="true"
         android:textColorHint="#40ffffff"
         app:layout_constraintEnd_toStartOf="@+id/show_hide"
         app:layout_constraintStart_toStartOf="parent"

@@ -6,13 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.domain.BagsStatusType
 import gr.fellow.fellow_traveller.domain.car.Car
+import gr.fellow.fellow_traveller.domain.trip.Destination
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.user.LocalUser
-import gr.fellow.fellow_traveller.domain.user.UserBase
-import gr.fellow.fellow_traveller.framework.network.google.model.DestinationModel
+import gr.fellow.fellow_traveller.usecase.car.GetUserCarsRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.firabase.CreateOrEnterConversationFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.firabase.SendMessageFirebaseUseCase
-import gr.fellow.fellow_traveller.usecase.home.GetUserCarsRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.newtrip.RegisterTripRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
 import gr.fellow.fellow_traveller.utils.dateTimeToTimestamp
@@ -26,22 +25,20 @@ constructor(
     private val registerTripRemoteUseCase: RegisterTripRemoteUseCase,
     private val createOrEnterConversationFirebaseUseCase: CreateOrEnterConversationFirebaseUseCase,
     private val sendMessageFirebaseUseCase: SendMessageFirebaseUseCase,
-
-    ) : BaseViewModel() {
+) : BaseViewModel() {
 
 
     private val _success = MutableLiveData<TripInvolved>()
     val success: LiveData<TripInvolved> = _success
 
-    private val _destinationFrom = MutableLiveData<DestinationModel>()
-    val destinationFrom: LiveData<DestinationModel> = _destinationFrom
+    private val _destinationFrom = MutableLiveData<Destination>()
+    val destinationFrom: LiveData<Destination> = _destinationFrom
 
-    private val _destinationTo = MutableLiveData<DestinationModel>()
-    val destinationTo: LiveData<DestinationModel> = _destinationTo
+    private val _destinationTo = MutableLiveData<Destination>()
+    val destinationTo: LiveData<Destination> = _destinationTo
 
-
-    private val _destinationPickUp = MutableLiveData<DestinationModel>()
-    val destinationPickUp: LiveData<DestinationModel> = _destinationPickUp
+    private val _destinationPickUp = MutableLiveData<Destination>()
+    val destinationPickUp: LiveData<Destination> = _destinationPickUp
 
     private val _date = MutableLiveData<String>()
     val date: LiveData<String> = _date
@@ -88,18 +85,18 @@ constructor(
     }
 
 
-    fun setDestinationFrom(id: String, title: String) {
-        _destinationFrom.value = DestinationModel(id, title)
+    fun setDestinationFrom(destination: Destination) {
+        _destinationFrom.value = destination
     }
 
     fun setDestinationPickUp(id: String, title: String) {
-        _destinationPickUp.value = DestinationModel(id, title)
+        _destinationPickUp.value = Destination(id, title)
     }
 
-    fun setDestinationTo(id: String, title: String) {
+    fun setDestinationTo(destination: Destination) {
         launch {
             _userInfo.value = loadUserLocalInfoUseCase()
-            _destinationTo.value = DestinationModel(id, title)
+            _destinationTo.value = destination
         }
     }
 
@@ -138,18 +135,18 @@ constructor(
     }
 
 
-    fun registerTrip(userBase: UserBase) {
+    fun registerTrip(userBase: LocalUser) {
         launchAfter(_success) {
 
 
-            var msg: String? = null
-            if (message.value?.trim()?.length!! > 0) {
-                msg = message.value.toString()
-            }
-
-            val response = registerTripRemoteUseCase(
-                destinationFrom.value?.placeId.toString(), destinationTo.value?.placeId.toString(), car.value?.id.toString(),
-                pet.value!!, seats.value!!, bags.value!!.code, msg, price.value!!, getTimestamp()
+            /*       var msg: String? = null
+                   if (message.value?.trim()?.length!! > 0) {
+                       msg = message.value.toString()
+                   }
+       */
+            val response = registerTripRemoteUseCase.invoke(
+                destinationFrom.value?.placeId.toString(), destinationTo.value?.placeId.toString(), destinationPickUp.value?.placeId.toString(), car.value?.id.toString(),
+                pet.value!!, seats.value!!, bags.value!!.code, "", price.value!!, getTimestamp()
             )
 
             //We create only the creator's conversation
@@ -159,7 +156,7 @@ constructor(
             )
 
             //We create a temp list with id, in this case we add only creator id and then we send a message with type 3(First Messag)
-            var tempIdList = mutableListOf<String>()
+            val tempIdList = mutableListOf<String>()
             tempIdList.add(response.creatorUser.id)
             sendMessageFirebaseUseCase.invoke(userBase.id, response.id, "", "", 3, tempIdList, response.picture)
 
@@ -169,7 +166,7 @@ constructor(
     }
 
 
-    fun getTimestamp(): Long {
+    private fun getTimestamp(): Long {
         return dateTimeToTimestamp(date.value.toString(), time.value.toString())
     }
 }

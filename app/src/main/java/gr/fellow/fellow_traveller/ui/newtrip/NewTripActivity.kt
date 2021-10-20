@@ -1,28 +1,28 @@
 package gr.fellow.fellow_traveller.ui.newtrip
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import androidx.navigation.NavController
+import androidx.core.os.bundleOf
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivityViewModel
 import gr.fellow.fellow_traveller.databinding.ActivityNewTripBinding
-import gr.fellow.fellow_traveller.domain.AnswerType
 import gr.fellow.fellow_traveller.domain.BagsStatusType
 import gr.fellow.fellow_traveller.domain.car.Car
+import gr.fellow.fellow_traveller.domain.trip.Destination
 import gr.fellow.fellow_traveller.domain.user.LocalUser
 import gr.fellow.fellow_traveller.ui.dialogs.DatePickerCustomDialog
-import gr.fellow.fellow_traveller.ui.dialogs.ExitCustomDialog
 import gr.fellow.fellow_traveller.ui.dialogs.TimePickerCustomDialog
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.BagsStatusPickBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.dialogs.bottom_sheet.CarPickBottomSheetDialog
 import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.location.SelectLocationActivity
 import gr.fellow.fellow_traveller.ui.views.PickButtonActionListener
+import gr.fellow.fellow_traveller.utils.ADDRESS
+import gr.fellow.fellow_traveller.utils.validateDateTimeDiffer
 import kotlinx.android.synthetic.main.activity_new_trip.*
 import kotlinx.android.synthetic.main.fragment_main.*
 
@@ -31,11 +31,11 @@ import kotlinx.android.synthetic.main.fragment_main.*
 class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripViewModel>(NewTripViewModel::class.java) {
 
 
-    private lateinit var nav: NavController
-    private var userRate: Float = 0f
     lateinit var localUser: LocalUser
     private var seatsNum = 1
-    private var pricePerPerson = "0".toFloat()
+    private var pricePerPerson = 0f
+    private lateinit var destinationFrom: Destination
+    private lateinit var destinationTo: Destination
     private lateinit var carPickBottomSheetDialog: CarPickBottomSheetDialog
     private lateinit var bagsStatusPickBottomSheetDialog: BagsStatusPickBottomSheetDialog
     private lateinit var dateDialog: DatePickerCustomDialog
@@ -48,13 +48,40 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
 
 
     override fun handleIntent() {
-        userRate = intent.getFloatExtra("userRate", 0f)
-        localUser = intent.getParcelableExtra<LocalUser>("localUser")!!
+        val tempDestinationFrom = intent.getParcelableExtra<Destination>("destinationFrom")
+        if (tempDestinationFrom == null)
+            finish()
+        val tempDestinationTo = intent.getParcelableExtra<Destination>("destinationTo")
+        if (tempDestinationTo == null)
+            finish()
+
+        val tempLocalUser = intent.getParcelableExtra<LocalUser>("localUser")
+        if (tempLocalUser == null)
+            finish()
+        tempDestinationFrom?.let {
+            destinationFrom = it
+        }
+        tempDestinationTo?.let {
+            destinationTo = it
+        }
+        tempLocalUser?.let {
+            localUser = it
+        }
     }
 
     override fun setUpObservers() {
 
+        binding.destinationFrom.text = destinationFrom.title
+        binding.destinationTo.text = destinationTo.title
+
+
+
+
         viewModel.carList.observe(this, { list ->
+            if (list.isNullOrEmpty()) {
+                createToast(getString(R.string.have_not_cars))
+                finish()
+            }
             if (list.size == 1)
                 viewModel.setCar(list.first())
             carList.clear()
@@ -76,6 +103,13 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
 
         })
 
+        viewModel.destinationFrom.observe(this, {
+            binding.destinationFrom.setDestination(it)
+        })
+
+        viewModel.destinationTo.observe(this, {
+            binding.destinationTo.setDestination(it)
+        })
 
         viewModel.destinationPickUp.observe(this, {
             binding.pickUpDestination.text = it.title
@@ -139,6 +173,9 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
         viewModel.loadUserCars()
         viewModel.setSeats(1)
 
+        viewModel.setDestinationFrom(destinationFrom)
+        viewModel.setDestinationTo(destinationTo)
+
         binding.seatsPickButton.pickButtonActionListener = object : PickButtonActionListener {
             override fun onPickAction(value: Int) {
                 viewModel.setSeats(value)
@@ -155,7 +192,7 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
             override fun afterTextChanged(editable: Editable?) {
                 var num = "0".toFloat()
                 try {
-                    val text = editable ?: "0"
+                    val text = editable ?: num
                     num = text.toString().toFloat()
                 } catch (e: Exception) {
 
@@ -176,7 +213,7 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
 
 
         binding.ediPickUp.setOnClickListener {
-            startActivityForResultWithFade(SelectLocationActivity::class, 1)
+            startActivityForResultWithFade(SelectLocationActivity::class, 1, bundleOf("autocompleteType" to ADDRESS))
         }
 
         binding.pickBags.setOnClickListener {
@@ -207,7 +244,11 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
         with(binding) {
             save.setOnClickListener {
                 if (pickUpDestination.isCorrect() and date.isCorrect() and time.isCorrect() and car.isCorrect() and bags.isCorrect() and pet.isCorrect()) {
-
+                    if (validateDateTimeDiffer(date.text.toString(), time.text.toString(), resources.getInteger(R.integer.Time_difference))) {
+                        viewModel.registerTrip(localUser)
+                    } else {
+                        createToast(getString(R.string.ERROR_TRIP_TIMESTAMP))
+                    }
                 }
             }
         }
@@ -219,32 +260,41 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
 
 
     private fun onCarItemClickListener(car: Car) {
-
         viewModel.setCar(car)
         carPickBottomSheetDialog.dismiss()
-
     }
 
 
     private fun calculateTotalPrice() {
-        binding.totalPrice.setSpanText(Pair("$seatsNum x ${pricePerPerson} ${getString(R.string.euro_symbol)}\n${getString(R.string.sum)} ", R.color.white_60_new),
+        binding.totalPrice.setSpanTextColor(Pair("$seatsNum x ${pricePerPerson} ${getString(R.string.euro_symbol)}\n${getString(R.string.sum)} ", R.color.white_60_new),
             Pair("${pricePerPerson * seatsNum} ${getString(R.string.euro_symbol)}", R.color.white))
     }
 
-    @SuppressLint("RestrictedApi")
-    override fun onBackPressed() {
-
-        if (viewModel.destinationFrom.value?.placeId != null && viewModel.destinationTo.value?.placeId != null) {
-            if (nav.backStack.size == 2) {
-                openDialog()
-            } else if (nav.currentDestination?.id != R.id.successTripFragment) {
-                super.onBackPressed()
-            }
-        } else {
-            super.onBackPressed()
-        }
-
-    }
+//    @SuppressLint("RestrictedApi")
+//    override fun onBackPressed() {
+//
+//        if (viewModel.destinationFrom.value?.placeId != null && viewModel.destinationTo.value?.placeId != null) {
+//            if (nav.backStack.size == 2) {
+//                openDialog()
+//            } else if (nav.currentDestination?.id != R.id.successTripFragment) {
+//                super.onBackPressed()
+//            }
+//        } else {
+//            super.onBackPressed()
+//        }
+//
+//    }
+//
+//
+//
+//    private fun openDialog() {
+//        ExitCustomDialog(this, this::exitCustomDialogAnswerType, getString(R.string.prompt_cancel_offer), 1).show(supportFragmentManager, "exitCustomDialog")
+//    }
+//
+//    private fun exitCustomDialogAnswerType(result: AnswerType) {
+//        if (result == AnswerType.Yes)
+//            finish()
+//    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -256,18 +306,5 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
             }
         }
     }
-
-
-    fun getUserRate() = userRate
-
-    private fun openDialog() {
-        ExitCustomDialog(this, this::exitCustomDialogAnswerType, getString(R.string.prompt_cancel_offer), 1).show(supportFragmentManager, "exitCustomDialog")
-    }
-
-    private fun exitCustomDialogAnswerType(result: AnswerType) {
-        if (result == AnswerType.Yes)
-            finish()
-    }
-
 
 }

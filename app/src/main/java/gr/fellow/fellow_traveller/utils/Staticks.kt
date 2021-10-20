@@ -14,3 +14,7 @@ const val RESENT_EMAIL = "RESENT_EMAIL"
 const val NOTIFICATION_TIME_LOOP = 15000L // every 15 seconds
 const val NOTIFICATION_SERVICE_CODE = 1997
 
+const val ADDRESS = "address"
+const val CITY = "city"
+
+const val PLACE_TITLE_SPLIT_CHAR = "$$"

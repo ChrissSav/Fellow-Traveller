@@ -17,6 +17,7 @@ import android.os.Handler
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
@@ -36,8 +37,12 @@ import com.bumptech.glide.Glide
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.tapadoo.alerter.Alerter
 import gr.fellow.fellow_traveller.R
+import gr.fellow.fellow_traveller.domain.trip.Destination
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
+import gr.fellow.fellow_traveller.ui.views.FellowEditTextNew
+import gr.fellow.fellow_traveller.ui.views.FellowEditTextNewOnClickListener
+import gr.fellow.fellow_traveller.utils.PLACE_TITLE_SPLIT_CHAR
 import gr.fellow.fellow_traveller.utils.RESENT_EMAIL
 import gr.fellow.fellow_traveller.utils.set
 import kotlin.reflect.KClass
@@ -51,7 +56,7 @@ fun Activity.createAlerter(msg: String) {
         .setTitle(getString(R.string.warning))
         .setText(msg)
         .setIcon(icon)
-        .setBackgroundColorRes(R.color.colorPrimary)
+        .setBackgroundColorRes(R.color.black_new)
         .setDuration(1800)
         .enableSwipeToDismiss() //seems to not work well with OnClickListener
         .show()
@@ -171,6 +176,15 @@ fun Fragment.startActivityForResultWithFade(activity: KClass<out Activity>, code
     val intent = Intent(this.context, activity.java)
     startActivityForResult(intent, code)
     this.activity?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+}
+
+fun Activity.startActivityForResultWithFade(activity: KClass<out Activity>, code: Int, bundle: Bundle?) {
+    val intent = Intent(this, activity.java)
+    bundle?.let {
+        intent.putExtras(it)
+    }
+    startActivityForResult(intent, code)
+    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
 }
 
 fun Activity.startActivityForResultWithFade(activity: KClass<out Activity>, code: Int) {
@@ -376,7 +390,7 @@ fun View.visibleAnim() {
 }
 
 
-fun TextView.setSpanText(vararg pairs: Pair<String, Int>) {
+fun TextView.setSpanTextColor(vararg pairs: Pair<String, Int>) {
 
     val ssb = SpannableStringBuilder("")
 
@@ -391,6 +405,35 @@ fun TextView.setSpanText(vararg pairs: Pair<String, Int>) {
 }
 
 
+fun TextView.setSpanTextStyle(vararg pairs: Pair<String, Int>) {
+    val ssb = SpannableStringBuilder("")
+    pairs.forEach { current ->
+        val style = StyleSpan(current.second)
+        val tempSsb = SpannableStringBuilder(current.first)
+        tempSsb.setSpan(style, 0, current.first.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        ssb.append(tempSsb)
+    }
+    this.setText(ssb, TextView.BufferType.SPANNABLE)
+}
+
+
+fun TextView.setDestination(destination: Destination) {
+    if (destination.title.contains(PLACE_TITLE_SPLIT_CHAR)) {
+        setSpanTextStyle(Pair(destination.title.split(PLACE_TITLE_SPLIT_CHAR)[0], R.style.header_4_new),
+            Pair(destination.title.split(PLACE_TITLE_SPLIT_CHAR)[1], R.style.paragraph_3_new))
+    } else {
+        text = destination.title
+    }
+}
+
+
+fun <T : Any> FellowEditTextNew.onClickListener(function: () -> T) {
+    fellowEditTextNewOnClickListener = object : FellowEditTextNewOnClickListener {
+        override fun onClick() {
+            function.invoke()
+        }
+    }
+}
 
 
 

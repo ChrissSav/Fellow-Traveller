@@ -11,6 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentTripsOffersBinding
+import gr.fellow.fellow_traveller.domain.trip.Destination
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
 import gr.fellow.fellow_traveller.ui.extensions.startActivityForResult
@@ -62,11 +63,19 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
 
 
         binding.buttonHistory.setOnClickListener {
-            findNavController()?.navigate(R.id.action_destination_trips_to_tripInvolvedHistoryFragment, bundleOf("creator" to true))
+            startActivityForResult(NewTripActivity::class,
+                1,
+                bundleOf(
+                    "destinationFrom" to Destination("ChIJ8UNwBh-9oRQR3Y1mdkU1Nic", getString(R.string.placeholder_city_athens)),
+                    "localUser" to viewModel.user.value!!,
+                    "destinationTo" to Destination("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", getString(R.string.placeholder_city_thessaloniki)),
+                ))
+
+            //  findNavController()?.navigate(R.id.action_destination_trips_to_tripInvolvedHistoryFragment, bundleOf("creator" to true))
         }
 
         binding.offerButton.setOnClickListener {
-            startActivityForResult(NewTripActivity::class, 1, bundleOf("userRate" to viewModel.user.value?.rate, "localUser" to viewModel.user.value!!))
+            //startActivityForResult(NewTripActivity::class, 1, bundleOf("userRate" to viewModel.user.value?.rate, "localUser" to viewModel.user.value!!))
         }
 
 

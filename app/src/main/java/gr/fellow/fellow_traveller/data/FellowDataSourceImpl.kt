@@ -26,7 +26,7 @@ import java.util.*
 class FellowDataSourceImpl(
     private val repository: FellowRepository,
     private val googleServiceRepository: GoogleServiceRepository,
-    private val firebaseRepository: FirebaseRepository
+    private val firebaseRepository: FirebaseRepository,
 ) : FellowDataSource {
 
 
@@ -88,13 +88,14 @@ class FellowDataSourceImpl(
     override suspend fun deleteCarRemote(carId: String): String =
         repository.deleteCarRemote(carId)
 
+
+    override suspend fun getCarColors() =
+        repository.getCarColors().map { it.mapToCarColor() }.toMutableList()
+
+
     override suspend fun addTripRemote(
-        destFrom: String, destTo: String, carId: String,
-        hasPet: Boolean, seats: Int, bags: Int, msg: String?, price: Float, timestamp: Long
-    ): TripInvolved {
-        val tripCreateRequest = TripCreateRequest(destFrom, destTo, carId, hasPet, seats, bags, msg, price, timestamp)
-        return repository.registerTripRemote(tripCreateRequest).mapTripInvolved()
-    }
+        destFrom: String, destTo: String, destPickUp: String, carId: String, hasPet: Boolean, seats: Int, bags: Int, msg: String?, price: Float, timestamp: Long,
+    ) = repository.registerTripRemote(TripCreateRequest(destFrom, destTo, destPickUp, carId, hasPet, seats, bags, msg, price, timestamp)).mapTripInvolved()
 
 
     override suspend fun searchTrips(query: SearchTripFilter): MutableList<TripSearch> =
@@ -116,6 +117,9 @@ class FellowDataSourceImpl(
 
     override suspend fun exitFromTrip(tripId: String): String =
         repository.exitFromTrip(tripId)
+
+    override suspend fun getPlaceAutocomplete(query: String, type: String) =
+        repository.getPlaceAutocomplete(query, type).map { it.mapDestination() }.toMutableList()
 
     override suspend fun deleteTrip(tripId: String): String =
         repository.deleteTrip(tripId)

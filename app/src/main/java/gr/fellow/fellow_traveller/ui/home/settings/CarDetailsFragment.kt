@@ -1,7 +1,9 @@
 package gr.fellow.fellow_traveller.ui.home.settings
 
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
@@ -25,7 +27,7 @@ class CarDetailsFragment : BaseFragment<FragmentCarDetailsBinding>() {
 
 
     override fun setUpObservers() {
-        viewModel.carDeletedId.observe(viewLifecycleOwner, Observer {
+        viewModel.carDeletedId.observe(viewLifecycleOwner, {
             onBackPressed()
         })
     }
@@ -34,7 +36,16 @@ class CarDetailsFragment : BaseFragment<FragmentCarDetailsBinding>() {
         binding.brand.text = args.car.brand
         binding.model.text = args.car.model
         binding.plate.text = args.car.plate
-        binding.color.text = args.car.color
+
+        binding.color.text = args.car.color.title
+        binding.colorView.backgroundTintList = ColorStateList.valueOf(Color.parseColor(args.car.color.hex))
+
+        if (Color.parseColor(args.car.color.hex) == Color.parseColor("#000000")) {
+            binding.whiteStroke.visibility = View.VISIBLE
+        } else {
+            binding.whiteStroke.visibility = View.GONE
+        }
+
 
         binding.back.button.setOnClickListener {
             onBackPressed()

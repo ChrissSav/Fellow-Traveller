@@ -4,50 +4,26 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import gr.fellow.fellow_traveller.data.base.BaseViewModel
 import gr.fellow.fellow_traveller.data.base.SingleLiveEvent
+import gr.fellow.fellow_traveller.domain.trip.Destination
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
-import gr.fellow.fellow_traveller.framework.network.google.response.PredictionResponse
-import gr.fellow.fellow_traveller.usecase.newtrip.GetGeometryFormPlaceUseCase
-import gr.fellow.fellow_traveller.usecase.newtrip.GetPlaceFromPlacesUseCase
+import gr.fellow.fellow_traveller.usecase.trip.GetPlaceAutocomplete
 
 class SelectLocationViewModel
 @ViewModelInject
 constructor(
-    private val getPlacesUseCase: GetPlaceFromPlacesUseCase,
-    private val getGeometryFormPlaceUseCase: GetGeometryFormPlaceUseCase
+    private val getPlaceAutocomplete: GetPlaceAutocomplete,
 ) : BaseViewModel() {
 
-    private val _destinations = SingleLiveEvent<MutableList<PredictionResponse>>()
-    val destinations: LiveData<MutableList<PredictionResponse>> = _destinations
+    private val _destinations = SingleLiveEvent<MutableList<Destination>>()
+    val destinations: LiveData<MutableList<Destination>> = _destinations
 
 
     private val _place = SingleLiveEvent<PlaceModel>()
     val place: LiveData<PlaceModel> = _place
 
-    fun getAllDestinations(title: String) {
+    fun getAutocomplete(title: String, type: String) {
         launch {
-            val result = getPlacesUseCase(title)
-            if (result.isSuccessful) {
-                result.body()?.let {
-
-                    val res = result.body()?.predictions
-                    if (res!!.isNotEmpty()) {
-                        _destinations.value = res
-                    }
-
-                }
-            }
-        }
-    }
-
-    fun getLanLogForPlace(placeId: String, placeTitle: String) {
-        launch {
-            val result = getGeometryFormPlaceUseCase(placeId)
-            if (result.isSuccessful) {
-                result.body()?.let {
-                    val res = result.body()!!.result.geometry
-                    _place.value = PlaceModel(placeId, placeTitle, res.location.lat, res.location.lng)
-                }
-            }
+            _destinations.value = getPlaceAutocomplete(title, type)
         }
     }
 }

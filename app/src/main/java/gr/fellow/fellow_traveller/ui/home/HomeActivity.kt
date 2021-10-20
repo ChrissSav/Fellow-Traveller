@@ -67,14 +67,14 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
         viewModel.reloadConnection.observe(this, {
             if (it) {
-                viewModel.loadCars()
+                /* viewModel.loadCars()
                 viewModel.loadTripsAsCreator()
                 viewModel.loadTripsAsPassenger()
                 viewModel.loadTripsAsCreatorHistory()
                 viewModel.loadTripsAsPassengerHistory()
                 viewModel.loadNotifications()
                 viewModel.loadReviews()
-                viewModel.reload(false)
+                viewModel.reload(false)*/
             }
         })
 
@@ -124,10 +124,10 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
     override fun setUpViews() {
         viewModel.loadUserInfo()
         viewModel.loadCars()
-        viewModel.loadTripsAsCreator()
-        viewModel.loadTripsAsPassenger()
-        viewModel.loadTripsAsCreatorHistory()
-        viewModel.loadTripsAsPassengerHistory()
+        /* viewModel.loadTripsAsCreator()
+         viewModel.loadTripsAsPassenger()
+         viewModel.loadTripsAsCreatorHistory()
+         viewModel.loadTripsAsPassengerHistory()*/
         viewModel.loadNotifications()
         viewModel.loadReviews()
 

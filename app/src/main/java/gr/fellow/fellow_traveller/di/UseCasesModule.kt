@@ -7,6 +7,10 @@ import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.scopes.ActivityScoped
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.usecase.auth.*
+import gr.fellow.fellow_traveller.usecase.car.AddCarToRemoteUseCase
+import gr.fellow.fellow_traveller.usecase.car.DeleteCarUseCase
+import gr.fellow.fellow_traveller.usecase.car.GetCarColorsUseCase
+import gr.fellow.fellow_traveller.usecase.car.GetUserCarsRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.firabase.*
 import gr.fellow.fellow_traveller.usecase.home.*
 import gr.fellow.fellow_traveller.usecase.newtrip.GetGeometryFormPlaceUseCase
@@ -20,7 +24,7 @@ import gr.fellow.fellow_traveller.usecase.register.RegisterUserUseCase
 import gr.fellow.fellow_traveller.usecase.review.CheckReviewUseCase
 import gr.fellow.fellow_traveller.usecase.review.GetUserReviewsUseCase
 import gr.fellow.fellow_traveller.usecase.review.RegisterReviewUseCase
-import gr.fellow.fellow_traveller.usecase.trips.*
+import gr.fellow.fellow_traveller.usecase.trip.*
 import gr.fellow.fellow_traveller.usecase.user.GetUserInfoByIdUseCase
 import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
 
@@ -29,11 +33,25 @@ import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
 @Module
 class UseCasesModule {
 
+
+    @ActivityScoped
+    @Provides
+    fun provideGetCarColorsUseCase(dataSource: FellowDataSource): GetCarColorsUseCase {
+        return GetCarColorsUseCase(dataSource)
+    }
+
     @ActivityScoped
     @Provides
     fun provideSendFirebaseMessageUseCase(dataSource: FellowDataSource): SendMessageFirebaseUseCase {
         return SendMessageFirebaseUseCase(dataSource)
     }
+
+    @ActivityScoped
+    @Provides
+    fun provideGetPlaceAutocomplete(dataSource: FellowDataSource): GetPlaceAutocomplete {
+        return GetPlaceAutocomplete(dataSource)
+    }
+
 
     @ActivityScoped
     @Provides

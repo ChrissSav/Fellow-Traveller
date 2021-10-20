@@ -22,6 +22,8 @@ import gr.fellow.fellow_traveller.ui.extensions.toMutableListSafe
 import gr.fellow.fellow_traveller.ui.home.chat.models.Conversation
 import gr.fellow.fellow_traveller.usecase.auth.ChangePasswordUseCase
 import gr.fellow.fellow_traveller.usecase.auth.DeleteUserAuthLocalUseCase
+import gr.fellow.fellow_traveller.usecase.car.DeleteCarUseCase
+import gr.fellow.fellow_traveller.usecase.car.GetUserCarsRemoteUseCase
 import gr.fellow.fellow_traveller.usecase.firabase.DeleteConversationFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.firabase.SendMessageFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.firabase.UpdateSeenStatusFirebaseUseCase
@@ -31,7 +33,7 @@ import gr.fellow.fellow_traveller.usecase.notification.GetNotificationsUseCase
 import gr.fellow.fellow_traveller.usecase.notification.UpdateNotificationsUseCase
 import gr.fellow.fellow_traveller.usecase.register.RegisterUserLocalUseCase
 import gr.fellow.fellow_traveller.usecase.review.GetUserReviewsUseCase
-import gr.fellow.fellow_traveller.usecase.trips.*
+import gr.fellow.fellow_traveller.usecase.trip.*
 import gr.fellow.fellow_traveller.usecase.user.GetUserInfoByIdUseCase
 import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
 import kotlinx.coroutines.delay

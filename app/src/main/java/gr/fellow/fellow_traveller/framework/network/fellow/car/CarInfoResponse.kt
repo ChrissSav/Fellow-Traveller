@@ -6,5 +6,11 @@ data class CarInfoResponse(
     val brand: String,
     val model: String,
     val plate: String,
-    val color: String
+    val color: CarColorResponse,
+)
+
+
+data class CarColorResponse(
+    val title: String,
+    val hex: String,
 )

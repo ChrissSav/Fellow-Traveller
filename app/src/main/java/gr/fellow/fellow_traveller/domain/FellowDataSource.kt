@@ -2,8 +2,10 @@ package gr.fellow.fellow_traveller.domain
 
 import android.net.Uri
 import gr.fellow.fellow_traveller.domain.car.Car
+import gr.fellow.fellow_traveller.domain.car.CarColor
 import gr.fellow.fellow_traveller.domain.notification.Notification
 import gr.fellow.fellow_traveller.domain.review.Review
+import gr.fellow.fellow_traveller.domain.trip.Destination
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.domain.user.LocalUser
@@ -46,7 +48,7 @@ interface FellowDataSource {
 
     suspend fun updatePicture(picture: String?): UserAuthResponse
 
-    suspend fun updateUserMessenger(messenger : String): UserAuthResponse
+    suspend fun updateUserMessenger(messenger: String): UserAuthResponse
 
     suspend fun getUserInfoRemote(): UserAuthResponse
 
@@ -62,13 +64,14 @@ interface FellowDataSource {
 
     suspend fun deleteCarRemote(carId: String): String
 
+    suspend fun getCarColors(): MutableList<CarColor>
 
     // Trips
 
 
     suspend fun addTripRemote(
-        destFrom: String, destTo: String, carId: String,
-        hasPet: Boolean, seats: Int, bags: Int, msg: String?, price: Float, timestamp: Long
+        destFrom: String, destTo: String, destPickUp: String, carId: String,
+        hasPet: Boolean, seats: Int, bags: Int, msg: String?, price: Float, timestamp: Long,
     ): TripInvolved
 
     suspend fun searchTrips(query: SearchTripFilter): MutableList<TripSearch>
@@ -85,6 +88,7 @@ interface FellowDataSource {
 
     suspend fun deleteTrip(tripId: String): String
 
+    suspend fun getPlaceAutocomplete(query: String, type: String): MutableList<Destination>
 
     // Notification
 

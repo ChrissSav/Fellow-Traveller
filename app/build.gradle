@@ -57,7 +57,7 @@ android {
 
         debug {
             buildConfigField "String", "FELLOW_TOS_URL", "\"https://fellowtraveller.gr/tos/\""
-            buildConfigField "String", "FELLOW_API_URL", "\"https://api.fellowtraveller.gr/v1/\""
+            buildConfigField "String", "FELLOW_API_URL", "\"https://dev-api.fellowtraveller.gr/v1/\""
             buildConfigField "String", "FELLOW_WEB_SITE_URL", "\"https://fellowtraveller.gr/\""
             buildConfigField "String", "PLACE_API_URL", "\"https://maps.googleapis.com/maps/api/place/\""
             versionNameSuffix "-debug"

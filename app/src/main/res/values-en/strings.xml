@@ -245,12 +245,11 @@
     <string name="your_location">Your location</string>
     <string name="select_destination">Select destination…</string>
     <string name="select_location">Search location…</string>
-
     <string name="baggage_allowance">Baggage Allowance</string>
+    <string name="pick_color">Choose a color</string>
     <string name="availability_none">None</string>
     <string name="availability_limited">Limited</string>
     <string name="availability_great">Great</string>
-
     <string name="select_vehicle">Select vehicle</string>
     <string name="add_vehicle">Add Vehicle</string>
     <string name="what_is_your_name">How should we call you?</string>
@@ -483,6 +482,7 @@
 
     <string name="add_first_car">Add your first vehicle</string>
     <string name="add_first_car_label">Register your vehicle to be able to offer trips</string>
+    <string name="have_not_cars">You must have at least one vehicle to create a trip</string>
 
 
     <string name="new_trip">New trip</string>

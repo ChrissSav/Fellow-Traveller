@@ -13,8 +13,8 @@ import gr.fellow.fellow_traveller.domain.user.UserBase
 import gr.fellow.fellow_traveller.framework.network.google.model.PlaceModel
 import gr.fellow.fellow_traveller.usecase.firabase.CreateOrEnterConversationFirebaseUseCase
 import gr.fellow.fellow_traveller.usecase.firabase.SendMessageFirebaseUseCase
-import gr.fellow.fellow_traveller.usecase.trips.BookTripUseCase
-import gr.fellow.fellow_traveller.usecase.trips.SearchTripsUseCase
+import gr.fellow.fellow_traveller.usecase.trip.BookTripUseCase
+import gr.fellow.fellow_traveller.usecase.trip.SearchTripsUseCase
 import kotlinx.coroutines.delay
 
 

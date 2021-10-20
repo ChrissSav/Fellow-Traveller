@@ -25,7 +25,7 @@ class CarOwnAdapter(
         with(holder) {
             val currentItem = currentList[position]
             binding.brandModel.text = "${currentItem.brand} ${currentItem.model}"
-            binding.color.text = currentItem.color
+            binding.color.text = currentItem.color.title
             binding.edit.setOnClickListener {
                 onCarItemClickListener(currentItem)
             }

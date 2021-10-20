@@ -102,7 +102,7 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/brand"
                     app:layout_constraintTop_toBottomOf="@+id/brand"
-                    app:regex_f="@string/regex_min_3_chars_english_with_space"
+                    app:regex_f="@string/regex_min_2_chars_english_with_space"
                     app:text_type_f="text" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -140,15 +140,41 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:editable_f="false"
                     app:hint_f="@string/placeholder_vehicle_color"
                     app:imeOptions_f="actionNext"
                     app:label_f="@string/color"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/color_view"
                     app:layout_constraintStart_toEndOf="@+id/view211"
                     app:layout_constraintTop_toTopOf="parent"
                     app:max_length_f="10"
                     app:regex_f="@string/regex_min_3_chars"
                     app:text_type_f="text" />
+
+
+                <View
+                    android:id="@+id/color_view"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/button_background_green_30dp"
+                    android:backgroundTint="@color/white_40_new"
+                    android:text="@string/price_placeholder"
+                    app:layout_constraintBottom_toBottomOf="@+id/view211"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/view211" />
+
+                <View
+                    android:id="@+id/white_stroke"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/increaser_border_stroke_shape_1"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/color_view"
+                    app:layout_constraintEnd_toEndOf="@+id/color_view"
+                    app:layout_constraintStart_toStartOf="@+id/color_view"
+                    app:layout_constraintTop_toTopOf="@+id/color_view" />
+
 
                 <View
                     android:layout_width="@dimen/component_input_icon_dime"

@@ -9,13 +9,20 @@ data class Car(
     val brand: String,
     val model: String,
     val plate: String,
-    val color: String
+    val color: CarColor,
 ) : Parcelable {
 
     val baseInfo: String
         get() = "$brand $model"
 
     val fullInfo: String
-        get() = "$brand $model | $plate | $color"
+        get() = "$brand $model | $plate | ${color.title}"
 
 }
+
+
+@Parcelize
+data class CarColor(
+    val title: String,
+    val hex: String,
+) : Parcelable

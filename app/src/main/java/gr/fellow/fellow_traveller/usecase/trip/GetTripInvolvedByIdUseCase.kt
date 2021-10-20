@@ -1,11 +1,11 @@
-package gr.fellow.fellow_traveller.usecase.trips
+package gr.fellow.fellow_traveller.usecase.trip
 
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 
-class DeleteTripUseCase(
+class GetTripInvolvedByIdUseCase(
     private val dataSource: FellowDataSource
 ) {
 
     suspend operator fun invoke(tripId: String) =
-        dataSource.deleteTrip(tripId)
+        dataSource.getTripInvolvedById(tripId)
 }

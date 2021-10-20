@@ -7,6 +7,8 @@ data class TripCreateRequest(
     val destFrom: String,
     @SerializedName("destinationTo")
     val destTo: String,
+    @SerializedName("destinationPickUp")
+    val destPickUp: String,
     val carId: String,
     @SerializedName("pet")
     val hasPet: Boolean,
@@ -17,5 +19,5 @@ data class TripCreateRequest(
     @SerializedName("price")
     val price: Float,
     @SerializedName("timestamp")
-    val timestamp: Long
+    val timestamp: Long,
 )

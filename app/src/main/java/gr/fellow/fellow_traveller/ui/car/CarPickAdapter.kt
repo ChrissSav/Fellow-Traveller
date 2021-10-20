@@ -27,7 +27,7 @@ class CarPickAdapter(
             val currentItem = currentList[position]
 
             binding.brandModel.text = "${currentItem.brand} ${currentItem.model}"
-            binding.color.text = "${currentItem.color} | ${currentItem.plate}"
+            binding.color.text = "${currentItem.color.title} | ${currentItem.plate}"
             binding.root.setOnClickListener {
                 onCarItemClickListener(currentItem)
             }

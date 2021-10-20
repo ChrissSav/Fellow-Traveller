@@ -2,11 +2,7 @@ package gr.fellow.fellow_traveller.ui.search.locations
 
 import android.app.Activity
 import android.content.Intent
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.View
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivity
@@ -28,7 +24,7 @@ class SelectDestinationActivity : BaseActivity<ActivitySelectDestinationBinding>
         ActivitySelectDestinationBinding.inflate(layoutInflater)
 
     override fun setUpObservers() {
-        viewModel.destinations.observe(this, Observer {
+       /* viewModel.destinations.observe(this, Observer {
             placesList.clear()
             placesList.addAll(it)
             binding.recyclerView.adapter?.notifyDataSetChanged()
@@ -38,21 +34,21 @@ class SelectDestinationActivity : BaseActivity<ActivitySelectDestinationBinding>
 
         viewModel.place.observe(this, Observer {
             sendPlaceToParent(it)
-        })
+        })*/
 
     }
 
     override fun setUpViews() {
-        placesListPopular = mutableListOf(
-            PredictionResponse("ChIJ8UNwBh-9oRQR3Y1mdkU1Nic", getString(R.string.placeholder_city_athens)),
-            PredictionResponse("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", getString(R.string.placeholder_city_thessaloniki)),
-            PredictionResponse("ChIJZ93-3qLpWxMRwJe54iy9AAQ", getString(R.string.placeholder_city_ioannina)),
-            PredictionResponse("ChIJLe0kpZk1XhMRoIy54iy9AAQ", getString(R.string.placeholder_city_patra)),
-            PredictionResponse("ChIJoUddWVyIWBMRMJy54iy9AAQ", getString(R.string.placeholder_city_larisa)),
-            PredictionResponse("ChIJfdnlaDstrBQR3tAiUqN47vY", getString(R.string.placeholder_city_ksanthi)),
-            PredictionResponse("ChIJ1eUpZ4txqRQRV-NcWXB83Qk", getString(R.string.placeholder_city_serres)),
-            PredictionResponse("ChIJ1cgCXJ8cshQR40EeRCv5sLo", getString(R.string.placeholder_city_aleksandroupoli))
-        )
+        /* placesListPopular = mutableListOf(
+             PredictionResponse("ChIJ8UNwBh-9oRQR3Y1mdkU1Nic", getString(R.string.placeholder_city_athens)),
+             PredictionResponse("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", getString(R.string.placeholder_city_thessaloniki)),
+             PredictionResponse("ChIJZ93-3qLpWxMRwJe54iy9AAQ", getString(R.string.placeholder_city_ioannina)),
+             PredictionResponse("ChIJLe0kpZk1XhMRoIy54iy9AAQ", getString(R.string.placeholder_city_patra)),
+             PredictionResponse("ChIJoUddWVyIWBMRMJy54iy9AAQ", getString(R.string.placeholder_city_larisa)),
+             PredictionResponse("ChIJfdnlaDstrBQR3tAiUqN47vY", getString(R.string.placeholder_city_ksanthi)),
+             PredictionResponse("ChIJ1eUpZ4txqRQRV-NcWXB83Qk", getString(R.string.placeholder_city_serres)),
+             PredictionResponse("ChIJ1cgCXJ8cshQR40EeRCv5sLo", getString(R.string.placeholder_city_aleksandroupoli))
+         )*/
 
         /*if ("to" == intent.getStringExtra("info"))
             binding.endDestLabel.text = getString(R.string.enter_destination)
@@ -60,40 +56,40 @@ class SelectDestinationActivity : BaseActivity<ActivitySelectDestinationBinding>
             binding.endDestLabel.text = getString(R.string.enter_starting_point)*/
 
 
-        binding.backButton.setOnClickListener {
-            finish()
-        }
+        /* binding.backButton.setOnClickListener {
+             finish()
+         }
 
 
-        binding.deleteContent.setOnClickListener {
-            binding.editText.text = null
-        }
+         binding.deleteContent.setOnClickListener {
+             binding.editText.text = null
+         }
 
-        binding.editText.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(charSequence: Editable?) {
-                if (charSequence.toString().trim().isNotEmpty()) {
-                    binding.deleteContent.visibility = View.VISIBLE
-                }
-                if (charSequence.toString().trim().length > 1) {
-                    viewModel.getAllDestinations(charSequence.toString().trim())
-                } else if (charSequence.toString().trim().isEmpty()) {
-                    binding.recyclerViewPopular.visibility = View.VISIBLE
-                    binding.deleteContent.visibility = View.GONE
-                    binding.recyclerView.visibility = View.GONE
-                }
-            }
+         binding.editText.addTextChangedListener(object : TextWatcher {
+             override fun afterTextChanged(charSequence: Editable?) {
+                 if (charSequence.toString().trim().isNotEmpty()) {
+                     binding.deleteContent.visibility = View.VISIBLE
+                 }
+                 if (charSequence.toString().trim().length > 1) {
+                     viewModel.getAllDestinations(charSequence.toString().trim())
+                 } else if (charSequence.toString().trim().isEmpty()) {
+                     binding.recyclerViewPopular.visibility = View.VISIBLE
+                     binding.deleteContent.visibility = View.GONE
+                     binding.recyclerView.visibility = View.GONE
+                 }
+             }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
-            }
+             }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-            }
-        })
+             }
+         })
 
 
-        initializeRecycle()
+         initializeRecycle()*/
     }
 
 
@@ -106,7 +102,7 @@ class SelectDestinationActivity : BaseActivity<ActivitySelectDestinationBinding>
 
 
     private fun onPredictionItemSelected(predictionResponse: PredictionResponse) {
-        viewModel.getLanLogForPlace(predictionResponse.placeId, predictionResponse.description)
+        /*viewModel.getLanLogForPlace(predictionResponse.placeId, predictionResponse.description)*/
     }
 
 

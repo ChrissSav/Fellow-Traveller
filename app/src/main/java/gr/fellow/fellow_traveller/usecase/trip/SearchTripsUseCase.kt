@@ -1,4 +1,4 @@
-package gr.fellow.fellow_traveller.usecase.trips
+package gr.fellow.fellow_traveller.usecase.trip
 
 import gr.fellow.fellow_traveller.domain.FellowDataSource
 import gr.fellow.fellow_traveller.domain.SearchTripFilter

@@ -235,6 +235,7 @@
     <string name="select_location">Αναζήτηση τοποθεσίας…</string>
     <string name="application_name" translatable="false">fellow.</string>
     <string name="baggage_allowance">Χώρος Αποσκεύων</string>
+    <string name="pick_color">Επίλεξε ένα χρώμα</string>
     <string name="availability_none">Καθόλου</string>
     <string name="availability_limited">Περιορισμένη</string>
     <string name="availability_great">Μεγάλη</string>
@@ -462,6 +463,7 @@
     <string name="user_login_label">Εισήγαγε τα στοιχεία του λογαριασμού σου</string>
     <string name="save">Αποθήκευση</string>
     <string name="add_first_car">Βάλε το πρώτο σου όχημα</string>
+    <string name="have_not_cars">Για να καταχωρήσεις διαδρομή θα πρέπει να έχεις ένα τουλάχιστον όχημα</string>
     <string name="add_first_car_label">Καταχώρησε το όχημά σου για να μπορεις να προσφερεις ταξιδια</string>
 
 </resources>

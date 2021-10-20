@@ -8,7 +8,7 @@ data class CarInfoBase(
     val brand: String,
     val model: String,
     val plate: String,
-    val color: String
+    val color: CarColor,
 ) : Parcelable {
 
     val baseInfo: String

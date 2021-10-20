@@ -5,28 +5,31 @@ import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
-import gr.fellow.fellow_traveller.data.base.BaseActivity
+import gr.fellow.fellow_traveller.data.base.BaseActivityViewModel
 import gr.fellow.fellow_traveller.databinding.ActivitySelectLocationBinding
-import gr.fellow.fellow_traveller.framework.network.google.response.PredictionResponse
+import gr.fellow.fellow_traveller.domain.trip.Destination
 import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
-import gr.fellow.fellow_traveller.ui.location.adapter.PlacesAdapter
-import gr.fellow.fellow_traveller.ui.location.adapter.PlacesPopularAdapter
+import gr.fellow.fellow_traveller.ui.location.adapter.DestinationAdapter
+import gr.fellow.fellow_traveller.utils.ADDRESS
 
 @AndroidEntryPoint
-class SelectLocationActivity : BaseActivity<ActivitySelectLocationBinding>() {
+class SelectLocationActivity : BaseActivityViewModel<ActivitySelectLocationBinding, SelectLocationViewModel>(SelectLocationViewModel::class.java) {
 
-    private val viewModel: SelectLocationViewModel by viewModels()
-    private var placesList = mutableListOf<PredictionResponse>()
-    private var placesListPopular = mutableListOf<PredictionResponse>()
+    private var placesList = mutableListOf<Destination>()
+    private var placesListPopular = mutableListOf<Destination>()
 
+    private var autocompleteType = ADDRESS
 
     override fun provideViewBinding(): ActivitySelectLocationBinding =
         ActivitySelectLocationBinding.inflate(layoutInflater)
 
+
+    override fun handleIntent() {
+        autocompleteType = intent.getStringExtra("autocompleteType") ?: ADDRESS
+    }
 
     override fun setUpObservers() {
         viewModel.destinations.observe(this, Observer {
@@ -41,21 +44,24 @@ class SelectLocationActivity : BaseActivity<ActivitySelectLocationBinding>() {
 
     override fun setUpViews() {
 
+        if (autocompleteType == ADDRESS)
+            binding.constraintLayoutPopular.visibility = View.GONE
+
         placesListPopular = mutableListOf(
-            PredictionResponse("ChIJ8UNwBh-9oRQR3Y1mdkU1Nic", getString(R.string.placeholder_city_athens)),
-            PredictionResponse("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", getString(R.string.placeholder_city_thessaloniki)),
-            PredictionResponse("ChIJZ93-3qLpWxMRwJe54iy9AAQ", getString(R.string.placeholder_city_ioannina)),
-            PredictionResponse("ChIJLe0kpZk1XhMRoIy54iy9AAQ", getString(R.string.placeholder_city_patra)),
-            PredictionResponse("ChIJoUddWVyIWBMRMJy54iy9AAQ", getString(R.string.placeholder_city_larisa)),
-            PredictionResponse("ChIJfdnlaDstrBQR3tAiUqN47vY", getString(R.string.placeholder_city_ksanthi)),
-            PredictionResponse("ChIJ1eUpZ4txqRQRV-NcWXB83Qk", getString(R.string.placeholder_city_serres)),
-            PredictionResponse("ChIJ1cgCXJ8cshQR40EeRCv5sLo", getString(R.string.placeholder_city_aleksandroupoli))
+            Destination("ChIJ8UNwBh-9oRQR3Y1mdkU1Nic", getString(R.string.placeholder_city_athens)),
+            Destination("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", getString(R.string.placeholder_city_thessaloniki)),
+            Destination("ChIJZ93-3qLpWxMRwJe54iy9AAQ", getString(R.string.placeholder_city_ioannina)),
+            Destination("ChIJLe0kpZk1XhMRoIy54iy9AAQ", getString(R.string.placeholder_city_patra)),
+            Destination("ChIJoUddWVyIWBMRMJy54iy9AAQ", getString(R.string.placeholder_city_larisa)),
+            Destination("ChIJfdnlaDstrBQR3tAiUqN47vY", getString(R.string.placeholder_city_ksanthi)),
+            Destination("ChIJ1eUpZ4txqRQRV-NcWXB83Qk", getString(R.string.placeholder_city_serres)),
+            Destination("ChIJ1cgCXJ8cshQR40EeRCv5sLo", getString(R.string.placeholder_city_aleksandroupoli))
         )
 
 
         with(binding) {
-            recyclerView.adapter = PlacesAdapter(placesList, this@SelectLocationActivity::onPredictionItemSelected)
-            recyclerViewPopular.adapter = PlacesPopularAdapter(placesListPopular, this@SelectLocationActivity::onPredictionItemSelected)
+            recyclerView.adapter = DestinationAdapter(placesList, this@SelectLocationActivity::onPredictionItemSelected)
+            recyclerViewPopular.adapter = DestinationAdapter(placesListPopular, this@SelectLocationActivity::onPredictionItemSelected)
 
             backButton.setOnClickListener {
                 finish()
@@ -64,7 +70,7 @@ class SelectLocationActivity : BaseActivity<ActivitySelectLocationBinding>() {
             editText.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(charSequence: Editable) {
                     if (charSequence.toString().trim().length > 2)
-                        viewModel.getAllDestinations(charSequence.toString().trim())
+                        viewModel.getAutocomplete(charSequence.toString().trim(), autocompleteType)
                     else if (charSequence.toString().trim().isEmpty()) {
                         recyclerViewPopular.visibility = View.VISIBLE
                         recyclerView.visibility = View.GONE
@@ -80,10 +86,10 @@ class SelectLocationActivity : BaseActivity<ActivitySelectLocationBinding>() {
         }
     }
 
-    private fun onPredictionItemSelected(predictionResponse: PredictionResponse) {
+    private fun onPredictionItemSelected(predictionResponse: Destination) {
         val resultIntent = Intent()
         resultIntent.putExtra("id", predictionResponse.placeId)
-        resultIntent.putExtra("title", predictionResponse.description)
+        resultIntent.putExtra("title", predictionResponse.title)
         setResult(Activity.RESULT_OK, resultIntent)
         finish()
     }

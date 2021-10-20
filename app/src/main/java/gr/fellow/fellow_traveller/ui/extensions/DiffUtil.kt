@@ -3,6 +3,7 @@ package gr.fellow.fellow_traveller.ui.extensions
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil
 import gr.fellow.fellow_traveller.domain.car.Car
+import gr.fellow.fellow_traveller.domain.car.CarColor
 import gr.fellow.fellow_traveller.domain.chat.ChatMessage
 import gr.fellow.fellow_traveller.domain.notification.Notification
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
@@ -17,6 +18,18 @@ class CarDiffCallback : DiffUtil.ItemCallback<Car>() {
 
     @SuppressLint("DiffUtilEquals")
     override fun areContentsTheSame(oldItem: Car, newItem: Car): Boolean {
+        return oldItem == newItem
+    }
+}
+
+class CarColorDiffCallback : DiffUtil.ItemCallback<CarColor>() {
+    override fun areItemsTheSame(oldItem: CarColor, newItem: CarColor): Boolean {
+        return oldItem.hex == newItem.hex
+    }
+
+
+    @SuppressLint("DiffUtilEquals")
+    override fun areContentsTheSame(oldItem: CarColor, newItem: CarColor): Boolean {
         return oldItem == newItem
     }
 }
