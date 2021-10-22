@@ -64,8 +64,6 @@ constructor(
     private val _price = MutableLiveData<Float>()
     val price: LiveData<Float> = _price
 
-    private val _message = MutableLiveData<String>()
-    val message: LiveData<String> = _message
 
     private val _userInfo = MutableLiveData<LocalUser>()
     val userInfo: LiveData<LocalUser> = _userInfo
@@ -120,9 +118,6 @@ constructor(
         _pet.value = pet
     }
 
-    fun setMessage(msg: String?) {
-        _message.value = msg?.trim()
-    }
 
     fun setCar(carTemp: Car) {
         _car.value = carTemp
@@ -135,18 +130,18 @@ constructor(
     }
 
 
-    fun registerTrip(userBase: LocalUser) {
+    fun registerTrip(userBase: LocalUser, description: String?) {
         launchAfter(_success) {
 
 
-            /*       var msg: String? = null
-                   if (message.value?.trim()?.length!! > 0) {
-                       msg = message.value.toString()
-                   }
-       */
+            var msg: String? = null
+            if (description?.trim()?.length!! > 0) {
+                msg = description.toString()
+            }
+
             val response = registerTripRemoteUseCase.invoke(
                 destinationFrom.value?.placeId.toString(), destinationTo.value?.placeId.toString(), destinationPickUp.value?.placeId.toString(), car.value?.id.toString(),
-                pet.value!!, seats.value!!, bags.value!!.code, "", price.value!!, getTimestamp()
+                pet.value!!, seats.value!!, bags.value!!.code, msg, price.value!!, getTimestamp()
             )
 
             //We create only the creator's conversation

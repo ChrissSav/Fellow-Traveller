@@ -24,11 +24,11 @@ constructor(
             val originalRequest = chain.request()
             if (!(originalRequest.url.encodedPath.contains("/signup") && originalRequest.method == "POST")
                 && !(originalRequest.url.encodedPath.contains("/signin") && originalRequest.method == "POST")
-                && !(originalRequest.url.encodedPath.contains("/check_email") && originalRequest.method == "POST")
-                && !(originalRequest.url.encodedPath.contains("/verify_account") && originalRequest.method == "GET")
-                && !(originalRequest.url.encodedPath.contains("/refresh_token") && originalRequest.method == "POST")
-                && !(originalRequest.url.encodedPath.contains("/forgot_password") && originalRequest.method == "POST")
-                && !(originalRequest.url.encodedPath.contains("/reset_password") && originalRequest.method == "POST")
+                && !(originalRequest.url.encodedPath.contains("/check-email") && originalRequest.method == "POST")
+                && !(originalRequest.url.encodedPath.contains("/verify-account") && originalRequest.method == "GET")
+                && !(originalRequest.url.encodedPath.contains("/refresh-token") && originalRequest.method == "POST")
+                && !(originalRequest.url.encodedPath.contains("/forgot-password") && originalRequest.method == "POST")
+                && !(originalRequest.url.encodedPath.contains("/reset-password") && originalRequest.method == "POST")
             ) {
                 var token = sharedPreferences.getString(PREFS_AUTH_ACCESS_TOKEN, "").toString()
 

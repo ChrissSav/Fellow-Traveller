@@ -9,7 +9,7 @@ import retrofit2.http.POST
 
 interface FellowTokenService {
 
-    @POST("auth/refresh_token")
+    @POST("auth/refresh-token")
     fun refreshToken(
         @Body refreshToken: RefreshTokenRequest
     ): Call<BaseResponse<AccessRefreshTokenResponse>>

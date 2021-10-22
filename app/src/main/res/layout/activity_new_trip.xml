@@ -277,7 +277,7 @@
 
 
             <View
-                android:id="@+id/makis"
+                android:id="@+id/view32"
                 android:layout_width="@dimen/component_input_icon_dime"
                 android:layout_height="@dimen/component_input_icon_dime"
                 android:background="@drawable/ic_cash"
@@ -293,7 +293,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="@string/price_title"
-                app:layout_constraintStart_toEndOf="@+id/makis"
+                app:layout_constraintStart_toEndOf="@+id/view32"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -526,24 +526,82 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/button_background_orange_16dp"
+            android:backgroundTint="@color/black_20_new"
+            android:padding="@dimen/padding_component_icon"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout16"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout16"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout16">
+
+
+            <View
+                android:id="@+id/view21"
+                android:layout_width="@dimen/component_input_icon_dime"
+                android:layout_height="@dimen/component_input_icon_dime"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/ic_message"
+                android:backgroundTint="@color/white_60_new"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/label" />
+
+            <TextView
+                android:id="@+id/label"
+                style="@style/label_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/message_place_holder"
+                app:layout_constraintStart_toEndOf="@+id/view21"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <EditText
+                android:id="@+id/description"
+                style="@style/input_new"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                android:hint="@string/type_here"
+                android:inputType="text"
+                android:maxLength="200"
+                android:textColorHint="#40ffffff"
+                app:layout_constraintEnd_toEndOf="@+id/character_count"
+                app:layout_constraintStart_toStartOf="@+id/label"
+                app:layout_constraintTop_toBottomOf="@+id/label" />
+
+            <TextView
+                android:id="@+id/character_count"
+                style="@style/paragraph_5_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/save"
             style="@style/button_1"
             android:layout_width="@dimen/button_button_width"
             android:layout_height="@dimen/button_button_height"
             android:layout_marginTop="32dp"
-            android:layout_marginBottom="8dp"
             android:background="@drawable/button_background_orange_16dp"
             android:gravity="center"
             android:text="@string/complete"
             android:textColor="@color/white"
             app:backgroundTint="@color/green_new"
             app:iconGravity="textStart"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout16"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout7" />
+
 
         <include
             android:id="@+id/progressLoad"
@@ -555,7 +613,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

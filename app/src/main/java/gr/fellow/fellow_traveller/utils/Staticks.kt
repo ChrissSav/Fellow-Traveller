@@ -1,5 +1,7 @@
 package gr.fellow.fellow_traveller.utils
 
+import gr.fellow.fellow_traveller.BuildConfig
+
 const val PREFS_AUTH_ACCESS_TOKEN = "PREFS_AUTH_ACCESS_TOKEN"
 const val PREFS_AUTH_REFRESH_TOKEN = "PREFS_AUTH_REFRESH_TOKEN"
 
@@ -18,3 +20,4 @@ const val ADDRESS = "address"
 const val CITY = "city"
 
 const val PLACE_TITLE_SPLIT_CHAR = "$$"
+const val API_URL_LOAD_IMAGES = "${BuildConfig.FELLOW_API_URL}/destination-image"

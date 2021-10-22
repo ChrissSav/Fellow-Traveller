@@ -22,7 +22,7 @@ interface FellowService {
 
     /**  AUTH  **/
 
-    @POST("auth/check_email")
+    @POST("auth/check-email")
     suspend fun checkIfAccountInfoExist(
         @Body emailRequest: CheckEmailRequest,
     ): Response<BaseResponse<String>>
@@ -33,7 +33,7 @@ interface FellowService {
         @Body request: AccountCreateRequest,
     ): Response<BaseResponse<String>>
 
-    @GET("auth/verify_account/phone")
+    @GET("auth/verify-account/phone")
     suspend fun verifyAccount(
         @Query("token") token: String,
     ): Response<BaseResponse<AuthenticationResponse>>
@@ -51,13 +51,13 @@ interface FellowService {
     ): Response<BaseResponse<String>>
 
 
-    @POST("auth/forgot_password")
+    @POST("auth/forgot-password")
     suspend fun forgotPassword(
         @Body forgotPasswordRequest: ForgotPasswordRequest,
     ): Response<BaseResponse<String>>
 
 
-    @POST("auth/reset_password")
+    @POST("auth/reset-password")
     suspend fun resetPassword(
         @Body resetPasswordRequest: ResetPasswordRequest,
     ): Response<BaseResponse<String>>

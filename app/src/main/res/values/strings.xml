@@ -316,7 +316,8 @@
     <string name="welcome_to">Καλώς όρισες στο</string>
     <string name="sign_up">Εγγραφή</string>
     <string name="leave_a_message_for_co_travellers">Γράψε ένα μήνυμα στους συνταξιδιώτες σου</string>
-    <string name="message_place_holder">Μήνυμα (προαιρετικό)</string>
+    <string name="message_place_holder">Περιγραφή (προαιρετικό)</string>
+    <string name="type_here">πληκτρολόγησε εδώ</string>
     <string name="conversation">Συνομιλία</string>
     <string name="notes">Σημειώσεις</string>
     <string name="pictures">Εικόνες</string>

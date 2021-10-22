@@ -1,8 +1,11 @@
 package gr.fellow.fellow_traveller.ui.newtrip
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.text.Editable
+import android.text.InputFilter
+import android.text.InputFilter.LengthFilter
 import android.text.TextWatcher
 import android.view.View
 import androidx.core.os.bundleOf
@@ -41,6 +44,7 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
     private lateinit var dateDialog: DatePickerCustomDialog
     private lateinit var timeDialog: TimePickerCustomDialog
     private var carList = mutableListOf<Car>()
+    private var descriptionMaxLength = 200
 
 
     override fun provideViewBinding(): ActivityNewTripBinding =
@@ -153,6 +157,13 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
             binding.bags.text = getString(it.textInt)
         })
 
+        viewModel.success.observe(this, {
+            createToast(getString(R.string.submit_trip_offer_success))
+            val resultIntent = Intent()
+            resultIntent.putExtra("trip", it)
+            setResult(Activity.RESULT_OK, resultIntent)
+            finish()
+        })
 
         viewModel.pet.observe(this, {
             if (it != binding.petsSwitch.isChecked)
@@ -168,6 +179,7 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
     }
 
 
+    @SuppressLint("SetTextI18n")
     override fun setUpViews() {
 
         viewModel.loadUserCars()
@@ -175,6 +187,10 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
 
         viewModel.setDestinationFrom(destinationFrom)
         viewModel.setDestinationTo(destinationTo)
+
+        binding.description.filters = arrayOf<InputFilter>(LengthFilter(descriptionMaxLength))
+        binding.characterCount.text = "0/$descriptionMaxLength"
+
 
         binding.seatsPickButton.pickButtonActionListener = object : PickButtonActionListener {
             override fun onPickAction(value: Int) {
@@ -190,7 +206,7 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
             }
 
             override fun afterTextChanged(editable: Editable?) {
-                var num = "0".toFloat()
+                var num = 0f
                 try {
                     val text = editable ?: num
                     num = text.toString().toFloat()
@@ -198,6 +214,22 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
 
                 }
                 viewModel.setPrice(num)
+            }
+
+        })
+
+
+
+        binding.description.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(editable: Editable?) {
+                val length = editable?.length ?: 0
+                binding.characterCount.text = "$length/$descriptionMaxLength"
             }
 
         })
@@ -245,7 +277,7 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
             save.setOnClickListener {
                 if (pickUpDestination.isCorrect() and date.isCorrect() and time.isCorrect() and car.isCorrect() and bags.isCorrect() and pet.isCorrect()) {
                     if (validateDateTimeDiffer(date.text.toString(), time.text.toString(), resources.getInteger(R.integer.Time_difference))) {
-                        viewModel.registerTrip(localUser)
+                        viewModel.registerTrip(localUser, description.text.toString())
                     } else {
                         createToast(getString(R.string.ERROR_TRIP_TIMESTAMP))
                     }
