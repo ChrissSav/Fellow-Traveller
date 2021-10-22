@@ -9,32 +9,34 @@
 
     <TextView
         android:id="@+id/textView20"
+        style="@style/header_1_new"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        style="@style/display_1"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:text="@string/trips"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/fragmentTrip_TabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_width="0dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="24dp"
         android:elevation="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView20"
         app:layout_constraintTop_toBottomOf="@+id/textView20"
+        app:tabBackground="@drawable/tab_layout_background"
         app:tabGravity="fill"
-        app:tabIndicatorColor="@color/black_color"
+        app:tabIndicatorColor="@android:color/transparent"
         app:tabMode="scrollable"
-        app:tabSelectedTextColor="@color/black_color"
-        app:tabTextAppearance="@style/header_1"
-        app:tabTextColor="@color/grey_color" />
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextAppearance="@style/paragraph_3_new"
+        app:tabTextColor="@color/white_40_new" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/fragmentTrip_ViewPager"

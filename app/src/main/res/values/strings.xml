@@ -157,6 +157,7 @@
     <string name="msg_continue">Συνέχεια</string>
     <string name="placeholder_car_make_model" translatable="false">Rolls-Royce Phantom</string>
     <string name="bookings">Κρατήσεις</string>
+    <string name="active">Ενεργά</string>
     <string name="offers">Προσφορές</string>
     <string name="delete_trip_success">Επιτυχής διαγραφή ταξιδιού</string>
     <string name="leave_trip_success">Επιτυχής Ακύρωση Κράτησης</string>
@@ -354,7 +355,7 @@
     <string name="car_textview" translatable="false">TextView</string>
     <string name="passengers">Επιβάτες</string>
     <string name="price_per_person">5.50$ ανά άτομο</string>
-    <string name="search_trip">Αναζήτηση ταξιδιού</string>
+    <string name="search_trip">Αναζήτησε ταξίδι</string>
     <string name="switch_text">Εναλλαγή</string>
     <string name="verify_your_email">Επιβεβαίωσε το email σου</string>
     <string name="warning_email_spam">Προσοχή! Το email επιβεβαίωσης μπορεί να μεταφερθεί αυτόματα στην ανεπιθύμητη αλληλογραφία</string>
@@ -410,11 +411,13 @@
     <string name="looks_like_no_active_trips">Φαίνεται ότι δεν έχεις κάποιο ενεργό ταξίδι. Βρες καινούρια ταξίδια εδώ</string>
     <string name="search">Αναζήτηση</string>
     <string name="you_have_booked_this_trip">Έχεις κάνει κράτηση σε αυτό το ταξίδι</string>
-    <string name="you_dont_have_trips">Δεν έχεις ταξίδια στο ιστορικό σου</string>
+    <string name="you_dont_have_trips">Δεν έχεις ταξίδια</string>
+    <string name="trip_new__or_offer">Ξεκινήστε προσφέροντας ή αναζητώντας ένα ταξίδι</string>
     <string name="you_dont_have_trips_history">Φαίνεται ότι δεν έχεις ακόμα κάποιο ταξίδι στο ιστορικό σου. Εδώ θα φαίνονται τα ταξίδια σου ως αρχειοθετημένα</string>
     <string name="you_dont_have_offers">Δεν έχεις κάποια προσφορά ταξιδιού</string>
     <string name="you_dont_have_offers_desc">Φαίνεται ότι δεν έχεις μοιράσει κάποια διαδρομή σου πρόσφατα. Πρόσφερε νέες διαδρομές εδώ</string>
     <string name="offer_a_trip">Προσφορά</string>
+    <string name="offer_trip">Πρόσφερε ταξίδι</string>
     <string name="no_vehicles">Δεν έχεις κάποιο όχημα</string>
     <string name="no_vehicles_description">Φαίνεται ότι δεν έχεις προσθέσει κάποιο όχημα. Κάνε μία προσθήκη για να μπορείς να προσφέρεις διαδρομές</string>
     <string name="driver">Οδηγός</string>

@@ -2,38 +2,29 @@ package gr.fellow.fellow_traveller.ui.home.trip_fragments
 
 import android.app.Activity
 import android.content.Intent
-import android.util.Log
-import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
-import gr.fellow.fellow_traveller.databinding.FragmentTripsOffersBinding
-import gr.fellow.fellow_traveller.domain.trip.Destination
+import gr.fellow.fellow_traveller.databinding.FragmentTripsActiveTabBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
-import gr.fellow.fellow_traveller.ui.extensions.startActivityForResult
-import gr.fellow.fellow_traveller.ui.extensions.startShimmerWithVisibility
-import gr.fellow.fellow_traveller.ui.extensions.stopShimmerWithVisibility
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
-import gr.fellow.fellow_traveller.ui.home.adapter.TripsInvolvedAdapter
-import gr.fellow.fellow_traveller.ui.newtrip.NewTripActivity
 
 
 @AndroidEntryPoint
-class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
+class TripsActiveTabFragment : BaseFragment<FragmentTripsActiveTabBinding>() {
 
     private val viewModel: HomeViewModel by activityViewModels()
 
-    override fun getViewBinding(): FragmentTripsOffersBinding =
-        FragmentTripsOffersBinding.inflate(layoutInflater)
+    override fun getViewBinding(): FragmentTripsActiveTabBinding =
+        FragmentTripsActiveTabBinding.inflate(layoutInflater)
 
     override fun setUpObservers() {
 
 
-        viewModel.tripsAsCreatorActive.observe(viewLifecycleOwner, Observer { list ->
+        /*viewModel.tripsAsCreatorActive.observe(viewLifecycleOwner, Observer { list ->
             Log.i("makis", "list.size ${list.size}")
             (binding.recyclerView.adapter as TripsInvolvedAdapter).submitList(null)
             (binding.recyclerView.adapter as TripsInvolvedAdapter).submitList(list)
@@ -53,13 +44,13 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
             } else {
                 binding.shimmerViewContainer.stopShimmerWithVisibility()
             }
-        })
+        })*/
 
     }
 
     override fun setUpViews() {
-       // viewModel.loadTripsAsCreator()
-        binding.recyclerView.adapter = TripsInvolvedAdapter(R.drawable.background_stroke_radius_27_green, this@TripsOffersTabFragment::onTripClick)
+        // viewModel.loadTripsAsCreator()
+        /*binding.recyclerView.adapter = TripsInvolvedAdapter(R.drawable.background_stroke_radius_27_green, this@TripsActiveTabFragment::onTripClick)
 
 
         binding.buttonHistory.setOnClickListener {
@@ -82,7 +73,7 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             (binding.recyclerView.adapter as TripsInvolvedAdapter).submitList(null)
             viewModel.loadTripsAsCreator(true)
-        }
+        }*/
     }
 
     private fun onTripClick(tripInvolved: TripInvolved) {

@@ -141,11 +141,10 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
             setupBottomNavMenu(destination.id)
 
-            if (destination.id in homeLayout) {
-                showBottomNav()
-            } else {
-                hideBottomNav()
-            }
+
+            showHideBottomNav(homeLayout.contains(destination.id))
+            showHideButtons(destination.id == R.id.destination_main)
+
 
             if (destination.id == R.id.destination_notifications)
                 viewModelSecond.updateNotificationCount(0)
@@ -223,19 +222,27 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
     }
 
 
-    private fun showBottomNav() {
+    private fun showHideButtons(show: Boolean = false) {
         with(binding) {
-            bottomNavigationView.visibility = View.VISIBLE
-            account.visibility = View.VISIBLE
-            notification.visibility = View.VISIBLE
+            if (show) {
+                account.visibility = View.VISIBLE
+                notification.visibility = View.VISIBLE
+            } else {
+                account.visibility = View.GONE
+                notification.visibility = View.GONE
+            }
+
         }
     }
 
-    private fun hideBottomNav() {
+    private fun showHideBottomNav(show: Boolean = false) {
         with(binding) {
-            bottomNavigationView.visibility = View.GONE
-            account.visibility = View.GONE
-            notification.visibility = View.GONE
+            if (show) {
+                bottomNavigationView.visibility = View.VISIBLE
+            } else {
+                bottomNavigationView.visibility = View.GONE
+            }
+
         }
     }
 

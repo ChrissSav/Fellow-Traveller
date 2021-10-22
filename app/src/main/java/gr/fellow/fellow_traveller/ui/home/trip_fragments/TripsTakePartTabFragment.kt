@@ -50,7 +50,7 @@ class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
     }
 
     override fun setUpViews() {
-        viewModel.loadTripsAsPassenger()
+       // viewModel.loadTripsAsPassenger()
         binding.recyclerView.adapter = TripsInvolvedAdapter(R.drawable.background_stroke_radius_27_orange, this@TripsTakePartTabFragment::onTripClick)
 
 
