@@ -88,7 +88,7 @@ constructor(
     }
 
     fun setDestinationPickUp(id: String, title: String) {
-        _destinationPickUp.value = Destination(id, title)
+        _destinationPickUp.value = Destination(id, title, null, null)
     }
 
     fun setDestinationTo(destination: Destination) {
@@ -141,7 +141,7 @@ constructor(
 
             val response = registerTripRemoteUseCase.invoke(
                 destinationFrom.value?.placeId.toString(), destinationTo.value?.placeId.toString(), destinationPickUp.value?.placeId.toString(), car.value?.id.toString(),
-                pet.value!!, seats.value!!, bags.value!!.code, msg, price.value!!, getTimestamp()
+                pet.value!!, seats.value!!, bags.value!!.code, msg, price.value ?: 0f, getTimestamp()
             )
 
             //We create only the creator's conversation

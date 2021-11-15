@@ -5,7 +5,6 @@
     android:id="@+id/ActivityReviews_main_constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_new"
     tools:context=".ui.car.AddCarActivity">
 
 

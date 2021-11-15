@@ -30,14 +30,14 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:background="@drawable/button_background_green_30dp"
-                android:backgroundTint="@color/green_20_new"
+                android:backgroundTint="@color/orange_20_new"
                 android:padding="4dp"
                 android:src="@drawable/ic_arrow_right"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/green" />
+                app:tint="@color/orange_60_new" />
 
             <TextView
                 android:id="@+id/destination_from"
@@ -82,7 +82,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Gravid ultrices et purus sollicitudin turpis convallis. Dui. consectetur..."
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Gravid ultrices et purus sollicitudin tujkguyfgufgyiftyfdrtftrer ghijgrpis convallis. Dui. consectetur..."
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout_trip_destinations"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout_trip_destinations" />
@@ -100,7 +100,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/date_time"
-                style="@style/paragraph_3_new"
+                style="@style/paragraph_3_bold_new"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_orange_8dp"
@@ -120,7 +120,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/seats"
-                style="@style/paragraph_3_new"
+                style="@style/paragraph_3_bold_new"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -130,7 +130,7 @@
                 android:paddingTop="4dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="4dp"
-                android:text="3 ελ. θέσεις"
+                android:text="@string/active_item_seats"
                 android:textColor="@color/white"
                 app:icon="@drawable/ic_seat"
                 app:iconGravity="textStart"
@@ -152,9 +152,10 @@
                 android:paddingTop="4dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="4dp"
-                android:text="5,00$/άτομο"
                 android:textColor="@color/white"
-                app:backgroundTint="@color/orange_20_new"
+                android:backgroundTintMode="src_over"
+                android:text="@string/active_item_price"
+                app:backgroundTint="@color/green_60_new"
                 app:icon="@drawable/ic_cash"
                 app:iconGravity="textStart"
                 app:iconSize="16dp"
@@ -181,13 +182,13 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:clickable="false"
-            android:text="#Κατοικίδιο"
-            android:textColor="@color/orange_60_new"
+            android:text="@string/active_item_pet"
+            android:textColor="@color/green_90_new"
             app:icon="@drawable/ic_bone"
             app:iconGravity="textStart"
             app:iconPadding="2dp"
             app:iconSize="16dp"
-            app:iconTint="@color/orange_60_new"
+            app:iconTint="@color/green_90_new"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout17"
             app:layout_constraintTop_toTopOf="@+id/picture" />
 

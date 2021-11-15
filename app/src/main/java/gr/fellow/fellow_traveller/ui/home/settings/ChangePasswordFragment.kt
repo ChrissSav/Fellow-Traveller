@@ -34,9 +34,9 @@ class ChangePasswordFragment : BaseFragment<FragmentChangePasswordBinding>() {
         })
 
 
-        passwordStrengthCalculator.strength.observe(viewLifecycleOwner, { value ->
+      /*  passwordStrengthCalculator.strength.observe(viewLifecycleOwner, { value ->
             //binding.passwordStr.setTextBackTint(value.textInt, value.colorInt)
-        })
+        })*/
 
     }
 

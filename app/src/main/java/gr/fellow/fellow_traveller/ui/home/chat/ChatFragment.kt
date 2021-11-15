@@ -67,14 +67,14 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
     override fun setUpObservers() {
 
-        viewModel.messagesList.observe(viewLifecycleOwner, {
+        viewModel.messagesList.observe(viewLifecycleOwner) {
             viewModel.loadMessages.value = false
             messagesList.add(it)
             (binding.chat.chatRecyclerView.adapter as MessagesAdapter).notifyItemInserted(messagesList.size - 1)
             binding.chat.chatRecyclerView.scrollToPosition(messagesList.size - 1)
-        })
+        }
 
-        viewModel.listOfParticipants.observe(viewLifecycleOwner, {
+        viewModel.listOfParticipants.observe(viewLifecycleOwner) {
             participantsInfo.clear()
             viewModel.getTripById(args.conversationItem.tripId)
             participantsInfo.addAll(it)
@@ -89,9 +89,9 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             }
 
 
-        })
+        }
 
-        viewModel.tripInfo.observe(viewLifecycleOwner, { trip ->
+        viewModel.tripInfo.observe(viewLifecycleOwner) { trip ->
             //Load end panel with tripInvolved info
             tripInvolved = trip
 
@@ -134,16 +134,16 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             }
 
 
-        })
+        }
 
-        viewModel.loadMessages.observe(viewLifecycleOwner, {
+        viewModel.loadMessages.observe(viewLifecycleOwner) {
 
             if (it) {
                 binding.chat.chatShimmer.startShimmerWithVisibility()
             } else {
                 binding.chat.chatShimmer.stopShimmerWithVisibility()
             }
-        })
+        }
 
     }
 

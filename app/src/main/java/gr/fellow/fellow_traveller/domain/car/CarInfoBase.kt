@@ -12,9 +12,10 @@ data class CarInfoBase(
 ) : Parcelable {
 
     val baseInfo: String
-        get() = "$brand $model"
+        get() = "$brand $model $color"
 
     val fullInfo: String
         get() = "$brand $model | $plate | $color"
+
 
 }

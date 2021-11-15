@@ -302,6 +302,7 @@
         <attr name="regex_f" format="string" />
         <attr name="editable_f" format="boolean" />
         <attr name="all_caps_f" format="boolean" />
+        <attr name="bold_f" format="boolean" />
         <attr name="max_length_f" format="integer" />
         <attr name="imeOptions_f">
             <!-- There are no special semantics associated with this editor. -->

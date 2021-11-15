@@ -36,6 +36,7 @@ import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import com.bumptech.glide.Glide
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.tapadoo.alerter.Alerter
+import gr.fellow.fellow_traveller.BuildConfig
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.domain.trip.Destination
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
@@ -132,8 +133,16 @@ fun Activity.openGoogleMaps(trip: TripSearch) {
     val uri = "https://www.google.com/maps/dir/${trip.destFrom.title}/${trip.destTo.title}/"
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
     startActivity(Intent.createChooser(intent, getString(R.string.select_application)))
+}
+
+
+fun Activity.openGoogleMaps(destination: Destination) {
+    val uri = "https://maps.google.com/?q=${destination.title.replace("$$", " ").replace(" ", "+")}"
+    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+    startActivity(Intent.createChooser(intent, getString(R.string.select_application)))
 
 }
+
 
 fun Activity.openGoogleMaps(trip: TripInvolved) {
     val uri = "https://www.google.com/maps/dir/${trip.destFrom.title}/${trip.destTo.title}/"
@@ -289,6 +298,13 @@ fun ImageView.loadImageFromUrl(url: String?) {
 }
 
 
+fun ImageView.loadDestination(destination: Destination) {
+    Glide.with(this.context)
+        .load(BuildConfig.FELLOW_API_URL + "destination-image?latitude=${destination.latitude}&longitude=${destination.longitude}")
+        .into(this)
+}
+
+
 fun ImageView.startAnimation() {
     if (drawable is AnimatedVectorDrawableCompat) {
         (drawable as AnimatedVectorDrawableCompat).start()
@@ -416,11 +432,24 @@ fun TextView.setSpanTextStyle(vararg pairs: Pair<String, Int>) {
     this.setText(ssb, TextView.BufferType.SPANNABLE)
 }
 
+fun FellowEditTextNew.setSpanTextStyle(vararg pairs: Pair<String, Int>) {
+    val ssb = SpannableStringBuilder("")
+    pairs.forEach { current ->
+        val style = StyleSpan(current.second)
+        val tempSsb = SpannableStringBuilder(current.first)
+        tempSsb.setSpan(style, 0, current.first.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        ssb.append(tempSsb)
+    }
+    this.editText.setText(ssb, TextView.BufferType.SPANNABLE)
+}
+
 
 fun TextView.setDestination(destination: Destination) {
     if (destination.title.contains(PLACE_TITLE_SPLIT_CHAR)) {
-        setSpanTextStyle(Pair(destination.title.split(PLACE_TITLE_SPLIT_CHAR)[0], R.style.header_4_new),
-            Pair(destination.title.split(PLACE_TITLE_SPLIT_CHAR)[1], R.style.paragraph_3_new))
+        setSpanTextStyle(
+            Pair(destination.title.split(PLACE_TITLE_SPLIT_CHAR)[0], R.style.header_4_new),
+            Pair(destination.title.split(PLACE_TITLE_SPLIT_CHAR)[1], R.style.paragraph_3_new)
+        )
     } else {
         text = destination.title
     }

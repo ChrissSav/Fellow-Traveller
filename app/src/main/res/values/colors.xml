@@ -59,6 +59,7 @@
     <color name="orange_new">#FF6230</color>
     <color name="orange_20_new">#20FF6230</color>
     <color name="orange_60_new">#60FF6230</color>
+    <color name="orange_90_new">#90FF6230</color>
     <color name="yellow">#F2D726</color>
     <color name="light_aqua_New">#B2E8BF</color>
     <color name="light_orange_New">#F7E5CD</color>
@@ -73,8 +74,10 @@
 
     <color name="green_new">#0E5034</color>
     <color name="green_20_new">#200E5034</color>
-
+    <color name="green_60_new">#400E5034</color>
+    <color name="green_90_new">#900E5034</color>
     <color name="black_20_new">#10ffffff</color>
+    <color name="white_20_new">#20FFFFFF</color>
     <color name="white_60_new">#99FFFFFF</color>
     <color name="white_40_new">#60FFFFFF</color>
 

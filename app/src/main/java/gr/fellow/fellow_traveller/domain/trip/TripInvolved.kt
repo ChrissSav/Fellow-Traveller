@@ -6,7 +6,6 @@ import gr.fellow.fellow_traveller.domain.TripStatus
 import gr.fellow.fellow_traveller.domain.car.CarInfoBase
 import gr.fellow.fellow_traveller.domain.user.Passenger
 import gr.fellow.fellow_traveller.domain.user.UserCreator
-import gr.fellow.fellow_traveller.framework.network.fellow.trip.DestinationResponse
 import gr.fellow.fellow_traveller.utils.convertTimestampToFormat
 import gr.fellow.fellow_traveller.utils.getTimeFromTimestamp
 import kotlinx.android.parcel.Parcelize
@@ -15,8 +14,9 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class TripInvolved(
     val id: String,
-    val destFrom: DestinationResponse,
-    val destTo: DestinationResponse,
+    val destFrom: Destination,
+    val destTo: Destination,
+    val destPickUp: Destination,
     val creatorUser: UserCreator,
     val car: CarInfoBase,
     val hasPet: Boolean,
@@ -42,13 +42,13 @@ data class TripInvolved(
     val placesInfo
         get() = "${destFrom.title} - ${destTo.title}"
 
-    val seatsStatus: String
+    val seatAvailable: Int
         get() {
             var current = 0
             passengers.forEach {
                 current += it.seats
             }
-            return "${current}/${seats}"
+            return seats - current
         }
 
 }

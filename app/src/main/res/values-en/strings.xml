@@ -198,7 +198,7 @@
     <string name="choose_date_range_for_search">Select date range</string>
     <string name="date_range">Date range</string>
     <string name="cancel_search">Do you want to cancel the search?</string>
-    <string name="per_person">per person</string>
+    <string name="per_person">person</string>
     <string name="exit_from_trip">Are you sure you want to leave this trip?</string>
     <string name="delete_this_trip">Are you sure you want to delete this trip?</string>
     <string name="no_pictures">There is no picture for this conversation yet</string>

@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.ui.views
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Typeface
 import android.text.Editable
 import android.text.InputFilter
@@ -13,7 +14,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.widget.TextViewCompat
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.FellowEditTextNewBinding
 import gr.fellow.fellow_traveller.ui.extensions.getLength
@@ -33,6 +36,7 @@ class FellowEditTextNew(context: Context, attrs: AttributeSet) : ConstraintLayou
     private var inputType = 0
     private var textAllCaps = true
     private var maxLength = 50
+    private var bold = false
     private var regex = "^.{50}\$"
     private var label: String? = null
     private var errorMessage = ""
@@ -46,6 +50,9 @@ class FellowEditTextNew(context: Context, attrs: AttributeSet) : ConstraintLayou
         binding.error.text = error
         binding.error.visibleAnim()
     }
+
+    val editText: EditText
+        get() = binding.editText
 
 
     var text: String? = null
@@ -72,6 +79,7 @@ class FellowEditTextNew(context: Context, attrs: AttributeSet) : ConstraintLayou
             inputType = attributes.getInteger(R.styleable.FellowEditText_text_type_f, InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
             imeOptions = attributes.getInteger(R.styleable.FellowEditText_imeOptions_f, EditorInfo.IME_ACTION_NEXT)
             textAllCaps = attributes.getBoolean(R.styleable.FellowEditText_all_caps_f, false)
+            bold = attributes.getBoolean(R.styleable.FellowEditText_bold_f, false)
             maxLength = attributes.getInteger(R.styleable.FellowEditText_max_length_f, 50)
             regex = attributes.getString(R.styleable.FellowEditText_regex_f) ?: resources.getString(R.string.regex_accept_all)
             errorMessage = attributes.getString(R.styleable.FellowEditText_error_message_f) ?: resources.getString(R.string.check_field)
@@ -92,9 +100,9 @@ class FellowEditTextNew(context: Context, attrs: AttributeSet) : ConstraintLayou
             binding.editText.transformationMethod = PasswordTransformationMethod()
         }
 
-        if (textAllCaps)
+        if (textAllCaps) {
             binding.editText.inputType = InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS
-
+        }
         binding.editText.filters = arrayOf<InputFilter>(LengthFilter(maxLength))
 
 
@@ -104,6 +112,14 @@ class FellowEditTextNew(context: Context, attrs: AttributeSet) : ConstraintLayou
             binding.editText.isLongClickable = false
             binding.editText.isFocusableInTouchMode = false
             binding.editText.isCursorVisible = false
+        }
+
+
+        if (bold) {
+            TextViewCompat.setTextAppearance(binding.editText, R.style.header_6_new)
+
+            binding.editText.setTextColor(Color.WHITE)
+
         }
 
 

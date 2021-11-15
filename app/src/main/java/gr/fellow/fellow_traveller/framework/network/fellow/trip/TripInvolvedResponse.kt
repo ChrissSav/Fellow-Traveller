@@ -12,6 +12,8 @@ data class TripInvolvedResponse(
     val destFrom: DestinationResponse,
     @SerializedName("destinationTo")
     val destTo: DestinationResponse,
+    @SerializedName("destinationPickUp")
+    val destPickUp: DestinationResponse,
     val creator: UserCreatorResponse,
     val car: CarInfoResponse,
     @SerializedName("pet")

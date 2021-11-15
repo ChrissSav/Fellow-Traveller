@@ -82,6 +82,9 @@ interface FellowDataSource {
 
     suspend fun getTipsAsPassenger(status: String): MutableList<TripInvolved>
 
+    suspend fun getTipsAsPassengerAndCreator(status: String): MutableList<TripInvolved>
+
+
     suspend fun getTripInvolvedById(tripId: String): TripInvolved
 
     suspend fun exitFromTrip(tripId: String): String

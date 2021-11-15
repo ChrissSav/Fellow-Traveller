@@ -112,6 +112,9 @@ class FellowDataSourceImpl(
         repository.getTipsAsPassenger(status).map { it.mapTripInvolved() }.toMutableList()
 
 
+    override suspend fun getTipsAsPassengerAndCreator(status: String): MutableList<TripInvolved> =
+        repository.getTipsAsPassengerAndCreator(status).map { it.mapTripInvolved() }.toMutableList()
+
     override suspend fun getTripInvolvedById(tripId: String): TripInvolved =
         repository.getTripInvolvedById(tripId).mapTripInvolved()
 

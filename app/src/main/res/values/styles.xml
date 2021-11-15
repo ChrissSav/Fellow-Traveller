@@ -6,7 +6,8 @@
         <!-- Customize your theme here. -->
         <item name="android:statusBarColor">@color/black_new</item>
         <item name="android:windowDisablePreview">true</item>
-        <item name="colorPrimary">@color/black_color</item>
+        <item name="colorPrimary">@color/black_new</item>
+        <item name="android:navigationBarColor">@color/black_new</item>
         <item name="colorPrimaryDark">@color/orange_color</item>
         <item name="colorAccent">@color/orange_color</item>
         <item name="windowNoTitle">true</item>
@@ -18,14 +19,14 @@
         <item name="colorSecondary">@color/home_blue</item>
         <item name="colorError">@color/home_blue</item>
         <!-- New MaterialComponents attributes. -->
-        <item name="colorPrimaryVariant">@color/black_color</item>
-        <item name="colorSecondaryVariant">@color/black_color</item>
+        <item name="colorPrimaryVariant">@color/black_new</item>
+        <item name="colorSecondaryVariant">@color/black_new</item>
         <item name="colorSurface">@color/white</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorOnSecondary">@color/home_blue</item>
-        <item name="colorOnBackground">@color/black_color</item>
+        <item name="colorOnBackground">@color/black_new</item>
         <item name="colorOnError">@color/red_color</item>
-        <item name="colorOnSurface">@color/black_color</item>
+        <item name="colorOnSurface">@color/black_new</item>
         <item name="scrimBackground">@color/mtrl_scrim_color</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1
@@ -169,5 +170,9 @@
         <item name="cornerSizeTopLeft">16dp</item>
         <item name="cornerSizeBottomRight">0dp</item>
         <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <style name="roundedImageView" parent="">
+        <item name="cornerSize">16dp</item>
     </style>
 </resources>

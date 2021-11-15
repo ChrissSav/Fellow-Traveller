@@ -49,11 +49,8 @@ constructor(
     private val getUserCarsRemoteUseCase: GetUserCarsRemoteUseCase,
     private val deleteCarUseCase: DeleteCarUseCase,
     private val updateAccountInfoUseCase: UpdateAccountInfoUseCase,
-    private val getTripsAsCreatorRemoteUseCase: GetTripsAsCreatorRemoteUseCase,
-    private val getTripsAsPassengerRemoteUseCase: GetTripsAsPassengerRemoteUseCase,
-    private val deleteTripUseCase: DeleteTripUseCase,
+
     private val changePasswordUseCase: ChangePasswordUseCase,
-    private val exitFromTripUseCase: ExitFromTripUseCase,
     private val getNotificationsUseCase: GetNotificationsUseCase,
     private val updateNotificationsUseCase: UpdateNotificationsUseCase,
     private val getTripInvolvedByIdUseCase: GetTripInvolvedByIdUseCase,
@@ -63,6 +60,13 @@ constructor(
     private val updateUserMessengerUseCase: UpdateUserMessengerUseCase,
     private val updateUserPictureUseCase: UpdateUserPictureUseCase,
     private val uploadPictureFirebaseUseCase: UploadPictureFirebaseUseCase,
+
+    //Trip
+    private val getTripsInvolvedRemoteUseCase: GetTripsInvolvedRemoteUseCase,
+    private val getTripsAsCreatorRemoteUseCase: GetTripsAsCreatorRemoteUseCase,
+    private val getTripsAsPassengerRemoteUseCase: GetTripsAsPassengerRemoteUseCase,
+    private val exitFromTripUseCase: ExitFromTripUseCase,
+    private val deleteTripUseCase: DeleteTripUseCase,
 
 
     //Get Reviews
@@ -81,6 +85,11 @@ constructor(
         private const val DELAY_LOAD = 350L
     }
 
+
+    val currentUser: LocalUser
+        get() {
+            return user.value!!
+        }
 
     val reloadConnection = MutableLiveData<Boolean>()
 
@@ -104,6 +113,11 @@ constructor(
     private val _changePassword = SingleLiveEvent<Boolean>()
     val changePassword: LiveData<Boolean> = _changePassword
 
+    /**  ACTIVE **/
+    private val _tripsActive = MutableLiveData<MutableList<TripInvolved>>()
+    val tripsActive: LiveData<MutableList<TripInvolved>> = _tripsActive
+    val loadActiveTrips = MutableLiveData<Boolean>()
+    private var loadMoreActiveTrips = true
 
     /**  AS PASSENGER **/
 
@@ -220,6 +234,21 @@ constructor(
             _carDeletedId.value = car
         }
     }
+
+    /** ACTIVE ***/
+
+    fun loadTripsActive(more: Boolean = false) {
+        launchWithLiveData(true, loadActiveTrips) {
+            if (_tripsActive.value != null && !more) {
+                return@launchWithLiveData
+            }
+            val response = getTripsInvolvedRemoteUseCase("active")
+            if (more)
+                delay(DELAY_LOAD)
+            _tripsActive.value = response
+        }
+    }
+
 
     /** CREATOR ***/
 
@@ -441,25 +470,26 @@ constructor(
     }
 
 
+
     private val _tripInvolvedDetails = SingleLiveEvent<TripInvolved>()
     val tripInvolvedDetails: LiveData<TripInvolved> = _tripInvolvedDetails
-    val loadTripInvolvedDetails = MutableLiveData<Boolean>()
+    private val loadTripInvolvedDetails = MutableLiveData<Boolean>()
     private val tripInvolvedDetailsDelay = 450L
 
-    fun loadTripCreatorActiveInvolvedDetails(tripId: String, reload: Boolean = false, notificationId: Long) {
+    fun loadTripActiveInvolvedDetails(tripId: String, reload: Boolean = false, notificationId: Long) {
         launchWithLiveData(true, loadTripInvolvedDetails) {
-            val index = _tripsAsCreatorActive.toMutableListSafe().indexOfFirst { it.id == tripId }
+            val index = _tripsActive.toMutableListSafe().indexOfFirst { it.id == tripId }
             if (reload || index == -1) {
                 if (notificationId > 0) {
                     updateNotificationsUseCase(notificationId)
                     _notifications.setNotificationRead(notificationId)
                 }
                 val trip = getTripInvolvedByIdUseCase(tripId)
-                _tripsAsCreatorActive.addOrReplace(trip)
+                _tripsActive.addOrReplace(trip)
                 _tripInvolvedDetails.value = trip
             } else {
                 delay(tripInvolvedDetailsDelay)
-                _tripInvolvedDetails.value = _tripsAsCreatorActive.toMutableListSafe()[index]
+                _tripInvolvedDetails.value = _tripsActive.toMutableListSafe()[index]
             }
         }
     }
@@ -523,13 +553,15 @@ constructor(
     fun sendFirebaseMessage(textMessage: String, tripId: String, messageType: Int, participantsList: MutableList<String>) {
 
         launchWithLiveData(true, loadMessageFirebase) {
-            sendMessageFirebaseUseCase.invoke(_user.value?.id.toString(),
+            sendMessageFirebaseUseCase.invoke(
+                _user.value?.id.toString(),
                 tripId,
                 textMessage,
                 _user.value?.firstName.toString(),
                 messageType,
                 participantsList,
-                _user.value?.picture.toString())
+                _user.value?.picture.toString()
+            )
         }
 
     }

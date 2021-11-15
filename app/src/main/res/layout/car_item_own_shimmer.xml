@@ -4,7 +4,6 @@
     android:id="@+id/my_car_item_constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/black_new"
     android:padding="@dimen/back_button_margin">
 
     <androidx.constraintlayout.widget.ConstraintLayout

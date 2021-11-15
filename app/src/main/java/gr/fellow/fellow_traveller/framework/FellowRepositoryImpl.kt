@@ -141,6 +141,11 @@ class FellowRepositoryImpl(
             service.getTripsAs("passenger", status).handleApiFormat()
         }
 
+    override suspend fun getTipsAsPassengerAndCreator(status: String): MutableList<TripInvolvedResponse> =
+        networkCall {
+            service.getTripsAs(null, status).handleApiFormat()
+        }
+
     override suspend fun getTripInvolvedById(tripId: String): TripInvolvedResponse =
         networkCall {
             service.getTripInvolvedById(tripId).handleApiFormat()

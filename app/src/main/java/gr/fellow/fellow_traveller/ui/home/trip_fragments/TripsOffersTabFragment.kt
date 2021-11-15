@@ -58,18 +58,20 @@ class TripsOffersTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
     }
 
     override fun setUpViews() {
-       // viewModel.loadTripsAsCreator()
+        // viewModel.loadTripsAsCreator()
         binding.recyclerView.adapter = TripsInvolvedAdapter(R.drawable.background_stroke_radius_27_green, this@TripsOffersTabFragment::onTripClick)
 
 
         binding.buttonHistory.setOnClickListener {
-            startActivityForResult(NewTripActivity::class,
+            startActivityForResult(
+                NewTripActivity::class,
                 1,
                 bundleOf(
-                    "destinationFrom" to Destination("ChIJ8UNwBh-9oRQR3Y1mdkU1Nic", getString(R.string.placeholder_city_athens)),
+                    "destinationFrom" to Destination("ChIJ8UNwBh-9oRQR3Y1mdkU1Nic", getString(R.string.placeholder_city_athens), null, null),
                     "localUser" to viewModel.user.value!!,
-                    "destinationTo" to Destination("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", getString(R.string.placeholder_city_thessaloniki)),
-                ))
+                    "destinationTo" to Destination("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", getString(R.string.placeholder_city_thessaloniki), null, null),
+                )
+            )
 
             //  findNavController()?.navigate(R.id.action_destination_trips_to_tripInvolvedHistoryFragment, bundleOf("creator" to true))
         }

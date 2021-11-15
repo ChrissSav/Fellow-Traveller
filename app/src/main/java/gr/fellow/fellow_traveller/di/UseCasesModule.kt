@@ -36,6 +36,12 @@ class UseCasesModule {
 
     @ActivityScoped
     @Provides
+    fun provideGetTripsInvolvedRemoteUseCase(dataSource: FellowDataSource): GetTripsInvolvedRemoteUseCase {
+        return GetTripsInvolvedRemoteUseCase(dataSource)
+    }
+
+    @ActivityScoped
+    @Provides
     fun provideGetCarColorsUseCase(dataSource: FellowDataSource): GetCarColorsUseCase {
         return GetCarColorsUseCase(dataSource)
     }

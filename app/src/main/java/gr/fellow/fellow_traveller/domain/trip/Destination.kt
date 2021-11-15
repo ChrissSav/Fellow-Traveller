@@ -7,4 +7,6 @@ import kotlinx.android.parcel.Parcelize
 data class Destination(
     val placeId: String,
     val title: String,
+    val latitude: Float?,
+    val longitude: Float?
 ) : Parcelable

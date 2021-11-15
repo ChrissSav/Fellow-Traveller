@@ -120,25 +120,7 @@ interface FellowService {
 
     /** TRIP **/
 
-    @POST("trips")
-    suspend fun registerTrip(
-        @Body trip: TripCreateRequest,
-    ): Response<BaseResponse<TripInvolvedResponse>>
-
-    @GET("trips/involved/{trip_id}")
-    suspend fun getTripInvolvedById(
-        @Path("trip_id") tripId: String,
-    ): Response<BaseResponse<TripInvolvedResponse>>
-
-
     @GET("trips")
-    suspend fun getTripsAs(
-        @Query("type") type: String,
-        @Query("status") status: String,
-        // @Query("page") page: Int
-    ): Response<BaseResponse<MutableList<TripInvolvedResponse>>>
-
-    @GET("trips/search")
     suspend fun searchTrips(
         @Query("latitude_from") latitudeFrom: Float,
         @Query("longitude_from") longitudeFrom: Float,
@@ -154,6 +136,24 @@ interface FellowService {
         @Query("price_max") priceMax: Int?,
         @Query("pet") pet: Boolean?,
     ): Response<BaseResponse<MutableList<TripSearchResponse>>>
+
+
+    @POST("trips")
+    suspend fun registerTrip(
+        @Body trip: TripCreateRequest,
+    ): Response<BaseResponse<TripInvolvedResponse>>
+
+    @GET("trips/involved/{trip_id}")
+    suspend fun getTripInvolvedById(
+        @Path("trip_id") tripId: String,
+    ): Response<BaseResponse<TripInvolvedResponse>>
+
+
+    @GET("trips/involved")
+    suspend fun getTripsAs(
+        @Query("type") type: String?,
+        @Query("status") status: String,
+    ): Response<BaseResponse<MutableList<TripInvolvedResponse>>>
 
 
     @PUT("trips/passenger")

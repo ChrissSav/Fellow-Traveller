@@ -68,6 +68,8 @@ interface FellowRepository {
 
     suspend fun getTipsAsPassenger(status: String): MutableList<TripInvolvedResponse>
 
+    suspend fun getTipsAsPassengerAndCreator(status: String): MutableList<TripInvolvedResponse>
+
     suspend fun getTripInvolvedById(tripId: String): TripInvolvedResponse
 
     suspend fun searchTrips(query: SearchTripFilter): MutableList<TripSearchResponse>

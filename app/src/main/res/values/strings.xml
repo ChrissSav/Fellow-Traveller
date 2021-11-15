@@ -174,7 +174,7 @@
     <string name="choose_date_range_for_search">Επέλεξε εύρος ημερομηνίας για αναζήτηση</string>
     <string name="date_range">Εύρος ημ/νίας</string>
     <string name="cancel_search">Ακύρωση αναζήτησης;</string>
-    <string name="per_person">ανά άτομο</string>
+    <string name="per_person">άτομο</string>
     <string name="exit_from_trip">Θέλεις σίγουρα να αποχωρήσεις από αυτό το ταξίδι;</string>
     <string name="delete_this_trip">Θέλεις σίγουρα να διαγράψεις αυτό το ταξίδι;</string>
     <string name="no_pictures">Δεν υπάρχει ακόμα κάποια εικόνα για αυτήν την συνομιλία</string>
@@ -469,5 +469,13 @@
     <string name="add_first_car">Βάλε το πρώτο σου όχημα</string>
     <string name="have_not_cars">Για να καταχωρήσεις διαδρομή θα πρέπει να έχεις ένα τουλάχιστον όχημα</string>
     <string name="add_first_car_label">Καταχώρησε το όχημά σου για να μπορεις να προσφερεις ταξιδια</string>
+
+
+    <!--    Trip active time-->
+
+    <string name="active_item_seats" translatable="false">%s ελ. θέσεις</string>
+    <string name="active_item_price" translatable="false">%s€/άτομο</string>
+    <string name="active_item_pet" translatable="false">#Κατοικίδιο</string>
+
 
 </resources>
