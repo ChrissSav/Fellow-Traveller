@@ -15,7 +15,7 @@ import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.observe
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.google.firebase.database.*
@@ -62,11 +62,12 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
     override fun setUpObservers() {
 
-        viewModel.user.observe(this) {
+        viewModel.user.observe(this, Observer {
             loadConversations(it.id)
-        }
+        })
 
-        viewModel.reloadConnection.observe(this) {
+
+        viewModel.reloadConnection.observe(this, Observer {
             if (it) {
                 /* viewModel.loadCars()
                     viewModel.loadTripsAsCreator()
@@ -77,39 +78,39 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
                     viewModel.loadReviews()
                     viewModel.reload(false)*/
             }
-        }
+        })
 
 
 
-        viewModel.load.observe(this) {
+        viewModel.load.observe(this, Observer {
             if (it) {
                 hideKeyboard()
                 binding.genericLoader.root.visibility = View.VISIBLE
             } else
                 binding.genericLoader.root.visibility = View.GONE
-        }
+        })
 
-        viewModel.error.observe(this) {
+        viewModel.error.observe(this, Observer {
             if (it.internal) {
                 createAlerter(getString(it.messageId))
             } else
                 createAlerter(it.message)
-        }
+        })
 
-        viewModel.logout.observe(this) {
+        viewModel.logout.observe(this, Observer {
             if (it) {
                 cancelJob()
                 startActivityClearStack(MainActivity::class)
             }
-        }
+        })
 
 
 
-        viewModelSecond.notificationCount.observe(this) {
+        viewModelSecond.notificationCount.observe(this, Observer {
             if (it > 0)
                 viewModel.loadNotifications(true)
             setUpNotifications(it)
-        }
+        })
 
     }
 
@@ -197,7 +198,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
     @SuppressLint("UseCompatLoadingForColorStateLists")
     private fun setButtonUnCheck(imageView: ImageView) {
-        imageView.setColorFilter(ContextCompat.getColor(this, R.color.black_20_new), android.graphics.PorterDuff.Mode.SRC_IN)
+        imageView.setColorFilter(ContextCompat.getColor(this, R.color.black_new), android.graphics.PorterDuff.Mode.SRC_IN)
         imageView.backgroundTintList = resources.getColorStateList(R.color.white, null)
     }
 

@@ -51,16 +51,15 @@ class TripsActiveAdapter(
 
 
             if (currentUserId == currentTrip.creatorUser.id) {
-                binding.pet.iconTint = context.resources.getColorStateList(R.color.green_60_new, null)
+                binding.pet.iconTint = context.resources.getColorStateList(R.color.green_90_new, null)
                 binding.price.backgroundTintList = context.resources.getColorStateList(R.color.green_60_new, null)
                 binding.arrow.backgroundTintList = context.resources.getColorStateList(R.color.green_20_new, null)
-                binding.arrow.imageTintList = context.resources.getColorStateList(R.color.green_20_new, null)
-
+                binding.arrow.imageTintList = context.resources.getColorStateList(R.color.green, null)
             } else {
-                binding.pet.iconTint = context.resources.getColorStateList(R.color.orange_20_new, null)
-                binding.price.backgroundTintList = context.resources.getColorStateList(R.color.orange_20_new, null)
+                binding.pet.iconTint = context.resources.getColorStateList(R.color.orange_90_new, null)
+                binding.price.backgroundTintList = context.resources.getColorStateList(R.color.orange_60_new, null)
                 binding.arrow.backgroundTintList = context.resources.getColorStateList(R.color.orange_20_new, null)
-                binding.arrow.imageTintList = context.resources.getColorStateList(R.color.orange_60_new, null)
+                binding.arrow.imageTintList = context.resources.getColorStateList(R.color.orange, null)
             }
 
 

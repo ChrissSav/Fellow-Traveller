@@ -5,7 +5,7 @@ import gr.fellow.fellow_traveller.domain.TripStatus
 import gr.fellow.fellow_traveller.framework.network.fellow.user.UserBaseResponse
 
 data class NotificationResponse(
-    val id: Long,
+    val id: String,
     val user: UserBaseResponse,
     val type: Int,
     val read: Boolean,
@@ -56,5 +56,5 @@ data class NotificationTripResponse(
 }
 
 data class UpdateNotification(
-    val id: Long
+    val id: String
 )

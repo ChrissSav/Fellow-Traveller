@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Notification(
-    val id: Long,
+    val id: String,
     val user: UserBase,
     val type: NotificationStatus,
     var isRead: Boolean,

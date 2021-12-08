@@ -99,7 +99,7 @@ fun MutableLiveData<MutableList<TripInvolved>>.addOrReplace(item: TripInvolved) 
     value = temp
 }
 
-fun MutableLiveData<MutableList<Notification>>.setNotificationRead(item: Long) {
+fun MutableLiveData<MutableList<Notification>>.setNotificationRead(item: String) {
     val tempList = value ?: mutableListOf()
     try {
         val test = tempList.first { it.id == item }
@@ -110,11 +110,4 @@ fun MutableLiveData<MutableList<Notification>>.setNotificationRead(item: Long) {
     }
 
     value = tempList
-}
-
-
-fun CharSequence.matchesRegex(regex: String): Boolean {
-    val pattern: Pattern = Pattern.compile(regex)
-    val hasSpecialChar: Matcher = pattern.matcher(this)
-    return hasSpecialChar.find()
 }

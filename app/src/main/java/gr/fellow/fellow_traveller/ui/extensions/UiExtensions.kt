@@ -300,7 +300,7 @@ fun ImageView.loadImageFromUrl(url: String?) {
 
 fun ImageView.loadDestination(destination: Destination) {
     Glide.with(this.context)
-        .load(BuildConfig.FELLOW_API_URL + "destination-image?latitude=${destination.latitude}&longitude=${destination.longitude}")
+        .load(BuildConfig.FELLOW_API_URL + "destination-image?latitude=${destination.latitude}&longitude=${destination.longitude}&height=720&width=720")
         .into(this)
 }
 

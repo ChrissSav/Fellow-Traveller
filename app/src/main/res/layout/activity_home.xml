@@ -54,7 +54,7 @@
         android:layout_height="55dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/background_rate_radius_16_black"
-        android:backgroundTint="#20ffffff"
+        android:backgroundTint="#25ffffff"
         android:padding="@dimen/padding_component_icon"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"

@@ -29,7 +29,7 @@
                 android:id="@+id/arrow"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/button_background_green_30dp"
+                android:background="@drawable/button_background_green_30dp_without_ripple"
                 android:backgroundTint="@color/orange_20_new"
                 android:padding="4dp"
                 android:src="@drawable/ic_arrow_right"
@@ -189,6 +189,7 @@
             app:iconPadding="2dp"
             app:iconSize="16dp"
             app:iconTint="@color/green_90_new"
+            app:layout_constraintBottom_toBottomOf="@+id/picture"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout17"
             app:layout_constraintTop_toTopOf="@+id/picture" />
 

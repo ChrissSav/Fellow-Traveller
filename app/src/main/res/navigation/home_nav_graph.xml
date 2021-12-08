@@ -182,8 +182,9 @@
 
         <argument
             android:name="notificationId"
-            app:argType="long"
-            android:defaultValue="-10L" />
+            android:defaultValue="null"
+            app:argType="string"
+            app:nullable="true" />
 
         <argument
             android:name="history"

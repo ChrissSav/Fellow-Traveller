@@ -470,17 +470,16 @@ constructor(
     }
 
 
-
     private val _tripInvolvedDetails = SingleLiveEvent<TripInvolved>()
     val tripInvolvedDetails: LiveData<TripInvolved> = _tripInvolvedDetails
     private val loadTripInvolvedDetails = MutableLiveData<Boolean>()
     private val tripInvolvedDetailsDelay = 450L
 
-    fun loadTripActiveInvolvedDetails(tripId: String, reload: Boolean = false, notificationId: Long) {
+    fun loadTripActiveInvolvedDetails(tripId: String, reload: Boolean = false, notificationId: String?) {
         launchWithLiveData(true, loadTripInvolvedDetails) {
             val index = _tripsActive.toMutableListSafe().indexOfFirst { it.id == tripId }
             if (reload || index == -1) {
-                if (notificationId > 0) {
+                if (notificationId != null) {
                     updateNotificationsUseCase(notificationId)
                     _notifications.setNotificationRead(notificationId)
                 }
@@ -494,11 +493,11 @@ constructor(
         }
     }
 
-    fun loadTripCreatorHistoryInvolvedDetails(tripId: String, reload: Boolean = false, notificationId: Long) {
+    fun loadTripCreatorHistoryInvolvedDetails(tripId: String, reload: Boolean = false, notificationId: String?) {
         launchWithLiveData(true, loadTripInvolvedDetails) {
             val index = _tripsAsCreatorHistory.toMutableListSafe().indexOfFirst { it.id == tripId }
             if (reload || index == -1) {
-                if (notificationId > 0) {
+                if (notificationId != null) {
                     updateNotificationsUseCase(notificationId)
                     _notifications.setNotificationRead(notificationId)
                 }
@@ -513,11 +512,11 @@ constructor(
     }
 
 
-    fun loadTripTakesPartActiveInvolvedDetails(tripId: String, reload: Boolean = false, notificationId: Long) {
+    fun loadTripTakesPartActiveInvolvedDetails(tripId: String, reload: Boolean = false, notificationId: String?) {
         launchWithLiveData(true, loadTripInvolvedDetails) {
             val index = _tripsAsPassengerActive.toMutableListSafe().indexOfFirst { it.id == tripId }
             if (reload || index == -1) {
-                if (notificationId > 0) {
+                if (notificationId != null) {
                     updateNotificationsUseCase(notificationId)
                     _notifications.setNotificationRead(notificationId)
                 }
@@ -531,11 +530,11 @@ constructor(
         }
     }
 
-    fun loadTripTakesPartHistoryInvolvedDetails(tripId: String, reload: Boolean = false, notificationId: Long) {
+    fun loadTripTakesPartHistoryInvolvedDetails(tripId: String, reload: Boolean = false, notificationId: String?) {
         launchWithLiveData(true, loadTripInvolvedDetails) {
             val index = _tripsAsPassengerHistory.toMutableListSafe().indexOfFirst { it.id == tripId }
             if (reload || index == -1) {
-                if (notificationId > 0) {
+                if (notificationId != null) {
                     updateNotificationsUseCase(notificationId)
                     _notifications.setNotificationRead(notificationId)
                 }

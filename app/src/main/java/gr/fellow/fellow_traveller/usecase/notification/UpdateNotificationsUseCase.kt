@@ -7,7 +7,7 @@ class UpdateNotificationsUseCase(
     private val dataSource: FellowDataSource
 ) {
 
-    suspend operator fun invoke(id: Long) =
+    suspend operator fun invoke(id: String) =
         dataSource.setNotificationRead(UpdateNotification(id))
 
 }
