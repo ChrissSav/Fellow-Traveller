@@ -7,13 +7,13 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
-import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentTripsActiveTabBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
-import gr.fellow.fellow_traveller.ui.extensions.findNavController
+import gr.fellow.fellow_traveller.ui.extensions.startActivityForResultWithFade
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.TripsActiveAdapter
+import gr.fellow.fellow_traveller.ui.home.trip_details.TripDetailsActivity
 
 
 @AndroidEntryPoint
@@ -68,9 +68,11 @@ class TripsActiveTabFragment : BaseFragment<FragmentTripsActiveTabBinding>() {
     }
 
     private fun onTripClick(tripInvolved: TripInvolved) {
-        findNavController()?.navigate(
-            R.id.action_destination_trips_to_tripInvolvedDetailsFragment, bundleOf("tripId" to tripInvolved.id, "reload" to false, "history" to false, "creator" to true)
-        )
+        startActivityForResultWithFade(TripDetailsActivity::class, 2, bundleOf("trip" to tripInvolved))
+
+//        findNavController()?.navigate(
+//            R.id.action_destination_trips_to_tripInvolvedDetailsFragment, bundleOf("tripId" to tripInvolved.id, "reload" to false, "history" to false, "creator" to true)
+//        )
     }
 
 

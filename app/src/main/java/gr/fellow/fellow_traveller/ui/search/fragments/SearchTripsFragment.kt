@@ -95,7 +95,7 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
 
             })
 
-            searchFilter.observe(viewLifecycleOwner, {
+            searchFilter.observe(viewLifecycleOwner, Observer {
                 binding.filterButton.visibility = View.VISIBLE
                 binding.motion.getTransition(R.id.search_trip_transition).setEnable(true)
                 viewModel.getTrips()
@@ -126,11 +126,11 @@ class SearchTripsFragment : BaseFragment<FragmentSearchTripsBinding>() {
             }
 
             destFromButton.addOnClickListener {
-                startActivityForResultWithFade(SelectDestinationActivity::class, 1)
+                startActivityForResultWithFade(SelectDestinationActivity::class, 1, null)
             }
 
             destToButton.addOnClickListener {
-                startActivityForResultWithFade(SelectDestinationActivity::class, 2)
+                startActivityForResultWithFade(SelectDestinationActivity::class, 2, null)
             }
 
 

@@ -181,8 +181,11 @@ fun Fragment.startActivityForResult(activity: KClass<out Activity>, code: Int, b
 }
 
 
-fun Fragment.startActivityForResultWithFade(activity: KClass<out Activity>, code: Int) {
+fun Fragment.startActivityForResultWithFade(activity: KClass<out Activity>, code: Int, bundle: Bundle? = null) {
     val intent = Intent(this.context, activity.java)
+    bundle?.let {
+        intent.putExtras(it)
+    }
     startActivityForResult(intent, code)
     this.activity?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
 }
@@ -300,7 +303,13 @@ fun ImageView.loadImageFromUrl(url: String?) {
 
 fun ImageView.loadDestination(destination: Destination) {
     Glide.with(this.context)
-        .load(BuildConfig.FELLOW_API_URL + "destination-image?latitude=${destination.latitude}&longitude=${destination.longitude}&height=720&width=720")
+        .load(BuildConfig.FELLOW_API_URL + "images/destination?latitude=${destination.latitude}&longitude=${destination.longitude}&height=720&width=720")
+        .into(this)
+}
+
+fun ImageView.loadDestinationImage(destination: Destination, color: String) {
+    Glide.with(this.context)
+        .load(BuildConfig.FELLOW_API_URL + "images/destination?latitude=${destination.latitude}&longitude=${destination.longitude}&height=720&width=720&color=${color.substring(3)}")
         .into(this)
 }
 

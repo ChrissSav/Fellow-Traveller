@@ -61,6 +61,7 @@ android {
             buildConfigField "String", "FELLOW_WEB_SITE_URL", "\"https://fellowtraveller.gr/\""
             buildConfigField "String", "PLACE_API_URL", "\"https://maps.googleapis.com/maps/api/place/\""
             versionNameSuffix "-debug"
+            manifestPlaceholders = [ api_url:"dev-api.fellowtraveller.gr"]
 
         }
 
@@ -70,6 +71,7 @@ android {
             buildConfigField "String", "FELLOW_API_URL", "\"https://api.fellowtraveller.gr/v1/\""
             buildConfigField "String", "FELLOW_WEB_SITE_URL", "\"https://fellowtraveller.gr/\""
             buildConfigField "String", "PLACE_API_URL", "\"https://maps.googleapis.com/maps/api/place/\""
+            manifestPlaceholders = [ api_url:"api.fellowtraveller.gr"]
 
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

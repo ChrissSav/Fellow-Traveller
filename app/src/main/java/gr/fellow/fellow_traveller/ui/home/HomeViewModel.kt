@@ -242,7 +242,7 @@ constructor(
             if (_tripsActive.value != null && !more) {
                 return@launchWithLiveData
             }
-            val response = getTripsInvolvedRemoteUseCase("active")
+            val response = getTripsInvolvedRemoteUseCase("history")
             if (more)
                 delay(DELAY_LOAD)
             _tripsActive.value = response

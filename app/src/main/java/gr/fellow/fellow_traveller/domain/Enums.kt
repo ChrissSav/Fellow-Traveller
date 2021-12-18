@@ -1,13 +1,16 @@
 package gr.fellow.fellow_traveller.domain
 
+import android.os.Parcelable
 import gr.fellow.fellow_traveller.R
+import kotlinx.android.parcel.Parcelize
 
 
 enum class PetAnswerType {
     Yes, No, Anything
 }
 
-enum class TripStatus(val textInt: Int) {
+@Parcelize
+enum class TripStatus(val textInt: Int) : Parcelable {
     ACTIVE(R.string.trip_status_active),
     PENDING(R.string.trip_status_in_progress),
     COMPLETED(R.string.trip_status_complete),

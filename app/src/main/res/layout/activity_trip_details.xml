@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".ui.home.trip_details.TripDetailsActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+
+        <include
+            android:id="@+id/back"
+            layout="@layout/back_button_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/background_stroke_radius_16_alpha_grey"
+            android:src="@drawable/ic_options"
+            android:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/back" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout18"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/button_background_orange_16dp"
+            android:backgroundTint="@color/black_20_new"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/back">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout_trip_destinations"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/arrow"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/button_background_green_30dp"
+                    android:backgroundTint="@color/orange_20_new"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_arrow_right"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/orange_60_new" />
+
+                <TextView
+                    android:id="@+id/destination_from"
+                    style="@style/header_4_new"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:lineSpacingExtra="4dp"
+                    android:maxLines="2"
+                    android:text="@string/placeholder_city_athens"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/arrow"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/destination_to"
+                    style="@style/header_4_new"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="end"
+                    android:lineSpacingExtra="4dp"
+                    android:maxLines="2"
+                    android:text="@string/placeholder_city_thessaloniki"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/arrow"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/pet"
+                style="@style/paragraph_4_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:text="@string/active_item_pet"
+                android:textColor="@color/green_90_new"
+                app:icon="@drawable/ic_bone"
+                app:iconGravity="textStart"
+                app:iconPadding="2dp"
+                app:iconSize="16dp"
+                app:iconTint="@color/green_90_new"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout_trip_destinations"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout_trip_destinations" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout21"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/button_background_orange_16dp"
+            android:backgroundTint="@color/black_20_new"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout18"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout18"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout18">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="@dimen/trip_price_seat_dimen"
+                    android:layout_height="@dimen/trip_price_seat_dimen"
+                    android:background="@drawable/circle_button_shape"
+                    android:backgroundTint="@color/white_20_new"
+                    android:padding="@dimen/trip_price_seat_padding"
+                    android:src="@drawable/ic_cash"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/price"
+                    app:tint="@color/white_60_new" />
+
+
+                <TextView
+                    android:id="@+id/textView5"
+                    style="@style/label_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Τιμή / άτομο"
+                    app:layout_constraintStart_toStartOf="@+id/price"
+                    app:layout_constraintTop_toBottomOf="@+id/price" />
+
+                <TextView
+                    android:id="@+id/price"
+                    style="@style/header_5_new"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="5.50$"
+                    app:layout_constraintStart_toEndOf="@+id/imageView4"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/constraintLayout19"
+                app:layout_constraintStart_toEndOf="@+id/constraintLayout20"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.503">
+
+                <ImageView
+                    android:id="@+id/imageView4f"
+                    android:layout_width="@dimen/trip_price_seat_dimen"
+                    android:layout_height="@dimen/trip_price_seat_dimen"
+                    android:background="@drawable/circle_button_shape"
+                    android:backgroundTint="@color/white_20_new"
+                    android:padding="@dimen/trip_price_seat_padding"
+                    android:src="@drawable/ic_seat"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView53"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/seats"
+                    app:tint="@color/white_60_new" />
+
+
+                <TextView
+                    android:id="@+id/seats"
+                    style="@style/header_5_new"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="2/4"
+                    app:layout_constraintStart_toEndOf="@+id/imageView4f"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/textView53"
+                    style="@style/label_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ελ. Θέσεις"
+                    app:layout_constraintStart_toStartOf="@+id/seats"
+                    app:layout_constraintTop_toBottomOf="@+id/seats" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.503">
+
+                <ImageView
+                    android:id="@+id/imageView42"
+                    android:layout_width="@dimen/trip_price_seat_dimen"
+                    android:layout_height="@dimen/trip_price_seat_dimen"
+                    android:background="@drawable/circle_button_shape"
+                    android:backgroundTint="@color/white_20_new"
+                    android:padding="@dimen/trip_price_seat_padding"
+                    android:src="@drawable/ic_luggage"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView54"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/bags"
+                    app:tint="@color/white_60_new" />
+
+
+                <TextView
+                    android:id="@+id/bags"
+                    style="@style/header_5_new"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Μικρή"
+                    app:layout_constraintStart_toEndOf="@+id/imageView42"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/textView54"
+                    style="@style/label_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Χωρ. Αποσκ."
+                    app:layout_constraintStart_toStartOf="@+id/bags"
+                    app:layout_constraintTop_toBottomOf="@+id/bags" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout1w0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/button_background_orange_16dp"
+            android:backgroundTint="@color/black_20_new"
+            android:padding="@dimen/padding_component_icon"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout21"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout21"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout21">
+
+
+            <ImageView
+                android:id="@+id/view211"
+                android:layout_width="@dimen/trip_price_seat_dimen"
+                android:layout_height="@dimen/trip_price_seat_dimen"
+                android:background="@drawable/circle_button_shape"
+                android:backgroundTint="@color/white_20_new"
+                android:padding="@dimen/trip_price_seat_padding"
+                android:src="@drawable/ic_calendar"
+                app:layout_constraintBottom_toBottomOf="@+id/date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/date"
+                app:tint="@color/white_60_new" />
+
+            <gr.fellow.fellow_traveller.ui.views.FellowEditTextNew
+                android:id="@+id/date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:bold_f="true"
+                app:editable_f="false"
+                app:error_message_f="@string/ERROR_SELECT_DATE"
+                app:hint_f="@string/date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/view211"
+                app:layout_constraintTop_toTopOf="parent"
+                app:regex_f="@string/regex_min_1_chars" />
+
+
+            <ImageView
+                android:layout_width="@dimen/trip_price_seat_dimen"
+                android:layout_height="@dimen/trip_price_seat_dimen"
+                android:background="@drawable/circle_button_shape"
+                android:backgroundTint="@color/white_20_new"
+                android:padding="@dimen/trip_price_seat_padding"
+                android:src="@drawable/ic_pin"
+                app:layout_constraintBottom_toBottomOf="@+id/destinationPickUp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/destinationPickUp"
+                app:tint="@color/white_60_new" />
+
+            <gr.fellow.fellow_traveller.ui.views.FellowEditTextNew
+                android:id="@+id/destinationPickUp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:bold_f="true"
+                app:editable_f="false"
+                app:hint_f="@string/select_destination_pick_up"
+                app:layout_constraintEnd_toEndOf="@+id/date"
+                app:layout_constraintStart_toStartOf="@+id/date"
+                app:layout_constraintTop_toBottomOf="@+id/date"
+                app:regex_f="@string/regex_min_1_chars"
+                app:text_type_f="text" />
+
+
+            <ImageView
+                android:id="@+id/view1"
+                android:layout_width="@dimen/trip_price_seat_dimen"
+                android:layout_height="@dimen/trip_price_seat_dimen"
+                android:background="@drawable/circle_button_shape"
+                android:backgroundTint="@color/white_20_new"
+                android:padding="@dimen/trip_price_seat_padding"
+                android:src="@drawable/ic_car_front"
+                app:layout_constraintBottom_toBottomOf="@+id/car"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/car"
+                app:tint="@color/white_60_new" />
+
+
+            <gr.fellow.fellow_traveller.ui.views.FellowEditTextNew
+                android:id="@+id/car"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:bold_f="true"
+                app:editable_f="false"
+                app:hint_f="@string/vehicle"
+                app:layout_constraintEnd_toEndOf="@+id/destinationPickUp"
+                app:layout_constraintStart_toStartOf="@+id/destinationPickUp"
+                app:layout_constraintTop_toBottomOf="@+id/destinationPickUp"
+                app:regex_f="@string/regex_min_1_chars" />
+
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/pick_up_image"
+                android:layout_width="0dp"
+                android:layout_height="180dp"
+                android:layout_marginTop="20dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="@+id/car"
+                app:layout_constraintStart_toStartOf="@+id/view1"
+                app:layout_constraintTop_toBottomOf="@+id/car"
+                app:shapeAppearanceOverlay="@style/roundedImageView"
+                app:srcCompat="@drawable/map_temp" />
+
+
+            <TextView
+                android:id="@+id/open_in_maps"
+                style="@style/paragraph_5_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:padding="4dp"
+                android:text="Άνοιγμα στους χάρτες"
+                android:textColor="@color/white_60_new"
+                app:layout_constraintBottom_toBottomOf="@+id/pick_up_image"
+                app:layout_constraintEnd_toEndOf="@+id/pick_up_image" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -3,6 +3,7 @@ package gr.fellow.fellow_traveller.ui.home.tabs
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
@@ -34,7 +35,7 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
 
     override fun setUpObservers() {
 
-        viewModel.notifications.observe(viewLifecycleOwner, {
+        viewModel.notifications.observe(viewLifecycleOwner, Observer {
             notifications.clear()
             notifications.addAll(it)
             (binding.recyclerView.adapter as NotificationAdapter).notifyDataSetChanged()
@@ -44,7 +45,7 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
                 binding.notificationsSection.visibility = View.GONE
         })
 
-        viewModel.loadNotifications.observe(viewLifecycleOwner, {
+        viewModel.loadNotifications.observe(viewLifecycleOwner, Observer {
             if (it) {
                 binding.notificationsSection.visibility = View.GONE
                 binding.shimmerViewContainer.startShimmerWithVisibility()
@@ -55,7 +56,7 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
 
         })
 
-        viewModel.notification.observe(viewLifecycleOwner, {
+        viewModel.notification.observe(viewLifecycleOwner, Observer {
             when (it.type) {
                 NotificationStatus.RATE -> {
                     activity?.startActivityWithFade(RateActivity::class, bundleOf("notification" to it))

@@ -2,6 +2,7 @@ package gr.fellow.fellow_traveller.ui.auth
 
 import android.view.View
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivity
@@ -14,7 +15,7 @@ import gr.fellow.fellow_traveller.ui.home.HomeActivity
 class VerifyUserAccountActivity : BaseActivity<ActivityVerifyAccountBinding>() {
 
     private val viewModel: VerifyAccountViewModel by viewModels()
-    private var token: String? = null
+    private var token: String = ""
 
     override fun provideViewBinding(): ActivityVerifyAccountBinding =
         ActivityVerifyAccountBinding.inflate(layoutInflater)
@@ -23,7 +24,7 @@ class VerifyUserAccountActivity : BaseActivity<ActivityVerifyAccountBinding>() {
     override fun handleIntent() {
         val data = intent.data
         try {
-            token = data?.getQueryParameter("token")
+            token = data?.getQueryParameter("token") ?: ""
         } catch (ex: Exception) {
 
         }
@@ -32,7 +33,7 @@ class VerifyUserAccountActivity : BaseActivity<ActivityVerifyAccountBinding>() {
 
     override fun setUpObservers() {
 
-        viewModel.load.observe(this, {
+        viewModel.load.observe(this, Observer {
             if (it)
                 binding.genericLoader.root.visibility = View.VISIBLE
             else
@@ -40,7 +41,7 @@ class VerifyUserAccountActivity : BaseActivity<ActivityVerifyAccountBinding>() {
 
         })
 
-        viewModel.error.observe(this, {
+        viewModel.error.observe(this, Observer {
             if (it.internal)
                 createToast(getString(it.messageId))
             else {
@@ -49,7 +50,7 @@ class VerifyUserAccountActivity : BaseActivity<ActivityVerifyAccountBinding>() {
             finish()
         })
 
-        viewModel.success.observe(this, {
+        viewModel.success.observe(this, Observer {
             createToast(getString(R.string.authentication_success))
             startActivityClearStack(HomeActivity::class)
         })
@@ -60,8 +61,6 @@ class VerifyUserAccountActivity : BaseActivity<ActivityVerifyAccountBinding>() {
 
     override fun setUpViews() {
         viewModel.verify(token.toString())
-
-
     }
 
 

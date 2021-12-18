@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="n">
-
+        <activity android:name=".ui.home.trip_details.TripDetailsActivity"></activity>
         <activity
             android:name=".ui.user.UserProfileDetailsActivity"
             android:screenOrientation="portrait"
@@ -47,8 +47,8 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="api.fellowtraveller.gr"
-                    android:pathPrefix="/v1/auth/verify_account/desktop"
+                    android:host="${api_url}"
+                    android:pathPrefix="/v1/auth/verify-account"
                     android:scheme="https" />
             </intent-filter>
         </activity>
@@ -102,7 +102,6 @@
         <service
             android:name=".service.NotificationJobService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-
     </application>
 
 </manifest>
