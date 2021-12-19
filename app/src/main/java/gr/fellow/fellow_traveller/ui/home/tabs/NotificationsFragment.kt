@@ -76,20 +76,20 @@ class NotificationsFragment : BaseFragment<FragmentNotificationsBinding>() {
     }
 
     override fun setUpViews() {
-        viewModel.loadNotifications()
-        binding.recyclerView.adapter = NotificationAdapter(notifications, viewModel::readNotification)
-        binding.recyclerView.hasFixedSize()
-
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            loadMoreTripsAsCreator = true
-            loadMoreTripsAsPassenger = true
-            notifications.clear()
-            (binding.recyclerView.adapter as NotificationAdapter).notifyDataSetChanged()
-            viewModel.loadNotifications(true)
-        }
-        binding.back.button.setOnClickListener {
-            activity?.onBackPressed()
-        }
+//        viewModel.loadNotifications()
+//        binding.recyclerView.adapter = NotificationAdapter(notifications, viewModel::readNotification)
+//        binding.recyclerView.hasFixedSize()
+//
+//        binding.swipeRefreshLayout.setOnRefreshListener {
+//            loadMoreTripsAsCreator = true
+//            loadMoreTripsAsPassenger = true
+//            notifications.clear()
+//            (binding.recyclerView.adapter as NotificationAdapter).notifyDataSetChanged()
+//            viewModel.loadNotifications(true)
+//        }c
+//        binding.back.button.setOnClickListener {
+//            activity?.onBackPressed()
+//        }
     }
 
 

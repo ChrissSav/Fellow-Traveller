@@ -1,21 +1,14 @@
 package gr.fellow.fellow_traveller.ui.home.trip_fragments
 
 import android.annotation.SuppressLint
-import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
-import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentTripInvolvedDetailsBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
-import gr.fellow.fellow_traveller.ui.extensions.loadDestination
 import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
-import gr.fellow.fellow_traveller.ui.extensions.openGoogleMaps
-import gr.fellow.fellow_traveller.ui.extensions.setDestination
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
-import gr.fellow.fellow_traveller.utils.convertTimestampToFormat
 
 @AndroidEntryPoint
 class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBinding>() {
@@ -119,32 +112,32 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
         }*/
 
-        viewModel.tripInvolvedDetails.observe(viewLifecycleOwner) { trip ->
-
-            with(binding) {
-
-                destinationFrom.setDestination(trip.destFrom)
-                destinationTo.setDestination(trip.destTo)
-
-                pet.visibility = if (trip.hasPet) View.VISIBLE else View.GONE
-
-                date.text = convertTimestampToFormat(trip.timestamp, "EEE dd MMM, HH:mm")
-                price.text = getString(R.string.price, trip.price.toString())
-                seats.text = "${trip.seatAvailable}/${trip.seats}"
-                bags.text = getString(trip.bags.textInt)
-
-                destinationPickUp.text = trip.destPickUp.title.replace("$$", " ")
-
-                car.text = trip.car.baseInfo
-
-                pickUpImage.loadDestination(trip.destPickUp)
-
-                binding.openInMaps.setOnClickListener {
-                    activity?.openGoogleMaps(trip.destPickUp)
-                }
-            }
-
-        }
+//        viewModel.tripInvolvedDetails.observe(viewLifecycleOwner) { trip ->
+//
+//            with(binding) {
+//
+//                destinationFrom.setDestination(trip.destFrom)
+//                destinationTo.setDestination(trip.destTo)
+//
+//                pet.visibility = if (trip.hasPet) View.VISIBLE else View.GONE
+//
+//                date.text = convertTimestampToFormat(trip.timestamp, "EEE dd MMM, HH:mm")
+//                price.text = getString(R.string.price, trip.price.toString())
+//                seats.text = "${trip.seatAvailable}/${trip.seats}"
+//                bags.text = getString(trip.bags.textInt)
+//
+//                destinationPickUp.text = trip.destPickUp.title.replace("$$", " ")
+//
+//                car.text = trip.car.baseInfo
+//
+//                pickUpImage.loadDestination(trip.destPickUp)
+//
+//                binding.openInMaps.setOnClickListener {
+//                    activity?.openGoogleMaps(trip.destPickUp)
+//                }
+//            }
+//
+//        }
     }
 
 
@@ -157,7 +150,7 @@ class TripInvolvedDetailsFragment : BaseFragment<FragmentTripInvolvedDetailsBind
 
 
         if (!args.history) {
-            viewModel.loadTripActiveInvolvedDetails(args.tripId, args.reload, args.notificationId)
+            //  viewModel.loadTripActiveInvolvedDetails(args.tripId, args.reload, args.notificationId)
         }
         /* binding.overlappingPanels.setStartPanelLockState(OverlappingPanelsLayout.LockState.CLOSE)
          binding.overlappingPanels.setEndPanelLockState(OverlappingPanelsLayout.LockState.CLOSE)

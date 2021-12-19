@@ -7,6 +7,7 @@ import android.net.Uri
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
@@ -28,10 +29,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         FragmentProfileBinding.inflate(layoutInflater)
 
 
+    @SuppressLint("SetTextI18n")
     override fun setUpObservers() {
 
 
-        viewModel.user.observe(viewLifecycleOwner, { user ->
+        viewModel.user.observe(viewLifecycleOwner, Observer { user ->
 
             with(binding) {
 
@@ -49,7 +51,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 }
             }
         })
-        viewModel.cars.observe(viewLifecycleOwner, { car ->
+        viewModel.cars.observe(viewLifecycleOwner, Observer { car ->
             if (car.size > 0) {
                 binding.addCarSection.visibility = View.GONE
             } else {

@@ -107,9 +107,9 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
 
         viewModelSecond.notificationCount.observe(this, Observer {
-            if (it > 0)
-                viewModel.loadNotifications(true)
-            setUpNotifications(it)
+//            if (it > 0)
+//                viewModel.loadNotifications(true)
+//            setUpNotifications(it)
         })
 
     }
@@ -130,8 +130,8 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
          viewModel.loadTripsAsPassenger()
          viewModel.loadTripsAsCreatorHistory()
          viewModel.loadTripsAsPassengerHistory()*/
-        viewModel.loadNotifications()
-        viewModel.loadReviews()
+//        viewModel.loadNotifications()
+//        viewModel.loadReviews()
 
         scheduleJob()
         initialBottomNavButtonsList()
@@ -164,7 +164,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
         val networkCallback: NetworkCallback = object : NetworkCallback() {
             override fun onAvailable(network: Network) {
                 Timer("SettingUp", false).schedule(1000) {
-                    viewModel.reload(true)
+                    // viewModel.reload(true)
                 }
 
             }
@@ -295,7 +295,7 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
                     }
                 }
 
-                viewModel.loadConversations(tempList)
+                //  viewModel.loadConversations(tempList)
 
             }
 
@@ -316,6 +316,6 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
 
 
     fun readAllUnReadNotification() {
-        viewModel.readAllUnReadNotification()
+        // viewModel.readAllUnReadNotification()
     }
 }

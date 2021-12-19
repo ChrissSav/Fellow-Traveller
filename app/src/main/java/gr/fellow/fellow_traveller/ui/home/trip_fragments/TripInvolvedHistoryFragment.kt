@@ -11,7 +11,6 @@ import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentTripInvolvedHistoryBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.ui.extensions.findNavController
-import gr.fellow.fellow_traveller.ui.extensions.onBackPressed
 import gr.fellow.fellow_traveller.ui.extensions.startShimmerWithVisibility
 import gr.fellow.fellow_traveller.ui.extensions.stopShimmerWithVisibility
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
@@ -72,29 +71,29 @@ class TripInvolvedHistoryFragment : BaseFragment<FragmentTripInvolvedHistoryBind
     }
 
     override fun setUpViews() {
-        if (args.creator) {
-            viewModel.loadTripsAsCreatorHistory()
-            binding.recyclerView.adapter = TripsHistoryAdapter(R.drawable.background_stroke_radius_27_green, this@TripInvolvedHistoryFragment::onTripClick)
-            binding.label.text = getString(R.string.my_offers)
-        } else {
-            viewModel.loadTripsAsPassengerHistory()
-            binding.recyclerView.adapter = TripsHistoryAdapter(R.drawable.background_stroke_radius_27_orange, this@TripInvolvedHistoryFragment::onTripClick)
-            binding.label.text = getString(R.string.my_bookings)
-        }
-
-
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            if (args.creator)
-                viewModel.loadTripsAsCreatorHistory(true)
-            else
-                viewModel.loadTripsAsPassengerHistory(true)
-
-            (binding.recyclerView.adapter as TripsHistoryAdapter).submitList(null)
-        }
-
-        binding.backButton.setOnClickListener {
-            onBackPressed()
-        }
+//        if (args.creator) {
+//            viewModel.loadTripsAsCreatorHistory()
+//            binding.recyclerView.adapter = TripsHistoryAdapter(R.drawable.background_stroke_radius_27_green, this@TripInvolvedHistoryFragment::onTripClick)
+//            binding.label.text = getString(R.string.my_offers)
+//        } else {
+//            viewModel.loadTripsAsPassengerHistory()
+//            binding.recyclerView.adapter = TripsHistoryAdapter(R.drawable.background_stroke_radius_27_orange, this@TripInvolvedHistoryFragment::onTripClick)
+//            binding.label.text = getString(R.string.my_bookings)
+//        }
+//
+//
+//        binding.swipeRefreshLayout.setOnRefreshListener {
+//            if (args.creator)
+//                viewModel.loadTripsAsCreatorHistory(true)
+//            else
+//                viewModel.loadTripsAsPassengerHistory(true)
+//
+//            (binding.recyclerView.adapter as TripsHistoryAdapter).submitList(null)
+//        }
+//
+//        binding.backButton.setOnClickListener {
+//            onBackPressed()
+//        }
 
     }
 

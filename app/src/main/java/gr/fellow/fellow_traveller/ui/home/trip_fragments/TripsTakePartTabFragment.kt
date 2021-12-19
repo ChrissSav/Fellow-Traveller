@@ -11,7 +11,10 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentTakesPartTabBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
-import gr.fellow.fellow_traveller.ui.extensions.*
+import gr.fellow.fellow_traveller.ui.extensions.findNavController
+import gr.fellow.fellow_traveller.ui.extensions.startActivityForResult
+import gr.fellow.fellow_traveller.ui.extensions.startShimmerWithVisibility
+import gr.fellow.fellow_traveller.ui.extensions.stopShimmerWithVisibility
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.home.adapter.TripsInvolvedAdapter
 import gr.fellow.fellow_traveller.ui.search.SearchTripActivity
@@ -65,7 +68,7 @@ class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             (binding.recyclerView.adapter as TripsInvolvedAdapter).submitList(null)
-            viewModel.loadTripsAsPassenger(true)
+            // viewModel.loadTripsAsPassenger(true)
         }
 
     }
@@ -84,7 +87,7 @@ class TripsTakePartTabFragment : BaseFragment<FragmentTakesPartTabBinding>() {
             if (resultCode == Activity.RESULT_OK) {
                 val trip = data?.getParcelableExtra<TripInvolved>("trip")
                 trip?.let {
-                    viewModel.addTripPassenger(it)
+                    //  viewModel.addTripPassenger(it)
                 }
             }
 

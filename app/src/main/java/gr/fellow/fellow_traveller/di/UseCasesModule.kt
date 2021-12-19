@@ -33,11 +33,17 @@ import gr.fellow.fellow_traveller.usecase.user.LoadUserLocalInfoUseCase
 @Module
 class UseCasesModule {
 
+    @ActivityScoped
+    @Provides
+    fun provideGetHistoryInvolvedTripsUseCase(dataSource: FellowDataSource): GetHistoryInvolvedTripsUseCase {
+        return GetHistoryInvolvedTripsUseCase(dataSource)
+    }
+
 
     @ActivityScoped
     @Provides
-    fun provideGetTripsInvolvedRemoteUseCase(dataSource: FellowDataSource): GetTripsInvolvedRemoteUseCase {
-        return GetTripsInvolvedRemoteUseCase(dataSource)
+    fun provideGetActiveInvolvedTripsUseCase(dataSource: FellowDataSource): GetActiveInvolvedTripsUseCase {
+        return GetActiveInvolvedTripsUseCase(dataSource)
     }
 
     @ActivityScoped

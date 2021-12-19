@@ -106,4 +106,6 @@
     <dimen name="trip_price_seat_dimen">32dp</dimen>
     <dimen name="trip_price_seat_padding">9dp</dimen>
 
+
+    <dimen name="top_buttons_width_height">44dp</dimen>
 </resources>

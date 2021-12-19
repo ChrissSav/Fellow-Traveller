@@ -9,7 +9,7 @@ import android.text.InputFilter.LengthFilter
 import android.text.TextWatcher
 import android.view.View
 import androidx.core.os.bundleOf
-import androidx.lifecycle.observe
+import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseActivityViewModel
@@ -80,7 +80,7 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
 
 
 
-        viewModel.carList.observe(this) { list ->
+        viewModel.carList.observe(this, Observer { list ->
             if (list.isNullOrEmpty()) {
                 createToast(getString(R.string.have_not_cars))
                 finish()
@@ -89,58 +89,58 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
                 viewModel.setCar(list.first())
             carList.clear()
             carList.addAll(list)
-        }
+        })
 
-        viewModel.error.observe(this) {
+        viewModel.error.observe(this, Observer {
             if (it.internal)
                 createAlerter(getString(it.messageId), R.color.green)
             else
                 createAlerter(it.message, R.color.blue_color)
-        }
+        })
 
-        viewModel.load.observe(this) {
+        viewModel.load.observe(this, Observer {
             if (it)
                 binding.progressLoad.root.visibility = View.VISIBLE
             else
                 binding.progressLoad.root.visibility = View.GONE
 
-        }
+        })
 
-        viewModel.destinationFrom.observe(this) {
+        viewModel.destinationFrom.observe(this, Observer {
             binding.destinationFrom.setDestination(it)
-        }
+        })
 
-        viewModel.destinationTo.observe(this) {
+        viewModel.destinationTo.observe(this, Observer {
             binding.destinationTo.setDestination(it)
-        }
+        })
 
-        viewModel.destinationPickUp.observe(this) {
+        viewModel.destinationPickUp.observe(this, Observer {
             binding.pickUpDestination.text = it.title
-        }
+        })
 
 
-        viewModel.date.observe(this) {
+        viewModel.date.observe(this, Observer {
             binding.date.text = it
-        }
+        })
 
-        viewModel.time.observe(this) {
+        viewModel.time.observe(this, Observer {
             binding.time.text = it
-        }
+        })
 
-        viewModel.price.observe(this) {
+        viewModel.price.observe(this, Observer {
             if (binding.pricePerPerson.text.isNullOrEmpty())
                 binding.pricePerPerson.setText("$it")
 
             pricePerPerson = it
             calculateTotalPrice()
-        }
+        })
 
-        viewModel.car.observe(this) {
+        viewModel.car.observe(this, Observer {
             binding.car.text = it.fullInfo
-        }
+        })
 
 
-        viewModel.seats.observe(this) {
+        viewModel.seats.observe(this, Observer {
             binding.seatsPickButton.currentNum = it
             seatsNum = it
             calculateTotalPrice()
@@ -149,22 +149,22 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
             } else {
                 binding.seats.text = "$it ${getString(R.string.seats)}"
             }
-        }
+        })
 
 
-        viewModel.bags.observe(this) {
+        viewModel.bags.observe(this, Observer {
             binding.bags.text = getString(it.textInt)
-        }
+        })
 
-        viewModel.success.observe(this) {
+        viewModel.success.observe(this, Observer {
             createToast(getString(R.string.submit_trip_offer_success))
             val resultIntent = Intent()
             resultIntent.putExtra("trip", it)
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
-        }
+        })
 
-        viewModel.pet.observe(this) {
+        viewModel.pet.observe(this, Observer {
             if (it != binding.petsSwitch.isChecked)
                 binding.petsSwitch.isChecked = it
             if (it) {
@@ -172,7 +172,7 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
             } else {
                 binding.pet.text = getString(R.string.not_allowed)
             }
-        }
+        })
 
 
     }
@@ -297,8 +297,10 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
 
 
     private fun calculateTotalPrice() {
-        binding.totalPrice.setSpanTextColor(Pair("$seatsNum x ${pricePerPerson} ${getString(R.string.euro_symbol)}\n${getString(R.string.sum)} ", R.color.white_60_new),
-            Pair("${pricePerPerson * seatsNum} ${getString(R.string.euro_symbol)}", R.color.white))
+        binding.totalPrice.setSpanTextColor(
+            Pair("$seatsNum x ${pricePerPerson} ${getString(R.string.euro_symbol)}\n${getString(R.string.sum)} ", R.color.white_60_new),
+            Pair("${pricePerPerson * seatsNum} ${getString(R.string.euro_symbol)}", R.color.white)
+        )
     }
 
 //    @SuppressLint("RestrictedApi")

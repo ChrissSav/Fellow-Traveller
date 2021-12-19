@@ -66,7 +66,16 @@ class TripDetailsActivity : BaseActivityViewModel<ActivityTripDetailsBinding, Tr
 
                 car.text = trip.car.baseInfo
 
-                pickUpImage.loadDestinationImage(trip.destPickUp, if (it.first.creatorUser.id == it.second.id) getString(R.color.green_new) else getString(R.color.orange_new))
+
+                if (it.first.creatorUser.id == it.second.id) {
+                    arrow.backgroundTintList = resources.getColorStateList(R.color.green_20_new, null)
+                    arrow.imageTintList = resources.getColorStateList(R.color.green_new, null)
+                    pickUpImage.loadDestinationImage(trip.destPickUp, getString(R.color.green_new))
+                } else {
+                    arrow.backgroundTintList = resources.getColorStateList(R.color.orange_20_new, null)
+                    arrow.imageTintList = resources.getColorStateList(R.color.orange_new, null)
+                    pickUpImage.loadDestinationImage(trip.destPickUp, getString(R.color.orange_new))
+                }
 
                 binding.openInMaps.setOnClickListener {
                     openGoogleMaps(trip.destPickUp)

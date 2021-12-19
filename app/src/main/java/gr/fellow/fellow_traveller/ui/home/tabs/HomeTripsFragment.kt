@@ -6,14 +6,14 @@ import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentHomeTripsBinding
 import gr.fellow.fellow_traveller.ui.home.adapter.TripsViewPagerAdapter
 import gr.fellow.fellow_traveller.ui.home.trip_fragments.TripsActiveTabFragment
-import gr.fellow.fellow_traveller.ui.home.trip_fragments.TripsOffersTabFragment
+import gr.fellow.fellow_traveller.ui.home.trip_fragments.TripsHistoryTabFragment
 
 
 @AndroidEntryPoint
 class HomeTripsFragment : BaseFragment<FragmentHomeTripsBinding>() {
 
     private var tripsActiveTabFragment = TripsActiveTabFragment()
-    private var tripsOffersFragment = TripsOffersTabFragment()
+    private var tripsOffersFragment = TripsHistoryTabFragment()
 
     override fun getViewBinding(): FragmentHomeTripsBinding =
         FragmentHomeTripsBinding.inflate(layoutInflater)

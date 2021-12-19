@@ -124,7 +124,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             if (resultCode == Activity.RESULT_OK) {
                 val trip = data?.getParcelableExtra<TripInvolved>("trip")
                 trip?.let {
-                    viewModel.addTripCreate(it)
+                   // viewModel.addTripCreate(it)
                 }
             }
 
@@ -134,7 +134,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             if (resultCode == Activity.RESULT_OK) {
                 val trip = data?.getParcelableExtra<TripInvolved>("trip")
                 trip?.let {
-                    viewModel.addTripPassenger(it)
+                    // viewModel.addTripPassenger(it)
                 }
             }
 

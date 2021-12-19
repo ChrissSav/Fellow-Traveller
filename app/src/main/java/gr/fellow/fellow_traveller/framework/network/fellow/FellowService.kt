@@ -70,7 +70,7 @@ interface FellowService {
         @Body updateAccountRequest: UpdateAccountRequest,
     ): Response<BaseResponse<UserAuthResponse>>
 
-    @GET("users/me")
+    @GET("users")
     suspend fun getUserInfo(
     ): Response<BaseResponse<UserAuthResponse>>
 
