@@ -30,7 +30,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/trip_active_item_layout" />
+                tools:listitem="@layout/trip_history_item_layout" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout

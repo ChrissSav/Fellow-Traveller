@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
@@ -79,12 +78,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         binding.allCars.setOnClickListener {
             findNavController()?.navigate(R.id.action_destination_info_to_userCarsFragment)
         }
-        binding.allBookings.setOnClickListener {
+        /*binding.allBookings.setOnClickListener {
             findNavController()?.navigate(R.id.action_destination_info_to_tripInvolvedHistoryFragment, bundleOf("creator" to false))
         }
         binding.allOffers.setOnClickListener {
             findNavController()?.navigate(R.id.action_destination_info_to_tripInvolvedHistoryFragment, bundleOf("creator" to true))
-        }
+        }*/
         binding.addCarSection.setOnClickListener {
             startActivityForResult(AddCarActivity::class, 1, null)
         }

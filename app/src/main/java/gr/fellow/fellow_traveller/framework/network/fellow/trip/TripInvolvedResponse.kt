@@ -26,7 +26,6 @@ data class TripInvolvedResponse(
     val price: Float,
     val timestamp: Long,
     val passengers: MutableList<PassengerResponse>,
-    val picture: String,
     val status: Int,
 ) {
 

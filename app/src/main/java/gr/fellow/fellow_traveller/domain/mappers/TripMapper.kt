@@ -11,7 +11,7 @@ import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripSearchRespon
 
 fun TripInvolvedResponse.mapTripInvolved() = TripInvolved(
     id, destFrom.mapDestination(), destTo.mapDestination(), destPickUp.mapDestination(), creator.mapToUserCreatorResponse(), car.mapToCarInfoBase(), hasPet, seats,
-    getBagsStatus(), msg, price, timestamp, passengers.mapToPassenger(), picture, getTripStatus()
+    getBagsStatus(), msg, price, timestamp, passengers.mapToPassenger(), getTripStatus()
 )
 
 

@@ -147,13 +147,13 @@ constructor(
             //We create only the creator's conversation
             createOrEnterConversationFirebaseUseCase.invoke(
                 userBase.id, userBase.id, response.id, response.destFrom.title + " - "
-                        + response.destTo.title, response.picture, response.creatorUser.fullName
+                        + response.destTo.title, "response.picture", response.creatorUser.fullName
             )
 
             //We create a temp list with id, in this case we add only creator id and then we send a message with type 3(First Messag)
             val tempIdList = mutableListOf<String>()
             tempIdList.add(response.creatorUser.id)
-            sendMessageFirebaseUseCase.invoke(userBase.id, response.id, "", "", 3, tempIdList, response.picture)
+            sendMessageFirebaseUseCase.invoke(userBase.id, response.id, "", "", 3, tempIdList, "response.picture")
 
             return@launchAfter response
 

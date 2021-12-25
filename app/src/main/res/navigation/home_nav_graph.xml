@@ -50,13 +50,6 @@
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
-        <action
-            android:id="@+id/action_destination_trips_to_tripInvolvedHistoryFragment"
-            app:destination="@id/tripInvolvedHistoryFragment"
-            app:enterAnim="@anim/enter_from_right"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
     </fragment>
 
 
@@ -68,13 +61,6 @@
         <action
             android:id="@+id/action_destination_info_to_userCarsFragment"
             app:destination="@id/userCarsFragment"
-            app:enterAnim="@anim/enter_from_right"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
-        <action
-            android:id="@+id/action_destination_info_to_tripInvolvedHistoryFragment"
-            app:destination="@id/tripInvolvedHistoryFragment"
             app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
@@ -146,23 +132,6 @@
         android:name="gr.fellow.fellow_traveller.ui.home.settings.ChangePasswordFragment"
         android:label="fragment_change_password"
         tools:layout="@layout/fragment_change_password" />
-    <fragment
-        android:id="@+id/tripInvolvedHistoryFragment"
-        android:name="gr.fellow.fellow_traveller.ui.home.trip_fragments.TripInvolvedHistoryFragment"
-        android:label="fragment_trip_involved_history"
-        tools:layout="@layout/fragment_trip_involved_history">
-        <argument
-            android:name="creator"
-            android:defaultValue="false"
-            app:argType="boolean" />
-        <action
-            android:id="@+id/action_tripInvolvedHistoryFragment_to_tripInvolvedDetailsFragment"
-            app:destination="@id/tripInvolvedDetailsSecondFragment"
-            app:enterAnim="@anim/enter_from_right"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
-    </fragment>
     <fragment
         android:id="@+id/profileReviewsFragment"
         android:name="gr.fellow.fellow_traveller.ui.home.reviews.ProfileReviewsFragment"

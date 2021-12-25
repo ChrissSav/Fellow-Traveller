@@ -8,27 +8,27 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.data.base.BaseFragment
-import gr.fellow.fellow_traveller.databinding.FragmentTripsOffersBinding
+import gr.fellow.fellow_traveller.databinding.FragmentTripsHistoryTabBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.ui.extensions.startActivityForResultWithFade
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
-import gr.fellow.fellow_traveller.ui.home.adapter.TripsActiveAdapter
+import gr.fellow.fellow_traveller.ui.home.adapter.TripsHistoryAdapter
 import gr.fellow.fellow_traveller.ui.home.trip_details.TripDetailsActivity
 
 
 @AndroidEntryPoint
-class TripsHistoryTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
+class TripsHistoryTabFragment : BaseFragment<FragmentTripsHistoryTabBinding>() {
 
     private val viewModel: HomeViewModel by activityViewModels()
 
-    override fun getViewBinding(): FragmentTripsOffersBinding =
-        FragmentTripsOffersBinding.inflate(layoutInflater)
+    override fun getViewBinding(): FragmentTripsHistoryTabBinding =
+        FragmentTripsHistoryTabBinding.inflate(layoutInflater)
 
     override fun setUpObservers() {
 
         viewModel.tripsHistory.observe(viewLifecycleOwner, Observer { list ->
-            (binding.recyclerView.adapter as TripsActiveAdapter).submitList(null)
-            (binding.recyclerView.adapter as TripsActiveAdapter).submitList(list)
+            (binding.recyclerView.adapter as TripsHistoryAdapter).submitList(null)
+            (binding.recyclerView.adapter as TripsHistoryAdapter).submitList(list)
             binding.swipeRefreshLayout.isRefreshing = false
 
             //Check if we have active trips
@@ -42,11 +42,11 @@ class TripsHistoryTabFragment : BaseFragment<FragmentTripsOffersBinding>() {
 
     override fun setUpViews() {
         viewModel.loadHistoryTrips()
-        binding.recyclerView.adapter = TripsActiveAdapter(viewModel.currentUser.id, this@TripsHistoryTabFragment::onTripClick)
+        binding.recyclerView.adapter = TripsHistoryAdapter(viewModel.currentUser.id, this@TripsHistoryTabFragment::onTripClick)
 
 
         binding.swipeRefreshLayout.setOnRefreshListener {
-            (binding.recyclerView.adapter as TripsActiveAdapter).submitList(null)
+            (binding.recyclerView.adapter as TripsHistoryAdapter).submitList(null)
             viewModel.loadHistoryTrips(true)
         }
     }
