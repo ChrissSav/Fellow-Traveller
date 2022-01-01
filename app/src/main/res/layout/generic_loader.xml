@@ -6,25 +6,20 @@
     android:clickable="true"
     android:elevation="16dp"
     android:focusable="true"
-    android:background="@color/background_color_progress"
+    android:background="#80000000"
     android:focusableInTouchMode="true">
 
-    <com.agrawalsuneet.dotsloader.loaders.LazyLoader
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spin_kit"
+        style="@style/SpinKitView.FoldingCube"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="16dp"
+        app:SpinKit_Color="@color/green_60_new"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lazyloader_animDur="250"
-        app:lazyloader_dotsDist="10dp"
-        android:layout_gravity="center"
-        app:lazyloader_dotsRadius="7dp"
-        app:lazyloader_firstDelayDur="150"
-        app:lazyloader_firstDotColor="@color/black_color"
-        app:lazyloader_interpolator="@android:anim/decelerate_interpolator"
-        app:lazyloader_secondDelayDur="300"
-        app:lazyloader_secondDotColor="@color/black_color"
-        app:lazyloader_thirdDotColor="@color/black_color" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </FrameLayout>

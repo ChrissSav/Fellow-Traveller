@@ -9,5 +9,6 @@ data class DestinationResponse(
     val id: String,
     val title: String,
     val latitude: Float,
-    val longitude: Float
+    val longitude: Float,
+    val administrative: AdministrativeResponse
 ) : Parcelable

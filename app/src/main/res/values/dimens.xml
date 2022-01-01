@@ -108,4 +108,8 @@
 
 
     <dimen name="top_buttons_width_height">44dp</dimen>
+
+    <!-- Trip -->
+    <dimen name="trip_administrative_width_height">80dp</dimen>
+
 </resources>

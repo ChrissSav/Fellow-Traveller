@@ -140,12 +140,11 @@ fun Activity.openGoogleMaps(destination: Destination) {
     val uri = "https://maps.google.com/?q=${destination.title.replace("$$", " ").replace(" ", "+")}"
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
     startActivity(Intent.createChooser(intent, getString(R.string.select_application)))
-
 }
 
 
 fun Activity.openGoogleMaps(trip: TripInvolved) {
-    val uri = "https://www.google.com/maps/dir/${trip.destFrom.title}/${trip.destTo.title}/"
+    val uri = "https://www.google.com/maps/dir/${trip.destFrom.fullTitle}/${trip.destTo.fullTitle}/"
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
     startActivity(Intent.createChooser(intent, getString(R.string.select_application)))
 }
@@ -303,13 +302,23 @@ fun ImageView.loadImageFromUrl(url: String?) {
 
 fun ImageView.loadDestination(destination: Destination) {
     Glide.with(this.context)
-        .load(BuildConfig.FELLOW_API_URL + "images/destination?latitude=${destination.latitude}&longitude=${destination.longitude}&height=720&width=720")
+        .load(BuildConfig.FELLOW_API_URL + "images/destinations?latitude=${destination.latitude}&longitude=${destination.longitude}&height=720&width=720")
         .into(this)
 }
 
 fun ImageView.loadDestinationImage(destination: Destination, color: String) {
     Glide.with(this.context)
         .load(BuildConfig.FELLOW_API_URL + "images/destination?latitude=${destination.latitude}&longitude=${destination.longitude}&height=720&width=720&color=${color.substring(3)}")
+        .into(this)
+}
+
+fun ImageView.loadDirectionsImage(trip: TripInvolved, color: String) {
+    Glide.with(this.context)
+        .load(
+            BuildConfig.FELLOW_API_URL + "images/directions?latitudeStart=${trip.destFrom.latitude}&longitudeStart=${trip.destFrom.longitude}" +
+                    "&latitudeEnd=${trip.destTo.latitude}&longitudeEnd=${trip.destTo.longitude}" +
+                    "&height=720&width=720&color=%23${color.substring(3)}"
+        )
         .into(this)
 }
 

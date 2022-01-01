@@ -9,7 +9,7 @@ import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.databinding.TripHistoryItemLayoutBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.ui.extensions.TripInvolvedDiffCallback
-import gr.fellow.fellow_traveller.ui.extensions.setDestination
+import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
 import gr.fellow.fellow_traveller.utils.convertTimestampToFormat
 import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
 
@@ -28,9 +28,14 @@ class TripsHistoryAdapter(
 
         with(holder) {
             val currentTrip = currentList[position]
-            binding.destinationFrom.text = currentTrip.destFrom.title
-            binding.destinationTo.setDestination(currentTrip.destTo)
-            binding.date.text = getDateFromTimestamp(currentTrip.timestamp, "EEE, dd MMM")
+            binding.destinationFromAdministrative.text = currentTrip.destFrom.administrative?.title
+            binding.destinationFromDes.text = currentTrip.destFrom.title
+            binding.destinationToAdministrative.text = currentTrip.destTo.administrative?.title
+            binding.destinationToDes.text = currentTrip.destTo.title
+            binding.pictureFrom.loadImageFromUrl(currentTrip.destFrom.administrative?.image)
+            binding.pictureTo.loadImageFromUrl(currentTrip.destTo.administrative?.image)
+
+            binding.date.text = getDateFromTimestamp(currentTrip.timestamp, "EEE, dd MMM yyyy")
 
             binding.root.setOnClickListener {
                 onTripClickListener.invoke(currentTrip)
@@ -56,6 +61,7 @@ class TripsHistoryAdapter(
             }
         }
     }
+
 
     class ViewHolder(val binding: TripHistoryItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 }

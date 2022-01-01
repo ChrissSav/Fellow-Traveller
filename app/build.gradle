@@ -220,10 +220,11 @@ dependencies {
     //Discord Overlaps
     implementation 'com.github.discord:OverlappingPanels:0.1.1'
 
-    implementation 'com.agrawalsuneet.androidlibs:dotsloader:1.4'
-
     //Animations
     implementation 'com.airbnb.android:lottie:3.4.0'
+
+    //Android-SpinKit
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
 
 }

@@ -25,11 +25,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+
             <ImageView
                 android:id="@+id/arrow"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/button_background_green_30dp_without_ripple"
+                android:background="@drawable/button_background_green_30dp"
                 android:backgroundTint="@color/orange_20_new"
                 android:padding="4dp"
                 android:src="@drawable/ic_arrow_right"
@@ -40,52 +41,55 @@
                 app:tint="@color/orange_60_new" />
 
             <TextView
-                android:id="@+id/destination_from"
+                android:id="@+id/destination_from_administrative"
                 style="@style/header_6_new"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
-                android:lineSpacingExtra="4dp"
-                android:maxLines="2"
+                android:layout_marginEnd="8dp"
                 android:text="@string/placeholder_city_athens"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/arrow"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
             <TextView
-                android:id="@+id/destination_to"
+                android:id="@+id/destination_from_des"
+                style="@style/paragraph_4_new"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/placeholder_city_athens"
+                app:layout_constraintEnd_toEndOf="@+id/destination_from_administrative"
+                app:layout_constraintStart_toStartOf="@+id/destination_from_administrative"
+                app:layout_constraintTop_toBottomOf="@+id/destination_from_administrative" />
+
+            <TextView
+                android:id="@+id/destination_to_administrative"
                 style="@style/header_6_new"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:gravity="end"
-                android:lineSpacingExtra="4dp"
-                android:maxLines="2"
                 android:text="@string/placeholder_city_thessaloniki"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/arrow"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/destination_to_des"
+                style="@style/paragraph_4_new"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="@string/placeholder_city_athens"
+                app:layout_constraintEnd_toEndOf="@+id/destination_to_administrative"
+                app:layout_constraintStart_toStartOf="@+id/destination_to_administrative"
+                app:layout_constraintTop_toTopOf="@+id/destination_from_des" />
 
-        <TextView
-            android:id="@+id/description"
-            style="@style/paragraph_3_new"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Gravid ultrices et purus sollicitudin tujkguyfgufgyiftyfdrtftrer ghijgrpis convallis. Dui. consectetur..."
-            app:layout_constraintEnd_toEndOf="@+id/constraintLayout_trip_destinations"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout_trip_destinations" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -95,7 +99,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description">
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout_trip_destinations">
 
 
             <com.google.android.material.button.MaterialButton
@@ -147,14 +151,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/background_orange_8dp"
+                android:backgroundTintMode="src_over"
                 android:clickable="false"
                 android:paddingStart="8dp"
                 android:paddingTop="4dp"
                 android:paddingEnd="8dp"
                 android:paddingBottom="4dp"
-                android:textColor="@color/white"
-                android:backgroundTintMode="src_over"
                 android:text="@string/active_item_price"
+                android:textColor="@color/white"
                 app:backgroundTint="@color/green_60_new"
                 app:icon="@drawable/ic_cash"
                 app:iconGravity="textStart"

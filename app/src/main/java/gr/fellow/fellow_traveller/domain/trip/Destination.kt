@@ -8,5 +8,10 @@ data class Destination(
     val placeId: String,
     val title: String,
     val latitude: Float?,
-    val longitude: Float?
-) : Parcelable
+    val longitude: Float?,
+    val administrative: Administrative?
+) : Parcelable {
+
+    val fullTitle
+        get() = "$title, ${administrative?.title}"
+}

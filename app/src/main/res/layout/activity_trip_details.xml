@@ -24,6 +24,7 @@
         <ImageButton
             android:id="@+id/button"
             android:layout_width="@dimen/top_buttons_width_height"
+            android:visibility="invisible"
             android:layout_height="@dimen/top_buttons_width_height"
             android:background="@drawable/background_stroke_radius_16_alpha_grey"
             android:src="@drawable/ic_options"
@@ -32,83 +33,121 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/back" />
 
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/picture_from"
+            android:layout_width="@dimen/trip_administrative_width_height"
+            android:layout_height="@dimen/trip_administrative_width_height"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/ic_boy"
+            app:layout_constraintBottom_toBottomOf="@+id/picture_to"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout18"
+            app:layout_constraintTop_toTopOf="@+id/picture_to" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/picture_to"
+            android:layout_width="@dimen/trip_administrative_width_height"
+            android:layout_height="@dimen/trip_administrative_width_height"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/ic_boy"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout18"
+            app:layout_constraintTop_toBottomOf="@+id/button" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout18"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:background="@drawable/button_background_orange_16dp"
             android:backgroundTint="@color/black_20_new"
             android:padding="16dp"
+            android:translationY="-8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/back">
+            app:layout_constraintTop_toBottomOf="@+id/picture_to">
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout_trip_destinations"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/arrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/button_background_green_30dp"
+                android:backgroundTint="@color/orange_20_new"
+                android:padding="4dp"
+                android:src="@drawable/ic_arrow_right"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/orange_60_new" />
 
-                <ImageView
-                    android:id="@+id/arrow"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/button_background_green_30dp"
-                    android:backgroundTint="@color/orange_20_new"
-                    android:padding="4dp"
-                    android:src="@drawable/ic_arrow_right"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/orange_60_new" />
-
-                <TextView
-                    android:id="@+id/destination_from"
-                    style="@style/header_4_new"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:lineSpacingExtra="4dp"
-                    android:maxLines="2"
-                    android:text="@string/placeholder_city_athens"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/arrow"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/destination_from_administrative"
+                style="@style/header_4_new"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/placeholder_city_athens"
+                app:layout_constraintEnd_toStartOf="@+id/arrow"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-                <TextView
-                    android:id="@+id/destination_to"
-                    style="@style/header_4_new"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:gravity="end"
-                    android:lineSpacingExtra="4dp"
-                    android:maxLines="2"
-                    android:text="@string/placeholder_city_thessaloniki"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/arrow"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/destination_from_des"
+                style="@style/paragraph_3_new"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/placeholder_city_athens"
+                app:layout_constraintEnd_toEndOf="@+id/destination_from_administrative"
+                app:layout_constraintStart_toStartOf="@+id/destination_from_administrative"
+                app:layout_constraintTop_toBottomOf="@+id/destination_from_administrative" />
+
+            <TextView
+                android:id="@+id/destination_to_administrative"
+                style="@style/header_4_new"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:gravity="end"
+                android:text="@string/placeholder_city_thessaloniki"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/arrow"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/destination_to_des"
+                style="@style/paragraph_3_new"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="@string/placeholder_city_athens"
+                app:layout_constraintEnd_toEndOf="@+id/destination_to_administrative"
+                app:layout_constraintStart_toStartOf="@+id/destination_to_administrative"
+                app:layout_constraintTop_toTopOf="@+id/destination_from_des" />
+
+            <TextView
+                android:id="@+id/description"
+                style="@style/paragraph_2_new"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/no_description_available"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/destination_to_des"
+                app:layout_constraintStart_toStartOf="@+id/destination_from_des"
+                app:layout_constraintTop_toBottomOf="@+id/destination_from_des" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/pet"
                 style="@style/paragraph_4_new"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:background="@android:color/transparent"
                 android:clickable="false"
                 android:text="@string/active_item_pet"
@@ -119,8 +158,10 @@
                 app:iconSize="16dp"
                 app:iconTint="@color/green_90_new"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/constraintLayout_trip_destinations"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout_trip_destinations" />
+                app:layout_constraintStart_toStartOf="@+id/description"
+                app:layout_constraintTop_toBottomOf="@+id/description" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -402,5 +443,14 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+        <include
+            android:id="@+id/generic_loader"
+            layout="@layout/generic_loader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </ScrollView>

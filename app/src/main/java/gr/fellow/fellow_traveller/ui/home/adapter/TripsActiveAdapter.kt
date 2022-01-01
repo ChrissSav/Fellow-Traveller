@@ -10,7 +10,6 @@ import gr.fellow.fellow_traveller.databinding.TripActiveItemLayoutBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.ui.extensions.TripInvolvedDiffCallback
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
-import gr.fellow.fellow_traveller.ui.extensions.setDestination
 import gr.fellow.fellow_traveller.ui.extensions.setSpanTextStyle
 import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
 
@@ -29,8 +28,10 @@ class TripsActiveAdapter(
         val context = holder.binding.root.context
         with(holder) {
             val currentTrip = currentList[position]
-            binding.destinationFrom.text = currentTrip.destFrom.title
-            binding.destinationTo.setDestination(currentTrip.destTo)
+            binding.destinationFromAdministrative.text = currentTrip.destFrom.administrative?.title
+            binding.destinationFromDes.text = currentTrip.destFrom.title
+            binding.destinationToAdministrative.text = currentTrip.destTo.administrative?.title
+            binding.destinationToDes.text = currentTrip.destTo.title
             binding.dateTime.text = getDateFromTimestamp(currentTrip.timestamp, "dd/MM HH:mm")
             binding.price.text = context.getString(R.string.active_item_price, currentTrip.price.toString())
             binding.seats.text = context.getString(R.string.active_item_seats, currentTrip.seatAvailable.toString())

@@ -47,7 +47,7 @@
     <color name="button_fill_color">@color/black</color>
 
 
-    <color name="background_color_progress">#70ffffff</color>
+    <color name="background_color_progress">#20ffffff</color>
 
     <color name="search_fragment_background">#FFD8BB</color>
 

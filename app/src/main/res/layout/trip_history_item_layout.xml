@@ -16,105 +16,108 @@
         android:paddingBottom="16dp"
         android:text="Παρ, 18 Αυγ"
         android:textColor="#80ffffff"
-        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout22"
+        android:id="@+id/constraintLayout18"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_background_orange_16dp"
         android:backgroundTint="@color/black_20_new"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/picture_from"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="8dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
             android:background="@drawable/ic_boy"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout22"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintBottom_toBottomOf="@+id/destination_from_des"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout18"
+            app:layout_constraintTop_toTopOf="@+id/picture_to" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/picture_to"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginEnd="8dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/ic_boy"
-            app:layout_constraintBottom_toBottomOf="@+id/picture_from"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/picture_from" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout18"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout_trip_destinations"
+
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/button_background_green_30dp"
+            android:backgroundTint="@color/orange_20_new"
+            android:padding="4dp"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/orange_60_new" />
+
+        <TextView
+            android:id="@+id/destination_from_administrative"
+            style="@style/header_6_new"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/picture_to"
+            android:text="@string/placeholder_city_athens"
+            app:layout_constraintEnd_toStartOf="@+id/arrow"
             app:layout_constraintStart_toEndOf="@+id/picture_from"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/arrow"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@drawable/button_background_green_30dp_without_ripple"
-                android:backgroundTint="@color/orange_20_new"
-                android:padding="4dp"
-                android:src="@drawable/ic_arrow_right"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/orange_60_new" />
-
-            <TextView
-                android:id="@+id/destination_from"
-                style="@style/header_6_new"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
-                android:lineSpacingExtra="4dp"
-                android:maxLines="2"
-                android:text="@string/placeholder_city_athens"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/arrow"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-            <TextView
-                android:id="@+id/destination_to"
-                style="@style/header_6_new"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:gravity="end"
-                android:lineSpacingExtra="4dp"
-                android:maxLines="2"
-                android:text="@string/placeholder_city_thessaloniki"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/arrow"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/destination_from_des"
+            style="@style/paragraph_4_new"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/placeholder_city_athens"
+            app:layout_constraintEnd_toEndOf="@+id/destination_from_administrative"
+            app:layout_constraintStart_toStartOf="@+id/destination_from_administrative"
+            app:layout_constraintTop_toBottomOf="@+id/destination_from_administrative" />
+
+        <TextView
+            android:id="@+id/destination_to_administrative"
+            style="@style/header_6_new"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="end"
+            android:text="@string/placeholder_city_thessaloniki"
+            app:layout_constraintEnd_toStartOf="@+id/picture_to"
+            app:layout_constraintStart_toEndOf="@+id/arrow"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/destination_to_des"
+            style="@style/paragraph_4_new"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="@string/placeholder_city_athens"
+            app:layout_constraintEnd_toEndOf="@+id/destination_to_administrative"
+            app:layout_constraintStart_toStartOf="@+id/destination_to_administrative"
+            app:layout_constraintTop_toTopOf="@+id/destination_from_des" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

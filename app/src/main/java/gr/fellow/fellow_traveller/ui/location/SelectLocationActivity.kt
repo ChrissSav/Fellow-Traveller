@@ -48,14 +48,14 @@ class SelectLocationActivity : BaseActivityViewModel<ActivitySelectLocationBindi
             binding.constraintLayoutPopular.visibility = View.GONE
 
         placesListPopular = mutableListOf(
-            Destination("ChIJ8UNwBh-9oRQR3Y1mdkU1Nic", getString(R.string.placeholder_city_athens), null, null),
-            Destination("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", getString(R.string.placeholder_city_thessaloniki), null, null),
-            Destination("ChIJZ93-3qLpWxMRwJe54iy9AAQ", getString(R.string.placeholder_city_ioannina), null, null),
-            Destination("ChIJLe0kpZk1XhMRoIy54iy9AAQ", getString(R.string.placeholder_city_patra), null, null),
-            Destination("ChIJoUddWVyIWBMRMJy54iy9AAQ", getString(R.string.placeholder_city_larisa), null, null),
-            Destination("ChIJfdnlaDstrBQR3tAiUqN47vY", getString(R.string.placeholder_city_ksanthi), null, null),
-            Destination("ChIJ1eUpZ4txqRQRV-NcWXB83Qk", getString(R.string.placeholder_city_serres), null, null),
-            Destination("ChIJ1cgCXJ8cshQR40EeRCv5sLo", getString(R.string.placeholder_city_aleksandroupoli), null, null)
+            Destination("ChIJ8UNwBh-9oRQR3Y1mdkU1Nic", getString(R.string.placeholder_city_athens), null, null, null),
+            Destination("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", getString(R.string.placeholder_city_thessaloniki), null, null, null),
+            Destination("ChIJZ93-3qLpWxMRwJe54iy9AAQ", getString(R.string.placeholder_city_ioannina), null, null, null),
+            Destination("ChIJLe0kpZk1XhMRoIy54iy9AAQ", getString(R.string.placeholder_city_patra), null, null, null),
+            Destination("ChIJoUddWVyIWBMRMJy54iy9AAQ", getString(R.string.placeholder_city_larisa), null, null, null),
+            Destination("ChIJfdnlaDstrBQR3tAiUqN47vY", getString(R.string.placeholder_city_ksanthi), null, null, null),
+            Destination("ChIJ1eUpZ4txqRQRV-NcWXB83Qk", getString(R.string.placeholder_city_serres), null, null, null),
+            Destination("ChIJ1cgCXJ8cshQR40EeRCv5sLo", getString(R.string.placeholder_city_aleksandroupoli), null, null, null)
         )
 
 
