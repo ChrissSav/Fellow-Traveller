@@ -5,6 +5,11 @@ import android.app.Activity
 import android.content.Intent
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import com.mapbox.maps.plugin.attribution.attribution
+import com.mapbox.maps.plugin.compass.compass
+import com.mapbox.maps.plugin.gestures.gestures
+import com.mapbox.maps.plugin.logo.logo
+import com.mapbox.maps.plugin.scalebar.scalebar
 import dagger.hilt.android.AndroidEntryPoint
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
@@ -14,6 +19,7 @@ import gr.fellow.fellow_traveller.ui.extensions.then
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.views.TripRad
 import gr.fellow.fellow_traveller.ui.views.TripRadioOnClickListener
+
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
@@ -39,6 +45,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun setUpViews() {
+        binding.mapView.apply {
+            logo.enabled = false
+            scalebar.enabled = false
+            attribution.enabled = false
+            compass.enabled = false
+
+            gestures.updateSettings {
+                scrollEnabled = true
+                pinchToZoomEnabled = true
+                rotateEnabled = false
+            }
+        }
 
         /* binding.motion.progress = progress
 
