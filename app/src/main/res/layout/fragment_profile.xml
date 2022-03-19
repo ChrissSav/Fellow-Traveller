@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_new"
     android:fillViewport="true"
     tools:context=".ui.home.tabs.ProfileFragment">
 
@@ -224,18 +223,17 @@
 
 
             <Button
-                android:id="@+id/all_bookings"
+                android:id="@+id/history_tris"
                 style="@style/paragraph_3_new"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:drawableEnd="@drawable/ic_history"
                 android:drawableTint="@color/white"
-
                 android:foreground="?android:attr/selectableItemBackground"
                 android:textColor="@color/white"
                 android:padding="@dimen/padding_component_icon"
-                android:text="@string/my_bookings"
+                android:text="@string/history_trips"
                 android:textAlignment="textStart"
                 android:textAllCaps="false"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -243,24 +241,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/all_cars" />
 
 
-            <Button
-                android:id="@+id/all_offers"
-                style="@style/paragraph_3_new"
-                android:layout_width="0dp"
-                android:foreground="?android:attr/selectableItemBackground"
-
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:drawableEnd="@drawable/ic_history"
-                android:drawableTint="@color/white"
-                android:textColor="@color/white"
-                android:padding="@dimen/padding_component_icon"
-                android:text="@string/my_offers"
-                android:textAlignment="textStart"
-                android:textAllCaps="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/all_bookings" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

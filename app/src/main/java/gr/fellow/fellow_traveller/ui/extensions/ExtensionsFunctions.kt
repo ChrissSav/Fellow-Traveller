@@ -48,6 +48,8 @@ fun CharSequence.getLength(): Int {
     return if (this.isEmpty()) 0 else this.toString().length
 }
 
+infix fun <T> Boolean.then(param: () -> T): T? = if (this) param() else null
+
 val Int.toPx: Int
     get() = (this * Resources.getSystem().displayMetrics.density).toInt()
 

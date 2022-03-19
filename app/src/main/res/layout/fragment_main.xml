@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_new"
     tools:context=".ui.main.fragments.MainFragment">
 
     <ImageView
         android:id="@+id/MainActivity_ImageView_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="64dp"
         android:src="@drawable/ic_fellow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:gravity="start"
         android:text="@string/welcome_message_title"
@@ -114,6 +113,7 @@
         android:id="@+id/button_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:background="@drawable/button_background_orange_16dp"
         android:backgroundTint="@color/green_20_new"
         android:padding="@dimen/padding_component_icon"

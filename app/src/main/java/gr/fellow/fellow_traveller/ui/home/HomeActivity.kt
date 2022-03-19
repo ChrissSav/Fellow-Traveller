@@ -196,16 +196,12 @@ class HomeActivity : BaseActivityViewModel<ActivityHomeBinding, HomeViewModel>(H
         }
     }
 
-    @SuppressLint("UseCompatLoadingForColorStateLists")
     private fun setButtonUnCheck(imageView: ImageView) {
-        imageView.setColorFilter(ContextCompat.getColor(this, R.color.black_new), android.graphics.PorterDuff.Mode.SRC_IN)
-        imageView.backgroundTintList = resources.getColorStateList(R.color.white, null)
+        imageView.setColorFilter(ContextCompat.getColor(this, R.color.gray_bottom), android.graphics.PorterDuff.Mode.SRC_IN)
     }
 
-    @SuppressLint("UseCompatLoadingForColorStateLists")
     private fun setButtonCheck(imageView: ImageView) {
         imageView.setColorFilter(ContextCompat.getColor(this, R.color.white), android.graphics.PorterDuff.Mode.SRC_IN)
-        imageView.backgroundTintList = resources.getColorStateList(R.color.black, null)
     }
 
     private fun showHideBottomNav(targetHeight: Int) {

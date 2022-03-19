@@ -3,12 +3,17 @@ package gr.fellow.fellow_traveller.ui.home.tabs
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
+import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentHomeBinding
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
+import gr.fellow.fellow_traveller.ui.extensions.then
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
+import gr.fellow.fellow_traveller.ui.views.TripRad
+import gr.fellow.fellow_traveller.ui.views.TripRadioOnClickListener
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
@@ -114,6 +119,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
              val placeTo = PlaceModel("ChIJ7eAoFPQ4qBQRqXTVuBXnugk", getString(R.string.placeholder_city_thessaloniki), 40.634781.toFloat(), 22.943090.toFloat())
              startActivityForResult(SearchTripActivity::class, 2, bundleOf("placeFrom" to placeFrom, "placeTo" to placeTo, "localUser" to viewModel.user.value))
          }*/
+
+        binding.radio.onClick = object : TripRadioOnClickListener {
+            override fun onClick(type: TripRad) {
+                updateColor(type)
+            }
+        }
+    }
+
+    private fun updateColor(type: TripRad) {
+        val backgroundTint = (type == TripRad.SEARCH) then { resources.getColorStateList(R.color.orange_20_new, null) } ?: resources.getColorStateList(R.color.green_60_new, null)
+        val color = (type == TripRad.SEARCH) then { ContextCompat.getColor(this.requireContext(), R.color.orange_new) } ?: ContextCompat.getColor(this.requireContext(), R.color.green_new)
+
+        binding.imageViewFrom.setColorFilter(color, android.graphics.PorterDuff.Mode.SRC_IN)
+        binding.imageViewFrom.backgroundTintList = backgroundTint
+
+        binding.imageViewTo.setColorFilter(color, android.graphics.PorterDuff.Mode.SRC_IN)
+        binding.imageViewTo.backgroundTintList = backgroundTint
     }
 
 
@@ -124,7 +146,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             if (resultCode == Activity.RESULT_OK) {
                 val trip = data?.getParcelableExtra<TripInvolved>("trip")
                 trip?.let {
-                   // viewModel.addTripCreate(it)
+                    // viewModel.addTripCreate(it)
                 }
             }
 

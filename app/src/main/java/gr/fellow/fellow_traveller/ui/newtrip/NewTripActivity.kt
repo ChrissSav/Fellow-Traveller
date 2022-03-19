@@ -51,9 +51,11 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
 
 
     override fun handleIntent() {
+
         val tempDestinationFrom = intent.getParcelableExtra<Destination>("destinationFrom")
         if (tempDestinationFrom == null)
             finish()
+
         val tempDestinationTo = intent.getParcelableExtra<Destination>("destinationTo")
         if (tempDestinationTo == null)
             finish()
@@ -61,12 +63,15 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
         val tempLocalUser = intent.getParcelableExtra<LocalUser>("localUser")
         if (tempLocalUser == null)
             finish()
+
         tempDestinationFrom?.let {
             destinationFrom = it
         }
+
         tempDestinationTo?.let {
             destinationTo = it
         }
+
         tempLocalUser?.let {
             localUser = it
         }

@@ -52,7 +52,7 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/margin_bottom_navigation"
         android:background="@drawable/background_rate_radius_16_black"
         android:backgroundTint="#20ffffff"
         android:padding="@dimen/padding_component_icon"

@@ -578,6 +578,9 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="TripRadio">
+
+    </declare-styleable>
 
     <declare-styleable name="FellowPassword">
         <attr name="hint_Password" format="string" />

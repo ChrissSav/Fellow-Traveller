@@ -78,12 +78,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         binding.allCars.setOnClickListener {
             findNavController()?.navigate(R.id.action_destination_info_to_userCarsFragment)
         }
-        /*binding.allBookings.setOnClickListener {
-            findNavController()?.navigate(R.id.action_destination_info_to_tripInvolvedHistoryFragment, bundleOf("creator" to false))
+
+        binding.historyTris.setOnClickListener {
+            findNavController()?.navigate(R.id.action_destination_info_to_destination_trips)
         }
-        binding.allOffers.setOnClickListener {
-            findNavController()?.navigate(R.id.action_destination_info_to_tripInvolvedHistoryFragment, bundleOf("creator" to true))
-        }*/
+
         binding.addCarSection.setOnClickListener {
             startActivityForResult(AddCarActivity::class, 1, null)
         }

@@ -2,20 +2,20 @@
 <resources>
     <style name="titleRegisterStyle">
         <item name="android:fontFamily">@font/firasans_light</item>
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/black_new</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">26sp</item>
     </style>
 
     <style name="labelRegisterStyle">
         <item name="android:fontFamily">@font/firasans_medium</item>
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/black_new</item>
         <item name="android:textSize">18sp</item>
     </style>
 
     <style name="inputStyle">
         <item name="android:fontFamily">@font/firasans_light</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/black_new</item>
     </style>
 </resources>

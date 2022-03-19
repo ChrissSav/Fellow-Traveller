@@ -105,7 +105,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="42dp"
         android:background="@drawable/fab_background_orange"
-        android:backgroundTint="@color/black_color"
+        android:backgroundTint="@color/black_new"
         android:drawableStart="@drawable/ic_tick"
         android:drawablePadding="8dp"
         android:drawableTint="@color/white"

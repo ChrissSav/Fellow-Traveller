@@ -283,6 +283,8 @@
     <string name="email_will_be_sent">Ένας σύνδεσμος επιβεβαίωσης θα σταλεί στο email σου, ώστε να ενεργοποιήσεις τον λογαριασμό σου.</string>
     <string name="password_recovery">Ανάκτηση συνθηματικού πρόσβασης</string>
     <string name="enter_your_email">Εισήγαγε το email σου</string>
+    <string name="searching">Αναζητώ</string>
+    <string name="offer">Προσφέρω</string>
     <string name="we_will_send_a_6_digit_verification_code">Θα σου αποστείλουμαι ένα email με τον 6-ψήφιο κωδικό</string>
     <string name="reset">Ανάκτηση</string>
     <string name="confirm_password_reset">Επιβεβαίωση ανάκτησης συνθηματικού</string>
@@ -443,6 +445,7 @@
     <string name="placeholder_from">π.χ. Αθήνα</string>
     <string name="placeholder_to">π.χ. Θεσσαλονίκη</string>
     <string name="history">Ιστορικό</string>
+    <string name="history_trips">Ιστορικό ταξιδιών</string>
     <string name="offer_your_next_trip_description">Μοιράσου το επόμενο ταξίδι σου και βρες συνταξιδιώτες στο λεπτό.</string>
     <string name="confirm_booking">Επικύρωση Κράτησης</string>
     <string name="placeholder_vehicle_brand">π.χ. Tesla</string>

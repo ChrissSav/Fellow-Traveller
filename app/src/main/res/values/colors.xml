@@ -9,7 +9,6 @@
     <color name="orange_color_pressed">#ee7d3b</color>
     <color name="softOrange_color">#FBE8E0</color>
     <color name="white_color">#F8F8F8</color>
-    <color name="black_color">#1C1C1C</color>
     <color name="black_color_pressed">#333130</color>
     <color name="greyBlack_color">#7c7b7a</color>
     <color name="greyBlack_transparent_color">#807c7b7a</color>
@@ -29,7 +28,6 @@
     <color name="lightOrange">#FFF2E6</color>
     <color name="grey">#C9C9C9</color>
 
-    <color name="black">#171717</color>
     <color name="home_blue">#3ca9cb</color>
     <color name="aqua">#1F98B9</color>
     <color name="white">#FFFFFF</color>
@@ -44,7 +42,7 @@
 
     <!--    NEew offer button-->
     <color name="button_default_color">#9E9E9E</color>
-    <color name="button_fill_color">@color/black</color>
+    <color name="button_fill_color">@color/black_new</color>
 
 
     <color name="background_color_progress">#20ffffff</color>
@@ -72,6 +70,7 @@
     <color name="background_gray_40">#1AFFFFFF</color>
 
 
+    <color name="gray_bottom">#707070</color>
     <color name="green_new">#0E5034</color>
     <color name="green_20_new">#200E5034</color>
     <color name="green_60_new">#400E5034</color>

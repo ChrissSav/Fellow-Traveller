@@ -22,7 +22,7 @@
 
             <CustomAttribute
                 motion:attributeName="backgroundColor"
-                motion:customColorValue="@color/black_color" />
+                motion:customColorValue="@color/black_new" />
         </Constraint>
         <Constraint
             android:id="@+id/constraintLayout6"
