@@ -14,13 +14,15 @@ import gr.fellow.fellow_traveller.domain.trip.Destination
 import gr.fellow.fellow_traveller.ui.extensions.hideKeyboard
 import gr.fellow.fellow_traveller.ui.location.adapter.DestinationAdapter
 import gr.fellow.fellow_traveller.utils.ADDRESS
+import java.util.*
+import kotlin.concurrent.schedule
 
 @AndroidEntryPoint
 class SelectLocationActivity : BaseActivityViewModel<ActivitySelectLocationBinding, SelectLocationViewModel>(SelectLocationViewModel::class.java) {
 
     private var placesList = mutableListOf<Destination>()
     private var placesListPopular = mutableListOf<Destination>()
-
+    private var isLocked = false
     private var autocompleteType = ADDRESS
 
     override fun provideViewBinding(): ActivitySelectLocationBinding =
@@ -69,20 +71,34 @@ class SelectLocationActivity : BaseActivityViewModel<ActivitySelectLocationBindi
 
             editText.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(charSequence: Editable) {
-                    if (charSequence.toString().trim().length > 2)
-                        viewModel.getAutocomplete(charSequence.toString().trim(), autocompleteType)
-                    else if (charSequence.toString().trim().isEmpty()) {
-                        recyclerViewPopular.visibility = View.VISIBLE
-                        recyclerView.visibility = View.GONE
+                    autocompleteLock {
+                        if (charSequence.toString().trim().length > 2)
+                            viewModel.getAutocomplete(charSequence.toString().trim(), autocompleteType)
+                        else if (charSequence.toString().trim().isEmpty()) {
+                            recyclerViewPopular.visibility = View.VISIBLE
+                            recyclerView.visibility = View.GONE
+                        }
                     }
                 }
 
                 override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+
                 }
 
                 override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+
                 }
             })
+        }
+    }
+
+    private fun autocompleteLock(function: () -> Unit) {
+        if (!isLocked) {
+            isLocked = true
+            function.invoke()
+            Timer().schedule(750) {
+                isLocked = false
+            }
         }
     }
 

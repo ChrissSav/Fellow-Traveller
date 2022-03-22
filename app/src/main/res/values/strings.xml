@@ -284,8 +284,7 @@
     <string name="email_will_be_sent">Ένας σύνδεσμος επιβεβαίωσης θα σταλεί στο email σου, ώστε να ενεργοποιήσεις τον λογαριασμό σου.</string>
     <string name="password_recovery">Ανάκτηση συνθηματικού πρόσβασης</string>
     <string name="enter_your_email">Εισήγαγε το email σου</string>
-    <string name="searching">Αναζητώ</string>
-    <string name="offer">Προσφέρω</string>
+    <string name="offer">Προσφορά</string>
     <string name="we_will_send_a_6_digit_verification_code">Θα σου αποστείλουμαι ένα email με τον 6-ψήφιο κωδικό</string>
     <string name="reset">Ανάκτηση</string>
     <string name="confirm_password_reset">Επιβεβαίωση ανάκτησης συνθηματικού</string>

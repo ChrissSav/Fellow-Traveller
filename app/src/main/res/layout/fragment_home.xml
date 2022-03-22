@@ -46,6 +46,7 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout_from"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/background_rate_radius_16_black"
@@ -84,11 +85,11 @@
                 android:maxLines="1"
                 android:textColorHint="#40ffffff"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView3"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                app:layout_constraintStart_toStartOf="@+id/textView_from"
+                app:layout_constraintTop_toBottomOf="@+id/textView_from" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textView_from"
                 style="@style/header_5_new"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -100,6 +101,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout_to"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="-28dp"
@@ -141,11 +143,11 @@
                 android:maxLines="1"
                 android:textColorHint="#40ffffff"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView5"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                app:layout_constraintStart_toStartOf="@+id/textView_to"
+                app:layout_constraintTop_toBottomOf="@+id/textView_to" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/textView_to"
                 style="@style/header_5_new"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -157,6 +159,24 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/submit"
+        style="@style/button_1_new"
+        android:layout_width="208dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="@string/offer_trip"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        app:backgroundTint="@color/green_new"
+        app:cornerRadius="16dp"
+        app:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/mapView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
