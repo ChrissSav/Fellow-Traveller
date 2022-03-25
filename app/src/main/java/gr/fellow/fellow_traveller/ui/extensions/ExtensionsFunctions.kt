@@ -5,8 +5,7 @@ import androidx.core.text.HtmlCompat
 import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.domain.notification.Notification
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
-import java.util.regex.Matcher
-import java.util.regex.Pattern
+import java.util.*
 
 
 fun getRandomImage(): String {

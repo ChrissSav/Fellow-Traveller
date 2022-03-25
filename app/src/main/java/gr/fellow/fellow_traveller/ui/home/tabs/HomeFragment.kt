@@ -18,15 +18,14 @@ import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentHomeBinding
 import gr.fellow.fellow_traveller.domain.trip.Destination
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
-import gr.fellow.fellow_traveller.ui.extensions.startActivityForResult
-import gr.fellow.fellow_traveller.ui.extensions.startActivityForResultWithFade
-import gr.fellow.fellow_traveller.ui.extensions.then
+import gr.fellow.fellow_traveller.ui.extensions.*
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.location.SelectLocationActivity
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripActivity
 import gr.fellow.fellow_traveller.ui.views.TripRad
 import gr.fellow.fellow_traveller.ui.views.TripRadioOnClickListener
 import gr.fellow.fellow_traveller.utils.CITY
+
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
@@ -159,7 +158,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 val destination = data?.getParcelableExtra<Destination>("place")!!
                 destinations = Pair(destination, destinations.second)
 
-                setDestinations()
+                setDestinationFrom()
             }
 
         }
@@ -170,7 +169,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 val destination = data?.getParcelableExtra<Destination>("place")!!
                 destinations = Pair(destinations.first, destination)
 
-                setDestinations()
+                setDestinationTo()
             }
 
         }
@@ -182,14 +181,50 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun setDestinations() {
-        val (from, to) = destinations
-
-        binding.destinationFrom.setText(from?.title ?: "")
-
-        binding.destinationTo.setText(to?.title ?: "")
+        val (destinationFrom, destinationTo) = destinations
 
 
-        binding.submit.visibility = (from != null && to != null) then { View.VISIBLE } ?: View.GONE
+        binding.destinationFrom.setText(destinationFrom?.title ?: "")
+
+        binding.destinationTo.setText(destinationTo?.title ?: "")
+
+
+        if (destinationFrom != null && destinationTo != null) {
+
+            binding.submit.visibility = View.VISIBLE
+            binding.mapView.addMarker(destination = destinationFrom, type = type)
+            binding.mapView.flyToPoint(destinationFrom)
+
+        } else {
+            binding.submit.visibility = View.GONE
+        }
+
+    }
+
+    private fun setDestinationFrom() {
+        val (destinationFrom, destinationTo) = destinations
+
+        binding.destinationFrom.setText(destinationFrom?.title ?: "")
+
+
+        if (destinationFrom != null) {
+            binding.mapView.addMarker(destinationFrom, type = type)
+            binding.mapView.flyToPoint(destinationFrom)
+        }
+    }
+
+
+    private fun setDestinationTo() {
+        val (destinationFrom, destinationTo) = destinations
+
+        binding.destinationTo.setText(destinationTo?.title ?: "")
+
+
+        if (destinationTo != null) {
+            binding.mapView.addMarker(destinationTo, true, type)
+            binding.mapView.flyToPoint(destinationTo)
+        }
     }
 
 }
+
