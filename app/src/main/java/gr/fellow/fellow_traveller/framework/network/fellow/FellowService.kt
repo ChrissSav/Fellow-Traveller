@@ -8,6 +8,7 @@ import gr.fellow.fellow_traveller.framework.network.fellow.car.CarRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.notification.NotificationResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.notification.UpdateNotification
 import gr.fellow.fellow_traveller.framework.network.fellow.place.PlaceAutocompleteResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.place.PlaceDetailsResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.review.RegisterReviewRequest
 import gr.fellow.fellow_traveller.framework.network.fellow.review.ReviewResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.BookTripRequest
@@ -179,6 +180,13 @@ interface FellowService {
         @Query("query") query: String,
         @Query("type") type: String,
     ): Response<BaseResponse<MutableList<PlaceAutocompleteResponse>>>
+
+    @GET("trips/place/details")
+    suspend fun getPlaceDetails(
+        @Query("place_id") placeId: String,
+        @Query("type") type: String,
+    ): Response<BaseResponse<PlaceDetailsResponse>>
+
 
     /** REVIEW **/
 

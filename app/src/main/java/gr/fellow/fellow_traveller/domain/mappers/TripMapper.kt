@@ -5,6 +5,7 @@ import gr.fellow.fellow_traveller.domain.trip.Destination
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.framework.network.fellow.place.PlaceAutocompleteResponse
+import gr.fellow.fellow_traveller.framework.network.fellow.place.PlaceDetailsResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.AdministrativeResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.DestinationResponse
 import gr.fellow.fellow_traveller.framework.network.fellow.trip.TripInvolvedResponse
@@ -25,4 +26,7 @@ fun TripSearchResponse.mapTripSearch() = TripSearch(
 
 fun PlaceAutocompleteResponse.mapDestination() = Destination(placeId, description, null, null, null)
 
+fun PlaceDetailsResponse.mapDestination() = Destination(placeId, title, latitude, longitude, administrative)
+
 fun DestinationResponse.mapDestination() = Destination(id, title, latitude, longitude, administrative.mapToAdministrative())
+

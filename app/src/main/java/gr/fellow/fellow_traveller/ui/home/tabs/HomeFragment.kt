@@ -156,10 +156,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         if (requestCode == 3) {
             if (resultCode == Activity.RESULT_OK) {
-                val title = data?.getStringExtra("title").toString()
-                val id = data?.getStringExtra("id").toString()
-
-                val destination = Destination(id, title, null, null, null)
+                val destination = data?.getParcelableExtra<Destination>("place")!!
                 destinations = Pair(destination, destinations.second)
 
                 setDestinations()
@@ -170,10 +167,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         if (requestCode == 4) {
             if (resultCode == Activity.RESULT_OK) {
-                val title = data?.getStringExtra("title").toString()
-                val id = data?.getStringExtra("id").toString()
-
-                val destination = Destination(id, title, null, null, null)
+                val destination = data?.getParcelableExtra<Destination>("place")!!
                 destinations = Pair(destinations.first, destination)
 
                 setDestinations()

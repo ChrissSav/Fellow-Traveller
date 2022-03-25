@@ -91,7 +91,11 @@ interface FellowDataSource {
 
     suspend fun deleteTrip(tripId: String): String
 
+    //Place
+
     suspend fun getPlaceAutocomplete(query: String, type: String): MutableList<Destination>
+
+    suspend fun getPlaceDetails(placeId: String, type: String): Destination
 
     // Notification
 

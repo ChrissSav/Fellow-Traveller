@@ -42,6 +42,14 @@ class SelectLocationActivity : BaseActivityViewModel<ActivitySelectLocationBindi
             binding.recyclerView.visibility = View.VISIBLE
         })
 
+        viewModel.place.observe(this, Observer {
+            val resultIntent = Intent()
+            resultIntent.putExtra("place", it)
+            setResult(Activity.RESULT_OK, resultIntent)
+            finish()
+        })
+
+
     }
 
     override fun setUpViews() {
@@ -103,11 +111,12 @@ class SelectLocationActivity : BaseActivityViewModel<ActivitySelectLocationBindi
     }
 
     private fun onPredictionItemSelected(predictionResponse: Destination) {
-        val resultIntent = Intent()
-        resultIntent.putExtra("id", predictionResponse.placeId)
-        resultIntent.putExtra("title", predictionResponse.title)
-        setResult(Activity.RESULT_OK, resultIntent)
-        finish()
+        //val resultIntent = Intent()
+        //resultIntent.putExtra("id", predictionResponse.placeId)
+        //resultIntent.putExtra("title", predictionResponse.title)
+        //setResult(Activity.RESULT_OK, resultIntent)
+        //finish()
+        viewModel.onSelect(predictionResponse.placeId, autocompleteType)
     }
 
 

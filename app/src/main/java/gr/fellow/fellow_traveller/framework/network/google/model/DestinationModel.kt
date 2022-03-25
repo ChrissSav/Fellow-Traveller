@@ -4,11 +4,6 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 
-data class DestinationModel(
-    val placeId: String,
-    val title: String
-)
-
 @Parcelize
 data class PlaceModel(
     val placeId: String,

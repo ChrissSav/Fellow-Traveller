@@ -181,6 +181,11 @@ class FellowRepositoryImpl(
             service.getPlaceAutocomplete(query, type).handleApiFormat()
         }
 
+    override suspend fun getPlaceDetails(placeId: String, type: String) =
+        networkCall {
+            service.getPlaceDetails(placeId, type).handleApiFormat()
+        }
+
     override suspend fun getNotification(): MutableList<NotificationResponse> =
         networkCall {
             service.getNotifications().handleApiFormat()
