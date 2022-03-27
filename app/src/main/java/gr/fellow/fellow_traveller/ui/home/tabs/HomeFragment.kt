@@ -7,7 +7,6 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.attribution.attribution
 import com.mapbox.maps.plugin.compass.compass
 import com.mapbox.maps.plugin.gestures.gestures
@@ -19,7 +18,10 @@ import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentHomeBinding
 import gr.fellow.fellow_traveller.domain.trip.Destination
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
-import gr.fellow.fellow_traveller.ui.extensions.*
+import gr.fellow.fellow_traveller.ui.extensions.flyToPoint
+import gr.fellow.fellow_traveller.ui.extensions.startActivityForResult
+import gr.fellow.fellow_traveller.ui.extensions.startActivityForResultWithFade
+import gr.fellow.fellow_traveller.ui.extensions.then
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.location.SelectLocationActivity
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripActivity
@@ -220,11 +222,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
          //   binding.mapView.addMarker(destinationTo, true, type)
             binding.mapView.flyToPoint(destinationTo)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        binding.mapView.getMapboxMap().
     }
 
 }

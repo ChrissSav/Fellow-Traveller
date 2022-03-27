@@ -37,7 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:background="@drawable/background_shimmer_32dp"
+            android:background="@drawable/background_shimmer_8dp"
             android:maxLines="1"
             android:text="@string/placeholder_car_make_model"
             android:textColor="@color/shimmer_color"

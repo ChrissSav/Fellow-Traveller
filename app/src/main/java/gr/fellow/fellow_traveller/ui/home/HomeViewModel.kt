@@ -72,9 +72,7 @@ constructor(
     private val deleteConversationFirebaseUseCase: DeleteConversationFirebaseUseCase
 ) : BaseViewModel() {
 
-    companion object {
-        private const val DELAY_LOAD = 350L
-    }
+    private val DELAY_LOAD = 750L
 
 
     val currentUser: LocalUser
@@ -160,15 +158,13 @@ constructor(
     /**  ACTIVE **/
     private val _tripsActive = MutableLiveData<MutableList<TripInvolved>>()
     val tripsActive: LiveData<MutableList<TripInvolved>> = _tripsActive
-//    val loadActiveTrips = MutableLiveData<Boolean>()
-//    private var loadMoreActiveTrips = true
+    val activeTripsLoader = MutableLiveData<Boolean>()
 
 
     /**  HISTORY **/
     private val _tripsHistory = MutableLiveData<MutableList<TripInvolved>>()
     val tripsHistory: LiveData<MutableList<TripInvolved>> = _tripsHistory
-//    val loadActiveTrips = MutableLiveData<Boolean>()
-//    private var loadMoreActiveTrips = true
+    val historyTripsLoader = MutableLiveData<Boolean>()
 
 
     /*****************************************************************************************************/
@@ -650,28 +646,32 @@ constructor(
 
     fun loadActiveTrips(forceLoad: Boolean = false) {
         // launchWithLiveData(true, loadActiveTrips) {
-        launch {
+        launchWithLiveData(true, activeTripsLoader) {
             if (_tripsActive.value != null && !forceLoad) {
-                return@launch
+                return@launchWithLiveData
             }
 //            val response =
 //            if (more)
 //                delay(DELAY_LOAD)
-            _tripsActive.value = getActiveInvolvedTripsUseCase()
+            val trips = getActiveInvolvedTripsUseCase()
+            if (forceLoad)
+                delay(DELAY_LOAD)
+            _tripsActive.value = trips
         }
     }
 
 
     fun loadHistoryTrips(forceLoad: Boolean = false) {
         // launchWithLiveData(true, loadActiveTrips) {
-        launch {
+        launchWithLiveData(true, historyTripsLoader) {
             if (_tripsHistory.value != null && !forceLoad) {
-                return@launch
+                return@launchWithLiveData
             }
 //            val response =
-//            if (more)
-//                delay(DELAY_LOAD)
-            _tripsHistory.value = getHistoryInvolvedTripsUseCase()
+            val trips = getHistoryInvolvedTripsUseCase()
+            if (forceLoad)
+                delay(DELAY_LOAD)
+            _tripsHistory.value = trips
         }
     }
 }

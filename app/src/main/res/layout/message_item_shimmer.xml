@@ -11,7 +11,7 @@
         android:id="@+id/sender_image"
         android:layout_width="38dp"
         android:layout_height="38dp"
-        android:background="@drawable/background_shimmer_32dp"
+        android:background="@drawable/background_shimmer_8dp"
         android:layout_marginTop="8dp"
         android:baselineAlignBottom="true"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:text="@string/first_name"
         android:textColor="@color/shimmer_color"
-        android:background="@drawable/background_shimmer_32dp"
+        android:background="@drawable/background_shimmer_8dp"
         app:layout_constraintStart_toStartOf="@id/message_section"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,7 +38,7 @@
         android:layout_marginEnd="@dimen/calendar_margin_16dp"
         android:text="@string/date"
         android:textColor="@color/shimmer_color"
-        android:background="@drawable/background_shimmer_32dp"
+        android:background="@drawable/background_shimmer_8dp"
         app:layout_constraintBottom_toBottomOf="@id/sender_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/sender_name" />
@@ -59,7 +59,7 @@
             style="@style/paragraph_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_shimmer_32dp"
+            android:background="@drawable/background_shimmer_8dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:paddingTop="10dp"

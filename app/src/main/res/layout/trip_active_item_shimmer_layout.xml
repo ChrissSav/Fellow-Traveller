@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background_orange_16dp"
+        android:backgroundTint="@color/black_20_new"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout_trip_destinations"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+                android:id="@+id/arrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/button_background_green_30dp"
+                android:backgroundTint="@color/orange_20_new"
+                android:padding="4dp"
+                android:src="@drawable/ic_arrow_right"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/orange_60_new" />
+
+            <TextView
+                android:id="@+id/destination_from_administrative"
+                style="@style/header_6_new"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_shimmer_8dp"
+                android:textColor="@color/shimmer_color"
+                app:layout_constraintEnd_toStartOf="@+id/arrow"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/destination_from_des"
+                style="@style/paragraph_4_new"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/background_shimmer_8dp"
+                android:textColor="@color/shimmer_color"
+                app:layout_constraintStart_toStartOf="@+id/destination_from_administrative"
+                app:layout_constraintTop_toBottomOf="@+id/destination_from_administrative"
+                tools:text="@string/placeholder_city_athens" />
+
+            <TextView
+                android:id="@+id/destination_to_administrative"
+                style="@style/header_6_new"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/background_shimmer_8dp"
+                android:gravity="end"
+                android:textColor="@color/shimmer_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/arrow"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/destination_to_des"
+                style="@style/paragraph_4_new"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_shimmer_8dp"
+                android:gravity="end"
+                android:textColor="@color/shimmer_color"
+                app:layout_constraintEnd_toEndOf="@+id/destination_to_administrative"
+                app:layout_constraintTop_toTopOf="@+id/destination_from_des" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout17"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout_trip_destinations">
+
+
+            <TextView
+                android:id="@+id/date_time"
+                style="@style/paragraph_3_bold_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_shimmer_8dp"
+                android:clickable="false"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="4dp"
+                android:text="25/03 07:00"
+                android:textColor="@color/shimmer_color"
+                app:iconTint="@color/white_40_new"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/seats"
+                style="@style/paragraph_3_bold_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/background_shimmer_8dp"
+                android:clickable="false"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="4dp"
+                android:text="@string/active_item_seats"
+                android:textColor="@color/shimmer_color"
+                app:icon="@drawable/ic_seat"
+                app:iconGravity="textStart"
+                app:iconSize="16dp"
+                app:iconTint="@color/white_40_new"
+                app:layout_constraintStart_toEndOf="@+id/date_time"
+                app:layout_constraintTop_toTopOf="@+id/date_time" />
+
+
+            <TextView
+                android:id="@+id/price"
+                style="@style/paragraph_3_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/background_shimmer_8dp"
+                android:backgroundTintMode="src_over"
+                android:clickable="false"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="4dp"
+                android:text="@string/active_item_price"
+                android:textColor="@color/shimmer_color"
+                app:icon="@drawable/ic_cash"
+                app:iconGravity="textStart"
+                app:iconSize="16dp"
+                app:iconTint="@color/white_40_new"
+                app:layout_constraintStart_toEndOf="@+id/seats"
+                app:layout_constraintTop_toTopOf="@+id/seats" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/picture"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/background_shimmer_8dp"
+            android:textColor="@color/shimmer_color"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout17"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout17" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pet"
+            style="@style/paragraph_4_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            android:text="@string/active_item_pet"
+            android:textColor="@color/green_90_new"
+            android:visibility="gone"
+            app:icon="@drawable/ic_bone"
+            app:iconGravity="textStart"
+            app:iconPadding="2dp"
+            app:iconSize="16dp"
+            app:iconTint="@color/green_90_new"
+            app:layout_constraintBottom_toBottomOf="@+id/picture"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout17"
+            app:layout_constraintTop_toTopOf="@+id/picture" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

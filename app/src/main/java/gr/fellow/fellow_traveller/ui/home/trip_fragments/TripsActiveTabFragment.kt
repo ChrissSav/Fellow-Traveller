@@ -27,15 +27,29 @@ class TripsActiveTabFragment : BaseFragment<FragmentTripsActiveTabBinding>() {
     override fun setUpObservers() {
 
         viewModel.tripsActive.observe(viewLifecycleOwner, Observer { list ->
-            (binding.recyclerView.adapter as TripsActiveAdapter).submitList(null)
             (binding.recyclerView.adapter as TripsActiveAdapter).submitList(list)
             binding.swipeRefreshLayout.isRefreshing = false
 
             //Check if we have active trips
-            if (list.isNullOrEmpty())
+            if (list.isNullOrEmpty()) {
                 binding.tripsNotFound.visibility = View.VISIBLE
-            else
+                binding.recyclerView.visibility = View.GONE
+
+            } else {
                 binding.tripsNotFound.visibility = View.GONE
+                binding.recyclerView.visibility = View.VISIBLE
+
+            }
+        })
+
+        viewModel.activeTripsLoader.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                binding.recyclerView.visibility = View.GONE
+                binding.tripsNotFound.visibility = View.GONE
+                binding.shimmerViewContainer.visibility = View.VISIBLE
+            } else {
+                binding.shimmerViewContainer.visibility = View.GONE
+            }
         })
     }
 
@@ -62,7 +76,6 @@ class TripsActiveTabFragment : BaseFragment<FragmentTripsActiveTabBinding>() {
 */
 
         binding.swipeRefreshLayout.setOnRefreshListener {
-            (binding.recyclerView.adapter as TripsActiveAdapter).submitList(null)
             viewModel.loadActiveTrips(true)
         }
     }
