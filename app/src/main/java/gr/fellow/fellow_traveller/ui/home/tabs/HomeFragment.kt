@@ -7,6 +7,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
+import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.attribution.attribution
 import com.mapbox.maps.plugin.compass.compass
 import com.mapbox.maps.plugin.gestures.gestures
@@ -74,6 +75,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         binding.submit.setOnClickListener {
             val (from, to) = destinations
+            clearDestinations()
             if (type == TripRad.OFFER) {
                 startActivityForResult(
                     NewTripActivity::class, 2, bundleOf(
@@ -91,7 +93,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     )
                 )*/
             }
-            clearDestinations()
+
         }
 
         binding.textViewFrom.setOnClickListener {
@@ -159,6 +161,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 destinations = Pair(destination, destinations.second)
 
                 setDestinationFrom()
+                handelSubmitButton()
             }
 
         }
@@ -170,6 +173,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 destinations = Pair(destinations.first, destination)
 
                 setDestinationTo()
+                handelSubmitButton()
             }
 
         }
@@ -177,24 +181,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun clearDestinations() {
         destinations = Pair(null, null)
-        setDestinations()
+        binding.destinationFrom.text = null
+        binding.destinationTo.text = null
+        handelSubmitButton()
     }
 
-    private fun setDestinations() {
+    private fun handelSubmitButton() {
         val (destinationFrom, destinationTo) = destinations
 
-
-        binding.destinationFrom.setText(destinationFrom?.title ?: "")
-
-        binding.destinationTo.setText(destinationTo?.title ?: "")
-
-
         if (destinationFrom != null && destinationTo != null) {
-
             binding.submit.visibility = View.VISIBLE
-            binding.mapView.addMarker(destination = destinationFrom, type = type)
-            binding.mapView.flyToPoint(destinationFrom)
-
         } else {
             binding.submit.visibility = View.GONE
         }
@@ -202,28 +198,33 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun setDestinationFrom() {
-        val (destinationFrom, destinationTo) = destinations
+        val (destinationFrom, _) = destinations
 
         binding.destinationFrom.setText(destinationFrom?.title ?: "")
 
 
         if (destinationFrom != null) {
-            binding.mapView.addMarker(destinationFrom, type = type)
+          //  binding.mapView.addMarker(destinationFrom, type = type)
             binding.mapView.flyToPoint(destinationFrom)
         }
     }
 
 
     private fun setDestinationTo() {
-        val (destinationFrom, destinationTo) = destinations
+        val (_, destinationTo) = destinations
 
         binding.destinationTo.setText(destinationTo?.title ?: "")
 
 
         if (destinationTo != null) {
-            binding.mapView.addMarker(destinationTo, true, type)
+         //   binding.mapView.addMarker(destinationTo, true, type)
             binding.mapView.flyToPoint(destinationTo)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.mapView.getMapboxMap().
     }
 
 }

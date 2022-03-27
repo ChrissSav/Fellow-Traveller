@@ -175,13 +175,13 @@ interface FellowService {
 
 
     /** Place **/
-    @GET("trips/place/autocomplete")
+    @GET("place/autocomplete")
     suspend fun getPlaceAutocomplete(
         @Query("query") query: String,
         @Query("type") type: String,
     ): Response<BaseResponse<MutableList<PlaceAutocompleteResponse>>>
 
-    @GET("trips/place/details")
+    @GET("place/details")
     suspend fun getPlaceDetails(
         @Query("place_id") placeId: String,
         @Query("type") type: String,

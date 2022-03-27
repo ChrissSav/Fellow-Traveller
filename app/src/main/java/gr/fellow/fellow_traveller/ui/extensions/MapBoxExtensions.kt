@@ -19,6 +19,7 @@ import com.mapbox.maps.plugin.animation.flyTo
 import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions
 import com.mapbox.maps.plugin.annotation.generated.createPointAnnotationManager
+import com.mapbox.maps.plugin.annotation.generated.createPolylineAnnotationManager
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.domain.trip.Destination
 import gr.fellow.fellow_traveller.ui.views.TripRad
@@ -29,8 +30,7 @@ fun MapView.addMarker(destination: Destination, isDestination: Boolean = false, 
     val markerColor = (type == TripRad.OFFER) then { R.color.green_new } ?: R.color.orange_new
 
     bitmapFromDrawableRes(this.context, resourceId, markerColor)?.let {
-        val annotationApi = annotations
-        val pointAnnotationManager = annotationApi.createPointAnnotationManager()
+        val pointAnnotationManager = annotations.createPointAnnotationManager()
         val pointAnnotationOptions: PointAnnotationOptions = PointAnnotationOptions()
             .withPoint(Point.fromLngLat(destination.longitude!!.toDouble(), destination.latitude!!.toDouble()))
             .withIconImage(it)

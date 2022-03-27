@@ -98,9 +98,9 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
 
         viewModel.error.observe(this, Observer {
             if (it.internal)
-                createAlerter(getString(it.messageId), R.color.green)
+                createAlerter(getString(it.messageId), R.color.green_new)
             else
-                createAlerter(it.message, R.color.blue_color)
+                createAlerter(it.message, R.color.green_new)
         })
 
         viewModel.load.observe(this, Observer {
@@ -338,9 +338,8 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
-                val title = data?.getStringExtra("title").toString()
-                val id = data?.getStringExtra("id").toString()
-                viewModel.setDestinationPickUp(id, title)
+                val destination = data?.getParcelableExtra<Destination>("place")!!
+                viewModel.setDestinationPickUp(destination)
             }
         }
     }
