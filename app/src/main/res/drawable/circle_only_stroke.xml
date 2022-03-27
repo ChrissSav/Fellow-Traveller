@@ -4,7 +4,7 @@
     <solid android:color="@android:color/transparent" />
     <stroke
         android:width="3dp"
-        android:color="@color/black_color" />
+        android:color="@color/black_new" />
     <size
         android:width="40dp"
         android:height="40dp" />

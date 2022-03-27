@@ -5,8 +5,7 @@ import androidx.core.text.HtmlCompat
 import androidx.lifecycle.MutableLiveData
 import gr.fellow.fellow_traveller.domain.notification.Notification
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
-import java.util.regex.Matcher
-import java.util.regex.Pattern
+import java.util.*
 
 
 fun getRandomImage(): String {
@@ -47,6 +46,8 @@ fun CharSequence.getString(): String? {
 fun CharSequence.getLength(): Int {
     return if (this.isEmpty()) 0 else this.toString().length
 }
+
+infix fun <T> Boolean.then(param: () -> T): T? = if (this) param() else null
 
 val Int.toPx: Int
     get() = (this * Resources.getSystem().displayMetrics.density).toInt()

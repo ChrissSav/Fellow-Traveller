@@ -4,8 +4,179 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/fragment_home_scene"
     tools:context=".ui.home.tabs.HomeFragment">
+
+
+    <com.mapbox.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:mapbox_cameraTargetLat="40.63461"
+        app:mapbox_cameraTargetLng="22.91828"
+        app:mapbox_cameraZoom="9.0"
+        app:mapbox_styleUri="mapbox://styles/mapbox/dark-v10" />
+
+    <gr.fellow.fellow_traveller.ui.views.TripRadio
+        android:id="@+id/radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_rate_radius_16_black_top"
+        android:orientation="vertical"
+        android:paddingStart="8dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="@dimen/padding_bottom_of_navigation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout_from"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_rate_radius_16_black"
+            android:backgroundTint="#262626"
+            android:elevation="1dp"
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageViewFrom"
+                android:layout_width="@dimen/home_fragment_imageView"
+                android:layout_height="@dimen/home_fragment_imageView"
+                android:background="@drawable/circle_button_shape"
+                android:backgroundTint="@color/green_60_new"
+                android:padding="12dp"
+                android:src="@drawable/ic_location"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/green" />
+
+            <EditText
+                android:id="@+id/destination_from"
+                style="@style/input_new"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:ellipsize="end"
+                android:focusable="false"
+                android:hint="@string/select_destination"
+                android:inputType="text"
+                android:longClickable="false"
+                android:maxLines="1"
+                android:textColorHint="#40ffffff"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView_from"
+                app:layout_constraintTop_toBottomOf="@+id/textView_from" />
+
+            <TextView
+                android:id="@+id/textView_from"
+                style="@style/header_5_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/from"
+                app:layout_constraintStart_toEndOf="@+id/imageViewFrom"
+                app:layout_constraintTop_toTopOf="@+id/imageViewFrom" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout_to"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-28dp"
+            android:background="@drawable/background_rate_radius_16_black"
+            android:backgroundTint="#191919"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingTop="40dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageViewTo"
+                android:layout_width="@dimen/home_fragment_imageView"
+                android:layout_height="@dimen/home_fragment_imageView"
+                android:background="@drawable/circle_button_shape"
+                android:backgroundTint="@color/green_60_new"
+                android:padding="12dp"
+                android:src="@drawable/ic_pin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/green" />
+
+            <EditText
+                android:id="@+id/destination_to"
+                style="@style/input_new"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:ellipsize="end"
+                android:focusable="false"
+                android:hint="@string/select_destination"
+                android:inputType="text"
+                android:longClickable="false"
+                android:maxLines="1"
+                android:textColorHint="#40ffffff"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView_to"
+                app:layout_constraintTop_toBottomOf="@+id/textView_to" />
+
+            <TextView
+                android:id="@+id/textView_to"
+                style="@style/header_5_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/to"
+                app:layout_constraintStart_toEndOf="@+id/imageViewTo"
+                app:layout_constraintTop_toTopOf="@+id/imageViewTo" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/submit"
+        style="@style/button_1_new"
+        android:layout_width="208dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="@string/offer_trip"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        app:backgroundTint="@color/green_new"
+        app:cornerRadius="16dp"
+        app:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/mapView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

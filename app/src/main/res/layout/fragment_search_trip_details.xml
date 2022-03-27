@@ -203,7 +203,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="@drawable/background_border_stroke_12dp"
-                    android:backgroundTint="@color/black"
+                    android:backgroundTint="@color/black_new"
                     android:gravity="center"
                     android:text="@string/rating_placeholder"
                     android:textColor="@color/white"

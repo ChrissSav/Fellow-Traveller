@@ -51,9 +51,11 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
 
 
     override fun handleIntent() {
+
         val tempDestinationFrom = intent.getParcelableExtra<Destination>("destinationFrom")
         if (tempDestinationFrom == null)
             finish()
+
         val tempDestinationTo = intent.getParcelableExtra<Destination>("destinationTo")
         if (tempDestinationTo == null)
             finish()
@@ -61,12 +63,15 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
         val tempLocalUser = intent.getParcelableExtra<LocalUser>("localUser")
         if (tempLocalUser == null)
             finish()
+
         tempDestinationFrom?.let {
             destinationFrom = it
         }
+
         tempDestinationTo?.let {
             destinationTo = it
         }
+
         tempLocalUser?.let {
             localUser = it
         }
@@ -93,9 +98,9 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
 
         viewModel.error.observe(this, Observer {
             if (it.internal)
-                createAlerter(getString(it.messageId), R.color.green)
+                createAlerter(getString(it.messageId), R.color.green_new)
             else
-                createAlerter(it.message, R.color.blue_color)
+                createAlerter(it.message, R.color.green_new)
         })
 
         viewModel.load.observe(this, Observer {
@@ -333,9 +338,8 @@ class NewTripActivity : BaseActivityViewModel<ActivityNewTripBinding, NewTripVie
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
-                val title = data?.getStringExtra("title").toString()
-                val id = data?.getStringExtra("id").toString()
-                viewModel.setDestinationPickUp(id, title)
+                val destination = data?.getParcelableExtra<Destination>("place")!!
+                viewModel.setDestinationPickUp(destination)
             }
         }
     }

@@ -89,7 +89,7 @@ android {
     }
 
     buildFeatures {
-        viewBinding true
+        viewBinding = true
     }
 
 }
@@ -225,6 +225,10 @@ dependencies {
 
     //Android-SpinKit
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
+  /*  //mapbox
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:6.0.1'*/
+    implementation 'com.mapbox.maps:android:10.3.0'
 
 
 }

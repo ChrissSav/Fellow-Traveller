@@ -179,7 +179,7 @@
                     android:layout_marginBottom="32dp"
                     android:gravity="center"
                     android:text="@string/all_ratings"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_new"
                     app:drawableEndCompat="@drawable/ic_right_arrow"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

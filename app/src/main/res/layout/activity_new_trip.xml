@@ -342,6 +342,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/euro_symbol"
+                android:textColor="#40ffffff"
                 app:layout_constraintBottom_toBottomOf="@+id/price_per_person"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/price_per_person" />
@@ -592,7 +593,7 @@
             android:layout_width="@dimen/button_button_width"
             android:layout_height="@dimen/button_button_height"
             android:layout_marginTop="32dp"
-            android:layout_marginBottom="@dimen/back_button_margin"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/button_background_orange_16dp"
             android:gravity="center"
             android:text="@string/complete"

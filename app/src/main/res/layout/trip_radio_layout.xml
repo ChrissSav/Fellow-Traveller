@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_rate_radius_16_black"
+    android:padding="8dp">
+
+    <Button
+        android:id="@+id/search"
+        style="@style/button_3_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_rate_radius_16_black"
+        android:backgroundTint="@color/orange_60_new"
+        android:text="@string/search"
+        android:textAllCaps="false"
+        android:textColor="@color/orange" />
+
+    <Button
+        android:id="@+id/offer"
+        style="@style/button_3_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_rate_radius_16_black"
+        android:backgroundTint="@color/black_new"
+        android:text="@string/offer"
+        android:textAllCaps="false"
+        android:textColor="@color/white_60_new" />
+
+</LinearLayout>

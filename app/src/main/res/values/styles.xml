@@ -1,6 +1,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
     <color name="white_opaque">#FFFFFFFF</color>
-    <color name="pitch_black">#FF000000</color>
+    <color name="pitch_black">#000000</color>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -27,7 +27,7 @@
         <item name="colorOnBackground">@color/black_new</item>
         <item name="colorOnError">@color/red_color</item>
         <item name="colorOnSurface">@color/black_new</item>
-        <item name="scrimBackground">@color/mtrl_scrim_color</item>
+        <item name="scrimBackground">@color/black_new</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1
         </item>
@@ -113,7 +113,7 @@
         <item name="android:toYDelta">0%</item>
         <item name="android:duration">@android:integer/config_longAnimTime</item>
         <item name="android:windowBackground">@color/white</item>
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/black_new</item>
     </style>
 
     <style name="Theme_Dialog_Abort" parent="android:Theme.Holo.Dialog">
@@ -123,7 +123,7 @@
         <item name="android:toYDelta">0%</item>
         <item name="android:duration">@android:integer/config_longAnimTime</item>
         <item name="android:windowBackground">@color/white</item>
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/black_new</item>
     </style>
 
 
@@ -131,7 +131,7 @@
         <item name="textAllCaps">false</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:fontFamily">@font/firasans_bold</item>
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/black_new</item>
         <item name="android:textSize">20sp</item>
     </style>
 

@@ -3,39 +3,39 @@
 
     <style name="title_1">
         <item name="android:fontFamily">@font/alegreyasans_black</item>
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/black_new</item>
         <item name="android:textSize">23sp</item>
     </style>
 
     <style name="display_1">
         <item name="android:fontFamily">@font/alegreyasans_black</item>
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/black_new</item>
         <item name="android:textSize">22sp</item>
     </style>
 
     <style name="header_1">
         <item name="android:fontFamily">@font/alegreyasans_bold</item>
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/black_new</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18sp</item>
     </style>
 
     <style name="header_2">
         <item name="android:fontFamily">@font/alegreyasans_bold</item>
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/black_new</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">16sp</item>
     </style>
 
     <style name="header_3">
         <item name="android:fontFamily">@font/alegreyasans_bold</item>
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/black_new</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="description_style">
         <item name="android:fontFamily">@font/roboto_light</item>
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/black_new</item>
         <item name="android:textSize">14sp</item>
     </style>
 
@@ -44,38 +44,38 @@
     <style name="paragraph_1">
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:lineSpacingExtra">4dp</item>
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/black_new</item>
         <item name="android:textSize">13sp</item>
     </style>
 
     <style name="paragraph_2">
         <item name="android:fontFamily">@font/roboto_light</item>
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/black_new</item>
         <item name="android:textSize">13sp</item>
     </style>
 
     <style name="paragraph_3">
         <item name="android:fontFamily">@font/roboto_regular</item>
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/black_new</item>
         <item name="android:textSize">10sp</item>
     </style>
 
     <style name="paragraph_4">
         <item name="android:fontFamily">@font/roboto_light</item>
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/black_new</item>
         <item name="android:textSize">11sp</item>
     </style>
 
 
     <style name="input_1">
         <item name="android:fontFamily">@font/roboto_regular</item>
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/black_new</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="input_2">
         <item name="android:fontFamily">@font/roboto_light</item>
-        <item name="android:textColor">@color/black_color</item>
+        <item name="android:textColor">@color/black_new</item>
         <item name="android:textSize">16sp</item>
     </style>
 

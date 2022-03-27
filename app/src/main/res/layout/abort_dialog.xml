@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/yes"
-        android:textColor="@color/black_color"
+        android:textColor="@color/black_new"
         android:background="?android:attr/selectableItemBackground"/>
 
 

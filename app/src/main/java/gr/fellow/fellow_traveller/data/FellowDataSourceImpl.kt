@@ -124,6 +124,9 @@ class FellowDataSourceImpl(
     override suspend fun getPlaceAutocomplete(query: String, type: String) =
         repository.getPlaceAutocomplete(query, type).map { it.mapDestination() }.toMutableList()
 
+    override suspend fun getPlaceDetails(placeId: String, type: String) =
+        repository.getPlaceDetails(placeId, type).mapDestination()
+
     override suspend fun deleteTrip(tripId: String): String =
         repository.deleteTrip(tripId)
 

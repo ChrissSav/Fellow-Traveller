@@ -87,8 +87,8 @@ constructor(
         _destinationFrom.value = destination
     }
 
-    fun setDestinationPickUp(id: String, title: String) {
-        _destinationPickUp.value = Destination(id, title, null, null, null)
+    fun setDestinationPickUp(destination: Destination) {
+        _destinationPickUp.value = destination
     }
 
     fun setDestinationTo(destination: Destination) {

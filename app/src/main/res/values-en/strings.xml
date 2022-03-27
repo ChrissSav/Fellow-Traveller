@@ -293,6 +293,7 @@
     <string name="email_will_be_sent">A verification link will be sent to your email in order to activate your account.</string>
     <string name="password_recovery">Reset Password</string>
     <string name="enter_your_email">Enter your email address so we can send a password reset code.</string>
+    <string name="offer">Offer</string>
     <string name="we_will_send_a_6_digit_verification_code">A 6-digit password reset code will be sent to your email.</string>
     <string name="reset">Reset</string>
     <string name="confirm_password_reset">Verify password reset</string>
@@ -417,6 +418,7 @@
     <string name="new_password">New Password</string>
     <string name="repeat_password">Confirm New Password</string>
     <string name="history">History</string>
+    <string name="history_trips">History trips</string>
     <string name="offer_your_next_trip_description">Share your next trip and find the ideal passengers.</string>
     <string name="confirm_booking">Confirm Booking</string>
 
