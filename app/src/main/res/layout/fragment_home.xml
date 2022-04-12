@@ -7,18 +7,27 @@
     tools:context=".ui.home.tabs.HomeFragment">
 
 
-    <com.mapbox.maps.MapView
+    <!--    <com.mapbox.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:mapbox_cameraTargetLat="40.63461"
+            app:mapbox_cameraTargetLng="22.91828"
+            app:mapbox_cameraZoom="9.0"
+            app:mapbox_styleUri="mapbox://styles/mapbox/dark-v10" />-->
+
+    <FrameLayout
         android:id="@+id/mapView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:mapbox_cameraTargetLat="40.63461"
-        app:mapbox_cameraTargetLng="22.91828"
-        app:mapbox_cameraZoom="9.0"
-        app:mapbox_styleUri="mapbox://styles/mapbox/dark-v10" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <gr.fellow.fellow_traveller.ui.views.TripRadio
         android:id="@+id/radio"

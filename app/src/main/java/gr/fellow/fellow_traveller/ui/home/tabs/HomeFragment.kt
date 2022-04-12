@@ -7,7 +7,6 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
-import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.attribution.attribution
 import com.mapbox.maps.plugin.compass.compass
 import com.mapbox.maps.plugin.gestures.gestures
@@ -19,7 +18,10 @@ import gr.fellow.fellow_traveller.data.base.BaseFragment
 import gr.fellow.fellow_traveller.databinding.FragmentHomeBinding
 import gr.fellow.fellow_traveller.domain.trip.Destination
 import gr.fellow.fellow_traveller.domain.trip.TripInvolved
-import gr.fellow.fellow_traveller.ui.extensions.*
+import gr.fellow.fellow_traveller.ui.extensions.flyToPoint
+import gr.fellow.fellow_traveller.ui.extensions.startActivityForResult
+import gr.fellow.fellow_traveller.ui.extensions.startActivityForResultWithFade
+import gr.fellow.fellow_traveller.ui.extensions.then
 import gr.fellow.fellow_traveller.ui.home.HomeViewModel
 import gr.fellow.fellow_traveller.ui.location.SelectLocationActivity
 import gr.fellow.fellow_traveller.ui.newtrip.NewTripActivity
@@ -53,7 +55,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun setUpViews() {
-        binding.mapView.apply {
+        /*binding.mapView.apply {
             logo.enabled = false
             scalebar.enabled = false
             attribution.enabled = false
@@ -65,7 +67,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 rotateEnabled = false
             }
         }
-
+*/
         binding.radio.onClick = object : TripRadioOnClickListener {
             override fun onClick(type: TripRad) {
                 updateColor(type)
@@ -205,7 +207,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         if (destinationFrom != null) {
           //  binding.mapView.addMarker(destinationFrom, type = type)
-            binding.mapView.flyToPoint(destinationFrom)
+          //  binding.mapView.flyToPoint(destinationFrom)
         }
     }
 
@@ -218,13 +220,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         if (destinationTo != null) {
          //   binding.mapView.addMarker(destinationTo, true, type)
-            binding.mapView.flyToPoint(destinationTo)
+         //   binding.mapView.flyToPoint(destinationTo)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        binding.mapView.getMapboxMap().
     }
 
 }
