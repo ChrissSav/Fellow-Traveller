@@ -55,7 +55,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun setUpViews() {
-        binding.mapView.apply {
+        /*binding.mapView.apply {
             logo.enabled = false
             scalebar.enabled = false
             attribution.enabled = false
@@ -67,7 +67,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 rotateEnabled = false
             }
         }
-
+*/
         binding.radio.onClick = object : TripRadioOnClickListener {
             override fun onClick(type: TripRad) {
                 updateColor(type)
@@ -207,7 +207,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         if (destinationFrom != null) {
           //  binding.mapView.addMarker(destinationFrom, type = type)
-            binding.mapView.flyToPoint(destinationFrom)
+          //  binding.mapView.flyToPoint(destinationFrom)
         }
     }
 
@@ -220,7 +220,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         if (destinationTo != null) {
          //   binding.mapView.addMarker(destinationTo, true, type)
-            binding.mapView.flyToPoint(destinationTo)
+         //   binding.mapView.flyToPoint(destinationTo)
         }
     }
 
