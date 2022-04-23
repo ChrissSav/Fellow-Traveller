@@ -1,241 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/motion"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/fragment_search_destinations_scene"
     tools:context=".ui.search.fragments.SearchTripsFragment">
 
 
     <ImageButton
-        android:id="@+id/back_button"
-        style="@style/border_icon_button"
-        android:layout_width="@dimen/back_button_width_height"
-        android:layout_height="@dimen/back_button_width_height"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/ic_back_button"
+        android:id="@+id/account"
+        android:layout_width="@dimen/top_buttons_width_height"
+        android:layout_height="@dimen/top_buttons_width_height"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/background_stroke_radius_16_alpha_grey"
+        android:contentDescription="@string/back"
+        android:padding="20dp"
+        android:src="@drawable/ic_arrow_back_new"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
 
 
     <ImageButton
-        android:id="@+id/filter_button"
-        style="@style/border_icon_button"
-        android:layout_width="@dimen/back_button_width_height"
-        android:layout_height="@dimen/back_button_width_height"
-        android:layout_marginEnd="16dp"
+        android:id="@+id/filter"
+        android:layout_width="@dimen/top_buttons_width_height"
+        android:layout_height="@dimen/top_buttons_width_height"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/background_stroke_radius_16_alpha_grey"
+        android:padding="20dp"
         android:src="@drawable/ic_filters"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/back_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/back_button" />
+        app:layout_constraintTop_toTopOf="@+id/account"
+        app:tint="@color/white" />
 
-    <TextView
-        android:id="@+id/label"
-        style="@style/display_1"
+
+    <include
+        android:id="@+id/tip_details"
+        layout="@layout/trip_history_item_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="@string/search_trip"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/back_button"
-        app:layout_constraintTop_toBottomOf="@id/back_button" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/account" />
 
-
-    <gr.fellow.fellow_traveller.ui.views.FellowEditText
-        android:id="@+id/destFrom_button"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView2"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="20dp"
-        app:editable_f="false"
-        app:error_message_f="@string/ERROR_SELECT_DEST_FROM"
-        app:hint_f="@string/placeholder_from"
-        app:imeOptions_f="actionDone"
-        app:label_f="@string/from"
+        android:layout_height="46dp"
+        android:background="@color/red_color"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/back_button"
-        app:layout_constraintTop_toTopOf="parent"
-        app:regex_f="@string/regex_min_1_chars" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tip_details" />
 
-
-    <TextView
-        android:id="@+id/swap"
-        style="@style/paragraph_3"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:gravity="center|end"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:text="@string/switch_text"
-        app:layout_constraintEnd_toEndOf="@+id/destFrom_button"
-        app:layout_constraintTop_toBottomOf="@+id/destFrom_button" />
-
-
-    <gr.fellow.fellow_traveller.ui.views.FellowEditText
-        android:id="@+id/destTo_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        app:editable_f="false"
-        app:error_message_f="@string/ERROR_SELECT_DEST_TO"
-        app:hint_f="@string/placeholder_to"
-        app:imeOptions_f="actionDone"
-        app:label_f="@string/to"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@id/back_button"
-        app:layout_constraintTop_toBottomOf="@+id/swap"
-        app:regex_f="@string/regex_min_1_chars" />
-
-
-    <Button
-        android:id="@+id/search_button"
-        style="@style/header_2"
-        android:layout_width="0dp"
-        android:layout_height="54dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="42dp"
-        android:background="@drawable/button_background_orange_16dp"
-        android:stateListAnimator="@null"
-        android:text="@string/search"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/back_button" />
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout_search_results"
+    <View
+        android:id="@+id/view9"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="2dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:alpha="0"
-        android:background="@drawable/bottom_sheet_dialog_shape"
-        android:backgroundTint="@color/light_orange_New"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_button">
+        android:layout_marginEnd="8dp"
+        android:background="@color/black_20_new"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView2" />
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/paragraph_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/white_40_new"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/view9"
+        app:layout_constraintTop_toBottomOf="@+id/view9"
+        tools:text="328 αποτελέσματα" />
 
 
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="140dp"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/black_new"
-            android:indeterminateTintMode="src_atop"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/results_label"
-            style="@style/display_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:freezesText="true"
-            android:text="@string/trip_found"
-            android:visibility="gone"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-            android:id="@+id/sort_button"
-            style="@style/paragraph_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:drawablePadding="10dp"
-            android:gravity="center"
-            android:text="@string/most_relevant"
-            android:visibility="gone"
-            app:drawableEndCompat="@drawable/ic_sort"
-            app:layout_constraintBottom_toBottomOf="@id/results_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/results_label" />
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="32dp"
-            android:layoutAnimation="@anim/layout_animation"
-            android:visibility="gone"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/results_label"
-            tools:listitem="@layout/search_result_item" />
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/not_found_image"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="100dp"
-            android:elevation="16dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/results_label">
-
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:background="@drawable/circle_only_stroke"
-                android:backgroundTint="@color/black_new"
-                android:padding="30dp"
-                android:src="@drawable/ic_crane"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/header_text"
-                style="@style/header_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
-                android:gravity="center"
-                android:text="@string/no_trips"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/image" />
-
-            <TextView
-                style="@style/paragraph_1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="16dp"
-                android:gravity="center"
-                android:text="@string/you_can_change_filters"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/header_text" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.constraintlayout.motion.widget.MotionLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

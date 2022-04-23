@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">fellow.</string>
+    <string name="back">Πίσω</string>
     <string name="mapbox_access_token" translatable="false">sk.eyJ1IjoiZmVsbG93Z3IiLCJhIjoiY2wweHRkMnVsMW5kMDNsanc0bmxrNnlodCJ9.cSRawZAlHDCZSlwwZEMBFg</string>
     <string name="PLACE_LANGUAGE">el</string>
     <string name="USER_INFO" translatable="false">userAuth</string>

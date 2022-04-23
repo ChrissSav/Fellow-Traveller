@@ -19,17 +19,18 @@ class SearchTripActivity : BaseActivityViewModel<ActivitySearchTripBinding, Sear
 
 
     private lateinit var nav: NavController
-    lateinit var localUser: LocalUser
+    private lateinit var localUser: LocalUser
+    private lateinit var placeFrom: PlaceModel
+    private lateinit var placeTo: PlaceModel
 
-    override fun handleIntent() {
-        val placeFrom = intent.getParcelableExtra<PlaceModel>("placeFrom")
-        val placeTo = intent.getParcelableExtra<PlaceModel>("placeTo")
-        localUser = intent.getParcelableExtra<LocalUser>("localUser")!!
-
-        if (placeFrom != null && placeTo != null) {
-            viewModel.setDestinationFrom(placeFrom)
-            viewModel.setDestinationTo(placeTo)
-            viewModel.destinationsSet()
+    companion object {
+        @JvmStatic
+        fun getInstance(localUser: LocalUser, placeFrom: PlaceModel, placeTo: PlaceModel): SearchTripActivity {
+            val result = SearchTripActivity()
+            result.localUser = localUser
+            result.placeFrom = placeFrom
+            result.placeTo = placeTo
+            return result
         }
     }
 
@@ -48,9 +49,10 @@ class SearchTripActivity : BaseActivityViewModel<ActivitySearchTripBinding, Sear
 
 
     override fun setUpViews() {
-
-
         nav = Navigation.findNavController(this, R.id.SearchTripActivity_nav_host)
+        viewModel.setDestinationFrom(placeFrom)
+        viewModel.setDestinationTo(placeTo)
+        viewModel.destinationsSet()
     }
 
     override fun onBackPressed() {
