@@ -51,4 +51,14 @@ data class TripSearch(
             return seats - current
         }
 
+
+    val seatAvailable: Int
+        get() {
+            var current = 0
+            passengers.forEach {
+                current += it.seats
+            }
+            return seats - current
+        }
+
 }

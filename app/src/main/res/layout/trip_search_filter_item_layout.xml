@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="104dp"
+    android:layout_height="56dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="0dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/background_orange_8dp"
+    android:backgroundTint="@color/black_20_new"
+    android:gravity="start|center"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/label"
+        style="@style/label_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Ημερομηνία" />
+
+    <TextView
+        android:id="@+id/text"
+        style="@style/paragraph_2_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/white"
+        tools:text="23/09 - 26/09" />
+
+</LinearLayout>

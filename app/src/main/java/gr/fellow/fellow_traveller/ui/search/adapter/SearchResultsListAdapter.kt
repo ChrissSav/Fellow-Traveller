@@ -1,6 +1,7 @@
 package gr.fellow.fellow_traveller.ui.search.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +10,8 @@ import gr.fellow.fellow_traveller.databinding.SearchResultItemBinding
 import gr.fellow.fellow_traveller.domain.trip.TripSearch
 import gr.fellow.fellow_traveller.ui.extensions.TripSearchDiffCallback
 import gr.fellow.fellow_traveller.ui.extensions.loadImageFromUrl
+import gr.fellow.fellow_traveller.ui.extensions.setSpanTextStyle
+import gr.fellow.fellow_traveller.utils.getDateFromTimestamp
 
 class SearchResultsListAdapter(
     private val onTripClickListener: (TripSearch) -> Unit
@@ -21,22 +24,32 @@ class SearchResultsListAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         val currentTrip = currentList[position]
+        val context = holder.binding.root.context
 
         with(holder) {
-            binding.from.text = currentTrip.destFrom.title
-            binding.to.text = currentTrip.destTo.title
-            binding.name.text = currentTrip.creatorUser.fullName
-            binding.date.text = currentTrip.date
-            binding.time.text = currentTrip.time
-            binding.price.text = binding.price.context.getString(R.string.price, currentTrip.price.toString())
+            binding.destinationFromAdministrative.text = currentTrip.destFrom.administrative.title
+            binding.destinationFromDes.text = currentTrip.destFrom.title
+            binding.destinationToAdministrative.text = currentTrip.destTo.administrative.title
+            binding.destinationToDes.text = currentTrip.destTo.title
+            binding.dateTime.text = getDateFromTimestamp(currentTrip.timestamp, "dd/MM HH:mm")
+            binding.price.text = context.getString(R.string.active_item_price, currentTrip.price.toString())
+            binding.seats.text = context.getString(R.string.active_item_seats, currentTrip.seatAvailable.toString())
+
+            binding.pet.visibility = if (currentTrip.hasPet) View.VISIBLE else View.INVISIBLE
             binding.picture.loadImageFromUrl(currentTrip.creatorUser.picture)
-            // binding.rate.text = currentTrip.creatorUser.rate.toString()
-            // binding.review.text = currentTrip.creatorUser.reviews.toString()
-            binding.seats.text = currentTrip.seatsStatus
-            binding.bags.text = binding.bags.context.getString(currentTrip.bags.textInt)
-            binding.pet.text = if (currentTrip.hasPet) binding.pet.resources.getString(R.string.allowed) else binding.pet.resources.getString(R.string.not_allowed)
+
+            binding.price.setSpanTextStyle(
+                Pair(
+                    "${currentTrip.price}${context.getString(R.string.euro_symbol)}/",
+                    R.style.paragraph_3_bold_new
+                ),
+                Pair(
+                    context.getString(R.string.per_person),
+                    R.style.paragraph_3_new
+                )
+            )
+
             binding.root.setOnClickListener {
                 onTripClickListener.invoke(currentTrip)
             }
