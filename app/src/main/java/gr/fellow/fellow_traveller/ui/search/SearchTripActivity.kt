@@ -19,7 +19,7 @@ class SearchTripActivity : BaseActivityViewModel<ActivitySearchTripBinding, Sear
 
 
     private lateinit var nav: NavController
-    private lateinit var localUser: LocalUser
+    lateinit var localUser: LocalUser
     private lateinit var placeFrom: PlaceModel
     private lateinit var placeTo: PlaceModel
 

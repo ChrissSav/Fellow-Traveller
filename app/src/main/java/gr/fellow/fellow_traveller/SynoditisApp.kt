@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 
 @HiltAndroidApp
-class FellowApp : Application() {
+class SynoditisApp : Application() {
 
     companion object {
         const val CHANNEL_TRIPS_ID = "CHANNEL_TRIPS_ID"

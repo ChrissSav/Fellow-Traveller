@@ -34,6 +34,35 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:16157656929:android:054a0be4c018184dfd2720",
+        "android_client_info": {
+          "package_name": "gr.fellow.fellow_traveller.stage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "16157656929-qj1gqcf29j5ljh07ud2otduo00md3vbn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0ZXRinxaJjWcB8FtyxdmfnL9IcKaouDQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "16157656929-qj1gqcf29j5ljh07ud2otduo00md3vbn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

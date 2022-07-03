@@ -12,7 +12,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.NavDeepLinkBuilder
 import dagger.hilt.android.AndroidEntryPoint
-import gr.fellow.fellow_traveller.FellowApp
+import gr.fellow.fellow_traveller.SynoditisApp
 import gr.fellow.fellow_traveller.R
 import gr.fellow.fellow_traveller.domain.NotificationStatus
 import gr.fellow.fellow_traveller.domain.TripStatus
@@ -85,7 +85,7 @@ class NotificationJobService : JobService() {
         val alarmSound: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
 
-        val notification: android.app.Notification = NotificationCompat.Builder(this, FellowApp.CHANNEL_TRIPS_ID)
+        val notification: android.app.Notification = NotificationCompat.Builder(this, SynoditisApp.CHANNEL_TRIPS_ID)
             .setSmallIcon(R.drawable.ic_logo_white)
             .setContentTitle(getTitle(notificationItem))
             .setStyle(NotificationCompat.BigTextStyle().bigText(getDescription(notificationItem)))
